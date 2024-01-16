@@ -16,7 +16,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * A slide in a slideshow.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Slide implements XmlSerializable<Slide> {

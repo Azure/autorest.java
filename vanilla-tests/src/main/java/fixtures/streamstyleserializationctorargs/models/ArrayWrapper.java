@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The ArrayWrapper model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {

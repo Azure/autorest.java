@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * Status and result of the analyze operation.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class AnalyzeResultOperation {

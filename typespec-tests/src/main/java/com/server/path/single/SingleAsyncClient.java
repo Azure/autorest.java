@@ -19,7 +19,9 @@ import com.server.path.single.implementation.SingleClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous SingleClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SingleClientBuilder.class, isAsync = true)
 public final class SingleAsyncClient {

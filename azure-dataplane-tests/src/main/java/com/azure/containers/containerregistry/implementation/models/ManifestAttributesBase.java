@@ -18,7 +18,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Manifest details.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class ManifestAttributesBase implements JsonSerializable<ManifestAttributesBase> {

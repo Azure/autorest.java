@@ -23,7 +23,9 @@ import com.type.model.usage.models.OutputRecord;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous UsageClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UsageClientBuilder.class, isAsync = true)
 public final class UsageAsyncClient {

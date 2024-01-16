@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.requiredoptionalbody.implementation.RequiredOptionalBodyClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous RequiredOptionalBodyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RequiredOptionalBodyClientBuilder.class)
 public final class RequiredOptionalBodyClient {

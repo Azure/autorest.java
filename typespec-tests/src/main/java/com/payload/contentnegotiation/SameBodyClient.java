@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import com.payload.contentnegotiation.implementation.SameBodiesImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ContentNegotiationClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ContentNegotiationClientBuilder.class)
 public final class SameBodyClient {

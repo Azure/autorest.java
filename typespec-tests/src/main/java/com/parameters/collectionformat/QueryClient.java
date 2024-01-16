@@ -18,7 +18,9 @@ import com.parameters.collectionformat.implementation.QueriesImpl;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous CollectionFormatClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = CollectionFormatClientBuilder.class)
 public final class QueryClient {

@@ -8,7 +8,9 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The Error model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Error {

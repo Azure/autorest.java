@@ -8,7 +8,9 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Defines values for MyKind.
+ * <!-- end generated doc -->
  */
 public final class MyKind extends ExpandableStringEnum<MyKind> {
     /**

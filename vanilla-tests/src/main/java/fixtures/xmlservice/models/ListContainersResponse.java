@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * An enumeration of containers.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "EnumerationResults")
 @Fluent

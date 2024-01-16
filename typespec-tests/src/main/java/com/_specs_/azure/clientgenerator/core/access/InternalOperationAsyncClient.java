@@ -23,7 +23,9 @@ import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AccessClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AccessClientBuilder.class, isAsync = true)
 public final class InternalOperationAsyncClient {

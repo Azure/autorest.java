@@ -27,7 +27,9 @@ import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous UnionClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UnionClientBuilder.class, isAsync = true)
 public final class UnionAsyncClient {

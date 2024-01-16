@@ -15,7 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The model is Record&lt;unknown&gt; with a discriminator.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class IsUnknownAdditionalPropertiesDiscriminated

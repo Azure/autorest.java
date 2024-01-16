@@ -20,7 +20,9 @@ import com.specialheaders.conditionalrequest.implementation.ConditionalRequestCl
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ConditionalRequestClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ConditionalRequestClientBuilder.class, isAsync = true)
 public final class ConditionalRequestAsyncClient {

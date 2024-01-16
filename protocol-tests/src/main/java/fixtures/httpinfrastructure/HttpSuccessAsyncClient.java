@@ -19,7 +19,9 @@ import fixtures.httpinfrastructure.implementation.HttpSuccessImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestHttpInfrastructureTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = HttpSuccessClientBuilder.class, isAsync = true)
 public final class HttpSuccessAsyncClient {

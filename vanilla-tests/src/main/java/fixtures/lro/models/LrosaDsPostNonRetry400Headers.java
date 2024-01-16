@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The LrosaDsPostNonRetry400Headers model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class LrosaDsPostNonRetry400Headers {

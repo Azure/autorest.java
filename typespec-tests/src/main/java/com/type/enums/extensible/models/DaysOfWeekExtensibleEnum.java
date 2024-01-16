@@ -9,7 +9,9 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Days of the week.
+ * <!-- end generated doc -->
  */
 public final class DaysOfWeekExtensibleEnum extends ExpandableStringEnum<DaysOfWeekExtensibleEnum> {
     /**

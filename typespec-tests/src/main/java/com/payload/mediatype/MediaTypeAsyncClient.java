@@ -20,7 +20,9 @@ import com.payload.mediatype.implementation.StringBodiesImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous MediaTypeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MediaTypeClientBuilder.class, isAsync = true)
 public final class MediaTypeAsyncClient {

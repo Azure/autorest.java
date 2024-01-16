@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * An alert rule.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class MetricAlertProperties {

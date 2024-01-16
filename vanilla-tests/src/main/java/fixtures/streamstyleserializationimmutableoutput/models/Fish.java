@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The Fish model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Fish implements JsonSerializable<Fish> {

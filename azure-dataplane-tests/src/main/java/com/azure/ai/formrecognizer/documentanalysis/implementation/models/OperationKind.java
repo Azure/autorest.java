@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Type of operation.
+ * <!-- end generated doc -->
  */
 public final class OperationKind extends ExpandableStringEnum<OperationKind> {
     /**

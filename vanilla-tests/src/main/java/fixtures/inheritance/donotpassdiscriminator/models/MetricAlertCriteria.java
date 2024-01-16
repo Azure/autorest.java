@@ -17,7 +17,9 @@ import java.util.Map;
 import java.util.regex.Pattern;
 
 /**
+ * <!-- start generated doc -->
  * The rule criteria that defines the conditions of the alert rule.
+ * <!-- end generated doc -->
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,

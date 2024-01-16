@@ -19,7 +19,9 @@ import com.resiliency.servicedriven.v1.implementation.ResiliencyServiceDrivenCli
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ResiliencyServiceDrivenClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ResiliencyServiceDrivenClientBuilder.class, isAsync = true)
 public final class ResiliencyServiceDrivenAsyncClient {

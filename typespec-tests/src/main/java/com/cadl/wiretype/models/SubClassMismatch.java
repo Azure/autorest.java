@@ -16,7 +16,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The SubClassMismatch model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class SubClassMismatch extends SuperClass {

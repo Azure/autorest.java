@@ -20,7 +20,9 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous FormRecognizerClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FormRecognizerClientBuilder.class)
 public final class FormRecognizerClient {

@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The third level model in the normal multiple levels inheritance.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Siamese extends Cat {

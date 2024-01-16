@@ -19,7 +19,9 @@ import com.client.structure.service.implementation.ClientAClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ClientAClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ClientAClientBuilder.class, isAsync = true)
 public final class ClientAAsyncClient {

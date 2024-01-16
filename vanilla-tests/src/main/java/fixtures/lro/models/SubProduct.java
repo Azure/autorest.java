@@ -9,7 +9,9 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The SubProduct model.
+ * <!-- end generated doc -->
  */
 @JsonFlatten
 @Fluent

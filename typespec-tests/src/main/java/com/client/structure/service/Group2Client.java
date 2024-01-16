@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.client.structure.service.implementation.Group2sImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous TwoOperationGroupClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = TwoOperationGroupClientBuilder.class)
 public final class Group2Client {

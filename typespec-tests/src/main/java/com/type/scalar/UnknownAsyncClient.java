@@ -20,7 +20,9 @@ import com.type.scalar.implementation.UnknownsImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ScalarClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ScalarClientBuilder.class, isAsync = true)
 public final class UnknownAsyncClient {

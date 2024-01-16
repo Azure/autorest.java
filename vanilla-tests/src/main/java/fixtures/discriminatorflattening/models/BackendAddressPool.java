@@ -9,7 +9,9 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * Pool of backend IP addresses.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class BackendAddressPool {

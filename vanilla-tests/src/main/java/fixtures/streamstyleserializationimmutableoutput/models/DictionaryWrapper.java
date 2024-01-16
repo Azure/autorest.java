@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The DictionaryWrapper model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class DictionaryWrapper implements JsonSerializable<DictionaryWrapper> {

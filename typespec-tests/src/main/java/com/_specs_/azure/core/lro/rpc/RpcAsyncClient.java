@@ -21,7 +21,9 @@ import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous RpcClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RpcClientBuilder.class, isAsync = true)
 public final class RpcAsyncClient {

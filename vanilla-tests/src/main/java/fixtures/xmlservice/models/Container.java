@@ -10,7 +10,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * An Azure Storage container.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "Container")
 @Fluent

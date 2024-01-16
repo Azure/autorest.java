@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the ErrorModelClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { ErrorModelClient.class, ErrorModelAsyncClient.class })
 public final class ErrorModelClientBuilder implements HttpTrait<ErrorModelClientBuilder>,

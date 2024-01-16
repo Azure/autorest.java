@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The LrosaDsDeleteAsyncRelativeRetry400Headers model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class LrosaDsDeleteAsyncRelativeRetry400Headers {

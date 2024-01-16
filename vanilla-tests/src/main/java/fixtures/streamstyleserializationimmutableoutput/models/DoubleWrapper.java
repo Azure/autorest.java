@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The DoubleWrapper model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {

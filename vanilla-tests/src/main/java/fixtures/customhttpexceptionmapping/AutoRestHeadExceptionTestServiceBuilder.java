@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the AutoRestHeadExceptionTestService type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { AutoRestHeadExceptionTestService.class })
 public final class AutoRestHeadExceptionTestServiceBuilder implements

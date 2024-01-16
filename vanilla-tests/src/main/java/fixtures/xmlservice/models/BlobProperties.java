@@ -11,7 +11,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * Properties of a blob.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "BlobProperties")
 @Fluent

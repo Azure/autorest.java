@@ -24,7 +24,9 @@ import com.azure.core.util.BinaryData;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous BasicClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BasicClientBuilder.class)
 public final class BasicClient {

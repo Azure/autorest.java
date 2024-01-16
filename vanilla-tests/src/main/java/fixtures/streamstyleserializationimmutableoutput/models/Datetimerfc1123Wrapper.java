@@ -15,7 +15,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The Datetimerfc1123Wrapper model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerfc1123Wrapper> {

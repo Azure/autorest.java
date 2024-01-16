@@ -18,7 +18,9 @@ import com.azure.core.http.rest.Response;
 import com.specialheaders.conditionalrequest.implementation.ConditionalRequestClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ConditionalRequestClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ConditionalRequestClientBuilder.class)
 public final class ConditionalRequestClient {

@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Not used anywhere, but access is override to public so still need to be generated and exported with serialization.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class OrphanModel implements JsonSerializable<OrphanModel> {

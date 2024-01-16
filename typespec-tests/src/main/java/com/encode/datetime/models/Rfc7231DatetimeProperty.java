@@ -16,7 +16,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The Rfc7231DatetimeProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231DatetimeProperty> {

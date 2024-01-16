@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Model with a property never. (This property should not be included).
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class NeverProperty implements JsonSerializable<NeverProperty> {

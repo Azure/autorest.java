@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The Resource model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Resource implements JsonSerializable<Resource> {

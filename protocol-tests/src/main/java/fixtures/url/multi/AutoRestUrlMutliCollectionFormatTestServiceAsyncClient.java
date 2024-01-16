@@ -18,7 +18,9 @@ import fixtures.url.multi.implementation.QueriesImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestUrlMutliCollectionFormatTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.class, isAsync = true)
 public final class AutoRestUrlMutliCollectionFormatTestServiceAsyncClient {

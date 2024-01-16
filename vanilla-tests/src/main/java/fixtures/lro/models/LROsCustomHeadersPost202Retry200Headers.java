@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The LROsCustomHeadersPost202Retry200Headers model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class LROsCustomHeadersPost202Retry200Headers {

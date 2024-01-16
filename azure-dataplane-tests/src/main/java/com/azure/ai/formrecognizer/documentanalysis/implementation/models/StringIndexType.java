@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Method used to compute string offset and length.
+ * <!-- end generated doc -->
  */
 public final class StringIndexType extends ExpandableStringEnum<StringIndexType> {
     /**

@@ -13,7 +13,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Specifies the metric alert criteria for a single resource that has multiple metric criteria.
+ * <!-- end generated doc -->
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,

@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The second level model in the normal multiple levels inheritance.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class Cat extends Pet {

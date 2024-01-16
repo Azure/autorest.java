@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The As model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class As implements JsonSerializable<As> {

@@ -13,7 +13,9 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.paging.AutoRestPagingTestServiceVersion;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the AutoRestPagingTestServiceClient type.
+ * <!-- end generated doc -->
  */
 public final class AutoRestPagingTestServiceClientImpl {
     /**

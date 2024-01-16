@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * Link to an application package inside the batch account.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ApplicationPackageReference {

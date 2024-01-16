@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Model with a property unknown, and the data is a dictionnary.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class UnknownDictProperty implements JsonSerializable<UnknownDictProperty> {

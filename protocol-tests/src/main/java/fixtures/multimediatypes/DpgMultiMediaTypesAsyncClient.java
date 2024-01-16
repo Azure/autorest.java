@@ -19,7 +19,9 @@ import fixtures.multimediatypes.implementation.DpgMultiMediaTypesClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous DpgMultiMediaTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DpgMultiMediaTypesClientBuilder.class, isAsync = true)
 public final class DpgMultiMediaTypesAsyncClient {

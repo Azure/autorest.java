@@ -23,7 +23,9 @@ import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous SpecialCharsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialCharsClientBuilder.class, isAsync = true)
 public final class SpecialCharsAsyncClient {

@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.resiliency.servicedriven.v1.implementation.ResiliencyServiceDrivenClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ResiliencyServiceDrivenClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ResiliencyServiceDrivenClientBuilder.class)
 public final class ResiliencyServiceDrivenClient {

@@ -25,7 +25,9 @@ import com.payload.multipart.models.MultiBinaryPartsRequest;
 import com.payload.multipart.models.MultiPartRequest;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MultiPartClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultiPartClientBuilder.class)
 public final class MultiPartClient {

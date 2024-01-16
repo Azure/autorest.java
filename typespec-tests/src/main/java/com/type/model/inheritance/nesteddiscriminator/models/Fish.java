@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * This is base model for polymorphic multiple levels inheritance with a discriminator.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class Fish implements JsonSerializable<Fish> {

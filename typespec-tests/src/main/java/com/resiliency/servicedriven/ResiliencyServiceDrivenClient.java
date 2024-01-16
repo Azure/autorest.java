@@ -19,7 +19,9 @@ import com.resiliency.servicedriven.implementation.ResiliencyServiceDrivenClient
 import java.util.Arrays;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ResiliencyServiceDrivenClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ResiliencyServiceDrivenClientBuilder.class)
 public final class ResiliencyServiceDrivenClient {

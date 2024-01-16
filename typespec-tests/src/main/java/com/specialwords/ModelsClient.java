@@ -51,7 +51,9 @@ import com.specialwords.models.With;
 import com.specialwords.models.Yield;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialWordsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialWordsClientBuilder.class)
 public final class ModelsClient {

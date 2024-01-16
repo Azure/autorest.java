@@ -15,7 +15,9 @@ import java.time.Duration;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The FloatSecondsDurationArrayProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class FloatSecondsDurationArrayProperty implements JsonSerializable<FloatSecondsDurationArrayProperty> {

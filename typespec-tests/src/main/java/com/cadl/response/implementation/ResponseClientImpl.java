@@ -48,7 +48,9 @@ import java.time.Duration;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the ResponseClient type.
+ * <!-- end generated doc -->
  */
 public final class ResponseClientImpl {
     /**

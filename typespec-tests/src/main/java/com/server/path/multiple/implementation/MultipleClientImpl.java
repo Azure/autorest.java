@@ -33,7 +33,9 @@ import com.server.path.multiple.MultipleServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the MultipleClient type.
+ * <!-- end generated doc -->
  */
 public final class MultipleClientImpl {
     /**

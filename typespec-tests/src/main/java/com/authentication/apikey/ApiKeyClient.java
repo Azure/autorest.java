@@ -17,7 +17,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ApiKeyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ApiKeyClientBuilder.class)
 public final class ApiKeyClient {

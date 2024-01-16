@@ -24,7 +24,9 @@ import com.cadl.visibility.models.WriteDog;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous VisibilityClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = VisibilityClientBuilder.class, isAsync = true)
 public final class VisibilityAsyncClient {

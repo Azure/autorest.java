@@ -14,7 +14,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Template type for testing models with optional property. Pass in the type of the property you are looking for.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class BytesProperty implements JsonSerializable<BytesProperty> {

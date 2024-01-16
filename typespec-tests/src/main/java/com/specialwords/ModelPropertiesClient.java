@@ -19,7 +19,9 @@ import com.specialwords.implementation.ModelPropertiesImpl;
 import com.specialwords.models.SameAsModel;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialWordsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialWordsClientBuilder.class)
 public final class ModelPropertiesClient {

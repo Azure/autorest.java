@@ -10,7 +10,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.net.URL;
 
 /**
+ * <!-- start generated doc -->
  * The ModelWithUrlProperty model.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "ModelWithUrlProperty")
 @Fluent

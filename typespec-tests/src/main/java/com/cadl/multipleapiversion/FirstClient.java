@@ -19,7 +19,9 @@ import com.cadl.multipleapiversion.implementation.FirstClientImpl;
 import com.cadl.multipleapiversion.models.Resource;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous FirstClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FirstClientBuilder.class)
 public final class FirstClient {

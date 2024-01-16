@@ -19,7 +19,9 @@ import fixtures.bodyfile.implementation.FilesImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestSwaggerBatFileServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerBatFileServiceClientBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBatFileServiceAsyncClient {

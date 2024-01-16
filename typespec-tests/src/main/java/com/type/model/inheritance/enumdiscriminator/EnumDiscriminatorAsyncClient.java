@@ -22,7 +22,9 @@ import com.type.model.inheritance.enumdiscriminator.models.Snake;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous EnumDiscriminatorClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = EnumDiscriminatorClientBuilder.class, isAsync = true)
 public final class EnumDiscriminatorAsyncClient {

@@ -15,7 +15,9 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * <!-- start generated doc -->
  * The Rfc3339DatetimeProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339DatetimeProperty> {

@@ -22,7 +22,9 @@ import com.cadl.model.models.Resource2;
 import com.cadl.model.models.Resource3;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ModelClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ModelClientBuilder.class)
 public final class ModelClient {

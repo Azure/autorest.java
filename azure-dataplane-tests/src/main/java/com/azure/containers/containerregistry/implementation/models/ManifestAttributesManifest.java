@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * List of manifest attributes.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ManifestAttributesManifest implements JsonSerializable<ManifestAttributesManifest> {

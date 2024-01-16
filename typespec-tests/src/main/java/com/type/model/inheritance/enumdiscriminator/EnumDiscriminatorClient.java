@@ -20,7 +20,9 @@ import com.type.model.inheritance.enumdiscriminator.models.Dog;
 import com.type.model.inheritance.enumdiscriminator.models.Snake;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous EnumDiscriminatorClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = EnumDiscriminatorClientBuilder.class)
 public final class EnumDiscriminatorClient {

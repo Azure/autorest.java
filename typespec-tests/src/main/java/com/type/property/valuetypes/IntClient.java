@@ -19,7 +19,9 @@ import com.type.property.valuetypes.implementation.IntsImpl;
 import com.type.property.valuetypes.models.IntProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ValueTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ValueTypesClientBuilder.class)
 public final class IntClient {

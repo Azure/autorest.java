@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the LROsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { LROsClient.class, LROsAsyncClient.class })
 public final class LROsClientBuilder implements HttpTrait<LROsClientBuilder>, ConfigurationTrait<LROsClientBuilder> {

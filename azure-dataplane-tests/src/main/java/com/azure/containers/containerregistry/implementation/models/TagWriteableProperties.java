@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Changeable attributes.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class TagWriteableProperties implements JsonSerializable<TagWriteableProperties> {

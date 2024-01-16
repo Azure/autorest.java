@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * A component of a composed document model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ComponentDocumentModelDetails {

@@ -8,7 +8,9 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Defines values for ArchiveStatus.
+ * <!-- end generated doc -->
  */
 public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
     /**

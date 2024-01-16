@@ -22,7 +22,9 @@ import com.type.model.inheritance.singlediscriminator.models.Dinosaur;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous SingleDiscriminatorClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SingleDiscriminatorClientBuilder.class, isAsync = true)
 public final class SingleDiscriminatorAsyncClient {

@@ -25,7 +25,9 @@ import com.encode.duration.models.Int32SecondsDurationProperty;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous DurationClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DurationClientBuilder.class, isAsync = true)
 public final class PropertyAsyncClient {

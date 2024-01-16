@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The HeadersResponseIntegerHeaders model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class HeadersResponseIntegerHeaders {

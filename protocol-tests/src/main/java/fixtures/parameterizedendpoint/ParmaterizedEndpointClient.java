@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import fixtures.parameterizedendpoint.implementation.ParmaterizedEndpointClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ParmaterizedEndpointClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ParmaterizedEndpointClientBuilder.class)
 public final class ParmaterizedEndpointClient {

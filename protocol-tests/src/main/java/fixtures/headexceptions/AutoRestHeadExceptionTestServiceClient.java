@@ -17,7 +17,9 @@ import fixtures.headexceptions.implementation.HeadExceptionsImpl;
 import fixtures.headexceptions.models.CustomizedException;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestHeadExceptionTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestHeadExceptionTestServiceClientBuilder.class)
 public final class AutoRestHeadExceptionTestServiceClient {

@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * Properties of this repository.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class ContainerRepositoryProperties implements JsonSerializable<ContainerRepositoryProperties> {

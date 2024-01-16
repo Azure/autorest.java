@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Acr error response describing why the operation failed.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class AcrErrors implements JsonSerializable<AcrErrors> {

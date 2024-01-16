@@ -15,7 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The model extends from Record&lt;float32&gt; type.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ExtendsFloatAdditionalProperties implements JsonSerializable<ExtendsFloatAdditionalProperties> {

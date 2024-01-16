@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The JsonAndClientProjectedNameModel model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class JsonAndClientProjectedNameModel implements JsonSerializable<JsonAndClientProjectedNameModel> {

@@ -14,7 +14,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * The Metrics model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Metrics implements XmlSerializable<Metrics> {

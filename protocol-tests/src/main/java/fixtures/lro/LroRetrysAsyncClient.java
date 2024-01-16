@@ -18,7 +18,9 @@ import com.azure.core.util.polling.PollerFlux;
 import fixtures.lro.implementation.LroRetrysImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestLongRunningOperationTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LroRetrysClientBuilder.class, isAsync = true)
 public final class LroRetrysAsyncClient {

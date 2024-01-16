@@ -9,8 +9,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * The unit used by the width, height, and polygon properties. For images, the unit is "pixel". For PDF, the unit is
  * "inch".
+ * <!-- end generated doc -->
  */
 public final class LengthUnit extends ExpandableStringEnum<LengthUnit> {
     /**

@@ -13,7 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * A barrel of apples.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "AppleBarrel")
 @Fluent

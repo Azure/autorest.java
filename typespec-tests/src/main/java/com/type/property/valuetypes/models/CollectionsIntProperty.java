@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Model with collection int properties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class CollectionsIntProperty implements JsonSerializable<CollectionsIntProperty> {

@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * Model with collection bytes properties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class CollectionsByteProperty implements JsonSerializable<CollectionsByteProperty> {

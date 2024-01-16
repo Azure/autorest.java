@@ -20,7 +20,9 @@ import com.azure.core.util.polling.SyncPoller;
 import fixtures.specialheader.implementation.HeadersImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialHeaderClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialHeaderClientBuilder.class)
 public final class SpecialHeaderClient {

@@ -21,7 +21,9 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DpgRequiredHeaderQueryClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DpgRequiredHeaderQueryClientBuilder.class)
 public final class DpgRequiredHeaderQueryClient {

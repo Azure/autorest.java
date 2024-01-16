@@ -19,7 +19,9 @@ import com.type.property.valuetypes.implementation.UnionIntLiteralsImpl;
 import com.type.property.valuetypes.models.UnionIntLiteralProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ValueTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ValueTypesClientBuilder.class)
 public final class UnionIntLiteralClient {

@@ -10,7 +10,9 @@ import com.azure.core.util.BinaryData;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The ComplexPartsRequest model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ComplexPartsRequest {

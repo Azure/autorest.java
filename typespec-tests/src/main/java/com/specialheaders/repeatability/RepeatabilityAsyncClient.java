@@ -19,7 +19,9 @@ import com.specialheaders.repeatability.implementation.RepeatabilityClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous RepeatabilityClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RepeatabilityClientBuilder.class, isAsync = true)
 public final class RepeatabilityAsyncClient {

@@ -10,7 +10,9 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Operation info.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class OperationSummary {

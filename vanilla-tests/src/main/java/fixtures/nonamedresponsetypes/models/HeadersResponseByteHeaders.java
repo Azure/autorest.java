@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Base64;
 
 /**
+ * <!-- start generated doc -->
  * The HeadersResponseByteHeaders model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class HeadersResponseByteHeaders {

@@ -22,7 +22,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The Encoded model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Encoded implements JsonSerializable<Encoded> {

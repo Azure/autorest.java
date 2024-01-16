@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The MyBaseType model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class MyBaseType implements JsonSerializable<MyBaseType> {

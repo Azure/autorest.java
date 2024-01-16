@@ -12,7 +12,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The Cat model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Cat extends Pet {

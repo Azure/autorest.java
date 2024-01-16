@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * List of repositories.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Repositories implements JsonSerializable<Repositories> {

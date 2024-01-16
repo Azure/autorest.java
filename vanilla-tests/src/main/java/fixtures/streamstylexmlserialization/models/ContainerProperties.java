@@ -17,7 +17,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * Properties of a container.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ContainerProperties implements XmlSerializable<ContainerProperties> {

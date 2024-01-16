@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The Resource model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Resource {

@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
 /**
+ * <!-- start generated doc -->
  * The DateWrapper model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class DateWrapper {

@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Model with required and optional properties.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class RequiredAndOptionalProperty implements JsonSerializable<RequiredAndOptionalProperty> {

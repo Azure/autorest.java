@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the EnumServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { EnumServiceClient.class, EnumServiceAsyncClient.class })
 public final class EnumServiceClientBuilder

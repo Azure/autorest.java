@@ -19,7 +19,9 @@ import java.time.Duration;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestSwaggerBatHeaderServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerBatHeaderServiceClientBuilder.class)
 public final class AutoRestSwaggerBatHeaderServiceClient {

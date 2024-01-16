@@ -15,7 +15,9 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * <!-- start generated doc -->
  * The SuperClass model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class SuperClass implements JsonSerializable<SuperClass> {

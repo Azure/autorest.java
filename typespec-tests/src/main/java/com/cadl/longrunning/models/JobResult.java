@@ -16,7 +16,9 @@ import java.io.IOException;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * The JobResult model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class JobResult implements JsonSerializable<JobResult> {

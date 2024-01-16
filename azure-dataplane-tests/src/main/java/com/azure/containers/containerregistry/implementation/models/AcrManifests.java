@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Manifest attributes.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class AcrManifests implements JsonSerializable<AcrManifests> {

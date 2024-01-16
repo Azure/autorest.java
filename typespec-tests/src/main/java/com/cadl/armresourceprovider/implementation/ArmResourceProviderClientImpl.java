@@ -36,7 +36,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the ArmResourceProviderClientImpl type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ArmResourceProviderClientBuilder.class)
 public final class ArmResourceProviderClientImpl implements ArmResourceProviderClient {

@@ -9,7 +9,9 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
 
 /**
+ * <!-- start generated doc -->
  * The MultiBinaryPartsRequest model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class MultiBinaryPartsRequest {

@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Semantic data type of the field value.
+ * <!-- end generated doc -->
  */
 public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldType> {
     /**

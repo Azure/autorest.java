@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The OutputData model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class OutputData implements JsonSerializable<OutputData> {

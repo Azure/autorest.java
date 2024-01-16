@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.time.Duration;
 
 /**
+ * <!-- start generated doc -->
  * Model with a duration property.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class DurationProperty implements JsonSerializable<DurationProperty> {

@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Dictionary inner model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class InnerModel implements JsonSerializable<InnerModel> {

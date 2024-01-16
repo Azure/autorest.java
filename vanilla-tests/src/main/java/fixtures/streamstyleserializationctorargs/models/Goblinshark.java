@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The Goblinshark model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Goblinshark extends Shark {

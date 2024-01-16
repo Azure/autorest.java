@@ -26,7 +26,9 @@ import com.cadl.longrunning.models.PollResponse;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous LongRunningClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LongRunningClientBuilder.class, isAsync = true)
 public final class LongRunningAsyncClient {

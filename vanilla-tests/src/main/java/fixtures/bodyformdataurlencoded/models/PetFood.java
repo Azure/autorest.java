@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Can take a value of meat, or fish, or plant.
+ * <!-- end generated doc -->
  */
 public final class PetFood extends ExpandableStringEnum<PetFood> {
     /**

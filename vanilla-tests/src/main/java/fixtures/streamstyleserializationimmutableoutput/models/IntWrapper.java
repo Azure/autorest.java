@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The IntWrapper model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class IntWrapper implements JsonSerializable<IntWrapper> {

@@ -11,7 +11,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.Duration;
 
 /**
+ * <!-- start generated doc -->
  * The HeadersResponseDurationHeaders model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class HeadersResponseDurationHeaders {

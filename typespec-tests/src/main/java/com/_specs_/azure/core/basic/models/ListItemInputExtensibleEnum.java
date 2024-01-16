@@ -9,7 +9,9 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * An extensible enum input parameter.
+ * <!-- end generated doc -->
  */
 public final class ListItemInputExtensibleEnum extends ExpandableStringEnum<ListItemInputExtensibleEnum> {
     /**

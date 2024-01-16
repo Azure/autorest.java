@@ -19,7 +19,9 @@ import com.type.property.additionalproperties.implementation.ExtendsStringsImpl;
 import com.type.property.additionalproperties.models.ExtendsStringAdditionalProperties;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AdditionalPropertiesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AdditionalPropertiesClientBuilder.class)
 public final class ExtendsStringClient {

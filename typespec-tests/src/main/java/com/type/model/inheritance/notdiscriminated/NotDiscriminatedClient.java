@@ -19,7 +19,9 @@ import com.type.model.inheritance.notdiscriminated.implementation.NotDiscriminat
 import com.type.model.inheritance.notdiscriminated.models.Siamese;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous NotDiscriminatedClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NotDiscriminatedClientBuilder.class)
 public final class NotDiscriminatedClient {

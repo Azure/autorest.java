@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * First item.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class FirstItem implements JsonSerializable<FirstItem> {

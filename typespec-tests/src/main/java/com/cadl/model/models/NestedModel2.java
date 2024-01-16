@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The NestedModel2 model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class NestedModel2 implements JsonSerializable<NestedModel2> {

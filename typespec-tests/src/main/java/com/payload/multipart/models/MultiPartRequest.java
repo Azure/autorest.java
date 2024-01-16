@@ -9,7 +9,9 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
 
 /**
+ * <!-- start generated doc -->
  * The MultiPartRequest model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class MultiPartRequest {

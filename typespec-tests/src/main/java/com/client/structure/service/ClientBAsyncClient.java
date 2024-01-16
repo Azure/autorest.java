@@ -19,7 +19,9 @@ import com.client.structure.service.implementation.ClientBClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ClientBClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ClientBClientBuilder.class, isAsync = true)
 public final class ClientBAsyncClient {

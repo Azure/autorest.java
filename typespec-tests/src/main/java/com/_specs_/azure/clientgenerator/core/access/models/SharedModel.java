@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Used by both public and internal operation. It should be generated and exported.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class SharedModel implements JsonSerializable<SharedModel> {

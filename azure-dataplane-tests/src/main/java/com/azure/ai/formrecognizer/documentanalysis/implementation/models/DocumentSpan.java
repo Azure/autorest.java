@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * Contiguous region of the concatenated content property, specified as an offset and length.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentSpan {

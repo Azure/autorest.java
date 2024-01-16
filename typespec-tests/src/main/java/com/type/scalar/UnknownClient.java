@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import com.type.scalar.implementation.UnknownsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ScalarClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ScalarClientBuilder.class)
 public final class UnknownClient {

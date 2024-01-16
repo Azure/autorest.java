@@ -16,7 +16,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * An Access policy.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class AccessPolicy implements XmlSerializable<AccessPolicy> {

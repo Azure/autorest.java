@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * Details about a user.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class User implements JsonSerializable<User> {

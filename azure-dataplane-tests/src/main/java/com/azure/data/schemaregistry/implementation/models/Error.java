@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * An error response returned from Azure Schema Registry service.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Error implements JsonSerializable<Error> {

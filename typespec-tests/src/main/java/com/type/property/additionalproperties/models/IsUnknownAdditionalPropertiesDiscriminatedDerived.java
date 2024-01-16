@@ -14,7 +14,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The derived discriminated type.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class IsUnknownAdditionalPropertiesDiscriminatedDerived

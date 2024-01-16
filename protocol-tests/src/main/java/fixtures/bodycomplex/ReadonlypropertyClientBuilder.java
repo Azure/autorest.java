@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the ReadonlypropertyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { ReadonlypropertyClient.class, ReadonlypropertyAsyncClient.class })
 public final class ReadonlypropertyClientBuilder

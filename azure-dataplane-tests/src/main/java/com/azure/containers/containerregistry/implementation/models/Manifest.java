@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Returns the requested manifest file.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Manifest implements JsonSerializable<Manifest> {

@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.paging.implementation.PagingsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestPagingTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestPagingTestServiceClientBuilder.class, isAsync = true)
 public final class AutoRestPagingTestServiceAsyncClient {

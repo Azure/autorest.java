@@ -12,7 +12,9 @@ import com.azure.xml.XmlWriter;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * The BlobName model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class BlobName implements XmlSerializable<BlobName> {

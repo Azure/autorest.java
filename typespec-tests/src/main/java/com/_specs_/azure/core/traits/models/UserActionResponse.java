@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * User action response.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class UserActionResponse implements JsonSerializable<UserActionResponse> {

@@ -15,7 +15,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * A response containing error details.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class ErrorResponse implements JsonSerializable<ErrorResponse> {

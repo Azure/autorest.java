@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the LongRunningClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { LongRunningClient.class, LongRunningAsyncClient.class })
 public final class LongRunningClientBuilder implements HttpTrait<LongRunningClientBuilder>,

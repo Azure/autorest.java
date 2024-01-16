@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Output model with visibility properties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class VisibilityModel implements JsonSerializable<VisibilityModel> {

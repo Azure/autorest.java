@@ -27,7 +27,9 @@ import com.payload.multipart.models.MultiPartRequest;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous MultiPartClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultiPartClientBuilder.class, isAsync = true)
 public final class MultiPartAsyncClient {

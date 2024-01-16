@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * Properties of the backend address pool.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class BackendAddressPoolPropertiesFormat {

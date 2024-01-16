@@ -17,8 +17,10 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic
  * instances.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Salmon extends Fish {

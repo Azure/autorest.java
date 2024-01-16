@@ -47,7 +47,9 @@ import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the BasicClient type.
+ * <!-- end generated doc -->
  */
 public final class BasicClientImpl {
     /**

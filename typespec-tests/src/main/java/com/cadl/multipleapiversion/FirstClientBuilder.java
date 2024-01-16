@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the FirstClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { FirstClient.class, FirstAsyncClient.class })
 public final class FirstClientBuilder implements HttpTrait<FirstClientBuilder>, ConfigurationTrait<FirstClientBuilder>,

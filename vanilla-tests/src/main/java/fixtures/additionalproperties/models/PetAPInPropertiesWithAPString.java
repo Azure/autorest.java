@@ -13,7 +13,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The PetAPInPropertiesWithAPString model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class PetAPInPropertiesWithAPString {

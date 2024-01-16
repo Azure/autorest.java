@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import com.type.scalar.implementation.StringOperationsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ScalarClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ScalarClientBuilder.class)
 public final class StringOperationClient {

@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The ProductResult model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ProductResult {

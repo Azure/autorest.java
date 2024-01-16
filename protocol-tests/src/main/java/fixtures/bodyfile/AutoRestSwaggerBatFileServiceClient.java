@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodyfile.implementation.FilesImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestSwaggerBatFileServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerBatFileServiceClientBuilder.class)
 public final class AutoRestSwaggerBatFileServiceClient {

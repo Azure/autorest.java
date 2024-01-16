@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Defines values for ModelAsStringNoRequiredTwoValueNoDefaultOpEnum.
+ * <!-- end generated doc -->
  */
 public final class ModelAsStringNoRequiredTwoValueNoDefaultOpEnum
     extends ExpandableStringEnum<ModelAsStringNoRequiredTwoValueNoDefaultOpEnum> {

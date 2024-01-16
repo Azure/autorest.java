@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * A selection mark object representing check boxes, radio buttons, and other elements indicating a selection.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentSelectionMark {

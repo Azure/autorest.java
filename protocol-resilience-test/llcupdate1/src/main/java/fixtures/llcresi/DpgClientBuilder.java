@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the DpgClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { DpgClient.class, DpgAsyncClient.class })
 public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, ConfigurationTrait<DpgClientBuilder> {

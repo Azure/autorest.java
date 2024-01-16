@@ -19,7 +19,9 @@ import com.cadl.server.implementation.ContosoClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ContosoClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ContosoClientBuilder.class, isAsync = true)
 public final class ContosoAsyncClient {

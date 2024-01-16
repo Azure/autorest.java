@@ -9,9 +9,11 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * summary of Statuses
  * 
  * description of Statuses.
+ * <!-- end generated doc -->
  */
 public final class DataStatus extends ExpandableStringEnum<DataStatus> {
     /**

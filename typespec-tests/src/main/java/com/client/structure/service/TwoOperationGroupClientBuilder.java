@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the TwoOperationGroupClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(
     serviceClients = { Group1Client.class, Group2Client.class, Group1AsyncClient.class, Group2AsyncClient.class })

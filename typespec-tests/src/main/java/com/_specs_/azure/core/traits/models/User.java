@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Sample Model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class User implements JsonSerializable<User> {

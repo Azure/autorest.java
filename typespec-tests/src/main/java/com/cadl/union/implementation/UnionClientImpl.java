@@ -13,7 +13,9 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.union.UnionServiceVersion;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the UnionClient type.
+ * <!-- end generated doc -->
  */
 public final class UnionClientImpl {
     /**

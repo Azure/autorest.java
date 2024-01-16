@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The LROsPostAsyncRetrycanceledHeaders model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class LROsPostAsyncRetrycanceledHeaders {

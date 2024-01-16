@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.UUID;
 
 /**
+ * <!-- start generated doc -->
  * The ReadonlyObj model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ReadonlyObj {

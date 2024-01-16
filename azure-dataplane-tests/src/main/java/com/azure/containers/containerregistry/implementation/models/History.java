@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * A list of unstructured historical data for v1 compatibility.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class History implements JsonSerializable<History> {

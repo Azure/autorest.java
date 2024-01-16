@@ -19,7 +19,9 @@ import com.cadl.errormodel.implementation.ErrorOpsImpl;
 import com.cadl.errormodel.models.Diagnostic;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ErrorModelClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ErrorModelClientBuilder.class)
 public final class ErrorModelClient {

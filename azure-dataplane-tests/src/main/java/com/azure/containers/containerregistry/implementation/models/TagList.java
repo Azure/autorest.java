@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * List of tag details.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class TagList implements JsonSerializable<TagList> {

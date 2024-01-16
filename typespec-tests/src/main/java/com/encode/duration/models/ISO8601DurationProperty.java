@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.time.Duration;
 
 /**
+ * <!-- start generated doc -->
  * The ISO8601DurationProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class ISO8601DurationProperty implements JsonSerializable<ISO8601DurationProperty> {

@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the HttpRetryClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { HttpRetryClient.class, HttpRetryAsyncClient.class })
 public final class HttpRetryClientBuilder

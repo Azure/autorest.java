@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the AutoRestIntegerTestService type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { AutoRestIntegerTestService.class })
 public final class AutoRestIntegerTestServiceBuilder

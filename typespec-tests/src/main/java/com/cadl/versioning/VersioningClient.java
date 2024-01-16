@@ -25,7 +25,9 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous VersioningClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = VersioningClientBuilder.class)
 public final class VersioningClient {

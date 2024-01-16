@@ -21,7 +21,9 @@ import com.cadl.multipart.models.FormData;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MultipartClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultipartClientBuilder.class)
 public final class MultipartClient {

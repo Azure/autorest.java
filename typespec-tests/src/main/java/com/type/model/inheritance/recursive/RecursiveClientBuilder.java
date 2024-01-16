@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the RecursiveClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { RecursiveClient.class, RecursiveAsyncClient.class })
 public final class RecursiveClientBuilder

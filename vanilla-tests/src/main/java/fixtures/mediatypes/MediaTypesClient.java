@@ -36,7 +36,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the MediaTypesClient type.
+ * <!-- end generated doc -->
  */
 public final class MediaTypesClient {
     /**

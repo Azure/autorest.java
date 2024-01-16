@@ -19,7 +19,9 @@ import fixtures.requiredoptionalbody.implementation.RequiredOptionalBodyClientIm
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous RequiredOptionalBodyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RequiredOptionalBodyClientBuilder.class, isAsync = true)
 public final class RequiredOptionalBodyAsyncClient {

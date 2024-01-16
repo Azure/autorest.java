@@ -9,7 +9,9 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The ByteWrapper model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ByteWrapper {

@@ -19,7 +19,9 @@ import com.type.model.inheritance.nesteddiscriminator.implementation.NestedDiscr
 import com.type.model.inheritance.nesteddiscriminator.models.Fish;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous NestedDiscriminatorClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NestedDiscriminatorClientBuilder.class)
 public final class NestedDiscriminatorClient {

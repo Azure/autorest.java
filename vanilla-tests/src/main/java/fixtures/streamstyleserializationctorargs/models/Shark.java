@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The Shark model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Shark extends Fish {

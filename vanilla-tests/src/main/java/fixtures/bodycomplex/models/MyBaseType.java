@@ -12,7 +12,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 /**
+ * <!-- start generated doc -->
  * The MyBaseType model.
+ * <!-- end generated doc -->
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,

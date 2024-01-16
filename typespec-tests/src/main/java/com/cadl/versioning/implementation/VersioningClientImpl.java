@@ -13,7 +13,9 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.versioning.VersioningServiceVersion;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the VersioningClient type.
+ * <!-- end generated doc -->
  */
 public final class VersioningClientImpl {
     /**

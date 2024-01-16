@@ -21,7 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialCharsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialCharsClientBuilder.class)
 public final class SpecialCharsClient {

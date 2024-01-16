@@ -15,7 +15,9 @@ import fixtures.bodycomplex.implementation.models.ErrorException;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestComplexTestService type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class, isAsync = true)
 public final class BasicAsyncClient {

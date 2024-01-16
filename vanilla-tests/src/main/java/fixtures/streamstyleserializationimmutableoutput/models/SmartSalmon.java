@@ -14,7 +14,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The SmartSalmon model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class SmartSalmon extends Salmon {

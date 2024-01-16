@@ -34,7 +34,9 @@ import fixtures.validation.models.Product;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the AutoRestValidationTest type.
+ * <!-- end generated doc -->
  */
 public final class AutoRestValidationTest {
     /**

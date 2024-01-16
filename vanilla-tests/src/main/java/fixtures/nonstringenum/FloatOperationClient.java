@@ -14,7 +14,9 @@ import fixtures.nonstringenum.implementation.FloatOperationsImpl;
 import fixtures.nonstringenum.models.FloatEnum;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous NonStringEnumsClient type.
+ * <!-- end generated doc -->
  */
 public final class FloatOperationClient {
     @Generated

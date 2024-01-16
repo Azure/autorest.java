@@ -16,7 +16,9 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 /**
+ * <!-- start generated doc -->
  * The UnixTimestampDatetimeProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class UnixTimestampDatetimeProperty implements JsonSerializable<UnixTimestampDatetimeProperty> {

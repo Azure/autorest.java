@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Top Level Arm Resource Properties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class TopLevelArmResourceProperties {

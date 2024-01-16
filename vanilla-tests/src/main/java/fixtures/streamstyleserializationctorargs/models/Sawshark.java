@@ -16,7 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The Sawshark model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Sawshark extends Shark {

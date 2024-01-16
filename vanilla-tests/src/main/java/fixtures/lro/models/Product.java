@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The Product model.
+ * <!-- end generated doc -->
  */
 @JsonFlatten
 @Fluent

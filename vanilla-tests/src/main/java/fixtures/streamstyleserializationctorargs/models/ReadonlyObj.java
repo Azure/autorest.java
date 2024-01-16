@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The ReadonlyObj model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {

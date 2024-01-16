@@ -19,7 +19,9 @@ import com.azure.core.util.BinaryData;
 import com.encode.bytes.implementation.ResponseBodiesImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous BytesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BytesClientBuilder.class)
 public final class ResponseBodyClient {

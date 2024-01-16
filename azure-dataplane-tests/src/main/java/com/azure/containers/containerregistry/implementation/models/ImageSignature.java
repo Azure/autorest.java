@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Signature of a signed manifest.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ImageSignature implements JsonSerializable<ImageSignature> {

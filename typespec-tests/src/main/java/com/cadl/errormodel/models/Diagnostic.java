@@ -15,7 +15,9 @@ import com.cadl.errormodel.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The Diagnostic model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Diagnostic implements JsonSerializable<Diagnostic> {

@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
+ * <!-- start generated doc -->
  * The ContainerRegistryBlobsCheckChunkExistsHeaders model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ContainerRegistryBlobsCheckChunkExistsHeaders {

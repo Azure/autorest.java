@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * List of float enums.
+ * <!-- end generated doc -->
  */
 public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
     /**

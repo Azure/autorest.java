@@ -21,7 +21,9 @@ import com.type.property.valuetypes.models.UnionStringLiteralProperty;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ValueTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ValueTypesClientBuilder.class, isAsync = true)
 public final class UnionStringLiteralAsyncClient {

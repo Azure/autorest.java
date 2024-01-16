@@ -17,7 +17,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * Properties of a blob.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class BlobProperties implements XmlSerializable<BlobProperties> {

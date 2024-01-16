@@ -14,7 +14,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * An enumeration of blobs.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ListBlobsResponse implements XmlSerializable<ListBlobsResponse> {

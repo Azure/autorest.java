@@ -24,7 +24,9 @@ import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous FlattenClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FlattenClientBuilder.class, isAsync = true)
 public final class FlattenAsyncClient {

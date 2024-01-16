@@ -19,7 +19,9 @@ import com.type.model.inheritance.recursive.implementation.RecursiveClientImpl;
 import com.type.model.inheritance.recursive.models.Extension;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous RecursiveClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RecursiveClientBuilder.class)
 public final class RecursiveClient {

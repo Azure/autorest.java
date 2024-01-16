@@ -16,7 +16,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * Storage Service Properties.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class StorageServiceProperties implements XmlSerializable<StorageServiceProperties> {

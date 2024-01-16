@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The BinaryArrayPartsRequest model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class BinaryArrayPartsRequest {

@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Model with a property unknown, and the data is an array.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class UnknownArrayProperty implements JsonSerializable<UnknownArrayProperty> {

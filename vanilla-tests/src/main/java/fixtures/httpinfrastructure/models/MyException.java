@@ -8,7 +8,9 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The MyException model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class MyException {

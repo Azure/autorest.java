@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Request body to build a new custom document model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class BuildDocumentModelRequest {

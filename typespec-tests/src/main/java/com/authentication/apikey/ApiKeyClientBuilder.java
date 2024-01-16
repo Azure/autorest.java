@@ -41,7 +41,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the ApiKeyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { ApiKeyClient.class, ApiKeyAsyncClient.class })
 public final class ApiKeyClientBuilder implements HttpTrait<ApiKeyClientBuilder>,

@@ -15,7 +15,9 @@ import fixtures.bodycomplex.implementation.models.DictionaryWrapper;
 import fixtures.bodycomplex.implementation.models.ErrorException;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestComplexTestService type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class DictionaryClient {

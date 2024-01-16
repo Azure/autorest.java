@@ -20,7 +20,9 @@ import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import com.type.property.nullable.models.DatetimeProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous NullableClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NullableClientBuilder.class)
 public final class DatetimeOperationClient {

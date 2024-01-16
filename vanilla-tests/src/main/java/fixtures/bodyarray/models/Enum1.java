@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Defines values for Enum1.
+ * <!-- end generated doc -->
  */
 public final class Enum1 extends ExpandableStringEnum<Enum1> {
     /**

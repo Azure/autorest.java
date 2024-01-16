@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Result of the request to list tags of the image.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class RepositoryTags implements JsonSerializable<RepositoryTags> {

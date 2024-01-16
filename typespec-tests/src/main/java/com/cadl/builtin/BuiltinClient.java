@@ -22,7 +22,9 @@ import com.cadl.builtin.models.Builtin;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous BuiltinClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BuiltinClientBuilder.class)
 public final class BuiltinClient {

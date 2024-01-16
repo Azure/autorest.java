@@ -16,7 +16,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * The ModelWithUrlProperty model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ModelWithUrlProperty implements XmlSerializable<ModelWithUrlProperty> {

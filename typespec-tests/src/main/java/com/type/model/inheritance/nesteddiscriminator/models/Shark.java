@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class Shark extends Fish {

@@ -16,7 +16,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The SubClassBothMismatch model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class SubClassBothMismatch extends SuperClassMismatch {

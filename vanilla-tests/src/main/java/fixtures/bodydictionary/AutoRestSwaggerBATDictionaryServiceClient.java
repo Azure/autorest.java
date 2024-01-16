@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestSwaggerBATDictionaryService type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerBATDictionaryServiceBuilder.class)
 public final class AutoRestSwaggerBATDictionaryServiceClient {

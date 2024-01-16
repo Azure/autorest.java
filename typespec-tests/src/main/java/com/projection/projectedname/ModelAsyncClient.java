@@ -22,7 +22,9 @@ import com.projection.projectedname.models.JavaModel;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ProjectedNameClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ProjectedNameClientBuilder.class, isAsync = true)
 public final class ModelAsyncClient {

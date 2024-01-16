@@ -21,7 +21,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpreadClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpreadClientBuilder.class)
 public final class AliasClient {

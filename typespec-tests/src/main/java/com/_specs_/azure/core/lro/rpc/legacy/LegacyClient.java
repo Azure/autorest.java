@@ -21,7 +21,9 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous LegacyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LegacyClientBuilder.class)
 public final class LegacyClient {

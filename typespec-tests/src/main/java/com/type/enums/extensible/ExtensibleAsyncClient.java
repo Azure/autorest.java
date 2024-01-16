@@ -21,7 +21,9 @@ import com.type.enums.extensible.models.DaysOfWeekExtensibleEnum;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ExtensibleClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ExtensibleClientBuilder.class, isAsync = true)
 public final class ExtensibleAsyncClient {

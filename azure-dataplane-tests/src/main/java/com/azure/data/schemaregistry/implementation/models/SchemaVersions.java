@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Object received from the registry containing the list of schema versions and link to next batch page.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class SchemaVersions implements JsonSerializable<SchemaVersions> {

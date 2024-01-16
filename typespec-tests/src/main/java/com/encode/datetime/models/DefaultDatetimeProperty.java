@@ -15,7 +15,9 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
+ * <!-- start generated doc -->
  * The DefaultDatetimeProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class DefaultDatetimeProperty implements JsonSerializable<DefaultDatetimeProperty> {

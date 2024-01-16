@@ -10,7 +10,9 @@ import com.azure.core.http.HttpHeaders;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * The LrosaDsPost202RetryInvalidHeaderHeaders model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class LrosaDsPost202RetryInvalidHeaderHeaders {

@@ -10,7 +10,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * A banana.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "banana")
 @Fluent

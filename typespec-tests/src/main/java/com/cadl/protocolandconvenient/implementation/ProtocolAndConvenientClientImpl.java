@@ -13,7 +13,9 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.protocolandconvenient.ProtocolAndConvenientServiceVersion;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the ProtocolAndConvenientClient type.
+ * <!-- end generated doc -->
  */
 public final class ProtocolAndConvenientClientImpl {
     /**

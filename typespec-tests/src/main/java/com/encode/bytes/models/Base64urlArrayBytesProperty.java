@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The Base64urlArrayBytesProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Base64urlArrayBytesProperty implements JsonSerializable<Base64urlArrayBytesProperty> {

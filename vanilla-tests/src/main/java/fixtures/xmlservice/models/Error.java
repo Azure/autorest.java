@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
+ * <!-- start generated doc -->
  * The Error model.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "Error")
 @Fluent

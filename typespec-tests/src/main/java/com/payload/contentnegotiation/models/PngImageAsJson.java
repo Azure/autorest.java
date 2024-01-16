@@ -14,7 +14,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The PngImageAsJson model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {

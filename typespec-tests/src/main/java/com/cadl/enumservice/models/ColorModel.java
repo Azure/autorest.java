@@ -9,7 +9,9 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Defines values for ColorModel.
+ * <!-- end generated doc -->
  */
 public final class ColorModel extends ExpandableStringEnum<ColorModel> {
     /**

@@ -19,7 +19,9 @@ import com.encode.datetime.implementation.ResponseHeadersImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous DatetimeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DatetimeClientBuilder.class, isAsync = true)
 public final class ResponseHeaderAsyncClient {

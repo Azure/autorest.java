@@ -22,7 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AdditionalPropertiesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AdditionalPropertiesClientBuilder.class)
 public final class IsModelArrayClient {

@@ -15,7 +15,9 @@ import com.cadl.response.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The OperationDetails1 model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class OperationDetails1 implements JsonSerializable<OperationDetails1> {

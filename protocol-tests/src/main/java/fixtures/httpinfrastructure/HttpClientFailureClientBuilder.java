@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the HttpClientFailureClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { HttpClientFailureClient.class, HttpClientFailureAsyncClient.class })
 public final class HttpClientFailureClientBuilder

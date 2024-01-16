@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Array inner model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class InnerModel implements JsonSerializable<InnerModel> {

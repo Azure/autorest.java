@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * A slide in a slideshow.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "slide")
 @Fluent

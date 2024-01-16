@@ -24,7 +24,9 @@ import com.cadl.model.models.Resource3;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ModelClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ModelClientBuilder.class, isAsync = true)
 public final class ModelAsyncClient {

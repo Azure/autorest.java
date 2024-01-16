@@ -14,7 +14,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The model extends from a type that is Record&lt;unknown&gt; type.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditionalProperties {

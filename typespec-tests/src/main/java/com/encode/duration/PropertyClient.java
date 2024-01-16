@@ -23,7 +23,9 @@ import com.encode.duration.models.ISO8601DurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DurationClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DurationClientBuilder.class)
 public final class PropertyClient {

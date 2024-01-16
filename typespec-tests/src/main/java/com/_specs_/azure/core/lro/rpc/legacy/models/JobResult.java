@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Result of the job.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class JobResult implements JsonSerializable<JobResult> {

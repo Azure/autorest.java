@@ -21,7 +21,9 @@ import com.cadl.wiretype.models.SubClassBothMismatch;
 import com.cadl.wiretype.models.SubClassMismatch;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous WireTypeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = WireTypeClientBuilder.class)
 public final class WireTypeClient {

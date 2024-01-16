@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Record used in operation parameters.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class InputRecord implements JsonSerializable<InputRecord> {

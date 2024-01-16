@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Table cell kind.
+ * <!-- end generated doc -->
  */
 public final class DocumentTableCellKind extends ExpandableStringEnum<DocumentTableCellKind> {
     /**

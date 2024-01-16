@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * A JSON web signature.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class JWK implements JsonSerializable<JWK> {

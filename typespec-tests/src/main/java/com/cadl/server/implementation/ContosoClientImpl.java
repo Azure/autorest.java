@@ -33,7 +33,9 @@ import com.cadl.server.ContosoServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the ContosoClient type.
+ * <!-- end generated doc -->
  */
 public final class ContosoClientImpl {
     /**

@@ -15,7 +15,9 @@ import fixtures.bodycomplex.implementation.FlattencomplexesImpl;
 import fixtures.bodycomplex.implementation.models.MyBaseType;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestComplexTestService type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestComplexTestServiceBuilder.class)
 public final class FlattencomplexClient {

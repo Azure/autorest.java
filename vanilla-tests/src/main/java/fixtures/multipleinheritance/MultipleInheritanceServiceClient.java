@@ -35,7 +35,9 @@ import fixtures.multipleinheritance.models.Pet;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the MultipleInheritanceServiceClient type.
+ * <!-- end generated doc -->
  */
 public final class MultipleInheritanceServiceClient {
     /**

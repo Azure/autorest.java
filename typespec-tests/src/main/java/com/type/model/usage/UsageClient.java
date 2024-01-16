@@ -21,7 +21,9 @@ import com.type.model.usage.models.InputRecord;
 import com.type.model.usage.models.OutputRecord;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous UsageClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UsageClientBuilder.class)
 public final class UsageClient {

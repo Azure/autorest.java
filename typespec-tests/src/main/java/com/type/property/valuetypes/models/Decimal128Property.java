@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 /**
+ * <!-- start generated doc -->
  * Model with a decimal128 property.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Decimal128Property implements JsonSerializable<Decimal128Property> {

@@ -18,7 +18,9 @@ import fixtures.parameterizedendpoint.implementation.ParmaterizedEndpointClientI
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ParmaterizedEndpointClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ParmaterizedEndpointClientBuilder.class, isAsync = true)
 public final class ParmaterizedEndpointAsyncClient {

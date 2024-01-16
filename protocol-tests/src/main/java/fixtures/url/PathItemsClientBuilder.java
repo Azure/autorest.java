@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the PathItemsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { PathItemsClient.class, PathItemsAsyncClient.class })
 public final class PathItemsClientBuilder

@@ -9,7 +9,9 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
+ * <!-- start generated doc -->
  * The ContainerRegistriesGetRepositoriesNextHeaders model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ContainerRegistriesGetRepositoriesNextHeaders {

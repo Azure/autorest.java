@@ -15,7 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The model is from Record&lt;string&gt; type.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class IsStringAdditionalProperties implements JsonSerializable<IsStringAdditionalProperties> {

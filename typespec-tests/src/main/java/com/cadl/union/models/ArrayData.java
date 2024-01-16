@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The ArrayData model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class ArrayData implements JsonSerializable<ArrayData> {

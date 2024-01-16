@@ -18,7 +18,9 @@ import fixtures.constants.implementation.ContantsImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestSwaggerConstantServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerConstantServiceClientBuilder.class, isAsync = true)
 public final class AutoRestSwaggerConstantServiceAsyncClient {

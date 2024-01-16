@@ -16,7 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * UserOrder for testing list with expand.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class UserOrder implements JsonSerializable<UserOrder> {

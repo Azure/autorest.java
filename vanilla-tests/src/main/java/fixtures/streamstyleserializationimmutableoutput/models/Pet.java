@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The Pet model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Pet implements JsonSerializable<Pet> {

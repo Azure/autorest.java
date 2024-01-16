@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.implementation.ReadonlypropertiesImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestComplexTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ReadonlypropertyClientBuilder.class)
 public final class ReadonlypropertyClient {

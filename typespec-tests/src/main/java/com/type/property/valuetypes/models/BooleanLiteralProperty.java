@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Model with a boolean literal property.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class BooleanLiteralProperty implements JsonSerializable<BooleanLiteralProperty> {

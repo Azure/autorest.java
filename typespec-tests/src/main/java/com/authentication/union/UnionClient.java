@@ -17,7 +17,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous UnionClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class UnionClient {

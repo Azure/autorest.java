@@ -16,7 +16,9 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
+ * <!-- start generated doc -->
  * An enumeration of containers.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ListContainersResponse implements XmlSerializable<ListContainersResponse> {

@@ -13,7 +13,9 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import fixtures.bodycomplex.AutoRestComplexTestServiceVersion;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the AutoRestComplexTestServiceClient type.
+ * <!-- end generated doc -->
  */
 public final class AutoRestComplexTestServiceClientImpl {
     /**

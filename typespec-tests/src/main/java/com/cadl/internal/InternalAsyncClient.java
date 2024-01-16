@@ -23,7 +23,9 @@ import com.cadl.internal.models.ApiResponse;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous InternalClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = InternalClientBuilder.class, isAsync = true)
 public final class InternalAsyncClient {

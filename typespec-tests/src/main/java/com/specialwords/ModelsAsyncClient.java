@@ -53,7 +53,9 @@ import com.specialwords.models.Yield;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous SpecialWordsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialWordsClientBuilder.class, isAsync = true)
 public final class ModelsAsyncClient {

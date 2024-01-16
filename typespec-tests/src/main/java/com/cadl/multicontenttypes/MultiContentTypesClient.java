@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import com.cadl.multicontenttypes.implementation.MultiContentTypesClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MultiContentTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultiContentTypesClientBuilder.class)
 public final class MultiContentTypesClient {

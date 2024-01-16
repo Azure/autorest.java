@@ -11,7 +11,9 @@ import com.cadl.armresourceprovider.models.Origin;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
+ * <!-- start generated doc -->
  * Details of a REST API operation, returned from the Resource Provider Operations API.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class OperationInner {

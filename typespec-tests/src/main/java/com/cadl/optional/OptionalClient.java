@@ -21,7 +21,9 @@ import com.cadl.optional.models.AllPropertiesOptional;
 import com.cadl.optional.models.Optional;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous OptionalClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class OptionalClient {

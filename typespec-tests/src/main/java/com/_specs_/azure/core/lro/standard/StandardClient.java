@@ -21,7 +21,9 @@ import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous StandardClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = StandardClientBuilder.class)
 public final class StandardClient {

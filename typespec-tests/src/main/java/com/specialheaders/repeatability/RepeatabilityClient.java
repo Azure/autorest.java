@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.specialheaders.repeatability.implementation.RepeatabilityClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous RepeatabilityClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RepeatabilityClientBuilder.class)
 public final class RepeatabilityClient {

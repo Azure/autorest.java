@@ -13,7 +13,9 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The Fish model.
+ * <!-- end generated doc -->
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,

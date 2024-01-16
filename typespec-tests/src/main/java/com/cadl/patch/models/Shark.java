@@ -15,7 +15,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Shark extends Fish {

@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The type used for update operations of the ChildResource.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ChildResourceUpdate {

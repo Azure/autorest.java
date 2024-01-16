@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the DpgMultiMediaTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { DpgMultiMediaTypesClient.class, DpgMultiMediaTypesAsyncClient.class })
 public final class DpgMultiMediaTypesClientBuilder

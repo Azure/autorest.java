@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpRetriesImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = HttpRetryClientBuilder.class)
 public final class HttpRetryClient {

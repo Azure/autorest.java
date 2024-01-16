@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Content and layout elements extracted from a page from the input.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentPage {

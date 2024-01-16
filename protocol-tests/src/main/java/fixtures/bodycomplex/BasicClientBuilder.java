@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the BasicClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { BasicClient.class, BasicAsyncClient.class })
 public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, ConfigurationTrait<BasicClientBuilder> {

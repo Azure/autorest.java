@@ -20,7 +20,9 @@ import java.util.List;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous BytesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BytesClientBuilder.class, isAsync = true)
 public final class HeaderAsyncClient {

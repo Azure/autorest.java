@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * model for record.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class ModelForRecord implements JsonSerializable<ModelForRecord> {

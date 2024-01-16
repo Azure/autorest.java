@@ -18,7 +18,9 @@ import com.azure.core.util.polling.PollerFlux;
 import fixtures.endpointlro.implementation.LROsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous LroEndpointClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LroEndpointClientBuilder.class, isAsync = true)
 public final class LroEndpointAsyncClient {

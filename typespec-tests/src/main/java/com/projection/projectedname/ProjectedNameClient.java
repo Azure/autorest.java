@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.projection.projectedname.implementation.ProjectedNameClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ProjectedNameClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ProjectedNameClientBuilder.class)
 public final class ProjectedNameClient {

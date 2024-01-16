@@ -21,7 +21,9 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DictionaryClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DictionaryClientBuilder.class)
 public final class DatetimeValueClient {

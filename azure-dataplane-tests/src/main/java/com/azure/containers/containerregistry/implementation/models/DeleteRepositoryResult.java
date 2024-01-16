@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Deleted repository.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class DeleteRepositoryResult implements JsonSerializable<DeleteRepositoryResult> {

@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.encode.datetime.implementation.ResponseHeadersImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DatetimeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DatetimeClientBuilder.class)
 public final class ResponseHeaderClient {

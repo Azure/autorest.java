@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * JSON web key parameter.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class JWKHeader implements JsonSerializable<JWKHeader> {

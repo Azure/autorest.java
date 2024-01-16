@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Docker V2 image layer descriptor including config and layers.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class OciDescriptor implements JsonSerializable<OciDescriptor> {

@@ -10,7 +10,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Defines values for ProductReceived.
+ * <!-- end generated doc -->
  */
 public final class ProductReceived extends ExpandableStringEnum<ProductReceived> {
     /**

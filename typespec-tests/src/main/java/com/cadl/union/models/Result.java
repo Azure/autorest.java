@@ -14,7 +14,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The Result model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Result implements JsonSerializable<Result> {

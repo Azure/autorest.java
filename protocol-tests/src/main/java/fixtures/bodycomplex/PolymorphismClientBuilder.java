@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the PolymorphismClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { PolymorphismClient.class, PolymorphismAsyncClient.class })
 public final class PolymorphismClientBuilder

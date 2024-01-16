@@ -23,7 +23,9 @@ import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous PageableClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = PageableClientBuilder.class, isAsync = true)
 public final class PageableAsyncClient {

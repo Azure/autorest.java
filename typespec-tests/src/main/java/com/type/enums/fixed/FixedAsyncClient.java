@@ -21,7 +21,9 @@ import com.type.enums.fixed.models.DaysOfWeekEnum;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous FixedClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FixedClientBuilder.class, isAsync = true)
 public final class FixedAsyncClient {

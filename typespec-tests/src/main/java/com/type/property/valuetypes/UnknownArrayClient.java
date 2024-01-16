@@ -19,7 +19,9 @@ import com.type.property.valuetypes.implementation.UnknownArraysImpl;
 import com.type.property.valuetypes.models.UnknownArrayProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ValueTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ValueTypesClientBuilder.class)
 public final class UnknownArrayClient {

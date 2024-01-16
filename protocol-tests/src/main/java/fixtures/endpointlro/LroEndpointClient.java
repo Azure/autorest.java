@@ -18,7 +18,9 @@ import com.azure.core.util.polling.SyncPoller;
 import fixtures.endpointlro.implementation.LROsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous LroEndpointClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LroEndpointClientBuilder.class)
 public final class LroEndpointClient {

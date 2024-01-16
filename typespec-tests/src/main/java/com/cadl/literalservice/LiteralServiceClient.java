@@ -20,7 +20,9 @@ import com.cadl.literalservice.models.Model;
 import com.cadl.literalservice.models.OptionalLiteralParam;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous LiteralServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LiteralServiceClientBuilder.class)
 public final class LiteralServiceClient {

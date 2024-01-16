@@ -10,7 +10,9 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 /**
+ * <!-- start generated doc -->
  * Contans property.
+ * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "Data")
 @Fluent

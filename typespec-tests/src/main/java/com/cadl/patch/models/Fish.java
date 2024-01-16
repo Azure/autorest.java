@@ -16,7 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * This is base model for polymorphic multiple levels inheritance with a discriminator.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Fish implements JsonSerializable<Fish> {

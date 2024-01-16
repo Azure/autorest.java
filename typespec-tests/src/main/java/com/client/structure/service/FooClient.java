@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.client.structure.service.implementation.FoosImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ServiceClientClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ServiceClientClientBuilder.class)
 public final class FooClient {

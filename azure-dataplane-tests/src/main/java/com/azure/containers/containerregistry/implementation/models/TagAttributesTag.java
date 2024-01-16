@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Tag.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class TagAttributesTag implements JsonSerializable<TagAttributesTag> {

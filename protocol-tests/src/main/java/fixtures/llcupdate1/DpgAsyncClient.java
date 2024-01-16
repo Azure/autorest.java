@@ -19,7 +19,9 @@ import fixtures.llcupdate1.implementation.ParamsImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous DpgClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DpgClientBuilder.class, isAsync = true)
 public final class DpgAsyncClient {

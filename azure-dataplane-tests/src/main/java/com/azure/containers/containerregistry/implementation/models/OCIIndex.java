@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Returns the requested OCI index file.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class OCIIndex extends Manifest {

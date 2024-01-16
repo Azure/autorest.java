@@ -9,7 +9,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
+ * <!-- start generated doc -->
  * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
+ * <!-- end generated doc -->
  */
 public final class ActionType extends ExpandableStringEnum<ActionType> {
     /**

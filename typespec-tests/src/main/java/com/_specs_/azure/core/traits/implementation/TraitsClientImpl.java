@@ -40,7 +40,9 @@ import java.util.UUID;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the TraitsClient type.
+ * <!-- end generated doc -->
  */
 public final class TraitsClientImpl {
     /**
