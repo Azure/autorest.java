@@ -111,7 +111,6 @@ public class ExtendsTests {
     }
 
     @Test
-    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     public void testExtendsUnknownDerivedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
         additionalProperty.put("prop1", 32);
@@ -130,7 +129,6 @@ public class ExtendsTests {
     }
 
     @Test
-    @Disabled("bug https://github.com/Azure/autorest.java/issues/2500")
     public void testExtendsUnknownDiscriminatedClient() {
         Map<String, Object> additionalProperty = new LinkedHashMap<>();
         additionalProperty.put("prop1", 32);

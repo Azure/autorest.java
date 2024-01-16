@@ -52,6 +52,7 @@ public final class ClientModelPropertiesManager {
     private final List<ClientModelProperty> superRequiredProperties;
     private final List<ClientModelProperty> superSetterProperties;
     private final List<ClientModelProperty> superReadOnlyProperties;
+    private final ClientModelProperty superAdditionalPropertiesProperty;
     private final List<ClientModelProperty> constructorProperties;
     private final List<ClientModelProperty> requiredProperties;
     private final List<ClientModelProperty> setterProperties;
@@ -100,6 +101,7 @@ public final class ClientModelPropertiesManager {
         superRequiredProperties = new ArrayList<>();
         superSetterProperties = new ArrayList<>();
         superReadOnlyProperties = new ArrayList<>();
+        ClientModelProperty superAdditionalProperties = null;
         boolean hasXmlElements = false;
         boolean hasXmlTexts = false;
         xmlNamespaceWithPrefix = new LinkedHashMap<>();
@@ -128,7 +130,10 @@ public final class ClientModelPropertiesManager {
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
             // Ignore additional properties and polymorphic discriminators from parent types as they will be handled
             // specifically in the subtype.
-            if (property.isAdditionalProperties() || property.isPolymorphicDiscriminator()) {
+            if (property.isAdditionalProperties()) {
+                superAdditionalProperties = property;
+                continue;
+            } else if (property.isPolymorphicDiscriminator()) {
                 continue;
             }
 
@@ -172,6 +177,8 @@ public final class ClientModelPropertiesManager {
                 xmlNamespaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
             }
         }
+
+        this.superAdditionalPropertiesProperty = superAdditionalProperties;
 
         constructorProperties = new ArrayList<>();
         requiredProperties = new ArrayList<>();
@@ -415,6 +422,18 @@ public final class ClientModelPropertiesManager {
      */
     public ClientModelProperty getAdditionalProperties() {
         return additionalProperties;
+    }
+
+    /**
+     * Gets the {@link ClientModelProperty} that defines the additional properties property in superclass.
+     * <p>
+     * If the no superclass contain additional properties, this will return null.
+     *
+     * @return The {@link ClientModelProperty} that defines the additional properties property in superclass, or null if
+     * no superclass defines additional properties.
+     */
+    public ClientModelProperty getSuperAdditionalPropertiesProperty() {
+        return superAdditionalPropertiesProperty;
     }
 
     /**
