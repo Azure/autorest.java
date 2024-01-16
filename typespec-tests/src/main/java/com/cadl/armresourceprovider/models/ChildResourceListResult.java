@@ -11,9 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The response of a ChildResource list operation.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ChildResourceListResult {

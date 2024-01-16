@@ -8,9 +8,7 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Child Resource Properties.
- * <!-- end generated doc -->
  */
 @Immutable
 public final class ChildResourceProperties {

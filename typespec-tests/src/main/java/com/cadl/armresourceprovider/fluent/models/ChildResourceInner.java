@@ -12,9 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Subresource of Top Level Arm Resource.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ChildResourceInner extends Resource {
