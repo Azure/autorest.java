@@ -909,12 +909,29 @@ export class CodeModelBuilder {
     }
   }
 
+  private _armApiVersionParameter?: Parameter;
+
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
     if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
       // pre-condition for "isApiVersion": the client supports ApiVersions
-      const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
-      op.addParameter(parameter);
-      clientContext.addGlobalParameter(parameter);
+      if (this.isArm()) {
+        // In ARM, we yet don't know how service will define mixed api-versions(like those in Compute RP).
+        // Currently we assume ARM tsp only have one client and one api-version.
+        const apiVersion = clientContext.apiVersions[0];
+        if (!this._armApiVersionParameter) {
+          this._armApiVersionParameter = this.createApiVersionParameter(
+            "api-version",
+            param.type === "query" ? ParameterLocation.Query : ParameterLocation.Path,
+            apiVersion,
+          );
+          clientContext.addGlobalParameter(this._armApiVersionParameter);
+        }
+        op.addParameter(this._armApiVersionParameter);
+      } else {
+        const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
+        op.addParameter(parameter);
+        clientContext.addGlobalParameter(parameter);
+      }
     } else if (this.isSubscriptionId(param)) {
       const parameter = this.subscriptionIdParameter(param);
       op.addParameter(parameter);
@@ -2588,14 +2605,18 @@ export class CodeModelBuilder {
     );
   }
 
-  private createApiVersionParameter(serializedName: string, parameterLocation: ParameterLocation): Parameter {
+  private createApiVersionParameter(
+    serializedName: string,
+    parameterLocation: ParameterLocation,
+    value = "",
+  ): Parameter {
     return new Parameter(
       serializedName,
       "Version parameter",
       this.codeModel.schemas.add(
         new ConstantSchema(serializedName, "API Version", {
           valueType: this.stringSchema,
-          value: new ConstantValue(""),
+          value: new ConstantValue(value),
         }),
       ),
       {
