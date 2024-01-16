@@ -167,7 +167,7 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
         this.serializerAdapter = serializerAdapter;
         this.defaultPollInterval = defaultPollInterval;
         this.subscriptionId = subscriptionId;
-        this.apiVersion = "";
+        this.apiVersion = "2023-11-01";
         this.childResourcesInterfaces = new ChildResourcesInterfacesClientImpl(this);
         this.topLevelArmResourceInterfaces = new TopLevelArmResourceInterfacesClientImpl(this);
         this.operations = new OperationsClientImpl(this);
