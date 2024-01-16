@@ -9,7 +9,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 /**
@@ -38,14 +37,8 @@ public class Cat extends Pet {
      * 
      * @return the color value.
      */
-    public byte[] getColor() {
-        String returnValue = this.color;
-        String colorStr = returnValue;
-        try {
-            return colorStr.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException ex) {
-            return colorStr.getBytes();
-        }
+    public String getColor() {
+        return this.color;
     }
 
     /**
