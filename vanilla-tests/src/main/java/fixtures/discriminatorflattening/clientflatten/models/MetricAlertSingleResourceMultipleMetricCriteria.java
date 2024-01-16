@@ -9,7 +9,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Specifies the metric alert criteria for a single resource that has multiple metric criteria.
@@ -64,6 +66,11 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
             Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA == null ? null
                 : Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString());
         jsonWriter.writeArrayField("allOf", this.allOf, (writer, element) -> writer.writeString(element));
+        if (getAdditionalProperties() != null) {
+            for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
+                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
+            }
+        }
         return jsonWriter.writeEndObject();
     }
 
@@ -80,6 +87,7 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
         return jsonReader.readObject(reader -> {
             MetricAlertSingleResourceMultipleMetricCriteria deserializedMetricAlertSingleResourceMultipleMetricCriteria
                 = new MetricAlertSingleResourceMultipleMetricCriteria();
+            Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -95,9 +103,14 @@ public final class MetricAlertSingleResourceMultipleMetricCriteria extends Metri
                     List<String> allOf = reader.readArray(reader1 -> reader1.getString());
                     deserializedMetricAlertSingleResourceMultipleMetricCriteria.allOf = allOf;
                 } else {
-                    reader.skipChildren();
+                    if (additionalProperties == null) {
+                        additionalProperties = new LinkedHashMap<>();
+                    }
+
+                    additionalProperties.put(fieldName, reader.readUntyped());
                 }
             }
+            deserializedMetricAlertSingleResourceMultipleMetricCriteria.setAdditionalProperties(additionalProperties);
 
             return deserializedMetricAlertSingleResourceMultipleMetricCriteria;
         });
