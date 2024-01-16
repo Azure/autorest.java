@@ -34,9 +34,7 @@ import com.server.versions.versioned.VersionedServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
- * <!-- start generated doc -->
  * Initializes a new instance of the VersionedClient type.
- * <!-- end generated doc -->
  */
 public final class VersionedClientImpl {
     /**

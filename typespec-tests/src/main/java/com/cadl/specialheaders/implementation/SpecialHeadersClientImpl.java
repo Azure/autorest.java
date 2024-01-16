@@ -13,9 +13,7 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.cadl.specialheaders.SpecialHeadersServiceVersion;
 
 /**
- * <!-- start generated doc -->
  * Initializes a new instance of the SpecialHeadersClient type.
- * <!-- end generated doc -->
  */
 public final class SpecialHeadersClientImpl {
     /**

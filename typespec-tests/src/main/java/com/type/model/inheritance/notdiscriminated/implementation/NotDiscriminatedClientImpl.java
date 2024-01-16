@@ -34,9 +34,7 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import reactor.core.publisher.Mono;
 
 /**
- * <!-- start generated doc -->
  * Initializes a new instance of the NotDiscriminatedClient type.
- * <!-- end generated doc -->
  */
 public final class NotDiscriminatedClientImpl {
     /**

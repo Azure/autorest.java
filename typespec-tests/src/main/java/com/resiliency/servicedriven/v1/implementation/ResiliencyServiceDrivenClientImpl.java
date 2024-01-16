@@ -34,9 +34,7 @@ import com.resiliency.servicedriven.v1.ServiceDrivenServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
- * <!-- start generated doc -->
  * Initializes a new instance of the ResiliencyServiceDrivenClient type.
- * <!-- end generated doc -->
  */
 public final class ResiliencyServiceDrivenClientImpl {
     /**

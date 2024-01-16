@@ -9,9 +9,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * Defines values for LR.
- * <!-- end generated doc -->
  */
 public final class LR extends ExpandableStringEnum<LR> {
     /**

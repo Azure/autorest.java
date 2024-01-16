@@ -8,9 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * Can take a value of access_token_refresh_token, or access_token, or refresh_token.
- * <!-- end generated doc -->
  */
 public final class PostContentSchemaGrantType extends ExpandableStringEnum<PostContentSchemaGrantType> {
     /**
