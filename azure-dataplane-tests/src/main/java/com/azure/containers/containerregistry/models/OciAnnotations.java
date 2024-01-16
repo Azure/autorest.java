@@ -16,9 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Additional information provided through arbitrary metadata.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class OciAnnotations implements JsonSerializable<OciAnnotations> {

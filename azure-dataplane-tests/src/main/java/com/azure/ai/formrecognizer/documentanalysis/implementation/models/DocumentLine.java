@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentLine {

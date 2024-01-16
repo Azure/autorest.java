@@ -16,9 +16,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * A banana.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Banana implements XmlSerializable<Banana> {

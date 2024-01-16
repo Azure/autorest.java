@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Returns the requested OCI Manifest file.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class OciImageManifest implements JsonSerializable<OciImageManifest> {

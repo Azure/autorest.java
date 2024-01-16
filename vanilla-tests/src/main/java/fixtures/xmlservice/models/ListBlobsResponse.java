@@ -10,9 +10,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
- * <!-- start generated doc -->
  * An enumeration of blobs.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "EnumerationResults")
 @Fluent

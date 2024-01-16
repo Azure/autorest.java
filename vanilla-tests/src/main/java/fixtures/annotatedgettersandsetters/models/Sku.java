@@ -10,9 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 /**
- * <!-- start generated doc -->
  * SKU details.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Sku {

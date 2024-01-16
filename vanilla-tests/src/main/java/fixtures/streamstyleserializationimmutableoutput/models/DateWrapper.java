@@ -14,9 +14,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 /**
- * <!-- start generated doc -->
  * The DateWrapper model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DateWrapper implements JsonSerializable<DateWrapper> {

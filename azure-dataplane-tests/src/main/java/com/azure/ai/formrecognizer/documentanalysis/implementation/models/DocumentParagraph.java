@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * A paragraph object consisting with contiguous lines generally with common alignment and spacing.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentParagraph {

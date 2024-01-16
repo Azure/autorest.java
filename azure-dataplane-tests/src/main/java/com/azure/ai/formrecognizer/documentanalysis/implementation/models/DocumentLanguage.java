@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * An object representing the detected language for a given text span.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentLanguage {

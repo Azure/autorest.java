@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * An object representing the field key or value in a key-value pair.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentKeyValueElement {

@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * Object received from the registry containing schema identifiers.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class SchemaId implements JsonSerializable<SchemaId> {

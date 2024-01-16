@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * The artifact's platform, consisting of operating system and architecture.
- * <!-- end generated doc -->
  */
 @Immutable
 public final class ArtifactManifestPlatform implements JsonSerializable<ArtifactManifestPlatform> {

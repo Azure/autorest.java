@@ -14,9 +14,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <!-- start generated doc -->
  * The DatetimeWrapper model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> {

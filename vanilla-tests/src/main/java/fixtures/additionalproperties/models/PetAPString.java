@@ -13,9 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * The PetAPString model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class PetAPString {

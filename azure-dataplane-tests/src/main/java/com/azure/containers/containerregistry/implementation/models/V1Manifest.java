@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Returns the requested V1 manifest file.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class V1Manifest extends Manifest {

@@ -9,9 +9,7 @@ import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Document analysis parameters.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class AnalyzeDocumentRequest {

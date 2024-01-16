@@ -10,9 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
- * <!-- start generated doc -->
  * The ModelWithByteProperty model.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "ModelWithByteProperty")
 @Fluent

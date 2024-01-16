@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Returns the requested Docker V2 Manifest file.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class V2Manifest extends Manifest {

@@ -10,9 +10,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 
 /**
- * <!-- start generated doc -->
  * The BlobName model.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "BlobName")
 @Fluent

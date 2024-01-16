@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /**
- * <!-- start generated doc -->
  * The DatetimeWrapper model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DatetimeWrapper {

@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
- * <!-- start generated doc -->
  * signed identifier.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "SignedIdentifier")
 @Fluent

@@ -9,9 +9,7 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Describes a Virtual Machine Scale Set.
- * <!-- end generated doc -->
  */
 @JsonFlatten
 @Fluent

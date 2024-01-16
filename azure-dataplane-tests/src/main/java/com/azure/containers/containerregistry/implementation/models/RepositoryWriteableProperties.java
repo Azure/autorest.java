@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * Changeable attributes for Repository.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class RepositoryWriteableProperties implements JsonSerializable<RepositoryWriteableProperties> {

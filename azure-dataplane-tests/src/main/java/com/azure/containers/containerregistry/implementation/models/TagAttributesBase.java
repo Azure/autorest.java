@@ -14,9 +14,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <!-- start generated doc -->
  * Tag attribute details.
- * <!-- end generated doc -->
  */
 @Fluent
 public class TagAttributesBase implements JsonSerializable<TagAttributesBase> {

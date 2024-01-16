@@ -14,9 +14,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The Cookiecuttershark model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Cookiecuttershark extends Shark {

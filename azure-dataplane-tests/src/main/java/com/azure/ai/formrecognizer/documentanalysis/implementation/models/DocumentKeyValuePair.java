@@ -8,9 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * An object representing a form field with distinct field label (key) and field value (may be empty).
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentKeyValuePair {

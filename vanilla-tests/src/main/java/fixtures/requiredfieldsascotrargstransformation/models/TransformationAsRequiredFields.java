@@ -14,9 +14,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 
 /**
- * <!-- start generated doc -->
  * The TransformationAsRequiredFields model.
- * <!-- end generated doc -->
  */
 @Immutable
 public class TransformationAsRequiredFields {

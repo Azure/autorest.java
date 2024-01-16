@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * The DotFish model.
- * <!-- end generated doc -->
  */
 @Immutable
 public class DotFish implements JsonSerializable<DotFish> {

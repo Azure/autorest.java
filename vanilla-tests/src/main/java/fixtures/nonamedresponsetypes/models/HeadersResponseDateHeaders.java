@@ -11,9 +11,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
 /**
- * <!-- start generated doc -->
  * The HeadersResponseDateHeaders model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class HeadersResponseDateHeaders {

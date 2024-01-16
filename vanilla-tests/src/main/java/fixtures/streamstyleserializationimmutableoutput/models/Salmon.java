@@ -12,9 +12,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The Salmon model.
- * <!-- end generated doc -->
  */
 @Fluent
 public class Salmon extends Fish {

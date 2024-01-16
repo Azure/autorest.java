@@ -14,9 +14,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * I am a complex type with no XML node.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ComplexTypeNoMeta implements XmlSerializable<ComplexTypeNoMeta> {

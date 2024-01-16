@@ -13,10 +13,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The platform object describes the platform which the image in the manifest runs on. A full list of valid operating
  * system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Platform implements JsonSerializable<Platform> {

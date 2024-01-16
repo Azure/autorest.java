@@ -13,9 +13,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Error response returned from Azure Schema Registry service.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ErrorDetail implements JsonSerializable<ErrorDetail> {

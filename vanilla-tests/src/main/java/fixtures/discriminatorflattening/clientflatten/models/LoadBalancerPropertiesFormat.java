@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Properties of the load balancer.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class LoadBalancerPropertiesFormat {

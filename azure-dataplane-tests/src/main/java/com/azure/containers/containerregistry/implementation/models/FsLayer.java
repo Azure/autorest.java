@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * Image layer information.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class FsLayer implements JsonSerializable<FsLayer> {

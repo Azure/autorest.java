@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Request body to create a composed document model from component document models.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ComposeDocumentModelRequest {

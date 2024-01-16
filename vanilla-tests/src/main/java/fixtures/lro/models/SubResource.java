@@ -8,9 +8,7 @@ import com.azure.core.annotation.Immutable;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * The SubResource model.
- * <!-- end generated doc -->
  */
 @Immutable
 public class SubResource {

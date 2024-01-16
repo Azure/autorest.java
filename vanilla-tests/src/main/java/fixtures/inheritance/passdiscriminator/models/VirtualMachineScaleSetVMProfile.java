@@ -8,9 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Describes a virtual machine scale set virtual machine profile.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class VirtualMachineScaleSetVMProfile {

@@ -13,9 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Storage Service Properties.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "StorageServiceProperties")
 @Fluent

@@ -11,9 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * An object representing the content and location of a field value.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentField {

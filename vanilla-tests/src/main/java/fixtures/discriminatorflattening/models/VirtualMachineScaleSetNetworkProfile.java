@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Describes a virtual machine scale set network profile.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class VirtualMachineScaleSetNetworkProfile {

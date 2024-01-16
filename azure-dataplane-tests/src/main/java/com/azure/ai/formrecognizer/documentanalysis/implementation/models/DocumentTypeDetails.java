@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Document type info.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentTypeDetails {

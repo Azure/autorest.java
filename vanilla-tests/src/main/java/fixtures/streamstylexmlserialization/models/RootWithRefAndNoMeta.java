@@ -14,9 +14,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * I am root, and I ref a model with no meta.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class RootWithRefAndNoMeta implements XmlSerializable<RootWithRefAndNoMeta> {

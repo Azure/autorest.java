@@ -8,9 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Describes a virtual machine scale set network profile's network configurations.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class VirtualMachineScaleSetNetworkConfiguration {

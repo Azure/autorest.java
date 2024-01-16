@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * Error information.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {

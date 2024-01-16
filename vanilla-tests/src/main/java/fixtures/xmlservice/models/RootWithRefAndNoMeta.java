@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
- * <!-- start generated doc -->
  * I am root, and I ref a model with no meta.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "RootWithRefAndNoMeta")
 @Fluent

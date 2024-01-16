@@ -16,9 +16,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * An Azure Storage blob.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Blob implements XmlSerializable<Blob> {

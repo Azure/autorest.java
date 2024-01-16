@@ -14,9 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Returns the requested manifest file.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ManifestWrapper extends Manifest {

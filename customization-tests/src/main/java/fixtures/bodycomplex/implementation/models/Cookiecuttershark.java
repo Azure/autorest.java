@@ -11,9 +11,7 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The Cookiecuttershark model.
- * <!-- end generated doc -->
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
 @JsonTypeName("cookiecuttershark")

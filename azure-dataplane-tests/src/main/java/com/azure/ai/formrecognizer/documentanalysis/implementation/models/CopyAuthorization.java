@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /**
- * <!-- start generated doc -->
  * Authorization to copy a document model to the specified target resource and modelId.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class CopyAuthorization {

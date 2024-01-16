@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Description of the field semantic schema using a JSON Schema style syntax.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentFieldSchema {

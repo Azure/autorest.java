@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * List Operations response object.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class GetOperationsResponse {

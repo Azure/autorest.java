@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The DotFishMarket model.
- * <!-- end generated doc -->
  */
 @Immutable
 public final class DotFishMarket {

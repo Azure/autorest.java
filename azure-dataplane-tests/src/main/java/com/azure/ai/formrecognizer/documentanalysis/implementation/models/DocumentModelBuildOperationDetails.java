@@ -12,9 +12,7 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Get Operation response object.
- * <!-- end generated doc -->
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
 @JsonTypeName("documentModelBuild")

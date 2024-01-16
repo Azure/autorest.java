@@ -9,9 +9,7 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * The metric alert resource.
- * <!-- end generated doc -->
  */
 @JsonFlatten
 @Fluent

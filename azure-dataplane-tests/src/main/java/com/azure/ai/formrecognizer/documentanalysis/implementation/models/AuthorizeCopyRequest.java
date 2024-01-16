@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Request body to authorize document model copy.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class AuthorizeCopyRequest {

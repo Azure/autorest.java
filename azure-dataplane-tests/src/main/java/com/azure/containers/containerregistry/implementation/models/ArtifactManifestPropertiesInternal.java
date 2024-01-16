@@ -18,9 +18,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Manifest attributes details.
- * <!-- end generated doc -->
  */
 @Fluent
 public class ArtifactManifestPropertiesInternal implements JsonSerializable<ArtifactManifestPropertiesInternal> {

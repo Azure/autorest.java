@@ -9,10 +9,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * A word object consisting of a contiguous sequence of characters. For non-space delimited languages, such as
  * Chinese, Japanese, and Korean, each character is represented as its own word.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentWord {

@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * The DictionaryWrapper model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DictionaryWrapper {

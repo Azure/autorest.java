@@ -11,9 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The Blobs model.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "Blobs")
 @Fluent

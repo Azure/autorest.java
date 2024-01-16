@@ -14,9 +14,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * The ModelWithByteProperty model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ModelWithByteProperty implements XmlSerializable<ModelWithByteProperty> {

@@ -14,9 +14,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * the retention policy.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class RetentionPolicy implements XmlSerializable<RetentionPolicy> {

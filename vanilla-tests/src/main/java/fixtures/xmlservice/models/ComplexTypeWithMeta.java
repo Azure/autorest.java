@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
- * <!-- start generated doc -->
  * I am a complex type with XML node.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "XMLComplexTypeWithMeta")
 @Fluent

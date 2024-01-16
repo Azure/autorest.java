@@ -12,9 +12,7 @@ import com.azure.xml.XmlWriter;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * Contans property.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ObjectWithXMsTextProperty implements XmlSerializable<ObjectWithXMsTextProperty> {

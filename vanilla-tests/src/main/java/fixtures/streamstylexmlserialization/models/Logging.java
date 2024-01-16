@@ -14,9 +14,7 @@ import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 
 /**
- * <!-- start generated doc -->
  * Azure Analytics Logging settings.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Logging implements XmlSerializable<Logging> {

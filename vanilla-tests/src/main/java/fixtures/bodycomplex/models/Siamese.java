@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * The Siamese model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Siamese extends Cat {

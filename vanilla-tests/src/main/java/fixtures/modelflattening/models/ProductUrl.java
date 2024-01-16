@@ -8,9 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * The product URL.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ProductUrl extends GenericUrl {

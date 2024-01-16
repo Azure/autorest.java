@@ -8,9 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Parameter group.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class ParameterGroupingPostRequiredParameters {

@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * Bounding polygon on a specific page of the input.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class BoundingRegion {

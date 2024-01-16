@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * A table object consisting table cells arranged in a rectangular layout.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentTable {

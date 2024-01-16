@@ -8,9 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Uri or local path to source data.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class SourcePath {

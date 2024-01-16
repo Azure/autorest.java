@@ -10,9 +10,7 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.time.OffsetDateTime;
 
 /**
- * <!-- start generated doc -->
  * An Access policy.
- * <!-- end generated doc -->
  */
 @JacksonXmlRootElement(localName = "AccessPolicy")
 @Fluent

@@ -10,9 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * An object describing the location and semantic content of a document.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Document {

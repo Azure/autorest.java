@@ -10,9 +10,7 @@ import java.time.OffsetDateTime;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Document model summary.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentModelSummary {

@@ -8,9 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * <!-- start generated doc -->
  * Describes the properties of a Virtual Machine Scale Set.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class VirtualMachineScaleSetProperties {

@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * <!-- start generated doc -->
  * An object representing the location and content of a table cell.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class DocumentTableCell {

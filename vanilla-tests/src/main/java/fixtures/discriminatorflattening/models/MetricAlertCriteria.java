@@ -15,9 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * The rule criteria that defines the conditions of the alert rule.
- * <!-- end generated doc -->
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,

@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * The Basic model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class Basic implements JsonSerializable<Basic> {

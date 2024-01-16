@@ -14,9 +14,7 @@ import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <!-- start generated doc -->
  * Tag attributes.
- * <!-- end generated doc -->
  */
 @Fluent
 public class ArtifactTagPropertiesInternal implements JsonSerializable<ArtifactTagPropertiesInternal> {

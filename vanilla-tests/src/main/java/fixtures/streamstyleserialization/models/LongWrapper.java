@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * The LongWrapper model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class LongWrapper implements JsonSerializable<LongWrapper> {

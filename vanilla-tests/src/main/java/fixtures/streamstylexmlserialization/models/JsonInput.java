@@ -12,9 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * <!-- start generated doc -->
  * The JsonInput model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class JsonInput implements JsonSerializable<JsonInput> {

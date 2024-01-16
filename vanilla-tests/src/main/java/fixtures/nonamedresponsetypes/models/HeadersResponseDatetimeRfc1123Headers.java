@@ -12,9 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /**
- * <!-- start generated doc -->
  * The HeadersResponseDatetimeRfc1123Headers model.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class HeadersResponseDatetimeRfc1123Headers {
