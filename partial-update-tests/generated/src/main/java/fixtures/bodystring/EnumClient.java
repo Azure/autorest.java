@@ -17,7 +17,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.bodystring.implementation.EnumsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
 public final class EnumClient {

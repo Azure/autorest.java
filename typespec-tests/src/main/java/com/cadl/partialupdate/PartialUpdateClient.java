@@ -18,7 +18,9 @@ import com.cadl.partialupdate.implementation.PartialUpdateClientImpl;
 import com.cadl.partialupdate.models.PartialUpdateModel;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous PartialUpdateClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = PartialUpdateClientBuilder.class)
 public final class PartialUpdateClient {
