@@ -4,6 +4,7 @@
 package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.TemplateUtil;
 
 public class JavaJavadocComment {
     private JavaFileContents contents;
@@ -39,9 +40,9 @@ public class JavaJavadocComment {
 
     public final void description(String description, boolean withStartAndEndGeneratedComment) {
         if (withStartAndEndGeneratedComment) {
-            line("<!-- start generated doc -->");
+            line(TemplateUtil.GENERATED_JAVADOC_START_WRAPPER);
             description(description);
-            line("<!-- end generated doc -->");
+            line(TemplateUtil.GENERATED_JAVADOC_END_WRAPPER);
         } else {
             description(description);
         }
