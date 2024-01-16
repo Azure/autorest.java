@@ -12,9 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
- * <!-- start generated doc -->
  * Concrete tracked resource types can be created by aliasing this type using a specific property type.
- * <!-- end generated doc -->
  */
 @Fluent
 public final class TopLevelArmResourceInner extends Resource {
