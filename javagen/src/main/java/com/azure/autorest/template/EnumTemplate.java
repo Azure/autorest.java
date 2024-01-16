@@ -54,7 +54,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         addGeneratedImport(imports);
 
         javaFile.declareImport(imports);
-        javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
+        javaFile.javadocComment(comment -> comment.description(enumType.getDescription(), true));
 
         String enumName = enumType.getName();
         String declaration = enumName + " extends ExpandableStringEnum<" + enumName + ">";

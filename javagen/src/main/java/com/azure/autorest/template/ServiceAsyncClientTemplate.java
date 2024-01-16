@@ -72,7 +72,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
         comment.description(String.format("Initializes a new instance of the asynchronous %1$s type.",
-            serviceClient.getInterfaceName())));
+            serviceClient.getInterfaceName()), true));
 
     if (asyncClient.getClientBuilder() != null) {
       javaFile.annotation(String.format("ServiceClient(builder = %s.class, isAsync = true)", asyncClient.getClientBuilder().getClassName()));

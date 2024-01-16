@@ -20,6 +20,7 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
@@ -34,6 +35,7 @@ import com.azure.core.http.policy.HttpLoggingPolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
 import com.azure.core.util.CoreUtils;
+import com.github.javaparser.ast.comments.JavadocComment;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -129,7 +131,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             if (settings.isGenerateBuilderPerClient() && clientBuilder.getSyncClients().size() == 1) {
                 clientTypeName = clientBuilder.getSyncClients().iterator().next().getClassName();
             }
-            comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientTypeName));
+            comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientTypeName), true);
         });
 
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));

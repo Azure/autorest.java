@@ -95,7 +95,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(),
-            comment -> comment.description(model.getDescription()));
+            comment -> comment.description(model.getDescription(), true));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         final boolean immutableOutputModel = settings.isOutputModelImmutable()

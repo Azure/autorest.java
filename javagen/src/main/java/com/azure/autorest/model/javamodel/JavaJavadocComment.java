@@ -37,6 +37,16 @@ public class JavaJavadocComment {
         line(processedText);
     }
 
+    public final void description(String description, boolean withStartAndEndGeneratedComment) {
+        if (withStartAndEndGeneratedComment) {
+            line("<!-- start generated doc -->");
+            description(description);
+            line("<!-- end generated doc -->");
+        } else {
+            description(description);
+        }
+    }
+
     public final void line(String text) {
         if (text != null && !text.isEmpty()) {
             contents.line(text);
