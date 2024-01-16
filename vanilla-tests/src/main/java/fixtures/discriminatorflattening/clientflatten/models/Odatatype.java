@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * specifies the type of the alert criteria.
- * <!-- end generated doc -->
  */
 public final class Odatatype extends ExpandableStringEnum<Odatatype> {
     /**

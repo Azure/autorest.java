@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * Custom document model build mode.
- * <!-- end generated doc -->
  */
 public final class DocumentBuildMode extends ExpandableStringEnum<DocumentBuildMode> {
     /**

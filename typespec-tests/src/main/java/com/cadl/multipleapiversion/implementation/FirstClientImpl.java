@@ -35,9 +35,7 @@ import com.cadl.multipleapiversion.FirstServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
- * <!-- start generated doc -->
  * Initializes a new instance of the FirstClient type.
- * <!-- end generated doc -->
  */
 public final class FirstClientImpl {
     /**

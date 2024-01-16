@@ -9,9 +9,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * The status of the processing job.
- * <!-- end generated doc -->
  */
 public final class JobStatus extends ExpandableStringEnum<JobStatus> {
     /**

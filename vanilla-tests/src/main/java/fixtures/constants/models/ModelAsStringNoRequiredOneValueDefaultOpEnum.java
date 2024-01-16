@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * Defines values for ModelAsStringNoRequiredOneValueDefaultOpEnum.
- * <!-- end generated doc -->
  */
 public final class ModelAsStringNoRequiredOneValueDefaultOpEnum
     extends ExpandableStringEnum<ModelAsStringNoRequiredOneValueDefaultOpEnum> {

@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * API version.
- * <!-- end generated doc -->
  */
 public final class ApiVersion extends ExpandableStringEnum<ApiVersion> {
     /**

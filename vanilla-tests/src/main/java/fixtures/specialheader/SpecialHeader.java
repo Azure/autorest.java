@@ -12,9 +12,7 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 
 /**
- * <!-- start generated doc -->
  * Initializes a new instance of the SpecialHeader type.
- * <!-- end generated doc -->
  */
 public final class SpecialHeader {
     /**

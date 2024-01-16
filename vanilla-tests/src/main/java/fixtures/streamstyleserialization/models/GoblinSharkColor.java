@@ -8,9 +8,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * Colors possible.
- * <!-- end generated doc -->
  */
 public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColor> {
     /**

@@ -9,10 +9,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value
  * is "user,system".
- * <!-- end generated doc -->
  */
 public final class Origin extends ExpandableStringEnum<Origin> {
     /**

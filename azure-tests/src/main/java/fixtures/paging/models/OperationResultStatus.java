@@ -9,9 +9,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
- * <!-- start generated doc -->
  * The status of the request.
- * <!-- end generated doc -->
  */
 public final class OperationResultStatus extends ExpandableStringEnum<OperationResultStatus> {
     /**
