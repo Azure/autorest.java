@@ -83,7 +83,7 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
         javaFile.javadocComment(comment ->
         {
             String serviceClientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
-            comment.description(String.format("Initializes a new instance of the %1$s type.", serviceClientTypeName), true);
+            comment.description(String.format("Initializes a new instance of the %1$s type.", serviceClientTypeName));
         });
         if (settings.isFluent() && !settings.isGenerateSyncAsyncClients() && !settings.clientBuilderDisabled()) {
             javaFile.annotation(String.format("ServiceClient(builder = %s.class)",
