@@ -448,7 +448,7 @@ public class RuntimeTests {
         assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupWithResponseAsync", "String", "String", "StorageAccountExpand", "Context");
     }
 
-    private static void assertMethodNotExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
+    private static <T> void assertMethodNotExist(Class<T> clazz, String methodName, String... parameterTypeSimpleNames) {
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();
         for(Method method : methods) {
@@ -462,7 +462,7 @@ public class RuntimeTests {
         }
     }
 
-    private static void assertMethodExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
+    private static <T> void assertMethodExist(Class<T> clazz, String methodName, String... parameterTypeSimpleNames) {
         boolean found = false;
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();
