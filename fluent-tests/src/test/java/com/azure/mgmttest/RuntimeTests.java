@@ -73,6 +73,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -140,6 +141,7 @@ public class RuntimeTests {
     public void testPom() throws ParserConfigurationException, IOException, SAXException {
         File pomFile = new File("pom_generated_resources.xml");
 
+        // verify pom basic
         Map<String, String> rootTags = new HashMap<>();
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -159,6 +161,15 @@ public class RuntimeTests {
 
         Assertions.assertTrue(rootTags.containsKey("name"));
         Assertions.assertTrue(rootTags.get("name").contains("Azure SDK"));
+
+        // verify x-version-update tag used in Azure Java repo
+        String content = new String(Files.readAllBytes(pomFile.toPath()));
+        Assertions.assertTrue(content.contains("<artifactId>mockito-core</artifactId>"));
+        Assertions.assertTrue(content.contains("<artifactId>byte-buddy</artifactId>"));
+        Assertions.assertTrue(content.contains("<artifactId>byte-buddy-agent</artifactId>"));
+        Assertions.assertTrue(content.contains("<!-- {x-version-update;org.mockito:mockito-core;external_dependency} -->"));
+        Assertions.assertTrue(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy;external_dependency} -->"));
+        Assertions.assertTrue(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy-agent;external_dependency} -->"));
     }
 
     @Test
