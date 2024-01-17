@@ -65,7 +65,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
         comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
-            serviceClient.getInterfaceName()), true));
+            serviceClient.getInterfaceName()), isPartialUpdateSupported()));
 
     if (syncClient.getClientBuilder() != null) {
       javaFile.annotation(String.format("ServiceClient(builder = %s.class)", syncClient.getClientBuilder().getClassName()));
@@ -175,6 +175,10 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
     classBlock.annotation(Annotation.GENERATED.getName());
+  }
+
+  protected boolean isPartialUpdateSupported() {
+    return true;
   }
 
   private void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {

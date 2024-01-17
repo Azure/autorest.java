@@ -22,4 +22,9 @@ public class AndroidServiceSyncClientTemplate extends ServiceSyncClientTemplate 
     @Override
     protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
+
+    @Override
+    protected boolean isPartialUpdateSupported() {
+        return false;
+    }
 }

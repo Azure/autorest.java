@@ -129,7 +129,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             if (settings.isGenerateBuilderPerClient() && clientBuilder.getSyncClients().size() == 1) {
                 clientTypeName = clientBuilder.getSyncClients().iterator().next().getClassName();
             }
-            comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientTypeName), true);
+            comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientTypeName), isPartialUpdateSupported());
         });
 
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
@@ -551,6 +551,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         classBlock.annotation(Annotation.GENERATED.getName());
+    }
+
+    protected boolean isPartialUpdateSupported() {
+        return true;
     }
 
     protected void addOverrideAnnotation(JavaContext classBlock) {

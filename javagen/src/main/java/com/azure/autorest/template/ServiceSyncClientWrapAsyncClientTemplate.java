@@ -34,7 +34,7 @@ public class ServiceSyncClientWrapAsyncClientTemplate extends ServiceSyncClientT
 
         // constructor
         classBlock.javadocComment(comment -> {
-            comment.description(String.format("Initializes an instance of %1$s class.", syncClient.getClassName()), true);
+            comment.description(String.format("Initializes an instance of %1$s class.", syncClient.getClassName()), isPartialUpdateSupported());
             comment.param(ASYNC_CLIENT_VAR_NAME, "the async client.");
         });
         addGeneratedAnnotation(classBlock);

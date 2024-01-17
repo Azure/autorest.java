@@ -24,4 +24,9 @@ public class AndroidServiceAsyncClientTemplate extends ServiceAsyncClientTemplat
     @Override
     protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
+
+    @Override
+    protected boolean isPartialUpdateSupported() {
+        return false;
+    }
 }

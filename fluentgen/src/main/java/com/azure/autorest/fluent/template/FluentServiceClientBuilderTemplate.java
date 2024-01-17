@@ -31,4 +31,9 @@ public class FluentServiceClientBuilderTemplate extends ServiceClientBuilderTemp
     @Override
     protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
+
+    @Override
+    protected boolean isPartialUpdateSupported() {
+        return false;
+    }
 }

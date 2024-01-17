@@ -95,7 +95,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(),
-            comment -> comment.description(model.getDescription(), JavaSettings.getInstance().isDataPlaneClient()));
+            comment -> comment.description(model.getDescription(), isPartialUpdateSupported()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         final boolean immutableOutputModel = settings.isOutputModelImmutable()
@@ -1169,6 +1169,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
             classBlock.annotation(Annotation.GENERATED.getName());
         }
+    }
+
+    protected boolean isPartialUpdateSupported() {
+        return JavaSettings.getInstance().isDataPlaneClient();
     }
 
     // Javadoc for getter method
