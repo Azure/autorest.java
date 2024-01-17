@@ -169,7 +169,7 @@ import {
   isKnownContentType,
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
-import { isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
+import { isArmCommonType } from "./type-utils.js";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
@@ -527,8 +527,7 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
-      } else if (this.isArm()) {
-        // todo: there's ongoing discussion of whether to apply it to DPG as well
+      } else {
         // fallback to @service.version
         const service = getService(this.program, client.service);
         if (service?.version) {
@@ -536,8 +535,6 @@ export class CodeModelBuilder {
           const apiVersion = new ApiVersion();
           apiVersion.version = service.version;
           codeModelClient.apiVersions.push(apiVersion);
-        } else {
-          throw new Error(`API version not available for client ${client.name}.`);
         }
       }
 
