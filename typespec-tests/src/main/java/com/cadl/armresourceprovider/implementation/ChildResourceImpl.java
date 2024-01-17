@@ -127,9 +127,10 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
         com.cadl.armresourceprovider.ArmResourceProviderManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
-        this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
-        this.topLevelArmResourceName = Utils.getValueFromIdByName(innerObject.id(), "topLevelArmResources");
-        this.childResourceName = Utils.getValueFromIdByName(innerObject.id(), "childResources");
+        this.resourceGroupName = ResourceManagerUtils.getValueFromIdByName(innerObject.id(), "resourceGroups");
+        this.topLevelArmResourceName
+            = ResourceManagerUtils.getValueFromIdByName(innerObject.id(), "topLevelArmResources");
+        this.childResourceName = ResourceManagerUtils.getValueFromIdByName(innerObject.id(), "childResources");
     }
 
     public ChildResource refresh() {
