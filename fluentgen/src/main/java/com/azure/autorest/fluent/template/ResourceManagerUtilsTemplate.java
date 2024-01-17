@@ -28,11 +28,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
+public class ResourceManagerUtilsTemplate implements IJavaTemplate<Void, JavaFile> {
 
-    private static final UtilsTemplate INSTANCE = new UtilsTemplate();
+    private static final ResourceManagerUtilsTemplate INSTANCE = new ResourceManagerUtilsTemplate();
 
-    public static UtilsTemplate getInstance() {
+    public static ResourceManagerUtilsTemplate getInstance() {
         return INSTANCE;
     }
 
@@ -45,7 +45,7 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
                 .visibility(JavaVisibility.PackagePrivate)
                 .modifiers(Collections.singletonList(JavaModifier.Static))
                 .methodSignature("String getValueFromIdByName(String id, String name)")
-                .method(block -> block.line(FluentUtils.loadTextFromResource("Utils_getValueFromIdByName.txt")))
+                .method(block -> block.line(FluentUtils.loadTextFromResource("ResourceManagerUtils_getValueFromIdByName.txt")))
                 .build();
         METHOD_TEMPLATES.add(getValueFromIdByNameMethod);
 
@@ -60,7 +60,7 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
                 .visibility(JavaVisibility.PackagePrivate)
                 .modifiers(Collections.singletonList(JavaModifier.Static))
                 .methodSignature("String getValueFromIdByParameterName(String id, String pathTemplate, String parameterName)")
-                .method(block -> block.line(FluentUtils.loadTextFromResource("Utils_getValueFromIdByParameterName.txt")))
+                .method(block -> block.line(FluentUtils.loadTextFromResource("ResourceManagerUtils_getValueFromIdByParameterName.txt")))
                 .build();
         METHOD_TEMPLATES.add(getValueFromIdByParameterNameMethod);
     }
@@ -88,13 +88,13 @@ public class UtilsTemplate implements IJavaTemplate<Void, JavaFile> {
         imports.addAll(IMPORTS_UTILS_PAGED_ITERABLE);
         javaFile.declareImport(imports);
 
-        javaFile.classBlock(JavaVisibility.PackagePrivate, Collections.singletonList(JavaModifier.Final), ModelNaming.CLASS_UTILS, classBlock -> {
-            classBlock.constructor(JavaVisibility.Private, String.format("%s()", ModelNaming.CLASS_UTILS), (constructorBlock) -> {});
+        javaFile.classBlock(JavaVisibility.PackagePrivate, Collections.singletonList(JavaModifier.Final), ModelNaming.CLASS_RESOURCE_MANAGER_UTILS, classBlock -> {
+            classBlock.constructor(JavaVisibility.Private, String.format("%s()", ModelNaming.CLASS_RESOURCE_MANAGER_UTILS), (constructorBlock) -> {});
             METHOD_TEMPLATES.forEach(mt -> mt.writeMethod(classBlock));
 
             // mapPage and PagedIterableImpl class
             javaFile.line();
-            String configurableClassText = FluentUtils.loadTextFromResource("Utils_PagedIterableImpl.txt");
+            String configurableClassText = FluentUtils.loadTextFromResource("ResourceManagerUtils_PagedIterableImpl.txt");
             javaFile.text(configurableClassText);
         });
     }

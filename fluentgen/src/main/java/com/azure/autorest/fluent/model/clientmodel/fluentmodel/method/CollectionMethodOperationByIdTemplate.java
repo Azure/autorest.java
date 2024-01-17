@@ -107,10 +107,11 @@ public class CollectionMethodOperationByIdTemplate implements ImmutableMethod {
                         String urlSegmentName = urlSegmentNameByParameterName.get(p.getSerializedName());
                         String valueFromIdText;
                         if (urlPathSegments.hasScope()) {
-                            valueFromIdText = String.format("Utils.getValueFromIdByParameterName(%1$s, \"%2$s\", \"%3$s\")",
-                                    ModelNaming.METHOD_PARAMETER_NAME_ID, urlPathSegments.getPath(), p.getSerializedName());
+                            valueFromIdText = String.format("%1$s.getValueFromIdByParameterName(%2$s, \"%3$s\", \"%4$s\")",
+                                    ModelNaming.CLASS_RESOURCE_MANAGER_UTILS, ModelNaming.METHOD_PARAMETER_NAME_ID, urlPathSegments.getPath(), p.getSerializedName());
                         } else {
-                            valueFromIdText = String.format("Utils.getValueFromIdByName(%1$s, \"%2$s\")", ModelNaming.METHOD_PARAMETER_NAME_ID, urlSegmentName);
+                            valueFromIdText = String.format("%1$s.getValueFromIdByName(%2$s, \"%3$s\")",
+                                    ModelNaming.CLASS_RESOURCE_MANAGER_UTILS, ModelNaming.METHOD_PARAMETER_NAME_ID, urlSegmentName);
                         }
                         LocalVariable var = localVariables.getLocalVariableByMethodParameter(p.getClientMethodParameter());
                         // need additional conversion from String to LocalVariable.variableType

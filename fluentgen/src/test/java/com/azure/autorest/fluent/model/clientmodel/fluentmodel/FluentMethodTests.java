@@ -73,7 +73,7 @@ public class FluentMethodTests {
         String methodContent = TestUtils.getMethodTemplateContent(constructor.getMethodTemplate());
         Assertions.assertTrue(methodContent.contains("this.innerObject = innerObject;"));
         Assertions.assertTrue(methodContent.contains("this.serviceManager = serviceManager;"));
-        Assertions.assertTrue(methodContent.contains("this.lockName = Utils.getValueFromIdByName(innerObject.id(), \"locks\")"));
+        Assertions.assertTrue(methodContent.contains("this.lockName = ResourceManagerUtils.getValueFromIdByName(innerObject.id(), \"locks\")"));
 
         // constructor by name
         constructor = new FluentConstructorByName(lockModel, FluentMethodType.CONSTRUCTOR,
