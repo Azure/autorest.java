@@ -527,8 +527,7 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
-      } else if (this.isArm()) {
-        // todo: there's ongoing discussion of whether to apply it to DPG as well
+      } else {
         // fallback to @service.version
         const service = getService(this.program, client.service);
         if (service?.version) {
