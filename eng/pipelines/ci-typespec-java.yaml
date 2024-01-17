@@ -16,8 +16,11 @@ pr:
     include:
       - '*'
     exclude:
-      - 'fluent*'
-      - 'postprocessor'
+      - 'androidgen'
+      - 'azure-dataplane-tests'
+      - 'azure-tests'
+      - 'fluent-tests'
+      - 'partial-update-tests'
       - 'vanilla-tests'
       - 'protocol*'
 
