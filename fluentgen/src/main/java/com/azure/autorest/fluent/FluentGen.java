@@ -316,7 +316,7 @@ public class FluentGen extends Javagen {
             }
 
             // Utils
-            javaPackage.addUtils();
+            javaPackage.addResourceManagerUtils();
 
             // module-info
             javaPackage.addModuleInfo(fluentClient.getModuleInfo());
