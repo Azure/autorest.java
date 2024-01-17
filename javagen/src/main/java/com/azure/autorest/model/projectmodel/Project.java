@@ -73,7 +73,7 @@ public class Project {
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),
         JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.3"),
         MOCKITO_CORE("org.mockito", "mockito-core", "4.11.0"),
-        BYTE_BUDDY("net.bytebuddy", "byte-buddy", "1.12.23"),
+        BYTE_BUDDY("net.bytebuddy", "byte-buddy", "1.14.8"),
         BYTE_BUDDY_AGENT("net.bytebuddy", "byte-buddy-agent", "1.14.8"),
         SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36");
 
