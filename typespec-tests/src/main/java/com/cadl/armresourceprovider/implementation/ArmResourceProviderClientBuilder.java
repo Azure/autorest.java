@@ -15,9 +15,7 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import java.time.Duration;
 
 /**
- * <!-- start generated doc -->
  * A builder for creating a new instance of the ArmResourceProviderClientImpl type.
- * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { ArmResourceProviderClientImpl.class })
 public final class ArmResourceProviderClientBuilder {
