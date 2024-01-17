@@ -535,8 +535,6 @@ export class CodeModelBuilder {
           const apiVersion = new ApiVersion();
           apiVersion.version = service.version;
           codeModelClient.apiVersions.push(apiVersion);
-        } else {
-          throw new Error(`API version not available for client ${client.name}.`);
         }
       }
 
