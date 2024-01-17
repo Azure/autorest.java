@@ -169,7 +169,7 @@ import {
   isKnownContentType,
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
-import { isArmCommonType } from "@azure-tools/typespec-azure-resource-manager";
+import { isArmCommonType } from "./type-utils.js";
 import pkg from "lodash";
 import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
