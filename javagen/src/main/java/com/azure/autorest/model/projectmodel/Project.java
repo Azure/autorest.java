@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -40,6 +41,17 @@ public class Project {
     private static final Logger LOGGER = new PluginLogger(Javagen.getPluginInstance(), Project.class);
 
     public static final String AZURE_GROUP_ID = ExternalPackage.CORE.getGroupId();
+
+    public static final Map<String, String> VERSION_UPDATE_TAG = Map.of(
+            // see https://github.com/Azure/azure-sdk-for-java/blob/main/eng/versioning/external_dependencies.txt
+            "net.bytebuddy:byte-buddy", "testdep_net.bytebuddy:byte-buddy",
+            "net.bytebuddy:byte-buddy-agent", "testdep_net.bytebuddy:byte-buddy-agent"
+    );
+    public static String getVersionUpdateTag(String groupId, String artifactId) {
+        String tag = groupId + ":" + artifactId;
+        String ret = VERSION_UPDATE_TAG.get(tag);
+        return ret == null ? tag : ret;
+    }
 
     protected String serviceName;
     protected String serviceDescription;
@@ -266,7 +278,7 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 for (Dependency dependency : Dependency.values()) {
-                    String artifact = dependency.getGroupId() + ":" + dependency.getArtifactId();
+                    String artifact = getVersionUpdateTag(dependency.getGroupId(), dependency.getArtifactId());
                     checkArtifact(line, artifact).ifPresent(dependency::setVersion);
                 }
             });
