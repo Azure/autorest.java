@@ -42,17 +42,6 @@ public class Project {
 
     public static final String AZURE_GROUP_ID = ExternalPackage.CORE.getGroupId();
 
-    public static final Map<String, String> VERSION_UPDATE_TAG = Map.of(
-            // see https://github.com/Azure/azure-sdk-for-java/blob/main/eng/versioning/external_dependencies.txt
-            "net.bytebuddy:byte-buddy", "testdep_net.bytebuddy:byte-buddy",
-            "net.bytebuddy:byte-buddy-agent", "testdep_net.bytebuddy:byte-buddy-agent"
-    );
-    public static String getVersionUpdateTag(String groupId, String artifactId) {
-        String tag = groupId + ":" + artifactId;
-        String ret = VERSION_UPDATE_TAG.get(tag);
-        return ret == null ? tag : ret;
-    }
-
     protected String serviceName;
     protected String serviceDescription;
     protected String namespace;
@@ -245,6 +234,25 @@ public class Project {
             }
         }
         return ret;
+    }
+
+    private static final Map<String, String> VERSION_UPDATE_TAG_MAP = Map.of(
+            // see https://github.com/Azure/azure-sdk-for-java/blob/main/eng/versioning/external_dependencies.txt
+            "net.bytebuddy:byte-buddy", "testdep_net.bytebuddy:byte-buddy",
+            "net.bytebuddy:byte-buddy-agent", "testdep_net.bytebuddy:byte-buddy-agent"
+    );
+
+    /**
+     * Gets the version update tag (x-version-update) for the groupId and artifactId.
+     *
+     * @param groupId the group ID.
+     * @param artifactId the artifact ID.
+     * @return the version update tag.
+     */
+    public static String getVersionUpdateTag(String groupId, String artifactId) {
+        String tag = groupId + ":" + artifactId;
+        String ret = VERSION_UPDATE_TAG_MAP.get(tag);
+        return ret == null ? tag : ret;
     }
 
     protected void findPackageVersions() {
