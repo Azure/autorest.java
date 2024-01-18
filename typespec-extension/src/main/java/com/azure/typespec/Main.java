@@ -104,9 +104,16 @@ public class Main {
         FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
 
         // write
+
+        // java files
         Postprocessor.writeToFiles(javaPackage.getJavaFiles().stream()
             .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())), fluentPlugin,
             fluentPlugin.getLogger());
+
+        // XML include POM
+        javaPackage.getXmlFiles().forEach(xmlFile -> fluentPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
+        // Others
+        javaPackage.getTextFiles().forEach(textFile -> fluentPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
     }
 
     private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
