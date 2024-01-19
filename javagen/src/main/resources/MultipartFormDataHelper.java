@@ -199,7 +199,7 @@ public final class MultipartFormDataHelper {
         requestDataStream = new SequenceInputStream(requestDataStream, new ByteArrayInputStream(bytes));
     }
 
-    private String normalizeAscii(String text) {
+    private static String normalizeAscii(String text) {
         return Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\x00-\\x7F]", "");
     }
 }
