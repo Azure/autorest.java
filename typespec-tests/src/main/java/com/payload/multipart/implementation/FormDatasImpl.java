@@ -191,16 +191,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -219,16 +209,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -247,28 +227,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for mixed scenarios.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *         (recursive schema, see above)
-     *     ]
-     *     pictures (Required): [
-     *         BinaryData (Required)
-     *     ]
-     *     pictures (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -287,28 +245,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for mixed scenarios.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *         (recursive schema, see above)
-     *     ]
-     *     pictures (Required): [
-     *         BinaryData (Required)
-     *     ]
-     *     pictures (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -327,18 +263,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains json part and binary part.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -357,18 +281,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains json part and binary part.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -387,20 +299,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     pictures (Required): [
-     *         BinaryData (Required)
-     *     ]
-     *     pictures (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -420,20 +318,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     pictures (Required): [
-     *         BinaryData (Required)
-     *     ]
-     *     pictures (Optional): [
-     *         String (Optional)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -452,20 +336,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi json parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *          (Required){
-     *             city: String (Required)
-     *         }
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -485,20 +355,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi json parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *          (Required){
-     *             city: String (Required)
-     *         }
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -517,17 +373,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     picture: BinaryData (Optional)
-     *     picture: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -547,17 +392,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     picture: BinaryData (Optional)
-     *     picture: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

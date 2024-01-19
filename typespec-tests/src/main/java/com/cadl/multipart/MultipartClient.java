@@ -59,22 +59,6 @@ public final class MultipartClient {
      * </tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     name: String (Required)
-     *     resolution: int (Required)
-     *     type: String(JPEG/PNG) (Required)
-     *     size (Required): {
-     *         width: int (Required)
-     *         height: int (Required)
-     *     }
-     *     image: BinaryData (Required)
-     *     image: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
