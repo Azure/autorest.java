@@ -22,6 +22,7 @@ import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -599,12 +600,30 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         .build());
 
                 // add (optional) filename property
+                // here is a hack to use same serializedName
                 iterator.add(property.newBuilder()
                         .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX)
                         .defaultValue(ClassType.STRING.defaultValueExpression(property.getSerializedName()))
                         .description("The filename for " + property.getName())
                         .wireType(ClassType.STRING)
                         .clientType(ClassType.STRING)
+                        .required(false)
+                        .build());
+            } else if (property.getWireType() instanceof ListType && ((ListType) property.getWireType()).getElementType() == ArrayType.BYTE_ARRAY) {
+                // replace List<byte[]> with List<BinaryData>
+                iterator.remove();
+                iterator.add(property.newBuilder()
+                        .wireType(new ListType(ClassType.BINARY_DATA))
+                        .clientType(new ListType(ClassType.BINARY_DATA))
+                        .build());
+
+                // add (optional) filenames property as List<String>
+                // here is a hack to use same serializedName
+                iterator.add(property.newBuilder()
+                        .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX + "s")
+                        .description("The filenames for " + property.getName())
+                        .wireType(new ListType(ClassType.STRING))
+                        .clientType(new ListType(ClassType.STRING))
                         .required(false)
                         .build());
             }

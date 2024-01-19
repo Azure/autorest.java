@@ -48,7 +48,13 @@ public final class ComplexPartsRequest {
      * The pictures property.
      */
     @Generated
-    private final List<byte[]> pictures;
+    private final List<BinaryData> pictures;
+
+    /*
+     * The filenames for pictures
+     */
+    @Generated
+    private List<String> picturesFilenames;
 
     /**
      * Creates an instance of ComplexPartsRequest class.
@@ -61,7 +67,7 @@ public final class ComplexPartsRequest {
      */
     @Generated
     public ComplexPartsRequest(String id, Address address, BinaryData profileImage, List<Address> previousAddresses,
-        List<byte[]> pictures) {
+        List<BinaryData> pictures) {
         this.id = id;
         this.address = address;
         this.profileImage = profileImage;
@@ -137,7 +143,29 @@ public final class ComplexPartsRequest {
      * @return the pictures value.
      */
     @Generated
-    public List<byte[]> getPictures() {
+    public List<BinaryData> getPictures() {
         return this.pictures;
+    }
+
+    /**
+     * Get the picturesFilenames property: The filenames for pictures.
+     * 
+     * @return the picturesFilenames value.
+     */
+    @Generated
+    public List<String> getPicturesFilenames() {
+        return this.picturesFilenames;
+    }
+
+    /**
+     * Set the picturesFilenames property: The filenames for pictures.
+     * 
+     * @param picturesFilenames the picturesFilenames value to set.
+     * @return the ComplexPartsRequest object itself.
+     */
+    @Generated
+    public ComplexPartsRequest setPicturesFilenames(List<String> picturesFilenames) {
+        this.picturesFilenames = picturesFilenames;
+        return this;
     }
 }

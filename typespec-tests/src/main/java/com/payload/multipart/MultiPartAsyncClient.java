@@ -46,16 +46,6 @@ public final class MultiPartAsyncClient {
 
     /**
      * Test content-type: multipart/form-data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -75,25 +65,6 @@ public final class MultiPartAsyncClient {
 
     /**
      * Test content-type: multipart/form-data for mixed scenarios.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *         (recursive schema, see above)
-     *     ]
-     *     pictures (Required): [
-     *         byte[] (Required)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -113,18 +84,6 @@ public final class MultiPartAsyncClient {
 
     /**
      * Test content-type: multipart/form-data for scenario contains json part and binary part.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -144,17 +103,6 @@ public final class MultiPartAsyncClient {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     pictures (Required): [
-     *         byte[] (Required)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -174,20 +122,6 @@ public final class MultiPartAsyncClient {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi json parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *          (Required){
-     *             city: String (Required)
-     *         }
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -207,17 +141,6 @@ public final class MultiPartAsyncClient {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     picture: BinaryData (Optional)
-     *     picture: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -278,8 +201,8 @@ public final class MultiPartAsyncClient {
             .serializeJsonField("address", body.getAddress())
             .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
             .serializeJsonField("previousAddresses", body.getPreviousAddresses())
-            .serializeJsonField("pictures", body.getPictures()).end().getRequestBody(), requestOptions)
-                .flatMap(FluxUtil::toMono);
+            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -323,9 +246,9 @@ public final class MultiPartAsyncClient {
     public Mono<Void> binaryArrayParts(BinaryArrayPartsRequest body) {
         // Generated convenience method for binaryArrayPartsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return binaryArrayPartsWithResponse(
-            new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
-                .serializeJsonField("pictures", body.getPictures()).end().getRequestBody(),
+        return binaryArrayPartsWithResponse(new MultipartFormDataHelper(requestOptions)
+            .serializeTextField("id", body.getId())
+            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
 
