@@ -35,15 +35,14 @@ def load_versions(content: str) -> Dict[Package, str]:
         if not line.startswith('#'):
             segments = line.split(';')
             package = segments[0]
-            if ('_' in package):
+            if (package.startswith('testdep_')):
                 # fix e.g. "testdep_net.bytebuddy:byte-buddy;1.14.8"
                 package = package.split('_')[1]
             version = None if len(segments) == 1 else segments[1]
             package_segments = package.split(':')
             if len(package_segments) == 2:
                 package_obj = Package(package_segments[0], package_segments[1])
-                if (not package_obj in packages):
-                    packages[package_obj] = version
+                packages[package_obj] = version
     return packages
 
 
