@@ -4,8 +4,6 @@
 package com.payload.contentnegotiation;
 
 import com.payload.FileUtils;
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
 import com.payload.contentnegotiation.models.PngImageAsJson;
 import org.junit.jupiter.api.Assertions;
@@ -14,7 +12,7 @@ import org.junit.jupiter.api.Test;
 public class SharedRouteTests {
 
     private final SameBodyClient client1 = new ContentNegotiationClientBuilder().buildSameBodyClient();
-    private final DifferentBodyClient client2 = new ContentNegotiationClientBuilder().httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS)).buildDifferentBodyClient();
+    private final DifferentBodyClient client2 = new ContentNegotiationClientBuilder().buildDifferentBodyClient();
 
     @Test
     public void testContentNegotiation() {

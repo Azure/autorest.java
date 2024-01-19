@@ -5,8 +5,6 @@ package com._specs_.azure.core.lro.rpc;
 
 import com._specs_.azure.core.lro.rpc.models.GenerationOptions;
 import com._specs_.azure.core.lro.rpc.models.GenerationResult;
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollResponse;
@@ -17,7 +15,6 @@ import org.junit.jupiter.api.Test;
 public class RpcTests {
 
     private final RpcClient client = new RpcClientBuilder()
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
             .buildClient();
 
     @Test
