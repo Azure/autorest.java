@@ -547,10 +547,15 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
     protected void addGeneratedImport(Set<String> imports) {
         Annotation.GENERATED.addImportsTo(imports);
+        Annotation.METADATA.addImportsTo(imports);
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
-        classBlock.annotation(Annotation.GENERATED.getName());
+        if (JavaSettings.getInstance().isBranded()) {
+            classBlock.annotation(Annotation.GENERATED.getName());
+        } else {
+            classBlock.annotation(Annotation.METADATA.getName() + "(generated = true)");
+        }
     }
 
     protected void addOverrideAnnotation(JavaContext classBlock) {

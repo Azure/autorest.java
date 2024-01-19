@@ -416,6 +416,8 @@ public class ClientModel {
      */
     protected void addImmutableAnnotationImport(Set<String> imports) {
         Annotation.IMMUTABLE.addImportsTo(imports);
+        Annotation.METADATA.addImportsTo(imports);
+        Annotation.TYPE_CONDITIONS.addImportsTo(imports);
     }
 
     /**
@@ -425,6 +427,7 @@ public class ClientModel {
      */
     protected void addFluentAnnotationImport(Set<String> imports) {
         Annotation.FLUENT.addImportsTo(imports);
+        Annotation.METADATA.addImportsTo(imports);
     }
 
     /**

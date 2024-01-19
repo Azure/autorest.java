@@ -42,8 +42,12 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
             {
                 comment.description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", restAPI.getClientTypeName()));
             });
-            classBlock.annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));
-            classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", serviceInterfaceWithLengthLimit(restAPI.getClientTypeName())));
+            if (settings.isBranded()) {
+                classBlock.annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));
+                classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\")", serviceInterfaceWithLengthLimit(restAPI.getClientTypeName())));
+            } else {
+                classBlock.annotation(String.format("ServiceInterface(name = \"%1$s\", host = \"%2$s\")", serviceInterfaceWithLengthLimit(restAPI.getClientTypeName()), restAPI.getBaseURL()));
+            }
 
             JavaVisibility visibility = JavaVisibility.Private;
             if (settings.isServiceInterfaceAsPublic()) {
@@ -59,10 +63,15 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
 
                     writeProxyMethodHeaders(restAPIMethod, interfaceBlock);
 
-                    interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
-
-                    if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
-                        interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(String::valueOf).collect(Collectors.joining(", "))));
+                    if (settings.isBranded()) {
+                        interfaceBlock.annotation(String.format("%1$s(\"%2$s\")", CodeNamer.toPascalCase(restAPIMethod.getHttpMethod().toString().toLowerCase()), restAPIMethod.getUrlPath()));
+                        if (!restAPIMethod.getResponseExpectedStatusCodes().isEmpty()) {
+                            interfaceBlock.annotation(String.format("ExpectedResponses({%1$s})", restAPIMethod.getResponseExpectedStatusCodes().stream().map(String::valueOf).collect(Collectors.joining(", "))));
+                        }
+                    } else {
+                        interfaceBlock.annotation("HttpRequestInformation(method = HttpMethod." + restAPIMethod.getHttpMethod().toString()
+                                + ", path = \"" + restAPIMethod.getUrlPath()
+                                + "\", expectedStatusCodes = { " + restAPIMethod.getResponseExpectedStatusCodes().stream().map(String::valueOf).collect(Collectors.joining(", ")) + " })");
                     }
 
                     if (!settings.isDataPlaneClient()) {
@@ -153,14 +162,26 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
     }
 
     protected void writeUnexpectedExceptions(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
-        for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
-            interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(value = %1$s.class, code = {%2$s})",
-                    exception.getKey(), exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(", "))));
+        if (JavaSettings.getInstance().isBranded()) {
+            for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(value = %1$s.class, code = {%2$s})",
+                        exception.getKey(), exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(", "))));
+            }
+        } else {
+            for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                interfaceBlock.annotation("UnexpectedResponseExceptionInformation(exceptionTypeName = \""
+                        + restAPIMethod.getHttpExceptionType(exception.getKey()).toString()
+                        + "\", statusCode = {" + exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(",")) + " })");
+            }
         }
     }
 
     protected void writeSingleUnexpectedException(ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {
-        interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(%1$s.class)", restAPIMethod.getUnexpectedResponseExceptionType()));
+        if(JavaSettings.getInstance().isBranded()) {
+            interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(%1$s.class)", restAPIMethod.getUnexpectedResponseExceptionType()));
+        } else {
+            interfaceBlock.annotation("UnexpectedResponseExceptionInformation");
+        }
     }
 
     protected void writeProxyMethodSignature(java.util.ArrayList<String> parameterDeclarationList, ProxyMethod restAPIMethod, JavaInterface interfaceBlock) {

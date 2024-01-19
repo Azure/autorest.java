@@ -140,24 +140,25 @@ public class ClassType implements IType {
     }
 
     private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
-        put(RestProxy.class, new ClassDetails(RestProxy.class, "com.generic.core.http.RestProxy"));
+        put(RestProxy.class, new ClassDetails(RestProxy.class, "com.generic.core.implementation.http.RestProxy"));
         put(HttpPipeline.class, new ClassDetails(HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
         put(HttpPipelineBuilder.class, new ClassDetails(HttpPipelineBuilder.class, "com.generic.core.http.pipeline.HttpPipelineBuilder"));
         put(Context.class, new ClassDetails(Context.class, "com.generic.core.models.Context"));
         put(HttpClient.class, new ClassDetails(HttpClient.class, "com.generic.core.http.client.HttpClient"));
         put(HttpLogOptions.class, new ClassDetails(HttpLogOptions.class, "com.generic.core.http.policy.logging.HttpLogOptions"));
         put(HttpPipelinePolicy.class, new ClassDetails(HttpPipelinePolicy.class, "com.generic.core.http.pipeline.HttpPipelinePolicy"));
-        put(KeyCredentialPolicy.class, new ClassDetails(KeyCredentialPolicy.class, "com.generic.core.http.policy.credential.KeyCredentialPolicy"));
+        put(KeyCredentialPolicy.class, new ClassDetails(KeyCredentialPolicy.class, "com.generic.core.http.policy.KeyCredentialPolicy"));
         put(Configuration.class, new ClassDetails(Configuration.class, "com.generic.core.util.configuration.Configuration"));
         put(HttpHeaders.class, new ClassDetails(HttpHeaders.class, "com.generic.core.models.Headers"));
         put(HttpHeaderName.class, new ClassDetails(HttpHeaderName.class, "com.generic.core.http.models.HttpHeaderName"));
         put(HttpRequest.class, new ClassDetails(HttpRequest.class, "com.generic.core.http.models.HttpRequest"));
-        put(RequestOptions.class, new ClassDetails(RequestOptions.class, "com.generic.core.models.RequestOptions"));
+        put(RequestOptions.class, new ClassDetails(RequestOptions.class, "com.generic.core.http.models.RequestOptions"));
         put(BinaryData.class, new ClassDetails(BinaryData.class, "com.generic.core.models.BinaryData"));
         put(RetryOptions.class, new ClassDetails(RetryOptions.class, "com.generic.core.http.policy.retry.RetryOptions"));
         put(Response.class, new ClassDetails(Response.class, "com.generic.core.http.Response"));
         put(SimpleResponse.class, new ClassDetails(SimpleResponse.class, "com.generic.core.http.SimpleResponse"));
         put(ExpandableStringEnum.class, new ClassDetails(ExpandableStringEnum.class, "com.generic.core.models.ExpandableStringEnum"));
+        put(HttpResponseException.class, new ClassDetails(HttpResponseException.class, "com.generic.core.http.exception.HttpResponseException"));
     }};
 
     private static ClassType.Builder getClassTypeBuilder(Class<?> classKey) {
