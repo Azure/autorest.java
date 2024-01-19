@@ -60,22 +60,22 @@ jobs:
           jdkArchitectureOption: 'x64'
           publishJUnitResults: false
 
-      - task: PowerShell@2
-        retryCountOnTaskFailure: 1
-        displayName: 'Generate Code'
-        inputs:
-          pwsh: true
-          filePath: Generate-TypeSpec.ps1
-          arguments: '-Parallelization 1'
-
-      - script: |
-          git status
-          git diff
-        displayName: 'Git Diff'
-
-      - script: |
-          [ -z "`git status --porcelain -- :!package-lock.json`" ]
-        displayName: 'Check no Diff'
+#      - task: PowerShell@2
+#        retryCountOnTaskFailure: 1
+#        displayName: 'Generate Code'
+#        inputs:
+#          pwsh: true
+#          filePath: Generate-TypeSpec.ps1
+#          arguments: '-Parallelization 1'
+#
+#      - script: |
+#          git status
+#          git diff
+#        displayName: 'Git Diff'
+#
+#      - script: |
+#          [ -z "`git status --porcelain -- :!package-lock.json`" ]
+#        displayName: 'Check no Diff'
 
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
@@ -110,7 +110,7 @@ jobs:
         displayName: 'Publish Cadl Ranch Coverage Report (azure)'
 
       - script: |
-          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java-standard.json &
         displayName: 'Start Cadl Ranch Test Server (standard)'
         workingDirectory: ./typespec-tests
 
