@@ -32,7 +32,7 @@ jobs:
     variables:
       - template: /eng/pipelines/variables/globals.yml
       - name: isMain
-        value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+        value: $[eq(variables['Build.SourceBranch'], 'refs/heads/eng_cadl-ranch')]
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
@@ -79,11 +79,11 @@ jobs:
 
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
-        displayName: 'Start Cadl Ranch Test Server'
+        displayName: 'Start Cadl Ranch Test Server (azure)'
         workingDirectory: ./typespec-tests
 
       - task: Maven@3
-        displayName: 'Run TypeSpec Tests'
+        displayName: 'Run TypeSpec Tests (azure)'
         inputs:
           mavenPomFile: pom.xml
           goals: 'clean test'
@@ -96,26 +96,51 @@ jobs:
 
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
-        displayName: 'Stop Cadl Ranch Test Server'
+        displayName: 'Stop Cadl Ranch Test Server (azure)'
         workingDirectory: ./typespec-tests
 
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http --coverageFiles ./cadl-ranch-coverage-java.json
-        displayName: 'Cadl Ranch Coverage Report'
+        displayName: 'Cadl Ranch Coverage Report (azure)'
         workingDirectory: ./typespec-tests
         continueOnError: true
 
       - publish: $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json
         artifact: CoverageReport
-        displayName: 'Publish Cadl Ranch Coverage Report'
+        displayName: 'Publish Cadl Ranch Coverage Report (azure)'
+
+      - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
+        displayName: 'Start Cadl Ranch Test Server (standard)'
+        workingDirectory: ./typespec-tests
+
+      - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js server stop
+        displayName: 'Stop Cadl Ranch Test Server (standard)'
+        workingDirectory: ./typespec-tests
+
+      - script: |
+          node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js check-coverage node_modules/@azure-tools/cadl-ranch-specs/http --coverageFiles ./cadl-ranch-coverage-java-standard.json
+        displayName: 'Cadl Ranch Coverage Report (standard)'
+        workingDirectory: ./typespec-tests
+        continueOnError: true
 
       - task: AzureCLI@2
-        displayName: 'Upload to Cadl Ranch Coverage Report Dashboard'
+        displayName: 'Upload to Cadl Ranch Coverage Report Dashboard (azure)'
         condition: eq(variables.isMain, 'true')
         inputs:
           azureSubscription: "Cadl Ranch Storage"
           scriptType: "bash"
           scriptLocation: "inlineScript"
           inlineScript: node $(Build.SourcesDirectory)/typespec-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName azuresdkcadlranch --generatorMode azure --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
+
+      - task: AzureCLI@2
+        displayName: 'Upload to Cadl Ranch Coverage Report Dashboard (standard)'
+        condition: eq(variables.isMain, 'true')
+        inputs:
+          azureSubscription: "Cadl Ranch Storage"
+          scriptType: "bash"
+          scriptLocation: "inlineScript"
+          inlineScript: node $(Build.SourcesDirectory)/typespec-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java-standard.json --generatorName java --storageAccountName azuresdkcadlranch --generatorMode standard --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
 
       - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
