@@ -32,7 +32,7 @@ jobs:
     variables:
       - template: /eng/pipelines/variables/globals.yml
       - name: isMain
-        value: $[eq(variables['Build.SourceBranch'], 'refs/heads/eng_cadl-ranch')]
+        value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
 
     pool:
       name: "azsdk-pool-mms-ubuntu-2004-general"
