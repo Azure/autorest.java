@@ -10,13 +10,13 @@
   },
   "dependencies": {
     "@azure-tools/cadl-ranch-specs": "0.28.7",
-    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.12.2.tgz"
+    "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.12.3.tgz"
   },
   "devDependencies": {
     "@typespec/prettier-plugin-typespec": "~0.51.0",
+    "@azure-tools/typespec-azure-resource-manager": "~0.37.1",
     "prettier-plugin-organize-imports": "3.2.4",
-    "prettier": "~3.1.0",
-    "@azure-tools/typespec-azure-resource-manager": ">=0.37.1 <1.0.0"
+    "prettier": "~3.1.0"
   },
   "overrides": {
     "@typespec/compiler": ">=0.51.0 <1.0.0",
