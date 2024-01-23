@@ -780,6 +780,7 @@ public class ClientModelUtil {
                 .description("The file details model for the " + filePropertyName)
                 .type(type)
                 .serializationFormats(Set.of(KnownMediaType.MULTIPART.value()))
+                // let it inherit the usage (PUBLIC/INTERNAL) from the multipart/form-data request model
                 .implementationDetails(new ImplementationDetails.Builder().usages(modelUsages).build())
                 .properties(properties)
                 .build();

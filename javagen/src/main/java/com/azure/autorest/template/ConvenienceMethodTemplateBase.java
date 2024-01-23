@@ -624,7 +624,6 @@ abstract class ConvenienceMethodTemplateBase {
 
     private static String expressionMultipartFormDataToBinaryData(String name, ClientModel model) {
         BiFunction<String, String, String> nullableExpression = (propertyExpr, expr) -> propertyExpr + " == null ? null : " + expr;
-        BiFunction<String, String, String> arrayNullableExpression = (propertyExpr, expr) -> propertyExpr + " == null ? null : " + expr;
 
         // serialize model for multipart/form-data
         StringBuilder builder = new StringBuilder().append("new MultipartFormDataHelper(requestOptions)");
@@ -661,9 +660,9 @@ abstract class ConvenienceMethodTemplateBase {
                 String filenameExpression = String.format(streamExpressionFormat,
                         propertyGetExpression, className, "getFilename");
                 if (!property.isRequired()) {
-                    fileExpression = arrayNullableExpression.apply(propertyGetExpression, fileExpression);
-                    contentTypeExpression = arrayNullableExpression.apply(propertyGetExpression, contentTypeExpression);
-                    filenameExpression = arrayNullableExpression.apply(propertyGetExpression, filenameExpression);
+                    fileExpression = nullableExpression.apply(propertyGetExpression, fileExpression);
+                    contentTypeExpression = nullableExpression.apply(propertyGetExpression, contentTypeExpression);
+                    filenameExpression = nullableExpression.apply(propertyGetExpression, filenameExpression);
                 }
 
                 builder.append(String.format(
