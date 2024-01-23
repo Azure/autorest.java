@@ -88,8 +88,10 @@ public class MultipartTests {
 
     private final static class MultipartFilenameValidationPolicy implements HttpPipelinePolicy {
         private final List<String> filenames = new ArrayList<>();
+        private final List<String> contentTypes = new ArrayList<>();
 
         private final static Pattern FILENAME_PATTERN = Pattern.compile("filename=\"(.*?)\"");
+        private final static Pattern CONTENT_TYPE_PATTERN = Pattern.compile("Content-Type:\\s*(.*)");
 
         @Override
         public Mono<HttpResponse> process(HttpPipelineCallContext context, HttpPipelineNextPolicy nextPolicy) {
@@ -116,6 +118,25 @@ public class MultipartTests {
                 start = posNewLine + 1;
             }
 
+            start = 0;
+            byte[] contentTypePattern = "Content-Type:".getBytes(StandardCharsets.UTF_8);
+
+            while ((index = KpmAlgorithm.indexOf(body, start, stop, contentTypePattern)) >= 0) {
+                int posNewLine;
+                for (posNewLine = index; posNewLine < stop; ++posNewLine) {
+                    if (body[posNewLine] == 10 || body[posNewLine] == 13) {
+                        // newline
+                        String line = new String(body, index, posNewLine - index, StandardCharsets.UTF_8);
+                        Matcher matcher = CONTENT_TYPE_PATTERN.matcher(line);
+                        if (matcher.find()) {
+                            contentTypes.add(matcher.group(1));
+                        }
+                        break;
+                    }
+                }
+                start = posNewLine + 1;
+            }
+
             // reset the body to compensate here consuming all the data
             context.getHttpRequest().setBody(body);
             return nextPolicy.process();
@@ -123,6 +144,10 @@ public class MultipartTests {
 
         private void validateFilenames(String... filenames) {
             Assertions.assertEquals(Arrays.asList(filenames), this.filenames);
+        }
+
+        private void validateContentTypes(String... contentTypes) {
+            Assertions.assertEquals(Arrays.asList(contentTypes), this.contentTypes);
         }
     }
 
@@ -176,6 +201,8 @@ public class MultipartTests {
                         new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)),
                         new PicturesFileDetails(BinaryData.fromFile(PNG_FILE))
                 )));
+
+        validationPolicy.validateContentTypes("application/octet-stream", "application/octet-stream");
 
         // provide only 1 filename, when there are 2 files
         // filename contains non-ASCII
