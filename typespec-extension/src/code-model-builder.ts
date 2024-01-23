@@ -899,11 +899,6 @@ export class CodeModelBuilder {
         }
       }
     }
-
-    if (this.isArmLongRunningOperation(this.program, operation)) {
-      op.extensions = op.extensions ?? {};
-      op.extensions["x-ms-long-running-operation"] = true;
-    }
   }
 
   private _armApiVersionParameter?: Parameter;
@@ -2773,10 +2768,6 @@ export class CodeModelBuilder {
     } else if (schema instanceof ArraySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     }
-  }
-
-  private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.isArm() && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
   }
 
   private isArm() {
