@@ -307,7 +307,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             // handle multipart/form-data
             if (!CoreUtils.isNullOrEmpty(compositeType.getSerializationFormats()) && compositeType.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
-                processMultipartFormDataProperties(properties);
+                processMultipartFormDataProperties(modelType, usages, properties);
             }
 
             builder.properties(properties);
@@ -586,45 +586,32 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         return ret;
     }
 
-    private static void processMultipartFormDataProperties(List<ClientModelProperty> properties) {
+    private static void processMultipartFormDataProperties(ClassType modelType, Set<ImplementationDetails.Usage> usages, List<ClientModelProperty> properties) {
+        if (usages == null || !(usages.contains(ImplementationDetails.Usage.PUBLIC)
+                || usages.contains(ImplementationDetails.Usage.INTERNAL))) {
+            // not need to process, if this model does not write to a class
+            return;
+        }
+
         ListIterator<ClientModelProperty> iterator = properties.listIterator();
         while (iterator.hasNext()) {
             ClientModelProperty property = iterator.next();
 
             if (property.getWireType() == ArrayType.BYTE_ARRAY) {
-                // replace byte[] with BinaryData
+                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(modelType, usages, property.getName());
+                // replace byte[] with the type
                 iterator.remove();
                 iterator.add(property.newBuilder()
-                        .wireType(ClassType.BINARY_DATA)
-                        .clientType(ClassType.BINARY_DATA)
-                        .build());
-
-                // add (optional) filename property
-                // here is a hack to use same serializedName
-                iterator.add(property.newBuilder()
-                        .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX)
-                        .defaultValue(ClassType.STRING.defaultValueExpression(property.getSerializedName()))
-                        .description("The filename for " + property.getName())
-                        .wireType(ClassType.STRING)
-                        .clientType(ClassType.STRING)
-                        .required(false)
+                        .wireType(fileDetailsModelType)
+                        .clientType(fileDetailsModelType)
                         .build());
             } else if (property.getWireType() instanceof ListType && ((ListType) property.getWireType()).getElementType() == ArrayType.BYTE_ARRAY) {
-                // replace List<byte[]> with List<BinaryData>
+                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(modelType, usages, property.getName());
+                // replace List<byte[]> with List<ClientModel>
                 iterator.remove();
                 iterator.add(property.newBuilder()
-                        .wireType(new ListType(ClassType.BINARY_DATA))
-                        .clientType(new ListType(ClassType.BINARY_DATA))
-                        .build());
-
-                // add (optional) filenames property as List<String>
-                // here is a hack to use same serializedName
-                iterator.add(property.newBuilder()
-                        .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX + "s")
-                        .description("The filenames for " + property.getName())
-                        .wireType(new ListType(ClassType.STRING))
-                        .clientType(new ListType(ClassType.STRING))
-                        .required(false)
+                        .wireType(new ListType(fileDetailsModelType))
+                        .clientType(new ListType(fileDetailsModelType))
                         .build());
             }
         }

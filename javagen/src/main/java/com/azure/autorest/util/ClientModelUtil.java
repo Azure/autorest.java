@@ -7,6 +7,10 @@ import com.azure.autorest.extension.base.model.codemodel.ApiVersion;
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
+import com.azure.autorest.extension.base.model.codemodel.Language;
+import com.azure.autorest.extension.base.model.codemodel.Languages;
+import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -50,10 +54,6 @@ import java.util.stream.Stream;
  * Utilities for client model.
  */
 public class ClientModelUtil {
-
-    // used for filename property of multipart/form-data
-    // e.g. if property for file is "BinaryData audio", a "String audioFilename" will be added to the ClientModel.
-    public static final String FILENAME_SUFFIX = "Filename";
 
     public static final String MULTI_PART_FORM_DATA_HELPER_CLASS_NAME = "MultipartFormDataHelper";
 
@@ -713,5 +713,81 @@ public class ClientModelUtil {
         }
 
         return externalPackageNames;
+    }
+
+    /**
+     * Gets or creates a new ##FileDetails model for a multipart/form-data request
+     *
+     * @param modelType the type of the multipart/form-data request model.
+     * @param modelUsages the usages of the multipart/form-data request model.
+     * @param filePropertyName the property name of the file in the multipart/form-data request model.
+     * @return the ##FileDetails model
+     */
+    public static IType getMultipartFileDetailsModel(
+            ClassType modelType,
+            Set<ImplementationDetails.Usage> modelUsages,
+            String filePropertyName) {
+        String name = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(filePropertyName + "FileDetails");
+        ClientModel clientModel = ClientModelUtil.getClientModel(name);
+        if (clientModel != null) {
+            if (!clientModel.getProperties().stream()
+                    .map(ClientModelProperty::getName)
+                    .collect(Collectors.toSet())
+                    .containsAll(Arrays.asList("content", "filename", "contentType"))) {
+                // a quick verification to avoid this new ClientModel overwrite an existing one
+                throw new RuntimeException("Multipart model " + name + " overwrites an existing model with same name.");
+            }
+            return clientModel.getType();
+        }
+
+        // create ClassType
+        ObjectSchema objectSchema = new ObjectSchema();
+        objectSchema.setLanguage(new Languages());
+        objectSchema.getLanguage().setJava(new Language());
+        objectSchema.getLanguage().getJava().setName(name);
+        ClassType type = Mappers.getObjectMapper().map(objectSchema);
+
+        // create ClientModel
+        List<ClientModelProperty> properties = new ArrayList<>();
+        properties.add(new ClientModelProperty.Builder()
+                .name("content")
+                .description("The content of the file")
+                .required(true)
+                .readOnly(false)
+                .wireType(ClassType.BINARY_DATA)
+                .clientType(ClassType.BINARY_DATA)
+                .build());
+        properties.add(new ClientModelProperty.Builder()
+                .name("filename")
+                .description("The filename of the file")
+                .required(false)
+                .readOnly(false)
+                .wireType(ClassType.STRING)
+                .clientType(ClassType.STRING)
+                .build());
+        properties.add(new ClientModelProperty.Builder()
+                .name("contentType")
+                .description("The content-type of the file")
+                .required(false)
+                .readOnly(false)
+                .wireType(ClassType.STRING)
+                .clientType(ClassType.STRING)
+                .defaultValue("\"application/octet-stream\"")
+                .build());
+        clientModel = new ClientModel.Builder()
+                .name(name)
+                .packageName(modelType.getPackage())
+                .description("The file details model for the " + filePropertyName)
+                .type(type)
+                .serializationFormats(Set.of(KnownMediaType.MULTIPART.value()))
+                .implementationDetails(new ImplementationDetails.Builder().usages(modelUsages).build())
+                .properties(properties)
+                .build();
+        ClientModels.getInstance().addModel(clientModel);
+        return clientModel.getType();
+    }
+
+    public static boolean isMultipartModel(ClientModel model) {
+        return model.getSerializationFormats().contains(KnownMediaType.MULTIPART.value());
     }
 }

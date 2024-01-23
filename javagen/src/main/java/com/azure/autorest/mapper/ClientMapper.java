@@ -33,6 +33,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -132,13 +133,16 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                 .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
-        final List<ClientModel> clientModels = autoRestModelTypes
+        List<ClientModel> clientModelsFromCodeModel = autoRestModelTypes
             .distinct()
             .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
             .filter(Objects::nonNull)
             .distinct()
             .collect(Collectors.toList());
-
+        // append some models not from CodeModel
+        final List<ClientModel> clientModels = Stream.concat(clientModelsFromCodeModel.stream(), ClientModels.getInstance().getModels().stream())
+            .distinct()
+            .collect(Collectors.toList());
         builder.models(clientModels);
 
         // union model (class)
