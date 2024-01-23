@@ -171,7 +171,6 @@ import {
 } from "./operation-utils.js";
 import { isArmCommonType } from "./type-utils.js";
 import pkg from "lodash";
-import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
