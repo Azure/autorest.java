@@ -6,7 +6,6 @@ package com.payload.multipart.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.BinaryData;
 
 /**
  * The MultiBinaryPartsRequest model.
@@ -17,25 +16,13 @@ public final class MultiBinaryPartsRequest {
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
-
-    /*
-     * The filename for profileImage
-     */
-    @Generated
-    private String profileImageFilename = "profileImage";
+    private final ProfileImageFileDetails profileImage;
 
     /*
      * The picture property.
      */
     @Generated
-    private BinaryData picture;
-
-    /*
-     * The filename for picture
-     */
-    @Generated
-    private String pictureFilename = "picture";
+    private PictureFileDetails picture;
 
     /**
      * Creates an instance of MultiBinaryPartsRequest class.
@@ -43,7 +30,7 @@ public final class MultiBinaryPartsRequest {
      * @param profileImage the profileImage value to set.
      */
     @Generated
-    public MultiBinaryPartsRequest(BinaryData profileImage) {
+    public MultiBinaryPartsRequest(ProfileImageFileDetails profileImage) {
         this.profileImage = profileImage;
     }
 
@@ -53,30 +40,8 @@ public final class MultiBinaryPartsRequest {
      * @return the profileImage value.
      */
     @Generated
-    public BinaryData getProfileImage() {
+    public ProfileImageFileDetails getProfileImage() {
         return this.profileImage;
-    }
-
-    /**
-     * Get the profileImageFilename property: The filename for profileImage.
-     * 
-     * @return the profileImageFilename value.
-     */
-    @Generated
-    public String getProfileImageFilename() {
-        return this.profileImageFilename;
-    }
-
-    /**
-     * Set the profileImageFilename property: The filename for profileImage.
-     * 
-     * @param profileImageFilename the profileImageFilename value to set.
-     * @return the MultiBinaryPartsRequest object itself.
-     */
-    @Generated
-    public MultiBinaryPartsRequest setProfileImageFilename(String profileImageFilename) {
-        this.profileImageFilename = profileImageFilename;
-        return this;
     }
 
     /**
@@ -85,7 +50,7 @@ public final class MultiBinaryPartsRequest {
      * @return the picture value.
      */
     @Generated
-    public BinaryData getPicture() {
+    public PictureFileDetails getPicture() {
         return this.picture;
     }
 
@@ -96,30 +61,8 @@ public final class MultiBinaryPartsRequest {
      * @return the MultiBinaryPartsRequest object itself.
      */
     @Generated
-    public MultiBinaryPartsRequest setPicture(BinaryData picture) {
+    public MultiBinaryPartsRequest setPicture(PictureFileDetails picture) {
         this.picture = picture;
-        return this;
-    }
-
-    /**
-     * Get the pictureFilename property: The filename for picture.
-     * 
-     * @return the pictureFilename value.
-     */
-    @Generated
-    public String getPictureFilename() {
-        return this.pictureFilename;
-    }
-
-    /**
-     * Set the pictureFilename property: The filename for picture.
-     * 
-     * @param pictureFilename the pictureFilename value to set.
-     * @return the MultiBinaryPartsRequest object itself.
-     */
-    @Generated
-    public MultiBinaryPartsRequest setPictureFilename(String pictureFilename) {
-        this.pictureFilename = pictureFilename;
         return this;
     }
 }
