@@ -120,7 +120,7 @@ $job = @(
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/report.json --namespace=fixtures.report --payload-flattening-threshold=1",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/body-formdata-urlencoded.json --namespace=fixtures.bodyformdataurlencoded",
     "$VANILLA_ARGUMENTS --input-file=$SWAGGER_PATH/constants.json --namespace=fixtures.constants",
-    "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md",
+    "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/lro.md --stream-style-serialization=false",
     "--version=$AUTOREST_CORE_VERSION --use=./ vanilla-tests/swagger/custom-http-exception-mapping.md"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 

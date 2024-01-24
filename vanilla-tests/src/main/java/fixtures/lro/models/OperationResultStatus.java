@@ -5,6 +5,7 @@
 package fixtures.lro.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -81,6 +82,7 @@ public final class OperationResultStatus extends ExpandableStringEnum<OperationR
      * @param name a name to look for.
      * @return the corresponding OperationResultStatus.
      */
+    @JsonCreator
     public static OperationResultStatus fromString(String name) {
         return fromString(name, OperationResultStatus.class);
     }

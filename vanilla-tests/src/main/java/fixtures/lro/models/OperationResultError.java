@@ -5,25 +5,23 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The OperationResultError model.
  */
 @Fluent
-public final class OperationResultError implements JsonSerializable<OperationResultError> {
+public final class OperationResultError {
     /*
      * The error code for an operation failure
      */
+    @JsonProperty(value = "code")
     private Integer code;
 
     /*
      * The detailed arror message
      */
+    @JsonProperty(value = "message")
     private String message;
 
     /**
@@ -78,41 +76,5 @@ public final class OperationResultError implements JsonSerializable<OperationRes
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("code", this.code);
-        jsonWriter.writeStringField("message", this.message);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of OperationResultError from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of OperationResultError if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the OperationResultError.
-     */
-    public static OperationResultError fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            OperationResultError deserializedOperationResultError = new OperationResultError();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("code".equals(fieldName)) {
-                    deserializedOperationResultError.code = reader.getNullable(JsonReader::getInt);
-                } else if ("message".equals(fieldName)) {
-                    deserializedOperationResultError.message = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedOperationResultError;
-        });
     }
 }

@@ -5,24 +5,25 @@
 package fixtures.lro.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.azure.core.annotation.JsonFlatten;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The SubProduct model.
  */
+@JsonFlatten
 @Fluent
 public class SubProduct extends SubResource {
     /*
      * The provisioningState property.
      */
+    @JsonProperty(value = "properties.provisioningState")
     private String provisioningState;
 
     /*
      * The provisioningStateValues property.
      */
+    @JsonProperty(value = "properties.provisioningStateValues", access = JsonProperty.Access.WRITE_ONLY)
     private SubProductPropertiesProvisioningStateValues provisioningStateValues;
 
     /**
@@ -68,56 +69,5 @@ public class SubProduct extends SubResource {
     @Override
     public void validate() {
         super.validate();
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        if (provisioningState != null || provisioningStateValues != null) {
-            jsonWriter.writeStartObject("properties");
-            jsonWriter.writeStringField("provisioningState", this.provisioningState);
-            jsonWriter.writeEndObject();
-        }
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of SubProduct from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of SubProduct if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IOException If an error occurs while reading the SubProduct.
-     */
-    public static SubProduct fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            SubProduct deserializedSubProduct = new SubProduct();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    deserializedSubProduct.setId(reader.getString());
-                } else if ("properties".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("provisioningState".equals(fieldName)) {
-                            deserializedSubProduct.provisioningState = reader.getString();
-                        } else if ("provisioningStateValues".equals(fieldName)) {
-                            deserializedSubProduct.provisioningStateValues
-                                = SubProductPropertiesProvisioningStateValues.fromString(reader.getString());
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedSubProduct;
-        });
     }
 }
