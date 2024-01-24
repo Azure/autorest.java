@@ -123,8 +123,9 @@ public final class TopLevelArmResourceImpl
         com.cadl.armresourceprovider.ArmResourceProviderManager serviceManager) {
         this.innerObject = innerObject;
         this.serviceManager = serviceManager;
-        this.resourceGroupName = Utils.getValueFromIdByName(innerObject.id(), "resourceGroups");
-        this.topLevelArmResourceName = Utils.getValueFromIdByName(innerObject.id(), "topLevelArmResources");
+        this.resourceGroupName = ResourceManagerUtils.getValueFromIdByName(innerObject.id(), "resourceGroups");
+        this.topLevelArmResourceName
+            = ResourceManagerUtils.getValueFromIdByName(innerObject.id(), "topLevelArmResources");
     }
 
     public TopLevelArmResource refresh() {

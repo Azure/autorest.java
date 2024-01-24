@@ -1,5 +1,11 @@
 # Release History
 
+## 0.12.3 (2024-01-22)
+
+Compatible with compiler 0.51.
+
+- (Preview) Supported generating SDK from management-plane TypeSpec (`@armProviderNamespace`).
+
 ## 0.12.2 (2024-01-09)
 
 Compatible with compiler 0.51.

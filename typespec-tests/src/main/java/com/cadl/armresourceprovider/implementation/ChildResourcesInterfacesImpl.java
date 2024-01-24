@@ -62,28 +62,28 @@ public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfa
         String topLevelArmResourceName) {
         PagedIterable<ChildResourceInner> inner
             = this.serviceClient().listByTopLevelArmResource(resourceGroupName, topLevelArmResourceName);
-        return Utils.mapPage(inner, inner1 -> new ChildResourceImpl(inner1, this.manager()));
+        return ResourceManagerUtils.mapPage(inner, inner1 -> new ChildResourceImpl(inner1, this.manager()));
     }
 
     public PagedIterable<ChildResource> listByTopLevelArmResource(String resourceGroupName,
         String topLevelArmResourceName, Context context) {
         PagedIterable<ChildResourceInner> inner
             = this.serviceClient().listByTopLevelArmResource(resourceGroupName, topLevelArmResourceName, context);
-        return Utils.mapPage(inner, inner1 -> new ChildResourceImpl(inner1, this.manager()));
+        return ResourceManagerUtils.mapPage(inner, inner1 -> new ChildResourceImpl(inner1, this.manager()));
     }
 
     public ChildResource getById(String id) {
-        String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
+        String resourceGroupName = ResourceManagerUtils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'resourceGroups'.", id)));
         }
-        String topLevelArmResourceName = Utils.getValueFromIdByName(id, "topLevelArmResources");
+        String topLevelArmResourceName = ResourceManagerUtils.getValueFromIdByName(id, "topLevelArmResources");
         if (topLevelArmResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'topLevelArmResources'.", id)));
         }
-        String childResourceName = Utils.getValueFromIdByName(id, "childResources");
+        String childResourceName = ResourceManagerUtils.getValueFromIdByName(id, "childResources");
         if (childResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'childResources'.", id)));
@@ -93,17 +93,17 @@ public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfa
     }
 
     public Response<ChildResource> getByIdWithResponse(String id, Context context) {
-        String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
+        String resourceGroupName = ResourceManagerUtils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'resourceGroups'.", id)));
         }
-        String topLevelArmResourceName = Utils.getValueFromIdByName(id, "topLevelArmResources");
+        String topLevelArmResourceName = ResourceManagerUtils.getValueFromIdByName(id, "topLevelArmResources");
         if (topLevelArmResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'topLevelArmResources'.", id)));
         }
-        String childResourceName = Utils.getValueFromIdByName(id, "childResources");
+        String childResourceName = ResourceManagerUtils.getValueFromIdByName(id, "childResources");
         if (childResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'childResources'.", id)));
@@ -112,17 +112,17 @@ public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfa
     }
 
     public void deleteById(String id) {
-        String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
+        String resourceGroupName = ResourceManagerUtils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'resourceGroups'.", id)));
         }
-        String topLevelArmResourceName = Utils.getValueFromIdByName(id, "topLevelArmResources");
+        String topLevelArmResourceName = ResourceManagerUtils.getValueFromIdByName(id, "topLevelArmResources");
         if (topLevelArmResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'topLevelArmResources'.", id)));
         }
-        String childResourceName = Utils.getValueFromIdByName(id, "childResources");
+        String childResourceName = ResourceManagerUtils.getValueFromIdByName(id, "childResources");
         if (childResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'childResources'.", id)));
@@ -131,17 +131,17 @@ public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfa
     }
 
     public void deleteByIdWithResponse(String id, Context context) {
-        String resourceGroupName = Utils.getValueFromIdByName(id, "resourceGroups");
+        String resourceGroupName = ResourceManagerUtils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'resourceGroups'.", id)));
         }
-        String topLevelArmResourceName = Utils.getValueFromIdByName(id, "topLevelArmResources");
+        String topLevelArmResourceName = ResourceManagerUtils.getValueFromIdByName(id, "topLevelArmResources");
         if (topLevelArmResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'topLevelArmResources'.", id)));
         }
-        String childResourceName = Utils.getValueFromIdByName(id, "childResources");
+        String childResourceName = ResourceManagerUtils.getValueFromIdByName(id, "childResources");
         if (childResourceName == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 String.format("The resource ID '%s' is not valid. Missing path segment 'childResources'.", id)));

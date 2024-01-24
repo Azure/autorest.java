@@ -51,11 +51,11 @@ public class FluentConstructorByInner extends FluentMethod {
                     pathParameters.forEach(p -> {
                         String valueFromIdText;
                         if (urlPathSegments.hasScope()) {
-                            valueFromIdText = String.format("Utils.getValueFromIdByParameterName(%1$s.id(), \"%2$s\", \"%3$s\")",
-                                    ModelNaming.MODEL_PROPERTY_INNER, urlPathSegments.getPath(), p.getSerializedName());
+                            valueFromIdText = String.format("%1$s.getValueFromIdByParameterName(%2$s.id(), \"%3$s\", \"%4$s\")",
+                                    ModelNaming.CLASS_RESOURCE_MANAGER_UTILS, ModelNaming.MODEL_PROPERTY_INNER, urlPathSegments.getPath(), p.getSerializedName());
                         } else {
-                            valueFromIdText = String.format("Utils.getValueFromIdByName(%1$s.id(), \"%2$s\")",
-                                    ModelNaming.MODEL_PROPERTY_INNER, urlSegmentNameByParameterName.get(p.getSerializedName()));
+                            valueFromIdText = String.format("%1$s.getValueFromIdByName(%2$s.id(), \"%3$s\")",
+                                    ModelNaming.CLASS_RESOURCE_MANAGER_UTILS, ModelNaming.MODEL_PROPERTY_INNER, urlSegmentNameByParameterName.get(p.getSerializedName()));
                         }
                         if (p.getClientMethodParameter().getClientType() != ClassType.STRING) {
                             valueFromIdText = String.format("%1$s.fromString(%2$s)", p.getClientMethodParameter().getClientType().toString(), valueFromIdText);
