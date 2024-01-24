@@ -718,14 +718,12 @@ public class ClientModelUtil {
     /**
      * Gets or creates a new ##FileDetails model for a multipart/form-data request
      *
-     * @param modelType the type of the multipart/form-data request model.
-     * @param modelUsages the usages of the multipart/form-data request model.
+     * @param compositeType the object schema of the multipart/form-data request model.
      * @param filePropertyName the property name of the file in the multipart/form-data request model.
      * @return the ##FileDetails model
      */
     public static IType getMultipartFileDetailsModel(
-            ClassType modelType,
-            Set<ImplementationDetails.Usage> modelUsages,
+            ObjectSchema compositeType,
             String filePropertyName) {
         String fileDetailsModelName = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(
                 filePropertyName.toLowerCase(Locale.ROOT).endsWith("file")
@@ -741,6 +739,7 @@ public class ClientModelUtil {
         objectSchema.setLanguage(new Languages());
         objectSchema.getLanguage().setJava(new Language());
         objectSchema.getLanguage().getJava().setName(fileDetailsModelName);
+        objectSchema.setUsage(compositeType.getUsage());
         ClassType type = Mappers.getObjectMapper().map(objectSchema);
 
         // create ClientModel
@@ -772,12 +771,14 @@ public class ClientModelUtil {
                 .build());
         clientModel = new ClientModel.Builder()
                 .name(fileDetailsModelName)
-                .packageName(modelType.getPackage())
                 .description("The file details model for the " + filePropertyName)
+                .packageName(type.getPackage())
                 .type(type)
                 .serializationFormats(Set.of(KnownMediaType.MULTIPART.value()))
                 // let it inherit the usage (PUBLIC/INTERNAL) from the multipart/form-data request model
-                .implementationDetails(new ImplementationDetails.Builder().usages(modelUsages).build())
+                .implementationDetails(new ImplementationDetails.Builder()
+                        .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
+                        .build())
                 .properties(properties)
                 .build();
         ClientModels.getInstance().addModel(clientModel);

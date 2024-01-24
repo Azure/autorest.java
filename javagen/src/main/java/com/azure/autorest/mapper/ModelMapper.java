@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -307,7 +308,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             // handle multipart/form-data
             if (!CoreUtils.isNullOrEmpty(compositeType.getSerializationFormats()) && compositeType.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
-                processMultipartFormDataProperties(modelType, usages, properties);
+                processMultipartFormDataProperties(compositeType, properties);
             }
 
             builder.properties(properties);
@@ -586,9 +587,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         return ret;
     }
 
-    private static void processMultipartFormDataProperties(ClassType modelType, Set<ImplementationDetails.Usage> usages, List<ClientModelProperty> properties) {
-        if (usages == null || !(usages.contains(ImplementationDetails.Usage.PUBLIC)
-                || usages.contains(ImplementationDetails.Usage.INTERNAL))) {
+    private static void processMultipartFormDataProperties(ObjectSchema compositeType, List<ClientModelProperty> properties) {
+        if (compositeType.getUsage() == null || !(compositeType.getUsage().contains(SchemaContext.PUBLIC) || compositeType.getUsage().contains(SchemaContext.INTERNAL))) {
             // not need to process, if this model does not write to a class
             return;
         }
@@ -598,7 +598,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             ClientModelProperty property = iterator.next();
 
             if (property.getWireType() == ArrayType.BYTE_ARRAY) {
-                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(modelType, usages, property.getName());
+                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(compositeType, property.getName());
                 // replace byte[] with the type
                 iterator.remove();
                 iterator.add(property.newBuilder()
@@ -606,7 +606,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         .clientType(fileDetailsModelType)
                         .build());
             } else if (property.getWireType() instanceof ListType && ((ListType) property.getWireType()).getElementType() == ArrayType.BYTE_ARRAY) {
-                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(modelType, usages, property.getName());
+                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(compositeType, property.getName());
                 // replace List<byte[]> with List<ClientModel>
                 iterator.remove();
                 iterator.add(property.newBuilder()
