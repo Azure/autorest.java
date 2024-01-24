@@ -9,10 +9,10 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
 
 /**
- * The file details model for the other.
+ * The file details model for the file.
  */
 @Fluent
-public final class OtherFileDetails {
+public final class FileDetails {
     /*
      * The content of the file
      */
@@ -32,12 +32,12 @@ public final class OtherFileDetails {
     private String contentType = "application/octet-stream";
 
     /**
-     * Creates an instance of OtherFileDetails class.
+     * Creates an instance of FileDetails class.
      * 
      * @param content the content value to set.
      */
     @Generated
-    public OtherFileDetails(BinaryData content) {
+    public FileDetails(BinaryData content) {
         this.content = content;
     }
 
@@ -65,10 +65,10 @@ public final class OtherFileDetails {
      * Set the filename property: The filename of the file.
      * 
      * @param filename the filename value to set.
-     * @return the OtherFileDetails object itself.
+     * @return the FileDetails object itself.
      */
     @Generated
-    public OtherFileDetails setFilename(String filename) {
+    public FileDetails setFilename(String filename) {
         this.filename = filename;
         return this;
     }
@@ -87,10 +87,10 @@ public final class OtherFileDetails {
      * Set the contentType property: The content-type of the file.
      * 
      * @param contentType the contentType value to set.
-     * @return the OtherFileDetails object itself.
+     * @return the FileDetails object itself.
      */
     @Generated
-    public OtherFileDetails setContentType(String contentType) {
+    public FileDetails setContentType(String contentType) {
         this.contentType = contentType;
         return this;
     }

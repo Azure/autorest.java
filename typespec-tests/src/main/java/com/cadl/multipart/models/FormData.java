@@ -44,10 +44,10 @@ public final class FormData {
     private final ImageFileDetails image;
 
     /*
-     * The other property.
+     * The file property.
      */
     @Generated
-    private List<OtherFileDetails> other;
+    private List<FileDetails> file;
 
     /**
      * Creates an instance of FormData class.
@@ -118,24 +118,24 @@ public final class FormData {
     }
 
     /**
-     * Get the other property: The other property.
+     * Get the file property: The file property.
      * 
-     * @return the other value.
+     * @return the file value.
      */
     @Generated
-    public List<OtherFileDetails> getOther() {
-        return this.other;
+    public List<FileDetails> getFile() {
+        return this.file;
     }
 
     /**
-     * Set the other property: The other property.
+     * Set the file property: The file property.
      * 
-     * @param other the other value to set.
+     * @param file the file value to set.
      * @return the FormData object itself.
      */
     @Generated
-    public FormData setOther(List<OtherFileDetails> other) {
-        this.other = other;
+    public FormData setFile(List<FileDetails> file) {
+        this.file = file;
         return this;
     }
 }

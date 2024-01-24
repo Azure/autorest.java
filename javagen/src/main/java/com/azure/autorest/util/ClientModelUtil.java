@@ -727,16 +727,12 @@ public class ClientModelUtil {
             ClassType modelType,
             Set<ImplementationDetails.Usage> modelUsages,
             String filePropertyName) {
-        String name = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(filePropertyName + "FileDetails");
-        ClientModel clientModel = ClientModelUtil.getClientModel(name);
+        String fileDetailsModelName = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(
+                filePropertyName.toLowerCase(Locale.ROOT).endsWith("file")
+                        ? filePropertyName + "Details"
+                        : filePropertyName + "FileDetails");
+        ClientModel clientModel = ClientModelUtil.getClientModel(fileDetailsModelName);
         if (clientModel != null) {
-            if (!clientModel.getProperties().stream()
-                    .map(ClientModelProperty::getName)
-                    .collect(Collectors.toSet())
-                    .containsAll(Arrays.asList("content", "filename", "contentType"))) {
-                // a quick verification to avoid this new ClientModel overwrite an existing one
-                throw new RuntimeException("Multipart model " + name + " overwrites an existing model with same name.");
-            }
             return clientModel.getType();
         }
 
@@ -744,7 +740,7 @@ public class ClientModelUtil {
         ObjectSchema objectSchema = new ObjectSchema();
         objectSchema.setLanguage(new Languages());
         objectSchema.getLanguage().setJava(new Language());
-        objectSchema.getLanguage().getJava().setName(name);
+        objectSchema.getLanguage().getJava().setName(fileDetailsModelName);
         ClassType type = Mappers.getObjectMapper().map(objectSchema);
 
         // create ClientModel
@@ -775,7 +771,7 @@ public class ClientModelUtil {
                 .defaultValue("\"application/octet-stream\"")
                 .build());
         clientModel = new ClientModel.Builder()
-                .name(name)
+                .name(fileDetailsModelName)
                 .packageName(modelType.getPackage())
                 .description("The file details model for the " + filePropertyName)
                 .type(type)

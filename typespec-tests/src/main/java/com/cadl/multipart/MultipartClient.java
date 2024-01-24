@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
+import com.cadl.multipart.models.FileDetails;
 import com.cadl.multipart.models.FormData;
-import com.cadl.multipart.models.OtherFileDetails;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -106,13 +106,13 @@ public final class MultipartClient {
                 .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
                 .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
                     data.getImage().getFilename())
-                .serializeFileFields("other",
-                    data.getOther() == null ? null
-                        : data.getOther().stream().map(OtherFileDetails::getContent).collect(Collectors.toList()),
-                    data.getOther() == null ? null
-                        : data.getOther().stream().map(OtherFileDetails::getContentType).collect(Collectors.toList()),
-                    data.getOther() == null ? null
-                        : data.getOther().stream().map(OtherFileDetails::getFilename).collect(Collectors.toList()))
+                .serializeFileFields("file",
+                    data.getFile() == null ? null
+                        : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
+                    data.getFile() == null ? null
+                        : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
+                    data.getFile() == null ? null
+                        : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
                 .end().getRequestBody(),
             requestOptions).getValue();
     }
@@ -140,13 +140,13 @@ public final class MultipartClient {
                 .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
                 .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
                     data.getImage().getFilename())
-                .serializeFileFields("other",
-                    data.getOther() == null ? null
-                        : data.getOther().stream().map(OtherFileDetails::getContent).collect(Collectors.toList()),
-                    data.getOther() == null ? null
-                        : data.getOther().stream().map(OtherFileDetails::getContentType).collect(Collectors.toList()),
-                    data.getOther() == null ? null
-                        : data.getOther().stream().map(OtherFileDetails::getFilename).collect(Collectors.toList()))
+                .serializeFileFields("file",
+                    data.getFile() == null ? null
+                        : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
+                    data.getFile() == null ? null
+                        : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
+                    data.getFile() == null ? null
+                        : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
                 .end().getRequestBody(),
             requestOptions).getValue();
     }
