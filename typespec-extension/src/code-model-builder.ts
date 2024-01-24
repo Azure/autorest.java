@@ -171,7 +171,6 @@ import {
 } from "./operation-utils.js";
 import { isArmCommonType } from "./type-utils.js";
 import pkg from "lodash";
-import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -898,11 +897,6 @@ export class CodeModelBuilder {
           }
         }
       }
-    }
-
-    if (this.isArmLongRunningOperation(this.program, operation)) {
-      op.extensions = op.extensions ?? {};
-      op.extensions["x-ms-long-running-operation"] = true;
     }
   }
 
@@ -2773,10 +2767,6 @@ export class CodeModelBuilder {
     } else if (schema instanceof ArraySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     }
-  }
-
-  private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.isArm() && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
   }
 
   private isArm() {
