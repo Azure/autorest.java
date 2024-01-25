@@ -3,7 +3,6 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Annotation;
@@ -705,7 +704,7 @@ abstract class ConvenienceMethodTemplateBase {
 
     private static boolean isMultipartModel(IType type) {
         if (ClientModelUtil.isClientModel(type)) {
-            return ClientModelUtil.getClientModel(type.toString()).getSerializationFormats().contains(KnownMediaType.MULTIPART.value());
+            return ClientModelUtil.isMultipartModel(ClientModelUtil.getClientModel(type.toString()));
         } else {
             return false;
         }
