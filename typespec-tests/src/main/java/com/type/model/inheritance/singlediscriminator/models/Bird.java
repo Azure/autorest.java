@@ -63,30 +63,30 @@ public class Bird implements JsonSerializable<Bird> {
     public static Bird fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
-            JsonReader readerToUse = reader.bufferObject();
-
-            readerToUse.nextToken(); // Prepare for reading
-            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = readerToUse.getFieldName();
-                readerToUse.nextToken();
-                if ("kind".equals(fieldName)) {
-                    discriminatorValue = readerToUse.getString();
-                    break;
-                } else {
-                    readerToUse.skipChildren();
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("kind".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
                 }
-            }
-            // Use the discriminator value to determine which subtype should be deserialized.
-            if ("seagull".equals(discriminatorValue)) {
-                return SeaGull.fromJson(readerToUse.reset());
-            } else if ("sparrow".equals(discriminatorValue)) {
-                return Sparrow.fromJson(readerToUse.reset());
-            } else if ("goose".equals(discriminatorValue)) {
-                return Goose.fromJson(readerToUse.reset());
-            } else if ("eagle".equals(discriminatorValue)) {
-                return Eagle.fromJson(readerToUse.reset());
-            } else {
-                return fromJsonKnownDiscriminator(readerToUse.reset());
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("seagull".equals(discriminatorValue)) {
+                    return SeaGull.fromJson(readerToUse.reset());
+                } else if ("sparrow".equals(discriminatorValue)) {
+                    return Sparrow.fromJson(readerToUse.reset());
+                } else if ("goose".equals(discriminatorValue)) {
+                    return Goose.fromJson(readerToUse.reset());
+                } else if ("eagle".equals(discriminatorValue)) {
+                    return Eagle.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
             }
         });
     }
