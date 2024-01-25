@@ -54,6 +54,7 @@ model Data {
 
 model BytesData extends Data {
   kind: "bytes";
+
   @clientName("dataAsBytes")
   @projectedName("json", "data_bytes")
   @projectedName("client", "noeffect")
