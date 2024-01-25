@@ -42,8 +42,8 @@ public abstract class Customization {
         }
 
         // Start language client
-        try (EclipseLanguageClient languageClient = new EclipseLanguageClient(null,
-            tempDirWithPrefix.toString())) {
+        try (EclipseLanguageClient languageClient
+            = new EclipseLanguageClient(null, tempDirWithPrefix.toString(), logger)) {
             languageClient.initialize();
             customize(new LibraryCustomization(editor, languageClient), logger);
             editor.removeFile("pom.xml");

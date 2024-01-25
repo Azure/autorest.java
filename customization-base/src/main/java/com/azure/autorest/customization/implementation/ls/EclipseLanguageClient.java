@@ -41,6 +41,7 @@ import org.eclipse.lsp4j.WorkspaceEdit;
 import org.eclipse.lsp4j.WorkspaceFolder;
 import org.eclipse.lsp4j.WorkspaceSymbolParams;
 import org.eclipse.lsp4j.jsonrpc.json.MessageJsonHandler;
+import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
@@ -64,14 +65,10 @@ public class EclipseLanguageClient implements AutoCloseable {
     private final Connection connection;
     private final String workspaceDir;
 
-    public EclipseLanguageClient(String workspaceDir) {
-        this(null, workspaceDir);
-    }
-
-    public EclipseLanguageClient(String pathToLanguageServerPlugin, String workspaceDir) {
+    public EclipseLanguageClient(String pathToLanguageServerPlugin, String workspaceDir, Logger logger) {
         try {
             this.workspaceDir = new File(workspaceDir).toURI().toString();
-            this.server = new EclipseLanguageServerFacade(pathToLanguageServerPlugin);
+            this.server = new EclipseLanguageServerFacade(pathToLanguageServerPlugin, logger);
             this.connection = new Connection(server.getOutputStream(), server.getInputStream());
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -79,6 +76,7 @@ public class EclipseLanguageClient implements AutoCloseable {
 
         if (!server.isAlive()) {
             server.shutdown();
+            logger.error("Language server failed to start: " + server.getServerError());
             throw new RuntimeException("Language server failed to start: " + server.getServerError());
         }
     }
