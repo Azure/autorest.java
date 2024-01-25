@@ -173,7 +173,6 @@ import {
 } from "./operation-utils.js";
 import { isArmCommonType } from "./type-utils.js";
 import pkg from "lodash";
-import { Server } from "http";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
