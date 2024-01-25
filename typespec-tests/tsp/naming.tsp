@@ -1,9 +1,11 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Foundations;
+using Azure.ClientGenerator.Core;
 
 @summary("summary of Naming")
 @doc("description of Naming")
@@ -52,6 +54,9 @@ model Data {
 
 model BytesData extends Data {
   kind: "bytes";
+  @clientName("dataAsBytes")
+  @projectedName("json", "data_bytes")
+  @projectedName("client", "noeffect")
   data: bytes;
 }
 
