@@ -72,6 +72,7 @@ import {
   SdkClient,
   getCrossLanguageDefinitionId,
   getClientNameOverride,
+  shouldFlattenProperty,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -2277,13 +2278,16 @@ export class CodeModelBuilder {
     const schema = this.processSchema(prop, prop.name);
     let nullable = isNullableType(prop.type);
 
-    let extensions = undefined;
+    let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
-      extensions = {
-        "x-ms-secret": true,
-      };
+      extensions = extensions ?? {};
+      extensions["x-ms-secret"] = true;
       // if the property does not return in response, it had to be nullable
       nullable = true;
+    }
+    if (shouldFlattenProperty(this.sdkContext, prop)) {
+      extensions = extensions ?? {};
+      extensions["x-ms-client-flatten"] = true;
     }
 
     return new Property(this.getName(prop), this.getDoc(prop), schema, {

@@ -5,6 +5,7 @@
 Compatible with compiler 0.52.
 
 - Supported `@clientName` from "@azure-tools/typespec-client-generator-core".
+- Supported `@flattenProperty` from "@azure-tools/typespec-client-generator-core".
 
 ## 0.12.3 (2024-01-22)
 
