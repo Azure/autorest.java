@@ -651,6 +651,8 @@ abstract class ConvenienceMethodTemplateBase {
             } else if (property.getWireType() instanceof ListType && isMultipartModel(((ListType) property.getWireType()).getElementType())) {
                 // file array
 
+                // For now, we use 3 List, as we do not wish the Helper class refer to different ##FileDetails model.
+                // Later, if we switch to a shared class in azure-core, we can change the implementation.
                 String className = ((ListType) property.getWireType()).getElementType().toString();
                 String streamExpressionFormat = "%1$s.stream().map(%2$s::%3$s).collect(Collectors.toList())";
                 String fileExpression = String.format(streamExpressionFormat,

@@ -716,7 +716,7 @@ public class ClientModelUtil {
     }
 
     /**
-     * Gets or creates a new ##FileDetails model for a multipart/form-data request
+     * Gets or creates a new FileDetails model for a multipart/form-data request
      *
      * @param compositeType the object schema of the multipart/form-data request model.
      * @param filePropertyName the property name of the file in the multipart/form-data request model.
@@ -725,6 +725,11 @@ public class ClientModelUtil {
     public static IType getMultipartFileDetailsModel(
             ObjectSchema compositeType,
             String filePropertyName) {
+        // TODO (weidxu): this ##FileDetails model may get renamed and moved to azure-core
+
+        // The ##FileDetails model would inherit the usages from compositeType (the request model). So if the request is INTERNAL, FileDetails model would also be INTERNAL.
+        // But it may reside in a different package, depending on the options e.g. "custom-types"/"custom-types-subpackage".
+
         String fileDetailsModelName = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(
                 filePropertyName.toLowerCase(Locale.ROOT).endsWith("file")
                         ? filePropertyName + "Details"
