@@ -1288,14 +1288,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    if (schema instanceof ObjectSchema && schema.serializationFormats?.includes(KnownMediaType.Multipart)) {
-      // TODO: anonymous model for multipart is not supported
-      schema.language.default.name = op.language.default.name + "Request";
-      if (!parameter.language.default.name) {
-        // name the parameter for documentation
-        parameter.language.default.name = "request";
-      }
-    } else if (schema instanceof ObjectSchema && !schema.language.default.name) {
+    if (schema instanceof ObjectSchema && !schema.language.default.name) {
       // anonymous model
 
       // name the schema for documentation
@@ -1304,6 +1297,12 @@ export class CodeModelBuilder {
       if (!parameter.language.default.name) {
         // name the parameter for documentation
         parameter.language.default.name = "request";
+      }
+
+      if (schema.serializationFormats?.includes(KnownMediaType.Multipart)) {
+        // TODO: anonymous model for multipart is not supported
+        // at present, use the model with name given above
+        return;
       }
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
