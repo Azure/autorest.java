@@ -71,6 +71,7 @@ import {
   isInternal,
   SdkClient,
   getCrossLanguageDefinitionId,
+  getClientNameOverride,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -2455,6 +2456,10 @@ export class CodeModelBuilder {
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
+    const emitterClientName = getClientNameOverride(this.sdkContext, target);
+    if (emitterClientName) {
+      return emitterClientName;
+    }
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
       return languageProjectedName;
