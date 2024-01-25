@@ -24,7 +24,7 @@
     "@typespec/rest": ">=0.52.0 <1.0.0",
     "@typespec/versioning": ">=0.52.0 <1.0.0",
     "@typespec/openapi": ">=0.52.0 <1.0.0",
-    "@azure-tools/typespec-azure-core": ">=0.38.8 <1.0.0",
+    "@azure-tools/typespec-azure-core": ">=0.38.0 <1.0.0",
     "@azure-tools/typespec-client-generator-core": ">=0.38.0 <1.0.0"
   },
   "private": true
