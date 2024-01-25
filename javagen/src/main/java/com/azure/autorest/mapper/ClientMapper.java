@@ -139,7 +139,8 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             .filter(Objects::nonNull)
             .distinct()
             .collect(Collectors.toList());
-        // append some models not from CodeModel
+        // append some models not from CodeModel (currently, only for ##FileDetails models for multipart/form-data request)
+        // TODO (weidxu): we can remove this code block, if ##FileDetails moves to azure-core
         final List<ClientModel> clientModels = Stream.concat(clientModelsFromCodeModel.stream(), ClientModels.getInstance().getModels().stream())
             .distinct()
             .collect(Collectors.toList());
