@@ -22,8 +22,8 @@ jobs:
 - job: 'Build'
   timeoutInMinutes: 60
   pool:
-    name: azsdk-pool-mms-win-2022-general
-    vmImage: windows-2022
+    name: "azsdk-pool-mms-ubuntu-2004-general"
+    vmImage: "MMSUbuntu20.04"
 
   variables:
     - template: /eng/pipelines/variables/globals.yml
@@ -40,8 +40,27 @@ jobs:
       JobType: 'Fluent Integration'
 
   - task: Maven@3
+    displayName: 'Build and Package'
     inputs:
-      mavenPomFile: 'pom.xml'
+      mavenPomFile: pom.xml
+      goals: 'clean install'
+      options: '$(DefaultOptions) -P local,testFluent -T 1C -DskipTests'
+      mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: $(JavaVersion)
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: false
+
+  - task: PowerShell@2
+    displayName: 'Generate Code'
+    inputs:
+      pwsh: true
+      filePath: fluent-gen/Initialize-Tests.ps1
+
+  - task: Maven@3
+    displayName: 'Run Tests'
+    inputs:
+      mavenPomFile: 'fluent-tests/pom.xml'
       mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: $(JavaVersion)
