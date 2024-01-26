@@ -10,7 +10,7 @@
 
 # Invokes the given expression and only writes the output of the expression if it failed.
 param (
-  [int] $Parallelization = [Environment]::ProcessorCount - 1
+  [int] $Parallelization = [Environment]::ProcessorCount
 )
 
 function invokeExpressionAndCaptureOutput([string]$expression) {
