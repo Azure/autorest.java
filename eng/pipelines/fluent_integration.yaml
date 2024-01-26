@@ -55,12 +55,12 @@ jobs:
     displayName: 'Generate Code'
     inputs:
       pwsh: true
-      filePath: fluent-gen/Initialize-Tests.ps1
+      filePath: fluent-tests/Initialize-Tests.ps1
 
   - task: Maven@3
     displayName: 'Run Tests'
     inputs:
-      mavenPomFile: 'fluent-tests/pom.xml'
+      mavenPomFile: 'pom.xml'
       mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: $(JavaVersion)
