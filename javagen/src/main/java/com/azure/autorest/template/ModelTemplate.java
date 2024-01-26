@@ -3,7 +3,6 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -1144,7 +1143,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private static boolean modelRequireSerialization(ClientModel model) {
         // TODO (weidxu): any other case? "binary"?
-        return !model.getSerializationFormats().contains(KnownMediaType.MULTIPART.value());
+        return !ClientModelUtil.isMultipartModel(model);
     }
 
     /**
