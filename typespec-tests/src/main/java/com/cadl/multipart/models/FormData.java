@@ -6,7 +6,7 @@ package com.cadl.multipart.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.BinaryData;
+import java.util.List;
 
 /**
  * The FormData model.
@@ -41,13 +41,13 @@ public final class FormData {
      * The image property.
      */
     @Generated
-    private final BinaryData image;
+    private final ImageFileDetails image;
 
     /*
-     * The filename for image
+     * The file property.
      */
     @Generated
-    private String imageFilename = "image";
+    private List<FileDetails> file;
 
     /**
      * Creates an instance of FormData class.
@@ -59,7 +59,7 @@ public final class FormData {
      * @param image the image value to set.
      */
     @Generated
-    public FormData(String name, int resolution, ImageType type, Size size, BinaryData image) {
+    public FormData(String name, int resolution, ImageType type, Size size, ImageFileDetails image) {
         this.name = name;
         this.resolution = resolution;
         this.type = type;
@@ -113,29 +113,29 @@ public final class FormData {
      * @return the image value.
      */
     @Generated
-    public BinaryData getImage() {
+    public ImageFileDetails getImage() {
         return this.image;
     }
 
     /**
-     * Get the imageFilename property: The filename for image.
+     * Get the file property: The file property.
      * 
-     * @return the imageFilename value.
+     * @return the file value.
      */
     @Generated
-    public String getImageFilename() {
-        return this.imageFilename;
+    public List<FileDetails> getFile() {
+        return this.file;
     }
 
     /**
-     * Set the imageFilename property: The filename for image.
+     * Set the file property: The file property.
      * 
-     * @param imageFilename the imageFilename value to set.
+     * @param file the file value to set.
      * @return the FormData object itself.
      */
     @Generated
-    public FormData setImageFilename(String imageFilename) {
-        this.imageFilename = imageFilename;
+    public FormData setFile(List<FileDetails> file) {
+        this.file = file;
         return this;
     }
 }

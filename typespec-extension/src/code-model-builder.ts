@@ -573,18 +573,18 @@ export class CodeModelBuilder {
         // operation group with no operation is skipped
         if (operations.length > 0) {
           const groupPath = operationGroup.groupPath.split(".");
-          let oprationGroupName: string;
+          let operationGroupName: string;
           if (groupPath.length > 1) {
             // groupPath should be in format of "OpenAIClient.Chat.Completions"
-            oprationGroupName = groupPath.slice(1).join("");
+            operationGroupName = groupPath.slice(1).join("");
           } else {
             // protection
-            oprationGroupName = operationGroup.type.name;
+            operationGroupName = operationGroup.type.name;
           }
-          codeModelGroup = new OperationGroup(oprationGroupName);
+          codeModelGroup = new OperationGroup(operationGroupName);
           for (const operation of operations) {
             if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-              codeModelGroup.addOperation(this.processOperation(oprationGroupName, operation, clientContext));
+              codeModelGroup.addOperation(this.processOperation(operationGroupName, operation, clientContext));
             }
           }
           codeModelClient.operationGroups.push(codeModelGroup);
@@ -1300,7 +1300,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    if (!schema.language.default.name && schema instanceof ObjectSchema) {
+    if (schema instanceof ObjectSchema && !schema.language.default.name) {
       // anonymous model
 
       // name the schema for documentation
@@ -1310,6 +1310,13 @@ export class CodeModelBuilder {
         // name the parameter for documentation
         parameter.language.default.name = "request";
       }
+
+      if (schema.serializationFormats?.includes(KnownMediaType.Multipart)) {
+        // TODO: anonymous model for multipart is not supported
+        // at present, use the model with name given above
+        return;
+      }
+
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {

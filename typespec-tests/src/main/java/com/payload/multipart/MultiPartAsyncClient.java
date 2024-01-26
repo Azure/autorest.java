@@ -24,6 +24,8 @@ import com.payload.multipart.models.JsonArrayPartsRequest;
 import com.payload.multipart.models.JsonPartRequest;
 import com.payload.multipart.models.MultiBinaryPartsRequest;
 import com.payload.multipart.models.MultiPartRequest;
+import com.payload.multipart.models.PicturesFileDetails;
+import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 
 /**
@@ -176,8 +178,9 @@ public final class MultiPartAsyncClient {
         // Generated convenience method for basicWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
-            .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
-            .getRequestBody(), requestOptions).flatMap(FluxUtil::toMono);
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+            .end().getRequestBody(), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -199,10 +202,14 @@ public final class MultiPartAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return complexWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
             .serializeJsonField("address", body.getAddress())
-            .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
             .serializeJsonField("previousAddresses", body.getPreviousAddresses())
-            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
-            requestOptions).flatMap(FluxUtil::toMono);
+            .serializeFileFields("pictures",
+                body.getPictures().stream().map(PicturesFileDetails::getContent).collect(Collectors.toList()),
+                body.getPictures().stream().map(PicturesFileDetails::getContentType).collect(Collectors.toList()),
+                body.getPictures().stream().map(PicturesFileDetails::getFilename).collect(Collectors.toList()))
+            .end().getRequestBody(), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -222,11 +229,11 @@ public final class MultiPartAsyncClient {
     public Mono<Void> jsonPart(JsonPartRequest body) {
         // Generated convenience method for jsonPartWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return jsonPartWithResponse(
-            new MultipartFormDataHelper(requestOptions).serializeJsonField("address", body.getAddress())
-                .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
-                .getRequestBody(),
-            requestOptions).flatMap(FluxUtil::toMono);
+        return jsonPartWithResponse(new MultipartFormDataHelper(requestOptions)
+            .serializeJsonField("address", body.getAddress())
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+            .end().getRequestBody(), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
@@ -246,9 +253,13 @@ public final class MultiPartAsyncClient {
     public Mono<Void> binaryArrayParts(BinaryArrayPartsRequest body) {
         // Generated convenience method for binaryArrayPartsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return binaryArrayPartsWithResponse(new MultipartFormDataHelper(requestOptions)
-            .serializeTextField("id", body.getId())
-            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
+        return binaryArrayPartsWithResponse(
+            new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
+                .serializeFileFields("pictures",
+                    body.getPictures().stream().map(PicturesFileDetails::getContent).collect(Collectors.toList()),
+                    body.getPictures().stream().map(PicturesFileDetails::getContentType).collect(Collectors.toList()),
+                    body.getPictures().stream().map(PicturesFileDetails::getFilename).collect(Collectors.toList()))
+                .end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
 
@@ -271,7 +282,8 @@ public final class MultiPartAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return jsonArrayPartsWithResponse(
             new MultipartFormDataHelper(requestOptions)
-                .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
+                .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
                 .serializeJsonField("previousAddresses", body.getPreviousAddresses()).end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -295,8 +307,12 @@ public final class MultiPartAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return multiBinaryPartsWithResponse(
             new MultipartFormDataHelper(requestOptions)
-                .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
-                .serializeFileField("picture", body.getPicture(), body.getPictureFilename()).end().getRequestBody(),
+                .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+                .serializeFileField("picture", body.getPicture() == null ? null : body.getPicture().getContent(),
+                    body.getPicture() == null ? null : body.getPicture().getContentType(),
+                    body.getPicture() == null ? null : body.getPicture().getFilename())
+                .end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
     }
 }
