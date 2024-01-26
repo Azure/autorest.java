@@ -45,7 +45,7 @@ public class TypeConversionUtilsTests {
 
         IType pagedIterableType = GenericType.PagedIterable(innerType);
         convertedExpression = TypeConversionUtils.conversionExpression(pagedIterableType, TypeConversionUtils.tempVariableName());
-        Assertions.assertEquals("Utils.mapPage(inner, inner1 -> new MockResourceImpl(inner1, this.manager()))", convertedExpression);
+        Assertions.assertEquals("ResourceManagerUtils.mapPage(inner, inner1 -> new MockResourceImpl(inner1, this.manager()))", convertedExpression);
 
         IType responseType = GenericType.Response(innerType);
         convertedExpression = TypeConversionUtils.conversionExpression(responseType, TypeConversionUtils.tempVariableName());

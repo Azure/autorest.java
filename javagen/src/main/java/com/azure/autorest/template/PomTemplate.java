@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Pom;
+import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.model.xmlmodel.XmlBlock;
 import com.azure.autorest.model.xmlmodel.XmlFile;
 import com.azure.core.util.CoreUtils;
@@ -137,9 +138,8 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                             dependenciesBlock.tag("artifactId", artifactId);
                             if (version != null) {
                                 dependencyBlock.tagWithInlineComment("version", version,
-                                        String.format("{x-version-update;%1$s:%2$s;%3$s}",
-                                                groupId,
-                                                artifactId,
+                                        String.format("{x-version-update;%1$s;%2$s}",
+                                                Project.getVersionUpdateTag(groupId, artifactId),
                                                 externalDependency ? "external_dependency" : "dependency"));
                             }
                             if (scope != null) {

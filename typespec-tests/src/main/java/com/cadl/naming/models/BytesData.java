@@ -18,36 +18,36 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
-     * The data property.
+     * The data_bytes property.
      */
     @Generated
-    private final byte[] data;
+    private final byte[] dataAsBytes;
 
     /**
      * Creates an instance of BytesData class.
      * 
-     * @param data the data value to set.
+     * @param dataAsBytes the dataAsBytes value to set.
      */
     @Generated
-    private BytesData(byte[] data) {
-        this.data = data;
+    private BytesData(byte[] dataAsBytes) {
+        this.dataAsBytes = dataAsBytes;
     }
 
     /**
-     * Get the data property: The data property.
+     * Get the dataAsBytes property: The data_bytes property.
      * 
-     * @return the data value.
+     * @return the dataAsBytes value.
      */
     @Generated
-    public byte[] getData() {
-        return CoreUtils.clone(this.data);
+    public byte[] getDataAsBytes() {
+        return CoreUtils.clone(this.dataAsBytes);
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("kind_id", "bytes");
-        jsonWriter.writeBinaryField("data", this.data);
+        jsonWriter.writeBinaryField("data_bytes", this.dataAsBytes);
         return jsonWriter.writeEndObject();
     }
 
@@ -63,7 +63,7 @@ public final class BytesData extends Data {
      */
     public static BytesData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            byte[] data = null;
+            byte[] dataAsBytes = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -75,13 +75,13 @@ public final class BytesData extends Data {
                             "'kind_id' was expected to be non-null and equal to 'bytes'. The found 'kind_id' was '"
                                 + type + "'.");
                     }
-                } else if ("data".equals(fieldName)) {
-                    data = reader.getBinary();
+                } else if ("data_bytes".equals(fieldName)) {
+                    dataAsBytes = reader.getBinary();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new BytesData(data);
+            return new BytesData(dataAsBytes);
         });
     }
 }

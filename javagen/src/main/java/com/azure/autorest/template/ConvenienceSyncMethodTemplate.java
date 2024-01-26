@@ -213,7 +213,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, String invocationExpression,
                                                    Set<String> mediaTypes,
                                                    Set<GenericType> typeReferenceStaticClasses) {
-        SupportedMimeType mimeType = getResponseKnownMimeType(mediaTypes);
+        SupportedMimeType mimeType = SupportedMimeType.getResponseKnownMimeType(mediaTypes);
         // TODO (weidxu): support XML etc.
         switch (mimeType) {
             case TEXT:

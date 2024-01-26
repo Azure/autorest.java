@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
+import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import com.type.property.nullable.implementation.StringOperationsImpl;
 import com.type.property.nullable.models.StringProperty;
 import reactor.core.publisher.Mono;
@@ -114,7 +115,6 @@ public final class StringOperationAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patchNonNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'patchNonNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNonNullWithResponseAsync(body, requestOptions);
     }
 
@@ -142,7 +142,6 @@ public final class StringOperationAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> patchNullWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'patchNull' is 'application/merge-patch+json'
         return this.serviceClient.patchNullWithResponseAsync(body, requestOptions);
     }
 
@@ -182,5 +181,53 @@ public final class StringOperationAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getNullWithResponse(requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(StringProperty.class));
+    }
+
+    /**
+     * Put a body with all properties present.
+     * 
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patchNonNull(StringProperty body) {
+        // Generated convenience method for patchNonNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, true);
+        BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
+        JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, false);
+        return patchNonNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * Put a body with default properties.
+     * 
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> patchNull(StringProperty body) {
+        // Generated convenience method for patchNullWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, true);
+        BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
+        JsonMergePatchHelper.getStringPropertyAccessor().prepareModelForJsonMergePatch(body, false);
+        return patchNullWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

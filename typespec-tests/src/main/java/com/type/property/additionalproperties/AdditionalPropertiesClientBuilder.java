@@ -43,7 +43,11 @@ import java.util.Objects;
 @ServiceClientBuilder(
     serviceClients = {
         ExtendsUnknownClient.class,
+        ExtendsUnknownDerivedClient.class,
+        ExtendsUnknownDiscriminatedClient.class,
         IsUnknownClient.class,
+        IsUnknownDerivedClient.class,
+        IsUnknownDiscriminatedClient.class,
         ExtendsStringClient.class,
         IsStringClient.class,
         ExtendsFloatClient.class,
@@ -53,7 +57,11 @@ import java.util.Objects;
         ExtendsModelArrayClient.class,
         IsModelArrayClient.class,
         ExtendsUnknownAsyncClient.class,
+        ExtendsUnknownDerivedAsyncClient.class,
+        ExtendsUnknownDiscriminatedAsyncClient.class,
         IsUnknownAsyncClient.class,
+        IsUnknownDerivedAsyncClient.class,
+        IsUnknownDiscriminatedAsyncClient.class,
         ExtendsStringAsyncClient.class,
         IsStringAsyncClient.class,
         ExtendsFloatAsyncClient.class,
@@ -253,7 +261,7 @@ public final class AdditionalPropertiesClientBuilder
         this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
             .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
-        policies.add(new HttpLoggingPolicy(httpLogOptions));
+        policies.add(new HttpLoggingPolicy(localHttpLogOptions));
         HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
             .httpClient(httpClient).clientOptions(localClientOptions).build();
         return httpPipeline;
@@ -270,6 +278,26 @@ public final class AdditionalPropertiesClientBuilder
     }
 
     /**
+     * Builds an instance of ExtendsUnknownDerivedAsyncClient class.
+     * 
+     * @return an instance of ExtendsUnknownDerivedAsyncClient.
+     */
+    @Generated
+    public ExtendsUnknownDerivedAsyncClient buildExtendsUnknownDerivedAsyncClient() {
+        return new ExtendsUnknownDerivedAsyncClient(buildInnerClient().getExtendsUnknownDeriveds());
+    }
+
+    /**
+     * Builds an instance of ExtendsUnknownDiscriminatedAsyncClient class.
+     * 
+     * @return an instance of ExtendsUnknownDiscriminatedAsyncClient.
+     */
+    @Generated
+    public ExtendsUnknownDiscriminatedAsyncClient buildExtendsUnknownDiscriminatedAsyncClient() {
+        return new ExtendsUnknownDiscriminatedAsyncClient(buildInnerClient().getExtendsUnknownDiscriminateds());
+    }
+
+    /**
      * Builds an instance of IsUnknownAsyncClient class.
      * 
      * @return an instance of IsUnknownAsyncClient.
@@ -277,6 +305,26 @@ public final class AdditionalPropertiesClientBuilder
     @Generated
     public IsUnknownAsyncClient buildIsUnknownAsyncClient() {
         return new IsUnknownAsyncClient(buildInnerClient().getIsUnknowns());
+    }
+
+    /**
+     * Builds an instance of IsUnknownDerivedAsyncClient class.
+     * 
+     * @return an instance of IsUnknownDerivedAsyncClient.
+     */
+    @Generated
+    public IsUnknownDerivedAsyncClient buildIsUnknownDerivedAsyncClient() {
+        return new IsUnknownDerivedAsyncClient(buildInnerClient().getIsUnknownDeriveds());
+    }
+
+    /**
+     * Builds an instance of IsUnknownDiscriminatedAsyncClient class.
+     * 
+     * @return an instance of IsUnknownDiscriminatedAsyncClient.
+     */
+    @Generated
+    public IsUnknownDiscriminatedAsyncClient buildIsUnknownDiscriminatedAsyncClient() {
+        return new IsUnknownDiscriminatedAsyncClient(buildInnerClient().getIsUnknownDiscriminateds());
     }
 
     /**
@@ -370,6 +418,26 @@ public final class AdditionalPropertiesClientBuilder
     }
 
     /**
+     * Builds an instance of ExtendsUnknownDerivedClient class.
+     * 
+     * @return an instance of ExtendsUnknownDerivedClient.
+     */
+    @Generated
+    public ExtendsUnknownDerivedClient buildExtendsUnknownDerivedClient() {
+        return new ExtendsUnknownDerivedClient(buildInnerClient().getExtendsUnknownDeriveds());
+    }
+
+    /**
+     * Builds an instance of ExtendsUnknownDiscriminatedClient class.
+     * 
+     * @return an instance of ExtendsUnknownDiscriminatedClient.
+     */
+    @Generated
+    public ExtendsUnknownDiscriminatedClient buildExtendsUnknownDiscriminatedClient() {
+        return new ExtendsUnknownDiscriminatedClient(buildInnerClient().getExtendsUnknownDiscriminateds());
+    }
+
+    /**
      * Builds an instance of IsUnknownClient class.
      * 
      * @return an instance of IsUnknownClient.
@@ -377,6 +445,26 @@ public final class AdditionalPropertiesClientBuilder
     @Generated
     public IsUnknownClient buildIsUnknownClient() {
         return new IsUnknownClient(buildInnerClient().getIsUnknowns());
+    }
+
+    /**
+     * Builds an instance of IsUnknownDerivedClient class.
+     * 
+     * @return an instance of IsUnknownDerivedClient.
+     */
+    @Generated
+    public IsUnknownDerivedClient buildIsUnknownDerivedClient() {
+        return new IsUnknownDerivedClient(buildInnerClient().getIsUnknownDeriveds());
+    }
+
+    /**
+     * Builds an instance of IsUnknownDiscriminatedClient class.
+     * 
+     * @return an instance of IsUnknownDiscriminatedClient.
+     */
+    @Generated
+    public IsUnknownDiscriminatedClient buildIsUnknownDiscriminatedClient() {
+        return new IsUnknownDiscriminatedClient(buildInnerClient().getIsUnknownDiscriminateds());
     }
 
     /**

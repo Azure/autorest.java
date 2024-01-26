@@ -203,4 +203,9 @@ public class JavaClass implements JavaType {
         addExpectedNewLine();
         contents.annotation(annotations);
     }
+
+    public final void staticBlock(Consumer<JavaBlock> codeBlock) {
+        addExpectedNewLine();
+        contents.block("static", codeBlock);
+    }
 }

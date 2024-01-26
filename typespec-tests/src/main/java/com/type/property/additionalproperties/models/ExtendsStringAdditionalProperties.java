@@ -26,7 +26,7 @@ public final class ExtendsStringAdditionalProperties implements JsonSerializable
     private final String name;
 
     /*
-     * Dictionary of ExtendsUnknownAdditionalPropertiesName
+     * Additional properties
      */
     @Generated
     private Map<String, String> additionalProperties;
@@ -52,7 +52,7 @@ public final class ExtendsStringAdditionalProperties implements JsonSerializable
     }
 
     /**
-     * Get the additionalProperties property: Dictionary of ExtendsUnknownAdditionalPropertiesName.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class ExtendsStringAdditionalProperties implements JsonSerializable
     }
 
     /**
-     * Set the additionalProperties property: Dictionary of ExtendsUnknownAdditionalPropertiesName.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsStringAdditionalProperties object itself.

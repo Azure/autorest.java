@@ -21,7 +21,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
      * Property
      */
     @Generated
-    private IntLiteralProperty1 property;
+    private IntLiteralPropertyProperty property;
 
     /**
      * Creates an instance of IntLiteralProperty class.
@@ -36,7 +36,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
      * @return the property value.
      */
     @Generated
-    public IntLiteralProperty1 getProperty() {
+    public IntLiteralPropertyProperty getProperty() {
         return this.property;
     }
 
@@ -47,7 +47,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
      * @return the IntLiteralProperty object itself.
      */
     @Generated
-    public IntLiteralProperty setProperty(IntLiteralProperty1 property) {
+    public IntLiteralProperty setProperty(IntLiteralPropertyProperty property) {
         this.property = property;
         return this;
     }
@@ -75,7 +75,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedIntLiteralProperty.property = IntLiteralProperty1.fromLong(reader.getLong());
+                    deserializedIntLiteralProperty.property = IntLiteralPropertyProperty.fromLong(reader.getLong());
                 } else {
                     reader.skipChildren();
                 }

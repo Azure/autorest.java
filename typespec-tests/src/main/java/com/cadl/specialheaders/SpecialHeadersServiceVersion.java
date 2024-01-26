@@ -11,9 +11,9 @@ import com.azure.core.util.ServiceVersion;
  */
 public enum SpecialHeadersServiceVersion implements ServiceVersion {
     /**
-     * Enum value 1.0.0.
+     * Enum value 2022-06-01-preview.
      */
-    V1_0_0("1.0.0");
+    V2022_06_01_PREVIEW("2022-06-01-preview");
 
     private final String version;
 
@@ -35,6 +35,6 @@ public enum SpecialHeadersServiceVersion implements ServiceVersion {
      * @return The latest {@link SpecialHeadersServiceVersion}.
      */
     public static SpecialHeadersServiceVersion getLatest() {
-        return V1_0_0;
+        return V2022_06_01_PREVIEW;
     }
 }

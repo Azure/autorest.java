@@ -18,7 +18,7 @@ import java.util.Map;
  * The model extends from Record&lt;unknown&gt; type.
  */
 @Fluent
-public final class ExtendsUnknownAdditionalProperties implements JsonSerializable<ExtendsUnknownAdditionalProperties> {
+public class ExtendsUnknownAdditionalProperties implements JsonSerializable<ExtendsUnknownAdditionalProperties> {
     /*
      * The name property
      */
@@ -26,7 +26,7 @@ public final class ExtendsUnknownAdditionalProperties implements JsonSerializabl
     private final String name;
 
     /*
-     * Dictionary of any
+     * Additional properties
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -52,7 +52,7 @@ public final class ExtendsUnknownAdditionalProperties implements JsonSerializabl
     }
 
     /**
-     * Get the additionalProperties property: Dictionary of any.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class ExtendsUnknownAdditionalProperties implements JsonSerializabl
     }
 
     /**
-     * Set the additionalProperties property: Dictionary of any.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsUnknownAdditionalProperties object itself.

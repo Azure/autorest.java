@@ -20,7 +20,7 @@ import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
-import com.encode.duration.models.Iso8601DurationProperty;
+import com.encode.duration.models.ISO8601DurationProperty;
 
 /**
  * Initializes a new instance of the synchronous DurationClient type.
@@ -244,11 +244,11 @@ public final class PropertyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Iso8601DurationProperty iso8601(Iso8601DurationProperty body) {
+    public ISO8601DurationProperty iso8601(ISO8601DurationProperty body) {
         // Generated convenience method for iso8601WithResponse
         RequestOptions requestOptions = new RequestOptions();
         return iso8601WithResponse(BinaryData.fromObject(body), requestOptions).getValue()
-            .toObject(Iso8601DurationProperty.class);
+            .toObject(ISO8601DurationProperty.class);
     }
 
     /**

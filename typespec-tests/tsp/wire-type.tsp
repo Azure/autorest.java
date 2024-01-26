@@ -7,7 +7,6 @@ using Azure.ClientGenerator.Core;
 @doc("Test for mismatch of wire type and client type on class constructors.")
 @service({
   title: "WireType",
-  version: "1.0.0",
 })
 namespace Cadl.WireType;
 

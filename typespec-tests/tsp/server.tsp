@@ -1,11 +1,12 @@
 import "@typespec/rest";
+import "@typespec/versioning";
 import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 @service({
   title: "HttpbinServer",
-  version: "1.0.0",
 })
 @server(
   "https://{domain}.{tld}",
@@ -31,8 +32,8 @@ namespace Cadl.Server {
 
 @service({
   title: "ContosoServer",
-  version: "v1",
 })
+@versioned(Cadl.ContosoServer.APIVersions)
 @server(
   "{Endpoint}/contoso/{ApiVersion}",
   "Service endpoint",

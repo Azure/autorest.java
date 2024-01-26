@@ -34,6 +34,7 @@ export interface EmitterOptions {
   "stream-style-serialization"?: boolean;
 
   "partial-update"?: boolean;
+  "models-subpackage"?: string;
   "custom-types"?: string;
   "custom-types-subpackage"?: string;
   "customization-class"?: string;
@@ -49,6 +50,7 @@ export interface DevOptions {
   "support-versioning"?: boolean;
   "debug"?: boolean;
   "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
+  "java-temp-dir"?: string; // working directory for java codegen, e.g. transformed code-model file
 }
 
 const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
@@ -80,6 +82,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
 
     // customization
     "partial-update": { type: "boolean", nullable: true, default: false },
+    "models-subpackage": { type: "string", nullable: true },
     "custom-types": { type: "string", nullable: true },
     "custom-types-subpackage": { type: "string", nullable: true },
     "customization-class": { type: "string", nullable: true },
@@ -141,6 +144,15 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     if (options["dev-options"]?.loglevel) {
       javaArgs.push("-Dorg.slf4j.simpleLogger.defaultLogLevel=" + options["dev-options"]?.loglevel);
     }
+    if (options["dev-options"]?.["java-temp-dir"]) {
+      javaArgs.push("-Dcodegen.java.temp.directory=" + options["dev-options"]?.["java-temp-dir"]);
+    }
+    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED");
+    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED");
+    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED");
+    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED");
+    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED");
+    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED");
     javaArgs.push("-jar");
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);

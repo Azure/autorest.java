@@ -15,7 +15,9 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.implementation.RepeatabilityHeadersImpl;
 import com.cadl.specialheaders.models.Resource;
 
@@ -246,7 +248,6 @@ public final class RepeatabilityHeadersClient {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateLro(String name, BinaryData resource,
         RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'createLro' is 'application/merge-patch+json'
         return this.serviceClient.beginCreateLro(name, resource, requestOptions);
     }
 
@@ -310,5 +311,29 @@ public final class RepeatabilityHeadersClient {
         // Generated convenience method for postWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return postWithResponse(name, requestOptions).getValue().toObject(Resource.class);
+    }
+
+    /**
+     * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
+     * 
+     * @param name A sequence of textual characters.
+     * @param resource The resource instance.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    public SyncPoller<PollOperationDetails, Resource> beginCreateLro(String name, Resource resource) {
+        // Generated convenience method for beginCreateLroWithModel
+        RequestOptions requestOptions = new RequestOptions();
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return serviceClient.beginCreateLroWithModel(name, resourceInBinaryData, requestOptions);
     }
 }

@@ -20,6 +20,7 @@ import {
   isNullType,
   isTemplateDeclaration,
   isTemplateInstance,
+  isTypeSpecValueTypeOf,
 } from "@typespec/compiler";
 import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
@@ -296,6 +297,23 @@ export function getUsage(type: Model | Operation | Enum): SchemaContext[] | unde
     }
     return ret;
   });
+}
+
+/**
+ * Check if a given model or model property is an ARM common type.
+ * This is copied from typespec-azure-resource-manager. We don't want to depend on this package since it now has weird dependency on typespec-autorest.
+ *
+ * @param {Type} entity - The entity to be checked.
+ *  @return {boolean} - A boolean value indicating whether an entity is an ARM common type.
+ */
+export function isArmCommonType(entity: Type): boolean {
+  const commonDecorators = ["$armCommonDefinition", "$armCommonParameter"];
+  if (isTypeSpecValueTypeOf(entity, ["Model", "ModelProperty"])) {
+    return commonDecorators.some((commonDecorator) =>
+      entity.decorators.some((d) => d.decorator.name === commonDecorator),
+    );
+  }
+  return false;
 }
 
 function getDecoratorScopedValue<T>(

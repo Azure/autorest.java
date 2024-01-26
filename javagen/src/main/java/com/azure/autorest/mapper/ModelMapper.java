@@ -5,12 +5,12 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.DictionarySchema;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
@@ -22,6 +22,7 @@ import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
@@ -82,6 +83,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 .type(modelType)
                 .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
                 .usedInXml(SchemaUtil.treatAsXml(compositeType))
+                .serializationFormats(compositeType.getSerializationFormats())
                 .implementationDetails(new ImplementationDetails.Builder()
                     .usages(usages)
                     .build());
@@ -293,14 +295,18 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                 additionalProperties.setLanguage(new Languages());
                 additionalProperties.getLanguage().setJava(new Language());
-                additionalProperties.getLanguage().getJava().setName("additionalProperties");
-                additionalProperties.getLanguage().getJava().setDescription(schema.getLanguage().getJava().getDescription());
+                additionalProperties.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES);
+                String additionalPropertiesDescription = schema.getLanguage().getJava().getDescription();
+                if (CoreUtils.isNullOrEmpty(additionalPropertiesDescription)) {
+                    additionalPropertiesDescription = "Additional properties";
+                }
+                additionalProperties.getLanguage().getJava().setDescription(additionalPropertiesDescription);
 
                 properties.add(Mappers.getModelPropertyMapper().map(additionalProperties));
             }
 
             // handle multipart/form-data
-            if (!CoreUtils.isNullOrEmpty(compositeType.getUsage()) && compositeType.getUsage().contains(SchemaContext.MULTIPART_FORM_DATA)) {
+            if (!CoreUtils.isNullOrEmpty(compositeType.getSerializationFormats()) && compositeType.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
                 processMultipartFormDataProperties(properties);
             }
 
@@ -594,12 +600,30 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         .build());
 
                 // add (optional) filename property
+                // here is a hack to use same serializedName
                 iterator.add(property.newBuilder()
                         .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX)
                         .defaultValue(ClassType.STRING.defaultValueExpression(property.getSerializedName()))
                         .description("The filename for " + property.getName())
                         .wireType(ClassType.STRING)
                         .clientType(ClassType.STRING)
+                        .required(false)
+                        .build());
+            } else if (property.getWireType() instanceof ListType && ((ListType) property.getWireType()).getElementType() == ArrayType.BYTE_ARRAY) {
+                // replace List<byte[]> with List<BinaryData>
+                iterator.remove();
+                iterator.add(property.newBuilder()
+                        .wireType(new ListType(ClassType.BINARY_DATA))
+                        .clientType(new ListType(ClassType.BINARY_DATA))
+                        .build());
+
+                // add (optional) filenames property as List<String>
+                // here is a hack to use same serializedName
+                iterator.add(property.newBuilder()
+                        .name(property.getName() + ClientModelUtil.FILENAME_SUFFIX + "s")
+                        .description("The filenames for " + property.getName())
+                        .wireType(new ListType(ClassType.STRING))
+                        .clientType(new ListType(ClassType.STRING))
                         .required(false)
                         .build());
             }

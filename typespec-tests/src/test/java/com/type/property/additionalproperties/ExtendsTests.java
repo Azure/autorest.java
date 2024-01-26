@@ -1,5 +1,6 @@
 package com.type.property.additionalproperties;
 
+import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalPropertiesDiscriminated;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -9,6 +10,8 @@ import com.type.property.additionalproperties.models.ExtendsModelAdditionalPrope
 import com.type.property.additionalproperties.models.ExtendsModelArrayAdditionalProperties;
 import com.type.property.additionalproperties.models.ExtendsStringAdditionalProperties;
 import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalProperties;
+import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalPropertiesDerived;
+import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalPropertiesDiscriminatedDerived;
 import com.type.property.additionalproperties.models.ModelForRecord;
 
 import java.util.Arrays;
@@ -22,6 +25,8 @@ public class ExtendsTests {
     private final ExtendsModelClient extendsModelClient = new AdditionalPropertiesClientBuilder().buildExtendsModelClient();
     private final ExtendsStringClient extendsStringClient = new AdditionalPropertiesClientBuilder().buildExtendsStringClient();
     private final ExtendsUnknownClient extendsUnknownClient = new AdditionalPropertiesClientBuilder().buildExtendsUnknownClient();
+    private final ExtendsUnknownDerivedClient extendsUnknownDerivedClient = new AdditionalPropertiesClientBuilder().buildExtendsUnknownDerivedClient();
+    private final ExtendsUnknownDiscriminatedClient extendsUnknownDiscriminatedClient = new AdditionalPropertiesClientBuilder().buildExtendsUnknownDiscriminatedClient();
 
     @Test
     public void testExtendsFloat() {
@@ -84,7 +89,7 @@ public class ExtendsTests {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("ExtendsStringAdditionalProperties", properties.getName());
-        Assertions.assertIterableEquals(propertyMap.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
     }
 
     @Test
@@ -102,6 +107,42 @@ public class ExtendsTests {
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("ExtendsUnknownAdditionalProperties", properties.getName());
-        Assertions.assertIterableEquals(propertyMap.entrySet(), properties.getAdditionalProperties().entrySet());
+        Assertions.assertEquals(propertyMap, properties.getAdditionalProperties());
+    }
+
+    @Test
+    public void testExtendsUnknownDerivedClient() {
+        Map<String, Object> additionalProperty = new LinkedHashMap<>();
+        additionalProperty.put("prop1", 32);
+        additionalProperty.put("prop2", true) ;
+        additionalProperty.put("prop3", "abc") ;
+        ExtendsUnknownAdditionalPropertiesDerived body = new ExtendsUnknownAdditionalPropertiesDerived("ExtendsUnknownAdditionalProperties", 314)
+                .setAge(2.71828);
+        body.setAdditionalProperties(additionalProperty);
+        extendsUnknownDerivedClient.put(body);
+
+        ExtendsUnknownAdditionalPropertiesDerived properties = extendsUnknownDerivedClient.get();
+        Assertions.assertNotNull(properties);
+        Assertions.assertNotNull(properties.getAdditionalProperties());
+        Assertions.assertEquals("ExtendsUnknownAdditionalProperties", properties.getName());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
+    }
+
+    @Test
+    public void testExtendsUnknownDiscriminatedClient() {
+        Map<String, Object> additionalProperty = new LinkedHashMap<>();
+        additionalProperty.put("prop1", 32);
+        additionalProperty.put("prop2", true) ;
+        additionalProperty.put("prop3", "abc") ;
+        ExtendsUnknownAdditionalPropertiesDiscriminatedDerived body = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived("Derived", 314)
+                .setAge(2.71828);
+        body.setAdditionalProperties(additionalProperty);
+        extendsUnknownDiscriminatedClient.put(body);
+
+        ExtendsUnknownAdditionalPropertiesDiscriminated properties = extendsUnknownDiscriminatedClient.get();
+        Assertions.assertNotNull(properties);
+        Assertions.assertNotNull(properties.getAdditionalProperties());
+        Assertions.assertEquals("Derived", properties.getName());
+        Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
     }
 }

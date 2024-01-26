@@ -846,7 +846,7 @@ public final class ModelsAsyncClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -866,8 +866,8 @@ public final class ModelsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> withWithResponse(BinaryData body, RequestOptions requestOptions) {
-        return this.serviceClient.withWithResponseAsync(body, requestOptions);
+    public Mono<Response<Void>> withWithWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.withWithWithResponseAsync(body, requestOptions);
     }
 
     /**
@@ -1516,7 +1516,7 @@ public final class ModelsAsyncClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1529,10 +1529,10 @@ public final class ModelsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> with(With body) {
-        // Generated convenience method for withWithResponse
+    public Mono<Void> withWith(With body) {
+        // Generated convenience method for withWithWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return withWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
+        return withWithWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

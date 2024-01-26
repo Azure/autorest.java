@@ -564,7 +564,7 @@ public final class ParametersAsyncClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param with A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -576,8 +576,8 @@ public final class ParametersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> withWithResponse(String with, RequestOptions requestOptions) {
-        return this.serviceClient.withWithResponseAsync(with, requestOptions);
+    public Mono<Response<Void>> withWithWithResponse(String with, RequestOptions requestOptions) {
+        return this.serviceClient.withWithWithResponseAsync(with, requestOptions);
     }
 
     /**
@@ -1236,7 +1236,7 @@ public final class ParametersAsyncClient {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param with A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1249,10 +1249,10 @@ public final class ParametersAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> with(String with) {
-        // Generated convenience method for withWithResponse
+    public Mono<Void> withWith(String with) {
+        // Generated convenience method for withWithWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return withWithResponse(with, requestOptions).flatMap(FluxUtil::toMono);
+        return withWithWithResponse(with, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

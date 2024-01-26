@@ -6,7 +6,6 @@ using Azure.ClientGenerator.Core;
 
 @service({
   title: "Builtin",
-  version: "1.0.0",
 })
 namespace Cadl.Builtin;
 

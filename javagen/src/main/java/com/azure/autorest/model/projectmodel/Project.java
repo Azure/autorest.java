@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -73,6 +74,8 @@ public class Project {
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),
         JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.3"),
         MOCKITO_CORE("org.mockito", "mockito-core", "4.11.0"),
+        BYTE_BUDDY("net.bytebuddy", "byte-buddy", "1.14.8"),
+        BYTE_BUDDY_AGENT("net.bytebuddy", "byte-buddy-agent", "1.14.8"),
         SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36");
 
         private final String groupId;
@@ -233,6 +236,25 @@ public class Project {
         return ret;
     }
 
+    private static final Map<String, String> VERSION_UPDATE_TAG_MAP = Map.of(
+            // see https://github.com/Azure/azure-sdk-for-java/blob/main/eng/versioning/external_dependencies.txt
+            "net.bytebuddy:byte-buddy", "testdep_net.bytebuddy:byte-buddy",
+            "net.bytebuddy:byte-buddy-agent", "testdep_net.bytebuddy:byte-buddy-agent"
+    );
+
+    /**
+     * Gets the version update tag (x-version-update) for the groupId and artifactId.
+     *
+     * @param groupId the group ID.
+     * @param artifactId the artifact ID.
+     * @return the version update tag.
+     */
+    public static String getVersionUpdateTag(String groupId, String artifactId) {
+        String tag = groupId + ":" + artifactId;
+        String ret = VERSION_UPDATE_TAG_MAP.get(tag);
+        return ret == null ? tag : ret;
+    }
+
     protected void findPackageVersions() {
         Optional<String> sdkFolderOpt = findSdkFolder();
         this.integratedWithSdk = sdkFolderOpt.isPresent();
@@ -264,7 +286,7 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 for (Dependency dependency : Dependency.values()) {
-                    String artifact = dependency.getGroupId() + ":" + dependency.getArtifactId();
+                    String artifact = getVersionUpdateTag(dependency.getGroupId(), dependency.getArtifactId());
                     checkArtifact(line, artifact).ifPresent(dependency::setVersion);
                 }
             });

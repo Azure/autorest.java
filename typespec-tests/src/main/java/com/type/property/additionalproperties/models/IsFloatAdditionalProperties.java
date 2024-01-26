@@ -26,7 +26,7 @@ public final class IsFloatAdditionalProperties implements JsonSerializable<IsFlo
     private final double id;
 
     /*
-     * The model is from Record<float32> type.
+     * Additional properties
      */
     @Generated
     private Map<String, Double> additionalProperties;
@@ -52,7 +52,7 @@ public final class IsFloatAdditionalProperties implements JsonSerializable<IsFlo
     }
 
     /**
-     * Get the additionalProperties property: The model is from Record&lt;float32&gt; type.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class IsFloatAdditionalProperties implements JsonSerializable<IsFlo
     }
 
     /**
-     * Set the additionalProperties property: The model is from Record&lt;float32&gt; type.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsFloatAdditionalProperties object itself.

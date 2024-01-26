@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.Annotation;
@@ -16,8 +17,8 @@ import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
@@ -116,6 +117,7 @@ abstract class ConvenienceMethodTemplateBase {
 
         writeValidationForVersioning(convenienceMethod, parametersMap.keySet(), methodBlock);
 
+        boolean isJsonMergePatchOperation = protocolMethod != null && protocolMethod.getProxyMethod() != null && "application/merge-patch+json".equalsIgnoreCase(protocolMethod.getProxyMethod().getRequestContentType());
         Map<String, String> parameterExpressionsMap = new HashMap<>();
         for (Map.Entry<MethodParameter, MethodParameter> entry : parametersMap.entrySet()) {
             MethodParameter parameter = entry.getKey();
@@ -140,11 +142,16 @@ abstract class ConvenienceMethodTemplateBase {
                         break;
 
                     case BODY: {
-                        Consumer<JavaBlock> writeLine = javaBlock -> javaBlock.line(
-                                String.format("requestOptions.setBody(%s);",
-                                        expressionConvertToBinaryData(
-                                                parameter.getName(), parameter.getClientMethodParameter().getWireType(),
-                                                protocolMethod.getProxyMethod().getRequestContentType())));
+                        Consumer<JavaBlock> writeLine = javaBlock -> {
+                            IType parameterType = parameter.getClientMethodParameter().getClientType();
+                            String expression =  expressionConvertToBinaryData(parameter.getName(), parameter.getClientMethodParameter().getWireType(), protocolMethod.getProxyMethod().getRequestContentType());
+                            if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterType) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterType).getName()))) {
+                                String variableName = writeParameterConversionExpressionWithJsonMergePatchEnabled(javaBlock, parameterType.toString(), parameter.getName(), expression);
+                                javaBlock.line(String.format("requestOptions.setBody(%s);", variableName));
+                            } else {
+                                javaBlock.line(String.format("requestOptions.setBody(%s);", expression));
+                            }
+                        };
                         if (!parameter.getClientMethodParameter().isRequired()) {
                             methodBlock.ifBlock(String.format("%s != null", parameter.getName()), writeLine);
                         } else {
@@ -159,11 +166,14 @@ abstract class ConvenienceMethodTemplateBase {
         // invocation with protocol method parameters and RequestOptions
         String invocationExpression = protocolMethod.getMethodInputParameters().stream()
                 .map(p -> {
-                    String expression = parameterExpressionsMap.get(p.getName());
-                    if (expression == null) {
-                        expression = p.getName();
+                    String parameterName = p.getName();
+                    String expression = parameterExpressionsMap.get(parameterName);
+                    IType parameterRawType = p.getRawType();
+                    if (isJsonMergePatchOperation && ClientModelUtil.isClientModel(parameterRawType) && RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()) && ClientModelUtil.isJsonMergePatchModel(ClientModelUtil.getClientModel(((ClassType) parameterRawType).getName()))) {
+                        return writeParameterConversionExpressionWithJsonMergePatchEnabled(methodBlock, parameterRawType.toString(), parameterName, expression);
+                    } else {
+                        return expression == null ? parameterName : expression;
                     }
-                    return expression;
                 })
                 .collect(Collectors.joining(", "));
 
@@ -329,6 +339,9 @@ abstract class ConvenienceMethodTemplateBase {
 
         // versioning
         imports.add(Arrays.class.getName());
+
+        // JsonMergePatchHelper class
+        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
@@ -397,39 +410,39 @@ abstract class ConvenienceMethodTemplateBase {
         XML,
         MULTIPART,
         BINARY,
-        JSON
-    }
+        JSON;
 
-    // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
-    private static final Map<String, SupportedMimeType> SUPPORTED_MIME_TYPES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-    static {
-        SUPPORTED_MIME_TYPES.put("text/xml", SupportedMimeType.XML);
-        SUPPORTED_MIME_TYPES.put("application/xml", SupportedMimeType.XML);
-        SUPPORTED_MIME_TYPES.put("application/json", SupportedMimeType.JSON);
-        SUPPORTED_MIME_TYPES.put("text/css", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/csv", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/html", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/javascript", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/plain", SupportedMimeType.TEXT);
-        // not in azure-core
-        SUPPORTED_MIME_TYPES.put("application/merge-patch+json", SupportedMimeType.JSON);
-    }
-
-    protected static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
-        // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
-        // This is mostly for the error response which is in JSON, and is not included in this calculation.
-
-        for (String mediaType : mediaTypes) {
-            SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
-            if (type != null) {
-                return type;
-            }
+        // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
+        private static final Map<String, SupportedMimeType> SUPPORTED_MIME_TYPES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        static {
+            SUPPORTED_MIME_TYPES.put("text/xml", SupportedMimeType.XML);
+            SUPPORTED_MIME_TYPES.put("application/xml", SupportedMimeType.XML);
+            SUPPORTED_MIME_TYPES.put("application/json", SupportedMimeType.JSON);
+            SUPPORTED_MIME_TYPES.put("text/css", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/csv", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/html", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/javascript", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/plain", SupportedMimeType.TEXT);
+            // not in azure-core
+            SUPPORTED_MIME_TYPES.put("application/merge-patch+json", SupportedMimeType.JSON);
         }
-        return SupportedMimeType.BINARY;    // BINARY if not recognized
+
+        public static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
+            // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
+            // This is mostly for the error response which is in JSON, and is not included in this calculation.
+
+            for (String mediaType : mediaTypes) {
+                SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
+                if (type != null) {
+                    return type;
+                }
+            }
+            return SupportedMimeType.BINARY;    // BINARY if not recognized
+        }
     }
 
     private static String expressionConvertToBinaryData(String name, IType type, String mediaType) {
-        SupportedMimeType mimeType = getResponseKnownMimeType(Collections.singleton(mediaType));
+        SupportedMimeType mimeType = SupportedMimeType.getResponseKnownMimeType(Collections.singleton(mediaType));
         switch (mimeType) {
             case TEXT:
                 return "BinaryData.fromString(" + name + ")";
@@ -583,7 +596,7 @@ abstract class ConvenienceMethodTemplateBase {
             if (bodyType instanceof ClassType) {
                 ClientModel model = ClientModelUtil.getClientModel(bodyType.toString());
                 // serialize model for multipart/form-data
-                if (model != null && model.getImplementationDetails() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA)) {
+                if (model != null && model.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
                     return expressionMultipartFormDataToBinaryData(name, model);
                 }
             }
@@ -611,6 +624,14 @@ abstract class ConvenienceMethodTemplateBase {
     }
 
     private static String expressionMultipartFormDataToBinaryData(String name, ClientModel model) {
+        // find corresponding filename property
+        Function<String, Optional<ClientModelProperty>> findFileNameProperty =
+                (serializedName) -> model.getProperties().stream()
+                        // here is a hack to find matching filename property by finding property of type String/List<String> and of same serializedName
+                        .filter(p -> Objects.equals(serializedName, p.getSerializedName())
+                                && (p.getWireType() == ClassType.STRING || (p.getWireType() instanceof ListType && (((ListType) p.getWireType()).getElementType() == ClassType.STRING))))
+                        .findFirst();
+
         // serialize model for multipart/form-data
         StringBuilder builder = new StringBuilder().append("new MultipartFormDataHelper(requestOptions)");
         Set<String> filePropertySerializedNames = new HashSet<>();
@@ -620,23 +641,29 @@ abstract class ConvenienceMethodTemplateBase {
                 String serializedName = property.getSerializedName();
                 filePropertySerializedNames.add(serializedName);
 
-                // find corresponding filename property
-                String filenameExpression;
-                Optional<ClientModelProperty> filenameProperty = model.getProperties().stream()
-                        // here is a hack to find matching filename property by finding property of type String and of same serializedName
-                        .filter(p -> p.getWireType() == ClassType.STRING && Objects.equals(serializedName, p.getSerializedName()))
-                        .findFirst();
-                if (filenameProperty.isPresent()) {
-                    filenameExpression = name + "." + filenameProperty.get().getGetterName() + "()";
-                } else {
-                    filenameExpression = ClassType.STRING.defaultValueExpression(property.getSerializedName());
-                }
+                String filenameExpression = findFileNameProperty.apply(serializedName)
+                        .map(clientModelProperty -> name + "." + clientModelProperty.getGetterName() + "()")
+                        .orElse(ClassType.STRING.defaultValueExpression(property.getSerializedName()));
 
                 builder.append(String.format(
                         ".serializeFileField(%1$s, %2$s.%3$s(), %4$s)",
                         ClassType.STRING.defaultValueExpression(property.getSerializedName()),
-                        name,
-                        property.getGetterName(),
+                        name, property.getGetterName(),
+                        filenameExpression
+                ));
+            } else if (property.getWireType() instanceof ListType && ((ListType) property.getWireType()).getElementType() == ClassType.BINARY_DATA) {
+                // application/octet-stream, multiple files
+                String serializedName = property.getSerializedName();
+                filePropertySerializedNames.add(serializedName);
+
+                String filenameExpression = findFileNameProperty.apply(serializedName)
+                        .map(clientModelProperty -> name + "." + clientModelProperty.getGetterName() + "()")
+                        .orElse("null");
+
+                builder.append(String.format(
+                        ".serializeFileFields(%1$s, %2$s.%3$s(), %4$s)",
+                        ClassType.STRING.defaultValueExpression(property.getSerializedName()),
+                        name, property.getGetterName(),
                         filenameExpression
                 ));
             } else if (filePropertySerializedNames.contains(property.getSerializedName())) {
@@ -698,6 +725,22 @@ abstract class ConvenienceMethodTemplateBase {
                 .filter(p -> !p.isConstant() && !p.isFromClient())
                 .map(p -> new MethodParameter(proxyMethodParameterByClientParameterName.get(p.getName()), p))
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * Writes the expression to convert a convenience parameter to a protocol parameter and wrap it in JsonMergePatchHelper.
+     * @param javaBlock
+     * @param convenientParameterTypeName
+     * @param convenientParameterName
+     * @param expression
+     * @return the name of the variable that holds the converted parameter
+     */
+    private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String convenientParameterTypeName, String convenientParameterName, String expression) {
+            String variableName = convenientParameterName + "InBinaryData";
+            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
+            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromBytes(%2$s.toBytes());", variableName, expression)); // BinaryData.fromObject() will not fire serialization, use toBytes() to fire serialization
+            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
+            return variableName;
     }
 
     protected static class MethodParameter {

@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -64,15 +66,18 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             // Request body
             Set<IType> typesInJavadoc = new HashSet<>();
 
-            boolean isBodyParamRequired = clientMethod.getProxyMethod().getAllParameters()
+            Optional<ProxyMethodParameter> bodyParameter = clientMethod.getProxyMethod().getAllParameters()
                     .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
-                            .map(ProxyMethodParameter::isRequired).findFirst().orElse(false);
+                    .findFirst();
 
-            clientMethod.getProxyMethod().getAllParameters()
-                    .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
-                    .map(ProxyMethodParameter::getRawType)
-                    .findFirst()
-                    .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc, isBodyParamRequired));
+            if (bodyParameter.isPresent()) {
+                ClientModel model = ClientModelUtil.getClientModel(bodyParameter.get().getRawType().toString());
+                if (model == null || !model.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
+                    // do not generate JSON schema for Multipart request body
+                    boolean isBodyParamRequired = bodyParameter.map(ProxyMethodParameter::isRequired).orElse(false);
+                    bodyParameter.map(ProxyMethodParameter::getRawType).ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc, isBodyParamRequired));
+                }
+            }
 
             // Response body
             IType responseBodyType;

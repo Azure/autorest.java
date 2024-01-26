@@ -21,7 +21,7 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
      * Property
      */
     @Generated
-    private BooleanLiteralProperty1 property;
+    private BooleanLiteralPropertyProperty property;
 
     /**
      * Creates an instance of BooleanLiteralProperty class.
@@ -36,7 +36,7 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
      * @return the property value.
      */
     @Generated
-    public BooleanLiteralProperty1 getProperty() {
+    public BooleanLiteralPropertyProperty getProperty() {
         return this.property;
     }
 
@@ -47,7 +47,7 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
      * @return the BooleanLiteralProperty object itself.
      */
     @Generated
-    public BooleanLiteralProperty setProperty(BooleanLiteralProperty1 property) {
+    public BooleanLiteralProperty setProperty(BooleanLiteralPropertyProperty property) {
         this.property = property;
         return this;
     }
@@ -76,7 +76,7 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
 
                 if ("property".equals(fieldName)) {
                     deserializedBooleanLiteralProperty.property
-                        = BooleanLiteralProperty1.fromBoolean(reader.getBoolean());
+                        = BooleanLiteralPropertyProperty.fromBoolean(reader.getBoolean());
                 } else {
                     reader.skipChildren();
                 }

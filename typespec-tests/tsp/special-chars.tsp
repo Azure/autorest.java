@@ -4,7 +4,6 @@ using TypeSpec.Http;
 
 @service({
   title: "SpecialChars",
-  version: "1.0.0",
 })
 namespace Cadl.SpecialChars;
 

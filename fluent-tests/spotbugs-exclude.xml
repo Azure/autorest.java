@@ -15,4 +15,8 @@
     <Package name="com.azure.mgmtlitetest.mediaservices.models"/>
     <Bug pattern="NM_CONFUSING"/>
   </Match>
+
+  <Match>
+    <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,PI_DO_NOT_REUSE_PUBLIC_IDENTIFIERS_CLASS_NAMES"/>
+  </Match>
 </FindBugsFilter>

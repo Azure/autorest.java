@@ -1,15 +1,16 @@
 import "@typespec/rest";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Foundations;
+using Azure.ClientGenerator.Core;
 
 @summary("summary of Naming")
 @doc("description of Naming")
 @service({
   title: "Naming",
-  version: "1.0.0",
 })
 namespace Cadl.Naming;
 
@@ -53,6 +54,10 @@ model Data {
 
 model BytesData extends Data {
   kind: "bytes";
+
+  @clientName("dataAsBytes")
+  @projectedName("json", "data_bytes")
+  @projectedName("client", "noeffect")
   data: bytes;
 }
 
@@ -102,7 +107,7 @@ interface NamingOp {
   @post
   post(...Request): Response | ErrorResponse;
 
-  getAnonymouse(): {
+  getAnonymous(): {
     name: string;
   };
 }

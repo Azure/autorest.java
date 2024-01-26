@@ -7,7 +7,6 @@ using Azure.Core.Foundations;
 
 @service({
   title: "ErrorModel",
-  version: "1.0.0",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.ErrorModel;

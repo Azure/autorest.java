@@ -1,5 +1,24 @@
 # Release History
 
+## 0.13.0 (2024-01-25)
+
+Compatible with compiler 0.52.
+
+- Supported `@clientName` from "@azure-tools/typespec-client-generator-core".
+- Supported `@flattenProperty` from "@azure-tools/typespec-client-generator-core".
+
+## 0.12.3 (2024-01-22)
+
+Compatible with compiler 0.51.
+
+- (Preview) Supported generating SDK from management-plane TypeSpec (`@armProviderNamespace`).
+
+## 0.12.2 (2024-01-09)
+
+Compatible with compiler 0.51.
+
+- Supported convenience API for "application/merge-patch+json" (basic functionality), only available when stream-style-serialization is enabled.
+
 ## 0.12.1 (2023-12-18)
 
 Compatible with compiler 0.51.

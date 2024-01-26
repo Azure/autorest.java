@@ -11,12 +11,12 @@ public enum UnionIntLiteralPropertyProperty {
     /**
      * Enum value 42.
      */
-    FORTY_TWO(42L),
+    FOUR_TWO(42L),
 
     /**
      * Enum value 43.
      */
-    FORTY_THREE(43L);
+    FOUR_THREE(43L);
 
     /**
      * The actual serialized value for a UnionIntLiteralPropertyProperty instance.

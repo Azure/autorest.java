@@ -4,7 +4,7 @@
 package com.type.property.optional;
 
 import com.type.property.optional.models.StringLiteralProperty;
-import com.type.property.optional.models.StringLiteralProperty1;
+import com.type.property.optional.models.StringLiteralPropertyProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +14,7 @@ public class StringLiteralClientTests {
     @Test
     public void getAll() {
         StringLiteralProperty stringLiteralProperty = client.getAll();
-        Assertions.assertEquals(StringLiteralProperty1.HELLO, stringLiteralProperty.getProperty());
+        Assertions.assertEquals(StringLiteralPropertyProperty.HELLO, stringLiteralProperty.getProperty());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class StringLiteralClientTests {
     @Test
     public void putAll() {
         StringLiteralProperty stringLiteralProperty = new StringLiteralProperty();
-        stringLiteralProperty.setProperty(StringLiteralProperty1.HELLO);
+        stringLiteralProperty.setProperty(StringLiteralPropertyProperty.HELLO);
         client.putAll(stringLiteralProperty);
     }
 

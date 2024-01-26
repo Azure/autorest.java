@@ -3,12 +3,10 @@
 package com.azure.autorest.postprocessor.implementation;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.google.googlejavaformat.java.FormatterException;
 import com.google.googlejavaformat.java.RemoveUnusedImports;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jdt.internal.compiler.env.IModule;
-import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.Document;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.text.edits.TextEdit;
@@ -52,8 +50,8 @@ public final class CodeFormatterUtil {
      */
     private static Map<String, String> loadEclipseSettings() throws Exception {
         DocumentBuilder documentBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-        org.w3c.dom.Document document = documentBuilder.parse(
-            CodeFormatterUtil.class.getClassLoader().getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"));
+        org.w3c.dom.Document document = documentBuilder.parse(CodeFormatterUtil.class.getClassLoader()
+            .getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"));
 
         NodeList formatterSettingXml = document.getElementsByTagName("setting");
         Map<String, String> formatterSettings = new HashMap<>();
@@ -72,12 +70,11 @@ public final class CodeFormatterUtil {
      * @param file The file to remove unused imports from.
      * @return The file with unused imports removed.
      */
-    private static String removeUnusedImports(String file) throws FormatterException {
+    private static String removeUnusedImports(String file) throws Exception {
         return RemoveUnusedImports.removeUnusedImports(file);
     }
 
-    private static String formatCode(String file, String fileName, CodeFormatter codeFormatter)
-        throws BadLocationException {
+    private static String formatCode(String file, String fileName, CodeFormatter codeFormatter) throws Exception {
         IDocument doc = new Document(file);
 
         int kind = IModule.MODULE_INFO_JAVA.equals(fileName)

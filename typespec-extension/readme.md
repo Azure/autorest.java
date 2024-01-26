@@ -4,7 +4,7 @@ Install [Node.js](https://nodejs.org/en/download/) 16 or above. (Verify by `node
 
 Install [Java](https://docs.microsoft.com/java/openjdk/download) 11 or above. (Verify by `java --version`)
 
-Install [TypeSpec](https://github.com/microsoft/typespec/) 0.51.
+Install [TypeSpec](https://github.com/microsoft/typespec/) 0.52.
 
 # Initialize TypeSpec Project
 
@@ -61,8 +61,8 @@ options:
     generate-samples: true
     generate-tests: true
     examples-directory: "./examples"
-    namer: false
     partial-update: false
+    models-subpackage: "models"
     custom-types-subpackage: "implementation.models"
     custom-types: InternalModel1,InternalModel2
 ```

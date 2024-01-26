@@ -139,7 +139,7 @@ public final class RequestBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> base64Url(@HeaderParam("accept") String accept,
+        Mono<Response<Void>> base64url(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/body/request/base64url")
@@ -148,7 +148,7 @@ public final class RequestBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> base64UrlSync(@HeaderParam("accept") String accept,
+        Response<Void> base64urlSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData value, RequestOptions requestOptions, Context context);
     }
 
@@ -343,7 +343,7 @@ public final class RequestBodiesImpl {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -360,13 +360,13 @@ public final class RequestBodiesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponseAsync(BinaryData value, RequestOptions requestOptions) {
+    public Mono<Response<Void>> base64urlWithResponseAsync(BinaryData value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.base64Url(accept, value, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64url(accept, value, requestOptions, context));
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * <p>
      * <strong>Request Body Schema</strong>
      * </p>
@@ -383,8 +383,8 @@ public final class RequestBodiesImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(BinaryData value, RequestOptions requestOptions) {
+    public Response<Void> base64urlWithResponse(BinaryData value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.base64UrlSync(accept, value, requestOptions, Context.NONE);
+        return service.base64urlSync(accept, value, requestOptions, Context.NONE);
     }
 }
