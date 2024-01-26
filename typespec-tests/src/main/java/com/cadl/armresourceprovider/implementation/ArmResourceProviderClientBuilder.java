@@ -20,6 +20,22 @@ import java.time.Duration;
 @ServiceClientBuilder(serviceClients = { ArmResourceProviderClientImpl.class })
 public final class ArmResourceProviderClientBuilder {
     /*
+     * Server parameter
+     */
+    private String endpoint;
+
+    /**
+     * Sets Server parameter.
+     * 
+     * @param endpoint the endpoint value.
+     * @return the ArmResourceProviderClientBuilder.
+     */
+    public ArmResourceProviderClientBuilder endpoint(String endpoint) {
+        this.endpoint = endpoint;
+        return this;
+    }
+
+    /*
      * The ID of the target subscription.
      */
     private String subscriptionId;
@@ -113,7 +129,7 @@ public final class ArmResourceProviderClientBuilder {
         SerializerAdapter localSerializerAdapter = (serializerAdapter != null) ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ArmResourceProviderClientImpl client = new ArmResourceProviderClientImpl(localPipeline, localSerializerAdapter,
-            localDefaultPollInterval, localEnvironment, this.subscriptionId);
+            localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);
         return client;
     }
 }
