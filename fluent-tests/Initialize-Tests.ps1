@@ -1,10 +1,6 @@
-# Add Java 11 to path on DevOps
-Write-Host "java11 home dir: $env:JAVA_HOME_11_X64"
-Write-Host "add java11 to path"
-$env:PATH = "$env:JAVA_HOME_11_X64\bin;$env:PATH"
-
-# Print Java version
-Invoke-Expression -Command "java -version"
+param (
+    [int] $Parallelization = [Environment]::ProcessorCount - 1
+)
 
 # Regenerate code
 Remove-Item -Path ./src/main/java/com/azure/mgmttest -Recurse -Force | Out-Null
@@ -18,6 +14,32 @@ $FLUENT_ARGUMENTS="$COMMON_ARGUMENTS --fluent"
 $FLUENTLITE_ARGUMENTS="$COMMON_ARGUMENTS --fluent=lite --generate-samples --generate-tests"
 
 $ExitCode = 0
+
+$generateScript = {
+    $generateOutput = Invoke-Expression "autorest $_"
+    $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
+
+    if ($LASTEXITCODE -ne 0) {
+        Write-Host "
+========================
+autorest $_
+========================
+$([String]::Join("`n", $generateOutput))
+        "
+    } else {
+        Write-Host "
+========================
+autorest $_
+========================
+SUCCEEDED
+        "
+    }
+
+    if ($global:ExitCode -ne 0) {
+        exit $global:ExitCode
+    }
+}
+
 function singleThreadGenerate($arguments) {
     Write-Host "
 ========================
@@ -34,79 +56,77 @@ autorest $arguments
     }
 }
 
-# fluent premium
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources")
+$job = @(
+    # fluent premium
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/Microsoft.Resources/stable/2019-08-01/resources.json --namespace=com.azure.mgmttest.resources",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.storage.md --namespace=com.azure.mgmttest.storage",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.network.md --namespace=com.azure.mgmttest.network",
 
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.storage.md --namespace=com.azure.mgmttest.storage")
+    # error response that is subclass of ManagementException
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.appservice.md --namespace=com.azure.mgmttest.appservice",
 
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.network.md --namespace=com.azure.mgmttest.network")
+    # multiple inheritance
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json --namespace=com.azure.mgmttest.cosmos",
 
-# error response that is subclass of ManagementException
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS ./swagger/readme.appservice.md --namespace=com.azure.mgmttest.appservice")
+    # flatten payload
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute",
 
-# multiple inheritance
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cosmos-db/resource-manager/Microsoft.DocumentDB/stable/2019-12-12/cosmos-db.json --namespace=com.azure.mgmttest.cosmos")
+    # error response that not conform to ARM
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization",
 
-# flatten payload
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/CloudserviceRP/stable/2021-03-01/cloudService.json --namespace=com.azure.mgmttest.compute")
+    # client model flatten at autorest.java
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/Microsoft.Network/stable/2021-02-01/networkWatcher.json --namespace=com.azure.mgmttest.networkwatcher",
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cdn/resource-manager/Microsoft.Cdn/stable/2020-09-01/afdx.json --namespace=com.azure.mgmttest.afdx",
 
-# error response that not conform to ARM
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/graphrbac/data-plane/Microsoft.GraphRbac/stable/1.6/graphrbac.json --namespace=com.azure.mgmttest.authorization")
+    # nested x-ms-flatten from superclass in ExtendedProduct
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack",
 
-# client model flatten at autorest.java
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/Microsoft.Compute/GalleryRP/stable/2020-09-30/sharedGallery.json --namespace=com.azure.mgmttest.computegallery")
+    # conflict property name from 2 x-ms-flatten in LabDetails and LabProperties
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/education/resource-manager/Microsoft.Education/preview/2021-12-01-preview/education.json --namespace=com.azure.mgmttest.education",
 
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/Microsoft.Network/stable/2021-02-01/networkWatcher.json --namespace=com.azure.mgmttest.networkwatcher")
+    # do not flatten if polymorphic in DevicePropertiesFormat
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork",
 
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/cdn/resource-manager/Microsoft.Cdn/stable/2020-09-01/afdx.json --namespace=com.azure.mgmttest.afdx")
+    # flatten the empty model which has non-empty parent model
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor",
 
-# nested x-ms-flatten from superclass in ExtendedProduct
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/azurestack/resource-manager/Microsoft.AzureStack/preview/2020-06-01-preview/Product.json --namespace=com.azure.mgmttest.azurestack")
+    # extract systemData from Resource
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/29f3116d3ce31f2125d1e2cfb92d6511fcb01c41/specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json --java.namespace=com.azure.mgmttest.postgresqlhsc",
 
-# conflict property name from 2 x-ms-flatten in LabDetails and LabProperties
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/education/resource-manager/Microsoft.Education/preview/2021-12-01-preview/education.json --namespace=com.azure.mgmttest.education")
+    # swagger customized Resource and ProxyResource
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager",
 
-# do not flatten if polymorphic in DevicePropertiesFormat
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/hybridnetwork/resource-manager/Microsoft.HybridNetwork/stable/2021-05-01/device.json --namespace=com.azure.mgmttest.hybridnetwork")
+    # ErrorDetails shared in exception and output
+    "--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothub",
 
-# flatten the empty model which has non-empty parent model
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/monitor/resource-manager/Microsoft.Insights/preview/2021-09-01-preview/dataCollectionRules_API.json --namespace=com.azure.mgmttest.monitor")
+    # fluent lite
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-resources-2021-01 --java.namespace=com.azure.mgmtlitetest.resources",
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/da0cfefaa0e6c237e1e3819f1cb2e11d7606878d/specification/storage/resource-manager/readme.md --tag=package-2021-01 --java.namespace=com.azure.mgmtlitetest.storage",
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/advisor/resource-manager/readme.md --tag=package-2020-01 --java.namespace=com.azure.mgmtlitetest.advisor",
 
-# extract systemData from Resource
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/29f3116d3ce31f2125d1e2cfb92d6511fcb01c41/specification/postgresqlhsc/resource-manager/Microsoft.DBforPostgreSQL/stable/2022-11-08/postgresqlhsc.json --java.namespace=com.azure.mgmttest.postgresqlhsc")
+    # pageable + LRO
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/mediaservices/resource-manager/readme.md --tag=package-account-2023-01 --java.namespace=com.azure.mgmtlitetest.mediaservices",
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-policy-2020-09 --java.namespace=com.azure.mgmtlitetest.policy",
 
-# swagger customized Resource and ProxyResource
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://github.com/Azure/azure-rest-api-specs/blob/main/specification/trafficmanager/resource-manager/Microsoft.Network/stable/2018-08-01/trafficmanager.json --namespace=com.azure.mgmttest.trafficmanager")
+    # UUID subscriptionId
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0a2eb0d14f5132fcfd30222d584acf67713332ea/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2022-12-01/containerregistry.json --namespace=com.azure.mgmtlitetest.containerregistrylite",
 
-# ErrorDetails shared in exception and output
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENT_ARGUMENTS --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/8fa9b5051129dd4808c9be1f5b753af226b044db/specification/iothub/resource-manager/Microsoft.Devices/stable/2023-06-30/iothub.json --namespace=com.azure.mgmttest.iothub")
+    # multiple inheritance with conflict field
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/readme.md --tag=package-preview-2021-05 --java.namespace=com.azure.mgmtlitetest.botservice",
 
-# fluent lite
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --pom-file=pom_generated_resources.xml https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-resources-2021-01 --java.namespace=com.azure.mgmtlitetest.resources")
+    # model inherit ErrorResponse
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/196886564583ff59186bd0ef44d923120aaf3f78/specification/managednetworkfabric/resource-manager/Microsoft.ManagedNetworkFabric/stable/2023-06-15/NetworkFabrics.json --java.namespace=com.azure.mgmtlitetest.managednetworkfabric",
 
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/da0cfefaa0e6c237e1e3819f1cb2e11d7606878d/specification/storage/resource-manager/readme.md --tag=package-2021-01 --java.namespace=com.azure.mgmtlitetest.storage")
+    # schema clean-up
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/schema-cleanup.json --java.namespace=com.azure.mgmtlitetest.schemacleanup"
 
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/advisor/resource-manager/readme.md --tag=package-2020-01 --java.namespace=com.azure.mgmtlitetest.advisor")
+    # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network"
+    # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
+) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
-# pageable + LRO
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/mediaservices/resource-manager/readme.md --tag=package-account-2023-01 --java.namespace=com.azure.mgmtlitetest.mediaservices")
-
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/resources/resource-manager/readme.md --tag=package-policy-2020-09 --java.namespace=com.azure.mgmtlitetest.policy")
-
-# UUID subscriptionId
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/0a2eb0d14f5132fcfd30222d584acf67713332ea/specification/containerregistry/resource-manager/Microsoft.ContainerRegistry/stable/2022-12-01/containerregistry.json --namespace=com.azure.mgmtlitetest.containerregistrylite")
-
-# multiple inheritance with conflict field
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/botservice/resource-manager/readme.md --tag=package-preview-2021-05 --java.namespace=com.azure.mgmtlitetest.botservice")
-
-# model inherit ErrorResponse
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/196886564583ff59186bd0ef44d923120aaf3f78/specification/managednetworkfabric/resource-manager/Microsoft.ManagedNetworkFabric/stable/2023-06-15/NetworkFabrics.json --java.namespace=com.azure.mgmtlitetest.managednetworkfabric")
-
-# schema clean-up
-singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/schema-cleanup.json --java.namespace=com.azure.mgmtlitetest.schemacleanup")
-
-# singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network")
-# singleThreadGenerate("--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute")
+$job | Wait-Job -Timeout 360
+$job | Receive-Job
 
 # delete module-info as fluent-test is on java8
 Remove-Item -Path ./src/main/java/module-info.java -Force | Out-Null
