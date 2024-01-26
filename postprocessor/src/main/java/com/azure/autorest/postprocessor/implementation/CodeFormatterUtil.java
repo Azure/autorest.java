@@ -3,6 +3,8 @@
 package com.azure.autorest.postprocessor.implementation;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
+import com.google.googlejavaformat.java.ImportOrderer;
+import com.google.googlejavaformat.java.JavaFormatterOptions;
 import com.google.googlejavaformat.java.RemoveUnusedImports;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
@@ -71,7 +73,8 @@ public final class CodeFormatterUtil {
      * @return The file with unused imports removed.
      */
     private static String removeUnusedImports(String file) throws Exception {
-        return RemoveUnusedImports.removeUnusedImports(file);
+        return RemoveUnusedImports.removeUnusedImports(
+            ImportOrderer.reorderImports(file, JavaFormatterOptions.Style.GOOGLE));
     }
 
     private static String formatCode(String file, String fileName, CodeFormatter codeFormatter) throws Exception {

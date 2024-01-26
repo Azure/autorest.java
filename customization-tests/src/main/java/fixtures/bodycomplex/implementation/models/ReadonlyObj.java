@@ -4,10 +4,9 @@
 
 package fixtures.bodycomplex.implementation.models;
 
-import java.util.UUID;
-
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.UUID;
 
 /**
  * The ReadonlyObj model.
