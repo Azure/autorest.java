@@ -41,6 +41,20 @@ import reactor.core.publisher.Mono;
 @ServiceClient(builder = ArmResourceProviderClientBuilder.class)
 public final class ArmResourceProviderClientImpl implements ArmResourceProviderClient {
     /**
+     * Server parameter.
+     */
+    private final String endpoint;
+
+    /**
+     * Gets Server parameter.
+     * 
+     * @return the endpoint value.
+     */
+    public String getEndpoint() {
+        return this.endpoint;
+    }
+
+    /**
      * Version parameter.
      */
     private final String apiVersion;
@@ -159,13 +173,15 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param defaultPollInterval The default poll interval for long-running operation.
      * @param environment The Azure environment.
+     * @param endpoint Server parameter.
      * @param subscriptionId The ID of the target subscription.
      */
     ArmResourceProviderClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        Duration defaultPollInterval, AzureEnvironment environment, String subscriptionId) {
+        Duration defaultPollInterval, AzureEnvironment environment, String endpoint, String subscriptionId) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.defaultPollInterval = defaultPollInterval;
+        this.endpoint = endpoint;
         this.subscriptionId = subscriptionId;
         this.apiVersion = "2023-11-01";
         this.childResourcesInterfaces = new ChildResourcesInterfacesClientImpl(this);

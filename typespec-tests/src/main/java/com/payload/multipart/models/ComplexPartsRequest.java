@@ -4,15 +4,14 @@
 
 package com.payload.multipart.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.BinaryData;
+import com.azure.core.annotation.Immutable;
 import java.util.List;
 
 /**
  * The ComplexPartsRequest model.
  */
-@Fluent
+@Immutable
 public final class ComplexPartsRequest {
     /*
      * The id property.
@@ -30,13 +29,7 @@ public final class ComplexPartsRequest {
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
-
-    /*
-     * The filename for profileImage
-     */
-    @Generated
-    private String profileImageFilename = "profileImage";
+    private final ProfileImageFileDetails profileImage;
 
     /*
      * The previousAddresses property.
@@ -48,13 +41,7 @@ public final class ComplexPartsRequest {
      * The pictures property.
      */
     @Generated
-    private final List<BinaryData> pictures;
-
-    /*
-     * The filenames for pictures
-     */
-    @Generated
-    private List<String> picturesFilenames;
+    private final List<PicturesFileDetails> pictures;
 
     /**
      * Creates an instance of ComplexPartsRequest class.
@@ -66,8 +53,8 @@ public final class ComplexPartsRequest {
      * @param pictures the pictures value to set.
      */
     @Generated
-    public ComplexPartsRequest(String id, Address address, BinaryData profileImage, List<Address> previousAddresses,
-        List<BinaryData> pictures) {
+    public ComplexPartsRequest(String id, Address address, ProfileImageFileDetails profileImage,
+        List<Address> previousAddresses, List<PicturesFileDetails> pictures) {
         this.id = id;
         this.address = address;
         this.profileImage = profileImage;
@@ -101,30 +88,8 @@ public final class ComplexPartsRequest {
      * @return the profileImage value.
      */
     @Generated
-    public BinaryData getProfileImage() {
+    public ProfileImageFileDetails getProfileImage() {
         return this.profileImage;
-    }
-
-    /**
-     * Get the profileImageFilename property: The filename for profileImage.
-     * 
-     * @return the profileImageFilename value.
-     */
-    @Generated
-    public String getProfileImageFilename() {
-        return this.profileImageFilename;
-    }
-
-    /**
-     * Set the profileImageFilename property: The filename for profileImage.
-     * 
-     * @param profileImageFilename the profileImageFilename value to set.
-     * @return the ComplexPartsRequest object itself.
-     */
-    @Generated
-    public ComplexPartsRequest setProfileImageFilename(String profileImageFilename) {
-        this.profileImageFilename = profileImageFilename;
-        return this;
     }
 
     /**
@@ -143,29 +108,7 @@ public final class ComplexPartsRequest {
      * @return the pictures value.
      */
     @Generated
-    public List<BinaryData> getPictures() {
+    public List<PicturesFileDetails> getPictures() {
         return this.pictures;
-    }
-
-    /**
-     * Get the picturesFilenames property: The filenames for pictures.
-     * 
-     * @return the picturesFilenames value.
-     */
-    @Generated
-    public List<String> getPicturesFilenames() {
-        return this.picturesFilenames;
-    }
-
-    /**
-     * Set the picturesFilenames property: The filenames for pictures.
-     * 
-     * @param picturesFilenames the picturesFilenames value to set.
-     * @return the ComplexPartsRequest object itself.
-     */
-    @Generated
-    public ComplexPartsRequest setPicturesFilenames(List<String> picturesFilenames) {
-        this.picturesFilenames = picturesFilenames;
-        return this;
     }
 }

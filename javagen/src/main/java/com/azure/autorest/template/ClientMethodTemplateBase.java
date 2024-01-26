@@ -3,7 +3,6 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -72,7 +71,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
             if (bodyParameter.isPresent()) {
                 ClientModel model = ClientModelUtil.getClientModel(bodyParameter.get().getRawType().toString());
-                if (model == null || !model.getSerializationFormats().contains(KnownMediaType.MULTIPART.value())) {
+                if (model == null || !ClientModelUtil.isMultipartModel(model)) {
                     // do not generate JSON schema for Multipart request body
                     boolean isBodyParamRequired = bodyParameter.map(ProxyMethodParameter::isRequired).orElse(false);
                     bodyParameter.map(ProxyMethodParameter::getRawType).ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc, isBodyParamRequired));

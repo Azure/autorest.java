@@ -23,6 +23,7 @@ model FormData {
   type: ImageType;
   size: Size;
   image: bytes;
+  file?: bytes[];
 }
 
 @doc("request is binary")

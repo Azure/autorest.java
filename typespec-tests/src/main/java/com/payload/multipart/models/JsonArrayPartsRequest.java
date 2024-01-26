@@ -4,27 +4,20 @@
 
 package com.payload.multipart.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.BinaryData;
+import com.azure.core.annotation.Immutable;
 import java.util.List;
 
 /**
  * The JsonArrayPartsRequest model.
  */
-@Fluent
+@Immutable
 public final class JsonArrayPartsRequest {
     /*
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
-
-    /*
-     * The filename for profileImage
-     */
-    @Generated
-    private String profileImageFilename = "profileImage";
+    private final ProfileImageFileDetails profileImage;
 
     /*
      * The previousAddresses property.
@@ -39,7 +32,7 @@ public final class JsonArrayPartsRequest {
      * @param previousAddresses the previousAddresses value to set.
      */
     @Generated
-    public JsonArrayPartsRequest(BinaryData profileImage, List<Address> previousAddresses) {
+    public JsonArrayPartsRequest(ProfileImageFileDetails profileImage, List<Address> previousAddresses) {
         this.profileImage = profileImage;
         this.previousAddresses = previousAddresses;
     }
@@ -50,30 +43,8 @@ public final class JsonArrayPartsRequest {
      * @return the profileImage value.
      */
     @Generated
-    public BinaryData getProfileImage() {
+    public ProfileImageFileDetails getProfileImage() {
         return this.profileImage;
-    }
-
-    /**
-     * Get the profileImageFilename property: The filename for profileImage.
-     * 
-     * @return the profileImageFilename value.
-     */
-    @Generated
-    public String getProfileImageFilename() {
-        return this.profileImageFilename;
-    }
-
-    /**
-     * Set the profileImageFilename property: The filename for profileImage.
-     * 
-     * @param profileImageFilename the profileImageFilename value to set.
-     * @return the JsonArrayPartsRequest object itself.
-     */
-    @Generated
-    public JsonArrayPartsRequest setProfileImageFilename(String profileImageFilename) {
-        this.profileImageFilename = profileImageFilename;
-        return this;
     }
 
     /**

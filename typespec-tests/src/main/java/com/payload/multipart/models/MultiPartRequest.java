@@ -4,14 +4,13 @@
 
 package com.payload.multipart.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.BinaryData;
+import com.azure.core.annotation.Immutable;
 
 /**
  * The MultiPartRequest model.
  */
-@Fluent
+@Immutable
 public final class MultiPartRequest {
     /*
      * The id property.
@@ -23,13 +22,7 @@ public final class MultiPartRequest {
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
-
-    /*
-     * The filename for profileImage
-     */
-    @Generated
-    private String profileImageFilename = "profileImage";
+    private final ProfileImageFileDetails profileImage;
 
     /**
      * Creates an instance of MultiPartRequest class.
@@ -38,7 +31,7 @@ public final class MultiPartRequest {
      * @param profileImage the profileImage value to set.
      */
     @Generated
-    public MultiPartRequest(String id, BinaryData profileImage) {
+    public MultiPartRequest(String id, ProfileImageFileDetails profileImage) {
         this.id = id;
         this.profileImage = profileImage;
     }
@@ -59,29 +52,7 @@ public final class MultiPartRequest {
      * @return the profileImage value.
      */
     @Generated
-    public BinaryData getProfileImage() {
+    public ProfileImageFileDetails getProfileImage() {
         return this.profileImage;
-    }
-
-    /**
-     * Get the profileImageFilename property: The filename for profileImage.
-     * 
-     * @return the profileImageFilename value.
-     */
-    @Generated
-    public String getProfileImageFilename() {
-        return this.profileImageFilename;
-    }
-
-    /**
-     * Set the profileImageFilename property: The filename for profileImage.
-     * 
-     * @param profileImageFilename the profileImageFilename value to set.
-     * @return the MultiPartRequest object itself.
-     */
-    @Generated
-    public MultiPartRequest setProfileImageFilename(String profileImageFilename) {
-        this.profileImageFilename = profileImageFilename;
-        return this;
     }
 }
