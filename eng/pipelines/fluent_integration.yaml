@@ -44,7 +44,7 @@ jobs:
     inputs:
       mavenPomFile: pom.xml
       goals: 'clean install'
-      options: '$(DefaultOptions) -P local,testFluent -T 1C -DskipTests'
+      options: '$(DefaultOptions) -P local -T 1C -DskipTests'
       mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
       javaHomeOption: 'JDKVersion'
       jdkVersionOption: $(JavaVersion)
