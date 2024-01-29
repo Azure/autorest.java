@@ -651,68 +651,71 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // In the future this can be enhanced to switch if the first property is the discriminator field and to use
             // a Map to contain all properties found while searching for the discriminator field.
             // TODO (alzimmer): Need to handle non-string wire type discriminator types.
-            methodBlock.line(String.join("\n",
-                "String discriminatorValue = null;",
-                "JsonReader readerToUse = reader.bufferObject();",
-                "",
-                "readerToUse.nextToken(); // Prepare for reading",
-                "while (readerToUse.nextToken() != JsonToken.END_OBJECT) {",
-                "    String " + fieldNameVariableName + " = readerToUse.getFieldName();",
-                "    readerToUse.nextToken();",
-                "    if (\"" + discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")) {",
-                "        discriminatorValue = readerToUse.getString();",
-                "        break;",
-                "    } else {",
-                "        readerToUse.skipChildren();",
-                "    }",
-                "}"
-            ));
+            methodBlock.line("String discriminatorValue = null;");
+            methodBlock.tryBlock("JsonReader readerToUse = reader.bufferObject()", tryStatement -> {
+                tryStatement.line("readerToUse.nextToken(); // Prepare for reading");
+                tryStatement.line("while (readerToUse.nextToken() != JsonToken.END_OBJECT) {");
+                tryStatement.increaseIndent();
+                tryStatement.line("String " + fieldNameVariableName + " = readerToUse.getFieldName();");
+                tryStatement.line("readerToUse.nextToken();");
+                tryStatement.ifBlock(
+                    "\"" + discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")",
+                    ifStatement -> {
+                        ifStatement.line("discriminatorValue = readerToUse.getString();");
+                        ifStatement.line("break;");
+                    })
+                    .elseBlock(elseBlock -> elseBlock.line("readerToUse.skipChildren();"));
+                tryStatement.decreaseIndent();
+                tryStatement.line("}");
 
-            methodBlock.line("// Use the discriminator value to determine which subtype should be deserialized.");
+                tryStatement.line("// Use the discriminator value to determine which subtype should be deserialized.");
 
-            // Add a throw statement if the discriminator value didn't match anything known.
-            StringBuilder exceptionMessage = new StringBuilder("Discriminator field '")
-                .append(discriminatorProperty.getSerializedName())
-                .append("' didn't match one of the expected values ");
+                // Add a throw statement if the discriminator value didn't match anything known.
+                StringBuilder exceptionMessage = new StringBuilder("Discriminator field '").append(
+                    discriminatorProperty.getSerializedName()).append("' didn't match one of the expected values ");
 
-            if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
-                exceptionMessage.append("'").append(propertiesManager.getExpectedDiscriminator()).append("'");
-            }
-
-            // Add deserialization for the super type itself.
-            JavaIfBlock ifBlock = (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) ? null
-                : methodBlock.ifBlock("discriminatorValue == null || \"" + propertiesManager.getExpectedDiscriminator()
-                    + "\".equals(discriminatorValue)",
-                ifStatement -> ifStatement.methodReturn("fromJsonKnownDiscriminator(readerToUse)"));
-
-            // Add deserialization for all child types.
-            List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
-            for (int i = 0; i < childTypes.size(); i++) {
-                ClientModel childType = childTypes.get(i);
-
-                ifBlock = ifOrElseIf(methodBlock, ifBlock, "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
-                    ifStatement -> ifStatement.methodReturn(childType.getName() + (isSuperTypeWithDiscriminator(childType)
-                        ? ".fromJsonKnownDiscriminator(readerToUse.reset())"
-                        : ".fromJson(readerToUse.reset())")));
-
-                if (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue()) && i == 0) {
-                    exceptionMessage.append("'").append(childType.getSerializedName()).append("'");
-                } else if (i < childTypes.size() - 1) {
-                    exceptionMessage.append(", '").append(childType.getSerializedName()).append("'");
-                } else {
-                    ((childTypes.size() == 1) ? exceptionMessage.append(" or '") : exceptionMessage.append(", or '"))
-                        .append(childType.getSerializedName())
-                        .append("'. It was: '\" + discriminatorValue + \"'.");
+                if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
+                    exceptionMessage.append("'").append(propertiesManager.getExpectedDiscriminator()).append("'");
                 }
-            }
 
-            // TODO (alzimmer): Add a log message if the discriminator didn't match anything that was expected.
-            if (ifBlock == null) {
-                methodBlock.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())");
-            } else {
-                ifBlock.elseBlock(elseBlock ->
-                    elseBlock.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())"));
-            }
+                // Add deserialization for the super type itself.
+                JavaIfBlock ifBlock = (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) ? null
+                    : tryStatement.ifBlock(
+                        "discriminatorValue == null || \"" + propertiesManager.getExpectedDiscriminator()
+                            + "\".equals(discriminatorValue)",
+                        ifStatement -> ifStatement.methodReturn("fromJsonKnownDiscriminator(readerToUse)"));
+
+                // Add deserialization for all child types.
+                List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
+                for (int i = 0; i < childTypes.size(); i++) {
+                    ClientModel childType = childTypes.get(i);
+
+                    ifBlock = ifOrElseIf(tryStatement, ifBlock,
+                        "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
+                        ifStatement -> ifStatement.methodReturn(
+                            childType.getName() + (isSuperTypeWithDiscriminator(childType)
+                                ? ".fromJsonKnownDiscriminator(readerToUse.reset())"
+                                : ".fromJson(readerToUse.reset())")));
+
+                    if (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue()) && i == 0) {
+                        exceptionMessage.append("'").append(childType.getSerializedName()).append("'");
+                    } else if (i < childTypes.size() - 1) {
+                        exceptionMessage.append(", '").append(childType.getSerializedName()).append("'");
+                    } else {
+                        ((childTypes.size() == 1) ? exceptionMessage.append(" or '")
+                            : exceptionMessage.append(", or '")).append(childType.getSerializedName())
+                            .append("'. It was: '\" + discriminatorValue + \"'.");
+                    }
+                }
+
+                // TODO (alzimmer): Add a log message if the discriminator didn't match anything that was expected.
+                if (ifBlock == null) {
+                    tryStatement.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())");
+                } else {
+                    ifBlock.elseBlock(
+                        elseBlock -> elseBlock.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())"));
+                }
+            });
         });
 
         readJsonObject(classBlock, propertiesManager, true,

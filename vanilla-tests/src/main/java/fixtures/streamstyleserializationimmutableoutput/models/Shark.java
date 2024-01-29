@@ -144,30 +144,30 @@ public class Shark extends Fish {
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
-            JsonReader readerToUse = reader.bufferObject();
-
-            readerToUse.nextToken(); // Prepare for reading
-            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = readerToUse.getFieldName();
-                readerToUse.nextToken();
-                if ("fishtype".equals(fieldName)) {
-                    discriminatorValue = readerToUse.getString();
-                    break;
-                } else {
-                    readerToUse.skipChildren();
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("fishtype".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
                 }
-            }
-            // Use the discriminator value to determine which subtype should be deserialized.
-            if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
-                return fromJsonKnownDiscriminator(readerToUse);
-            } else if ("sawshark".equals(discriminatorValue)) {
-                return Sawshark.fromJson(readerToUse.reset());
-            } else if ("goblin".equals(discriminatorValue)) {
-                return Goblinshark.fromJson(readerToUse.reset());
-            } else if ("cookiecuttershark".equals(discriminatorValue)) {
-                return Cookiecuttershark.fromJson(readerToUse.reset());
-            } else {
-                return fromJsonKnownDiscriminator(readerToUse.reset());
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
+                    return fromJsonKnownDiscriminator(readerToUse);
+                } else if ("sawshark".equals(discriminatorValue)) {
+                    return Sawshark.fromJson(readerToUse.reset());
+                } else if ("goblin".equals(discriminatorValue)) {
+                    return Goblinshark.fromJson(readerToUse.reset());
+                } else if ("cookiecuttershark".equals(discriminatorValue)) {
+                    return Cookiecuttershark.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
             }
         });
     }
