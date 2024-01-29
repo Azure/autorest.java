@@ -3,10 +3,21 @@ param (
 )
 
 # Regenerate code
-Remove-Item -Path ./src/main/java/com/azure/mgmttest -Recurse -Force | Out-Null
-Remove-Item -Path ./src/main/java/com/azure/mgmtlitetest -Recurse -Force | Out-Null
-Remove-Item -Path ./src/samples -Recurse -Force | Out-Null
-Remove-Item -Path ./src/test/java/com/azure/mgmtlitetest -Recurse -Force | Out-Null
+if (Test-Path ./src/main/java/com/azure/mgmttest) {
+    Remove-Item -Path ./src/main/java/com/azure/mgmttest -Recurse -Force | Out-Null
+}
+
+if (Test-Path ./src/main/java/com/azure/mgmtlitetest) {
+    Remove-Item -Path ./src/main/java/com/azure/mgmtlitetest -Recurse -Force | Out-Null
+}
+
+if (Test-Path ./src/samples) {
+    Remove-Item -Path ./src/samples -Recurse -Force | Out-Null
+}
+
+if (Test-Path ./src/test/java/com/azure/mgmtlitetest) {
+    Remove-Item -Path ./src/test/java/com/azure/mgmtlitetest -Recurse -Force | Out-Null
+}
 
 $AUTOREST_CORE_VERSION="3.9.7"
 $COMMON_ARGUMENTS="--java --use=../ --java.output-folder=./ --modelerfour.additional-checks=false --modelerfour.lenient-model-deduplication=true --azure-arm --java.license-header=MICROSOFT_MIT_SMALL"
@@ -129,6 +140,8 @@ $job | Wait-Job -Timeout 360
 $job | Receive-Job
 
 # delete module-info as fluent-test is on java8
-Remove-Item -Path ./src/main/java/module-info.java -Force | Out-Null
+if (Test-Path ./src/main/java/module-info.java) {
+    Remove-Item -Path ./src/main/java/module-info.java -Force | Out-Null
+}
 
 exit $ExitCode
