@@ -39,21 +39,18 @@ public final class SalmonTests {
                         .asList(
                             new Fish(15.608067f).setSpecies("gbwjzrnf")
                                 .setSiblings(
-                                    Arrays
-                                        .asList(
-                                            new Fish(30.775976f)
-                                                .setSpecies("spemvtzfk")
-                                                .setSiblings(Arrays.asList(new Fish(93.34901f), new Fish(33.460037f),
-                                                    new Fish(16.258835f))),
-                                            new Fish(2.1371305f)
-                                                .setSpecies("xqeofjaeqjhqjba")
-                                                .setSiblings(Arrays.asList(new Fish(53.99528f), new Fish(21.614403f),
-                                                    new Fish(95.46702f), new Fish(48.216724f))),
-                                            new Fish(9.4591675f).setSpecies("ngsntnbybk")
-                                                .setSiblings(Arrays.asList(new Fish(70.90245f), new Fish(49.255276f),
-                                                    new Fish(57.128227f))),
-                                            new Fish(31.060987f).setSpecies("xxwr").setSiblings(Arrays.asList(
-                                                new Fish(72.06065f), new Fish(70.73601f), new Fish(50.07295f)))))))
+                                    Arrays.asList(
+                                        new Fish(30.775976f).setSpecies("spemvtzfk")
+                                            .setSiblings(Arrays.asList(new Fish(93.34901f), new Fish(33.460037f),
+                                                new Fish(16.258835f))),
+                                        new Fish(2.1371305f).setSpecies("xqeofjaeqjhqjba")
+                                            .setSiblings(Arrays.asList(new Fish(53.99528f), new Fish(21.614403f),
+                                                new Fish(95.46702f), new Fish(48.216724f))),
+                                        new Fish(9.4591675f).setSpecies("ngsntnbybk")
+                                            .setSiblings(Arrays.asList(new Fish(70.90245f), new Fish(49.255276f),
+                                                new Fish(57.128227f))),
+                                        new Fish(31.060987f).setSpecies("xxwr").setSiblings(Arrays
+                                            .asList(new Fish(72.06065f), new Fish(70.73601f), new Fish(50.07295f)))))))
                 .setLocation("xzxtheo").setIswild(false);
         model = BinaryData.fromObject(model).toObject(Salmon.class);
         Assertions.assertEquals("vyevcciqi", model.getSpecies());
