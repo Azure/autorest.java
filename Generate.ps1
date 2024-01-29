@@ -5,7 +5,7 @@
 # If 'com.azure.autorest.customization' tests fails, re-install 'customization-base'.
 
 param (
-    [int] $Parallelization = [Environment]::ProcessorCount - 1
+    [int] $Parallelization = [Environment]::ProcessorCount
 )
 
 $AUTOREST_CORE_VERSION = "3.9.7"
