@@ -1,5 +1,5 @@
 param (
-    [int] $Parallelization = [Environment]::ProcessorCount - 1
+    [int] $Parallelization = [Environment]::ProcessorCount
 )
 
 # Regenerate code
