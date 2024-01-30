@@ -66,6 +66,7 @@ interface FlattenOp {
   @post
   sendProjectedName(
     @query id: string,
+
     @encodedName("application/json", "file_id")
     @projectedName("client", "fileIdentifier")
     fileId: string,
