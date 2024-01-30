@@ -6,7 +6,6 @@ package com.azure.autorest;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
-import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
@@ -159,7 +158,7 @@ public class TypeSpecPlugin extends Javagen {
         // MultipartFormDataHelper
         final boolean generateMultipartFormDataHelper = client.getModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
-                .anyMatch(m -> m.getSerializationFormats().contains(KnownMediaType.MULTIPART.value()));
+                .anyMatch(ClientModelUtil::isMultipartModel);
         if (generateMultipartFormDataHelper) {
             javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
         }
@@ -212,6 +211,7 @@ public class TypeSpecPlugin extends Javagen {
         SETTINGS_MAP.put("required-parameter-client-methods", true);
         SETTINGS_MAP.put("generic-response-type", true);
         SETTINGS_MAP.put("output-model-immutable", true);
+        SETTINGS_MAP.put("client-flattened-annotation-target", "disabled");
         SETTINGS_MAP.put("disable-required-property-annotation", true);
         // Defaulting to KeyCredential and not providing TypeSpec services to generate with AzureKeyCredential.
         SETTINGS_MAP.put("use-key-credential", true);

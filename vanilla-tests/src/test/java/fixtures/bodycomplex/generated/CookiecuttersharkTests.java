@@ -31,39 +31,31 @@ public final class CookiecuttersharkTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Cookiecuttershark model
-            = new Cookiecuttershark(44.5553f, OffsetDateTime.parse("2021-03-18T06:36:17Z")).setSpecies("dslfhotwmcy")
-                .setSiblings(
-                    Arrays.asList(
-                        new Fish(89.95281f).setSpecies("ftadehxnltyfs")
-                            .setSiblings(Arrays.asList(new Fish(90.22537f).setSpecies("zdmohctbqvu").setSiblings(
-                                Arrays.asList(new Fish(28.46756f), new Fish(34.753197f))))),
-                        new Fish(94.58838f).setSpecies("ujjugwdkcglh")
-                            .setSiblings(Arrays.asList(new Fish(34.070343f).setSpecies("qweykhmenev")
+        Cookiecuttershark model = new Cookiecuttershark(44.5553f, OffsetDateTime.parse("2021-03-18T06:36:17Z"))
+            .setSpecies("dslfhotwmcy")
+            .setSiblings(Arrays
+                .asList(
+                    new Fish(89.95281f).setSpecies("ftadehxnltyfs")
+                        .setSiblings(Arrays.asList(new Fish(90.22537f).setSpecies("zdmohctbqvu").setSiblings(
+                            Arrays.asList(new Fish(28.46756f), new Fish(34.753197f))))),
+                    new Fish(94.58838f).setSpecies("ujjugwdkcglh")
+                        .setSiblings(
+                            Arrays.asList(new Fish(34.070343f).setSpecies("qweykhmenev")
                                 .setSiblings(Arrays.asList(new Fish(59.155167f))))),
-                        new Fish(33.80321f).setSpecies("dcsi")
-                            .setSiblings(
-                                Arrays
-                                    .asList(
-                                        new Fish(78.81726f).setSpecies("iqscjeypv")
-                                            .setSiblings(Arrays.asList(new Fish(71.00282f), new Fish(64.86957f),
-                                                new Fish(4.124391f))),
-                                        new Fish(12.696767f).setSpecies("efovgmk")
-                                            .setSiblings(Arrays.asList(new Fish(92.70471f), new Fish(38.220562f),
-                                                new Fish(97.29868f), new Fish(24.898804f))))),
-                        new Fish(78.49014f).setSpecies("sqpjhvmdajvn")
-                            .setSiblings(
-                                Arrays
-                                    .asList(
-                                        new Fish(89.8033f).setSpecies("a")
-                                            .setSiblings(Arrays.asList(new Fish(23.191893f), new Fish(31.31023f),
-                                                new Fish(94.267494f))),
-                                        new Fish(37.39239f).setSpecies("u")
-                                            .setSiblings(Arrays.asList(new Fish(12.270075f), new Fish(98.63335f),
-                                                new Fish(26.569813f))),
-                                        new Fish(89.91945f).setSpecies("dpuozmyz")
-                                            .setSiblings(Arrays.asList(new Fish(34.15059f)))))))
-                .setAge(1163750271);
+                    new Fish(33.80321f).setSpecies("dcsi")
+                        .setSiblings(Arrays.asList(
+                            new Fish(78.81726f).setSpecies("iqscjeypv").setSiblings(
+                                Arrays.asList(new Fish(71.00282f), new Fish(64.86957f), new Fish(4.124391f))),
+                            new Fish(12.696767f).setSpecies("efovgmk")
+                                .setSiblings(Arrays.asList(new Fish(92.70471f), new Fish(38.220562f),
+                                    new Fish(97.29868f), new Fish(24.898804f))))),
+                    new Fish(78.49014f).setSpecies("sqpjhvmdajvn").setSiblings(Arrays.asList(
+                        new Fish(89.8033f).setSpecies("a").setSiblings(
+                            Arrays.asList(new Fish(23.191893f), new Fish(31.31023f), new Fish(94.267494f))),
+                        new Fish(37.39239f).setSpecies("u").setSiblings(
+                            Arrays.asList(new Fish(12.270075f), new Fish(98.63335f), new Fish(26.569813f))),
+                        new Fish(89.91945f).setSpecies("dpuozmyz").setSiblings(Arrays.asList(new Fish(34.15059f)))))))
+            .setAge(1163750271);
         model = BinaryData.fromObject(model).toObject(Cookiecuttershark.class);
         Assertions.assertEquals("dslfhotwmcy", model.getSpecies());
         Assertions.assertEquals(44.5553f, model.getLength());

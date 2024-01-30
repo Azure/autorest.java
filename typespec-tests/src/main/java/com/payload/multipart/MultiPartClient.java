@@ -23,6 +23,8 @@ import com.payload.multipart.models.JsonArrayPartsRequest;
 import com.payload.multipart.models.JsonPartRequest;
 import com.payload.multipart.models.MultiBinaryPartsRequest;
 import com.payload.multipart.models.MultiPartRequest;
+import com.payload.multipart.models.PicturesFileDetails;
+import java.util.stream.Collectors;
 
 /**
  * Initializes a new instance of the synchronous MultiPartClient type.
@@ -173,8 +175,9 @@ public final class MultiPartClient {
         // Generated convenience method for basicWithResponse
         RequestOptions requestOptions = new RequestOptions();
         basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
-            .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
-            .getRequestBody(), requestOptions).getValue();
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+            .end().getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -195,10 +198,14 @@ public final class MultiPartClient {
         RequestOptions requestOptions = new RequestOptions();
         complexWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
             .serializeJsonField("address", body.getAddress())
-            .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
             .serializeJsonField("previousAddresses", body.getPreviousAddresses())
-            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
-            requestOptions).getValue();
+            .serializeFileFields("pictures",
+                body.getPictures().stream().map(PicturesFileDetails::getContent).collect(Collectors.toList()),
+                body.getPictures().stream().map(PicturesFileDetails::getContentType).collect(Collectors.toList()),
+                body.getPictures().stream().map(PicturesFileDetails::getFilename).collect(Collectors.toList()))
+            .end().getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -217,11 +224,11 @@ public final class MultiPartClient {
     public void jsonPart(JsonPartRequest body) {
         // Generated convenience method for jsonPartWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        jsonPartWithResponse(
-            new MultipartFormDataHelper(requestOptions).serializeJsonField("address", body.getAddress())
-                .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename()).end()
-                .getRequestBody(),
-            requestOptions).getValue();
+        jsonPartWithResponse(new MultipartFormDataHelper(requestOptions)
+            .serializeJsonField("address", body.getAddress())
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+            .end().getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -241,8 +248,11 @@ public final class MultiPartClient {
         // Generated convenience method for binaryArrayPartsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         binaryArrayPartsWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
-            .serializeFileFields("pictures", body.getPictures(), body.getPicturesFilenames()).end().getRequestBody(),
-            requestOptions).getValue();
+            .serializeFileFields("pictures",
+                body.getPictures().stream().map(PicturesFileDetails::getContent).collect(Collectors.toList()),
+                body.getPictures().stream().map(PicturesFileDetails::getContentType).collect(Collectors.toList()),
+                body.getPictures().stream().map(PicturesFileDetails::getFilename).collect(Collectors.toList()))
+            .end().getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -263,7 +273,8 @@ public final class MultiPartClient {
         RequestOptions requestOptions = new RequestOptions();
         jsonArrayPartsWithResponse(
             new MultipartFormDataHelper(requestOptions)
-                .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
+                .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
                 .serializeJsonField("previousAddresses", body.getPreviousAddresses()).end().getRequestBody(),
             requestOptions).getValue();
     }
@@ -286,8 +297,12 @@ public final class MultiPartClient {
         RequestOptions requestOptions = new RequestOptions();
         multiBinaryPartsWithResponse(
             new MultipartFormDataHelper(requestOptions)
-                .serializeFileField("profileImage", body.getProfileImage(), body.getProfileImageFilename())
-                .serializeFileField("picture", body.getPicture(), body.getPictureFilename()).end().getRequestBody(),
+                .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+                .serializeFileField("picture", body.getPicture() == null ? null : body.getPicture().getContent(),
+                    body.getPicture() == null ? null : body.getPicture().getContentType(),
+                    body.getPicture() == null ? null : body.getPicture().getFilename())
+                .end().getRequestBody(),
             requestOptions).getValue();
     }
 }

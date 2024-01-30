@@ -1,5 +1,18 @@
 # Release History
 
+## 0.13.1 (2024-01-26)
+
+Compatible with compiler 0.52.
+
+- Behavior changed on "multipart/form-data" request. The file field would take a `##FileDetails` model, instead of `BinaryData`. 
+
+## 0.13.0 (2024-01-25)
+
+Compatible with compiler 0.52.
+
+- Supported `@clientName` from "@azure-tools/typespec-client-generator-core".
+- Supported `@flattenProperty` from "@azure-tools/typespec-client-generator-core".
+
 ## 0.12.3 (2024-01-22)
 
 Compatible with compiler 0.51.

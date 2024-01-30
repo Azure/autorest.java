@@ -6,7 +6,7 @@
 #
 # Before running this script the 'tsp' profile must be built, 'mvn install -P local,tsp'.
 param (
-  [int] $Parallelization = [Environment]::ProcessorCount - 1
+  [int] $Parallelization = [Environment]::ProcessorCount
 )
 
 $ExitCode = 0

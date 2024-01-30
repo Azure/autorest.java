@@ -71,6 +71,8 @@ import {
   isInternal,
   SdkClient,
   getCrossLanguageDefinitionId,
+  getClientNameOverride,
+  shouldFlattenProperty,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -265,7 +267,7 @@ export class CodeModelBuilder {
 
   private processHost(server: HttpServer | undefined): Parameter[] {
     const hostParameters: Parameter[] = [];
-    if (server) {
+    if (server && !this.isArmSynthesizedServer(server)) {
       server.parameters.forEach((it) => {
         let parameter;
 
@@ -540,7 +542,7 @@ export class CodeModelBuilder {
       // server
       let baseUri = "{endpoint}";
       const servers = getServers(this.program, client.service);
-      if (servers && servers.length === 1) {
+      if (servers && servers.length === 1 && !this.isArmSynthesizedServer(servers[0])) {
         baseUri = servers[0].url;
       }
       const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
@@ -571,18 +573,18 @@ export class CodeModelBuilder {
         // operation group with no operation is skipped
         if (operations.length > 0) {
           const groupPath = operationGroup.groupPath.split(".");
-          let oprationGroupName: string;
+          let operationGroupName: string;
           if (groupPath.length > 1) {
             // groupPath should be in format of "OpenAIClient.Chat.Completions"
-            oprationGroupName = groupPath.slice(1).join("");
+            operationGroupName = groupPath.slice(1).join("");
           } else {
             // protection
-            oprationGroupName = operationGroup.type.name;
+            operationGroupName = operationGroup.type.name;
           }
-          codeModelGroup = new OperationGroup(oprationGroupName);
+          codeModelGroup = new OperationGroup(operationGroupName);
           for (const operation of operations) {
             if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-              codeModelGroup.addOperation(this.processOperation(oprationGroupName, operation, clientContext));
+              codeModelGroup.addOperation(this.processOperation(operationGroupName, operation, clientContext));
             }
           }
           codeModelClient.operationGroups.push(codeModelGroup);
@@ -625,6 +627,18 @@ export class CodeModelBuilder {
     }
 
     return clients;
+  }
+
+  /**
+   * `@armProviderNamespace` currently will add a default server if not defined globally:
+   * https://github.com/Azure/typespec-azure/blob/8b8d7c05f168d9305a09691c4fedcb88f4a57652/packages/typespec-azure-resource-manager/src/namespace.ts#L121-L128
+   * TODO: if the synthesized server has the right hostParameter, we can use that insteadß
+   *
+   * @param server returned by getServers
+   * @returns whether it's synthesized by `@armProviderNamespace`
+   */
+  private isArmSynthesizedServer(server: HttpServer): boolean {
+    return this.isArm() && (!server.parameters || server.parameters.size == 0);
   }
 
   private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
@@ -1286,7 +1300,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    if (!schema.language.default.name && schema instanceof ObjectSchema) {
+    if (schema instanceof ObjectSchema && !schema.language.default.name) {
       // anonymous model
 
       // name the schema for documentation
@@ -1296,6 +1310,13 @@ export class CodeModelBuilder {
         // name the parameter for documentation
         parameter.language.default.name = "request";
       }
+
+      if (schema.serializationFormats?.includes(KnownMediaType.Multipart)) {
+        // TODO: anonymous model for multipart is not supported
+        // at present, use the model with name given above
+        return;
+      }
+
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {
@@ -2276,13 +2297,16 @@ export class CodeModelBuilder {
     const schema = this.processSchema(prop, prop.name);
     let nullable = isNullableType(prop.type);
 
-    let extensions = undefined;
+    let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
-      extensions = {
-        "x-ms-secret": true,
-      };
+      extensions = extensions ?? {};
+      extensions["x-ms-secret"] = true;
       // if the property does not return in response, it had to be nullable
       nullable = true;
+    }
+    if (shouldFlattenProperty(this.sdkContext, prop)) {
+      extensions = extensions ?? {};
+      extensions["x-ms-client-flatten"] = true;
     }
 
     return new Property(this.getName(prop), this.getDoc(prop), schema, {
@@ -2455,6 +2479,10 @@ export class CodeModelBuilder {
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
+    const emitterClientName = getClientNameOverride(this.sdkContext, target);
+    if (emitterClientName) {
+      return emitterClientName;
+    }
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
       return languageProjectedName;
@@ -2769,8 +2797,8 @@ export class CodeModelBuilder {
     }
   }
 
-  private isArm() {
-    return this.codeModel.arm;
+  private isArm(): boolean {
+    return Boolean(this.codeModel.arm);
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {

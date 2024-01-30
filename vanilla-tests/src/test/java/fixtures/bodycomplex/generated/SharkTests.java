@@ -31,28 +31,28 @@ public final class SharkTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Shark model = new Shark(28.352106f, OffsetDateTime.parse("2021-10-01T07:14:45Z")).setSpecies("gpbtoqcjmklj")
-            .setSiblings(Arrays.asList(
-                new Fish(42.611782f).setSpecies("lkhbz")
-                    .setSiblings(Arrays.asList(
-                        new Fish(30.823957f).setSpecies("c")
-                            .setSiblings(Arrays.asList(new Fish(42.87764f), new Fish(93.16337f))),
-                        new Fish(86.22104f).setSpecies("ummajtjaod")
-                            .setSiblings(Arrays.asList(new Fish(62.736557f), new Fish(33.899582f))))),
-                new Fish(89.226135f).setSpecies("xo")
-                    .setSiblings(Arrays.asList(
+        Shark model
+            = new Shark(28.352106f, OffsetDateTime.parse("2021-10-01T07:14:45Z")).setSpecies("gpbtoqcjmklj")
+                .setSiblings(Arrays.asList(
+                    new Fish(42.611782f).setSpecies("lkhbz")
+                        .setSiblings(Arrays.asList(
+                            new Fish(30.823957f).setSpecies("c")
+                                .setSiblings(Arrays.asList(new Fish(42.87764f), new Fish(93.16337f))),
+                            new Fish(86.22104f).setSpecies("ummajtjaod")
+                                .setSiblings(Arrays.asList(new Fish(62.736557f), new Fish(33.899582f))))),
+                    new Fish(89.226135f).setSpecies("xo").setSiblings(Arrays.asList(
                         new Fish(84.68226f).setSpecies("stxgc")
                             .setSiblings(Arrays.asList(new Fish(84.1204f), new Fish(25.783592f))),
                         new Fish(25.220078f).setSpecies("clwhijcoejctbz")
                             .setSiblings(Arrays.asList(new Fish(47.4539f), new Fish(3.9527357f), new Fish(39.88341f))),
                         new Fish(93.731895f).setSpecies("dkexxppofm").setSiblings(Arrays.asList(new Fish(90.91013f))))),
-                new Fish(5.059004f).setSpecies("toc")
-                    .setSiblings(Arrays.asList(
-                        new Fish(75.01583f).setSpecies("bqe")
-                            .setSiblings(Arrays.asList(new Fish(68.61014f), new Fish(12.802905f), new Fish(96.80261f))),
-                        new Fish(76.06833f).setSpecies("twnpzaoqvuhrhcf")
-                            .setSiblings(Arrays.asList(new Fish(69.74643f), new Fish(35.38187f)))))))
-            .setAge(818060655);
+                    new Fish(5.059004f).setSpecies("toc")
+                        .setSiblings(Arrays.asList(
+                            new Fish(75.01583f).setSpecies("bqe").setSiblings(
+                                Arrays.asList(new Fish(68.61014f), new Fish(12.802905f), new Fish(96.80261f))),
+                            new Fish(76.06833f).setSpecies("twnpzaoqvuhrhcf")
+                                .setSiblings(Arrays.asList(new Fish(69.74643f), new Fish(35.38187f)))))))
+                .setAge(818060655);
         model = BinaryData.fromObject(model).toObject(Shark.class);
         Assertions.assertEquals("gpbtoqcjmklj", model.getSpecies());
         Assertions.assertEquals(28.352106f, model.getLength());

@@ -743,7 +743,7 @@ public final class EnumServiceClient {
         }
         return setStringEnumArrayWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .getValue().toObject(String.class);
+            .getValue().toObject(String.class);
     }
 
     /**
@@ -765,7 +765,7 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .getValue().toObject(String.class);
+            .getValue().toObject(String.class);
     }
 
     /**
@@ -939,7 +939,7 @@ public final class EnumServiceClient {
         }
         return setStringEnumMultiWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .getValue().toObject(String.class);
+            .getValue().toObject(String.class);
     }
 
     /**
@@ -961,7 +961,7 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumMultiWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .getValue().toObject(String.class);
+            .getValue().toObject(String.class);
     }
 
     /**
@@ -1134,7 +1134,7 @@ public final class EnumServiceClient {
         }
         return setStringEnumArrayHeaderWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .getValue().toObject(String.class);
+            .getValue().toObject(String.class);
     }
 
     /**
@@ -1156,6 +1156,6 @@ public final class EnumServiceClient {
         RequestOptions requestOptions = new RequestOptions();
         return setStringEnumArrayHeaderWithResponse(colorArray.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.toList()), requestOptions)
-                .getValue().toObject(String.class);
+            .getValue().toObject(String.class);
     }
 }

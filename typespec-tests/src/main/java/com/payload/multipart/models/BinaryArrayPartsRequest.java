@@ -4,15 +4,14 @@
 
 package com.payload.multipart.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.BinaryData;
+import com.azure.core.annotation.Immutable;
 import java.util.List;
 
 /**
  * The BinaryArrayPartsRequest model.
  */
-@Fluent
+@Immutable
 public final class BinaryArrayPartsRequest {
     /*
      * The id property.
@@ -24,13 +23,7 @@ public final class BinaryArrayPartsRequest {
      * The pictures property.
      */
     @Generated
-    private final List<BinaryData> pictures;
-
-    /*
-     * The filenames for pictures
-     */
-    @Generated
-    private List<String> picturesFilenames;
+    private final List<PicturesFileDetails> pictures;
 
     /**
      * Creates an instance of BinaryArrayPartsRequest class.
@@ -39,7 +32,7 @@ public final class BinaryArrayPartsRequest {
      * @param pictures the pictures value to set.
      */
     @Generated
-    public BinaryArrayPartsRequest(String id, List<BinaryData> pictures) {
+    public BinaryArrayPartsRequest(String id, List<PicturesFileDetails> pictures) {
         this.id = id;
         this.pictures = pictures;
     }
@@ -60,29 +53,7 @@ public final class BinaryArrayPartsRequest {
      * @return the pictures value.
      */
     @Generated
-    public List<BinaryData> getPictures() {
+    public List<PicturesFileDetails> getPictures() {
         return this.pictures;
-    }
-
-    /**
-     * Get the picturesFilenames property: The filenames for pictures.
-     * 
-     * @return the picturesFilenames value.
-     */
-    @Generated
-    public List<String> getPicturesFilenames() {
-        return this.picturesFilenames;
-    }
-
-    /**
-     * Set the picturesFilenames property: The filenames for pictures.
-     * 
-     * @param picturesFilenames the picturesFilenames value to set.
-     * @return the BinaryArrayPartsRequest object itself.
-     */
-    @Generated
-    public BinaryArrayPartsRequest setPicturesFilenames(List<String> picturesFilenames) {
-        this.picturesFilenames = picturesFilenames;
-        return this;
     }
 }
