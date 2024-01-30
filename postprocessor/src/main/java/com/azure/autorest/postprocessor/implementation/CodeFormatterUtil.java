@@ -1,5 +1,6 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
+
 package com.azure.autorest.postprocessor.implementation;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
@@ -17,7 +18,9 @@ import org.w3c.dom.NodeList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Utility class that handles code formatting.
@@ -42,6 +45,26 @@ public final class CodeFormatterUtil {
                 throw new RuntimeException(e);
             }
         });
+    }
+
+    /**
+     * Formats the given files by removing unused imports and applying Eclipse code formatting.
+     *
+     * @param files The files to format. The entry is filename and content.
+     * @return the files after format.
+     * @throws Exception If code formatting fails.
+     */
+    public static List<String> formatCode(List<Map.Entry<String, String>> files) throws Exception {
+        Map<String, String> eclipseSettings = loadEclipseSettings();
+        return files.parallelStream().map(fileEntry -> {
+            try {
+                String file = removeUnusedImports(fileEntry.getValue());
+                file = formatCode(file, fileEntry.getKey(), ToolFactory.createCodeFormatter(eclipseSettings));
+                return file;
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }).collect(Collectors.toList());
     }
 
     /**
