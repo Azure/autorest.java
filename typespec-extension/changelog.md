@@ -1,5 +1,11 @@
 # Release History
 
+## 0.13.2 (Unreleased)
+
+Compatible with compiler 0.52.
+
+- Supported `@encodedName` for "application/json".
+
 ## 0.13.1 (2024-01-26)
 
 Compatible with compiler 0.52.

@@ -40,6 +40,7 @@ import {
   EnumMember,
   walkPropertiesInherited,
   getService,
+  resolveEncodedName,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -2483,6 +2484,7 @@ export class CodeModelBuilder {
     if (emitterClientName) {
       return emitterClientName;
     }
+    // TODO: deprecate getProjectedName
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
       return languageProjectedName;
@@ -2520,12 +2522,14 @@ export class CodeModelBuilder {
   }
 
   private getSerializedName(target: ModelProperty): string {
-    // First get projected name, if not found, return target.name
+    // First get projected name, if not found, call resolveEncodedName
+    // TODO: deprecate getProjectedName
     const jsonProjectedName = getProjectedName(this.program, target, "json");
     if (jsonProjectedName) {
       return jsonProjectedName;
     }
-    return target.name;
+    // TODO: the MIME better be from SchemaUsage.serializationFormats. However, at this step, the values is not propagated to inner models.
+    return resolveEncodedName(this.program, target, "application/json");
   }
 
   private isReadOnly(target: ModelProperty): boolean {
