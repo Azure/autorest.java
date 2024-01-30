@@ -217,6 +217,13 @@ public class MultipartTests {
     }
 
     @Test
+    public void testFilenameAndContentType() {
+        client.checkFileNameAndContentType(new MultiPartRequest(
+                "123",
+                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("hello.jpg").setContentType("image/jpg")));
+    }
+
+    @Test
     public void testComplex() {
         client.complex(new ComplexPartsRequest(
                 "123",
