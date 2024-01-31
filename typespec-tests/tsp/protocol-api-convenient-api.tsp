@@ -107,7 +107,7 @@ model ListTrait {
   request: {
     @traitLocation(TraitLocation.Parameters)
     properties: {
-      @projectedName("client", "maxPageSize")
+      @clientName("maxPageSize")
       @query
       maxresults?: safeint;
     };

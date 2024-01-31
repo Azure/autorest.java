@@ -31,7 +31,7 @@ model Resource {
   intValue?: int32;
   enumValue?: "a" | "b" | "c";
 
-  @projectedName("json", "wireNameForInnerModelProperty")
+  @encodedName("application/json", "wireNameForInnerModelProperty")
   innerModelProperty?: InnerModel;
 
   array?: InnerModel[];

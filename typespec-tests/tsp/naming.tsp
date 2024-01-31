@@ -47,8 +47,8 @@ model DataModel {
 
 @discriminator("kind")
 model Data {
-  @projectedName("json", "kind_id")
-  @projectedName("client", "type")
+  @clientName("type")
+  @encodedName("application/json", "kind_id")
   kind: string;
 }
 
@@ -56,7 +56,7 @@ model BytesData extends Data {
   kind: "bytes";
 
   @clientName("dataAsBytes")
-  @projectedName("json", "data_bytes")
+  @encodedName("application/json", "data_bytes")
   @projectedName("client", "noeffect")
   data: bytes;
 }
