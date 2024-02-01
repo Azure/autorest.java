@@ -107,7 +107,7 @@ interface TopLevelArmResourceInterface
 
 @armResourceOperations
 interface CustomTemplateResourceInterface extends ResourceCreate<CustomTemplateResource> {
-  op update is ArmResourceUpdateSync<CustomTemplateResource>;
+  update is ArmResourceUpdateSync<CustomTemplateResource>;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
