@@ -8,7 +8,7 @@ import {
   getAllHttpServices,
 } from "@typespec/http";
 import { resolveOperationId } from "@typespec/openapi";
-import { ApiVersions, Parameter } from "@autorest/codemodel";
+import { Parameter } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
 import { getVersion } from "@typespec/versioning";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
@@ -188,14 +188,6 @@ export function isPayloadProperty(program: Program, property: ModelProperty) {
   const pathInfo = getPathParamName(program, property);
   const statusCodeInfo = isStatusCode(program, property);
   return !(headerInfo || queryInfo || pathInfo || statusCodeInfo);
-}
-
-export function getClientApiVersions(client: CodeModelClient): ApiVersions | undefined {
-  if (client.globalParameters?.find((it) => it.origin === ORIGIN_API_VERSION)) {
-    return client.apiVersions;
-  } else {
-    return undefined;
-  }
 }
 
 export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceVersion {

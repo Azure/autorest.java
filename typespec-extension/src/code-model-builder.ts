@@ -158,7 +158,6 @@ import {
   isAllValueInteger,
 } from "./type-utils.js";
 import {
-  getClientApiVersions,
   getServiceVersion,
   operationIsJsonMergePatch,
   isPayloadProperty,
@@ -599,7 +598,7 @@ export class CodeModelBuilder {
     let apiVersionSameForAllClients = true;
     let sharedApiVersions = undefined;
     for (const client of this.codeModel.clients) {
-      const apiVersions = getClientApiVersions(client);
+      const apiVersions = client.apiVersions;
       if (!apiVersions) {
         // client does not have apiVersions
         apiVersionSameForAllClients = false;
@@ -620,7 +619,7 @@ export class CodeModelBuilder {
       }
     } else {
       for (const client of this.codeModel.clients) {
-        const apiVersions = getClientApiVersions(client);
+        const apiVersions = client.apiVersions;
         if (apiVersions) {
           client.serviceVersion = getServiceVersion(client);
         }
