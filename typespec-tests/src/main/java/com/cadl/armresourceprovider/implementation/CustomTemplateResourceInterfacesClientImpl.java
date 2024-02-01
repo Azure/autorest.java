@@ -19,7 +19,6 @@ import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.management.polling.PollResult;
@@ -29,7 +28,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.armresourceprovider.fluent.CustomTemplateResourceInterfacesClient;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
-import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfacesUpdateHeaders;
+import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfacesUpdateResponse;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -81,9 +80,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         @Patch("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Cadl.ArmResourceProvider/customTemplateResources/{customTemplateResourceName}")
         @ExpectedResponses({ 200 })
         @UnexpectedResponseExceptionType(ManagementException.class)
-        Mono<ResponseBase<CustomTemplateResourceInterfacesUpdateHeaders, CustomTemplateResourceInner>> update(
-            @HostParam("endpoint") String endpoint, @QueryParam("api-version") String apiVersion,
-            @PathParam("subscriptionId") String subscriptionId,
+        Mono<CustomTemplateResourceInterfacesUpdateResponse> update(@HostParam("endpoint") String endpoint,
+            @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
             @PathParam("resourceGroupName") String resourceGroupName,
             @PathParam("customTemplateResourceName") String customTemplateResourceName,
             @HeaderParam("accept") String accept, @BodyParam("application/json") CustomTemplateResourceInner resource,
@@ -346,13 +344,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<ResponseBase<CustomTemplateResourceInterfacesUpdateHeaders, CustomTemplateResourceInner>>
-        updateWithResponseAsync(String resourceGroupName, String customTemplateResourceName,
-            CustomTemplateResourceInner resource) {
+    private Mono<CustomTemplateResourceInterfacesUpdateResponse> updateWithResponseAsync(String resourceGroupName,
+        String customTemplateResourceName, CustomTemplateResourceInner resource) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -390,13 +387,12 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    private Mono<ResponseBase<CustomTemplateResourceInterfacesUpdateHeaders, CustomTemplateResourceInner>>
-        updateWithResponseAsync(String resourceGroupName, String customTemplateResourceName,
-            CustomTemplateResourceInner resource, Context context) {
+    private Mono<CustomTemplateResourceInterfacesUpdateResponse> updateWithResponseAsync(String resourceGroupName,
+        String customTemplateResourceName, CustomTemplateResourceInner resource, Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -453,13 +449,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link ResponseBase}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResponseBase<CustomTemplateResourceInterfacesUpdateHeaders, CustomTemplateResourceInner> updateWithResponse(
-        String resourceGroupName, String customTemplateResourceName, CustomTemplateResourceInner resource,
-        Context context) {
+    public CustomTemplateResourceInterfacesUpdateResponse updateWithResponse(String resourceGroupName,
+        String customTemplateResourceName, CustomTemplateResourceInner resource, Context context) {
         return updateWithResponseAsync(resourceGroupName, customTemplateResourceName, resource, context).block();
     }
 

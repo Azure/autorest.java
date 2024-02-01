@@ -6,12 +6,11 @@ package com.cadl.armresourceprovider.fluent;
 
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
-import com.azure.core.http.rest.ResponseBase;
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
-import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfacesUpdateHeaders;
+import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfacesUpdateResponse;
 
 /**
  * An instance of this class provides access to all the operations defined in CustomTemplateResourceInterfacesClient.
@@ -92,13 +91,11 @@ public interface CustomTemplateResourceInterfacesClient {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return concrete tracked resource types can be created by aliasing this type using a specific property type along
-     * with {@link ResponseBase}.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    ResponseBase<CustomTemplateResourceInterfacesUpdateHeaders, CustomTemplateResourceInner> updateWithResponse(
-        String resourceGroupName, String customTemplateResourceName, CustomTemplateResourceInner resource,
-        Context context);
+    CustomTemplateResourceInterfacesUpdateResponse updateWithResponse(String resourceGroupName,
+        String customTemplateResourceName, CustomTemplateResourceInner resource, Context context);
 
     /**
      * Update a CustomTemplateResource.
