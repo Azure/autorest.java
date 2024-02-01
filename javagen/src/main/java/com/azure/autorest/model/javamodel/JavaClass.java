@@ -3,6 +3,7 @@
 
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.Arrays;
@@ -11,6 +12,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_START_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_START_MARKER;
 
 public class JavaClass implements JavaType {
     private JavaFileContents contents;
@@ -197,6 +203,67 @@ public class JavaClass implements JavaType {
     public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction) {
         addExpectedNewLine();
         contents.javadocComment(wordWrapWidth, commentAction);
+    }
+
+    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper) {
+        addExpectedNewLine();
+        if (commentDescriptionAction != null) {
+            contents.javadocCommentStart();
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
+            }
+            contents.withWordWrap(wordWrapWidth, () -> commentDescriptionAction.accept(new JavaJavadocComment(contents)));
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+            }
+            contents.line();
+            if (commentTagAction == null) { // if no tags action, then end the javadoc comment
+                contents.javadocCommentEnd();
+            }
+        }
+        if (commentTagAction != null) {
+            if (commentDescriptionAction == null) {// if no description action, then start the javadoc comment
+                contents.javadocCommentStart();
+            }
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
+            }
+            contents.withWordWrap(wordWrapWidth, () -> commentTagAction.accept(new JavaJavadocComment(contents)));
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
+            }
+            contents.javadocCommentEnd();
+        }
+    }
+
+    public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper) {
+        addExpectedNewLine();
+        if (commentDescriptionAction != null) {
+            contents.javadocCommentStart();
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
+            }commentDescriptionAction.accept(new JavaJavadocComment(contents));
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+            }
+            contents.line();
+            if (commentTagAction == null) { // if no tags action, then end the javadoc comment
+                contents.javadocCommentEnd();
+            }
+        }
+        if (commentTagAction != null) {
+            if (commentDescriptionAction == null) {// if no description action, then start the javadoc comment
+                contents.javadocCommentStart();
+            }
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
+            }
+            commentTagAction.accept(new JavaJavadocComment(contents));
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
+            }
+            contents.javadocCommentEnd();
+        }
     }
 
     public final void annotation(String... annotations) {

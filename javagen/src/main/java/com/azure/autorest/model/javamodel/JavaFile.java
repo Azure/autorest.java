@@ -11,6 +11,11 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_START_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_START_MARKER;
+
 public class JavaFile implements JavaContext {
     private String packageKeyword;
     private int packageWithPeriodLength;
@@ -101,6 +106,34 @@ public class JavaFile implements JavaContext {
 
     public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction) {
         getContents().javadocComment(wordWrapWidth, commentAction);
+    }
+
+    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper) {
+        if (commentAction != null) {
+            contents.javadocCommentStart();
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
+            }
+            contents.withWordWrap(wordWrapWidth, () -> commentAction.accept(new JavaJavadocComment(contents)));
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+            }
+            contents.javadocCommentEnd();
+        }
+    }
+
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper) {
+        if (commentAction != null) {
+            contents.javadocCommentStart();
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
+            }
+            commentAction.accept(new JavaJavadocComment(contents));
+            if (withGeneratedWrapper) {
+                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+            }
+            contents.javadocCommentEnd();
+        }
     }
 
     public final void lineComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction) {
