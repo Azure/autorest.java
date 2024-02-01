@@ -155,11 +155,9 @@ public class MultipartTests {
     public void testBasic() {
         MultiPartRequest request = new MultiPartRequest(
                 "123",
-                new ProfileImageFileDetails(BinaryData.fromFile(FILE)));
+                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"));
 
         client.basic(request);
-
-        request.getProfileImage().setFilename("image.jpg");
         asyncClient.basic(request).block();
     }
 
@@ -167,7 +165,7 @@ public class MultipartTests {
     public void testJson() {
         client.jsonPart(new JsonPartRequest(
                 new Address("X"),
-                new ProfileImageFileDetails(BinaryData.fromFile(FILE))));
+                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg")));
     }
 
     @Test
@@ -180,40 +178,36 @@ public class MultipartTests {
     @Test
     public void testMultipleFiles() {
         client.multiBinaryParts(new MultiBinaryPartsRequest(
-                new ProfileImageFileDetails(BinaryData.fromFile(FILE)))
-                .setPicture(new PictureFileDetails(BinaryData.fromFile(FileUtils.getPngFile()))));
+                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"))
+                .setPicture(new PictureFileDetails(BinaryData.fromFile(FileUtils.getPngFile())).setFilename("image.png")));
 
-        validationPolicy.validateFilenames("profileImage", "picture");
+        validationPolicy.validateFilenames("image.jpg", "image.png");
 
         // "picture" be optional
         asyncClient.multiBinaryParts(new MultiBinaryPartsRequest(
-                new ProfileImageFileDetails(BinaryData.fromFile(FILE)))).block();
-
-        validationPolicy.validateFilenames("profileImage");
+                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"))).block();
     }
 
     @Test
     public void testFileArray() {
-        // provide no filename
         client.binaryArrayParts(new BinaryArrayPartsRequest(
                 "123",
                 Arrays.asList(
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)),
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE))
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image1.png"),
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image2.png")
                 )));
 
         validationPolicy.validateContentTypes("application/octet-stream", "application/octet-stream");
 
-        // provide only 1 filename, when there are 2 files
         // filename contains non-ASCII
         asyncClient.binaryArrayParts(new BinaryArrayPartsRequest(
                 "123",
                 Arrays.asList(
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("voilà.jpg"),
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE))
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("voilà.png"),
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image2.png")
                 ))).block();
 
-        validationPolicy.validateFilenames("voila.jpg", "pictures2");
+        validationPolicy.validateFilenames("voila.png", "image2.png");
     }
 
     @Test
@@ -228,26 +222,13 @@ public class MultipartTests {
         client.complex(new ComplexPartsRequest(
                 "123",
                 new Address("X"),
-                new ProfileImageFileDetails(BinaryData.fromFile(FILE)),
+                new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"),
                 Arrays.asList(new Address("Y"), new Address("Z")),
                 Arrays.asList(
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)),
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE))
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image1.png"),
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image2.png")
                 )));
 
-        validationPolicy.validateFilenames("profileImage", "pictures1", "pictures2");
-
-        // provide 3 filenames, when there are 2 files
-        asyncClient.complex(new ComplexPartsRequest(
-                "123",
-                new Address("X"),
-                new ProfileImageFileDetails(BinaryData.fromFile(FILE)),
-                Arrays.asList(new Address("Y"), new Address("Z")),
-                Arrays.asList(
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)),
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("picture2")
-                ))).block();
-
-        validationPolicy.validateFilenames("profileImage", "pictures1", "picture2");
+        validationPolicy.validateFilenames("image.jpg", "image1.png", "image2.png");
     }
 }
