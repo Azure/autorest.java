@@ -20,6 +20,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.headexceptions.AutoRestHeadExceptionTestServiceVersion;
 import fixtures.headexceptions.models.CustomizedException;
 import reactor.core.publisher.Mono;
 
@@ -46,6 +47,15 @@ public final class HeadExceptionsImpl {
         this.service
             = RestProxy.create(HeadExceptionsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestHeadExceptionTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

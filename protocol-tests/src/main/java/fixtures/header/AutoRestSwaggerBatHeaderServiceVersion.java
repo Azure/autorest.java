@@ -4,12 +4,10 @@
 
 package fixtures.header;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of AutoRestSwaggerBatHeaderServiceClient.
  */
-public enum AutoRestSwaggerBatHeaderServiceVersion implements ServiceVersion {
+public enum AutoRestSwaggerBatHeaderServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

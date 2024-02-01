@@ -193,6 +193,24 @@ public final class DpgMultiMediaTypesClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private DpgMultiMediaTypesServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the DpgMultiMediaTypesClientBuilder.
+     */
+    @Generated
+    public DpgMultiMediaTypesClientBuilder serviceVersion(DpgMultiMediaTypesServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -219,8 +237,10 @@ public final class DpgMultiMediaTypesClientBuilder
     private DpgMultiMediaTypesClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        DpgMultiMediaTypesServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : DpgMultiMediaTypesServiceVersion.getLatest();
         DpgMultiMediaTypesClientImpl client = new DpgMultiMediaTypesClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

@@ -4,12 +4,10 @@
 
 package fixtures.url;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of AutoRestUrlTestServiceClient.
  */
-public enum AutoRestUrlTestServiceVersion implements ServiceVersion {
+public enum AutoRestUrlTestServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

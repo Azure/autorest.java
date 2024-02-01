@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.lro.AutoRestLongRunningOperationTestServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestLongRunningOperationTestServiceClient type.
@@ -27,6 +28,20 @@ public final class AutoRestLongRunningOperationTestServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final AutoRestLongRunningOperationTestServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestLongRunningOperationTestServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -117,10 +132,12 @@ public final class AutoRestLongRunningOperationTestServiceClientImpl {
      * Initializes an instance of AutoRestLongRunningOperationTestServiceClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestLongRunningOperationTestServiceClientImpl(String host) {
+    public AutoRestLongRunningOperationTestServiceClientImpl(String host,
+        AutoRestLongRunningOperationTestServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -128,9 +145,11 @@ public final class AutoRestLongRunningOperationTestServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestLongRunningOperationTestServiceClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public AutoRestLongRunningOperationTestServiceClientImpl(HttpPipeline httpPipeline, String host,
+        AutoRestLongRunningOperationTestServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -139,12 +158,15 @@ public final class AutoRestLongRunningOperationTestServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestLongRunningOperationTestServiceClientImpl(HttpPipeline httpPipeline,
-        SerializerAdapter serializerAdapter, String host) {
+        SerializerAdapter serializerAdapter, String host,
+        AutoRestLongRunningOperationTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.lROs = new LROsImpl(this);
         this.lroRetrys = new LroRetrysImpl(this);
         this.lrosaDs = new LrosaDsImpl(this);

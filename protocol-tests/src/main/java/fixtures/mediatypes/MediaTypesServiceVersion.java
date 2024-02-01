@@ -4,12 +4,10 @@
 
 package fixtures.mediatypes;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of MediaTypesClient.
  */
-public enum MediaTypesServiceVersion implements ServiceVersion {
+public enum MediaTypesServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2.0-preview.
      */

@@ -192,6 +192,24 @@ public final class MediaTypesClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private MediaTypesServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the MediaTypesClientBuilder.
+     */
+    @Generated
+    public MediaTypesClientBuilder serviceVersion(MediaTypesServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -218,8 +236,10 @@ public final class MediaTypesClientBuilder
     private MediaTypesClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        MediaTypesClientImpl client
-            = new MediaTypesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+        MediaTypesServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : MediaTypesServiceVersion.getLatest();
+        MediaTypesClientImpl client = new MediaTypesClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

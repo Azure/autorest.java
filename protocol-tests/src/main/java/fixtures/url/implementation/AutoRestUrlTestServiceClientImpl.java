@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.url.AutoRestUrlTestServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestUrlTestServiceClient type.
@@ -55,6 +56,20 @@ public final class AutoRestUrlTestServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final AutoRestUrlTestServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestUrlTestServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -133,10 +148,12 @@ public final class AutoRestUrlTestServiceClientImpl {
      * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
      * @param globalStringQuery should contain value null.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestUrlTestServiceClientImpl(String globalStringPath, String globalStringQuery, String host) {
+    public AutoRestUrlTestServiceClientImpl(String globalStringPath, String globalStringQuery, String host,
+        AutoRestUrlTestServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), globalStringPath, globalStringQuery, host);
+            JacksonAdapter.createDefaultSerializerAdapter(), globalStringPath, globalStringQuery, host, serviceVersion);
     }
 
     /**
@@ -146,10 +163,12 @@ public final class AutoRestUrlTestServiceClientImpl {
      * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
      * @param globalStringQuery should contain value null.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestUrlTestServiceClientImpl(HttpPipeline httpPipeline, String globalStringPath,
-        String globalStringQuery, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), globalStringPath, globalStringQuery, host);
+        String globalStringQuery, String host, AutoRestUrlTestServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), globalStringPath, globalStringQuery, host,
+            serviceVersion);
     }
 
     /**
@@ -160,14 +179,16 @@ public final class AutoRestUrlTestServiceClientImpl {
      * @param globalStringPath A string value 'globalItemStringPath' that appears in the path.
      * @param globalStringQuery should contain value null.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestUrlTestServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        String globalStringPath, String globalStringQuery, String host) {
+        String globalStringPath, String globalStringQuery, String host, AutoRestUrlTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.globalStringPath = globalStringPath;
         this.globalStringQuery = globalStringQuery;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.paths = new PathsImpl(this);
         this.queries = new QueriesImpl(this);
         this.pathItems = new PathItemsImpl(this);

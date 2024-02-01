@@ -193,6 +193,24 @@ public final class DpgRequiredHeaderQueryClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private DpgRequiredHeaderQueryServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the DpgRequiredHeaderQueryClientBuilder.
+     */
+    @Generated
+    public DpgRequiredHeaderQueryClientBuilder serviceVersion(DpgRequiredHeaderQueryServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -219,8 +237,10 @@ public final class DpgRequiredHeaderQueryClientBuilder
     private DpgRequiredHeaderQueryClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        DpgRequiredHeaderQueryServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : DpgRequiredHeaderQueryServiceVersion.getLatest();
         DpgRequiredHeaderQueryClientImpl client = new DpgRequiredHeaderQueryClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

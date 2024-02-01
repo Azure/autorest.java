@@ -192,6 +192,24 @@ public final class EnumServiceClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private EnumServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the EnumServiceClientBuilder.
+     */
+    @Generated
+    public EnumServiceClientBuilder serviceVersion(EnumServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -218,8 +236,10 @@ public final class EnumServiceClientBuilder
     private EnumServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        EnumServiceClientImpl client
-            = new EnumServiceClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+        EnumServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : EnumServiceVersion.getLatest();
+        EnumServiceClientImpl client = new EnumServiceClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

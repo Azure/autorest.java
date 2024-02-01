@@ -4,12 +4,10 @@
 
 package fixtures.paging;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of AutoRestPagingTestServiceClient.
  */
-public enum AutoRestPagingTestServiceVersion implements ServiceVersion {
+public enum AutoRestPagingTestServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

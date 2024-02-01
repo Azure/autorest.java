@@ -4,12 +4,10 @@
 
 package com._specs_.azure.core.lro.rpc;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of RpcClient.
  */
-public enum RpcServiceVersion implements ServiceVersion {
+public enum RpcServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-12-01-preview.
      */

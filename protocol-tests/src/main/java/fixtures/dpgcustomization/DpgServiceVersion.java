@@ -4,12 +4,10 @@
 
 package fixtures.dpgcustomization;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of DpgClient.
  */
-public enum DpgServiceVersion implements ServiceVersion {
+public enum DpgServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

@@ -192,6 +192,24 @@ public final class SpecialHeaderClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private SpecialHeaderServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the SpecialHeaderClientBuilder.
+     */
+    @Generated
+    public SpecialHeaderClientBuilder serviceVersion(SpecialHeaderServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -218,8 +236,10 @@ public final class SpecialHeaderClientBuilder
     private SpecialHeaderClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        SpecialHeaderClientImpl client
-            = new SpecialHeaderClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+        SpecialHeaderServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : SpecialHeaderServiceVersion.getLatest();
+        SpecialHeaderClientImpl client = new SpecialHeaderClientImpl(localPipeline,
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

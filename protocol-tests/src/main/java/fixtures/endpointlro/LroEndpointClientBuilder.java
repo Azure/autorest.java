@@ -209,6 +209,24 @@ public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClie
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private LroEndpointServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the LroEndpointClientBuilder.
+     */
+    @Generated
+    public LroEndpointClientBuilder serviceVersion(LroEndpointServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -234,8 +252,10 @@ public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClie
     @Generated
     private LroEndpointClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        LroEndpointServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : LroEndpointServiceVersion.getLatest();
         LroEndpointClientImpl client = new LroEndpointClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.projectName);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.projectName, localServiceVersion);
         return client;
     }
 

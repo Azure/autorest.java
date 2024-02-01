@@ -4,12 +4,10 @@
 
 package com.cadl.multipleapiversion;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of NoApiVersionClient.
  */
-public enum NoApiVersionServiceVersion implements ServiceVersion {
+public enum NoApiVersionServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-10-01-preview.
      */

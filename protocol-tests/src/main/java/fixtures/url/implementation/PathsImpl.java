@@ -25,6 +25,7 @@ import com.azure.core.util.Base64Url;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.url.AutoRestUrlTestServiceVersion;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -53,6 +54,15 @@ public final class PathsImpl {
     PathsImpl(AutoRestUrlTestServiceClientImpl client) {
         this.service = RestProxy.create(PathsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestUrlTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**
