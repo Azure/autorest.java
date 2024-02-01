@@ -25,6 +25,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.cadl.patch.PatchServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -49,6 +50,15 @@ public final class PatchesImpl {
     PatchesImpl(PatchClientImpl client) {
         this.service = RestProxy.create(PatchesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public PatchServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

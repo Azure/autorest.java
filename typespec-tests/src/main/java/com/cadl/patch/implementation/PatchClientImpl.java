@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import com.cadl.patch.PatchServiceVersion;
 
 /**
  * Initializes a new instance of the PatchClient type.
@@ -27,6 +28,20 @@ public final class PatchClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
+    }
+
+    /**
+     * Service version.
+     */
+    private final PatchServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public PatchServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -75,10 +90,11 @@ public final class PatchClientImpl {
      * Initializes an instance of PatchClient client.
      * 
      * @param endpoint Server parameter.
+     * @param serviceVersion Service version.
      */
-    public PatchClientImpl(String endpoint) {
+    public PatchClientImpl(String endpoint, PatchServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -86,9 +102,10 @@ public final class PatchClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Server parameter.
+     * @param serviceVersion Service version.
      */
-    public PatchClientImpl(HttpPipeline httpPipeline, String endpoint) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+    public PatchClientImpl(HttpPipeline httpPipeline, String endpoint, PatchServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -97,11 +114,14 @@ public final class PatchClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Server parameter.
+     * @param serviceVersion Service version.
      */
-    public PatchClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
+    public PatchClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
+        PatchServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
+        this.serviceVersion = serviceVersion;
         this.patches = new PatchesImpl(this);
     }
 }
