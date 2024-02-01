@@ -261,7 +261,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .name("serviceVersion")
                     .readOnly(false)
                     .defaultValueExpression(serviceVersionClassName + ".getLatest()")
-                    .required(true)
+                    .required(false)
                     .requestParameterName(apiVersionSerializedName)
                     .build());
         }
