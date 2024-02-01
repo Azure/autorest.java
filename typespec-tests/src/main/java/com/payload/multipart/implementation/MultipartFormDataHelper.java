@@ -208,6 +208,6 @@ public final class MultipartFormDataHelper {
     }
 
     private static String normalizeAscii(String text) {
-        return Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\x00-\\x7F]", "");
+        return Normalizer.normalize(text, Normalizer.Form.NFD).replaceAll("[^\\x20-\\x7E]|\"", "");
     }
 }
