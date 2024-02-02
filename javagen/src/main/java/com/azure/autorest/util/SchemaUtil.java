@@ -3,7 +3,6 @@
 
 package com.azure.autorest.util;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.Header;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
@@ -16,11 +15,9 @@ import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
-import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
@@ -30,7 +27,6 @@ import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -38,14 +34,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 import java.util.stream.Collectors;
 
 public class SchemaUtil {
-    private static final PluginLogger LOGGER = new PluginLogger(Javagen.getPluginInstance(), SchemaUtil.class);
-
-    private static final ConcurrentMap<String, Optional<Class<?>>> TYPE_CLASS_MAP = new ConcurrentHashMap<>();
 
     private SchemaUtil() {
     }
@@ -339,29 +330,5 @@ public class SchemaUtil {
     public static boolean treatAsXml(Schema schema) {
         return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains(KnownMediaType.XML.value()))
             || (schema.getSerialization() != null && schema.getSerialization().getXml() != null);
-    }
-
-    /**
-     * Whether the given type is GenericType and is subclass of either of the given classes.
-     * @param type the type to check
-     * @param parentClasses classes to match either one
-     * @return whether the given type is GenericType and is subclass of either of the given classes
-     */
-    public static boolean isGenericTypeClassSubclassOf(IType type, Class<?>... parentClasses) {
-        if (!(type instanceof GenericType) || parentClasses == null || parentClasses.length == 0) return false;
-        Class<?> genericClass = getGenericClass((GenericType) type);
-        return genericClass != null && Arrays.stream(parentClasses).anyMatch(p -> p.isAssignableFrom(genericClass));
-    }
-
-    private static Class<?> getGenericClass(GenericType type) {
-        String className = String.format("%s.%s", type.getPackage(), type.getName());
-        return TYPE_CLASS_MAP.computeIfAbsent(className, key -> {
-            try {
-                return Optional.of(Class.forName(key));
-            } catch (ClassNotFoundException e) {
-                LOGGER.warn(String.format("class %s not found!", key), e);
-                return Optional.empty();
-            }
-        }).orElse(null);
     }
 }

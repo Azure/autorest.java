@@ -31,13 +31,13 @@ public class ReturnTypeDescriptionAssembler {
 
     private static String assembleForGeneric(String description, GenericType returnType, IType baseType) {
         String assembledDesc = description;
-        if (SchemaUtil.isGenericTypeClassSubclassOf(returnType, Mono.class)) {
+        if (TypeUtil.isGenericTypeClassSubclassOf(returnType, Mono.class)) {
             assembledDesc = assembleForMono(description, returnType, baseType);
-        } else if (SchemaUtil.isGenericTypeClassSubclassOf(returnType, Response.class)) {
+        } else if (TypeUtil.isGenericTypeClassSubclassOf(returnType, Response.class)) {
             assembledDesc = assembleForResponse(description, returnType, baseType);
-        } else if (SchemaUtil.isGenericTypeClassSubclassOf(returnType, PagedIterable.class, PagedFlux.class)) {
+        } else if (TypeUtil.isGenericTypeClassSubclassOf(returnType, PagedIterable.class, PagedFlux.class)) {
             assembledDesc = assembleForPagination(description, returnType, baseType);
-        } else if (SchemaUtil.isGenericTypeClassSubclassOf(returnType, SyncPoller.class, PollerFlux.class)) {
+        } else if (TypeUtil.isGenericTypeClassSubclassOf(returnType, SyncPoller.class, PollerFlux.class)) {
             assembledDesc = assembleForPoller(description, returnType, baseType);
         }
         return assembledDesc;
@@ -51,7 +51,7 @@ public class ReturnTypeDescriptionAssembler {
      */
     private static String assembleForMono(String description, GenericType returnType, IType baseType) {
         String assembledDesc;
-        if (SchemaUtil.isGenericTypeClassSubclassOf(returnType.getTypeArguments()[0], Response.class)) { // Mono<Response<?>>
+        if (TypeUtil.isGenericTypeClassSubclassOf(returnType.getTypeArguments()[0], Response.class)) { // Mono<Response<?>>
             assembledDesc = String.format(
                     "%s on successful completion of {@link Mono}",
                     assembleForResponse(description, (GenericType) returnType.getTypeArguments()[0], baseType)

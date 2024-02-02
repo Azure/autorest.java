@@ -8,9 +8,6 @@ import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
-import com.azure.autorest.extension.base.model.codemodel.Language;
-import com.azure.autorest.extension.base.model.codemodel.Languages;
-import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -63,6 +60,9 @@ public class ClientModelUtil {
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
     public static final String JSON_MERGE_PATCH_HELPER_CLASS_NAME = "JsonMergePatchHelper";
+
+    private ClientModelUtil() {
+    }
 
     /**
      * Prepare async/sync clients for service client.
@@ -713,81 +713,6 @@ public class ClientModelUtil {
         }
 
         return externalPackageNames;
-    }
-
-    /**
-     * Gets or creates a new FileDetails model for a multipart/form-data request
-     *
-     * @param compositeType the object schema of the multipart/form-data request model.
-     * @param filePropertyName the property name of the file in the multipart/form-data request model.
-     * @return the ##FileDetails model
-     */
-    public static IType getMultipartFileDetailsModel(
-            ObjectSchema compositeType,
-            String filePropertyName) {
-        // TODO (weidxu): this ##FileDetails model may get renamed and moved to azure-core
-
-        // The ##FileDetails model would inherit the usages from compositeType (the request model). So if the request is INTERNAL, FileDetails model would also be INTERNAL.
-        // But it may reside in a different package, depending on the options e.g. "custom-types"/"custom-types-subpackage".
-
-        String fileDetailsModelName = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(
-                filePropertyName.toLowerCase(Locale.ROOT).endsWith("file")
-                        ? filePropertyName + "Details"
-                        : filePropertyName + "FileDetails");
-        ClientModel clientModel = ClientModelUtil.getClientModel(fileDetailsModelName);
-        if (clientModel != null) {
-            return clientModel.getType();
-        }
-
-        // create ClassType
-        ObjectSchema objectSchema = new ObjectSchema();
-        objectSchema.setLanguage(new Languages());
-        objectSchema.getLanguage().setJava(new Language());
-        objectSchema.getLanguage().getJava().setName(fileDetailsModelName);
-        objectSchema.setUsage(compositeType.getUsage());
-        ClassType type = Mappers.getObjectMapper().map(objectSchema);
-
-        // create ClientModel
-        List<ClientModelProperty> properties = new ArrayList<>();
-        properties.add(new ClientModelProperty.Builder()
-                .name("content")
-                .description("The content of the file")
-                .required(true)
-                .readOnly(false)
-                .wireType(ClassType.BINARY_DATA)
-                .clientType(ClassType.BINARY_DATA)
-                .build());
-        properties.add(new ClientModelProperty.Builder()
-                .name("filename")
-                .description("The filename of the file")
-                .required(false)
-                .readOnly(false)
-                .wireType(ClassType.STRING)
-                .clientType(ClassType.STRING)
-                .build());
-        properties.add(new ClientModelProperty.Builder()
-                .name("contentType")
-                .description("The content-type of the file")
-                .required(false)
-                .readOnly(false)
-                .wireType(ClassType.STRING)
-                .clientType(ClassType.STRING)
-                .defaultValue("\"application/octet-stream\"")
-                .build());
-        clientModel = new ClientModel.Builder()
-                .name(fileDetailsModelName)
-                .description("The file details model for the " + filePropertyName)
-                .packageName(type.getPackage())
-                .type(type)
-                .serializationFormats(Set.of(KnownMediaType.MULTIPART.value()))
-                // let it inherit the usage (PUBLIC/INTERNAL) from the multipart/form-data request model
-                .implementationDetails(new ImplementationDetails.Builder()
-                        .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
-                        .build())
-                .properties(properties)
-                .build();
-        ClientModels.getInstance().addModel(clientModel);
-        return clientModel.getType();
     }
 
     public static boolean isMultipartModel(ClientModel model) {

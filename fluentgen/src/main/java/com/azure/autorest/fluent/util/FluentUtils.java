@@ -30,6 +30,7 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.autorest.util.TypeUtil;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.ResponseBase;
@@ -319,7 +320,7 @@ public class FluentUtils {
             if (Response.class.getSimpleName().equals(type.getName())) {
                 ret = true;
             } else {
-                ret = SchemaUtil.isGenericTypeClassSubclassOf(type, Response.class);
+                ret = TypeUtil.isGenericTypeClassSubclassOf(type, Response.class);
             }
         } else if (clientType instanceof ClassType) {
             // ClientResponse is type of a subclass of Response<>
@@ -338,7 +339,7 @@ public class FluentUtils {
             GenericType type = (GenericType) clientType;
             if (Response.class.getSimpleName().equals(type.getName())) {
                 bodyType = type.getTypeArguments()[0];
-            } else if (SchemaUtil.isGenericTypeClassSubclassOf(type, Response.class)) {
+            } else if (TypeUtil.isGenericTypeClassSubclassOf(type, Response.class)) {
                 bodyType = getValueTypeFromResponseTypeSubType(type);
             }
         } else if (clientType instanceof ClassType) {
