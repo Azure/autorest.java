@@ -204,7 +204,7 @@ public class MultipartTests {
                 "123",
                 Arrays.asList(
                         new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("voilà.png"),
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("image2.png")
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("ima\"\nge2.png")
                 ))).block();
 
         validationPolicy.validateFilenames("voila.png", "image2.png");
