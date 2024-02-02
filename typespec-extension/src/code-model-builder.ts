@@ -501,6 +501,14 @@ export class CodeModelBuilder {
           schemaUsage.splice(index, 1);
         }
       }
+
+      // Internal on Anonymous
+      if (schemaUsage?.includes(SchemaContext.Anonymous)) {
+        const index = schemaUsage.indexOf(SchemaContext.Internal);
+        if (index < 0) {
+          schemaUsage.push(SchemaContext.Internal);
+        }
+      }
     }
   }
 
