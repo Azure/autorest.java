@@ -16,10 +16,11 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.flatten.implementation.FlattenClientImpl;
+import com.cadl.flatten.implementation.models.SendLongRequest;
+import com.cadl.flatten.implementation.models.SendProjectedNameRequest;
+import com.cadl.flatten.implementation.models.SendRequest;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous FlattenClient type.
@@ -164,9 +165,7 @@ public final class FlattenClient {
     public void send(String id, String input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", user);
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input).setUser(user);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(id, request, requestOptions).getValue();
     }
@@ -188,8 +187,7 @@ public final class FlattenClient {
     public void send(String id, String input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(id, request, requestOptions).getValue();
     }
@@ -211,8 +209,7 @@ public final class FlattenClient {
     public void sendProjectedName(String id, String fileIdentifier) {
         // Generated convenience method for sendProjectedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("file_id", fileIdentifier);
+        SendProjectedNameRequest requestObj = new SendProjectedNameRequest(fileIdentifier);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendProjectedNameWithResponse(id, request, requestOptions).getValue();
     }
@@ -235,13 +232,9 @@ public final class FlattenClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String filter = options.getFilter();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", options.getUser());
-        requestObj.put("input", options.getInput());
-        requestObj.put("dataInt", options.getDataInt());
-        requestObj.put("dataIntOptional", options.getDataIntOptional());
-        requestObj.put("dataLong", options.getDataLong());
-        requestObj.put("data_float", options.getDataFloat());
+        SendLongRequest requestObj = new SendLongRequest(options.getInput(), options.getDataInt())
+            .setUser(options.getUser()).setDataIntOptional(options.getDataIntOptional())
+            .setDataLong(options.getDataLong()).setDataFloat(options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);

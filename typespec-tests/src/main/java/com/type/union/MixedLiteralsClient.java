@@ -16,10 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.MixedLiteralsImpl;
+import com.type.union.implementation.models.SendRequest8;
 import com.type.union.models.GetResponse8;
 import com.type.union.models.MixedLiteralsCases;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -132,8 +131,7 @@ public final class MixedLiteralsClient {
     public void send(MixedLiteralsCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        SendRequest8 requestObj = new SendRequest8(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(request, requestOptions).getValue();
     }

@@ -16,9 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.ModelsOnliesImpl;
+import com.type.union.implementation.models.SendRequest5;
 import com.type.union.models.GetResponse5;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -121,8 +120,7 @@ public final class ModelsOnlyClient {
     public void send(BinaryData prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        SendRequest5 requestObj = new SendRequest5(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(request, requestOptions).getValue();
     }

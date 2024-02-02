@@ -16,10 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.IntsOnliesImpl;
+import com.type.union.implementation.models.SendRequest3;
 import com.type.union.models.GetResponse3;
 import com.type.union.models.Prop2;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -122,8 +121,7 @@ public final class IntsOnlyClient {
     public void send(Prop2 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", (prop == null ? null : prop.toLong()));
+        SendRequest3 requestObj = new SendRequest3(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(request, requestOptions).getValue();
     }

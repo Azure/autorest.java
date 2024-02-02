@@ -24,9 +24,9 @@ import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.ListType;
-import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.TypeUtil;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -598,7 +598,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             ClientModelProperty property = iterator.next();
 
             if (property.getWireType() == ArrayType.BYTE_ARRAY) {
-                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(compositeType, property.getName());
+                IType fileDetailsModelType = TypeUtil.getMultipartFileDetailsModel(compositeType, property.getName());
                 // replace byte[] with the type
                 iterator.remove();
                 iterator.add(property.newBuilder()
@@ -606,7 +606,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         .clientType(fileDetailsModelType)
                         .build());
             } else if (property.getWireType() instanceof ListType && ((ListType) property.getWireType()).getElementType() == ArrayType.BYTE_ARRAY) {
-                IType fileDetailsModelType = ClientModelUtil.getMultipartFileDetailsModel(compositeType, property.getName());
+                IType fileDetailsModelType = TypeUtil.getMultipartFileDetailsModel(compositeType, property.getName());
                 // replace List<byte[]> with List<ClientModel>
                 iterator.remove();
                 iterator.add(property.newBuilder()

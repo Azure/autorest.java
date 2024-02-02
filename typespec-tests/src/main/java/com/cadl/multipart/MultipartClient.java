@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
+import com.cadl.multipart.implementation.models.UploadFileRequest;
 import com.cadl.multipart.models.FileDetails;
 import com.cadl.multipart.models.FormData;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public final class MultipartClient {
     }
 
     /**
-     * request is binary.
+     * The upload operation.
      * <p>
      * <strong>Query Parameters</strong>
      * </p>
@@ -80,7 +81,27 @@ public final class MultipartClient {
     }
 
     /**
-     * request is binary.
+     * The uploadFile operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> uploadFileWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is
+        // 'multipart/form-data'
+        return this.serviceClient.uploadFileWithResponse(name, request, requestOptions);
+    }
+
+    /**
+     * The upload operation.
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
@@ -118,7 +139,7 @@ public final class MultipartClient {
     }
 
     /**
-     * request is binary.
+     * The upload operation.
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
@@ -149,5 +170,29 @@ public final class MultipartClient {
                         : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
                 .end().getRequestBody(),
             requestOptions).getValue();
+    }
+
+    /**
+     * The uploadFile operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param file Represent a byte array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void uploadFile(String name, FileDetails file) {
+        // Generated convenience method for uploadFileWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        UploadFileRequest requestObj = new UploadFileRequest(file);
+        BinaryData request
+            = new MultipartFormDataHelper(requestOptions).serializeFileField("file", requestObj.getFile().getContent(),
+                requestObj.getFile().getContentType(), requestObj.getFile().getFilename()).end().getRequestBody();
+        uploadFileWithResponse(name, request, requestOptions).getValue();
     }
 }

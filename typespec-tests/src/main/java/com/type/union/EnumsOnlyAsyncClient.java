@@ -17,10 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.EnumsOnliesImpl;
+import com.type.union.implementation.models.SendRequest6;
 import com.type.union.models.EnumsOnlyCases;
 import com.type.union.models.GetResponse6;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -132,8 +131,7 @@ public final class EnumsOnlyAsyncClient {
     public Mono<Void> send(EnumsOnlyCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        SendRequest6 requestObj = new SendRequest6(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }

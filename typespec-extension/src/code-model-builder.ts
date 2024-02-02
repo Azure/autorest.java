@@ -501,6 +501,14 @@ export class CodeModelBuilder {
           schemaUsage.splice(index, 1);
         }
       }
+
+      // Internal on Anonymous
+      if (schemaUsage?.includes(SchemaContext.Anonymous)) {
+        const index = schemaUsage.indexOf(SchemaContext.Internal);
+        if (index < 0) {
+          schemaUsage.push(SchemaContext.Internal);
+        }
+      }
     }
   }
 
@@ -1159,7 +1167,9 @@ export class CodeModelBuilder {
 
       if (groupToRequestConditions || groupToMatchConditions) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         request.signatureParameters = [];
         op.convenienceApi.requests.push(request);
@@ -1311,17 +1321,13 @@ export class CodeModelBuilder {
         parameter.language.default.name = "request";
       }
 
-      if (schema.serializationFormats?.includes(KnownMediaType.Multipart)) {
-        // TODO: anonymous model for multipart is not supported
-        // at present, use the model with name given above
-        return;
-      }
-
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         op.convenienceApi.requests.push(request);
 
