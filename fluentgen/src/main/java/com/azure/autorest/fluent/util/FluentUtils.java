@@ -12,25 +12,29 @@ import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.model.clientmodel.ModelNaming;
-import com.azure.autorest.model.clientmodel.ClientMethod;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
-import com.azure.autorest.model.clientmodel.ClientModels;
-import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.LocalVariable;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.model.clientmodel.ClassType;
+import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
+import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.util.SchemaUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
+import com.azure.core.http.rest.ResponseBase;
+import com.azure.core.http.rest.SimpleResponse;
+import com.azure.core.http.rest.StreamResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
@@ -314,6 +318,8 @@ public class FluentUtils {
             GenericType type = (GenericType) clientType;
             if (Response.class.getSimpleName().equals(type.getName())) {
                 ret = true;
+            } else {
+                ret = SchemaUtil.isGenericTypeClassSubclassOf(type, Response.class);
             }
         } else if (clientType instanceof ClassType) {
             // ClientResponse is type of a subclass of Response<>
@@ -332,6 +338,8 @@ public class FluentUtils {
             GenericType type = (GenericType) clientType;
             if (Response.class.getSimpleName().equals(type.getName())) {
                 bodyType = type.getTypeArguments()[0];
+            } else if (SchemaUtil.isGenericTypeClassSubclassOf(type, Response.class)) {
+                bodyType = getValueTypeFromResponseTypeSubType(type);
             }
         } else if (clientType instanceof ClassType) {
             ClassType type = (ClassType) clientType;
@@ -341,6 +349,21 @@ public class FluentUtils {
             if (clientResponse.isPresent()) {
                 bodyType = clientResponse.get().getBodyType();
             };
+        }
+        return bodyType;
+    }
+
+    private static IType getValueTypeFromResponseTypeSubType(GenericType type) {
+        IType bodyType;
+        if (ResponseBase.class.getSimpleName().equals(type.getName())) {
+            bodyType = type.getTypeArguments()[1];
+        } else if (SimpleResponse.class.getSimpleName().equals(type.getName())) {
+            bodyType = type.getTypeArguments()[0];
+        } else if (StreamResponse.class.getSimpleName().equals(type.getName())) {
+            bodyType = GenericType.FLUX_BYTE_BUFFER;
+        } else {
+            log("Unable to determine value type for Response subtype: %s, fallback to typeArguments[0].", type);
+            bodyType = type.getTypeArguments()[0];
         }
         return bodyType;
     }
