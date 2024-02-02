@@ -184,21 +184,25 @@ public class MethodUtil {
             }
         }
         contentType.setImplementation(Parameter.ImplementationLocation.METHOD);
+
+        Language language = new Language();
+        language.setName("ContentType");
+        language.setDescription("The content type");
         SealedChoiceSchema sealedChoiceSchema = new SealedChoiceSchema();
         StringSchema stringSchema = new StringSchema();
         stringSchema.setType(Schema.AllSchemaTypes.STRING);
         sealedChoiceSchema.setChoiceType(stringSchema);
         sealedChoiceSchema.setChoices(getContentTypeChoiceValues(requests));
         sealedChoiceSchema.setType(Schema.AllSchemaTypes.fromValue("sealed-choice"));
-        Language language = new Language();
-        language.setName("contentType");
-        language.setSerializedName("Content-Type");
-        language.setDescription("The content type");
         sealedChoiceSchema.setLanguage(new Languages());
-        sealedChoiceSchema.getLanguage().setJava(language);
         sealedChoiceSchema.getLanguage().setDefault(language);
         sealedChoiceSchema.getLanguage().setJava(language);
         sealedChoiceSchema.setProtocol(new Protocols());
+
+        language = new Language();
+        language.setName("contentType");
+        language.setSerializedName("Content-Type");
+        language.setDescription("The content type");
         contentType.setSchema(sealedChoiceSchema);
         contentType.setImplementation(Parameter.ImplementationLocation.METHOD);
         contentType.setProtocol(new Protocols());
