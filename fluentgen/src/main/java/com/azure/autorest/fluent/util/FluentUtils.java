@@ -354,13 +354,16 @@ public class FluentUtils {
     }
 
     private static IType getValueTypeFromResponseTypeSubType(GenericType type) {
-        IType bodyType = null;
+        IType bodyType;
         if (ResponseBase.class.getSimpleName().equals(type.getName())) {
             bodyType = type.getTypeArguments()[1];
         } else if (SimpleResponse.class.getSimpleName().equals(type.getName())) {
             bodyType = type.getTypeArguments()[0];
         } else if (StreamResponse.class.getSimpleName().equals(type.getName())) {
             bodyType = GenericType.FLUX_BYTE_BUFFER;
+        } else {
+            log("Unable to determine value type for Response subtype: %s, fallback to typeArguments[0].", type);
+            bodyType = type.getTypeArguments()[0];
         }
         return bodyType;
     }
