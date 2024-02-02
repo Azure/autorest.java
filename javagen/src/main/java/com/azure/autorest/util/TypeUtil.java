@@ -75,10 +75,7 @@ public class TypeUtil {
         // The ##FileDetails model would inherit the usages from compositeType (the request model). So if the request is INTERNAL, FileDetails model would also be INTERNAL.
         // But it may reside in a different package, depending on the options e.g. "custom-types"/"custom-types-subpackage".
 
-        String fileDetailsModelName = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(
-                filePropertyName.toLowerCase(Locale.ROOT).endsWith("file")
-                        ? filePropertyName + "Details"
-                        : filePropertyName + "FileDetails");
+        String fileDetailsModelName = getFileDetailsModelName(filePropertyName);
         ClientModel clientModel = ClientModelUtil.getClientModel(fileDetailsModelName);
         if (clientModel != null) {
             return clientModel.getType();
@@ -133,5 +130,23 @@ public class TypeUtil {
                 .build();
         ClientModels.getInstance().addModel(clientModel);
         return clientModel.getType();
+    }
+
+    private static String getFileDetailsModelName(String filePropertyName) {
+        return com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(
+                filePropertyName.toLowerCase(Locale.ROOT).endsWith("file")
+                        ? filePropertyName + "Details"
+                        : filePropertyName + "FileDetails");
+    }
+
+    /**
+     * Gets the FileDetails model for a multipart/form-data request
+     *
+     * @param filePropertyName the property name of the file in the multipart/form-data request model.
+     * @return the ##FileDetails model
+     */
+    public static IType getMultipartFileDetailsModel(String filePropertyName) {
+        String fileDetailsModelName = getFileDetailsModelName(filePropertyName);
+        return ClientModelUtil.getClientModel(fileDetailsModelName).getType();
     }
 }

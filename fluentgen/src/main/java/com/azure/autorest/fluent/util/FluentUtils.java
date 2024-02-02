@@ -28,7 +28,6 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.ModelProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.autorest.util.SchemaUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.autorest.util.TypeUtil;
 import com.azure.core.http.rest.PagedIterable;

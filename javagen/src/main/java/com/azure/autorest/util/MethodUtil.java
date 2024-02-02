@@ -377,4 +377,9 @@ public class MethodUtil {
         return choiceValues;
     }
 
+    public static boolean isContentTypeInRequest(Request request, String contentType) {
+        return request.getProtocol() != null && request.getProtocol().getHttp() != null
+                && request.getProtocol().getHttp().getMediaTypes() != null
+                && request.getProtocol().getHttp().getMediaTypes().contains(contentType);
+    }
 }

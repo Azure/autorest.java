@@ -1167,7 +1167,9 @@ export class CodeModelBuilder {
 
       if (groupToRequestConditions || groupToMatchConditions) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         request.signatureParameters = [];
         op.convenienceApi.requests.push(request);
@@ -1323,7 +1325,9 @@ export class CodeModelBuilder {
 
       if (op.convenienceApi && op.parameters) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         op.convenienceApi.requests.push(request);
 

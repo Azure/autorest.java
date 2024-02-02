@@ -292,7 +292,11 @@ abstract class ConvenienceMethodTemplateBase {
                     }
                 }
                 methodBlock.line(String.format("%1$s %2$s = new %1$s(%3$s)%4$s;", targetType, targetParameterObjectName, ctorExpression, setterExpression));
-                methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
+                String expression = expressionConvertToType(
+                        targetParameterObjectName,
+                        findParameterForConvenienceMethod(targetParameter, protocolMethod),
+                        protocolMethod.getProxyMethod().getRequestContentType());
+                methodBlock.line(String.format("BinaryData %1$s = %2$s;", targetParameterName, expression));
             }
         }
     }
@@ -729,8 +733,15 @@ abstract class ConvenienceMethodTemplateBase {
 
     private static MethodParameter findParameterForConvenienceMethod(
             MethodParameter parameter, ClientMethod protocolMethod) {
+        // TODO (weidxu): this way of finding parameter from protocol method may not be correct. So far it is only used to find the RequestParameterLocation.BODY
         List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
         return protocolParameters.stream().filter(p -> Objects.equals(parameter.getSerializedName(), p.getSerializedName())).findFirst().orElse(null);
+    }
+
+    private static MethodParameter findParameterForConvenienceMethod(
+            ClientMethodParameter parameter, ClientMethod protocolMethod) {
+        List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
+        return protocolParameters.stream().filter(p -> Objects.equals(parameter.getName(), p.getName())).findFirst().orElse(null);
     }
 
     private static List<MethodParameter> getParameters(ClientMethod method, boolean useAllParameters) {
