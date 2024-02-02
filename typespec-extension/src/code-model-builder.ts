@@ -1319,12 +1319,6 @@ export class CodeModelBuilder {
         parameter.language.default.name = "request";
       }
 
-      if (schema.serializationFormats?.includes(KnownMediaType.Multipart)) {
-        // TODO: anonymous model for multipart is not supported
-        // at present, use the model with name given above
-        return;
-      }
-
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {
