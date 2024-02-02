@@ -252,7 +252,7 @@ abstract class ConvenienceMethodTemplateBase {
                             .findFirst().orElse(null);
                     if (proxyMethodParameter != null) {
                         MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
-                        parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
+                        parametersMap.put(methodParameter, findProtocolMethodParameterForConvenienceMethod(methodParameter, protocolMethod));
                     }
                 }
             }
@@ -292,10 +292,18 @@ abstract class ConvenienceMethodTemplateBase {
                     }
                 }
                 methodBlock.line(String.format("%1$s %2$s = new %1$s(%3$s)%4$s;", targetType, targetParameterObjectName, ctorExpression, setterExpression));
-                String expression = expressionConvertToType(
-                        targetParameterObjectName,
-                        findParameterForConvenienceMethod(targetParameter, protocolMethod),
-                        protocolMethod.getProxyMethod().getRequestContentType());
+
+                String expression = null;
+                if (targetParameter.getRawType() instanceof ClassType) {
+                    ClientModel model = ClientModelUtil.getClientModel(targetParameter.getRawType().toString());
+                    // serialize model for multipart/form-data
+                    if (model != null && ClientModelUtil.isMultipartModel(model)) {
+                        expression = expressionMultipartFormDataToBinaryData(targetParameterObjectName, model);
+                    }
+                }
+                if (expression == null) {
+                    expression = expressionConvertToBinaryData(targetParameterObjectName, targetParameter.getRawType(), protocolMethod.getProxyMethod().getRequestContentType());
+                }
                 methodBlock.line(String.format("BinaryData %1$s = %2$s;", targetParameterName, expression));
             }
         }
@@ -731,17 +739,10 @@ abstract class ConvenienceMethodTemplateBase {
         return parameterMap;
     }
 
-    private static MethodParameter findParameterForConvenienceMethod(
+    private static MethodParameter findProtocolMethodParameterForConvenienceMethod(
             MethodParameter parameter, ClientMethod protocolMethod) {
         List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
         return protocolParameters.stream().filter(p -> Objects.equals(parameter.getSerializedName(), p.getSerializedName())).findFirst().orElse(null);
-    }
-
-    private static MethodParameter findParameterForConvenienceMethod(
-            ClientMethodParameter parameter, ClientMethod protocolMethod) {
-        // TODO (weidxu): this way of finding parameter from protocol method may not be correct. So far it is only used to find the RequestParameterLocation.BODY
-        List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
-        return protocolParameters.stream().filter(p -> Objects.equals(parameter.getName(), p.getName())).findFirst().orElse(null);
     }
 
     private static List<MethodParameter> getParameters(ClientMethod method, boolean useAllParameters) {
