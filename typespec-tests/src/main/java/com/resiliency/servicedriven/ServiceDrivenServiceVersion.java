@@ -4,12 +4,10 @@
 
 package com.resiliency.servicedriven;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of ServiceDrivenClient.
  */
-public enum ServiceDrivenServiceVersion implements ServiceVersion {
+public enum ServiceDrivenServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value v1.
      */

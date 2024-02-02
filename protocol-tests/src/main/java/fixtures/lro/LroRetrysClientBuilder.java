@@ -192,6 +192,24 @@ public final class LroRetrysClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestLongRunningOperationTestServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the LroRetrysClientBuilder.
+     */
+    @Generated
+    public LroRetrysClientBuilder serviceVersion(AutoRestLongRunningOperationTestServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -218,9 +236,11 @@ public final class LroRetrysClientBuilder
     private AutoRestLongRunningOperationTestServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestLongRunningOperationTestServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestLongRunningOperationTestServiceVersion.getLatest();
         AutoRestLongRunningOperationTestServiceClientImpl client
             = new AutoRestLongRunningOperationTestServiceClientImpl(localPipeline,
-                JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

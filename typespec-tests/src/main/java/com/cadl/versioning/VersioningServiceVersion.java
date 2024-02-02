@@ -4,12 +4,10 @@
 
 package com.cadl.versioning;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of VersioningClient.
  */
-public enum VersioningServiceVersion implements ServiceVersion {
+public enum VersioningServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-06-01-preview.
      */

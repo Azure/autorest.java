@@ -29,6 +29,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.constantandclientparam.ConstantAndClientParameterServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -97,6 +98,20 @@ public final class ConstantAndClientParameterServiceClientImpl {
     }
 
     /**
+     * Service version.
+     */
+    private final ConstantAndClientParameterServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public ConstantAndClientParameterServiceVersion getServiceVersion() {
+        return this.serviceVersion;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -132,12 +147,14 @@ public final class ConstantAndClientParameterServiceClientImpl {
      * value.
      * @param queryNonRequiredClientParam Query parameter on the client that is not required.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public ConstantAndClientParameterServiceClientImpl(int queryRequiredClientParam,
-        int queryRequiredDefaultValueClientParam, int queryNonRequiredClientParam, String host) {
+        int queryRequiredDefaultValueClientParam, int queryNonRequiredClientParam, String host,
+        ConstantAndClientParameterServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
             JacksonAdapter.createDefaultSerializerAdapter(), queryRequiredClientParam,
-            queryRequiredDefaultValueClientParam, queryNonRequiredClientParam, host);
+            queryRequiredDefaultValueClientParam, queryNonRequiredClientParam, host, serviceVersion);
     }
 
     /**
@@ -149,11 +166,13 @@ public final class ConstantAndClientParameterServiceClientImpl {
      * value.
      * @param queryNonRequiredClientParam Query parameter on the client that is not required.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public ConstantAndClientParameterServiceClientImpl(HttpPipeline httpPipeline, int queryRequiredClientParam,
-        int queryRequiredDefaultValueClientParam, int queryNonRequiredClientParam, String host) {
+        int queryRequiredDefaultValueClientParam, int queryNonRequiredClientParam, String host,
+        ConstantAndClientParameterServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), queryRequiredClientParam,
-            queryRequiredDefaultValueClientParam, queryNonRequiredClientParam, host);
+            queryRequiredDefaultValueClientParam, queryNonRequiredClientParam, host, serviceVersion);
     }
 
     /**
@@ -166,16 +185,18 @@ public final class ConstantAndClientParameterServiceClientImpl {
      * value.
      * @param queryNonRequiredClientParam Query parameter on the client that is not required.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public ConstantAndClientParameterServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
         int queryRequiredClientParam, int queryRequiredDefaultValueClientParam, int queryNonRequiredClientParam,
-        String host) {
+        String host, ConstantAndClientParameterServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.queryRequiredClientParam = queryRequiredClientParam;
         this.queryRequiredDefaultValueClientParam = queryRequiredDefaultValueClientParam;
         this.queryNonRequiredClientParam = queryNonRequiredClientParam;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(ConstantAndClientParameterServiceClientService.class, this.httpPipeline,
             this.getSerializerAdapter());
     }

@@ -4,12 +4,10 @@
 
 package com.cadl.flatten;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of FlattenClient.
  */
-public enum FlattenServiceVersion implements ServiceVersion {
+public enum FlattenServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-06-01-preview.
      */

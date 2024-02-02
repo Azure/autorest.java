@@ -4,12 +4,10 @@
 
 package com._specs_.azure.core.traits;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of TraitsClient.
  */
-public enum TraitsServiceVersion implements ServiceVersion {
+public enum TraitsServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-12-01-preview.
      */

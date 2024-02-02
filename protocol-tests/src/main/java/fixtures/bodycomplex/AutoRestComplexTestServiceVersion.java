@@ -4,12 +4,10 @@
 
 package fixtures.bodycomplex;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of AutoRestComplexTestServiceClient.
  */
-public enum AutoRestComplexTestServiceVersion implements ServiceVersion {
+public enum AutoRestComplexTestServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2016-02-29.
      */

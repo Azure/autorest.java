@@ -4,12 +4,10 @@
 
 package com.server.versions.versioned;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of VersionedClient.
  */
-public enum VersionedServiceVersion implements ServiceVersion {
+public enum VersionedServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-12-01-preview.
      */

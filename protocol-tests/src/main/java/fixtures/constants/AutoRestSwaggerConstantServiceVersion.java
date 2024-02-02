@@ -4,12 +4,10 @@
 
 package fixtures.constants;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of AutoRestSwaggerConstantServiceClient.
  */
-public enum AutoRestSwaggerConstantServiceVersion implements ServiceVersion {
+public enum AutoRestSwaggerConstantServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

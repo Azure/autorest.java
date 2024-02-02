@@ -4,12 +4,10 @@
 
 package com.azure.ai.formrecognizer.documentanalysis.dpg;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of FormRecognizerClient.
  */
-public enum FormRecognizerServiceVersion implements ServiceVersion {
+public enum FormRecognizerServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-08-31.
      */

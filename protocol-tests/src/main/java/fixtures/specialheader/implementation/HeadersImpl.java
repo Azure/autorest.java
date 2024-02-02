@@ -38,6 +38,7 @@ import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
+import fixtures.specialheader.SpecialHeaderServiceVersion;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -68,6 +69,15 @@ public final class HeadersImpl {
     HeadersImpl(SpecialHeaderClientImpl client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public SpecialHeaderServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

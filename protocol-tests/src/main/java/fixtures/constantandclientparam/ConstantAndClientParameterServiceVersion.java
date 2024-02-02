@@ -4,12 +4,10 @@
 
 package fixtures.constantandclientparam;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of ConstantAndClientParameterServiceClient.
  */
-public enum ConstantAndClientParameterServiceVersion implements ServiceVersion {
+public enum ConstantAndClientParameterServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

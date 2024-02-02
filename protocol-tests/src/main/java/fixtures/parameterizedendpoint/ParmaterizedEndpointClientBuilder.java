@@ -192,6 +192,24 @@ public final class ParmaterizedEndpointClientBuilder implements HttpTrait<Parmat
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private ParmaterizedEndpointServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the ParmaterizedEndpointClientBuilder.
+     */
+    @Generated
+    public ParmaterizedEndpointClientBuilder serviceVersion(ParmaterizedEndpointServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -217,8 +235,10 @@ public final class ParmaterizedEndpointClientBuilder implements HttpTrait<Parmat
     @Generated
     private ParmaterizedEndpointClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        ParmaterizedEndpointServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : ParmaterizedEndpointServiceVersion.getLatest();
         ParmaterizedEndpointClientImpl client = new ParmaterizedEndpointClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;
     }
 

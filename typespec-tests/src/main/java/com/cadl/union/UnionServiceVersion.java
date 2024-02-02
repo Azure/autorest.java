@@ -4,12 +4,10 @@
 
 package com.cadl.union;
 
-import com.azure.core.util.ServiceVersion;
-
 /**
  * Service version of UnionClient.
  */
-public enum UnionServiceVersion implements ServiceVersion {
+public enum UnionServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Enum value 2022-03-01-preview.
      */

@@ -191,6 +191,24 @@ public final class EnumClientBuilder implements HttpTrait<EnumClientBuilder>, Co
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestSwaggerBatServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the EnumClientBuilder.
+     */
+    @Generated
+    public EnumClientBuilder serviceVersion(AutoRestSwaggerBatServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -217,8 +235,10 @@ public final class EnumClientBuilder implements HttpTrait<EnumClientBuilder>, Co
     private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestSwaggerBatServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestSwaggerBatServiceVersion.getLatest();
         AutoRestSwaggerBatServiceClientImpl client = new AutoRestSwaggerBatServiceClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

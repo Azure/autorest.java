@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.constants.AutoRestSwaggerConstantServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerConstantServiceClient type.
@@ -75,6 +76,20 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     }
 
     /**
+     * Service version.
+     */
+    private final AutoRestSwaggerConstantServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestSwaggerConstantServiceVersion getServiceVersion() {
+        return this.serviceVersion;
+    }
+
+    /**
      * The HTTP pipeline to send requests through.
      */
     private final HttpPipeline httpPipeline;
@@ -126,11 +141,13 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
      * @param pathConstant Constant path property on the client that is a required parameter for operation
      * 'constants_putClientConstants'.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestSwaggerConstantServiceClientImpl(boolean headerConstant, int queryConstant, String pathConstant,
-        String host) {
+        String host, AutoRestSwaggerConstantServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant, host);
+            JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant, host,
+            serviceVersion);
     }
 
     /**
@@ -144,11 +161,12 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
      * @param pathConstant Constant path property on the client that is a required parameter for operation
      * 'constants_putClientConstants'.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestSwaggerConstantServiceClientImpl(HttpPipeline httpPipeline, boolean headerConstant,
-        int queryConstant, String pathConstant, String host) {
+        int queryConstant, String pathConstant, String host, AutoRestSwaggerConstantServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant,
-            host);
+            host, serviceVersion);
     }
 
     /**
@@ -163,15 +181,18 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
      * @param pathConstant Constant path property on the client that is a required parameter for operation
      * 'constants_putClientConstants'.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestSwaggerConstantServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        boolean headerConstant, int queryConstant, String pathConstant, String host) {
+        boolean headerConstant, int queryConstant, String pathConstant, String host,
+        AutoRestSwaggerConstantServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.headerConstant = headerConstant;
         this.queryConstant = queryConstant;
         this.pathConstant = pathConstant;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.contants = new ContantsImpl(this);
     }
 }

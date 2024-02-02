@@ -251,6 +251,25 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestSwaggerConstantServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the AutoRestSwaggerConstantServiceClientBuilder.
+     */
+    @Generated
+    public AutoRestSwaggerConstantServiceClientBuilder
+        serviceVersion(AutoRestSwaggerConstantServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -278,9 +297,11 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localPathConstant = (pathConstant != null) ? pathConstant : "path";
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestSwaggerConstantServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestSwaggerConstantServiceVersion.getLatest();
         AutoRestSwaggerConstantServiceClientImpl client = new AutoRestSwaggerConstantServiceClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.headerConstant, this.queryConstant, localPathConstant,
-            localHost);
+            localHost, localServiceVersion);
         return client;
     }
 
