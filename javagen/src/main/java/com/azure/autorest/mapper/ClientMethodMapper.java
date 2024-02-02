@@ -3,7 +3,6 @@
 
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
 import com.azure.autorest.extension.base.model.codemodel.LongRunningMetadata;
@@ -95,8 +94,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return Objects.hash(operation, isProtocolMethod);
         }
     }
-
-    private static final ReturnTypeDescriptionAssembler DESCRIPTION_ASSEMBLER = new ReturnTypeDescriptionAssembler(Javagen.getPluginInstance());
 
     /**
      * Creates a new instance of {@link ClientMethodMapper}.
@@ -1620,7 +1617,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             description = "whether resource exists";
         }
 
-        description = DESCRIPTION_ASSEMBLER.assemble(description, returnType, baseType);
+        description = ReturnTypeDescriptionAssembler.assemble(description, returnType, baseType);
 
         return description == null ? "the response" : description;
     }
