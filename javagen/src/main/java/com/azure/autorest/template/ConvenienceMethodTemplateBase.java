@@ -733,13 +733,13 @@ abstract class ConvenienceMethodTemplateBase {
 
     private static MethodParameter findParameterForConvenienceMethod(
             MethodParameter parameter, ClientMethod protocolMethod) {
-        // TODO (weidxu): this way of finding parameter from protocol method may not be correct. So far it is only used to find the RequestParameterLocation.BODY
         List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
         return protocolParameters.stream().filter(p -> Objects.equals(parameter.getSerializedName(), p.getSerializedName())).findFirst().orElse(null);
     }
 
     private static MethodParameter findParameterForConvenienceMethod(
             ClientMethodParameter parameter, ClientMethod protocolMethod) {
+        // TODO (weidxu): this way of finding parameter from protocol method may not be correct. So far it is only used to find the RequestParameterLocation.BODY
         List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
         return protocolParameters.stream().filter(p -> Objects.equals(parameter.getName(), p.getName())).findFirst().orElse(null);
     }
