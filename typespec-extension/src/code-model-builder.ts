@@ -41,6 +41,7 @@ import {
   walkPropertiesInherited,
   getService,
   resolveEncodedName,
+  isVoidType,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -749,7 +750,9 @@ export class CodeModelBuilder {
     // body
     if (op.parameters.body) {
       if (op.parameters.body.parameter) {
-        this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+        if (!isVoidType(op.parameters.body.parameter.type)) {
+          this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+        }
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
