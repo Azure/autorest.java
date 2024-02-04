@@ -4,10 +4,12 @@
 
 package fixtures.httpinfrastructure;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of AutoRestHttpInfrastructureTestServiceClient.
  */
-public enum AutoRestHttpInfrastructureTestServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum AutoRestHttpInfrastructureTestServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

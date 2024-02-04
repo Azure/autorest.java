@@ -4,10 +4,12 @@
 
 package fixtures.endpointlro;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of LroEndpoint.
  */
-public enum LroEndpointServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum LroEndpointServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

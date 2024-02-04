@@ -4,10 +4,12 @@
 
 package fixtures.requiredoptionalbody;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of RequiredOptionalBodyClient.
  */
-public enum RequiredOptionalBodyServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum RequiredOptionalBodyServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

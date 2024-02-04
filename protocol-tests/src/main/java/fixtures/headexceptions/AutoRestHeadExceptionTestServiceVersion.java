@@ -4,10 +4,12 @@
 
 package fixtures.headexceptions;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of AutoRestHeadExceptionTestServiceClient.
  */
-public enum AutoRestHeadExceptionTestServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum AutoRestHeadExceptionTestServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */
