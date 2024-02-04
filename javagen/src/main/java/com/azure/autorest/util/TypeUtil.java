@@ -134,7 +134,7 @@ public class TypeUtil {
                 .type(type)
                 .serializationFormats(Set.of(KnownMediaType.MULTIPART.value()))
                 .implementationDetails(new ImplementationDetails.Builder()
-                        .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
+                        .usages(SchemaUtil.mapSchemaContext(usages))
                         .build())
                 .properties(properties)
                 .build();
