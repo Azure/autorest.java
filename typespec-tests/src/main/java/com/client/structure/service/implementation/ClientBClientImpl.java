@@ -28,7 +28,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.ServiceVersion;
+import com.client.structure.service.ServiceServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -71,14 +71,14 @@ public final class ClientBClientImpl {
     /**
      * Service version.
      */
-    private final ServiceVersion serviceVersion;
+    private final ServiceServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
      * 
      * @return the serviceVersion value.
      */
-    public ServiceVersion getServiceVersion() {
+    public ServiceServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
@@ -117,7 +117,7 @@ public final class ClientBClientImpl {
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      * @param serviceVersion Service version.
      */
-    public ClientBClientImpl(String endpoint, String client, ServiceVersion serviceVersion) {
+    public ClientBClientImpl(String endpoint, String client, ServiceServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
             JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
     }
@@ -130,7 +130,8 @@ public final class ClientBClientImpl {
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      * @param serviceVersion Service version.
      */
-    public ClientBClientImpl(HttpPipeline httpPipeline, String endpoint, String client, ServiceVersion serviceVersion) {
+    public ClientBClientImpl(HttpPipeline httpPipeline, String endpoint, String client,
+        ServiceServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
     }
 
@@ -144,7 +145,7 @@ public final class ClientBClientImpl {
      * @param serviceVersion Service version.
      */
     public ClientBClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String client, ServiceVersion serviceVersion) {
+        String client, ServiceServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;

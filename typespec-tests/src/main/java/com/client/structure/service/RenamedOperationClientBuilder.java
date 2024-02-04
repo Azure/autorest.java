@@ -218,7 +218,7 @@ public final class RenamedOperationClientBuilder implements HttpTrait<RenamedOpe
      * Service version
      */
     @Generated
-    private ServiceVersion serviceVersion;
+    private ServiceServiceVersion serviceVersion;
 
     /**
      * Sets Service version.
@@ -227,7 +227,7 @@ public final class RenamedOperationClientBuilder implements HttpTrait<RenamedOpe
      * @return the RenamedOperationClientBuilder.
      */
     @Generated
-    public RenamedOperationClientBuilder serviceVersion(ServiceVersion serviceVersion) {
+    public RenamedOperationClientBuilder serviceVersion(ServiceServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -258,7 +258,8 @@ public final class RenamedOperationClientBuilder implements HttpTrait<RenamedOpe
     @Generated
     private RenamedOperationClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ServiceVersion localServiceVersion = (serviceVersion != null) ? serviceVersion : ServiceVersion.getLatest();
+        ServiceServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : ServiceServiceVersion.getLatest();
         RenamedOperationClientImpl client = new RenamedOperationClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client, localServiceVersion);
         return client;

@@ -4,10 +4,12 @@
 
 package com.cadl.response;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of ResponseClient.
  */
-public enum ResponseServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum ResponseServiceVersion implements ServiceVersion {
     /**
      * Enum value 2022-06-01-preview.
      */

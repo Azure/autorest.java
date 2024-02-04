@@ -4,10 +4,12 @@
 
 package com.cadl.multipleapiversion;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of SecondClient.
  */
-public enum SecondServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum SecondServiceVersion implements ServiceVersion {
     /**
      * Enum value 2022-10-01-preview.
      */

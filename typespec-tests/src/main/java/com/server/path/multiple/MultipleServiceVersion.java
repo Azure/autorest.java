@@ -4,10 +4,12 @@
 
 package com.server.path.multiple;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of MultipleClient.
  */
-public enum MultipleServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum MultipleServiceVersion implements ServiceVersion {
     /**
      * Enum value v1.0.
      */

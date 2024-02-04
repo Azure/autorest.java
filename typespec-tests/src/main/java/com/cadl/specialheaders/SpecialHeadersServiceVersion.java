@@ -4,10 +4,12 @@
 
 package com.cadl.specialheaders;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of SpecialHeadersClient.
  */
-public enum SpecialHeadersServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum SpecialHeadersServiceVersion implements ServiceVersion {
     /**
      * Enum value 2022-06-01-preview.
      */

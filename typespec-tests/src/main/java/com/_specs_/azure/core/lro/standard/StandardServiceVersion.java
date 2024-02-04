@@ -4,10 +4,12 @@
 
 package com._specs_.azure.core.lro.standard;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of StandardClient.
  */
-public enum StandardServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum StandardServiceVersion implements ServiceVersion {
     /**
      * Enum value 2022-12-01-preview.
      */

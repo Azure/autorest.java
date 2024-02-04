@@ -4,10 +4,12 @@
 
 package com.cadl.server;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of ContosoClient.
  */
-public enum ContosoServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum ContosoServiceVersion implements ServiceVersion {
     /**
      * Enum value v1.
      */

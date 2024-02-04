@@ -4,10 +4,12 @@
 
 package com.cadl.protocolandconvenient;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of ProtocolAndConvenientClient.
  */
-public enum ProtocolAndConvenientServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum ProtocolAndConvenientServiceVersion implements ServiceVersion {
     /**
      * Enum value 2022-06-01-preview.
      */
