@@ -99,7 +99,9 @@ model ResponseWithHeader<T> {
 @armResourceOperations
 interface ChildResourcesInterface
   extends ResourceInstanceOperations<ChildResource, ChildResourceProperties>,
-    ResourceListByParent<ChildResource> {}
+    ResourceListByParent<ChildResource> {
+  actionWithoutBody is ArmResourceActionAsync<ChildResource, void, void>;
+}
 
 @armResourceOperations
 interface TopLevelArmResourceInterface
