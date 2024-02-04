@@ -4,10 +4,12 @@
 
 package fixtures.url.multi;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of AutoRestUrlMutliCollectionFormatTestServiceClient.
  */
-public enum AutoRestUrlMutliCollectionFormatTestServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum AutoRestUrlMutliCollectionFormatTestServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

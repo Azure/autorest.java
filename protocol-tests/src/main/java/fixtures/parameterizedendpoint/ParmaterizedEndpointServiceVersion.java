@@ -4,10 +4,12 @@
 
 package fixtures.parameterizedendpoint;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of ParmaterizedEndpointClient.
  */
-public enum ParmaterizedEndpointServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum ParmaterizedEndpointServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

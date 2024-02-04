@@ -4,10 +4,12 @@
 
 package fixtures.specialheader;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of SpecialHeaderClient.
  */
-public enum SpecialHeaderServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum SpecialHeaderServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

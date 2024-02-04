@@ -10,7 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.ServiceVersion;
+import com.client.structure.service.ServiceServiceVersion;
 
 /**
  * Initializes a new instance of the TwoOperationGroupClient type.
@@ -47,14 +47,14 @@ public final class TwoOperationGroupClientImpl {
     /**
      * Service version.
      */
-    private final ServiceVersion serviceVersion;
+    private final ServiceServiceVersion serviceVersion;
 
     /**
      * Gets Service version.
      * 
      * @return the serviceVersion value.
      */
-    public ServiceVersion getServiceVersion() {
+    public ServiceServiceVersion getServiceVersion() {
         return this.serviceVersion;
     }
 
@@ -121,7 +121,7 @@ public final class TwoOperationGroupClientImpl {
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
      * @param serviceVersion Service version.
      */
-    public TwoOperationGroupClientImpl(String endpoint, String client, ServiceVersion serviceVersion) {
+    public TwoOperationGroupClientImpl(String endpoint, String client, ServiceServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
             JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
     }
@@ -135,7 +135,7 @@ public final class TwoOperationGroupClientImpl {
      * @param serviceVersion Service version.
      */
     public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, String endpoint, String client,
-        ServiceVersion serviceVersion) {
+        ServiceServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
     }
 
@@ -149,7 +149,7 @@ public final class TwoOperationGroupClientImpl {
      * @param serviceVersion Service version.
      */
     public TwoOperationGroupClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String client, ServiceVersion serviceVersion) {
+        String client, ServiceServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;

@@ -4,10 +4,12 @@
 
 package fixtures.llcresi;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of DpgClient.
  */
-public enum DpgServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum DpgServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

@@ -6,7 +6,7 @@ package com.cadl.multipart.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.cadl.multipart.models.FileDetails;
+import com.cadl.multipart.models.FileDataFileDetails;
 
 /**
  * The UploadFileRequest model.
@@ -14,28 +14,28 @@ import com.cadl.multipart.models.FileDetails;
 @Immutable
 public final class UploadFileRequest {
     /*
-     * The file property.
+     * The file_data property.
      */
     @Generated
-    private final FileDetails file;
+    private final FileDataFileDetails fileData;
 
     /**
      * Creates an instance of UploadFileRequest class.
      * 
-     * @param file the file value to set.
+     * @param fileData the fileData value to set.
      */
     @Generated
-    public UploadFileRequest(FileDetails file) {
-        this.file = file;
+    public UploadFileRequest(FileDataFileDetails fileData) {
+        this.fileData = fileData;
     }
 
     /**
-     * Get the file property: The file property.
+     * Get the fileData property: The file_data property.
      * 
-     * @return the file value.
+     * @return the fileData value.
      */
     @Generated
-    public FileDetails getFile() {
-        return this.file;
+    public FileDataFileDetails getFileData() {
+        return this.fileData;
     }
 }

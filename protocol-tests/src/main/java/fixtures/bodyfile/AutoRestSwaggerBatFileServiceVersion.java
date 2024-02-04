@@ -4,10 +4,12 @@
 
 package fixtures.bodyfile;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of AutoRestSwaggerBatFileServiceClient.
  */
-public enum AutoRestSwaggerBatFileServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum AutoRestSwaggerBatFileServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

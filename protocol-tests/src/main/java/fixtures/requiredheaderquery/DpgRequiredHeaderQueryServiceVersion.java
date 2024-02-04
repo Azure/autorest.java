@@ -4,10 +4,12 @@
 
 package fixtures.requiredheaderquery;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of DpgRequiredHeaderQueryClient.
  */
-public enum DpgRequiredHeaderQueryServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum DpgRequiredHeaderQueryServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

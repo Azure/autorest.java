@@ -193,12 +193,13 @@ export function isPayloadProperty(program: Program, property: ModelProperty) {
 export function getServiceVersion(client: CodeModelClient | CodeModel): ServiceVersion {
   let name = client.language.default.name;
   let description = name;
+  name = pascalCase(name);
   if (name.endsWith("Client")) {
     name = name.substring(0, name.length - "Client".length);
   } else {
     description = description + "Client";
   }
-  if (name.endsWith("Service")) {
+  if (name.endsWith("Service") && name !== "Service") {
     name = name + "Version";
   } else {
     name = name + "ServiceVersion";

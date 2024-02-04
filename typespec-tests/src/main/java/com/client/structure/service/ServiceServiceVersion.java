@@ -4,10 +4,12 @@
 
 package com.client.structure.service;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of ServiceClient.
  */
-public enum ServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum ServiceServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */
@@ -15,7 +17,7 @@ public enum ServiceVersion implements com.azure.core.util.ServiceVersion {
 
     private final String version;
 
-    ServiceVersion(String version) {
+    ServiceServiceVersion(String version) {
         this.version = version;
     }
 
@@ -30,9 +32,9 @@ public enum ServiceVersion implements com.azure.core.util.ServiceVersion {
     /**
      * Gets the latest service version supported by this client library.
      * 
-     * @return The latest {@link ServiceVersion}.
+     * @return The latest {@link ServiceServiceVersion}.
      */
-    public static ServiceVersion getLatest() {
+    public static ServiceServiceVersion getLatest() {
         return V1_0_0;
     }
 }

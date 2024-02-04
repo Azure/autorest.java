@@ -4,10 +4,12 @@
 
 package fixtures.multimediatypes;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of DpgMultiMediaTypesClient.
  */
-public enum DpgMultiMediaTypesServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum DpgMultiMediaTypesServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

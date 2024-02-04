@@ -213,7 +213,7 @@ public final class ClientBClientBuilder implements HttpTrait<ClientBClientBuilde
      * Service version
      */
     @Generated
-    private ServiceVersion serviceVersion;
+    private ServiceServiceVersion serviceVersion;
 
     /**
      * Sets Service version.
@@ -222,7 +222,7 @@ public final class ClientBClientBuilder implements HttpTrait<ClientBClientBuilde
      * @return the ClientBClientBuilder.
      */
     @Generated
-    public ClientBClientBuilder serviceVersion(ServiceVersion serviceVersion) {
+    public ClientBClientBuilder serviceVersion(ServiceServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -253,7 +253,8 @@ public final class ClientBClientBuilder implements HttpTrait<ClientBClientBuilde
     @Generated
     private ClientBClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ServiceVersion localServiceVersion = (serviceVersion != null) ? serviceVersion : ServiceVersion.getLatest();
+        ServiceServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : ServiceServiceVersion.getLatest();
         ClientBClientImpl client = new ClientBClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, this.client, localServiceVersion);
         return client;

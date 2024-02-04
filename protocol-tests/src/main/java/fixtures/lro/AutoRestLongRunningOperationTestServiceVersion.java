@@ -4,10 +4,12 @@
 
 package fixtures.lro;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of AutoRestLongRunningOperationTestServiceClient.
  */
-public enum AutoRestLongRunningOperationTestServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum AutoRestLongRunningOperationTestServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

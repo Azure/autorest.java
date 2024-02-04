@@ -4,10 +4,12 @@
 
 package fixtures.enums;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of EnumServiceClient.
  */
-public enum EnumServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum EnumServiceVersion implements ServiceVersion {
     /**
      * Enum value 1.0.0.
      */

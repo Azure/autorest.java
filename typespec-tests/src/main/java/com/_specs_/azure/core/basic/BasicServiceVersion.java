@@ -4,10 +4,12 @@
 
 package com._specs_.azure.core.basic;
 
+import com.azure.core.util.ServiceVersion;
+
 /**
  * Service version of BasicClient.
  */
-public enum BasicServiceVersion implements com.azure.core.util.ServiceVersion {
+public enum BasicServiceVersion implements ServiceVersion {
     /**
      * Enum value 2022-12-01-preview.
      */
