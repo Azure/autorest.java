@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Language;
 import com.azure.autorest.extension.base.model.codemodel.Languages;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -20,6 +21,7 @@ import com.azure.autorest.model.clientmodel.ImplementationDetails;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -86,7 +88,16 @@ public class TypeUtil {
         objectSchema.setLanguage(new Languages());
         objectSchema.getLanguage().setJava(new Language());
         objectSchema.getLanguage().getJava().setName(fileDetailsModelName);
-        objectSchema.setUsage(compositeType.getUsage());
+        // usages
+        Set<SchemaContext> usages = compositeType.getUsage();
+        // let it inherit the usage (PUBLIC/INTERNAL) from the multipart/form-data request model
+        if (usages != null && usages.contains(SchemaContext.ANONYMOUS)) {
+            // but, if the request model is ANONYMOUS, the FileDetails should not be ANONYMOUS
+            usages = new HashSet<>(usages);
+            usages.remove(SchemaContext.ANONYMOUS);
+            usages.remove(SchemaContext.INTERNAL);
+        }
+        objectSchema.setUsage(usages);
         ClassType type = Mappers.getObjectMapper().map(objectSchema);
 
         // create ClientModel
@@ -122,7 +133,6 @@ public class TypeUtil {
                 .packageName(type.getPackage())
                 .type(type)
                 .serializationFormats(Set.of(KnownMediaType.MULTIPART.value()))
-                // let it inherit the usage (PUBLIC/INTERNAL) from the multipart/form-data request model
                 .implementationDetails(new ImplementationDetails.Builder()
                         .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
                         .build())
