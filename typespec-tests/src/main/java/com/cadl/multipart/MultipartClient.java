@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
 import com.cadl.multipart.implementation.models.UploadFileRequest;
+import com.cadl.multipart.models.FileDataFileDetails;
 import com.cadl.multipart.models.FileDetails;
 import com.cadl.multipart.models.FormData;
 import java.util.Objects;
@@ -176,7 +177,7 @@ public final class MultipartClient {
      * The uploadFile operation.
      * 
      * @param name A sequence of textual characters.
-     * @param file Represent a byte array.
+     * @param fileData Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -186,13 +187,14 @@ public final class MultipartClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void uploadFile(String name, FileDetails file) {
+    public void uploadFile(String name, FileDataFileDetails fileData) {
         // Generated convenience method for uploadFileWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        UploadFileRequest requestObj = new UploadFileRequest(file);
-        BinaryData request
-            = new MultipartFormDataHelper(requestOptions).serializeFileField("file", requestObj.getFile().getContent(),
-                requestObj.getFile().getContentType(), requestObj.getFile().getFilename()).end().getRequestBody();
+        UploadFileRequest requestObj = new UploadFileRequest(fileData);
+        BinaryData request = new MultipartFormDataHelper(requestOptions)
+            .serializeFileField("file_data", requestObj.getFileData().getContent(),
+                requestObj.getFileData().getContentType(), requestObj.getFileData().getFilename())
+            .end().getRequestBody();
         uploadFileWithResponse(name, request, requestOptions).getValue();
     }
 }

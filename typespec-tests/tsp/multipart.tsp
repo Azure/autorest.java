@@ -40,5 +40,5 @@ op upload(
 op uploadFile(
   @path name: string,
   @header contentType: "multipart/form-data",
-  file: bytes,
+  file_data: bytes,
 ): OkResponse;
