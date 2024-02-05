@@ -205,49 +205,40 @@ public class JavaClass implements JavaType {
     }
 
     public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper) {
-        addExpectedNewLine();
-        if (commentDescriptionAction != null) {
-            contents.javadocCommentStart();
-            if (withGeneratedWrapper) {
-                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
-            }
-            contents.withWordWrap(wordWrapWidth, () -> commentDescriptionAction.accept(new JavaJavadocComment(contents)));
-            if (withGeneratedWrapper) {
-                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
-            }
-            contents.line();
-            if (commentTagAction == null) { // if no tags action, then end the javadoc comment
-                contents.javadocCommentEnd();
-            }
-        }
-        if (commentTagAction != null) {
-            if (commentDescriptionAction == null) {// if no description action, then start the javadoc comment
-                contents.javadocCommentStart();
-            }
-            if (withGeneratedWrapper) {
-                contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
-            }
-            contents.withWordWrap(wordWrapWidth, () -> commentTagAction.accept(new JavaJavadocComment(contents)));
-            if (withGeneratedWrapper) {
-                contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
-            }
-            contents.javadocCommentEnd();
-        }
+        javadocComment(commentDescriptionAction, commentTagAction, withGeneratedWrapper, true, wordWrapWidth);
     }
 
     public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper) {
+        javadocComment(commentDescriptionAction, commentTagAction, withGeneratedWrapper, false, 0);
+    }
+
+    /**
+     * Helper method to add a javadoc comment to the contents.
+     * @param commentDescriptionAction
+     * @param commentTagAction
+     * @param withGeneratedWrapper
+     * @param withWordWrap
+     * @param wordWrapWidth
+     */
+    private void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper, boolean withWordWrap, int wordWrapWidth) {
         addExpectedNewLine();
         if (commentDescriptionAction != null) {
             contents.javadocCommentStart();
             if (withGeneratedWrapper) {
                 contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
-            }commentDescriptionAction.accept(new JavaJavadocComment(contents));
+            }
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentDescriptionAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentDescriptionAction.accept(new JavaJavadocComment(contents));
+            }
             if (withGeneratedWrapper) {
                 contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
             }
-            contents.line();
             if (commentTagAction == null) { // if no tags action, then end the javadoc comment
                 contents.javadocCommentEnd();
+            } else { // otherwise, a new line will be added and the tags action will start
+                contents.line();
             }
         }
         if (commentTagAction != null) {
@@ -257,7 +248,11 @@ public class JavaClass implements JavaType {
             if (withGeneratedWrapper) {
                 contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
             }
-            commentTagAction.accept(new JavaJavadocComment(contents));
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentTagAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentTagAction.accept(new JavaJavadocComment(contents));
+            }
             if (withGeneratedWrapper) {
                 contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
             }

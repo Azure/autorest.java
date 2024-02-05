@@ -107,26 +107,24 @@ public class JavaFile implements JavaContext {
     }
 
     public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper) {
-        if (commentAction != null) {
-            contents.javadocCommentStart();
-            if (withGeneratedWrapper) {
-                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
-            }
-            contents.withWordWrap(wordWrapWidth, () -> commentAction.accept(new JavaJavadocComment(contents)));
-            if (withGeneratedWrapper) {
-                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
-            }
-            contents.javadocCommentEnd();
-        }
+        javadocComment(commentAction, withGeneratedWrapper, false, wordWrapWidth);
     }
 
     public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper) {
+        javadocComment(commentAction, withGeneratedWrapper, false, 0);
+    }
+
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper, boolean withWordWrap, int wordWrapWidth) {
         if (commentAction != null) {
             contents.javadocCommentStart();
             if (withGeneratedWrapper) {
                 contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
             }
-            commentAction.accept(new JavaJavadocComment(contents));
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentAction.accept(new JavaJavadocComment(contents));
+            }
             if (withGeneratedWrapper) {
                 contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
             }
