@@ -126,4 +126,8 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
     protected void addGeneratedAnnotation(JavaType typeBlock) {
         typeBlock.annotation(Annotation.GENERATED.getName());
     }
+
+    protected boolean isPartialUpdateSupported() {
+        return true;
+    }
 }
