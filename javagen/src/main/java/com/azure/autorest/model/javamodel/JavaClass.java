@@ -3,7 +3,6 @@
 
 package com.azure.autorest.model.javamodel;
 
-import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.util.CoreUtils;
 
 import java.util.Arrays;
