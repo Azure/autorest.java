@@ -70,9 +70,9 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     Templates.getConvenienceAsyncMethodTemplate().addImports(imports, asyncClient.getConvenienceMethods());
 
     javaFile.declareImport(imports);
-    javaFile.javadocComment(comment ->
+    javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
         comment.description(String.format("Initializes a new instance of the asynchronous %1$s type.",
-            serviceClient.getInterfaceName())));
+            serviceClient.getInterfaceName())), false);
 
     if (asyncClient.getClientBuilder() != null) {
       javaFile.annotation(String.format("ServiceClient(builder = %s.class, isAsync = true)", asyncClient.getClientBuilder().getClassName()));
@@ -90,8 +90,9 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
       // Service Client Constructor
       classBlock.javadocComment(comment -> {
         comment.description(String.format("Initializes an instance of %1$s class.", asyncClient.getClassName()));
+      }, comment -> {
         comment.param("serviceClient", "the service client implementation.");
-      });
+      }, false);
       addGeneratedAnnotation(classBlock);
       if (wrapServiceClient) {
         classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", asyncClassName,
@@ -144,6 +145,10 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     classBlock.annotation(Annotation.GENERATED.getName());
   }
 
+  protected boolean isPartialUpdateSupported() {
+    return true;
+  }
+
   /**
    * Adds "getEndpoint" method, if necessary.
    * <p>
@@ -178,7 +183,10 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
               classBlock.javadocComment(comment -> {
                 comment.description("Gets the service endpoint that the client is connected to.");
                 comment.methodReturns("the service endpoint that the client is connected to.");
-              });
+              }, comment -> {
+                comment.description("Gets the service endpoint that the client is connected to.");
+                comment.methodReturns("the service endpoint that the client is connected to.");
+              }, false);
               String methodName = new ModelNamer().modelPropertyGetterName(serviceClientProperty);
               classBlock.method(serviceClientProperty.getMethodVisibility(), null, String.format("%1$s %2$s()",
                   serviceClientProperty.getType(), methodName), function -> {

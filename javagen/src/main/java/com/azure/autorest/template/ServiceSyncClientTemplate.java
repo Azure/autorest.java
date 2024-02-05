@@ -65,7 +65,7 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     javaFile.declareImport(imports);
     javaFile.javadocComment(comment ->
         comment.description(String.format("Initializes a new instance of the synchronous %1$s type.",
-            serviceClient.getInterfaceName())));
+            serviceClient.getInterfaceName())), false);
 
     if (syncClient.getClientBuilder() != null) {
       javaFile.annotation(String.format("ServiceClient(builder = %s.class)", syncClient.getClientBuilder().getClassName()));
@@ -100,10 +100,10 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
     }
 
     // Service Client Constructor
-    classBlock.javadocComment(comment -> {
-      comment.description(String.format("Initializes an instance of %1$s class.", syncClient.getClassName()));
-      comment.param("serviceClient", "the service client implementation.");
-    });
+    classBlock.javadocComment(
+            comment -> comment.description(String.format("Initializes an instance of %1$s class.", syncClient.getClassName())),
+            comment -> comment.param("serviceClient", "the service client implementation."),
+            false);
     addGeneratedAnnotation(classBlock);
     if (wrapServiceClient) {
       classBlock.constructor(constructorVisibility, String.format("%1$s(%2$s %3$s)", syncClient.getClassName(),

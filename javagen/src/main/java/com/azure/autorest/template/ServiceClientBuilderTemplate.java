@@ -124,13 +124,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         builderTypes.append("}");
         javaFile.declareImport(imports);
 
-        javaFile.javadocComment(comment -> {
+        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment -> {
             String clientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
             if (settings.isGenerateBuilderPerClient() && clientBuilder.getSyncClients().size() == 1) {
                 clientTypeName = clientBuilder.getSyncClients().iterator().next().getClassName();
             }
             comment.description(String.format("A builder for creating a new instance of the %1$s type.", clientTypeName));
-        });
+        }, false);
 
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
         String classDefinition = serviceClientBuilderName;
@@ -178,13 +178,17 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     classBlock.privateFinalMemberVariable("List<HttpPipelinePolicy>", "pipelinePolicies");
 
                     // constructor
-                    classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
+                    classBlock.javadocComment(comment -> {
+                        comment.description(String.format("Create an instance of the %s.", serviceClientBuilderName));
+                    }, comment -> {}, false);
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
                         javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                     });
                 } else {
-                    classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
+                    classBlock.javadocComment(comment -> {
+                        comment.description(String.format("Create an instance of the %s.", serviceClientBuilderName));
+                    }, comment -> {}, false);
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
                     });
@@ -224,12 +228,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 classBlock.privateMemberVariable(propertyVariableInit);
 
                 if (!serviceClientProperty.isReadOnly()) {
-                    classBlock.javadocComment(comment ->
-                    {
+                    classBlock.javadocComment(comment -> {
                         comment.description(String.format("Sets %1$s", serviceClientProperty.getDescription()));
+                    }, comment -> {
                         comment.param(serviceClientProperty.getName(), String.format("the %1$s value.", serviceClientProperty.getName()));
                         comment.methodReturns(String.format("the %1$s", serviceClientBuilderName));
-                    });
+                    }, false);
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName,
                             CodeNamer.toCamelCase(serviceClientProperty.getAccessorMethodSuffix()), serviceClientProperty.getType(),
@@ -246,11 +250,11 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             JavaVisibility visibility = settings.isGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
 
             // build method
-            classBlock.javadocComment(comment ->
-            {
+            classBlock.javadocComment(comment -> {
                 comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
+            }, comment -> {
                 comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
-            });
+            }, false);
             addGeneratedAnnotation(classBlock);
             classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
@@ -331,12 +335,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         for (AsyncSyncClient asyncClient : asyncClients) {
             final boolean wrapServiceClient = asyncClient.getMethodGroupClient() == null;
 
-            classBlock.javadocComment(comment ->
-            {
-                comment.description(String
-                        .format("Builds an instance of %1$s class", asyncClient.getClassName()));
-                comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName()));
-            });
+            classBlock.javadocComment(
+                    comment -> comment.description(String.format("Builds an instance of %1$s class", asyncClient.getClassName())),
+                    comment -> comment.methodReturns(String.format("an instance of %1$s", asyncClient.getClassName())),
+                    false);
             addGeneratedAnnotation(classBlock);
             classBlock.publicMethod(String.format("%1$s %2$s()", asyncClient.getClassName(), clientBuilder.getBuilderMethodNameForAsyncClient(asyncClient)),
                     function -> {
@@ -357,12 +359,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             AsyncSyncClient asyncClient = (asyncClients.size() == syncClients.size()) ? asyncClients.get(syncClientIndex) : null;
 
-            classBlock.javadocComment(comment ->
-            {
-                comment.description(String
-                        .format("Builds an instance of %1$s class", syncClient.getClassName()));
-                comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName()));
-            });
+            classBlock.javadocComment(
+                    comment -> comment.description(String.format("Builds an instance of %1$s class", syncClient.getClassName())),
+                    comment -> comment.methodReturns(String.format("an instance of %1$s", syncClient.getClassName())),
+                    false);
             addGeneratedAnnotation(classBlock);
             classBlock.publicMethod(String.format("%1$s %2$s()", syncClient.getClassName(), clientBuilder.getBuilderMethodNameForSyncClient(syncClient)),
                     function -> {
@@ -405,7 +405,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                                 serviceClientProperty.getType(),
                                 serviceClientProperty.getName()));
                     }
-                    classBlock.javadocComment(comment -> comment.description(traitMethod.getDocumentation()));
+                    classBlock.javadocComment(comment -> comment.description(traitMethod.getDocumentation()), comment -> {}, false);
                     addGeneratedAnnotation(classBlock);
                     if (settings.isBranded()) {
                         // TODO: generic not having Trait
@@ -551,6 +551,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         classBlock.annotation(Annotation.GENERATED.getName());
+    }
+
+    protected boolean isPartialUpdateSupported() {
+        return true;
     }
 
     protected void addOverrideAnnotation(JavaContext classBlock) {
