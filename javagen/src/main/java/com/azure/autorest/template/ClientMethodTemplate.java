@@ -1104,14 +1104,26 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      */
     public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
         // interface need a fully-qualified exception class name, since exception is usually only included in ProxyMethod
-        typeBlock.javadocComment(comment -> {
-            if (JavaSettings.getInstance().isDataPlaneClient()) {
-                generateProtocolMethodJavadoc(clientMethod, comment);
-            } else {
-                generateJavadoc(clientMethod, comment, restAPIMethod, useFullClassName);
-            }
-        });
+        if (JavaSettings.getInstance().isDataPlaneClient()) {
+            typeBlock.javadocComment(
+                    comment -> generateProtocolMethodJavadocDescription(clientMethod, comment),
+                    comment -> generateProtocolMethodJavadocTags(clientMethod, comment),
+                    false);
+        } else {
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod, useFullClassName);
+        }
     }
+
+//    public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
+//        // interface need a fully-qualified exception class name, since exception is usually only included in ProxyMethod
+//        typeBlock.javadocComment(comment -> {
+//            if (JavaSettings.getInstance().isDataPlaneClient()) {
+//                generateProtocolMethodJavadoc(clientMethod, comment);
+//            } else {
+//                generateJavadoc(clientMethod, comment, restAPIMethod, useFullClassName);
+//            }
+//        });
+//    }
 
     /**
      * Generate javadoc for client method.
@@ -1122,7 +1134,29 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      * @param useFullClassName whether to use fully-qualified class name in javadoc
      */
     public static void generateJavadoc(ClientMethod clientMethod, JavaJavadocComment commentBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
+        generateJavadocDescription(clientMethod, commentBlock);
+        generateJavadocTags(clientMethod, commentBlock, restAPIMethod, useFullClassName);
+    }
+
+    /**
+     * Generate javadoc description for client method.
+     *
+     * @param clientMethod client method
+     * @param commentBlock comment block
+     */
+    public static void generateJavadocDescription(ClientMethod clientMethod, JavaJavadocComment commentBlock) {
         commentBlock.description(clientMethod.getDescription());
+    }
+
+    /**
+     * Generate javadoc tags for client method.
+     *
+     * @param clientMethod client method
+     * @param commentBlock comment block
+     * @param restAPIMethod proxy method
+     * @param useFullClassName whether to use fully-qualified class name in javadoc
+     */
+    public static void generateJavadocTags(ClientMethod clientMethod, JavaJavadocComment commentBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
         List<ClientMethodParameter> methodParameters = clientMethod.getMethodInputParameters();
         for (ClientMethodParameter parameter : methodParameters) {
             commentBlock.param(parameter.getName(), parameterDescriptionOrDefault(parameter));
@@ -1134,6 +1168,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         commentBlock.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
         commentBlock.methodReturns(clientMethod.getReturnValue().getDescription());
     }
+
 
     protected static String parameterDescriptionOrDefault(ClientMethodParameter parameter) {
         String paramJavadoc = parameter.getDescription();

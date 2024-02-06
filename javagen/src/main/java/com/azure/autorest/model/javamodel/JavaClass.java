@@ -208,6 +208,7 @@ public class JavaClass implements JavaType {
         javadocComment(commentDescriptionAction, commentTagAction, withGeneratedWrapper, true, wordWrapWidth);
     }
 
+    @Override
     public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper) {
         javadocComment(commentDescriptionAction, commentTagAction, withGeneratedWrapper, false, 0);
     }

@@ -37,7 +37,19 @@ import java.util.stream.Collectors;
 
 public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMethod, JavaType> {
 
+//    protected static void generateProtocolMethodJavadoc(ClientMethod clientMethod, JavaType typeBlock) {
+//        typeBlock.javadocComment(
+//                comment -> generateProtocolMethodJavadocDescription(clientMethod, comment),
+//                comment -> generateProtocolMethodJavadocTags(clientMethod, comment),
+//                false);
+//    }
+
     protected static void generateProtocolMethodJavadoc(ClientMethod clientMethod, JavaJavadocComment commentBlock) {
+        generateProtocolMethodJavadocDescription(clientMethod, commentBlock);
+        generateProtocolMethodJavadocTags(clientMethod, commentBlock);
+    }
+
+    protected static void generateProtocolMethodJavadocDescription(ClientMethod clientMethod, JavaJavadocComment commentBlock) {
         commentBlock.description(clientMethod.getDescription());
 
         if (clientMethod.getProxyMethod() != null) {
@@ -120,7 +132,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                 responseBodySchemaJavadoc(responseBodyType, commentBlock, typesInJavadoc);
             }
         }
+    }
 
+    protected static void generateProtocolMethodJavadocTags(ClientMethod clientMethod, JavaJavadocComment commentBlock) {
         clientMethod.getParameters().forEach(p -> commentBlock.param(p.getName(), methodParameterDescriptionOrDefault(p)));
         if (clientMethod.getProxyMethod() != null) {
             generateJavadocExceptions(clientMethod, commentBlock, false);

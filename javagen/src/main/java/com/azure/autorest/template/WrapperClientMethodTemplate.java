@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
+import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.TemplateUtil;
@@ -48,9 +49,12 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
 
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
         if (settings.isDataPlaneClient()) {
-            typeBlock.javadocComment(comment -> generateProtocolMethodJavadoc(clientMethod, comment));
+            typeBlock.javadocComment(
+                    comment -> generateProtocolMethodJavadocDescription(clientMethod, comment),
+                    comment -> generateProtocolMethodJavadocTags(clientMethod, comment),
+                    false);
         } else {
-            generateJavadoc(clientMethod, typeBlock, restAPIMethod);
+            generateJavadoc(clientMethod, typeBlock, restAPIMethod, false);
         }
 
         addGeneratedAnnotation(typeBlock);
@@ -104,23 +108,39 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod) {
         typeBlock.javadocComment(comment -> {
-            comment.description(clientMethod.getDescription());
-            List<ClientMethodParameter> methodParameters = clientMethod.getMethodInputParameters();
-            for (ClientMethodParameter parameter : methodParameters) {
-                comment.param(parameter.getName(), parameter.getDescription());
-            }
-            if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
-                comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
-            }
-            if (restAPIMethod != null) {
-                if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-                    comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(),
-                            "thrown if the request is rejected by server");
-                }
-                comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
-            }
-            comment.methodReturns(clientMethod.getReturnValue().getDescription());
+            generateJavadocDescription(comment, clientMethod);
+            generateJavadocTags(comment, clientMethod, restAPIMethod);
         });
+    }
+
+    protected void generateJavadocDescription(JavaJavadocComment comment, ClientMethod clientMethod) {
+        comment.description(clientMethod.getDescription());
+    }
+
+    protected void generateJavadocTags(JavaJavadocComment comment, ClientMethod clientMethod, ProxyMethod restAPIMethod) {
+        List<ClientMethodParameter> methodParameters = clientMethod.getMethodInputParameters();
+        for (ClientMethodParameter parameter : methodParameters) {
+            comment.param(parameter.getName(), parameter.getDescription());
+        }
+        if (clientMethod.getParametersDeclaration() != null && !clientMethod.getParametersDeclaration().isEmpty()) {
+            comment.methodThrows("IllegalArgumentException", "thrown if parameters fail the validation");
+        }
+        if (restAPIMethod != null) {
+            if (restAPIMethod.getUnexpectedResponseExceptionType() != null) {
+                comment.methodThrows(restAPIMethod.getUnexpectedResponseExceptionType().toString(),
+                        "thrown if the request is rejected by server");
+            }
+            comment.methodThrows("RuntimeException", "all other wrapped checked exceptions if the request fails to be sent");
+        }
+        comment.methodReturns(clientMethod.getReturnValue().getDescription());
+    }
+
+    protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean withGeneratedWrapper) {
+        typeBlock.javadocComment(comment -> {
+            generateJavadocDescription(comment, clientMethod);
+        }, comment -> {
+            generateJavadocTags(comment, clientMethod, restAPIMethod);
+        }, withGeneratedWrapper);
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {

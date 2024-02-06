@@ -48,6 +48,17 @@ public class JavaBlock implements JavaContext {
         contents.javadocComment(commentAction);
     }
 
+    @Override
+    public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedWrapper) {
+        if (withGeneratedWrapper == false) {
+            Consumer<JavaJavadocComment> commentAction = comment -> {
+                commentDescriptionAction.accept(comment);
+                commentTagsAction.accept(comment);
+            };
+            javadocComment(commentAction);
+        }
+    }
+
     public final void methodReturn(String text) {
         contents.methodReturn(text);
     }

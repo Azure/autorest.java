@@ -36,6 +36,11 @@ public class JavaInterface implements JavaType {
         contents.javadocComment(commentAction);
     }
 
+    @Override
+    public void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedWrapper) {
+
+    }
+
     public final void lineComment(String comment) {
         addExpectedNewLine();
         contents.lineComment(comment);
