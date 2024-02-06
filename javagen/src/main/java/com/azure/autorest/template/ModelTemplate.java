@@ -731,7 +731,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // If there are required properties, the required properties will extend the consumer to add param Javadocs.
         Consumer<JavaJavadocComment> javadocCommentDescConsumer = comment ->
             comment.description("Creates an instance of " + model.getName() + " class.");
-        Consumer<JavaJavadocComment> javadocCommentTagConsumer = comment -> {};
+        Consumer<JavaJavadocComment> javadocCommentTagConsumer = null;
 
         final int constructorPropertiesStringBuilderCapacity = 128 * (requiredProperties.size() + requiredParentProperties.size());
 
@@ -762,6 +762,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 addModelConstructorParameter(property, constructorProperties, addJsonPropertyAnnotation);
 
+                if (javadocCommentTagConsumer == null) {
+                    javadocCommentTagConsumer = comment -> {};
+                }
                 javadocCommentTagConsumer = javadocCommentTagConsumer.andThen(comment -> comment.param(property.getName(),
                     "the " + property.getName() + " value to set"));
 
@@ -780,6 +783,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 addModelConstructorParameter(property, constructorProperties, addJsonPropertyAnnotation);
 
+                if (javadocCommentTagConsumer == null) {
+                    javadocCommentTagConsumer = comment -> {};
+                }
                 javadocCommentTagConsumer = javadocCommentTagConsumer.andThen(comment -> comment.param(property.getName(),
                     "the " + property.getName() + " value to set"));
             }
