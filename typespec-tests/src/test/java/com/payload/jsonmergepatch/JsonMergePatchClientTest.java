@@ -56,7 +56,7 @@ public class JsonMergePatchClientTest {
         ResourcePatch resourcePatch = new ResourcePatch();
         resourcePatch.setDescription(null);
         resourcePatch.setMap(new HashMap<>());
-        resourcePatch.getMap().put("key", new InnerModel().setDescription("innerDesc").setDescription(null));
+        resourcePatch.getMap().put("key", new InnerModel().setDescription(null));
         resourcePatch.getMap().put("key2", null);
         resourcePatch.setArray(null);
         resourcePatch.setInnerModel(null);
