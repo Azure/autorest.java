@@ -7,8 +7,6 @@ pool:
 
 variables:
 - group: Release Secrets for GitHub
-- name: NodeVersion
-  value: '18.x'
 
 resources:
   repositories:
@@ -23,6 +21,9 @@ jobs:
 
   timeoutInMinutes: 60
 
+  variables:
+  - template: /eng/pipelines/variables/globals.yml
+
   steps:
   - checkout: self
     fetchDepth: 1
@@ -32,6 +33,9 @@ jobs:
     displayName: 'Install Node.js $(NodeVersion)'
     inputs:
       versionSpec: '$(NodeVersion)'
+
+  - script: npm install -g @azure-tools/typespec-client-generator-cli
+    displayName: 'Install tsp-client'
 
   - task: PowerShell@2
     displayName: 'Get Package Version'
