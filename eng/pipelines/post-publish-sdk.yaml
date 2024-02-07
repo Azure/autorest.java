@@ -7,8 +7,6 @@ pool:
 
 variables:
 - group: Release Secrets for GitHub
-- name: NodeVersion
-  value: '18.x'
 
 resources:
   repositories:
@@ -22,6 +20,9 @@ jobs:
 - job: Generate_SDK
 
   timeoutInMinutes: 60
+
+  variables:
+  - template: /eng/pipelines/variables/globals.yml
 
   steps:
   - checkout: self

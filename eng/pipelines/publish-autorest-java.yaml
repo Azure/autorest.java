@@ -5,51 +5,76 @@ pool:
   name: "azsdk-pool-mms-ubuntu-2004-general"
   vmImage: "MMSUbuntu20.04"
 
+variables:
+- group: Release Secrets for GitHub
+
 jobs:
-  - job: Build
+- job: Build
 
-    timeoutInMinutes: 30
+  timeoutInMinutes: 30
 
-    variables:
-      - template: /eng/pipelines/variables/globals.yml
+  variables:
+  - template: /eng/pipelines/variables/globals.yml
 
-    steps:
-      - task: NodeTool@0
-        displayName: 'Install Node.js $(NodeVersion)'
-        inputs:
-          versionSpec: '$(NodeVersion)'
+  steps:
+  - task: NodeTool@0
+    displayName: 'Install Node.js $(NodeVersion)'
+    inputs:
+      versionSpec: '$(NodeVersion)'
 
-      - template: /eng/pipelines/steps/cache-maven-repository.yml
-        parameters:
-          JobType: 'Publish Autorest'
+  - template: /eng/pipelines/steps/cache-maven-repository.yml
+    parameters:
+      JobType: 'Publish Autorest'
 
-      - task: Maven@3
-        displayName: 'Build JAR'
-        inputs:
-          mavenPomFile: pom.xml
-          goals: 'clean install'
-          options: '$(DefaultOptions) -P local -T 1C'
-          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: $(JavaVersion)
-          jdkArchitectureOption: 'x64'
-          publishJUnitResults: false
+  - task: Maven@3
+    displayName: 'Build JAR'
+    inputs:
+      mavenPomFile: pom.xml
+      goals: 'clean install'
+      options: '$(DefaultOptions) -P local -T 1C'
+      mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: $(JavaVersion)
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: false
 
-      - task: Npm@1
-        displayName: 'Install Dependencies for AutoRest Java'
-        inputs:
-          command: install
+  - task: Npm@1
+    displayName: 'Install Dependencies for AutoRest Java'
+    inputs:
+      command: install
 
-      - task: Npm@1
-        displayName: 'Pack AutoRest Java'
-        inputs:
-          command: custom
-          customCommand: pack
+  - task: Npm@1
+    displayName: 'Pack AutoRest Java'
+    inputs:
+      command: custom
+      customCommand: pack
 
-      - script: |
-          npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
-          ls *.tgz | npm publish -0 --access public
-          npm config delete //registry.npmjs.org/:_authToken
-        displayName: 'Publish AutoRest Java to NPM'
+  - task: PowerShell@2
+    displayName: 'Get Package Version'
+    inputs:
+      targetType: 'inline'
+      script: |
+        $PACKAGE_VERSION = node -p -e "require('./package.json').version"
+        Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-      - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
+  - task: PowerShell@2
+    displayName: 'Create GitHub Releases'
+    inputs:
+      filePath: eng/scripts/Create-Release.ps1
+      arguments: >
+        -releaseSha '$(Build.SourceVersion)'
+        -tagName 'v$(PackageVersion)'
+        -title 'AutoRest Java v$(PackageVersion)'
+        -releaseNotes '- Bug fix'
+      pwsh: true
+    timeoutInMinutes: 5
+    env:
+      GH_TOKEN: $(azuresdk-github-pat)
+
+  - script: |
+      npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
+      ls *.tgz | npm publish -0 --access public
+      npm config delete //registry.npmjs.org/:_authToken
+    displayName: 'Publish AutoRest Java to NPM'
+
+  - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

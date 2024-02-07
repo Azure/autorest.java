@@ -5,75 +5,100 @@ pool:
   name: "azsdk-pool-mms-ubuntu-2004-general"
   vmImage: "MMSUbuntu20.04"
 
+variables:
+- group: Release Secrets for GitHub
+
 jobs:
-  - job: Build
+- job: Build
 
-    timeoutInMinutes: 30
+  timeoutInMinutes: 30
 
-    variables:
-      - template: /eng/pipelines/variables/globals.yml
+  variables:
+  - template: /eng/pipelines/variables/globals.yml
 
-    steps:
-      - task: NodeTool@0
-        displayName: 'Install Node.js $(NodeVersion)'
-        inputs:
-          versionSpec: '$(NodeVersion)'
+  steps:
+  - task: NodeTool@0
+    displayName: 'Install Node.js $(NodeVersion)'
+    inputs:
+      versionSpec: '$(NodeVersion)'
 
-      - template: /eng/pipelines/steps/cache-maven-repository.yml
-        parameters:
-          JobType: 'Publish TypeSpec'
+  - template: /eng/pipelines/steps/cache-maven-repository.yml
+    parameters:
+      JobType: 'Publish TypeSpec'
 
-      - task: Maven@3
-        displayName: 'Build JAR'
-        inputs:
-          mavenPomFile: pom.xml
-          goals: 'clean install'
-          options: '$(DefaultOptions) -P local,tsp -T 1C'
-          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
-          javaHomeOption: 'JDKVersion'
-          jdkVersionOption: $(JavaVersion)
-          jdkArchitectureOption: 'x64'
-          publishJUnitResults: false
+  - task: Maven@3
+    displayName: 'Build JAR'
+    inputs:
+      mavenPomFile: pom.xml
+      goals: 'clean install'
+      options: '$(DefaultOptions) -P local,tsp -T 1C'
+      mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+      javaHomeOption: 'JDKVersion'
+      jdkVersionOption: $(JavaVersion)
+      jdkArchitectureOption: 'x64'
+      publishJUnitResults: false
 
-      - task: Npm@1
-        displayName: 'Install Dependencies for TypeSpec Java'
-        inputs:
-          command: install
-          workingDir: ./typespec-extension
+  - task: Npm@1
+    displayName: 'Install Dependencies for TypeSpec Java'
+    inputs:
+      command: install
+      workingDir: ./typespec-extension
 
-      - task: Npm@1
-        displayName: 'Build TypeSpec Java'
-        inputs:
-          command: custom
-          customCommand: run build
-          workingDir: ./typespec-extension
+  - task: Npm@1
+    displayName: 'Build TypeSpec Java'
+    inputs:
+      command: custom
+      customCommand: run build
+      workingDir: ./typespec-extension
 
-      - task: Npm@1
-        displayName: 'Lint TypeSpec Java'
-        inputs:
-          command: custom
-          customCommand: run lint
-          workingDir: ./typespec-extension
+  - task: Npm@1
+    displayName: 'Lint TypeSpec Java'
+    inputs:
+      command: custom
+      customCommand: run lint
+      workingDir: ./typespec-extension
 
-      - task: Npm@1
-        displayName: 'Check-Format TypeSpec Java'
-        inputs:
-          command: custom
-          customCommand: run check-format
-          workingDir: ./typespec-extension
+  - task: Npm@1
+    displayName: 'Check-Format TypeSpec Java'
+    inputs:
+      command: custom
+      customCommand: run check-format
+      workingDir: ./typespec-extension
 
-      - task: Npm@1
-        displayName: 'Pack TypeSpec Java'
-        inputs:
-          command: custom
-          customCommand: pack
-          workingDir: ./typespec-extension
+  - task: Npm@1
+    displayName: 'Pack TypeSpec Java'
+    inputs:
+      command: custom
+      customCommand: pack
+      workingDir: ./typespec-extension
 
-      - script: |
-          npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
-          ls *.tgz | npm publish -0 --access public
-          npm config delete //registry.npmjs.org/:_authToken
-        displayName: 'Publish TypeSpec Java to NPM'
-        workingDirectory: ./typespec-extension
+  - task: PowerShell@2
+    displayName: 'Get Package Version'
+    inputs:
+      targetType: 'inline'
+      script: |
+        $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
+        Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-      - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
+  - task: PowerShell@2
+    displayName: 'Create GitHub Releases'
+    inputs:
+      filePath: eng/scripts/Create-Release.ps1
+      arguments: >
+        -releaseSha '$(Build.SourceVersion)'
+        -tagName '@azure-tools/typespec-java_$(PackageVersion)'
+        -title '@azure-tools/typespec-java_$(PackageVersion)'
+        -releaseNotes '- Bug fix'
+      pwsh: true
+    timeoutInMinutes: 5
+    env:
+      GH_TOKEN: $(azuresdk-github-pat)
+
+  - script: |
+      npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
+      ls *.tgz | npm publish -0 --access public
+      npm config delete //registry.npmjs.org/:_authToken
+    displayName: 'Publish TypeSpec Java to NPM'
+    workingDirectory: ./typespec-extension
+
+  - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
