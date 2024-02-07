@@ -1,6 +1,6 @@
 {
   "name": "@autorest/java",
-  "version": "4.1.26",
+  "version": "4.1.27",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
@@ -39,7 +39,7 @@
     "*/target/*-jar-with-dependencies.jar"
   ],
   "devDependencies": {
-    "autorest": "^3.0.0",
+    "autorest": "^3.7.1",
     "@microsoft.azure/autorest.testserver": "3.3.48"
   }
 }

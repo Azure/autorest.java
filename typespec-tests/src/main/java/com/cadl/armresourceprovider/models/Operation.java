@@ -20,7 +20,7 @@ public interface Operation {
 
     /**
      * Gets the isDataAction property: Whether the operation applies to data-plane. This is "true" for data-plane
-     * operations and "false" for ARM/control-plane operations.
+     * operations and "false" for Azure Resource Manager/control-plane operations.
      * 
      * @return the isDataAction value.
      */

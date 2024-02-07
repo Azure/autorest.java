@@ -8,6 +8,14 @@ jobs:
   build:
     timeout-minutes: 180
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: write
+      deployments: none
+      packages: none
+      pull-requests: none
+      security-events: none
+
     steps:
       - name: Checkout branch
         uses: actions/checkout@v3
