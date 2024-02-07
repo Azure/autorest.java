@@ -71,16 +71,7 @@ def update_sdks():
         generated_test_exists = os.path.isdir(generated_test_path)
 
         logging.info('Generate for module %s', artifact)
-
-        cmd = [
-            'pwsh',
-            os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Sync.ps1'),
-            module_path
-        ]
-        subprocess.check_call(cmd, cwd=sdk_root)
-
-        cmd[1] = os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Generate.ps1')
-        subprocess.check_call(cmd, cwd=sdk_root)
+        subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
 
         if not generated_samples_exists:
             shutil.rmtree(generated_samples_path, ignore_errors=True)

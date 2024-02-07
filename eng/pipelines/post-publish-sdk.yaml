@@ -33,6 +33,9 @@ jobs:
     inputs:
       versionSpec: '$(NodeVersion)'
 
+  - script: npm install -g @azure-tools/typespec-client-generator-cli
+    displayName: 'Install tsp-client'
+
   - task: PowerShell@2
     displayName: 'Get Package Version'
     inputs:
