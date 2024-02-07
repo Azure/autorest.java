@@ -19,24 +19,22 @@ public class JsonMergePatchClientTest {
     private final JsonMergePatchClient client = new JsonMergePatchClientBuilder().buildClient();
 
     @Test
-    void createAndUpdateResource() {
+    public void createAndUpdateResource() {
         // create resource
-        Resource resource = createResource();
+        Resource resource = buildResource();
         client.createResource(resource);
         // update resource
-        ResourcePatch resourcePatch = createResourcePatch();
-        updateResourcePatch(resourcePatch);
+        ResourcePatch resourcePatch = buildResourcePatchWithNullProperties();
         client.updateResource(resourcePatch);
     }
 
     @Test
-    void updateOptionalResource() {
-        ResourcePatch resourcePatch = createResourcePatch();
-        updateResourcePatch(resourcePatch);
+    public void updateOptionalResource() {
+        ResourcePatch resourcePatch = buildResourcePatchWithNullProperties();
         client.updateOptionalResource(resourcePatch);
     }
 
-    private static Resource createResource() {
+    private static Resource buildResource() {
         InnerModel innerModel = new InnerModel();
         innerModel.setName("InnerMadge");
         innerModel.setDescription("innerDesc");
@@ -54,27 +52,11 @@ public class JsonMergePatchClientTest {
         return resource;
     }
 
-    private static ResourcePatch createResourcePatch() {
+    private static ResourcePatch buildResourcePatchWithNullProperties() {
         ResourcePatch resourcePatch = new ResourcePatch();
-        resourcePatch.setDescription("desc");
-        InnerModel innerModel = new InnerModel();
-        innerModel.setName("InnerMadge");
-        innerModel.setDescription("innerDesc");
-        Map<String, InnerModel> map = new HashMap<>();
-        map.put("key", innerModel);
-        List<InnerModel> array = Arrays.asList(innerModel);
-        resourcePatch.setArray(array);
-        resourcePatch.setMap(map);
-        resourcePatch.setIntValue(1);
-        resourcePatch.setFloatValue(1.1);
-        resourcePatch.setInnerModel(innerModel);
-        resourcePatch.setIntArray(Arrays.asList(1, 2, 3));
-        return resourcePatch;
-    }
-
-    private static void updateResourcePatch(ResourcePatch resourcePatch) {
         resourcePatch.setDescription(null);
-        resourcePatch.getMap().get("key").setDescription(null);
+        resourcePatch.setMap(new HashMap<>());
+        resourcePatch.getMap().put("key", new InnerModel().setDescription("innerDesc").setDescription(null));
         resourcePatch.getMap().put("key2", null);
         resourcePatch.setArray(null);
         resourcePatch.setInnerModel(null);
@@ -82,5 +64,6 @@ public class JsonMergePatchClientTest {
         resourcePatch.setFloatValue(null);
         resourcePatch.setInnerModel(null);
         resourcePatch.setIntArray(null);
+        return resourcePatch;
     }
 }
