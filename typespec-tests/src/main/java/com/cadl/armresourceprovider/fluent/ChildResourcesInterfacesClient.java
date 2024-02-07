@@ -233,4 +233,63 @@ public interface ChildResourcesInterfacesClient {
     @ServiceMethod(returns = ReturnType.COLLECTION)
     PagedIterable<ChildResourceInner> listByTopLevelArmResource(String resourceGroupName,
         String topLevelArmResourceName, Context context);
+
+    /**
+     * A long-running resource action.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelArmResourceName arm resource name for path.
+     * @param childResourceName ChildResources.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    SyncPoller<PollResult<Void>, Void> beginActionWithoutBody(String resourceGroupName, String topLevelArmResourceName,
+        String childResourceName);
+
+    /**
+     * A long-running resource action.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelArmResourceName arm resource name for path.
+     * @param childResourceName ChildResources.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link SyncPoller} for polling of long-running operation.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    SyncPoller<PollResult<Void>, Void> beginActionWithoutBody(String resourceGroupName, String topLevelArmResourceName,
+        String childResourceName, Context context);
+
+    /**
+     * A long-running resource action.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelArmResourceName arm resource name for path.
+     * @param childResourceName ChildResources.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    void actionWithoutBody(String resourceGroupName, String topLevelArmResourceName, String childResourceName);
+
+    /**
+     * A long-running resource action.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param topLevelArmResourceName arm resource name for path.
+     * @param childResourceName ChildResources.
+     * @param context The context to associate with this operation.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    void actionWithoutBody(String resourceGroupName, String topLevelArmResourceName, String childResourceName,
+        Context context);
 }

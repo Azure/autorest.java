@@ -99,7 +99,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL_TYPESPEC");
 
-        SETTINGS_MAP.put("generic-response-type", true);
+        SETTINGS_MAP.put("generic-response-type", false);
         SETTINGS_MAP.put("generate-client-interfaces", true);
         SETTINGS_MAP.put("client-logger", true);
 

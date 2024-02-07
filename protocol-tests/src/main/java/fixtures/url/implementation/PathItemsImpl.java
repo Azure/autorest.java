@@ -24,6 +24,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.url.AutoRestUrlTestServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -49,6 +50,15 @@ public final class PathItemsImpl {
         this.service
             = RestProxy.create(PathItemsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestUrlTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

@@ -28,6 +28,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.llcresi.DpgServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -52,6 +53,15 @@ public final class ParamsImpl {
     ParamsImpl(DpgClientImpl client) {
         this.service = RestProxy.create(ParamsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public DpgServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

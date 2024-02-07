@@ -223,8 +223,10 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
     private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestSwaggerBatServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestSwaggerBatServiceVersion.getLatest();
         AutoRestSwaggerBatServiceClientImpl client = new AutoRestSwaggerBatServiceClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 
@@ -299,6 +301,24 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
     @Generated
     public EnumClient buildEnumClient() {
         return new EnumClient(buildInnerClient().getEnums());
+    }
+
+    /*
+     * Service version
+     */
+    @Generated
+    private AutoRestSwaggerBatServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     *
+     * @param serviceVersion the serviceVersion value.
+     * @return the AutoRestSwaggerBatServiceClientBuilder.
+     */
+    @Generated
+    public AutoRestSwaggerBatServiceClientBuilder serviceVersion(AutoRestSwaggerBatServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(AutoRestSwaggerBatServiceClientBuilder.class);

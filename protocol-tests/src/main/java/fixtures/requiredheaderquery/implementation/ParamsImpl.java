@@ -27,6 +27,7 @@ import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
+import fixtures.requiredheaderquery.DpgRequiredHeaderQueryServiceVersion;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -56,6 +57,15 @@ public final class ParamsImpl {
     ParamsImpl(DpgRequiredHeaderQueryClientImpl client) {
         this.service = RestProxy.create(ParamsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public DpgRequiredHeaderQueryServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

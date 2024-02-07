@@ -211,6 +211,24 @@ public final class TwoOperationGroupClientBuilder implements HttpTrait<TwoOperat
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private ServiceServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the TwoOperationGroupClientBuilder.
+     */
+    @Generated
+    public TwoOperationGroupClientBuilder serviceVersion(ServiceServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -236,8 +254,10 @@ public final class TwoOperationGroupClientBuilder implements HttpTrait<TwoOperat
     @Generated
     private TwoOperationGroupClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        ServiceServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : ServiceServiceVersion.getLatest();
         TwoOperationGroupClientImpl client = new TwoOperationGroupClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client, localServiceVersion);
         return client;
     }
 

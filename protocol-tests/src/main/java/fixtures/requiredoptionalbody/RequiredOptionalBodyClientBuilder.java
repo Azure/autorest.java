@@ -193,6 +193,24 @@ public final class RequiredOptionalBodyClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private RequiredOptionalBodyServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the RequiredOptionalBodyClientBuilder.
+     */
+    @Generated
+    public RequiredOptionalBodyClientBuilder serviceVersion(RequiredOptionalBodyServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -219,8 +237,10 @@ public final class RequiredOptionalBodyClientBuilder
     private RequiredOptionalBodyClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        RequiredOptionalBodyServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : RequiredOptionalBodyServiceVersion.getLatest();
         RequiredOptionalBodyClientImpl client = new RequiredOptionalBodyClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.httpinfrastructure.AutoRestHttpInfrastructureTestServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestHttpInfrastructureTestServiceClient type.
@@ -27,6 +28,20 @@ public final class AutoRestHttpInfrastructureTestServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final AutoRestHttpInfrastructureTestServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestHttpInfrastructureTestServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -159,10 +174,12 @@ public final class AutoRestHttpInfrastructureTestServiceClientImpl {
      * Initializes an instance of AutoRestHttpInfrastructureTestServiceClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestHttpInfrastructureTestServiceClientImpl(String host) {
+    public AutoRestHttpInfrastructureTestServiceClientImpl(String host,
+        AutoRestHttpInfrastructureTestServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -170,9 +187,11 @@ public final class AutoRestHttpInfrastructureTestServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestHttpInfrastructureTestServiceClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public AutoRestHttpInfrastructureTestServiceClientImpl(HttpPipeline httpPipeline, String host,
+        AutoRestHttpInfrastructureTestServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -181,12 +200,14 @@ public final class AutoRestHttpInfrastructureTestServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestHttpInfrastructureTestServiceClientImpl(HttpPipeline httpPipeline,
-        SerializerAdapter serializerAdapter, String host) {
+        SerializerAdapter serializerAdapter, String host, AutoRestHttpInfrastructureTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.httpFailures = new HttpFailuresImpl(this);
         this.httpSuccess = new HttpSuccessImpl(this);
         this.httpRedirects = new HttpRedirectsImpl(this);

@@ -22,6 +22,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.client.structure.service.ServiceServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -46,6 +47,15 @@ public final class GroupsImpl {
     GroupsImpl(RenamedOperationClientImpl client) {
         this.service = RestProxy.create(GroupsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public ServiceServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

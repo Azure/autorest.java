@@ -72,5 +72,4 @@ public class ServiceVersionTemplate implements IJavaTemplate<ServiceVersion, Jav
         }
         return versionInEnum;
     }
-
 }

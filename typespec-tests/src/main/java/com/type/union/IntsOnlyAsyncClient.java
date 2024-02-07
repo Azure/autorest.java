@@ -17,10 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.IntsOnliesImpl;
+import com.type.union.implementation.models.SendRequest3;
 import com.type.union.models.GetResponse3;
 import com.type.union.models.Prop2;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -126,8 +125,7 @@ public final class IntsOnlyAsyncClient {
     public Mono<Void> send(Prop2 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", (prop == null ? null : prop.toLong()));
+        SendRequest3 requestObj = new SendRequest3(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }

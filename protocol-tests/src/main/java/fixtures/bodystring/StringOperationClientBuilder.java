@@ -192,6 +192,24 @@ public final class StringOperationClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestSwaggerBatServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the StringOperationClientBuilder.
+     */
+    @Generated
+    public StringOperationClientBuilder serviceVersion(AutoRestSwaggerBatServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -218,8 +236,10 @@ public final class StringOperationClientBuilder
     private AutoRestSwaggerBatServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestSwaggerBatServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestSwaggerBatServiceVersion.getLatest();
         AutoRestSwaggerBatServiceClientImpl client = new AutoRestSwaggerBatServiceClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

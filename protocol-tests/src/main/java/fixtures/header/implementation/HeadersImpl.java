@@ -23,6 +23,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.header.AutoRestSwaggerBatHeaderServiceVersion;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
@@ -49,6 +50,15 @@ public final class HeadersImpl {
     HeadersImpl(AutoRestSwaggerBatHeaderServiceClientImpl client) {
         this.service = RestProxy.create(HeadersService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestSwaggerBatHeaderServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

@@ -74,6 +74,13 @@ enum ColorModel {
   Green,
 }
 
+// UnusedEnum will be generated
+@access(Access.public)
+enum UnusedEnum {
+  Weekday,
+  Weekend,
+}
+
 @route("/internal")
 interface InternalOp {
   // test ApiRequest with Access.public

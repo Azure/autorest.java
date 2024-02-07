@@ -16,10 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.FloatsOnliesImpl;
+import com.type.union.implementation.models.SendRequest4;
 import com.type.union.models.GetResponse4;
 import com.type.union.models.Prop3;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -122,8 +121,7 @@ public final class FloatsOnlyClient {
     public void send(Prop3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", (prop == null ? null : prop.toDouble()));
+        SendRequest4 requestObj = new SendRequest4(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(request, requestOptions).getValue();
     }

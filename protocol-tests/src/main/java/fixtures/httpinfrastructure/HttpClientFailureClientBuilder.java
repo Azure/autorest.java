@@ -193,6 +193,24 @@ public final class HttpClientFailureClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestHttpInfrastructureTestServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the HttpClientFailureClientBuilder.
+     */
+    @Generated
+    public HttpClientFailureClientBuilder serviceVersion(AutoRestHttpInfrastructureTestServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -219,8 +237,10 @@ public final class HttpClientFailureClientBuilder
     private AutoRestHttpInfrastructureTestServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestHttpInfrastructureTestServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestHttpInfrastructureTestServiceVersion.getLatest();
         AutoRestHttpInfrastructureTestServiceClientImpl client = new AutoRestHttpInfrastructureTestServiceClientImpl(
-            localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

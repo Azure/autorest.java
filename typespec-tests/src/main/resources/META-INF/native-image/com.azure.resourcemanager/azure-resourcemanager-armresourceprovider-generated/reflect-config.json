@@ -39,6 +39,16 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.CustomTemplateResourceProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.models.PagedOperation",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
@@ -50,6 +60,11 @@
   "allDeclaredMethods" : true
 }, {
   "name" : "com.cadl.armresourceprovider.models.OperationDisplay",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.CustomTemplateResourceInterfacesUpdateHeaders",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true

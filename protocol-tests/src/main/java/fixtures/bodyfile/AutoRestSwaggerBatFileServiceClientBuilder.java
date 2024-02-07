@@ -194,6 +194,25 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestSwaggerBatFileServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the AutoRestSwaggerBatFileServiceClientBuilder.
+     */
+    @Generated
+    public AutoRestSwaggerBatFileServiceClientBuilder
+        serviceVersion(AutoRestSwaggerBatFileServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -220,8 +239,10 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
     private AutoRestSwaggerBatFileServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestSwaggerBatFileServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestSwaggerBatFileServiceVersion.getLatest();
         AutoRestSwaggerBatFileServiceClientImpl client = new AutoRestSwaggerBatFileServiceClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

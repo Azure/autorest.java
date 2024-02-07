@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.endpointlro.LroEndpointServiceVersion;
 
 /**
  * Initializes a new instance of the LroEndpointClient type.
@@ -41,6 +42,20 @@ public final class LroEndpointClientImpl {
      */
     public String getProjectName() {
         return this.projectName;
+    }
+
+    /**
+     * Service version.
+     */
+    private final LroEndpointServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public LroEndpointServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -90,10 +105,11 @@ public final class LroEndpointClientImpl {
      * 
      * @param endpoint The endpoint.
      * @param projectName Project name.
+     * @param serviceVersion Service version.
      */
-    public LroEndpointClientImpl(String endpoint, String projectName) {
+    public LroEndpointClientImpl(String endpoint, String projectName, LroEndpointServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName, serviceVersion);
     }
 
     /**
@@ -102,9 +118,11 @@ public final class LroEndpointClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint The endpoint.
      * @param projectName Project name.
+     * @param serviceVersion Service version.
      */
-    public LroEndpointClientImpl(HttpPipeline httpPipeline, String endpoint, String projectName) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName);
+    public LroEndpointClientImpl(HttpPipeline httpPipeline, String endpoint, String projectName,
+        LroEndpointServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, projectName, serviceVersion);
     }
 
     /**
@@ -114,13 +132,15 @@ public final class LroEndpointClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint The endpoint.
      * @param projectName Project name.
+     * @param serviceVersion Service version.
      */
     public LroEndpointClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String projectName) {
+        String projectName, LroEndpointServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.projectName = projectName;
+        this.serviceVersion = serviceVersion;
         this.lROs = new LROsImpl(this);
     }
 }

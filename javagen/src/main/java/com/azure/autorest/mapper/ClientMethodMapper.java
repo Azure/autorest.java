@@ -3,9 +3,9 @@
 
 package com.azure.autorest.mapper;
 
-import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.LongRunningMetadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -17,6 +17,7 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
+import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethod.Builder;
@@ -46,6 +47,7 @@ import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
 import com.azure.autorest.util.SchemaUtil;
+import com.azure.autorest.util.TypeUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
@@ -95,8 +97,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             return Objects.hash(operation, isProtocolMethod);
         }
     }
-
-    private static final ReturnTypeDescriptionAssembler DESCRIPTION_ASSEMBLER = new ReturnTypeDescriptionAssembler(Javagen.getPluginInstance());
 
     /**
      * Creates a new instance of {@link ClientMethodMapper}.
@@ -222,19 +222,32 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                         .collect(Collectors.toList());
                 }
 
-                boolean isJsonPatch = request.getProtocol() != null && request.getProtocol().getHttp() != null
-                    && request.getProtocol().getHttp().getMediaTypes() != null
-                    && request.getProtocol().getHttp().getMediaTypes().contains("application/json-patch+json");
+                final boolean isJsonPatch = MethodUtil.isContentTypeInRequest(request, "application/json-patch+json");
 
-                boolean proxyMethodUsesBinaryData = proxyMethod.getParameters().stream()
+                final boolean proxyMethodUsesBinaryData = proxyMethod.getParameters().stream()
                     .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == ClassType.BINARY_DATA);
-                boolean proxyMethodUsesFluxByteBuffer = proxyMethod.getParameters().stream()
+                final boolean proxyMethodUsesFluxByteBuffer = proxyMethod.getParameters().stream()
                     .anyMatch(proxyMethodParameter -> proxyMethodParameter.getClientType() == GenericType.FLUX_BYTE_BUFFER);
 
                 Set<Parameter> originalParameters = new HashSet<>();
                 for (Parameter parameter : codeModelParameters) {
                     ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper()
                         .map(parameter, isProtocolMethod);
+
+                    if (parameter.getOriginalParameter() != null && parameter.getTargetProperty() != null
+                            && MethodUtil.isContentTypeInRequest(request, KnownMediaType.MULTIPART.getContentType())) {
+                        // flattened parameter from a multipart/form-data request field
+                        // TODO (weidxu): the mapping in processParameterTransformations is not correct, as the ClientModelProperty is updated in ModelMapper
+                        if (clientMethodParameter.getWireType() == ArrayType.BYTE_ARRAY
+                                || (clientMethodParameter.getWireType() instanceof ListType && ((ListType) clientMethodParameter.getWireType()).getElementType() == ArrayType.BYTE_ARRAY)) {
+                            IType fileDetailsModelType = TypeUtil.getMultipartFileDetailsModel(SchemaUtil.getJavaName(parameter.getTargetProperty()));
+                            IType type = clientMethodParameter.getWireType() == ArrayType.BYTE_ARRAY ? fileDetailsModelType : new ListType(fileDetailsModelType);
+                            clientMethodParameter = clientMethodParameter.newBuilder()
+                                    .wireType(type)
+                                    .rawType(type)
+                                    .build();
+                        }
+                    }
 
                     if (isJsonPatch) {
                         clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
@@ -1620,7 +1633,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             description = "whether resource exists";
         }
 
-        description = DESCRIPTION_ASSEMBLER.assemble(description, returnType, baseType);
+        description = ReturnTypeDescriptionAssembler.assemble(description, returnType, baseType);
 
         return description == null ? "the response" : description;
     }

@@ -228,6 +228,24 @@ public final class QueriesClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestUrlTestServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the QueriesClientBuilder.
+     */
+    @Generated
+    public QueriesClientBuilder serviceVersion(AutoRestUrlTestServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -254,8 +272,11 @@ public final class QueriesClientBuilder
     private AutoRestUrlTestServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        AutoRestUrlTestServiceClientImpl client = new AutoRestUrlTestServiceClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.globalStringPath, this.globalStringQuery, localHost);
+        AutoRestUrlTestServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestUrlTestServiceVersion.getLatest();
+        AutoRestUrlTestServiceClientImpl client
+            = new AutoRestUrlTestServiceClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+                this.globalStringPath, this.globalStringQuery, localHost, localServiceVersion);
         return client;
     }
 

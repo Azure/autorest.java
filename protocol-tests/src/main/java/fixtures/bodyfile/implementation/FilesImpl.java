@@ -23,6 +23,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.bodyfile.AutoRestSwaggerBatFileServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -47,6 +48,15 @@ public final class FilesImpl {
     FilesImpl(AutoRestSwaggerBatFileServiceClientImpl client) {
         this.service = RestProxy.create(FilesService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestSwaggerBatFileServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**
