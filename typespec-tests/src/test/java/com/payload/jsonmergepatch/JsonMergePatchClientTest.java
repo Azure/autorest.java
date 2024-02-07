@@ -14,12 +14,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-class JsonMergePatchClientTest {
+public class JsonMergePatchClientTest {
 
-    JsonMergePatchClient client = new JsonMergePatchClientBuilder().buildClient();
+    private final JsonMergePatchClient client = new JsonMergePatchClientBuilder().buildClient();
 
     @Test
     void createAndUpdateResource() {
+        // create resource
+        Resource resource = createResource();
+        client.createResource(resource);
+        // update resource
+        ResourcePatch resourcePatch = createResourcePatch();
+        updateResourcePatch(resourcePatch);
+        client.updateResource(resourcePatch);
+    }
+
+    @Test
+    void updateOptionalResource() {
+        ResourcePatch resourcePatch = createResourcePatch();
+        updateResourcePatch(resourcePatch);
+        client.updateOptionalResource(resourcePatch);
+    }
+
+    private static Resource createResource() {
         InnerModel innerModel = new InnerModel();
         innerModel.setName("InnerMadge");
         innerModel.setDescription("innerDesc");
@@ -34,41 +51,36 @@ class JsonMergePatchClientTest {
         resource.setFloatValue(1.1);
         resource.setInnerModel(innerModel);
         resource.setIntArray(Arrays.asList(1, 2, 3));
-        // create resource
-        client.createResource(resource);
-        // update resource
-        ResourcePatch resourcePatch = new ResourcePatch();
-        resourcePatch.setDescription(null);
-        resourcePatch.setArray(null);
-        innerModel.setDescription(null);
-        map.put("key2", null);
-        resourcePatch.setMap(map);
-        resourcePatch.setIntValue(null);
-        resourcePatch.setFloatValue(null);
-        resourcePatch.setInnerModel(null);
-        resourcePatch.setIntArray(null);
-        client.updateResource(resourcePatch);
+        return resource;
     }
 
-    @Test
-    void createAndUpdateOptionalResource() {
+    private static ResourcePatch createResourcePatch() {
         ResourcePatch resourcePatch = new ResourcePatch();
-        resourcePatch.setDescription(null);
-        resourcePatch.setArray(null);
+        resourcePatch.setDescription("desc");
         InnerModel innerModel = new InnerModel();
         innerModel.setName("InnerMadge");
         innerModel.setDescription("innerDesc");
-        innerModel.setDescription(null);
         Map<String, InnerModel> map = new HashMap<>();
         map.put("key", innerModel);
-        map.put("key2", null);
+        List<InnerModel> array = Arrays.asList(innerModel);
+        resourcePatch.setArray(array);
         resourcePatch.setMap(map);
+        resourcePatch.setIntValue(1);
+        resourcePatch.setFloatValue(1.1);
+        resourcePatch.setInnerModel(innerModel);
+        resourcePatch.setIntArray(Arrays.asList(1, 2, 3));
+        return resourcePatch;
+    }
+
+    private static void updateResourcePatch(ResourcePatch resourcePatch) {
+        resourcePatch.setDescription(null);
+        resourcePatch.getMap().get("key").setDescription(null);
+        resourcePatch.getMap().put("key2", null);
+        resourcePatch.setArray(null);
+        resourcePatch.setInnerModel(null);
         resourcePatch.setIntValue(null);
         resourcePatch.setFloatValue(null);
         resourcePatch.setInnerModel(null);
         resourcePatch.setIntArray(null);
-        client.updateOptionalResource(resourcePatch);
     }
-
-
 }
