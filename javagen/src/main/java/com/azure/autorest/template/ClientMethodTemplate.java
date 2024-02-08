@@ -1104,14 +1104,22 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
      */
     public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {
         // interface need a fully-qualified exception class name, since exception is usually only included in ProxyMethod
-        if (JavaSettings.getInstance().isDataPlaneClient()) {
-            typeBlock.javadocComment(
-                    comment -> generateProtocolMethodJavadocDescription(clientMethod, comment),
-                    comment -> generateProtocolMethodJavadocTags(clientMethod, comment),
-                    false);
-        } else {
-            generateJavadoc(clientMethod, typeBlock, restAPIMethod, useFullClassName);
-        }
+        typeBlock.javadocComment(
+            comment -> {
+                if (JavaSettings.getInstance().isDataPlaneClient()) {
+                    generateProtocolMethodJavadocDescription(clientMethod, comment);
+                } else {
+                    generateJavadocDescription(clientMethod, comment);
+                }
+            },
+            comment -> {
+                if (JavaSettings.getInstance().isDataPlaneClient()) {
+                    generateProtocolMethodJavadocTags(clientMethod, comment);
+                } else {
+                    generateJavadocTags(clientMethod, comment, restAPIMethod, useFullClassName);
+                }
+            },
+            false);
     }
 
 //    public static void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean useFullClassName) {

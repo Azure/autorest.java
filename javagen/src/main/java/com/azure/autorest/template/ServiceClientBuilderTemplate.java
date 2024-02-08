@@ -180,7 +180,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     // constructor
                     classBlock.javadocComment(comment -> {
                         comment.description(String.format("Create an instance of the %s.", serviceClientBuilderName));
-                    }, comment -> {}, false);
+                    }, null, false);
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
                         javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
@@ -188,7 +188,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 } else {
                     classBlock.javadocComment(comment -> {
                         comment.description(String.format("Create an instance of the %s.", serviceClientBuilderName));
-                    }, comment -> {}, false);
+                    }, null, false);
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
                     });
@@ -405,7 +405,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                                 serviceClientProperty.getType(),
                                 serviceClientProperty.getName()));
                     }
-                    classBlock.javadocComment(comment -> comment.description(traitMethod.getDocumentation()), comment -> {}, false);
+                    classBlock.javadocComment(comment -> comment.description(traitMethod.getDocumentation()), null, false);
                     addGeneratedAnnotation(classBlock);
                     if (settings.isBranded()) {
                         // TODO: generic not having Trait
