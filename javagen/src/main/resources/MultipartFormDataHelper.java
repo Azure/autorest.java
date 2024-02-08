@@ -10,7 +10,6 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.UUID;
-import java.util.regex.Pattern;
 
 // DO NOT modify this helper class
 
@@ -209,8 +208,6 @@ public final class MultipartFormDataHelper {
         requestLength += bytes.length;
         requestDataStream = new SequenceInputStream(requestDataStream, new ByteArrayInputStream(bytes));
     }
-
-    private static final Pattern REDACT_FILENAME = Pattern.compile("[^\\x20-\\x7E]|\"");
 
     private static String escapeName(String name) {
         return name.replace("\n", "%0A").replace("\r", "%0D").replace("\"", "%22");
