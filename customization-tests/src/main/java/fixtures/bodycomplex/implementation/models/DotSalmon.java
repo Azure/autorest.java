@@ -68,7 +68,7 @@ public class DotSalmon extends DotFish {
 
     /**
      * Set the iswild property: The iswild property.
-     * 
+     *
      * @param iswild the iswild value to set.
      */
     public void setWild(Boolean iswild) {
@@ -86,7 +86,7 @@ public class DotSalmon extends DotFish {
 
     /**
      * Return if the salmon is a domestic species.
-     * 
+     *
      * @return true if the salmon is domestic
      * @deprecated Removing in the next version
      */
