@@ -4,9 +4,13 @@
 package com.azure.autorest.postprocessor.implementation;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
-import com.google.googlejavaformat.java.ImportOrderer;
-import com.google.googlejavaformat.java.JavaFormatterOptions;
-import com.google.googlejavaformat.java.RemoveUnusedImports;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.ImportDeclaration;
+import com.github.javaparser.ast.PackageDeclaration;
+import com.github.javaparser.ast.nodeTypes.NodeWithIdentifier;
+import com.github.javaparser.ast.nodeTypes.NodeWithName;
+import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import org.eclipse.jdt.core.ToolFactory;
 import org.eclipse.jdt.core.formatter.CodeFormatter;
 import org.eclipse.jdt.internal.compiler.env.IModule;
@@ -20,6 +24,8 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -96,8 +102,37 @@ public final class CodeFormatterUtil {
      * @return The file with unused imports removed.
      */
     private static String removeUnusedImports(String file) throws Exception {
-        return RemoveUnusedImports.removeUnusedImports(
-            ImportOrderer.reorderImports(file, JavaFormatterOptions.Style.GOOGLE));
+        CompilationUnit compilationUnit = StaticJavaParser.parse(file);
+        PackageDeclaration packageDeclaration = compilationUnit.getPackageDeclaration().orElse(null);
+        String packageName = packageDeclaration != null ? packageDeclaration.getNameAsString() : null;
+        com.github.javaparser.ast.NodeList<ImportDeclaration> imports = compilationUnit.getImports();
+        Set<String> types = compilationUnit.stream()
+            .filter(node -> node instanceof NodeWithIdentifier || node instanceof NodeWithName
+                || node instanceof NodeWithSimpleName)
+            .filter(node -> !node.isDescendantOf(packageDeclaration) && !(node instanceof PackageDeclaration))
+            .filter(node -> imports.stream().noneMatch(node::isDescendantOf) && !(node instanceof ImportDeclaration))
+            .map(node -> {
+                if (node instanceof NodeWithIdentifier) {
+                    return ((NodeWithIdentifier<?>) node).getIdentifier();
+                } else if (node instanceof NodeWithName) {
+                    return ((NodeWithName<?>) node).getNameAsString();
+                } else {
+                    return ((NodeWithSimpleName<?>) node).getNameAsString();
+                }
+            })
+            .collect(Collectors.toSet());
+
+        imports.removeIf(importDeclaration -> {
+            String fullImportName = importDeclaration.getNameAsString();
+            if (Objects.equals(fullImportName, packageName)) {
+                return true;
+            }
+
+            String importType = importDeclaration.getName().getIdentifier();
+            return !types.contains(importType);
+        });
+
+        return compilationUnit.setImports(imports).toString();
     }
 
     private static String formatCode(String file, String fileName, CodeFormatter codeFormatter) throws Exception {
