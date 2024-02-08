@@ -9,6 +9,7 @@ import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import fixtures.bodycomplex.implementation.InheritancesImpl;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.Siamese;
 import reactor.core.publisher.Mono;
 

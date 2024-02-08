@@ -10,6 +10,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import fixtures.bodycomplex.implementation.BasicsImpl;
 import fixtures.bodycomplex.implementation.models.Basic;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 import reactor.core.publisher.Mono;
 
 /**

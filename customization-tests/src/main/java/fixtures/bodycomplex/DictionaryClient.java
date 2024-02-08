@@ -11,6 +11,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import fixtures.bodycomplex.implementation.DictionariesImpl;
 import fixtures.bodycomplex.implementation.models.DictionaryWrapper;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 
 /**
  * Initializes a new instance of the synchronous AutoRestComplexTestService type.

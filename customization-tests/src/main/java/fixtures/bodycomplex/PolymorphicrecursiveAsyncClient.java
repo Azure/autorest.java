@@ -9,6 +9,7 @@ import com.azure.core.annotation.ServiceClient;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import fixtures.bodycomplex.implementation.PolymorphicrecursivesImpl;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.Fish;
 import reactor.core.publisher.Mono;
 

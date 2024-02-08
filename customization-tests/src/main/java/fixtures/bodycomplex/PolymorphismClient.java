@@ -12,6 +12,7 @@ import com.azure.core.util.Context;
 import fixtures.bodycomplex.implementation.PolymorphismsImpl;
 import fixtures.bodycomplex.implementation.models.DotFish;
 import fixtures.bodycomplex.implementation.models.DotFishMarket;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.Fish;
 import fixtures.bodycomplex.implementation.models.Salmon;
 

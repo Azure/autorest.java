@@ -11,6 +11,7 @@ import com.azure.core.http.rest.Response;
 import fixtures.bodycomplex.implementation.PolymorphismsImpl;
 import fixtures.bodycomplex.implementation.models.DotFish;
 import fixtures.bodycomplex.implementation.models.DotFishMarket;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.Fish;
 import fixtures.bodycomplex.implementation.models.Salmon;
 import reactor.core.publisher.Mono;

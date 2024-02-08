@@ -11,6 +11,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.Context;
 import fixtures.bodycomplex.implementation.ArraysImpl;
 import fixtures.bodycomplex.implementation.models.ArrayWrapper;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 
 /**
  * The sync client containing Array operations.

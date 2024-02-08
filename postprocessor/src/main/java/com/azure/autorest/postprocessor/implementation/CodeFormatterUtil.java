@@ -8,6 +8,7 @@ import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
 import com.github.javaparser.ast.PackageDeclaration;
+import com.github.javaparser.ast.comments.JavadocComment;
 import com.github.javaparser.ast.nodeTypes.NodeWithIdentifier;
 import com.github.javaparser.ast.nodeTypes.NodeWithName;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
@@ -121,6 +122,12 @@ public final class CodeFormatterUtil {
                 }
             })
             .collect(Collectors.toSet());
+
+        compilationUnit.getAllComments().stream()
+            .filter(comment -> comment instanceof JavadocComment)
+            .map(comment -> (JavadocComment) comment)
+            .forEach(javadoc -> javadoc.parse().getBlockTags()
+                .forEach(tag -> tag.getName().ifPresent(types::add)));
 
         imports.removeIf(importDeclaration -> {
             String fullImportName = importDeclaration.getNameAsString();

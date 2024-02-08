@@ -16,6 +16,7 @@ import fixtures.bodycomplex.implementation.models.DatetimeWrapper;
 import fixtures.bodycomplex.implementation.models.DateWrapper;
 import fixtures.bodycomplex.implementation.models.DoubleWrapper;
 import fixtures.bodycomplex.implementation.models.DurationWrapper;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 import fixtures.bodycomplex.implementation.models.FloatWrapper;
 import fixtures.bodycomplex.implementation.models.IntWrapper;
 import fixtures.bodycomplex.implementation.models.LongWrapper;

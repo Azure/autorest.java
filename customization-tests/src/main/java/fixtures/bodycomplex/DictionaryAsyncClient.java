@@ -10,6 +10,7 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
 import fixtures.bodycomplex.implementation.DictionariesImpl;
 import fixtures.bodycomplex.implementation.models.DictionaryWrapper;
+import fixtures.bodycomplex.implementation.models.ErrorException;
 import reactor.core.publisher.Mono;
 
 /**
