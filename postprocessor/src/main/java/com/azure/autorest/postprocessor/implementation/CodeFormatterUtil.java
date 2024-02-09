@@ -24,6 +24,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -169,10 +170,10 @@ public final class CodeFormatterUtil {
         List<String> lines = new ArrayList<>(Arrays.asList(file.split("\r?\n")));
 
         List<ImportDeclaration> sortedImportsToRemove = importsToRemove.entrySet().stream()
-            .sorted(Map.Entry.comparingByKey()).map(Map.Entry::getValue)
+            .sorted(Map.Entry.comparingByKey(Comparator.reverseOrder())).map(Map.Entry::getValue)
             .collect(Collectors.toList());
 
-        for (ImportDeclaration importDeclaration : sortedImportsToRemove.reversed()) {
+        for (ImportDeclaration importDeclaration : sortedImportsToRemove) {
             int startLine = importDeclaration.getRange().get().begin.line - 1;
             int endLine = importDeclaration.getRange().get().end.line - 1;
 
