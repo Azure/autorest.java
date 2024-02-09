@@ -6,7 +6,6 @@ package com.cadl.multipart.implementation.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-
 import com.cadl.multipart.models.FileDataFileDetails;
 
 /**

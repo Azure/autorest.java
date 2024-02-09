@@ -7,11 +7,9 @@ package fixtures.bodystring;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.Context;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.RefColorConstant;
-
 import reactor.core.publisher.Mono;
 
 /**

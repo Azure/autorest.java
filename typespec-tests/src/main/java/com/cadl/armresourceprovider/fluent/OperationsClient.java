@@ -6,9 +6,7 @@ package com.cadl.armresourceprovider.fluent;
 
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.http.rest.PagedIterable;
-
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.OperationInner;
 

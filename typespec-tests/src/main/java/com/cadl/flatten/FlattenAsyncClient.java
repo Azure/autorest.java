@@ -5,32 +5,23 @@
 package com.cadl.flatten;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.core.util.FluxUtil;
-
 import com.cadl.flatten.implementation.FlattenClientImpl;
-
 import com.cadl.flatten.implementation.models.SendLongRequest;
 import com.cadl.flatten.implementation.models.SendProjectedNameRequest;
 import com.cadl.flatten.implementation.models.SendRequest;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
-
 import reactor.core.publisher.Mono;
 
 /**

@@ -7,17 +7,13 @@ package com._specs_.azure.core.basic.models;
 import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-
 import java.util.HashSet;
-
 import java.util.List;
-
 import java.util.Set;
 
 /**

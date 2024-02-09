@@ -9,23 +9,15 @@ package com.encode.bytes.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.encode.bytes.BytesClientBuilder;
-
 import com.encode.bytes.HeaderClient;
-
 import com.encode.bytes.PropertyClient;
-
 import com.encode.bytes.QueryClient;
-
 import com.encode.bytes.RequestBodyClient;
-
 import com.encode.bytes.ResponseBodyClient;
 
 class BytesClientTestBase extends TestProxyTestBase {

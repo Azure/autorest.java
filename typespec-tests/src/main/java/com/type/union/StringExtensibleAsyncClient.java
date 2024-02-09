@@ -5,29 +5,21 @@
 package com.type.union;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.core.util.FluxUtil;
-
 import com.type.union.implementation.StringExtensiblesImpl;
 import com.type.union.implementation.models.SendRequest1;
 import com.type.union.models.GetResponse1;
 import com.type.union.models.Prop;
-
 import reactor.core.publisher.Mono;
 
 /**

@@ -5,7 +5,6 @@
 package com.cadl.response.generated;
 
 import com.azure.core.util.Configuration;
-
 import com.cadl.response.ResponseClient;
 import com.cadl.response.ResponseClientBuilder;
 

@@ -5,7 +5,6 @@
 package com.cadl.armresourceprovider.fluent;
 
 import com.azure.core.http.HttpPipeline;
-
 import java.time.Duration;
 
 /**

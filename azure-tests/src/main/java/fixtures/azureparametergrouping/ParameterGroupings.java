@@ -19,7 +19,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.azureparametergrouping.models.ErrorException;
@@ -29,7 +28,6 @@ import fixtures.azureparametergrouping.models.ParameterGroupingPostMultiParamGro
 import fixtures.azureparametergrouping.models.ParameterGroupingPostOptionalParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostRequiredParameters;
 import fixtures.azureparametergrouping.models.ParameterGroupingPostReservedWordsParameters;
-
 import reactor.core.publisher.Mono;
 
 /**

@@ -9,19 +9,13 @@ package com.encode.duration.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.encode.duration.DurationClientBuilder;
-
 import com.encode.duration.HeaderClient;
-
 import com.encode.duration.PropertyClient;
-
 import com.encode.duration.QueryClient;
 
 class DurationClientTestBase extends TestProxyTestBase {

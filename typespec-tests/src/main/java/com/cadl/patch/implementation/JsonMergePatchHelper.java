@@ -7,7 +7,6 @@ package com.cadl.patch.implementation;
 import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.InnerModel;
 import com.cadl.patch.models.Resource;
-
 import com.cadl.patch.models.Salmon;
 import com.cadl.patch.models.Shark;
 

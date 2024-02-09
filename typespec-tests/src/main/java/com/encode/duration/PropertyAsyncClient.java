@@ -5,31 +5,23 @@
 package com.encode.duration;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.core.util.FluxUtil;
-
 import com.encode.duration.implementation.PropertiesImpl;
 import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.ISO8601DurationProperty;
-
 import reactor.core.publisher.Mono;
 
 /**

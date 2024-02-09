@@ -5,9 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.util.CoreUtils;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

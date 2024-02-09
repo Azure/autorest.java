@@ -9,14 +9,11 @@ package com.cadl.errormodel.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
-
 import com.cadl.errormodel.ErrorModelClient;
 import com.cadl.errormodel.ErrorModelClientBuilder;
 

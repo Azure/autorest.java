@@ -5,39 +5,27 @@
 package com.payload.multipart;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.core.util.FluxUtil;
-
 import com.payload.multipart.implementation.FormDatasImpl;
-
 import com.payload.multipart.implementation.MultipartFormDataHelper;
-
 import com.payload.multipart.models.BinaryArrayPartsRequest;
 import com.payload.multipart.models.ComplexPartsRequest;
 import com.payload.multipart.models.JsonArrayPartsRequest;
 import com.payload.multipart.models.JsonPartRequest;
 import com.payload.multipart.models.MultiBinaryPartsRequest;
 import com.payload.multipart.models.MultiPartRequest;
-
 import com.payload.multipart.models.PicturesFileDetails;
-
 import java.util.stream.Collectors;
-
 import reactor.core.publisher.Mono;
 
 /**

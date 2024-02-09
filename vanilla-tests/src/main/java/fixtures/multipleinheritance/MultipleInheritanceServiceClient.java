@@ -22,7 +22,6 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -33,7 +32,6 @@ import fixtures.multipleinheritance.models.Feline;
 import fixtures.multipleinheritance.models.Horse;
 import fixtures.multipleinheritance.models.Kitten;
 import fixtures.multipleinheritance.models.Pet;
-
 import reactor.core.publisher.Mono;
 
 /**

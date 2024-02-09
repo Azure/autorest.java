@@ -9,21 +9,14 @@ package com.encode.datetime.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.encode.datetime.DatetimeClientBuilder;
-
 import com.encode.datetime.HeaderClient;
-
 import com.encode.datetime.PropertyClient;
-
 import com.encode.datetime.QueryClient;
-
 import com.encode.datetime.ResponseHeaderClient;
 
 class DatetimeClientTestBase extends TestProxyTestBase {

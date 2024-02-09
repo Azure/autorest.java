@@ -5,7 +5,6 @@
 package com.cadl.specialchars.generated;
 
 import com.cadl.specialchars.models.Resource;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

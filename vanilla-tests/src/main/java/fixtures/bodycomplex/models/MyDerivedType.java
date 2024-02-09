@@ -5,7 +5,6 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Immutable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;

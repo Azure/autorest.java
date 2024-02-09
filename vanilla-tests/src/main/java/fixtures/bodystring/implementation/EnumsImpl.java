@@ -17,14 +17,12 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodystring.Enums;
 import fixtures.bodystring.models.Colors;
 import fixtures.bodystring.models.ErrorException;
 import fixtures.bodystring.models.RefColorConstant;
-
 import reactor.core.publisher.Mono;
 
 /**

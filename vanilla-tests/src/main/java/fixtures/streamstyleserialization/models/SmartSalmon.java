@@ -5,14 +5,10 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.json.JsonReader;
-
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-
 import java.io.IOException;
-
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;

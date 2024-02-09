@@ -18,7 +18,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
@@ -28,10 +27,8 @@ import fixtures.bodydictionary.models.Widget;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
 import java.util.List;
 import java.util.Map;
-
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 

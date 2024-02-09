@@ -6,11 +6,8 @@ package com.cadl.multicontenttypes.generated;
 
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Configuration;
-
 import com.cadl.multicontenttypes.MultiContentTypesClientBuilder;
-
 import com.cadl.multicontenttypes.SingleContentTypeClient;
-
 import java.nio.charset.StandardCharsets;
 
 public class SingleContentTypeUploadImageForSingleContentType {

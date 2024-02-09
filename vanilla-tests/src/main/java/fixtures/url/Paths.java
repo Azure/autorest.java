@@ -16,18 +16,14 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.Base64Util;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-
 import fixtures.url.models.ErrorException;
 import fixtures.url.models.UriColor;
-
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;

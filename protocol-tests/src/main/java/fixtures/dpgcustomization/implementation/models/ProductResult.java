@@ -6,7 +6,6 @@ package fixtures.dpgcustomization.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import fixtures.dpgcustomization.models.Product;
 import java.util.List;

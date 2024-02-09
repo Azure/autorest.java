@@ -21,12 +21,10 @@ import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.custombaseuri.paging.models.Product;
 import fixtures.custombaseuri.paging.models.ProductResult;
-
 import reactor.core.publisher.Mono;
 
 /**

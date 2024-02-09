@@ -5,9 +5,7 @@
 package com.cadl.versioning.generated;
 
 import com.azure.core.http.rest.PagedIterable;
-
 import com.cadl.versioning.models.Resource;
-
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;

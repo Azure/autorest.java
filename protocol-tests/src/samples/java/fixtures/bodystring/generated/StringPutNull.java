@@ -6,7 +6,6 @@ package fixtures.bodystring.generated;
 
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import fixtures.bodystring.StringOperationClient;
 import fixtures.bodystring.StringOperationClientBuilder;
 

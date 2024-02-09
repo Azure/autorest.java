@@ -9,33 +9,20 @@ package com.type.array.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.type.array.ArrayClientBuilder;
-
 import com.type.array.BooleanValueClient;
-
 import com.type.array.DatetimeValueClient;
-
 import com.type.array.DurationValueClient;
-
 import com.type.array.Float32ValueClient;
-
 import com.type.array.Int32ValueClient;
-
 import com.type.array.Int64ValueClient;
-
 import com.type.array.ModelValueClient;
-
 import com.type.array.NullableFloatValueClient;
-
 import com.type.array.StringValueClient;
-
 import com.type.array.UnknownValueClient;
 
 class ArrayClientTestBase extends TestProxyTestBase {

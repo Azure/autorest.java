@@ -5,10 +5,8 @@
 package com.cadl.builtin.generated;
 
 import com.azure.core.util.Configuration;
-
 import com.cadl.builtin.BuiltinClient;
 import com.cadl.builtin.BuiltinClientBuilder;
-
 import com.cadl.builtin.models.Builtin;
 
 public class BuiltinOpRead {

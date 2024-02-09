@@ -10,12 +10,9 @@ package com._specs_.azure.core.lro.rpc.legacy.generated;
 
 import com._specs_.azure.core.lro.rpc.legacy.LegacyClient;
 import com._specs_.azure.core.lro.rpc.legacy.LegacyClientBuilder;
-
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 

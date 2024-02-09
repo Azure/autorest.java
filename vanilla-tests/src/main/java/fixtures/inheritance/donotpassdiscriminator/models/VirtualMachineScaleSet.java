@@ -5,9 +5,7 @@
 package fixtures.inheritance.donotpassdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.annotation.JsonFlatten;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

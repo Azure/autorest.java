@@ -8,7 +8,6 @@ import fixtures.streamstylexmlserialization.models.SignedIdentifier;
 import java.util.List;
 
 import com.azure.core.util.CoreUtils;
-
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;

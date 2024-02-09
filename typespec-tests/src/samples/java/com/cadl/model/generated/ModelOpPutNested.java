@@ -5,10 +5,8 @@
 package com.cadl.model.generated;
 
 import com.azure.core.util.Configuration;
-
 import com.cadl.model.ModelClient;
 import com.cadl.model.ModelClientBuilder;
-
 import com.cadl.model.models.NestedModel;
 
 public class ModelOpPutNested {

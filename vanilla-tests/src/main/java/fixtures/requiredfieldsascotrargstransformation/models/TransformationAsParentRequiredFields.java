@@ -6,7 +6,6 @@ package fixtures.requiredfieldsascotrargstransformation.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
-
 import com.azure.core.util.DateTimeRfc1123;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;

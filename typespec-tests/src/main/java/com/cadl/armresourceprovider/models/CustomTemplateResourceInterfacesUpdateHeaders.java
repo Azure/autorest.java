@@ -5,10 +5,8 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

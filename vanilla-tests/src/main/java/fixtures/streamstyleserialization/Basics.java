@@ -18,13 +18,11 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
 import fixtures.streamstyleserialization.models.Basic;
 import fixtures.streamstyleserialization.models.ErrorException;
-
 import reactor.core.publisher.Mono;
 
 /**

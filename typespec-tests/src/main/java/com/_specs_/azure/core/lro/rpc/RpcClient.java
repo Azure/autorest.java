@@ -7,23 +7,16 @@ package com._specs_.azure.core.lro.rpc;
 import com._specs_.azure.core.lro.rpc.implementation.RpcClientImpl;
 import com._specs_.azure.core.lro.rpc.models.GenerationOptions;
 import com._specs_.azure.core.lro.rpc.models.GenerationResult;
-
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.rest.RequestOptions;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 

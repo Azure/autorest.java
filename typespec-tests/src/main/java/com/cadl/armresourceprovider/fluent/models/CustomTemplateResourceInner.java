@@ -5,12 +5,9 @@
 package com.cadl.armresourceprovider.fluent.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
-
 import com.cadl.armresourceprovider.models.CustomTemplateResourceProperties;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 

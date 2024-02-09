@@ -6,10 +6,8 @@ package com.cadl.armresourceprovider.fluent;
 
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
-
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfacesUpdateResponse;

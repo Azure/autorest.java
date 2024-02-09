@@ -6,10 +6,8 @@ package com.cadl.versioning.generated;
 
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.Configuration;
-
 import com.cadl.versioning.VersioningClient;
 import com.cadl.versioning.VersioningClientBuilder;
-
 import com.cadl.versioning.models.Resource;
 import java.util.Arrays;
 

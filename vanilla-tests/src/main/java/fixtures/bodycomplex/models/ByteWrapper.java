@@ -5,9 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.util.CoreUtils;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

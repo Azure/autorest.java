@@ -18,13 +18,11 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import fixtures.bodydatetimerfc1123.models.ErrorException;
 import java.time.OffsetDateTime;
-
 import reactor.core.publisher.Mono;
 
 /**

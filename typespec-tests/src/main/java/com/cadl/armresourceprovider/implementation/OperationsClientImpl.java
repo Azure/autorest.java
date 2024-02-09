@@ -22,15 +22,12 @@ import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.management.exception.ManagementException;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-
 import com.cadl.armresourceprovider.fluent.OperationsClient;
 import com.cadl.armresourceprovider.fluent.models.OperationInner;
 import com.cadl.armresourceprovider.models.PagedOperation;
-
 import reactor.core.publisher.Mono;
 
 /**

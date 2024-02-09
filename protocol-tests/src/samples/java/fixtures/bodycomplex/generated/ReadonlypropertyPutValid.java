@@ -6,7 +6,6 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import fixtures.bodycomplex.ReadonlypropertyClient;
 import fixtures.bodycomplex.ReadonlypropertyClientBuilder;
 

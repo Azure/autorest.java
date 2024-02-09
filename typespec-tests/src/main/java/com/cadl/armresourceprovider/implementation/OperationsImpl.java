@@ -5,9 +5,7 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.http.rest.PagedIterable;
-
 import com.azure.core.util.Context;
-
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.OperationsClient;
 import com.cadl.armresourceprovider.fluent.models.OperationInner;

@@ -5,12 +5,9 @@
 package com.cadl.specialheaders;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
@@ -20,15 +17,10 @@ import com.azure.core.http.MatchConditions;
 import com.azure.core.http.RequestConditions;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.core.util.DateTimeRfc1123;
-
 import com.cadl.specialheaders.implementation.EtagHeadersImpl;
-
 import com.cadl.specialheaders.models.Resource;
-
 import java.time.OffsetDateTime;
 
 /**

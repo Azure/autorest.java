@@ -10,19 +10,14 @@ package com.authentication.union.generated;
 
 import com.authentication.union.UnionClient;
 import com.authentication.union.UnionClientBuilder;
-
 import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import java.time.OffsetDateTime;
-
 import reactor.core.publisher.Mono;
 
 class UnionClientTestBase extends TestProxyTestBase {

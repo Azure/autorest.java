@@ -10,19 +10,14 @@ package com.authentication.oauth2.generated;
 
 import com.authentication.oauth2.OAuth2Client;
 import com.authentication.oauth2.OAuth2ClientBuilder;
-
 import com.azure.core.credential.AccessToken;
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.azure.identity.DefaultAzureCredentialBuilder;
 import java.time.OffsetDateTime;
-
 import reactor.core.publisher.Mono;
 
 class OAuth2ClientTestBase extends TestProxyTestBase {

@@ -5,11 +5,9 @@
 package com.cadl.armresourceprovider.fluent.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.cadl.armresourceprovider.models.ActionType;
 import com.cadl.armresourceprovider.models.OperationDisplay;
 import com.cadl.armresourceprovider.models.Origin;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

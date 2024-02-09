@@ -10,12 +10,9 @@ package com.authentication.apikey.generated;
 
 import com.authentication.apikey.ApiKeyClient;
 import com.authentication.apikey.ApiKeyClientBuilder;
-
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 

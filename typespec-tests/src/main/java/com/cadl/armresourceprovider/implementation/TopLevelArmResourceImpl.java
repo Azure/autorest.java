@@ -11,7 +11,6 @@ import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import com.cadl.armresourceprovider.models.TopLevelArmResource;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceProperties;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate;
-
 import java.util.Collections;
 import java.util.Map;
 

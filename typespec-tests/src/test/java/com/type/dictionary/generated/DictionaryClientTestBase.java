@@ -9,34 +9,21 @@ package com.type.dictionary.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.type.dictionary.BooleanValueClient;
-
 import com.type.dictionary.DatetimeValueClient;
 import com.type.dictionary.DictionaryClientBuilder;
-
 import com.type.dictionary.DurationValueClient;
-
 import com.type.dictionary.Float32ValueClient;
-
 import com.type.dictionary.Int32ValueClient;
-
 import com.type.dictionary.Int64ValueClient;
-
 import com.type.dictionary.ModelValueClient;
-
 import com.type.dictionary.NullableFloatValueClient;
-
 import com.type.dictionary.RecursiveModelValueClient;
-
 import com.type.dictionary.StringValueClient;
-
 import com.type.dictionary.UnknownValueClient;
 
 class DictionaryClientTestBase extends TestProxyTestBase {

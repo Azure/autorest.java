@@ -5,7 +5,6 @@
 package fixtures.bodyduration.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**

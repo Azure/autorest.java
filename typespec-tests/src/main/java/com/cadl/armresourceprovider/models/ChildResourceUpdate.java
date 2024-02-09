@@ -5,7 +5,6 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;

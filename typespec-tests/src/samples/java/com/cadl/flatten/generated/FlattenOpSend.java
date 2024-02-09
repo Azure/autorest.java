@@ -5,10 +5,8 @@
 package com.cadl.flatten.generated;
 
 import com.azure.core.util.Configuration;
-
 import com.cadl.flatten.FlattenClient;
 import com.cadl.flatten.FlattenClientBuilder;
-
 import com.cadl.flatten.models.User;
 
 public class FlattenOpSend {

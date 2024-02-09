@@ -17,16 +17,13 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-
 import fixtures.bodycomplex.models.DotFish;
 import fixtures.bodycomplex.models.DotFishMarket;
 import fixtures.bodycomplex.models.ErrorException;
 import fixtures.bodycomplex.models.Fish;
 import fixtures.bodycomplex.models.Salmon;
-
 import reactor.core.publisher.Mono;
 
 /**

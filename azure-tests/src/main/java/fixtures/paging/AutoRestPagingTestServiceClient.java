@@ -5,22 +5,14 @@
 package fixtures.paging;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.HttpResponseException;
-
 import com.azure.core.http.rest.PagedIterable;
-
 import com.azure.core.util.Context;
-
 import fixtures.paging.implementation.PagingsImpl;
-
 import fixtures.paging.models.CustomParameterGroup;
-
 import fixtures.paging.models.PagingGetMultiplePagesLroOptions;
 import fixtures.paging.models.PagingGetMultiplePagesOptions;
 import fixtures.paging.models.PagingGetMultiplePagesWithOffsetOptions;

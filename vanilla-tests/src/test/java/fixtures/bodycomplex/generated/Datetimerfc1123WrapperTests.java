@@ -5,10 +5,8 @@
 package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
-
 import fixtures.bodycomplex.models.Datetimerfc1123Wrapper;
 import java.time.OffsetDateTime;
-
 import org.junit.jupiter.api.Assertions;
 
 public final class Datetimerfc1123WrapperTests {

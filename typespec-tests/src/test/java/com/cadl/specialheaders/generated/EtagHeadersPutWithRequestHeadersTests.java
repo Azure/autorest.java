@@ -5,9 +5,7 @@
 package com.cadl.specialheaders.generated;
 
 import com.azure.core.http.RequestConditions;
-
 import com.cadl.specialheaders.models.Resource;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

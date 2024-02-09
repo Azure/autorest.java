@@ -9,26 +9,17 @@ package com.type.scalar.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.type.scalar.BooleanOperationClient;
-
 import com.type.scalar.Decimal128TypeClient;
-
 import com.type.scalar.Decimal128VerifyClient;
-
 import com.type.scalar.DecimalTypeClient;
-
 import com.type.scalar.DecimalVerifyClient;
 import com.type.scalar.ScalarClientBuilder;
-
 import com.type.scalar.StringOperationClient;
-
 import com.type.scalar.UnknownClient;
 
 class ScalarClientTestBase extends TestProxyTestBase {

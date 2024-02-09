@@ -5,10 +5,8 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 

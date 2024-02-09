@@ -7,23 +7,16 @@ package com._specs_.azure.core.basic;
 import com._specs_.azure.core.basic.implementation.TwoModelsAsPageItemsImpl;
 import com._specs_.azure.core.basic.models.FirstItem;
 import com._specs_.azure.core.basic.models.SecondItem;
-
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.rest.PagedIterable;
-
 import com.azure.core.http.rest.RequestOptions;
-
 import com.azure.core.util.BinaryData;
 
 /**

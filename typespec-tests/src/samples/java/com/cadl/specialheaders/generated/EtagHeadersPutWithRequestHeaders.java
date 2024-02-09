@@ -5,13 +5,9 @@
 package com.cadl.specialheaders.generated;
 
 import com.azure.core.http.RequestConditions;
-
 import com.azure.core.util.Configuration;
-
 import com.cadl.specialheaders.EtagHeadersClient;
-
 import com.cadl.specialheaders.SpecialHeadersClientBuilder;
-
 import com.cadl.specialheaders.models.Resource;
 
 public class EtagHeadersPutWithRequestHeaders {

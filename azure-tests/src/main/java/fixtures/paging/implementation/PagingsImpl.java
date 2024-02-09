@@ -24,7 +24,6 @@ import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.paging.models.BodyParamModel;
@@ -38,7 +37,6 @@ import fixtures.paging.models.Product;
 import fixtures.paging.models.ProductResult;
 import fixtures.paging.models.ProductResultValue;
 import fixtures.paging.models.ProductResultValueWithXMSClientName;
-
 import reactor.core.publisher.Mono;
 
 /**

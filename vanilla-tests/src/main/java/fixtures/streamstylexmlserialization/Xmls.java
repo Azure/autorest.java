@@ -19,7 +19,6 @@ import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.streamstylexmlserialization.implementation.models.BananaWrapper;
@@ -41,7 +40,6 @@ import fixtures.streamstylexmlserialization.models.Slideshow;
 import fixtures.streamstylexmlserialization.models.StorageServiceProperties;
 import fixtures.streamstylexmlserialization.models.XmlsGetHeadersResponse;
 import java.util.List;
-
 import reactor.core.publisher.Mono;
 
 /**

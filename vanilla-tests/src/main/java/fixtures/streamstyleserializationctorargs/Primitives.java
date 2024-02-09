@@ -17,7 +17,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.logging.ClientLogger;
@@ -33,7 +32,6 @@ import fixtures.streamstyleserializationctorargs.models.FloatWrapper;
 import fixtures.streamstyleserializationctorargs.models.IntWrapper;
 import fixtures.streamstyleserializationctorargs.models.LongWrapper;
 import fixtures.streamstyleserializationctorargs.models.StringWrapper;
-
 import reactor.core.publisher.Mono;
 
 /**

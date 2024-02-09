@@ -22,7 +22,10 @@ import org.w3c.dom.NodeList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -136,7 +139,7 @@ public final class CodeFormatterUtil {
                 .forEach(tag -> tag.getName().ifPresent(types::add)));
 
         // Get the list of imports that are unused.
-        List<String> unusedImports = imports.stream().filter(importDeclaration -> {
+        Set<ImportDeclaration> importsToRemove = imports.stream().filter(importDeclaration -> {
             String fullImportName = importDeclaration.getNameAsString();
             if (Objects.equals(fullImportName, packageName)) {
                 return true;
@@ -144,13 +147,36 @@ public final class CodeFormatterUtil {
 
             String importType = importDeclaration.getName().getIdentifier();
             return !types.contains(importType);
-        }).map(importDeclaration -> "import " + importDeclaration.getNameAsString() + ";").collect(Collectors.toList());
+        }).collect(Collectors.toCollection(LinkedHashSet::new));
 
-        for (String unusedImport : unusedImports) {
-            file = file.replaceFirst(unusedImport, "");
+        // Get the list of duplicate imports.
+        imports.stream().collect(Collectors.groupingBy(ImportDeclaration::getNameAsString)).entrySet().stream()
+            .filter(entry -> entry.getValue().size() > 1)
+            .flatMap(entry -> entry.getValue().stream().skip(1))
+            .forEach(importsToRemove::add);
+
+        // Nothing to clean up.
+        if (importsToRemove.isEmpty()) {
+            return file;
         }
 
-        return file;
+        // Split the file into lines to remove the unused imports.
+        List<String> lines = new ArrayList<>(Arrays.asList(file.split("\r?\n")));
+
+        List<ImportDeclaration> sortedImportsToRemove = importsToRemove.stream()
+            .sorted((i1, i2) -> i2.getRange().get().begin.line - i1.getRange().get().begin.line)
+            .collect(Collectors.toList());
+
+        for (ImportDeclaration importDeclaration : sortedImportsToRemove) {
+            int startLine = importDeclaration.getRange().get().begin.line - 1;
+            int endLine = importDeclaration.getRange().get().end.line - 1;
+
+            for (int i = startLine; i <= endLine; i++) {
+                lines.remove(i);
+            }
+        }
+
+        return String.join(System.lineSeparator(), lines);
     }
 
     private static String formatCode(String file, String fileName, CodeFormatter codeFormatter) throws Exception {

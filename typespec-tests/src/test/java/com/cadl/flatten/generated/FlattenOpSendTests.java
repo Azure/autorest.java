@@ -5,7 +5,6 @@
 package com.cadl.flatten.generated;
 
 import com.cadl.flatten.models.User;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

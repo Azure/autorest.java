@@ -9,9 +9,7 @@ import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResource;
-
 import com.cadl.armresourceprovider.models.CustomTemplateResourceProperties;
-
 import java.util.Collections;
 import java.util.Map;
 

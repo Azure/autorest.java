@@ -9,20 +9,15 @@ package com.cadl.multipleapiversion.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
-
 import com.cadl.multipleapiversion.FirstClient;
 import com.cadl.multipleapiversion.FirstClientBuilder;
-
 import com.cadl.multipleapiversion.NoApiVersionClient;
 import com.cadl.multipleapiversion.NoApiVersionClientBuilder;
-
 import com.cadl.multipleapiversion.SecondClient;
 import com.cadl.multipleapiversion.SecondClientBuilder;
 

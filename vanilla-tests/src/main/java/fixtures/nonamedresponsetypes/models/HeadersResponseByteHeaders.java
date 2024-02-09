@@ -5,13 +5,10 @@
 package fixtures.nonamedresponsetypes.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.CoreUtils;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import java.util.Base64;
 
 /**

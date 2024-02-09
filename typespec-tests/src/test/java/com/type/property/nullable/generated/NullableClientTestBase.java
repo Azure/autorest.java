@@ -9,24 +9,16 @@ package com.type.property.nullable.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.type.property.nullable.BytesClient;
-
 import com.type.property.nullable.CollectionsByteClient;
-
 import com.type.property.nullable.CollectionsModelClient;
-
 import com.type.property.nullable.DatetimeOperationClient;
-
 import com.type.property.nullable.DurationOperationClient;
 import com.type.property.nullable.NullableClientBuilder;
-
 import com.type.property.nullable.StringOperationClient;
 
 class NullableClientTestBase extends TestProxyTestBase {

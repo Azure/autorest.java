@@ -6,7 +6,6 @@ package com.type.property.nullable.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,9 +14,7 @@ import com.type.property.nullable.implementation.CoreToCodegenBridgeUtils;
 import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
 import java.time.Duration;
-
 import java.util.HashSet;
-
 import java.util.Set;
 
 /**

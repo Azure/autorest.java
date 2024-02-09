@@ -5,9 +5,7 @@
 package com.cadl.multicontenttypes.generated;
 
 import com.azure.core.util.BinaryData;
-
 import java.nio.charset.StandardCharsets;
-
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 

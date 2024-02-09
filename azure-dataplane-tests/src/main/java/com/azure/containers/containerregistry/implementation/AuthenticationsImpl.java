@@ -9,7 +9,6 @@ import com.azure.containers.containerregistry.implementation.models.AcrErrorsExc
 import com.azure.containers.containerregistry.implementation.models.AcrRefreshToken;
 import com.azure.containers.containerregistry.implementation.models.PostContentSchemaGrantType;
 import com.azure.containers.containerregistry.implementation.models.TokenGrantType;
-
 import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.FormParam;
 import com.azure.core.annotation.HeaderParam;
@@ -23,10 +22,8 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-
 import reactor.core.publisher.Mono;
 
 /**

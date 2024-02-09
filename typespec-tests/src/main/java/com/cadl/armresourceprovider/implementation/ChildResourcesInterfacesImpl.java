@@ -5,17 +5,13 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.http.rest.PagedIterable;
-
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.SimpleResponse;
-
 import com.azure.core.util.Context;
-
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.ChildResourcesInterfacesClient;
 import com.cadl.armresourceprovider.fluent.models.ChildResourceInner;
 import com.cadl.armresourceprovider.models.ChildResource;
-
 import com.cadl.armresourceprovider.models.ChildResourcesInterfaces;
 
 public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfaces {

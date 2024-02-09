@@ -20,9 +20,7 @@ import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceInterface;
 import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
-
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
@@ -43,7 +41,6 @@ import fixtures.httpinfrastructure.models.HttpRedirectsPost307Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPut301Response;
 import fixtures.httpinfrastructure.models.HttpRedirectsPut307Response;
 import java.util.List;
-
 import reactor.core.publisher.Mono;
 
 /**

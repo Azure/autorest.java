@@ -5,25 +5,18 @@
 package fixtures.bodydictionary;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
-
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.http.rest.Response;
-
 import fixtures.bodydictionary.implementation.DictionariesImpl;
 import fixtures.bodydictionary.models.ErrorException;
 import fixtures.bodydictionary.models.Widget;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-
 import java.util.List;
 import java.util.Map;
-
 import reactor.core.publisher.Mono;
 
 /**

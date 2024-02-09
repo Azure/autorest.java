@@ -5,16 +5,11 @@
 package fixtures.bodycomplex;
 
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.Context;
-
 import fixtures.bodycomplex.implementation.BasicsImpl;
 import fixtures.bodycomplex.implementation.models.Basic;
 import fixtures.bodycomplex.implementation.models.ErrorException;

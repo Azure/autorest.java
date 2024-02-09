@@ -5,7 +5,6 @@
 package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
-
 import fixtures.bodycomplex.models.LongWrapper;
 import org.junit.jupiter.api.Assertions;
 

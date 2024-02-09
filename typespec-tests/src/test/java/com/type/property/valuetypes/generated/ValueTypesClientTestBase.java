@@ -9,67 +9,37 @@ package com.type.property.valuetypes.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.type.property.valuetypes.BooleanLiteralClient;
-
 import com.type.property.valuetypes.BooleanOperationClient;
-
 import com.type.property.valuetypes.BytesClient;
-
 import com.type.property.valuetypes.CollectionsIntClient;
-
 import com.type.property.valuetypes.CollectionsModelClient;
-
 import com.type.property.valuetypes.CollectionsStringClient;
-
 import com.type.property.valuetypes.DatetimeOperationClient;
-
 import com.type.property.valuetypes.Decimal128Client;
-
 import com.type.property.valuetypes.DecimalClient;
-
 import com.type.property.valuetypes.DictionaryStringClient;
-
 import com.type.property.valuetypes.DurationOperationClient;
-
 import com.type.property.valuetypes.EnumClient;
-
 import com.type.property.valuetypes.ExtensibleEnumClient;
-
 import com.type.property.valuetypes.FloatLiteralClient;
-
 import com.type.property.valuetypes.FloatOperationClient;
-
 import com.type.property.valuetypes.IntClient;
-
 import com.type.property.valuetypes.IntLiteralClient;
-
 import com.type.property.valuetypes.ModelClient;
-
 import com.type.property.valuetypes.NeverClient;
-
 import com.type.property.valuetypes.StringLiteralClient;
-
 import com.type.property.valuetypes.StringOperationClient;
-
 import com.type.property.valuetypes.UnionFloatLiteralClient;
-
 import com.type.property.valuetypes.UnionIntLiteralClient;
-
 import com.type.property.valuetypes.UnionStringLiteralClient;
-
 import com.type.property.valuetypes.UnknownArrayClient;
-
 import com.type.property.valuetypes.UnknownDictClient;
-
 import com.type.property.valuetypes.UnknownIntClient;
-
 import com.type.property.valuetypes.UnknownStringClient;
 import com.type.property.valuetypes.ValueTypesClientBuilder;
 

@@ -7,9 +7,7 @@ package com.cadl.armresourceprovider.implementation;
 import com.azure.core.annotation.ServiceClient;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
-
 import com.azure.core.http.HttpResponse;
-
 import com.azure.core.http.rest.Response;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.exception.ManagementError;
@@ -35,7 +33,6 @@ import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
-
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 

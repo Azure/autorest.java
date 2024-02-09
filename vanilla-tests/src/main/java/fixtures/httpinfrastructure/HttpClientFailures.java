@@ -6,7 +6,6 @@ package fixtures.httpinfrastructure;
 
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
-
 import com.azure.core.annotation.Get;
 import com.azure.core.annotation.Head;
 import com.azure.core.annotation.HeaderParam;
@@ -22,11 +21,9 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.httpinfrastructure.models.ErrorException;
-
 import reactor.core.publisher.Mono;
 
 /**

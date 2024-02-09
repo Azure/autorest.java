@@ -6,12 +6,9 @@ package com.type.model.inheritance.singlediscriminator.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-
 import com.azure.json.JsonReader;
-
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-
 import java.io.IOException;
 
 /**

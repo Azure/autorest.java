@@ -6,9 +6,7 @@ package com.cadl.builtin.generated;
 
 import com.cadl.builtin.models.Builtin;
 import com.cadl.builtin.models.Encoded;
-
 import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

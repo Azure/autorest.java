@@ -10,12 +10,9 @@ package com._specs_.azure.clientgenerator.core.usage.generated;
 
 import com._specs_.azure.clientgenerator.core.usage.UsageClient;
 import com._specs_.azure.clientgenerator.core.usage.UsageClientBuilder;
-
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 

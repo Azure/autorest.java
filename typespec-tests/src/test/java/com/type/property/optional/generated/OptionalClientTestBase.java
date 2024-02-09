@@ -9,40 +9,24 @@ package com.type.property.optional.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.type.property.optional.BooleanLiteralClient;
-
 import com.type.property.optional.BytesClient;
-
 import com.type.property.optional.CollectionsByteClient;
-
 import com.type.property.optional.CollectionsModelClient;
-
 import com.type.property.optional.DatetimeOperationClient;
-
 import com.type.property.optional.DurationOperationClient;
-
 import com.type.property.optional.FloatLiteralClient;
-
 import com.type.property.optional.IntLiteralClient;
 import com.type.property.optional.OptionalClientBuilder;
-
 import com.type.property.optional.RequiredAndOptionalClient;
-
 import com.type.property.optional.StringLiteralClient;
-
 import com.type.property.optional.StringOperationClient;
-
 import com.type.property.optional.UnionFloatLiteralClient;
-
 import com.type.property.optional.UnionIntLiteralClient;
-
 import com.type.property.optional.UnionStringLiteralClient;
 
 class OptionalClientTestBase extends TestProxyTestBase {

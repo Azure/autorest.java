@@ -7,23 +7,16 @@ package com._specs_.azure.core.lro.standard;
 import com._specs_.azure.core.lro.standard.implementation.StandardClientImpl;
 import com._specs_.azure.core.lro.standard.models.ExportedUser;
 import com._specs_.azure.core.lro.standard.models.User;
-
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
-
 import com.azure.core.annotation.ServiceMethod;
-
 import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.rest.RequestOptions;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 

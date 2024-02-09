@@ -7,7 +7,6 @@ package com.cadl.model.generated;
 import com.cadl.model.models.NestedModel;
 import com.cadl.model.models.NestedModel1;
 import com.cadl.model.models.NestedModel2;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;

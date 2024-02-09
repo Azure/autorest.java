@@ -6,7 +6,6 @@ package com.cadl.multipart.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-
 import java.util.List;
 
 /**

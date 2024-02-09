@@ -10,14 +10,10 @@ package com._specs_.azure.core.basic.generated;
 
 import com._specs_.azure.core.basic.BasicClient;
 import com._specs_.azure.core.basic.BasicClientBuilder;
-
 import com._specs_.azure.core.basic.TwoModelsAsPageItemClient;
-
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 

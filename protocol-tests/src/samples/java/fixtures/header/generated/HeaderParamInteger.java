@@ -6,7 +6,6 @@ package fixtures.header.generated;
 
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import fixtures.header.AutoRestSwaggerBatHeaderServiceClient;
 import fixtures.header.AutoRestSwaggerBatHeaderServiceClientBuilder;
 

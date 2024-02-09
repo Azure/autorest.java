@@ -16,7 +16,6 @@ import com.azure.core.annotation.ServiceMethod;
 import com.azure.core.annotation.UnexpectedResponseExceptionType;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import fixtures.additionalproperties.models.CatAPTrue;
@@ -26,7 +25,6 @@ import fixtures.additionalproperties.models.PetAPInPropertiesWithAPString;
 import fixtures.additionalproperties.models.PetAPObject;
 import fixtures.additionalproperties.models.PetAPString;
 import fixtures.additionalproperties.models.PetAPTrue;
-
 import reactor.core.publisher.Mono;
 
 /**

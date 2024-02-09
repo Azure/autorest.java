@@ -6,7 +6,6 @@ package fixtures.url.multi.generated;
 
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
-
 import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClient;
 import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceClientBuilder;
 

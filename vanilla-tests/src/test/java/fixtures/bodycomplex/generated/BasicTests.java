@@ -5,10 +5,8 @@
 package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
-
 import fixtures.bodycomplex.models.Basic;
 import fixtures.bodycomplex.models.CMYKColors;
-
 import org.junit.jupiter.api.Assertions;
 
 public final class BasicTests {

@@ -5,18 +5,14 @@
 package fixtures.streamstylexmlserialization.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-
 import java.time.OffsetDateTime;
-
 import java.util.Objects;
-
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 

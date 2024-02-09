@@ -6,14 +6,11 @@ package com.cadl.union.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-
 import com.azure.core.util.BinaryData;
-
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-
 import com.cadl.union.models.User;
 import java.io.IOException;
 

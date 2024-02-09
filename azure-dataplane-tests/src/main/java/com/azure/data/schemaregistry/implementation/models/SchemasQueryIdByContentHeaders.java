@@ -5,7 +5,6 @@
 package com.azure.data.schemaregistry.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 

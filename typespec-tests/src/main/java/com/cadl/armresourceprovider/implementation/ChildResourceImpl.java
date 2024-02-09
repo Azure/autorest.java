@@ -6,14 +6,11 @@ package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.management.Region;
 import com.azure.core.management.SystemData;
-
 import com.azure.core.util.Context;
-
 import com.cadl.armresourceprovider.fluent.models.ChildResourceInner;
 import com.cadl.armresourceprovider.models.ChildResource;
 import com.cadl.armresourceprovider.models.ChildResourceProperties;
 import com.cadl.armresourceprovider.models.ChildResourceUpdate;
-
 import java.util.Collections;
 import java.util.Map;
 

@@ -5,7 +5,6 @@
 package com.azure.ai.formrecognizer.documentanalysis.dpg.implementation;
 
 import com.azure.ai.formrecognizer.documentanalysis.dpg.FormRecognizerServiceVersion;
-
 import com.azure.core.annotation.BodyParam;
 import com.azure.core.annotation.Delete;
 import com.azure.core.annotation.ExpectedResponses;
@@ -24,7 +23,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -36,11 +34,9 @@ import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
@@ -52,7 +48,6 @@ import com.azure.core.util.serializer.TypeReference;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
-
 import java.util.stream.Collectors;
 import reactor.core.publisher.Mono;
 

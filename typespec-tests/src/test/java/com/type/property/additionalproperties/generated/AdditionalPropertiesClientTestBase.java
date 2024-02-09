@@ -9,41 +9,24 @@ package com.type.property.additionalproperties.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.type.property.additionalproperties.AdditionalPropertiesClientBuilder;
-
 import com.type.property.additionalproperties.ExtendsFloatClient;
-
 import com.type.property.additionalproperties.ExtendsModelArrayClient;
-
 import com.type.property.additionalproperties.ExtendsModelClient;
-
 import com.type.property.additionalproperties.ExtendsStringClient;
-
 import com.type.property.additionalproperties.ExtendsUnknownClient;
-
 import com.type.property.additionalproperties.ExtendsUnknownDerivedClient;
-
 import com.type.property.additionalproperties.ExtendsUnknownDiscriminatedClient;
-
 import com.type.property.additionalproperties.IsFloatClient;
-
 import com.type.property.additionalproperties.IsModelArrayClient;
-
 import com.type.property.additionalproperties.IsModelClient;
-
 import com.type.property.additionalproperties.IsStringClient;
-
 import com.type.property.additionalproperties.IsUnknownClient;
-
 import com.type.property.additionalproperties.IsUnknownDerivedClient;
-
 import com.type.property.additionalproperties.IsUnknownDiscriminatedClient;
 
 class AdditionalPropertiesClientTestBase extends TestProxyTestBase {

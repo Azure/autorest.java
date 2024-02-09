@@ -5,10 +5,8 @@
 package com.cadl.specialchars.generated;
 
 import com.azure.core.util.Configuration;
-
 import com.cadl.specialchars.SpecialCharsClient;
 import com.cadl.specialchars.SpecialCharsClientBuilder;
-
 import com.cadl.specialchars.models.Resource;
 
 public class BuiltinOpRead {

@@ -5,7 +5,6 @@
 package fixtures.validation.models;
 
 import com.azure.core.annotation.Fluent;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 

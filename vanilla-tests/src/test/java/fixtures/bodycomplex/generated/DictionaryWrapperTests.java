@@ -5,7 +5,6 @@
 package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
-
 import fixtures.bodycomplex.models.DictionaryWrapper;
 import java.util.HashMap;
 import java.util.Map;

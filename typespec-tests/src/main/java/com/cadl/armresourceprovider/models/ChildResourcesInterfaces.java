@@ -6,7 +6,6 @@ package com.cadl.armresourceprovider.models;
 
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
-
 import com.azure.core.util.Context;
 
 /**

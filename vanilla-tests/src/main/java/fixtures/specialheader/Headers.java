@@ -22,16 +22,13 @@ import com.azure.core.http.rest.PagedResponse;
 import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
-
 import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import fixtures.specialheader.models.ErrorException;
 import fixtures.specialheader.models.ProductResultValue;
 import java.time.OffsetDateTime;
-
 import java.util.UUID;
-
 import reactor.core.publisher.Mono;
 
 /**

@@ -6,7 +6,6 @@ package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.CustomTemplateResourceInterfacesClient;
-
 import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfaces;
 
 public final class CustomTemplateResourceInterfacesImpl implements CustomTemplateResourceInterfaces {

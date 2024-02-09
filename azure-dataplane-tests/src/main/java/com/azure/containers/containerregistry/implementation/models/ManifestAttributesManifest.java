@@ -6,13 +6,11 @@ package com.azure.containers.containerregistry.implementation.models;
 
 import com.azure.containers.containerregistry.models.ArtifactManifestPlatform;
 import com.azure.core.annotation.Fluent;
-
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-
 import java.util.List;
 
 /**

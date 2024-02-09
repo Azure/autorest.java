@@ -9,13 +9,10 @@ package com.specialheaders.repeatability.generated;
 // See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.
 
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-
 import com.specialheaders.repeatability.RepeatabilityClient;
 import com.specialheaders.repeatability.RepeatabilityClientBuilder;
 

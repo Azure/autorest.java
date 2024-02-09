@@ -10,12 +10,9 @@ package com.authentication.http.custom.generated;
 
 import com.authentication.http.custom.CustomClient;
 import com.authentication.http.custom.CustomClientBuilder;
-
 import com.azure.core.http.HttpClient;
-
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
-
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 
