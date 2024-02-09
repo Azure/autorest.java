@@ -204,10 +204,10 @@ public class MultipartTests {
                 "123",
                 Arrays.asList(
                         new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("voilà.png"),
-                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("ima\"\nge2.png")
+                        new PicturesFileDetails(BinaryData.fromFile(PNG_FILE)).setFilename("ima\"\n\rge2.png")
                 ))).block();
 
-        validationPolicy.validateFilenames("voila.png", "image2.png");
+        validationPolicy.validateFilenames("voilà.png", "ima%22%0A%0Dge2.png");
     }
 
     @Test
