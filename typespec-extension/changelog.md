@@ -1,6 +1,12 @@
 # Release History
 
-## 0.13.3 (2024-02-07)
+## 0.13.5 (2024-02-09)
+
+Compatible with compiler 0.53.
+
+- Behavior changed on "multipart/form-data" request. If `filename` is not provided, implementation will no longer provide a default filename to `Content-Disposition` line.
+
+## 0.13.4 (2024-02-07)
 
 Compatible with compiler 0.53.
 
