@@ -104,9 +104,14 @@ public final class CodeFormatterUtil {
      */
     private static String removeUnusedImports(String file) throws Exception {
         CompilationUnit compilationUnit = StaticJavaParser.parse(file);
+
+        // Package declaration could be null.
         PackageDeclaration packageDeclaration = compilationUnit.getPackageDeclaration().orElse(null);
         String packageName = packageDeclaration != null ? packageDeclaration.getNameAsString() : null;
+
         com.github.javaparser.ast.NodeList<ImportDeclaration> imports = compilationUnit.getImports();
+
+        // Collect all names used in the file that aren't associated with the package or imports.
         Set<String> types = compilationUnit.stream()
             .filter(node -> node instanceof NodeWithIdentifier || node instanceof NodeWithName
                 || node instanceof NodeWithSimpleName)
@@ -123,13 +128,15 @@ public final class CodeFormatterUtil {
             })
             .collect(Collectors.toSet());
 
+        // Collect all the types used in the Javadoc comments.
         compilationUnit.getAllComments().stream()
             .filter(comment -> comment instanceof JavadocComment)
             .map(comment -> (JavadocComment) comment)
             .forEach(javadoc -> javadoc.parse().getBlockTags()
                 .forEach(tag -> tag.getName().ifPresent(types::add)));
 
-        imports.removeIf(importDeclaration -> {
+        // Get the list of imports that are unused.
+        List<String> unusedImports = imports.stream().filter(importDeclaration -> {
             String fullImportName = importDeclaration.getNameAsString();
             if (Objects.equals(fullImportName, packageName)) {
                 return true;
@@ -137,9 +144,13 @@ public final class CodeFormatterUtil {
 
             String importType = importDeclaration.getName().getIdentifier();
             return !types.contains(importType);
-        });
+        }).map(importDeclaration -> "import " + importDeclaration.getNameAsString() + ";").collect(Collectors.toList());
 
-        return compilationUnit.setImports(imports).toString();
+        for (String unusedImport : unusedImports) {
+            file = file.replaceFirst(unusedImport, "");
+        }
+
+        return file;
     }
 
     private static String formatCode(String file, String fileName, CodeFormatter codeFormatter) throws Exception {
