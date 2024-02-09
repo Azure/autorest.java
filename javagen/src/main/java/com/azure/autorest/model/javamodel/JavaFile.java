@@ -116,7 +116,13 @@ public class JavaFile implements JavaContext {
 
     @Override
     public void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedWrapper) {
-
+        if (withGeneratedWrapper == false) {
+            Consumer<JavaJavadocComment> commentAction = comment -> {
+                commentDescriptionAction.accept(comment);
+                commentTagsAction.accept(comment);
+            };
+            javadocComment(commentAction);
+        }
     }
 
     public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper, boolean withWordWrap, int wordWrapWidth) {
