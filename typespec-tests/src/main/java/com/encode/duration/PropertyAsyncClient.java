@@ -20,8 +20,8 @@ import com.encode.duration.implementation.PropertiesImpl;
 import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
-import com.encode.duration.models.ISO8601DurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
+import com.encode.duration.models.ISO8601DurationProperty;
 import reactor.core.publisher.Mono;
 
 /**
