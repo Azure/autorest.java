@@ -4,14 +4,15 @@
 
 package fixtures.streamstylexmlserialization.implementation.models;
 
+import fixtures.streamstylexmlserialization.models.Banana;
+import java.util.List;
+
 import com.azure.core.util.CoreUtils;
 import com.azure.xml.XmlReader;
 import com.azure.xml.XmlSerializable;
 import com.azure.xml.XmlToken;
 import com.azure.xml.XmlWriter;
-import fixtures.streamstylexmlserialization.models.Banana;
 import java.util.ArrayList;
-import java.util.List;
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
 

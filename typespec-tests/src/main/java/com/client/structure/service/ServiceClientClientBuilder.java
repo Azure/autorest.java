@@ -18,8 +18,8 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -223,6 +223,24 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private ServiceServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the ServiceClientClientBuilder.
+     */
+    @Generated
+    public ServiceClientClientBuilder serviceVersion(ServiceServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -248,8 +266,10 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     @Generated
     private ServiceClientClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        ServiceServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : ServiceServiceVersion.getLatest();
         ServiceClientClientImpl client = new ServiceClientClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client, localServiceVersion);
         return client;
     }
 

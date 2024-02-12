@@ -18,8 +18,8 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -209,6 +209,24 @@ public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClie
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private LroEndpointServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the LroEndpointClientBuilder.
+     */
+    @Generated
+    public LroEndpointClientBuilder serviceVersion(LroEndpointServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -234,8 +252,10 @@ public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClie
     @Generated
     private LroEndpointClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        LroEndpointServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : LroEndpointServiceVersion.getLatest();
         LroEndpointClientImpl client = new LroEndpointClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.projectName);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.projectName, localServiceVersion);
         return client;
     }
 

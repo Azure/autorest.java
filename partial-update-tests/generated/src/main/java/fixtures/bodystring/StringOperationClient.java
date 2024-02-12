@@ -14,8 +14,8 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import fixtures.bodystring.implementation.EnumsImpl;
 import fixtures.bodystring.implementation.StringOperationsImpl;
+import fixtures.bodystring.implementation.EnumsImpl;
 
 /**
  * Initializes a new instance of the synchronous AutoRestSwaggerBatServiceClient type.

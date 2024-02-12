@@ -62,6 +62,24 @@ model TopLevelArmResourceProperties {
   provisioningState?: ProvisioningState;
 }
 
+//----------------------- Custom Template Resource -----------------------
+@resource("customTemplateResources")
+model CustomTemplateResource is TrackedResource<CustomTemplateResourceProperties> {
+  @key("customTemplateResourceName")
+  @path
+  @segment("customTemplateResources")
+  @doc("arm resource name for path")
+  @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
+  name: string;
+}
+
+@doc("Top Level Arm Resource Properties.")
+model CustomTemplateResourceProperties {
+  @visibility("read")
+  @doc("The status of the last operation.")
+  provisioningState?: ProvisioningState;
+}
+
 @lroStatus
 enum ProvisioningState {
   ...ResourceProvisioningState,
@@ -71,14 +89,43 @@ enum ProvisioningState {
   Accepted,
 }
 
+model ResponseWithHeader<T> {
+  ...OkResponse;
+  ...Azure.Core.Foundations.RetryAfterHeader;
+  ...Body<T>;
+}
+
 //----------------------- Paths -----------------------
 @armResourceOperations
 interface ChildResourcesInterface
   extends ResourceInstanceOperations<ChildResource, ChildResourceProperties>,
-    ResourceListByParent<ChildResource> {}
+    ResourceListByParent<ChildResource> {
+  actionWithoutBody is ArmResourceActionAsync<ChildResource, void, void>;
+}
 
 @armResourceOperations
 interface TopLevelArmResourceInterface
   extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {}
 
+@armResourceOperations
+interface CustomTemplateResourceInterface extends ResourceCreate<CustomTemplateResource> {
+  update is ArmResourceUpdateSync<CustomTemplateResource>;
+}
+
 interface Operations extends Azure.ResourceManager.Operations {}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "This is a valid template"
+@autoRoute
+@doc("Update a {name}", TResource)
+@armResourceCreateOrUpdate(TResource)
+@patch
+op ArmResourceUpdateSync<
+  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
+>(
+  ...ResourceInstanceParameters<TResource, TBaseParameters>,
+
+  @doc("Resource create parameters.")
+  @body
+  resource: TResource,
+): ResponseWithHeader<TResource> | ErrorResponse;

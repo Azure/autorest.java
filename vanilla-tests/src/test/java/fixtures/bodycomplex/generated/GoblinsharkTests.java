@@ -6,8 +6,8 @@ package fixtures.bodycomplex.generated;
 
 import com.azure.core.util.BinaryData;
 import fixtures.bodycomplex.models.Fish;
-import fixtures.bodycomplex.models.GoblinSharkColor;
 import fixtures.bodycomplex.models.Goblinshark;
+import fixtures.bodycomplex.models.GoblinSharkColor;
 import java.time.OffsetDateTime;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;

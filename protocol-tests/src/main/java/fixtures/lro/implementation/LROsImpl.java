@@ -33,6 +33,7 @@ import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.TypeReference;
+import fixtures.lro.AutoRestLongRunningOperationTestServiceVersion;
 import java.time.Duration;
 import reactor.core.publisher.Mono;
 
@@ -58,6 +59,15 @@ public final class LROsImpl {
     LROsImpl(AutoRestLongRunningOperationTestServiceClientImpl client) {
         this.service = RestProxy.create(LROsService.class, client.getHttpPipeline(), client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestLongRunningOperationTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

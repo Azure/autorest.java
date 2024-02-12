@@ -61,6 +61,13 @@ public interface ArmResourceProviderClient {
     TopLevelArmResourceInterfacesClient getTopLevelArmResourceInterfaces();
 
     /**
+     * Gets the CustomTemplateResourceInterfacesClient object to access its operations.
+     * 
+     * @return the CustomTemplateResourceInterfacesClient object.
+     */
+    CustomTemplateResourceInterfacesClient getCustomTemplateResourceInterfaces();
+
+    /**
      * Gets the OperationsClient object to access its operations.
      * 
      * @return the OperationsClient object.

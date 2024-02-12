@@ -40,6 +40,8 @@ import {
   EnumMember,
   walkPropertiesInherited,
   getService,
+  resolveEncodedName,
+  isVoidType,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -157,7 +159,6 @@ import {
   isAllValueInteger,
 } from "./type-utils.js";
 import {
-  getClientApiVersions,
   getServiceVersion,
   operationIsJsonMergePatch,
   isPayloadProperty,
@@ -501,6 +502,14 @@ export class CodeModelBuilder {
           schemaUsage.splice(index, 1);
         }
       }
+
+      // Internal on Anonymous
+      if (schemaUsage?.includes(SchemaContext.Anonymous)) {
+        const index = schemaUsage.indexOf(SchemaContext.Internal);
+        if (index < 0) {
+          schemaUsage.push(SchemaContext.Internal);
+        }
+      }
     }
   }
 
@@ -598,7 +607,7 @@ export class CodeModelBuilder {
     let apiVersionSameForAllClients = true;
     let sharedApiVersions = undefined;
     for (const client of this.codeModel.clients) {
-      const apiVersions = getClientApiVersions(client);
+      const apiVersions = client.apiVersions;
       if (!apiVersions) {
         // client does not have apiVersions
         apiVersionSameForAllClients = false;
@@ -619,7 +628,7 @@ export class CodeModelBuilder {
       }
     } else {
       for (const client of this.codeModel.clients) {
-        const apiVersions = getClientApiVersions(client);
+        const apiVersions = client.apiVersions;
         if (apiVersions) {
           client.serviceVersion = getServiceVersion(client);
         }
@@ -741,7 +750,9 @@ export class CodeModelBuilder {
     // body
     if (op.parameters.body) {
       if (op.parameters.body.parameter) {
-        this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+        if (!isVoidType(op.parameters.body.parameter.type)) {
+          this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+        }
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
@@ -1159,7 +1170,9 @@ export class CodeModelBuilder {
 
       if (groupToRequestConditions || groupToMatchConditions) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         request.signatureParameters = [];
         op.convenienceApi.requests.push(request);
@@ -1311,17 +1324,13 @@ export class CodeModelBuilder {
         parameter.language.default.name = "request";
       }
 
-      if (schema.serializationFormats?.includes(KnownMediaType.Multipart)) {
-        // TODO: anonymous model for multipart is not supported
-        // at present, use the model with name given above
-        return;
-      }
-
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         op.convenienceApi.requests.push(request);
 
@@ -2483,6 +2492,7 @@ export class CodeModelBuilder {
     if (emitterClientName) {
       return emitterClientName;
     }
+    // TODO: deprecate getProjectedName
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
       return languageProjectedName;
@@ -2520,12 +2530,14 @@ export class CodeModelBuilder {
   }
 
   private getSerializedName(target: ModelProperty): string {
-    // First get projected name, if not found, return target.name
+    // First get projected name, if not found, call resolveEncodedName
+    // TODO: deprecate getProjectedName
     const jsonProjectedName = getProjectedName(this.program, target, "json");
     if (jsonProjectedName) {
       return jsonProjectedName;
     }
-    return target.name;
+    // TODO: the MIME better be from SchemaUsage.serializationFormats. However, at this step, the values is not propagated to inner models.
+    return resolveEncodedName(this.program, target, "application/json");
   }
 
   private isReadOnly(target: ModelProperty): boolean {

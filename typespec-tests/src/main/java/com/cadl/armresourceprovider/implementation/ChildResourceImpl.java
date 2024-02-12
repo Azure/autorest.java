@@ -145,6 +145,16 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
         return this;
     }
 
+    public void actionWithoutBody() {
+        serviceManager.childResourcesInterfaces().actionWithoutBody(resourceGroupName, topLevelArmResourceName,
+            childResourceName);
+    }
+
+    public void actionWithoutBody(Context context) {
+        serviceManager.childResourcesInterfaces().actionWithoutBody(resourceGroupName, topLevelArmResourceName,
+            childResourceName, context);
+    }
+
     public ChildResourceImpl withRegion(Region location) {
         this.innerModel().withLocation(location.toString());
         return this;

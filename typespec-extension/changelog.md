@@ -1,5 +1,25 @@
 # Release History
 
+## 0.13.5 (2024-02-09)
+
+Compatible with compiler 0.53.
+
+- Behavior changed on "multipart/form-data" request. If `filename` is not provided, implementation will no longer provide a default filename to `Content-Disposition` line.
+
+## 0.13.4 (2024-02-07)
+
+Compatible with compiler 0.53.
+
+## 0.13.3 (2024-02-04)
+
+Compatible with compiler 0.52.
+
+## 0.13.2 (2024-02-02)
+
+Compatible with compiler 0.52.
+
+- Supported `@encodedName` for "application/json".
+
 ## 0.13.1 (2024-01-26)
 
 Compatible with compiler 0.52.

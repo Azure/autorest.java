@@ -26,6 +26,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.httpinfrastructure.AutoRestHttpInfrastructureTestServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -51,6 +52,15 @@ public final class HttpServerFailuresImpl {
         this.service = RestProxy.create(HttpServerFailuresService.class, client.getHttpPipeline(),
             client.getSerializerAdapter());
         this.client = client;
+    }
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestHttpInfrastructureTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
     }
 
     /**

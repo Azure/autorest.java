@@ -32,6 +32,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.enums.EnumServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -55,6 +56,20 @@ public final class EnumServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final EnumServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public EnumServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -89,10 +104,11 @@ public final class EnumServiceClientImpl {
      * Initializes an instance of EnumServiceClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public EnumServiceClientImpl(String host) {
+    public EnumServiceClientImpl(String host, EnumServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -100,9 +116,10 @@ public final class EnumServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public EnumServiceClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public EnumServiceClientImpl(HttpPipeline httpPipeline, String host, EnumServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -111,11 +128,14 @@ public final class EnumServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public EnumServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public EnumServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host,
+        EnumServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(EnumServiceClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 

@@ -17,10 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.MixedTypesImpl;
+import com.type.union.implementation.models.SendRequest9;
 import com.type.union.models.GetResponse9;
 import com.type.union.models.MixedTypesCases;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -136,8 +135,7 @@ public final class MixedTypesAsyncClient {
     public Mono<Void> send(MixedTypesCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        SendRequest9 requestObj = new SendRequest9(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }

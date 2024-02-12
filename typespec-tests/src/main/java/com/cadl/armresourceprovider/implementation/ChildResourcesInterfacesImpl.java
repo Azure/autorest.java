@@ -72,6 +72,15 @@ public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfa
         return ResourceManagerUtils.mapPage(inner, inner1 -> new ChildResourceImpl(inner1, this.manager()));
     }
 
+    public void actionWithoutBody(String resourceGroupName, String topLevelArmResourceName, String childResourceName) {
+        this.serviceClient().actionWithoutBody(resourceGroupName, topLevelArmResourceName, childResourceName);
+    }
+
+    public void actionWithoutBody(String resourceGroupName, String topLevelArmResourceName, String childResourceName,
+        Context context) {
+        this.serviceClient().actionWithoutBody(resourceGroupName, topLevelArmResourceName, childResourceName, context);
+    }
+
     public ChildResource getById(String id) {
         String resourceGroupName = ResourceManagerUtils.getValueFromIdByName(id, "resourceGroups");
         if (resourceGroupName == null) {

@@ -18,11 +18,11 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.union.implementation.UnionFlattenOpsImpl;
+import com.cadl.union.implementation.models.SendLongRequest;
+import com.cadl.union.implementation.models.SendRequest;
 import com.cadl.union.models.Result;
 import com.cadl.union.models.SendLongOptions;
 import com.cadl.union.models.User;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -209,9 +209,7 @@ public final class UnionClient {
     public void send(String id, BinaryData input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", user);
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input).setUser(user);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(id, request, requestOptions).getValue();
     }
@@ -233,8 +231,7 @@ public final class UnionClient {
     public void send(String id, BinaryData input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(id, request, requestOptions).getValue();
     }
@@ -257,13 +254,9 @@ public final class UnionClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String filter = options.getFilter();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", options.getUser());
-        requestObj.put("input", options.getInput());
-        requestObj.put("dataInt", options.getDataInt());
-        requestObj.put("dataUnion", options.getDataUnion());
-        requestObj.put("dataLong", options.getDataLong());
-        requestObj.put("data_float", options.getDataFloat());
+        SendLongRequest requestObj = new SendLongRequest(options.getInput(), options.getDataInt())
+            .setUser(options.getUser()).setDataUnion(options.getDataUnion()).setDataLong(options.getDataLong())
+            .setDataFloat(options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);

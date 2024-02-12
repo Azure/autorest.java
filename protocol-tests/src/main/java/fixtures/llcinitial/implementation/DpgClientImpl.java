@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.llcinitial.DpgServiceVersion;
 
 /**
  * Initializes a new instance of the DpgClient type.
@@ -27,6 +28,20 @@ public final class DpgClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final DpgServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public DpgServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -75,10 +90,11 @@ public final class DpgClientImpl {
      * Initializes an instance of DpgClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public DpgClientImpl(String host) {
+    public DpgClientImpl(String host, DpgServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -86,9 +102,10 @@ public final class DpgClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public DpgClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public DpgClientImpl(HttpPipeline httpPipeline, String host, DpgServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -97,11 +114,14 @@ public final class DpgClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public DpgClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public DpgClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host,
+        DpgServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.params = new ParamsImpl(this);
     }
 }
