@@ -199,7 +199,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
-                } else if (settings.isStreamStyleSerialization() && model.isPolymorphicParent()
+                } else if (settings.isStreamStyleSerialization() && !CoreUtils.isNullOrEmpty(model.getDerivedModels())
                     && (property.isReadOnly() || (immutableOutputOnlyModel && !property.isRequired()))) {
                     // If stream-style serialization is being generated, the model has derived types, and the property
                     // is readonly or is part of an immutable output model, generate a package-private setter method
@@ -1123,6 +1123,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         boolean ret = model.getProperties().stream()
             .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
                 && property.getWireType() != property.getClientType());
+
+        if (!ret && !CoreUtils.isNullOrEmpty(model.getParentModelName())) {
+            ret = ClientModelUtil.getParentProperties(model).stream()
+                .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
+                    && property.getWireType() != property.getClientType());
+        }
 
         // flatten properties
         if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {

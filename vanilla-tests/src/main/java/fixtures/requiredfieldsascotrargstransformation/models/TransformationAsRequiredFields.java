@@ -215,7 +215,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
             OffsetDateTime unixTimeLongRequired = null;
             boolean unixTimeDateTimeRequiredFound = false;
             OffsetDateTime unixTimeDateTimeRequired = null;
-            OffsetDateTime rfc1123NonRequired = null;
+            DateTimeRfc1123 rfc1123NonRequired = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -246,11 +246,8 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                     unixTimeDateTimeRequiredFound = true;
                 } else if ("rfc1123NonRequired".equals(fieldName)) {
-                    DateTimeRfc1123 rfc1123NonRequired
+                    rfc1123NonRequired
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
-                    if (rfc1123NonRequired != null) {
-                        rfc1123NonRequired = rfc1123NonRequired.getDateTime();
-                    }
                 } else {
                     reader.skipChildren();
                 }

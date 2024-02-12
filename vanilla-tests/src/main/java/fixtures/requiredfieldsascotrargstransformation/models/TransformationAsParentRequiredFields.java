@@ -24,6 +24,8 @@ import java.util.Objects;
  */
 @Immutable
 public final class TransformationAsParentRequiredFields extends TransformationAsRequiredFields {
+    private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+
     /*
      * The rfc1123RequiredChild property.
      */
@@ -154,7 +156,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
             OffsetDateTime rfc1123NonRequired = null;
             boolean rfc1123RequiredChildFound = false;
             OffsetDateTime rfc1123RequiredChild = null;
-            OffsetDateTime rfc1123NonRequiredChild = null;
+            DateTimeRfc1123 rfc1123NonRequiredChild = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -185,10 +187,10 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                     unixTimeDateTimeRequiredFound = true;
                 } else if ("rfc1123NonRequired".equals(fieldName)) {
-                    DateTimeRfc1123 rfc1123NonRequired
+                    DateTimeRfc1123 rfc1123NonRequiredHolder
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
-                    if (rfc1123NonRequired != null) {
-                        rfc1123NonRequired = rfc1123NonRequired.getDateTime();
+                    if (rfc1123NonRequiredHolder != null) {
+                        rfc1123NonRequired = rfc1123NonRequiredHolder.getDateTime();
                     }
                 } else if ("rfc1123RequiredChild".equals(fieldName)) {
                     DateTimeRfc1123 rfc1123RequiredChildHolder
@@ -198,11 +200,8 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
                     }
                     rfc1123RequiredChildFound = true;
                 } else if ("rfc1123NonRequiredChild".equals(fieldName)) {
-                    DateTimeRfc1123 rfc1123NonRequiredChild
+                    rfc1123NonRequiredChild
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
-                    if (rfc1123NonRequiredChild != null) {
-                        rfc1123NonRequiredChild = rfc1123NonRequiredChild.getDateTime();
-                    }
                 } else {
                     reader.skipChildren();
                 }

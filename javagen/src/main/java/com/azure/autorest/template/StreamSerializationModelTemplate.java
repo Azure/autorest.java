@@ -924,27 +924,29 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (isXml) {
                 // XML only needs to initialize the XML element properties. XML attribute properties are initialized with
                 // their XML value.
-                propertiesManager.forEachSuperXmlElement(element -> initializeLocalVariable(methodBlock, element, settings));
-                propertiesManager.forEachXmlElement(element -> initializeLocalVariable(methodBlock, element, settings));
+                propertiesManager.forEachSuperXmlElement(element -> initializeLocalVariable(methodBlock, element, true,
+                    settings));
+                propertiesManager.forEachXmlElement(element -> initializeLocalVariable(methodBlock, element, false,
+                    settings));
             } else {
-                Consumer<ClientModelProperty> initializeLocalVariable = property ->
-                    initializeLocalVariable(methodBlock, property, settings);
                 propertiesManager.forEachSuperRequiredProperty(property -> {
                     if (property.isConstant()) {
                         // Constants are never deserialized.
                         return;
                     }
-                    initializeLocalVariable.accept(property);
+                    initializeLocalVariable(methodBlock, property, true, settings);
                 });
-                propertiesManager.forEachSuperSetterProperty(initializeLocalVariable);
+                propertiesManager.forEachSuperSetterProperty(property -> initializeLocalVariable(methodBlock, property,
+                    true, settings));
                 propertiesManager.forEachRequiredProperty(property -> {
                     if (property.isConstant()) {
                         // Constants are never deserialized.
                         return;
                     }
-                    initializeLocalVariable.accept(property);
+                    initializeLocalVariable(methodBlock, property, false, settings);
                 });
-                propertiesManager.forEachSetterProperty(initializeLocalVariable);
+                propertiesManager.forEachSetterProperty(property -> initializeLocalVariable(methodBlock, property,
+                    false, settings));
             }
         } else {
             String modelName = propertiesManager.getModel().getName();
@@ -954,11 +956,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         ClientModelProperty additionalProperty = getAdditionalPropertiesPropertyInModelOrFromSuper(propertiesManager);
         if (additionalProperty != null) {
-            initializeLocalVariable(methodBlock, additionalProperty, settings);
+            initializeLocalVariable(methodBlock, additionalProperty, false, settings);
         }
     }
 
-    private static void initializeLocalVariable(JavaBlock methodBlock, ClientModelProperty property,
+    private static void initializeLocalVariable(JavaBlock methodBlock, ClientModelProperty property, boolean fromSuper,
         JavaSettings settings) {
         if (includePropertyInConstructor(property, settings) && !settings.isDisableRequiredJsonAnnotation()) {
             // Required properties need an additional boolean variable to indicate they've been found.
@@ -966,8 +968,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         // Always instantiate the local variable.
-        IType clientType = property.getClientType();
-        methodBlock.line(clientType + " " + property.getName() + " = " + clientType.defaultValueExpression() + ";");
+        // If the property is part of the constructor or set by a setter method from the super class, initialize the
+        // local variable with the client type. Otherwise, initialize as the wire type to prevent multiple conversions
+        // between wire and client types.
+        IType type = (includePropertyInConstructor(property, settings) || fromSuper)
+            ? property.getClientType() : property.getWireType();
+        methodBlock.line(type + " " + property.getName() + " = " + type.defaultValueExpression() + ";");
     }
 
     /**
@@ -1046,7 +1052,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static JavaIfBlock handleFlattenedPropertiesDeserializationHelper(
         JsonFlattenedPropertiesTree flattenedProperties, JavaBlock methodBlock, JavaIfBlock ifBlock,
         ClientModelProperty additionalProperties, String fieldNameVariableName, boolean hasConstructorArguments,
-        JavaSettings settings) {
+    JavaSettings settings) {
         ClientModelPropertyWithMetadata propertyWithMetadata = flattenedProperties.getProperty();
         if (propertyWithMetadata != null) {
             String modelVariableName = "deserialized" + propertyWithMetadata.getModel().getName();
@@ -1056,7 +1062,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 "\"" + flattenedProperties.getNodeName() + "\".equals(" + fieldNameVariableName + ")",
                 deserializationBlock -> generateJsonDeserializationLogic(deserializationBlock, modelVariableName,
                     propertyWithMetadata.getProperty(), propertyWithMetadata.isFromSuperClass(),
-                    hasConstructorArguments, settings));
+hasConstructorArguments, settings));
         } else {
             // Otherwise this is an intermediate location and a while loop reader needs to be added.
             return ifOrElseIf(methodBlock, ifBlock,
@@ -1095,11 +1101,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // Need to convert the wire type to the client type for constructors.
             // Need to convert the wire type to the client type for public setters.
             boolean convertToClientType = (clientType != wireType)
-                    && (hasConstructorArguments || (fromSuper && !property.isReadOnly()));
+                && (includePropertyInConstructor(property, settings) || (fromSuper && !property.isReadOnly()));
             BiConsumer<String, JavaBlock> simpleDeserializationConsumer = (logic, block) -> {
                 if (!hasConstructorArguments) {
-                    handleSettingDeserializedValue(block, modelVariableName, property, logic,
-                            fromSuper);
+                    handleSettingDeserializedValue(block, modelVariableName, property, logic, fromSuper);
                 } else {
                     block.line(property.getName() + " = " + logic + ";");
                 }
@@ -1116,7 +1121,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 if (wireType.isNullable()) {
                     // Check if the property is required, if so use a holder name as there will be an existing holder
                     // variable for the value that will be used in the constructor.
-                    String holderName = property.isRequired() ? property.getName() + "Holder" : property.getName();
+                    String holderName = property.getName() + "Holder";
                     deserializationBlock.line(wireType + " " + holderName + " = " + simpleDeserialization + ";");
                     deserializationBlock.ifBlock(holderName + " != null", ifBlock ->
                         simpleDeserializationConsumer.accept(wireType.convertToClientType(holderName), ifBlock));

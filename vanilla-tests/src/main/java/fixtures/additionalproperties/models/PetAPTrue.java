@@ -94,6 +94,17 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
     }
 
     /**
+     * Set the status property: The status property.
+     * 
+     * @param status the status value to set.
+     * @return the PetAPTrue object itself.
+     */
+    PetAPTrue setStatus(Boolean status) {
+        this.status = status;
+        return this;
+    }
+
+    /**
      * Get the additionalProperties property: Dictionary of &lt;any&gt;.
      * 
      * @return the additionalProperties value.

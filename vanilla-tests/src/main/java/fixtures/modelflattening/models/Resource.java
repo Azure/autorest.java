@@ -58,12 +58,34 @@ public class Resource implements JsonSerializable<Resource> {
     }
 
     /**
+     * Set the id property: Resource Id.
+     * 
+     * @param id the id value to set.
+     * @return the Resource object itself.
+     */
+    Resource setId(String id) {
+        this.id = id;
+        return this;
+    }
+
+    /**
      * Get the type property: Resource Type.
      * 
      * @return the type value.
      */
     public String getType() {
         return this.type;
+    }
+
+    /**
+     * Set the type property: Resource Type.
+     * 
+     * @param type the type value to set.
+     * @return the Resource object itself.
+     */
+    Resource setType(String type) {
+        this.type = type;
+        return this;
     }
 
     /**
@@ -113,6 +135,17 @@ public class Resource implements JsonSerializable<Resource> {
      */
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Set the name property: Resource Name.
+     * 
+     * @param name the name value to set.
+     * @return the Resource object itself.
+     */
+    Resource setName(String name) {
+        this.name = name;
+        return this;
     }
 
     /**
