@@ -5,62 +5,67 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * Content and layout elements extracted from a page from the input.
  */
 @Fluent
-public final class DocumentPage implements JsonSerializable<DocumentPage> {
+public final class DocumentPage {
     /*
      * 1-based page number in the input document.
      */
+    @JsonProperty(value = "pageNumber", required = true)
     private int pageNumber;
 
     /*
      * The general orientation of the content in clockwise direction, measured in degrees between (-180, 180].
      */
+    @JsonProperty(value = "angle")
     private Float angle;
 
     /*
      * The width of the image/PDF in pixels/inches, respectively.
      */
+    @JsonProperty(value = "width")
     private Float width;
 
     /*
      * The height of the image/PDF in pixels/inches, respectively.
      */
+    @JsonProperty(value = "height")
     private Float height;
 
     /*
      * The unit used by the width, height, and polygon properties. For images, the unit is "pixel". For PDF, the unit
      * is "inch".
      */
+    @JsonProperty(value = "unit")
     private LengthUnit unit;
 
     /*
      * Location of the page in the reading order concatenated content.
      */
+    @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
     /*
      * Extracted words from the page.
      */
+    @JsonProperty(value = "words")
     private List<DocumentWord> words;
 
     /*
      * Extracted selection marks from the page.
      */
+    @JsonProperty(value = "selectionMarks")
     private List<DocumentSelectionMark> selectionMarks;
 
     /*
      * Extracted lines from the page, potentially containing both textual and visual elements.
      */
+    @JsonProperty(value = "lines")
     private List<DocumentLine> lines;
 
     /**
@@ -251,69 +256,5 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
     public DocumentPage setLines(List<DocumentLine> lines) {
         this.lines = lines;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("pageNumber", this.pageNumber);
-        jsonWriter.writeArrayField("spans", this.spans, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeNumberField("angle", this.angle);
-        jsonWriter.writeNumberField("width", this.width);
-        jsonWriter.writeNumberField("height", this.height);
-        jsonWriter.writeStringField("unit", this.unit == null ? null : this.unit.toString());
-        jsonWriter.writeArrayField("words", this.words, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField("selectionMarks", this.selectionMarks,
-            (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField("lines", this.lines, (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of DocumentPage from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentPage if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the DocumentPage.
-     */
-    public static DocumentPage fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            DocumentPage deserializedDocumentPage = new DocumentPage();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("pageNumber".equals(fieldName)) {
-                    deserializedDocumentPage.pageNumber = reader.getInt();
-                } else if ("spans".equals(fieldName)) {
-                    List<DocumentSpan> spans = reader.readArray(reader1 -> DocumentSpan.fromJson(reader1));
-                    deserializedDocumentPage.spans = spans;
-                } else if ("angle".equals(fieldName)) {
-                    deserializedDocumentPage.angle = reader.getNullable(JsonReader::getFloat);
-                } else if ("width".equals(fieldName)) {
-                    deserializedDocumentPage.width = reader.getNullable(JsonReader::getFloat);
-                } else if ("height".equals(fieldName)) {
-                    deserializedDocumentPage.height = reader.getNullable(JsonReader::getFloat);
-                } else if ("unit".equals(fieldName)) {
-                    deserializedDocumentPage.unit = LengthUnit.fromString(reader.getString());
-                } else if ("words".equals(fieldName)) {
-                    List<DocumentWord> words = reader.readArray(reader1 -> DocumentWord.fromJson(reader1));
-                    deserializedDocumentPage.words = words;
-                } else if ("selectionMarks".equals(fieldName)) {
-                    List<DocumentSelectionMark> selectionMarks
-                        = reader.readArray(reader1 -> DocumentSelectionMark.fromJson(reader1));
-                    deserializedDocumentPage.selectionMarks = selectionMarks;
-                } else if ("lines".equals(fieldName)) {
-                    List<DocumentLine> lines = reader.readArray(reader1 -> DocumentLine.fromJson(reader1));
-                    deserializedDocumentPage.lines = lines;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedDocumentPage;
-        });
     }
 }

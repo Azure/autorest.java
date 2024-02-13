@@ -6,12 +6,8 @@ package fixtures.dpgcustomization.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The LroProduct model.
@@ -22,7 +18,8 @@ public final class LroProduct extends Product {
      * The provisioningState property.
      */
     @Generated
-    private final String provisioningState;
+    @JsonProperty(value = "provisioningState", required = true)
+    private String provisioningState;
 
     /**
      * Creates an instance of LroProduct class.
@@ -31,7 +28,9 @@ public final class LroProduct extends Product {
      * @param provisioningState the provisioningState value to set.
      */
     @Generated
-    public LroProduct(ProductReceived received, String provisioningState) {
+    @JsonCreator
+    public LroProduct(@JsonProperty(value = "received", required = true) ProductReceived received,
+        @JsonProperty(value = "provisioningState", required = true) String provisioningState) {
         super(received);
         this.provisioningState = provisioningState;
     }
@@ -44,58 +43,5 @@ public final class LroProduct extends Product {
     @Generated
     public String getProvisioningState() {
         return this.provisioningState;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("received", getReceived() == null ? null : getReceived().toString());
-        jsonWriter.writeStringField("provisioningState", this.provisioningState);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of LroProduct from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of LroProduct if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the LroProduct.
-     */
-    public static LroProduct fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            boolean receivedFound = false;
-            ProductReceived received = null;
-            boolean provisioningStateFound = false;
-            String provisioningState = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("received".equals(fieldName)) {
-                    received = ProductReceived.fromString(reader.getString());
-                    receivedFound = true;
-                } else if ("provisioningState".equals(fieldName)) {
-                    provisioningState = reader.getString();
-                    provisioningStateFound = true;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            if (receivedFound && provisioningStateFound) {
-                return new LroProduct(received, provisioningState);
-            }
-            List<String> missingProperties = new ArrayList<>();
-            if (!receivedFound) {
-                missingProperties.add("received");
-            }
-            if (!provisioningStateFound) {
-                missingProperties.add("provisioningState");
-            }
-
-            throw new IllegalStateException(
-                "Missing required property/properties: " + String.join(", ", missingProperties));
-        });
     }
 }

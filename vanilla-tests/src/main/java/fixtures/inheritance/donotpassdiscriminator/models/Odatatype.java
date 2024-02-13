@@ -5,6 +5,7 @@
 package fixtures.inheritance.donotpassdiscriminator.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -44,6 +45,7 @@ public final class Odatatype extends ExpandableStringEnum<Odatatype> {
      * @param name a name to look for.
      * @return the corresponding Odatatype.
      */
+    @JsonCreator
     public static Odatatype fromString(String name) {
         return fromString(name, Odatatype.class);
     }

@@ -5,20 +5,17 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ClassOptionalWrapper model.
  */
 @Fluent
-public final class ClassOptionalWrapper implements JsonSerializable<ClassOptionalWrapper> {
+public final class ClassOptionalWrapper {
     /*
      * The value property.
      */
+    @JsonProperty(value = "value")
     private Product value;
 
     /**
@@ -56,38 +53,5 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
         if (getValue() != null) {
             getValue().validate();
         }
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeJsonField("value", this.value);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ClassOptionalWrapper from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ClassOptionalWrapper if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the ClassOptionalWrapper.
-     */
-    public static ClassOptionalWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ClassOptionalWrapper deserializedClassOptionalWrapper = new ClassOptionalWrapper();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("value".equals(fieldName)) {
-                    deserializedClassOptionalWrapper.value = Product.fromJson(reader);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedClassOptionalWrapper;
-        });
     }
 }

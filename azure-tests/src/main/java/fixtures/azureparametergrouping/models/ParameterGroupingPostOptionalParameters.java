@@ -5,26 +5,23 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Parameter group.
  */
 @Fluent
-public final class ParameterGroupingPostOptionalParameters
-    implements JsonSerializable<ParameterGroupingPostOptionalParameters> {
+public final class ParameterGroupingPostOptionalParameters {
     /*
      * The customHeader property.
      */
+    @JsonProperty(value = "customHeader")
     private String customHeader;
 
     /*
      * Query parameter with default
      */
+    @JsonProperty(value = "query")
     private Integer query;
 
     /**
@@ -79,42 +76,5 @@ public final class ParameterGroupingPostOptionalParameters
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("customHeader", this.customHeader);
-        jsonWriter.writeNumberField("query", this.query);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ParameterGroupingPostOptionalParameters from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ParameterGroupingPostOptionalParameters if the JsonReader was pointing to an instance of
-     * it, or null if it was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the ParameterGroupingPostOptionalParameters.
-     */
-    public static ParameterGroupingPostOptionalParameters fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ParameterGroupingPostOptionalParameters deserializedParameterGroupingPostOptionalParameters
-                = new ParameterGroupingPostOptionalParameters();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("customHeader".equals(fieldName)) {
-                    deserializedParameterGroupingPostOptionalParameters.customHeader = reader.getString();
-                } else if ("query".equals(fieldName)) {
-                    deserializedParameterGroupingPostOptionalParameters.query = reader.getNullable(JsonReader::getInt);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedParameterGroupingPostOptionalParameters;
-        });
     }
 }

@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -51,6 +52,7 @@ public final class GoblinSharkColor extends ExpandableStringEnum<GoblinSharkColo
      * @param name a name to look for.
      * @return the corresponding GoblinSharkColor.
      */
+    @JsonCreator
     public static GoblinSharkColor fromString(String name) {
         return fromString(name, GoblinSharkColor.class);
     }

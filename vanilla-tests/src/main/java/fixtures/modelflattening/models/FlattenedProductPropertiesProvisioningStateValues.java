@@ -5,6 +5,7 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -82,6 +83,7 @@ public final class FlattenedProductPropertiesProvisioningStateValues
      * @param name a name to look for.
      * @return the corresponding FlattenedProductPropertiesProvisioningStateValues.
      */
+    @JsonCreator
     public static FlattenedProductPropertiesProvisioningStateValues fromString(String name) {
         return fromString(name, FlattenedProductPropertiesProvisioningStateValues.class);
     }

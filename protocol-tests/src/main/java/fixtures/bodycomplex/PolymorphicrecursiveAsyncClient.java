@@ -43,7 +43,6 @@ public final class PolymorphicrecursiveAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -73,7 +72,6 @@ public final class PolymorphicrecursiveAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [

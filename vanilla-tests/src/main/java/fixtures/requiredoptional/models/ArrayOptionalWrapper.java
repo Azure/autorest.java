@@ -5,21 +5,18 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * The ArrayOptionalWrapper model.
  */
 @Fluent
-public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptionalWrapper> {
+public final class ArrayOptionalWrapper {
     /*
      * The value property.
      */
+    @JsonProperty(value = "value")
     private List<String> value;
 
     /**
@@ -54,39 +51,5 @@ public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptiona
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("value", this.value, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ArrayOptionalWrapper from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ArrayOptionalWrapper if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the ArrayOptionalWrapper.
-     */
-    public static ArrayOptionalWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ArrayOptionalWrapper deserializedArrayOptionalWrapper = new ArrayOptionalWrapper();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("value".equals(fieldName)) {
-                    List<String> value = reader.readArray(reader1 -> reader1.getString());
-                    deserializedArrayOptionalWrapper.value = value;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedArrayOptionalWrapper;
-        });
     }
 }

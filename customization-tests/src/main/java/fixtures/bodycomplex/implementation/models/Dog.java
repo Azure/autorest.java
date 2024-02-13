@@ -5,10 +5,7 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Dog model.
@@ -18,6 +15,7 @@ public final class Dog extends Pet {
     /*
      * The food property.
      */
+    @JsonProperty(value = "food")
     private String food;
 
     /**
@@ -62,44 +60,5 @@ public final class Dog extends Pet {
     public Dog setName(String name) {
         super.setName(name);
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("id", getId());
-        jsonWriter.writeStringField("name", getName());
-        jsonWriter.writeStringField("food", this.food);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of Dog from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of Dog if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IOException If an error occurs while reading the Dog.
-     */
-    public static Dog fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            Dog deserializedDog = new Dog();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    deserializedDog.setId(reader.getNullable(JsonReader::getInt));
-                } else if ("name".equals(fieldName)) {
-                    deserializedDog.setName(reader.getString());
-                } else if ("food".equals(fieldName)) {
-                    deserializedDog.food = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedDog;
-        });
     }
 }

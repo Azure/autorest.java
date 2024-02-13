@@ -5,41 +5,42 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
 /**
  * Request body to build a new custom document model.
  */
 @Fluent
-public final class BuildDocumentModelRequest implements JsonSerializable<BuildDocumentModelRequest> {
+public final class BuildDocumentModelRequest {
     /*
      * Unique document model name.
      */
+    @JsonProperty(value = "modelId", required = true)
     private String modelId;
 
     /*
      * Document model description.
      */
+    @JsonProperty(value = "description")
     private String description;
 
     /*
      * Custom document model build mode.
      */
+    @JsonProperty(value = "buildMode", required = true)
     private DocumentBuildMode buildMode;
 
     /*
      * Azure Blob Storage location containing the training data.
      */
+    @JsonProperty(value = "azureBlobSource")
     private AzureBlobContentSource azureBlobSource;
 
     /*
      * List of key-value tag attributes associated with the document model.
      */
+    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /**
@@ -146,52 +147,5 @@ public final class BuildDocumentModelRequest implements JsonSerializable<BuildDo
     public BuildDocumentModelRequest setTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("modelId", this.modelId);
-        jsonWriter.writeStringField("buildMode", this.buildMode == null ? null : this.buildMode.toString());
-        jsonWriter.writeStringField("description", this.description);
-        jsonWriter.writeJsonField("azureBlobSource", this.azureBlobSource);
-        jsonWriter.writeMapField("tags", this.tags, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of BuildDocumentModelRequest from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of BuildDocumentModelRequest if the JsonReader was pointing to an instance of it, or null if
-     * it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the BuildDocumentModelRequest.
-     */
-    public static BuildDocumentModelRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            BuildDocumentModelRequest deserializedBuildDocumentModelRequest = new BuildDocumentModelRequest();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("modelId".equals(fieldName)) {
-                    deserializedBuildDocumentModelRequest.modelId = reader.getString();
-                } else if ("buildMode".equals(fieldName)) {
-                    deserializedBuildDocumentModelRequest.buildMode = DocumentBuildMode.fromString(reader.getString());
-                } else if ("description".equals(fieldName)) {
-                    deserializedBuildDocumentModelRequest.description = reader.getString();
-                } else if ("azureBlobSource".equals(fieldName)) {
-                    deserializedBuildDocumentModelRequest.azureBlobSource = AzureBlobContentSource.fromJson(reader);
-                } else if ("tags".equals(fieldName)) {
-                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
-                    deserializedBuildDocumentModelRequest.tags = tags;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedBuildDocumentModelRequest;
-        });
     }
 }

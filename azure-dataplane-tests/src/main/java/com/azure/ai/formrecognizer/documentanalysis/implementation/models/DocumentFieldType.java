@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -91,6 +92,7 @@ public final class DocumentFieldType extends ExpandableStringEnum<DocumentFieldT
      * @param name a name to look for.
      * @return the corresponding DocumentFieldType.
      */
+    @JsonCreator
     public static DocumentFieldType fromString(String name) {
         return fromString(name, DocumentFieldType.class);
     }

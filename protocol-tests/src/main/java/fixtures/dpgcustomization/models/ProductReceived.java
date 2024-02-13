@@ -6,6 +6,7 @@ package fixtures.dpgcustomization.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -41,6 +42,7 @@ public final class ProductReceived extends ExpandableStringEnum<ProductReceived>
      * @return the corresponding ProductReceived.
      */
     @Generated
+    @JsonCreator
     public static ProductReceived fromString(String name) {
         return fromString(name, ProductReceived.class);
     }

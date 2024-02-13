@@ -5,25 +5,23 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The LongWrapper model.
  */
 @Fluent
-public final class LongWrapper implements JsonSerializable<LongWrapper> {
+public final class LongWrapper {
     /*
      * The field1 property.
      */
+    @JsonProperty(value = "field1")
     private Long field1;
 
     /*
      * The field2 property.
      */
+    @JsonProperty(value = "field2")
     private Long field2;
 
     /**
@@ -78,41 +76,5 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("field1", this.field1);
-        jsonWriter.writeNumberField("field2", this.field2);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of LongWrapper from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of LongWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IOException If an error occurs while reading the LongWrapper.
-     */
-    public static LongWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            LongWrapper deserializedLongWrapper = new LongWrapper();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("field1".equals(fieldName)) {
-                    deserializedLongWrapper.field1 = reader.getNullable(JsonReader::getLong);
-                } else if ("field2".equals(fieldName)) {
-                    deserializedLongWrapper.field2 = reader.getNullable(JsonReader::getLong);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedLongWrapper;
-        });
     }
 }

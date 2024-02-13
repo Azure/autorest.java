@@ -5,21 +5,18 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * The ArrayWrapper model.
  */
 @Fluent
-public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
+public final class ArrayWrapper {
     /*
      * The value property.
      */
+    @JsonProperty(value = "value", required = true)
     private List<String> value;
 
     /**
@@ -57,40 +54,5 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
         if (getValue() == null) {
             throw new IllegalArgumentException("Missing required property value in model ArrayWrapper");
         }
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("value", this.value, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ArrayWrapper from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ArrayWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ArrayWrapper.
-     */
-    public static ArrayWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ArrayWrapper deserializedArrayWrapper = new ArrayWrapper();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("value".equals(fieldName)) {
-                    List<String> value = reader.readArray(reader1 -> reader1.getString());
-                    deserializedArrayWrapper.value = value;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedArrayWrapper;
-        });
     }
 }

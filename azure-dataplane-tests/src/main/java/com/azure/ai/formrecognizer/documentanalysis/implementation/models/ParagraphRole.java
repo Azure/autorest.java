@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -56,6 +57,7 @@ public final class ParagraphRole extends ExpandableStringEnum<ParagraphRole> {
      * @param name a name to look for.
      * @return the corresponding ParagraphRole.
      */
+    @JsonCreator
     public static ParagraphRole fromString(String name) {
         return fromString(name, ParagraphRole.class);
     }

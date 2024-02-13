@@ -5,48 +5,49 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
  * Document model info.
  */
 @Fluent
-public final class DocumentModelDetails implements JsonSerializable<DocumentModelDetails> {
+public final class DocumentModelDetails {
     /*
      * Unique document model name.
      */
+    @JsonProperty(value = "modelId", required = true)
     private String modelId;
 
     /*
      * Document model description.
      */
+    @JsonProperty(value = "description")
     private String description;
 
     /*
      * Date and time (UTC) when the document model was created.
      */
+    @JsonProperty(value = "createdDateTime", required = true)
     private OffsetDateTime createdDateTime;
 
     /*
      * API version used to create this document model.
      */
+    @JsonProperty(value = "apiVersion")
     private String apiVersion;
 
     /*
      * List of key-value tag attributes associated with the document model.
      */
+    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /*
      * Supported document types.
      */
+    @JsonProperty(value = "docTypes")
     private Map<String, DocumentTypeDetails> docTypes;
 
     /**
@@ -173,59 +174,5 @@ public final class DocumentModelDetails implements JsonSerializable<DocumentMode
     public DocumentModelDetails setDocTypes(Map<String, DocumentTypeDetails> docTypes) {
         this.docTypes = docTypes;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("modelId", this.modelId);
-        jsonWriter.writeStringField("createdDateTime",
-            this.createdDateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdDateTime));
-        jsonWriter.writeStringField("description", this.description);
-        jsonWriter.writeStringField("apiVersion", this.apiVersion);
-        jsonWriter.writeMapField("tags", this.tags, (writer, element) -> writer.writeString(element));
-        jsonWriter.writeMapField("docTypes", this.docTypes, (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of DocumentModelDetails from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentModelDetails if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the DocumentModelDetails.
-     */
-    public static DocumentModelDetails fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            DocumentModelDetails deserializedDocumentModelDetails = new DocumentModelDetails();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("modelId".equals(fieldName)) {
-                    deserializedDocumentModelDetails.modelId = reader.getString();
-                } else if ("createdDateTime".equals(fieldName)) {
-                    deserializedDocumentModelDetails.createdDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                } else if ("description".equals(fieldName)) {
-                    deserializedDocumentModelDetails.description = reader.getString();
-                } else if ("apiVersion".equals(fieldName)) {
-                    deserializedDocumentModelDetails.apiVersion = reader.getString();
-                } else if ("tags".equals(fieldName)) {
-                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
-                    deserializedDocumentModelDetails.tags = tags;
-                } else if ("docTypes".equals(fieldName)) {
-                    Map<String, DocumentTypeDetails> docTypes
-                        = reader.readMap(reader1 -> DocumentTypeDetails.fromJson(reader1));
-                    deserializedDocumentModelDetails.docTypes = docTypes;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedDocumentModelDetails;
-        });
     }
 }

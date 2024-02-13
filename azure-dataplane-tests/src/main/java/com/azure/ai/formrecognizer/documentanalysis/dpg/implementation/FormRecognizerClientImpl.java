@@ -1908,7 +1908,6 @@ public final class FormRecognizerClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
      *     percentCompleted: Integer (Optional)
@@ -1959,7 +1958,6 @@ public final class FormRecognizerClientImpl {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
      *     percentCompleted: Integer (Optional)

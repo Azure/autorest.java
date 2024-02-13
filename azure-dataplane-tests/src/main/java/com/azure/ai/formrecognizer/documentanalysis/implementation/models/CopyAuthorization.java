@@ -5,47 +5,48 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Authorization to copy a document model to the specified target resource and modelId.
  */
 @Fluent
-public final class CopyAuthorization implements JsonSerializable<CopyAuthorization> {
+public final class CopyAuthorization {
     /*
      * ID of the target Azure resource where the document model should be copied to.
      */
+    @JsonProperty(value = "targetResourceId", required = true)
     private String targetResourceId;
 
     /*
      * Location of the target Azure resource where the document model should be copied to.
      */
+    @JsonProperty(value = "targetResourceRegion", required = true)
     private String targetResourceRegion;
 
     /*
      * Identifier of the target document model.
      */
+    @JsonProperty(value = "targetModelId", required = true)
     private String targetModelId;
 
     /*
      * URL of the copied document model in the target account.
      */
+    @JsonProperty(value = "targetModelLocation", required = true)
     private String targetModelLocation;
 
     /*
      * Token used to authorize the request.
      */
+    @JsonProperty(value = "accessToken", required = true)
     private String accessToken;
 
     /*
      * Date/time when the access token expires.
      */
+    @JsonProperty(value = "expirationDateTime", required = true)
     private OffsetDateTime expirationDateTime;
 
     /**
@@ -174,56 +175,5 @@ public final class CopyAuthorization implements JsonSerializable<CopyAuthorizati
     public CopyAuthorization setExpirationDateTime(OffsetDateTime expirationDateTime) {
         this.expirationDateTime = expirationDateTime;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("targetResourceId", this.targetResourceId);
-        jsonWriter.writeStringField("targetResourceRegion", this.targetResourceRegion);
-        jsonWriter.writeStringField("targetModelId", this.targetModelId);
-        jsonWriter.writeStringField("targetModelLocation", this.targetModelLocation);
-        jsonWriter.writeStringField("accessToken", this.accessToken);
-        jsonWriter.writeStringField("expirationDateTime", this.expirationDateTime == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.expirationDateTime));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of CopyAuthorization from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of CopyAuthorization if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the CopyAuthorization.
-     */
-    public static CopyAuthorization fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            CopyAuthorization deserializedCopyAuthorization = new CopyAuthorization();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("targetResourceId".equals(fieldName)) {
-                    deserializedCopyAuthorization.targetResourceId = reader.getString();
-                } else if ("targetResourceRegion".equals(fieldName)) {
-                    deserializedCopyAuthorization.targetResourceRegion = reader.getString();
-                } else if ("targetModelId".equals(fieldName)) {
-                    deserializedCopyAuthorization.targetModelId = reader.getString();
-                } else if ("targetModelLocation".equals(fieldName)) {
-                    deserializedCopyAuthorization.targetModelLocation = reader.getString();
-                } else if ("accessToken".equals(fieldName)) {
-                    deserializedCopyAuthorization.accessToken = reader.getString();
-                } else if ("expirationDateTime".equals(fieldName)) {
-                    deserializedCopyAuthorization.expirationDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedCopyAuthorization;
-        });
     }
 }

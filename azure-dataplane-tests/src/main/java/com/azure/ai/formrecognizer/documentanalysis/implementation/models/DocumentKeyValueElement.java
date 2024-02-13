@@ -5,31 +5,30 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * An object representing the field key or value in a key-value pair.
  */
 @Fluent
-public final class DocumentKeyValueElement implements JsonSerializable<DocumentKeyValueElement> {
+public final class DocumentKeyValueElement {
     /*
      * Concatenated content of the key-value element in reading order.
      */
+    @JsonProperty(value = "content", required = true)
     private String content;
 
     /*
      * Bounding regions covering the key-value element.
      */
+    @JsonProperty(value = "boundingRegions")
     private List<BoundingRegion> boundingRegions;
 
     /*
      * Location of the key-value element in the reading order concatenated content.
      */
+    @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
     /**
@@ -96,49 +95,5 @@ public final class DocumentKeyValueElement implements JsonSerializable<DocumentK
     public DocumentKeyValueElement setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("content", this.content);
-        jsonWriter.writeArrayField("spans", this.spans, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField("boundingRegions", this.boundingRegions,
-            (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of DocumentKeyValueElement from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentKeyValueElement if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the DocumentKeyValueElement.
-     */
-    public static DocumentKeyValueElement fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            DocumentKeyValueElement deserializedDocumentKeyValueElement = new DocumentKeyValueElement();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("content".equals(fieldName)) {
-                    deserializedDocumentKeyValueElement.content = reader.getString();
-                } else if ("spans".equals(fieldName)) {
-                    List<DocumentSpan> spans = reader.readArray(reader1 -> DocumentSpan.fromJson(reader1));
-                    deserializedDocumentKeyValueElement.spans = spans;
-                } else if ("boundingRegions".equals(fieldName)) {
-                    List<BoundingRegion> boundingRegions
-                        = reader.readArray(reader1 -> BoundingRegion.fromJson(reader1));
-                    deserializedDocumentKeyValueElement.boundingRegions = boundingRegions;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedDocumentKeyValueElement;
-        });
     }
 }

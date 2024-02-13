@@ -5,37 +5,40 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.LinkedHashMap;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * The PetAPTrue model.
  */
 @Fluent
-public class PetAPTrue implements JsonSerializable<PetAPTrue> {
+public class PetAPTrue {
     /*
      * The id property.
      */
+    @JsonProperty(value = "id", required = true)
     private int id;
 
     /*
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The status property.
      */
+    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
     private Boolean status;
 
     /*
      * Dictionary of <any>
      */
+    @JsonIgnore
     private Map<String, Object> additionalProperties;
 
     /**
@@ -94,21 +97,11 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
     }
 
     /**
-     * Set the status property: The status property.
-     * 
-     * @param status the status value to set.
-     * @return the PetAPTrue object itself.
-     */
-    PetAPTrue setStatus(Boolean status) {
-        this.status = status;
-        return this;
-    }
-
-    /**
      * Get the additionalProperties property: Dictionary of &lt;any&gt;.
      * 
      * @return the additionalProperties value.
      */
+    @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -124,61 +117,19 @@ public class PetAPTrue implements JsonSerializable<PetAPTrue> {
         return this;
     }
 
+    @JsonAnySetter
+    void setAdditionalProperties(String key, Object value) {
+        if (additionalProperties == null) {
+            additionalProperties = new HashMap<>();
+        }
+        additionalProperties.put(key, value);
+    }
+
     /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("id", this.id);
-        jsonWriter.writeStringField("name", this.name);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of PetAPTrue from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of PetAPTrue if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the PetAPTrue.
-     */
-    public static PetAPTrue fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            PetAPTrue deserializedPetAPTrue = new PetAPTrue();
-            Map<String, Object> additionalProperties = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    deserializedPetAPTrue.id = reader.getInt();
-                } else if ("name".equals(fieldName)) {
-                    deserializedPetAPTrue.name = reader.getString();
-                } else if ("status".equals(fieldName)) {
-                    deserializedPetAPTrue.status = reader.getNullable(JsonReader::getBoolean);
-                } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.readUntyped());
-                }
-            }
-            deserializedPetAPTrue.additionalProperties = additionalProperties;
-
-            return deserializedPetAPTrue;
-        });
     }
 }

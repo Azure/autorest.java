@@ -5,20 +5,17 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The StringWrapper model.
  */
 @Fluent
-public final class StringWrapper implements JsonSerializable<StringWrapper> {
+public final class StringWrapper {
     /*
      * The value property.
      */
+    @JsonProperty(value = "value", required = true)
     private String value;
 
     /**
@@ -56,39 +53,5 @@ public final class StringWrapper implements JsonSerializable<StringWrapper> {
         if (getValue() == null) {
             throw new IllegalArgumentException("Missing required property value in model StringWrapper");
         }
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("value", this.value);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of StringWrapper from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of StringWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the StringWrapper.
-     */
-    public static StringWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            StringWrapper deserializedStringWrapper = new StringWrapper();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("value".equals(fieldName)) {
-                    deserializedStringWrapper.value = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedStringWrapper;
-        });
     }
 }

@@ -5,6 +5,7 @@
 package fixtures.bodyarray.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -41,6 +42,7 @@ public final class Enum1 extends ExpandableStringEnum<Enum1> {
      * @param name a name to look for.
      * @return the corresponding Enum1.
      */
+    @JsonCreator
     public static Enum1 fromString(String name) {
         return fromString(name, Enum1.class);
     }

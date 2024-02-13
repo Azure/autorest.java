@@ -5,25 +5,23 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Feline model.
  */
 @Fluent
-public class Feline implements JsonSerializable<Feline> {
+public class Feline {
     /*
      * The meows property.
      */
+    @JsonProperty(value = "meows")
     private Boolean meows;
 
     /*
      * The hisses property.
      */
+    @JsonProperty(value = "hisses")
     private Boolean hisses;
 
     /**
@@ -78,41 +76,5 @@ public class Feline implements JsonSerializable<Feline> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeBooleanField("meows", this.meows);
-        jsonWriter.writeBooleanField("hisses", this.hisses);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of Feline from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of Feline if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IOException If an error occurs while reading the Feline.
-     */
-    public static Feline fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            Feline deserializedFeline = new Feline();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("meows".equals(fieldName)) {
-                    deserializedFeline.meows = reader.getNullable(JsonReader::getBoolean);
-                } else if ("hisses".equals(fieldName)) {
-                    deserializedFeline.hisses = reader.getNullable(JsonReader::getBoolean);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedFeline;
-        });
     }
 }

@@ -5,20 +5,17 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The ClassWrapper model.
  */
 @Fluent
-public final class ClassWrapper implements JsonSerializable<ClassWrapper> {
+public final class ClassWrapper {
     /*
      * The value property.
      */
+    @JsonProperty(value = "value", required = true)
     private Product value;
 
     /**
@@ -58,39 +55,5 @@ public final class ClassWrapper implements JsonSerializable<ClassWrapper> {
         } else {
             getValue().validate();
         }
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeJsonField("value", this.value);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ClassWrapper from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ClassWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ClassWrapper.
-     */
-    public static ClassWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ClassWrapper deserializedClassWrapper = new ClassWrapper();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("value".equals(fieldName)) {
-                    deserializedClassWrapper.value = Product.fromJson(reader);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedClassWrapper;
-        });
     }
 }

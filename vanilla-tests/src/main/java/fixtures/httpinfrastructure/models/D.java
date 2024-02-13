@@ -5,20 +5,17 @@
 package fixtures.httpinfrastructure.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The D model.
  */
 @Fluent
-public final class D implements JsonSerializable<D> {
+public final class D {
     /*
      * The httpStatusCode property.
      */
+    @JsonProperty(value = "httpStatusCode")
     private String httpStatusCode;
 
     /**
@@ -53,38 +50,5 @@ public final class D implements JsonSerializable<D> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("httpStatusCode", this.httpStatusCode);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of D from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of D if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON
-     * null.
-     * @throws IOException If an error occurs while reading the D.
-     */
-    public static D fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            D deserializedD = new D();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("httpStatusCode".equals(fieldName)) {
-                    deserializedD.httpStatusCode = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedD;
-        });
     }
 }

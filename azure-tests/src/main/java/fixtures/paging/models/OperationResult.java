@@ -5,20 +5,17 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The OperationResult model.
  */
 @Fluent
-public final class OperationResult implements JsonSerializable<OperationResult> {
+public final class OperationResult {
     /*
      * The status of the request
      */
+    @JsonProperty(value = "status")
     private OperationResultStatus status;
 
     /**
@@ -53,38 +50,5 @@ public final class OperationResult implements JsonSerializable<OperationResult> 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of OperationResult from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of OperationResult if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IOException If an error occurs while reading the OperationResult.
-     */
-    public static OperationResult fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            OperationResult deserializedOperationResult = new OperationResult();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("status".equals(fieldName)) {
-                    deserializedOperationResult.status = OperationResultStatus.fromString(reader.getString());
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedOperationResult;
-        });
     }
 }

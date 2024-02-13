@@ -5,27 +5,25 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
-import com.azure.xml.XmlWriter;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * I am root, and I ref a model WITH meta.
  */
+@JacksonXmlRootElement(localName = "RootWithRefAndMeta")
 @Fluent
-public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndMeta> {
+public final class RootWithRefAndMeta {
     /*
      * XML will use XMLComplexTypeWithMeta
      */
+    @JsonProperty(value = "XMLComplexTypeWithMeta")
     private ComplexTypeWithMeta refToModel;
 
     /*
      * Something else (just to avoid flattening)
      */
+    @JsonProperty(value = "Something")
     private String something;
 
     /**
@@ -83,62 +81,5 @@ public final class RootWithRefAndMeta implements XmlSerializable<RootWithRefAndM
         if (getRefToModel() != null) {
             getRefToModel().validate();
         }
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        return toXml(xmlWriter, null);
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndMeta" : rootElementName;
-        xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeXml(this.refToModel, "XMLComplexTypeWithMeta");
-        xmlWriter.writeStringElement("Something", this.something);
-        return xmlWriter.writeEndElement();
-    }
-
-    /**
-     * Reads an instance of RootWithRefAndMeta from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @return An instance of RootWithRefAndMeta if the XmlReader was pointing to an instance of it, or null if it was
-     * pointing to XML null.
-     * @throws XMLStreamException If an error occurs while reading the RootWithRefAndMeta.
-     */
-    public static RootWithRefAndMeta fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return fromXml(xmlReader, null);
-    }
-
-    /**
-     * Reads an instance of RootWithRefAndMeta from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     * cases where the model can deserialize from different root element names.
-     * @return An instance of RootWithRefAndMeta if the XmlReader was pointing to an instance of it, or null if it was
-     * pointing to XML null.
-     * @throws XMLStreamException If an error occurs while reading the RootWithRefAndMeta.
-     */
-    public static RootWithRefAndMeta fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "RootWithRefAndMeta" : rootElementName;
-        return xmlReader.readObject(finalRootElementName, reader -> {
-            RootWithRefAndMeta deserializedRootWithRefAndMeta = new RootWithRefAndMeta();
-            while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                QName elementName = reader.getElementName();
-
-                if ("XMLComplexTypeWithMeta".equals(elementName.getLocalPart())) {
-                    deserializedRootWithRefAndMeta.refToModel
-                        = ComplexTypeWithMeta.fromXml(reader, "XMLComplexTypeWithMeta");
-                } else if ("Something".equals(elementName.getLocalPart())) {
-                    deserializedRootWithRefAndMeta.something = reader.getStringElement();
-                } else {
-                    reader.skipElement();
-                }
-            }
-
-            return deserializedRootWithRefAndMeta;
-        });
     }
 }

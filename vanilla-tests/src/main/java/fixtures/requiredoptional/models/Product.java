@@ -5,25 +5,23 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Product model.
  */
 @Fluent
-public final class Product implements JsonSerializable<Product> {
+public final class Product {
     /*
      * The id property.
      */
+    @JsonProperty(value = "id", required = true)
     private int id;
 
     /*
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -78,42 +76,5 @@ public final class Product implements JsonSerializable<Product> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("id", this.id);
-        jsonWriter.writeStringField("name", this.name);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of Product from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of Product if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Product.
-     */
-    public static Product fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            Product deserializedProduct = new Product();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    deserializedProduct.id = reader.getInt();
-                } else if ("name".equals(fieldName)) {
-                    deserializedProduct.name = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedProduct;
-        });
     }
 }

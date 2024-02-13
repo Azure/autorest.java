@@ -5,28 +5,52 @@
 package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.LinkedHashMap;
+import com.azure.core.annotation.JsonFlatten;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeId;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Specifies the metric alert criteria for a single resource that has multiple metric criteria.
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.EXISTING_PROPERTY,
+    property = "odata\\.type",
+    visible = true)
+@JsonTypeName("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria")
+@JsonFlatten
 @Fluent
 public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
     /*
+     * specifies the type of the alert criteria.
+     */
+    @JsonTypeId
+    @JsonProperty(value = "odata\\.type", required = true)
+    private static final Odatatype ODATA_TYPE
+        = Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA;
+
+    /*
      * The list of metric criteria for this 'all of' operation.
      */
+    @JsonProperty(value = "allOf")
     private List<String> allOf;
 
     /**
      * Creates an instance of MetricAlertSingleResourceMultipleMetricCriteria class.
      */
     public MetricAlertSingleResourceMultipleMetricCriteria() {
+    }
+
+    /**
+     * Get the odataType property: specifies the type of the alert criteria.
+     * 
+     * @return the odataType value.
+     */
+    public Odatatype getOdataType() {
+        return ODATA_TYPE;
     }
 
     /**
@@ -57,62 +81,5 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
     @Override
     public void validate() {
         super.validate();
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("odata\\.type",
-            Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA == null ? null
-                : Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString());
-        jsonWriter.writeArrayField("allOf", this.allOf, (writer, element) -> writer.writeString(element));
-        if (getAdditionalProperties() != null) {
-            for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of MetricAlertSingleResourceMultipleMetricCriteria from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of MetricAlertSingleResourceMultipleMetricCriteria if the JsonReader was pointing to an
-     * instance of it, or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
-     * @throws IOException If an error occurs while reading the MetricAlertSingleResourceMultipleMetricCriteria.
-     */
-    public static MetricAlertSingleResourceMultipleMetricCriteria fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            MetricAlertSingleResourceMultipleMetricCriteria deserializedMetricAlertSingleResourceMultipleMetricCriteria
-                = new MetricAlertSingleResourceMultipleMetricCriteria();
-            Map<String, Object> additionalProperties = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("odata\\.type".equals(fieldName)) {
-                    String odataType = reader.getString();
-                    if (!"Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria".equals(odataType)) {
-                        throw new IllegalStateException(
-                            "'odata\\.type' was expected to be non-null and equal to 'Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria'. The found 'odata\\.type' was '"
-                                + odataType + "'.");
-                    }
-                } else if ("allOf".equals(fieldName)) {
-                    List<String> allOf = reader.readArray(reader1 -> reader1.getString());
-                    deserializedMetricAlertSingleResourceMultipleMetricCriteria.allOf = allOf;
-                } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.readUntyped());
-                }
-            }
-            deserializedMetricAlertSingleResourceMultipleMetricCriteria.setAdditionalProperties(additionalProperties);
-
-            return deserializedMetricAlertSingleResourceMultipleMetricCriteria;
-        });
     }
 }

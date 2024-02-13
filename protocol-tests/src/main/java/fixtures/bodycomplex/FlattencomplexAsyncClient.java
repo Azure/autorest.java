@@ -43,7 +43,6 @@ public final class FlattencomplexAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String(Kind1) (Optional)
      *     propB1: String (Optional)
      *     helper (Optional): {
      *         propBH1: String (Optional)

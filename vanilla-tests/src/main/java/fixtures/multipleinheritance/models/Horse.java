@@ -5,10 +5,7 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Horse model.
@@ -18,6 +15,7 @@ public final class Horse extends Pet {
     /*
      * The isAShowHorse property.
      */
+    @JsonProperty(value = "isAShowHorse")
     private Boolean isAShowHorse;
 
     /**
@@ -63,42 +61,5 @@ public final class Horse extends Pet {
     @Override
     public void validate() {
         super.validate();
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("name", getName());
-        jsonWriter.writeBooleanField("isAShowHorse", this.isAShowHorse);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of Horse from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of Horse if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Horse.
-     */
-    public static Horse fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            Horse deserializedHorse = new Horse();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("name".equals(fieldName)) {
-                    deserializedHorse.setName(reader.getString());
-                } else if ("isAShowHorse".equals(fieldName)) {
-                    deserializedHorse.isAShowHorse = reader.getNullable(JsonReader::getBoolean);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedHorse;
-        });
     }
 }

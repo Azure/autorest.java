@@ -5,36 +5,36 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * A paragraph object consisting with contiguous lines generally with common alignment and spacing.
  */
 @Fluent
-public final class DocumentParagraph implements JsonSerializable<DocumentParagraph> {
+public final class DocumentParagraph {
     /*
      * Semantic role of the paragraph.
      */
+    @JsonProperty(value = "role")
     private ParagraphRole role;
 
     /*
      * Concatenated content of the paragraph in reading order.
      */
+    @JsonProperty(value = "content", required = true)
     private String content;
 
     /*
      * Bounding regions covering the paragraph.
      */
+    @JsonProperty(value = "boundingRegions")
     private List<BoundingRegion> boundingRegions;
 
     /*
      * Location of the paragraph in the reading order concatenated content.
      */
+    @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
     /**
@@ -121,52 +121,5 @@ public final class DocumentParagraph implements JsonSerializable<DocumentParagra
     public DocumentParagraph setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("content", this.content);
-        jsonWriter.writeArrayField("spans", this.spans, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("role", this.role == null ? null : this.role.toString());
-        jsonWriter.writeArrayField("boundingRegions", this.boundingRegions,
-            (writer, element) -> writer.writeJson(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of DocumentParagraph from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentParagraph if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the DocumentParagraph.
-     */
-    public static DocumentParagraph fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            DocumentParagraph deserializedDocumentParagraph = new DocumentParagraph();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("content".equals(fieldName)) {
-                    deserializedDocumentParagraph.content = reader.getString();
-                } else if ("spans".equals(fieldName)) {
-                    List<DocumentSpan> spans = reader.readArray(reader1 -> DocumentSpan.fromJson(reader1));
-                    deserializedDocumentParagraph.spans = spans;
-                } else if ("role".equals(fieldName)) {
-                    deserializedDocumentParagraph.role = ParagraphRole.fromString(reader.getString());
-                } else if ("boundingRegions".equals(fieldName)) {
-                    List<BoundingRegion> boundingRegions
-                        = reader.readArray(reader1 -> BoundingRegion.fromJson(reader1));
-                    deserializedDocumentParagraph.boundingRegions = boundingRegions;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedDocumentParagraph;
-        });
     }
 }

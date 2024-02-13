@@ -5,36 +5,35 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Parameter group.
  */
 @Fluent
-public final class ParameterGroupingPostRequiredParameters
-    implements JsonSerializable<ParameterGroupingPostRequiredParameters> {
+public final class ParameterGroupingPostRequiredParameters {
     /*
      * The customHeader property.
      */
+    @JsonProperty(value = "customHeader")
     private String customHeader;
 
     /*
      * Query parameter with default
      */
+    @JsonProperty(value = "query")
     private Integer query;
 
     /*
      * Path parameter
      */
+    @JsonProperty(value = "path", required = true)
     private String path;
 
     /*
      * The body property.
      */
+    @JsonProperty(value = "body", required = true)
     private int body;
 
     /**
@@ -133,49 +132,5 @@ public final class ParameterGroupingPostRequiredParameters
             throw new IllegalArgumentException(
                 "Missing required property path in model ParameterGroupingPostRequiredParameters");
         }
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("path", this.path);
-        jsonWriter.writeIntField("body", this.body);
-        jsonWriter.writeStringField("customHeader", this.customHeader);
-        jsonWriter.writeNumberField("query", this.query);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ParameterGroupingPostRequiredParameters from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ParameterGroupingPostRequiredParameters if the JsonReader was pointing to an instance of
-     * it, or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ParameterGroupingPostRequiredParameters.
-     */
-    public static ParameterGroupingPostRequiredParameters fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ParameterGroupingPostRequiredParameters deserializedParameterGroupingPostRequiredParameters
-                = new ParameterGroupingPostRequiredParameters();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("path".equals(fieldName)) {
-                    deserializedParameterGroupingPostRequiredParameters.path = reader.getString();
-                } else if ("body".equals(fieldName)) {
-                    deserializedParameterGroupingPostRequiredParameters.body = reader.getInt();
-                } else if ("customHeader".equals(fieldName)) {
-                    deserializedParameterGroupingPostRequiredParameters.customHeader = reader.getString();
-                } else if ("query".equals(fieldName)) {
-                    deserializedParameterGroupingPostRequiredParameters.query = reader.getNullable(JsonReader::getInt);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedParameterGroupingPostRequiredParameters;
-        });
     }
 }

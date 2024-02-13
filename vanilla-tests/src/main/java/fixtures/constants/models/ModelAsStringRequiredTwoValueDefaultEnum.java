@@ -5,6 +5,7 @@
 package fixtures.constants.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -37,6 +38,7 @@ public final class ModelAsStringRequiredTwoValueDefaultEnum
      * @param name a name to look for.
      * @return the corresponding ModelAsStringRequiredTwoValueDefaultEnum.
      */
+    @JsonCreator
     public static ModelAsStringRequiredTwoValueDefaultEnum fromString(String name) {
         return fromString(name, ModelAsStringRequiredTwoValueDefaultEnum.class);
     }

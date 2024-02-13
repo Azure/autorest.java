@@ -5,27 +5,34 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.LinkedHashMap;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
  * The SmartSalmon model.
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
+@JsonTypeName("smart_salmon")
 @Fluent
 public final class SmartSalmon extends Salmon {
     /*
      * The college_degree property.
      */
+    @JsonProperty(value = "college_degree")
     private String collegeDegree;
 
     /*
      * Dictionary of <any>
      */
+    @JsonIgnore
     private Map<String, Object> additionalProperties;
 
     /**
@@ -33,7 +40,8 @@ public final class SmartSalmon extends Salmon {
      * 
      * @param length the length value to set.
      */
-    public SmartSalmon(float length) {
+    @JsonCreator
+    public SmartSalmon(@JsonProperty(value = "length", required = true) float length) {
         super(length);
     }
 
@@ -62,6 +70,7 @@ public final class SmartSalmon extends Salmon {
      * 
      * @return the additionalProperties value.
      */
+    @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -75,6 +84,14 @@ public final class SmartSalmon extends Salmon {
     public SmartSalmon setAdditionalProperties(Map<String, Object> additionalProperties) {
         this.additionalProperties = additionalProperties;
         return this;
+    }
+
+    @JsonAnySetter
+    void setAdditionalProperties(String key, Object value) {
+        if (additionalProperties == null) {
+            additionalProperties = new HashMap<>();
+        }
+        additionalProperties.put(key, value);
     }
 
     /**
@@ -121,90 +138,5 @@ public final class SmartSalmon extends Salmon {
     @Override
     public void validate() {
         super.validate();
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "smart_salmon");
-        jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("species", getSpecies());
-        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("location", getLocation());
-        jsonWriter.writeBooleanField("iswild", iswild());
-        jsonWriter.writeStringField("college_degree", this.collegeDegree);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of SmartSalmon from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of SmartSalmon if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
-     * @throws IOException If an error occurs while reading the SmartSalmon.
-     */
-    public static SmartSalmon fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            boolean lengthFound = false;
-            float length = 0.0f;
-            String species = null;
-            List<Fish> siblings = null;
-            String location = null;
-            Boolean iswild = null;
-            String collegeDegree = null;
-            Map<String, Object> additionalProperties = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"smart_salmon".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'smart_salmon'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
-                    length = reader.getFloat();
-                    lengthFound = true;
-                } else if ("species".equals(fieldName)) {
-                    species = reader.getString();
-                } else if ("siblings".equals(fieldName)) {
-                    siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
-                } else if ("location".equals(fieldName)) {
-                    location = reader.getString();
-                } else if ("iswild".equals(fieldName)) {
-                    iswild = reader.getNullable(JsonReader::getBoolean);
-                } else if ("college_degree".equals(fieldName)) {
-                    collegeDegree = reader.getString();
-                } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.readUntyped());
-                }
-            }
-            if (lengthFound) {
-                SmartSalmon deserializedSmartSalmon = new SmartSalmon(length);
-                deserializedSmartSalmon.setSpecies(species);
-                deserializedSmartSalmon.setSiblings(siblings);
-                deserializedSmartSalmon.setLocation(location);
-                deserializedSmartSalmon.setIswild(iswild);
-                deserializedSmartSalmon.collegeDegree = collegeDegree;
-                deserializedSmartSalmon.additionalProperties = additionalProperties;
-
-                return deserializedSmartSalmon;
-            }
-            throw new IllegalStateException("Missing required property: length");
-        });
     }
 }

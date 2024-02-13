@@ -4,6 +4,9 @@
 
 package fixtures.mediatypes.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Content type for upload.
  */
@@ -38,6 +41,7 @@ public enum ContentType2 {
      * @param value the serialized value to parse.
      * @return the parsed ContentType2 object, or null if unable to parse.
      */
+    @JsonCreator
     public static ContentType2 fromString(String value) {
         if (value == null) {
             return null;
@@ -54,6 +58,7 @@ public enum ContentType2 {
     /**
      * {@inheritDoc}
      */
+    @JsonValue
     @Override
     public String toString() {
         return this.value;

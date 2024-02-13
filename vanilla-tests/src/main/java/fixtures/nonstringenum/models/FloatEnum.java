@@ -5,6 +5,7 @@
 package fixtures.nonstringenum.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -51,6 +52,7 @@ public final class FloatEnum extends ExpandableStringEnum<FloatEnum> {
      * @param name a name to look for.
      * @return the corresponding FloatEnum.
      */
+    @JsonCreator
     public static FloatEnum fromFloat(float name) {
         return fromString(String.valueOf(name), FloatEnum.class);
     }

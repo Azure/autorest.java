@@ -6,29 +6,27 @@ package fixtures.dpgcustomization.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import fixtures.dpgcustomization.models.Product;
-import java.io.IOException;
 import java.util.List;
 
 /**
  * The ProductResult model.
  */
 @Fluent
-public final class ProductResult implements JsonSerializable<ProductResult> {
+public final class ProductResult {
     /*
      * The values property.
      */
     @Generated
+    @JsonProperty(value = "values")
     private List<Product> values;
 
     /*
      * The nextLink property.
      */
     @Generated
+    @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /**
@@ -80,42 +78,5 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
     public ProductResult setNextLink(String nextLink) {
         this.nextLink = nextLink;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("values", this.values, (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeStringField("nextLink", this.nextLink);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ProductResult from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ProductResult if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IOException If an error occurs while reading the ProductResult.
-     */
-    public static ProductResult fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ProductResult deserializedProductResult = new ProductResult();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("values".equals(fieldName)) {
-                    List<Product> values = reader.readArray(reader1 -> Product.fromJson(reader1));
-                    deserializedProductResult.values = values;
-                } else if ("nextLink".equals(fieldName)) {
-                    deserializedProductResult.nextLink = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedProductResult;
-        });
     }
 }

@@ -5,63 +5,80 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.time.OffsetDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
  * Get Operation response object.
  */
+@JsonTypeInfo(
+    use = JsonTypeInfo.Id.NAME,
+    include = JsonTypeInfo.As.PROPERTY,
+    property = "kind",
+    defaultImpl = OperationDetails.class)
+@JsonTypeName("OperationDetails")
+@JsonSubTypes({
+    @JsonSubTypes.Type(name = "documentModelBuild", value = DocumentModelBuildOperationDetails.class),
+    @JsonSubTypes.Type(name = "documentModelCompose", value = DocumentModelComposeOperationDetails.class),
+    @JsonSubTypes.Type(name = "documentModelCopyTo", value = DocumentModelCopyToOperationDetails.class) })
 @Fluent
-public class OperationDetails implements JsonSerializable<OperationDetails> {
+public class OperationDetails {
     /*
      * Operation ID
      */
+    @JsonProperty(value = "operationId", required = true)
     private String operationId;
 
     /*
      * Operation status.
      */
+    @JsonProperty(value = "status", required = true)
     private OperationStatus status;
 
     /*
      * Operation progress (0-100).
      */
+    @JsonProperty(value = "percentCompleted")
     private Integer percentCompleted;
 
     /*
      * Date and time (UTC) when the operation was created.
      */
+    @JsonProperty(value = "createdDateTime", required = true)
     private OffsetDateTime createdDateTime;
 
     /*
      * Date and time (UTC) when the status was last updated.
      */
+    @JsonProperty(value = "lastUpdatedDateTime", required = true)
     private OffsetDateTime lastUpdatedDateTime;
 
     /*
      * URL of the resource targeted by this operation.
      */
+    @JsonProperty(value = "resourceLocation", required = true)
     private String resourceLocation;
 
     /*
      * API version used to create this operation.
      */
+    @JsonProperty(value = "apiVersion")
     private String apiVersion;
 
     /*
      * List of key-value tag attributes associated with the document model.
      */
+    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /*
      * Encountered error.
      */
+    @JsonProperty(value = "error")
     private Error error;
 
     /**
@@ -248,98 +265,5 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
     public OperationDetails setError(Error error) {
         this.error = error;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("operationId", this.operationId);
-        jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
-        jsonWriter.writeStringField("createdDateTime",
-            this.createdDateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdDateTime));
-        jsonWriter.writeStringField("lastUpdatedDateTime", this.lastUpdatedDateTime == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedDateTime));
-        jsonWriter.writeStringField("resourceLocation", this.resourceLocation);
-        jsonWriter.writeNumberField("percentCompleted", this.percentCompleted);
-        jsonWriter.writeStringField("apiVersion", this.apiVersion);
-        jsonWriter.writeMapField("tags", this.tags, (writer, element) -> writer.writeString(element));
-        jsonWriter.writeJsonField("error", this.error);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of OperationDetails from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of OperationDetails if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
-     * @throws IOException If an error occurs while reading the OperationDetails.
-     */
-    public static OperationDetails fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String discriminatorValue = null;
-            try (JsonReader readerToUse = reader.bufferObject()) {
-                readerToUse.nextToken(); // Prepare for reading
-                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                    String fieldName = readerToUse.getFieldName();
-                    readerToUse.nextToken();
-                    if ("kind".equals(fieldName)) {
-                        discriminatorValue = readerToUse.getString();
-                        break;
-                    } else {
-                        readerToUse.skipChildren();
-                    }
-                }
-                // Use the discriminator value to determine which subtype should be deserialized.
-                if ("documentModelBuild".equals(discriminatorValue)) {
-                    return DocumentModelBuildOperationDetails.fromJson(readerToUse.reset());
-                } else if ("documentModelCompose".equals(discriminatorValue)) {
-                    return DocumentModelComposeOperationDetails.fromJson(readerToUse.reset());
-                } else if ("documentModelCopyTo".equals(discriminatorValue)) {
-                    return DocumentModelCopyToOperationDetails.fromJson(readerToUse.reset());
-                } else {
-                    return fromJsonKnownDiscriminator(readerToUse.reset());
-                }
-            }
-        });
-    }
-
-    static OperationDetails fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            OperationDetails deserializedOperationDetails = new OperationDetails();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("operationId".equals(fieldName)) {
-                    deserializedOperationDetails.operationId = reader.getString();
-                } else if ("status".equals(fieldName)) {
-                    deserializedOperationDetails.status = OperationStatus.fromString(reader.getString());
-                } else if ("createdDateTime".equals(fieldName)) {
-                    deserializedOperationDetails.createdDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                } else if ("lastUpdatedDateTime".equals(fieldName)) {
-                    deserializedOperationDetails.lastUpdatedDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                } else if ("resourceLocation".equals(fieldName)) {
-                    deserializedOperationDetails.resourceLocation = reader.getString();
-                } else if ("percentCompleted".equals(fieldName)) {
-                    deserializedOperationDetails.percentCompleted = reader.getNullable(JsonReader::getInt);
-                } else if ("apiVersion".equals(fieldName)) {
-                    deserializedOperationDetails.apiVersion = reader.getString();
-                } else if ("tags".equals(fieldName)) {
-                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
-                    deserializedOperationDetails.tags = tags;
-                } else if ("error".equals(fieldName)) {
-                    deserializedOperationDetails.error = Error.fromJson(reader);
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedOperationDetails;
-        });
     }
 }

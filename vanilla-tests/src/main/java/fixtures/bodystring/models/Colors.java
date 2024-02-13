@@ -4,6 +4,9 @@
 
 package fixtures.bodystring.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Referenced Color Enum Description.
  */
@@ -38,6 +41,7 @@ public enum Colors {
      * @param value the serialized value to parse.
      * @return the parsed Colors object, or null if unable to parse.
      */
+    @JsonCreator
     public static Colors fromString(String value) {
         if (value == null) {
             return null;
@@ -54,6 +58,7 @@ public enum Colors {
     /**
      * {@inheritDoc}
      */
+    @JsonValue
     @Override
     public String toString() {
         return this.value;

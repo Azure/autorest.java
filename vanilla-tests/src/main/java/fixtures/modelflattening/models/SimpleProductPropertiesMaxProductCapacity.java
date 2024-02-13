@@ -4,6 +4,9 @@
 
 package fixtures.modelflattening.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Capacity of product. For example, 4 people.
  */
@@ -28,6 +31,7 @@ public enum SimpleProductPropertiesMaxProductCapacity {
      * @param value the serialized value to parse.
      * @return the parsed SimpleProductPropertiesMaxProductCapacity object, or null if unable to parse.
      */
+    @JsonCreator
     public static SimpleProductPropertiesMaxProductCapacity fromString(String value) {
         if (value == null) {
             return null;
@@ -44,6 +48,7 @@ public enum SimpleProductPropertiesMaxProductCapacity {
     /**
      * {@inheritDoc}
      */
+    @JsonValue
     @Override
     public String toString() {
         return this.value;

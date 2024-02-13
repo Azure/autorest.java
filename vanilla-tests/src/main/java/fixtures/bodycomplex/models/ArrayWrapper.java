@@ -5,21 +5,18 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
  * The ArrayWrapper model.
  */
 @Fluent
-public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
+public final class ArrayWrapper {
     /*
      * The array property.
      */
+    @JsonProperty(value = "array")
     private List<String> array;
 
     /**
@@ -54,39 +51,5 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeString(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ArrayWrapper from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ArrayWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IOException If an error occurs while reading the ArrayWrapper.
-     */
-    public static ArrayWrapper fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ArrayWrapper deserializedArrayWrapper = new ArrayWrapper();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("array".equals(fieldName)) {
-                    List<String> array = reader.readArray(reader1 -> reader1.getString());
-                    deserializedArrayWrapper.array = array;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedArrayWrapper;
-        });
     }
 }

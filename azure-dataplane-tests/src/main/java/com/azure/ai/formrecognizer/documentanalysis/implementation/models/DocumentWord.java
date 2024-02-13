@@ -5,11 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
@@ -17,25 +13,29 @@ import java.util.List;
  * Chinese, Japanese, and Korean, each character is represented as its own word.
  */
 @Fluent
-public final class DocumentWord implements JsonSerializable<DocumentWord> {
+public final class DocumentWord {
     /*
      * Text content of the word.
      */
+    @JsonProperty(value = "content", required = true)
     private String content;
 
     /*
      * Bounding polygon of the word.
      */
+    @JsonProperty(value = "polygon")
     private List<Float> polygon;
 
     /*
      * Location of the word in the reading order concatenated content.
      */
+    @JsonProperty(value = "span", required = true)
     private DocumentSpan span;
 
     /*
      * Confidence of correctly extracting the word.
      */
+    @JsonProperty(value = "confidence", required = true)
     private float confidence;
 
     /**
@@ -122,49 +122,5 @@ public final class DocumentWord implements JsonSerializable<DocumentWord> {
     public DocumentWord setConfidence(float confidence) {
         this.confidence = confidence;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("content", this.content);
-        jsonWriter.writeJsonField("span", this.span);
-        jsonWriter.writeFloatField("confidence", this.confidence);
-        jsonWriter.writeArrayField("polygon", this.polygon, (writer, element) -> writer.writeFloat(element));
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of DocumentWord from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentWord if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the DocumentWord.
-     */
-    public static DocumentWord fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            DocumentWord deserializedDocumentWord = new DocumentWord();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("content".equals(fieldName)) {
-                    deserializedDocumentWord.content = reader.getString();
-                } else if ("span".equals(fieldName)) {
-                    deserializedDocumentWord.span = DocumentSpan.fromJson(reader);
-                } else if ("confidence".equals(fieldName)) {
-                    deserializedDocumentWord.confidence = reader.getFloat();
-                } else if ("polygon".equals(fieldName)) {
-                    List<Float> polygon = reader.readArray(reader1 -> reader1.getFloat());
-                    deserializedDocumentWord.polygon = polygon;
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedDocumentWord;
-        });
     }
 }

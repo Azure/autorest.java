@@ -5,6 +5,7 @@
 package fixtures.bodyformdataurlencoded.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -41,6 +42,7 @@ public final class PetFood extends ExpandableStringEnum<PetFood> {
      * @param name a name to look for.
      * @return the corresponding PetFood.
      */
+    @JsonCreator
     public static PetFood fromString(String name) {
         return fromString(name, PetFood.class);
     }

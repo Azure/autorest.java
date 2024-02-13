@@ -5,25 +5,23 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Contiguous region of the concatenated content property, specified as an offset and length.
  */
 @Fluent
-public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
+public final class DocumentSpan {
     /*
      * Zero-based index of the content represented by the span.
      */
+    @JsonProperty(value = "offset", required = true)
     private int offset;
 
     /*
      * Number of characters in the content represented by the span.
      */
+    @JsonProperty(value = "length", required = true)
     private int length;
 
     /**
@@ -70,42 +68,5 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
     public DocumentSpan setLength(int length) {
         this.length = length;
         return this;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("offset", this.offset);
-        jsonWriter.writeIntField("length", this.length);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of DocumentSpan from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentSpan if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the DocumentSpan.
-     */
-    public static DocumentSpan fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            DocumentSpan deserializedDocumentSpan = new DocumentSpan();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("offset".equals(fieldName)) {
-                    deserializedDocumentSpan.offset = reader.getInt();
-                } else if ("length".equals(fieldName)) {
-                    deserializedDocumentSpan.length = reader.getInt();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedDocumentSpan;
-        });
     }
 }

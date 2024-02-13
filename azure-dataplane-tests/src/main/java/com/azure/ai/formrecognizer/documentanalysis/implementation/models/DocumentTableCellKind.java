@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -51,6 +52,7 @@ public final class DocumentTableCellKind extends ExpandableStringEnum<DocumentTa
      * @param name a name to look for.
      * @return the corresponding DocumentTableCellKind.
      */
+    @JsonCreator
     public static DocumentTableCellKind fromString(String name) {
         return fromString(name, DocumentTableCellKind.class);
     }

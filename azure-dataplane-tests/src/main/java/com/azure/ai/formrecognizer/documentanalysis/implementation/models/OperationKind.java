@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -41,6 +42,7 @@ public final class OperationKind extends ExpandableStringEnum<OperationKind> {
      * @param name a name to look for.
      * @return the corresponding OperationKind.
      */
+    @JsonCreator
     public static OperationKind fromString(String name) {
         return fromString(name, OperationKind.class);
     }

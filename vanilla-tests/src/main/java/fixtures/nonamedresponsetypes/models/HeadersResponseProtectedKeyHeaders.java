@@ -7,6 +7,7 @@ package fixtures.nonamedresponsetypes.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The HeadersResponseProtectedKeyHeaders model.
@@ -16,6 +17,7 @@ public final class HeadersResponseProtectedKeyHeaders {
     /*
      * The Content-Type property.
      */
+    @JsonProperty(value = "Content-Type")
     private String contentType;
 
     // HttpHeaders containing the raw property values.

@@ -5,27 +5,25 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.CoreUtils;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
-import com.azure.xml.XmlWriter;
-import javax.xml.namespace.QName;
-import javax.xml.stream.XMLStreamException;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 
 /**
  * The Error model.
  */
+@JacksonXmlRootElement(localName = "Error")
 @Fluent
-public final class Error implements XmlSerializable<Error> {
+public final class Error {
     /*
      * The status property.
      */
+    @JsonProperty(value = "status")
     private Integer status;
 
     /*
      * The message property.
      */
+    @JsonProperty(value = "message")
     private String message;
 
     /**
@@ -80,61 +78,5 @@ public final class Error implements XmlSerializable<Error> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
-        return toXml(xmlWriter, null);
-    }
-
-    @Override
-    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
-        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Error" : rootElementName;
-        xmlWriter.writeStartElement(rootElementName);
-        xmlWriter.writeNumberElement("status", this.status);
-        xmlWriter.writeStringElement("message", this.message);
-        return xmlWriter.writeEndElement();
-    }
-
-    /**
-     * Reads an instance of Error from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @return An instance of Error if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     * XML null.
-     * @throws XMLStreamException If an error occurs while reading the Error.
-     */
-    public static Error fromXml(XmlReader xmlReader) throws XMLStreamException {
-        return fromXml(xmlReader, null);
-    }
-
-    /**
-     * Reads an instance of Error from the XmlReader.
-     * 
-     * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     * cases where the model can deserialize from different root element names.
-     * @return An instance of Error if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     * XML null.
-     * @throws XMLStreamException If an error occurs while reading the Error.
-     */
-    public static Error fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
-        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Error" : rootElementName;
-        return xmlReader.readObject(finalRootElementName, reader -> {
-            Error deserializedError = new Error();
-            while (reader.nextElement() != XmlToken.END_ELEMENT) {
-                QName elementName = reader.getElementName();
-
-                if ("status".equals(elementName.getLocalPart())) {
-                    deserializedError.status = reader.getNullableElement(Integer::parseInt);
-                } else if ("message".equals(elementName.getLocalPart())) {
-                    deserializedError.message = reader.getStringElement();
-                } else {
-                    reader.skipElement();
-                }
-            }
-
-            return deserializedError;
-        });
     }
 }

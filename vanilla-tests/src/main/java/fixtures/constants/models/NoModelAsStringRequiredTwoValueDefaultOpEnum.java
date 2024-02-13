@@ -4,6 +4,9 @@
 
 package fixtures.constants.models;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+
 /**
  * Defines values for NoModelAsStringRequiredTwoValueDefaultOpEnum.
  */
@@ -33,6 +36,7 @@ public enum NoModelAsStringRequiredTwoValueDefaultOpEnum {
      * @param value the serialized value to parse.
      * @return the parsed NoModelAsStringRequiredTwoValueDefaultOpEnum object, or null if unable to parse.
      */
+    @JsonCreator
     public static NoModelAsStringRequiredTwoValueDefaultOpEnum fromString(String value) {
         if (value == null) {
             return null;
@@ -49,6 +53,7 @@ public enum NoModelAsStringRequiredTwoValueDefaultOpEnum {
     /**
      * {@inheritDoc}
      */
+    @JsonValue
     @Override
     public String toString() {
         return this.value;

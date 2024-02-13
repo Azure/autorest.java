@@ -527,7 +527,6 @@ public final class FormRecognizerAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
      *     percentCompleted: Integer (Optional)

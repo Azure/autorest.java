@@ -5,37 +5,40 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
-import java.util.LinkedHashMap;
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * The PetAPObject model.
  */
 @Fluent
-public final class PetAPObject implements JsonSerializable<PetAPObject> {
+public final class PetAPObject {
     /*
      * The id property.
      */
+    @JsonProperty(value = "id", required = true)
     private int id;
 
     /*
      * The name property.
      */
+    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The status property.
      */
+    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
     private Boolean status;
 
     /*
      * Dictionary of <any>
      */
+    @JsonIgnore
     private Map<String, Object> additionalProperties;
 
     /**
@@ -98,6 +101,7 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
      * 
      * @return the additionalProperties value.
      */
+    @JsonAnyGetter
     public Map<String, Object> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -113,61 +117,19 @@ public final class PetAPObject implements JsonSerializable<PetAPObject> {
         return this;
     }
 
+    @JsonAnySetter
+    void setAdditionalProperties(String key, Object value) {
+        if (additionalProperties == null) {
+            additionalProperties = new HashMap<>();
+        }
+        additionalProperties.put(key, value);
+    }
+
     /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("id", this.id);
-        jsonWriter.writeStringField("name", this.name);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of PetAPObject from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of PetAPObject if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the PetAPObject.
-     */
-    public static PetAPObject fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            PetAPObject deserializedPetAPObject = new PetAPObject();
-            Map<String, Object> additionalProperties = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    deserializedPetAPObject.id = reader.getInt();
-                } else if ("name".equals(fieldName)) {
-                    deserializedPetAPObject.name = reader.getString();
-                } else if ("status".equals(fieldName)) {
-                    deserializedPetAPObject.status = reader.getNullable(JsonReader::getBoolean);
-                } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.readUntyped());
-                }
-            }
-            deserializedPetAPObject.additionalProperties = additionalProperties;
-
-            return deserializedPetAPObject;
-        });
     }
 }

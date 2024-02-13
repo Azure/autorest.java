@@ -5,20 +5,19 @@
 package fixtures.inheritance.donotpassdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.azure.core.annotation.JsonFlatten;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The metric alert resource.
  */
+@JsonFlatten
 @Fluent
-public class MetricAlertResource implements JsonSerializable<MetricAlertResource> {
+public class MetricAlertResource {
     /*
      * defines the specific alert criteria information.
      */
+    @JsonProperty(value = "properties.criteria", required = true)
     private MetricAlertCriteria criteria;
 
     /**
@@ -58,51 +57,5 @@ public class MetricAlertResource implements JsonSerializable<MetricAlertResource
         } else {
             getCriteria().validate();
         }
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        if (criteria != null) {
-            jsonWriter.writeStartObject("properties");
-            jsonWriter.writeJsonField("criteria", this.criteria);
-            jsonWriter.writeEndObject();
-        }
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of MetricAlertResource from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of MetricAlertResource if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the MetricAlertResource.
-     */
-    public static MetricAlertResource fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            MetricAlertResource deserializedMetricAlertResource = new MetricAlertResource();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("properties".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
-                    while (reader.nextToken() != JsonToken.END_OBJECT) {
-                        fieldName = reader.getFieldName();
-                        reader.nextToken();
-
-                        if ("criteria".equals(fieldName)) {
-                            deserializedMetricAlertResource.criteria = MetricAlertCriteria.fromJson(reader);
-                        } else {
-                            reader.skipChildren();
-                        }
-                    }
-                }
-                reader.skipChildren();
-            }
-
-            return deserializedMetricAlertResource;
-        });
     }
 }

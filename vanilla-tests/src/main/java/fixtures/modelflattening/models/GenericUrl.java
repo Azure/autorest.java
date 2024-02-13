@@ -5,20 +5,17 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The Generic URL.
  */
 @Fluent
-public class GenericUrl implements JsonSerializable<GenericUrl> {
+public class GenericUrl {
     /*
      * Generic URL value.
      */
+    @JsonProperty(value = "generic_value")
     private String genericValue;
 
     /**
@@ -53,38 +50,5 @@ public class GenericUrl implements JsonSerializable<GenericUrl> {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("generic_value", this.genericValue);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of GenericUrl from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of GenericUrl if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IOException If an error occurs while reading the GenericUrl.
-     */
-    public static GenericUrl fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            GenericUrl deserializedGenericUrl = new GenericUrl();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("generic_value".equals(fieldName)) {
-                    deserializedGenericUrl.genericValue = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedGenericUrl;
-        });
     }
 }

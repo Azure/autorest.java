@@ -7,6 +7,7 @@ package fixtures.httpinfrastructure.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The HttpRedirectsPost307Headers model.
@@ -16,6 +17,7 @@ public final class HttpRedirectsPost307Headers {
     /*
      * The Location property.
      */
+    @JsonProperty(value = "Location")
     private String location = "/http/success/post/200";
 
     // HttpHeaders containing the raw property values.
