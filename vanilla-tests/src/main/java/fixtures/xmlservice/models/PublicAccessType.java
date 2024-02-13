@@ -5,7 +5,6 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -37,7 +36,6 @@ public final class PublicAccessType extends ExpandableStringEnum<PublicAccessTyp
      * @param name a name to look for.
      * @return the corresponding PublicAccessType.
      */
-    @JsonCreator
     public static PublicAccessType fromString(String name) {
         return fromString(name, PublicAccessType.class);
     }

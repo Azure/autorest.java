@@ -8,7 +8,6 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
 
 /**
@@ -19,7 +18,6 @@ public final class HeadersResponseDatetimeRfc1123Headers {
     /*
      * The value property.
      */
-    @JsonProperty(value = "value")
     private DateTimeRfc1123 value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");

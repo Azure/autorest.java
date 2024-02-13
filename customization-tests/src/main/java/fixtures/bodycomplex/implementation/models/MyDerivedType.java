@@ -5,21 +5,19 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The MyDerivedType model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "kind")
-@JsonTypeName("Kind1")
 @Fluent
 public final class MyDerivedType extends MyBaseType {
     /*
      * The propD1 property.
      */
-    @JsonProperty(value = "propD1")
     private String propD1;
 
     /**
@@ -64,5 +62,66 @@ public final class MyDerivedType extends MyBaseType {
     public MyDerivedType setPropBH1(String propBH1) {
         super.setPropBH1(propBH1);
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", MyKind.KIND1 == null ? null : MyKind.KIND1.toString());
+        jsonWriter.writeStringField("propB1", getPropB1());
+        jsonWriter.writeStringField("propD1", this.propD1);
+        if (getPropBH1() != null) {
+            jsonWriter.writeStartObject("helper");
+            jsonWriter.writeStringField("propBH1", getPropBH1());
+            jsonWriter.writeEndObject();
+        }
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of MyDerivedType from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of MyDerivedType if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the MyDerivedType.
+     */
+    public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            MyDerivedType deserializedMyDerivedType = new MyDerivedType();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("kind".equals(fieldName)) {
+                    String kind = reader.getString();
+                    if (!"Kind1".equals(kind)) {
+                        throw new IllegalStateException(
+                            "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '" + kind
+                                + "'.");
+                    }
+                } else if ("propB1".equals(fieldName)) {
+                    deserializedMyDerivedType.setPropB1(reader.getString());
+                } else if ("propD1".equals(fieldName)) {
+                    deserializedMyDerivedType.propD1 = reader.getString();
+                } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("propBH1".equals(fieldName)) {
+                            deserializedMyDerivedType.setPropBH1(reader.getString());
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedMyDerivedType;
+        });
     }
 }

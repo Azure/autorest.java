@@ -6,23 +6,22 @@ package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
  * The Sawshark model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
-@JsonTypeName("sawshark")
 @Fluent
 public final class Sawshark extends Shark {
     /*
      * The picture property.
      */
-    @JsonProperty(value = "picture")
     private byte[] picture;
 
     /**
@@ -94,5 +93,66 @@ public final class Sawshark extends Shark {
     public Sawshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "sawshark");
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("birthday",
+            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeNumberField("age", getAge());
+        jsonWriter.writeBinaryField("picture", this.picture);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Sawshark from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Sawshark if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Sawshark.
+     */
+    public static Sawshark fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Sawshark deserializedSawshark = new Sawshark();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("fishtype".equals(fieldName)) {
+                    String fishtype = reader.getString();
+                    if (!"sawshark".equals(fishtype)) {
+                        throw new IllegalStateException(
+                            "'fishtype' was expected to be non-null and equal to 'sawshark'. The found 'fishtype' was '"
+                                + fishtype + "'.");
+                    }
+                } else if ("length".equals(fieldName)) {
+                    deserializedSawshark.setLength(reader.getFloat());
+                } else if ("birthday".equals(fieldName)) {
+                    deserializedSawshark.setBirthday(
+                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
+                } else if ("species".equals(fieldName)) {
+                    deserializedSawshark.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedSawshark.setSiblings(siblings);
+                } else if ("age".equals(fieldName)) {
+                    deserializedSawshark.setAge(reader.getNullable(JsonReader::getInt));
+                } else if ("picture".equals(fieldName)) {
+                    deserializedSawshark.picture = reader.getBinary();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedSawshark;
+        });
     }
 }

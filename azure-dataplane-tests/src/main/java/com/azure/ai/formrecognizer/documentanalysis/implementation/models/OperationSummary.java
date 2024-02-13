@@ -5,67 +5,63 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
  * Operation info.
  */
 @Fluent
-public final class OperationSummary {
+public final class OperationSummary implements JsonSerializable<OperationSummary> {
     /*
      * Operation ID
      */
-    @JsonProperty(value = "operationId", required = true)
     private String operationId;
 
     /*
      * Operation status.
      */
-    @JsonProperty(value = "status", required = true)
     private OperationStatus status;
 
     /*
      * Operation progress (0-100).
      */
-    @JsonProperty(value = "percentCompleted")
     private Integer percentCompleted;
 
     /*
      * Date and time (UTC) when the operation was created.
      */
-    @JsonProperty(value = "createdDateTime", required = true)
     private OffsetDateTime createdDateTime;
 
     /*
      * Date and time (UTC) when the status was last updated.
      */
-    @JsonProperty(value = "lastUpdatedDateTime", required = true)
     private OffsetDateTime lastUpdatedDateTime;
 
     /*
      * Type of operation.
      */
-    @JsonProperty(value = "kind", required = true)
     private OperationKind kind;
 
     /*
      * URL of the resource targeted by this operation.
      */
-    @JsonProperty(value = "resourceLocation", required = true)
     private String resourceLocation;
 
     /*
      * API version used to create this operation.
      */
-    @JsonProperty(value = "apiVersion")
     private String apiVersion;
 
     /*
      * List of key-value tag attributes associated with the document model.
      */
-    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /**
@@ -252,5 +248,68 @@ public final class OperationSummary {
     public OperationSummary setTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("operationId", this.operationId);
+        jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
+        jsonWriter.writeStringField("createdDateTime",
+            this.createdDateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdDateTime));
+        jsonWriter.writeStringField("lastUpdatedDateTime", this.lastUpdatedDateTime == null ? null
+            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedDateTime));
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
+        jsonWriter.writeStringField("resourceLocation", this.resourceLocation);
+        jsonWriter.writeNumberField("percentCompleted", this.percentCompleted);
+        jsonWriter.writeStringField("apiVersion", this.apiVersion);
+        jsonWriter.writeMapField("tags", this.tags, (writer, element) -> writer.writeString(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of OperationSummary from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of OperationSummary if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the OperationSummary.
+     */
+    public static OperationSummary fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            OperationSummary deserializedOperationSummary = new OperationSummary();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("operationId".equals(fieldName)) {
+                    deserializedOperationSummary.operationId = reader.getString();
+                } else if ("status".equals(fieldName)) {
+                    deserializedOperationSummary.status = OperationStatus.fromString(reader.getString());
+                } else if ("createdDateTime".equals(fieldName)) {
+                    deserializedOperationSummary.createdDateTime
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("lastUpdatedDateTime".equals(fieldName)) {
+                    deserializedOperationSummary.lastUpdatedDateTime
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("kind".equals(fieldName)) {
+                    deserializedOperationSummary.kind = OperationKind.fromString(reader.getString());
+                } else if ("resourceLocation".equals(fieldName)) {
+                    deserializedOperationSummary.resourceLocation = reader.getString();
+                } else if ("percentCompleted".equals(fieldName)) {
+                    deserializedOperationSummary.percentCompleted = reader.getNullable(JsonReader::getInt);
+                } else if ("apiVersion".equals(fieldName)) {
+                    deserializedOperationSummary.apiVersion = reader.getString();
+                } else if ("tags".equals(fieldName)) {
+                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
+                    deserializedOperationSummary.tags = tags;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedOperationSummary;
+        });
     }
 }

@@ -5,35 +5,25 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Immutable;
-import com.azure.core.annotation.JsonFlatten;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The MyBaseType model.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "kind",
-    defaultImpl = MyBaseType.class)
-@JsonTypeName("MyBaseType")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "Kind1", value = MyDerivedType.class) })
-@JsonFlatten
 @Immutable
-public class MyBaseType {
+public class MyBaseType implements JsonSerializable<MyBaseType> {
     /*
      * The propB1 property.
      */
-    @JsonProperty(value = "propB1")
     private String propB1;
 
     /*
      * The propBH1 property.
      */
-    @JsonProperty(value = "helper.propBH1")
     private String propBH1;
 
     /**
@@ -52,6 +42,17 @@ public class MyBaseType {
     }
 
     /**
+     * Set the propB1 property: The propB1 property.
+     * 
+     * @param propB1 the propB1 value to set.
+     * @return the MyBaseType object itself.
+     */
+    MyBaseType setPropB1(String propB1) {
+        this.propB1 = propB1;
+        return this;
+    }
+
+    /**
      * Get the propBH1 property: The propBH1 property.
      * 
      * @return the propBH1 value.
@@ -61,10 +62,96 @@ public class MyBaseType {
     }
 
     /**
+     * Set the propBH1 property: The propBH1 property.
+     * 
+     * @param propBH1 the propBH1 value to set.
+     * @return the MyBaseType object itself.
+     */
+    MyBaseType setPropBH1(String propBH1) {
+        this.propBH1 = propBH1;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("propB1", this.propB1);
+        if (propBH1 != null) {
+            jsonWriter.writeStartObject("helper");
+            jsonWriter.writeStringField("propBH1", this.propBH1);
+            jsonWriter.writeEndObject();
+        }
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of MyBaseType from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of MyBaseType if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the MyBaseType.
+     */
+    public static MyBaseType fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("kind".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
+                }
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("Kind1".equals(discriminatorValue)) {
+                    return MyDerivedType.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
+            }
+        });
+    }
+
+    static MyBaseType fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            MyBaseType deserializedMyBaseType = new MyBaseType();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("propB1".equals(fieldName)) {
+                    deserializedMyBaseType.propB1 = reader.getString();
+                } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("propBH1".equals(fieldName)) {
+                            deserializedMyBaseType.propBH1 = reader.getString();
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedMyBaseType;
+        });
     }
 }

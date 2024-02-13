@@ -5,24 +5,26 @@
 package fixtures.paging.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * The ProductResultValue model.
  */
 @Fluent
-public final class ProductResultValue {
+public final class ProductResultValue implements JsonSerializable<ProductResultValue> {
     /*
      * The value property.
      */
-    @JsonProperty(value = "value")
     private List<Product> value;
 
     /*
      * The nextLink property.
      */
-    @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /**
@@ -80,5 +82,42 @@ public final class ProductResultValue {
         if (getValue() != null) {
             getValue().forEach(e -> e.validate());
         }
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeArrayField("value", this.value, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("nextLink", this.nextLink);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ProductResultValue from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ProductResultValue if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IOException If an error occurs while reading the ProductResultValue.
+     */
+    public static ProductResultValue fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            ProductResultValue deserializedProductResultValue = new ProductResultValue();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("value".equals(fieldName)) {
+                    List<Product> value = reader.readArray(reader1 -> Product.fromJson(reader1));
+                    deserializedProductResultValue.value = value;
+                } else if ("nextLink".equals(fieldName)) {
+                    deserializedProductResultValue.nextLink = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedProductResultValue;
+        });
     }
 }

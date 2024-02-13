@@ -5,7 +5,6 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -32,7 +31,6 @@ public final class ApiVersion extends ExpandableStringEnum<ApiVersion> {
      * @param name a name to look for.
      * @return the corresponding ApiVersion.
      */
-    @JsonCreator
     public static ApiVersion fromString(String name) {
         return fromString(name, ApiVersion.class);
     }

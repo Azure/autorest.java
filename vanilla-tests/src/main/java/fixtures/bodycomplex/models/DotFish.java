@@ -5,29 +5,20 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Immutable;
-import com.azure.core.annotation.JsonFlatten;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The DotFish model.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "fish\\.type",
-    defaultImpl = DotFish.class)
-@JsonTypeName("DotFish")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "DotSalmon", value = DotSalmon.class) })
-@JsonFlatten
 @Immutable
-public class DotFish {
+public class DotFish implements JsonSerializable<DotFish> {
     /*
      * The species property.
      */
-    @JsonProperty(value = "species")
     private String species;
 
     /**
@@ -46,10 +37,80 @@ public class DotFish {
     }
 
     /**
+     * Set the species property: The species property.
+     * 
+     * @param species the species value to set.
+     * @return the DotFish object itself.
+     */
+    DotFish setSpecies(String species) {
+        this.species = species;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("species", this.species);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DotFish from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DotFish if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the DotFish.
+     */
+    public static DotFish fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("fish\\.type".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
+                }
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("DotSalmon".equals(discriminatorValue)) {
+                    return DotSalmon.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
+            }
+        });
+    }
+
+    static DotFish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DotFish deserializedDotFish = new DotFish();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("species".equals(fieldName)) {
+                    deserializedDotFish.species = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDotFish;
+        });
     }
 }

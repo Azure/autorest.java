@@ -5,38 +5,27 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
  * The Shark model.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "fishtype",
-    defaultImpl = Shark.class)
-@JsonTypeName("shark")
-@JsonSubTypes({
-    @JsonSubTypes.Type(name = "sawshark", value = Sawshark.class),
-    @JsonSubTypes.Type(name = "goblin", value = GoblinShark.class),
-    @JsonSubTypes.Type(name = "cookiecuttershark", value = Cookiecuttershark.class) })
 @Fluent
 public class Shark extends Fish {
     /*
      * The age property.
      */
-    @JsonProperty(value = "age")
     private Integer age;
 
     /*
      * The birthday property.
      */
-    @JsonProperty(value = "birthday", required = true)
     private OffsetDateTime birthday;
 
     /**
@@ -110,5 +99,87 @@ public class Shark extends Fish {
     public Shark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fishtype", "shark");
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("birthday",
+            this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
+        jsonWriter.writeNumberField("age", this.age);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Shark from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
+     * polymorphic discriminator.
+     * @throws IOException If an error occurs while reading the Shark.
+     */
+    public static Shark fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("fishtype".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
+                }
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
+                    return fromJsonKnownDiscriminator(readerToUse);
+                } else if ("sawshark".equals(discriminatorValue)) {
+                    return Sawshark.fromJson(readerToUse.reset());
+                } else if ("goblin".equals(discriminatorValue)) {
+                    return GoblinShark.fromJson(readerToUse.reset());
+                } else if ("cookiecuttershark".equals(discriminatorValue)) {
+                    return Cookiecuttershark.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
+            }
+        });
+    }
+
+    static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Shark deserializedShark = new Shark();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("length".equals(fieldName)) {
+                    deserializedShark.setLength(reader.getFloat());
+                } else if ("species".equals(fieldName)) {
+                    deserializedShark.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedShark.setSiblings(siblings);
+                } else if ("birthday".equals(fieldName)) {
+                    deserializedShark.birthday
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("age".equals(fieldName)) {
+                    deserializedShark.age = reader.getNullable(JsonReader::getInt);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedShark;
+        });
     }
 }

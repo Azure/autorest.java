@@ -5,7 +5,6 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -42,7 +41,6 @@ public final class StringIndexType extends ExpandableStringEnum<StringIndexType>
      * @param name a name to look for.
      * @return the corresponding StringIndexType.
      */
-    @JsonCreator
     public static StringIndexType fromString(String name) {
         return fromString(name, StringIndexType.class);
     }

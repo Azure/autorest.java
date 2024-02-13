@@ -5,24 +5,27 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * The DateWrapper model.
  */
 @Fluent
-public final class DateWrapper {
+public final class DateWrapper implements JsonSerializable<DateWrapper> {
     /*
      * The field property.
      */
-    @JsonProperty(value = "field")
     private LocalDate field;
 
     /*
      * The leap property.
      */
-    @JsonProperty(value = "leap")
     private LocalDate leap;
 
     /**
@@ -77,5 +80,43 @@ public final class DateWrapper {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("field", Objects.toString(this.field, null));
+        jsonWriter.writeStringField("leap", Objects.toString(this.leap, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DateWrapper from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DateWrapper if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IOException If an error occurs while reading the DateWrapper.
+     */
+    public static DateWrapper fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DateWrapper deserializedDateWrapper = new DateWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("field".equals(fieldName)) {
+                    deserializedDateWrapper.field
+                        = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                } else if ("leap".equals(fieldName)) {
+                    deserializedDateWrapper.leap
+                        = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDateWrapper;
+        });
     }
 }
