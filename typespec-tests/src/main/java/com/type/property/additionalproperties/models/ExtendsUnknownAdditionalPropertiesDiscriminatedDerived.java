@@ -20,6 +20,12 @@ import java.util.Map;
 public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
     extends ExtendsUnknownAdditionalPropertiesDiscriminated {
     /*
+     * The discriminator
+     */
+    @Generated
+    private String kind = "derived";
+
+    /*
      * The index property
      */
     @Generated
@@ -41,6 +47,16 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
     public ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(String name, int index) {
         super(name);
         this.index = index;
+    }
+
+    /**
+     * Get the kind property: The discriminator.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -78,9 +94,10 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "derived");
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeStringField("name", getName());
         jsonWriter.writeIntField("index", this.index);
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeNumberField("age", this.age);
         if (getAdditionalProperties() != null) {
             for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
@@ -96,8 +113,7 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
      * @param jsonReader The JsonReader being read.
      * @return An instance of ExtendsUnknownAdditionalPropertiesDiscriminatedDerived if the JsonReader was pointing to
      * an instance of it, or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ExtendsUnknownAdditionalPropertiesDiscriminatedDerived.
      */
     public static ExtendsUnknownAdditionalPropertiesDiscriminatedDerived fromJson(JsonReader jsonReader)
@@ -105,23 +121,19 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
         return jsonReader.readObject(reader -> {
             String name = null;
             int index = 0;
+            String kind = "derived";
             Double age = null;
             Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"derived".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'derived'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("name".equals(fieldName)) {
+                if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else if ("index".equals(fieldName)) {
                     index = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getDouble);
                 } else {
@@ -134,6 +146,7 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
             }
             ExtendsUnknownAdditionalPropertiesDiscriminatedDerived deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived
                 = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, index);
+            deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived.kind = kind;
             deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived.age = age;
             deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived
                 .setAdditionalProperties(additionalProperties);

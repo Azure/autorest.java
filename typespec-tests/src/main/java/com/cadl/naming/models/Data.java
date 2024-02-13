@@ -17,6 +17,12 @@ import java.io.IOException;
  */
 @Immutable
 public class Data implements JsonSerializable<Data> {
+    /*
+     * The kind_id property.
+     */
+    @Generated
+    private String type;
+
     /**
      * Creates an instance of Data class.
      */
@@ -24,9 +30,31 @@ public class Data implements JsonSerializable<Data> {
     protected Data() {
     }
 
+    /**
+     * Get the type property: The kind_id property.
+     * 
+     * @return the type value.
+     */
+    @Generated
+    public String getType() {
+        return this.type;
+    }
+
+    /**
+     * Set the type property: The kind_id property.
+     * 
+     * @param type the type value to set.
+     * @return the Data object itself.
+     */
+    Data setType(String type) {
+        this.type = type;
+        return this;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind_id", this.type);
         return jsonWriter.writeEndObject();
     }
 
@@ -36,7 +64,6 @@ public class Data implements JsonSerializable<Data> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Data if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      * @throws IOException If an error occurs while reading the Data.
      */
     public static Data fromJson(JsonReader jsonReader) throws IOException {
@@ -71,7 +98,11 @@ public class Data implements JsonSerializable<Data> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                reader.skipChildren();
+                if ("kind_id".equals(fieldName)) {
+                    deserializedData.type = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
             }
 
             return deserializedData;

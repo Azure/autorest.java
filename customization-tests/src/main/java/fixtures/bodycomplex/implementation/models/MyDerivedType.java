@@ -16,6 +16,11 @@ import java.io.IOException;
 @Fluent
 public final class MyDerivedType extends MyBaseType {
     /*
+     * The kind property.
+     */
+    private MyKind kind = MyKind.KIND1;
+
+    /*
      * The propD1 property.
      */
     private String propD1;
@@ -24,6 +29,15 @@ public final class MyDerivedType extends MyBaseType {
      * Creates an instance of MyDerivedType class.
      */
     public MyDerivedType() {
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    public MyKind getKind() {
+        return this.kind;
     }
 
     /**
@@ -67,8 +81,9 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", MyKind.KIND1 == null ? null : MyKind.KIND1.toString());
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propB1", getPropB1());
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
             jsonWriter.writeStartObject("helper");
@@ -84,7 +99,6 @@ public final class MyDerivedType extends MyBaseType {
      * @param jsonReader The JsonReader being read.
      * @return An instance of MyDerivedType if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      * @throws IOException If an error occurs while reading the MyDerivedType.
      */
     public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
@@ -94,15 +108,10 @@ public final class MyDerivedType extends MyBaseType {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"Kind1".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("propB1".equals(fieldName)) {
+                if ("propB1".equals(fieldName)) {
                     deserializedMyDerivedType.setPropB1(reader.getString());
+                } else if ("kind".equals(fieldName)) {
+                    deserializedMyDerivedType.kind = MyKind.fromString(reader.getString());
                 } else if ("propD1".equals(fieldName)) {
                     deserializedMyDerivedType.propD1 = reader.getString();
                 } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {

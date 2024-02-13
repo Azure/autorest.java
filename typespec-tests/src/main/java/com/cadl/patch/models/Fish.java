@@ -21,6 +21,12 @@ import java.util.Set;
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind;
+
+    /*
      * The id property.
      */
     @Generated
@@ -73,6 +79,28 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     public Fish(int age) {
         this.age = age;
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The kind property.
+     * 
+     * @param kind the kind value to set.
+     * @return the Fish object itself.
+     */
+    Fish setKind(String kind) {
+        this.kind = kind;
+        this.updatedProperties.add("kind");
+        return this;
     }
 
     /**
@@ -159,6 +187,7 @@ public class Fish implements JsonSerializable<Fish> {
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeIntField("age", this.age);
+            jsonWriter.writeStringField("kind", this.kind);
             jsonWriter.writeStringField("color", this.color);
             return jsonWriter.writeEndObject();
         }
@@ -167,6 +196,11 @@ public class Fish implements JsonSerializable<Fish> {
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", this.age);
+        if (this.kind != null) {
+            jsonWriter.writeStringField("kind", this.kind);
+        } else if (updatedProperties.contains("kind")) {
+            jsonWriter.writeNullField("kind");
+        }
         if (this.color != null) {
             jsonWriter.writeStringField("color", this.color);
         } else if (updatedProperties.contains("color")) {
@@ -181,8 +215,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
@@ -217,6 +250,7 @@ public class Fish implements JsonSerializable<Fish> {
             String id = null;
             String name = null;
             int age = 0;
+            String kind = null;
             String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -228,6 +262,8 @@ public class Fish implements JsonSerializable<Fish> {
                     name = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
                 } else {
@@ -237,6 +273,7 @@ public class Fish implements JsonSerializable<Fish> {
             Fish deserializedFish = new Fish(age);
             deserializedFish.id = id;
             deserializedFish.name = name;
+            deserializedFish.kind = kind;
             deserializedFish.color = color;
 
             return deserializedFish;

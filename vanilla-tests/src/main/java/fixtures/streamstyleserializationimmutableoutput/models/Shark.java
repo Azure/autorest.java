@@ -20,6 +20,11 @@ import java.util.List;
 @Fluent
 public class Shark extends Fish {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "shark";
+
+    /*
      * The age property.
      */
     private Integer age;
@@ -33,6 +38,26 @@ public class Shark extends Fish {
      * Creates an instance of Shark class.
      */
     public Shark() {
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
+    }
+
+    /**
+     * Set the fishtype property: The fishtype property.
+     * 
+     * @param fishtype the fishtype value to set.
+     * @return the Shark object itself.
+     */
+    Shark setFishtype(String fishtype) {
+        this.fishtype = fishtype;
+        return this;
     }
 
     /**
@@ -121,12 +146,13 @@ public class Shark extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "shark");
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("birthday",
             this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("age", this.age);
         return jsonWriter.writeEndObject();
     }
@@ -137,8 +163,7 @@ public class Shark extends Fish {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Shark.
      */
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
@@ -189,6 +214,8 @@ public class Shark extends Fish {
                 } else if ("birthday".equals(fieldName)) {
                     deserializedShark.birthday
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedShark.fishtype = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     deserializedShark.age = reader.getNullable(JsonReader::getInt);
                 } else {

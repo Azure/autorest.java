@@ -206,9 +206,10 @@ public final class ClientModelPropertiesManager {
                 // Extract the additionalProperties property as this will need to be passed into all deserialization
                 // logic creation calls.
                 additionalProperties = property;
-            } else if (property.isPolymorphicDiscriminator()) {
-                discriminatorProperty = property;
             } else {
+                if (property.isPolymorphicDiscriminator()) {
+                    discriminatorProperty = property;
+                }
                 setterProperties.add(property);
             }
 

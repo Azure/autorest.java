@@ -16,6 +16,12 @@ import java.io.IOException;
  */
 @Immutable
 public final class Golden extends Dog {
+    /*
+     * discriminator property
+     */
+    @Generated
+    private String kind = "golden";
+
     /**
      * Creates an instance of Golden class.
      * 
@@ -26,11 +32,22 @@ public final class Golden extends Dog {
         super(weight);
     }
 
+    /**
+     * Get the kind property: discriminator property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "golden");
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("weight", getWeight());
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -40,31 +57,29 @@ public final class Golden extends Dog {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Golden if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Golden.
      */
     public static Golden fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int weight = 0;
+            String kind = "golden";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"golden".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'golden'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("weight".equals(fieldName)) {
+                if ("weight".equals(fieldName)) {
                     weight = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new Golden(weight);
+            Golden deserializedGolden = new Golden(weight);
+            deserializedGolden.kind = kind;
+
+            return deserializedGolden;
         });
     }
 }

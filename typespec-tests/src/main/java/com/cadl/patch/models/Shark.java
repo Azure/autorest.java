@@ -19,6 +19,12 @@ import java.util.Set;
  */
 @Fluent
 public final class Shark extends Fish {
+    /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "shark";
+
     @Generated
     private boolean jsonMergePatch;
 
@@ -51,6 +57,16 @@ public final class Shark extends Fish {
     }
 
     /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -67,21 +83,27 @@ public final class Shark extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", "shark");
+            jsonWriter.writeStringField("kind", this.kind);
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
+            jsonWriter.writeStringField("kind", this.kind);
             return jsonWriter.writeEndObject();
         }
     }
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "shark");
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("age", getAge());
         if (getColor() != null) {
             jsonWriter.writeStringField("color", getColor());
         } else if (updatedProperties.contains("color")) {
             jsonWriter.writeNullField("color");
+        }
+        if (this.kind != null) {
+            jsonWriter.writeStringField("kind", this.kind);
+        } else if (updatedProperties.contains("kind")) {
+            jsonWriter.writeNullField("kind");
         }
         return jsonWriter.writeEndObject();
     }
@@ -92,8 +114,7 @@ public final class Shark extends Fish {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Shark.
      */
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
@@ -102,18 +123,12 @@ public final class Shark extends Fish {
             String name = null;
             int age = 0;
             String color = null;
+            String kind = "shark";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"shark".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'shark'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("id".equals(fieldName)) {
+                if ("id".equals(fieldName)) {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
@@ -121,6 +136,8 @@ public final class Shark extends Fish {
                     age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
@@ -129,6 +146,7 @@ public final class Shark extends Fish {
             deserializedShark.setId(id);
             deserializedShark.setName(name);
             deserializedShark.setColor(color);
+            deserializedShark.kind = kind;
 
             return deserializedShark;
         });

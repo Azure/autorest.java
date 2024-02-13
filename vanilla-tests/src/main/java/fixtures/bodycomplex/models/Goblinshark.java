@@ -20,6 +20,11 @@ import java.util.List;
 @Fluent
 public final class Goblinshark extends Shark {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "goblin";
+
+    /*
      * The jawsize property.
      */
     private Integer jawsize;
@@ -37,6 +42,15 @@ public final class Goblinshark extends Shark {
      */
     public Goblinshark(float length, OffsetDateTime birthday) {
         super(length, birthday);
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -119,13 +133,14 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "goblin");
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
@@ -137,8 +152,7 @@ public final class Goblinshark extends Shark {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Goblinshark if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Goblinshark.
      */
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
@@ -150,20 +164,14 @@ public final class Goblinshark extends Shark {
             String species = null;
             List<Fish> siblings = null;
             Integer age = null;
+            String fishtype = "goblin";
             Integer jawsize = null;
             GoblinSharkColor color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"goblin".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
                 } else if ("birthday".equals(fieldName)) {
@@ -175,6 +183,8 @@ public final class Goblinshark extends Shark {
                     siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getInt);
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("jawsize".equals(fieldName)) {
                     jawsize = reader.getNullable(JsonReader::getInt);
                 } else if ("color".equals(fieldName)) {
@@ -188,6 +198,7 @@ public final class Goblinshark extends Shark {
                 deserializedGoblinshark.setSpecies(species);
                 deserializedGoblinshark.setSiblings(siblings);
                 deserializedGoblinshark.setAge(age);
+                deserializedGoblinshark.fishtype = fishtype;
                 deserializedGoblinshark.jawsize = jawsize;
                 deserializedGoblinshark.color = color;
 

@@ -20,6 +20,12 @@ public class Shark extends Fish {
      * The sharktype property.
      */
     @Generated
+    private String sharktype = "shark";
+
+    /*
+     * The sharktype property.
+     */
+    @Generated
     private final String sharktype;
 
     /**
@@ -44,10 +50,32 @@ public class Shark extends Fish {
         return this.sharktype;
     }
 
+    /**
+     * Set the sharktype property: The sharktype property.
+     * 
+     * @param sharktype the sharktype value to set.
+     * @return the Shark object itself.
+     */
+    Shark setSharktype(String sharktype) {
+        this.sharktype = sharktype;
+        return this;
+    }
+
+    /**
+     * Get the sharktype property: The sharktype property.
+     * 
+     * @return the sharktype value.
+     */
+    @Generated
+    public String getSharktype() {
+        return this.sharktype;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", getAge());
+        jsonWriter.writeStringField("sharktype", this.sharktype);
         jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }
@@ -58,8 +86,7 @@ public class Shark extends Fish {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Shark.
      */
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
@@ -95,19 +122,23 @@ public class Shark extends Fish {
         return jsonReader.readObject(reader -> {
             int age = 0;
             String sharktype = null;
+            String sharktype = "shark";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("sharktype".equals(fieldName)) {
-                    sharktype = reader.getString();
-                } else if ("age".equals(fieldName)) {
+                if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("sharktype".equals(fieldName)) {
+                    sharktype = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new Shark(age, sharktype);
+            Shark deserializedShark = new Shark(age, sharktype);
+            deserializedShark.sharktype = sharktype;
+
+            return deserializedShark;
         });
     }
 }

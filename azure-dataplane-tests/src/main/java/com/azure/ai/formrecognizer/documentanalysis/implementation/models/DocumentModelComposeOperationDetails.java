@@ -19,6 +19,11 @@ import java.util.Map;
 @Fluent
 public final class DocumentModelComposeOperationDetails extends OperationDetails {
     /*
+     * Type of operation.
+     */
+    private String kind = "documentModelCompose";
+
+    /*
      * Operation result upon success.
      */
     private DocumentModelDetails result;
@@ -27,6 +32,15 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
      * Creates an instance of DocumentModelComposeOperationDetails class.
      */
     public DocumentModelComposeOperationDetails() {
+    }
+
+    /**
+     * Get the kind property: Type of operation.
+     * 
+     * @return the kind value.
+     */
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -133,7 +147,7 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "documentModelCompose");
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeStringField("operationId", getOperationId());
         jsonWriter.writeStringField("status", getStatus() == null ? null : getStatus().toString());
         jsonWriter.writeStringField("createdDateTime",
@@ -145,6 +159,7 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
         jsonWriter.writeStringField("apiVersion", getApiVersion());
         jsonWriter.writeMapField("tags", getTags(), (writer, element) -> writer.writeString(element));
         jsonWriter.writeJsonField("error", getError());
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -155,8 +170,7 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
      * @param jsonReader The JsonReader being read.
      * @return An instance of DocumentModelComposeOperationDetails if the JsonReader was pointing to an instance of it,
      * or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentModelComposeOperationDetails.
      */
     public static DocumentModelComposeOperationDetails fromJson(JsonReader jsonReader) throws IOException {
@@ -167,14 +181,7 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"documentModelCompose".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'documentModelCompose'. The found 'kind' was '"
-                                + kind + "'.");
-                    }
-                } else if ("operationId".equals(fieldName)) {
+                if ("operationId".equals(fieldName)) {
                     deserializedDocumentModelComposeOperationDetails.setOperationId(reader.getString());
                 } else if ("status".equals(fieldName)) {
                     deserializedDocumentModelComposeOperationDetails
@@ -197,6 +204,8 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
                     deserializedDocumentModelComposeOperationDetails.setTags(tags);
                 } else if ("error".equals(fieldName)) {
                     deserializedDocumentModelComposeOperationDetails.setError(Error.fromJson(reader));
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDocumentModelComposeOperationDetails.kind = reader.getString();
                 } else if ("result".equals(fieldName)) {
                     deserializedDocumentModelComposeOperationDetails.result = DocumentModelDetails.fromJson(reader);
                 } else {

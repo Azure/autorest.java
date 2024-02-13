@@ -18,6 +18,12 @@ import java.io.IOException;
 @Immutable
 public class Dinosaur implements JsonSerializable<Dinosaur> {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind;
+
+    /*
      * The size property.
      */
     @Generated
@@ -34,6 +40,27 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     }
 
     /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The kind property.
+     * 
+     * @param kind the kind value to set.
+     * @return the Dinosaur object itself.
+     */
+    Dinosaur setKind(String kind) {
+        this.kind = kind;
+        return this;
+    }
+
+    /**
      * Get the size property: The size property.
      * 
      * @return the size value.
@@ -47,6 +74,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("size", this.size);
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -56,8 +84,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Dinosaur if the JsonReader was pointing to an instance of it, or null if it was pointing
      * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Dinosaur.
      */
     public static Dinosaur fromJson(JsonReader jsonReader) throws IOException {
@@ -88,17 +115,23 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     static Dinosaur fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int size = 0;
+            String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("size".equals(fieldName)) {
                     size = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new Dinosaur(size);
+            Dinosaur deserializedDinosaur = new Dinosaur(size);
+            deserializedDinosaur.kind = kind;
+
+            return deserializedDinosaur;
         });
     }
 }

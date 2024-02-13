@@ -18,6 +18,11 @@ import java.util.List;
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
     /*
+     * The fishtype property.
+     */
+    private String fishtype;
+
+    /*
      * The species property.
      */
     private String species;
@@ -36,6 +41,26 @@ public class Fish implements JsonSerializable<Fish> {
      * Creates an instance of Fish class.
      */
     public Fish() {
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
+    }
+
+    /**
+     * Set the fishtype property: The fishtype property.
+     * 
+     * @param fishtype the fishtype value to set.
+     * @return the Fish object itself.
+     */
+    Fish setFishtype(String fishtype) {
+        this.fishtype = fishtype;
+        return this;
     }
 
     /**
@@ -102,6 +127,7 @@ public class Fish implements JsonSerializable<Fish> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", this.length);
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("species", this.species);
         jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
@@ -113,8 +139,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
@@ -161,6 +186,8 @@ public class Fish implements JsonSerializable<Fish> {
 
                 if ("length".equals(fieldName)) {
                     deserializedFish.length = reader.getFloat();
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedFish.fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     deserializedFish.species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {

@@ -19,6 +19,11 @@ import java.util.List;
 @Fluent
 public final class Goblinshark extends Shark {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "goblin";
+
+    /*
      * The jawsize property.
      */
     private Integer jawsize;
@@ -32,6 +37,15 @@ public final class Goblinshark extends Shark {
      * Creates an instance of Goblinshark class.
      */
     public Goblinshark() {
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -132,13 +146,14 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "goblin");
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
@@ -150,8 +165,7 @@ public final class Goblinshark extends Shark {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Goblinshark if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Goblinshark.
      */
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
@@ -161,14 +175,7 @@ public final class Goblinshark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"goblin".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     deserializedGoblinshark.setLength(reader.getFloat());
                 } else if ("birthday".equals(fieldName)) {
                     deserializedGoblinshark.setBirthday(
@@ -180,6 +187,8 @@ public final class Goblinshark extends Shark {
                     deserializedGoblinshark.setSiblings(siblings);
                 } else if ("age".equals(fieldName)) {
                     deserializedGoblinshark.setAge(reader.getNullable(JsonReader::getInt));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedGoblinshark.fishtype = reader.getString();
                 } else if ("jawsize".equals(fieldName)) {
                     deserializedGoblinshark.jawsize = reader.getNullable(JsonReader::getInt);
                 } else if ("color".equals(fieldName)) {

@@ -331,14 +331,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (isJsonMergePatch) {
             if (property.getClientType().isNullable()) {
                 methodBlock.ifBlock(String.format("%s!=null", getPropertyGetterStatement(property, fromSuperType)), codeBlock -> {
-                    serializeJsonProperty(codeBlock, property, serializedName,
-                            fromSuperType, isJsonMergePatch);
+                    serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, isJsonMergePatch);
                 }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
                     codeBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
                 });
             } else {
-                serializeJsonProperty(methodBlock, property, serializedName,
-                        fromSuperType, isJsonMergePatch);
+                serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, isJsonMergePatch);
             }
         } else {
             serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, isJsonMergePatch);
@@ -425,17 +423,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static String getPropertyGetterStatement(ClientModelProperty property, boolean fromSuperType) {
         IType clientType = property.getClientType();
         IType wireType = property.getWireType();
-        String propertyValueGetter;
         if (fromSuperType) {
-            propertyValueGetter = (clientType != wireType)
-                    ? wireType.convertFromClientType(property.getGetterName() + "()")
-                    : property.getGetterName() + "()";
-        } else if (property.isPolymorphicDiscriminator()) {
-            propertyValueGetter = property.getDefaultValue();
+            return  (clientType != wireType)
+                ? wireType.convertFromClientType(property.getGetterName() + "()") : property.getGetterName() + "()";
         } else {
-            propertyValueGetter = "this." + property.getName();
+            return  "this." + property.getName();
         }
-        return propertyValueGetter;
     }
 
     /**
@@ -719,7 +712,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         });
 
         readJsonObject(classBlock, propertiesManager, true,
-            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, true, settings));
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
     }
 
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
@@ -757,11 +750,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void writeTerminalTypeFromJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         JavaSettings settings) {
         readJsonObject(classBlock, propertiesManager, false,
-            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, false, settings));
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
     }
 
     private static void writeFromJsonDeserialization(JavaBlock methodBlock,
-        ClientModelPropertiesManager propertiesManager, boolean fromSuperTypeReading, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
         // Add the deserialization logic.
         methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
@@ -771,36 +764,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
             addReaderWhileLoop(methodBlock, true, fieldNameVariableName, false, whileBlock -> {
                 JavaIfBlock ifBlock = null;
-
-                if (propertiesManager.getDiscriminatorProperty() != null
-                    && (propertiesManager.isDiscriminatorRequired() || !fromSuperTypeReading)) {
-                    ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
-                    String ifStatement = String.format("\"%s\".equals(%s)", discriminatorProperty.getSerializedName(),
-                        fieldNameVariableName);
-
-                    ifBlock = methodBlock.ifBlock(ifStatement, ifAction -> {
-                        if (propertiesManager.isDiscriminatorRequired()) {
-                            ifAction.line(discriminatorProperty.getName() + " = reader.getString();");
-                        } else {
-                            ifAction.line("String %s = reader.getString();", discriminatorProperty.getName());
-                        }
-
-                        // From super type reading indicates we're calling fromJsonKnownDiscriminator, no need to
-                        // validate the discriminator value as that's already been done.
-                        if (!fromSuperTypeReading) {
-                            String ifStatement2 = String.format("!\"%s\".equals(%s)", propertiesManager.getExpectedDiscriminator(),
-                                discriminatorProperty.getName());
-                            ifAction.ifBlock(ifStatement2, ifAction2 -> ifAction2.line(
-                                "throw new IllegalStateException(" + "\"'%s' was expected to be non-null and equal to '%s'. The found '%s' was '\" + %s + \"'.\");",
-                                discriminatorProperty.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
-                                discriminatorProperty.getSerializedName(), discriminatorProperty.getName()));
-                        }
-
-                        if (propertiesManager.isDiscriminatorRequired() && !settings.isDisableRequiredJsonAnnotation()) {
-                            ifAction.line(discriminatorProperty.getName() + "Found = true;");
-                        }
-                    });
-                }
 
                 // Loop over all properties and generate their deserialization handling.
                 AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(ifBlock);
@@ -870,7 +833,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         String modelName = propertiesManager.getModel().getName();
         boolean hasRequiredProperties = propertiesManager.hasRequiredProperties();
-        boolean isPolymorphic = propertiesManager.getDiscriminatorProperty() != null;
 
         if (!superTypeReading) {
             classBlock.javadocComment(javadocComment -> {
@@ -879,16 +841,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 javadocComment.methodReturns("An instance of " + modelName + " if the JsonReader was pointing to an "
                     + "instance of it, or null if it was pointing to JSON null.");
 
-                // TODO (alzimmer): Make the throws statement more descriptive by including the polymorphic
-                //  discriminator property name and the required property names. For now this covers the base functionality.
                 String throwsStatement = null;
-                if (hasRequiredProperties && isPolymorphic) {
-                    throwsStatement = "If the deserialized JSON object was missing any required properties or the "
-                        + "polymorphic discriminator.";
-                } else if (hasRequiredProperties) {
+                if (hasRequiredProperties) {
                     throwsStatement = "If the deserialized JSON object was missing any required properties.";
-                } else if (isPolymorphic) {
-                    throwsStatement = "If the deserialized JSON object was missing the polymorphic discriminator.";
                 }
 
                 if (throwsStatement != null) {
@@ -973,7 +928,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // between wire and client types.
         IType type = (includePropertyInConstructor(property, settings) || fromSuper)
             ? property.getClientType() : property.getWireType();
-        methodBlock.line(type + " " + property.getName() + " = " + type.defaultValueExpression() + ";");
+        String defaultValue = property.isPolymorphicDiscriminator()
+            ? property.getDefaultValue() : type.defaultValueExpression();
+        methodBlock.line(type + " " + property.getName() + " = " + defaultValue + ";");
     }
 
     /**

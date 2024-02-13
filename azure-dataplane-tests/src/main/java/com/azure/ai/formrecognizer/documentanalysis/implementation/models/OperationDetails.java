@@ -20,6 +20,11 @@ import java.util.Map;
 @Fluent
 public class OperationDetails implements JsonSerializable<OperationDetails> {
     /*
+     * Type of operation.
+     */
+    private String kind;
+
+    /*
      * Operation ID
      */
     private String operationId;
@@ -68,6 +73,26 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * Creates an instance of OperationDetails class.
      */
     public OperationDetails() {
+    }
+
+    /**
+     * Get the kind property: Type of operation.
+     * 
+     * @return the kind value.
+     */
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: Type of operation.
+     * 
+     * @param kind the kind value to set.
+     * @return the OperationDetails object itself.
+     */
+    OperationDetails setKind(String kind) {
+        this.kind = kind;
+        return this;
     }
 
     /**
@@ -260,6 +285,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
         jsonWriter.writeStringField("lastUpdatedDateTime", this.lastUpdatedDateTime == null ? null
             : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedDateTime));
         jsonWriter.writeStringField("resourceLocation", this.resourceLocation);
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeNumberField("percentCompleted", this.percentCompleted);
         jsonWriter.writeStringField("apiVersion", this.apiVersion);
         jsonWriter.writeMapField("tags", this.tags, (writer, element) -> writer.writeString(element));
@@ -273,8 +299,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of OperationDetails if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the OperationDetails.
      */
     public static OperationDetails fromJson(JsonReader jsonReader) throws IOException {
@@ -325,6 +350,8 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("resourceLocation".equals(fieldName)) {
                     deserializedOperationDetails.resourceLocation = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    deserializedOperationDetails.kind = reader.getString();
                 } else if ("percentCompleted".equals(fieldName)) {
                     deserializedOperationDetails.percentCompleted = reader.getNullable(JsonReader::getInt);
                 } else if ("apiVersion".equals(fieldName)) {

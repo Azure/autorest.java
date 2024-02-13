@@ -19,6 +19,11 @@ import java.util.Map;
 @Fluent
 public final class DocumentModelCopyToOperationDetails extends OperationDetails {
     /*
+     * Type of operation.
+     */
+    private String kind = "documentModelCopyTo";
+
+    /*
      * Operation result upon success.
      */
     private DocumentModelDetails result;
@@ -27,6 +32,15 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * Creates an instance of DocumentModelCopyToOperationDetails class.
      */
     public DocumentModelCopyToOperationDetails() {
+    }
+
+    /**
+     * Get the kind property: Type of operation.
+     * 
+     * @return the kind value.
+     */
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -133,7 +147,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "documentModelCopyTo");
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeStringField("operationId", getOperationId());
         jsonWriter.writeStringField("status", getStatus() == null ? null : getStatus().toString());
         jsonWriter.writeStringField("createdDateTime",
@@ -145,6 +159,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
         jsonWriter.writeStringField("apiVersion", getApiVersion());
         jsonWriter.writeMapField("tags", getTags(), (writer, element) -> writer.writeString(element));
         jsonWriter.writeJsonField("error", getError());
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -155,8 +170,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * @param jsonReader The JsonReader being read.
      * @return An instance of DocumentModelCopyToOperationDetails if the JsonReader was pointing to an instance of it,
      * or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentModelCopyToOperationDetails.
      */
     public static DocumentModelCopyToOperationDetails fromJson(JsonReader jsonReader) throws IOException {
@@ -167,14 +181,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"documentModelCopyTo".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'documentModelCopyTo'. The found 'kind' was '"
-                                + kind + "'.");
-                    }
-                } else if ("operationId".equals(fieldName)) {
+                if ("operationId".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails.setOperationId(reader.getString());
                 } else if ("status".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails
@@ -197,6 +204,8 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
                     deserializedDocumentModelCopyToOperationDetails.setTags(tags);
                 } else if ("error".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails.setError(Error.fromJson(reader));
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.kind = reader.getString();
                 } else if ("result".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails.result = DocumentModelDetails.fromJson(reader);
                 } else {

@@ -18,6 +18,12 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
+     * The kind_id property.
+     */
+    @Generated
+    private String type = "bytes";
+
+    /*
      * The data_bytes property.
      */
     @Generated
@@ -34,6 +40,16 @@ public final class BytesData extends Data {
     }
 
     /**
+     * Get the type property: The kind_id property.
+     * 
+     * @return the type value.
+     */
+    @Generated
+    public String getType() {
+        return this.type;
+    }
+
+    /**
      * Get the dataAsBytes property: The data_bytes property.
      * 
      * @return the dataAsBytes value.
@@ -46,8 +62,9 @@ public final class BytesData extends Data {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind_id", "bytes");
+        jsonWriter.writeStringField("kind_id", this.type);
         jsonWriter.writeBinaryField("data_bytes", this.dataAsBytes);
+        jsonWriter.writeStringField("kind_id", this.type);
         return jsonWriter.writeEndObject();
     }
 
@@ -57,31 +74,29 @@ public final class BytesData extends Data {
      * @param jsonReader The JsonReader being read.
      * @return An instance of BytesData if the JsonReader was pointing to an instance of it, or null if it was pointing
      * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the BytesData.
      */
     public static BytesData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             byte[] dataAsBytes = null;
+            String type = "bytes";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind_id".equals(fieldName)) {
-                    String type = reader.getString();
-                    if (!"bytes".equals(type)) {
-                        throw new IllegalStateException(
-                            "'kind_id' was expected to be non-null and equal to 'bytes'. The found 'kind_id' was '"
-                                + type + "'.");
-                    }
-                } else if ("data_bytes".equals(fieldName)) {
+                if ("data_bytes".equals(fieldName)) {
                     dataAsBytes = reader.getBinary();
+                } else if ("kind_id".equals(fieldName)) {
+                    type = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new BytesData(dataAsBytes);
+            BytesData deserializedBytesData = new BytesData(dataAsBytes);
+            deserializedBytesData.type = type;
+
+            return deserializedBytesData;
         });
     }
 }

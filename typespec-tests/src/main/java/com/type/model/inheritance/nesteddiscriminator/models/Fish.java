@@ -18,6 +18,12 @@ import java.io.IOException;
 @Immutable
 public class Fish implements JsonSerializable<Fish> {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind;
+
+    /*
      * The age property.
      */
     @Generated
@@ -34,6 +40,27 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The kind property.
+     * 
+     * @param kind the kind value to set.
+     * @return the Fish object itself.
+     */
+    Fish setKind(String kind) {
+        this.kind = kind;
+        return this;
+    }
+
+    /**
      * Get the age property: The age property.
      * 
      * @return the age value.
@@ -47,6 +74,7 @@ public class Fish implements JsonSerializable<Fish> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", this.age);
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -56,8 +84,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
@@ -94,17 +121,23 @@ public class Fish implements JsonSerializable<Fish> {
     static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int age = 0;
+            String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new Fish(age);
+            Fish deserializedFish = new Fish(age);
+            deserializedFish.kind = kind;
+
+            return deserializedFish;
         });
     }
 }

@@ -159,12 +159,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
             for (ClientModelProperty property : model.getProperties()) {
-                // For now, don't add a getter if the property is a polymorphic discriminator and stream-style
-                // serialization is being used.
-                if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
-                    continue;
-                }
-
                 final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
@@ -532,10 +526,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isPolymorphicDiscriminator() && CoreUtils.isNullOrEmpty(property.getDefaultValue())) {
-                continue;
-            }
-
             String propertyName = property.getName();
             IType propertyType = property.getWireType();
 
@@ -556,7 +546,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 } else {
                     // handle x-ms-client-default
                     if (property.getDefaultValue() != null) {
-                        if (property.isPolymorphicDiscriminator()) {
+                        if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
                             fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
                         } else {
                             fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
@@ -572,7 +562,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 } else {
                     // handle x-ms-client-default
                     if (property.getDefaultValue() != null) {
-                        if (property.isPolymorphicDiscriminator()) {
+                        if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
                             fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
                         } else {
                             fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
@@ -583,20 +573,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
-                // Stream-style serialization doesn't need the polymorphic discriminator constant.
-                continue;
-            }
-
             classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
                 comment -> comment.line(property.getDescription()));
 
             addGeneratedAnnotation(classBlock);
             addFieldAnnotations(model, property, classBlock, settings);
 
-            if (property.isPolymorphicDiscriminator()) {
+            if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
                 classBlock.privateStaticFinalVariable(fieldSignature);
-            } else if (ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization()) {
+            } else if (ClientModelUtil.includePropertyInConstructor(property, settings)
+                && settings.isStreamStyleSerialization() && !property.isPolymorphicDiscriminator()) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);
@@ -916,7 +902,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
-        String expression = property.isPolymorphicDiscriminator()
+        String expression = (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization())
             ? CodeNamer.getEnumMemberName(property.getName())
             : "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {

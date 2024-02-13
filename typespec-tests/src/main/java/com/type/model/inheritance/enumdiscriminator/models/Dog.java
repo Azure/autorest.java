@@ -18,6 +18,12 @@ import java.io.IOException;
 @Immutable
 public class Dog implements JsonSerializable<Dog> {
     /*
+     * discriminator property
+     */
+    @Generated
+    private String kind;
+
+    /*
      * Weight of the dog
      */
     @Generated
@@ -34,6 +40,27 @@ public class Dog implements JsonSerializable<Dog> {
     }
 
     /**
+     * Get the kind property: discriminator property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: discriminator property.
+     * 
+     * @param kind the kind value to set.
+     * @return the Dog object itself.
+     */
+    Dog setKind(String kind) {
+        this.kind = kind;
+        return this;
+    }
+
+    /**
      * Get the weight property: Weight of the dog.
      * 
      * @return the weight value.
@@ -47,6 +74,7 @@ public class Dog implements JsonSerializable<Dog> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("weight", this.weight);
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -56,8 +84,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Dog if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Dog.
      */
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
@@ -88,17 +115,23 @@ public class Dog implements JsonSerializable<Dog> {
     static Dog fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int weight = 0;
+            String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("weight".equals(fieldName)) {
                     weight = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new Dog(weight);
+            Dog deserializedDog = new Dog(weight);
+            deserializedDog.kind = kind;
+
+            return deserializedDog;
         });
     }
 }

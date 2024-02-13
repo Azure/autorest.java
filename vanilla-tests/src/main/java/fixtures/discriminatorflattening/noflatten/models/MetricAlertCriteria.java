@@ -19,6 +19,11 @@ import java.util.Map;
 @Fluent
 public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria> {
     /*
+     * specifies the type of the alert criteria.
+     */
+    private Odatatype odataType;
+
+    /*
      * The rule criteria that defines the conditions of the alert rule.
      */
     private Map<String, Object> additionalProperties;
@@ -27,6 +32,26 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
      * Creates an instance of MetricAlertCriteria class.
      */
     public MetricAlertCriteria() {
+    }
+
+    /**
+     * Get the odataType property: specifies the type of the alert criteria.
+     * 
+     * @return the odataType value.
+     */
+    public Odatatype getOdataType() {
+        return this.odataType;
+    }
+
+    /**
+     * Set the odataType property: specifies the type of the alert criteria.
+     * 
+     * @param odataType the odataType value to set.
+     * @return the MetricAlertCriteria object itself.
+     */
+    MetricAlertCriteria setOdataType(Odatatype odataType) {
+        this.odataType = odataType;
+        return this;
     }
 
     /**
@@ -60,6 +85,7 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("odata.type", this.odataType == null ? null : this.odataType.toString());
         if (additionalProperties != null) {
             for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
@@ -74,7 +100,6 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
      * @param jsonReader The JsonReader being read.
      * @return An instance of MetricAlertCriteria if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      * @throws IOException If an error occurs while reading the MetricAlertCriteria.
      */
     public static MetricAlertCriteria fromJson(JsonReader jsonReader) throws IOException {
@@ -110,11 +135,15 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (additionalProperties == null) {
-                    additionalProperties = new LinkedHashMap<>();
-                }
+                if ("odata.type".equals(fieldName)) {
+                    deserializedMetricAlertCriteria.odataType = Odatatype.fromString(reader.getString());
+                } else {
+                    if (additionalProperties == null) {
+                        additionalProperties = new LinkedHashMap<>();
+                    }
 
-                additionalProperties.put(fieldName, reader.readUntyped());
+                    additionalProperties.put(fieldName, reader.readUntyped());
+                }
             }
             deserializedMetricAlertCriteria.additionalProperties = additionalProperties;
 

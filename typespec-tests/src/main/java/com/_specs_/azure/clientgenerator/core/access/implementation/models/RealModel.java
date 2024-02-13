@@ -16,6 +16,12 @@ import java.io.IOException;
  */
 @Immutable
 public final class RealModel extends AbstractModel {
+    /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "real";
+
     /**
      * Creates an instance of RealModel class.
      * 
@@ -26,11 +32,22 @@ public final class RealModel extends AbstractModel {
         super(name);
     }
 
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "real");
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -40,31 +57,29 @@ public final class RealModel extends AbstractModel {
      * @param jsonReader The JsonReader being read.
      * @return An instance of RealModel if the JsonReader was pointing to an instance of it, or null if it was pointing
      * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the RealModel.
      */
     public static RealModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
+            String kind = "real";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"real".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'real'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("name".equals(fieldName)) {
+                if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new RealModel(name);
+            RealModel deserializedRealModel = new RealModel(name);
+            deserializedRealModel.kind = kind;
+
+            return deserializedRealModel;
         });
     }
 }
