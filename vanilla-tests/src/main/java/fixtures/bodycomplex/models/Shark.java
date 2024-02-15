@@ -38,6 +38,7 @@ public class Shark extends Fish {
      */
     public Shark(float length, OffsetDateTime birthday) {
         super(length);
+        setFishtype("shark");
         this.birthday = birthday;
     }
 

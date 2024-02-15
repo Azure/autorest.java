@@ -30,6 +30,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      * Creates an instance of DotFish class.
      */
     protected DotFish() {
+        this.fishType = null;
     }
 
     /**

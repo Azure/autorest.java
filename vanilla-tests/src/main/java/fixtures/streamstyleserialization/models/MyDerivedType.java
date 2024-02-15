@@ -24,6 +24,7 @@ public final class MyDerivedType extends MyBaseType {
      * Creates an instance of MyDerivedType class.
      */
     public MyDerivedType() {
+        setKind(MyKind.KIND1);
     }
 
     /**

@@ -36,6 +36,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      */
     @Generated
     protected Dinosaur(int size) {
+        this.kind = null;
         this.size = size;
     }
 

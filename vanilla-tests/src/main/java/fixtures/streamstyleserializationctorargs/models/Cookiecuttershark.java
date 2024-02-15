@@ -27,6 +27,7 @@ public final class Cookiecuttershark extends Shark {
      */
     public Cookiecuttershark(float length, OffsetDateTime birthday) {
         super(length, birthday);
+        setFishtype("cookiecuttershark");
     }
 
     /**

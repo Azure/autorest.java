@@ -27,6 +27,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * Creates an instance of DocumentModelCopyToOperationDetails class.
      */
     public DocumentModelCopyToOperationDetails() {
+        setKind("documentModelCopyTo");
     }
 
     /**

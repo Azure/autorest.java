@@ -37,6 +37,7 @@ public final class Goblinshark extends Shark {
      */
     public Goblinshark(float length, OffsetDateTime birthday) {
         super(length, birthday);
+        setFishtype("goblin");
     }
 
     /**

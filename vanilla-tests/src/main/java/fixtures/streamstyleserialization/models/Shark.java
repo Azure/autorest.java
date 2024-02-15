@@ -33,6 +33,7 @@ public class Shark extends Fish {
      * Creates an instance of Shark class.
      */
     public Shark() {
+        setFishtype("shark");
     }
 
     /**

@@ -32,6 +32,7 @@ public final class SmartSalmon extends Salmon {
      * Creates an instance of SmartSalmon class.
      */
     public SmartSalmon() {
+        setFishtype("smart_salmon");
     }
 
     /**

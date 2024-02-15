@@ -29,6 +29,7 @@ public class DotSalmon extends DotFish {
      * Creates an instance of DotSalmon class.
      */
     public DotSalmon() {
+        setFishType("DotSalmon");
     }
 
     /**

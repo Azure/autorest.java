@@ -24,6 +24,7 @@ public final class Sparrow extends Bird {
     @Generated
     public Sparrow(int wingspan) {
         super(wingspan);
+        setKind("sparrow");
     }
 
     @Override

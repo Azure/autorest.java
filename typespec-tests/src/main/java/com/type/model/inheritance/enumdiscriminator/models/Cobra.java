@@ -24,6 +24,7 @@ public final class Cobra extends Snake {
     @Generated
     public Cobra(int length) {
         super(length);
+        setKind("cobra");
     }
 
     @Override

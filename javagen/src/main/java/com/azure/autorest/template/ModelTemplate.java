@@ -829,6 +829,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 constructor.line("super(" + superProperties + ");");
             }
 
+            // If there is a polymorphic discriminator and stream-style serialization is being used, add a line to
+            // initialize the discriminator.
+            ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
+            if (polymorphicProperty != null && !polymorphicProperty.isRequired()
+                && settings.isStreamStyleSerialization()) {
+                if (modelDefinesProperty(model, polymorphicProperty)) {
+                    constructor.line("this." + polymorphicProperty.getName() + " = "
+                        + polymorphicProperty.getDefaultValue() + ";");
+                } else {
+                    constructor.line(polymorphicProperty.getSetterName() + "(" + polymorphicProperty.getDefaultValue() + ");");
+                }
+            }
+
             // constant properties should already be initialized in class variable definition
 //            // Then, add all constant properties.
 //            for (ClientModelProperty property : constantProperties) {
@@ -987,7 +1000,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param isJsonMergePatchModel Whether the client model is a JSON merge patch model.
      */
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
-                                        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings, boolean isJsonMergePatchModel) {
+        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings, boolean isJsonMergePatchModel) {
         String expression = (propertyClientType.equals(ArrayType.BYTE_ARRAY))
             ? TemplateHelper.getByteCloneExpression(property.getName())
             : property.getName();

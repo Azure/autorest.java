@@ -36,6 +36,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
      */
     @Generated
     protected AbstractModel(String name) {
+        this.kind = null;
         this.name = name;
     }
 

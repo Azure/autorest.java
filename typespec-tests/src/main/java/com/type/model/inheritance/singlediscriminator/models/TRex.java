@@ -24,6 +24,7 @@ public final class TRex extends Dinosaur {
     @Generated
     private TRex(int size) {
         super(size);
+        setKind("t-rex");
     }
 
     @Override

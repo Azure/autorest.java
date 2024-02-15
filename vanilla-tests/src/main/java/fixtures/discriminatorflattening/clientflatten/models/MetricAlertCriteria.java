@@ -32,6 +32,7 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
      * Creates an instance of MetricAlertCriteria class.
      */
     public MetricAlertCriteria() {
+        this.odataType = null;
     }
 
     /**

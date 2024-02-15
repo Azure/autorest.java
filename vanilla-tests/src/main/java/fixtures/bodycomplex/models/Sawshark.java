@@ -33,6 +33,7 @@ public final class Sawshark extends Shark {
      */
     public Sawshark(float length, OffsetDateTime birthday) {
         super(length, birthday);
+        setFishtype("sawshark");
     }
 
     /**

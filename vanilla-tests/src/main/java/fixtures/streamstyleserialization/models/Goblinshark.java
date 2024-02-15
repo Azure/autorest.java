@@ -32,6 +32,7 @@ public final class Goblinshark extends Shark {
      * Creates an instance of Goblinshark class.
      */
     public Goblinshark() {
+        setFishtype("goblin");
     }
 
     /**

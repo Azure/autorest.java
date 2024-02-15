@@ -24,6 +24,7 @@ public final class Goose extends Bird {
     @Generated
     public Goose(int wingspan) {
         super(wingspan);
+        setKind("goose");
     }
 
     @Override

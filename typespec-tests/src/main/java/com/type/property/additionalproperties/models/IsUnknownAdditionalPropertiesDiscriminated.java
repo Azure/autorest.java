@@ -45,6 +45,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
      */
     @Generated
     public IsUnknownAdditionalPropertiesDiscriminated(String name) {
+        this.kind = null;
         this.name = name;
     }
 

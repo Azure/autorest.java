@@ -30,6 +30,7 @@ public final class BytesData extends Data {
      */
     @Generated
     private BytesData(byte[] dataAsBytes) {
+        setType("bytes");
         this.dataAsBytes = dataAsBytes;
     }
 

@@ -24,6 +24,7 @@ public final class SeaGull extends Bird {
     @Generated
     public SeaGull(int wingspan) {
         super(wingspan);
+        setKind("seagull");
     }
 
     @Override

@@ -45,6 +45,7 @@ public final class Eagle extends Bird {
     @Generated
     public Eagle(int wingspan) {
         super(wingspan);
+        setKind("eagle");
     }
 
     /**

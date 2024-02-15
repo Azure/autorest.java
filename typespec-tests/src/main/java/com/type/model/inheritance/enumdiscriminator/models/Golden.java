@@ -24,6 +24,7 @@ public final class Golden extends Dog {
     @Generated
     public Golden(int weight) {
         super(weight);
+        setKind("golden");
     }
 
     @Override

@@ -35,6 +35,7 @@ public final class SmartSalmon extends Salmon {
      */
     public SmartSalmon(float length) {
         super(length);
+        setFishtype("smart_salmon");
     }
 
     /**

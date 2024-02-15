@@ -40,6 +40,7 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
     @Generated
     public ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(String name, int index) {
         super(name);
+        setKind("derived");
         this.index = index;
     }
 

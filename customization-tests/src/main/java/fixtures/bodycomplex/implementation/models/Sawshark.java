@@ -28,6 +28,7 @@ public final class Sawshark extends Shark {
      * Creates an instance of Sawshark class.
      */
     public Sawshark() {
+        setFishtype("sawshark");
     }
 
     /**

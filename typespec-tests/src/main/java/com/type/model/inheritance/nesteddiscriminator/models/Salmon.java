@@ -45,6 +45,7 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon(int age) {
         super(age);
+        setKind("salmon");
     }
 
     /**

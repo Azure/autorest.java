@@ -27,6 +27,7 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
      * Creates an instance of DocumentModelBuildOperationDetails class.
      */
     public DocumentModelBuildOperationDetails() {
+        setKind("documentModelBuild");
     }
 
     /**

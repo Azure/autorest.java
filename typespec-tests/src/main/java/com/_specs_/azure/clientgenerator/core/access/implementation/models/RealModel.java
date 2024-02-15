@@ -24,6 +24,7 @@ public final class RealModel extends AbstractModel {
     @Generated
     private RealModel(String name) {
         super(name);
+        setKind("real");
     }
 
     @Override

@@ -27,6 +27,7 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
      * Creates an instance of DocumentModelComposeOperationDetails class.
      */
     public DocumentModelComposeOperationDetails() {
+        setKind("documentModelCompose");
     }
 
     /**

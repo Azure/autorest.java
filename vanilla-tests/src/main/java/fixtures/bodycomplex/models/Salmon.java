@@ -33,6 +33,7 @@ public class Salmon extends Fish {
      */
     public Salmon(float length) {
         super(length);
+        setFishtype("salmon");
     }
 
     /**
