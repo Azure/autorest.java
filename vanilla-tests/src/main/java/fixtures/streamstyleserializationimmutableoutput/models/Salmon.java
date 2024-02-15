@@ -33,17 +33,6 @@ public class Salmon extends Fish {
     }
 
     /**
-     * Set the fishtype property: The fishtype property.
-     * 
-     * @param fishtype the fishtype value to set.
-     * @return the Salmon object itself.
-     */
-    Salmon setFishtype(String fishtype) {
-        this.fishtype = fishtype;
-        return this;
-    }
-
-    /**
      * Get the location property: The location property.
      * 
      * @return the location value.

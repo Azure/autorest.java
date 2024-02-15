@@ -36,17 +36,6 @@ public class Shark extends Fish {
     }
 
     /**
-     * Set the fishtype property: The fishtype property.
-     * 
-     * @param fishtype the fishtype value to set.
-     * @return the Shark object itself.
-     */
-    Shark setFishtype(String fishtype) {
-        this.fishtype = fishtype;
-        return this;
-    }
-
-    /**
      * Get the age property: The age property.
      * 
      * @return the age value.

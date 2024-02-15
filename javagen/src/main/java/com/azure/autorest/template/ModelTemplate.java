@@ -169,7 +169,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                if (!property.isPolymorphicDiscriminator() || modelDefinesPolymorphicProperty(model, property)) {
+                if (!property.isPolymorphicDiscriminator() || modelDefinesProperty(model, property)) {
                     // Only the super most parent model should have the polymorphic discriminator getter.
                     // The child models should use the parent's getter.
                     generateGetterJavadoc(classBlock, model, property);
@@ -199,19 +199,29 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
-                } else if (settings.isStreamStyleSerialization() && !CoreUtils.isNullOrEmpty(model.getDerivedModels())
-                    && (property.isReadOnly() || (immutableOutputOnlyModel && !property.isRequired()))
-                    && !ClientModelUtil.includePropertyInConstructor(property, settings)) {
-                    // If stream-style serialization is being generated, the model has derived types, and the property
-                    // is readonly or is part of an immutable output model, generate a package-private setter method
-                    // that uses the wire type for setting the value. This will be used in stream-style serialization as
-                    // it doesn't perform reflective cracking like Jackson Databind does, which means it needs a way to
-                    // access the readonly property (aka one without a public setter method).
-                    generateSetterJavadoc(classBlock, model, property);
-                    classBlock.method(JavaVisibility.PackagePrivate, null,
-                        model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " " + property.getName() + ")",
-                        methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
-                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
+                } else {
+                    // If stream-style serialization is being generated, some additional setters may need to be added
+                    // to support read-only properties that aren't included in the constructor.
+                    // Jackson handles this by reflectively setting the value in the parent model, but stream-style
+                    // serialization doesn't perform reflective cracking like Jackson Databind does, so it needs a way
+                    // to access the readonly property (aka one without a public setter method).
+                    //
+                    // The package-private setter is added when the property isn't included in the constructor and is
+                    // defined by this model.
+                    boolean streamStyle = settings.isStreamStyleSerialization();
+                    boolean hasDerivedTypes = !CoreUtils.isNullOrEmpty(model.getDerivedModels());
+                    boolean notIncludedInConstructor = !ClientModelUtil.includePropertyInConstructor(property,
+                        settings);
+                    boolean definedByModel = modelDefinesProperty(model, property);
+                    if (streamStyle && hasDerivedTypes && notIncludedInConstructor && definedByModel) {
+                        generateSetterJavadoc(classBlock, model, property);
+                        classBlock.method(JavaVisibility.PackagePrivate, null,
+                            model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
+                                + property.getName() + ")",
+                            methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
+                                methodBlock, settings,
+                                ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
+                    }
                 }
 
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
@@ -537,7 +547,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isPolymorphicDiscriminator() && !modelDefinesPolymorphicProperty(model, property)) {
+            if (property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property)) {
                 // Only the super most parent model should have the polymorphic discriminator as a field.
                 // The child models should use the parent's field. If the polymorphic property is required, it will be
                 // initialized in the parent's constructor. Otherwise, it will be set using the package-private setter.
@@ -1250,8 +1260,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         });
     }
 
-    private static boolean modelDefinesPolymorphicProperty(ClientModel model, ClientModelProperty polymorphicProperty) {
-        return !ClientModelUtil.getParentProperties(model).stream().anyMatch(parentProperty ->
-            Objects.equals(polymorphicProperty.getSerializedName(), parentProperty.getSerializedName()));
+    private static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
+        return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
+            Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
     }
 }
