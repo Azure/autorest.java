@@ -21,12 +21,10 @@ public final class GoblinShark extends Shark {
      * 
      * @param age the age value to set.
      * @param sharktype the sharktype value to set.
-     * @param sharktype the sharktype value to set.
      */
     @Generated
-    public GoblinShark(int age, String sharktype, String sharktype) {
+    public GoblinShark(int age, String sharktype) {
         super(age, sharktype);
-        this.sharktype = sharktype;
     }
 
     @Override

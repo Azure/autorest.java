@@ -21,12 +21,10 @@ public final class SawShark extends Shark {
      * 
      * @param age the age value to set.
      * @param sharktype the sharktype value to set.
-     * @param sharktype the sharktype value to set.
      */
     @Generated
-    public SawShark(int age, String sharktype, String sharktype) {
+    public SawShark(int age, String sharktype) {
         super(age, sharktype);
-        this.sharktype = sharktype;
     }
 
     @Override

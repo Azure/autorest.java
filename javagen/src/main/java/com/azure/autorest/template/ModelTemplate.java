@@ -723,8 +723,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return;
         }
 
-        // Constant properties are those that are required and constant.
-        List<ClientModelProperty> constantProperties = new ArrayList<>();
+        // Get the required properties from the super class structure.
+        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getParentConstructorProperties(model, settings);
 
         // Required properties are those that are required but not constant.
         List<ClientModelProperty> requiredProperties = new ArrayList<>();
@@ -735,16 +735,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 continue;
             }
 
-            // Bucket into constant or required properties based on whether the property is constant.
-            if (property.isConstant()) {
-                constantProperties.add(property);
-            } else {
+            // Property matches a parent property, don't need to include it twice.
+            if (requiredParentProperties.stream().anyMatch(p -> p.getName().equals(property.getName()))) {
+                continue;
+            }
+
+            // Only include non-constant properties.
+            if (!property.isConstant()) {
                 requiredProperties.add(property);
             }
         }
-
-        // Also get required properties from the super class structure.
-        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getParentConstructorProperties(model, settings);
 
         // Jackson requires a constructor with @JsonCreator, with parameters in wire type. Ref https://github.com/Azure/autorest.java/issues/2170
         boolean generatePrivateConstructorForJackson = false;
