@@ -20,11 +20,6 @@ import java.util.List;
 @Fluent
 public final class Sawshark extends Shark {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "sawshark";
-
-    /*
      * The picture property.
      */
     private byte[] picture;
@@ -33,15 +28,6 @@ public final class Sawshark extends Shark {
      * Creates an instance of Sawshark class.
      */
     public Sawshark() {
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    public String getFishtype() {
-        return this.fishtype;
     }
 
     /**
@@ -112,14 +98,13 @@ public final class Sawshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
+        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeBinaryField("picture", this.picture);
         return jsonWriter.writeEndObject();
     }
@@ -145,6 +130,8 @@ public final class Sawshark extends Shark {
                 } else if ("birthday".equals(fieldName)) {
                     deserializedSawshark.setBirthday(
                         reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedSawshark.setFishtype(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedSawshark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {
@@ -152,8 +139,6 @@ public final class Sawshark extends Shark {
                     deserializedSawshark.setSiblings(siblings);
                 } else if ("age".equals(fieldName)) {
                     deserializedSawshark.setAge(reader.getNullable(JsonReader::getInt));
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedSawshark.fishtype = reader.getString();
                 } else if ("picture".equals(fieldName)) {
                     deserializedSawshark.picture = reader.getBinary();
                 } else {

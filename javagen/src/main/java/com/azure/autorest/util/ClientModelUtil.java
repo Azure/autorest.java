@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -36,6 +37,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -496,12 +498,12 @@ public class ClientModelUtil {
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             // Add the properties in inverse order as they be reverse at the end.
-            List<ClientModelProperty> ctorArgs = parentModel.getProperties().stream()
-                .filter(property -> property.isRequired() && !property.isConstant() && !property.isReadOnly())
-                .collect(Collectors.toList());
-
-            for (int i = ctorArgs.size() - 1; i >= 0; i--) {
-                requiredParentProperties.add(ctorArgs.get(i));
+            List<ClientModelProperty> parentProperties = parentModel.getProperties();
+            for (int i = parentProperties.size() - 1; i >= 0; i--) {
+                ClientModelProperty property = parentProperties.get(i);
+                if (property.isRequired() && !property.isConstant() && !property.isReadOnly()) {
+                    requiredParentProperties.add(property);
+                }
             }
 
             lastParentName = parentModel.getName();
@@ -509,6 +511,40 @@ public class ClientModelUtil {
         }
         Collections.reverse(requiredParentProperties);
         return requiredParentProperties;
+    }
+
+    /**
+     * Gets all the properties that parent models define that are part of the constructor.
+     * <p>
+     * This uses {@link ClientModelUtil#includePropertyInConstructor(ClientModelProperty, JavaSettings)} to determine
+     * which properties should be included in the constructor.
+     *
+     * @param model The client model.
+     * @param settings Autorest generation settings.
+     * @return All properties that are defined by super types of the client model that should be included in the
+     * constructor.
+     */
+    public static List<ClientModelProperty> getParentConstructorProperties(ClientModel model, JavaSettings settings) {
+        String lastParentName = model.getName();
+        ClientModel parentModel = getClientModel(model.getParentModelName());
+        Set<ClientModelProperty> constructorProperties = new LinkedHashSet<>();
+        while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
+            // Add the properties in inverse order as they be reverse at the end.
+            List<ClientModelProperty> parentProperties = parentModel.getProperties();
+            for (int i = parentProperties.size() - 1; i >= 0; i--) {
+                ClientModelProperty property = parentProperties.get(i);
+                if (includePropertyInConstructor(property, settings)) {
+                    constructorProperties.add(property);
+                }
+            }
+
+            lastParentName = parentModel.getName();
+            parentModel = getClientModel(parentModel.getParentModelName());
+        }
+
+        List<ClientModelProperty> propertyList = new ArrayList<>(constructorProperties);
+        Collections.reverse(propertyList);
+        return propertyList;
     }
 
     /**
@@ -542,20 +578,31 @@ public class ClientModelUtil {
     /**
      * Determines whether the {@link ClientModelProperty} should be included in the model's constructor.
      * <p>
-     * {@link ClientModelProperty Properties} are included in the constructor if the following hold true
-     * <ul>
-     * <li>{@link ClientModelProperty#isRequired()} is true</li>
-     * <li>{@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true</li>
-     * <li>{@link ClientModelProperty#isReadOnly()} is false or {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true</li>
-     * </ul>
+     * The {@code property} is included in the constructor if it is {@link ClientModelProperty#isRequired()},
+     * {@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true, and either the property is not
+     * {@link ClientModelProperty#isReadOnly()}, is {@link ClientModelProperty#isPolymorphicDiscriminator()}, or
+     * {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true.
      *
      * @param property The {@link ClientModelProperty}
      * @param settings The Autorest generation settings.
      * @return Whether the {@code property} should be included in the model's constructor.
      */
     public static boolean includePropertyInConstructor(ClientModelProperty property, JavaSettings settings) {
-        return property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
-            && (!property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs());
+        // First, the property must be required and the setting to include required fields as constructor args must be
+        // enabled.
+        boolean requiredAndIncluded = property.isRequired() && settings.isRequiredFieldsAsConstructorArgs();
+
+        // Then, one of the property not being read-only or the setting to include read-only properties in constructor
+        // args is enabled must be true.
+        boolean notReadOnlyOrIncludeReadOnly = !property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs();
+
+        // Polymorphic discriminators are a special case as they are their own concept within codegen but there can be
+        // cases where the same property is defined as the polymorphic discriminator and a property in the class. Only
+        // when the property defined in the class is required will the polymorphic discriminator be considered needed in
+        // the constructor.
+        boolean polymorphicDiscriminatorIsRequired = property.isPolymorphicDiscriminator() && property.isRequired();
+
+        return requiredAndIncluded && (notReadOnlyOrIncludeReadOnly || polymorphicDiscriminatorIsRequired);
     }
 
     /**
@@ -563,24 +610,20 @@ public class ClientModelUtil {
      *
      * @param clientModelProperty the client model property.
      * @param ignoreGenericType whether to ignore the mismatch, if both wire type and client type is generic type.
-     *                          <p>For example, ignore the case of {@code List<OffsetDateTime>} vs {@code List<Long>}.
+     * For example, ignore the case of {@code List<OffsetDateTime>} vs {@code List<Long>}.
      * @return whether wire type and client type mismatch.
      */
     public static boolean isWireTypeMismatch(ClientModelProperty clientModelProperty, boolean ignoreGenericType) {
         if (clientModelProperty.getClientType() == clientModelProperty.getWireType()) {
             // same type
             return false;
-        } else {
-            // type mismatch
-            if (ignoreGenericType
-                    && clientModelProperty.getClientType() instanceof GenericType
-                    && clientModelProperty.getWireType() instanceof GenericType) {
-                // at present, ignore generic type, as type erasure causes conflict of 2 constructors
-                return false;
-            } else {
-                return true;
-            }
         }
+
+        // type mismatch
+        // at present, ignore generic type, as type erasure causes conflict of 2 constructors
+        return !(ignoreGenericType
+            && clientModelProperty.getClientType() instanceof GenericType
+            && clientModelProperty.getWireType() instanceof GenericType);
     }
 
     /**
@@ -601,16 +644,23 @@ public class ClientModelUtil {
 
         // If any of the properties are ResponseError generate the bridge utils.
         // Or if any of the properties are Duration or contain Duration as a generic generate the bridge utils.
-        if (model.getProperties().stream().anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR
-            || p.getClientType() == ClassType.DURATION || p.getClientType().contains(ClassType.DURATION))) {
-            return true;
+        for (ClientModelProperty p : model.getProperties()) {
+            if (p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION
+                || p.getClientType().contains(ClassType.DURATION)) {
+                return true;
+            }
         }
 
         // flatten properties
-        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-            return model.getPropertyReferences().stream()
-                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
-                .anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION);
+        if (settings.getClientFlattenAnnotationTarget() != JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            return false;
+        }
+
+        for (ClientModelPropertyReference p : model.getPropertyReferences()) {
+            if (p.isFromFlattenedProperty() &&
+                (p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION)) {
+                return true;
+            }
         }
 
         return false;
@@ -689,23 +739,35 @@ public class ClientModelUtil {
 
     public static Set<String> getExternalPackageNamesUsedInClient(List<ClientModel> models, CodeModel codeModel) {
         // models
-        Set<String> externalPackageNames = models == null ? new HashSet<>() : models.stream()
-                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
-                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
-                .map(ClientModel::getPackage)
-                .collect(Collectors.toSet());
+        Set<String> externalPackageNames = new HashSet<>();
+
+        if (!CoreUtils.isNullOrEmpty(models)) {
+            for (ClientModel model : models) {
+                if (model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null
+                        && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL)) {
+                    externalPackageNames.add(model.getPackage());
+                }
+            }
+        }
 
         // LongRunningMetadata in methods
         if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
             for (Client client : codeModel.getClients()) {
-                if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
-                    for (OperationGroup og : client.getOperationGroups()) {
-                        if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
-                            externalPackageNames.addAll(og.getOperations().stream()
-                                    .filter(o -> o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null && o.getLroMetadata().getPollingStrategy().getLanguage() != null && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null)
-                                    .map(o -> o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace())
-                                    .filter(Objects::nonNull)
-                                    .collect(Collectors.toSet()));
+                if (CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+                    continue;
+                }
+
+                for (OperationGroup og : client.getOperationGroups()) {
+                    if (CoreUtils.isNullOrEmpty(og.getOperations())) {
+                        continue;
+                    }
+
+                    for (Operation o : og.getOperations()) {
+                        if (o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null
+                            && o.getLroMetadata().getPollingStrategy().getLanguage() != null
+                            && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null
+                            && o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace() != null) {
+                            externalPackageNames.add(o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace());
                         }
                     }
                 }

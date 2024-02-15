@@ -16,12 +16,6 @@ import java.io.IOException;
  */
 @Immutable
 public final class Sparrow extends Bird {
-    /*
-     * The kind property.
-     */
-    @Generated
-    private String kind = "sparrow";
-
     /**
      * Creates an instance of Sparrow class.
      * 
@@ -32,22 +26,11 @@ public final class Sparrow extends Bird {
         super(wingspan);
     }
 
-    /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    @Generated
-    public String getKind() {
-        return this.kind;
-    }
-
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("wingspan", getWingspan());
-        jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeStringField("kind", getKind());
         return jsonWriter.writeEndObject();
     }
 
@@ -77,7 +60,7 @@ public final class Sparrow extends Bird {
                 }
             }
             Sparrow deserializedSparrow = new Sparrow(wingspan);
-            deserializedSparrow.kind = kind;
+            deserializedSparrow.setKind(kind);
 
             return deserializedSparrow;
         });

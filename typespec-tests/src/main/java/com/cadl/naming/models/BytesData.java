@@ -18,12 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
-     * The kind_id property.
-     */
-    @Generated
-    private String type = "bytes";
-
-    /*
      * The data_bytes property.
      */
     @Generated
@@ -40,16 +34,6 @@ public final class BytesData extends Data {
     }
 
     /**
-     * Get the type property: The kind_id property.
-     * 
-     * @return the type value.
-     */
-    @Generated
-    public String getType() {
-        return this.type;
-    }
-
-    /**
      * Get the dataAsBytes property: The data_bytes property.
      * 
      * @return the dataAsBytes value.
@@ -62,9 +46,8 @@ public final class BytesData extends Data {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind_id", this.type);
+        jsonWriter.writeStringField("kind_id", getType());
         jsonWriter.writeBinaryField("data_bytes", this.dataAsBytes);
-        jsonWriter.writeStringField("kind_id", this.type);
         return jsonWriter.writeEndObject();
     }
 
@@ -79,22 +62,22 @@ public final class BytesData extends Data {
      */
     public static BytesData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            byte[] dataAsBytes = null;
             String type = "bytes";
+            byte[] dataAsBytes = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("data_bytes".equals(fieldName)) {
-                    dataAsBytes = reader.getBinary();
-                } else if ("kind_id".equals(fieldName)) {
+                if ("kind_id".equals(fieldName)) {
                     type = reader.getString();
+                } else if ("data_bytes".equals(fieldName)) {
+                    dataAsBytes = reader.getBinary();
                 } else {
                     reader.skipChildren();
                 }
             }
             BytesData deserializedBytesData = new BytesData(dataAsBytes);
-            deserializedBytesData.type = type;
+            deserializedBytesData.setType(type);
 
             return deserializedBytesData;
         });

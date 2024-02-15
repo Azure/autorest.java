@@ -15,8 +15,8 @@ import java.util.Set;
 
 public class AndroidClientModel extends ClientModel {
     protected AndroidClientModel(String packageKeyword, String name, List<String> imports, String description,
-        boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
-        String parentModelName, List<com.azure.autorest.model.clientmodel.ClientModel> derivedModels, String xmlName,
+        boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String serializedName,
+        boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName,
         String xmlNamespace, List<ClientModelProperty> properties,
         List<ClientModelPropertyReference> propertyReferences, IType modelType, boolean stronglyTypedHeader,
         boolean usedInXml, Set<String> serializationFormats) {

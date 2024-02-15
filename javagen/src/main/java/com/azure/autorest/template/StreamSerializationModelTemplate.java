@@ -40,7 +40,6 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstructor;
@@ -89,7 +88,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(List.class.getName());
         imports.add(Map.class.getName());
         imports.add(Objects.class.getName());
-        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
+        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "."
+            + ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
     }
 
     @Override
@@ -220,11 +220,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     /**
-     * write ToJson() method.
-     * If it is a JsonMergePatch model, toJson() should first check jsonMergePatch flag value and then do serialization accordingly.
-     * @param classBlock
-     * @param propertiesManager
-     * @param isJsonMergePatch
+     * write toJson() method.
+     * <p>
+     * If it is a JsonMergePatch model, toJson() should first check jsonMergePatch flag value and then do serialization
+     * accordingly.
+     *
+     * @param classBlock The class block to write the toJson method to.
+     * @param propertiesManager The properties manager for the model.
+     * @param isJsonMergePatch Whether the serialization is for a JSON merge patch.
      */
     private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager, boolean isJsonMergePatch) {
         classBlock.annotation("Override");
@@ -239,14 +242,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     /**
-     * write ToJsonMergePatch() method
-     * @param classBlock
-     * @param propertiesManager
+     * write toJsonMergePatch() method
+     *
+     * @param classBlock The class block to write the toJsonMergePatch method to.
+     * @param propertiesManager The properties manager for the model.
      */
     private static void writeToJsonMergePatch(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
-        classBlock.publicMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException", methodBlock -> {
-            serializeJsonProperties(methodBlock, propertiesManager, true);
-        });
+        classBlock.publicMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException",
+            methodBlock -> serializeJsonProperties(methodBlock, propertiesManager, true));
     }
 
     /**
@@ -255,22 +258,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param propertiesManager The properties manager for the model.
      * @param isJsonMergePatch Whether or not the serialization is for a JSON merge patch.
      */
-    private static void serializeJsonProperties(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager, boolean isJsonMergePatch) {
+    private static void serializeJsonProperties(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager,
+        boolean isJsonMergePatch) {
         methodBlock.line("jsonWriter.writeStartObject();");
 
-        // If the model has a discriminator property serialize it first.
-        // Unless the polymorphic discriminator is also a property on the model, in which case it'll be handled
-        // later.
-        if (propertiesManager.getDiscriminatorProperty() != null
-                && !CoreUtils.isNullOrEmpty(propertiesManager.getDiscriminatorProperty().getDefaultValue())
-                && !propertiesManager.isDiscriminatorRequired()) {
-            ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
-            serializeJsonProperty(methodBlock, discriminatorProperty, discriminatorProperty.getSerializedName(),
-                    false, true);
-        }
-
-        BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) ->
-                serializeJsonProperty(methodBlock, property, property.getSerializedName(), fromSuper, true, isJsonMergePatch);
+        BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) -> serializeJsonProperty(
+            methodBlock, property, property.getSerializedName(), fromSuper, true, isJsonMergePatch);
 
         propertiesManager.forEachSuperRequiredProperty(property -> serializeJsonProperty.accept(property, true));
         propertiesManager.forEachSuperSetterProperty(property -> serializeJsonProperty.accept(property, true));
@@ -359,7 +352,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param isJsonMergePatch Whether the serialization is for a JSON Merge Patch model.
      */
     private static void serializeJsonProperty(JavaBlock methodBlock, ClientModelProperty property,
-                                              String serializedName, boolean fromSuperType, boolean isJsonMergePatch) {
+        String serializedName, boolean fromSuperType, boolean isJsonMergePatch) {
         IType clientType = property.getClientType();
         IType wireType = property.getWireType();
         String propertyValueGetter = getPropertyGetterStatement(property, fromSuperType);
@@ -379,9 +372,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
                 // check is required to prevent a NullPointerException when converting the value.
-                methodBlock.ifBlock(property.getGetterName() + "() != null", ifAction -> {
-                    ifAction.line(fieldSerializationMethod + ";");
-                });
+                methodBlock.ifBlock(property.getGetterName() + "() != null",
+                    ifAction -> ifAction.line(fieldSerializationMethod + ";"));
             } else {
                 methodBlock.line(fieldSerializationMethod + ";");
             }
@@ -393,9 +385,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         } else if (wireType == ClassType.BINARY_DATA) {
             String writeBinaryDataExpr = "jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));";
             if (!property.isRequired()) {
-                methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> {
-                    ifAction.line(writeBinaryDataExpr);
-                });
+                methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> ifAction.line(writeBinaryDataExpr));
             } else {
                 methodBlock.line(writeBinaryDataExpr);
             }
@@ -415,10 +405,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     /**
      * Helper function to get property getter statement.
+     * <p>
      * If the value is from super type, then we will return "getProperty()", otherwise, return "this.property"
-     * @param property
-     * @param fromSuperType
-     * @return
+     *
+     * @param property The property being serialized.
+     * @param fromSuperType Whether the property is defined by a super type of the model.
+     * @return The property getter statement.
      */
     private static String getPropertyGetterStatement(ClientModelProperty property, boolean fromSuperType) {
         IType clientType = property.getClientType();
@@ -434,19 +426,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     /**
      * Helper method to serialize a JSON container property (such as {@link List} and {@link Map}).
      *
-     * @param methodBlock         The method handling serialization.
-     * @param utilityMethod       The method aiding in the serialization of the container.
-     * @param containerType       The container type.
-     * @param elementType         The element type for the container, for a {@link List} this is the element type and for a
-     *                            {@link Map} this is the value type.
-     * @param serializedName      The serialized property name.
+     * @param methodBlock The method handling serialization.
+     * @param utilityMethod The method aiding in the serialization of the container.
+     * @param containerType The container type.
+     * @param elementType The element type for the container, for a {@link List} this is the element type and for a
+     * {@link Map} this is the value type.
+     * @param serializedName The serialized property name.
      * @param propertyValueGetter The property or property getter for the field being serialized.
-     * @param depth               Depth of recursion for container types, such as {@code Map<String, List<String>>} would be 0 when
-     *                            {@code Map} is being handled and then 1 when {@code List} is being handled.
-     * @param isJsonMergePatch
+     * @param depth Depth of recursion for container types, such as {@code Map<String, List<String>>} would be 0 when
+     * {@code Map} is being handled and then 1 when {@code List} is being handled.
+     * @param isJsonMergePatch Whether the serialization is for a JSON Merge Patch model.
      */
-    private static void serializeJsonContainerProperty(JavaBlock methodBlock, String utilityMethod,
-                                                       IType containerType, IType elementType, String serializedName, String propertyValueGetter, int depth, boolean isJsonMergePatch) {
+    private static void serializeJsonContainerProperty(JavaBlock methodBlock, String utilityMethod, IType containerType,
+        IType elementType, String serializedName, String propertyValueGetter, int depth, boolean isJsonMergePatch) {
         String callingWriterName = depth == 0 ? "jsonWriter" : (depth == 1) ? "writer" : "writer" + (depth - 1);
         String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
         String elementName = depth == 0 ? "element" : "element" + depth;
@@ -638,7 +630,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // a setter or for setting a field, unlike in the actual deserialization method where it needs to be the same
         // type as the field.
         String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
-        ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
+        ClientModelPropertyWithMetadata discriminatorProperty = propertiesManager.getDiscriminatorProperty();
         readJsonObject(classBlock, propertiesManager, false, methodBlock -> {
             // For now, reading polymorphic types will always buffer the current object.
             // In the future this can be enhanced to switch if the first property is the discriminator field and to use
@@ -652,56 +644,31 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 tryStatement.line("String " + fieldNameVariableName + " = readerToUse.getFieldName();");
                 tryStatement.line("readerToUse.nextToken();");
                 tryStatement.ifBlock(
-                    "\"" + discriminatorProperty.getSerializedName() + "\".equals(" + fieldNameVariableName + ")",
+                    "\"" + discriminatorProperty.getProperty().getSerializedName() + "\".equals(" + fieldNameVariableName + ")",
                     ifStatement -> {
                         ifStatement.line("discriminatorValue = readerToUse.getString();");
                         ifStatement.line("break;");
-                    })
-                    .elseBlock(elseBlock -> elseBlock.line("readerToUse.skipChildren();"));
+                    }).elseBlock(elseBlock -> elseBlock.line("readerToUse.skipChildren();"));
+
                 tryStatement.decreaseIndent();
                 tryStatement.line("}");
 
                 tryStatement.line("// Use the discriminator value to determine which subtype should be deserialized.");
 
-                // Add a throw statement if the discriminator value didn't match anything known.
-                StringBuilder exceptionMessage = new StringBuilder("Discriminator field '").append(
-                    discriminatorProperty.getSerializedName()).append("' didn't match one of the expected values ");
-
-                if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
-                    exceptionMessage.append("'").append(propertiesManager.getExpectedDiscriminator()).append("'");
-                }
-
                 // Add deserialization for the super type itself.
-                JavaIfBlock ifBlock = (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) ? null
-                    : tryStatement.ifBlock(
-                        "discriminatorValue == null || \"" + propertiesManager.getExpectedDiscriminator()
-                            + "\".equals(discriminatorValue)",
-                        ifStatement -> ifStatement.methodReturn("fromJsonKnownDiscriminator(readerToUse)"));
+                JavaIfBlock ifBlock = null;
 
                 // Add deserialization for all child types.
                 List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
-                for (int i = 0; i < childTypes.size(); i++) {
-                    ClientModel childType = childTypes.get(i);
-
+                for (ClientModel childType : childTypes) {
                     ifBlock = ifOrElseIf(tryStatement, ifBlock,
                         "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
                         ifStatement -> ifStatement.methodReturn(
                             childType.getName() + (isSuperTypeWithDiscriminator(childType)
                                 ? ".fromJsonKnownDiscriminator(readerToUse.reset())"
                                 : ".fromJson(readerToUse.reset())")));
-
-                    if (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue()) && i == 0) {
-                        exceptionMessage.append("'").append(childType.getSerializedName()).append("'");
-                    } else if (i < childTypes.size() - 1) {
-                        exceptionMessage.append(", '").append(childType.getSerializedName()).append("'");
-                    } else {
-                        ((childTypes.size() == 1) ? exceptionMessage.append(" or '")
-                            : exceptionMessage.append(", or '")).append(childType.getSerializedName())
-                            .append("'. It was: '\" + discriminatorValue + \"'.");
-                    }
                 }
 
-                // TODO (alzimmer): Add a log message if the discriminator didn't match anything that was expected.
                 if (ifBlock == null) {
                     tryStatement.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())");
                 } else {
@@ -732,7 +699,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param propertiesManager The properties for the model.
      * @return the additionalProperty model property from this model or its superclass.
      */
-    private static ClientModelProperty getAdditionalPropertiesPropertyInModelOrFromSuper(ClientModelPropertiesManager propertiesManager) {
+    private static ClientModelProperty getAdditionalPropertiesPropertyInModelOrFromSuper(
+        ClientModelPropertiesManager propertiesManager) {
         return propertiesManager.getAdditionalProperties() != null
                 ? propertiesManager.getAdditionalProperties()
                 : propertiesManager.getSuperAdditionalPropertiesProperty();
@@ -763,20 +731,17 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             // Add the outermost while loop to read the JSON object.
             String fieldNameVariableName = propertiesManager.getJsonReaderFieldNameVariableName();
             addReaderWhileLoop(methodBlock, true, fieldNameVariableName, false, whileBlock -> {
-                JavaIfBlock ifBlock = null;
-
                 // Loop over all properties and generate their deserialization handling.
-                AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(ifBlock);
+                AtomicReference<JavaIfBlock> ifBlockReference = new AtomicReference<>(null);
+
                 BiConsumer<ClientModelProperty, Boolean> consumer = (property, fromSuper) ->
                     handleJsonPropertyDeserialization(property, propertiesManager.getDeserializedModelName(),
                         whileBlock, ifBlockReference, fieldNameVariableName, fromSuper,
                         propertiesManager.hasConstructorArguments(), settings);
-                // Constants and required polymorphic discriminators are skipped.
-                // Constants aren't deserialized and polymorphic discriminators are handled separately.
-                Predicate<ClientModelProperty> skipRequiredProperty = property -> property.isConstant()
-                    || (propertiesManager.isDiscriminatorRequired() && Objects.equals(property.getSerializedName(), propertiesManager.getModel().getPolymorphicDiscriminator()));
+
+                // Constants are skipped as they aren't deserialized.
                 propertiesManager.forEachSuperRequiredProperty(property -> {
-                    if (skipRequiredProperty.test(property)) {
+                    if (property.isConstant()) {
                         return;
                     }
 
@@ -784,14 +749,14 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 });
                 propertiesManager.forEachSuperSetterProperty(property -> consumer.accept(property, true));
                 propertiesManager.forEachRequiredProperty(property -> {
-                    if (skipRequiredProperty.test(property)) {
+                    if (property.isConstant()) {
                         return;
                     }
                     consumer.accept(property, false);
                 });
                 propertiesManager.forEachSetterProperty(property -> consumer.accept(property, false));
 
-                ifBlock = ifBlockReference.get();
+                JavaIfBlock ifBlock = ifBlockReference.get();
 
                 handleFlattenedPropertiesDeserialization(propertiesManager.getJsonFlattenedPropertiesTree(),
                     methodBlock, ifBlock, propertiesManager.getAdditionalProperties(),
@@ -1405,7 +1370,7 @@ hasConstructorArguments, settings));
     }
 
     private static boolean isSuperTypeWithDiscriminator(ClientModel model) {
-        return !CoreUtils.isNullOrEmpty(model.getPolymorphicDiscriminator())
+        return !CoreUtils.isNullOrEmpty(model.getPolymorphicDiscriminatorName())
             && !CoreUtils.isNullOrEmpty(model.getDerivedModels());
     }
 
@@ -1595,7 +1560,7 @@ hasConstructorArguments, settings));
         // discriminator type always as a String. This is permissible as the found discriminator is never being used in
         // a setter or for setting a field, unlike in the actual deserialization method where it needs to be the same
         // type as the field.
-        ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
+        ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty().getProperty();
         readXmlObject(classBlock, propertiesManager, false, methodBlock -> {
             // Assumption for now for XML, only XML properties are used for handling inheritance.
             // If this found to be wrong in the future copy the concept of bufferObject and resettable from azure-json
@@ -1612,47 +1577,23 @@ hasConstructorArguments, settings));
 
             methodBlock.line("// Use the discriminator value to determine which subtype should be deserialized.");
 
-            // Add a throw statement if the discriminator value didn't match anything known.
-            StringBuilder exceptionMessage = new StringBuilder("Discriminator field '")
-                .append(discriminatorProperty.getSerializedName())
-                .append("' didn't match one of the expected values ");
-
-            if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
-                exceptionMessage.append("'").append(propertiesManager.getExpectedDiscriminator()).append("'");
-            }
-
             // Add deserialization for the super type itself.
-            String conditionalStatement = "discriminatorValue == null || "
-                + "\"" + propertiesManager.getExpectedDiscriminator() + "\".equals(discriminatorValue)";
-            JavaIfBlock ifBlock = (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) ? null
-                : methodBlock.ifBlock(conditionalStatement,
-                ifStatement -> ifStatement.methodReturn("fromXmlKnownDiscriminator(reader, finalRootElementName)"));
+            JavaIfBlock ifBlock = null;
 
             // Add deserialization for all child types.
             List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
-            for (int i = 0; i < childTypes.size(); i++) {
-                ClientModel childType = childTypes.get(i);
-
+            for (ClientModel childType : childTypes) {
                 ifBlock = ifOrElseIf(methodBlock, ifBlock, "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
                     ifStatement -> ifStatement.methodReturn(childType.getName() + (isSuperTypeWithDiscriminator(childType)
                         ? ".fromXmlKnownDiscriminator(reader, finalRootElementName)"
                         : ".fromXml(reader, finalRootElementName)")));
-
-                if (CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue()) && i == 0) {
-                    exceptionMessage.append("'").append(childType.getSerializedName()).append("'");
-                } else if (i < childTypes.size() - 1) {
-                    exceptionMessage.append(", '").append(childType.getSerializedName()).append("'");
-                } else {
-                    ((childTypes.size() == 1) ? exceptionMessage.append(" or '") : exceptionMessage.append(", or '"))
-                        .append(childType.getSerializedName())
-                        .append("'. It was: '\" + discriminatorValue + \"'.");
-                }
             }
 
             if (ifBlock == null) {
-                methodBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");");
+                methodBlock.methodReturn("fromXmlKnownDiscriminator(reader, finalRootElementName)");
             } else {
-                ifBlock.elseBlock(elseBlock -> elseBlock.line("throw new IllegalStateException(\"" + exceptionMessage + "\");"));
+                ifBlock.elseBlock(
+                    elseBlock -> elseBlock.methodReturn("fromXmlKnownDiscriminator(reader, finalRootElementName)"));
             }
         });
 
@@ -1803,8 +1744,9 @@ hasConstructorArguments, settings));
                 JavaIfBlock ifBlock = null;
 
                 if (propertiesManager.getDiscriminatorProperty() != null
-                    && !propertiesManager.getDiscriminatorProperty().isXmlAttribute()) {
-                    ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty();
+                    && !propertiesManager.getDiscriminatorProperty().getProperty().isXmlAttribute()) {
+                    ClientModelProperty discriminatorProperty = propertiesManager.getDiscriminatorProperty()
+                        .getProperty();
                     String ifStatement = String.format("\"%s\".equals(%s)", propertiesManager.getExpectedDiscriminator(),
                         fieldNameVariableName);
 

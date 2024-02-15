@@ -20,12 +20,6 @@ public class Shark extends Fish {
      * The sharktype property.
      */
     @Generated
-    private String sharktype = "shark";
-
-    /*
-     * The sharktype property.
-     */
-    @Generated
     private final String sharktype;
 
     /**
@@ -50,32 +44,11 @@ public class Shark extends Fish {
         return this.sharktype;
     }
 
-    /**
-     * Set the sharktype property: The sharktype property.
-     * 
-     * @param sharktype the sharktype value to set.
-     * @return the Shark object itself.
-     */
-    Shark setSharktype(String sharktype) {
-        this.sharktype = sharktype;
-        return this;
-    }
-
-    /**
-     * Get the sharktype property: The sharktype property.
-     * 
-     * @return the sharktype value.
-     */
-    @Generated
-    public String getSharktype() {
-        return this.sharktype;
-    }
-
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", getAge());
-        jsonWriter.writeStringField("sharktype", this.sharktype);
+        jsonWriter.writeStringField("kind", getKind());
         jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }
@@ -105,9 +78,7 @@ public class Shark extends Fish {
                     }
                 }
                 // Use the discriminator value to determine which subtype should be deserialized.
-                if (discriminatorValue == null || "shark".equals(discriminatorValue)) {
-                    return fromJsonKnownDiscriminator(readerToUse);
-                } else if ("saw".equals(discriminatorValue)) {
+                if ("saw".equals(discriminatorValue)) {
                     return SawShark.fromJson(readerToUse.reset());
                 } else if ("goblin".equals(discriminatorValue)) {
                     return GoblinShark.fromJson(readerToUse.reset());
@@ -121,7 +92,7 @@ public class Shark extends Fish {
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int age = 0;
-            String sharktype = null;
+            String kind = null;
             String sharktype = "shark";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -129,6 +100,8 @@ public class Shark extends Fish {
 
                 if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("sharktype".equals(fieldName)) {
                     sharktype = reader.getString();
                 } else {
@@ -136,7 +109,7 @@ public class Shark extends Fish {
                 }
             }
             Shark deserializedShark = new Shark(age, sharktype);
-            deserializedShark.sharktype = sharktype;
+            deserializedShark.setKind(kind);
 
             return deserializedShark;
         });

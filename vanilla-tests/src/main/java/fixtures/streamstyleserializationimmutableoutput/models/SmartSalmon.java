@@ -19,11 +19,6 @@ import java.util.Map;
 @Fluent
 public final class SmartSalmon extends Salmon {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "smart_salmon";
-
-    /*
      * The college_degree property.
      */
     private String collegeDegree;
@@ -37,15 +32,6 @@ public final class SmartSalmon extends Salmon {
      * Creates an instance of SmartSalmon class.
      */
     public SmartSalmon() {
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    public String getFishtype() {
-        return this.fishtype;
     }
 
     /**
@@ -146,13 +132,12 @@ public final class SmartSalmon extends Salmon {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("location", getLocation());
         jsonWriter.writeBooleanField("iswild", iswild());
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("college_degree", this.collegeDegree);
         if (additionalProperties != null) {
             for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
@@ -181,6 +166,8 @@ public final class SmartSalmon extends Salmon {
 
                 if ("length".equals(fieldName)) {
                     deserializedSmartSalmon.setLength(reader.getFloat());
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedSmartSalmon.setFishtype(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedSmartSalmon.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {
@@ -190,8 +177,6 @@ public final class SmartSalmon extends Salmon {
                     deserializedSmartSalmon.setLocation(reader.getString());
                 } else if ("iswild".equals(fieldName)) {
                     deserializedSmartSalmon.setIswild(reader.getNullable(JsonReader::getBoolean));
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedSmartSalmon.fishtype = reader.getString();
                 } else if ("college_degree".equals(fieldName)) {
                     deserializedSmartSalmon.collegeDegree = reader.getString();
                 } else {

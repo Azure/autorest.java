@@ -42,9 +42,9 @@ public class ClientModel {
      */
     private final boolean isPolymorphicParent;
     /**
-     * Get the name of the property that determines which polymorphic model type to create.
+     * Get the property that determines which polymorphic model type to create.
      */
-    private final String polymorphicDiscriminator;
+    private final ClientModelProperty polymorphicDiscriminator;
     /**
      * Get the name that is used for this model when it is serialized.
      */
@@ -132,11 +132,12 @@ public class ClientModel {
      * @param crossLanguageDefinitionId The cross language definition id for the model.
      */
     protected ClientModel(String packageKeyword, String name, List<String> imports, String description,
-        boolean isPolymorphic, String polymorphicDiscriminator, String serializedName, boolean needsFlatten,
-        String parentModelName, List<ClientModel> derivedModels, String xmlName, String xmlNamespace,
-        List<ClientModelProperty> properties, List<ClientModelPropertyReference> propertyReferences, IType modelType,
-        boolean stronglyTypedHeader, ImplementationDetails implementationDetails, boolean usedInXml,
-        Set<String> serializationFormats, String crossLanguageDefinitionId) {
+        boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String serializedName,
+        boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName,
+        String xmlNamespace, List<ClientModelProperty> properties,
+        List<ClientModelPropertyReference> propertyReferences, IType modelType, boolean stronglyTypedHeader,
+        ImplementationDetails implementationDetails, boolean usedInXml, Set<String> serializationFormats,
+        String crossLanguageDefinitionId) {
         this.packageName = packageKeyword;
         this.name = name;
         this.fullName = packageName + "." + name;
@@ -234,12 +235,21 @@ public class ClientModel {
     }
 
     /**
+     * Gets the property that determines which polymorphic model type to create.
+     *
+     * @return The property that determines which polymorphic model type to create.
+     */
+    public final ClientModelProperty getPolymorphicDiscriminator() {
+        return polymorphicDiscriminator;
+    }
+
+    /**
      * Gets the name of the property that determines which polymorphic model type to create.
      *
      * @return The name of the property that determines which polymorphic model type to create.
      */
-    public final String getPolymorphicDiscriminator() {
-        return polymorphicDiscriminator;
+    public final String getPolymorphicDiscriminatorName() {
+        return (polymorphicDiscriminator == null) ? null : polymorphicDiscriminator.getSerializedName();
     }
 
     /**
@@ -457,7 +467,7 @@ public class ClientModel {
         protected List<String> imports = Collections.emptyList();
         protected String description;
         protected boolean isPolymorphic;
-        protected String polymorphicDiscriminator;
+        protected ClientModelProperty polymorphicDiscriminator;
         protected String serializedName;
         protected boolean needsFlatten = false;
         protected String parentModelName;
@@ -529,13 +539,12 @@ public class ClientModel {
         }
 
         /**
-         * Sets the name of the property that determines which polymorphic model type to create.
+         * Sets the property that determines which polymorphic model type to create.
          *
-         * @param polymorphicDiscriminator the name of the property that determines which polymorphic model type to
-         * create
+         * @param polymorphicDiscriminator the property that determines which polymorphic model type to create
          * @return the Builder itself
          */
-        public Builder polymorphicDiscriminator(String polymorphicDiscriminator) {
+        public Builder polymorphicDiscriminator(ClientModelProperty polymorphicDiscriminator) {
             this.polymorphicDiscriminator = polymorphicDiscriminator;
             return this;
         }

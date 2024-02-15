@@ -20,11 +20,6 @@ import java.util.List;
 @Fluent
 public final class Goblinshark extends Shark {
     /*
-     * The fishtype property.
-     */
-    private String fishtype = "goblin";
-
-    /*
      * The jawsize property.
      */
     private Integer jawsize;
@@ -42,15 +37,6 @@ public final class Goblinshark extends Shark {
      */
     public Goblinshark(float length, OffsetDateTime birthday) {
         super(length, birthday);
-    }
-
-    /**
-     * Get the fishtype property: The fishtype property.
-     * 
-     * @return the fishtype value.
-     */
-    public String getFishtype() {
-        return this.fishtype;
     }
 
     /**
@@ -133,14 +119,13 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
+        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
-        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
@@ -161,10 +146,10 @@ public final class Goblinshark extends Shark {
             float length = 0.0f;
             boolean birthdayFound = false;
             OffsetDateTime birthday = null;
+            String fishtype = "goblin";
             String species = null;
             List<Fish> siblings = null;
             Integer age = null;
-            String fishtype = "goblin";
             Integer jawsize = null;
             GoblinSharkColor color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -177,14 +162,14 @@ public final class Goblinshark extends Shark {
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                     birthdayFound = true;
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
                     siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getInt);
-                } else if ("fishtype".equals(fieldName)) {
-                    fishtype = reader.getString();
                 } else if ("jawsize".equals(fieldName)) {
                     jawsize = reader.getNullable(JsonReader::getInt);
                 } else if ("color".equals(fieldName)) {
@@ -195,10 +180,10 @@ public final class Goblinshark extends Shark {
             }
             if (lengthFound && birthdayFound) {
                 Goblinshark deserializedGoblinshark = new Goblinshark(length, birthday);
+                deserializedGoblinshark.setFishtype(fishtype);
                 deserializedGoblinshark.setSpecies(species);
                 deserializedGoblinshark.setSiblings(siblings);
                 deserializedGoblinshark.setAge(age);
-                deserializedGoblinshark.fishtype = fishtype;
                 deserializedGoblinshark.jawsize = jawsize;
                 deserializedGoblinshark.color = color;
 

@@ -19,11 +19,6 @@ import java.util.Map;
 @Fluent
 public final class DocumentModelBuildOperationDetails extends OperationDetails {
     /*
-     * Type of operation.
-     */
-    private String kind = "documentModelBuild";
-
-    /*
      * Operation result upon success.
      */
     private DocumentModelDetails result;
@@ -32,15 +27,6 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
      * Creates an instance of DocumentModelBuildOperationDetails class.
      */
     public DocumentModelBuildOperationDetails() {
-    }
-
-    /**
-     * Get the kind property: Type of operation.
-     * 
-     * @return the kind value.
-     */
-    public String getKind() {
-        return this.kind;
     }
 
     /**
@@ -147,7 +133,6 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeStringField("operationId", getOperationId());
         jsonWriter.writeStringField("status", getStatus() == null ? null : getStatus().toString());
         jsonWriter.writeStringField("createdDateTime",
@@ -155,11 +140,11 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
         jsonWriter.writeStringField("lastUpdatedDateTime", getLastUpdatedDateTime() == null ? null
             : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getLastUpdatedDateTime()));
         jsonWriter.writeStringField("resourceLocation", getResourceLocation());
+        jsonWriter.writeStringField("kind", getKind());
         jsonWriter.writeNumberField("percentCompleted", getPercentCompleted());
         jsonWriter.writeStringField("apiVersion", getApiVersion());
         jsonWriter.writeMapField("tags", getTags(), (writer, element) -> writer.writeString(element));
         jsonWriter.writeJsonField("error", getError());
-        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -194,6 +179,8 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
                         reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
                 } else if ("resourceLocation".equals(fieldName)) {
                     deserializedDocumentModelBuildOperationDetails.setResourceLocation(reader.getString());
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDocumentModelBuildOperationDetails.setKind(reader.getString());
                 } else if ("percentCompleted".equals(fieldName)) {
                     deserializedDocumentModelBuildOperationDetails
                         .setPercentCompleted(reader.getNullable(JsonReader::getInt));
@@ -204,8 +191,6 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
                     deserializedDocumentModelBuildOperationDetails.setTags(tags);
                 } else if ("error".equals(fieldName)) {
                     deserializedDocumentModelBuildOperationDetails.setError(Error.fromJson(reader));
-                } else if ("kind".equals(fieldName)) {
-                    deserializedDocumentModelBuildOperationDetails.kind = reader.getString();
                 } else if ("result".equals(fieldName)) {
                     deserializedDocumentModelBuildOperationDetails.result = DocumentModelDetails.fromJson(reader);
                 } else {

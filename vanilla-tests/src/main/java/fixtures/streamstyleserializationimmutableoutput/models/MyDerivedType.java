@@ -16,11 +16,6 @@ import java.io.IOException;
 @Immutable
 public final class MyDerivedType extends MyBaseType {
     /*
-     * The kind property.
-     */
-    private MyKind kind = MyKind.KIND1;
-
-    /*
      * The propD1 property.
      */
     private String propD1;
@@ -29,15 +24,6 @@ public final class MyDerivedType extends MyBaseType {
      * Creates an instance of MyDerivedType class.
      */
     private MyDerivedType() {
-    }
-
-    /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    public MyKind getKind() {
-        return this.kind;
     }
 
     /**
@@ -62,9 +48,8 @@ public final class MyDerivedType extends MyBaseType {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
+        jsonWriter.writeStringField("kind", getKind() == null ? null : getKind().toString());
         jsonWriter.writeStringField("propB1", getPropB1());
-        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
             jsonWriter.writeStartObject("helper");
@@ -89,10 +74,10 @@ public final class MyDerivedType extends MyBaseType {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("propB1".equals(fieldName)) {
+                if ("kind".equals(fieldName)) {
+                    deserializedMyDerivedType.setKind(MyKind.fromString(reader.getString()));
+                } else if ("propB1".equals(fieldName)) {
                     deserializedMyDerivedType.setPropB1(reader.getString());
-                } else if ("kind".equals(fieldName)) {
-                    deserializedMyDerivedType.kind = MyKind.fromString(reader.getString());
                 } else if ("propD1".equals(fieldName)) {
                     deserializedMyDerivedType.propD1 = reader.getString();
                 } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {

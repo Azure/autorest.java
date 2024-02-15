@@ -16,12 +16,6 @@ import java.io.IOException;
  */
 @Immutable
 public final class Cobra extends Snake {
-    /*
-     * discriminator property
-     */
-    @Generated
-    private String kind = "cobra";
-
     /**
      * Creates an instance of Cobra class.
      * 
@@ -32,22 +26,11 @@ public final class Cobra extends Snake {
         super(length);
     }
 
-    /**
-     * Get the kind property: discriminator property.
-     * 
-     * @return the kind value.
-     */
-    @Generated
-    public String getKind() {
-        return this.kind;
-    }
-
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("length", getLength());
-        jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeStringField("kind", getKind());
         return jsonWriter.writeEndObject();
     }
 
@@ -77,7 +60,7 @@ public final class Cobra extends Snake {
                 }
             }
             Cobra deserializedCobra = new Cobra(length);
-            deserializedCobra.kind = kind;
+            deserializedCobra.setKind(kind);
 
             return deserializedCobra;
         });

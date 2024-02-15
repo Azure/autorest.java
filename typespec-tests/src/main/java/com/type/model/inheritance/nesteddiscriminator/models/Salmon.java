@@ -20,12 +20,6 @@ import java.util.Map;
 @Fluent
 public final class Salmon extends Fish {
     /*
-     * The kind property.
-     */
-    @Generated
-    private String kind = "salmon";
-
-    /*
      * The friends property.
      */
     @Generated
@@ -51,16 +45,6 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon(int age) {
         super(age);
-    }
-
-    /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    @Generated
-    public String getKind() {
-        return this.kind;
     }
 
     /**
@@ -132,9 +116,8 @@ public final class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("age", getAge());
-        jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeStringField("kind", getKind());
         jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("partner", this.partner);
@@ -176,7 +159,7 @@ public final class Salmon extends Fish {
                 }
             }
             Salmon deserializedSalmon = new Salmon(age);
-            deserializedSalmon.kind = kind;
+            deserializedSalmon.setKind(kind);
             deserializedSalmon.friends = friends;
             deserializedSalmon.hate = hate;
             deserializedSalmon.partner = partner;
