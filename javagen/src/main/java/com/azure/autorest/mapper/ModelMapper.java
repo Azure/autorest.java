@@ -274,7 +274,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     }
                 }
 
-                builder.polymorphicDiscriminator(discriminatorProperty);
+                builder.polymorphicDiscriminatorName(polymorphicDiscriminator)
+                    .polymorphicDiscriminator(discriminatorProperty);
             }
 
             builder.needsFlatten(needsFlatten);

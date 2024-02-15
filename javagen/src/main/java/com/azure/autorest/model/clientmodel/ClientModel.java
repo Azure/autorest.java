@@ -46,6 +46,10 @@ public class ClientModel {
      */
     private final ClientModelProperty polymorphicDiscriminator;
     /**
+     * Get the name of the property that determines which polymorphic model type to create.
+     */
+    private final String polymorphicDiscriminatorName;
+    /**
      * Get the name that is used for this model when it is serialized.
      */
     private final String serializedName;
@@ -116,7 +120,9 @@ public class ClientModel {
      * @param imports The imports for this model.
      * @param description The description of this model.
      * @param isPolymorphic Whether this model has model types that derive from it.
-     * @param polymorphicDiscriminator The name of the property that determines which polymorphic model type to create.
+     * @param polymorphicDiscriminator The property that determines which polymorphic model type to create.
+     * @param polymorphicDiscriminatorName The name of the property that determines which polymorphic model type to
+     * create.
      * @param serializedName The name that is used for this model when it is serialized.
      * @param needsFlatten Whether this model needs serialization flattening.
      * @param parentModelName The parent model of this model.
@@ -132,9 +138,9 @@ public class ClientModel {
      * @param crossLanguageDefinitionId The cross language definition id for the model.
      */
     protected ClientModel(String packageKeyword, String name, List<String> imports, String description,
-        boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String serializedName,
-        boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName,
-        String xmlNamespace, List<ClientModelProperty> properties,
+        boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String polymorphicDiscriminatorName,
+        String serializedName, boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels,
+        String xmlName, String xmlNamespace, List<ClientModelProperty> properties,
         List<ClientModelPropertyReference> propertyReferences, IType modelType, boolean stronglyTypedHeader,
         ImplementationDetails implementationDetails, boolean usedInXml, Set<String> serializationFormats,
         String crossLanguageDefinitionId) {
@@ -146,6 +152,7 @@ public class ClientModel {
         this.isPolymorphic = isPolymorphic;
         this.isPolymorphicParent = isPolymorphic && !CoreUtils.isNullOrEmpty(derivedModels);
         this.polymorphicDiscriminator = polymorphicDiscriminator;
+        this.polymorphicDiscriminatorName = polymorphicDiscriminatorName;
         this.serializedName = serializedName;
         this.needsFlatten = needsFlatten;
         this.parentModelName = parentModelName;
@@ -249,7 +256,7 @@ public class ClientModel {
      * @return The name of the property that determines which polymorphic model type to create.
      */
     public final String getPolymorphicDiscriminatorName() {
-        return (polymorphicDiscriminator == null) ? null : polymorphicDiscriminator.getSerializedName();
+        return polymorphicDiscriminatorName;
     }
 
     /**
@@ -468,6 +475,7 @@ public class ClientModel {
         protected String description;
         protected boolean isPolymorphic;
         protected ClientModelProperty polymorphicDiscriminator;
+        protected String polymorphicDiscriminatorName;
         protected String serializedName;
         protected boolean needsFlatten = false;
         protected String parentModelName;
@@ -546,6 +554,11 @@ public class ClientModel {
          */
         public Builder polymorphicDiscriminator(ClientModelProperty polymorphicDiscriminator) {
             this.polymorphicDiscriminator = polymorphicDiscriminator;
+            return this;
+        }
+
+        public Builder polymorphicDiscriminatorName(String polymorphicDiscriminatorName) {
+            this.polymorphicDiscriminatorName = polymorphicDiscriminatorName;
             return this;
         }
 
@@ -710,9 +723,9 @@ public class ClientModel {
          */
         public ClientModel build() {
             return new ClientModel(packageName, name, imports, description, isPolymorphic, polymorphicDiscriminator,
-                serializedName, needsFlatten, parentModelName, derivedModels, xmlName, xmlNamespace, properties,
-                propertyReferences, modelType, stronglyTypedHeader, implementationDetails, usedInXml,
-                serializationFormats, crossLanguageDefinitionId);
+                polymorphicDiscriminatorName, serializedName, needsFlatten, parentModelName, derivedModels, xmlName,
+                xmlNamespace, properties, propertyReferences, modelType, stronglyTypedHeader, implementationDetails,
+                usedInXml, serializationFormats, crossLanguageDefinitionId);
         }
     }
 }

@@ -8,7 +8,6 @@ import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
-import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -498,12 +497,12 @@ public class ClientModelUtil {
         List<ClientModelProperty> requiredParentProperties = new ArrayList<>();
         while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
             // Add the properties in inverse order as they be reverse at the end.
-            List<ClientModelProperty> parentProperties = parentModel.getProperties();
-            for (int i = parentProperties.size() - 1; i >= 0; i--) {
-                ClientModelProperty property = parentProperties.get(i);
-                if (property.isRequired() && !property.isConstant() && !property.isReadOnly()) {
-                    requiredParentProperties.add(property);
-                }
+            List<ClientModelProperty> ctorArgs = parentModel.getProperties().stream()
+                .filter(property -> property.isRequired() && !property.isConstant() && !property.isReadOnly())
+                .collect(Collectors.toList());
+
+            for (int i = ctorArgs.size() - 1; i >= 0; i--) {
+                requiredParentProperties.add(ctorArgs.get(i));
             }
 
             lastParentName = parentModel.getName();
@@ -617,13 +616,17 @@ public class ClientModelUtil {
         if (clientModelProperty.getClientType() == clientModelProperty.getWireType()) {
             // same type
             return false;
+        } else {
+            // type mismatch
+            if (ignoreGenericType
+                && clientModelProperty.getClientType() instanceof GenericType
+                && clientModelProperty.getWireType() instanceof GenericType) {
+                // at present, ignore generic type, as type erasure causes conflict of 2 constructors
+                return false;
+            } else {
+                return true;
+            }
         }
-
-        // type mismatch
-        // at present, ignore generic type, as type erasure causes conflict of 2 constructors
-        return !(ignoreGenericType
-            && clientModelProperty.getClientType() instanceof GenericType
-            && clientModelProperty.getWireType() instanceof GenericType);
     }
 
     /**
@@ -644,16 +647,16 @@ public class ClientModelUtil {
 
         // If any of the properties are ResponseError generate the bridge utils.
         // Or if any of the properties are Duration or contain Duration as a generic generate the bridge utils.
-        for (ClientModelProperty p : model.getProperties()) {
-            if (p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION
-                || p.getClientType().contains(ClassType.DURATION)) {
-                return true;
-            }
+        if (model.getProperties().stream().anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR
+            || p.getClientType() == ClassType.DURATION || p.getClientType().contains(ClassType.DURATION))) {
+            return true;
         }
 
         // flatten properties
-        if (settings.getClientFlattenAnnotationTarget() != JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-            return false;
+        if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+            return model.getPropertyReferences().stream()
+                .filter(ClientModelPropertyReference::isFromFlattenedProperty)
+                .anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION);
         }
 
         for (ClientModelPropertyReference p : model.getPropertyReferences()) {
@@ -739,35 +742,23 @@ public class ClientModelUtil {
 
     public static Set<String> getExternalPackageNamesUsedInClient(List<ClientModel> models, CodeModel codeModel) {
         // models
-        Set<String> externalPackageNames = new HashSet<>();
-
-        if (!CoreUtils.isNullOrEmpty(models)) {
-            for (ClientModel model : models) {
-                if (model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null
-                        && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL)) {
-                    externalPackageNames.add(model.getPackage());
-                }
-            }
-        }
+        Set<String> externalPackageNames = models == null ? new HashSet<>() : models.stream()
+            .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
+                && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
+            .map(ClientModel::getPackage)
+            .collect(Collectors.toSet());
 
         // LongRunningMetadata in methods
         if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
             for (Client client : codeModel.getClients()) {
-                if (CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
-                    continue;
-                }
-
-                for (OperationGroup og : client.getOperationGroups()) {
-                    if (CoreUtils.isNullOrEmpty(og.getOperations())) {
-                        continue;
-                    }
-
-                    for (Operation o : og.getOperations()) {
-                        if (o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null
-                            && o.getLroMetadata().getPollingStrategy().getLanguage() != null
-                            && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null
-                            && o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace() != null) {
-                            externalPackageNames.add(o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace());
+                if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+                    for (OperationGroup og : client.getOperationGroups()) {
+                        if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
+                            externalPackageNames.addAll(og.getOperations().stream()
+                                .filter(o -> o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null && o.getLroMetadata().getPollingStrategy().getLanguage() != null && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null)
+                                .map(o -> o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace())
+                                .filter(Objects::nonNull)
+                                .collect(Collectors.toSet()));
                         }
                     }
                 }

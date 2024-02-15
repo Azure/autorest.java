@@ -4,6 +4,7 @@
 package com.azure.autorest.extension.base.plugin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.type.TypeReference;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -86,22 +87,25 @@ public class JavaSettings {
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
             // input-file
-            List<String> inputFiles = host.getListValue(String.class, "input-file");
+            List<Object> inputFiles = host.getValue(List.class, "input-file");
             if (inputFiles != null) {
-                autorestSettings.getInputFiles().addAll(inputFiles);
+                autorestSettings.getInputFiles().addAll(
+                    inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
                 logger.debug("List of input files : {}", autorestSettings.getInputFiles());
             }
             // require (readme.md etc.)
-            List<String> require = host.getListValue(String.class, "require");
+            List<Object> require = host.getValue(List.class, "require");
             if (require != null) {
-                autorestSettings.getRequire().addAll(require);
+                autorestSettings.getRequire().addAll(
+                    require.stream().map(Object::toString).collect(Collectors.toList()));
                 logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
             setHeader(getStringValue(host, "license-header"));
             instance = new JavaSettings(
                 autorestSettings,
-                host.getMapValue(String.class, Object.class, "modelerfour"),
+                host.getValue(new TypeReference<Map<String, Object>>() {
+                }.getType(), "modelerfour"),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 getStringValue(host, "fluent"),
@@ -141,7 +145,8 @@ public class JavaSettings {
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
                 getBooleanValue(host, "skip-formatting", false),
-                host.getMapValue(String.class, PollingDetails.class, "polling"),
+                host.getValue(new TypeReference<Map<String, PollingDetails>>() {
+                }.getType(), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 false, //getBooleanValue(host, "generate-send-request-method", false),
@@ -150,7 +155,8 @@ public class JavaSettings {
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
-                host.getMapValue(Integer.class, String.class, "http-status-code-to-exception-type-mapping"),
+                host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
+                    "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "generic-response-type", false),
                 getBooleanValue(host, "stream-style-serialization", true),

@@ -15,14 +15,15 @@ import java.util.Set;
 
 public class AndroidClientModel extends ClientModel {
     protected AndroidClientModel(String packageKeyword, String name, List<String> imports, String description,
-        boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String serializedName,
-        boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels, String xmlName,
-        String xmlNamespace, List<ClientModelProperty> properties,
+        boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String polymorphicDiscriminatorName,
+        String serializedName, boolean needsFlatten, String parentModelName, List<ClientModel> derivedModels,
+        String xmlName, String xmlNamespace, List<ClientModelProperty> properties,
         List<ClientModelPropertyReference> propertyReferences, IType modelType, boolean stronglyTypedHeader,
         boolean usedInXml, Set<String> serializationFormats) {
-        super(packageKeyword, name, imports, description, isPolymorphic, polymorphicDiscriminator, serializedName,
-            needsFlatten, parentModelName, derivedModels, xmlName, xmlNamespace, properties, propertyReferences,
-            modelType, stronglyTypedHeader, null, usedInXml, serializationFormats, null);
+        super(packageKeyword, name, imports, description, isPolymorphic, polymorphicDiscriminator,
+            polymorphicDiscriminatorName, serializedName, needsFlatten, parentModelName, derivedModels, xmlName,
+            xmlNamespace, properties, propertyReferences, modelType, stronglyTypedHeader, null, usedInXml,
+            serializationFormats, null);
     }
 
     @Override
@@ -54,9 +55,9 @@ public class AndroidClientModel extends ClientModel {
         @Override
         public ClientModel build() {
             return new AndroidClientModel(packageName, name, imports, description, isPolymorphic,
-                polymorphicDiscriminator, serializedName, needsFlatten, parentModelName, derivedModels, xmlName,
-                xmlNamespace, properties, propertyReferences, modelType, stronglyTypedHeader, usedInXml,
-                serializationFormats);
+                polymorphicDiscriminator, polymorphicDiscriminatorName, serializedName, needsFlatten, parentModelName,
+                derivedModels, xmlName, xmlNamespace, properties, propertyReferences, modelType, stronglyTypedHeader,
+                usedInXml, serializationFormats);
         }
     }
 }

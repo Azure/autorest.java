@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * Specifies the metric alert criteria for a single resource that has multiple metric criteria.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "null")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "odata\\.type")
 @JsonTypeName("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria")
 @JsonFlatten
 @Fluent
