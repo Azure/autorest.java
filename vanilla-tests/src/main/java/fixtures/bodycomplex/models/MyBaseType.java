@@ -35,7 +35,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * Creates an instance of MyBaseType class.
      */
     protected MyBaseType() {
-        this.kind = null;
+        this.kind = MyKind.fromString("MyBaseType");
     }
 
     /**

@@ -28,7 +28,7 @@ public class Data implements JsonSerializable<Data> {
      */
     @Generated
     protected Data() {
-        this.type = null;
+        this.type = "Data";
     }
 
     /**

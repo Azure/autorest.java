@@ -78,7 +78,7 @@ public class Fish implements JsonSerializable<Fish> {
      */
     @Generated
     public Fish(int age) {
-        this.kind = null;
+        this.kind = "Fish";
         this.age = age;
     }
 

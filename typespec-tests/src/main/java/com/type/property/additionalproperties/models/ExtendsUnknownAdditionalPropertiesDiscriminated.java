@@ -45,7 +45,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
      */
     @Generated
     public ExtendsUnknownAdditionalPropertiesDiscriminated(String name) {
-        this.kind = null;
+        this.kind = "ExtendsUnknownAdditionalPropertiesDiscriminated";
         this.name = name;
     }
 

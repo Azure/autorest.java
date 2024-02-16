@@ -73,7 +73,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * Creates an instance of OperationDetails class.
      */
     public OperationDetails() {
-        this.kind = null;
+        this.kind = "OperationDetails";
     }
 
     /**

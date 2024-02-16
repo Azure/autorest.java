@@ -164,7 +164,6 @@ public final class PolymorphismAsyncClient {
      *     sampleSalmon (Optional): {
      *         fish.type: String (Optional)
      *         species: String (Optional)
-     *         fish.type: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
      *     }
@@ -206,7 +205,6 @@ public final class PolymorphismAsyncClient {
      *     sampleSalmon (Optional): {
      *         fish.type: String (Optional)
      *         species: String (Optional)
-     *         fish.type: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
      *     }
@@ -257,7 +255,6 @@ public final class PolymorphismAsyncClient {
      *             ]
      *         }
      *     ]
-     *     fishtype: String (Optional)
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }
@@ -297,7 +294,6 @@ public final class PolymorphismAsyncClient {
      *             ]
      *         }
      *     ]
-     *     fishtype: String (Optional)
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }
@@ -337,7 +333,6 @@ public final class PolymorphismAsyncClient {
      *             ]
      *         }
      *     ]
-     *     fishtype: String (Optional)
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }
@@ -360,7 +355,6 @@ public final class PolymorphismAsyncClient {
      *             ]
      *         }
      *     ]
-     *     fishtype: String (Optional)
      *     location: String (Optional)
      *     iswild: Boolean (Optional)
      * }

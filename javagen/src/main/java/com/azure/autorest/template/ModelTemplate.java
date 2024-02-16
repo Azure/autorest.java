@@ -834,11 +834,14 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
             if (polymorphicProperty != null && !polymorphicProperty.isRequired()
                 && settings.isStreamStyleSerialization()) {
+                String discriminatorValue = polymorphicProperty.getDefaultValue() != null
+                    ? polymorphicProperty.getDefaultValue()
+                    : polymorphicProperty.getClientType().defaultValueExpression(model.getSerializedName());
+
                 if (modelDefinesProperty(model, polymorphicProperty)) {
-                    constructor.line("this." + polymorphicProperty.getName() + " = "
-                        + polymorphicProperty.getDefaultValue() + ";");
+                    constructor.line("this." + polymorphicProperty.getName() + " = " + discriminatorValue + ";");
                 } else {
-                    constructor.line(polymorphicProperty.getSetterName() + "(" + polymorphicProperty.getDefaultValue() + ");");
+                    constructor.line(polymorphicProperty.getSetterName() + "(" + discriminatorValue + ");");
                 }
             }
 

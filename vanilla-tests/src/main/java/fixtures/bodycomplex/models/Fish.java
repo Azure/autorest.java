@@ -43,7 +43,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param length the length value to set.
      */
     public Fish(float length) {
-        this.fishtype = null;
+        this.fishtype = "Fish";
         this.length = length;
     }
 

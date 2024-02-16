@@ -36,7 +36,7 @@ public class Dog implements JsonSerializable<Dog> {
      */
     @Generated
     public Dog(int weight) {
-        this.kind = null;
+        this.kind = "Dog";
         this.weight = weight;
     }
 

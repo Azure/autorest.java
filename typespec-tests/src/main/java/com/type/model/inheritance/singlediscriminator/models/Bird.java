@@ -36,7 +36,7 @@ public class Bird implements JsonSerializable<Bird> {
      */
     @Generated
     public Bird(int wingspan) {
-        this.kind = null;
+        this.kind = "Bird";
         this.wingspan = wingspan;
     }
 

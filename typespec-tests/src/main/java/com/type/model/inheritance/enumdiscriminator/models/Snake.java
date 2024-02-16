@@ -36,7 +36,7 @@ public class Snake implements JsonSerializable<Snake> {
      */
     @Generated
     public Snake(int length) {
-        this.kind = null;
+        this.kind = "Snake";
         this.length = length;
     }
 

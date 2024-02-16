@@ -9,7 +9,6 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -27,8 +26,8 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -42,10 +41,10 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
         if (clientMethod.getProxyMethod() != null) {
             List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters().stream()
-                    .filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
+                .filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation())
                     // ignore if synthesized by modelerfour, i.e. api-version
-                    .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE)
-                    .collect(Collectors.toList());
+                    && p.getOrigin() == ParameterSynthesizedOrigin.NONE)
+                .collect(Collectors.toList());
             if (!queryParameters.isEmpty() && hasParametersToPrintInJavadoc(queryParameters)) {
                 optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
                 commentBlock.line("You can add these to a request with {@link RequestOptions#addQueryParam}");
@@ -82,7 +81,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             IType responseBodyType;
             if (JavaSettings.getInstance().isDataPlaneClient()) {
                 // special handling for paging method
-                if (clientMethod.getType() == ClientMethodType.PagingSync || clientMethod.getType() == ClientMethodType.PagingAsync || clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage || clientMethod.getType() == ClientMethodType.PagingSyncSinglePage) {
+                if (clientMethod.getType().isPaging()) {
                     String itemName = clientMethod.getMethodPageDetails().getItemName();
                     // rawResponseType has properties: 'value' and 'nextLink'
                     IType rawResponseType = clientMethod.getProxyMethod().getRawResponseBodyType();
@@ -90,25 +89,27 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                         throw new IllegalStateException(String.format("clientMethod.getProxyMethod().getRawResponseBodyType() should be ClassType for paging method. rawResponseType = %s", rawResponseType.toString()));
                     }
                     ClientModel model = ClientModelUtil.getClientModel(((ClassType) rawResponseType).getName());
-                    List<ClientModelProperty> properties = new ArrayList<>();
+                    Map<String, ClientModelProperty> properties = new LinkedHashMap<>();
                     traverseProperties(model, properties);
-                    responseBodyType = properties.stream()
+                    responseBodyType = properties.values().stream()
                             .filter(property -> property.getName().equals(itemName))
-                            .map(clientModelProperty -> clientModelProperty.getClientType())
+                            .map(ClientModelProperty::getClientType)
                             .map(valueListType -> {
                                 // value type is List<T>, we need to get the typeArguments
                                 if (!(valueListType instanceof ListType)) {
-                                    throw new IllegalStateException(String.format("value type must be list for paging method. rawResponseType = %s", rawResponseType.toString()));
+                                    throw new IllegalStateException("value type must be list for paging method. "
+                                        + "rawResponseType = " + rawResponseType);
                                 }
                                 IType[] listTypeArgs = ((ListType) valueListType).getTypeArguments();
                                 if (listTypeArgs.length == 0) {
-                                    throw new IllegalStateException(String.format("list type arguments' length should not be 0 for paging method. rawResponseType = %s", rawResponseType.toString()));
+                                    throw new IllegalStateException(String.format("list type arguments' length should not be 0 for paging method. rawResponseType = %s",
+                                        rawResponseType));
                                 }
                                 return listTypeArgs[0];
                             })
                             .findFirst().orElse(null);
                     if (responseBodyType == null) {
-                        throw new IllegalStateException(String.format("%s not found in properties of rawResponseType. rawResponseType = ", itemName, rawResponseType.toString()));
+                        throw new IllegalStateException(itemName + " not found in properties of rawResponseType. rawResponseType = " + rawResponseType);
                     }
                 } else {
                     responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
@@ -153,7 +154,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
     }
 
-    private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
+    private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters,
+        JavaJavadocComment commentBlock) {
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
         commentBlock.line("<table border=\"1\">");
         commentBlock.line(String.format("    <caption>%s</caption>", title));
@@ -161,12 +163,10 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         for (ProxyMethodParameter parameter : parameters) {
             boolean parameterIsConstantOrFromClient = parameter.isConstant() || parameter.isFromClient();
             if (!parameter.isRequired() && !parameterIsConstantOrFromClient) {
-                commentBlock.line(String.format(
-                        "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                        parameter.getRequestParameterName(),
-                        CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
-                        parameter.isRequired() ? "Yes" : "No",
-                        parameterDescriptionOrDefault(parameter)));
+                commentBlock.line(String.format("    <tr><td>%s</td><td>%s</td><td>No</td><td>%s</td></tr>",
+                    parameter.getRequestParameterName(),
+                    CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
+                    parameterDescriptionOrDefault(parameter)));
             }
 
         }
@@ -215,9 +215,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             } else {
                 commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
             }
-            List<ClientModelProperty> properties = new ArrayList<>();
+            Map<String, ClientModelProperty> properties = new LinkedHashMap<>();
             traverseProperties(model, properties);
-            for (ClientModelProperty property : properties) {
+            for (ClientModelProperty property : properties.values()) {
                 bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), false);
             }
             commentBlock.line(indent + "}");
@@ -274,11 +274,12 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         return type.toString();
     }
 
-    private static void traverseProperties(ClientModel model, List<ClientModelProperty> properties) {
+    private static void traverseProperties(ClientModel model, Map<String, ClientModelProperty> properties) {
         if (model.getParentModelName() != null) {
             traverseProperties(ClientModelUtil.getClientModel(model.getParentModelName()), properties);
         }
-        properties.addAll(model.getProperties());
+
+        model.getProperties().forEach(p -> properties.put(p.getSerializedName(), p));
     }
 
     private static String parameterDescriptionOrDefault(ProxyMethodParameter parameter) {
