@@ -22,6 +22,7 @@ public final class Cookiecuttershark extends Shark {
      * Creates an instance of Cookiecuttershark class.
      */
     public Cookiecuttershark() {
+        setFishtype("cookiecuttershark");
     }
 
     /**
@@ -82,10 +83,10 @@ public final class Cookiecuttershark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "cookiecuttershark");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
+        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
@@ -98,8 +99,7 @@ public final class Cookiecuttershark extends Shark {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Cookiecuttershark if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Cookiecuttershark.
      */
     public static Cookiecuttershark fromJson(JsonReader jsonReader) throws IOException {
@@ -109,18 +109,13 @@ public final class Cookiecuttershark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"cookiecuttershark".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'cookiecuttershark'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     deserializedCookiecuttershark.setLength(reader.getFloat());
                 } else if ("birthday".equals(fieldName)) {
                     deserializedCookiecuttershark.setBirthday(
                         reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedCookiecuttershark.setFishtype(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedCookiecuttershark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {

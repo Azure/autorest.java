@@ -97,7 +97,7 @@ public class JavaSettings {
             List<Object> require = host.getValue(List.class, "require");
             if (require != null) {
                 autorestSettings.getRequire().addAll(
-                        require.stream().map(Object::toString).collect(Collectors.toList()));
+                    require.stream().map(Object::toString).collect(Collectors.toList()));
                 logger.debug("List of require : {}", autorestSettings.getRequire());
             }
 
@@ -114,7 +114,6 @@ public class JavaSettings {
                 120,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "com.mycompany.app").toLowerCase(),
-                getBooleanValue(host, "enable-xml", false),
                 getBooleanValue(host, "non-null-annotations", false),
                 getBooleanValue(host, "client-side-validations", false),
                 getStringValue(host, "client-type-prefix"),
@@ -160,7 +159,7 @@ public class JavaSettings {
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "generic-response-type", false),
-                getBooleanValue(host, "stream-style-serialization", false),
+                getBooleanValue(host, "stream-style-serialization", true),
                 getBooleanValue(host, "enable-sync-stack", false),
                 getBooleanValue(host, "output-model-immutable", false),
                 getBooleanValue(host, "use-input-stream-for-binary", false),
@@ -195,7 +194,6 @@ public class JavaSettings {
      * @param maximumJavadocCommentWidth
      * @param serviceName
      * @param packageKeyword
-     * @param shouldGenerateXmlSerialization
      * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
      * @param clientSideValidations
      * @param clientTypePrefix The prefix that will be added to each generated client type.
@@ -278,7 +276,6 @@ public class JavaSettings {
         int maximumJavadocCommentWidth,
         String serviceName,
         String packageKeyword,
-        boolean shouldGenerateXmlSerialization,
         boolean nonNullAnnotations,
         boolean clientSideValidations,
         String clientTypePrefix,
@@ -346,7 +343,6 @@ public class JavaSettings {
         this.maximumJavadocCommentWidth = maximumJavadocCommentWidth;
         this.serviceName = serviceName;
         this.packageName = packageKeyword;
-        this.shouldGenerateXmlSerialization = shouldGenerateXmlSerialization;
         this.nonNullAnnotations = nonNullAnnotations;
         this.clientSideValidations = clientSideValidations;
         this.clientTypePrefix = clientTypePrefix;
@@ -635,12 +631,6 @@ public class JavaSettings {
             }
         }
         return packageBuilder.toString();
-    }
-
-    private final boolean shouldGenerateXmlSerialization;
-
-    public final boolean isGenerateXmlSerialization() {
-        return shouldGenerateXmlSerialization;
     }
 
     /**

@@ -5,40 +5,32 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * The Salmon model.
  */
-@JsonTypeInfo(
-    use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "fishtype",
-    defaultImpl = Salmon.class)
-@JsonTypeName("salmon")
-@JsonSubTypes({ @JsonSubTypes.Type(name = "smart_salmon", value = SmartSalmon.class) })
 @Fluent
 public class Salmon extends Fish {
     /*
      * The location property.
      */
-    @JsonProperty(value = "location")
     private String location;
 
     /*
      * The iswild property.
      */
-    @JsonProperty(value = "iswild")
     private Boolean iswild;
 
     /**
      * Creates an instance of Salmon class.
      */
     public Salmon() {
+        setFishtype("salmon");
     }
 
     /**
@@ -106,5 +98,80 @@ public class Salmon extends Fish {
     public Salmon setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
         return this;
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("fishtype", getFishtype());
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("location", this.location);
+        jsonWriter.writeBooleanField("iswild", this.iswild);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Salmon from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Salmon.
+     */
+    public static Salmon fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            String discriminatorValue = null;
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("fishtype".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
+                }
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("smart_salmon".equals(discriminatorValue)) {
+                    return SmartSalmon.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
+            }
+        });
+    }
+
+    static Salmon fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Salmon deserializedSalmon = new Salmon();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("length".equals(fieldName)) {
+                    deserializedSalmon.setLength(reader.getFloat());
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedSalmon.setFishtype(reader.getString());
+                } else if ("species".equals(fieldName)) {
+                    deserializedSalmon.setSpecies(reader.getString());
+                } else if ("siblings".equals(fieldName)) {
+                    List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedSalmon.setSiblings(siblings);
+                } else if ("location".equals(fieldName)) {
+                    deserializedSalmon.location = reader.getString();
+                } else if ("iswild".equals(fieldName)) {
+                    deserializedSalmon.iswild = reader.getNullable(JsonReader::getBoolean);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedSalmon;
+        });
     }
 }

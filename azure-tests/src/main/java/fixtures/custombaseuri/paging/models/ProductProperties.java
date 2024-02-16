@@ -5,23 +5,25 @@
 package fixtures.custombaseuri.paging.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The ProductProperties model.
  */
 @Fluent
-public final class ProductProperties {
+public final class ProductProperties implements JsonSerializable<ProductProperties> {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id")
     private Integer id;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name")
     private String name;
 
     /**
@@ -76,5 +78,41 @@ public final class ProductProperties {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("id", this.id);
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ProductProperties from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ProductProperties if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IOException If an error occurs while reading the ProductProperties.
+     */
+    public static ProductProperties fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            ProductProperties deserializedProductProperties = new ProductProperties();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    deserializedProductProperties.id = reader.getNullable(JsonReader::getInt);
+                } else if ("name".equals(fieldName)) {
+                    deserializedProductProperties.name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedProductProperties;
+        });
     }
 }

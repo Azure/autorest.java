@@ -5,36 +5,36 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Map;
 
 /**
  * The PetAPInProperties model.
  */
 @Fluent
-public final class PetAPInProperties {
+public final class PetAPInProperties implements JsonSerializable<PetAPInProperties> {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id", required = true)
     private int id;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The status property.
      */
-    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
     private Boolean status;
 
     /*
      * Dictionary of <number>
      */
-    @JsonProperty(value = "additionalProperties")
     private Map<String, Float> additionalProperties;
 
     /**
@@ -118,5 +118,49 @@ public final class PetAPInProperties {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("id", this.id);
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeMapField("additionalProperties", this.additionalProperties,
+            (writer, element) -> writer.writeFloat(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of PetAPInProperties from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of PetAPInProperties if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the PetAPInProperties.
+     */
+    public static PetAPInProperties fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            PetAPInProperties deserializedPetAPInProperties = new PetAPInProperties();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    deserializedPetAPInProperties.id = reader.getInt();
+                } else if ("name".equals(fieldName)) {
+                    deserializedPetAPInProperties.name = reader.getString();
+                } else if ("status".equals(fieldName)) {
+                    deserializedPetAPInProperties.status = reader.getNullable(JsonReader::getBoolean);
+                } else if ("additionalProperties".equals(fieldName)) {
+                    Map<String, Float> additionalProperties = reader.readMap(reader1 -> reader1.getFloat());
+                    deserializedPetAPInProperties.additionalProperties = additionalProperties;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedPetAPInProperties;
+        });
     }
 }

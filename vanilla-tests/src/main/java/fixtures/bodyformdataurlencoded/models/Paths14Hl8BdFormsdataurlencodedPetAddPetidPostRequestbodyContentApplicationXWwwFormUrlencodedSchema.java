@@ -5,41 +5,42 @@
 package fixtures.bodyformdataurlencoded.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema model.
  */
 @Fluent
-public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema {
+public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+    implements
+    JsonSerializable<Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema> {
     /*
      * Can take a value of dog, or cat, or fish
      */
-    @JsonProperty(value = "pet_type", required = true)
     private PetType petType;
 
     /*
      * Can take a value of meat, or fish, or plant
      */
-    @JsonProperty(value = "pet_food", required = true)
     private PetFood petFood;
 
     /*
      * How many years is it old?
      */
-    @JsonProperty(value = "pet_age", required = true)
     private int petAge;
 
     /*
      * Updated name of the pet
      */
-    @JsonProperty(value = "name")
     private String name;
 
     /*
      * Updated status of the pet
      */
-    @JsonProperty(value = "status")
     private String status;
 
     /**
@@ -173,5 +174,62 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
             throw new IllegalArgumentException(
                 "Missing required property petFood in model Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema");
         }
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("pet_type", this.petType == null ? null : this.petType.toString());
+        jsonWriter.writeStringField("pet_food", this.petFood == null ? null : this.petFood.toString());
+        jsonWriter.writeIntField("pet_age", this.petAge);
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeStringField("status", this.status);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of
+     * Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema from the
+     * JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of
+     * Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the
+     * JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the
+     * Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
+     */
+    public static Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+        fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema deserializedPaths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
+                = new Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("pet_type".equals(fieldName)) {
+                    deserializedPaths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.petType
+                        = PetType.fromString(reader.getString());
+                } else if ("pet_food".equals(fieldName)) {
+                    deserializedPaths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.petFood
+                        = PetFood.fromString(reader.getString());
+                } else if ("pet_age".equals(fieldName)) {
+                    deserializedPaths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.petAge
+                        = reader.getInt();
+                } else if ("name".equals(fieldName)) {
+                    deserializedPaths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.name
+                        = reader.getString();
+                } else if ("status".equals(fieldName)) {
+                    deserializedPaths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.status
+                        = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedPaths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyContentApplicationXWwwFormUrlencodedSchema;
+        });
     }
 }

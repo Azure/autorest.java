@@ -5,18 +5,18 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * The Cookiecuttershark model.
  */
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "fishtype")
-@JsonTypeName("cookiecuttershark")
 @Fluent
 public final class Cookiecuttershark extends Shark {
     /**
@@ -25,10 +25,9 @@ public final class Cookiecuttershark extends Shark {
      * @param length the length value to set.
      * @param birthday the birthday value to set.
      */
-    @JsonCreator
-    public Cookiecuttershark(@JsonProperty(value = "length", required = true) float length,
-        @JsonProperty(value = "birthday", required = true) OffsetDateTime birthday) {
+    public Cookiecuttershark(float length, OffsetDateTime birthday) {
         super(length, birthday);
+        setFishtype("cookiecuttershark");
     }
 
     /**
@@ -66,5 +65,81 @@ public final class Cookiecuttershark extends Shark {
     @Override
     public void validate() {
         super.validate();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("birthday",
+            getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
+        jsonWriter.writeStringField("fishtype", getFishtype());
+        jsonWriter.writeStringField("species", getSpecies());
+        jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeNumberField("age", getAge());
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Cookiecuttershark from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Cookiecuttershark if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Cookiecuttershark.
+     */
+    public static Cookiecuttershark fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean lengthFound = false;
+            float length = 0.0f;
+            boolean birthdayFound = false;
+            OffsetDateTime birthday = null;
+            String fishtype = "cookiecuttershark";
+            String species = null;
+            List<Fish> siblings = null;
+            Integer age = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("length".equals(fieldName)) {
+                    length = reader.getFloat();
+                    lengthFound = true;
+                } else if ("birthday".equals(fieldName)) {
+                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    birthdayFound = true;
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
+                } else if ("species".equals(fieldName)) {
+                    species = reader.getString();
+                } else if ("siblings".equals(fieldName)) {
+                    siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getNullable(JsonReader::getInt);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (lengthFound && birthdayFound) {
+                Cookiecuttershark deserializedCookiecuttershark = new Cookiecuttershark(length, birthday);
+                deserializedCookiecuttershark.setFishtype(fishtype);
+                deserializedCookiecuttershark.setSpecies(species);
+                deserializedCookiecuttershark.setSiblings(siblings);
+                deserializedCookiecuttershark.setAge(age);
+
+                return deserializedCookiecuttershark;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!lengthFound) {
+                missingProperties.add("length");
+            }
+            if (!birthdayFound) {
+                missingProperties.add("birthday");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

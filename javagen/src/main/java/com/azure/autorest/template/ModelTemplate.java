@@ -46,6 +46,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.function.Consumer;
@@ -159,12 +160,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
             for (ClientModelProperty property : model.getProperties()) {
-                // For now, don't add a getter if the property is a polymorphic discriminator and stream-style
-                // serialization is being used.
-                if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
-                    continue;
-                }
-
                 final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
@@ -174,18 +169,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                generateGetterJavadoc(classBlock, model, property);
-                addGeneratedAnnotation(classBlock);
-                if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
-                    classBlock.annotation("JsonAnyGetter");
-                }
-                if (!propertyIsReadOnly) {
-                    TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
-                }
+                if (!property.isPolymorphicDiscriminator() || modelDefinesProperty(model, property)) {
+                    // Only the super most parent model should have the polymorphic discriminator getter.
+                    // The child models should use the parent's getter.
+                    generateGetterJavadoc(classBlock, model, property);
+                    addGeneratedAnnotation(classBlock);
+                    if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
+                        classBlock.annotation("JsonAnyGetter");
+                    }
+                    if (!propertyIsReadOnly) {
+                        TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
+                    }
 
-                classBlock.method(methodVisibility, null, propertyClientType + " " + getGetterName(model, property) + "()",
-                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                        methodBlock, settings));
+                    classBlock.method(methodVisibility, null,
+                        propertyClientType + " " + getGetterName(model, property) + "()",
+                        methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
+                            methodBlock, settings));
+                }
 
                 // The model is immutable output only if and only if the immutable output model setting is enabled and
                 // the usage of the model include output and does not include input.
@@ -199,18 +199,29 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
-                } else if (settings.isStreamStyleSerialization() && model.isPolymorphicParent()
-                    && (property.isReadOnly() || (immutableOutputOnlyModel && !property.isRequired()))) {
-                    // If stream-style serialization is being generated, the model has derived types, and the property
-                    // is readonly or is part of an immutable output model, generate a package-private setter method
-                    // that uses the wire type for setting the value. This will be used in stream-style serialization as
-                    // it doesn't perform reflective cracking like Jackson Databind does, which means it needs a way to
-                    // access the readonly property (aka one without a public setter method).
-                    generateSetterJavadoc(classBlock, model, property);
-                    classBlock.method(JavaVisibility.PackagePrivate, null,
-                        model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " " + property.getName() + ")",
-                        methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
-                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
+                } else {
+                    // If stream-style serialization is being generated, some additional setters may need to be added
+                    // to support read-only properties that aren't included in the constructor.
+                    // Jackson handles this by reflectively setting the value in the parent model, but stream-style
+                    // serialization doesn't perform reflective cracking like Jackson Databind does, so it needs a way
+                    // to access the readonly property (aka one without a public setter method).
+                    //
+                    // The package-private setter is added when the property isn't included in the constructor and is
+                    // defined by this model.
+                    boolean streamStyle = settings.isStreamStyleSerialization();
+                    boolean hasDerivedTypes = !CoreUtils.isNullOrEmpty(model.getDerivedModels());
+                    boolean notIncludedInConstructor = !ClientModelUtil.includePropertyInConstructor(property,
+                        settings);
+                    boolean definedByModel = modelDefinesProperty(model, property);
+                    if (streamStyle && hasDerivedTypes && notIncludedInConstructor && definedByModel) {
+                        generateSetterJavadoc(classBlock, model, property);
+                        classBlock.method(JavaVisibility.PackagePrivate, null,
+                            model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
+                                + property.getName() + ")",
+                            methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
+                                methodBlock, settings,
+                                ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
+                    }
                 }
 
                 // If the property is additional properties, and stream-style serialization isn't being used, add a
@@ -258,7 +269,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 // reference to properties from flattened client model
-                for (ClientModelPropertyReference propertyReference : propertyReferences.stream().filter(ClientModelPropertyReference::isFromFlattenedProperty).collect(Collectors.toList())) {
+                for (ClientModelPropertyReference propertyReference : propertyReferences) {
+                    if (!propertyReference.isFromFlattenedProperty()) {
+                        continue;
+                    }
+
                     ClientModelPropertyAccess property = propertyReference.getReferenceProperty();
                     ClientModelProperty targetProperty = propertyReference.getTargetProperty();
 
@@ -428,7 +443,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             jsonTypeInfo.append("JsonTypeInfo.As.EXISTING_PROPERTY, property = \"");
         }
 
-        jsonTypeInfo.append(model.getPolymorphicDiscriminator()).append("\"");
+        jsonTypeInfo.append(model.getPolymorphicDiscriminatorName()).append("\"");
 
         // If the class has derived models add itself as a default implementation.
         if (hasDerivedModels) {
@@ -532,7 +547,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isPolymorphicDiscriminator() && CoreUtils.isNullOrEmpty(property.getDefaultValue())) {
+            if (property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property)) {
+                // Only the super most parent model should have the polymorphic discriminator as a field.
+                // The child models should use the parent's field. If the polymorphic property is required, it will be
+                // initialized in the parent's constructor. Otherwise, it will be set using the package-private setter.
                 continue;
             }
 
@@ -555,8 +573,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
                 } else {
                     // handle x-ms-client-default
-                    if (property.getDefaultValue() != null) {
-                        if (property.isPolymorphicDiscriminator()) {
+                    // Only set the property to a default value if the property isn't included in the constructor.
+                    // There can be cases with polymorphic discriminators where they have both a default value and are
+                    // required, in which case the default value will be set in the constructor.
+                    if (property.getDefaultValue() != null
+                        && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
+                        if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
                             fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
                         } else {
                             fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
@@ -571,8 +593,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
                 } else {
                     // handle x-ms-client-default
-                    if (property.getDefaultValue() != null) {
-                        if (property.isPolymorphicDiscriminator()) {
+                    // Only set the property to a default value if the property isn't included in the constructor.
+                    // There can be cases with polymorphic discriminators where they have both a default value and are
+                    // required, in which case the default value will be set in the constructor.
+                    if (property.getDefaultValue() != null
+                        && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
+                        if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
                             fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
                         } else {
                             fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
@@ -583,20 +609,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            if (property.isPolymorphicDiscriminator() && settings.isStreamStyleSerialization()) {
-                // Stream-style serialization doesn't need the polymorphic discriminator constant.
-                continue;
-            }
-
             classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
                 comment -> comment.line(property.getDescription()));
 
             addGeneratedAnnotation(classBlock);
             addFieldAnnotations(model, property, classBlock, settings);
 
-            if (property.isPolymorphicDiscriminator()) {
+            if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
                 classBlock.privateStaticFinalVariable(fieldSignature);
-            } else if (ClientModelUtil.includePropertyInConstructor(property, settings) && settings.isStreamStyleSerialization()) {
+            } else if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);
@@ -691,7 +712,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings AutoRest settings.
      * @param classBlock The Java class file.
      */
-    private void addModelConstructor(ClientModel model, JavaVisibility constructorVisibility, JavaSettings settings, JavaClass classBlock) {
+    private void addModelConstructor(ClientModel model, JavaVisibility constructorVisibility, JavaSettings settings,
+        JavaClass classBlock) {
         final boolean requireSerialization = modelRequireSerialization(model);
 
         // Early out on custom strongly typed headers constructor as this has different handling that doesn't require
@@ -701,8 +723,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return;
         }
 
-        // Constant properties are those that are required and constant.
-        List<ClientModelProperty> constantProperties = new ArrayList<>();
+        // Get the required properties from the super class structure.
+        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getParentConstructorProperties(model, settings);
 
         // Required properties are those that are required but not constant.
         List<ClientModelProperty> requiredProperties = new ArrayList<>();
@@ -713,16 +735,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 continue;
             }
 
-            // Bucket into constant or required properties based on whether the property is constant.
-            if (property.isConstant()) {
-                constantProperties.add(property);
-            } else {
+            // Property matches a parent property, don't need to include it twice.
+            if (requiredParentProperties.stream().anyMatch(p -> p.getName().equals(property.getName()))) {
+                continue;
+            }
+
+            // Only include non-constant properties.
+            if (!property.isConstant()) {
                 requiredProperties.add(property);
             }
         }
-
-        // Also get required properties from the super class structure.
-        List<ClientModelProperty> requiredParentProperties = ClientModelUtil.getRequiredWritableParentProperties(model);
 
         // Jackson requires a constructor with @JsonCreator, with parameters in wire type. Ref https://github.com/Azure/autorest.java/issues/2170
         boolean generatePrivateConstructorForJackson = false;
@@ -805,6 +827,22 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // If there are super class properties, call super() first.
             if (superProperties.length() > 0) {
                 constructor.line("super(" + superProperties + ");");
+            }
+
+            // If there is a polymorphic discriminator and stream-style serialization is being used, add a line to
+            // initialize the discriminator.
+            ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
+            if (polymorphicProperty != null && !polymorphicProperty.isRequired()
+                && settings.isStreamStyleSerialization()) {
+                String discriminatorValue = polymorphicProperty.getDefaultValue() != null
+                    ? polymorphicProperty.getDefaultValue()
+                    : polymorphicProperty.getClientType().defaultValueExpression(model.getSerializedName());
+
+                if (modelDefinesProperty(model, polymorphicProperty)) {
+                    constructor.line("this." + polymorphicProperty.getName() + " = " + discriminatorValue + ";");
+                } else {
+                    constructor.line(polymorphicProperty.getSetterName() + "(" + discriminatorValue + ");");
+                }
             }
 
             // constant properties should already be initialized in class variable definition
@@ -916,7 +954,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
-        String expression = property.isPolymorphicDiscriminator()
+        String expression = (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization())
             ? CodeNamer.getEnumMemberName(property.getName())
             : "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
@@ -965,7 +1003,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param isJsonMergePatchModel Whether the client model is a JSON merge patch model.
      */
     private static void addSetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
-                                        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings, boolean isJsonMergePatchModel) {
+        boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings, boolean isJsonMergePatchModel) {
         String expression = (propertyClientType.equals(ArrayType.BYTE_ARRAY))
             ? TemplateHelper.getByteCloneExpression(property.getName())
             : property.getName();
@@ -1124,6 +1162,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
                 && property.getWireType() != property.getClientType());
 
+        if (!ret && !CoreUtils.isNullOrEmpty(model.getParentModelName())) {
+            ret = ClientModelUtil.getParentProperties(model).stream()
+                .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
+                    && property.getWireType() != property.getClientType());
+        }
+
         // flatten properties
         if (!ret && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
             // "return this.innerProperties() == null ? EMPTY_BYTE_ARRAY : this.innerProperties().property1();"
@@ -1230,5 +1274,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     "model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" +
                     "return model;\n" + "});", model.getName()));
         });
+    }
+
+    private static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
+        return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
+            Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
     }
 }

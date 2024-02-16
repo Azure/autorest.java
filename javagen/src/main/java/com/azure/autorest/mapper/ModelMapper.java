@@ -38,6 +38,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -250,24 +251,31 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     needsFlatten |= (discriminatorSerializedName.contains(".") && !settings.requireXMsFlattenedToFlatten());
                 }
             }
+
+            String polymorphicDiscriminator = null;
             if (isPolymorphic) {
                 String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
                 // Only escape the discriminator if the model will be flattened.
-                String polymorphicDiscriminator = needsFlatten
+                polymorphicDiscriminator = needsFlatten
                     ? discriminatorSerializedName.replace(".", "\\\\.")
                     : discriminatorSerializedName;
 
-                builder.polymorphicDiscriminator(polymorphicDiscriminator);
-
+                final String finalPolymorphicDiscriminator = polymorphicDiscriminator;
                 ClientModelProperty discriminatorProperty = createDiscriminatorProperty(
                     settings, hasChildren, compositeType,
-                    annotationArgs -> annotationArgs.replace(discriminatorSerializedName, polymorphicDiscriminator),
+                    annotationArgs -> annotationArgs.replace(discriminatorSerializedName, finalPolymorphicDiscriminator),
                     polymorphicDiscriminator);
 
                 if (discriminatorProperty != null) {
                     properties.add(discriminatorProperty);
-                    modelImports.add(JsonTypeId.class.getName());
+
+                    if (!settings.isStreamStyleSerialization()) {
+                        modelImports.add(JsonTypeId.class.getName());
+                    }
                 }
+
+                builder.polymorphicDiscriminatorName(polymorphicDiscriminator)
+                    .polymorphicDiscriminator(discriminatorProperty);
             }
 
             builder.needsFlatten(needsFlatten);
@@ -276,6 +284,29 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
                 ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
+                if (Objects.equals(polymorphicDiscriminator, modelProperty.getSerializedName())) {
+                    // Discriminator is defined both as the discriminator and a property in the model.
+                    // Make the discriminator property required if the property is required. But don't add the property
+                    // again as it would result in two properties for the same serialized name.
+                    properties.get(0).setRequired(modelProperty.isRequired());
+
+                    // If the model has children models, copy the requirement logic to the children models with the same
+                    // polymorphic discriminator.
+                    // Passing from the parent is performed instead of children checking the parent as children will
+                    // complete mapping before the parent. So, the parent is last to complete and the children models
+                    // will be fully defined. If the inverse was done, children checking the parent, the parent would
+                    // be null or an infinite loop would happen.
+                    if (!CoreUtils.isNullOrEmpty(derivedTypes)) {
+                        for (ClientModel derivedType : derivedTypes) {
+                            if (Objects.equals(derivedType.getPolymorphicDiscriminator().getSerializedName(), polymorphicDiscriminator)) {
+                                derivedType.getPolymorphicDiscriminator().setRequired(modelProperty.isRequired());
+                            }
+                        }
+                    }
+
+                    continue;
+                }
+
                 properties.add(modelProperty);
 
                 if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {

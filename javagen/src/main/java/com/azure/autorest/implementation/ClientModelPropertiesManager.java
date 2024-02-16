@@ -48,19 +48,18 @@ public final class ClientModelPropertiesManager {
     private final int requiredPropertiesCount;
     private final int setterPropertiesCount;
     private final int readOnlyPropertiesCount;
-    private final List<ClientModelProperty> superConstructorProperties;
-    private final List<ClientModelProperty> superRequiredProperties;
-    private final List<ClientModelProperty> superSetterProperties;
-    private final List<ClientModelProperty> superReadOnlyProperties;
+    private final LinkedHashMap<String, ClientModelProperty> superConstructorProperties;
+    private final LinkedHashMap<String, ClientModelProperty> superRequiredProperties;
+    private final LinkedHashMap<String, ClientModelProperty> superSetterProperties;
+    private final LinkedHashMap<String, ClientModelProperty> superReadOnlyProperties;
     private final ClientModelProperty superAdditionalPropertiesProperty;
-    private final List<ClientModelProperty> constructorProperties;
-    private final List<ClientModelProperty> requiredProperties;
-    private final List<ClientModelProperty> setterProperties;
-    private final List<ClientModelProperty> readOnlyProperties;
+    private final LinkedHashMap<String, ClientModelProperty> constructorProperties;
+    private final LinkedHashMap<String, ClientModelProperty> requiredProperties;
+    private final LinkedHashMap<String, ClientModelProperty> setterProperties;
+    private final LinkedHashMap<String, ClientModelProperty> readOnlyProperties;
     private final ClientModelProperty additionalProperties;
-    private final ClientModelProperty discriminatorProperty;
+    private final ClientModelPropertyWithMetadata discriminatorProperty;
     private final String expectedDiscriminator;
-    private final boolean discriminatorIsRequired;
     private final JsonFlattenedPropertiesTree jsonFlattenedPropertiesTree;
     private final String jsonReaderFieldNameVariableName;
 
@@ -92,15 +91,14 @@ public final class ClientModelPropertiesManager {
         this.model = model;
         this.deserializedModelName = "deserialized" + model.getName();
         this.expectedDiscriminator = model.getSerializedName();
-        String polymorphicDiscriminator = model.getPolymorphicDiscriminator();
-        boolean discriminatorIsRequired = false;
+        ClientModelPropertyWithMetadata discriminatorProperty = null;
 
         Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
         boolean hasRequiredProperties = false;
-        superConstructorProperties = new ArrayList<>();
-        superRequiredProperties = new ArrayList<>();
-        superSetterProperties = new ArrayList<>();
-        superReadOnlyProperties = new ArrayList<>();
+        superConstructorProperties = new LinkedHashMap<>();
+        superRequiredProperties = new LinkedHashMap<>();
+        superSetterProperties = new LinkedHashMap<>();
+        superReadOnlyProperties = new LinkedHashMap<>();
         ClientModelProperty superAdditionalProperties = null;
         boolean hasXmlElements = false;
         boolean hasXmlTexts = false;
@@ -128,33 +126,19 @@ public final class ClientModelPropertiesManager {
         }
 
         for (ClientModelProperty property : ClientModelUtil.getParentProperties(model)) {
-            // Ignore additional properties and polymorphic discriminators from parent types as they will be handled
-            // specifically in the subtype.
+            // Ignore additional properties from parent types as it will be handled specifically in the subtype.
             if (property.isAdditionalProperties()) {
                 superAdditionalProperties = property;
                 continue;
-            } else if (property.isPolymorphicDiscriminator()) {
-                continue;
             }
 
-            if (property.isRequired()) {
-                hasRequiredProperties = true;
-                if (Objects.equals(property.getSerializedName(), polymorphicDiscriminator)) {
-                    discriminatorIsRequired = true;
-                }
-
-                superRequiredProperties.add(property);
-
-                if (!property.isConstant()) {
-                    if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
-                        superConstructorProperties.add(property);
-                    } else {
-                        superReadOnlyProperties.add(property);
-                    }
-                }
-            } else {
-                superSetterProperties.add(property);
+            if (property.isPolymorphicDiscriminator()) {
+                discriminatorProperty = new ClientModelPropertyWithMetadata(model, property, true);
             }
+
+            superPropertyConsumer(property, superRequiredProperties, superConstructorProperties,
+                superReadOnlyProperties, superSetterProperties, settings);
+            hasRequiredProperties |= property.isRequired();
 
             if (property.getNeedsFlatten()) {
                 flattenedProperties.put(property.getName(), new ClientModelPropertyWithMetadata(model, property, true));
@@ -180,36 +164,46 @@ public final class ClientModelPropertiesManager {
 
         this.superAdditionalPropertiesProperty = superAdditionalProperties;
 
-        constructorProperties = new ArrayList<>();
-        requiredProperties = new ArrayList<>();
-        setterProperties = new ArrayList<>();
-        readOnlyProperties = new ArrayList<>();
-        ClientModelProperty discriminatorProperty = null;
+        constructorProperties = new LinkedHashMap<>();
+        requiredProperties = new LinkedHashMap<>();
+        setterProperties = new LinkedHashMap<>();
+        readOnlyProperties = new LinkedHashMap<>();
         ClientModelProperty additionalProperties = null;
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isRequired()) {
+            if (property.isPolymorphicDiscriminator() && discriminatorProperty != null
+                && Objects.equals(discriminatorProperty.getProperty().getSerializedName(), property.getSerializedName())) {
+                // The super type has defined the discriminator property, don't include it in the models properties
+                // but override the property it's pointing to in the super properties. Overriding is needed to ensure
+                // the correct default value is used.
+                superPropertyConsumer(property, superRequiredProperties, superConstructorProperties,
+                    superReadOnlyProperties, superSetterProperties, settings);
+            } else if (property.isRequired()) {
                 hasRequiredProperties = true;
-                if (Objects.equals(property.getSerializedName(), polymorphicDiscriminator)) {
-                    discriminatorIsRequired = true;
-                }
-
-                requiredProperties.add(property);
+                requiredProperties.put(property.getSerializedName(), property);
 
                 if (!property.isConstant()) {
                     if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
-                        constructorProperties.add(property);
+                        constructorProperties.put(property.getSerializedName(), property);
                     } else {
-                        readOnlyProperties.add(property);
+                        readOnlyProperties.put(property.getSerializedName(), property);
                     }
                 }
             } else if (property.isAdditionalProperties()) {
                 // Extract the additionalProperties property as this will need to be passed into all deserialization
                 // logic creation calls.
                 additionalProperties = property;
-            } else if (property.isPolymorphicDiscriminator()) {
-                discriminatorProperty = property;
             } else {
-                setterProperties.add(property);
+                setterProperties.put(property.getSerializedName(), property);
+            }
+
+            if (property.isPolymorphicDiscriminator()) {
+                if (discriminatorProperty == null) {
+                    discriminatorProperty = new ClientModelPropertyWithMetadata(model, property, false);
+                } else if (Objects.equals(discriminatorProperty.getProperty().getSerializedName(), property.getSerializedName())) {
+                    discriminatorProperty = new ClientModelPropertyWithMetadata(model, property, true);
+                } else {
+                    discriminatorProperty = new ClientModelPropertyWithMetadata(model, property, false);
+                }
             }
 
             if (property.getNeedsFlatten()) {
@@ -240,17 +234,15 @@ public final class ClientModelPropertiesManager {
             && (!CoreUtils.isNullOrEmpty(readOnlyProperties) || !CoreUtils.isNullOrEmpty(superReadOnlyProperties));
 
         this.hasRequiredProperties = hasRequiredProperties;
-        this.requiredPropertiesCount = requiredProperties.size() + superRequiredProperties.size()
-            + (discriminatorIsRequired ? 1 : 0);
+        this.requiredPropertiesCount = requiredProperties.size() + superRequiredProperties.size();
         this.setterPropertiesCount = setterProperties.size() + superSetterProperties.size();
         this.readOnlyPropertiesCount = readOnlyProperties.size() + superReadOnlyProperties.size();
         this.hasConstructorArguments = requiredConstructorProperties || readOnlyConstructorProperties;
         this.hasXmlElements = hasXmlElements;
         this.hasXmlTexts = hasXmlTexts;
         this.discriminatorProperty = discriminatorProperty;
-        this.discriminatorIsRequired = discriminatorIsRequired;
         this.additionalProperties = additionalProperties;
-        this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminator(),
+        this.jsonFlattenedPropertiesTree = getFlattenedPropertiesHierarchy(model.getPolymorphicDiscriminatorName(),
             flattenedProperties);
         Iterator<String> possibleReaderFieldNameVariableNamesIterator = possibleReaderFieldNameVariableNames.iterator();
         if (possibleReaderFieldNameVariableNamesIterator.hasNext()) {
@@ -270,6 +262,26 @@ public final class ClientModelPropertiesManager {
 
         this.xmlNamespaceToConstantMapping = model.getXmlName() == null
             ? Collections.emptyMap() : ClientModelUtil.xmlNamespaceToConstantMapping(model);
+    }
+
+    private static void superPropertyConsumer(ClientModelProperty property,
+        LinkedHashMap<String, ClientModelProperty> superRequiredProperties,
+        LinkedHashMap<String, ClientModelProperty> superConstructorProperties,
+        LinkedHashMap<String, ClientModelProperty> superReadOnlyProperties,
+        LinkedHashMap<String, ClientModelProperty> superSetterProperties, JavaSettings settings) {
+        if (property.isRequired()) {
+            superRequiredProperties.put(property.getSerializedName(), property);
+
+            if (!property.isConstant()) {
+                if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
+                    superConstructorProperties.put(property.getSerializedName(), property);
+                } else {
+                    superReadOnlyProperties.put(property.getSerializedName(), property);
+                }
+            }
+        } else {
+            superSetterProperties.put(property.getSerializedName(), property);
+        }
     }
 
     /**
@@ -343,7 +355,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachSuperConstructorProperty(Consumer<ClientModelProperty> consumer) {
-        superConstructorProperties.forEach(consumer);
+        superConstructorProperties.values().forEach(consumer);
     }
 
     /**
@@ -353,7 +365,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachSuperRequiredProperty(Consumer<ClientModelProperty> consumer) {
-        superRequiredProperties.forEach(consumer);
+        superRequiredProperties.values().forEach(consumer);
     }
 
     /**
@@ -363,7 +375,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachSuperSetterProperty(Consumer<ClientModelProperty> consumer) {
-        superSetterProperties.forEach(consumer);
+        superSetterProperties.values().forEach(consumer);
     }
 
     /**
@@ -373,7 +385,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachSuperReadOnlyProperty(Consumer<ClientModelProperty> consumer) {
-        superReadOnlyProperties.forEach(consumer);
+        superReadOnlyProperties.values().forEach(consumer);
     }
 
     /**
@@ -382,7 +394,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachConstructorProperty(Consumer<ClientModelProperty> consumer) {
-        constructorProperties.forEach(consumer);
+        constructorProperties.values().forEach(consumer);
     }
 
     /**
@@ -391,7 +403,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachRequiredProperty(Consumer<ClientModelProperty> consumer) {
-        requiredProperties.forEach(consumer);
+        requiredProperties.values().forEach(consumer);
     }
 
     /**
@@ -400,7 +412,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachSetterProperty(Consumer<ClientModelProperty> consumer) {
-        setterProperties.forEach(consumer);
+        setterProperties.values().forEach(consumer);
     }
 
     /**
@@ -409,7 +421,7 @@ public final class ClientModelPropertiesManager {
      * @param consumer The {@link ClientModelProperty} consumer.
      */
     public void forEachReadOnlyProperty(Consumer<ClientModelProperty> consumer) {
-        readOnlyProperties.forEach(consumer);
+        readOnlyProperties.values().forEach(consumer);
     }
 
     /**
@@ -437,14 +449,14 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
-     * Gets the {@link ClientModelProperty} that defines the discriminator property for polymorphic types.
+     * Gets the {@link ClientModelPropertyWithMetadata} that defines the discriminator property for polymorphic types.
      * <p>
      * If the model isn't polymorphic this will return null.
      *
-     * @return The {@link ClientModelProperty} that defines the discriminator property for polymorphic types, or null if
-     * the model isn't a polymorphic type.
+     * @return The {@link ClientModelPropertyWithMetadata} that defines the discriminator property for polymorphic
+     * types, or null if the model isn't a polymorphic type.
      */
-    public ClientModelProperty getDiscriminatorProperty() {
+    public ClientModelPropertyWithMetadata getDiscriminatorProperty() {
         return discriminatorProperty;
     }
 
@@ -458,17 +470,6 @@ public final class ClientModelPropertiesManager {
      */
     public String getExpectedDiscriminator() {
         return expectedDiscriminator;
-    }
-
-    /**
-     * Whether the discriminator property is required for the polymorphic model.
-     * <p>
-     * If the model isn't polymorphic this will return false.
-     *
-     * @return Whether the discriminator property is required for the polymorphic model.
-     */
-    public boolean isDiscriminatorRequired() {
-        return discriminatorIsRequired;
     }
 
     /**

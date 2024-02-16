@@ -106,7 +106,7 @@ public class ServiceClientProperty {
     }
 
     /**
-     * @return the name of this parameter when it is serialized. It could be {@code null}, if this parameter is client only.
+     * @return the name of this parameter when it is serialized. It could be null, if this parameter is client only.
      */
     public String getRequestParameterName() {
         return requestParameterName;

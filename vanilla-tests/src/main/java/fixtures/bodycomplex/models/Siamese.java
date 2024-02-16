@@ -5,7 +5,10 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,7 +19,6 @@ public final class Siamese extends Cat {
     /*
      * The breed property.
      */
-    @JsonProperty(value = "breed")
     private String breed;
 
     /**
@@ -89,5 +91,51 @@ public final class Siamese extends Cat {
     @Override
     public void validate() {
         super.validate();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("id", getId());
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("color", getColor());
+        jsonWriter.writeArrayField("hates", getHates(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("breed", this.breed);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Siamese from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IOException If an error occurs while reading the Siamese.
+     */
+    public static Siamese fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Siamese deserializedSiamese = new Siamese();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    deserializedSiamese.setId(reader.getNullable(JsonReader::getInt));
+                } else if ("name".equals(fieldName)) {
+                    deserializedSiamese.setName(reader.getString());
+                } else if ("color".equals(fieldName)) {
+                    deserializedSiamese.setColor(reader.getString());
+                } else if ("hates".equals(fieldName)) {
+                    List<Dog> hates = reader.readArray(reader1 -> Dog.fromJson(reader1));
+                    deserializedSiamese.setHates(hates);
+                } else if ("breed".equals(fieldName)) {
+                    deserializedSiamese.breed = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedSiamese;
+        });
     }
 }

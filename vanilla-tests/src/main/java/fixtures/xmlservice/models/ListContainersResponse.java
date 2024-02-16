@@ -5,63 +5,49 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.core.util.CoreUtils;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * An enumeration of containers.
  */
-@JacksonXmlRootElement(localName = "EnumerationResults")
 @Fluent
-public final class ListContainersResponse {
+public final class ListContainersResponse implements XmlSerializable<ListContainersResponse> {
     /*
      * The ServiceEndpoint property.
      */
-    @JacksonXmlProperty(localName = "ServiceEndpoint", isAttribute = true)
     private String serviceEndpoint;
 
     /*
      * The Prefix property.
      */
-    @JsonProperty(value = "Prefix", required = true)
     private String prefix;
 
     /*
      * The Marker property.
      */
-    @JsonProperty(value = "Marker")
     private String marker;
 
     /*
      * The MaxResults property.
      */
-    @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
-
-    static final class ContainersWrapper {
-        @JacksonXmlProperty(localName = "Container")
-        private final List<Container> items;
-
-        @JsonCreator
-        private ContainersWrapper(@JacksonXmlProperty(localName = "Container") List<Container> items) {
-            this.items = items;
-        }
-    }
 
     /*
      * The Containers property.
      */
-    @JsonProperty(value = "Containers")
-    private ContainersWrapper containers;
+    private List<Container> containers;
 
     /*
      * The NextMarker property.
      */
-    @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
 
     /**
@@ -157,9 +143,9 @@ public final class ListContainersResponse {
      */
     public List<Container> getContainers() {
         if (this.containers == null) {
-            this.containers = new ContainersWrapper(new ArrayList<Container>());
+            this.containers = new ArrayList<>();
         }
-        return this.containers.items;
+        return this.containers;
     }
 
     /**
@@ -169,7 +155,7 @@ public final class ListContainersResponse {
      * @return the ListContainersResponse object itself.
      */
     public ListContainersResponse setContainers(List<Container> containers) {
-        this.containers = new ContainersWrapper(containers);
+        this.containers = containers;
         return this;
     }
 
@@ -212,5 +198,91 @@ public final class ListContainersResponse {
         if (getNextMarker() == null) {
             throw new IllegalArgumentException("Missing required property nextMarker in model ListContainersResponse");
         }
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeStringAttribute("ServiceEndpoint", this.serviceEndpoint);
+        xmlWriter.writeStringElement("Prefix", this.prefix);
+        xmlWriter.writeStringElement("Marker", this.marker);
+        xmlWriter.writeIntElement("MaxResults", this.maxResults);
+        if (this.containers != null) {
+            xmlWriter.writeStartElement("Containers");
+            for (Container element : this.containers) {
+                xmlWriter.writeXml(element, "Container");
+            }
+            xmlWriter.writeEndElement();
+        }
+        xmlWriter.writeStringElement("NextMarker", this.nextMarker);
+        return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of ListContainersResponse from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
+     * was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ListContainersResponse.
+     */
+    public static ListContainersResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of ListContainersResponse from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     * cases where the model can deserialize from different root element names.
+     * @return An instance of ListContainersResponse if the XmlReader was pointing to an instance of it, or null if it
+     * was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ListContainersResponse.
+     */
+    public static ListContainersResponse fromXml(XmlReader xmlReader, String rootElementName)
+        throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ListContainersResponse deserializedListContainersResponse = new ListContainersResponse();
+            deserializedListContainersResponse.serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
+
+                if ("Prefix".equals(elementName.getLocalPart())) {
+                    deserializedListContainersResponse.prefix = reader.getStringElement();
+                } else if ("Marker".equals(elementName.getLocalPart())) {
+                    deserializedListContainersResponse.marker = reader.getStringElement();
+                } else if ("MaxResults".equals(elementName.getLocalPart())) {
+                    deserializedListContainersResponse.maxResults = reader.getIntElement();
+                } else if ("Containers".equals(elementName.getLocalPart())) {
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        elementName = reader.getElementName();
+                        if ("Container".equals(elementName.getLocalPart())) {
+                            if (deserializedListContainersResponse.containers == null) {
+                                deserializedListContainersResponse.containers = new ArrayList<>();
+                            }
+                            deserializedListContainersResponse.containers.add(Container.fromXml(reader, "Container"));
+                        } else {
+                            reader.skipElement();
+                        }
+                    }
+                } else if ("NextMarker".equals(elementName.getLocalPart())) {
+                    deserializedListContainersResponse.nextMarker = reader.getStringElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
+
+            return deserializedListContainersResponse;
+        });
     }
 }

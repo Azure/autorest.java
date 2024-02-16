@@ -7,7 +7,6 @@ package fixtures.header.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * The HeadersResponseIntegerHeaders model.
@@ -17,7 +16,6 @@ public final class HeadersResponseIntegerHeaders {
     /*
      * The value property.
      */
-    @JsonProperty(value = "value")
     private Integer value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");

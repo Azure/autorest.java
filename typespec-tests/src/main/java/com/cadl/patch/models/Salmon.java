@@ -69,6 +69,7 @@ public final class Salmon extends Fish {
     @Generated
     public Salmon(int age) {
         super(age);
+        setKind("salmon");
     }
 
     /**
@@ -157,8 +158,8 @@ public final class Salmon extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", "salmon");
             jsonWriter.writeIntField("age", getAge());
+            jsonWriter.writeStringField("kind", getKind());
             jsonWriter.writeStringField("color", getColor());
             jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
@@ -169,8 +170,12 @@ public final class Salmon extends Fish {
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "salmon");
         jsonWriter.writeIntField("age", getAge());
+        if (getKind() != null) {
+            jsonWriter.writeStringField("kind", getKind());
+        } else if (updatedProperties.contains("kind")) {
+            jsonWriter.writeNullField("kind");
+        }
         if (getColor() != null) {
             jsonWriter.writeStringField("color", getColor());
         } else if (updatedProperties.contains("color")) {
@@ -210,8 +215,7 @@ public final class Salmon extends Fish {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Salmon.
      */
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
@@ -219,6 +223,7 @@ public final class Salmon extends Fish {
             String id = null;
             String name = null;
             int age = 0;
+            String kind = "salmon";
             String color = null;
             List<Fish> friends = null;
             Map<String, Fish> hate = null;
@@ -227,19 +232,14 @@ public final class Salmon extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"salmon".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'salmon'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("id".equals(fieldName)) {
+                if ("id".equals(fieldName)) {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
                 } else if ("friends".equals(fieldName)) {
@@ -255,6 +255,7 @@ public final class Salmon extends Fish {
             Salmon deserializedSalmon = new Salmon(age);
             deserializedSalmon.setId(id);
             deserializedSalmon.setName(name);
+            deserializedSalmon.setKind(kind);
             deserializedSalmon.setColor(color);
             deserializedSalmon.friends = friends;
             deserializedSalmon.hate = hate;

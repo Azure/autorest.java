@@ -46,6 +46,14 @@ public abstract class NewPlugin {
         return connection.request(jsonMapper.constructType(type), "GetValue", sessionId, key);
     }
 
+//    public <K, V> Map<K, V> getMapValue(Class<K> keyType, Class<V> valueType, String key) {
+//        return getValue(jsonMapper.getTypeFactory().constructMapType(Map.class, keyType, valueType), key);
+//    }
+//
+//    public <T> List<T> getListValue(Class<T> valueType, String key) {
+//        return getValue(jsonMapper.getTypeFactory().constructCollectionType(List.class, valueType), key);
+//    }
+
     public String getStringValue(String key) {
         return getValue(String.class, key);
     }

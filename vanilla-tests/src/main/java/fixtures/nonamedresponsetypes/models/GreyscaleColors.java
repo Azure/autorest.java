@@ -4,9 +4,6 @@
 
 package fixtures.nonamedresponsetypes.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
-
 /**
  * Defines values for GreyscaleColors.
  */
@@ -41,7 +38,6 @@ public enum GreyscaleColors {
      * @param value the serialized value to parse.
      * @return the parsed GreyscaleColors object, or null if unable to parse.
      */
-    @JsonCreator
     public static GreyscaleColors fromString(String value) {
         if (value == null) {
             return null;
@@ -58,7 +54,6 @@ public enum GreyscaleColors {
     /**
      * {@inheritDoc}
      */
-    @JsonValue
     @Override
     public String toString() {
         return this.value;

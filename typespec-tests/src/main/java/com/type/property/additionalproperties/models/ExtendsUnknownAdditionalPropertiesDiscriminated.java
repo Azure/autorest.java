@@ -21,6 +21,12 @@ import java.util.Map;
 public class ExtendsUnknownAdditionalPropertiesDiscriminated
     implements JsonSerializable<ExtendsUnknownAdditionalPropertiesDiscriminated> {
     /*
+     * The discriminator
+     */
+    @Generated
+    private String kind;
+
+    /*
      * The name property
      */
     @Generated
@@ -39,7 +45,29 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
      */
     @Generated
     public ExtendsUnknownAdditionalPropertiesDiscriminated(String name) {
+        this.kind = "ExtendsUnknownAdditionalPropertiesDiscriminated";
         this.name = name;
+    }
+
+    /**
+     * Get the kind property: The discriminator.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The discriminator.
+     * 
+     * @param kind the kind value to set.
+     * @return the ExtendsUnknownAdditionalPropertiesDiscriminated object itself.
+     */
+    ExtendsUnknownAdditionalPropertiesDiscriminated setKind(String kind) {
+        this.kind = kind;
+        return this;
     }
 
     /**
@@ -79,6 +107,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeStringField("kind", this.kind);
         if (additionalProperties != null) {
             for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
@@ -93,8 +122,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
      * @param jsonReader The JsonReader being read.
      * @return An instance of ExtendsUnknownAdditionalPropertiesDiscriminated if the JsonReader was pointing to an
      * instance of it, or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ExtendsUnknownAdditionalPropertiesDiscriminated.
      */
     public static ExtendsUnknownAdditionalPropertiesDiscriminated fromJson(JsonReader jsonReader) throws IOException {
@@ -126,6 +154,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
         throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
+            String kind = null;
             Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -133,6 +162,8 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     if (additionalProperties == null) {
                         additionalProperties = new LinkedHashMap<>();
@@ -143,6 +174,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
             }
             ExtendsUnknownAdditionalPropertiesDiscriminated deserializedExtendsUnknownAdditionalPropertiesDiscriminated
                 = new ExtendsUnknownAdditionalPropertiesDiscriminated(name);
+            deserializedExtendsUnknownAdditionalPropertiesDiscriminated.kind = kind;
             deserializedExtendsUnknownAdditionalPropertiesDiscriminated.additionalProperties = additionalProperties;
 
             return deserializedExtendsUnknownAdditionalPropertiesDiscriminated;

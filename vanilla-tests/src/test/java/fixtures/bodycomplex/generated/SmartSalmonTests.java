@@ -16,45 +16,46 @@ public final class SmartSalmonTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
         SmartSalmon model = BinaryData.fromString(
-            "{\"fishtype\":\"smart_salmon\",\"college_degree\":\"lssai\",\"\":{\"eebvmgxsab\":\"datajwnzlljfmp\"},\"location\":\"qduujitcjczdz\",\"iswild\":false,\"species\":\"hkr\",\"length\":38.019188,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"p\",\"length\":43.59222,\"siblings\":[{\"fishtype\":\"Fish\",\"species\":\"vwrwj\",\"length\":48.286907,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":93.839714}]},{\"fishtype\":\"Fish\",\"species\":\"utjeltmrldhugj\",\"length\":66.317825,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":68.56524},{\"fishtype\":\"Fish\",\"length\":94.724525}]},{\"fishtype\":\"Fish\",\"species\":\"hocdgeab\",\"length\":70.60696,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":91.44667},{\"fishtype\":\"Fish\",\"length\":9.046102},{\"fishtype\":\"Fish\",\"length\":89.55463}]}]}]}")
+            "{\"fishtype\":\"mwisdkfthwxmnt\",\"college_degree\":\"qguhmuo\",\"\":{\"gazxuf\":\"dataprwzwbnguitnwui\"},\"location\":\"rfidfvzwdz\",\"iswild\":false,\"species\":\"waopvkmijcmmxd\",\"length\":42.68887,\"siblings\":[{\"fishtype\":\"srp\",\"species\":\"zidnsezcxtbzsgfy\",\"length\":7.1093616,\"siblings\":[{\"fishtype\":\"wmdwzjeiachboo\",\"species\":\"lnrosfqp\",\"length\":18.581312,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":85.271614},{\"fishtype\":\"Fish\",\"length\":77.50827}]},{\"fishtype\":\"ypyqrimzinp\",\"species\":\"wjdk\",\"length\":86.71942,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":7.825482},{\"fishtype\":\"Fish\",\"length\":94.463844},{\"fishtype\":\"Fish\",\"length\":38.036823}]},{\"fishtype\":\"hc\",\"species\":\"nohjt\",\"length\":13.129669,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":60.293747}]},{\"fishtype\":\"oifiyipjxsqwpgr\",\"species\":\"znorcj\",\"length\":23.660505,\"siblings\":[{\"fishtype\":\"Fish\",\"length\":41.42828}]}]}]}")
             .toObject(SmartSalmon.class);
-        Assertions.assertEquals("hkr", model.getSpecies());
-        Assertions.assertEquals(38.019188f, model.getLength());
-        Assertions.assertEquals("p", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(43.59222f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("vwrwj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(48.286907f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(93.839714f,
+        Assertions.assertEquals("waopvkmijcmmxd", model.getSpecies());
+        Assertions.assertEquals(42.68887f, model.getLength());
+        Assertions.assertEquals("zidnsezcxtbzsgfy", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(7.1093616f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("lnrosfqp", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(18.581312f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(85.271614f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals("qduujitcjczdz", model.getLocation());
+        Assertions.assertEquals("rfidfvzwdz", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
-        Assertions.assertEquals("lssai", model.getCollegeDegree());
+        Assertions.assertEquals("qguhmuo", model.getCollegeDegree());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        SmartSalmon model = new SmartSalmon(38.019188f).setSpecies("hkr")
-            .setSiblings(Arrays.asList(new Fish(43.59222f).setSpecies("p")
+        SmartSalmon model = new SmartSalmon(42.68887f).setSpecies("waopvkmijcmmxd")
+            .setSiblings(Arrays.asList(new Fish(7.1093616f).setSpecies("zidnsezcxtbzsgfy")
                 .setSiblings(Arrays.asList(
-                    new Fish(48.286907f).setSpecies("vwrwj").setSiblings(Arrays.asList(new Fish(93.839714f))),
-                    new Fish(66.317825f).setSpecies("utjeltmrldhugj")
-                        .setSiblings(Arrays.asList(new Fish(68.56524f), new Fish(94.724525f))),
-                    new Fish(70.60696f).setSpecies("hocdgeab")
-                        .setSiblings(Arrays.asList(new Fish(91.44667f), new Fish(9.046102f), new Fish(89.55463f)))))))
-            .setLocation("qduujitcjczdz").setIswild(false).setCollegeDegree("lssai")
-            .setAdditionalProperties(mapOf("fishtype", "smart_salmon"));
+                    new Fish(18.581312f).setSpecies("lnrosfqp")
+                        .setSiblings(Arrays.asList(new Fish(85.271614f), new Fish(77.50827f))),
+                    new Fish(86.71942f).setSpecies("wjdk")
+                        .setSiblings(Arrays.asList(new Fish(7.825482f), new Fish(94.463844f), new Fish(38.036823f))),
+                    new Fish(13.129669f).setSpecies("nohjt").setSiblings(Arrays.asList(new Fish(60.293747f))),
+                    new Fish(23.660505f).setSpecies("znorcj").setSiblings(Arrays.asList(new Fish(41.42828f)))))))
+            .setLocation("rfidfvzwdz").setIswild(false).setCollegeDegree("qguhmuo")
+            .setAdditionalProperties(mapOf("fishtype", "mwisdkfthwxmnt"));
         model = BinaryData.fromObject(model).toObject(SmartSalmon.class);
-        Assertions.assertEquals("hkr", model.getSpecies());
-        Assertions.assertEquals(38.019188f, model.getLength());
-        Assertions.assertEquals("p", model.getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(43.59222f, model.getSiblings().get(0).getLength());
-        Assertions.assertEquals("vwrwj", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
-        Assertions.assertEquals(48.286907f, model.getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals(93.839714f,
+        Assertions.assertEquals("waopvkmijcmmxd", model.getSpecies());
+        Assertions.assertEquals(42.68887f, model.getLength());
+        Assertions.assertEquals("zidnsezcxtbzsgfy", model.getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(7.1093616f, model.getSiblings().get(0).getLength());
+        Assertions.assertEquals("lnrosfqp", model.getSiblings().get(0).getSiblings().get(0).getSpecies());
+        Assertions.assertEquals(18.581312f, model.getSiblings().get(0).getSiblings().get(0).getLength());
+        Assertions.assertEquals(85.271614f,
             model.getSiblings().get(0).getSiblings().get(0).getSiblings().get(0).getLength());
-        Assertions.assertEquals("qduujitcjczdz", model.getLocation());
+        Assertions.assertEquals("rfidfvzwdz", model.getLocation());
         Assertions.assertEquals(false, model.iswild());
-        Assertions.assertEquals("lssai", model.getCollegeDegree());
+        Assertions.assertEquals("qguhmuo", model.getCollegeDegree());
     }
 
     // Use "Map.of" if available
