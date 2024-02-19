@@ -24,13 +24,14 @@ public final class Sparrow extends Bird {
     @Generated
     public Sparrow(int wingspan) {
         super(wingspan);
+        setKind("sparrow");
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "sparrow");
         jsonWriter.writeIntField("wingspan", getWingspan());
+        jsonWriter.writeStringField("kind", getKind());
         return jsonWriter.writeEndObject();
     }
 
@@ -40,31 +41,29 @@ public final class Sparrow extends Bird {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Sparrow if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Sparrow.
      */
     public static Sparrow fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int wingspan = 0;
+            String kind = "sparrow";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"sparrow".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'sparrow'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("wingspan".equals(fieldName)) {
+                if ("wingspan".equals(fieldName)) {
                     wingspan = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new Sparrow(wingspan);
+            Sparrow deserializedSparrow = new Sparrow(wingspan);
+            deserializedSparrow.setKind(kind);
+
+            return deserializedSparrow;
         });
     }
 }

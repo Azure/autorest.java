@@ -24,13 +24,14 @@ public final class TRex extends Dinosaur {
     @Generated
     private TRex(int size) {
         super(size);
+        setKind("t-rex");
     }
 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "t-rex");
         jsonWriter.writeIntField("size", getSize());
+        jsonWriter.writeStringField("kind", getKind());
         return jsonWriter.writeEndObject();
     }
 
@@ -40,31 +41,29 @@ public final class TRex extends Dinosaur {
      * @param jsonReader The JsonReader being read.
      * @return An instance of TRex if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the TRex.
      */
     public static TRex fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int size = 0;
+            String kind = "t-rex";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"t-rex".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 't-rex'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("size".equals(fieldName)) {
+                if ("size".equals(fieldName)) {
                     size = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new TRex(size);
+            TRex deserializedTRex = new TRex(size);
+            deserializedTRex.setKind(kind);
+
+            return deserializedTRex;
         });
     }
 }

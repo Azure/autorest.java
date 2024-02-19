@@ -66,7 +66,6 @@ Settings can be provided on the command line through `--name:value` or in a READ
 
 |Option                                                                &nbsp;| Description |
 |------------------|-------------|
-|`--enable-xml`|Generates models and clients that can be sent in XML over the wire. Default is false|
 |`--client-side-validations`|Generate validations for required parameters and required model properties. Default is false.|
 |`--generate-client-as-impl`|Append "Impl" to the names of service clients and method groups and place them in the `implementation` sub-package. Default is false.|
 |`--generate-client-interfaces`|Implies `--generate-client-as-impl` and generates interfaces for all the "Impl"s. Default is false.|
@@ -339,9 +338,6 @@ help-content:
     activationScope: java
     categoryFriendlyName: Java Generator
     settings:
-      - key: enable-xml
-        type: bool
-        description: Generates models and clients that can be sent in XML over the wire. Default is false
       - key: client-side-validations
         type: bool
         description: Generate validations for required parameters and required model properties. Default is false.

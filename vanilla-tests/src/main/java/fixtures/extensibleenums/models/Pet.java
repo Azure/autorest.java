@@ -5,29 +5,30 @@
 package fixtures.extensibleenums.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Pet model.
  */
 @Fluent
-public final class Pet {
+public final class Pet implements JsonSerializable<Pet> {
     /*
      * name
      */
-    @JsonProperty(value = "name")
     private String name;
 
     /*
      * Type of Pet
      */
-    @JsonProperty(value = "DaysOfWeek")
     private DaysOfWeekExtensibleEnum daysOfWeek;
 
     /*
      * The IntEnum property.
      */
-    @JsonProperty(value = "IntEnum", required = true)
     private IntEnum intEnum;
 
     /**
@@ -105,5 +106,45 @@ public final class Pet {
         if (getIntEnum() == null) {
             throw new IllegalArgumentException("Missing required property intEnum in model Pet");
         }
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("IntEnum", this.intEnum == null ? null : this.intEnum.toString());
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeStringField("DaysOfWeek", this.daysOfWeek == null ? null : this.daysOfWeek.toString());
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Pet from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Pet if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Pet.
+     */
+    public static Pet fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Pet deserializedPet = new Pet();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("IntEnum".equals(fieldName)) {
+                    deserializedPet.intEnum = IntEnum.fromString(reader.getString());
+                } else if ("name".equals(fieldName)) {
+                    deserializedPet.name = reader.getString();
+                } else if ("DaysOfWeek".equals(fieldName)) {
+                    deserializedPet.daysOfWeek = DaysOfWeekExtensibleEnum.fromString(reader.getString());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedPet;
+        });
     }
 }

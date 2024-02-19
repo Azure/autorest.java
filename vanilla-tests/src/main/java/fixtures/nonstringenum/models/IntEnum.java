@@ -5,7 +5,6 @@
 package fixtures.nonstringenum.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -52,7 +51,6 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
      * @param name a name to look for.
      * @return the corresponding IntEnum.
      */
-    @JsonCreator
     public static IntEnum fromInt(int name) {
         return fromString(String.valueOf(name), IntEnum.class);
     }

@@ -5,7 +5,6 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -37,7 +36,6 @@ public final class ArchiveStatus extends ExpandableStringEnum<ArchiveStatus> {
      * @param name a name to look for.
      * @return the corresponding ArchiveStatus.
      */
-    @JsonCreator
     public static ArchiveStatus fromString(String name) {
         return fromString(name, ArchiveStatus.class);
     }

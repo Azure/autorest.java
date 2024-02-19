@@ -5,37 +5,34 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The product documentation.
  */
-@JsonFlatten
 @Fluent
 public class SimpleProduct extends BaseProduct {
     /*
      * Display name of product.
      */
-    @JsonProperty(value = "details.max_product_display_name")
     private String maxProductDisplayName;
 
     /*
      * Capacity of product. For example, 4 people.
      */
-    @JsonProperty(value = "details.max_product_capacity")
     private SimpleProductPropertiesMaxProductCapacity capacity;
 
     /*
      * Generic URL value.
      */
-    @JsonProperty(value = "details.max_product_image.generic_value")
     private String genericValue;
 
     /*
      * URL value.
      */
-    @JsonProperty(value = "details.max_product_image.@odata\\.value")
     private String odataValue;
 
     /**
@@ -150,5 +147,83 @@ public class SimpleProduct extends BaseProduct {
     @Override
     public void validate() {
         super.validate();
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("base_product_id", getProductId());
+        jsonWriter.writeStringField("base_product_description", getDescription());
+        if (maxProductDisplayName != null || capacity != null || genericValue != null || odataValue != null) {
+            jsonWriter.writeStartObject("details");
+            jsonWriter.writeStringField("max_product_display_name", this.maxProductDisplayName);
+            jsonWriter.writeStringField("max_product_capacity",
+                this.capacity == null ? null : this.capacity.toString());
+            if (genericValue != null || odataValue != null) {
+                jsonWriter.writeStartObject("max_product_image");
+                jsonWriter.writeStringField("generic_value", this.genericValue);
+                jsonWriter.writeStringField("@odata\\.value", this.odataValue);
+                jsonWriter.writeEndObject();
+            }
+            jsonWriter.writeEndObject();
+        }
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of SimpleProduct from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of SimpleProduct if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the SimpleProduct.
+     */
+    public static SimpleProduct fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            SimpleProduct deserializedSimpleProduct = new SimpleProduct();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("base_product_id".equals(fieldName)) {
+                    deserializedSimpleProduct.setProductId(reader.getString());
+                } else if ("base_product_description".equals(fieldName)) {
+                    deserializedSimpleProduct.setDescription(reader.getString());
+                } else if ("details".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("max_product_display_name".equals(fieldName)) {
+                            deserializedSimpleProduct.maxProductDisplayName = reader.getString();
+                        } else if ("max_product_capacity".equals(fieldName)) {
+                            deserializedSimpleProduct.capacity
+                                = SimpleProductPropertiesMaxProductCapacity.fromString(reader.getString());
+                        } else if ("max_product_image".equals(fieldName)
+                            && reader.currentToken() == JsonToken.START_OBJECT) {
+                            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                                fieldName = reader.getFieldName();
+                                reader.nextToken();
+
+                                if ("generic_value".equals(fieldName)) {
+                                    deserializedSimpleProduct.genericValue = reader.getString();
+                                } else if ("@odata\\.value".equals(fieldName)) {
+                                    deserializedSimpleProduct.odataValue = reader.getString();
+                                } else {
+                                    reader.skipChildren();
+                                }
+                            }
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedSimpleProduct;
+        });
     }
 }

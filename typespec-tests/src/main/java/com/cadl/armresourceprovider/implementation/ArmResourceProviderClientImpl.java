@@ -12,8 +12,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.management.AzureEnvironment;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
-import com.azure.core.management.polling.PollResult;
 import com.azure.core.management.polling.PollerFactory;
+import com.azure.core.management.polling.PollResult;
 import com.azure.core.util.Context;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
@@ -24,6 +24,7 @@ import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.SerializerEncoding;
 import com.cadl.armresourceprovider.fluent.ArmResourceProviderClient;
 import com.cadl.armresourceprovider.fluent.ChildResourcesInterfacesClient;
+import com.cadl.armresourceprovider.fluent.CustomTemplateResourceInterfacesClient;
 import com.cadl.armresourceprovider.fluent.OperationsClient;
 import com.cadl.armresourceprovider.fluent.TopLevelArmResourceInterfacesClient;
 import java.io.IOException;
@@ -153,6 +154,20 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
     }
 
     /**
+     * The CustomTemplateResourceInterfacesClient object to access its operations.
+     */
+    private final CustomTemplateResourceInterfacesClient customTemplateResourceInterfaces;
+
+    /**
+     * Gets the CustomTemplateResourceInterfacesClient object to access its operations.
+     * 
+     * @return the CustomTemplateResourceInterfacesClient object.
+     */
+    public CustomTemplateResourceInterfacesClient getCustomTemplateResourceInterfaces() {
+        return this.customTemplateResourceInterfaces;
+    }
+
+    /**
      * The OperationsClient object to access its operations.
      */
     private final OperationsClient operations;
@@ -186,6 +201,7 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
         this.apiVersion = "2023-11-01";
         this.childResourcesInterfaces = new ChildResourcesInterfacesClientImpl(this);
         this.topLevelArmResourceInterfaces = new TopLevelArmResourceInterfacesClientImpl(this);
+        this.customTemplateResourceInterfaces = new CustomTemplateResourceInterfacesClientImpl(this);
         this.operations = new OperationsClientImpl(this);
     }
 

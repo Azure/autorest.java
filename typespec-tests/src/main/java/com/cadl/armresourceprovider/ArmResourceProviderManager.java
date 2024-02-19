@@ -11,8 +11,8 @@ import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -26,9 +26,11 @@ import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.ArmResourceProviderClient;
 import com.cadl.armresourceprovider.implementation.ArmResourceProviderClientBuilder;
 import com.cadl.armresourceprovider.implementation.ChildResourcesInterfacesImpl;
+import com.cadl.armresourceprovider.implementation.CustomTemplateResourceInterfacesImpl;
 import com.cadl.armresourceprovider.implementation.OperationsImpl;
 import com.cadl.armresourceprovider.implementation.TopLevelArmResourceInterfacesImpl;
 import com.cadl.armresourceprovider.models.ChildResourcesInterfaces;
+import com.cadl.armresourceprovider.models.CustomTemplateResourceInterfaces;
 import com.cadl.armresourceprovider.models.Operations;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceInterfaces;
 import java.time.Duration;
@@ -46,6 +48,8 @@ public final class ArmResourceProviderManager {
     private ChildResourcesInterfaces childResourcesInterfaces;
 
     private TopLevelArmResourceInterfaces topLevelArmResourceInterfaces;
+
+    private CustomTemplateResourceInterfaces customTemplateResourceInterfaces;
 
     private Operations operations;
 
@@ -271,6 +275,19 @@ public final class ArmResourceProviderManager {
                 = new TopLevelArmResourceInterfacesImpl(clientObject.getTopLevelArmResourceInterfaces(), this);
         }
         return topLevelArmResourceInterfaces;
+    }
+
+    /**
+     * Gets the resource collection API of CustomTemplateResourceInterfaces. It manages CustomTemplateResource.
+     * 
+     * @return Resource collection API of CustomTemplateResourceInterfaces.
+     */
+    public CustomTemplateResourceInterfaces customTemplateResourceInterfaces() {
+        if (this.customTemplateResourceInterfaces == null) {
+            this.customTemplateResourceInterfaces
+                = new CustomTemplateResourceInterfacesImpl(clientObject.getCustomTemplateResourceInterfaces(), this);
+        }
+        return customTemplateResourceInterfaces;
     }
 
     /**

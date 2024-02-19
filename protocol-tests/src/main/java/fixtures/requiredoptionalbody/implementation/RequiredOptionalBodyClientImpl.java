@@ -31,6 +31,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.requiredoptionalbody.RequiredOptionalBodyServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -54,6 +55,20 @@ public final class RequiredOptionalBodyClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final RequiredOptionalBodyServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public RequiredOptionalBodyServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -88,10 +103,11 @@ public final class RequiredOptionalBodyClientImpl {
      * Initializes an instance of RequiredOptionalBodyClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public RequiredOptionalBodyClientImpl(String host) {
+    public RequiredOptionalBodyClientImpl(String host, RequiredOptionalBodyServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -99,9 +115,11 @@ public final class RequiredOptionalBodyClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, String host,
+        RequiredOptionalBodyServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -110,11 +128,14 @@ public final class RequiredOptionalBodyClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host,
+        RequiredOptionalBodyServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.service
             = RestProxy.create(RequiredOptionalBodyClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }

@@ -18,6 +18,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
+import com.cadl.multipart.implementation.models.UploadFileRequest;
+import com.cadl.multipart.models.FileDataFileDetails;
 import com.cadl.multipart.models.FileDetails;
 import com.cadl.multipart.models.FormData;
 import java.util.Objects;
@@ -43,7 +45,7 @@ public final class MultipartAsyncClient {
     }
 
     /**
-     * request is binary.
+     * The upload operation.
      * <p>
      * <strong>Query Parameters</strong>
      * </p>
@@ -82,7 +84,27 @@ public final class MultipartAsyncClient {
     }
 
     /**
-     * request is binary.
+     * The uploadFile operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Mono<Response<Void>> uploadFileWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is
+        // 'multipart/form-data'
+        return this.serviceClient.uploadFileWithResponseAsync(name, request, requestOptions);
+    }
+
+    /**
+     * The upload operation.
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
@@ -121,7 +143,7 @@ public final class MultipartAsyncClient {
     }
 
     /**
-     * request is binary.
+     * The upload operation.
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
@@ -153,5 +175,31 @@ public final class MultipartAsyncClient {
                         : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
                 .end().getRequestBody(),
             requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The uploadFile operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param fileData Represent a byte array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> uploadFile(String name, FileDataFileDetails fileData) {
+        // Generated convenience method for uploadFileWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        UploadFileRequest requestObj = new UploadFileRequest(fileData);
+        BinaryData request = new MultipartFormDataHelper(requestOptions)
+            .serializeFileField("file_data", requestObj.getFileData().getContent(),
+                requestObj.getFileData().getContentType(), requestObj.getFileData().getFilename())
+            .end().getRequestBody();
+        return uploadFileWithResponse(name, request, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

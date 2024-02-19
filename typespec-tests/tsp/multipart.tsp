@@ -26,7 +26,6 @@ model FormData {
   file?: bytes[];
 }
 
-@doc("request is binary")
 @route("/upload/images/{name}")
 @post
 op upload(
@@ -34,4 +33,12 @@ op upload(
   @query compress?: boolean,
   @header contentType: "multipart/form-data",
   @body data: FormData,
-): void;
+): OkResponse;
+
+@route("/upload/files/{name}")
+@post
+op uploadFile(
+  @path name: string,
+  @header contentType: "multipart/form-data",
+  file_data: bytes,
+): OkResponse;

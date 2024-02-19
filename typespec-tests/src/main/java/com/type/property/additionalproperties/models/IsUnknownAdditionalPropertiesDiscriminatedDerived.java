@@ -40,6 +40,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
     @Generated
     public IsUnknownAdditionalPropertiesDiscriminatedDerived(String name, int index) {
         super(name);
+        setKind("derived");
         this.index = index;
     }
 
@@ -78,8 +79,8 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "derived");
         jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeStringField("kind", getKind());
         jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeNumberField("age", this.age);
         if (getAdditionalProperties() != null) {
@@ -96,13 +97,13 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
      * @param jsonReader The JsonReader being read.
      * @return An instance of IsUnknownAdditionalPropertiesDiscriminatedDerived if the JsonReader was pointing to an
      * instance of it, or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IsUnknownAdditionalPropertiesDiscriminatedDerived.
      */
     public static IsUnknownAdditionalPropertiesDiscriminatedDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
+            String kind = "derived";
             int index = 0;
             Double age = null;
             Map<String, Object> additionalProperties = null;
@@ -110,15 +111,10 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"derived".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'derived'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("name".equals(fieldName)) {
+                if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("index".equals(fieldName)) {
                     index = reader.getInt();
                 } else if ("age".equals(fieldName)) {
@@ -133,6 +129,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
             }
             IsUnknownAdditionalPropertiesDiscriminatedDerived deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived
                 = new IsUnknownAdditionalPropertiesDiscriminatedDerived(name, index);
+            deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.setKind(kind);
             deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.age = age;
             deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.setAdditionalProperties(additionalProperties);
 

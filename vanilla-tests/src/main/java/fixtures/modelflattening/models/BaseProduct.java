@@ -5,24 +5,26 @@
 package fixtures.modelflattening.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The product documentation.
  */
 @Fluent
-public class BaseProduct {
+public class BaseProduct implements JsonSerializable<BaseProduct> {
     /*
      * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San
      * Francisco will have a different product_id than uberX in Los Angeles.
      */
-    @JsonProperty(value = "base_product_id", required = true)
     private String productId;
 
     /*
      * Description of product.
      */
-    @JsonProperty(value = "base_product_description")
     private String description;
 
     /**
@@ -82,5 +84,42 @@ public class BaseProduct {
         if (getProductId() == null) {
             throw new IllegalArgumentException("Missing required property productId in model BaseProduct");
         }
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("base_product_id", this.productId);
+        jsonWriter.writeStringField("base_product_description", this.description);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of BaseProduct from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of BaseProduct if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the BaseProduct.
+     */
+    public static BaseProduct fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            BaseProduct deserializedBaseProduct = new BaseProduct();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("base_product_id".equals(fieldName)) {
+                    deserializedBaseProduct.productId = reader.getString();
+                } else if ("base_product_description".equals(fieldName)) {
+                    deserializedBaseProduct.description = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedBaseProduct;
+        });
     }
 }

@@ -1,11 +1,11 @@
 {
   "name": "@autorest/java",
-  "version": "4.1.26",
+  "version": "4.1.27",
   "description": "The Java extension for classic generators in AutoRest.",
   "scripts": {
     "autorest": "autorest",
-    "start": "java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
-    "debug": "java --add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED --add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
+    "start": "java -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
+    "debug": "java -agentlib:jdwp=transport=dt_socket,server=y,suspend=y,quiet=y,address=5005 -jar javagen/target/azure-autorest-javagen-jar-with-dependencies.jar",
     "build": "mvn package -P local",
     "generate": "./generate",
     "testserver-run": "autorest-testserver run",
@@ -39,7 +39,7 @@
     "*/target/*-jar-with-dependencies.jar"
   ],
   "devDependencies": {
-    "autorest": "^3.0.0",
+    "autorest": "^3.7.1",
     "@microsoft.azure/autorest.testserver": "3.3.48"
   }
 }

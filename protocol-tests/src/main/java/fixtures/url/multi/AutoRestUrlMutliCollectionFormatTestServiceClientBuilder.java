@@ -17,8 +17,8 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -196,6 +196,25 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestUrlMutliCollectionFormatTestServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.
+     */
+    @Generated
+    public AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
+        serviceVersion(AutoRestUrlMutliCollectionFormatTestServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -222,9 +241,11 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     private AutoRestUrlMutliCollectionFormatTestServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestUrlMutliCollectionFormatTestServiceVersion localServiceVersion = (serviceVersion != null)
+            ? serviceVersion : AutoRestUrlMutliCollectionFormatTestServiceVersion.getLatest();
         AutoRestUrlMutliCollectionFormatTestServiceClientImpl client
             = new AutoRestUrlMutliCollectionFormatTestServiceClientImpl(localPipeline,
-                JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

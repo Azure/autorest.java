@@ -246,9 +246,9 @@ public class FluentJavaSettings {
     private void splitStringToSet(String s, Set<String> set) {
         if (!CoreUtils.isNullOrEmpty(s)) {
             set.addAll(Arrays.stream(s.split(Pattern.quote(",")))
-                    .map(String::trim)
-                    .filter(s1 -> !s1.isEmpty())
-                    .collect(Collectors.toSet()));
+                .map(String::trim)
+                .filter(s1 -> !s1.isEmpty())
+                .collect(Collectors.toSet()));
         }
     }
 

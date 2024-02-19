@@ -78,7 +78,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "examples-directory": { type: "string", nullable: true },
 
     "enable-sync-stack": { type: "boolean", nullable: true, default: true },
-    "stream-style-serialization": { type: "boolean", nullable: true, default: false },
+    "stream-style-serialization": { type: "boolean", nullable: true, default: true },
 
     // customization
     "partial-update": { type: "boolean", nullable: true, default: false },
@@ -147,12 +147,6 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     if (options["dev-options"]?.["java-temp-dir"]) {
       javaArgs.push("-Dcodegen.java.temp.directory=" + options["dev-options"]?.["java-temp-dir"]);
     }
-    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.api=ALL-UNNAMED");
-    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.code=ALL-UNNAMED");
-    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.file=ALL-UNNAMED");
-    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.parser=ALL-UNNAMED");
-    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.tree=ALL-UNNAMED");
-    javaArgs.push("--add-exports=jdk.compiler/com.sun.tools.javac.util=ALL-UNNAMED");
     javaArgs.push("-jar");
     javaArgs.push(jarFileName);
     javaArgs.push(codeModelFileName);

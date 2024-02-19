@@ -8,9 +8,6 @@ import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
-import com.azure.autorest.extension.base.model.codemodel.Language;
-import com.azure.autorest.extension.base.model.codemodel.Languages;
-import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -39,6 +36,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -63,6 +61,9 @@ public class ClientModelUtil {
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
     public static final String JSON_MERGE_PATCH_HELPER_CLASS_NAME = "JsonMergePatchHelper";
+
+    private ClientModelUtil() {
+    }
 
     /**
      * Prepare async/sync clients for service client.
@@ -512,6 +513,40 @@ public class ClientModelUtil {
     }
 
     /**
+     * Gets all the properties that parent models define that are part of the constructor.
+     * <p>
+     * This uses {@link ClientModelUtil#includePropertyInConstructor(ClientModelProperty, JavaSettings)} to determine
+     * which properties should be included in the constructor.
+     *
+     * @param model The client model.
+     * @param settings Autorest generation settings.
+     * @return All properties that are defined by super types of the client model that should be included in the
+     * constructor.
+     */
+    public static List<ClientModelProperty> getParentConstructorProperties(ClientModel model, JavaSettings settings) {
+        String lastParentName = model.getName();
+        ClientModel parentModel = getClientModel(model.getParentModelName());
+        Set<ClientModelProperty> constructorProperties = new LinkedHashSet<>();
+        while (parentModel != null && !lastParentName.equals(parentModel.getName())) {
+            // Add the properties in inverse order as they be reverse at the end.
+            List<ClientModelProperty> parentProperties = parentModel.getProperties();
+            for (int i = parentProperties.size() - 1; i >= 0; i--) {
+                ClientModelProperty property = parentProperties.get(i);
+                if (includePropertyInConstructor(property, settings)) {
+                    constructorProperties.add(property);
+                }
+            }
+
+            lastParentName = parentModel.getName();
+            parentModel = getClientModel(parentModel.getParentModelName());
+        }
+
+        List<ClientModelProperty> propertyList = new ArrayList<>(constructorProperties);
+        Collections.reverse(propertyList);
+        return propertyList;
+    }
+
+    /**
      * Indicates whether the property will have a setter method generated for it.
      *
      * @param property The client model property, or a reference.
@@ -542,20 +577,31 @@ public class ClientModelUtil {
     /**
      * Determines whether the {@link ClientModelProperty} should be included in the model's constructor.
      * <p>
-     * {@link ClientModelProperty Properties} are included in the constructor if the following hold true
-     * <ul>
-     * <li>{@link ClientModelProperty#isRequired()} is true</li>
-     * <li>{@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true</li>
-     * <li>{@link ClientModelProperty#isReadOnly()} is false or {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true</li>
-     * </ul>
+     * The {@code property} is included in the constructor if it is {@link ClientModelProperty#isRequired()},
+     * {@link JavaSettings#isRequiredFieldsAsConstructorArgs()} is true, and either the property is not
+     * {@link ClientModelProperty#isReadOnly()}, is {@link ClientModelProperty#isPolymorphicDiscriminator()}, or
+     * {@link JavaSettings#isIncludeReadOnlyInConstructorArgs()} is true.
      *
      * @param property The {@link ClientModelProperty}
      * @param settings The Autorest generation settings.
      * @return Whether the {@code property} should be included in the model's constructor.
      */
     public static boolean includePropertyInConstructor(ClientModelProperty property, JavaSettings settings) {
-        return property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()
-            && (!property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs());
+        // First, the property must be required and the setting to include required fields as constructor args must be
+        // enabled.
+        boolean requiredAndIncluded = property.isRequired() && settings.isRequiredFieldsAsConstructorArgs();
+
+        // Then, one of the property not being read-only or the setting to include read-only properties in constructor
+        // args is enabled must be true.
+        boolean notReadOnlyOrIncludeReadOnly = !property.isReadOnly() || settings.isIncludeReadOnlyInConstructorArgs();
+
+        // Polymorphic discriminators are a special case as they are their own concept within codegen but there can be
+        // cases where the same property is defined as the polymorphic discriminator and a property in the class. Only
+        // when the property defined in the class is required will the polymorphic discriminator be considered needed in
+        // the constructor.
+        boolean polymorphicDiscriminatorIsRequired = property.isPolymorphicDiscriminator() && property.isRequired();
+
+        return requiredAndIncluded && (notReadOnlyOrIncludeReadOnly || polymorphicDiscriminatorIsRequired);
     }
 
     /**
@@ -563,7 +609,7 @@ public class ClientModelUtil {
      *
      * @param clientModelProperty the client model property.
      * @param ignoreGenericType whether to ignore the mismatch, if both wire type and client type is generic type.
-     *                          <p>For example, ignore the case of {@code List<OffsetDateTime>} vs {@code List<Long>}.
+     * For example, ignore the case of {@code List<OffsetDateTime>} vs {@code List<Long>}.
      * @return whether wire type and client type mismatch.
      */
     public static boolean isWireTypeMismatch(ClientModelProperty clientModelProperty, boolean ignoreGenericType) {
@@ -573,8 +619,8 @@ public class ClientModelUtil {
         } else {
             // type mismatch
             if (ignoreGenericType
-                    && clientModelProperty.getClientType() instanceof GenericType
-                    && clientModelProperty.getWireType() instanceof GenericType) {
+                && clientModelProperty.getClientType() instanceof GenericType
+                && clientModelProperty.getWireType() instanceof GenericType) {
                 // at present, ignore generic type, as type erasure causes conflict of 2 constructors
                 return false;
             } else {
@@ -611,6 +657,13 @@ public class ClientModelUtil {
             return model.getPropertyReferences().stream()
                 .filter(ClientModelPropertyReference::isFromFlattenedProperty)
                 .anyMatch(p -> p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION);
+        }
+
+        for (ClientModelPropertyReference p : model.getPropertyReferences()) {
+            if (p.isFromFlattenedProperty() &&
+                (p.getClientType() == ClassType.RESPONSE_ERROR || p.getClientType() == ClassType.DURATION)) {
+                return true;
+            }
         }
 
         return false;
@@ -690,10 +743,10 @@ public class ClientModelUtil {
     public static Set<String> getExternalPackageNamesUsedInClient(List<ClientModel> models, CodeModel codeModel) {
         // models
         Set<String> externalPackageNames = models == null ? new HashSet<>() : models.stream()
-                .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
-                        && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
-                .map(ClientModel::getPackage)
-                .collect(Collectors.toSet());
+            .filter(m -> m.getImplementationDetails() != null && m.getImplementationDetails().getUsages() != null
+                && m.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.EXTERNAL))
+            .map(ClientModel::getPackage)
+            .collect(Collectors.toSet());
 
         // LongRunningMetadata in methods
         if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
@@ -702,10 +755,10 @@ public class ClientModelUtil {
                     for (OperationGroup og : client.getOperationGroups()) {
                         if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
                             externalPackageNames.addAll(og.getOperations().stream()
-                                    .filter(o -> o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null && o.getLroMetadata().getPollingStrategy().getLanguage() != null && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null)
-                                    .map(o -> o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace())
-                                    .filter(Objects::nonNull)
-                                    .collect(Collectors.toSet()));
+                                .filter(o -> o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null && o.getLroMetadata().getPollingStrategy().getLanguage() != null && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null)
+                                .map(o -> o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace())
+                                .filter(Objects::nonNull)
+                                .collect(Collectors.toSet()));
                         }
                     }
                 }
@@ -713,81 +766,6 @@ public class ClientModelUtil {
         }
 
         return externalPackageNames;
-    }
-
-    /**
-     * Gets or creates a new FileDetails model for a multipart/form-data request
-     *
-     * @param compositeType the object schema of the multipart/form-data request model.
-     * @param filePropertyName the property name of the file in the multipart/form-data request model.
-     * @return the ##FileDetails model
-     */
-    public static IType getMultipartFileDetailsModel(
-            ObjectSchema compositeType,
-            String filePropertyName) {
-        // TODO (weidxu): this ##FileDetails model may get renamed and moved to azure-core
-
-        // The ##FileDetails model would inherit the usages from compositeType (the request model). So if the request is INTERNAL, FileDetails model would also be INTERNAL.
-        // But it may reside in a different package, depending on the options e.g. "custom-types"/"custom-types-subpackage".
-
-        String fileDetailsModelName = com.azure.autorest.preprocessor.namer.CodeNamer.getTypeName(
-                filePropertyName.toLowerCase(Locale.ROOT).endsWith("file")
-                        ? filePropertyName + "Details"
-                        : filePropertyName + "FileDetails");
-        ClientModel clientModel = ClientModelUtil.getClientModel(fileDetailsModelName);
-        if (clientModel != null) {
-            return clientModel.getType();
-        }
-
-        // create ClassType
-        ObjectSchema objectSchema = new ObjectSchema();
-        objectSchema.setLanguage(new Languages());
-        objectSchema.getLanguage().setJava(new Language());
-        objectSchema.getLanguage().getJava().setName(fileDetailsModelName);
-        objectSchema.setUsage(compositeType.getUsage());
-        ClassType type = Mappers.getObjectMapper().map(objectSchema);
-
-        // create ClientModel
-        List<ClientModelProperty> properties = new ArrayList<>();
-        properties.add(new ClientModelProperty.Builder()
-                .name("content")
-                .description("The content of the file")
-                .required(true)
-                .readOnly(false)
-                .wireType(ClassType.BINARY_DATA)
-                .clientType(ClassType.BINARY_DATA)
-                .build());
-        properties.add(new ClientModelProperty.Builder()
-                .name("filename")
-                .description("The filename of the file")
-                .required(false)
-                .readOnly(false)
-                .wireType(ClassType.STRING)
-                .clientType(ClassType.STRING)
-                .build());
-        properties.add(new ClientModelProperty.Builder()
-                .name("contentType")
-                .description("The content-type of the file")
-                .required(false)
-                .readOnly(false)
-                .wireType(ClassType.STRING)
-                .clientType(ClassType.STRING)
-                .defaultValue("\"application/octet-stream\"")
-                .build());
-        clientModel = new ClientModel.Builder()
-                .name(fileDetailsModelName)
-                .description("The file details model for the " + filePropertyName)
-                .packageName(type.getPackage())
-                .type(type)
-                .serializationFormats(Set.of(KnownMediaType.MULTIPART.value()))
-                // let it inherit the usage (PUBLIC/INTERNAL) from the multipart/form-data request model
-                .implementationDetails(new ImplementationDetails.Builder()
-                        .usages(SchemaUtil.mapSchemaContext(compositeType.getUsage()))
-                        .build())
-                .properties(properties)
-                .build();
-        ClientModels.getInstance().addModel(clientModel);
-        return clientModel.getType();
     }
 
     public static boolean isMultipartModel(ClientModel model) {

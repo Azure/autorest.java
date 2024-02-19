@@ -37,6 +37,7 @@ public final class Goblinshark extends Shark {
      */
     public Goblinshark(float length, OffsetDateTime birthday) {
         super(length, birthday);
+        setFishtype("goblin");
     }
 
     /**
@@ -119,10 +120,10 @@ public final class Goblinshark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "goblin");
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
+        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
@@ -137,8 +138,7 @@ public final class Goblinshark extends Shark {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Goblinshark if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Goblinshark.
      */
     public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
@@ -147,6 +147,7 @@ public final class Goblinshark extends Shark {
             float length = 0.0f;
             boolean birthdayFound = false;
             OffsetDateTime birthday = null;
+            String fishtype = "goblin";
             String species = null;
             List<Fish> siblings = null;
             Integer age = null;
@@ -156,19 +157,14 @@ public final class Goblinshark extends Shark {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"goblin".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'goblin'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                     birthdayFound = true;
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -185,6 +181,7 @@ public final class Goblinshark extends Shark {
             }
             if (lengthFound && birthdayFound) {
                 Goblinshark deserializedGoblinshark = new Goblinshark(length, birthday);
+                deserializedGoblinshark.setFishtype(fishtype);
                 deserializedGoblinshark.setSpecies(species);
                 deserializedGoblinshark.setSiblings(siblings);
                 deserializedGoblinshark.setAge(age);

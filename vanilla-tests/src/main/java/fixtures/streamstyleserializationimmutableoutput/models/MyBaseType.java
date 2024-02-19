@@ -17,6 +17,11 @@ import java.io.IOException;
 @Immutable
 public class MyBaseType implements JsonSerializable<MyBaseType> {
     /*
+     * The kind property.
+     */
+    private MyKind kind;
+
+    /*
      * The propB1 property.
      */
     private String propB1;
@@ -30,6 +35,27 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * Creates an instance of MyBaseType class.
      */
     protected MyBaseType() {
+        this.kind = MyKind.fromString("MyBaseType");
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    public MyKind getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The kind property.
+     * 
+     * @param kind the kind value to set.
+     * @return the MyBaseType object itself.
+     */
+    MyBaseType setKind(MyKind kind) {
+        this.kind = kind;
+        return this;
     }
 
     /**
@@ -83,6 +109,7 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         jsonWriter.writeStringField("propB1", this.propB1);
         if (propBH1 != null) {
             jsonWriter.writeStartObject("helper");
@@ -98,7 +125,6 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of MyBaseType if the JsonReader was pointing to an instance of it, or null if it was pointing
      * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
      * @throws IOException If an error occurs while reading the MyBaseType.
      */
     public static MyBaseType fromJson(JsonReader jsonReader) throws IOException {
@@ -133,7 +159,9 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("propB1".equals(fieldName)) {
+                if ("kind".equals(fieldName)) {
+                    deserializedMyBaseType.kind = MyKind.fromString(reader.getString());
+                } else if ("propB1".equals(fieldName)) {
                     deserializedMyBaseType.propB1 = reader.getString();
                 } else if ("helper".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
                     while (reader.nextToken() != JsonToken.END_OBJECT) {

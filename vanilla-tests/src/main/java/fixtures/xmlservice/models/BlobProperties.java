@@ -5,183 +5,160 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
 import java.time.OffsetDateTime;
+import java.util.Objects;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * Properties of a blob.
  */
-@JacksonXmlRootElement(localName = "BlobProperties")
 @Fluent
-public final class BlobProperties {
+public final class BlobProperties implements XmlSerializable<BlobProperties> {
     /*
      * The Last-Modified property.
      */
-    @JsonProperty(value = "Last-Modified", required = true)
     private DateTimeRfc1123 lastModified;
 
     /*
      * The Etag property.
      */
-    @JsonProperty(value = "Etag", required = true)
     private String etag;
 
     /*
      * Size in bytes
      */
-    @JsonProperty(value = "Content-Length")
     private Long contentLength;
 
     /*
      * The Content-Type property.
      */
-    @JsonProperty(value = "Content-Type")
     private String contentType;
 
     /*
      * The Content-Encoding property.
      */
-    @JsonProperty(value = "Content-Encoding")
     private String contentEncoding;
 
     /*
      * The Content-Language property.
      */
-    @JsonProperty(value = "Content-Language")
     private String contentLanguage;
 
     /*
      * The Content-MD5 property.
      */
-    @JsonProperty(value = "Content-MD5")
     private String contentMD5;
 
     /*
      * The Content-Disposition property.
      */
-    @JsonProperty(value = "Content-Disposition")
     private String contentDisposition;
 
     /*
      * The Cache-Control property.
      */
-    @JsonProperty(value = "Cache-Control")
     private String cacheControl;
 
     /*
      * The x-ms-blob-sequence-number property.
      */
-    @JsonProperty(value = "x-ms-blob-sequence-number")
     private Integer blobSequenceNumber;
 
     /*
      * The BlobType property.
      */
-    @JsonProperty(value = "BlobType")
     private BlobType blobType;
 
     /*
      * The LeaseStatus property.
      */
-    @JsonProperty(value = "LeaseStatus")
     private LeaseStatusType leaseStatus;
 
     /*
      * The LeaseState property.
      */
-    @JsonProperty(value = "LeaseState")
     private LeaseStateType leaseState;
 
     /*
      * The LeaseDuration property.
      */
-    @JsonProperty(value = "LeaseDuration")
     private LeaseDurationType leaseDuration;
 
     /*
      * The CopyId property.
      */
-    @JsonProperty(value = "CopyId")
     private String copyId;
 
     /*
      * The CopyStatus property.
      */
-    @JsonProperty(value = "CopyStatus")
     private CopyStatusType copyStatus;
 
     /*
      * The CopySource property.
      */
-    @JsonProperty(value = "CopySource")
     private String copySource;
 
     /*
      * The CopyProgress property.
      */
-    @JsonProperty(value = "CopyProgress")
     private String copyProgress;
 
     /*
      * The CopyCompletionTime property.
      */
-    @JsonProperty(value = "CopyCompletionTime")
     private DateTimeRfc1123 copyCompletionTime;
 
     /*
      * The CopyStatusDescription property.
      */
-    @JsonProperty(value = "CopyStatusDescription")
     private String copyStatusDescription;
 
     /*
      * The ServerEncrypted property.
      */
-    @JsonProperty(value = "ServerEncrypted")
     private Boolean serverEncrypted;
 
     /*
      * The IncrementalCopy property.
      */
-    @JsonProperty(value = "IncrementalCopy")
     private Boolean incrementalCopy;
 
     /*
      * The DestinationSnapshot property.
      */
-    @JsonProperty(value = "DestinationSnapshot")
     private String destinationSnapshot;
 
     /*
      * The DeletedTime property.
      */
-    @JsonProperty(value = "DeletedTime")
     private DateTimeRfc1123 deletedTime;
 
     /*
      * The RemainingRetentionDays property.
      */
-    @JsonProperty(value = "RemainingRetentionDays")
     private Integer remainingRetentionDays;
 
     /*
      * The AccessTier property.
      */
-    @JsonProperty(value = "AccessTier")
     private AccessTier accessTier;
 
     /*
      * The AccessTierInferred property.
      */
-    @JsonProperty(value = "AccessTierInferred")
     private Boolean accessTierInferred;
 
     /*
      * The ArchiveStatus property.
      */
-    @JsonProperty(value = "ArchiveStatus")
     private ArchiveStatus archiveStatus;
 
     /**
@@ -783,5 +760,143 @@ public final class BlobProperties {
         if (getEtag() == null) {
             throw new IllegalArgumentException("Missing required property etag in model BlobProperties");
         }
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BlobProperties" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeStringElement("Last-Modified", Objects.toString(this.lastModified, null));
+        xmlWriter.writeStringElement("Etag", this.etag);
+        xmlWriter.writeNumberElement("Content-Length", this.contentLength);
+        xmlWriter.writeStringElement("Content-Type", this.contentType);
+        xmlWriter.writeStringElement("Content-Encoding", this.contentEncoding);
+        xmlWriter.writeStringElement("Content-Language", this.contentLanguage);
+        xmlWriter.writeStringElement("Content-MD5", this.contentMD5);
+        xmlWriter.writeStringElement("Content-Disposition", this.contentDisposition);
+        xmlWriter.writeStringElement("Cache-Control", this.cacheControl);
+        xmlWriter.writeNumberElement("x-ms-blob-sequence-number", this.blobSequenceNumber);
+        xmlWriter.writeStringElement("BlobType", this.blobType == null ? null : this.blobType.toString());
+        xmlWriter.writeStringElement("LeaseStatus", this.leaseStatus == null ? null : this.leaseStatus.toString());
+        xmlWriter.writeStringElement("LeaseState", this.leaseState == null ? null : this.leaseState.toString());
+        xmlWriter.writeStringElement("LeaseDuration",
+            this.leaseDuration == null ? null : this.leaseDuration.toString());
+        xmlWriter.writeStringElement("CopyId", this.copyId);
+        xmlWriter.writeStringElement("CopyStatus", this.copyStatus == null ? null : this.copyStatus.toString());
+        xmlWriter.writeStringElement("CopySource", this.copySource);
+        xmlWriter.writeStringElement("CopyProgress", this.copyProgress);
+        xmlWriter.writeStringElement("CopyCompletionTime", Objects.toString(this.copyCompletionTime, null));
+        xmlWriter.writeStringElement("CopyStatusDescription", this.copyStatusDescription);
+        xmlWriter.writeBooleanElement("ServerEncrypted", this.serverEncrypted);
+        xmlWriter.writeBooleanElement("IncrementalCopy", this.incrementalCopy);
+        xmlWriter.writeStringElement("DestinationSnapshot", this.destinationSnapshot);
+        xmlWriter.writeStringElement("DeletedTime", Objects.toString(this.deletedTime, null));
+        xmlWriter.writeNumberElement("RemainingRetentionDays", this.remainingRetentionDays);
+        xmlWriter.writeStringElement("AccessTier", this.accessTier == null ? null : this.accessTier.toString());
+        xmlWriter.writeBooleanElement("AccessTierInferred", this.accessTierInferred);
+        xmlWriter.writeStringElement("ArchiveStatus",
+            this.archiveStatus == null ? null : this.archiveStatus.toString());
+        return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of BlobProperties from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of BlobProperties if the XmlReader was pointing to an instance of it, or null if it was
+     * pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the BlobProperties.
+     */
+    public static BlobProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of BlobProperties from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
+     * cases where the model can deserialize from different root element names.
+     * @return An instance of BlobProperties if the XmlReader was pointing to an instance of it, or null if it was
+     * pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the BlobProperties.
+     */
+    public static BlobProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "BlobProperties" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            BlobProperties deserializedBlobProperties = new BlobProperties();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
+
+                if ("Last-Modified".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.lastModified = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("Etag".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.etag = reader.getStringElement();
+                } else if ("Content-Length".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentLength = reader.getNullableElement(Long::parseLong);
+                } else if ("Content-Type".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentType = reader.getStringElement();
+                } else if ("Content-Encoding".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentEncoding = reader.getStringElement();
+                } else if ("Content-Language".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentLanguage = reader.getStringElement();
+                } else if ("Content-MD5".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentMD5 = reader.getStringElement();
+                } else if ("Content-Disposition".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.contentDisposition = reader.getStringElement();
+                } else if ("Cache-Control".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.cacheControl = reader.getStringElement();
+                } else if ("x-ms-blob-sequence-number".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.blobSequenceNumber = reader.getNullableElement(Integer::parseInt);
+                } else if ("BlobType".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.blobType = BlobType.fromString(reader.getStringElement());
+                } else if ("LeaseStatus".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.leaseStatus = LeaseStatusType.fromString(reader.getStringElement());
+                } else if ("LeaseState".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.leaseState = LeaseStateType.fromString(reader.getStringElement());
+                } else if ("LeaseDuration".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.leaseDuration = LeaseDurationType.fromString(reader.getStringElement());
+                } else if ("CopyId".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyId = reader.getStringElement();
+                } else if ("CopyStatus".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyStatus = CopyStatusType.fromString(reader.getStringElement());
+                } else if ("CopySource".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copySource = reader.getStringElement();
+                } else if ("CopyProgress".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyProgress = reader.getStringElement();
+                } else if ("CopyCompletionTime".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyCompletionTime = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("CopyStatusDescription".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.copyStatusDescription = reader.getStringElement();
+                } else if ("ServerEncrypted".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.serverEncrypted = reader.getNullableElement(Boolean::parseBoolean);
+                } else if ("IncrementalCopy".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.incrementalCopy = reader.getNullableElement(Boolean::parseBoolean);
+                } else if ("DestinationSnapshot".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.destinationSnapshot = reader.getStringElement();
+                } else if ("DeletedTime".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.deletedTime = reader.getNullableElement(DateTimeRfc1123::new);
+                } else if ("RemainingRetentionDays".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.remainingRetentionDays = reader.getNullableElement(Integer::parseInt);
+                } else if ("AccessTier".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.accessTier = AccessTier.fromString(reader.getStringElement());
+                } else if ("AccessTierInferred".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.accessTierInferred = reader.getNullableElement(Boolean::parseBoolean);
+                } else if ("ArchiveStatus".equals(elementName.getLocalPart())) {
+                    deserializedBlobProperties.archiveStatus = ArchiveStatus.fromString(reader.getStringElement());
+                } else {
+                    reader.skipElement();
+                }
+            }
+
+            return deserializedBlobProperties;
+        });
     }
 }

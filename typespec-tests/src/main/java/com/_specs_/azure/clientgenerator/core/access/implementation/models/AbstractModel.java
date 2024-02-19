@@ -18,6 +18,12 @@ import java.io.IOException;
 @Immutable
 public class AbstractModel implements JsonSerializable<AbstractModel> {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind;
+
+    /*
      * The name property.
      */
     @Generated
@@ -30,7 +36,29 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
      */
     @Generated
     protected AbstractModel(String name) {
+        this.kind = "AbstractModel";
         this.name = name;
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The kind property.
+     * 
+     * @param kind the kind value to set.
+     * @return the AbstractModel object itself.
+     */
+    AbstractModel setKind(String kind) {
+        this.kind = kind;
+        return this;
     }
 
     /**
@@ -47,6 +75,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -56,8 +85,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of AbstractModel if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the AbstractModel.
      */
     public static AbstractModel fromJson(JsonReader jsonReader) throws IOException {
@@ -88,17 +116,23 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
     static AbstractModel fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
+            String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new AbstractModel(name);
+            AbstractModel deserializedAbstractModel = new AbstractModel(name);
+            deserializedAbstractModel.kind = kind;
+
+            return deserializedAbstractModel;
         });
     }
 }

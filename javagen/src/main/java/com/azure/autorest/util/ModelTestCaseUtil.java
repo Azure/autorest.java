@@ -61,7 +61,7 @@ public class ModelTestCaseUtil {
         // polymorphism
         if (model.isPolymorphic()) {
             addForProperty(jsonObject,
-                    model.getPolymorphicDiscriminator(), model.getNeedsFlatten(),
+                    model.getPolymorphicDiscriminatorName(), model.getNeedsFlatten(),
                     model.getSerializedName());
         }
 

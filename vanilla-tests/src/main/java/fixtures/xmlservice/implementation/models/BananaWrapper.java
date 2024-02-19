@@ -4,19 +4,22 @@
 
 package fixtures.xmlservice.implementation.models;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import fixtures.xmlservice.models.Banana;
 import java.util.List;
+
+import com.azure.core.util.CoreUtils;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
+import java.util.ArrayList;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * A wrapper around List&lt;Banana&gt; which provides top-level metadata for serialization.
  */
-@JacksonXmlRootElement(localName = "bananas")
-public final class BananaWrapper {
-    @JacksonXmlProperty(localName = "banana")
+public final class BananaWrapper implements XmlSerializable<BananaWrapper> {
     private final List<Banana> bananas;
 
     /**
@@ -24,8 +27,7 @@ public final class BananaWrapper {
      * 
      * @param bananas the list.
      */
-    @JsonCreator
-    public BananaWrapper(@JsonProperty("banana") List<Banana> bananas) {
+    public BananaWrapper(List<Banana> bananas) {
         this.bananas = bananas;
     }
 
@@ -36,5 +38,48 @@ public final class BananaWrapper {
      */
     public List<Banana> items() {
         return bananas;
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "bananas" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        if (bananas != null) {
+            for (Banana element : bananas) {
+                xmlWriter.writeXml(element, "banana");
+            }
+        }
+        return xmlWriter.writeEndElement();
+    }
+
+    public static BananaWrapper fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    public static BananaWrapper fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "bananas" : rootElementName;
+        return xmlReader.readObject(rootElementName, reader -> {
+            List<Banana> items = null;
+
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
+
+                if ("banana".equals(elementName.getLocalPart())) {
+                    if (items == null) {
+                        items = new ArrayList<>();
+                    }
+
+                    items.add(Banana.fromXml(reader));
+                } else {
+                    reader.nextElement();
+                }
+            }
+            return new BananaWrapper(items);
+        });
     }
 }

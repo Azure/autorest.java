@@ -5,23 +5,25 @@
 package fixtures.bodystring.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The RefColorConstant model.
  */
 @Fluent
-public final class RefColorConstant {
+public final class RefColorConstant implements JsonSerializable<RefColorConstant> {
     /*
      * Referenced Color Constant Description.
      */
-    @JsonProperty(value = "ColorConstant", required = true)
     private String colorConstant = "green-color";
 
     /*
      * Sample string.
      */
-    @JsonProperty(value = "field1")
     private String field1;
 
     /**
@@ -76,5 +78,40 @@ public final class RefColorConstant {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("ColorConstant", this.colorConstant);
+        jsonWriter.writeStringField("field1", this.field1);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of RefColorConstant from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of RefColorConstant if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the RefColorConstant.
+     */
+    public static RefColorConstant fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            RefColorConstant deserializedRefColorConstant = new RefColorConstant();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("field1".equals(fieldName)) {
+                    deserializedRefColorConstant.field1 = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedRefColorConstant;
+        });
     }
 }

@@ -17,8 +17,8 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -194,6 +194,25 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestSwaggerBatFileServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the AutoRestSwaggerBatFileServiceClientBuilder.
+     */
+    @Generated
+    public AutoRestSwaggerBatFileServiceClientBuilder
+        serviceVersion(AutoRestSwaggerBatFileServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -220,8 +239,10 @@ public final class AutoRestSwaggerBatFileServiceClientBuilder
     private AutoRestSwaggerBatFileServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestSwaggerBatFileServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestSwaggerBatFileServiceVersion.getLatest();
         AutoRestSwaggerBatFileServiceClientImpl client = new AutoRestSwaggerBatFileServiceClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+            JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

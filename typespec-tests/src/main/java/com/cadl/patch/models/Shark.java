@@ -48,6 +48,7 @@ public final class Shark extends Fish {
     @Generated
     public Shark(int age) {
         super(age);
+        setKind("shark");
     }
 
     /**
@@ -67,8 +68,8 @@ public final class Shark extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", "shark");
             jsonWriter.writeIntField("age", getAge());
+            jsonWriter.writeStringField("kind", getKind());
             jsonWriter.writeStringField("color", getColor());
             return jsonWriter.writeEndObject();
         }
@@ -76,8 +77,12 @@ public final class Shark extends Fish {
 
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "shark");
         jsonWriter.writeIntField("age", getAge());
+        if (getKind() != null) {
+            jsonWriter.writeStringField("kind", getKind());
+        } else if (updatedProperties.contains("kind")) {
+            jsonWriter.writeNullField("kind");
+        }
         if (getColor() != null) {
             jsonWriter.writeStringField("color", getColor());
         } else if (updatedProperties.contains("color")) {
@@ -92,8 +97,7 @@ public final class Shark extends Fish {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Shark.
      */
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
@@ -101,24 +105,20 @@ public final class Shark extends Fish {
             String id = null;
             String name = null;
             int age = 0;
+            String kind = "shark";
             String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"shark".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'shark'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("id".equals(fieldName)) {
+                if ("id".equals(fieldName)) {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
                 } else {
@@ -128,6 +128,7 @@ public final class Shark extends Fish {
             Shark deserializedShark = new Shark(age);
             deserializedShark.setId(id);
             deserializedShark.setName(name);
+            deserializedShark.setKind(kind);
             deserializedShark.setColor(color);
 
             return deserializedShark;

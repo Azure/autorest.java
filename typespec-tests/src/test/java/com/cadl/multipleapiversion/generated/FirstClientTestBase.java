@@ -16,6 +16,8 @@ import com.azure.core.test.TestProxyTestBase;
 import com.azure.core.util.Configuration;
 import com.cadl.multipleapiversion.FirstClient;
 import com.cadl.multipleapiversion.FirstClientBuilder;
+import com.cadl.multipleapiversion.NoApiVersionClient;
+import com.cadl.multipleapiversion.NoApiVersionClientBuilder;
 import com.cadl.multipleapiversion.SecondClient;
 import com.cadl.multipleapiversion.SecondClientBuilder;
 
@@ -23,6 +25,8 @@ class FirstClientTestBase extends TestProxyTestBase {
     protected FirstClient firstClient;
 
     protected SecondClient secondClient;
+
+    protected NoApiVersionClient noApiVersionClient;
 
     @Override
     protected void beforeTest() {
@@ -47,6 +51,17 @@ class FirstClientTestBase extends TestProxyTestBase {
             secondClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         secondClient = secondClientbuilder.buildClient();
+
+        NoApiVersionClientBuilder noApiVersionClientbuilder = new NoApiVersionClientBuilder()
+            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT", "endpoint"))
+            .httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            noApiVersionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            noApiVersionClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        noApiVersionClient = noApiVersionClientbuilder.buildClient();
 
     }
 }

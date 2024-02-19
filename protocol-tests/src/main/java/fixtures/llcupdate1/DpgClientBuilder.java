@@ -17,8 +17,8 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -191,6 +191,24 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private DpgServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the DpgClientBuilder.
+     */
+    @Generated
+    public DpgClientBuilder serviceVersion(DpgServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -217,8 +235,10 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     private DpgClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
-        DpgClientImpl client
-            = new DpgClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+        DpgServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : DpgServiceVersion.getLatest();
+        DpgClientImpl client = new DpgClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
+            localHost, localServiceVersion);
         return client;
     }
 

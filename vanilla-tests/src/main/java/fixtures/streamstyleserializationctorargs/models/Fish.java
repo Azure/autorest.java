@@ -18,6 +18,11 @@ import java.util.List;
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
     /*
+     * The fishtype property.
+     */
+    private String fishtype;
+
+    /*
      * The species property.
      */
     private String species;
@@ -38,7 +43,28 @@ public class Fish implements JsonSerializable<Fish> {
      * @param length the length value to set.
      */
     public Fish(float length) {
+        this.fishtype = "Fish";
         this.length = length;
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
+    }
+
+    /**
+     * Set the fishtype property: The fishtype property.
+     * 
+     * @param fishtype the fishtype value to set.
+     * @return the Fish object itself.
+     */
+    Fish setFishtype(String fishtype) {
+        this.fishtype = fishtype;
+        return this;
     }
 
     /**
@@ -105,6 +131,7 @@ public class Fish implements JsonSerializable<Fish> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", this.length);
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("species", this.species);
         jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
@@ -116,8 +143,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
@@ -159,6 +185,7 @@ public class Fish implements JsonSerializable<Fish> {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;
             float length = 0.0f;
+            String fishtype = null;
             String species = null;
             List<Fish> siblings = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -168,6 +195,8 @@ public class Fish implements JsonSerializable<Fish> {
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -178,6 +207,7 @@ public class Fish implements JsonSerializable<Fish> {
             }
             if (lengthFound) {
                 Fish deserializedFish = new Fish(length);
+                deserializedFish.fishtype = fishtype;
                 deserializedFish.species = species;
                 deserializedFish.siblings = siblings;
 

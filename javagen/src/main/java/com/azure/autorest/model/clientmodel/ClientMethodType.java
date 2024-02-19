@@ -10,28 +10,29 @@ import java.util.Map;
  * The different types of ClientMethod overloads that can exist in a client.
  */
 public enum ClientMethodType {
-    PagingSync(0),
-    PagingAsync(1),
-    PagingAsyncSinglePage(2),
+    PagingSync(0, true, false, true),
+    PagingAsync(1, true, false, false),
+    PagingAsyncSinglePage(2, true, false, false),
 
-    SimulatedPagingSync(3),
-    SimulatedPagingAsync(4),
+    SimulatedPagingSync(3, false, false, true),
+    SimulatedPagingAsync(4, false, false, false),
 
-    LongRunningSync(5),
-    LongRunningAsync(6),
-    LongRunningBeginSync(7),
-    LongRunningBeginAsync(8),
+    LongRunningSync(5, false, true, true),
+    LongRunningAsync(6, false, true, false),
+    LongRunningBeginSync(7, false, true, true),
+    LongRunningBeginAsync(8, false, true, false),
 
-    SimpleSync(9),
-    SimpleAsync(10), // will not generate when sync-methods=none, will generate when sync-methods=essential,
-    SimpleAsyncRestResponse(11),
-    SimpleSyncRestResponse(12),
+    SimpleSync(9, false, false, true),
+    // will not generate when sync-methods=none, will generate when sync-methods=essential,
+    SimpleAsync(10, false, false, false),
+    SimpleAsyncRestResponse(11, false, false, false),
+    SimpleSyncRestResponse(12, false, false, true),
 
-    Resumable(13),
+    Resumable(13, false, false, false),
 
-    SendRequestSync(14),
-    SendRequestAsync(15),
-    PagingSyncSinglePage(16);
+    SendRequestSync(14, false, false, true),
+    SendRequestAsync(15, false, false, false),
+    PagingSyncSinglePage(16, true, false, true),;
 
     private static final Map<Integer, ClientMethodType> MAPPINGS;
 
@@ -43,9 +44,15 @@ public enum ClientMethodType {
     }
 
     private final int intValue;
+    private final boolean isPaging;
+    private final boolean isLongRunning;
+    private final boolean isSync;
 
-    ClientMethodType(int value) {
+    ClientMethodType(int value, boolean isPaging, boolean isLongRunning, boolean isSync) {
         intValue = value;
+        this.isPaging = isPaging;
+        this.isLongRunning = isLongRunning;
+        this.isSync = isSync;
     }
 
     public static ClientMethodType forValue(int value) {
@@ -54,5 +61,17 @@ public enum ClientMethodType {
 
     public int getValue() {
         return intValue;
+    }
+
+    public boolean isPaging() {
+        return isPaging;
+    }
+
+    public boolean isLongRunning() {
+        return isLongRunning;
+    }
+
+    public boolean isSync() {
+        return isSync;
     }
 }

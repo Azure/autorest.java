@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.headexceptions.AutoRestHeadExceptionTestServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestHeadExceptionTestServiceClient type.
@@ -27,6 +28,20 @@ public final class AutoRestHeadExceptionTestServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final AutoRestHeadExceptionTestServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestHeadExceptionTestServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -75,10 +90,12 @@ public final class AutoRestHeadExceptionTestServiceClientImpl {
      * Initializes an instance of AutoRestHeadExceptionTestServiceClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestHeadExceptionTestServiceClientImpl(String host) {
+    public AutoRestHeadExceptionTestServiceClientImpl(String host,
+        AutoRestHeadExceptionTestServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -86,9 +103,11 @@ public final class AutoRestHeadExceptionTestServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestHeadExceptionTestServiceClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public AutoRestHeadExceptionTestServiceClientImpl(HttpPipeline httpPipeline, String host,
+        AutoRestHeadExceptionTestServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -97,12 +116,14 @@ public final class AutoRestHeadExceptionTestServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestHeadExceptionTestServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        String host) {
+        String host, AutoRestHeadExceptionTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.headExceptions = new HeadExceptionsImpl(this);
     }
 }

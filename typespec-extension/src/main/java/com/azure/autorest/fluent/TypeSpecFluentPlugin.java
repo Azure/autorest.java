@@ -50,6 +50,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
             SETTINGS_MAP.put("fluent", "lite");
         }
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
+        // SETTINGS_MAP.put("stream-style-serialization", emitterOptions.getStreamStyleSerialization());
 
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", emitterOptions.getOutputDir());
@@ -99,7 +100,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL_TYPESPEC");
 
-        SETTINGS_MAP.put("generic-response-type", true);
+        SETTINGS_MAP.put("generic-response-type", false);
         SETTINGS_MAP.put("generate-client-interfaces", true);
         SETTINGS_MAP.put("client-logger", true);
 
@@ -109,6 +110,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("graal-vm-config", true);
         SETTINGS_MAP.put("sync-methods", "all");
         SETTINGS_MAP.put("client-side-validations", true);
+        SETTINGS_MAP.put("stream-style-serialization", false);
     }
 
     @SuppressWarnings("unchecked")

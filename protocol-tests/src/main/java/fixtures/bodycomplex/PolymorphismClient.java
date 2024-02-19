@@ -42,6 +42,7 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -70,6 +71,7 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -131,6 +133,7 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fish.type: String (Optional)
      *     species: String (Optional)
      * }
      * }</pre>
@@ -157,6 +160,7 @@ public final class PolymorphismClient {
      * <pre>{@code
      * {
      *     sampleSalmon (Optional): {
+     *         fish.type: String (Optional)
      *         species: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
@@ -165,6 +169,7 @@ public final class PolymorphismClient {
      *         (recursive schema, see above)
      *     ]
      *     sampleFish (Optional): {
+     *         fish.type: String (Optional)
      *         species: String (Optional)
      *     }
      *     fishes (Optional): [
@@ -196,6 +201,7 @@ public final class PolymorphismClient {
      * <pre>{@code
      * {
      *     sampleSalmon (Optional): {
+     *         fish.type: String (Optional)
      *         species: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
@@ -204,6 +210,7 @@ public final class PolymorphismClient {
      *         (recursive schema, see above)
      *     ]
      *     sampleFish (Optional): {
+     *         fish.type: String (Optional)
      *         species: String (Optional)
      *     }
      *     fishes (Optional): [
@@ -233,10 +240,12 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
+     *             fishtype: String (Optional)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -270,10 +279,12 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
+     *             fishtype: String (Optional)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -307,10 +318,12 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
+     *             fishtype: String (Optional)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -327,10 +340,12 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
+     *             fishtype: String (Optional)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -366,6 +381,7 @@ public final class PolymorphismClient {
      * </p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [

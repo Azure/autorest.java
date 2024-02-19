@@ -17,8 +17,8 @@ import com.azure.core.http.HttpPipelinePosition;
 import com.azure.core.http.policy.AddDatePolicy;
 import com.azure.core.http.policy.AddHeadersFromContextPolicy;
 import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpLoggingPolicy;
+import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.HttpPolicyProviders;
 import com.azure.core.http.policy.RequestIdPolicy;
@@ -192,6 +192,24 @@ public final class LrosaDsClientBuilder
     }
 
     /*
+     * Service version
+     */
+    @Generated
+    private AutoRestLongRunningOperationTestServiceVersion serviceVersion;
+
+    /**
+     * Sets Service version.
+     * 
+     * @param serviceVersion the serviceVersion value.
+     * @return the LrosaDsClientBuilder.
+     */
+    @Generated
+    public LrosaDsClientBuilder serviceVersion(AutoRestLongRunningOperationTestServiceVersion serviceVersion) {
+        this.serviceVersion = serviceVersion;
+        return this;
+    }
+
+    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -218,9 +236,11 @@ public final class LrosaDsClientBuilder
     private AutoRestLongRunningOperationTestServiceClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
+        AutoRestLongRunningOperationTestServiceVersion localServiceVersion
+            = (serviceVersion != null) ? serviceVersion : AutoRestLongRunningOperationTestServiceVersion.getLatest();
         AutoRestLongRunningOperationTestServiceClientImpl client
             = new AutoRestLongRunningOperationTestServiceClientImpl(localPipeline,
-                JacksonAdapter.createDefaultSerializerAdapter(), localHost);
+                JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 

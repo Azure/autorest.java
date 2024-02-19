@@ -41,6 +41,8 @@ $generateScript = {
   } elseif ($tspFile -match "arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+    # also don't generate with stream-style-serialization as azure-core-management hasn't migrated to azure-json yet
+    $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp

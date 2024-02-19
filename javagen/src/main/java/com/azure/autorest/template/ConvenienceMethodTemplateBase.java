@@ -253,7 +253,7 @@ abstract class ConvenienceMethodTemplateBase {
                             .findFirst().orElse(null);
                     if (proxyMethodParameter != null) {
                         MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
-                        parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
+                        parametersMap.put(methodParameter, findProtocolMethodParameterForConvenienceMethod(methodParameter, protocolMethod));
                     }
                 }
             }
@@ -261,35 +261,51 @@ abstract class ConvenienceMethodTemplateBase {
             // flatten (possible with grouping)
             ClientMethodParameter targetParameter = detail.getOutParameter();
             if (targetParameter.getWireType() == ClassType.BINARY_DATA) {
+                IType targetType = targetParameter.getRawType();
+
+                StringBuilder ctorExpression = new StringBuilder();
+                StringBuilder setterExpression = new StringBuilder();
                 String targetParameterName = targetParameter.getName();
                 String targetParameterObjectName = targetParameterName + "Obj";
-                methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
                 for (ParameterMapping mapping : detail.getParameterMappings()) {
-                    if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
-                        String parameterName = mapping.getInputParameter().getName();
-                        String mappingUsage;
-                        if (mapping.getInputParameter().getClientType() instanceof EnumType) {
-                            String enumConversion = ((EnumType) mapping.getInputParameter().getClientType()).getToMethodName() + "()";
-                            mappingUsage = "(" + parameterName + " == null ? null : " + parameterName + "." + enumConversion + ")";
-                        } else {
-                            mappingUsage = parameterName;
-                        }
+                    String parameterName = mapping.getInputParameter().getName();
 
-                        String inputPath;
-                        if (mapping.getInputParameterProperty() != null) {
-                            inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
-                                    CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
+                    String inputPath = parameterName;
+                    boolean propertyRequired = mapping.getInputParameter().isRequired();
+                    if (mapping.getInputParameterProperty() != null) {
+                        inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
+                                CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
+                        propertyRequired = mapping.getInputParameterProperty().isRequired();
+                    }
+                    if (propertyRequired) {
+                        // required
+                        if (JavaSettings.getInstance().isRequiredFieldsAsConstructorArgs()) {
+                            if (ctorExpression.length() > 0) {
+                                ctorExpression.append(", ");
+                            }
+                            ctorExpression.append(inputPath);
                         } else {
-                            inputPath = mappingUsage;
+                            setterExpression.append(".").append(mapping.getOutputParameterProperty().getSetterName()).append("(").append(inputPath).append(")");
                         }
-
-                        methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
-                                targetParameterObjectName,
-                                mapping.getOutputParameterProperty().getSerializedName(),
-                                inputPath));
+                    } else if (!convenienceMethod.getOnlyRequiredParameters()) {
+                        // optional
+                        setterExpression.append(".").append(mapping.getOutputParameterProperty().getSetterName()).append("(").append(inputPath).append(")");
                     }
                 }
-                methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
+                methodBlock.line(String.format("%1$s %2$s = new %1$s(%3$s)%4$s;", targetType, targetParameterObjectName, ctorExpression, setterExpression));
+
+                String expression = null;
+                if (targetParameter.getRawType() instanceof ClassType) {
+                    ClientModel model = ClientModelUtil.getClientModel(targetParameter.getRawType().toString());
+                    // serialize model for multipart/form-data
+                    if (model != null && ClientModelUtil.isMultipartModel(model)) {
+                        expression = expressionMultipartFormDataToBinaryData(targetParameterObjectName, model);
+                    }
+                }
+                if (expression == null) {
+                    expression = expressionConvertToBinaryData(targetParameterObjectName, targetParameter.getRawType(), protocolMethod.getProxyMethod().getRequestContentType());
+                }
+                methodBlock.line(String.format("BinaryData %1$s = %2$s;", targetParameterName, expression));
             }
         }
     }
@@ -724,7 +740,7 @@ abstract class ConvenienceMethodTemplateBase {
         return parameterMap;
     }
 
-    private static MethodParameter findParameterForConvenienceMethod(
+    private static MethodParameter findProtocolMethodParameterForConvenienceMethod(
             MethodParameter parameter, ClientMethod protocolMethod) {
         List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
         return protocolParameters.stream().filter(p -> Objects.equals(parameter.getSerializedName(), p.getSerializedName())).findFirst().orElse(null);

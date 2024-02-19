@@ -30,6 +30,7 @@ public class Salmon extends Fish {
      * Creates an instance of Salmon class.
      */
     public Salmon() {
+        setFishtype("salmon");
     }
 
     /**
@@ -112,8 +113,8 @@ public class Salmon extends Fish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "salmon");
         jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("location", this.location);
@@ -127,8 +128,7 @@ public class Salmon extends Fish {
      * @param jsonReader The JsonReader being read.
      * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to
      * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Salmon.
      */
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
@@ -147,9 +147,7 @@ public class Salmon extends Fish {
                     }
                 }
                 // Use the discriminator value to determine which subtype should be deserialized.
-                if (discriminatorValue == null || "salmon".equals(discriminatorValue)) {
-                    return fromJsonKnownDiscriminator(readerToUse);
-                } else if ("smart_salmon".equals(discriminatorValue)) {
+                if ("smart_salmon".equals(discriminatorValue)) {
                     return SmartSalmon.fromJson(readerToUse.reset());
                 } else {
                     return fromJsonKnownDiscriminator(readerToUse.reset());
@@ -167,6 +165,8 @@ public class Salmon extends Fish {
 
                 if ("length".equals(fieldName)) {
                     deserializedSalmon.setLength(reader.getFloat());
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedSalmon.setFishtype(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedSalmon.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {
