@@ -46,8 +46,7 @@ namespace Cadl.LongRunning {
     }>;
 
   @lroStatus
-  union JobStatus {
-    string,
+  enum JobStatus {
     NotStarted: "notStarted",
     Running: "running",
     Succeeded: "succeeded",
