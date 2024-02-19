@@ -57,6 +57,7 @@ import {
   getQueryParamOptions,
   getHeaderFieldOptions,
   isPathParam,
+  HttpOperationBody,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
@@ -1446,28 +1447,35 @@ export class CodeModelBuilder {
     // It happens when the response type is Union, on one status code.
     let response: Response;
     let headers: Array<HttpHeader> | undefined = undefined;
-    if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
+    if (resp.responses && resp.responses.length > 0) {
       // headers
       headers = [];
-      for (const [key, header] of Object.entries(resp.responses[0].headers)) {
-        const schema = this.processSchema(header, key);
-        headers.push(
-          new HttpHeader(key, schema, {
-            language: {
-              default: {
-                name: key,
-                description: this.getDoc(header),
-              },
-            },
-          }),
-        );
+      for (const response of resp.responses.values()) {
+        if (response.headers) {
+          for (const [key, header] of Object.entries(response.headers)) {
+            const schema = this.processSchema(header, key);
+            headers.push(
+              new HttpHeader(key, schema, {
+                language: {
+                  default: {
+                    name: key,
+                    description: this.getDoc(header),
+                  },
+                },
+              }),
+            );
+          }
+        }
       }
     }
 
+    let responseBody: HttpOperationBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
-      const responseBody = resp.responses[0].body;
+      responseBody = resp.responses[0].body;
+    }
+    if (responseBody) {
       const unknownResponseBody =
         responseBody.contentTypes.length > 0 && !isKnownContentType(responseBody.contentTypes);
 
@@ -1635,7 +1643,6 @@ export class CodeModelBuilder {
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Number":
-        // TODO: float
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Boolean":
