@@ -2187,15 +2187,16 @@ export class CodeModelBuilder {
         );
         if (discriminatorProperty) {
           if (discriminatorProperty.type.kind === "String") {
-            // value of StringLiteral of the discriminator property
+            // value as StringLiteral
             objectSchema.discriminatorValue = discriminatorProperty.type.value;
           } else if (discriminatorProperty.type.kind === "EnumMember") {
-            // value of EnumMember of the discriminator property
+            // value as EnumMember
             // lint requires value be string, not number
             objectSchema.discriminatorValue =
               (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
           } else if (discriminatorProperty.type.kind === "UnionVariant") {
-            // TODO: it is possible that the value be union of string
+            // value as UnionVariant
+            // TODO: it is possible that the UnionVariant be union of string
             objectSchema.discriminatorValue =
               ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
           }
