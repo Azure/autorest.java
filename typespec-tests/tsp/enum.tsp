@@ -19,10 +19,11 @@ enum Color {
   Green,
 }
 
-enum ColorModel {
-  Red,
-  Blue,
-  Green,
+union ColorModel {
+  string,
+  "Red",
+  "Blue",
+  "Green",
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"

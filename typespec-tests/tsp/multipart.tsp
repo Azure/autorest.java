@@ -7,9 +7,10 @@ using TypeSpec.Http;
 })
 namespace Cadl.Multipart;
 
-enum ImageType {
-  JPEG,
-  PNG,
+union ImageType {
+  string,
+  "JPEG",
+  "PNG",
 }
 
 model Size {
