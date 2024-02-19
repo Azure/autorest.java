@@ -2549,6 +2549,9 @@ export class CodeModelBuilder {
       this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
       return newName;
     }
+    if (typeof target.name === "symbol") {
+      return "";
+    }
     return target.name || "";
   }
 
