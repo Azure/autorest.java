@@ -57,9 +57,22 @@ model TopLevelArmResourceProperties {
   @visibility("read")
   configurationEndpoints?: string[];
 
+  userName: string;
+  ipRules: IPRules[];
+  startTimeStamp: utcDateTime;
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+}
+
+@doc("Top Level Arm Resource IP rule with specific IP or IP range in CIDR format.")
+model IPRules {
+  @doc("IP Rules Value")
+  value?: string;
+
+  @doc("The action of virtual network rule.")
+  action: string;
 }
 
 //----------------------- Custom Template Resource -----------------------
