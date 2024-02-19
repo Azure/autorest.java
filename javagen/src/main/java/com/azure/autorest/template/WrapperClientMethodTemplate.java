@@ -135,12 +135,12 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
         comment.methodReturns(clientMethod.getReturnValue().getDescription());
     }
 
-    protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean withGeneratedWrapper) {
+    protected void generateJavadoc(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, boolean withGeneratedMarker) {
         typeBlock.javadocComment(comment -> {
             generateJavadocDescription(comment, clientMethod);
         }, comment -> {
             generateJavadocTags(comment, clientMethod, restAPIMethod);
-        }, withGeneratedWrapper);
+        }, withGeneratedMarker);
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {

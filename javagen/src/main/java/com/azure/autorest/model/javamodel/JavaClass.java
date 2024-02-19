@@ -204,28 +204,28 @@ public class JavaClass implements JavaType {
         contents.javadocComment(wordWrapWidth, commentAction);
     }
 
-    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper) {
-        javadocComment(commentDescriptionAction, commentTagAction, withGeneratedWrapper, true, wordWrapWidth);
+    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedMarker) {
+        javadocComment(commentDescriptionAction, commentTagAction, withGeneratedMarker, true, wordWrapWidth);
     }
 
     @Override
-    public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper) {
-        javadocComment(commentDescriptionAction, commentTagAction, withGeneratedWrapper, false, 0);
+    public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedMarker) {
+        javadocComment(commentDescriptionAction, commentTagAction, withGeneratedMarker, false, 0);
     }
 
     /**
      * Helper method to add a javadoc comment to the contents.
      * @param commentDescriptionAction
      * @param commentTagAction
-     * @param withGeneratedWrapper
+     * @param withGeneratedMarker
      * @param withWordWrap
      * @param wordWrapWidth
      */
-    private void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedWrapper, boolean withWordWrap, int wordWrapWidth) {
+    private void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
         addExpectedNewLine();
         if (commentDescriptionAction != null) {
             contents.javadocCommentStart();
-            if (withGeneratedWrapper) {
+            if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
             }
             if (withWordWrap) {
@@ -233,7 +233,7 @@ public class JavaClass implements JavaType {
             } else {
                 commentDescriptionAction.accept(new JavaJavadocComment(contents));
             }
-            if (withGeneratedWrapper) {
+            if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
             }
             if (commentTagAction == null) { // if no tags action, then end the javadoc comment
@@ -246,7 +246,7 @@ public class JavaClass implements JavaType {
             if (commentDescriptionAction == null) {// if no description action, then start the javadoc comment
                 contents.javadocCommentStart();
             }
-            if (withGeneratedWrapper) {
+            if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
             }
             if (withWordWrap) {
@@ -254,7 +254,7 @@ public class JavaClass implements JavaType {
             } else {
                 commentTagAction.accept(new JavaJavadocComment(contents));
             }
-            if (withGeneratedWrapper) {
+            if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
             }
             contents.javadocCommentEnd();

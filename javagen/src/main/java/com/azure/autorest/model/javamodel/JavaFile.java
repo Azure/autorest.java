@@ -106,29 +106,27 @@ public class JavaFile implements JavaContext {
         getContents().javadocComment(wordWrapWidth, commentAction);
     }
 
-    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper) {
-        javadocComment(commentAction, withGeneratedWrapper, false, wordWrapWidth);
+    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction, boolean withGeneratedMarker) {
+        javadocComment(commentAction, withGeneratedMarker, false, wordWrapWidth);
     }
 
-    public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper) {
-        javadocComment(commentAction, withGeneratedWrapper, false, 0);
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedMarker) {
+        javadocComment(commentAction, withGeneratedMarker, false, 0);
     }
 
     @Override
-    public void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedWrapper) {
-        if (withGeneratedWrapper == false) {
-            Consumer<JavaJavadocComment> commentAction = comment -> {
-                commentDescriptionAction.accept(comment);
-                commentTagsAction.accept(comment);
-            };
-            javadocComment(commentAction);
-        }
+    public void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker) {
+        Consumer<JavaJavadocComment> commentAction = comment -> {
+            commentDescriptionAction.accept(comment);
+            commentTagsAction.accept(comment);
+        };
+        javadocComment(commentAction, withGeneratedMarker, false, 0);
     }
 
-    public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedWrapper, boolean withWordWrap, int wordWrapWidth) {
+    public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
         if (commentAction != null) {
             contents.javadocCommentStart();
-            if (withGeneratedWrapper) {
+            if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
             }
             if (withWordWrap) {
@@ -136,7 +134,7 @@ public class JavaFile implements JavaContext {
             } else {
                 commentAction.accept(new JavaJavadocComment(contents));
             }
-            if (withGeneratedWrapper) {
+            if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
             }
             contents.javadocCommentEnd();
