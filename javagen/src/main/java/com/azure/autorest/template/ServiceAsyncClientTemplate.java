@@ -70,7 +70,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
     Templates.getConvenienceAsyncMethodTemplate().addImports(imports, asyncClient.getConvenienceMethods());
 
     javaFile.declareImport(imports);
-    javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
+    javaFile.javadocComment(comment ->
         comment.description(String.format("Initializes a new instance of the asynchronous %1$s type.",
             serviceClient.getInterfaceName())), false);
 

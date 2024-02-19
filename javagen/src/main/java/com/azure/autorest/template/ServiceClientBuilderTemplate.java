@@ -124,7 +124,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         builderTypes.append("}");
         javaFile.declareImport(imports);
 
-        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment -> {
+        javaFile.javadocComment(comment -> {
             String clientTypeName = settings.isFluent() ? serviceClient.getClassName() : serviceClient.getInterfaceName();
             if (settings.isGenerateBuilderPerClient() && clientBuilder.getSyncClients().size() == 1) {
                 clientTypeName = clientBuilder.getSyncClients().iterator().next().getClassName();
