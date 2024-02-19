@@ -2181,7 +2181,9 @@ export class CodeModelBuilder {
         ).propertyName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
-          (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),
+          (it) =>
+            it.name === discriminatorPropertyName &&
+            (it.type.kind === "String" || it.type.kind === "EnumMember" || it.type.kind === "UnionVariant"),
         );
         if (discriminatorProperty) {
           if (discriminatorProperty.type.kind === "String") {
@@ -2192,6 +2194,10 @@ export class CodeModelBuilder {
             // lint requires value be string, not number
             objectSchema.discriminatorValue =
               (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
+          } else if (discriminatorProperty.type.kind === "UnionVariant") {
+            // TODO: it is possible that the value be union of string
+            objectSchema.discriminatorValue =
+              ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
           }
         } else {
           // fallback to name of the Model
