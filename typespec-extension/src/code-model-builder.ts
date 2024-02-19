@@ -395,11 +395,12 @@ export class CodeModelBuilder {
   private processModels(clients: SdkClient[]) {
     const processedModels: Set<Type> = new Set();
     for (const client of clients) {
-      const models: (Model | Enum)[] = Array.from(client.service.models.values());
+      const models: (Model | Enum | Union)[] = Array.from(client.service.models.values());
       Array.from(client.service.enums.values()).forEach((it) => models.push(it));
+      Array.from(client.service.unions.values()).forEach((it) => models.push(it));
 
       // lambda to mark model as public
-      const modelAsPublic = (model: Model | Enum) => {
+      const modelAsPublic = (model: Model | Enum | Union) => {
         // check it does not contain Union
         // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
         // if (union) {
@@ -410,7 +411,7 @@ export class CodeModelBuilder {
         //   throw new Error(errorMsg);
         // }
 
-        const schema = this.processSchema(model, model.name);
+        const schema = this.processSchema(model, "");
 
         this.trackSchemaUsage(schema, {
           usage: [SchemaContext.Public],
@@ -423,7 +424,7 @@ export class CodeModelBuilder {
           if (access === "public") {
             modelAsPublic(model);
           } else if (access === "internal") {
-            const schema = this.processSchema(model, model.name);
+            const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.Internal],
@@ -432,7 +433,7 @@ export class CodeModelBuilder {
 
           const usage = getUsage(model);
           if (usage) {
-            const schema = this.processSchema(model, model.name);
+            const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
               usage: usage,

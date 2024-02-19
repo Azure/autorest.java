@@ -253,7 +253,7 @@ export function modelIs(model: Model, name: string, namespace: string): boolean 
   return false;
 }
 
-export function getAccess(type: Model | Operation | Enum): string | undefined {
+export function getAccess(type: Model | Operation | Enum | Union): string | undefined {
   return getDecoratorScopedValue(type, "$access", (it) => {
     const value = it.args[0].value;
     if (value.kind === "EnumMember") {
@@ -268,7 +268,7 @@ export function isAllValueInteger(values: number[]): boolean {
   return values.every((it) => Number.isInteger(it));
 }
 
-export function getUsage(type: Model | Operation | Enum): SchemaContext[] | undefined {
+export function getUsage(type: Model | Operation | Enum | Union): SchemaContext[] | undefined {
   return getDecoratorScopedValue(type, "$usage", (it) => {
     const value = it.args[0].value;
     const values: EnumMember[] = [];
