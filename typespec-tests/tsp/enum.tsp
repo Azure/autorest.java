@@ -72,9 +72,10 @@ interface EnumOp {
   @route("/color")
   getColor(): Color;
 
-  @get
-  @route("/colormodel")
-  getColorModel(): ColorModel;
+  // TODO: the response as Union is ambiguous
+  // @get
+  // @route("/colormodel")
+  // getColorModel(): ColorModel;
 
   @post
   @route("operation/colormodel")

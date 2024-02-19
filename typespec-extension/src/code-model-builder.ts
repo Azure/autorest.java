@@ -40,7 +40,6 @@ import {
   EnumMember,
   walkPropertiesInherited,
   getService,
-  resolveEncodedName,
   isVoidType,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
@@ -75,6 +74,7 @@ import {
   getCrossLanguageDefinitionId,
   getClientNameOverride,
   shouldFlattenProperty,
+  getWireName,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -1442,6 +1442,7 @@ export class CodeModelBuilder {
     candidateResponseSchema: Schema | undefined = undefined,
   ) {
     // TODO: what to do if more than 1 response?
+    // It happens when the response type is Union, on one status code.
     let response: Response;
     let headers: Array<HttpHeader> | undefined = undefined;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
@@ -1677,6 +1678,14 @@ export class CodeModelBuilder {
       case "EnumMember":
         // e.g. "type: TypeEnum.EnumValue1"
         return this.processConstantSchemaForEnumMember(type, this.getName(type));
+
+      case "UnionVariant":
+        // e.g. "type: Union.Variant1"
+        if (type.type.kind === "String" || type.type.kind === "Number" || type.type.kind === "Boolean") {
+          return this.processConstantSchemaForUnionVariant(type, this.getName(type));
+        } else {
+          throw new Error(`Unsupported type reference to UnionVariant.`);
+        }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
@@ -1921,6 +1930,20 @@ export class CodeModelBuilder {
         summary: this.getSummary(type),
         valueType: valueType,
         value: new ConstantValue(type.value ?? type.name),
+      }),
+    );
+  }
+
+  private processConstantSchemaForUnionVariant(type: UnionVariant, name: string): ConstantSchema {
+    const valueType = this.processSchema(type.union, this.getName(type.union));
+
+    type Literal = StringLiteral | NumericLiteral | BooleanLiteral;
+
+    return this.codeModel.schemas.add(
+      new ConstantSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        valueType: valueType,
+        value: new ConstantValue((type.type as Literal).value ?? type.name),
       }),
     );
   }
@@ -2484,7 +2507,7 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Union | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation,
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
@@ -2530,14 +2553,8 @@ export class CodeModelBuilder {
   }
 
   private getSerializedName(target: ModelProperty): string {
-    // First get projected name, if not found, call resolveEncodedName
-    // TODO: deprecate getProjectedName
-    const jsonProjectedName = getProjectedName(this.program, target, "json");
-    if (jsonProjectedName) {
-      return jsonProjectedName;
-    }
-    // TODO: the MIME better be from SchemaUsage.serializationFormats. However, at this step, the values is not propagated to inner models.
-    return resolveEncodedName(this.program, target, "application/json");
+    // TODO: currently this is only for JSON
+    return getWireName(this.sdkContext, target);
   }
 
   private isReadOnly(target: ModelProperty): boolean {
