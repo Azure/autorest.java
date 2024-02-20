@@ -114,7 +114,7 @@ public class JavaFile implements JavaContext {
         javadocComment(commentAction, withGeneratedMarker, false, 0);
     }
 
-    public final void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
+    private void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
         if (commentAction != null) {
             contents.javadocCommentStart();
             if (withGeneratedMarker) {
