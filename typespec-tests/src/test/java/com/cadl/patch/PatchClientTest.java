@@ -74,6 +74,21 @@ public class PatchClientTest {
     }
 
     @Test
+    public void testSerializationForMapNullKeyProperty() {
+        Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
+            Resource resource = new Resource(new HashMap<>());
+            JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+            resource.getMap().put(null, new InnerModel("value1"));
+            BinaryData.fromObject(resource).toString();
+        });
+
+        String expectedMessage = "'fieldName' cannot be null.";
+        String actualMessage = exception.getMessage();
+
+        Assertions.assertTrue(actualMessage.contains(expectedMessage));
+    }
+
+    @Test
     public void testSerializationForArrayProperty() throws JsonProcessingException {
         Resource resource = new Resource(new HashMap<>());
         resource.setArray(Arrays.asList(new InnerModel("value1"), new InnerModel("value2")));
