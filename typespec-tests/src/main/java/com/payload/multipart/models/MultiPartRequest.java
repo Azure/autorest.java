@@ -8,7 +8,9 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
 
 /**
+ * <!-- start generated doc -->
  * The MultiPartRequest model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class MultiPartRequest {

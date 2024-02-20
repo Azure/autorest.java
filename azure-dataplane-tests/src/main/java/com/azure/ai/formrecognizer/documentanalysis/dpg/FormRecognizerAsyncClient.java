@@ -21,7 +21,9 @@ import com.azure.core.util.polling.PollerFlux;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous FormRecognizerClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FormRecognizerClientBuilder.class, isAsync = true)
 public final class FormRecognizerAsyncClient {

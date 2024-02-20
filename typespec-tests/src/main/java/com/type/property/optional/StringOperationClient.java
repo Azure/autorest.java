@@ -19,7 +19,9 @@ import com.type.property.optional.implementation.StringOperationsImpl;
 import com.type.property.optional.models.StringProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous OptionalClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class StringOperationClient {

@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.time.Duration;
 
 /**
+ * <!-- start generated doc -->
  * The DefaultDurationProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class DefaultDurationProperty implements JsonSerializable<DefaultDurationProperty> {

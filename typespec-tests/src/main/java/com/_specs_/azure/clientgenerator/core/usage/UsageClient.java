@@ -20,7 +20,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous UsageClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UsageClientBuilder.class)
 public final class UsageClient {

@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.specialheaders.clientrequestid.implementation.ClientRequestIdClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ClientRequestIdClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ClientRequestIdClientBuilder.class)
 public final class ClientRequestIdClient {

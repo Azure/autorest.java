@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the PathsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { PathsClient.class, PathsAsyncClient.class })
 public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, ConfigurationTrait<PathsClientBuilder> {

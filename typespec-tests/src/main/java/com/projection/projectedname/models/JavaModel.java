@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The JavaModel model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class JavaModel implements JsonSerializable<JavaModel> {

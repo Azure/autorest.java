@@ -30,7 +30,9 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous BasicClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BasicClientBuilder.class, isAsync = true)
 public final class BasicAsyncClient {

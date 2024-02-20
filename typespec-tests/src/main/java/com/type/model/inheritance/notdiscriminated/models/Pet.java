@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * This is base model for not-discriminated normal multiple levels inheritance.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class Pet implements JsonSerializable<Pet> {

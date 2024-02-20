@@ -19,7 +19,9 @@ import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ApiKeyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ApiKeyClientBuilder.class, isAsync = true)
 public final class ApiKeyAsyncClient {

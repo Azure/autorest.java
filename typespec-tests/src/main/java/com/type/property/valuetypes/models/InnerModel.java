@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Inner model. Will be a property type for ModelWithModelProperties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class InnerModel implements JsonSerializable<InnerModel> {

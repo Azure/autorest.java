@@ -42,7 +42,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the FormRecognizerClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { FormRecognizerClient.class, FormRecognizerAsyncClient.class })
 public final class FormRecognizerClientBuilder

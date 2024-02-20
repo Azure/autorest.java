@@ -22,7 +22,9 @@ import com.type.property.nullable.models.DurationProperty;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous NullableClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NullableClientBuilder.class, isAsync = true)
 public final class DurationOperationAsyncClient {

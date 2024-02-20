@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Model with collection models properties.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class CollectionsModelProperty implements JsonSerializable<CollectionsModelProperty> {

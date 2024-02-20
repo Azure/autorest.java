@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Define a base class in the legacy way. Discriminator property is not explicitly defined in the model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class Dinosaur implements JsonSerializable<Dinosaur> {

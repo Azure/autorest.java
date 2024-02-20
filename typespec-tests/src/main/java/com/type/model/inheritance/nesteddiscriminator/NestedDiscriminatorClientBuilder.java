@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the NestedDiscriminatorClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { NestedDiscriminatorClient.class, NestedDiscriminatorAsyncClient.class })
 public final class NestedDiscriminatorClientBuilder

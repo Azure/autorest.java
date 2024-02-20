@@ -19,7 +19,9 @@ import com.server.path.multiple.implementation.MultipleClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous MultipleClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultipleClientBuilder.class, isAsync = true)
 public final class MultipleAsyncClient {

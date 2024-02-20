@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Options for spreadWithMultipleParameters API.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class SpreadWithMultipleParametersOptions

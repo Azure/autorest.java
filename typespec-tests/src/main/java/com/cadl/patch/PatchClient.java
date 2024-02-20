@@ -21,7 +21,9 @@ import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.Resource;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous PatchClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = PatchClientBuilder.class)
 public final class PatchClient {

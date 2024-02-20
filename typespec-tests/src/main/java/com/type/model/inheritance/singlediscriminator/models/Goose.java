@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The second level model in polymorphic single level inheritance.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Goose extends Bird {

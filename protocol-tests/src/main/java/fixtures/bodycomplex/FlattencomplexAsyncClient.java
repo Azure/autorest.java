@@ -19,7 +19,9 @@ import fixtures.bodycomplex.implementation.FlattencomplexesImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestComplexTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FlattencomplexClientBuilder.class, isAsync = true)
 public final class FlattencomplexAsyncClient {

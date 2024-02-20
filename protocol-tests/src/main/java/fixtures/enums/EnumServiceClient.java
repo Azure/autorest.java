@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.enums.implementation.EnumServiceClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous EnumServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
 public final class EnumServiceClient {

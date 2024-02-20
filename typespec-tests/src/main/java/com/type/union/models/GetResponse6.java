@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The GetResponse6 model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class GetResponse6 implements JsonSerializable<GetResponse6> {

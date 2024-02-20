@@ -23,7 +23,9 @@ import com.cadl.wiretype.models.SubClassMismatch;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous WireTypeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = WireTypeClientBuilder.class, isAsync = true)
 public final class WireTypeAsyncClient {

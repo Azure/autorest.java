@@ -21,7 +21,9 @@ import com.cadl.multipleapiversion.models.Resource2;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous SecondClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SecondClientBuilder.class, isAsync = true)
 public final class SecondAsyncClient {

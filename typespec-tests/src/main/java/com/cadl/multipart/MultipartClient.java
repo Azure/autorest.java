@@ -25,7 +25,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MultipartClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultipartClientBuilder.class)
 public final class MultipartClient {

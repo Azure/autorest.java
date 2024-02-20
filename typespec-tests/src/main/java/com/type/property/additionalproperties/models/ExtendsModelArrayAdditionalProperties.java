@@ -16,7 +16,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The model extends from Record&lt;ModelForRecord[]&gt; type.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ExtendsModelArrayAdditionalProperties

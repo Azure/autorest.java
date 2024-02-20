@@ -24,7 +24,9 @@ import java.util.stream.Collectors;
 import reactor.core.publisher.Flux;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous BasicClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BasicClientBuilder.class, isAsync = true)
 public final class TwoModelsAsPageItemAsyncClient {

@@ -17,7 +17,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class BytesProperty implements JsonSerializable<BytesProperty> {

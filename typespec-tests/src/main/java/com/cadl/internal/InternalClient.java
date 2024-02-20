@@ -21,7 +21,9 @@ import com.cadl.internal.models.ApiRequest;
 import com.cadl.internal.models.ApiResponse;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous InternalClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = InternalClientBuilder.class)
 public final class InternalClient {

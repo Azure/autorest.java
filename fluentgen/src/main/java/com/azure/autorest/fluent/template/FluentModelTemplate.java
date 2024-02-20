@@ -143,6 +143,11 @@ public class FluentModelTemplate extends ModelTemplate {
     protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
 
+    @Override
+    protected boolean isPartialUpdateSupported() {
+        return false;
+    }
+
     private Optional<ClientModel> getPredefinedModel(String modelName) {
         return ResourceClientModel.getResourceClientModel(modelName);
     }

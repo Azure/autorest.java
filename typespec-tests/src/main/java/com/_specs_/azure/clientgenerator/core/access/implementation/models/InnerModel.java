@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Used in internal operations, should be generated but not exported.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class InnerModel implements JsonSerializable<InnerModel> {

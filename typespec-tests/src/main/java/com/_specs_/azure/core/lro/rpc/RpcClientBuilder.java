@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the RpcClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { RpcClient.class, RpcAsyncClient.class })
 public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, ConfigurationTrait<RpcClientBuilder> {

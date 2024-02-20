@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.cadl.specialheaders.implementation.SkipSpecialHeadersImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialHeadersClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialHeadersClientBuilder.class)
 public final class SkipSpecialHeadersClient {

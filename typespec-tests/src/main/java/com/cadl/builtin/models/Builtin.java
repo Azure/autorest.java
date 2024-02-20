@@ -23,7 +23,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The Builtin model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Builtin implements JsonSerializable<Builtin> {

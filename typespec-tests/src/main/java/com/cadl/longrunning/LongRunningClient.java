@@ -24,7 +24,9 @@ import com.cadl.longrunning.models.JobResultResult;
 import com.cadl.longrunning.models.PollResponse;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous LongRunningClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LongRunningClientBuilder.class)
 public final class LongRunningClient {

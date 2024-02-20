@@ -17,7 +17,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous OAuth2Client type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = OAuth2ClientBuilder.class)
 public final class OAuth2Client {

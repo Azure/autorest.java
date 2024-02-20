@@ -19,7 +19,9 @@ import com.parameters.spread.implementation.ModelsImpl;
 import com.parameters.spread.models.BodyParameter;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpreadClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpreadClientBuilder.class)
 public final class ModelClient {

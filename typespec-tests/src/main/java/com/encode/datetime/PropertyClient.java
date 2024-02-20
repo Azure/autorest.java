@@ -23,7 +23,9 @@ import com.encode.datetime.models.UnixTimestampArrayDatetimeProperty;
 import com.encode.datetime.models.UnixTimestampDatetimeProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DatetimeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DatetimeClientBuilder.class)
 public final class PropertyClient {

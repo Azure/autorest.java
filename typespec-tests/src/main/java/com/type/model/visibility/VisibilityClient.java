@@ -19,7 +19,9 @@ import com.type.model.visibility.implementation.VisibilityClientImpl;
 import com.type.model.visibility.models.VisibilityModel;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous VisibilityClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = VisibilityClientBuilder.class)
 public final class VisibilityClient {

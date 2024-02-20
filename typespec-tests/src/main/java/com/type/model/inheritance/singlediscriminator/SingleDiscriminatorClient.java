@@ -20,7 +20,9 @@ import com.type.model.inheritance.singlediscriminator.models.Bird;
 import com.type.model.inheritance.singlediscriminator.models.Dinosaur;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SingleDiscriminatorClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SingleDiscriminatorClientBuilder.class)
 public final class SingleDiscriminatorClient {

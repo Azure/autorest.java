@@ -19,7 +19,9 @@ import fixtures.mediatypes.implementation.MediaTypesClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous MediaTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MediaTypesClientBuilder.class, isAsync = true)
 public final class MediaTypesAsyncClient {

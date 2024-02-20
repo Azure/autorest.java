@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.cadl.server.implementation.ContosoClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ContosoClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ContosoClientBuilder.class)
 public final class ContosoClient {

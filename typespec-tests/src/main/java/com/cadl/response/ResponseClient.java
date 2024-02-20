@@ -24,7 +24,9 @@ import com.cadl.response.models.Resource;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ResponseClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ResponseClientBuilder.class)
 public final class ResponseClient {

@@ -19,7 +19,9 @@ import com.cadl.multipleapiversion.implementation.SecondClientImpl;
 import com.cadl.multipleapiversion.models.Resource2;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SecondClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SecondClientBuilder.class)
 public final class SecondClient {

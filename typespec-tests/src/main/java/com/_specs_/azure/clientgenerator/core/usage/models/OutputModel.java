@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Usage override to roundtrip.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class OutputModel implements JsonSerializable<OutputModel> {

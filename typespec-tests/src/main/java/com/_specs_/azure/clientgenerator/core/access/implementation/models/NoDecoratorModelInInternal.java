@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Used in an internal operation, should be generated but not exported.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class NoDecoratorModelInInternal implements JsonSerializable<NoDecoratorModelInInternal> {

@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.llcupdate1.implementation.ParamsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DpgClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DpgClientBuilder.class)
 public final class DpgClient {

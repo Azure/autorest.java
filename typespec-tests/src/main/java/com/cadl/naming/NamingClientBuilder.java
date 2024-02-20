@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the NamingClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { NamingClient.class, NamingAsyncClient.class })
 public final class NamingClientBuilder implements HttpTrait<NamingClientBuilder>,

@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the MultipleResponsesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { MultipleResponsesClient.class, MultipleResponsesAsyncClient.class })
 public final class MultipleResponsesClientBuilder

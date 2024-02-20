@@ -19,7 +19,9 @@ import com.client.structure.service.implementation.Group1sImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous TwoOperationGroupClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = TwoOperationGroupClientBuilder.class, isAsync = true)
 public final class Group1AsyncClient {

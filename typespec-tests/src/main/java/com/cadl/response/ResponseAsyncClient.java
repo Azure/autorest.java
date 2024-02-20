@@ -26,7 +26,9 @@ import java.util.List;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ResponseClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ResponseClientBuilder.class, isAsync = true)
 public final class ResponseAsyncClient {

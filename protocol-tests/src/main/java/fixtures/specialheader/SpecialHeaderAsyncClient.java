@@ -21,7 +21,9 @@ import fixtures.specialheader.implementation.HeadersImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous SpecialHeaderClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialHeaderClientBuilder.class, isAsync = true)
 public final class SpecialHeaderAsyncClient {

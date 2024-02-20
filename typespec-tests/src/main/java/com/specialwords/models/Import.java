@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The Import model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Import implements JsonSerializable<Import> {

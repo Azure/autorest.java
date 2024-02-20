@@ -19,7 +19,9 @@ import java.time.Duration;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DurationClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DurationClientBuilder.class)
 public final class QueryClient {

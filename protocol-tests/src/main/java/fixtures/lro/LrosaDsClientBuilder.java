@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the LrosaDsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { LrosaDsClient.class, LrosaDsAsyncClient.class })
 public final class LrosaDsClientBuilder

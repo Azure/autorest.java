@@ -19,7 +19,9 @@ import com.specialheaders.clientrequestid.implementation.ClientRequestIdClientIm
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ClientRequestIdClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ClientRequestIdClientBuilder.class, isAsync = true)
 public final class ClientRequestIdAsyncClient {

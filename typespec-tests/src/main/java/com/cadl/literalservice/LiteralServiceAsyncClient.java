@@ -22,7 +22,9 @@ import com.cadl.literalservice.models.OptionalLiteralParam;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous LiteralServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = LiteralServiceClientBuilder.class, isAsync = true)
 public final class LiteralServiceAsyncClient {

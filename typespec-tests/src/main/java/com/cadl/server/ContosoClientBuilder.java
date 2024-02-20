@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the ContosoClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { ContosoClient.class, ContosoAsyncClient.class })
 public final class ContosoClientBuilder implements HttpTrait<ContosoClientBuilder>,

@@ -22,7 +22,9 @@ import com.encode.bytes.models.Base64urlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous BytesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BytesClientBuilder.class)
 public final class PropertyClient {

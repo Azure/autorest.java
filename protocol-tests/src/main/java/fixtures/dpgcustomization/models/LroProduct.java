@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The LroProduct model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class LroProduct extends Product {

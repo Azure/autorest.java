@@ -20,7 +20,9 @@ import com.cadl.specialchars.implementation.models.ReadRequest;
 import com.cadl.specialchars.models.Resource;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialCharsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialCharsClientBuilder.class)
 public final class SpecialCharsClient {

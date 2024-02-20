@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the RepeatabilityClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { RepeatabilityClient.class, RepeatabilityAsyncClient.class })
 public final class RepeatabilityClientBuilder

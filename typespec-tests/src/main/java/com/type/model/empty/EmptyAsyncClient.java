@@ -23,7 +23,9 @@ import com.type.model.empty.models.EmptyOutput;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous EmptyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = EmptyClientBuilder.class, isAsync = true)
 public final class EmptyAsyncClient {

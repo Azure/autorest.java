@@ -22,7 +22,9 @@ import com.projection.projectedname.models.JsonProjectedNameModel;
 import com.projection.projectedname.models.LanguageProjectedNameModel;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ProjectedNameClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ProjectedNameClientBuilder.class)
 public final class PropertyClient {

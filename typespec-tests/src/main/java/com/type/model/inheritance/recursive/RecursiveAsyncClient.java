@@ -21,7 +21,9 @@ import com.type.model.inheritance.recursive.models.Extension;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous RecursiveClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RecursiveClientBuilder.class, isAsync = true)
 public final class RecursiveAsyncClient {

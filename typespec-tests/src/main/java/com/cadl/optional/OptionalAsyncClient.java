@@ -23,7 +23,9 @@ import com.cadl.optional.models.Optional;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous OptionalClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = OptionalClientBuilder.class, isAsync = true)
 public final class OptionalAsyncClient {

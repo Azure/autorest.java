@@ -20,7 +20,9 @@ import com.azure.core.util.polling.SyncPoller;
 import fixtures.dpgcustomization.implementation.DpgClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DpgClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DpgClientBuilder.class)
 public final class DpgClient {

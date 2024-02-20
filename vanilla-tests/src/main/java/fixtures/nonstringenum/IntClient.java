@@ -14,7 +14,9 @@ import fixtures.nonstringenum.implementation.IntsImpl;
 import fixtures.nonstringenum.models.IntEnum;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous NonStringEnumsClient type.
+ * <!-- end generated doc -->
  */
 public final class IntClient {
     @Generated

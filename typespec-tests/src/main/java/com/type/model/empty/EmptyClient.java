@@ -21,7 +21,9 @@ import com.type.model.empty.models.EmptyInputOutput;
 import com.type.model.empty.models.EmptyOutput;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous EmptyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = EmptyClientBuilder.class)
 public final class EmptyClient {

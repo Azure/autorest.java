@@ -9,7 +9,9 @@ import com.azure.core.annotation.Immutable;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The ComplexPartsRequest model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class ComplexPartsRequest {

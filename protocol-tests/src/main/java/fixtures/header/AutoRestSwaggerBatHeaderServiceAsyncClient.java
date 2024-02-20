@@ -20,7 +20,9 @@ import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestSwaggerBatHeaderServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerBatHeaderServiceClientBuilder.class, isAsync = true)
 public final class AutoRestSwaggerBatHeaderServiceAsyncClient {

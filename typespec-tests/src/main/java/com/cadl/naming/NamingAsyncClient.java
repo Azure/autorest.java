@@ -24,7 +24,9 @@ import com.cadl.naming.models.GetAnonymousResponse;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous NamingClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NamingClientBuilder.class, isAsync = true)
 public final class NamingAsyncClient {

@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.client.structure.service.implementation.ClientBClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ClientBClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ClientBClientBuilder.class)
 public final class ClientBClient {

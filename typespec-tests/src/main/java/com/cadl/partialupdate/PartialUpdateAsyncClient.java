@@ -20,7 +20,9 @@ import com.cadl.partialupdate.models.PartialUpdateModel;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous PartialUpdateClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = PartialUpdateClientBuilder.class, isAsync = true)
 public final class PartialUpdateAsyncClient {

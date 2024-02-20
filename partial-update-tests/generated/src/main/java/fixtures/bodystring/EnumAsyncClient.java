@@ -18,7 +18,9 @@ import fixtures.bodystring.implementation.EnumsImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestSwaggerBatServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class, isAsync = true)
 public final class EnumAsyncClient {

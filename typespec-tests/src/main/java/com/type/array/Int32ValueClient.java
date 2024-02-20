@@ -20,7 +20,9 @@ import com.type.array.implementation.Int32ValuesImpl;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ArrayClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ArrayClientBuilder.class)
 public final class Int32ValueClient {

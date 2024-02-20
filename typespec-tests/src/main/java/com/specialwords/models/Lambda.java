@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The Lambda model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Lambda implements JsonSerializable<Lambda> {

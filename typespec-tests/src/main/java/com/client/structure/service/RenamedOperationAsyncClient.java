@@ -19,7 +19,9 @@ import com.client.structure.service.implementation.RenamedOperationClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous RenamedOperationClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = RenamedOperationClientBuilder.class, isAsync = true)
 public final class RenamedOperationAsyncClient {

@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the SecondClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { SecondClient.class, SecondAsyncClient.class })
 public final class SecondClientBuilder implements HttpTrait<SecondClientBuilder>,

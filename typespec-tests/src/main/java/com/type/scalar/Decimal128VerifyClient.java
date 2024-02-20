@@ -21,7 +21,9 @@ import java.math.BigDecimal;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ScalarClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ScalarClientBuilder.class)
 public final class Decimal128VerifyClient {

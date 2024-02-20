@@ -21,7 +21,9 @@ import com.payload.contentnegotiation.models.PngImageAsJson;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ContentNegotiationClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ContentNegotiationClientBuilder.class, isAsync = true)
 public final class DifferentBodyAsyncClient {

@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the MultipleClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { MultipleClient.class, MultipleAsyncClient.class })
 public final class MultipleClientBuilder implements HttpTrait<MultipleClientBuilder>,

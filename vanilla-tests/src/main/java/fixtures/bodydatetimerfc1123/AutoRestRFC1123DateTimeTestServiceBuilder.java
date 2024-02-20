@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the AutoRestRFC1123DateTimeTestService type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { AutoRestRFC1123DateTimeTestService.class })
 public final class AutoRestRFC1123DateTimeTestServiceBuilder

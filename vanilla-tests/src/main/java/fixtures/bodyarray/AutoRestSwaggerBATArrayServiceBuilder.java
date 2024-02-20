@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the AutoRestSwaggerBATArrayService type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { AutoRestSwaggerBATArrayService.class })
 public final class AutoRestSwaggerBATArrayServiceBuilder implements HttpTrait<AutoRestSwaggerBATArrayServiceBuilder>,

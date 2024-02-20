@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import com.payload.mediatype.implementation.StringBodiesImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MediaTypeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MediaTypeClientBuilder.class)
 public final class MediaTypeClient {

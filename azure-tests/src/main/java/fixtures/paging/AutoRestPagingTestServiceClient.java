@@ -20,7 +20,9 @@ import fixtures.paging.models.PagingGetOdataMultiplePagesOptions;
 import fixtures.paging.models.Product;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestPagingTestService type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestPagingTestServiceBuilder.class)
 public final class AutoRestPagingTestServiceClient {

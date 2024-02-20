@@ -21,7 +21,9 @@ import com.type.union.models.GetResponse7;
 import com.type.union.models.StringAndArrayCases;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous UnionClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class StringAndArrayClient {

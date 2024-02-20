@@ -44,7 +44,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the AutorestSecurityInfo type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { AutorestSecurityInfo.class })
 public final class AutorestSecurityInfoBuilder

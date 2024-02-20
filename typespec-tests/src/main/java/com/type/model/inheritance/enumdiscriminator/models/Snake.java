@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Test fixed enum type for discriminator.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class Snake implements JsonSerializable<Snake> {

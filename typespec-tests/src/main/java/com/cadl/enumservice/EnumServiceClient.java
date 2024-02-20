@@ -29,7 +29,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous EnumServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = EnumServiceClientBuilder.class)
 public final class EnumServiceClient {

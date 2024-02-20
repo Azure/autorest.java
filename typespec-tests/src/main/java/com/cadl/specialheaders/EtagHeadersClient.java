@@ -24,7 +24,9 @@ import com.cadl.specialheaders.models.Resource;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialHeadersClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialHeadersClientBuilder.class)
 public final class EtagHeadersClient {

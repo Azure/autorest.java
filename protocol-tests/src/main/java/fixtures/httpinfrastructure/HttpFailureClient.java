@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.httpinfrastructure.implementation.HttpFailuresImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestHttpInfrastructureTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = HttpFailureClientBuilder.class)
 public final class HttpFailureClient {

@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The exported user data.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class ExportedUser implements JsonSerializable<ExportedUser> {

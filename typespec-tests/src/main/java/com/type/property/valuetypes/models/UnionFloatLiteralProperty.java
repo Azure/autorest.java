@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Model with a union of float literal as property.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class UnionFloatLiteralProperty implements JsonSerializable<UnionFloatLiteralProperty> {

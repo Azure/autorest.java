@@ -23,7 +23,9 @@ import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous FlattenClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FlattenClientBuilder.class)
 public final class FlattenClient {

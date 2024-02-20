@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The ProductResult model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class ProductResult implements JsonSerializable<ProductResult> {

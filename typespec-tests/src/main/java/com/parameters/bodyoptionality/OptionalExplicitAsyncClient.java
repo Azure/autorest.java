@@ -21,7 +21,9 @@ import com.parameters.bodyoptionality.models.BodyModel;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous BodyOptionalityClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BodyOptionalityClientBuilder.class, isAsync = true)
 public final class OptionalExplicitAsyncClient {

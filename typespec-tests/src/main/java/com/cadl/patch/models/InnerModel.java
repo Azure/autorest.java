@@ -16,7 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * The InnerModel model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class InnerModel implements JsonSerializable<InnerModel> {

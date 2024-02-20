@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.specialwords.implementation.OperationsImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous SpecialWordsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialWordsClientBuilder.class)
 public final class OperationsClient {

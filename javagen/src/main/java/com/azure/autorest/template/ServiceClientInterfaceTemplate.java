@@ -37,7 +37,7 @@ public class ServiceClientInterfaceTemplate implements IJavaTemplate<ServiceClie
 
         javaFile.javadocComment(comment ->
         {
-            comment.description(String.format("The interface for %1$s class.", serviceClient.getInterfaceName()));
+            comment.description(String.format("The interface for %1$s class.", serviceClient.getInterfaceName()), true);
         });
         javaFile.publicInterface(serviceClient.getInterfaceName(), interfaceBlock ->
         {

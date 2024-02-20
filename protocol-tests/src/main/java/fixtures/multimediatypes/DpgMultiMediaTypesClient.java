@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.multimediatypes.implementation.DpgMultiMediaTypesClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DpgMultiMediaTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DpgMultiMediaTypesClientBuilder.class)
 public final class DpgMultiMediaTypesClient {

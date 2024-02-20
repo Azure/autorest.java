@@ -19,7 +19,9 @@ import com.server.versions.notversioned.implementation.NotVersionedClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous NotVersionedClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NotVersionedClientBuilder.class, isAsync = true)
 public final class NotVersionedAsyncClient {

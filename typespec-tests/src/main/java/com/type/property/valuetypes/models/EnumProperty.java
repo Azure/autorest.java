@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Model with enum properties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class EnumProperty implements JsonSerializable<EnumProperty> {

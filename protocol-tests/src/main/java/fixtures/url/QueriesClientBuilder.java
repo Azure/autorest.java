@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the QueriesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { QueriesClient.class, QueriesAsyncClient.class })
 public final class QueriesClientBuilder

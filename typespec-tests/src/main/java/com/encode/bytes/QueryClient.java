@@ -18,7 +18,9 @@ import com.encode.bytes.implementation.QueriesImpl;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous BytesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BytesClientBuilder.class)
 public final class QueryClient {

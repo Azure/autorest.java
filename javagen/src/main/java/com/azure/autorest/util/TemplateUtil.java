@@ -59,6 +59,10 @@ public class TemplateUtil {
 
     public static final String DATE_UTC = "date-utc";
 
+    public static final String GENERATED_JAVADOC_START_WRAPPER = "<!-- start generated doc -->";
+
+    public static final String GENERATED_JAVADOC_END_WRAPPER = "<!-- end generated doc -->";
+
     private static final String[] ESCAPE_REPLACEMENT;
 
     static {

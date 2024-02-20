@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The Data model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class Data implements JsonSerializable<Data> {

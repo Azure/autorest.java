@@ -13,7 +13,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * Empty model used in both parameter and return type.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class EmptyInputOutput implements JsonSerializable<EmptyInputOutput> {

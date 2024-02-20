@@ -19,7 +19,9 @@ import com.type.enums.extensible.implementation.StringOperationsImpl;
 import com.type.enums.extensible.models.DaysOfWeekExtensibleEnum;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ExtensibleClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ExtensibleClientBuilder.class)
 public final class ExtensibleClient {

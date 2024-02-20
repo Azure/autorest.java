@@ -19,7 +19,9 @@ import com.cadl.multicontenttypes.implementation.MultipleContentTypesOnRequestsI
 import com.cadl.multicontenttypes.models.Resource;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MultiContentTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultiContentTypesClientBuilder.class)
 public final class MultipleContentTypesOnRequestClient {

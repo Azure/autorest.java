@@ -13,9 +13,11 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * summary of Response
  * 
  * description of Response.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class DataResponse implements JsonSerializable<DataResponse> {

@@ -13,7 +13,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * extension.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class Extension extends Element {

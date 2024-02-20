@@ -13,9 +13,11 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * summary of Request
  * 
  * description of Request.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class DataRequest implements JsonSerializable<DataRequest> {

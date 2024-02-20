@@ -25,7 +25,9 @@ import com.azure.core.util.DateTimeRfc1123;
 import java.time.OffsetDateTime;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous TraitsClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = TraitsClientBuilder.class)
 public final class TraitsClient {

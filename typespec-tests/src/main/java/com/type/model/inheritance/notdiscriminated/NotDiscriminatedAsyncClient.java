@@ -21,7 +21,9 @@ import com.type.model.inheritance.notdiscriminated.models.Siamese;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous NotDiscriminatedClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NotDiscriminatedClientBuilder.class, isAsync = true)
 public final class NotDiscriminatedAsyncClient {

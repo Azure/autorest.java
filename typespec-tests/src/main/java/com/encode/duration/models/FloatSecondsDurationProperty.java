@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.time.Duration;
 
 /**
+ * <!-- start generated doc -->
  * The FloatSecondsDurationProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class FloatSecondsDurationProperty implements JsonSerializable<FloatSecondsDurationProperty> {

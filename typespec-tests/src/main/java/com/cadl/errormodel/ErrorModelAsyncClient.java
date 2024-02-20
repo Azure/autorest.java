@@ -21,7 +21,9 @@ import com.cadl.errormodel.models.Diagnostic;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous ErrorModelClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ErrorModelClientBuilder.class, isAsync = true)
 public final class ErrorModelAsyncClient {

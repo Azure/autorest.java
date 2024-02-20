@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The second level legacy model in polymorphic single level inheritance.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class TRex extends Dinosaur {

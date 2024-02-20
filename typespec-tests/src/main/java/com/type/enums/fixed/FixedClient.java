@@ -19,7 +19,9 @@ import com.type.enums.fixed.implementation.StringOperationsImpl;
 import com.type.enums.fixed.models.DaysOfWeekEnum;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous FixedClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = FixedClientBuilder.class)
 public final class FixedClient {

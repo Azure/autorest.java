@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the LroRetrysClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { LroRetrysClient.class, LroRetrysAsyncClient.class })
 public final class LroRetrysClientBuilder

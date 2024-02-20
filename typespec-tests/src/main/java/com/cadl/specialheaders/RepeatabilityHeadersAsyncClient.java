@@ -24,7 +24,9 @@ import com.cadl.specialheaders.models.Resource;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous SpecialHeadersClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = SpecialHeadersClientBuilder.class, isAsync = true)
 public final class RepeatabilityHeadersAsyncClient {

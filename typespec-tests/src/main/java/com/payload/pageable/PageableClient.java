@@ -19,7 +19,9 @@ import com.payload.pageable.implementation.PageableClientImpl;
 import com.payload.pageable.models.User;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous PageableClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = PageableClientBuilder.class)
 public final class PageableClient {

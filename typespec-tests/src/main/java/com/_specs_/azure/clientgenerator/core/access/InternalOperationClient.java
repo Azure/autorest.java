@@ -21,7 +21,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AccessClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AccessClientBuilder.class)
 public final class InternalOperationClient {

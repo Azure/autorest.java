@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the ParmaterizedEndpointClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { ParmaterizedEndpointClient.class, ParmaterizedEndpointAsyncClient.class })
 public final class ParmaterizedEndpointClientBuilder implements HttpTrait<ParmaterizedEndpointClientBuilder>,

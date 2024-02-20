@@ -27,7 +27,9 @@ import com.cadl.protocolandconvenient.models.ResourceI;
 import com.cadl.protocolandconvenient.models.ResourceJ;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous ProtocolAndConvenientClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = ProtocolAndConvenientClientBuilder.class)
 public final class ProtocolAndConvenientClient {

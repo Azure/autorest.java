@@ -12,7 +12,9 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
+ * <!-- start generated doc -->
  * The third level model SawShark in polymorphic multiple levels inheritance.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class SawShark extends Shark {

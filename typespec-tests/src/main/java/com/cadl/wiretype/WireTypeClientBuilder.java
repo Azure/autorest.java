@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the WireTypeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { WireTypeClient.class, WireTypeAsyncClient.class })
 public final class WireTypeClientBuilder implements HttpTrait<WireTypeClientBuilder>,

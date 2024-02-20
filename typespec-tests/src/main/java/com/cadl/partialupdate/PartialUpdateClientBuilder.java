@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the PartialUpdateClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { PartialUpdateClient.class, PartialUpdateAsyncClient.class })
 public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdateClientBuilder>,

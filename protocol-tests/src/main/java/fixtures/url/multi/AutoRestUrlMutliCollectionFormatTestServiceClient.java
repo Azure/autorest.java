@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import fixtures.url.multi.implementation.QueriesImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AutoRestUrlMutliCollectionFormatTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestUrlMutliCollectionFormatTestServiceClientBuilder.class)
 public final class AutoRestUrlMutliCollectionFormatTestServiceClient {

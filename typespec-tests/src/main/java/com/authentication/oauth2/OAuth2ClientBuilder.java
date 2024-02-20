@@ -41,7 +41,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the OAuth2Client type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { OAuth2Client.class, OAuth2AsyncClient.class })
 public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>,

@@ -21,7 +21,9 @@ import com.type.union.models.GetResponse4;
 import com.type.union.models.Prop3;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous UnionClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class FloatsOnlyClient {

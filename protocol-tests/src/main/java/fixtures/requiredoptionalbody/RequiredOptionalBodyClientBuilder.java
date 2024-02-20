@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the RequiredOptionalBodyClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { RequiredOptionalBodyClient.class, RequiredOptionalBodyAsyncClient.class })
 public final class RequiredOptionalBodyClientBuilder

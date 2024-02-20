@@ -25,7 +25,9 @@ import com.cadl.union.models.SendLongOptions;
 import com.cadl.union.models.User;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous UnionClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class UnionClient {

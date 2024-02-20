@@ -19,7 +19,9 @@ import com.azure.core.util.FluxUtil;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous CustomClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = CustomClientBuilder.class, isAsync = true)
 public final class CustomAsyncClient {

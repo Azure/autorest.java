@@ -24,7 +24,9 @@ import java.time.OffsetDateTime;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous BuiltinClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BuiltinClientBuilder.class, isAsync = true)
 public final class BuiltinAsyncClient {

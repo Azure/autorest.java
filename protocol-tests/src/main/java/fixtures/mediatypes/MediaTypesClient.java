@@ -18,7 +18,9 @@ import com.azure.core.util.BinaryData;
 import fixtures.mediatypes.implementation.MediaTypesClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MediaTypesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MediaTypesClientBuilder.class)
 public final class MediaTypesClient {

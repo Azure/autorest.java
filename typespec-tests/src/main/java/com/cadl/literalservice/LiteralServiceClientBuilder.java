@@ -39,7 +39,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the LiteralServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { LiteralServiceClient.class, LiteralServiceAsyncClient.class })
 public final class LiteralServiceClientBuilder implements HttpTrait<LiteralServiceClientBuilder>,

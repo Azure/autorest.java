@@ -19,7 +19,9 @@ import java.time.OffsetDateTime;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous DatetimeClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DatetimeClientBuilder.class)
 public final class HeaderClient {

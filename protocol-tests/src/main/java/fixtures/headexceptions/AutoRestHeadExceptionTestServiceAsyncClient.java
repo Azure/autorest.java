@@ -18,7 +18,9 @@ import fixtures.headexceptions.models.CustomizedException;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AutoRestHeadExceptionTestServiceClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AutoRestHeadExceptionTestServiceClientBuilder.class, isAsync = true)
 public final class AutoRestHeadExceptionTestServiceAsyncClient {

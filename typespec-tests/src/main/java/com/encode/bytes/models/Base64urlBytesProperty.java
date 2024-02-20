@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The Base64urlBytesProperty model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class Base64urlBytesProperty implements JsonSerializable<Base64urlBytesProperty> {

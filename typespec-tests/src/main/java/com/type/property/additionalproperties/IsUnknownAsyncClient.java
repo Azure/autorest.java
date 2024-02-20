@@ -21,7 +21,9 @@ import com.type.property.additionalproperties.models.IsUnknownAdditionalProperti
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous AdditionalPropertiesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AdditionalPropertiesClientBuilder.class, isAsync = true)
 public final class IsUnknownAsyncClient {

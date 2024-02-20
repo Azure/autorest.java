@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the SpreadClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(
     serviceClients = { ModelClient.class, AliasClient.class, ModelAsyncClient.class, AliasAsyncClient.class })

@@ -16,7 +16,9 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * <!-- start generated doc -->
  * Inner model used in collections model property.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class InnerModel implements JsonSerializable<InnerModel> {

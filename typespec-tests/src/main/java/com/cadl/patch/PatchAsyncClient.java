@@ -23,7 +23,9 @@ import com.cadl.patch.models.Resource;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous PatchClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = PatchClientBuilder.class, isAsync = true)
 public final class PatchAsyncClient {

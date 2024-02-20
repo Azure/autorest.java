@@ -20,7 +20,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The AllPropertiesOptional model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class AllPropertiesOptional implements JsonSerializable<AllPropertiesOptional> {

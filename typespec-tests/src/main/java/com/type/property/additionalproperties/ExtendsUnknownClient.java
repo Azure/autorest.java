@@ -19,7 +19,9 @@ import com.type.property.additionalproperties.implementation.ExtendsUnknownsImpl
 import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalProperties;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous AdditionalPropertiesClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = AdditionalPropertiesClientBuilder.class)
 public final class ExtendsUnknownClient {

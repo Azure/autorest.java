@@ -16,7 +16,9 @@ import java.time.OffsetDateTime;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * The SuperClassMismatch model.
+ * <!-- end generated doc -->
  */
 @Immutable
 public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> {

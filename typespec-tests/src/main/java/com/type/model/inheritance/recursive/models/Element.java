@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * element.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class Element implements JsonSerializable<Element> {

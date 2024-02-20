@@ -15,7 +15,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * The model is from Record&lt;unknown&gt; type.
+ * <!-- end generated doc -->
  */
 @Fluent
 public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknownAdditionalProperties> {

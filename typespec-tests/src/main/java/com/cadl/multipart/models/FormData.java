@@ -9,7 +9,9 @@ import com.azure.core.annotation.Generated;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * The FormData model.
+ * <!-- end generated doc -->
  */
 @Fluent
 public final class FormData {

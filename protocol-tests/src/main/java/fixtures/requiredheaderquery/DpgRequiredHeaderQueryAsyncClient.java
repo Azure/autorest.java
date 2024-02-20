@@ -22,7 +22,9 @@ import java.util.List;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous DpgRequiredHeaderQueryClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = DpgRequiredHeaderQueryClientBuilder.class, isAsync = true)
 public final class DpgRequiredHeaderQueryAsyncClient {

@@ -17,7 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.server.versions.notversioned.implementation.NotVersionedClientImpl;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous NotVersionedClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = NotVersionedClientBuilder.class)
 public final class NotVersionedClient {

@@ -19,7 +19,9 @@ import com.type.property.optional.implementation.RequiredAndOptionalsImpl;
 import com.type.property.optional.models.RequiredAndOptionalProperty;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous OptionalClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = OptionalClientBuilder.class)
 public final class RequiredAndOptionalClient {

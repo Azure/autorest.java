@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.Map;
 
 /**
+ * <!-- start generated doc -->
  * Model with dictionary string properties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class DictionaryStringProperty implements JsonSerializable<DictionaryStringProperty> {

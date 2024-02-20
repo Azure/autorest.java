@@ -19,7 +19,9 @@ import com.parameters.bodyoptionality.implementation.BodyOptionalityClientImpl;
 import com.parameters.bodyoptionality.models.BodyModel;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous BodyOptionalityClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = BodyOptionalityClientBuilder.class)
 public final class BodyOptionalityClient {

@@ -38,7 +38,9 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
+ * <!-- start generated doc -->
  * A builder for creating a new instance of the FixedClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClientBuilder(serviceClients = { FixedClient.class, FixedAsyncClient.class })
 public final class FixedClientBuilder implements HttpTrait<FixedClientBuilder>, ConfigurationTrait<FixedClientBuilder> {

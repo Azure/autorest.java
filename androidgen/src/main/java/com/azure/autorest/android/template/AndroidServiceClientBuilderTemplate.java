@@ -141,4 +141,9 @@ public class AndroidServiceClientBuilderTemplate extends ServiceClientBuilderTem
     @Override
     protected void addGeneratedAnnotation(JavaContext classBlock) {
     }
+
+    @Override
+    protected boolean isPartialUpdateSupported() {
+        return false;
+    }
 }

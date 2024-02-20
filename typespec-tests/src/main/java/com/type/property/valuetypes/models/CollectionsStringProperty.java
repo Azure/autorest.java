@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.util.List;
 
 /**
+ * <!-- start generated doc -->
  * Model with collection string properties.
+ * <!-- end generated doc -->
  */
 @Immutable
 public final class CollectionsStringProperty implements JsonSerializable<CollectionsStringProperty> {

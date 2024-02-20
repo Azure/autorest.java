@@ -19,7 +19,9 @@ import com.cadl.server.implementation.HttpbinClientImpl;
 import reactor.core.publisher.Mono;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the asynchronous HttpbinClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = HttpbinClientBuilder.class, isAsync = true)
 public final class HttpbinAsyncClient {

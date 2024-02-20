@@ -27,7 +27,9 @@ import com.payload.multipart.models.PicturesFileDetails;
 import java.util.stream.Collectors;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous MultiPartClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = MultiPartClientBuilder.class)
 public final class MultiPartClient {

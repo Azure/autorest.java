@@ -21,7 +21,9 @@ import com.type.union.models.GetResponse8;
 import com.type.union.models.MixedLiteralsCases;
 
 /**
+ * <!-- start generated doc -->
  * Initializes a new instance of the synchronous UnionClient type.
+ * <!-- end generated doc -->
  */
 @ServiceClient(builder = UnionClientBuilder.class)
 public final class MixedLiteralsClient {
