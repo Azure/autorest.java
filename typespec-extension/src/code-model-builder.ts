@@ -2198,16 +2198,17 @@ export class CodeModelBuilder {
             objectSchema.discriminatorValue = discriminatorProperty.type.value;
           } else if (discriminatorProperty.type.kind === "EnumMember") {
             // value as EnumMember
-            // lint requires value be string, not number
+            // lint requires value be string
             objectSchema.discriminatorValue =
               (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
           } else if (discriminatorProperty.type.kind === "UnionVariant") {
             // value as UnionVariant
-            // TODO: it is possible that the UnionVariant be union of string
             objectSchema.discriminatorValue =
               ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
           }
         } else {
+          // it is possible that the property is Union, e.g. 'kind: "type1" | "type2"'; but such Type appears not to be a concrete model.
+
           // fallback to name of the Model
           objectSchema.discriminatorValue = name;
         }
@@ -2492,6 +2493,8 @@ export class CodeModelBuilder {
         return pascalCase(type.valueAsString);
       case "Boolean":
         return pascalCase(type.value ? "True" : "False");
+      case "Union":
+        return type.name ?? "Union";
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
