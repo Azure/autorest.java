@@ -8,7 +8,5 @@ import java.util.function.Consumer;
 public interface JavaContext {
     void javadocComment(Consumer<JavaJavadocComment> commentAction);
 
-    void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker);
-
     void annotation(String... annotations);
 }

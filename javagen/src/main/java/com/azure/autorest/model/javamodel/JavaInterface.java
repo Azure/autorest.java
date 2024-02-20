@@ -42,19 +42,38 @@ public class JavaInterface implements JavaType {
     }
 
     @Override
+    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker) {
+        javadocComment(commentDescriptionAction, commentTagsAction, withGeneratedMarker, true, wordWrapWidth);
+    }
+
+    @Override
     public void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker) {
+        javadocComment(commentDescriptionAction, commentTagsAction, withGeneratedMarker, false, 0);
+    }
+
+    /**
+     * Helper method to add a javadoc comment to the contents.
+     * @param commentDescriptionAction
+     * @param commentTagsAction
+     * @param withGeneratedMarker
+     * @param withWordWrap
+     * @param wordWrapWidth
+     */
+    private void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
         addExpectedNewLine();
         if (commentDescriptionAction != null) {
             contents.javadocCommentStart();
             if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
             }
-            commentDescriptionAction.accept(new JavaJavadocComment(contents));
-
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentDescriptionAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentDescriptionAction.accept(new JavaJavadocComment(contents));
+            }
             if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
             }
-
             if (commentTagsAction == null) { // if no tags action, then end the javadoc comment
                 contents.javadocCommentEnd();
             } else { // otherwise, a new line will be added and the tags action will start
@@ -68,8 +87,11 @@ public class JavaInterface implements JavaType {
             if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
             }
-            commentTagsAction.accept(new JavaJavadocComment(contents));
-
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentTagsAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentTagsAction.accept(new JavaJavadocComment(contents));
+            }
             if (withGeneratedMarker) {
                 contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
             }

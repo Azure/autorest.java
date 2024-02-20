@@ -7,4 +7,8 @@ import java.util.function.Consumer;
 
 public interface JavaType extends JavaContext {
     void publicMethod(String methodSignature, Consumer<JavaBlock> functionBlock);
+
+    void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker);
+
+    void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker);
 }

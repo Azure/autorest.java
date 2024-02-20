@@ -204,6 +204,7 @@ public class JavaClass implements JavaType {
         contents.javadocComment(wordWrapWidth, commentAction);
     }
 
+    @Override
     public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker) {
         javadocComment(commentDescriptionAction, commentTagsAction, withGeneratedMarker, true, wordWrapWidth);
     }
