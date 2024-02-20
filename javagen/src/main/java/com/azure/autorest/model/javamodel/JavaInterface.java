@@ -61,42 +61,35 @@ public class JavaInterface implements JavaType {
      */
     private void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
         addExpectedNewLine();
-        if (commentDescriptionAction != null) {
-            contents.javadocCommentStart();
-            if (withGeneratedMarker) {
-                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
-            }
-            if (withWordWrap) {
-                contents.withWordWrap(wordWrapWidth, () -> commentDescriptionAction.accept(new JavaJavadocComment(contents)));
-            } else {
-                commentDescriptionAction.accept(new JavaJavadocComment(contents));
-            }
-            if (withGeneratedMarker) {
-                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
-            }
-            if (commentTagsAction == null) { // if no tags action, then end the javadoc comment
-                contents.javadocCommentEnd();
-            } else { // otherwise, a new line will be added and the tags action will start
-                contents.line();
-            }
+        // javadoc comment description
+        contents.javadocCommentStart();
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
         }
-        if (commentTagsAction != null) {
-            if (commentDescriptionAction == null) {// if no description action, then start the javadoc comment
-                contents.javadocCommentStart();
-            }
-            if (withGeneratedMarker) {
-                contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
-            }
-            if (withWordWrap) {
-                contents.withWordWrap(wordWrapWidth, () -> commentTagsAction.accept(new JavaJavadocComment(contents)));
-            } else {
-                commentTagsAction.accept(new JavaJavadocComment(contents));
-            }
-            if (withGeneratedMarker) {
-                contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
-            }
-            contents.javadocCommentEnd();
+        Consumer<JavaJavadocComment> nonNullCommentDescriptionAction = commentDescriptionAction == null ? c -> {} : commentDescriptionAction;
+        if (withWordWrap) {
+            contents.withWordWrap(wordWrapWidth, () -> nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents)));
+        } else {
+            nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents));
         }
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+        }
+
+        // javadoc comment tags
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
+        }
+        Consumer<JavaJavadocComment> nonNullCommentTagsAction = commentTagsAction == null ? c -> {} : commentTagsAction;
+        if (withWordWrap) {
+            contents.withWordWrap(wordWrapWidth, () -> nonNullCommentTagsAction.accept(new JavaJavadocComment(contents)));
+        } else {
+            nonNullCommentTagsAction.accept(new JavaJavadocComment(contents));
+        }
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
+        }
+        contents.javadocCommentEnd();
     }
 
     public final void lineComment(String comment) {

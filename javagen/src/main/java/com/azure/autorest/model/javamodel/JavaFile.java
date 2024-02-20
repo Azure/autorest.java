@@ -115,21 +115,20 @@ public class JavaFile implements JavaContext {
     }
 
     private void javadocComment(Consumer<JavaJavadocComment> commentAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
-        if (commentAction != null) {
-            contents.javadocCommentStart();
-            if (withGeneratedMarker) {
-                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
-            }
-            if (withWordWrap) {
-                contents.withWordWrap(wordWrapWidth, () -> commentAction.accept(new JavaJavadocComment(contents)));
-            } else {
-                commentAction.accept(new JavaJavadocComment(contents));
-            }
-            if (withGeneratedMarker) {
-                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
-            }
-            contents.javadocCommentEnd();
+        contents.javadocCommentStart();
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
         }
+        Consumer<JavaJavadocComment> nonNullCommentDescriptionAction = commentAction == null ? c -> {} : commentAction;
+        if (withWordWrap) {
+            contents.withWordWrap(wordWrapWidth, () -> nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents)));
+        } else {
+            nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents));
+        }
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+        }
+        contents.javadocCommentEnd();
     }
 
     public final void lineComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction) {
