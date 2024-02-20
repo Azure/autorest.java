@@ -7,7 +7,6 @@ package com.cadl.armresourceprovider.models;
 import com.azure.core.annotation.Fluent;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.OffsetDateTime;
-import java.util.List;
 
 /**
  * The updatable properties of the TopLevelArmResource.
@@ -21,10 +20,16 @@ public final class TopLevelArmResourceUpdateProperties {
     private String username;
 
     /*
-     * The ipRules property.
+     * The userNames property.
      */
-    @JsonProperty(value = "ipRules")
-    private List<IpRules> ipRules;
+    @JsonProperty(value = "userNames")
+    private String userNames;
+
+    /*
+     * The accuserName property.
+     */
+    @JsonProperty(value = "accuserName")
+    private String accuserName;
 
     /*
      * The startTimeStamp property.
@@ -59,22 +64,42 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Get the ipRules property: The ipRules property.
+     * Get the userNames property: The userNames property.
      * 
-     * @return the ipRules value.
+     * @return the userNames value.
      */
-    public List<IpRules> ipRules() {
-        return this.ipRules;
+    public String userNames() {
+        return this.userNames;
     }
 
     /**
-     * Set the ipRules property: The ipRules property.
+     * Set the userNames property: The userNames property.
      * 
-     * @param ipRules the ipRules value to set.
+     * @param userNames the userNames value to set.
      * @return the TopLevelArmResourceUpdateProperties object itself.
      */
-    public TopLevelArmResourceUpdateProperties withIpRules(List<IpRules> ipRules) {
-        this.ipRules = ipRules;
+    public TopLevelArmResourceUpdateProperties withUserNames(String userNames) {
+        this.userNames = userNames;
+        return this;
+    }
+
+    /**
+     * Get the accuserName property: The accuserName property.
+     * 
+     * @return the accuserName value.
+     */
+    public String accuserName() {
+        return this.accuserName;
+    }
+
+    /**
+     * Set the accuserName property: The accuserName property.
+     * 
+     * @param accuserName the accuserName value to set.
+     * @return the TopLevelArmResourceUpdateProperties object itself.
+     */
+    public TopLevelArmResourceUpdateProperties withAccuserName(String accuserName) {
+        this.accuserName = accuserName;
         return this;
     }
 
@@ -104,8 +129,5 @@ public final class TopLevelArmResourceUpdateProperties {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (ipRules() != null) {
-            ipRules().forEach(e -> e.validate());
-        }
     }
 }

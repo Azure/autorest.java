@@ -28,10 +28,16 @@ public final class TopLevelArmResourceProperties {
     private String username;
 
     /*
-     * The ipRules property.
+     * The userNames property.
      */
-    @JsonProperty(value = "ipRules", required = true)
-    private List<IpRules> ipRules;
+    @JsonProperty(value = "userNames", required = true)
+    private String userNames;
+
+    /*
+     * The accuserName property.
+     */
+    @JsonProperty(value = "accuserName", required = true)
+    private String accuserName;
 
     /*
      * The startTimeStamp property.
@@ -81,22 +87,42 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Get the ipRules property: The ipRules property.
+     * Get the userNames property: The userNames property.
      * 
-     * @return the ipRules value.
+     * @return the userNames value.
      */
-    public List<IpRules> ipRules() {
-        return this.ipRules;
+    public String userNames() {
+        return this.userNames;
     }
 
     /**
-     * Set the ipRules property: The ipRules property.
+     * Set the userNames property: The userNames property.
      * 
-     * @param ipRules the ipRules value to set.
+     * @param userNames the userNames value to set.
      * @return the TopLevelArmResourceProperties object itself.
      */
-    public TopLevelArmResourceProperties withIpRules(List<IpRules> ipRules) {
-        this.ipRules = ipRules;
+    public TopLevelArmResourceProperties withUserNames(String userNames) {
+        this.userNames = userNames;
+        return this;
+    }
+
+    /**
+     * Get the accuserName property: The accuserName property.
+     * 
+     * @return the accuserName value.
+     */
+    public String accuserName() {
+        return this.accuserName;
+    }
+
+    /**
+     * Set the accuserName property: The accuserName property.
+     * 
+     * @param accuserName the accuserName value to set.
+     * @return the TopLevelArmResourceProperties object itself.
+     */
+    public TopLevelArmResourceProperties withAccuserName(String accuserName) {
+        this.accuserName = accuserName;
         return this;
     }
 
@@ -139,11 +165,13 @@ public final class TopLevelArmResourceProperties {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
                 "Missing required property username in model TopLevelArmResourceProperties"));
         }
-        if (ipRules() == null) {
+        if (userNames() == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
-                "Missing required property ipRules in model TopLevelArmResourceProperties"));
-        } else {
-            ipRules().forEach(e -> e.validate());
+                "Missing required property userNames in model TopLevelArmResourceProperties"));
+        }
+        if (accuserName() == null) {
+            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
+                "Missing required property accuserName in model TopLevelArmResourceProperties"));
         }
         if (startTimestamp() == null) {
             throw LOGGER.logExceptionAsError(new IllegalArgumentException(
