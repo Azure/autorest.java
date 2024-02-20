@@ -344,6 +344,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
         return this.encoded;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -378,6 +379,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Builtin.
      */
+    @Generated
     public static Builtin fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean booleanProperty = false;

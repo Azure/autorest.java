@@ -106,6 +106,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -118,6 +119,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         }
     }
 
+    @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         if (this.name != null) {
@@ -141,6 +143,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      * to JSON null.
      * @throws IOException If an error occurs while reading the InnerModel.
      */
+    @Generated
     public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             InnerModel deserializedInnerModel = new InnerModel();

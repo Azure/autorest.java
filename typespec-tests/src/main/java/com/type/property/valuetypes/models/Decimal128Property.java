@@ -44,6 +44,7 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
         return this.property;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Decimal128Property.
      */
+    @Generated
     public static Decimal128Property fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BigDecimal property = null;

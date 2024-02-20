@@ -62,6 +62,7 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
         return this.array;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -79,6 +80,7 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the StringAndArrayCases.
      */
+    @Generated
     public static StringAndArrayCases fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BinaryData string = null;

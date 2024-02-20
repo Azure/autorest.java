@@ -53,6 +53,7 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -68,6 +69,7 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the BytesProperty.
      */
+    @Generated
     public static BytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BytesProperty deserializedBytesProperty = new BytesProperty();

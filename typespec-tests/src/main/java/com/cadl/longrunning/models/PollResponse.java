@@ -61,6 +61,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
         return this.status;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -78,6 +79,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the PollResponse.
      */
+    @Generated
     public static PollResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String operationId = null;

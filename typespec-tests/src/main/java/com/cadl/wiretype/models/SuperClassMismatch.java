@@ -49,6 +49,7 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
         return this.dateTimeRfc7231.getDateTime();
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -65,6 +66,7 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SuperClassMismatch.
      */
+    @Generated
     public static SuperClassMismatch fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OffsetDateTime dateTimeRfc7231 = null;

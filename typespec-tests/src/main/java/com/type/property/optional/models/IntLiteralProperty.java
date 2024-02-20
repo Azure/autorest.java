@@ -52,6 +52,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +68,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the IntLiteralProperty.
      */
+    @Generated
     public static IntLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             IntLiteralProperty deserializedIntLiteralProperty = new IntLiteralProperty();

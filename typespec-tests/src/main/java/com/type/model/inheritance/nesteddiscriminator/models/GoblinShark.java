@@ -27,6 +27,7 @@ public final class GoblinShark extends Shark {
         super(age, sharktype);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -45,6 +46,7 @@ public final class GoblinShark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the GoblinShark.
      */
+    @Generated
     public static GoblinShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int age = 0;

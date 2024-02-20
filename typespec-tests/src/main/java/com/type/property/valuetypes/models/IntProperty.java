@@ -43,6 +43,7 @@ public final class IntProperty implements JsonSerializable<IntProperty> {
         return this.property;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class IntProperty implements JsonSerializable<IntProperty> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IntProperty.
      */
+    @Generated
     public static IntProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int property = 0;

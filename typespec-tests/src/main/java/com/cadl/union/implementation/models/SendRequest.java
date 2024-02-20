@@ -73,6 +73,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
         return this.input;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -90,6 +91,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SendRequest.
      */
+    @Generated
     public static SendRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BinaryData input = null;

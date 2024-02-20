@@ -82,6 +82,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -98,6 +99,7 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ProductResult.
      */
+    @Generated
     public static ProductResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ProductResult deserializedProductResult = new ProductResult();

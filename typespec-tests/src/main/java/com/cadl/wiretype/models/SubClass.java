@@ -48,6 +48,7 @@ public final class SubClass extends SuperClassMismatch {
         return this.dateTime;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -69,6 +70,7 @@ public final class SubClass extends SuperClassMismatch {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SubClass.
      */
+    @Generated
     public static SubClass fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OffsetDateTime dateTimeRfc7231 = null;

@@ -86,6 +86,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
         return this.nullableProperty;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -99,6 +100,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
         }
     }
 
+    @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         if (this.requiredProperty != null) {
@@ -124,6 +126,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CollectionsByteProperty.
      */
+    @Generated
     public static CollectionsByteProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String requiredProperty = null;

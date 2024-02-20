@@ -46,6 +46,7 @@ public final class LroProduct extends Product {
         return this.provisioningState;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -63,6 +64,7 @@ public final class LroProduct extends Product {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the LroProduct.
      */
+    @Generated
     public static LroProduct fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean receivedFound = false;

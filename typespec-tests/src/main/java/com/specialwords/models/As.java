@@ -43,6 +43,7 @@ public final class As implements JsonSerializable<As> {
         return this.name;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class As implements JsonSerializable<As> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the As.
      */
+    @Generated
     public static As fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

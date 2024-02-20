@@ -53,6 +53,7 @@ public class Element implements JsonSerializable<Element> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -68,6 +69,7 @@ public class Element implements JsonSerializable<Element> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Element.
      */
+    @Generated
     public static Element fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Element deserializedElement = new Element();

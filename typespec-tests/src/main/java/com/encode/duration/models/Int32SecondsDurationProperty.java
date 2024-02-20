@@ -44,6 +44,7 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
         return Duration.ofSeconds(this.value);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Int32SecondsDurationProperty.
      */
+    @Generated
     public static Int32SecondsDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Duration value = null;

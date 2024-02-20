@@ -49,6 +49,7 @@ public final class Base64urlArrayBytesProperty implements JsonSerializable<Base6
         return this.value.stream().map(el -> el.decodedBytes()).collect(java.util.stream.Collectors.toList());
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -66,6 +67,7 @@ public final class Base64urlArrayBytesProperty implements JsonSerializable<Base6
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Base64urlArrayBytesProperty.
      */
+    @Generated
     public static Base64urlArrayBytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<byte[]> value = null;

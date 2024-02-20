@@ -85,6 +85,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
         return this.nullableProperty;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -97,6 +98,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
         }
     }
 
+    @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         if (this.requiredProperty != null) {
@@ -121,6 +123,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the StringProperty.
      */
+    @Generated
     public static StringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String requiredProperty = null;

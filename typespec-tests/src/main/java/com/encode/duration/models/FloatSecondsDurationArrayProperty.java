@@ -50,6 +50,7 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
             .collect(java.util.stream.Collectors.toList());
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -66,6 +67,7 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FloatSecondsDurationArrayProperty.
      */
+    @Generated
     public static FloatSecondsDurationArrayProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<Duration> value = null;

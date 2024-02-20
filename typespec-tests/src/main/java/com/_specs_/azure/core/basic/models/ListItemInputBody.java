@@ -43,6 +43,7 @@ public final class ListItemInputBody implements JsonSerializable<ListItemInputBo
         return this.inputName;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class ListItemInputBody implements JsonSerializable<ListItemInputBo
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ListItemInputBody.
      */
+    @Generated
     public static ListItemInputBody fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String inputName = null;

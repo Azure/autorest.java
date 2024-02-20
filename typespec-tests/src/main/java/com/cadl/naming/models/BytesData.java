@@ -44,6 +44,7 @@ public final class BytesData extends Data {
         return CoreUtils.clone(this.dataAsBytes);
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -61,6 +62,7 @@ public final class BytesData extends Data {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the BytesData.
      */
+    @Generated
     public static BytesData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String type = "bytes";

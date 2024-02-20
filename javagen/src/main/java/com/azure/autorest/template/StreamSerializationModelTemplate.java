@@ -130,13 +130,15 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
     static void xmlWrapperClassXmlSerializableImplementation(JavaClass classBlock, String wrapperClassName,
         IType iterableType, String xmlRootElementName, String xmlRootElementNamespace, String xmlListElementName,
-        String xmlElementNameCamelCase, String xmlListElementNamespace) {
+        String xmlElementNameCamelCase, String xmlListElementNamespace, Consumer<JavaClass> addGeneratedAnnotation) {
         IType elementType = ((IterableType) iterableType).getElementType();
 
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.annotation("Override");
         classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException",
             methodBlock -> methodBlock.methodReturn("toXml(xmlWriter, null)"));
 
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.annotation("Override");
         classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException", writerMethod -> {
             writerMethod.line("rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? \"" + xmlRootElementName + "\" : rootElementName;");
@@ -156,9 +158,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writerMethod.methodReturn("xmlWriter.writeEndElement()");
         });
 
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader) throws XMLStreamException",
             readerMethod -> readerMethod.methodReturn("fromXml(xmlReader, null)"));
 
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.publicStaticMethod(wrapperClassName + " fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException", readerMethod -> {
             readerMethod.line("rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? \"" + xmlRootElementName + "\" : rootElementName;");
             String readObject = (xmlRootElementNamespace != null)
@@ -206,16 +210,19 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         ClientModelPropertiesManager propertiesManager = new ClientModelPropertiesManager(model, settings);
 
         if (model.getXmlName() != null) {
-            writeToXml(classBlock, propertiesManager);
-            writeFromXml(classBlock, model, propertiesManager, settings);
+            writeToXml(classBlock, propertiesManager, Templates.getModelTemplate()::addGeneratedAnnotation);
+            writeFromXml(classBlock, model, propertiesManager, settings,
+                Templates.getModelTemplate()::addGeneratedAnnotation);
         } else {
             if (ClientModelUtil.isJsonMergePatchModel(model)) {
-                writeToJson(classBlock, propertiesManager, true);
-                writeToJsonMergePatch(classBlock, propertiesManager);
+                writeToJson(classBlock, propertiesManager, true, Templates.getModelTemplate()::addGeneratedAnnotation);
+                writeToJsonMergePatch(classBlock, propertiesManager,
+                    Templates.getModelTemplate()::addGeneratedAnnotation);
             } else {
-                writeToJson(classBlock, propertiesManager, false);
+                writeToJson(classBlock, propertiesManager, false, Templates.getModelTemplate()::addGeneratedAnnotation);
             }
-            writeFromJson(classBlock, model, propertiesManager, settings);
+            writeFromJson(classBlock, model, propertiesManager, settings,
+                Templates.getModelTemplate()::addGeneratedAnnotation);
         }
     }
 
@@ -228,8 +235,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param classBlock The class block to write the toJson method to.
      * @param propertiesManager The properties manager for the model.
      * @param isJsonMergePatch Whether the serialization is for a JSON merge patch.
+     * @param addGeneratedAnnotation The consumer to add the generated annotation to the class block.
      */
-    private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager, boolean isJsonMergePatch) {
+    private static void writeToJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
+        boolean isJsonMergePatch, Consumer<JavaClass> addGeneratedAnnotation) {
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.annotation("Override");
         classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException", methodBlock -> {
             if (isJsonMergePatch) {
@@ -246,8 +256,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      *
      * @param classBlock The class block to write the toJsonMergePatch method to.
      * @param propertiesManager The properties manager for the model.
+     * @param addGeneratedAnnotation The consumer to add the generated annotation to the class block.
      */
-    private static void writeToJsonMergePatch(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
+    private static void writeToJsonMergePatch(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
+        Consumer<JavaClass> addGeneratedAnnotation) {
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.publicMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException",
             methodBlock -> serializeJsonProperties(methodBlock, propertiesManager, true));
     }
@@ -256,7 +269,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * Serializes the properties of a model to JSON.
      * @param methodBlock The method block to write the serialization method to.
      * @param propertiesManager The properties manager for the model.
-     * @param isJsonMergePatch Whether or not the serialization is for a JSON merge patch.
+     * @param isJsonMergePatch Whether the serialization is for a JSON merge patch.
      */
     private static void serializeJsonProperties(JavaBlock methodBlock, ClientModelPropertiesManager propertiesManager,
         boolean isJsonMergePatch) {
@@ -585,7 +598,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * Writes the fromJson(JsonReader) implementation.
      */
     private static void writeFromJson(JavaClass classBlock, ClientModel model,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, JavaSettings settings,
+        Consumer<JavaClass> addGeneratedAnnotation) {
         // All classes will create a public fromJson(JsonReader) method that initiates reading.
         // How the implementation looks depends on whether the type is a super type, subtype, both, or is a
         // stand-alone type.
@@ -609,9 +623,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // if the JSON payload is a Shark and not get a ClassCastException as it'd be more confusing on why a Shark
         // was trying to be converted to a Salmon.
         if (isSuperTypeWithDiscriminator(model)) {
-            writeSuperTypeFromJson(classBlock, model, propertiesManager, settings);
+            writeSuperTypeFromJson(classBlock, model, propertiesManager, settings, addGeneratedAnnotation);
         } else {
-            writeTerminalTypeFromJson(classBlock, propertiesManager, settings);
+            writeTerminalTypeFromJson(classBlock, propertiesManager, settings, addGeneratedAnnotation);
         }
     }
 
@@ -622,9 +636,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param model The Autorest representation of the model.
      * @param propertiesManager The properties for the model.
      * @param settings The Autorest generation settings.
+     * @param addGeneratedAnnotation Callback that adds {@code @Generated} annotation to a code block.
      */
     private static void writeSuperTypeFromJson(JavaClass classBlock, ClientModel model,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, JavaSettings settings,
+        Consumer<JavaClass> addGeneratedAnnotation) {
         // Handling polymorphic fields while determining which subclass, or the class itself, to deserialize handles the
         // discriminator type always as a String. This is permissible as the found discriminator is never being used in
         // a setter or for setting a field, unlike in the actual deserialization method where it needs to be the same
@@ -676,10 +692,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                         elseBlock -> elseBlock.methodReturn("fromJsonKnownDiscriminator(readerToUse.reset())"));
                 }
             });
-        });
+        }, addGeneratedAnnotation);
 
         readJsonObject(classBlock, propertiesManager, true,
-            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings),
+            addGeneratedAnnotation);
     }
 
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
@@ -714,11 +731,13 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param classBlock The class having {@code fromJson(JsonReader)} written to it.
      * @param propertiesManager The properties for the model.
      * @param settings The Autorest generation settings.
+     * @param addGeneratedAnnotation Callback that adds {@code @Generated} annotation to a code block.
      */
     private static void writeTerminalTypeFromJson(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
-        JavaSettings settings) {
+        JavaSettings settings, Consumer<JavaClass> addGeneratedAnnotation) {
         readJsonObject(classBlock, propertiesManager, false,
-            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings));
+            methodBlock -> writeFromJsonDeserialization(methodBlock, propertiesManager, settings),
+            addGeneratedAnnotation);
     }
 
     private static void writeFromJsonDeserialization(JavaBlock methodBlock,
@@ -790,9 +809,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param propertiesManager Properties information about the object being deserialized.
      * @param superTypeReading Whether the object reading is for a super type.
      * @param deserializationBlock Logic for deserializing the object.
+     * @param addGeneratedAnnotation Callback that adds {@code @Generated} annotation to a code block.
      */
     private static void readJsonObject(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
-        boolean superTypeReading, Consumer<JavaBlock> deserializationBlock) {
+        boolean superTypeReading, Consumer<JavaBlock> deserializationBlock,
+        Consumer<JavaClass> addGeneratedAnnotation) {
         JavaVisibility visibility = superTypeReading ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
         String methodName = superTypeReading ? "fromJsonKnownDiscriminator" : "fromJson";
 
@@ -819,6 +840,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             });
         }
 
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.staticMethod(visibility, modelName + " " + methodName + "(JsonReader jsonReader) throws IOException", methodBlock -> {
             // For now, use the basic readObject which will return null if the JsonReader is pointing to JsonToken.NULL.
             //
@@ -1388,11 +1410,14 @@ hasConstructorArguments, settings));
         return (ifBlock == null) ? baseBlock.ifBlock(condition, action) : ifBlock.elseIfBlock(condition, action);
     }
 
-    private static void writeToXml(JavaClass classBlock, ClientModelPropertiesManager propertiesManager) {
+    private static void writeToXml(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
+        Consumer<JavaClass> addGeneratedAnnotation) {
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.annotation("Override");
         classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException",
             methodBlock -> methodBlock.methodReturn("toXml(xmlWriter, null)"));
 
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.annotation("Override");
         classBlock.publicMethod("XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException", methodBlock -> {
             String modelXmlName = propertiesManager.getXmlRootElementName();
@@ -1538,11 +1563,12 @@ hasConstructorArguments, settings));
     }
 
     private static void writeFromXml(JavaClass classBlock, ClientModel model,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, JavaSettings settings,
+        Consumer<JavaClass> addGeneratedAnnotation) {
         if (isSuperTypeWithDiscriminator(model)) {
-            writeSuperTypeFromXml(classBlock, model, propertiesManager, settings);
+            writeSuperTypeFromXml(classBlock, model, propertiesManager, settings, addGeneratedAnnotation);
         } else {
-            writeTerminalTypeFromXml(classBlock, propertiesManager, settings);
+            writeTerminalTypeFromXml(classBlock, propertiesManager, settings, addGeneratedAnnotation);
         }
     }
 
@@ -1553,9 +1579,11 @@ hasConstructorArguments, settings));
      * @param model The Autorest representation of the model.
      * @param propertiesManager The properties for the model.
      * @param settings The Autorest generation settings.
+     * @param addGeneratedAnnotation Consumer for adding the generated annotation to the class.
      */
     private static void writeSuperTypeFromXml(JavaClass classBlock, ClientModel model,
-        ClientModelPropertiesManager propertiesManager, JavaSettings settings) {
+        ClientModelPropertiesManager propertiesManager, JavaSettings settings,
+        Consumer<JavaClass> addGeneratedAnnotation) {
         // Handling polymorphic fields while determining which subclass, or the class itself, to deserialize handles the
         // discriminator type always as a String. This is permissible as the found discriminator is never being used in
         // a setter or for setting a field, unlike in the actual deserialization method where it needs to be the same
@@ -1595,11 +1623,12 @@ hasConstructorArguments, settings));
                 ifBlock.elseBlock(
                     elseBlock -> elseBlock.methodReturn("fromXmlKnownDiscriminator(reader, finalRootElementName)"));
             }
-        });
+        }, addGeneratedAnnotation);
 
         if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
             readXmlObject(classBlock, propertiesManager, true,
-                methodBlock -> writeFromXmlDeserialization(methodBlock, propertiesManager, settings));
+                methodBlock -> writeFromXmlDeserialization(methodBlock, propertiesManager, settings),
+                addGeneratedAnnotation);
         }
     }
 
@@ -1618,9 +1647,11 @@ hasConstructorArguments, settings));
      * @param propertiesManager Properties information about the object being deserialized.
      * @param superTypeReading Whether the object reading is for a super type.
      * @param deserializationBlock Logic for deserializing the object.
+     * @param addGeneratedAnnotation Consumer for adding the generated annotation to the class.
      */
     private static void readXmlObject(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
-        boolean superTypeReading, Consumer<JavaBlock> deserializationBlock) {
+        boolean superTypeReading, Consumer<JavaBlock> deserializationBlock,
+        Consumer<JavaClass> addGeneratedAnnotation) {
         JavaVisibility visibility = superTypeReading ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
         String methodName = superTypeReading ? "fromXmlKnownDiscriminator" : "fromXml";
 
@@ -1630,15 +1661,18 @@ hasConstructorArguments, settings));
 
         if (!superTypeReading) {
             fromXmlJavadoc(classBlock, modelName, false, hasRequiredProperties, isPolymorphic);
+            addGeneratedAnnotation.accept(classBlock);
             classBlock.publicStaticMethod(modelName + " fromXml(XmlReader xmlReader) throws XMLStreamException",
                 methodBlock -> methodBlock.methodReturn("fromXml(xmlReader, null)"));
 
             fromXmlJavadoc(classBlock, modelName, true, hasRequiredProperties, isPolymorphic);
         } else {
+            addGeneratedAnnotation.accept(classBlock);
             classBlock.publicStaticMethod(modelName + " fromXmlKnownDiscriminator(XmlReader xmlReader) throws XMLStreamException",
                 methodBlock -> methodBlock.methodReturn("fromXmlKnownDiscriminator(xmlReader, null)"));
         }
 
+        addGeneratedAnnotation.accept(classBlock);
         classBlock.staticMethod(visibility, modelName + " " + methodName + "(XmlReader xmlReader, String rootElementName) throws XMLStreamException", methodBlock -> {
             // For now, use the basic readObject which will return null if the XmlReader is pointing to JsonToken.NULL.
             //
@@ -1702,11 +1736,13 @@ hasConstructorArguments, settings));
      * @param classBlock The class having {@code fromXml(XmlReader)} written to it.
      * @param propertiesManager The properties for the model.
      * @param settings The Autorest generation settings.
+     * @param addGeneratedAnnotation Consumer for adding the generated annotation to the class.
      */
     private static void writeTerminalTypeFromXml(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
-        JavaSettings settings) {
+        JavaSettings settings, Consumer<JavaClass> addGeneratedAnnotation) {
         readXmlObject(classBlock, propertiesManager, false,
-            methodBlock -> writeFromXmlDeserialization(methodBlock, propertiesManager, settings));
+            methodBlock -> writeFromXmlDeserialization(methodBlock, propertiesManager, settings),
+            addGeneratedAnnotation);
     }
 
     private static void writeFromXmlDeserialization(JavaBlock methodBlock,

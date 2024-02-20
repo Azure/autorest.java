@@ -73,6 +73,7 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -94,6 +95,7 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IsUnknownAdditionalProperties.
      */
+    @Generated
     public static IsUnknownAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

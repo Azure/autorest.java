@@ -27,6 +27,7 @@ public final class RealModel extends AbstractModel {
         setKind("real");
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -44,6 +45,7 @@ public final class RealModel extends AbstractModel {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the RealModel.
      */
+    @Generated
     public static RealModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

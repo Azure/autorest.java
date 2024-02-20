@@ -72,6 +72,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -89,6 +90,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the InnerModel.
      */
+    @Generated
     public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String property = null;

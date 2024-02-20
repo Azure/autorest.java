@@ -45,6 +45,7 @@ public class SuperClass implements JsonSerializable<SuperClass> {
         return this.dateTime;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -62,6 +63,7 @@ public class SuperClass implements JsonSerializable<SuperClass> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SuperClass.
      */
+    @Generated
     public static SuperClass fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OffsetDateTime dateTime = null;

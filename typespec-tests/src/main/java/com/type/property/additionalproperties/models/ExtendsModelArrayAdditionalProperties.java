@@ -57,6 +57,7 @@ public final class ExtendsModelArrayAdditionalProperties
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -76,6 +77,7 @@ public final class ExtendsModelArrayAdditionalProperties
      * or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ExtendsModelArrayAdditionalProperties.
      */
+    @Generated
     public static ExtendsModelArrayAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ExtendsModelArrayAdditionalProperties deserializedExtendsModelArrayAdditionalProperties

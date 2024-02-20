@@ -61,6 +61,7 @@ public final class FlattenModel implements JsonSerializable<FlattenModel> {
         return this.properties;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -78,6 +79,7 @@ public final class FlattenModel implements JsonSerializable<FlattenModel> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FlattenModel.
      */
+    @Generated
     public static FlattenModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

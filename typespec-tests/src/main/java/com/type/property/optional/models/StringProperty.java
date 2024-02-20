@@ -52,6 +52,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +68,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the StringProperty.
      */
+    @Generated
     public static StringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             StringProperty deserializedStringProperty = new StringProperty();

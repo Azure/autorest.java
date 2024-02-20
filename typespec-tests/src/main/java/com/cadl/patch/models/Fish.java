@@ -181,6 +181,7 @@ public class Fish implements JsonSerializable<Fish> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -194,6 +195,7 @@ public class Fish implements JsonSerializable<Fish> {
         }
     }
 
+    @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", this.age);
@@ -219,6 +221,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
+    @Generated
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -246,6 +249,7 @@ public class Fish implements JsonSerializable<Fish> {
         });
     }
 
+    @Generated
     static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;

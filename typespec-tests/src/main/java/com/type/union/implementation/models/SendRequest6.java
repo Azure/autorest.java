@@ -44,6 +44,7 @@ public final class SendRequest6 implements JsonSerializable<SendRequest6> {
         return this.prop;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class SendRequest6 implements JsonSerializable<SendRequest6> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SendRequest6.
      */
+    @Generated
     public static SendRequest6 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             EnumsOnlyCases prop = null;

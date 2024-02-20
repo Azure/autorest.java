@@ -115,6 +115,7 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
         return this.status;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -134,6 +135,7 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DataResponse.
      */
+    @Generated
     public static DataResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

@@ -52,6 +52,7 @@ public final class UnionStringLiteralProperty implements JsonSerializable<UnionS
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +68,7 @@ public final class UnionStringLiteralProperty implements JsonSerializable<UnionS
      * it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the UnionStringLiteralProperty.
      */
+    @Generated
     public static UnionStringLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             UnionStringLiteralProperty deserializedUnionStringLiteralProperty = new UnionStringLiteralProperty();

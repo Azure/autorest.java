@@ -53,6 +53,7 @@ public final class Extension extends Element {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -70,6 +71,7 @@ public final class Extension extends Element {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Extension.
      */
+    @Generated
     public static Extension fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<Extension> extension = null;

@@ -319,6 +319,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
         return this.immutable;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -352,6 +353,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
      * was pointing to JSON null.
      * @throws IOException If an error occurs while reading the AllPropertiesOptional.
      */
+    @Generated
     public static AllPropertiesOptional fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             AllPropertiesOptional deserializedAllPropertiesOptional = new AllPropertiesOptional();

@@ -52,6 +52,7 @@ public class Data implements JsonSerializable<Data> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +68,7 @@ public class Data implements JsonSerializable<Data> {
      * JSON null.
      * @throws IOException If an error occurs while reading the Data.
      */
+    @Generated
     public static Data fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -92,6 +94,7 @@ public class Data implements JsonSerializable<Data> {
         });
     }
 
+    @Generated
     static Data fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Data deserializedData = new Data();

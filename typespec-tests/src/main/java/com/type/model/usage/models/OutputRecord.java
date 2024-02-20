@@ -43,6 +43,7 @@ public final class OutputRecord implements JsonSerializable<OutputRecord> {
         return this.requiredProp;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class OutputRecord implements JsonSerializable<OutputRecord> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the OutputRecord.
      */
+    @Generated
     public static OutputRecord fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String requiredProp = null;

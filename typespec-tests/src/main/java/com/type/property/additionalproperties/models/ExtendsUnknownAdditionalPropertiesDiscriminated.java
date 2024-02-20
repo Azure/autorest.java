@@ -103,6 +103,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -125,6 +126,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ExtendsUnknownAdditionalPropertiesDiscriminated.
      */
+    @Generated
     public static ExtendsUnknownAdditionalPropertiesDiscriminated fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -150,6 +152,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
         });
     }
 
+    @Generated
     static ExtendsUnknownAdditionalPropertiesDiscriminated fromJsonKnownDiscriminator(JsonReader jsonReader)
         throws IOException {
         return jsonReader.readObject(reader -> {

@@ -52,6 +52,7 @@ public final class JobData implements JsonSerializable<JobData> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +68,7 @@ public final class JobData implements JsonSerializable<JobData> {
      * JSON null.
      * @throws IOException If an error occurs while reading the JobData.
      */
+    @Generated
     public static JobData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             JobData deserializedJobData = new JobData();

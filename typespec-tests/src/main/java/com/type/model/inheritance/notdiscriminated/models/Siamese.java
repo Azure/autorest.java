@@ -45,6 +45,7 @@ public final class Siamese extends Cat {
         return this.smart;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -63,6 +64,7 @@ public final class Siamese extends Cat {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Siamese.
      */
+    @Generated
     public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

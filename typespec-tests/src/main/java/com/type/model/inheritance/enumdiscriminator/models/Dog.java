@@ -71,6 +71,7 @@ public class Dog implements JsonSerializable<Dog> {
         return this.weight;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -88,6 +89,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Dog.
      */
+    @Generated
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -113,6 +115,7 @@ public class Dog implements JsonSerializable<Dog> {
         });
     }
 
+    @Generated
     static Dog fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int weight = 0;

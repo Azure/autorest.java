@@ -27,6 +27,7 @@ public final class TRex extends Dinosaur {
         setKind("t-rex");
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -44,6 +45,7 @@ public final class TRex extends Dinosaur {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the TRex.
      */
+    @Generated
     public static TRex fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int size = 0;

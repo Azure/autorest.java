@@ -43,6 +43,7 @@ public final class JobResultResult implements JsonSerializable<JobResultResult> 
         return this.data;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class JobResultResult implements JsonSerializable<JobResultResult> 
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the JobResultResult.
      */
+    @Generated
     public static JobResultResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String data = null;

@@ -253,6 +253,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -270,6 +271,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
         }
     }
 
+    @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         if (this.description != null) {
@@ -328,6 +330,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the ResourcePatch.
      */
+    @Generated
     public static ResourcePatch fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ResourcePatch deserializedResourcePatch = new ResourcePatch();

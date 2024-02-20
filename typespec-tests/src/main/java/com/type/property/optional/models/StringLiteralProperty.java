@@ -52,6 +52,7 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +68,7 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * was pointing to JSON null.
      * @throws IOException If an error occurs while reading the StringLiteralProperty.
      */
+    @Generated
     public static StringLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             StringLiteralProperty deserializedStringLiteralProperty = new StringLiteralProperty();

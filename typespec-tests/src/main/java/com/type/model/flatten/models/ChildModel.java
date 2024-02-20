@@ -61,6 +61,7 @@ public final class ChildModel implements JsonSerializable<ChildModel> {
         return this.age;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -78,6 +79,7 @@ public final class ChildModel implements JsonSerializable<ChildModel> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ChildModel.
      */
+    @Generated
     public static ChildModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String description = null;

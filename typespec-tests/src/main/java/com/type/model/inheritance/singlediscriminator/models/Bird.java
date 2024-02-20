@@ -71,6 +71,7 @@ public class Bird implements JsonSerializable<Bird> {
         return this.wingspan;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -88,6 +89,7 @@ public class Bird implements JsonSerializable<Bird> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Bird.
      */
+    @Generated
     public static Bird fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -119,6 +121,7 @@ public class Bird implements JsonSerializable<Bird> {
         });
     }
 
+    @Generated
     static Bird fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int wingspan = 0;

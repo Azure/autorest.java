@@ -75,6 +75,7 @@ public final class ResourceI implements JsonSerializable<ResourceI> {
         return this.type;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -91,6 +92,7 @@ public final class ResourceI implements JsonSerializable<ResourceI> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ResourceI.
      */
+    @Generated
     public static ResourceI fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;
