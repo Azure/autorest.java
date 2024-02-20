@@ -5,6 +5,11 @@ package com.azure.autorest.model.javamodel;
 
 import java.util.function.Consumer;
 
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_START_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_START_MARKER;
+
 public class JavaBlock implements JavaContext {
     private JavaFileContents contents;
 
@@ -50,12 +55,36 @@ public class JavaBlock implements JavaContext {
 
     @Override
     public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker) {
-        if (withGeneratedMarker == false) {
-            Consumer<JavaJavadocComment> commentAction = comment -> {
-                commentDescriptionAction.accept(comment);
-                commentTagsAction.accept(comment);
-            };
-            javadocComment(commentAction);
+        if (commentDescriptionAction != null) {
+            contents.javadocCommentStart();
+            if (withGeneratedMarker) {
+                contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
+            }
+            commentDescriptionAction.accept(new JavaJavadocComment(contents));
+
+            if (withGeneratedMarker) {
+                contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+            }
+
+            if (commentTagsAction == null) { // if no tags action, then end the javadoc comment
+                contents.javadocCommentEnd();
+            } else { // otherwise, a new line will be added and the tags action will start
+                contents.line();
+            }
+        }
+        if (commentTagsAction != null) {
+            if (commentDescriptionAction == null) {// if no description action, then start the javadoc comment
+                contents.javadocCommentStart();
+            }
+            if (withGeneratedMarker) {
+                contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
+            }
+            commentTagsAction.accept(new JavaJavadocComment(contents));
+
+            if (withGeneratedMarker) {
+                contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
+            }
+            contents.javadocCommentEnd();
         }
     }
 
