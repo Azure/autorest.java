@@ -67,7 +67,7 @@ public final class LongRunningAsyncClient {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
      *     createdDateTime: OffsetDateTime (Optional)
      *     expirationDateTime: OffsetDateTime (Optional)
      *     lastUpdateDateTime: OffsetDateTime (Optional)

@@ -1,5 +1,11 @@
 # Release History
 
+## 0.13.6 (2024-02-20)
+
+Compatible with compiler 0.53.
+
+- Fixed bug related to the support of `union` as extensible enum.
+
 ## 0.13.5 (2024-02-09)
 
 Compatible with compiler 0.53.

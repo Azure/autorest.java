@@ -73,10 +73,11 @@ enum TypesModel {
 @summary("summary of Statuses")
 @doc("description of Statuses")
 @friendlyName("DataStatus")
-enum StatusModel {
-  Running,
-  Completed,
-  Failed,
+union StatusModel {
+  string,
+  "Running",
+  "Completed",
+  "Failed",
 }
 
 @summary("summary of Request")

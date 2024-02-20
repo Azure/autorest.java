@@ -341,7 +341,7 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
      *     createdDateTime: OffsetDateTime (Optional)
      *     expirationDateTime: OffsetDateTime (Optional)
      *     lastUpdateDateTime: OffsetDateTime (Optional)
@@ -386,7 +386,7 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
      *     createdDateTime: OffsetDateTime (Optional)
      *     expirationDateTime: OffsetDateTime (Optional)
      *     lastUpdateDateTime: OffsetDateTime (Optional)

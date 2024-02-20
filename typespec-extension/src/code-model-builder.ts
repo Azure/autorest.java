@@ -40,7 +40,6 @@ import {
   EnumMember,
   walkPropertiesInherited,
   getService,
-  resolveEncodedName,
   isVoidType,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
@@ -58,6 +57,7 @@ import {
   getQueryParamOptions,
   getHeaderFieldOptions,
   isPathParam,
+  HttpOperationBody,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
@@ -75,6 +75,7 @@ import {
   getCrossLanguageDefinitionId,
   getClientNameOverride,
   shouldFlattenProperty,
+  getWireName,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -395,11 +396,12 @@ export class CodeModelBuilder {
   private processModels(clients: SdkClient[]) {
     const processedModels: Set<Type> = new Set();
     for (const client of clients) {
-      const models: (Model | Enum)[] = Array.from(client.service.models.values());
+      const models: (Model | Enum | Union)[] = Array.from(client.service.models.values());
       Array.from(client.service.enums.values()).forEach((it) => models.push(it));
+      Array.from(client.service.unions.values()).forEach((it) => models.push(it));
 
       // lambda to mark model as public
-      const modelAsPublic = (model: Model | Enum) => {
+      const modelAsPublic = (model: Model | Enum | Union) => {
         // check it does not contain Union
         // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
         // if (union) {
@@ -410,7 +412,7 @@ export class CodeModelBuilder {
         //   throw new Error(errorMsg);
         // }
 
-        const schema = this.processSchema(model, model.name);
+        const schema = this.processSchema(model, "");
 
         this.trackSchemaUsage(schema, {
           usage: [SchemaContext.Public],
@@ -423,7 +425,7 @@ export class CodeModelBuilder {
           if (access === "public") {
             modelAsPublic(model);
           } else if (access === "internal") {
-            const schema = this.processSchema(model, model.name);
+            const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.Internal],
@@ -432,7 +434,7 @@ export class CodeModelBuilder {
 
           const usage = getUsage(model);
           if (usage) {
-            const schema = this.processSchema(model, model.name);
+            const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
               usage: usage,
@@ -1442,30 +1444,38 @@ export class CodeModelBuilder {
     candidateResponseSchema: Schema | undefined = undefined,
   ) {
     // TODO: what to do if more than 1 response?
+    // It happens when the response type is Union, on one status code.
     let response: Response;
     let headers: Array<HttpHeader> | undefined = undefined;
-    if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
+    if (resp.responses && resp.responses.length > 0) {
       // headers
       headers = [];
-      for (const [key, header] of Object.entries(resp.responses[0].headers)) {
-        const schema = this.processSchema(header, key);
-        headers.push(
-          new HttpHeader(key, schema, {
-            language: {
-              default: {
-                name: key,
-                description: this.getDoc(header),
-              },
-            },
-          }),
-        );
+      for (const response of resp.responses.values()) {
+        if (response.headers) {
+          for (const [key, header] of Object.entries(response.headers)) {
+            const schema = this.processSchema(header, key);
+            headers.push(
+              new HttpHeader(key, schema, {
+                language: {
+                  default: {
+                    name: key,
+                    description: this.getDoc(header),
+                  },
+                },
+              }),
+            );
+          }
+        }
       }
     }
 
+    let responseBody: HttpOperationBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
-      const responseBody = resp.responses[0].body;
+      responseBody = resp.responses[0].body;
+    }
+    if (responseBody) {
       const unknownResponseBody =
         responseBody.contentTypes.length > 0 && !isKnownContentType(responseBody.contentTypes);
 
@@ -1633,7 +1643,6 @@ export class CodeModelBuilder {
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Number":
-        // TODO: float
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Boolean":
@@ -1677,6 +1686,14 @@ export class CodeModelBuilder {
       case "EnumMember":
         // e.g. "type: TypeEnum.EnumValue1"
         return this.processConstantSchemaForEnumMember(type, this.getName(type));
+
+      case "UnionVariant":
+        // e.g. "type: Union.Variant1"
+        if (type.type.kind === "String" || type.type.kind === "Number" || type.type.kind === "Boolean") {
+          return this.processConstantSchemaForUnionVariant(type, this.getName(type));
+        } else {
+          throw new Error(`Unsupported type reference to UnionVariant.`);
+        }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
@@ -1925,6 +1942,20 @@ export class CodeModelBuilder {
     );
   }
 
+  private processConstantSchemaForUnionVariant(type: UnionVariant, name: string): ConstantSchema {
+    const valueType = this.processSchema(type.union, this.getName(type.union));
+
+    type Literal = StringLiteral | NumericLiteral | BooleanLiteral;
+
+    return this.codeModel.schemas.add(
+      new ConstantSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        valueType: valueType,
+        value: new ConstantValue((type.type as Literal).value ?? type.name),
+      }),
+    );
+  }
+
   private processChoiceSchemaForUnion(
     type: Union,
     variants: UnionVariant[],
@@ -2157,19 +2188,27 @@ export class CodeModelBuilder {
         ).propertyName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
-          (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),
+          (it) =>
+            it.name === discriminatorPropertyName &&
+            (it.type.kind === "String" || it.type.kind === "EnumMember" || it.type.kind === "UnionVariant"),
         );
         if (discriminatorProperty) {
           if (discriminatorProperty.type.kind === "String") {
-            // value of StringLiteral of the discriminator property
+            // value as StringLiteral
             objectSchema.discriminatorValue = discriminatorProperty.type.value;
           } else if (discriminatorProperty.type.kind === "EnumMember") {
-            // value of EnumMember of the discriminator property
-            // lint requires value be string, not number
+            // value as EnumMember
+            // lint requires value be string
             objectSchema.discriminatorValue =
               (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
+          } else if (discriminatorProperty.type.kind === "UnionVariant") {
+            // value as UnionVariant
+            objectSchema.discriminatorValue =
+              ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
           }
         } else {
+          // it is possible that the property is Union, e.g. 'kind: "type1" | "type2"'; but such Type appears not to be a concrete model.
+
           // fallback to name of the Model
           objectSchema.discriminatorValue = name;
         }
@@ -2454,6 +2493,8 @@ export class CodeModelBuilder {
         return pascalCase(type.valueAsString);
       case "Boolean":
         return pascalCase(type.value ? "True" : "False");
+      case "Union":
+        return type.name ?? "Union";
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
@@ -2484,7 +2525,7 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Union | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation,
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
@@ -2526,18 +2567,15 @@ export class CodeModelBuilder {
       this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
       return newName;
     }
+    if (typeof target.name === "symbol") {
+      return "";
+    }
     return target.name || "";
   }
 
   private getSerializedName(target: ModelProperty): string {
-    // First get projected name, if not found, call resolveEncodedName
-    // TODO: deprecate getProjectedName
-    const jsonProjectedName = getProjectedName(this.program, target, "json");
-    if (jsonProjectedName) {
-      return jsonProjectedName;
-    }
-    // TODO: the MIME better be from SchemaUsage.serializationFormats. However, at this step, the values is not propagated to inner models.
-    return resolveEncodedName(this.program, target, "application/json");
+    // TODO: currently this is only for JSON
+    return getWireName(this.sdkContext, target);
   }
 
   private isReadOnly(target: ModelProperty): boolean {
