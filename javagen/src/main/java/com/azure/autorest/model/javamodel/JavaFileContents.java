@@ -69,7 +69,7 @@ public class JavaFileContents {
         this.wordWrapWidth = wordWrapWidth;
     }
 
-    public void withWordWrap(int wordWrapWidth, Runnable action) {
+    void withWordWrap(int wordWrapWidth, Runnable action) {
         setWordWrapWidth(wordWrapWidth);
         action.run();
         setWordWrapWidth(null);
@@ -261,12 +261,12 @@ public class JavaFileContents {
                 commentAction.accept(new JavaJavadocComment(this))));
     }
 
-    public void javadocCommentStart() {
+    void javadocCommentStart() {
         line("/**");
         addToPrefix(" * ");
     }
 
-    public void javadocCommentEnd() {
+    void javadocCommentEnd() {
         removeFromPrefix(" * ");
         line(" */");
     }
