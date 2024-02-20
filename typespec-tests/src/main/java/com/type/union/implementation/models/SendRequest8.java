@@ -44,6 +44,7 @@ public final class SendRequest8 implements JsonSerializable<SendRequest8> {
         return this.prop;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class SendRequest8 implements JsonSerializable<SendRequest8> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SendRequest8.
      */
+    @Generated
     public static SendRequest8 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             MixedLiteralsCases prop = null;

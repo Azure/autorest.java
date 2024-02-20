@@ -54,6 +54,7 @@ public final class DataRequest implements JsonSerializable<DataRequest> {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -69,6 +70,7 @@ public final class DataRequest implements JsonSerializable<DataRequest> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the DataRequest.
      */
+    @Generated
     public static DataRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DataRequest deserializedDataRequest = new DataRequest();

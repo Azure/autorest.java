@@ -44,6 +44,7 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
         return this.data;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class ArrayData implements JsonSerializable<ArrayData> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ArrayData.
      */
+    @Generated
     public static ArrayData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<String> data = null;

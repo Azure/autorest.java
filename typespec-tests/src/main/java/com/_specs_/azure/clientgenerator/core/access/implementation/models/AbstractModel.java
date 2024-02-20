@@ -71,6 +71,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
         return this.name;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -88,6 +89,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the AbstractModel.
      */
+    @Generated
     public static AbstractModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -113,6 +115,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
         });
     }
 
+    @Generated
     static AbstractModel fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

@@ -87,6 +87,7 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
         return this.nullableProperty;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -100,6 +101,7 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
         }
     }
 
+    @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         if (this.requiredProperty != null) {
@@ -125,6 +127,7 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DurationProperty.
      */
+    @Generated
     public static DurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String requiredProperty = null;

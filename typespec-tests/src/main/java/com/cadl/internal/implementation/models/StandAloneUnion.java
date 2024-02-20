@@ -44,6 +44,7 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
         return this.data;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class StandAloneUnion implements JsonSerializable<StandAloneUnion> 
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the StandAloneUnion.
      */
+    @Generated
     public static StandAloneUnion fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BinaryData data = null;

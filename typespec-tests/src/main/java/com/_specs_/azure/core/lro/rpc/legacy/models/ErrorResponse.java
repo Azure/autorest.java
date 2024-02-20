@@ -45,6 +45,7 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
         return this.error;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -62,6 +63,7 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ErrorResponse.
      */
+    @Generated
     public static ErrorResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ResponseError error = null;

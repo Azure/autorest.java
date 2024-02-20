@@ -43,6 +43,7 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
         return this.prop;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the GetResponse.
      */
+    @Generated
     public static GetResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Prop1 prop = null;

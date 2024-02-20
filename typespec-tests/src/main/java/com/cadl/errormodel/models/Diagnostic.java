@@ -63,6 +63,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
         return this.error;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -81,6 +82,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Diagnostic.
      */
+    @Generated
     public static Diagnostic fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

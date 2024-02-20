@@ -44,6 +44,7 @@ public final class OuterModel extends BaseModel {
         return this.inner;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -61,6 +62,7 @@ public final class OuterModel extends BaseModel {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the OuterModel.
      */
+    @Generated
     public static OuterModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

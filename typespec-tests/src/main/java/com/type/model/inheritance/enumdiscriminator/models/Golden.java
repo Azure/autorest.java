@@ -27,6 +27,7 @@ public final class Golden extends Dog {
         setKind("golden");
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -44,6 +45,7 @@ public final class Golden extends Dog {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Golden.
      */
+    @Generated
     public static Golden fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int weight = 0;

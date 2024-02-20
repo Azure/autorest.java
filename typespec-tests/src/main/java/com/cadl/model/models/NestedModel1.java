@@ -43,6 +43,7 @@ public final class NestedModel1 implements JsonSerializable<NestedModel1> {
         return this.nested2;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class NestedModel1 implements JsonSerializable<NestedModel1> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the NestedModel1.
      */
+    @Generated
     public static NestedModel1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             NestedModel2 nested2 = null;

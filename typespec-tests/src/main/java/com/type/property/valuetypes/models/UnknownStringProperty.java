@@ -43,6 +43,7 @@ public final class UnknownStringProperty implements JsonSerializable<UnknownStri
         return this.property;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class UnknownStringProperty implements JsonSerializable<UnknownStri
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UnknownStringProperty.
      */
+    @Generated
     public static UnknownStringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Object property = null;

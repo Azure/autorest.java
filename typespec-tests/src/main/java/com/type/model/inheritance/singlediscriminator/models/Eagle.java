@@ -114,6 +114,7 @@ public final class Eagle extends Bird {
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -134,6 +135,7 @@ public final class Eagle extends Bird {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Eagle.
      */
+    @Generated
     public static Eagle fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int wingspan = 0;

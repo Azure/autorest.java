@@ -40,6 +40,7 @@ public final class FirstItem implements JsonSerializable<FirstItem> {
         return this.id;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -55,6 +56,7 @@ public final class FirstItem implements JsonSerializable<FirstItem> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FirstItem.
      */
+    @Generated
     public static FirstItem fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;

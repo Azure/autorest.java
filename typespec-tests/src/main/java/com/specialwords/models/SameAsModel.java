@@ -43,6 +43,7 @@ public final class SameAsModel implements JsonSerializable<SameAsModel> {
         return this.sameAsModel;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class SameAsModel implements JsonSerializable<SameAsModel> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SameAsModel.
      */
+    @Generated
     public static SameAsModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String sameAsModel = null;

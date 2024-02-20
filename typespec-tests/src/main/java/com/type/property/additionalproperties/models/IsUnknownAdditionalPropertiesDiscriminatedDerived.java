@@ -76,6 +76,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -100,6 +101,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IsUnknownAdditionalPropertiesDiscriminatedDerived.
      */
+    @Generated
     public static IsUnknownAdditionalPropertiesDiscriminatedDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

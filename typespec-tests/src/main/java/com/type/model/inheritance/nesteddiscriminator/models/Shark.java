@@ -44,6 +44,7 @@ public class Shark extends Fish {
         return this.sharktype;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -62,6 +63,7 @@ public class Shark extends Fish {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Shark.
      */
+    @Generated
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -89,6 +91,7 @@ public class Shark extends Fish {
         });
     }
 
+    @Generated
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int age = 0;

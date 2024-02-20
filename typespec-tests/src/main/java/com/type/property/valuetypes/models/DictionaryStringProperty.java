@@ -44,6 +44,7 @@ public final class DictionaryStringProperty implements JsonSerializable<Dictiona
         return this.property;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class DictionaryStringProperty implements JsonSerializable<Dictiona
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DictionaryStringProperty.
      */
+    @Generated
     public static DictionaryStringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Map<String, String> property = null;

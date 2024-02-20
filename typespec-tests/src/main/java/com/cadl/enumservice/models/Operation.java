@@ -193,6 +193,7 @@ public final class Operation implements JsonSerializable<Operation> {
         return this.unitValue;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -219,6 +220,7 @@ public final class Operation implements JsonSerializable<Operation> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Operation.
      */
+    @Generated
     public static Operation fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OperationName name = null;

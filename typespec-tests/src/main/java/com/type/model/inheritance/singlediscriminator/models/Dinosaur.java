@@ -71,6 +71,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
         return this.size;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -88,6 +89,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Dinosaur.
      */
+    @Generated
     public static Dinosaur fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -113,6 +115,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
         });
     }
 
+    @Generated
     static Dinosaur fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int size = 0;

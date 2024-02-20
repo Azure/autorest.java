@@ -53,6 +53,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -68,6 +69,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
      * was pointing to JSON null.
      * @throws IOException If an error occurs while reading the CollectionsByteProperty.
      */
+    @Generated
     public static CollectionsByteProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             CollectionsByteProperty deserializedCollectionsByteProperty = new CollectionsByteProperty();

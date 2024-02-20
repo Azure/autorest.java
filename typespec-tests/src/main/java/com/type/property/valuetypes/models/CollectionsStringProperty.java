@@ -44,6 +44,7 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
         return this.property;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -60,6 +61,7 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CollectionsStringProperty.
      */
+    @Generated
     public static CollectionsStringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<String> property = null;

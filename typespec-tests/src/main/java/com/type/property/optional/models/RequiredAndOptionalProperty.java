@@ -71,6 +71,7 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
         return this.requiredProperty;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -88,6 +89,7 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the RequiredAndOptionalProperty.
      */
+    @Generated
     public static RequiredAndOptionalProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int requiredProperty = 0;

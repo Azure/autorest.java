@@ -59,6 +59,7 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
         return this.stringReadOnlyOptional;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -75,6 +76,7 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ImmutableModel.
      */
+    @Generated
     public static ImmutableModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String stringReadWriteRequired = null;

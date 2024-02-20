@@ -71,6 +71,7 @@ public class Snake implements JsonSerializable<Snake> {
         return this.length;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -88,6 +89,7 @@ public class Snake implements JsonSerializable<Snake> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Snake.
      */
+    @Generated
     public static Snake fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
@@ -113,6 +115,7 @@ public class Snake implements JsonSerializable<Snake> {
         });
     }
 
+    @Generated
     static Snake fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int length = 0;

@@ -43,6 +43,7 @@ public final class EnumProperty implements JsonSerializable<EnumProperty> {
         return this.property;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -59,6 +60,7 @@ public final class EnumProperty implements JsonSerializable<EnumProperty> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the EnumProperty.
      */
+    @Generated
     public static EnumProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             FixedInnerEnum property = null;

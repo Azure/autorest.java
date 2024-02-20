@@ -24,6 +24,7 @@ public final class NeverProperty implements JsonSerializable<NeverProperty> {
     public NeverProperty() {
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -38,6 +39,7 @@ public final class NeverProperty implements JsonSerializable<NeverProperty> {
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the NeverProperty.
      */
+    @Generated
     public static NeverProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             NeverProperty deserializedNeverProperty = new NeverProperty();

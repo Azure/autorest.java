@@ -90,6 +90,7 @@ public class Result implements JsonSerializable<Result> {
         return this.data;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -108,6 +109,7 @@ public class Result implements JsonSerializable<Result> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Result.
      */
+    @Generated
     public static Result fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

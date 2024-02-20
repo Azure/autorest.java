@@ -45,6 +45,7 @@ public final class DefaultDurationProperty implements JsonSerializable<DefaultDu
         return this.value;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -61,6 +62,7 @@ public final class DefaultDurationProperty implements JsonSerializable<DefaultDu
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DefaultDurationProperty.
      */
+    @Generated
     public static DefaultDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Duration value = null;

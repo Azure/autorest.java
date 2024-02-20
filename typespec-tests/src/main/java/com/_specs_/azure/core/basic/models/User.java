@@ -129,6 +129,7 @@ public final class User implements JsonSerializable<User> {
         return this.etag;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -141,6 +142,7 @@ public final class User implements JsonSerializable<User> {
         }
     }
 
+    @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         if (this.name != null) {
@@ -165,6 +167,7 @@ public final class User implements JsonSerializable<User> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the User.
      */
+    @Generated
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;

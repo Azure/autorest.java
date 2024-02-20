@@ -51,6 +51,7 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
             .collect(java.util.stream.Collectors.toList());
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -67,6 +68,7 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UnixTimestampArrayDatetimeProperty.
      */
+    @Generated
     public static UnixTimestampArrayDatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<OffsetDateTime> value = null;

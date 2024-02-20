@@ -24,6 +24,7 @@ public final class EmptyInputOutput implements JsonSerializable<EmptyInputOutput
     public EmptyInputOutput() {
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -38,6 +39,7 @@ public final class EmptyInputOutput implements JsonSerializable<EmptyInputOutput
      * pointing to JSON null.
      * @throws IOException If an error occurs while reading the EmptyInputOutput.
      */
+    @Generated
     public static EmptyInputOutput fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             EmptyInputOutput deserializedEmptyInputOutput = new EmptyInputOutput();

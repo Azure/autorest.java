@@ -73,6 +73,7 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
         return this;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -94,6 +95,7 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ExtendsFloatAdditionalProperties.
      */
+    @Generated
     public static ExtendsFloatAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             double id = 0.0;

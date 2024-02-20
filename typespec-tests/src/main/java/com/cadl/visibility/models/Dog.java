@@ -77,6 +77,7 @@ public final class Dog implements JsonSerializable<Dog> {
         return this.name;
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -94,6 +95,7 @@ public final class Dog implements JsonSerializable<Dog> {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Dog.
      */
+    @Generated
     public static Dog fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;

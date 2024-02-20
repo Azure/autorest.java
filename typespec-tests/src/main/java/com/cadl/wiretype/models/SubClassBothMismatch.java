@@ -51,6 +51,7 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
         return this.base64url.decodedBytes();
     }
 
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -71,6 +72,7 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SubClassBothMismatch.
      */
+    @Generated
     public static SubClassBothMismatch fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OffsetDateTime dateTimeRfc7231 = null;
