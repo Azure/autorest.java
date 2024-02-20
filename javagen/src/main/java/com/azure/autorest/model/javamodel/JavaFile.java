@@ -119,12 +119,15 @@ public class JavaFile implements JavaContext {
         if (withGeneratedMarker) {
             contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
         }
-        Consumer<JavaJavadocComment> nonNullCommentDescriptionAction = commentAction == null ? c -> {} : commentAction;
-        if (withWordWrap) {
-            contents.withWordWrap(wordWrapWidth, () -> nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents)));
-        } else {
-            nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents));
+
+        if (commentAction != null) {
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentAction.accept(new JavaJavadocComment(contents));
+            }
         }
+
         if (withGeneratedMarker) {
             contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
         }
