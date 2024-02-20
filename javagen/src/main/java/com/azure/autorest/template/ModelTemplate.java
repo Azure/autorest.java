@@ -103,7 +103,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         boolean treatAsXml = model.isUsedInXml();
 
         // Handle adding annotations if the model is polymorphic.
-        handlePolymorphism(model, hasDerivedModels, settings.isDiscriminatorPassedToChildDeserialization(), javaFile);
+        handlePolymorphism(model, hasDerivedModels, javaFile);
 
         // Add class level annotations for serialization formats such as XML.
         addClassLevelAnnotations(model, javaFile, settings);
@@ -420,12 +420,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      *
      * @param model The client model.
      * @param hasDerivedModels Whether this model has children types.
-     * @param isDiscriminatorPassedToChildDeserialization Whether the deserialization discriminator, such as
-     * {@code odata.type}, is passed to children types during deserialization.
      * @param javaFile The JavaFile being generated.
      */
-    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
-        boolean isDiscriminatorPassedToChildDeserialization, JavaFile javaFile) {
+    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels, JavaFile javaFile) {
         // Model isn't polymorphic, no work to do here.
         if (!model.isPolymorphic()) {
             return;
@@ -436,7 +433,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         // If the discriminator isn't being passed to child models or this model has derived, children, models
         // include the discriminator property using JsonTypeInfo.As.PROPERTY. Using this will serialize the
         // property using the property attribute of the annotation instead of looking for a @JsonProperty.
-        if (!isDiscriminatorPassedToChildDeserialization || hasDerivedModels) {
+        if (hasDerivedModels) {
             jsonTypeInfo.append("JsonTypeInfo.As.PROPERTY, property = \"");
         } else {
             // Otherwise, serialize the discriminator property with an existing property on the class.
@@ -450,10 +447,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             jsonTypeInfo.append(", defaultImpl = ").append(model.getName()).append(".class");
         }
 
-        // If the discriminator is passed to child models the discriminator property needs to be set to visible.
-        if (isDiscriminatorPassedToChildDeserialization) {
-            jsonTypeInfo.append(", visible = true");
-        }
+        // Discriminator is passed to child models the discriminator property needs to be set to visible.
+        jsonTypeInfo.append(", visible = true");
 
         javaFile.annotation(jsonTypeInfo.append(")").toString());
         javaFile.annotation(String.format("JsonTypeName(\"%1$s\")", model.getSerializedName()));

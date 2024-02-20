@@ -9,7 +9,9 @@ import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.HashMap;
@@ -23,7 +25,8 @@ import java.util.regex.Pattern;
     use = JsonTypeInfo.Id.NAME,
     include = JsonTypeInfo.As.PROPERTY,
     property = "odata\\.type",
-    defaultImpl = MetricAlertCriteria.class)
+    defaultImpl = MetricAlertCriteria.class,
+    visible = true)
 @JsonTypeName("MetricAlertCriteria")
 @JsonSubTypes({
     @JsonSubTypes.Type(
@@ -35,6 +38,13 @@ public class MetricAlertCriteria {
     private static final Pattern KEY_ESCAPER = Pattern.compile("\\.");;
 
     /*
+     * specifies the type of the alert criteria.
+     */
+    @JsonTypeId
+    @JsonProperty(value = "odata\\.type", required = true)
+    private static final Odatatype odataType;
+
+    /*
      * The rule criteria that defines the conditions of the alert rule.
      */
     @JsonIgnore
@@ -44,6 +54,15 @@ public class MetricAlertCriteria {
      * Creates an instance of MetricAlertCriteria class.
      */
     public MetricAlertCriteria() {
+    }
+
+    /**
+     * Get the odataType property: specifies the type of the alert criteria.
+     * 
+     * @return the odataType value.
+     */
+    public Odatatype getOdataType() {
+        return ODATA_TYPE;
     }
 
     /**

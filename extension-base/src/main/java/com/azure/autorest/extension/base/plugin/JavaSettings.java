@@ -151,7 +151,6 @@ public class JavaSettings {
                 getBooleanValue(host, "generate-tests", false),
                 false, //getBooleanValue(host, "generate-send-request-method", false),
                 getBooleanValue(host, "generate-models", false),
-                getBooleanValue(host, "pass-discriminator-to-child-deserialization", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
@@ -312,7 +311,6 @@ public class JavaSettings {
         boolean generateTests,
         boolean generateSendRequestMethod,
         boolean generateModels,
-        boolean passDiscriminatorToChildDeserialization,
         boolean annotateGettersAndSettersForSerialization,
         String defaultHttpExceptionType,
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
@@ -404,7 +402,6 @@ public class JavaSettings {
         this.generateTests = generateTests;
         this.generateSendRequestMethod = generateSendRequestMethod;
         this.generateModels = generateModels;
-        this.passDiscriminatorToChildDeserialization = passDiscriminatorToChildDeserialization;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
 
         // Error HTTP status code exception type handling.
@@ -995,12 +992,6 @@ public class JavaSettings {
             }
         }
         return pollingConfig.get("default");
-    }
-
-    private final boolean passDiscriminatorToChildDeserialization;
-
-    public boolean isDiscriminatorPassedToChildDeserialization() {
-        return passDiscriminatorToChildDeserialization;
     }
 
     private final boolean annotateGettersAndSettersForSerialization;
