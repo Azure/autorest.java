@@ -186,7 +186,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Sets server parameter.
-     *
+     * 
      * @param host the host value.
      * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
@@ -204,7 +204,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the AutoRestSwaggerBatServiceClientBuilder.
      */
@@ -216,7 +216,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Builds an instance of AutoRestSwaggerBatServiceClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of AutoRestSwaggerBatServiceClientImpl.
      */
     @Generated
@@ -265,7 +265,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Builds an instance of StringOperationAsyncClient class.
-     *
+     * 
      * @return an instance of StringOperationAsyncClient.
      */
     @Generated
@@ -275,7 +275,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Builds an instance of EnumAsyncClient class.
-     *
+     * 
      * @return an instance of EnumAsyncClient.
      */
     @Generated
@@ -285,7 +285,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Builds an instance of StringOperationClient class.
-     *
+     * 
      * @return an instance of StringOperationClient.
      */
     @Generated
@@ -295,7 +295,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Builds an instance of EnumClient class.
-     *
+     * 
      * @return an instance of EnumClient.
      */
     @Generated
@@ -311,7 +311,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
 
     /**
      * Sets Service version.
-     *
+     * 
      * @param serviceVersion the serviceVersion value.
      * @return the AutoRestSwaggerBatServiceClientBuilder.
      */

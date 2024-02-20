@@ -66,11 +66,12 @@ public class JavaInterface implements JavaType {
         if (withGeneratedMarker) {
             contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
         }
-        Consumer<JavaJavadocComment> nonNullCommentDescriptionAction = commentDescriptionAction == null ? c -> {} : commentDescriptionAction;
-        if (withWordWrap) {
-            contents.withWordWrap(wordWrapWidth, () -> nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents)));
-        } else {
-            nonNullCommentDescriptionAction.accept(new JavaJavadocComment(contents));
+        if (commentDescriptionAction != null) {
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentDescriptionAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentDescriptionAction.accept(new JavaJavadocComment(contents));
+            }
         }
         if (withGeneratedMarker) {
             contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
@@ -80,11 +81,12 @@ public class JavaInterface implements JavaType {
         if (withGeneratedMarker) {
             contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
         }
-        Consumer<JavaJavadocComment> nonNullCommentTagsAction = commentTagsAction == null ? c -> {} : commentTagsAction;
-        if (withWordWrap) {
-            contents.withWordWrap(wordWrapWidth, () -> nonNullCommentTagsAction.accept(new JavaJavadocComment(contents)));
-        } else {
-            nonNullCommentTagsAction.accept(new JavaJavadocComment(contents));
+        if (commentTagsAction != null) {
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentTagsAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentTagsAction.accept(new JavaJavadocComment(contents));
+            }
         }
         if (withGeneratedMarker) {
             contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
