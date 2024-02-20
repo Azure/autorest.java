@@ -71,6 +71,28 @@ public final class EnumServiceAsyncClient {
     }
 
     /**
+     * The getColorModel operation.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * String(Red/Blue/Green)
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getColorModelWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getColorModelWithResponseAsync(requestOptions);
+    }
+
+    /**
      * The setColorModel operation.
      * <p>
      * <strong>Response Body Schema</strong>
@@ -607,6 +629,25 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getColorWithResponse(requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> Color.fromString(protocolMethodData.toObject(String.class)));
+    }
+
+    /**
+     * The getColorModel operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<ColorModel> getColorModel() {
+        // Generated convenience method for getColorModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getColorModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> ColorModel.fromString(protocolMethodData.toObject(String.class)));
     }
 
     /**

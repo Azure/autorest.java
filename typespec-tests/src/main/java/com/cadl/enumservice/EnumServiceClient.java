@@ -69,6 +69,28 @@ public final class EnumServiceClient {
     }
 
     /**
+     * The getColorModel operation.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * String(Red/Blue/Green)
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> getColorModelWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getColorModelWithResponse(requestOptions);
+    }
+
+    /**
      * The setColorModel operation.
      * <p>
      * <strong>Response Body Schema</strong>
@@ -598,6 +620,24 @@ public final class EnumServiceClient {
         // Generated convenience method for getColorWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return Color.fromString(getColorWithResponse(requestOptions).getValue().toObject(String.class));
+    }
+
+    /**
+     * The getColorModel operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public ColorModel getColorModel() {
+        // Generated convenience method for getColorModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue().toObject(String.class));
     }
 
     /**
