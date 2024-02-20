@@ -371,11 +371,7 @@ public class SchemaNameNormalization {
             int index = newName.indexOf(entry.getKey());
             if (index >= 0) {
                 int endIndex = index + entry.getKey().length();
-                if (!partialMatch(newName, index, endIndex)
-                    // hack, mgmt only allow `preserve-uppercase-max-length` set to 2, so there can't be a partial match
-                    // for all uppercase, e.g. IP. Otherwise, the max uppercase length is 3, which is larger than 2.
-                    // TODO(xiaofei) Remove when we done migrating m4's `preserve-uppercase-max-length`
-                    || allUppercase(entry.getKey())) {
+                if (wordMatch(newName, index, endIndex)) {
                     newName = newName.replace(entry.getKey(), entry.getValue());
                 }
             }
@@ -383,15 +379,11 @@ public class SchemaNameNormalization {
         return newName;
     }
 
-    private boolean allUppercase(String name) {
-        return name.chars().allMatch(Character::isUpperCase);
-    }
-
-    // A partial match is when the configured keyword is only part of the whole word in the name.
-    // E.g. "lower": "Lower", and the actual name is "flower". We won't replace it to be "fLower".
-    private boolean partialMatch(String name, int index, int endIndex) {
-        return (index > 0 && isSameCase(name.charAt(index - 1), name.charAt(index)))
-            || (endIndex < name.length() && isSameCase(name.charAt(endIndex - 1), name.charAt(endIndex)));
+    // Whether the match is the whole word in the name.
+    // E.g. "lower": "loWer", and the actual name is "flower". We won't replace it to be "floWer".
+    private boolean wordMatch(String name, int index, int endIndex) {
+        return !((index > 0 && isSameCase(name.charAt(index - 1), name.charAt(index)))
+            || (endIndex < name.length() && isSameCase(name.charAt(endIndex - 1), name.charAt(endIndex))));
     }
 
     private static boolean isSameCase(char c1, char c2) {

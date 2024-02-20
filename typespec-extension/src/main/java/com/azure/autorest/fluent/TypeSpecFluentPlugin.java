@@ -128,14 +128,6 @@ public class TypeSpecFluentPlugin extends FluentGen {
         namingOverrides.put("tagname", "tagName");
         namingOverrides.put("tagvalue", "tagValue");
 
-        // migrate m4 settings
-        namingOverrides.put("ip", "Ip");
-        namingOverrides.put("id", "Id");
-        // m4 settings work a little different with our own naming override. Here we want both ip and IP to be overridden
-        // to Ip, id and ID to Id. Hence the additional settings below.
-        namingOverrides.put("IP", "Ip");
-        namingOverrides.put("ID", "Id");
-
         return namingOverrides;
     }
 

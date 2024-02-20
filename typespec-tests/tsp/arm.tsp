@@ -57,22 +57,14 @@ model TopLevelArmResourceProperties {
   @visibility("read")
   configurationEndpoints?: string[];
 
-  userName: string;
-  ipRules: IPRules[];
-  startTimeStamp: utcDateTime;
+  userName: string; // this should be renamed to username
+  userNames: string; // this isn't a whole word match, shouldn't be renamed to usernames
+  accuserName: string; // this isn't a whole word match, shouldn't be renamed to accusername
+  startTimeStamp: utcDateTime; // this should be renamed to startTimestamp
 
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-}
-
-@doc("Top Level Arm Resource IP rule with specific IP or IP range in CIDR format.")
-model IPRules {
-  @doc("IP Rules Value")
-  value?: string;
-
-  @doc("The action of virtual network rule.")
-  action: string;
 }
 
 //----------------------- Custom Template Resource -----------------------
