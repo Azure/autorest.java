@@ -168,15 +168,32 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.clientName(serviceClientName).clientDescription(serviceClientDescription);
 
         Map<ServiceClient, com.azure.autorest.extension.base.model.codemodel.Client> serviceClientsMap = new LinkedHashMap<>();
-        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
-            serviceClientsMap = processClients(codeModel.getClients(), codeModel);
-            builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
-        } else {
-            // service client
-            ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
-            builder.serviceClient(serviceClient);
 
-            serviceClientsMap.put(serviceClient, codeModel);
+        boolean multipleClientsWithOperationsPresent = codeModel.getClients()
+                .stream()
+                .flatMap(client -> client.getOperationGroups().stream())
+                .flatMap(og -> og.getOperations().stream())
+                .findAny()
+                .isPresent();
+
+        boolean singleClientOperationsPresent = codeModel.getOperationGroups()
+                .stream()
+                .flatMap(og -> og.getOperations().stream())
+                .findAny()
+                .isPresent();
+
+        if (multipleClientsWithOperationsPresent || singleClientOperationsPresent) {
+            // set the service clients only if there are client operations present
+            if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+                serviceClientsMap = processClients(codeModel.getClients(), codeModel);
+                builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
+            } else {
+                // service client
+                ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
+                builder.serviceClient(serviceClient);
+
+                serviceClientsMap.put(serviceClient, codeModel);
+            }
         }
 
         // package info
