@@ -20,10 +20,20 @@ enum Color {
 }
 
 union ColorModel {
-  string,
-  Red: "Red",
+  ColorModelBase,
   Blue: "Blue",
   Green: "Green",
+}
+
+union ColorModelBase {
+  string,
+  Red: "Red",
+}
+
+union PriorityModel {
+  int32,
+  High: 100,
+  Low: 0,
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
@@ -76,6 +86,12 @@ interface EnumOp {
   @route("/colormodel")
   getColorModel(): {
     @body body: ColorModel;
+  };
+
+  @get
+  @route("/prioritymodel")
+  getPriorityModel(): {
+    @body body: PriorityModel;
   };
 
   @post

@@ -60,7 +60,14 @@ import {
   HttpOperationBody,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
-import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
+import {
+  isPollingLocation,
+  getPagedResult,
+  isFixed,
+  getLroMetadata,
+  getUnionAsEnum,
+  UnionEnum,
+} from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
   listClients,
@@ -151,7 +158,6 @@ import {
   getDurationFormat,
   hasScalarAsBase,
   isNullableType,
-  isSameLiteralTypes,
   getAccess,
   getUsage,
   getUnionDescription,
@@ -1958,33 +1964,23 @@ export class CodeModelBuilder {
 
   private processChoiceSchemaForUnion(
     type: Union,
-    variants: UnionVariant[],
+    unionEnum: UnionEnum,
     name: string,
   ): ChoiceSchema | SealedChoiceSchema {
     // variants is Literal
 
-    const kindSet = new Set(variants.map((it) => it.type.kind));
-    // "choice1" | "choice2" is sealed
-    // "choice1" | "choice2" | string is extensible
-    const sealed = kindSet.size === 1;
+    const sealed = !unionEnum.open;
 
-    variants = variants.filter(
-      (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
-    );
-    const kind = variants[0].type.kind;
-    const valueType =
-      kind === "String"
-        ? this.stringSchema
-        : kind === "Boolean"
-          ? this.booleanSchema
-          : isAllValueInteger(variants.map((it) => (it.type as any).value))
-            ? this.integerSchema
-            : this.doubleSchema;
+    const variants = [...unionEnum.flattenedMembers.values()];
+    const kindIsString = typeof variants[0].value === "string";
+    const valueType = kindIsString
+      ? this.stringSchema
+      : isAllValueInteger(variants.map((it) => it.value as number))
+        ? this.integerSchema
+        : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
-    variants.forEach((it) =>
-      choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)),
-    );
+    variants.forEach((it) => choices.push(new ChoiceValue(it.value.toString(), this.getDoc(it.variant), it.value)));
 
     const namespace = getNamespace(type);
 
@@ -2396,9 +2392,10 @@ export class CodeModelBuilder {
       return this.processSchema(nonNullVariants[0].type, name);
     }
 
-    if (isSameLiteralTypes(nonNullVariants)) {
+    const unionEnum = ignoreDiagnostics(getUnionAsEnum(type));
+    if (unionEnum) {
       // enum
-      return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
+      return this.processChoiceSchemaForUnion(type, unionEnum, name);
     }
 
     // TODO: name from typespec-client-generator-core

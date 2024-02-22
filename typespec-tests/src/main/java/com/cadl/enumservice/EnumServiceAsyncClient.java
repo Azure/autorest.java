@@ -25,6 +25,7 @@ import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
 import com.cadl.enumservice.models.OperationStateValues;
 import com.cadl.enumservice.models.Priority;
+import com.cadl.enumservice.models.PriorityModel;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -90,6 +91,28 @@ public final class EnumServiceAsyncClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getColorModelWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getColorModelWithResponseAsync(requestOptions);
+    }
+
+    /**
+     * The getPriorityModel operation.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * String(100/0)
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> getPriorityModelWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getPriorityModelWithResponseAsync(requestOptions);
     }
 
     /**
@@ -648,6 +671,25 @@ public final class EnumServiceAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return getColorModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> ColorModel.fromString(protocolMethodData.toObject(String.class)));
+    }
+
+    /**
+     * The getPriorityModel operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<PriorityModel> getPriorityModel() {
+        // Generated convenience method for getPriorityModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return getPriorityModelWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> PriorityModel.fromlong(protocolMethodData.toObject(long.class)));
     }
 
     /**
