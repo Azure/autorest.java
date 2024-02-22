@@ -30,6 +30,7 @@ union ColorModelBase {
   Red: "Red",
 }
 
+@access(Access.public)
 union PriorityModel {
   int32,
   High: 100,
@@ -86,12 +87,6 @@ interface EnumOp {
   @route("/colormodel")
   getColorModel(): {
     @body body: ColorModel;
-  };
-
-  @get
-  @route("/prioritymodel")
-  getPriorityModel(): {
-    @body body: PriorityModel;
   };
 
   @post

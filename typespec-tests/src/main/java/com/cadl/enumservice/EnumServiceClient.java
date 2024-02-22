@@ -24,7 +24,6 @@ import com.cadl.enumservice.models.ColorModel;
 import com.cadl.enumservice.models.Operation;
 import com.cadl.enumservice.models.OperationStateValues;
 import com.cadl.enumservice.models.Priority;
-import com.cadl.enumservice.models.PriorityModel;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -89,28 +88,6 @@ public final class EnumServiceClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getColorModelWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getColorModelWithResponse(requestOptions);
-    }
-
-    /**
-     * The getPriorityModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * String(100/0)
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the response body along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getPriorityModelWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getPriorityModelWithResponse(requestOptions);
     }
 
     /**
@@ -661,24 +638,6 @@ public final class EnumServiceClient {
         // Generated convenience method for getColorModelWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return ColorModel.fromString(getColorModelWithResponse(requestOptions).getValue().toObject(String.class));
-    }
-
-    /**
-     * The getPriorityModel operation.
-     * 
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public PriorityModel getPriorityModel() {
-        // Generated convenience method for getPriorityModelWithResponse
-        RequestOptions requestOptions = new RequestOptions();
-        return PriorityModel.fromlong(getPriorityModelWithResponse(requestOptions).getValue().toObject(long.class));
     }
 
     /**

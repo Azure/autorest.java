@@ -1984,6 +1984,7 @@ export class CodeModelBuilder {
       if (member.variant) {
         return member.variant as UnionVariant;
       } else if (member.type) {
+        // TODO: remove this; in current runtime, the UnionVariant is from this "type" instead of "variant"
         return member.type as UnionVariant;
       } else {
         return undefined;
