@@ -215,6 +215,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     boolean definedByModel = modelDefinesProperty(model, property);
                     if (streamStyle && hasDerivedTypes && notIncludedInConstructor && definedByModel) {
                         generateSetterJavadoc(classBlock, model, property);
+                        addGeneratedAnnotation(classBlock);
                         classBlock.method(JavaVisibility.PackagePrivate, null,
                             model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
                                 + property.getName() + ")",

@@ -56,6 +56,7 @@ public class Snake implements JsonSerializable<Snake> {
      * @param kind the kind value to set.
      * @return the Snake object itself.
      */
+    @Generated
     Snake setKind(String kind) {
         this.kind = kind;
         return this;
