@@ -56,6 +56,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      * @param kind the kind value to set.
      * @return the Dinosaur object itself.
      */
+    @Generated
     Dinosaur setKind(String kind) {
         this.kind = kind;
         return this;

@@ -56,6 +56,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @param kind the kind value to set.
      * @return the Dog object itself.
      */
+    @Generated
     Dog setKind(String kind) {
         this.kind = kind;
         return this;

@@ -47,6 +47,7 @@ public class Data implements JsonSerializable<Data> {
      * @param type the type value to set.
      * @return the Data object itself.
      */
+    @Generated
     Data setType(String type) {
         this.type = type;
         return this;
