@@ -24,6 +24,7 @@ import {
 import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace } from "./utils.js";
+import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
 
 /** Acts as a cache for processing inputs.
  *
@@ -159,7 +160,7 @@ export function unionReferredByType(
         cache.set(type, ret);
         return ret;
       }
-    } else if (isSameLiteralTypes(nonNullVariants)) {
+    } else if (getUnionAsEnum(type)) {
       // "literal1" | "literal2" -> Enum
       cache.set(type, null);
       return null;
