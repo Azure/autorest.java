@@ -169,8 +169,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                if (!property.isPolymorphicDiscriminator()
-                    || (modelDefinesProperty(model, property) && settings.isStreamStyleSerialization())) {
+                if (!property.isPolymorphicDiscriminator() || modelDefinesProperty(model, property)) {
                     // Only the super most parent model should have the polymorphic discriminator getter.
                     // The child models should use the parent's getter.
                     generateGetterJavadoc(classBlock, model, property);

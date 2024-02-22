@@ -58,6 +58,15 @@ public class MetricAlertCriteria {
     }
 
     /**
+     * Get the odataType property: specifies the type of the alert criteria.
+     * 
+     * @return the odataType value.
+     */
+    public Odatatype getOdataType() {
+        return this.odataType;
+    }
+
+    /**
      * Set the odataType property: specifies the type of the alert criteria.
      * 
      * @param odataType the odataType value to set.
