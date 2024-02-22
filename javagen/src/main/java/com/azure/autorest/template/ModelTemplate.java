@@ -169,7 +169,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                if (!property.isPolymorphicDiscriminator() || modelDefinesProperty(model, property)) {
+                if (!property.isPolymorphicDiscriminator()
+                    || (modelDefinesProperty(model, property) && settings.isStreamStyleSerialization())) {
                     // Only the super most parent model should have the polymorphic discriminator getter.
                     // The child models should use the parent's getter.
                     generateGetterJavadoc(classBlock, model, property);
@@ -200,8 +201,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
                 } else {
-                    // If stream-style serialization is being generated, some additional setters may need to be added
-                    // to support read-only properties that aren't included in the constructor.
+                    // If stream-style serialization is being generated or the property is the polymorphic
+                    // discriminator, some additional setters may need to be added to support read-only properties that
+                    // aren't included in the constructor.
                     // Jackson handles this by reflectively setting the value in the parent model, but stream-style
                     // serialization doesn't perform reflective cracking like Jackson Databind does, so it needs a way
                     // to access the readonly property (aka one without a public setter method).
@@ -213,7 +215,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     boolean notIncludedInConstructor = !ClientModelUtil.includePropertyInConstructor(property,
                         settings);
                     boolean definedByModel = modelDefinesProperty(model, property);
-                    if (streamStyle && hasDerivedTypes && notIncludedInConstructor && definedByModel) {
+                    if (hasDerivedTypes && notIncludedInConstructor && definedByModel
+                        && (settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
                         generateSetterJavadoc(classBlock, model, property);
                         classBlock.method(JavaVisibility.PackagePrivate, null,
                             model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
@@ -610,9 +613,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addGeneratedAnnotation(classBlock);
             addFieldAnnotations(model, property, classBlock, settings);
 
-            if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
-                classBlock.privateStaticFinalVariable(fieldSignature);
-            } else if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
+            if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
                 classBlock.privateMemberVariable(fieldSignature);
@@ -824,11 +825,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 constructor.line("super(" + superProperties + ");");
             }
 
-            // If there is a polymorphic discriminator and stream-style serialization is being used, add a line to
-            // initialize the discriminator.
+            // If there is a polymorphic discriminator , add a line to initialize the discriminator.
             ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
-            if (polymorphicProperty != null && !polymorphicProperty.isRequired()
-                && settings.isStreamStyleSerialization()) {
+            if (polymorphicProperty != null && !polymorphicProperty.isRequired()) {
                 String discriminatorValue = polymorphicProperty.getDefaultValue() != null
                     ? polymorphicProperty.getDefaultValue()
                     : polymorphicProperty.getClientType().defaultValueExpression(model.getSerializedName());
@@ -949,9 +948,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
-        String expression = (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization())
-            ? CodeNamer.getEnumMemberName(property.getName())
-            : "this." + property.getName();
+        String expression = "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
             expression = TemplateHelper.getByteCloneExpression(expression);
         }

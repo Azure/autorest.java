@@ -33,6 +33,7 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
      * Creates an instance of MetricAlertSingleResourceMultipleMetricCriteria class.
      */
     public MetricAlertSingleResourceMultipleMetricCriteria() {
+        setOdataType(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA);
     }
 
     /**

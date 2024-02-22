@@ -42,7 +42,7 @@ public class MetricAlertCriteria {
      */
     @JsonTypeId
     @JsonProperty(value = "odata\\.type", required = true)
-    private static final Odatatype odataType;
+    private Odatatype odataType;
 
     /*
      * The rule criteria that defines the conditions of the alert rule.
@@ -54,15 +54,18 @@ public class MetricAlertCriteria {
      * Creates an instance of MetricAlertCriteria class.
      */
     public MetricAlertCriteria() {
+        this.odataType = Odatatype.fromString("MetricAlertCriteria");
     }
 
     /**
-     * Get the odataType property: specifies the type of the alert criteria.
+     * Set the odataType property: specifies the type of the alert criteria.
      * 
-     * @return the odataType value.
+     * @param odataType the odataType value to set.
+     * @return the MetricAlertCriteria object itself.
      */
-    public Odatatype getOdataType() {
-        return ODATA_TYPE;
+    MetricAlertCriteria setOdataType(Odatatype odataType) {
+        this.odataType = odataType;
+        return this;
     }
 
     /**
