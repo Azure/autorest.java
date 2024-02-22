@@ -30,8 +30,6 @@ import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
  *
  * If the input is undefined, the output is always undefined.
  * for a given input, the process is only ever called once.
- *
- *
  */
 export class ProcessingCache<In, Out> {
   private results = new Map<In, Out>();

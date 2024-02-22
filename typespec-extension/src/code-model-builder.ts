@@ -1980,7 +1980,28 @@ export class CodeModelBuilder {
         : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
-    variants.forEach((it) => choices.push(new ChoiceValue(it.value.toString(), this.getDoc(it.variant), it.value)));
+    const getUnionVariant = (member: any) => {
+      if (member.variant) {
+        return member.variant as UnionVariant;
+      } else if (member.type) {
+        return member.type as UnionVariant;
+      } else {
+        return undefined;
+      }
+    };
+    variants.forEach((it) => {
+      const unionVariant = getUnionVariant(it);
+      let name = it.value.toString();
+      let doc = it.value.toString();
+      if (unionVariant) {
+        const candidateName = this.getName(unionVariant);
+        if (candidateName) {
+          name = candidateName;
+        }
+        doc = this.getDoc(unionVariant);
+      }
+      choices.push(new ChoiceValue(name, doc, it.value));
+    });
 
     const namespace = getNamespace(type);
 
