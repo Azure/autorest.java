@@ -16,13 +16,13 @@ public final class PriorityModel extends ExpandableStringEnum<PriorityModel> {
      * Static value 100 for PriorityModel.
      */
     @Generated
-    public static final PriorityModel ONE_ZERO_ZERO = fromLong(100L);
+    public static final PriorityModel HIGH = fromLong(100L);
 
     /**
      * Static value 0 for PriorityModel.
      */
     @Generated
-    public static final PriorityModel ZERO = fromLong(0L);
+    public static final PriorityModel LOW = fromLong(0L);
 
     /**
      * Creates a new instance of PriorityModel value.

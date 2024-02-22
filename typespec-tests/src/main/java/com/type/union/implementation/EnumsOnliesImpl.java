@@ -103,8 +103,8 @@ public final class EnumsOnliesImpl {
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>
@@ -130,8 +130,8 @@ public final class EnumsOnliesImpl {
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>
@@ -157,8 +157,8 @@ public final class EnumsOnliesImpl {
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>
@@ -185,8 +185,8 @@ public final class EnumsOnliesImpl {
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>
