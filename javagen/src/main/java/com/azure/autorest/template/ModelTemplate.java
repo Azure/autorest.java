@@ -430,37 +430,23 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return;
         }
 
-        StringBuilder jsonTypeInfo = new StringBuilder("JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = ");
+        // After removing the concept of passing discriminator to children models and always doing it, there is no need
+        // to set the 'include' property of the JsonTypeInfo annotation. We use 'JsonTypeInfo.As.PROPERTY' as the value,
+        // which is the default value, so it doesn't need to be declared.
+        // And to support unknown subtypes, we always set a default implementation to the class being generated.
+        // And the discriminator is passed to child models, so the discriminator property needs to be set to visible.
+        String jsonTypeInfo = "JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = \""
+            + model.getPolymorphicDiscriminatorName() + "\", defaultImpl = " + model.getName()
+            + ".class, visible = true)";
 
-        // If the discriminator isn't being passed to child models or this model has derived, children, models
-        // include the discriminator property using JsonTypeInfo.As.PROPERTY. Using this will serialize the
-        // property using the property attribute of the annotation instead of looking for a @JsonProperty.
-        if (hasDerivedModels) {
-            jsonTypeInfo.append("JsonTypeInfo.As.PROPERTY, property = \"");
-        } else {
-            // Otherwise, serialize the discriminator property with an existing property on the class.
-            jsonTypeInfo.append("JsonTypeInfo.As.EXISTING_PROPERTY, property = \"");
-        }
-
-        jsonTypeInfo.append(model.getPolymorphicDiscriminatorName()).append("\"");
-
-        // If the class has derived models add itself as a default implementation.
-        if (hasDerivedModels) {
-            jsonTypeInfo.append(", defaultImpl = ").append(model.getName()).append(".class");
-        }
-
-        // Discriminator is passed to child models the discriminator property needs to be set to visible.
-        jsonTypeInfo.append(", visible = true");
-
-        javaFile.annotation(jsonTypeInfo.append(")").toString());
-        javaFile.annotation(String.format("JsonTypeName(\"%1$s\")", model.getSerializedName()));
+        javaFile.annotation(jsonTypeInfo);
+        javaFile.annotation("JsonTypeName(\"" + model.getSerializedName() + "\")");
 
         if (hasDerivedModels) {
             javaFile.line("@JsonSubTypes({");
             javaFile.indent(() -> {
-                Function<ClientModel, String> getDerivedTypeAnnotation = (ClientModel derivedType) ->
-                    String.format("@JsonSubTypes.Type(name = \"%1$s\", value = %2$s.class)",
-                        derivedType.getSerializedName(), derivedType.getName());
+                Function<ClientModel, String> getDerivedTypeAnnotation = derivedType -> "@JsonSubTypes.Type(name = \""
+                    + derivedType.getSerializedName() + "\", value = " + derivedType.getName() + ".class)";
 
                 for (int i = 0; i != model.getDerivedModels().size() - 1; i++) {
                     ClientModel derivedModel = model.getDerivedModels().get(i);

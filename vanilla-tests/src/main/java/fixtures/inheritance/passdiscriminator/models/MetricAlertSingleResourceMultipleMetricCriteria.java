@@ -16,8 +16,8 @@ import java.util.List;
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.EXISTING_PROPERTY,
     property = "odata\\.type",
+    defaultImpl = MetricAlertSingleResourceMultipleMetricCriteria.class,
     visible = true)
 @JsonTypeName("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria")
 @JsonFlatten

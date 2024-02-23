@@ -23,7 +23,6 @@ import java.util.regex.Pattern;
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
     property = "odata\\.type",
     defaultImpl = MetricAlertCriteria.class,
     visible = true)
