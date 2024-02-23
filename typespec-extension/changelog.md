@@ -8,7 +8,7 @@ Compatible with compiler 0.53.
 
 Compatible with compiler 0.53.
 
-- Fixed bug that 'partial update' will execute twice when generate for `typespec` definition.
+- Fixed bug that 'partial update' will execute twice when generate from TypeSpec.
 
 ## 0.13.6 (2024-02-20)
 
