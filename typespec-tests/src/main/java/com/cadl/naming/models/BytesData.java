@@ -44,6 +44,9 @@ public final class BytesData extends Data {
         return CoreUtils.clone(this.dataAsBytes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

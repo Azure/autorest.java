@@ -40,6 +40,9 @@ public final class SecondItem implements JsonSerializable<SecondItem> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

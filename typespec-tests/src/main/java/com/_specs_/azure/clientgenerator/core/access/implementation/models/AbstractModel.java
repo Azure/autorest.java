@@ -72,6 +72,9 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

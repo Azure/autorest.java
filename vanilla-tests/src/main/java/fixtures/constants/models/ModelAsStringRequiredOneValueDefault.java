@@ -60,6 +60,9 @@ public final class ModelAsStringRequiredOneValueDefault
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

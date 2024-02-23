@@ -53,6 +53,9 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

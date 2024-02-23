@@ -49,6 +49,9 @@ public final class Base64urlArrayBytesProperty implements JsonSerializable<Base6
         return this.value.stream().map(el -> el.decodedBytes()).collect(java.util.stream.Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

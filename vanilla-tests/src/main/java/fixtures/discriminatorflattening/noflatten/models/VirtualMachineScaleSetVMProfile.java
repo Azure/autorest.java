@@ -60,6 +60,9 @@ public final class VirtualMachineScaleSetVMProfile implements JsonSerializable<V
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

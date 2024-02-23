@@ -43,6 +43,9 @@ public class Pet implements JsonSerializable<Pet> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

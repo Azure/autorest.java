@@ -49,6 +49,9 @@ public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231Da
         return this.value.getDateTime();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

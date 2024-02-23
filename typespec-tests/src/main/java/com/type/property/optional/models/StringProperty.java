@@ -52,6 +52,9 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

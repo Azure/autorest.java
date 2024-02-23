@@ -43,6 +43,9 @@ public final class SpreadAsRequestBodyRequest implements JsonSerializable<Spread
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

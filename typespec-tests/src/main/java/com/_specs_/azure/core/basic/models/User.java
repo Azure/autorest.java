@@ -31,7 +31,7 @@ public final class User implements JsonSerializable<User> {
      * The user's name.
      */
     @Generated
-    private final String name;
+    private String name;
 
     /*
      * The user's order list
@@ -68,12 +68,9 @@ public final class User implements JsonSerializable<User> {
 
     /**
      * Creates an instance of User class.
-     * 
-     * @param name the name value to set.
      */
     @Generated
-    public User(String name) {
-        this.name = name;
+    public User() {
     }
 
     /**
@@ -94,6 +91,22 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Set the name property: The user's name.
+     * <p>
+     * Required when create the resource.
+     * </p>
+     * 
+     * @param name the name value to set.
+     * @return the User object itself.
+     */
+    @Generated
+    public User setName(String name) {
+        this.name = name;
+        this.updatedProperties.add("name");
+        return this;
     }
 
     /**
@@ -129,6 +142,9 @@ public final class User implements JsonSerializable<User> {
         return this.etag;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -171,8 +187,8 @@ public final class User implements JsonSerializable<User> {
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;
-            String name = null;
             String etag = null;
+            String name = null;
             List<UserOrder> orders = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -180,19 +196,20 @@ public final class User implements JsonSerializable<User> {
 
                 if ("id".equals(fieldName)) {
                     id = reader.getInt();
-                } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
                 } else if ("etag".equals(fieldName)) {
                     etag = reader.getString();
+                } else if ("name".equals(fieldName)) {
+                    name = reader.getString();
                 } else if ("orders".equals(fieldName)) {
                     orders = reader.readArray(reader1 -> UserOrder.fromJson(reader1));
                 } else {
                     reader.skipChildren();
                 }
             }
-            User deserializedUser = new User(name);
+            User deserializedUser = new User();
             deserializedUser.id = id;
             deserializedUser.etag = etag;
+            deserializedUser.name = name;
             deserializedUser.orders = orders;
 
             return deserializedUser;

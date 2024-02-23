@@ -319,6 +319,9 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
         return this.immutable;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

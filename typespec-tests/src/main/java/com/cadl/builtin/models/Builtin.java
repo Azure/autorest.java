@@ -344,6 +344,9 @@ public final class Builtin implements JsonSerializable<Builtin> {
         return this.encoded;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -51,6 +51,9 @@ public final class DeleteRepositoryResult implements JsonSerializable<DeleteRepo
         return this.deletedTags;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

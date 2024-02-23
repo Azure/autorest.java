@@ -45,6 +45,9 @@ public final class Siamese extends Cat {
         return this.smart;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

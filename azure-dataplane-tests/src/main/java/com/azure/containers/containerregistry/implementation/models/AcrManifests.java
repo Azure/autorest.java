@@ -125,6 +125,9 @@ public final class AcrManifests implements JsonSerializable<AcrManifests> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

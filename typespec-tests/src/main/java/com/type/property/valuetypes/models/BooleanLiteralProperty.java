@@ -40,6 +40,9 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

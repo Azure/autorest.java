@@ -24,6 +24,9 @@ public final class NeverProperty implements JsonSerializable<NeverProperty> {
     public NeverProperty() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -27,6 +27,9 @@ public final class Sparrow extends Bird {
         setKind("sparrow");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

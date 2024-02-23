@@ -43,6 +43,9 @@ public final class JsonProjectedNameModel implements JsonSerializable<JsonProjec
         return this.defaultName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

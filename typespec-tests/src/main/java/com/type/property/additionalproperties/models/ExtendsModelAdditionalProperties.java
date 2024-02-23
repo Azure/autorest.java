@@ -54,6 +54,9 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

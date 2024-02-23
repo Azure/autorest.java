@@ -44,6 +44,9 @@ public final class SendRequest9 implements JsonSerializable<SendRequest9> {
         return this.prop;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

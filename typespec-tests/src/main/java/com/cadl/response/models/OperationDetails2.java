@@ -95,6 +95,9 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
         return this.lroResult;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

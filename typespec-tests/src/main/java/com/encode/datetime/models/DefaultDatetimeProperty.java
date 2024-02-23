@@ -45,6 +45,9 @@ public final class DefaultDatetimeProperty implements JsonSerializable<DefaultDa
         return this.value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -43,6 +43,9 @@ public final class GenerationResult implements JsonSerializable<GenerationResult
         return this.data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

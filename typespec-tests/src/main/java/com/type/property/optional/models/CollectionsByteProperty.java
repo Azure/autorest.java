@@ -53,6 +53,9 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -97,6 +97,9 @@ public final class AcrErrorInfo implements JsonSerializable<AcrErrorInfo> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

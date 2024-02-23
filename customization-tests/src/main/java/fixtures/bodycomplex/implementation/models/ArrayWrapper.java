@@ -48,6 +48,9 @@ public final class ArrayWrapper implements JsonSerializable<ArrayWrapper> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

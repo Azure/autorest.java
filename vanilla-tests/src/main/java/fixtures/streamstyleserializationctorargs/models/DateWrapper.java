@@ -82,6 +82,9 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

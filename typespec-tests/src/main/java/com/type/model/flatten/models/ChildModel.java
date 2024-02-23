@@ -61,6 +61,9 @@ public final class ChildModel implements JsonSerializable<ChildModel> {
         return this.age;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -43,6 +43,9 @@ public final class NestedModel implements JsonSerializable<NestedModel> {
         return this.nested1;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

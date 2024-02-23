@@ -72,6 +72,9 @@ public final class DocumentSpan implements JsonSerializable<DocumentSpan> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

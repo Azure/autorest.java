@@ -44,6 +44,9 @@ public final class SendRequest4 implements JsonSerializable<SendRequest4> {
         return this.prop;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

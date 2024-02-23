@@ -71,6 +71,9 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
         return this.requiredProperty;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

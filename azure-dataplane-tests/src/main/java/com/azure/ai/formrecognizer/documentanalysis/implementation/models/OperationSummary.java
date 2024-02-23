@@ -250,6 +250,9 @@ public final class OperationSummary implements JsonSerializable<OperationSummary
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

@@ -63,12 +63,9 @@ public final class Salmon extends Fish {
 
     /**
      * Creates an instance of Salmon class.
-     * 
-     * @param age the age value to set.
      */
     @Generated
-    public Salmon(int age) {
-        super(age);
+    public Salmon() {
         setKind("salmon");
     }
 
@@ -146,12 +143,26 @@ public final class Salmon extends Fish {
      */
     @Generated
     @Override
+    public Salmon setAge(int age) {
+        super.setAge(age);
+        this.updatedProperties.add("age");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
     public Salmon setColor(String color) {
         super.setColor(color);
         this.updatedProperties.add("color");
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -159,8 +170,8 @@ public final class Salmon extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("kind", getKind());
+            jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
             jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
@@ -172,12 +183,12 @@ public final class Salmon extends Fish {
     @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("age", getAge());
         if (getKind() != null) {
             jsonWriter.writeStringField("kind", getKind());
         } else if (updatedProperties.contains("kind")) {
             jsonWriter.writeNullField("kind");
         }
+        jsonWriter.writeIntField("age", getAge());
         if (getColor() != null) {
             jsonWriter.writeStringField("color", getColor());
         } else if (updatedProperties.contains("color")) {
@@ -225,8 +236,8 @@ public final class Salmon extends Fish {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            int age = 0;
             String kind = "salmon";
+            int age = 0;
             String color = null;
             List<Fish> friends = null;
             Map<String, Fish> hate = null;
@@ -239,10 +250,10 @@ public final class Salmon extends Fish {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
                     kind = reader.getString();
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
                 } else if ("friends".equals(fieldName)) {
@@ -255,10 +266,11 @@ public final class Salmon extends Fish {
                     reader.skipChildren();
                 }
             }
-            Salmon deserializedSalmon = new Salmon(age);
+            Salmon deserializedSalmon = new Salmon();
             deserializedSalmon.setId(id);
             deserializedSalmon.setName(name);
             deserializedSalmon.setKind(kind);
+            deserializedSalmon.setAge(age);
             deserializedSalmon.setColor(color);
             deserializedSalmon.friends = friends;
             deserializedSalmon.hate = hate;

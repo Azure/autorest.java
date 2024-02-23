@@ -106,6 +106,9 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

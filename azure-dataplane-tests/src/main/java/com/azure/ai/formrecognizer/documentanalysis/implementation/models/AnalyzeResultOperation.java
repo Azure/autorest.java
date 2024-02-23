@@ -149,6 +149,9 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

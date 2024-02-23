@@ -72,6 +72,9 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
         return this.size;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

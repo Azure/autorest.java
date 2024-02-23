@@ -42,7 +42,7 @@ public class Fish implements JsonSerializable<Fish> {
      * The age property.
      */
     @Generated
-    private final int age;
+    private int age;
 
     /*
      * The color property.
@@ -73,13 +73,10 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Creates an instance of Fish class.
-     * 
-     * @param age the age value to set.
      */
     @Generated
-    public Fish(int age) {
+    public Fish() {
         this.kind = "Fish";
-        this.age = age;
     }
 
     /**
@@ -162,6 +159,22 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
+     * Set the age property: The age property.
+     * <p>
+     * Required when create the resource.
+     * </p>
+     * 
+     * @param age the age value to set.
+     * @return the Fish object itself.
+     */
+    @Generated
+    public Fish setAge(int age) {
+        this.age = age;
+        this.updatedProperties.add("age");
+        return this;
+    }
+
+    /**
      * Get the color property: The color property.
      * 
      * @return the color value.
@@ -184,6 +197,9 @@ public class Fish implements JsonSerializable<Fish> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -191,8 +207,8 @@ public class Fish implements JsonSerializable<Fish> {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeIntField("age", this.age);
             jsonWriter.writeStringField("kind", this.kind);
+            jsonWriter.writeIntField("age", this.age);
             jsonWriter.writeStringField("color", this.color);
             return jsonWriter.writeEndObject();
         }
@@ -201,12 +217,12 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("age", this.age);
         if (this.kind != null) {
             jsonWriter.writeStringField("kind", this.kind);
         } else if (updatedProperties.contains("kind")) {
             jsonWriter.writeNullField("kind");
         }
+        jsonWriter.writeIntField("age", this.age);
         if (this.color != null) {
             jsonWriter.writeStringField("color", this.color);
         } else if (updatedProperties.contains("color")) {
@@ -257,8 +273,8 @@ public class Fish implements JsonSerializable<Fish> {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            int age = 0;
             String kind = null;
+            int age = 0;
             String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -268,20 +284,21 @@ public class Fish implements JsonSerializable<Fish> {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
                     kind = reader.getString();
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            Fish deserializedFish = new Fish(age);
+            Fish deserializedFish = new Fish();
             deserializedFish.id = id;
             deserializedFish.name = name;
             deserializedFish.kind = kind;
+            deserializedFish.age = age;
             deserializedFish.color = color;
 
             return deserializedFish;

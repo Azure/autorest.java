@@ -44,6 +44,9 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -101,6 +101,9 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

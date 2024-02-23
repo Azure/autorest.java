@@ -120,6 +120,9 @@ public final class PetAPInProperties implements JsonSerializable<PetAPInProperti
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

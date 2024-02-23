@@ -55,6 +55,9 @@ public final class JsonOutput implements JsonSerializable<JsonOutput> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

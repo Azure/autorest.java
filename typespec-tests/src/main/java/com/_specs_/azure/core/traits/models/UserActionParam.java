@@ -43,6 +43,9 @@ public final class UserActionParam implements JsonSerializable<UserActionParam> 
         return this.userActionValue;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

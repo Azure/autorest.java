@@ -43,6 +43,9 @@ public final class JsonAndClientProjectedNameModel implements JsonSerializable<J
         return this.clientName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

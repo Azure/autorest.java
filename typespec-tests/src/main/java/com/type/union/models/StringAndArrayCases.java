@@ -62,6 +62,9 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
         return this.array;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

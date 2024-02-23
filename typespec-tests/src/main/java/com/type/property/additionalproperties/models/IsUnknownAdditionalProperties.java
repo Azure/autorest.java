@@ -73,6 +73,9 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

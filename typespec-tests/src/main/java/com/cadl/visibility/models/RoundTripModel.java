@@ -61,6 +61,9 @@ public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
         return this.secretName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

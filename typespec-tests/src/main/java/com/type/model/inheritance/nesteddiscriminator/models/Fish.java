@@ -72,6 +72,9 @@ public class Fish implements JsonSerializable<Fish> {
         return this.age;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

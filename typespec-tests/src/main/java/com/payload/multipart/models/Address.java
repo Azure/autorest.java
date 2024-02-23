@@ -43,6 +43,9 @@ public final class Address implements JsonSerializable<Address> {
         return this.city;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

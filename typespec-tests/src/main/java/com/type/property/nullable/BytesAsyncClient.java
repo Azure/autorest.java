@@ -46,8 +46,8 @@ public final class BytesAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -72,8 +72,8 @@ public final class BytesAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -98,8 +98,8 @@ public final class BytesAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -125,8 +125,8 @@ public final class BytesAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 

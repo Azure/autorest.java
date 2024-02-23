@@ -43,6 +43,9 @@ public final class SharedModel implements JsonSerializable<SharedModel> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

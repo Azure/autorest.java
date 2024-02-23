@@ -176,6 +176,9 @@ public final class Paths14Hl8BdFormsdataurlencodedPetAddPetidPostRequestbodyCont
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

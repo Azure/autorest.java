@@ -72,6 +72,9 @@ public class Snake implements JsonSerializable<Snake> {
         return this.length;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

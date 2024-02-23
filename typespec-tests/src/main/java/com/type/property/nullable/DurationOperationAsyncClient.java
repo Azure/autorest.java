@@ -46,8 +46,8 @@ public final class DurationOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: Duration (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: Duration (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -72,8 +72,8 @@ public final class DurationOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: Duration (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: Duration (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -98,8 +98,8 @@ public final class DurationOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: Duration (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: Duration (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -124,8 +124,8 @@ public final class DurationOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: Duration (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: Duration (Optional, Required on create)
      * }
      * }</pre>
      * 

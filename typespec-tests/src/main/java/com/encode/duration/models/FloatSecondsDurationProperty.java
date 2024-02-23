@@ -44,6 +44,9 @@ public final class FloatSecondsDurationProperty implements JsonSerializable<Floa
         return Duration.ofNanos((long) (this.value * 1000_000_000L));
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -43,6 +43,9 @@ public final class LanguageProjectedNameModel implements JsonSerializable<Langua
         return this.javaName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

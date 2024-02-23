@@ -46,6 +46,9 @@ public final class LroProduct extends Product {
         return this.provisioningState;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

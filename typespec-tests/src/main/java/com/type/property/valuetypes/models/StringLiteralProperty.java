@@ -40,6 +40,9 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

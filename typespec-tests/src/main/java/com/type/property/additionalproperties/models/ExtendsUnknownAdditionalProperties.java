@@ -73,6 +73,9 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

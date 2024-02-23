@@ -43,6 +43,9 @@ public final class Dog implements JsonSerializable<Dog> {
         return this.bark;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

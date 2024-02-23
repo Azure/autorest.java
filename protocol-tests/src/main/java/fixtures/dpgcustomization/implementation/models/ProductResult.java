@@ -82,6 +82,9 @@ public final class ProductResult implements JsonSerializable<ProductResult> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

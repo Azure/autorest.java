@@ -99,6 +99,9 @@ public final class MixedLiteralsCases implements JsonSerializable<MixedLiteralsC
         return this.booleanLiteral;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -45,6 +45,9 @@ public final class ISO8601DurationProperty implements JsonSerializable<ISO8601Du
         return this.value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

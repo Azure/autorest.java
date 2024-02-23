@@ -45,6 +45,9 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

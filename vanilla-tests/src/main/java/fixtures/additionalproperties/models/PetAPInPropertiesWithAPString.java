@@ -176,6 +176,9 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

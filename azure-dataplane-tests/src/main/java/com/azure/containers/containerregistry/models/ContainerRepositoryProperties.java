@@ -208,6 +208,9 @@ public class ContainerRepositoryProperties implements JsonSerializable<Container
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

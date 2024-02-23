@@ -43,6 +43,9 @@ public final class UnknownDictProperty implements JsonSerializable<UnknownDictPr
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
