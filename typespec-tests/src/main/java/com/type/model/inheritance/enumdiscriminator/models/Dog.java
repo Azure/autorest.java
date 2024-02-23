@@ -21,7 +21,7 @@ public class Dog implements JsonSerializable<Dog> {
      * discriminator property
      */
     @Generated
-    private String kind;
+    private DogKind kind;
 
     /*
      * Weight of the dog
@@ -36,7 +36,7 @@ public class Dog implements JsonSerializable<Dog> {
      */
     @Generated
     public Dog(int weight) {
-        this.kind = "Dog";
+        this.kind = DogKind.fromString("Dog");
         this.weight = weight;
     }
 
@@ -46,7 +46,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @return the kind value.
      */
     @Generated
-    public String getKind() {
+    public DogKind getKind() {
         return this.kind;
     }
 
@@ -57,7 +57,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @return the Dog object itself.
      */
     @Generated
-    Dog setKind(String kind) {
+    Dog setKind(DogKind kind) {
         this.kind = kind;
         return this;
     }
@@ -80,7 +80,7 @@ public class Dog implements JsonSerializable<Dog> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("weight", this.weight);
-        jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         return jsonWriter.writeEndObject();
     }
 
@@ -123,7 +123,7 @@ public class Dog implements JsonSerializable<Dog> {
     static Dog fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int weight = 0;
-            String kind = null;
+            DogKind kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -131,7 +131,7 @@ public class Dog implements JsonSerializable<Dog> {
                 if ("weight".equals(fieldName)) {
                     weight = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                    kind = DogKind.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

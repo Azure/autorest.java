@@ -21,7 +21,7 @@ public class Snake implements JsonSerializable<Snake> {
      * discriminator property
      */
     @Generated
-    private String kind;
+    private SnakeKind kind;
 
     /*
      * Length of the snake
@@ -36,7 +36,7 @@ public class Snake implements JsonSerializable<Snake> {
      */
     @Generated
     public Snake(int length) {
-        this.kind = "Snake";
+        this.kind = SnakeKind.fromString("Snake");
         this.length = length;
     }
 
@@ -46,7 +46,7 @@ public class Snake implements JsonSerializable<Snake> {
      * @return the kind value.
      */
     @Generated
-    public String getKind() {
+    public SnakeKind getKind() {
         return this.kind;
     }
 
@@ -57,7 +57,7 @@ public class Snake implements JsonSerializable<Snake> {
      * @return the Snake object itself.
      */
     @Generated
-    Snake setKind(String kind) {
+    Snake setKind(SnakeKind kind) {
         this.kind = kind;
         return this;
     }
@@ -80,7 +80,7 @@ public class Snake implements JsonSerializable<Snake> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("length", this.length);
-        jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
         return jsonWriter.writeEndObject();
     }
 
@@ -123,7 +123,7 @@ public class Snake implements JsonSerializable<Snake> {
     static Snake fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int length = 0;
-            String kind = null;
+            SnakeKind kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -131,7 +131,7 @@ public class Snake implements JsonSerializable<Snake> {
                 if ("length".equals(fieldName)) {
                     length = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                    kind = SnakeKind.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

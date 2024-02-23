@@ -24,7 +24,7 @@ public final class Cobra extends Snake {
     @Generated
     public Cobra(int length) {
         super(length);
-        setKind("cobra");
+        setKind(SnakeKind.COBRA);
     }
 
     /**
@@ -35,7 +35,7 @@ public final class Cobra extends Snake {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("length", getLength());
-        jsonWriter.writeStringField("kind", getKind());
+        jsonWriter.writeStringField("kind", getKind() == null ? null : getKind().toString());
         return jsonWriter.writeEndObject();
     }
 
@@ -52,7 +52,7 @@ public final class Cobra extends Snake {
     public static Cobra fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int length = 0;
-            String kind = "cobra";
+            SnakeKind kind = SnakeKind.COBRA;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -60,7 +60,7 @@ public final class Cobra extends Snake {
                 if ("length".equals(fieldName)) {
                     length = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                    kind = SnakeKind.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }
