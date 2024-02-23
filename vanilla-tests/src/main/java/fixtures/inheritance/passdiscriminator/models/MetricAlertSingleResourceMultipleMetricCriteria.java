@@ -7,7 +7,6 @@ package fixtures.inheritance.passdiscriminator.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.List;
@@ -17,21 +16,13 @@ import java.util.List;
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.EXISTING_PROPERTY,
     property = "odata\\.type",
+    defaultImpl = MetricAlertSingleResourceMultipleMetricCriteria.class,
     visible = true)
 @JsonTypeName("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria")
 @JsonFlatten
 @Fluent
 public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
-    /*
-     * specifies the type of the alert criteria.
-     */
-    @JsonTypeId
-    @JsonProperty(value = "odata\\.type", required = true)
-    private static final Odatatype ODATA_TYPE
-        = Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA;
-
     /*
      * The list of metric criteria for this 'all of' operation.
      */
@@ -42,15 +33,7 @@ public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlert
      * Creates an instance of MetricAlertSingleResourceMultipleMetricCriteria class.
      */
     public MetricAlertSingleResourceMultipleMetricCriteria() {
-    }
-
-    /**
-     * Get the odataType property: specifies the type of the alert criteria.
-     * 
-     * @return the odataType value.
-     */
-    public Odatatype getOdataType() {
-        return ODATA_TYPE;
+        setOdataType(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA);
     }
 
     /**
