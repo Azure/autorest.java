@@ -57,6 +57,11 @@ model TopLevelArmResourceProperties {
   @visibility("read")
   configurationEndpoints?: string[];
 
+  userName: string; // this should be renamed to username
+  userNames: string; // this isn't a whole word match, shouldn't be renamed to usernames
+  accuserName: string; // this isn't a whole word match, shouldn't be renamed to accusername
+  startTimeStamp: utcDateTime; // this should be renamed to startTimestamp
+
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
