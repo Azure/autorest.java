@@ -1233,6 +1233,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             } else {
                 comment.description(String.format("Set the %s property: %s", property.getName(), property.getDescription()));
             }
+            if (property.isRequiredForCreate() && !property.isRequired()) {
+                comment.line("<p>Required when create the resource.</p>");
+            }
             comment.param(property.getName(), String.format("the %s value to set", property.getName()));
             comment.methodReturns(String.format("the %s object itself.", model.getName()));
         });
