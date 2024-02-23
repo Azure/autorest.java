@@ -36,7 +36,7 @@ public class CoreTests {
     public void testCreateOrUpdate() {
         Map<String, String> body = new HashMap<>();
         body.put("name", "Madge");
-        Mono<User> response = client.createOrUpdate(1, new User("Madge"));
+        Mono<User> response = client.createOrUpdate(1, new User().setName("Madge"));
 
         StepVerifier.create(response)
                 .assertNext(user -> {
@@ -49,7 +49,7 @@ public class CoreTests {
 
     @Test
     public void testCreateOrReplace() {
-        Mono<User> response = client.createOrReplace(1, new User("Madge"));
+        Mono<User> response = client.createOrReplace(1, new User().setName("Madge"));
 
         StepVerifier.create(response)
                 .assertNext(user -> {

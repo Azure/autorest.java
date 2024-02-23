@@ -3,14 +3,9 @@
 
 package com.type.property.nullable;
 
-import com.azure.core.util.BinaryData;
-import com.azure.json.JsonProviders;
-import com.azure.json.JsonWriter;
 import com.type.property.nullable.models.DurationProperty;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,20 +17,13 @@ class DurationOperationClientTest {
 
     @Test
     void patchNonNullWithResponse() {
-        DurationProperty property = new DurationProperty("foo", Duration.parse("PT2974H14M12.011S"));
-        client.patchNonNullWithResponse(BinaryData.fromObject(property), null);
+        DurationProperty property = new DurationProperty().setRequiredProperty("foo").setNullableProperty(Duration.parse("PT2974H14M12.011S"));
+        client.patchNonNull(property);
     }
 
     @Test
-    void patchNullWithResponse() throws IOException {
-        StringWriter writer = new StringWriter();
-        JsonWriter jsonWriter = JsonProviders.createWriter(writer);
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("requiredProperty", "foo");
-        jsonWriter.writeNullField("nullableProperty");
-        jsonWriter.writeEndObject();
-        jsonWriter.close();
-        client.patchNullWithResponse(BinaryData.fromString(writer.toString()), null);
+    void patchNullWithResponse() {
+        client.patchNull(new DurationProperty().setRequiredProperty("foo").setNullableProperty(null));
     }
 
     @Test
