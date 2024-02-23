@@ -200,7 +200,7 @@ public interface TopLevelArmResource {
     /**
      * The template for TopLevelArmResource update.
      */
-    interface Update extends UpdateStages.WithTags {
+    interface Update extends UpdateStages.WithTags, UpdateStages.WithProperties {
         /**
          * Executes the update request.
          * 
@@ -232,6 +232,19 @@ public interface TopLevelArmResource {
              * @return the next definition stage.
              */
             Update withTags(Map<String, String> tags);
+        }
+
+        /**
+         * The stage of the TopLevelArmResource update allowing to specify properties.
+         */
+        interface WithProperties {
+            /**
+             * Specifies the properties property: The properties property..
+             * 
+             * @param properties The properties property.
+             * @return the next definition stage.
+             */
+            Update withProperties(TopLevelArmResourceUpdateProperties properties);
         }
     }
 

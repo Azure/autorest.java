@@ -60,7 +60,14 @@ import {
   HttpOperationBody,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
-import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
+import {
+  isPollingLocation,
+  getPagedResult,
+  isFixed,
+  getLroMetadata,
+  getUnionAsEnum,
+  UnionEnum,
+} from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
   listClients,
@@ -151,7 +158,6 @@ import {
   getDurationFormat,
   hasScalarAsBase,
   isNullableType,
-  isSameLiteralTypes,
   getAccess,
   getUsage,
   getUnionDescription,
@@ -1958,33 +1964,45 @@ export class CodeModelBuilder {
 
   private processChoiceSchemaForUnion(
     type: Union,
-    variants: UnionVariant[],
+    unionEnum: UnionEnum,
     name: string,
   ): ChoiceSchema | SealedChoiceSchema {
     // variants is Literal
 
-    const kindSet = new Set(variants.map((it) => it.type.kind));
-    // "choice1" | "choice2" is sealed
-    // "choice1" | "choice2" | string is extensible
-    const sealed = kindSet.size === 1;
+    const sealed = !unionEnum.open;
 
-    variants = variants.filter(
-      (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
-    );
-    const kind = variants[0].type.kind;
-    const valueType =
-      kind === "String"
-        ? this.stringSchema
-        : kind === "Boolean"
-          ? this.booleanSchema
-          : isAllValueInteger(variants.map((it) => (it.type as any).value))
-            ? this.integerSchema
-            : this.doubleSchema;
+    const variants = [...unionEnum.flattenedMembers.values()];
+    const kindIsString = typeof variants[0].value === "string";
+    const valueType = kindIsString
+      ? this.stringSchema
+      : isAllValueInteger(variants.map((it) => it.value as number))
+        ? this.integerSchema
+        : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
-    variants.forEach((it) =>
-      choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)),
-    );
+    const getUnionVariant = (member: any) => {
+      if (member.variant) {
+        return member.variant as UnionVariant;
+      } else if (member.type) {
+        // TODO: remove this; in current runtime, the UnionVariant is from this "type" instead of "variant"
+        return member.type as UnionVariant;
+      } else {
+        return undefined;
+      }
+    };
+    variants.forEach((it) => {
+      const unionVariant = getUnionVariant(it);
+      let name = it.value.toString();
+      let doc = it.value.toString();
+      if (unionVariant) {
+        const candidateName = this.getName(unionVariant);
+        if (candidateName) {
+          name = candidateName;
+        }
+        doc = this.getDoc(unionVariant);
+      }
+      choices.push(new ChoiceValue(name, doc, it.value));
+    });
 
     const namespace = getNamespace(type);
 
@@ -2119,9 +2137,6 @@ export class CodeModelBuilder {
       }
       if (discriminatorProperty) {
         objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
-        // as we do not expose the discriminator property, its schema is fine to be just a string (and we do not want to generate an enum that not used anywhere)
-        // TODO: support enum schema, if we expose the discriminator property
-        objectSchema.discriminator.property.schema = this.stringSchema;
       } else {
         // fallback to property name, if cannot find the discriminator property
         objectSchema.discriminator = new Discriminator(
@@ -2396,9 +2411,10 @@ export class CodeModelBuilder {
       return this.processSchema(nonNullVariants[0].type, name);
     }
 
-    if (isSameLiteralTypes(nonNullVariants)) {
+    const unionEnum = ignoreDiagnostics(getUnionAsEnum(type));
+    if (unionEnum) {
       // enum
-      return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
+      return this.processChoiceSchemaForUnion(type, unionEnum, name);
     }
 
     // TODO: name from typespec-client-generator-core
@@ -2791,6 +2807,10 @@ export class CodeModelBuilder {
 
             schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
             schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+
+            if (schema.discriminator?.property?.schema) {
+              innerApplySchemaUsage(schema.discriminator?.property?.schema, schemaUsage);
+            }
           }
 
           // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {

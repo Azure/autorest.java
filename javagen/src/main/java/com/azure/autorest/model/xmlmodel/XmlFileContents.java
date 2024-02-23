@@ -3,11 +3,8 @@
 
 package com.azure.autorest.model.xmlmodel;
 
-import com.azure.autorest.util.CodeNamer;
-
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -15,10 +12,8 @@ import java.util.stream.Collectors;
 public class XmlFileContents {
     private String singleIndent = "    ";
 
-    private StringBuilder contents;
-    private StringBuilder linePrefix;
-
-    private Integer wordWrapWidth = null;
+    private final StringBuilder contents;
+    private final StringBuilder linePrefix;
 
     private CurrentLineType currentLineType = CurrentLineType.values()[0];
 
@@ -69,16 +64,6 @@ public class XmlFileContents {
         }
     }
 
-    public final void setWordWrapWidth(Integer wordWrapWidth) {
-        this.wordWrapWidth = wordWrapWidth;
-    }
-
-    private void withWordWrap(int wordWrapWidth, Runnable action) {
-        setWordWrapWidth(wordWrapWidth);
-        action.run();
-        setWordWrapWidth(null);
-    }
-
     public final void indent(Runnable action) {
         increaseIndent();
         action.run();
@@ -93,29 +78,6 @@ public class XmlFileContents {
         removeFromPrefix(singleIndent);
     }
 
-    private List<String> wordWrap(String line, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<String>();
-
-        if (wordWrapWidth == null) {
-            lines.add(line);
-        } else {
-            // Subtract an extra column from the word wrap width because columns generally are
-            // 1 -based instead of 0-based.
-            int wordWrapIndexMinusLinePrefixLength = wordWrapWidth.intValue() - (addPrefix ? linePrefix.length() : 0) - 1;
-            List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
-            for (int i = 0; i != wrappedLines.size() - 1; i++) {
-                lines.add(wrappedLines.get(i) + "\n");
-            }
-
-            String lastWrappedLine = wrappedLines.get(wrappedLines.size() - 1);
-            if (lastWrappedLine != null && !lastWrappedLine.isEmpty()) {
-                lines.add(lastWrappedLine);
-            }
-        }
-
-        return lines;
-    }
-
     private void text(String text, boolean addPrefix) {
         ArrayList<String> lines = new ArrayList<String>();
 
@@ -128,14 +90,12 @@ public class XmlFileContents {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
                     String line = text.substring(lineStartIndex);
-                    List<String> wrappedLines = wordWrap(line, addPrefix);
-                    lines.addAll(wrappedLines);
+                    lines.add(line);
                     lineStartIndex = textLength;
                 } else {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    List<String> wrappedLines = wordWrap(line, addPrefix);
-                    lines.addAll(wrappedLines);
+                    lines.add(line);
                     lineStartIndex = nextLineStartIndex;
                 }
             }
@@ -200,7 +160,7 @@ public class XmlFileContents {
     }
 
     public void block(String text, Map<String, String> annotations, Consumer<XmlBlock> bodyAction) {
-        if (annotations != null && annotations.size() > 0) {
+        if (annotations != null && !annotations.isEmpty()) {
             String append = annotations.entrySet().stream()
                     .map(entry -> String.format("%s=\"%s\"", entry.getKey(), entry.getValue()))
                     .collect(Collectors.joining(" "));
@@ -221,11 +181,6 @@ public class XmlFileContents {
         line("<!--");
         commentAction.accept(new XmlLineComment(this));
         line(" -->");
-    }
-
-    public void blockComment(int wordWrapWidth, Consumer<XmlLineComment> commentAction) {
-        blockComment((comment) -> withWordWrap(wordWrapWidth, () ->
-                commentAction.accept(new XmlLineComment(this))));
     }
 
     private enum CurrentLineType {

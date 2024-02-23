@@ -111,6 +111,24 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("sync-methods", "all");
         SETTINGS_MAP.put("client-side-validations", true);
         SETTINGS_MAP.put("stream-style-serialization", false);
+        SETTINGS_MAP.put("pipeline.fluentgen.naming.override", getNamingOverrides());
+    }
+
+    private static Map<String, String> getNamingOverrides() {
+        Map<String, String> namingOverrides = new HashMap<>();
+        namingOverrides.put("eTag", "etag");
+        namingOverrides.put("userName", "username");
+        namingOverrides.put("metaData", "metadata");
+        namingOverrides.put("timeStamp", "timestamp");
+        namingOverrides.put("hostName", "hostname");
+        namingOverrides.put("webHook", "webhook");
+        namingOverrides.put("coolDown", "cooldown");
+        namingOverrides.put("resourceregion", "resourceRegion");
+        namingOverrides.put("sTag", "stag");
+        namingOverrides.put("tagname", "tagName");
+        namingOverrides.put("tagvalue", "tagValue");
+
+        return namingOverrides;
     }
 
     @SuppressWarnings("unchecked")

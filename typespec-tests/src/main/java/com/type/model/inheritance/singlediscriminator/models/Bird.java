@@ -56,6 +56,7 @@ public class Bird implements JsonSerializable<Bird> {
      * @param kind the kind value to set.
      * @return the Bird object itself.
      */
+    @Generated
     Bird setKind(String kind) {
         this.kind = kind;
         return this;

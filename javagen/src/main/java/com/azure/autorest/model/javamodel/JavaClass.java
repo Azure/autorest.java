@@ -179,11 +179,6 @@ public class JavaClass implements JavaType {
         contents.blockComment(commentAction);
     }
 
-    public final void blockComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction) {
-        addExpectedNewLine();
-        contents.blockComment(wordWrapWidth, commentAction);
-    }
-
     public final void javadocComment(String description) {
         addExpectedNewLine();
         contents.javadocComment(description);
@@ -192,11 +187,6 @@ public class JavaClass implements JavaType {
     public final void javadocComment(Consumer<JavaJavadocComment> commentAction) {
         addExpectedNewLine();
         contents.javadocComment(commentAction);
-    }
-
-    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction) {
-        addExpectedNewLine();
-        contents.javadocComment(wordWrapWidth, commentAction);
     }
 
     public final void annotation(String... annotations) {

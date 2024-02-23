@@ -11,6 +11,7 @@ import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import com.cadl.armresourceprovider.models.TopLevelArmResource;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceProperties;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate;
+import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdateProperties;
 import java.util.Collections;
 import java.util.Map;
 
@@ -162,6 +163,11 @@ public final class TopLevelArmResourceImpl
 
     public TopLevelArmResourceImpl withProperties(TopLevelArmResourceProperties properties) {
         this.innerModel().withProperties(properties);
+        return this;
+    }
+
+    public TopLevelArmResourceImpl withProperties(TopLevelArmResourceUpdateProperties properties) {
+        this.updateProperties.withProperties(properties);
         return this;
     }
 

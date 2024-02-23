@@ -65,6 +65,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
      * @param kind the kind value to set.
      * @return the IsUnknownAdditionalPropertiesDiscriminated object itself.
      */
+    @Generated
     IsUnknownAdditionalPropertiesDiscriminated setKind(String kind) {
         this.kind = kind;
         return this;

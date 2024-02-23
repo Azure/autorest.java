@@ -127,8 +127,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * The interface defining all the services for AutoRestResourceFlatteningTestService to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestResourceFlatteningTestService to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestResourceFlat")

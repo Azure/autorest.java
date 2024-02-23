@@ -98,6 +98,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param kind the kind value to set.
      * @return the Fish object itself.
      */
+    @Generated
     Fish setKind(String kind) {
         this.kind = kind;
         this.updatedProperties.add("kind");
@@ -120,6 +121,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param id the id value to set.
      * @return the Fish object itself.
      */
+    @Generated
     Fish setId(String id) {
         this.id = id;
         this.updatedProperties.add("id");
@@ -142,6 +144,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param name the name value to set.
      * @return the Fish object itself.
      */
+    @Generated
     Fish setName(String name) {
         this.name = name;
         this.updatedProperties.add("name");

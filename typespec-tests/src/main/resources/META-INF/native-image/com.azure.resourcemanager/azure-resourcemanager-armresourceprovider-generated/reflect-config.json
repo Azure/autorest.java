@@ -34,6 +34,11 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.models.TopLevelArmResourceUpdateProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.models.TopLevelArmResourceListResult",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,

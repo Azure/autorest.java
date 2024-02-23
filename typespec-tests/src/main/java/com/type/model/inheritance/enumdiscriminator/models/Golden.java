@@ -24,7 +24,7 @@ public final class Golden extends Dog {
     @Generated
     public Golden(int weight) {
         super(weight);
-        setKind("golden");
+        setKind(DogKind.GOLDEN);
     }
 
     @Generated
@@ -32,7 +32,7 @@ public final class Golden extends Dog {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("weight", getWeight());
-        jsonWriter.writeStringField("kind", getKind());
+        jsonWriter.writeStringField("kind", getKind() == null ? null : getKind().toString());
         return jsonWriter.writeEndObject();
     }
 
@@ -49,7 +49,7 @@ public final class Golden extends Dog {
     public static Golden fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int weight = 0;
-            String kind = "golden";
+            DogKind kind = DogKind.GOLDEN;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -57,7 +57,7 @@ public final class Golden extends Dog {
                 if ("weight".equals(fieldName)) {
                     weight = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                    kind = DogKind.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

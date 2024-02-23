@@ -371,19 +371,19 @@ public class SchemaNameNormalization {
             int index = newName.indexOf(entry.getKey());
             if (index >= 0) {
                 int endIndex = index + entry.getKey().length();
-                boolean replace = true;
-                if (index > 0 && isSameCase(newName.charAt(index - 1), newName.charAt(index))) {
-                    replace = false;
-                } else if (endIndex < newName.length() && isSameCase(newName.charAt(endIndex - 1), newName.charAt(endIndex))) {
-                    replace = false;
-                }
-
-                if (replace) {
+                if (wordMatch(newName, index, endIndex)) {
                     newName = newName.replace(entry.getKey(), entry.getValue());
                 }
             }
         }
         return newName;
+    }
+
+    // Whether the match is the whole word in the name.
+    // E.g. "lower": "loWer", and the actual name is "flower". We won't replace it to be "floWer".
+    private boolean wordMatch(String name, int index, int endIndex) {
+        return !((index > 0 && isSameCase(name.charAt(index - 1), name.charAt(index)))
+            || (endIndex < name.length() && isSameCase(name.charAt(endIndex - 1), name.charAt(endIndex))));
     }
 
     private static boolean isSameCase(char c1, char c2) {

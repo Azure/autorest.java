@@ -94,8 +94,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         javaFile.declareImport(imports);
 
-        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(),
-            comment -> comment.description(model.getDescription()));
+        javaFile.javadocComment(comment -> comment.description(model.getDescription()));
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         final boolean immutableOutputModel = settings.isOutputModelImmutable()
@@ -217,6 +216,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     if (hasDerivedTypes && notIncludedInConstructor && definedByModel
                         && (settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
                         generateSetterJavadoc(classBlock, model, property);
+                        addGeneratedAnnotation(classBlock);
                         classBlock.method(JavaVisibility.PackagePrivate, null,
                             model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
                                 + property.getName() + ")",
@@ -606,8 +606,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
             }
 
-            classBlock.blockComment(settings.getMaximumJavadocCommentWidth(),
-                comment -> comment.line(property.getDescription()));
+            classBlock.blockComment(comment -> comment.line(property.getDescription()));
 
             addGeneratedAnnotation(classBlock);
             addFieldAnnotations(model, property, classBlock, settings);
@@ -802,7 +801,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         // Add the Javadocs for the constructor.
-        classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), javadocCommentConsumer);
+        classBlock.javadocComment(javadocCommentConsumer);
 
         addGeneratedAnnotation(classBlock);
         // If there are any constructor arguments indicate that this is the JsonCreator. No args constructors are
@@ -1032,7 +1031,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             boolean validateOnParent = this.validateOnParentModel(model.getParentModelName());
 
             // javadoc
-            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
+            classBlock.javadocComment((comment) -> {
                 comment.description("Validates the instance.");
 
                 comment.methodThrows("IllegalArgumentException", "thrown if the instance is not valid");
@@ -1208,7 +1207,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     // Javadoc for getter method
     private static void generateGetterJavadoc(JavaClass classBlock, ClientModel model,
         ClientModelPropertyAccess property) {
-        classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), comment -> {
+        classBlock.javadocComment(comment -> {
             comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
             comment.methodReturns(String.format("the %1$s value", property.getName()));
         });
@@ -1217,7 +1216,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     // Javadoc for setter method
     private static void generateSetterJavadoc(JavaClass classBlock, ClientModel model,
         ClientModelPropertyAccess property) {
-        classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), (comment) -> {
+        classBlock.javadocComment((comment) -> {
             if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
                 comment.description(String.format("Set the %s property", property.getName()));
             } else {
