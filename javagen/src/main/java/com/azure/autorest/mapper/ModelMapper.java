@@ -449,12 +449,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
      */
     protected ClientModelProperty createDiscriminatorProperty(JavaSettings settings, boolean hasChildren,
         ObjectSchema compositeType, Function<String, String> annotationArgumentsMapper, String serializedName) {
-        // Don't create a discriminator property for the model if the discriminator shouldn't be passed to subtype
-        // deserialization or the model type has children and stream-style serialization isn't being used.
-        if ((!settings.isDiscriminatorPassedToChildDeserialization() || hasChildren)
-            && !settings.isStreamStyleSerialization()) {
-            return null;
-        }
         ClientModelProperty discriminatorProperty = Mappers.getModelPropertyMapper()
             .map(SchemaUtil.getDiscriminatorProperty(compositeType));
 

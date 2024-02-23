@@ -93,8 +93,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     }
 
     @Override
-    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels,
-        boolean isDiscriminatorPassedToChildDeserialization, JavaFile javaFile) {
+    protected void handlePolymorphism(ClientModel model, boolean hasDerivedModels, JavaFile javaFile) {
         // no-op as stream-style serialization doesn't need to add anything for polymorphic types.
     }
 

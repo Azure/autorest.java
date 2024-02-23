@@ -86,7 +86,6 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 |`--service-name`|Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).|
 |`--partial-update`|Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.|
-|`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
 |`--default-http-exception-type`|The fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
 |`--http-status-code-to-exception-type-mapping`|The HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
