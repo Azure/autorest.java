@@ -21,6 +21,12 @@ public final class TopLevelArmResourceUpdate {
     @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
     private Map<String, String> tags;
 
+    /*
+     * The properties property.
+     */
+    @JsonProperty(value = "properties")
+    private TopLevelArmResourceUpdateProperties properties;
+
     /**
      * Creates an instance of TopLevelArmResourceUpdate class.
      */
@@ -48,10 +54,33 @@ public final class TopLevelArmResourceUpdate {
     }
 
     /**
+     * Get the properties property: The properties property.
+     * 
+     * @return the properties value.
+     */
+    public TopLevelArmResourceUpdateProperties properties() {
+        return this.properties;
+    }
+
+    /**
+     * Set the properties property: The properties property.
+     * 
+     * @param properties the properties value to set.
+     * @return the TopLevelArmResourceUpdate object itself.
+     */
+    public TopLevelArmResourceUpdate withProperties(TopLevelArmResourceUpdateProperties properties) {
+        this.properties = properties;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (properties() != null) {
+            properties().validate();
+        }
     }
 }
