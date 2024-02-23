@@ -44,7 +44,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -69,7 +69,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -95,7 +95,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -120,7 +120,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -145,7 +145,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -170,7 +170,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -196,7 +196,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -221,7 +221,7 @@ public final class EnumDiscriminatorClient {
      * </p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
