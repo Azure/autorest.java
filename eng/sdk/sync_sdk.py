@@ -16,7 +16,8 @@ from typing import List
 sdk_root: str
 
 skip_artifacts: List[str] = [
-    'azure-ai-anomalydetector'  # deprecated
+    'azure-ai-anomalydetector',         # deprecated
+    'azure-ai-vision-imageanalysis'     # temporary disabled for modification on Javadoc
 ]
 
 
