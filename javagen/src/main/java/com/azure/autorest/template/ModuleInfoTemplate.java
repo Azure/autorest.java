@@ -24,7 +24,7 @@ public class ModuleInfoTemplate implements IJavaTemplate<ModuleInfo, JavaFile> {
     public void write(ModuleInfo model, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.getFileHeaderText() != null && !settings.getFileHeaderText().isEmpty()) {
-            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), comment -> {
+            javaFile.lineComment(comment -> {
                 comment.line(settings.getFileHeaderText());
             });
             javaFile.line();

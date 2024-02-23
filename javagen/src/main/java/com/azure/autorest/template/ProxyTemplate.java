@@ -38,8 +38,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
     public final void write(Proxy restAPI, JavaClass classBlock) {
         JavaSettings settings = JavaSettings.getInstance();
         if (restAPI != null) {
-            classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
-            {
+            classBlock.javadocComment(comment -> {
                 comment.description(String.format("The interface defining all the services for %1$s to be used by the proxy service to perform REST calls.", restAPI.getClientTypeName()));
             });
             classBlock.annotation(String.format("Host(\"%1$s\")", restAPI.getBaseURL()));

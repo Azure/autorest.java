@@ -54,8 +54,8 @@ public final class QueriesImpl {
     }
 
     /**
-     * The interface defining all the services for DurationClientQueries to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DurationClientQueries to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DurationClientQuerie")

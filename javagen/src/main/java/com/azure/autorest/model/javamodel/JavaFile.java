@@ -99,12 +99,8 @@ public class JavaFile implements JavaContext {
         getContents().javadocComment(commentAction);
     }
 
-    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction) {
-        getContents().javadocComment(wordWrapWidth, commentAction);
-    }
-
-    public final void lineComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction) {
-        getContents().lineComment(wordWrapWidth, commentAction);
+    public final void lineComment(Consumer<JavaLineComment> commentAction) {
+        getContents().lineComment(commentAction);
     }
 
     public final void annotation(String... annotations) {

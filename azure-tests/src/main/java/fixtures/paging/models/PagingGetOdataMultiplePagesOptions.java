@@ -53,8 +53,8 @@ public final class PagingGetOdataMultiplePagesOptions implements JsonSerializabl
     }
 
     /**
-     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds.
-     * The default is 30 seconds.
+     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
+     * default is 30 seconds.
      * 
      * @return the timeout value.
      */
@@ -63,8 +63,8 @@ public final class PagingGetOdataMultiplePagesOptions implements JsonSerializabl
     }
 
     /**
-     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds.
-     * The default is 30 seconds.
+     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
+     * default is 30 seconds.
      * 
      * @param timeout the timeout value to set.
      * @return the PagingGetOdataMultiplePagesOptions object itself.

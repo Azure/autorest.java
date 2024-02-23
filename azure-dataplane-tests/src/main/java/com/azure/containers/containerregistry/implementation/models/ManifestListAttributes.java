@@ -17,8 +17,8 @@ import java.io.IOException;
 @Fluent
 public final class ManifestListAttributes implements JsonSerializable<ManifestListAttributes> {
     /*
-     * The MIME type of the referenced object. This will generally be application/vnd.docker.image.manifest.v2+json,
-     * but it could also be application/vnd.docker.image.manifest.v1+json
+     * The MIME type of the referenced object. This will generally be application/vnd.docker.image.manifest.v2+json, but
+     * it could also be application/vnd.docker.image.manifest.v1+json
      */
     private String mediaType;
 
@@ -110,8 +110,8 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
 
     /**
      * Get the platform property: The platform object describes the platform which the image in the manifest runs on. A
-     * full list of valid operating system and architecture values are listed in the Go language documentation for
-     * $GOOS and $GOARCH.
+     * full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS
+     * and $GOARCH.
      * 
      * @return the platform value.
      */
@@ -121,8 +121,8 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
 
     /**
      * Set the platform property: The platform object describes the platform which the image in the manifest runs on. A
-     * full list of valid operating system and architecture values are listed in the Go language documentation for
-     * $GOOS and $GOARCH.
+     * full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS
+     * and $GOARCH.
      * 
      * @param platform the platform value to set.
      * @return the ManifestListAttributes object itself.

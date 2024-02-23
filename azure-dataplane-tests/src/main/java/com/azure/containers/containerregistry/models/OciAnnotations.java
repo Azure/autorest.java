@@ -47,8 +47,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     private String source;
 
     /*
-     * Version of the packaged software. The version MAY match a label or tag in the source code repository, may also
-     * be Semantic versioning-compatible
+     * Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be
+     * Semantic versioning-compatible
      */
     private String version;
 
