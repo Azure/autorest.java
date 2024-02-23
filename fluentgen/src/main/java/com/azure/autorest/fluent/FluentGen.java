@@ -353,9 +353,6 @@ public class FluentGen extends Javagen {
                 for (FluentMethodMockUnitTest unitTest : fluentClient.getMockUnitTests()) {
                     javaPackage.addOperationUnitTest(unitTest);
                 }
-                // enable inline mock maker for final class/method
-                writeFile("src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker",
-                        "mock-maker-inline\n", null);
             }
         }
 
