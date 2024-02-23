@@ -15,7 +15,6 @@ import {
   Type,
   TypeNameOptions,
   Union,
-  UnionVariant,
   getTypeName,
   isNullType,
   isTemplateDeclaration,
@@ -25,13 +24,12 @@ import {
 import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace } from "./utils.js";
+import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
 
 /** Acts as a cache for processing inputs.
  *
  * If the input is undefined, the output is always undefined.
  * for a given input, the process is only ever called once.
- *
- *
  */
 export class ProcessingCache<In, Out> {
   private results = new Map<In, Out>();
@@ -108,21 +106,6 @@ export function isNullableType(type: Type): boolean {
   }
 }
 
-export function isSameLiteralTypes(variants: UnionVariant[]): boolean {
-  const kindSet = new Set(variants.map((it) => it.type.kind));
-  if (kindSet.size === 1) {
-    // Union of same literals
-    const kind = kindSet.values().next().value;
-    return kind === "String" || kind === "Number" || kind === "Boolean";
-  } else {
-    if (kindSet.size === 2 && kindSet.has("String") && kindSet.has("Scalar")) {
-      // Union of string liberals and string scalar, treat as extensible enum
-      return variants.filter((it) => it.type.kind === "Scalar").every((it) => (it.type as Scalar).name === "string");
-    }
-  }
-  return false;
-}
-
 export function getDurationFormat(encode: EncodeData): DurationSchema["format"] {
   let format: DurationSchema["format"] = "duration-rfc3339";
   // duration encoded as seconds
@@ -175,7 +158,7 @@ export function unionReferredByType(
         cache.set(type, ret);
         return ret;
       }
-    } else if (isSameLiteralTypes(nonNullVariants)) {
+    } else if (getUnionAsEnum(type)) {
       // "literal1" | "literal2" -> Enum
       cache.set(type, null);
       return null;

@@ -20,10 +20,21 @@ enum Color {
 }
 
 union ColorModel {
-  string,
-  Red: "Red",
+  ColorModelBase,
   Blue: "Blue",
   Green: "Green",
+}
+
+union ColorModelBase {
+  string,
+  Red: "Red",
+}
+
+@access(Access.public)
+union PriorityModel {
+  int32,
+  High: 100,
+  Low: 0,
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
