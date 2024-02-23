@@ -3,7 +3,6 @@
 
 package com.azure.autorest.model.javamodel;
 
-import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -19,10 +18,8 @@ public class JavaFileContents {
     private static final String SINGLE_INDENT = "    ";
     private static final Pattern QUOTED_NEW_LINE = Pattern.compile(Pattern.quote("\n"));
 
-    private StringBuilder contents;
-    private StringBuilder linePrefix;
-
-    private Integer wordWrapWidth = null;
+    private final StringBuilder contents;
+    private final StringBuilder linePrefix;
 
     private CurrentLineType currentLineType = CurrentLineType.values()[0];
 
@@ -65,16 +62,6 @@ public class JavaFileContents {
         }
     }
 
-    public final void setWordWrapWidth(Integer wordWrapWidth) {
-        this.wordWrapWidth = wordWrapWidth;
-    }
-
-    private void withWordWrap(int wordWrapWidth, Runnable action) {
-        setWordWrapWidth(wordWrapWidth);
-        action.run();
-        setWordWrapWidth(null);
-    }
-
     public final void indent(Runnable action) {
         increaseIndent();
         action.run();
@@ -89,29 +76,6 @@ public class JavaFileContents {
         removeFromPrefix(SINGLE_INDENT);
     }
 
-    private List<String> wordWrap(String line, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<>();
-
-        if (wordWrapWidth == null) {
-            lines.add(line);
-        } else {
-            // Subtract an extra column from the word wrap width because columns generally are
-            // 1 -based instead of 0-based.
-            int wordWrapIndexMinusLinePrefixLength = wordWrapWidth - (addPrefix ? linePrefix.length() : 0) - 1;
-            List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
-            for (int i = 0; i < wrappedLines.size() - 1; i++) {
-                lines.add(wrappedLines.get(i) + System.lineSeparator());
-            }
-
-            String lastWrappedLine = wrappedLines.isEmpty() ? null : wrappedLines.get(wrappedLines.size() - 1);
-            if (lastWrappedLine != null && !lastWrappedLine.isEmpty()) {
-                lines.add(lastWrappedLine);
-            }
-        }
-
-        return lines;
-    }
-
     private void text(String text, boolean addPrefix) {
         ArrayList<String> lines = new ArrayList<String>();
 
@@ -124,14 +88,12 @@ public class JavaFileContents {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
                     String line = text.substring(lineStartIndex);
-                    List<String> wrappedLines = wordWrap(line, addPrefix);
-                    lines.addAll(wrappedLines);
+                    lines.add(line);
                     lineStartIndex = textLength;
                 } else {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    List<String> wrappedLines = wordWrap(line, addPrefix);
-                    lines.addAll(wrappedLines);
+                    lines.add(line);
                     lineStartIndex = nextLineStartIndex;
                 }
             }
@@ -222,11 +184,6 @@ public class JavaFileContents {
         removeFromPrefix("// ");
     }
 
-    public void lineComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction) {
-        lineComment((comment) -> withWordWrap(wordWrapWidth, () ->
-                commentAction.accept(new JavaLineComment(this))));
-    }
-
     public void blockComment(String text) {
         blockComment(comment -> comment.line(text));
     }
@@ -239,11 +196,6 @@ public class JavaFileContents {
         line(" */");
     }
 
-    public void blockComment(int wordWrapWidth, Consumer<JavaLineComment> commentAction) {
-        blockComment((comment) -> withWordWrap(wordWrapWidth, () ->
-                commentAction.accept(new JavaLineComment(this))));
-    }
-
     public void javadocComment(String text) {
         javadocComment(comment -> comment.description(text));
     }
@@ -254,11 +206,6 @@ public class JavaFileContents {
         commentAction.accept(new JavaJavadocComment(this));
         removeFromPrefix(" * ");
         line(" */");
-    }
-
-    public void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction) {
-        javadocComment((comment) -> withWordWrap(wordWrapWidth, () ->
-                commentAction.accept(new JavaJavadocComment(this))));
     }
 
     public void methodReturn(String text) {

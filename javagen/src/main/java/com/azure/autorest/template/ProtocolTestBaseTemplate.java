@@ -25,7 +25,7 @@ public class ProtocolTestBaseTemplate implements IJavaTemplate<TestContext, Java
 
         ProtocolTestWriter writer = new ProtocolTestWriter(testContext);
 
-        context.lineComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), javaLineComment -> {
+        context.lineComment(javaLineComment -> {
             javaLineComment.line("The Java test files under 'generated' package are generated for your reference.");
             javaLineComment.line("If you wish to modify these files, please copy them out of the 'generated' package, and modify there.");
             javaLineComment.line("See https://aka.ms/azsdk/dpg/java/tests for guide on adding a test.");

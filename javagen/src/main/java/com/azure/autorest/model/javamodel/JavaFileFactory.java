@@ -52,7 +52,7 @@ public class JavaFileFactory {
     private void addCommentAndPackage(JavaFile javaFile, String packageName) {
         String headerComment = settings.getFileHeaderText();
         if (headerComment != null && !headerComment.isEmpty()) {
-            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), comment -> comment.line(headerComment));
+            javaFile.lineComment(comment -> comment.line(headerComment));
             javaFile.line();
         }
 
