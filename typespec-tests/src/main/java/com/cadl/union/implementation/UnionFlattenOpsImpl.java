@@ -71,8 +71,8 @@ public final class UnionFlattenOpsImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientUnionFlattenOps to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for UnionClientUnionFlattenOps to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}/openai")
     @ServiceInterface(name = "UnionClientUnionFlat")

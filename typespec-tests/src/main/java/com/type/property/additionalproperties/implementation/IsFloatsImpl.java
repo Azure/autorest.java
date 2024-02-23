@@ -51,8 +51,8 @@ public final class IsFloatsImpl {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientIsFloats to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientIsFloats to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AdditionalProperties")
