@@ -30,7 +30,7 @@ public final class PartialUpdateAsyncClient {
 
     /**
      * Initializes an instance of PartialUpdateAsyncClient class.
-     *
+     * 
      * @param serviceClient the service client implementation.
      */
     @Generated
@@ -51,7 +51,7 @@ public final class PartialUpdateAsyncClient {
      *     aggregate: String (Optional)
      * }
      * }</pre>
-     *
+     * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -67,7 +67,7 @@ public final class PartialUpdateAsyncClient {
 
     /**
      * The read operation.
-     *
+     * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.

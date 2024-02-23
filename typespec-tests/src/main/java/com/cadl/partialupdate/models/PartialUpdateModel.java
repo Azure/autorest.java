@@ -52,7 +52,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
 
     /**
      * Creates an instance of PartialUpdateModel class.
-     *
+     * 
      * @param booleanProperty the booleanProperty value to set.
      * @param string the string value to set.
      * @param bytes the bytes value to set.
@@ -66,7 +66,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
 
     /**
      * Get the booleanProperty property: The boolean property.
-     *
+     * 
      * @return the booleanProperty value.
      */
     @Generated
@@ -76,7 +76,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
 
     /**
      * Get the string property: The string property.
-     *
+     * 
      * @return the string value.
      */
     @Generated
@@ -86,7 +86,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
 
     /**
      * Get the bytes property: The bytes property.
-     *
+     * 
      * @return the bytes value.
      */
     @Generated
@@ -99,7 +99,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
      * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
      * ‘count’ - for requests.
-     *
+     * 
      * @return the aggregate value.
      */
     @Generated

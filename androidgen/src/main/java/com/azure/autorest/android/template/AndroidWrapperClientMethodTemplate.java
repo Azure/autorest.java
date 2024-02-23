@@ -17,4 +17,9 @@ public class AndroidWrapperClientMethodTemplate extends WrapperClientMethodTempl
     @Override
     protected void addGeneratedAnnotation(JavaType typeBlock) {
     }
+
+    @Override
+    protected boolean isPartialUpdateSupported() {
+        return false;
+    }
 }

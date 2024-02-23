@@ -12,6 +12,11 @@ import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_DESC_START_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_END_MARKER;
+import static com.azure.autorest.util.TemplateUtil.GENERATED_JAVADOC_TAG_START_MARKER;
+
 public class JavaClass implements JavaType {
     private JavaFileContents contents;
     private boolean addNewLine;
@@ -197,6 +202,59 @@ public class JavaClass implements JavaType {
     public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentAction) {
         addExpectedNewLine();
         contents.javadocComment(wordWrapWidth, commentAction);
+    }
+
+    @Override
+    public final void javadocComment(int wordWrapWidth, Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker) {
+        javadocComment(commentDescriptionAction, commentTagsAction, withGeneratedMarker, true, wordWrapWidth);
+    }
+
+    @Override
+    public final void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker) {
+        javadocComment(commentDescriptionAction, commentTagsAction, withGeneratedMarker, false, 0);
+    }
+
+    /**
+     * Helper method to add a javadoc comment to the contents.
+     * @param commentDescriptionAction
+     * @param commentTagsAction
+     * @param withGeneratedMarker
+     * @param withWordWrap
+     * @param wordWrapWidth
+     */
+    private void javadocComment(Consumer<JavaJavadocComment> commentDescriptionAction, Consumer<JavaJavadocComment> commentTagsAction, boolean withGeneratedMarker, boolean withWordWrap, int wordWrapWidth) {
+        addExpectedNewLine();
+        // javadoc comment description
+        contents.javadocCommentStart();
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_DESC_START_MARKER);
+        }
+        if (commentDescriptionAction != null) {
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentDescriptionAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentDescriptionAction.accept(new JavaJavadocComment(contents));
+            }
+        }
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_DESC_END_MARKER);
+        }
+
+        // javadoc comment tags
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_TAG_START_MARKER);
+        }
+        if (commentTagsAction != null) {
+            if (withWordWrap) {
+                contents.withWordWrap(wordWrapWidth, () -> commentTagsAction.accept(new JavaJavadocComment(contents)));
+            } else {
+                commentTagsAction.accept(new JavaJavadocComment(contents));
+            }
+        }
+        if (withGeneratedMarker) {
+            contents.line(GENERATED_JAVADOC_TAG_END_MARKER);
+        }
+        contents.javadocCommentEnd();
     }
 
     public final void annotation(String... annotations) {

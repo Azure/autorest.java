@@ -198,7 +198,7 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
 
     /**
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
-     *
+     * 
      * @param retryPolicy the retryPolicy value.
      * @return the PartialUpdateClientBuilder.
      */
@@ -210,7 +210,7 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
 
     /**
      * Builds an instance of PartialUpdateClientImpl with the provided parameters.
-     *
+     * 
      * @return an instance of PartialUpdateClientImpl.
      */
     @Generated
@@ -256,7 +256,7 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
 
     /**
      * Builds an instance of PartialUpdateAsyncClient class.
-     *
+     * 
      * @return an instance of PartialUpdateAsyncClient.
      */
     @Generated
@@ -266,7 +266,7 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
 
     /**
      * Builds an instance of PartialUpdateClient class.
-     *
+     * 
      * @return an instance of PartialUpdateClient.
      */
     @Generated

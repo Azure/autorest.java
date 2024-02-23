@@ -95,7 +95,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         javaFile.declareImport(imports);
 
         javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(),
-            comment -> comment.description(model.getDescription()));
+            comment -> comment.description(model.getDescription()), false);
 
         final boolean hasDerivedModels = !model.getDerivedModels().isEmpty();
         final boolean immutableOutputModel = settings.isOutputModelImmutable()
@@ -249,7 +249,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 List<ClientModelPropertyAccess> settersToOverride = getParentSettersToOverride(model, settings,
                     propertyReferences);
                 for (ClientModelPropertyAccess parentProperty : settersToOverride) {
-                    classBlock.javadocComment(JavaJavadocComment::inheritDoc);
+                    classBlock.javadocComment(JavaJavadocComment::inheritDoc, null, false);
                     addGeneratedAnnotation(classBlock);
                     classBlock.annotation("Override");
                     classBlock.publicMethod(String.format("%s %s(%s %s)",
@@ -752,8 +752,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         // Description for the class is always the same, not matter whether there are required properties.
         // If there are required properties, the required properties will extend the consumer to add param Javadocs.
-        Consumer<JavaJavadocComment> javadocCommentConsumer = comment ->
+        Consumer<JavaJavadocComment> javadocCommentDescConsumer = comment ->
             comment.description("Creates an instance of " + model.getName() + " class.");
+        Consumer<JavaJavadocComment> javadocCommentTagConsumer = null;
 
         final int constructorPropertiesStringBuilderCapacity = 128 * (requiredProperties.size() + requiredParentProperties.size());
 
@@ -784,7 +785,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 addModelConstructorParameter(property, constructorProperties, addJsonPropertyAnnotation);
 
-                javadocCommentConsumer = javadocCommentConsumer.andThen(comment -> comment.param(property.getName(),
+                if (javadocCommentTagConsumer == null) {
+                    javadocCommentTagConsumer = comment -> {};
+                }
+                javadocCommentTagConsumer = javadocCommentTagConsumer.andThen(comment -> comment.param(property.getName(),
                     "the " + property.getName() + " value to set"));
 
                 if (superProperties.length() > 0) {
@@ -802,13 +806,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 addModelConstructorParameter(property, constructorProperties, addJsonPropertyAnnotation);
 
-                javadocCommentConsumer = javadocCommentConsumer.andThen(comment -> comment.param(property.getName(),
+                if (javadocCommentTagConsumer == null) {
+                    javadocCommentTagConsumer = comment -> {};
+                }
+                javadocCommentTagConsumer = javadocCommentTagConsumer.andThen(comment -> comment.param(property.getName(),
                     "the " + property.getName() + " value to set"));
             }
         }
 
         // Add the Javadocs for the constructor.
-        classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), javadocCommentConsumer);
+        classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), javadocCommentDescConsumer, javadocCommentTagConsumer, false);
 
         addGeneratedAnnotation(classBlock);
         // If there are any constructor arguments indicate that this is the JsonCreator. No args constructors are
@@ -1044,9 +1051,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // javadoc
             classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
                 comment.description("Validates the instance.");
-
+            }, (comment) -> {
                 comment.methodThrows("IllegalArgumentException", "thrown if the instance is not valid");
-            });
+            }, false);
 
             if (validateOnParent) {
                 classBlock.annotation("Override");
@@ -1215,13 +1222,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
     }
 
+    protected boolean isPartialUpdateSupported() {
+        return JavaSettings.getInstance().isDataPlaneClient();
+    }
+
     // Javadoc for getter method
     private static void generateGetterJavadoc(JavaClass classBlock, ClientModel model,
         ClientModelPropertyAccess property) {
         classBlock.javadocComment(JavaSettings.getInstance().getMaximumJavadocCommentWidth(), comment -> {
             comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
+        }, comment -> {
             comment.methodReturns(String.format("the %1$s value", property.getName()));
-        });
+        }, false);
     }
 
     // Javadoc for setter method
@@ -1233,9 +1245,11 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             } else {
                 comment.description(String.format("Set the %s property: %s", property.getName(), property.getDescription()));
             }
+        }, (comment) -> {
             comment.param(property.getName(), String.format("the %s value to set", property.getName()));
             comment.methodReturns(String.format("the %s object itself.", model.getName()));
-        });
+        }, false);
+
     }
 
     private static final class StreamStyleImports extends HashSet<String> {
@@ -1259,7 +1273,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         classBlock.javadocComment(comment -> {
             comment.description("Stores updated model property, the value is property name, not serialized name");
-        });
+        }, null, false);
         addGeneratedAnnotation(classBlock);
         classBlock.privateFinalMemberVariable("Set<String> updatedProperties = new HashSet<>()");
 
