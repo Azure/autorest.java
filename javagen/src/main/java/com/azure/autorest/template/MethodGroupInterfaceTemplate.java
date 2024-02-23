@@ -36,8 +36,7 @@ public class MethodGroupInterfaceTemplate implements IJavaTemplate<MethodGroupCl
                 .map(IType::toString).collect(Collectors.toList());
         String parentDeclaration = !interfaces.isEmpty() ? String.format(" extends %1$s", String.join(", ", interfaces)) : "";
 
-        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
-        {
+        javaFile.javadocComment((comment) -> {
             comment.description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
         });
         javaFile.publicInterface(String.format("%1$s%2$s", methodGroupClient.getInterfaceName(), parentDeclaration), interfaceBlock ->

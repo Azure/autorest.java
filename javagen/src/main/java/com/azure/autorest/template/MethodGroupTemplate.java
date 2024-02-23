@@ -59,8 +59,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
             ? JavaVisibility.PackagePrivate
             : JavaVisibility.Public;
 
-        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), comment ->
-        {
+        javaFile.javadocComment(comment -> {
             comment.description(String.format("An instance of this class provides access to all the operations defined in %1$s.", methodGroupClient.getInterfaceName()));
         });
         javaFile.publicFinalClass(String.format("%1$s%2$s", methodGroupClient.getClassName(), parentDeclaration), classBlock ->

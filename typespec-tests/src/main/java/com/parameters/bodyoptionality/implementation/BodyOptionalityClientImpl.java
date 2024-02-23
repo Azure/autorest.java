@@ -114,8 +114,8 @@ public final class BodyOptionalityClientImpl {
     }
 
     /**
-     * The interface defining all the services for BodyOptionalityClient to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for BodyOptionalityClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BodyOptionalityClien")

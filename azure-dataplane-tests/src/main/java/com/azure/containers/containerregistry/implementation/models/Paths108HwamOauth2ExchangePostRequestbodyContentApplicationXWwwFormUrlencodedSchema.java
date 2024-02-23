@@ -43,8 +43,7 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
     private String aadAccessToken;
 
     /**
-     * Creates an instance of Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     * class.
+     * Creates an instance of Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
      */
     public Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
     }

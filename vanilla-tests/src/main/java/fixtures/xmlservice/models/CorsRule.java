@@ -58,8 +58,8 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
 
     /**
      * Get the allowedOrigins property: The origin domains that are permitted to make a request against the storage
-     * service via CORS. The origin domain is the domain from which the request originates. Note that the origin must
-     * be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the
+     * service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be
+     * an exact case-sensitive match with the origin that the user age sends to the service. You can also use the
      * wildcard character '*' to allow all origin domains to make requests via CORS.
      * 
      * @return the allowedOrigins value.
@@ -70,8 +70,8 @@ public final class CorsRule implements XmlSerializable<CorsRule> {
 
     /**
      * Set the allowedOrigins property: The origin domains that are permitted to make a request against the storage
-     * service via CORS. The origin domain is the domain from which the request originates. Note that the origin must
-     * be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the
+     * service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be
+     * an exact case-sensitive match with the origin that the user age sends to the service. You can also use the
      * wildcard character '*' to allow all origin domains to make requests via CORS.
      * 
      * @param allowedOrigins the allowedOrigins value to set.

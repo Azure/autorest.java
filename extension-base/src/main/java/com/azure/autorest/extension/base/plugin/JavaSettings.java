@@ -111,7 +111,6 @@ public class JavaSettings {
                 getStringValue(host, "fluent"),
                 getBooleanValue(host, "regenerate-pom", false),
                 header,
-                120,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "com.mycompany.app").toLowerCase(),
                 getBooleanValue(host, "non-null-annotations", false),
@@ -191,7 +190,6 @@ public class JavaSettings {
      * @param fluent
      * @param regeneratePom
      * @param fileHeaderText
-     * @param maximumJavadocCommentWidth
      * @param serviceName
      * @param packageKeyword
      * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
@@ -273,7 +271,6 @@ public class JavaSettings {
         String fluent,
         boolean regeneratePom,
         String fileHeaderText,
-        int maximumJavadocCommentWidth,
         String serviceName,
         String packageKeyword,
         boolean nonNullAnnotations,
@@ -340,7 +337,6 @@ public class JavaSettings {
         this.fluent = fluent == null ? Fluent.NONE : (fluent.isEmpty() || fluent.equalsIgnoreCase("true") ? Fluent.PREMIUM : Fluent.valueOf(fluent.toUpperCase(Locale.ROOT)));
         this.regeneratePom = regeneratePom;
         this.fileHeaderText = fileHeaderText;
-        this.maximumJavadocCommentWidth = maximumJavadocCommentWidth;
         this.serviceName = serviceName;
         this.packageName = packageKeyword;
         this.nonNullAnnotations = nonNullAnnotations;
@@ -587,13 +583,7 @@ public class JavaSettings {
     public final String getFileHeaderText() {
         return fileHeaderText;
     }
-
-    private final int maximumJavadocCommentWidth;
-
-    public final int getMaximumJavadocCommentWidth() {
-        return maximumJavadocCommentWidth;
-    }
-
+    
     private final String serviceName;
 
     public final String getServiceName() {
