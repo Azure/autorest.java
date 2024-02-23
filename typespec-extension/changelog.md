@@ -1,8 +1,14 @@
 # Release History
 
+## 0.13.8 (2024-02-23)
+
+Compatible with compiler 0.53.
+
 ## 0.13.7 (2024-02-23)
 
 Compatible with compiler 0.53.
+
+- Fixed bug that 'partial update' will execute twice when generate for `typespec` definition.
 
 ## 0.13.6 (2024-02-20)
 
