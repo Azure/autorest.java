@@ -55,6 +55,9 @@ public class GenericUrl implements JsonSerializable<GenericUrl> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

@@ -27,6 +27,9 @@ public final class SeaGull extends Bird {
         setKind("seagull");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

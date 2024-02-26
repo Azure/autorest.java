@@ -43,6 +43,9 @@ public class BaseModel implements JsonSerializable<BaseModel> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

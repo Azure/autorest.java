@@ -119,6 +119,9 @@ public class Shark extends Fish {
 
     private static final ClientLogger LOGGER = new ClientLogger(Shark.class);
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

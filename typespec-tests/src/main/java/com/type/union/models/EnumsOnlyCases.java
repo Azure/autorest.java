@@ -61,6 +61,9 @@ public final class EnumsOnlyCases implements JsonSerializable<EnumsOnlyCases> {
         return this.ud;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

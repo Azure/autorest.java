@@ -46,9 +46,9 @@ public final class CollectionsByteAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *         byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
      *     ]
      * }
      * }</pre>
@@ -74,9 +74,9 @@ public final class CollectionsByteAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *         byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
      *     ]
      * }
      * }</pre>
@@ -102,9 +102,9 @@ public final class CollectionsByteAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *         byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
      *     ]
      * }
      * }</pre>
@@ -130,9 +130,9 @@ public final class CollectionsByteAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *         byte[] (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
      *     ]
      * }
      * }</pre>

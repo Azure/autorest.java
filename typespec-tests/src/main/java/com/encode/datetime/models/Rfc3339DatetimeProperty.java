@@ -45,6 +45,9 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
         return this.value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -60,6 +60,9 @@ public class MetricAlertResource implements JsonSerializable<MetricAlertResource
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

@@ -43,6 +43,9 @@ public final class SameAsModel implements JsonSerializable<SameAsModel> {
         return this.sameAsModel;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

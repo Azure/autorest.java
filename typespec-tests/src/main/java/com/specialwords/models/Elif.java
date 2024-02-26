@@ -43,6 +43,9 @@ public final class Elif implements JsonSerializable<Elif> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

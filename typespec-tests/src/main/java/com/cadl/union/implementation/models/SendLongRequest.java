@@ -175,6 +175,9 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

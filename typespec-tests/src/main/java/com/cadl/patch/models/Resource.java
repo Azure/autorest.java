@@ -44,7 +44,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * The map property.
      */
     @Generated
-    private final Map<String, InnerModel> map;
+    private Map<String, InnerModel> map;
 
     /*
      * The longValue property.
@@ -99,12 +99,9 @@ public final class Resource implements JsonSerializable<Resource> {
 
     /**
      * Creates an instance of Resource class.
-     * 
-     * @param map the map value to set.
      */
     @Generated
-    public Resource(Map<String, InnerModel> map) {
-        this.map = map;
+    public Resource() {
     }
 
     /**
@@ -158,6 +155,22 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Map<String, InnerModel> getMap() {
         return this.map;
+    }
+
+    /**
+     * Set the map property: The map property.
+     * <p>
+     * Required when create the resource.
+     * </p>
+     * 
+     * @param map the map value to set.
+     * @return the Resource object itself.
+     */
+    @Generated
+    public Resource setMap(Map<String, InnerModel> map) {
+        this.map = map;
+        this.updatedProperties.add("map");
+        return this;
     }
 
     /**
@@ -275,6 +288,9 @@ public final class Resource implements JsonSerializable<Resource> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -282,8 +298,8 @@ public final class Resource implements JsonSerializable<Resource> {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeStringField("description", this.description);
+            jsonWriter.writeMapField("map", this.map, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeNumberField("longValue", this.longValue);
             jsonWriter.writeNumberField("intValue", this.intValue);
             jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
@@ -296,6 +312,11 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        if (this.description != null) {
+            jsonWriter.writeStringField("description", this.description);
+        } else if (updatedProperties.contains("description")) {
+            jsonWriter.writeNullField("description");
+        }
         if (this.map != null) {
             jsonWriter.writeMapField("map", this.map, (writer, element) -> {
                 if (element != null) {
@@ -308,11 +329,6 @@ public final class Resource implements JsonSerializable<Resource> {
             });
         } else if (updatedProperties.contains("map")) {
             jsonWriter.writeNullField("map");
-        }
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
         }
         if (this.longValue != null) {
             jsonWriter.writeNumberField("longValue", this.longValue);
@@ -358,8 +374,8 @@ public final class Resource implements JsonSerializable<Resource> {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            Map<String, InnerModel> map = null;
             String description = null;
+            Map<String, InnerModel> map = null;
             Long longValue = null;
             Integer intValue = null;
             ResourceEnumValue enumValue = null;
@@ -373,10 +389,10 @@ public final class Resource implements JsonSerializable<Resource> {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("map".equals(fieldName)) {
-                    map = reader.readMap(reader1 -> InnerModel.fromJson(reader1));
                 } else if ("description".equals(fieldName)) {
                     description = reader.getString();
+                } else if ("map".equals(fieldName)) {
+                    map = reader.readMap(reader1 -> InnerModel.fromJson(reader1));
                 } else if ("longValue".equals(fieldName)) {
                     longValue = reader.getNullable(JsonReader::getLong);
                 } else if ("intValue".equals(fieldName)) {
@@ -391,10 +407,11 @@ public final class Resource implements JsonSerializable<Resource> {
                     reader.skipChildren();
                 }
             }
-            Resource deserializedResource = new Resource(map);
+            Resource deserializedResource = new Resource();
             deserializedResource.id = id;
             deserializedResource.name = name;
             deserializedResource.description = description;
+            deserializedResource.map = map;
             deserializedResource.longValue = longValue;
             deserializedResource.intValue = intValue;
             deserializedResource.enumValue = enumValue;

@@ -123,6 +123,9 @@ public final class DocumentSelectionMark implements JsonSerializable<DocumentSel
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

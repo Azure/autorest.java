@@ -63,6 +63,9 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
         return this.error;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

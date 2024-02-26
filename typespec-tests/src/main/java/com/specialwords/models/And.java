@@ -43,6 +43,9 @@ public final class And implements JsonSerializable<And> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

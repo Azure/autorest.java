@@ -43,6 +43,9 @@ public final class Lambda implements JsonSerializable<Lambda> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

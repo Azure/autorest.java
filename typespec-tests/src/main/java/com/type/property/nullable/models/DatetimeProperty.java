@@ -4,8 +4,8 @@
 
 package com.type.property.nullable.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,19 +20,19 @@ import java.util.Set;
 /**
  * Model with a datetime property.
  */
-@Immutable
+@Fluent
 public final class DatetimeProperty implements JsonSerializable<DatetimeProperty> {
     /*
      * Required property
      */
     @Generated
-    private final String requiredProperty;
+    private String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    private final OffsetDateTime nullableProperty;
+    private OffsetDateTime nullableProperty;
 
     @Generated
     private boolean jsonMergePatch;
@@ -57,14 +57,9 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
 
     /**
      * Creates an instance of DatetimeProperty class.
-     * 
-     * @param requiredProperty the requiredProperty value to set.
-     * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
-    public DatetimeProperty(String requiredProperty, OffsetDateTime nullableProperty) {
-        this.requiredProperty = requiredProperty;
-        this.nullableProperty = nullableProperty;
+    public DatetimeProperty() {
     }
 
     /**
@@ -78,6 +73,22 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
     }
 
     /**
+     * Set the requiredProperty property: Required property.
+     * <p>
+     * Required when create the resource.
+     * </p>
+     * 
+     * @param requiredProperty the requiredProperty value to set.
+     * @return the DatetimeProperty object itself.
+     */
+    @Generated
+    public DatetimeProperty setRequiredProperty(String requiredProperty) {
+        this.requiredProperty = requiredProperty;
+        this.updatedProperties.add("requiredProperty");
+        return this;
+    }
+
+    /**
      * Get the nullableProperty property: Property.
      * 
      * @return the nullableProperty value.
@@ -87,6 +98,25 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
         return this.nullableProperty;
     }
 
+    /**
+     * Set the nullableProperty property: Property.
+     * <p>
+     * Required when create the resource.
+     * </p>
+     * 
+     * @param nullableProperty the nullableProperty value to set.
+     * @return the DatetimeProperty object itself.
+     */
+    @Generated
+    public DatetimeProperty setNullableProperty(OffsetDateTime nullableProperty) {
+        this.nullableProperty = nullableProperty;
+        this.updatedProperties.add("nullableProperty");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -124,28 +154,27 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
      * @param jsonReader The JsonReader being read.
      * @return An instance of DatetimeProperty if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DatetimeProperty.
      */
     @Generated
     public static DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String requiredProperty = null;
-            OffsetDateTime nullableProperty = null;
+            DatetimeProperty deserializedDatetimeProperty = new DatetimeProperty();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("requiredProperty".equals(fieldName)) {
-                    requiredProperty = reader.getString();
+                    deserializedDatetimeProperty.requiredProperty = reader.getString();
                 } else if ("nullableProperty".equals(fieldName)) {
-                    nullableProperty
+                    deserializedDatetimeProperty.nullableProperty
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new DatetimeProperty(requiredProperty, nullableProperty);
+
+            return deserializedDatetimeProperty;
         });
     }
 }

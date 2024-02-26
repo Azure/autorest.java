@@ -48,6 +48,9 @@ public final class Base64urlBytesProperty implements JsonSerializable<Base64urlB
         return this.value.decodedBytes();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

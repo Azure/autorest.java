@@ -96,6 +96,8 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
     private final boolean isXmlText;
     private final String xmlPrefix;
 
+    private final Boolean requiredForCreate;
+
     /**
      * Create a new ClientModelProperty with the provided properties.
      * @param name The name of this property.
@@ -124,7 +126,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         String xmlListElementNamespace, String xmlListElementPrefix, IType wireType, IType clientType,
         boolean isConstant, String defaultValue, boolean isReadOnly, List<Mutability> mutabilities, boolean isRequired,
         String headerCollectionPrefix, boolean isAdditionalProperties, boolean needsFlatten, boolean clientFlatten,
-        boolean polymorphicDiscriminator, boolean isXmlText, String xmlPrefix) {
+        boolean polymorphicDiscriminator, boolean isXmlText, String xmlPrefix, Boolean requiredForCreate) {
         this.name = name;
         this.description = description;
         this.annotationArguments = annotationArguments;
@@ -150,6 +152,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         this.polymorphicDiscriminator = polymorphicDiscriminator;
         this.isXmlText = isXmlText;
         this.xmlPrefix = xmlPrefix;
+        this.requiredForCreate = requiredForCreate;
     }
 
     public final String getName() {
@@ -280,6 +283,10 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         return xmlPrefix;
     }
 
+    public boolean isRequiredForCreate() {
+        return requiredForCreate == null ? this.isRequired() : requiredForCreate;
+    }
+
     /**
      * Add this ServiceModelProperty's imports to the provided set of imports.
      * @param imports The set of imports to add to.
@@ -382,6 +389,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         private boolean polymorphicDiscriminator = false;
         private boolean isXmlText = false;
         private String xmlPrefix;
+        private Boolean requiredForCreate;
 
         /**
          * Sets the name of this property.
@@ -554,6 +562,16 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
         }
 
         /**
+         * Sets whether this property is required when create the resource.
+         * @param requiredForCreate whether this property is required when create the resource.
+         * @return the Builder itself
+         */
+        public Builder requiredForCreate(boolean requiredForCreate) {
+            this.requiredForCreate = requiredForCreate;
+            return this;
+        }
+
+        /**
          * Sets the prefix of the headers that make up this property's values.
          * @param headerCollectionPrefix the prefix of the headers that make up this property's values
          * @return the Builder itself
@@ -674,6 +692,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
             this.polymorphicDiscriminator = property.isPolymorphicDiscriminator();
             this.isXmlText = property.isXmlText();
             this.xmlPrefix = property.getXmlPrefix();
+            this.requiredForCreate = property.requiredForCreate;
         }
 
         public ClientModelProperty build() {
@@ -681,7 +700,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
                 xmlNamespace, serializedName, isXmlWrapper, xmlListElementName, xmlListElementNamespace,
                 xmlListElementPrefix, wireType, clientType, isConstant, defaultValue, isReadOnly, mutabilities,
                 isRequired, headerCollectionPrefix, isAdditionalProperties, needsFlatten, clientFlatten,
-                polymorphicDiscriminator, isXmlText, xmlPrefix);
+                polymorphicDiscriminator, isXmlText, xmlPrefix, requiredForCreate);
         }
     }
 }

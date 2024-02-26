@@ -43,6 +43,9 @@ public final class Yield implements JsonSerializable<Yield> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

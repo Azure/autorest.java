@@ -52,6 +52,9 @@ public final class JobData implements JsonSerializable<JobData> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

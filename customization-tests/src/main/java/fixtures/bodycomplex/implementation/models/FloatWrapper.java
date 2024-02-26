@@ -72,6 +72,9 @@ public final class FloatWrapper implements JsonSerializable<FloatWrapper> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

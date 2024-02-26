@@ -59,6 +59,9 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
         return this.stringReadOnlyOptional;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

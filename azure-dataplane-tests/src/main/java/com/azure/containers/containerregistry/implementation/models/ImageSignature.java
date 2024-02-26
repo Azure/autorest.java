@@ -97,6 +97,9 @@ public final class ImageSignature implements JsonSerializable<ImageSignature> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

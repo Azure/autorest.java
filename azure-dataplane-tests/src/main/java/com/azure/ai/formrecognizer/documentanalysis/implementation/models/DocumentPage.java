@@ -253,6 +253,9 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

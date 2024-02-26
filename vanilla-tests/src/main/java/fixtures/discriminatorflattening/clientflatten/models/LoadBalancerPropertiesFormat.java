@@ -59,6 +59,9 @@ public final class LoadBalancerPropertiesFormat implements JsonSerializable<Load
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

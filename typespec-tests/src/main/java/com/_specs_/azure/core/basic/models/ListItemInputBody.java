@@ -43,6 +43,9 @@ public final class ListItemInputBody implements JsonSerializable<ListItemInputBo
         return this.inputName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

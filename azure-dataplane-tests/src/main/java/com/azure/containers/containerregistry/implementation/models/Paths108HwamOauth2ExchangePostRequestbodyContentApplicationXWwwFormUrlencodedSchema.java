@@ -157,6 +157,9 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

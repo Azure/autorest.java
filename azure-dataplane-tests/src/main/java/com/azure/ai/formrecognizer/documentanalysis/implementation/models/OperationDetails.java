@@ -276,6 +276,9 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

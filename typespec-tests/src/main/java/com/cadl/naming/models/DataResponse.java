@@ -115,6 +115,9 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
         return this.status;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

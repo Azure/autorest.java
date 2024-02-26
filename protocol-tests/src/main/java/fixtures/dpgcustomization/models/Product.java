@@ -43,6 +43,9 @@ public class Product implements JsonSerializable<Product> {
         return this.received;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -51,6 +51,9 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
             .collect(java.util.stream.Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

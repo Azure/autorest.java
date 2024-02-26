@@ -43,6 +43,9 @@ public final class Input implements JsonSerializable<Input> {
         return this.hello;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

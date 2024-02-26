@@ -85,6 +85,9 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

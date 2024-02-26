@@ -89,6 +89,9 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

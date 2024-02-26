@@ -61,6 +61,9 @@ public final class FlattenModel implements JsonSerializable<FlattenModel> {
         return this.properties;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

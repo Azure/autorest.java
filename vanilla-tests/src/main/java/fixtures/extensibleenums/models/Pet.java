@@ -108,6 +108,9 @@ public final class Pet implements JsonSerializable<Pet> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

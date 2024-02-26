@@ -55,6 +55,9 @@ public final class BackendAddressPool implements JsonSerializable<BackendAddress
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

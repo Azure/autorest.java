@@ -43,6 +43,9 @@ public final class FloatProperty implements JsonSerializable<FloatProperty> {
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

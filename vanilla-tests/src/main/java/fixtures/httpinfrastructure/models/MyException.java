@@ -55,6 +55,9 @@ public class MyException implements JsonSerializable<MyException> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

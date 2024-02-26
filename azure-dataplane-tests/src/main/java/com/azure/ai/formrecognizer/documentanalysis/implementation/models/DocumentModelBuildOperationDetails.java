@@ -131,6 +131,9 @@ public final class DocumentModelBuildOperationDetails extends OperationDetails {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

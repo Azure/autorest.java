@@ -44,6 +44,9 @@ public class Shark extends Fish {
         return this.sharktype;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

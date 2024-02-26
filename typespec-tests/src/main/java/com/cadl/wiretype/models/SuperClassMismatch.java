@@ -49,6 +49,9 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
         return this.dateTimeRfc7231.getDateTime();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

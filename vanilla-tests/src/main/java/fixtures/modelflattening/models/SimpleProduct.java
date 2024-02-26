@@ -149,6 +149,9 @@ public class SimpleProduct extends BaseProduct {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

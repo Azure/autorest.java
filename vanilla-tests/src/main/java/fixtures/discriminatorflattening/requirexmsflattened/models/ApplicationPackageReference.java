@@ -95,6 +95,9 @@ public final class ApplicationPackageReference implements JsonSerializable<Appli
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

@@ -43,6 +43,9 @@ public final class JobData implements JsonSerializable<JobData> {
         return this.comment;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

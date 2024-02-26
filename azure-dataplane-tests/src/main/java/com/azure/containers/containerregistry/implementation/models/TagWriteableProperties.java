@@ -122,6 +122,9 @@ public final class TagWriteableProperties implements JsonSerializable<TagWriteab
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

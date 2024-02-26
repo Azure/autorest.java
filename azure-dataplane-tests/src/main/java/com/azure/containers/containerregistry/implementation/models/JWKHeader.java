@@ -147,6 +147,9 @@ public final class JWKHeader implements JsonSerializable<JWKHeader> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

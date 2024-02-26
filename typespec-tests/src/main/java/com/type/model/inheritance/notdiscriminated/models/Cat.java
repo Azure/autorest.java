@@ -44,6 +44,9 @@ public class Cat extends Pet {
         return this.age;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

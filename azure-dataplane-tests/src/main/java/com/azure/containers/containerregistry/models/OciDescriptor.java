@@ -148,6 +148,9 @@ public final class OciDescriptor implements JsonSerializable<OciDescriptor> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

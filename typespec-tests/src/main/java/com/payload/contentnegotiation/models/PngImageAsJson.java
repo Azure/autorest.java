@@ -44,6 +44,9 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
         return CoreUtils.clone(this.content);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

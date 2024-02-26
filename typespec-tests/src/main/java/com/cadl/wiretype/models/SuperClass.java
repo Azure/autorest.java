@@ -45,6 +45,9 @@ public class SuperClass implements JsonSerializable<SuperClass> {
         return this.dateTime;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

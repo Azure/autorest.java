@@ -80,6 +80,9 @@ public final class ChildProduct implements JsonSerializable<ChildProduct> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

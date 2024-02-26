@@ -80,6 +80,9 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

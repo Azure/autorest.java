@@ -43,6 +43,9 @@ public final class GetResponse6 implements JsonSerializable<GetResponse6> {
         return this.prop;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

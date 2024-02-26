@@ -114,7 +114,7 @@ public final class EtagHeadersOptionalBodyAsyncClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * <p>
@@ -125,7 +125,7 @@ public final class EtagHeadersOptionalBodyAsyncClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     type: String (Required)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 

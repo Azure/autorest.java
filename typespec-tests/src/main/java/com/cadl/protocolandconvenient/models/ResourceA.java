@@ -59,6 +59,9 @@ public final class ResourceA implements JsonSerializable<ResourceA> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

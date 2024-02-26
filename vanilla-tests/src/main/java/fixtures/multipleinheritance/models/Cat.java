@@ -115,6 +115,9 @@ public class Cat extends Pet {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

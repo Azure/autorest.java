@@ -51,6 +51,9 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
         return this.base64url.decodedBytes();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

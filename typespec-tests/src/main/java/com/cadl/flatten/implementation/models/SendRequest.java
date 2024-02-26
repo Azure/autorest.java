@@ -72,6 +72,9 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
         return this.input;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -44,6 +44,9 @@ public final class OuterModel extends BaseModel {
         return this.inner;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

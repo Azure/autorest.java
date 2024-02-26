@@ -90,6 +90,9 @@ public class Result implements JsonSerializable<Result> {
         return this.data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

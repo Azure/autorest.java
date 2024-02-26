@@ -27,6 +27,9 @@ public final class Golden extends Dog {
         setKind(DogKind.GOLDEN);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

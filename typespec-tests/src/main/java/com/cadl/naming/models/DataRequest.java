@@ -54,6 +54,9 @@ public final class DataRequest implements JsonSerializable<DataRequest> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

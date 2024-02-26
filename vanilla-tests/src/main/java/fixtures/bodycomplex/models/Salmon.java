@@ -104,6 +104,9 @@ public class Salmon extends Fish {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

@@ -193,6 +193,9 @@ public final class Operation implements JsonSerializable<Operation> {
         return this.unitValue;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

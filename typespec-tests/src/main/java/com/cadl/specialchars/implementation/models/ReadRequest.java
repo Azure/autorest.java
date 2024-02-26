@@ -43,6 +43,9 @@ public final class ReadRequest implements JsonSerializable<ReadRequest> {
         return this.id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

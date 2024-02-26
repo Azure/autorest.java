@@ -57,12 +57,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -74,12 +74,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -112,12 +112,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -129,12 +129,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -167,12 +167,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -261,12 +261,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -294,12 +294,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -354,12 +354,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -388,12 +388,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)
@@ -442,12 +442,12 @@ public final class BasicAsyncClient {
      * <pre>{@code
      * {
      *     id: int (Required)
-     *     name: String (Required)
+     *     name: String (Optional, Required on create)
      *     orders (Optional): [
      *          (Optional){
      *             id: int (Required)
-     *             userId: int (Required)
-     *             detail: String (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      *         }
      *     ]
      *     etag: String (Required)

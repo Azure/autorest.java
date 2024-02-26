@@ -61,6 +61,9 @@ public final class NestedFlattenModel implements JsonSerializable<NestedFlattenM
         return this.properties;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
