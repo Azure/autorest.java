@@ -75,8 +75,10 @@ enum TypesModel {
 @friendlyName("DataStatus")
 union StatusModel {
   string,
+
   @clientName("LroRunning")
   Running: "Running",
+
   Completed: "Completed",
   Failed: "Failed",
 }
