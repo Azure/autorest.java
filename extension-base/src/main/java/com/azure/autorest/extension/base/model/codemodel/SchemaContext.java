@@ -7,21 +7,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum SchemaContext {
-
     INPUT("input"),
-
     OUTPUT("output"),
-
     EXCEPTION("exception"),
-
     PUBLIC("public"),
-
     PAGED("paged"),
-
     ANONYMOUS("anonymous"),
-
     INTERNAL("internal"),
-
     JSON_MERGE_PATCH("json-merge-patch");
 
     private final String value;
@@ -42,10 +34,22 @@ public enum SchemaContext {
         return this.value;
     }
 
+    /**
+     * Gets the value of the schema context.
+     *
+     * @return The value of the schema context.
+     */
     public String value() {
         return this.value;
     }
 
+    /**
+     * Returns the enum constant of this type with the specified value.
+     *
+     * @param value The value of the constant.
+     * @return The enum constant of this type with the specified value.
+     * @throws IllegalArgumentException If the specified value does not map to one of the constants in the enum.
+     */
     public static SchemaContext fromValue(String value) {
         SchemaContext constant = CONSTANTS.get(value);
         if (constant == null) {

@@ -3,76 +3,119 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
+/**
+ * Represents a security scheme.
+ */
 public class Scheme {
-
     private Scheme.SecuritySchemeType type;
-
     // OAuth2
     private Set<String> scopes = new HashSet<>();
-
     // Key
     private String name;
     private String in;
     private String prefix;
 
+    /**
+     * Gets the type of the security scheme.
+     *
+     * @return The type of the security scheme.
+     */
     public Scheme.SecuritySchemeType getType() {
         return type;
     }
 
+    /**
+     * Sets the type of the security scheme.
+     *
+     * @param type The type of the security scheme.
+     */
     public void setType(Scheme.SecuritySchemeType type) {
         this.type = type;
     }
 
+    /**
+     * Gets the scopes of the security scheme.
+     *
+     * @return The scopes of the security scheme.
+     */
     public Set<String> getScopes() {
         return scopes;
     }
 
+    /**
+     * Sets the scopes of the security scheme.
+     *
+     * @param scopes The scopes of the security scheme.
+     */
     public void setScopes(Set<String> scopes) {
         this.scopes = scopes;
     }
 
+    /**
+     * Gets the name of the security scheme.
+     *
+     * @return The name of the security scheme.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets the name of the security scheme.
+     *
+     * @param name The name of the security scheme.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the location of the security scheme.
+     *
+     * @return The location of the security scheme.
+     */
     public String getIn() {
         return in;
     }
 
+    /**
+     * Sets the location of the security scheme.
+     *
+     * @param in The location of the security scheme.
+     */
     public void setIn(String in) {
         this.in = in;
     }
 
+    /**
+     * Gets the prefix of the security scheme.
+     *
+     * @return The prefix of the security scheme.
+     */
     public String getPrefix() {
         return prefix;
     }
 
+    /**
+     * Sets the prefix of the security scheme.
+     *
+     * @param prefix The prefix of the security scheme.
+     */
     public void setPrefix(String prefix) {
         this.prefix = prefix;
     }
 
+    /**
+     * The type of the security scheme.
+     */
     public enum SecuritySchemeType {
-
         OAUTH2("OAuth2"),
         KEY("Key");
 
         private final String value;
-        private final static Map<String, Scheme.SecuritySchemeType> CONSTANTS = new HashMap<>();
-
-        static {
-            for (Scheme.SecuritySchemeType c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
 
         SecuritySchemeType(String value) {
             this.value = value;
@@ -83,18 +126,30 @@ public class Scheme {
             return this.value;
         }
 
+        /**
+         * Get the value of the security scheme type.
+         *
+         * @return The value of the security scheme type.
+         */
         public String value() {
             return this.value;
         }
 
+        /**
+         * Get the security scheme type from the value.
+         *
+         * @param value The value of the security scheme type.
+         * @return The security scheme type.
+         * @throws IllegalArgumentException thrown if the value does not match any of the security scheme types.
+         */
         public static Scheme.SecuritySchemeType fromValue(String value) {
-            Scheme.SecuritySchemeType constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
+            if ("OAuth2".equals(value)) {
+                return OAUTH2;
+            } else if ("Key".equals(value)) {
+                return KEY;
             } else {
-                return constant;
+                throw new IllegalArgumentException(value);
             }
         }
-
     }
 }

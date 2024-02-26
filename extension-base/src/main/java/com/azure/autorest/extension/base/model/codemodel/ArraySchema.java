@@ -9,22 +9,9 @@ import java.util.Objects;
  * Represents an array schema.
  */
 public class ArraySchema extends ValueSchema {
-
-    /**
-     * (Required)
-     */
     private Schema elementType;
-    /**
-     * maximum number of elements in the array
-     */
     private double maxItems;
-    /**
-     * minimum number of elements in the array
-     */
     private double minItems;
-    /**
-     * if the elements in the array should be unique
-     */
     private boolean uniqueItems;
 
     /**

@@ -11,17 +11,9 @@ import java.util.Objects;
  * Represents a choice schema.
  */
 public class ChoiceSchema extends ValueSchema {
-
-    /**
-     * a Schema that represents a string value (Required)
-     */
     private Schema choiceType;
-    /**
-     * the possible choices for in the set (Required)
-     */
     private List<ChoiceValue> choices = new ArrayList<>();
     private String summary;
-
     private String crossLanguageDefinitionId;
 
     /**

@@ -56,6 +56,9 @@ public class ByteArraySchema extends PrimitiveSchema {
         return Objects.equals(format, rhs.format);
     }
 
+    /**
+     * Represents the format of the byte array.
+     */
     public enum Format {
         BASE_64_URL("base64url"),
         BYTE("byte");
@@ -80,6 +83,13 @@ public class ByteArraySchema extends PrimitiveSchema {
             return this.value;
         }
 
+        /**
+         * Parses a string to a ByteArraySchema.Format.
+         *
+         * @param value The value to parse.
+         * @return The parsed ByteArraySchema.Format.
+         * @throws IllegalArgumentException If the value does not match a known ByteArraySchema.Format.
+         */
         public static ByteArraySchema.Format fromValue(String value) {
             if ("base64url".equals(value)) {
                 return BASE_64_URL;

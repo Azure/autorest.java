@@ -12,7 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
-import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
+import com.azure.autorest.extension.base.model.codemodel.XmlSerializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -155,7 +155,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                             return false;
                         }
 
-                        XmlSerlializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
+                        XmlSerializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
                         return xmlSchema.isAttribute() || xmlSchema.getNamespace() != null;
                     })) {
                         modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
@@ -227,7 +227,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 boolean hasXmlFormat = compositeType.getSerialization() != null
                     && compositeType.getSerialization().getXml() != null;
                 if (hasXmlFormat) {
-                    final XmlSerlializationFormat xml = compositeType.getSerialization().getXml();
+                    final XmlSerializationFormat xml = compositeType.getSerialization().getXml();
                     String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
                         ? compositeType.getLanguage().getDefault().getName()
                         : xml.getName();

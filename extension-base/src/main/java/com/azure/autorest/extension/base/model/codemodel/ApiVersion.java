@@ -83,6 +83,9 @@ public class ApiVersion {
         return Objects.equals(version, rhs.version) && Objects.equals(range, rhs.range);
     }
 
+    /**
+     * Represents the range of the API version.
+     */
     public enum Range {
         __EMPTY__("+"),
         __EMPTY___("-");
@@ -106,6 +109,13 @@ public class ApiVersion {
             return this.value;
         }
 
+        /**
+         * Parses a string value into a range value.
+         *
+         * @param value The string value to parse.
+         * @return The parsed range value.
+         * @throws IllegalArgumentException thrown if the value does not match any of the known range values.
+         */
         public static ApiVersion.Range fromValue(String value) {
             if ("+".equals(value)) {
                 return __EMPTY__;

@@ -6,6 +6,9 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Known media types.
+ */
 public enum KnownMediaType {
     BINARY("binary"),
     FORM("form"),
@@ -24,7 +27,7 @@ public enum KnownMediaType {
         }
     }
 
-    private KnownMediaType(String value) {
+    KnownMediaType(String value) {
         this.value = value;
     }
 
@@ -33,10 +36,22 @@ public enum KnownMediaType {
         return this.value;
     }
 
+    /**
+     * Get the string value of the KnownMediaType.
+     *
+     * @return The string value.
+     */
     public String value() {
         return this.value;
     }
 
+    /**
+     * Get the KnownMediaType from a string value.
+     *
+     * @param value The string value.
+     * @return The KnownMediaType.
+     * @throws IllegalArgumentException If the string value doesn't correspond to a KnownMediaType.
+     */
     public static KnownMediaType fromValue(String value) {
         KnownMediaType constant = CONSTANTS.get(value);
         if (constant == null) {
@@ -46,6 +61,11 @@ public enum KnownMediaType {
         }
     }
 
+    /**
+     * Get the content type for the KnownMediaType.
+     *
+     * @return The content type.
+     */
     public String getContentType() {
         switch (this) {
             case BINARY: return "application/octet-stream";
@@ -54,7 +74,6 @@ public enum KnownMediaType {
             case MULTIPART: return "multipart/form-data";
             case TEXT: return "text/plain";
             case XML: return "application/xml";
-            case UNKNOWN:
             default: return JSON.getContentType();
         }
     }

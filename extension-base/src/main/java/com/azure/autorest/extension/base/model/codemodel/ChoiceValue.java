@@ -9,15 +9,7 @@ import java.util.Objects;
  * Represents a choice value.
  */
 public class ChoiceValue {
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     */
     private Languages language;
-    /**
-     * the actual value
-     * (Required)
-     */
     private String value;
     private DictionaryAny extensions;
 

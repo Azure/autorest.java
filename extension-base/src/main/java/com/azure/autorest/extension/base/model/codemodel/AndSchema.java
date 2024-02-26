@@ -11,12 +11,7 @@ import java.util.Objects;
  * An AND relationship between several schemas.
  */
 public class AndSchema extends ComplexSchema {
-
-    /**
-     * the set of schemas that this schema is composed of.
-     * (Required)
-     */
-    private List<ComplexSchema> allOf = new ArrayList<ComplexSchema>();
+    private List<ComplexSchema> allOf = new ArrayList<>();
     private String discriminatorValue;
 
     /**
