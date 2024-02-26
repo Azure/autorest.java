@@ -5,6 +5,9 @@ package com.azure.autorest.extension.base.model;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+/**
+ * Represents a message channel.
+ */
 public enum MessageChannel {
     INFORMATION("information"),
     HINT("hint"),
@@ -18,7 +21,7 @@ public enum MessageChannel {
 
     private final String value;
 
-    private MessageChannel(String value) {
+    MessageChannel(String value) {
         this.value = value;
     }
 
