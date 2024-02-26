@@ -75,6 +75,9 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

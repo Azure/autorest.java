@@ -71,6 +71,9 @@ public final class LoadBalancer implements JsonSerializable<LoadBalancer> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

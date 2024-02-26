@@ -84,6 +84,9 @@ public final class OdataProductResult implements JsonSerializable<OdataProductRe
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

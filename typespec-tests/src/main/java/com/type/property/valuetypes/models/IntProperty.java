@@ -43,6 +43,9 @@ public final class IntProperty implements JsonSerializable<IntProperty> {
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

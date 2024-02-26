@@ -24,6 +24,9 @@ public final class EmptyInput implements JsonSerializable<EmptyInput> {
     public EmptyInput() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -43,6 +43,9 @@ public final class ApiRequest implements JsonSerializable<ApiRequest> {
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

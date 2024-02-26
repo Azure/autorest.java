@@ -27,6 +27,9 @@ public final class RealModel extends AbstractModel {
         setKind("real");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -253,6 +253,9 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

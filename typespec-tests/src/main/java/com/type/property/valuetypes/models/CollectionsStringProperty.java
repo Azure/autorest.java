@@ -44,6 +44,9 @@ public final class CollectionsStringProperty implements JsonSerializable<Collect
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -55,6 +55,9 @@ public final class WrappedProduct implements JsonSerializable<WrappedProduct> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

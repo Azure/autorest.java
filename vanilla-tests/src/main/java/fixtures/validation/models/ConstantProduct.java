@@ -80,6 +80,9 @@ public final class ConstantProduct implements JsonSerializable<ConstantProduct> 
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

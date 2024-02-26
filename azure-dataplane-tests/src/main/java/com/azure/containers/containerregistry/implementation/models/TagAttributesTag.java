@@ -47,6 +47,9 @@ public final class TagAttributesTag implements JsonSerializable<TagAttributesTag
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

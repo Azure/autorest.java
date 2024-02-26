@@ -43,6 +43,9 @@ public final class InputOutputData2 implements JsonSerializable<InputOutputData2
         return this.data;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

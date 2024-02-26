@@ -58,6 +58,9 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

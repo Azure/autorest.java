@@ -59,6 +59,9 @@ public final class User implements JsonSerializable<User> {
         return this.role;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

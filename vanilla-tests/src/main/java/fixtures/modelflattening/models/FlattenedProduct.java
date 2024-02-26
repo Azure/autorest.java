@@ -139,6 +139,9 @@ public class FlattenedProduct extends Resource {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

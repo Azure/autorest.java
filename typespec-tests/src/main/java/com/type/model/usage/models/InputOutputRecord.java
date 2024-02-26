@@ -43,6 +43,9 @@ public final class InputOutputRecord implements JsonSerializable<InputOutputReco
         return this.requiredProp;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

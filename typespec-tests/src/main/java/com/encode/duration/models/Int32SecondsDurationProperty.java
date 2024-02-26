@@ -44,6 +44,9 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
         return Duration.ofSeconds(this.value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

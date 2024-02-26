@@ -19,12 +19,13 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 
 public class PatchClientTest {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
     @Test
     public void testSerializationForNumbers() throws JsonProcessingException {
-        Resource resource = new Resource(new HashMap<>());
+        Resource resource = new Resource();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.setIntValue(null);
         resource.setLongValue(null);
@@ -36,7 +37,7 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForString() throws JsonProcessingException {
-        Resource resource = new Resource(new HashMap<>());
+        Resource resource = new Resource();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.setDescription(null);
         String json = BinaryData.fromObject(resource).toString();
@@ -46,8 +47,8 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForNestedModelProperty() throws JsonProcessingException {
-        Resource resource = new Resource(new HashMap<>());
-        resource.setInnerModelProperty(new InnerModel("value1"));
+        Resource resource = new Resource();
+        resource.setInnerModelProperty(new InnerModel());
 
         // serialize for inner model property
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
@@ -65,9 +66,11 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForMapProperty() throws JsonProcessingException {
-        Resource resource = new Resource(new HashMap<>());
+        Resource resource = new Resource();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        resource.getMap().put("key", null);
+        Map<String, InnerModel> map = new HashMap<>();
+        map.put("key", null);
+        resource.setMap(map);
         String json = BinaryData.fromObject(resource).toString();
         JsonNode node = OBJECT_MAPPER.readTree(json);
         Assertions.assertEquals(JsonNodeType.NULL, node.get("map").get("key").getNodeType());
@@ -76,9 +79,11 @@ public class PatchClientTest {
     @Test
     public void testSerializationForMapNullKeyProperty() {
         Exception exception = Assertions.assertThrows(NullPointerException.class, () -> {
-            Resource resource = new Resource(new HashMap<>());
+            Resource resource = new Resource();
             JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-            resource.getMap().put(null, new InnerModel("value1"));
+            Map<String, InnerModel> map = new HashMap<>();
+            resource.setMap(map);
+            map.put(null, new InnerModel());
             BinaryData.fromObject(resource).toString();
         });
 
@@ -90,10 +95,12 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForArrayProperty() throws JsonProcessingException {
-        Resource resource = new Resource(new HashMap<>());
-        resource.setArray(Arrays.asList(new InnerModel("value1"), new InnerModel("value2")));
+        Resource resource = new Resource();
+        resource.setArray(Arrays.asList(new InnerModel().setName("value1"), new InnerModel().setName("value2")));
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        resource.getMap().put("key", null);
+        Map<String, InnerModel> map = new HashMap<>();
+        map.put("key", null);
+        resource.setMap(map);
         resource.getArray().set(0, null);
         String json = BinaryData.fromObject(resource).toString(); // {"map":{"key":null},"array":[{"name":"value2"}]}
         JsonNode node = OBJECT_MAPPER.readTree(json);
@@ -104,7 +111,7 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForEnum() throws JsonProcessingException {
-        Resource resource = new Resource(new HashMap<>());
+        Resource resource = new Resource();
         resource.setEnumValue(null);
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.setEnumValue(null);
@@ -115,7 +122,7 @@ public class PatchClientTest {
 
     @Test
     public void testSerializationForHierarchicalModel() throws JsonProcessingException {
-        Fish fish = new Salmon(1);
+        Fish fish = new Salmon().setAge(1);
         fish.setColor("pink");
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
         fish.setColor(null);

@@ -55,6 +55,9 @@ public final class SourcePath implements JsonSerializable<SourcePath> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

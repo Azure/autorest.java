@@ -72,6 +72,9 @@ public final class LongWrapper implements JsonSerializable<LongWrapper> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

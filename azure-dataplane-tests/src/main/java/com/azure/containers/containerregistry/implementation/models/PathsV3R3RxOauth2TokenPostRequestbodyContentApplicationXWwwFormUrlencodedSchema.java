@@ -128,6 +128,9 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

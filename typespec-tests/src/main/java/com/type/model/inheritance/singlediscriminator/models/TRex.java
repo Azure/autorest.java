@@ -27,6 +27,9 @@ public final class TRex extends Dinosaur {
         setKind("t-rex");
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

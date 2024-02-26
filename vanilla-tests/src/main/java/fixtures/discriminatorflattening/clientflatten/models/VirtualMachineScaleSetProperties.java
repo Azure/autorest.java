@@ -59,6 +59,9 @@ public final class VirtualMachineScaleSetProperties implements JsonSerializable<
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

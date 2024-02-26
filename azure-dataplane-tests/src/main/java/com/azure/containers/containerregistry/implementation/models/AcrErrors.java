@@ -48,6 +48,9 @@ public final class AcrErrors implements JsonSerializable<AcrErrors> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

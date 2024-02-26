@@ -104,6 +104,9 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -44,10 +44,10 @@ public final class CollectionsModelClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }
@@ -73,10 +73,10 @@ public final class CollectionsModelClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }
@@ -102,10 +102,10 @@ public final class CollectionsModelClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }
@@ -132,10 +132,10 @@ public final class CollectionsModelClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }

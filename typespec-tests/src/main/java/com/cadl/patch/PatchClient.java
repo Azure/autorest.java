@@ -48,9 +48,9 @@ public final class PatchClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -71,9 +71,9 @@ public final class PatchClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -111,9 +111,9 @@ public final class PatchClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -134,9 +134,9 @@ public final class PatchClient {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -173,7 +173,7 @@ public final class PatchClient {
      *     kind: String (Optional)
      *     id: String (Required)
      *     name: String (Required)
-     *     age: int (Required)
+     *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
      * }</pre>
@@ -185,7 +185,7 @@ public final class PatchClient {
      *     kind: String (Optional)
      *     id: String (Required)
      *     name: String (Required)
-     *     age: int (Required)
+     *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
      * }</pre>

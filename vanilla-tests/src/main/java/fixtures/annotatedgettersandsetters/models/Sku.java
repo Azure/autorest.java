@@ -153,6 +153,9 @@ public final class Sku implements JsonSerializable<Sku> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

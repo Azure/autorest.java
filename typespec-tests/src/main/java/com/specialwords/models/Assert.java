@@ -43,6 +43,9 @@ public final class Assert implements JsonSerializable<Assert> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

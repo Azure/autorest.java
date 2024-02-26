@@ -242,6 +242,9 @@ public final class FlattenParameterGroup implements JsonSerializable<FlattenPara
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

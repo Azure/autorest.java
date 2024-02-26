@@ -114,6 +114,9 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
         return this.deleteProp;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

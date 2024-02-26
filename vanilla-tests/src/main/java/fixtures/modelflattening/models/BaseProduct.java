@@ -86,6 +86,9 @@ public class BaseProduct implements JsonSerializable<BaseProduct> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

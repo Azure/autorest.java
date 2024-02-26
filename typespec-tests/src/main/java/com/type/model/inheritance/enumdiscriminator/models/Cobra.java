@@ -27,6 +27,9 @@ public final class Cobra extends Snake {
         setKind(SnakeKind.COBRA);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

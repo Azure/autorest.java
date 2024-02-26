@@ -61,6 +61,9 @@ public final class Size implements JsonSerializable<Size> {
         return this.height;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

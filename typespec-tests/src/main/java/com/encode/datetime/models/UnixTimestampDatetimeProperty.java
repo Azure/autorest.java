@@ -46,6 +46,9 @@ public final class UnixTimestampDatetimeProperty implements JsonSerializable<Uni
         return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.value), ZoneOffset.UTC);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

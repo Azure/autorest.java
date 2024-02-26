@@ -98,6 +98,9 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

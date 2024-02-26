@@ -264,6 +264,9 @@ public final class Encoded implements JsonSerializable<Encoded> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

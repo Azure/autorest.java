@@ -86,6 +86,9 @@ public final class CustomParameterGroup implements JsonSerializable<CustomParame
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

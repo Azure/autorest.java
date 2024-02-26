@@ -43,6 +43,9 @@ public final class ModelProperty implements JsonSerializable<ModelProperty> {
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

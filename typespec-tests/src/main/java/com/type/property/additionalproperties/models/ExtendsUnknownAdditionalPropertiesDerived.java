@@ -74,6 +74,9 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

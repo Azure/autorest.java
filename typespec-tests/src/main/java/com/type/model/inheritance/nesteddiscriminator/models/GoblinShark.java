@@ -27,6 +27,9 @@ public final class GoblinShark extends Shark {
         super(age, sharktype);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

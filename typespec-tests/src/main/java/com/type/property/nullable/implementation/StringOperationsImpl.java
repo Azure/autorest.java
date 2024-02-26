@@ -142,8 +142,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -168,8 +168,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -193,8 +193,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -219,8 +219,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -244,8 +244,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -273,8 +273,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -301,8 +301,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -329,8 +329,8 @@ public final class StringOperationsImpl {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 

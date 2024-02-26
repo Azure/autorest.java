@@ -44,6 +44,9 @@ public final class DefaultBytesProperty implements JsonSerializable<DefaultBytes
         return CoreUtils.clone(this.value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

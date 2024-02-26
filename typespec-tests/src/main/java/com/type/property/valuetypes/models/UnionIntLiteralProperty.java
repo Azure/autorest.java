@@ -43,6 +43,9 @@ public final class UnionIntLiteralProperty implements JsonSerializable<UnionIntL
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

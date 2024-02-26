@@ -122,6 +122,9 @@ public final class RepositoryWriteableProperties implements JsonSerializable<Rep
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

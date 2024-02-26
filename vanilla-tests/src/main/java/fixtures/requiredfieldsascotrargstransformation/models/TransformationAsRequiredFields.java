@@ -181,6 +181,9 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

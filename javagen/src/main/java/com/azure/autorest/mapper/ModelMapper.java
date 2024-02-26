@@ -281,9 +281,10 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.needsFlatten(needsFlatten);
             builder.imports(new ArrayList<>(modelImports));
 
+            final boolean isJsonMergePatch = usages.contains(ImplementationDetails.Usage.JSON_MERGE_PATCH);
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
-                ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property);
+                ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property, isJsonMergePatch);
                 if (Objects.equals(polymorphicDiscriminator, modelProperty.getSerializedName())) {
                     // Discriminator is defined both as the discriminator and a property in the model.
                     // Make the discriminator property required if the property is required. But don't add the property

@@ -105,6 +105,9 @@ public final class JobResult implements JsonSerializable<JobResult> {
         return this.results;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

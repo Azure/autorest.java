@@ -45,6 +45,9 @@ public final class DefaultDurationProperty implements JsonSerializable<DefaultDu
         return this.value;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

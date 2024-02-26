@@ -72,6 +72,9 @@ public class Bird implements JsonSerializable<Bird> {
         return this.wingspan;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

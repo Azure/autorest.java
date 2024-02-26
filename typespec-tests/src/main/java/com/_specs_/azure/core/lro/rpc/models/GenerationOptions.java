@@ -43,6 +43,9 @@ public final class GenerationOptions implements JsonSerializable<GenerationOptio
         return this.prompt;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -43,6 +43,9 @@ public final class BodyParameter implements JsonSerializable<BodyParameter> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

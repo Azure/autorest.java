@@ -91,6 +91,9 @@ public class DotSalmon extends DotFish {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

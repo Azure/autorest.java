@@ -43,6 +43,9 @@ public final class ClassModel implements JsonSerializable<ClassModel> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

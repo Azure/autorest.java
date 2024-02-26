@@ -46,8 +46,8 @@ public final class StringOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -72,8 +72,8 @@ public final class StringOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -98,8 +98,8 @@ public final class StringOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -125,8 +125,8 @@ public final class StringOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 

@@ -45,6 +45,9 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
         return this.error;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -80,6 +80,9 @@ public final class IntWrapper implements JsonSerializable<IntWrapper> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

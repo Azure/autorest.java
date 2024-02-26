@@ -98,6 +98,9 @@ public final class DocumentLine implements JsonSerializable<DocumentLine> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

@@ -189,7 +189,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Request Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, true);
+        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, isBodyParamRequired, true);
         commentBlock.line("}</pre>");
     }
 
@@ -201,64 +201,65 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Response Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true);
+        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true, true);
         commentBlock.line("}</pre>");
     }
 
-    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc, boolean isRequired, boolean isRootSchema) {
+    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc,
+                                          boolean isRequired, boolean isRequiredForCreate, boolean isRootSchema) {
         String nextIndent = indent + "    ";
         if ((ClientModelUtil.isClientModel(type) || ClientModelUtil.isExternalModel(type)) && !typesInJavadoc.contains(type)) {
             typesInJavadoc.add(type);
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": {");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": {");
             } else {
-                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + "{");
             }
             Map<String, ClientModelProperty> properties = new LinkedHashMap<>();
             traverseProperties(model, properties);
             for (ClientModelProperty property : properties.values()) {
-                bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), false);
+                bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), property.isRequiredForCreate(),false);
             }
             commentBlock.line(indent + "}");
         } else if (typesInJavadoc.contains(type)) {
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": (recursive schema, see " + name + " above)");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": (recursive schema, see " + name + " above)");
             } else {
                 commentBlock.line(indent + "(recursive schema, see above)");
             }
         } else if (type instanceof ListType) {
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": [");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": [");
             } else {
-                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "[");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + "[");
             }
-            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc, isRequired, false);
+            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc, isRequired, isRequiredForCreate, false);
             commentBlock.line(indent + "]");
         } else if (type instanceof EnumType) {
             String values = ((EnumType) type).getValues().stream()
                     .map(ClientEnumValue::getValue)
                     .collect(Collectors.joining("/"));
             if (name != null) {
-                commentBlock.line(indent + name + ": String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + name + ": String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             } else {
-                commentBlock.line(indent + "String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + "String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             }
         } else if (type instanceof MapType) {
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": {");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": {");
             } else {
-                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + "{");
             }
             final boolean valueRequired = !((MapType) type).isValueNullable();
-            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, valueRequired, false);
+            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, valueRequired, valueRequired, false);
             commentBlock.line(indent + "}");
         } else {
             String javadoc = convertToBodySchemaJavadoc(type);
             if (name != null) {
-                commentBlock.line(indent + name + ": " + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + name + ": " + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             } else {
-                commentBlock.line(indent + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             }
         }
     }
@@ -310,7 +311,15 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         return doc;
     }
 
-    private static String appendOptionalOrRequiredAttribute(boolean isRequired, boolean isRootSchema) {
-        return isRootSchema ? "" : isRequired ? " (Required)" : " (Optional)";
+    private static String appendOptionalOrRequiredAttribute(boolean isRequired, boolean isRequiredForCreate, boolean isRootSchema) {
+        if (isRootSchema) {
+            return "";
+        } else if (isRequired) {
+            return " (Required)";
+        } else if (isRequiredForCreate) {
+            return " (Optional, Required on create)";
+        } else {
+            return " (Optional)";
+        }
     }
 }

@@ -49,6 +49,9 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

@@ -56,6 +56,9 @@ public final class ArrayOptionalWrapper implements JsonSerializable<ArrayOptiona
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

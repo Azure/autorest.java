@@ -220,6 +220,9 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

@@ -80,6 +80,9 @@ public final class FirstParameterGroup implements JsonSerializable<FirstParamete
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

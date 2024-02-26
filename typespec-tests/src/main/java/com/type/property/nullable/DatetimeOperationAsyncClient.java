@@ -46,8 +46,8 @@ public final class DatetimeOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -72,8 +72,8 @@ public final class DatetimeOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -98,8 +98,8 @@ public final class DatetimeOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -124,8 +124,8 @@ public final class DatetimeOperationAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 

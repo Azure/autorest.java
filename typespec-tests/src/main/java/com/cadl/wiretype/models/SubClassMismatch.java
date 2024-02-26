@@ -51,6 +51,9 @@ public final class SubClassMismatch extends SuperClass {
         return this.dateTimeRfc7231.getDateTime();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

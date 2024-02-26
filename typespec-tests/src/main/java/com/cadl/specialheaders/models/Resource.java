@@ -42,7 +42,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * The type property.
      */
     @Generated
-    private final String type;
+    private String type;
 
     @Generated
     private boolean jsonMergePatch;
@@ -67,12 +67,9 @@ public final class Resource implements JsonSerializable<Resource> {
 
     /**
      * Creates an instance of Resource class.
-     * 
-     * @param type the type value to set.
      */
     @Generated
-    public Resource(String type) {
-        this.type = type;
+    public Resource() {
     }
 
     /**
@@ -128,6 +125,25 @@ public final class Resource implements JsonSerializable<Resource> {
         return this.type;
     }
 
+    /**
+     * Set the type property: The type property.
+     * <p>
+     * Required when create the resource.
+     * </p>
+     * 
+     * @param type the type value to set.
+     * @return the Resource object itself.
+     */
+    @Generated
+    public Resource setType(String type) {
+        this.type = type;
+        this.updatedProperties.add("type");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -135,8 +151,8 @@ public final class Resource implements JsonSerializable<Resource> {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("type", this.type);
             jsonWriter.writeStringField("description", this.description);
+            jsonWriter.writeStringField("type", this.type);
             return jsonWriter.writeEndObject();
         }
     }
@@ -144,15 +160,15 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.type != null) {
-            jsonWriter.writeStringField("type", this.type);
-        } else if (updatedProperties.contains("type")) {
-            jsonWriter.writeNullField("type");
-        }
         if (this.description != null) {
             jsonWriter.writeStringField("description", this.description);
         } else if (updatedProperties.contains("description")) {
             jsonWriter.writeNullField("description");
+        }
+        if (this.type != null) {
+            jsonWriter.writeStringField("type", this.type);
+        } else if (updatedProperties.contains("type")) {
+            jsonWriter.writeNullField("type");
         }
         return jsonWriter.writeEndObject();
     }
@@ -171,8 +187,8 @@ public final class Resource implements JsonSerializable<Resource> {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            String type = null;
             String description = null;
+            String type = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -181,18 +197,19 @@ public final class Resource implements JsonSerializable<Resource> {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("type".equals(fieldName)) {
-                    type = reader.getString();
                 } else if ("description".equals(fieldName)) {
                     description = reader.getString();
+                } else if ("type".equals(fieldName)) {
+                    type = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            Resource deserializedResource = new Resource(type);
+            Resource deserializedResource = new Resource();
             deserializedResource.id = id;
             deserializedResource.name = name;
             deserializedResource.description = description;
+            deserializedResource.type = type;
 
             return deserializedResource;
         });

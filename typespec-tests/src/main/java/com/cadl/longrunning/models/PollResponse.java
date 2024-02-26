@@ -61,6 +61,9 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
         return this.status;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

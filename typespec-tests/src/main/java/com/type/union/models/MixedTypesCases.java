@@ -98,6 +98,9 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
         return this.booleanProperty;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

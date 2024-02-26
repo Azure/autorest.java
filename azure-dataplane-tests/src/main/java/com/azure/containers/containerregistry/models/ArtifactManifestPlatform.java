@@ -64,6 +64,9 @@ public final class ArtifactManifestPlatform implements JsonSerializable<Artifact
         return this.operatingSystem;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

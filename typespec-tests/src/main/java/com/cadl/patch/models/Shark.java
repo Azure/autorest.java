@@ -42,13 +42,21 @@ public final class Shark extends Fish {
 
     /**
      * Creates an instance of Shark class.
-     * 
-     * @param age the age value to set.
      */
     @Generated
-    public Shark(int age) {
-        super(age);
+    public Shark() {
         setKind("shark");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public Shark setAge(int age) {
+        super.setAge(age);
+        this.updatedProperties.add("age");
+        return this;
     }
 
     /**
@@ -62,6 +70,9 @@ public final class Shark extends Fish {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -69,8 +80,8 @@ public final class Shark extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("kind", getKind());
+            jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
             return jsonWriter.writeEndObject();
         }
@@ -79,12 +90,12 @@ public final class Shark extends Fish {
     @Generated
     public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("age", getAge());
         if (getKind() != null) {
             jsonWriter.writeStringField("kind", getKind());
         } else if (updatedProperties.contains("kind")) {
             jsonWriter.writeNullField("kind");
         }
+        jsonWriter.writeIntField("age", getAge());
         if (getColor() != null) {
             jsonWriter.writeStringField("color", getColor());
         } else if (updatedProperties.contains("color")) {
@@ -107,8 +118,8 @@ public final class Shark extends Fish {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            int age = 0;
             String kind = "shark";
+            int age = 0;
             String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -118,20 +129,21 @@ public final class Shark extends Fish {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
                     kind = reader.getString();
+                } else if ("age".equals(fieldName)) {
+                    age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            Shark deserializedShark = new Shark(age);
+            Shark deserializedShark = new Shark();
             deserializedShark.setId(id);
             deserializedShark.setName(name);
             deserializedShark.setKind(kind);
+            deserializedShark.setAge(age);
             deserializedShark.setColor(color);
 
             return deserializedShark;

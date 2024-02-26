@@ -43,6 +43,9 @@ public final class ModelForRecord implements JsonSerializable<ModelForRecord> {
         return this.state;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

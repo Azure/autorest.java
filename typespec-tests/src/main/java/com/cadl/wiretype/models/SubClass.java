@@ -48,6 +48,9 @@ public final class SubClass extends SuperClassMismatch {
         return this.dateTime;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

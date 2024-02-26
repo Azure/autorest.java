@@ -383,6 +383,9 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();

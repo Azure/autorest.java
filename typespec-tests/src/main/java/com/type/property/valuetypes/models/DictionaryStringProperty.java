@@ -44,6 +44,9 @@ public final class DictionaryStringProperty implements JsonSerializable<Dictiona
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {

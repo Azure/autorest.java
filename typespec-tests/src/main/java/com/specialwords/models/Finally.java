@@ -43,6 +43,9 @@ public final class Finally implements JsonSerializable<Finally> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
