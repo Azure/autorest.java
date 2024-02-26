@@ -312,10 +312,14 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
     }
 
     private static String appendOptionalOrRequiredAttribute(boolean isRequired, boolean isRequiredForCreate, boolean isRootSchema) {
-        String optionalStr = " (Optional)";
-        if (isRequiredForCreate && !isRequired) {
-            optionalStr = " (Optional, Required on create)";
+        if (isRootSchema) {
+            return "";
+        } else if (isRequired) {
+            return " (Required)";
+        } else if (isRequiredForCreate) {
+            return " (Optional, Required on create)";
+        } else {
+            return " (Optional)";
         }
-        return isRootSchema ? "" : isRequired ? " (Required)" : optionalStr;
     }
 }
