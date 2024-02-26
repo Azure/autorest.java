@@ -1981,7 +1981,6 @@ export class CodeModelBuilder {
 
     const choices: ChoiceValue[] = [];
     for (const [name, member] of unionEnum.flattenedMembers.entries()) {
-      const variantType = member?.type;
       // get name from "UnionVariant | EnumMember"
       let valueName = this.getName(member.type);
       const valueDoc = this.getDoc(member.type);
