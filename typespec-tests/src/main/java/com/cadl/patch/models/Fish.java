@@ -215,18 +215,22 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.kind != null) {
-            jsonWriter.writeStringField("kind", this.kind);
-        } else if (updatedProperties.contains("kind")) {
-            jsonWriter.writeNullField("kind");
+        if (updatedProperties.contains("kind")) {
+            if (this.kind == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", this.kind);
+            }
         }
         jsonWriter.writeIntField("age", this.age);
-        if (this.color != null) {
-            jsonWriter.writeStringField("color", this.color);
-        } else if (updatedProperties.contains("color")) {
-            jsonWriter.writeNullField("color");
+        if (updatedProperties.contains("color")) {
+            if (this.color == null) {
+                jsonWriter.writeNullField("color");
+            } else {
+                jsonWriter.writeStringField("color", this.color);
+            }
         }
         return jsonWriter.writeEndObject();
     }

@@ -88,18 +88,22 @@ public final class Shark extends Fish {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (getKind() != null) {
-            jsonWriter.writeStringField("kind", getKind());
-        } else if (updatedProperties.contains("kind")) {
-            jsonWriter.writeNullField("kind");
+        if (updatedProperties.contains("kind")) {
+            if (getKind() == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", getKind());
+            }
         }
         jsonWriter.writeIntField("age", getAge());
-        if (getColor() != null) {
-            jsonWriter.writeStringField("color", getColor());
-        } else if (updatedProperties.contains("color")) {
-            jsonWriter.writeNullField("color");
+        if (updatedProperties.contains("color")) {
+            if (getColor() == null) {
+                jsonWriter.writeNullField("color");
+            } else {
+                jsonWriter.writeStringField("color", getColor());
+            }
         }
         return jsonWriter.writeEndObject();
     }

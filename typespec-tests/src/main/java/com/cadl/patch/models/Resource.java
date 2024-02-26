@@ -310,52 +310,66 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
+        if (updatedProperties.contains("description")) {
+            if (this.description == null) {
+                jsonWriter.writeNullField("description");
+            } else {
+                jsonWriter.writeStringField("description", this.description);
+            }
         }
-        if (this.map != null) {
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
-        } else if (updatedProperties.contains("map")) {
-            jsonWriter.writeNullField("map");
+        if (updatedProperties.contains("map")) {
+            if (this.map == null) {
+                jsonWriter.writeNullField("map");
+            } else {
+                jsonWriter.writeMapField("map", this.map, (writer, element) -> {
+                    if (element != null) {
+                        element.serializeAsJsonMergePatch(true);
+                        writer.writeJson(element);
+                        element.serializeAsJsonMergePatch(false);
+                    } else {
+                        writer.writeNull();
+                    }
+                });
+            }
         }
-        if (this.longValue != null) {
-            jsonWriter.writeNumberField("longValue", this.longValue);
-        } else if (updatedProperties.contains("longValue")) {
-            jsonWriter.writeNullField("longValue");
+        if (updatedProperties.contains("longValue")) {
+            if (this.longValue == null) {
+                jsonWriter.writeNullField("longValue");
+            } else {
+                jsonWriter.writeNumberField("longValue", this.longValue);
+            }
         }
-        if (this.intValue != null) {
-            jsonWriter.writeNumberField("intValue", this.intValue);
-        } else if (updatedProperties.contains("intValue")) {
-            jsonWriter.writeNullField("intValue");
+        if (updatedProperties.contains("intValue")) {
+            if (this.intValue == null) {
+                jsonWriter.writeNullField("intValue");
+            } else {
+                jsonWriter.writeNumberField("intValue", this.intValue);
+            }
         }
-        if (this.enumValue != null) {
-            jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
-        } else if (updatedProperties.contains("enumValue")) {
-            jsonWriter.writeNullField("enumValue");
+        if (updatedProperties.contains("enumValue")) {
+            if (this.enumValue == null) {
+                jsonWriter.writeNullField("enumValue");
+            } else {
+                jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
+            }
         }
-        if (this.innerModelProperty != null) {
-            this.innerModelProperty.serializeAsJsonMergePatch(true);
-            jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
-            this.innerModelProperty.serializeAsJsonMergePatch(false);
-        } else if (updatedProperties.contains("innerModelProperty")) {
-            jsonWriter.writeNullField("wireNameForInnerModelProperty");
+        if (updatedProperties.contains("innerModelProperty")) {
+            if (this.innerModelProperty == null) {
+                jsonWriter.writeNullField("wireNameForInnerModelProperty");
+            } else {
+                this.innerModelProperty.serializeAsJsonMergePatch(true);
+                jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
+                this.innerModelProperty.serializeAsJsonMergePatch(false);
+            }
         }
-        if (this.array != null) {
-            jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("array")) {
-            jsonWriter.writeNullField("array");
+        if (updatedProperties.contains("array")) {
+            if (this.array == null) {
+                jsonWriter.writeNullField("array");
+            } else {
+                jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
+            }
         }
         return jsonWriter.writeEndObject();
     }

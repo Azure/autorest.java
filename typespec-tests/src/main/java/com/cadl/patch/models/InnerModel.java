@@ -126,17 +126,21 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.name != null) {
-            jsonWriter.writeStringField("name", this.name);
-        } else if (updatedProperties.contains("name")) {
-            jsonWriter.writeNullField("name");
+        if (updatedProperties.contains("name")) {
+            if (this.name == null) {
+                jsonWriter.writeNullField("name");
+            } else {
+                jsonWriter.writeStringField("name", this.name);
+            }
         }
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
+        if (updatedProperties.contains("description")) {
+            if (this.description == null) {
+                jsonWriter.writeNullField("description");
+            } else {
+                jsonWriter.writeStringField("description", this.description);
+            }
         }
         return jsonWriter.writeEndObject();
     }

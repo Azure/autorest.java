@@ -159,17 +159,21 @@ public final class User implements JsonSerializable<User> {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.name != null) {
-            jsonWriter.writeStringField("name", this.name);
-        } else if (updatedProperties.contains("name")) {
-            jsonWriter.writeNullField("name");
+        if (updatedProperties.contains("name")) {
+            if (this.name == null) {
+                jsonWriter.writeNullField("name");
+            } else {
+                jsonWriter.writeStringField("name", this.name);
+            }
         }
-        if (this.orders != null) {
-            jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("orders")) {
-            jsonWriter.writeNullField("orders");
+        if (updatedProperties.contains("orders")) {
+            if (this.orders == null) {
+                jsonWriter.writeNullField("orders");
+            } else {
+                jsonWriter.writeArrayField("orders", this.orders, (writer, element) -> writer.writeJson(element));
+            }
         }
         return jsonWriter.writeEndObject();
     }

@@ -275,52 +275,66 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
+        if (updatedProperties.contains("description")) {
+            if (this.description == null) {
+                jsonWriter.writeNullField("description");
+            } else {
+                jsonWriter.writeStringField("description", this.description);
+            }
         }
-        if (this.map != null) {
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
-        } else if (updatedProperties.contains("map")) {
-            jsonWriter.writeNullField("map");
+        if (updatedProperties.contains("map")) {
+            if (this.map == null) {
+                jsonWriter.writeNullField("map");
+            } else {
+                jsonWriter.writeMapField("map", this.map, (writer, element) -> {
+                    if (element != null) {
+                        element.serializeAsJsonMergePatch(true);
+                        writer.writeJson(element);
+                        element.serializeAsJsonMergePatch(false);
+                    } else {
+                        writer.writeNull();
+                    }
+                });
+            }
         }
-        if (this.array != null) {
-            jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("array")) {
-            jsonWriter.writeNullField("array");
+        if (updatedProperties.contains("array")) {
+            if (this.array == null) {
+                jsonWriter.writeNullField("array");
+            } else {
+                jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
+            }
         }
-        if (this.intValue != null) {
-            jsonWriter.writeNumberField("intValue", this.intValue);
-        } else if (updatedProperties.contains("intValue")) {
-            jsonWriter.writeNullField("intValue");
+        if (updatedProperties.contains("intValue")) {
+            if (this.intValue == null) {
+                jsonWriter.writeNullField("intValue");
+            } else {
+                jsonWriter.writeNumberField("intValue", this.intValue);
+            }
         }
-        if (this.floatValue != null) {
-            jsonWriter.writeNumberField("floatValue", this.floatValue);
-        } else if (updatedProperties.contains("floatValue")) {
-            jsonWriter.writeNullField("floatValue");
+        if (updatedProperties.contains("floatValue")) {
+            if (this.floatValue == null) {
+                jsonWriter.writeNullField("floatValue");
+            } else {
+                jsonWriter.writeNumberField("floatValue", this.floatValue);
+            }
         }
-        if (this.innerModel != null) {
-            this.innerModel.serializeAsJsonMergePatch(true);
-            jsonWriter.writeJsonField("innerModel", this.innerModel);
-            this.innerModel.serializeAsJsonMergePatch(false);
-        } else if (updatedProperties.contains("innerModel")) {
-            jsonWriter.writeNullField("innerModel");
+        if (updatedProperties.contains("innerModel")) {
+            if (this.innerModel == null) {
+                jsonWriter.writeNullField("innerModel");
+            } else {
+                this.innerModel.serializeAsJsonMergePatch(true);
+                jsonWriter.writeJsonField("innerModel", this.innerModel);
+                this.innerModel.serializeAsJsonMergePatch(false);
+            }
         }
-        if (this.intArray != null) {
-            jsonWriter.writeArrayField("intArray", this.intArray, (writer, element) -> writer.writeInt(element));
-        } else if (updatedProperties.contains("intArray")) {
-            jsonWriter.writeNullField("intArray");
+        if (updatedProperties.contains("intArray")) {
+            if (this.intArray == null) {
+                jsonWriter.writeNullField("intArray");
+            } else {
+                jsonWriter.writeArrayField("intArray", this.intArray, (writer, element) -> writer.writeInt(element));
+            }
         }
         return jsonWriter.writeEndObject();
     }
