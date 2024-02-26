@@ -3,86 +3,70 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 
 /**
- * - since API version formats range from 
- * Azure ARM API date style (2018-01-01) to semver (1.2.3) 
- * and virtually any other text, this value tends to be an 
+ * - since API version formats range from
+ * Azure ARM API date style (2018-01-01) to semver (1.2.3)
+ * and virtually any other text, this value tends to be an
  * opaque string with the possibility of a modifier to indicate
  * that it is a range.
- * 
- * options: 
- * - prepend a dash or append a plus to indicate a range 
+ * <p>
+ * options:
+ * - prepend a dash or append a plus to indicate a range
  * (ie, '2018-01-01+' or '-2019-01-01', or '1.0+' )
- * 
+ * <p>
  * - semver-range style (ie, '^1.0.0' or '~1.0.0' )
- * 
  */
 public class ApiVersion {
-
-    /**
-     * the actual api version string used in the API
-     * (Required)
-     * 
-     */
     private String version;
     private ApiVersion.Range range;
 
     /**
-     * the actual api version string used in the API
-     * (Required)
-     * 
+     * Gets the API version string used in the API. (Required)
+     *
+     * @return The API version string used in the API.
      */
     public String getVersion() {
         return version;
     }
 
     /**
-     * the actual api version string used in the API
-     * (Required)
-     * 
+     * Sets the API version string used in the API. (Required)
+     *
+     * @param version The API version string used in the API.
      */
     public void setVersion(String version) {
         this.version = version;
     }
 
+    /**
+     * Gets the range of the API version.
+     *
+     * @return The range of the API version.
+     */
     public ApiVersion.Range getRange() {
         return range;
     }
 
+    /**
+     * Sets the range of the API version.
+     *
+     * @param range The range of the API version.
+     */
     public void setRange(ApiVersion.Range range) {
         this.range = range;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ApiVersion.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("version");
-        sb.append('=');
-        sb.append(((this.version == null)?"<null>":this.version));
-        sb.append(',');
-        sb.append("range");
-        sb.append('=');
-        sb.append(((this.range == null)?"<null>":this.range));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return ApiVersion.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[version="
+            + Objects.toString(version, "<null>") + ",range=" + Objects.toString(range, "<null>") + ']';
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.version == null)? 0 :this.version.hashCode()));
-        result = ((result* 31)+((this.range == null)? 0 :this.range.hashCode()));
-        return result;
+        return Objects.hash(version, range);
     }
 
     @Override
@@ -90,27 +74,21 @@ public class ApiVersion {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ApiVersion) == false) {
+
+        if (!(other instanceof ApiVersion)) {
             return false;
         }
+
         ApiVersion rhs = ((ApiVersion) other);
-        return (((this.version == rhs.version)||((this.version!= null)&&this.version.equals(rhs.version)))&&((this.range == rhs.range)||((this.range!= null)&&this.range.equals(rhs.range))));
+        return Objects.equals(version, rhs.version) && Objects.equals(range, rhs.range);
     }
 
     public enum Range {
-
         __EMPTY__("+"),
         __EMPTY___("-");
         private final String value;
-        private final static Map<String, ApiVersion.Range> CONSTANTS = new HashMap<String, ApiVersion.Range>();
 
-        static {
-            for (ApiVersion.Range c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
-
-        private Range(String value) {
+        Range(String value) {
             this.value = value;
         }
 
@@ -119,19 +97,23 @@ public class ApiVersion {
             return this.value;
         }
 
+        /**
+         * Gets the value of the range.
+         *
+         * @return The value of the range.
+         */
         public String value() {
             return this.value;
         }
 
         public static ApiVersion.Range fromValue(String value) {
-            ApiVersion.Range constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
+            if ("+".equals(value)) {
+                return __EMPTY__;
+            } else if ("-".equals(value)) {
+                return __EMPTY___;
             } else {
-                return constant;
+                throw new IllegalArgumentException(value);
             }
         }
-
     }
-
 }

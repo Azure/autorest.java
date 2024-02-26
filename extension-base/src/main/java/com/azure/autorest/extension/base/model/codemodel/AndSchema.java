@@ -5,74 +5,66 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 /**
- * an AND relationship between several schemas
- * 
+ * An AND relationship between several schemas.
  */
 public class AndSchema extends ComplexSchema {
 
     /**
      * the set of schemas that this schema is composed of.
      * (Required)
-     * 
      */
     private List<ComplexSchema> allOf = new ArrayList<ComplexSchema>();
     private String discriminatorValue;
 
     /**
-     * the set of schemas that this schema is composed of.
-     * (Required)
-     * 
+     * Gets the schemas that this schema composes. (Required)
+     *
+     * @return The schemas that this schema composes.
      */
     public List<ComplexSchema> getAllOf() {
         return allOf;
     }
 
     /**
-     * the set of schemas that this schema is composed of.
-     * (Required)
-     * 
+     * Sets the schemas that this schema composes. (Required)
+     *
+     * @param allOf The schemas that this schema composes.
      */
     public void setAllOf(List<ComplexSchema> allOf) {
         this.allOf = allOf;
     }
 
+    /**
+     * Gets the value of the discriminator for this schema.
+     *
+     * @return The value of the discriminator for this schema.
+     */
     public String getDiscriminatorValue() {
         return discriminatorValue;
     }
 
+    /**
+     * Sets the value of the discriminator for this schema.
+     *
+     * @param discriminatorValue The value of the discriminator for this schema.
+     */
     public void setDiscriminatorValue(String discriminatorValue) {
         this.discriminatorValue = discriminatorValue;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(AndSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("allOf");
-        sb.append('=');
-        sb.append(((this.allOf == null)?"<null>":this.allOf));
-        sb.append(',');
-        sb.append("discriminatorValue");
-        sb.append('=');
-        sb.append(((this.discriminatorValue == null)?"<null>":this.discriminatorValue));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return AndSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[allOf="
+            + Objects.toString(allOf, "<null>") + ",discriminatorValue="
+            + Objects.toString(discriminatorValue, "<null>") + ']';
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.allOf == null)? 0 :this.allOf.hashCode()));
-        result = ((result* 31)+((this.discriminatorValue == null)? 0 :this.discriminatorValue.hashCode()));
-        return result;
+        return Objects.hash(allOf, discriminatorValue);
     }
 
     @Override
@@ -80,11 +72,11 @@ public class AndSchema extends ComplexSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof AndSchema) == false) {
+
+        if (!(other instanceof AndSchema)) {
             return false;
         }
         AndSchema rhs = ((AndSchema) other);
-        return (((this.allOf == rhs.allOf)||((this.allOf!= null)&&this.allOf.equals(rhs.allOf)))&&((this.discriminatorValue == rhs.discriminatorValue)||((this.discriminatorValue!= null)&&this.discriminatorValue.equals(rhs.discriminatorValue))));
+        return Objects.equals(allOf, rhs.allOf) && Objects.equals(discriminatorValue, rhs.discriminatorValue);
     }
-
 }

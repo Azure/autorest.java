@@ -5,34 +5,27 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.HashMap;
 import java.util.Map;
-
+import java.util.Objects;
 
 /**
- * a schema that represents a ByteArray value
- * 
+ * Represents a byte array schema.
  */
 public class ByteArraySchema extends PrimitiveSchema {
-
-    /**
-     * date-time format
-     * (Required)
-     * 
-     */
     private ByteArraySchema.Format format;
 
     /**
-     * date-time format
-     * (Required)
-     * 
+     * Gets the byte array format. (Required)
+     *
+     * @return The byte array format.
      */
     public ByteArraySchema.Format getFormat() {
         return format;
     }
 
     /**
-     * date-time format
-     * (Required)
-     * 
+     * Sets the byte array format. (Required)
+     *
+     * @param format The byte array format.
      */
     public void setFormat(ByteArraySchema.Format format) {
         this.format = format;
@@ -40,25 +33,13 @@ public class ByteArraySchema extends PrimitiveSchema {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ByteArraySchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("format");
-        sb.append('=');
-        sb.append(((this.format == null)?"<null>":this.format));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return ByteArraySchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[format="
+            + Objects.toString(format, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.format == null)? 0 :this.format.hashCode()));
-        return result;
+        return Objects.hashCode(format);
     }
 
     @Override
@@ -66,27 +47,22 @@ public class ByteArraySchema extends PrimitiveSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ByteArraySchema) == false) {
+
+        if (!(other instanceof ByteArraySchema)) {
             return false;
         }
+
         ByteArraySchema rhs = ((ByteArraySchema) other);
-        return ((this.format == rhs.format)||((this.format!= null)&&this.format.equals(rhs.format)));
+        return Objects.equals(format, rhs.format);
     }
 
     public enum Format {
-
         BASE_64_URL("base64url"),
         BYTE("byte");
+
         private final String value;
-        private final static Map<String, ByteArraySchema.Format> CONSTANTS = new HashMap<String, ByteArraySchema.Format>();
 
-        static {
-            for (ByteArraySchema.Format c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
-
-        private Format(String value) {
+        Format(String value) {
             this.value = value;
         }
 
@@ -95,16 +71,22 @@ public class ByteArraySchema extends PrimitiveSchema {
             return this.value;
         }
 
+        /**
+         * Gets the value of the format.
+         *
+         * @return The value of the format.
+         */
         public String value() {
             return this.value;
         }
 
         public static ByteArraySchema.Format fromValue(String value) {
-            ByteArraySchema.Format constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
+            if ("base64url".equals(value)) {
+                return BASE_64_URL;
+            } else if ("byte".equals(value)) {
+                return BYTE;
             } else {
-                return constant;
+                throw new IllegalArgumentException(value);
             }
         }
 
