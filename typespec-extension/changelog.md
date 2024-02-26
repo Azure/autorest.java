@@ -1,5 +1,11 @@
 # Release History
 
+## 0.13.18 (Unreleased)
+
+Compatible with compiler 0.53.
+
+- Fixed bug that 'partial update' will execute twice when generate from TypeSpec.
+
 ## 0.13.7 (2024-02-23)
 
 Compatible with compiler 0.53.
