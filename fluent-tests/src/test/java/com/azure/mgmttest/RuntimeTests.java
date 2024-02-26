@@ -164,12 +164,12 @@ public class RuntimeTests {
 
         // verify x-version-update tag used in Azure Java repo
         String content = new String(Files.readAllBytes(pomFile.toPath()));
-        Assertions.assertTrue(content.contains("<artifactId>mockito-core</artifactId>"));
-        Assertions.assertTrue(content.contains("<artifactId>byte-buddy</artifactId>"));
-        Assertions.assertTrue(content.contains("<artifactId>byte-buddy-agent</artifactId>"));
-        Assertions.assertTrue(content.contains("<!-- {x-version-update;org.mockito:mockito-core;external_dependency} -->"));
-        Assertions.assertTrue(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy;external_dependency} -->"));
-        Assertions.assertTrue(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy-agent;external_dependency} -->"));
+        Assertions.assertFalse(content.contains("<artifactId>mockito-core</artifactId>"));
+        Assertions.assertFalse(content.contains("<artifactId>byte-buddy</artifactId>"));
+        Assertions.assertFalse(content.contains("<artifactId>byte-buddy-agent</artifactId>"));
+        Assertions.assertFalse(content.contains("<!-- {x-version-update;org.mockito:mockito-core;external_dependency} -->"));
+        Assertions.assertFalse(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy;external_dependency} -->"));
+        Assertions.assertFalse(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy-agent;external_dependency} -->"));
     }
 
     @Test

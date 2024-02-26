@@ -31,7 +31,8 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodMockTestTemplate.ClientMethodInfo, JavaFile> {
+public class FluentMethodMockTestTemplate
+    implements IJavaTemplate<FluentMethodMockTestTemplate.ClientMethodInfo, JavaFile> {
 
     public static class ClientMethodInfo {
         private final String className;
@@ -57,23 +58,13 @@ public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodM
 
     @Override
     public void write(ClientMethodInfo info, JavaFile javaFile) {
-        Set<String> imports = new HashSet<>(Arrays.asList(
-                AccessToken.class.getName(),
-                ClassType.HTTP_CLIENT.getFullName(),
-                ClassType.HTTP_HEADERS.getFullName(),
-                ClassType.HTTP_REQUEST.getFullName(),
-                HttpResponse.class.getName(),
-                ClassType.AZURE_ENVIRONMENT.getFullName(),
-                AzureProfile.class.getName(),
-                "org.junit.jupiter.api.Test",
-                "org.mockito.ArgumentCaptor",
-                "org.mockito.Mockito",
-                ByteBuffer.class.getName(),
-                Mono.class.getName(),
-                Flux.class.getName(),
-                StandardCharsets.class.getName(),
-                OffsetDateTime.class.getName()
-        ));
+        Set<String> imports = new HashSet<>(
+            Arrays.asList(AccessToken.class.getName(), ClassType.HTTP_CLIENT.getFullName(),
+                ClassType.HTTP_HEADERS.getFullName(), ClassType.HTTP_REQUEST.getFullName(),
+                HttpResponse.class.getName(), "com.azure.core.test.http.MockHttpResponse",
+                ClassType.AZURE_ENVIRONMENT.getFullName(), AzureProfile.class.getName(), "org.junit.jupiter.api.Test",
+                ByteBuffer.class.getName(), Mono.class.getName(), Flux.class.getName(),
+                StandardCharsets.class.getName(), OffsetDateTime.class.getName()));
 
         String className = info.className;
         FluentMethodMockUnitTest fluentMethodMockUnitTest = info.fluentMethodMockUnitTest;
@@ -89,16 +80,21 @@ public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodM
         String clientMethodInvocationWithResponse;
         FluentExampleTemplate.ExampleMethod exampleMethod;
         if (fluentMethodMockUnitTest.getFluentResourceCreateExample() != null) {
-            exampleMethod = FluentExampleTemplate.getInstance().generateExampleMethod(fluentMethodMockUnitTest.getFluentResourceCreateExample());
+            exampleMethod = FluentExampleTemplate.getInstance()
+                .generateExampleMethod(fluentMethodMockUnitTest.getFluentResourceCreateExample());
         } else if (fluentMethodMockUnitTest.getFluentMethodExample() != null) {
-            exampleMethod = FluentExampleTemplate.getInstance().generateExampleMethod(fluentMethodMockUnitTest.getFluentMethodExample());
+            exampleMethod = FluentExampleTemplate.getInstance()
+                .generateExampleMethod(fluentMethodMockUnitTest.getFluentMethodExample());
         } else {
             throw new IllegalStateException();
         }
         String clientMethodInvocation = exampleMethod.getMethodContent();
         if (hasReturnValue) {
-            // hack on replaceResponseForValue, as in "update" case, "exampleMethod.getMethodContent()" would be a code block, not a single line of code invocation.
-            clientMethodInvocationWithResponse = fluentReturnType + " response = " + (isResponseType ? replaceResponseForValue(clientMethodInvocation) : clientMethodInvocation);
+            // hack on replaceResponseForValue, as in "update" case, "exampleMethod.getMethodContent()" would be a code
+            // block, not a single line of code invocation.
+            clientMethodInvocationWithResponse = fluentReturnType + " response = " + (isResponseType
+                ? replaceResponseForValue(clientMethodInvocation)
+                : clientMethodInvocation);
         } else {
             clientMethodInvocationWithResponse = clientMethodInvocation;
         }
@@ -119,7 +115,8 @@ public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodM
         }
 
         // prepare assertions
-        ModelExampleWriter.ExampleNodeAssertionVisitor assertionVisitor = new ModelExampleWriter.ExampleNodeAssertionVisitor();
+        ModelExampleWriter.ExampleNodeAssertionVisitor assertionVisitor
+            = new ModelExampleWriter.ExampleNodeAssertionVisitor();
         if (hasReturnValue) {
             imports.add("org.junit.jupiter.api.Assertions");
 
@@ -131,36 +128,33 @@ public class FluentMethodMockTestTemplate implements IJavaTemplate<FluentMethodM
 
         javaFile.publicFinalClass(className, classBlock -> {
             classBlock.annotation("Test");
-            classBlock.publicMethod(String.format("void test%1$s() throws Exception", CodeNamer.toPascalCase(clientMethod.getName())), methodBlock -> {
-                // prepare mock class
-                methodBlock.line("HttpClient httpClient = Mockito.mock(HttpClient.class);");
-                methodBlock.line("HttpResponse httpResponse = Mockito.mock(HttpResponse.class);");
-                methodBlock.line("ArgumentCaptor<HttpRequest> httpRequest = ArgumentCaptor.forClass(HttpRequest.class);");
-                methodBlock.line();
-                // response
-                methodBlock.line("String responseStr = " + ClassType.STRING.defaultValueExpression(jsonStr) + ";");
-                methodBlock.line();
-                // mock class
-                methodBlock.line("Mockito.when(httpResponse.getStatusCode()).thenReturn(" + statusCode + ");");
-                methodBlock.line("Mockito.when(httpResponse.getHeaders()).thenReturn(new HttpHeaders());");
-                methodBlock.line("Mockito.when(httpResponse.getBody()).thenReturn(Flux.just(ByteBuffer.wrap(responseStr.getBytes(StandardCharsets.UTF_8))));");
-                methodBlock.line("Mockito.when(httpResponse.getBodyAsByteArray()).thenReturn(Mono.just(responseStr.getBytes(StandardCharsets.UTF_8)));");
-                methodBlock.line("Mockito.when(httpClient.send(httpRequest.capture(), Mockito.any())).thenReturn(Mono.defer(() -> {");
-                methodBlock.line("    Mockito.when(httpResponse.getRequest()).thenReturn(httpRequest.getValue());");
-                methodBlock.line("    return Mono.just(httpResponse);");
-                methodBlock.line("}));");
-                methodBlock.line();
-                // initialize manager
-                methodBlock.line(String.format("%1$s manager = %1$s.configure().withHttpClient(httpClient).authenticate(tokenRequestContext -> Mono.just(new AccessToken(\"this_is_a_token\", OffsetDateTime.MAX)), new AzureProfile(\"\", \"\", AzureEnvironment.AZURE));", exampleMethod.getExample().getEntryType().getName()));
-                methodBlock.line();
-                // method invocation
-                methodBlock.line(clientMethodInvocationWithResponse);
-                methodBlock.line();
-                // verification
-                if (hasReturnValue) {
-                    assertionVisitor.getAssertions().forEach(methodBlock::line);
-                }
-            });
+            classBlock.publicMethod(
+                "void test" + CodeNamer.toPascalCase(clientMethod.getName()) + "() throws Exception",
+                methodBlock -> {
+                    // response
+                    methodBlock.line("String responseStr = " + ClassType.STRING.defaultValueExpression(jsonStr) + ";");
+                    methodBlock.line();
+
+                    // prepare mock class
+                    methodBlock.line(
+                        "HttpClient httpClient = response -> Mono.just(new MockHttpResponse(response, " + statusCode
+                            + ", responseStr.getBytes(StandardCharsets.UTF_8)));");
+
+                    // initialize manager
+                    String exampleMethodName = exampleMethod.getExample().getEntryType().getName();
+                    methodBlock.line(exampleMethodName + " manager = " + exampleMethodName + ".configure()"
+                        + ".withHttpClient(httpClient).authenticate(tokenRequestContext -> "
+                        + "Mono.just(new AccessToken(\"this_is_a_token\", OffsetDateTime.MAX)), "
+                        + "new AzureProfile(\"\", \"\", AzureEnvironment.AZURE));");
+                    methodBlock.line();
+                    // method invocation
+                    methodBlock.line(clientMethodInvocationWithResponse);
+                    methodBlock.line();
+                    // verification
+                    if (hasReturnValue) {
+                        assertionVisitor.getAssertions().forEach(methodBlock::line);
+                    }
+                });
 
             // helper method
             if (exampleMethod.getHelperFeatures().contains(ExampleHelperFeature.MapOfMethod)) {
