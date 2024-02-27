@@ -53,7 +53,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import reactor.util.annotation.NonNull;
 
 import java.io.InputStream;
 import java.math.BigDecimal;
@@ -401,8 +400,6 @@ public class ClassType implements IType {
         .xmlElementDeserializationMethod("getNullableElement(URL::new)")
         .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, URL::new)")
         .build();
-
-    public static final ClassType NON_NULL = new ClassType.Builder(false).knownClass(NonNull.class).build();
 
     public static final ClassType STREAM_RESPONSE = new ClassType.Builder(false).knownClass(StreamResponse.class)
         .build();
