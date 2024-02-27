@@ -81,6 +81,33 @@ model OperationDetails2 {
   lroResult?: Resource;
 }
 
+@pagedResult
+model StringsList {
+  @items
+  value: string[];
+
+  @nextLink
+  nextLink?: string;
+}
+
+@pagedResult
+model Int32sList {
+  @items
+  value: int32[];
+
+  @nextLink
+  nextLink?: string;
+}
+
+@pagedResult
+model DateTimesList {
+  @items
+  value: utcDateTime[];
+
+  @nextLink
+  nextLink?: string;
+}
+
 op CustomLongRunningOperation<
   TParams extends TypeSpec.Reflection.Model,
   TResponse extends TypeSpec.Reflection.Model
@@ -157,4 +184,13 @@ interface ResponseOp {
   // OperationDetails does not have "result" property
   @route("/lro-invalid-result")
   lroInvalidResult is CustomLongRunningOperation<Resource, OperationDetails2>;
+
+  @route("/paged-string")
+  listStrings(): StringsList;
+
+  @route("/paged-int32")
+  listIntegers(): Int32sList;
+
+  // @route("/paged-datetime")
+  // listDateTimes(): DateTimesList;
 }

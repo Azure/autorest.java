@@ -95,7 +95,7 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
                                 "        pagedResponse.getContinuationToken(),\n" +
                                 "        null));\n" +
                                 "})",
-                        responseBodyType, expressionMapFromBinaryData));
+                        responseBodyType.asNullable(), expressionMapFromBinaryData));
             }
         } else if (methodType == ClientMethodType.LongRunningBeginAsync) {
             String methodName = protocolMethod.getName();
