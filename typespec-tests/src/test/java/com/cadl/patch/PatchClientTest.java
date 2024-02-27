@@ -124,10 +124,26 @@ public class PatchClientTest {
     public void testSerializationForHierarchicalModel() throws JsonProcessingException {
         Fish fish = new Salmon().setAge(1);
         fish.setColor("pink");
+        Assertions.assertEquals("salmon", fish.getKind());
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
         fish.setColor(null);
         String json = BinaryData.fromObject(fish).toString();
         JsonNode node = OBJECT_MAPPER.readTree(json);
         Assertions.assertEquals(JsonNodeType.NULL, node.get("color").getNodeType());
+    }
+
+    @Test
+    public void testSerializePropertiesInUpdatedPropertiesMapOnly() throws JsonProcessingException {
+        Resource resource = new Resource();
+        resource.setDescription("my desc");
+        resource.setIntValue(1);
+        // create a new object
+        Resource newResource = BinaryData.fromObject(resource).toObject(Resource.class);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(newResource, true);
+        newResource.setIntValue(null);
+        String json = BinaryData.fromObject(newResource).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertNull(node.get("description"));
+        Assertions.assertEquals(JsonNodeType.NULL,  node.get("intValue").getNodeType());
     }
 }
