@@ -61,6 +61,13 @@ public final class PatchClient {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * <p>
@@ -84,6 +91,13 @@ public final class PatchClient {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * 
@@ -124,6 +138,13 @@ public final class PatchClient {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * <p>
@@ -147,6 +168,13 @@ public final class PatchClient {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * 

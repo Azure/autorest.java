@@ -34,6 +34,8 @@ model Resource {
   innerModelProperty?: InnerModel;
 
   array?: InnerModel[];
+
+  fish?: Fish;
 }
 
 model InnerModel {

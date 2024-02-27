@@ -76,6 +76,12 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private List<InnerModel> array;
 
+    /*
+     * The fish property.
+     */
+    @Generated
+    private Fish fish;
+
     @Generated
     private boolean jsonMergePatch;
 
@@ -289,6 +295,29 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
+     * Get the fish property: The fish property.
+     * 
+     * @return the fish value.
+     */
+    @Generated
+    public Fish getFish() {
+        return this.fish;
+    }
+
+    /**
+     * Set the fish property: The fish property.
+     * 
+     * @param fish the fish value to set.
+     * @return the Resource object itself.
+     */
+    @Generated
+    public Resource setFish(Fish fish) {
+        this.fish = fish;
+        this.updatedProperties.add("fish");
+        return this;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -305,6 +334,7 @@ public final class Resource implements JsonSerializable<Resource> {
             jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
             jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
             jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
+            jsonWriter.writeJsonField("fish", this.fish);
             return jsonWriter.writeEndObject();
         }
     }
@@ -371,6 +401,15 @@ public final class Resource implements JsonSerializable<Resource> {
                 jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
             }
         }
+        if (updatedProperties.contains("fish")) {
+            if (this.fish == null) {
+                jsonWriter.writeNullField("fish");
+            } else {
+                this.fish.serializeAsJsonMergePatch(true);
+                jsonWriter.writeJsonField("fish", this.fish);
+                this.fish.serializeAsJsonMergePatch(false);
+            }
+        }
         return jsonWriter.writeEndObject();
     }
 
@@ -395,6 +434,7 @@ public final class Resource implements JsonSerializable<Resource> {
             ResourceEnumValue enumValue = null;
             InnerModel innerModelProperty = null;
             List<InnerModel> array = null;
+            Fish fish = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -417,6 +457,8 @@ public final class Resource implements JsonSerializable<Resource> {
                     innerModelProperty = InnerModel.fromJson(reader);
                 } else if ("array".equals(fieldName)) {
                     array = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
+                } else if ("fish".equals(fieldName)) {
+                    fish = Fish.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
@@ -431,6 +473,7 @@ public final class Resource implements JsonSerializable<Resource> {
             deserializedResource.enumValue = enumValue;
             deserializedResource.innerModelProperty = innerModelProperty;
             deserializedResource.array = array;
+            deserializedResource.fish = fish;
 
             return deserializedResource;
         });
