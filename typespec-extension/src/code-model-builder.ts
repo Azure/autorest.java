@@ -2125,6 +2125,9 @@ export class CodeModelBuilder {
       }
       if (discriminatorProperty) {
         objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+        // as we do not expose the discriminator property, its schema is fine to be just a string (and we do not want to generate an enum that not used anywhere)
+        // TODO: support enum schema, if we expose the discriminator property
+        objectSchema.discriminator.property.schema = this.stringSchema;
       } else {
         // fallback to property name, if cannot find the discriminator property
         objectSchema.discriminator = new Discriminator(
@@ -2796,9 +2799,9 @@ export class CodeModelBuilder {
             schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
             schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
 
-            if (schema.discriminator?.property?.schema) {
-              innerApplySchemaUsage(schema.discriminator?.property?.schema, schemaUsage);
-            }
+            // if (schema.discriminator?.property?.schema) {
+            //   innerApplySchemaUsage(schema.discriminator?.property?.schema, schemaUsage);
+            // }
           }
 
           // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
