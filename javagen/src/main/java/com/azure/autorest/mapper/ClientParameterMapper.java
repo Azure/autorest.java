@@ -6,7 +6,6 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.Versioning;
@@ -15,7 +14,6 @@ import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.SchemaUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * A mapper that maps an {@link Parameter} to a {@link ClientMethodParameter}.

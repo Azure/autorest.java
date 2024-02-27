@@ -14,7 +14,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.util.CodeNamer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class CustomClientParameterMapper implements IMapper<Parameter, ClientMethodParameter> {
 
