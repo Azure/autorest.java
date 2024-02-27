@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the implementations for Array.
- * Illustrates various types of arrays.
+ * Package containing the classes for Naming.
+ * Describe changing names of types in a client with `@clientName`.
  * <!-- end generated doc -->
  */
-package com.type.array.implementation;
+package com.client.naming;

@@ -45,7 +45,7 @@ public final class UnionFloatLiteralAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     property: String(42.42/43.43) (Required)
+     *     property: String(43.125/46.875) (Required)
      * }
      * }</pre>
      * 
@@ -69,7 +69,7 @@ public final class UnionFloatLiteralAsyncClient {
      * </p>
      * <pre>{@code
      * {
-     *     property: String(42.42/43.43) (Required)
+     *     property: String(43.125/46.875) (Required)
      * }
      * }</pre>
      * 

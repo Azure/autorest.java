@@ -4,8 +4,8 @@
 
 /**
  * <!-- start generated doc -->
- * Package containing the implementations for Array.
- * Illustrates various types of arrays.
+ * Package containing the classes for Json.
+ * Projection.
  * <!-- end generated doc -->
  */
-package com.type.array.implementation;
+package com.serialization.encodedname.json;
