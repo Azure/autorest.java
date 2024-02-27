@@ -13,6 +13,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * A logger for AutoRest plugins.
+ */
 public final class PluginLogger extends MarkerIgnoringBase {
     private final NewPlugin plugin;
     private final List<String> keys;

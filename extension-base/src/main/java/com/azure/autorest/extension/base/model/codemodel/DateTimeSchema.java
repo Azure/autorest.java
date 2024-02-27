@@ -3,36 +3,27 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import java.util.Objects;
 
 /**
- * a schema that represents a DateTime value
- * 
+ * Represents a date-time value.
  */
 public class DateTimeSchema extends PrimitiveSchema {
-
-    /**
-     * date-time format
-     * (Required)
-     * 
-     */
     private DateTimeSchema.Format format;
 
     /**
-     * date-time format
-     * (Required)
-     * 
+     * Gets the date-time format. (Required)
+     *
+     * @return The date-time format.
      */
     public DateTimeSchema.Format getFormat() {
         return format;
     }
 
     /**
-     * date-time format
-     * (Required)
-     * 
+     * Sets the date-time format. (Required)
+     *
+     * @param format The date-time format.
      */
     public void setFormat(DateTimeSchema.Format format) {
         this.format = format;
@@ -40,25 +31,13 @@ public class DateTimeSchema extends PrimitiveSchema {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DateTimeSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("format");
-        sb.append('=');
-        sb.append(((this.format == null)?"<null>":this.format));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return DateTimeSchema.class.getName() + '@' + Integer.toHexString(System.identityHashCode(this)) + "[format="
+        + Objects.toString(format, "<null>") + ']';
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.format == null)? 0 :this.format.hashCode()));
-        return result;
+        return Objects.hash(format);
     }
 
     @Override
@@ -66,27 +45,24 @@ public class DateTimeSchema extends PrimitiveSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof DateTimeSchema) == false) {
+
+        if (!(other instanceof DateTimeSchema)) {
             return false;
         }
+
         DateTimeSchema rhs = ((DateTimeSchema) other);
-        return ((this.format == rhs.format)||((this.format!= null)&&this.format.equals(rhs.format)));
+        return format == rhs.format;
     }
 
+    /**
+     * The format of the date-time.
+     */
     public enum Format {
-
         DATE_TIME("date-time"),
         DATE_TIME_RFC_1123("date-time-rfc1123");
         private final String value;
-        private final static Map<String, DateTimeSchema.Format> CONSTANTS = new HashMap<String, DateTimeSchema.Format>();
 
-        static {
-            for (DateTimeSchema.Format c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
-
-        private Format(String value) {
+        Format(String value) {
             this.value = value;
         }
 
@@ -95,16 +71,29 @@ public class DateTimeSchema extends PrimitiveSchema {
             return this.value;
         }
 
+        /**
+         * Gets the value of the format.
+         *
+         * @return The value of the format.
+         */
         public String value() {
             return this.value;
         }
 
+        /**
+         * Parses a value to a Format instance.
+         *
+         * @param value The value to parse.
+         * @return The parsed Format instance.
+         * @throws IllegalArgumentException If the value does not match a known Format.
+         */
         public static DateTimeSchema.Format fromValue(String value) {
-            DateTimeSchema.Format constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
+            if ("date-time".equals(value)) {
+                return DATE_TIME;
+            } else if ("date-time-rfc1123".equals(value)) {
+                return DATE_TIME_RFC_1123;
             } else {
-                return constant;
+                throw new IllegalArgumentException(value);
             }
         }
 

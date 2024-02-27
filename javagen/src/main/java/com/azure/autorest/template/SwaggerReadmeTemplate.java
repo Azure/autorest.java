@@ -139,8 +139,11 @@ public class SwaggerReadmeTemplate {
     }
 
     private static void updateOverrideOptions(JavaSettings settings) {
-        settings.getAutorestSettings().getTitle()
-                .ifPresent(value -> OVERRIDE_OPTIONS.putIfAbsent("title", value));
+        String title = settings.getAutorestSettings().getTitle();
+        if (title != null) {
+            OVERRIDE_OPTIONS.put("title", title);
+        }
+
         if (!settings.getAutorestSettings().getSecurity().isEmpty()) {
             OVERRIDE_OPTIONS.putIfAbsent("security",
                     stringOrArray(settings.getAutorestSettings().getSecurity()));
@@ -149,8 +152,11 @@ public class SwaggerReadmeTemplate {
             OVERRIDE_OPTIONS.putIfAbsent("security-scopes",
                     stringOrArray(settings.getAutorestSettings().getSecurityScopes()));
         }
-        settings.getAutorestSettings().getSecurityHeaderName()
-                .ifPresent(value -> OVERRIDE_OPTIONS.putIfAbsent("security-header-name", value));
+
+        String securityHeaderName = settings.getAutorestSettings().getSecurityHeaderName();
+        if (securityHeaderName != null) {
+            OVERRIDE_OPTIONS.put("security-header-name", securityHeaderName);
+        }
     }
 
     private void line(String text) {

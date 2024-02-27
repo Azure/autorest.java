@@ -5,58 +5,46 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 /**
- * represents  deprecation information for a given aspect
- * 
+ * Represents deprecation information.
  */
 public class Deprecation {
-
-    /**
-     * the reason why this aspect
-     * (Required)
-     * 
-     */
     private String message;
-    /**
-     * the api versions that this deprecation is applicable to.
-     * (Required)
-     * 
-     */
-    private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
+    private List<ApiVersion> apiVersions = new ArrayList<>();
 
     /**
-     * the reason why this aspect
-     * (Required)
-     * 
+     * Gets the deprecated message. (Required)
+     *
+     * @return The deprecated message.
      */
     public String getMessage() {
         return message;
     }
 
     /**
-     * the reason why this aspect
-     * (Required)
-     * 
+     * Sets the deprecated message. (Required)
+     *
+     * @param message The deprecated message.
      */
     public void setMessage(String message) {
         this.message = message;
     }
 
     /**
-     * the api versions that this deprecation is applicable to.
-     * (Required)
-     * 
+     * Gets the API versions that this deprecation is applicable to. (Required)
+     *
+     * @return The API versions that this deprecation is applicable to.
      */
     public List<ApiVersion> getApiVersions() {
         return apiVersions;
     }
 
     /**
-     * the api versions that this deprecation is applicable to.
-     * (Required)
-     * 
+     * Sets the API versions that this deprecation is applicable to. (Required)
+     *
+     * @param apiVersions The API versions that this deprecation is applicable to.
      */
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
@@ -64,30 +52,13 @@ public class Deprecation {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(Deprecation.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("message");
-        sb.append('=');
-        sb.append(((this.message == null)?"<null>":this.message));
-        sb.append(',');
-        sb.append("apiVersions");
-        sb.append('=');
-        sb.append(((this.apiVersions == null)?"<null>":this.apiVersions));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return Deprecation.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[message="
+                + Objects.toString(message, "<null>") + ",apiVersions=" + Objects.toString(apiVersions, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.message == null)? 0 :this.message.hashCode()));
-        result = ((result* 31)+((this.apiVersions == null)? 0 :this.apiVersions.hashCode()));
-        return result;
+        return Objects.hash(message, apiVersions);
     }
 
     @Override
@@ -95,11 +66,13 @@ public class Deprecation {
         if (other == this) {
             return true;
         }
-        if ((other instanceof Deprecation) == false) {
+
+        if (!(other instanceof Deprecation)) {
             return false;
         }
+
         Deprecation rhs = ((Deprecation) other);
-        return (((this.message == rhs.message)||((this.message!= null)&&this.message.equals(rhs.message)))&&((this.apiVersions == rhs.apiVersions)||((this.apiVersions!= null)&&this.apiVersions.equals(rhs.apiVersions))));
+        return Objects.equals(message, rhs.message) && Objects.equals(apiVersions, rhs.apiVersions);
     }
 
 }

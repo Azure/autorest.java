@@ -6,36 +6,45 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a request to an operation.
+ */
 public class Request extends Metadata {
+    private List<Parameter> parameters = new ArrayList<>();
+    private List<Parameter> signatureParameters = new ArrayList<>();
 
     /**
-     * the parameter inputs to the operation
-     * 
-     */
-    private List<Parameter> parameters = new ArrayList<Parameter>();
-
-    private List<Parameter> signatureParameters = new ArrayList<Parameter>();
-
-    /**
-     * the parameter inputs to the operation
-     * 
+     * Gets the parameter inputs to the operation.
+     *
+     * @return The parameter inputs to the operation.
      */
     public List<Parameter> getParameters() {
         return parameters;
     }
 
     /**
-     * the parameter inputs to the operation
-     * 
+     * Sets the parameter inputs to the operation.
+     *
+     * @param parameters The parameter inputs to the operation.
      */
     public void setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
     }
 
+    /**
+     * Gets the signature parameters.
+     *
+     * @return The signature parameters.
+     */
     public List<Parameter> getSignatureParameters() {
         return signatureParameters;
     }
 
+    /**
+     * Sets the signature parameters.
+     *
+     * @param signatureParameters The signature parameters.
+     */
     public void setSignatureParameters(List<Parameter> signatureParameters) {
         this.signatureParameters = signatureParameters;
     }

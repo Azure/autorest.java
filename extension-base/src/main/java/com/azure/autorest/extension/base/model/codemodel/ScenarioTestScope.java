@@ -3,43 +3,41 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
+ * Represents the scope of a test scenario.
  */
 public enum ScenarioTestScope {
 
     /**
-     * All of the following API scenario and steps should be under some resourceGroup. It means:
+     * All the following API scenario and steps should be under some resourceGroup. It means:
      * The consumer (API scenario runner or anything consumes API scenario) SHOULD maintain the resource group itself.
-     * Usually it requires user to input the subscriptionId/location, then it creates the resource group before test running, and deletes the resource group after running
+     * Usually it requires user to input the subscriptionId/location, then it creates the resource group before test
+     * running, and deletes the resource group after running
      * The consumer SHOULD set the following variables:
-     *  - subscriptionId
-     *  - resourceGroupName
-     *  - location
+     * - subscriptionId
+     * - resourceGroupName
+     * - location
      */
-    RESOURCE_GROUP("ResourceGroup")
-    ;
+    RESOURCE_GROUP("ResourceGroup");
 
     private final String value;
-    private static final Map<String, ScenarioTestScope> CONSTANTS = new HashMap<>();
-
-    static {
-        for (ScenarioTestScope stepType : ScenarioTestScope.values()) {
-            CONSTANTS.put(stepType.value, stepType);
-        }
-    }
 
     ScenarioTestScope(String value) {
         this.value = value;
     }
 
+    /**
+     * Gets the ScenarioTestScope from its value.
+     *
+     * @param value The value.
+     * @return The ScenarioTestScope.
+     * @throws IllegalArgumentException If the value is invalid.
+     */
     public static ScenarioTestScope fromValue(String value) {
-        ScenarioTestScope stepType = CONSTANTS.get(value);
-        if (stepType == null) {
+        if ("ResourceGroup".equals(value)) {
+            return RESOURCE_GROUP;
+        } else {
             throw new IllegalArgumentException(value);
         }
-        return stepType;
     }
 }

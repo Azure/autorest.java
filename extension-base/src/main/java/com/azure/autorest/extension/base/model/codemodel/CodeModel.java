@@ -6,83 +6,85 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * CodeModel
+ * Represents a code model.
  * <p>
- * the model that contains all the information required to generate a service api
- * 
+ * A code model contains all the information required to generate a service API.
  */
 public class CodeModel extends Client {
-
-    /**
-     * code model information
-     * (Required)
-     * 
-     */
     private Info info;
-    /**
-     * the full set of schemas for a given service, categorized into convenient collections
-     * (Required)
-     * 
-     */
     private Schemas schemas;
-
     private List<Client> clients = new ArrayList<>();
-
-    /**
-     * test model definition
-     */
     private TestModel testModel;
 
     /**
-     * code model information
-     * (Required)
-     * 
+     * Gets the code model information. (Required)
+     *
+     * @return The code model information.
      */
     public Info getInfo() {
         return info;
     }
 
     /**
-     * code model information
-     * (Required)
-     * 
+     * Sets the code model information. (Required)
+     *
+     * @param info The code model information.
      */
     public void setInfo(Info info) {
         this.info = info;
     }
 
     /**
-     * the full set of schemas for a given service, categorized into convenient collections
-     * (Required)
-     * 
+     * Gets the full set of schemas for a given service, categorized into convenient collections. (Required)
+     *
+     * @return The full set of schemas for a given service, categorized into convenient collections.
      */
     public Schemas getSchemas() {
         return schemas;
     }
 
     /**
-     * the full set of schemas for a given service, categorized into convenient collections
-     * (Required)
-     * 
+     * Sets the full set of schemas for a given service, categorized into convenient collections. (Required)
+     *
+     * @param schemas The full set of schemas for a given service, categorized into convenient collections.
      */
     public void setSchemas(Schemas schemas) {
         this.schemas = schemas;
     }
 
+    /**
+     * Gets the clients of the code model.
+     *
+     * @return The clients of the code model.
+     */
     public List<Client> getClients() {
         return clients;
     }
 
+    /**
+     * Sets the clients of the code model.
+     *
+     * @param clients The clients of the code model.
+     */
     public void setClients(List<Client> clients) {
         this.clients = clients;
     }
 
+    /**
+     * Gets the test model definition.
+     *
+     * @return The test model definition.
+     */
     public TestModel getTestModel() {
         return testModel;
     }
 
+    /**
+     * Sets the test model definition.
+     *
+     * @param testModel The test model definition.
+     */
     public void setTestModel(TestModel testModel) {
         this.testModel = testModel;
     }

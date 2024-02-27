@@ -6,18 +6,19 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a value.
+ */
 public class Value extends Metadata {
 
     /**
      * custom extensible metadata for individual language generators
      * (Required)
-     *
      */
     private Schema schema;
     /**
      * all schema types
      * (Required)
-     *
      */
     private boolean required;
 
@@ -25,171 +26,180 @@ public class Value extends Metadata {
     /**
      * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
      * (Required)
-     *
      */
     private String $key;
     /**
      * description of the aspect.
      * (Required)
-     *
      */
     private String description;
     /**
-     *
      * (Required)
-     *
      */
     private String uid;
     /**
      * a short description
-     *
      */
     private String summary;
     /**
      * API versions that this applies to. Undefined means all versions
-     *
      */
     private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
     /**
      * represents  deprecation information for a given aspect
-     *
      */
     private Deprecation deprecated;
     /**
      * a reference to external documentation
-     *
      */
     private ExternalDocumentation externalDocs;
 
     /**
-     * a short description
+     * Gets the summary of the value.
      *
+     * @return The summary of the value.
      */
     public String getSummary() {
         return summary;
     }
 
     /**
-     * a short description
+     * Sets the summary of the value.
      *
+     * @param summary The summary of the value.
      */
     public void setSummary(String summary) {
         this.summary = summary;
     }
 
     /**
+     * Gets the unique identifier of the value. (Required)
      *
-     * (Required)
-     *
+     * @return The unique identifier of the value.
      */
     public String getUid() {
         return uid;
     }
 
     /**
+     * Sets the unique identifier of the value. (Required)
      *
-     * (Required)
-     *
+     * @param uid The unique identifier of the value.
      */
     public void setUid(String uid) {
         this.uid = uid;
     }
 
     /**
-     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
-     * (Required)
+     * Gets the key of the value. (Required)
      *
+     * @return The key of the value.
      */
     public String get$key() {
         return $key;
     }
 
     /**
-     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
-     * (Required)
+     * Sets the key of the value. (Required)
      *
+     * @param $key The key of the value.
      */
     public void set$key(String $key) {
         this.$key = $key;
     }
 
     /**
-     * description of the aspect.
-     * (Required)
+     * Gets the description of the value. (Required)
      *
+     * @return The description of the value.
      */
     public String getDescription() {
         return description;
     }
 
     /**
-     * description of the aspect.
-     * (Required)
+     * Sets the description of the value. (Required)
      *
+     * @param description The description of the value.
      */
     public void setDescription(String description) {
         this.description = description;
     }
 
     /**
-     * API versions that this applies to. Undefined means all versions
+     * Gets the API versions that this applies to. Undefined means all versions.
      *
+     * @return The API versions that this applies to. Undefined means all versions.
      */
     public List<ApiVersion> getApiVersions() {
         return apiVersions;
     }
 
     /**
-     * API versions that this applies to. Undefined means all versions
+     * Sets the API versions that this applies to. Undefined means all versions.
      *
+     * @param apiVersions The API versions that this applies to. Undefined means all versions.
      */
     public void setApiVersions(List<ApiVersion> apiVersions) {
         this.apiVersions = apiVersions;
     }
 
     /**
-     * represents  deprecation information for a given aspect
+     * Gets the deprecation information for the value.
      *
+     * @return The deprecation information for the value.
      */
     public Deprecation getDeprecated() {
         return deprecated;
     }
 
     /**
-     * represents  deprecation information for a given aspect
+     * Sets the deprecation information for the value.
      *
+     * @param deprecated The deprecation information for the value.
      */
     public void setDeprecated(Deprecation deprecated) {
         this.deprecated = deprecated;
     }
 
     /**
-     * a reference to external documentation
+     * Gets a reference to external documentation.
      *
+     * @return A reference to external documentation.
      */
     public ExternalDocumentation getExternalDocs() {
         return externalDocs;
     }
 
     /**
-     * a reference to external documentation
+     * Sets a reference to external documentation.
      *
+     * @param externalDocs A reference to external documentation.
      */
     public void setExternalDocs(ExternalDocumentation externalDocs) {
         this.externalDocs = externalDocs;
     }
 
+    /**
+     * Gets the schema of the value. (Required)
+     *
+     * @return The schema of the value.
+     */
     public Schema getSchema() {
         return schema;
     }
 
+    /**
+     * Sets the schema of the value. (Required)
+     *
+     * @param schema The schema of the value.
+     */
     public void setSchema(Schema schema) {
         // This should ideally be done by the modeler if the header collection prefix is set.
         // The schema should be of type dictionary
         // TODO: remove this when modeler is fixed.
-        if (this.getExtensions() != null
-                && this.getExtensions().getXmsHeaderCollectionPrefix() != null
-                && schema instanceof StringSchema) {
+        if (this.getExtensions() != null && this.getExtensions().getXmsHeaderCollectionPrefix() != null
+            && schema instanceof StringSchema) {
             DictionarySchema dictionarySchema = new DictionarySchema();
             dictionarySchema.setElementType(schema);
             this.schema = dictionarySchema;
@@ -198,18 +208,38 @@ public class Value extends Metadata {
         this.schema = schema;
     }
 
+    /**
+     * Gets whether the value is required.
+     *
+     * @return Whether the value is required.
+     */
     public boolean isRequired() {
         return required;
     }
 
+    /**
+     * Sets whether the value is required.
+     *
+     * @param required Whether the value is required.
+     */
     public void setRequired(boolean required) {
         this.required = required;
     }
 
+    /**
+     * Gets whether the value is nullable.
+     *
+     * @return Whether the value is nullable.
+     */
     public boolean isNullable() {
         return nullable;
     }
 
+    /**
+     * Sets whether the value is nullable.
+     *
+     * @param nullable Whether the value is nullable.
+     */
     public void setNullable(boolean nullable) {
         this.nullable = nullable;
     }

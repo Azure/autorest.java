@@ -5,13 +5,26 @@ package com.azure.autorest.extension.base.model;
 
 import java.util.List;
 
+/**
+ * Represents a smart location.
+ */
 public class SmartLocation {
     private List<Object> path;
 
+    /**
+     * Gets the path of the location.
+     *
+     * @return The path of the location.
+     */
     public List<Object> getPath() {
         return path;
     }
 
+    /**
+     * Sets the path of the location.
+     *
+     * @param path The path of the location.
+     */
     public void setPath(List<Object> path) {
         this.path = path;
     }

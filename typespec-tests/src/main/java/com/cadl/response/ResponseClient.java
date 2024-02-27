@@ -12,6 +12,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
@@ -244,6 +245,50 @@ public final class ResponseClient {
     }
 
     /**
+     * The listStrings operation.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * String
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> listStrings(RequestOptions requestOptions) {
+        return this.serviceClient.listStrings(requestOptions);
+    }
+
+    /**
+     * The listIntegers operation.
+     * <p>
+     * <strong>Response Body Schema</strong>
+     * </p>
+     * <pre>{@code
+     * int
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> listIntegers(RequestOptions requestOptions) {
+        return this.serviceClient.listIntegers(requestOptions);
+    }
+
+    /**
      * The getBinary operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -387,6 +432,43 @@ public final class ResponseClient {
         // Generated convenience method for beginLroInvalidResultWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLroInvalidResultWithModel(BinaryData.fromObject(resource), requestOptions);
+    }
+
+    /**
+     * The listStrings operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<String> listStrings() {
+        // Generated convenience method for listStrings
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.listStrings(requestOptions).mapPage(bodyItemValue -> bodyItemValue.toObject(String.class));
+    }
+
+    /**
+     * The listIntegers operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Integer> listIntegers() {
+        // Generated convenience method for listIntegers
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.listIntegers(requestOptions)
+            .mapPage(bodyItemValue -> bodyItemValue.toObject(Integer.class));
     }
 
     @Generated

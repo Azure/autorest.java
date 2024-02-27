@@ -179,20 +179,20 @@ public class Project {
         }
     }
 
-    private Optional<String> findSdkFolder() {
+    private String findSdkFolder() {
         JavaSettings settings = JavaSettings.getInstance();
-        Optional<String> sdkFolderOpt = settings.getAutorestSettings().getJavaSdksFolder();
-        if (!sdkFolderOpt.isPresent()) {
+        String sdkFolderOpt = settings.getAutorestSettings().getJavaSdksFolder();
+        if (sdkFolderOpt == null) {
             LOGGER.info("'java-sdks-folder' parameter not available");
         } else {
-            if (!Paths.get(sdkFolderOpt.get()).isAbsolute()) {
+            if (!Paths.get(sdkFolderOpt).isAbsolute()) {
                 LOGGER.info("'java-sdks-folder' parameter is not an absolute path");
-                sdkFolderOpt = Optional.empty();
+                sdkFolderOpt = null;
             }
         }
 
         // try to deduct it from "output-folder"
-        if (!sdkFolderOpt.isPresent()) {
+        if (sdkFolderOpt == null) {
             String outputFolder = settings.getAutorestSettings().getOutputFolder();
             if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
                 Path path = Paths.get(outputFolder).normalize();
@@ -213,12 +213,12 @@ public class Project {
                 }
                 if (path != null) {
                     LOGGER.info("'azure-sdk-for-java' SDK folder '{}' deduced from 'output-folder' parameter", path.toString());
-                    sdkFolderOpt = Optional.of(path.toString());
+                    sdkFolderOpt = path.toString();
                 }
             }
         }
 
-        if (!sdkFolderOpt.isPresent()) {
+        if (sdkFolderOpt == null) {
             LOGGER.warn("'azure-sdk-for-java' SDK folder not found, fallback to default versions for dependencies");
         }
 
@@ -256,14 +256,14 @@ public class Project {
     }
 
     protected void findPackageVersions() {
-        Optional<String> sdkFolderOpt = findSdkFolder();
-        this.integratedWithSdk = sdkFolderOpt.isPresent();
-        if (!sdkFolderOpt.isPresent()) {
+        String sdkFolderOpt = findSdkFolder();
+        this.integratedWithSdk = sdkFolderOpt != null;
+        if (sdkFolderOpt == null) {
             return;
         }
 
         // find dependency version from versioning txt
-        Path sdkPath = Paths.get(sdkFolderOpt.get());
+        Path sdkPath = Paths.get(sdkFolderOpt);
         Path versionClientPath = sdkPath.resolve(Paths.get("eng", "versioning", "version_client.txt"));
         Path versionExternalPath = sdkPath.resolve(Paths.get("eng", "versioning", "external_dependencies.txt"));
         if (Files.isReadable(versionClientPath) && Files.isReadable(versionExternalPath)) {

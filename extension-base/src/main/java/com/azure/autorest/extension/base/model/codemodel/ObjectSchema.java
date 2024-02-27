@@ -6,146 +6,169 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * a schema that represents a type with child properties.
- *
+ * Represents an object with child properties.
  */
 public class ObjectSchema extends ComplexSchema {
-
-    /**
-     * a property is a child value in an object
-     *
-     */
     private Discriminator discriminator;
-    /**
-     * the collection of properties that are in this object
-     *
-     */
-    private List<Property> properties = new ArrayList<Property>();
-    /**
-     * maximum number of properties permitted
-     *
-     */
+    private List<Property> properties = new ArrayList<>();
     private double maxProperties;
-    /**
-     * minimum number of properties permitted
-     *
-     */
     private double minProperties;
-
     private Relations parents;
-
     private Relations children;
-
     private String discriminatorValue;
-
     // internal use, not from modelerfour
     private boolean flattenedSchema;
-
     // internal use, not from modelerfour
     private boolean stronglyTypedHeader;
-
     private String crossLanguageDefinitionId;
 
     /**
-     * a property is a child value in an object
+     * Gets the discriminator for this object.
      *
+     * @return The discriminator for this object.
      */
     public Discriminator getDiscriminator() {
         return discriminator;
     }
 
     /**
-     * a property is a child value in an object
+     * Sets the discriminator for this object.
      *
+     * @param discriminator The discriminator for this object.
      */
     public void setDiscriminator(Discriminator discriminator) {
         this.discriminator = discriminator;
     }
 
     /**
-     * the collection of properties that are in this object
+     * Gets the properties that are in this object.
      *
+     * @return The properties that are in this object.
      */
     public List<Property> getProperties() {
         return properties;
     }
 
     /**
-     * the collection of properties that are in this object
+     * Sets the properties that are in this object.
      *
+     * @param properties The properties that are in this object.
      */
     public void setProperties(List<Property> properties) {
         this.properties = properties;
     }
 
     /**
-     * maximum number of properties permitted
+     * Gets the maximum number of properties permitted.
      *
+     * @return The maximum number of properties permitted.
      */
     public double getMaxProperties() {
         return maxProperties;
     }
 
     /**
-     * maximum number of properties permitted
+     * Sets the maximum number of properties permitted.
      *
+     * @param maxProperties The maximum number of properties permitted.
      */
     public void setMaxProperties(double maxProperties) {
         this.maxProperties = maxProperties;
     }
 
     /**
-     * minimum number of properties permitted
+     * Gets the minimum number of properties permitted.
      *
+     * @return The minimum number of properties permitted.
      */
     public double getMinProperties() {
         return minProperties;
     }
 
     /**
-     * minimum number of properties permitted
+     * Sets the minimum number of properties permitted.
      *
+     * @param minProperties The minimum number of properties permitted.
      */
     public void setMinProperties(double minProperties) {
         this.minProperties = minProperties;
     }
 
+    /**
+     * Gets the parents of this object.
+     *
+     * @return The parents of this object.
+     */
     public Relations getParents() {
         return parents;
     }
 
+    /**
+     * Sets the parents of this object.
+     *
+     * @param parents The parents of this object.
+     */
     public void setParents(Relations parents) {
         this.parents = parents;
     }
 
+    /**
+     * Gets the children of this object.
+     *
+     * @return The children of this object.
+     */
     public Relations getChildren() {
         return children;
     }
 
+    /**
+     * Sets the children of this object.
+     *
+     * @param children The children of this object.
+     */
     public void setChildren(Relations children) {
         this.children = children;
     }
 
+    /**
+     * Gets the discriminator value for this object.
+     *
+     * @return The discriminator value for this object.
+     */
     public String getDiscriminatorValue() {
         return discriminatorValue;
     }
 
+    /**
+     * Sets the discriminator value for this object.
+     *
+     * @param discriminatorValue The discriminator value for this object.
+     */
     public void setDiscriminatorValue(String discriminatorValue) {
         this.discriminatorValue = discriminatorValue;
     }
 
+    /**
+     * Gets whether this schema represents a flattened schema.
+     *
+     * @return Whether this schema represents a flattened schema.
+     */
     public boolean isFlattenedSchema() {
         return flattenedSchema;
     }
 
+    /**
+     * Sets whether this schema represents a flattened schema.
+     *
+     * @param flattenedSchema Whether this schema represents a flattened schema.
+     */
     public void setFlattenedSchema(boolean flattenedSchema) {
         this.flattenedSchema = flattenedSchema;
     }
 
     /**
-     * Whether this schema represents a strongly-typed HTTP headers object.
+     * Gets whether this schema represents a strongly-typed HTTP headers object.
      *
      * @return Whether this schema represents a strongly-typed HTTP headers object.
      */
@@ -162,10 +185,20 @@ public class ObjectSchema extends ComplexSchema {
         this.stronglyTypedHeader = stronglyTypedHeader;
     }
 
+    /**
+     * Gets the cross-language definition ID for this object.
+     *
+     * @return The cross-language definition ID for this object.
+     */
     public String getCrossLanguageDefinitionId() {
         return crossLanguageDefinitionId;
     }
 
+    /**
+     * Sets the cross-language definition ID for this object.
+     *
+     * @param crossLanguageDefinitionId The cross-language definition ID for this object.
+     */
     public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }

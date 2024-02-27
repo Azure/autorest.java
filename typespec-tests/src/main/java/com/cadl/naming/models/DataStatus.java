@@ -18,7 +18,7 @@ public final class DataStatus extends ExpandableStringEnum<DataStatus> {
      * Static value Running for DataStatus.
      */
     @Generated
-    public static final DataStatus RUNNING = fromString("Running");
+    public static final DataStatus LRO_RUNNING = fromString("Running");
 
     /**
      * Static value Completed for DataStatus.

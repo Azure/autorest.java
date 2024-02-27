@@ -5,7 +5,7 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 
 /**
- * a schema that represents a choice of several values (ie, an 'enum')
+ * Represents a choice of several values (ie, an 'enum').
  */
 public class SealedChoiceSchema extends ChoiceSchema {
     @Override

@@ -3,98 +3,80 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import java.util.Objects;
 
+/**
+ * Represents a flag value.
+ */
 public class FlagValue {
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
-     */
     private Languages language;
-    /**
-     * 
-     * (Required)
-     * 
-     */
     private double value;
     private DictionaryAny extensions;
 
     /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
+     * Gets the language of the flag value. (Required)
+     *
+     * @return The language of the flag value.
      */
     public Languages getLanguage() {
         return language;
     }
 
     /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
+     * Sets the language of the flag value. (Required)
+     *
+     * @param language The language of the flag value.
      */
     public void setLanguage(Languages language) {
         this.language = language;
     }
 
     /**
-     * 
-     * (Required)
-     * 
+     * Gets the value of the flag. (Required)
+     *
+     * @return The value of the flag.
      */
     public double getValue() {
         return value;
     }
 
     /**
-     * 
-     * (Required)
-     * 
+     * Sets the value of the flag. (Required)
+     *
+     * @param value The value of the flag.
      */
     public void setValue(double value) {
         this.value = value;
     }
 
+    /**
+     * Gets the extensions of the flag value.
+     *
+     * @return The extensions of the flag value.
+     */
     public DictionaryAny getExtensions() {
         return extensions;
     }
 
+    /**
+     * Sets the extensions of the flag value.
+     *
+     * @param extensions The extensions of the flag value.
+     */
     public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(FlagValue.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("language");
-        sb.append('=');
-        sb.append(((this.language == null)?"<null>":this.language));
-        sb.append(',');
-        sb.append("value");
-        sb.append('=');
-        sb.append(this.value);
-        sb.append(',');
-        sb.append("extensions");
-        sb.append('=');
-        sb.append(((this.extensions == null)?"<null>":this.extensions));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return FlagValue.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[language="
+            + Objects.toString(language, "<null>") + ",value=" + value + ",extensions="
+            + Objects.toString(extensions, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.language == null)? 0 :this.language.hashCode()));
-        result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
-        result = ((result* 31)+((int)(Double.doubleToLongBits(this.value)^(Double.doubleToLongBits(this.value)>>> 32))));
-        return result;
+        return Objects.hash(language, extensions, value);
     }
 
     @Override
@@ -102,11 +84,14 @@ public class FlagValue {
         if (other == this) {
             return true;
         }
-        if ((other instanceof FlagValue) == false) {
+
+        if (!(other instanceof FlagValue)) {
             return false;
         }
+
         FlagValue rhs = ((FlagValue) other);
-        return ((((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&(Double.doubleToLongBits(this.value) == Double.doubleToLongBits(rhs.value)));
+        return value == rhs.value && Objects.equals(language, rhs.language)
+            && Objects.equals(extensions, rhs.extensions);
     }
 
 }

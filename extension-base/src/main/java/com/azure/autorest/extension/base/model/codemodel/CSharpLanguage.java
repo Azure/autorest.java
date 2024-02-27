@@ -3,26 +3,19 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
+/**
+ * Represents the C# language.
+ */
 public class CSharpLanguage {
-
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(CSharpLanguage.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return CSharpLanguage.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        return result;
+        return 1;
     }
 
     @Override
@@ -30,11 +23,8 @@ public class CSharpLanguage {
         if (other == this) {
             return true;
         }
-        if ((other instanceof CSharpLanguage) == false) {
-            return false;
-        }
-        CSharpLanguage rhs = ((CSharpLanguage) other);
-        return true;
+
+        return other instanceof CSharpLanguage;
     }
 
 }

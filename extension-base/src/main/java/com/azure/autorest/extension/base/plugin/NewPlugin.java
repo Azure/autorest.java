@@ -12,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
@@ -21,27 +22,65 @@ import org.yaml.snakeyaml.representer.Representer;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
+/**
+ * Represents a plugin that can be run by AutoRest.
+
+ */
 public abstract class NewPlugin {
+    private static final Type MAP_STRING_STRING_TYPE = TypeFactory.defaultInstance()
+        .constructMapType(Map.class, String.class, String.class);
+
+    /**
+     * The ObjectMapper used to serialize and deserialize JSON.
+     */
     protected final ObjectMapper jsonMapper;
+
+    /**
+     * The Yaml used to serialize and deserialize YAML.
+     */
     protected final Yaml yamlMapper;
 
+    /**
+     * The connection to the AutoRest extension.
+     */
     protected final Connection connection;
+
+    /**
+     * The name of the plugin.
+     */
     protected final String pluginName;
+
+    /**
+     * The session id.
+     */
     protected final String sessionId;
 
+    /**
+     * Reads the content of a file.
+     *
+     * @param fileName The name of the file.
+     * @return The content of the file.
+     */
     public String readFile(String fileName) {
         return connection.request(jsonMapper.constructType(String.class), "ReadFile", sessionId, fileName);
     }
 
+    /**
+     * Gets the value of a key.
+     *
+     * @param <T> The type of the value.
+     * @param type The type of the value.
+     * @param key The key.
+     * @return The value of the key.
+     */
     public <T> T getValue(Type type, String key) {
         return connection.request(jsonMapper.constructType(type), "GetValue", sessionId, key);
     }
@@ -54,10 +93,23 @@ public abstract class NewPlugin {
 //        return getValue(jsonMapper.getTypeFactory().constructCollectionType(List.class, valueType), key);
 //    }
 
+    /**
+     * Gets the value of a key.
+     *
+     * @param key The key.
+     * @return The value of the key.
+     */
     public String getStringValue(String key) {
         return getValue(String.class, key);
     }
 
+    /**
+     * Gets the value of a key.
+     *
+     * @param key The key.
+     * @param defaultValue The default value if the key doesn't have a value.
+     * @return The value of the key.
+     */
     public String getStringValue(String key, String defaultValue) {
         String ret = getStringValue(key);
         if (ret == null) {
@@ -67,25 +119,23 @@ public abstract class NewPlugin {
         }
     }
 
-    public String getStringValue(String[] keys, String defaultValue) {
-        String ret = null;
-        for (String key : keys) {
-            ret = getStringValue(key);
-            if (ret != null) {
-                break;
-            }
-        }
-        if (ret == null) {
-            return defaultValue;
-        } else {
-            return ret;
-        }
-    }
-
+    /**
+     * Gets the value of a key.
+     *
+     * @param key The key.
+     * @return The value of the key.
+     */
     public Boolean getBooleanValue(String key) {
         return getValue(Boolean.class, key);
     }
 
+    /**
+     * Gets the value of a key.
+     *
+     * @param key The key.
+     * @param defaultValue The default value if the key doesn't have a value.
+     * @return The value of the key.
+     */
     public boolean getBooleanValue(String key, boolean defaultValue) {
         Boolean ret = getBooleanValue(key);
         if (ret == null) {
@@ -95,18 +145,44 @@ public abstract class NewPlugin {
         }
     }
 
+    /**
+     * Gets the input files.
+     *
+     * @return The input files.
+     */
     public List<String> listInputs() {
-        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class), "ListInputs", sessionId, null);
+        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class),
+            "ListInputs", sessionId, null);
     }
 
+    /**
+     * Gets the input files of a specific type.
+     *
+     * @param artifactType The type of the input files.
+     * @return The input files of the specific type.
+     */
     public List<String> listInputs(String artifactType) {
-        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class), "ListInputs", sessionId, artifactType);
+        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class),
+            "ListInputs", sessionId, artifactType);
     }
 
+    /**
+     * Sends a message to the AutoRest extension.
+     *
+     * @param message The message to send.
+     */
     public void message(Message message) {
         connection.notify("Message", sessionId, message);
     }
 
+    /**
+     * Sends a message to the AutoRest extension.
+     *
+     * @param channel The channel of the message.
+     * @param text The text of the message.
+     * @param error The error of the message.
+     * @param keys The keys of the message.
+     */
     public void message(MessageChannel channel, String text, Throwable error, List<String> keys) {
         Message message = new Message();
         message.setChannel(channel);
@@ -119,27 +195,47 @@ public abstract class NewPlugin {
         message(message);
     }
 
+    /**
+     * Writes the content to a file.
+     *
+     * @param fileName The name of the file.
+     * @param content The content of the file.
+     * @param sourceMap The source map of the file.
+     */
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
         connection.notify("WriteFile", sessionId, fileName, content, sourceMap);
     }
 
+    /**
+     * Writes the content to a file.
+     *
+     * @param fileName The name of the file.
+     * @param content The content of the file.
+     * @param sourceMap The source map of the file.
+     * @param artifactType The type of the file.
+     */
     public void writeFile(String fileName, String content, List<Object> sourceMap, String artifactType) {
         Message message = new Message();
         message.setChannel(MessageChannel.FILE);
-        message.setDetails(new HashMap<String, Object>() {{
-            put("content", content);
-            put("type", artifactType);
-            put("uri", fileName);
-            put("sourceMap", sourceMap);
-        }});
+        if (sourceMap == null) {
+            message.setDetails(Map.of("content", content, "type", artifactType, "uri", fileName));
+        } else {
+            message.setDetails(
+                Map.of("content", content, "type", artifactType, "uri", fileName, "sourceMap", sourceMap));
+        }
         message.setText(content);
         message.setKey(Arrays.asList(artifactType, fileName));
         connection.notify("Message", sessionId, message);
     }
 
+    /**
+     * Protects the files from being overwritten.
+     *
+     * @param path The path to the files to protect.
+     */
     public void protectFiles(String path) {
         List<String> items = listInputs(path);
-        if (items != null && items.size() > 0) {
+        if (items != null && !items.isEmpty()) {
             for (String item : items) {
                 String content = readFile(item);
                 writeFile(item, content, null, "preserved-files");
@@ -149,30 +245,21 @@ public abstract class NewPlugin {
         writeFile(path, contentSingle, null, "preserved-files");
     }
 
+    /**
+     * Gets the configuration file.
+     *
+     * @param fileName The name of the configuration file.
+     * @return The content of the configuration file.
+     */
     public String getConfigurationFile(String fileName) {
-        Map<String, String> configurations = getValue(new ParameterizedType() {
-            @Override
-            public Type[] getActualTypeArguments() {
-                return new Type[]{String.class, String.class};
-            }
-
-            @Override
-            public Type getRawType() {
-                return Map.class;
-            }
-
-            @Override
-            public Type getOwnerType() {
-                return null;
-            }
-        }, "configurationFiles");
+        Map<String, String> configurations = getValue(MAP_STRING_STRING_TYPE, "configurationFiles");
         if (configurations != null) {
             Iterator<String> it = configurations.keySet().iterator();
             if (it.hasNext()) {
                 String first = it.next();
                 first = first.substring(0, first.lastIndexOf('/'));
                 for (String configFile : configurations.keySet()) {
-                    if (String.format("%s/%s", first, fileName).equals(configFile)) {
+                    if (Objects.equals(configFile, first + "/" + fileName)) {
                         return configurations.get(configFile);
                     }
                 }
@@ -181,14 +268,27 @@ public abstract class NewPlugin {
         return "";
     }
 
+    /**
+     * Updates the configuration file.
+     *
+     * @param filename The name of the configuration file.
+     * @param content The content of the configuration file.
+     */
     public void updateConfigurationFile(String filename, String content) {
         Message message = new Message();
         message.setChannel(MessageChannel.CONFIGURATION);
-        message.setKey(Arrays.asList(filename));
+        message.setKey(List.of(filename));
         message.setText(content);
         connection.notify("Message", sessionId, message);
     }
 
+    /**
+     * Initializes a new instance of the NewPlugin class.
+     *
+     * @param connection The connection to the AutoRest extension.
+     * @param pluginName The name of the plugin.
+     * @param sessionId The session id.
+     */
     public NewPlugin(Connection connection, String pluginName, String sessionId) {
         this.connection = connection;
         this.pluginName = pluginName;
@@ -216,17 +316,26 @@ public abstract class NewPlugin {
         yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
     }
 
+    /**
+     * The method that is called to run the plugin.
+     *
+     * @return Whether the plugin ran successfully.
+     */
     public boolean process() {
         try {
             JavaSettings.setHost(this);
             return processInternal();
         } catch (Throwable t) {
-            message(MessageChannel.FATAL,
-                "Unhandled error: " + t.getMessage(), t, Arrays.asList(getClass().getSimpleName()));
+            message(MessageChannel.FATAL, "Unhandled error: " + t.getMessage(), t, List.of(getClass().getSimpleName()));
             return false;
         }
     }
 
+    /**
+     * The method that is called to run the plugin.
+     *
+     * @return Whether the plugin ran successfully.
+     */
     public abstract boolean processInternal();
 
     private String formatThrowableMessage(Throwable t) {

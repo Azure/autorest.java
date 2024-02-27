@@ -236,11 +236,6 @@ public class Preprocessor extends NewPlugin {
     }
 
     @Override
-    public String getStringValue(String[] keys, String defaultValue) {
-        return wrappedPlugin.getStringValue(keys, defaultValue);
-    }
-
-    @Override
     public Boolean getBooleanValue(String key) {
         return wrappedPlugin.getBooleanValue(key);
     }
