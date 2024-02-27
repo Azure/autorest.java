@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 public class NamingTests {
 
     private final NamingClient client = new NamingClientBuilder().buildClient();
+
+    // client name should be "ClientModel", currently a bug in TCGC
     private final ModelClient modelClient = new NamingClientBuilder().buildModelClient();
 
     @Test
