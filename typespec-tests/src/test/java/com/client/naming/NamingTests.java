@@ -32,7 +32,7 @@ public class NamingTests {
 
         // header
         client.request("true");
-//        client.response();  // no client name in response header at present
+        client.response();  // no class about response header at present
 
         // model
         modelClient.client(new ClientModel(true));
