@@ -48,6 +48,8 @@
 
     <!-- This property configures whether PLAYBACK tests are ran in parallel. Default is true. -->
     <parallelizeTests>true</parallelizeTests>
+
+    <maven.javadoc.failOnWarnings>false</maven.javadoc.failOnWarnings>
   </properties>
 
   <dependencyManagement>
@@ -151,6 +153,7 @@
             <source>1.8</source>
             <detectJavaApiLink>false</detectJavaApiLink>
             <quiet>true</quiet>
+            <failOnWarnings>${maven.javadoc.failOnWarnings}</failOnWarnings>
           </configuration>
         </plugin>
 

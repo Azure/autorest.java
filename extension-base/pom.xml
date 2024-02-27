@@ -21,6 +21,10 @@
   <description>This module contains the base classes an utilities needed for writing an AutoRest extension in Java.</description>
   <url>https://github.com/Azure/autorest.java</url>
 
+  <properties>
+    <maven.javadoc.failOnWarnings>true</maven.javadoc.failOnWarnings>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.yaml</groupId>
