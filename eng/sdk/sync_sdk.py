@@ -73,6 +73,7 @@ def update_sdks():
 
         logging.info('Generate for module %s', artifact)
         subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
+        subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
 
         if not generated_samples_exists:
             shutil.rmtree(generated_samples_path, ignore_errors=True)
