@@ -1980,29 +1980,17 @@ export class CodeModelBuilder {
         : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
-    const getUnionVariant = (member: any) => {
-      if (member.variant) {
-        return member.variant as UnionVariant;
-      } else if (member.type) {
-        // TODO: remove this; in current runtime, the UnionVariant is from this "type" instead of "variant"
-        return member.type as UnionVariant;
-      } else {
-        return undefined;
+    for (const [name, member] of unionEnum.flattenedMembers.entries()) {
+      // get name from "UnionVariant | EnumMember"
+      let valueName = this.getName(member.type);
+      const valueDoc = this.getDoc(member.type);
+      if (!valueName) {
+        // fallback the name to the dict
+        valueName = typeof name === "string" ? name : `${member.value}`;
       }
-    };
-    variants.forEach((it) => {
-      const unionVariant = getUnionVariant(it);
-      let name = it.value.toString();
-      let doc = it.value.toString();
-      if (unionVariant) {
-        const candidateName = this.getName(unionVariant);
-        if (candidateName) {
-          name = candidateName;
-        }
-        doc = this.getDoc(unionVariant);
-      }
-      choices.push(new ChoiceValue(name, doc, it.value));
-    });
+      // TODO: may need to use getWireName on "member.value"
+      choices.push(new ChoiceValue(valueName, valueDoc, member.value));
+    }
 
     const namespace = getNamespace(type);
 
@@ -2137,9 +2125,6 @@ export class CodeModelBuilder {
       }
       if (discriminatorProperty) {
         objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
-        // as we do not expose the discriminator property, its schema is fine to be just a string (and we do not want to generate an enum that not used anywhere)
-        // TODO: support enum schema, if we expose the discriminator property
-        objectSchema.discriminator.property.schema = this.stringSchema;
       } else {
         // fallback to property name, if cannot find the discriminator property
         objectSchema.discriminator = new Discriminator(
@@ -2810,6 +2795,10 @@ export class CodeModelBuilder {
 
             schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
             schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+
+            if (schema.discriminator?.property?.schema) {
+              innerApplySchemaUsage(schema.discriminator?.property?.schema, schemaUsage);
+            }
           }
 
           // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
