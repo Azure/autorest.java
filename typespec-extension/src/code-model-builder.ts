@@ -2008,7 +2008,7 @@ export class CodeModelBuilder {
         },
       },
     });
-    // schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+    schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type as Union & { name: string });
     return this.codeModel.schemas.add(schema);
   }
 
