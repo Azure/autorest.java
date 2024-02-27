@@ -6,6 +6,9 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents individual serialization styles.
+ */
 public enum SerializationStyle {
     BINARY("binary"),
     DEEP_OBJECT("deepObject"),
@@ -23,17 +26,12 @@ public enum SerializationStyle {
     private final static Map<String, SerializationStyle> CONSTANTS = new HashMap<>();
 
     static {
-        for (SerializationStyle c: values()) {
+        for (SerializationStyle c : values()) {
             CONSTANTS.put(c.value, c);
         }
     }
-    public int getValue()
-    {
-        return this.ordinal();
-    }
 
-
-    private SerializationStyle(String value) {
+    SerializationStyle(String value) {
         this.value = value;
     }
 
@@ -46,10 +44,22 @@ public enum SerializationStyle {
         }
     }
 
+    /**
+     * Gets the value of the serialization style.
+     *
+     * @return The value of the serialization style.
+     */
     public String value() {
         return this.value;
     }
 
+    /**
+     * Gets the serialization style from its value.
+     *
+     * @param value The value of the serialization style.
+     * @return The serialization style.
+     * @throws IllegalArgumentException If the value is not a valid serialization style.
+     */
     public static SerializationStyle fromValue(String value) {
         SerializationStyle constant = CONSTANTS.get(value);
         if (constant == null) {

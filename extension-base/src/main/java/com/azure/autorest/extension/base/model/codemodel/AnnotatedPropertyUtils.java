@@ -16,7 +16,6 @@ import java.util.Map;
  * @see YamlProperty
  */
 public class AnnotatedPropertyUtils extends PropertyUtils {
-
     private final Map<Class<?>, Map<String, Property>> cachedPropertyMap = new HashMap<>();
 
     @Override

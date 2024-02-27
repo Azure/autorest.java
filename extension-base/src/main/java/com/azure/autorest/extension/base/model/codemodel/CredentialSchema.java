@@ -3,73 +3,65 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
+import java.util.Objects;
 
 /**
- * a schema that represents a Credential value
- * 
+ * Represents a credential schema.
  */
 public class CredentialSchema extends PrimitiveSchema {
-
-    /**
-     * the maximum length of the string
-     * 
-     */
     private double maxLength;
-    /**
-     * the minimum length of the string
-     * 
-     */
     private double minLength;
-    /**
-     * a regular expression that the string must be validated against
-     * 
-     */
     private String pattern;
 
     /**
-     * the maximum length of the string
-     * 
+     * Get the maximum length of the string.
+     *
+     * @return The maximum length of the string.
      */
     public double getMaxLength() {
         return maxLength;
     }
 
     /**
-     * the maximum length of the string
-     * 
+     * Set the maximum length of the string.
+     *
+     * @param maxLength The maximum length of the string.
      */
     public void setMaxLength(double maxLength) {
         this.maxLength = maxLength;
     }
 
     /**
-     * the minimum length of the string
-     * 
+     * Get the minimum length of the string.
+     *
+     * @return The minimum length of the string.
      */
     public double getMinLength() {
         return minLength;
     }
 
     /**
-     * the minimum length of the string
-     * 
+     * Set the minimum length of the string.
+     *
+     * @param minLength The minimum length of the string.
      */
     public void setMinLength(double minLength) {
         this.minLength = minLength;
     }
 
     /**
-     * a regular expression that the string must be validated against
-     * 
+     * Get a regular expression that the string must be validated against.
+     *
+     * @return A regular expression that the string must be validated against.
      */
     public String getPattern() {
         return pattern;
     }
 
     /**
-     * a regular expression that the string must be validated against
-     * 
+     * Set a regular expression that the string must be validated against.
+     *
+     * @param pattern A regular expression that the string must be validated against.
      */
     public void setPattern(String pattern) {
         this.pattern = pattern;
@@ -77,35 +69,14 @@ public class CredentialSchema extends PrimitiveSchema {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(CredentialSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("maxLength");
-        sb.append('=');
-        sb.append(this.maxLength);
-        sb.append(',');
-        sb.append("minLength");
-        sb.append('=');
-        sb.append(this.minLength);
-        sb.append(',');
-        sb.append("pattern");
-        sb.append('=');
-        sb.append(((this.pattern == null)?"<null>":this.pattern));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return CredentialSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this))
+            + "[maxLength=" + maxLength + ",minLength=" + minLength + ",pattern=" + Objects.toString(pattern, "<null>")
+            + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.pattern == null)? 0 :this.pattern.hashCode()));
-        result = ((result* 31)+((int)(Double.doubleToLongBits(this.maxLength)^(Double.doubleToLongBits(this.maxLength)>>> 32))));
-        result = ((result* 31)+((int)(Double.doubleToLongBits(this.minLength)^(Double.doubleToLongBits(this.minLength)>>> 32))));
-        return result;
+        return Objects.hash(pattern, maxLength, minLength);
     }
 
     @Override
@@ -113,11 +84,14 @@ public class CredentialSchema extends PrimitiveSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof CredentialSchema) == false) {
+
+        if (!(other instanceof CredentialSchema)) {
             return false;
         }
+
         CredentialSchema rhs = ((CredentialSchema) other);
-        return ((((this.pattern == rhs.pattern)||((this.pattern!= null)&&this.pattern.equals(rhs.pattern)))&&(Double.doubleToLongBits(this.maxLength) == Double.doubleToLongBits(rhs.maxLength)))&&(Double.doubleToLongBits(this.minLength) == Double.doubleToLongBits(rhs.minLength)));
+        return Objects.equals(maxLength, rhs.maxLength) && Objects.equals(minLength, rhs.minLength)
+            && Objects.equals(pattern, rhs.pattern);
     }
 
 }

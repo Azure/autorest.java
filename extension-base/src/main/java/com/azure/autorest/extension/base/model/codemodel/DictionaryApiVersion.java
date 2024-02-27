@@ -3,26 +3,19 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
+/**
+ * Represents the version of the dictionary API.
+ */
 public class DictionaryApiVersion {
-
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DictionaryApiVersion.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return DictionaryApiVersion.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        return result;
+        return 1;
     }
 
     @Override
@@ -30,11 +23,8 @@ public class DictionaryApiVersion {
         if (other == this) {
             return true;
         }
-        if ((other instanceof DictionaryApiVersion) == false) {
-            return false;
-        }
-        DictionaryApiVersion rhs = ((DictionaryApiVersion) other);
-        return true;
+
+        return other instanceof DictionaryApiVersion;
     }
 
 }

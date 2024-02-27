@@ -3,30 +3,45 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a response from a service.
- * 
+ * Represents a response from a service.
  */
 public class Response extends Metadata {
-
     private Schema schema;
-
     private Boolean binary;
 
+    /**
+     * Gets the schema of the response.
+     *
+     * @return The schema of the response.
+     */
     public Schema getSchema() {
         return schema;
     }
 
+    /**
+     * Sets the schema of the response.
+     *
+     * @param schema The schema of the response.
+     */
     public void setSchema(Schema schema) {
         this.schema = schema;
     }
 
+    /**
+     * Gets whether the response is binary.
+     *
+     * @return Whether the response is binary.
+     */
     public Boolean getBinary() {
         return binary;
     }
 
+    /**
+     * Sets whether the response is binary.
+     *
+     * @param binary Whether the response is binary.
+     */
     public void setBinary(Boolean binary) {
         this.binary = binary;
     }

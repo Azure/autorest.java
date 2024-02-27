@@ -3,11 +3,8 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * schema types that are non-object or complex types
- * 
+ * A schema that is non-object, non-complex.
  */
 public class AnySchema extends Schema {
 }

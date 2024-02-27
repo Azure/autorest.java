@@ -3,31 +3,18 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a schema that represents a Char value
- * 
+ * Represents a char schema.
  */
 public class CharSchema extends PrimitiveSchema {
-
-
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(CharSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return CharSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        return result;
+        return 1;
     }
 
     @Override
@@ -35,11 +22,7 @@ public class CharSchema extends PrimitiveSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof CharSchema) == false) {
-            return false;
-        }
-        CharSchema rhs = ((CharSchema) other);
-        return true;
-    }
 
+        return other instanceof CharSchema;
+    }
 }

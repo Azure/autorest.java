@@ -3,5 +3,8 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+/**
+ * Represents a service version.
+ */
 public class ServiceVersion extends Metadata {
 }

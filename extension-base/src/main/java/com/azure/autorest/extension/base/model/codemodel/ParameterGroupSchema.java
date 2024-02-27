@@ -5,34 +5,27 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 /**
- * a schema that represents a set of parameters.
- * 
+ * Represents a set of parameters.
  */
 public class ParameterGroupSchema extends ComplexSchema {
+    private List<Parameter> parameters = new ArrayList<>();
 
     /**
-     * the collection of properties that are in this object
-     * (Required)
-     * 
-     */
-    private List<Parameter> parameters = new ArrayList<Parameter>();
-
-    /**
-     * the collection of properties that are in this object
-     * (Required)
-     * 
+     * Gets the collection of properties that are in this object. (Required)
+     *
+     * @return The collection of properties that are in this object.
      */
     public List<Parameter> getParameters() {
         return parameters;
     }
 
     /**
-     * the collection of properties that are in this object
-     * (Required)
-     * 
+     * Sets the collection of properties that are in this object. (Required)
+     *
+     * @param parameters The collection of properties that are in this object.
      */
     public void setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
@@ -40,25 +33,13 @@ public class ParameterGroupSchema extends ComplexSchema {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ParameterGroupSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("parameters");
-        sb.append('=');
-        sb.append(((this.parameters == null)?"<null>":this.parameters));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return ParameterGroupSchema.class.getName() + '@' + Integer.toHexString(System.identityHashCode(this))
+            + "[parameters=" + Objects.toString(parameters, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.parameters == null)? 0 :this.parameters.hashCode()));
-        return result;
+        return Objects.hashCode(parameters);
     }
 
     @Override
@@ -66,11 +47,13 @@ public class ParameterGroupSchema extends ComplexSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ParameterGroupSchema) == false) {
+
+        if (!(other instanceof ParameterGroupSchema)) {
             return false;
         }
+
         ParameterGroupSchema rhs = ((ParameterGroupSchema) other);
-        return ((this.parameters == rhs.parameters)||((this.parameters!= null)&&this.parameters.equals(rhs.parameters)));
+        return Objects.equals(parameters, rhs.parameters);
     }
 
 }

@@ -3,5 +3,8 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+/**
+ * Represents an ARM ID schema.
+ */
 public class ArmIdSchema extends PrimitiveSchema {
 }

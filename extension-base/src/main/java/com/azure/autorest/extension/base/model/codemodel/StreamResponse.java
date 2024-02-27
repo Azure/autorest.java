@@ -3,16 +3,16 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a response from a service.
- * 
+ * Represents a stream response.
  */
 public class StreamResponse extends Response {
-    private boolean stream = true;
-
+    /**
+     * Whether the response is a stream.
+     *
+     * @return Whether the response is a stream.
+     */
     public boolean isStream() {
-        return stream;
+        return true;
     }
 }

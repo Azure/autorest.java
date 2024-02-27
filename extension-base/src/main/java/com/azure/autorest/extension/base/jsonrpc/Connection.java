@@ -255,12 +255,12 @@ public class Connection {
                                 CallerResponse<?> f = tasks.remove(id);
 
                                 try {
-                                    if (f.type.getRawClass().equals(Boolean.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
+                                    if (f.getType().getRawClass().equals(Boolean.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
                                         f.complete(Boolean.TRUE);
-                                    } else if (f.type.getRawClass().equals(String.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
+                                    } else if (f.getType().getRawClass().equals(String.class) && (jobject.get("result") != null) && jobject.get("result").toString().equals("{}")) {
                                         f.complete("");
                                     } else {
-                                        f.complete(MAPPER.convertValue(jobject.get("result"), f.type));
+                                        f.complete(MAPPER.convertValue(jobject.get("result"), f.getType()));
                                     }
                                 } catch (Exception e) {
                                     f.completeExceptionally(e);

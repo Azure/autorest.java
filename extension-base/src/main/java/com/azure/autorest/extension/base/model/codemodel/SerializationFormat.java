@@ -3,40 +3,41 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
+import java.util.Objects;
 
+/**
+ * Represents a serialization format.
+ */
 public class SerializationFormat {
-
     private DictionaryAny extensions;
 
+    /**
+     * Gets the extensions.
+     *
+     * @return The extensions.
+     */
     public DictionaryAny getExtensions() {
         return extensions;
     }
 
+    /**
+     * Sets the extensions.
+     *
+     * @param extensions The extensions.
+     */
     public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(SerializationFormat.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("extensions");
-        sb.append('=');
-        sb.append(((this.extensions == null)?"<null>":this.extensions));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return SerializationFormat.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this))
+            + "[extensions=" + Objects.toString(extensions, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
-        return result;
+        return Objects.hashCode(extensions);
     }
 
     @Override
@@ -44,11 +45,13 @@ public class SerializationFormat {
         if (other == this) {
             return true;
         }
-        if ((other instanceof SerializationFormat) == false) {
+
+        if (!(other instanceof SerializationFormat)) {
             return false;
         }
+
         SerializationFormat rhs = ((SerializationFormat) other);
-        return ((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions)));
+        return Objects.equals(extensions, rhs.extensions);
     }
 
 }

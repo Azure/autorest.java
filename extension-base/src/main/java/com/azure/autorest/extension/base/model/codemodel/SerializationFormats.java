@@ -3,73 +3,80 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
+import java.util.Objects;
 
 /**
- * custom extensible metadata for individual serialization formats
- * 
+ * Represents individual serialization formats.
  */
 public class SerializationFormats {
-
     private SerializationFormat json;
-    private XmlSerlializationFormat xml;
+    private XmlSerializationFormat xml;
     private SerializationFormat protobuf;
 
+    /**
+     * Gets the JSON serialization format.
+     *
+     * @return The JSON serialization format.
+     */
     public SerializationFormat getJson() {
         return json;
     }
 
+    /**
+     * Sets the JSON serialization format.
+     *
+     * @param json The JSON serialization format.
+     */
     public void setJson(SerializationFormat json) {
         this.json = json;
     }
 
-    public XmlSerlializationFormat getXml() {
+    /**
+     * Gets the XML serialization format.
+     *
+     * @return The XML serialization format.
+     */
+    public XmlSerializationFormat getXml() {
         return xml;
     }
 
-    public void setXml(XmlSerlializationFormat xml) {
+    /**
+     * Sets the XML serialization format.
+     *
+     * @param xml The XML serialization format.
+     */
+    public void setXml(XmlSerializationFormat xml) {
         this.xml = xml;
     }
 
+    /**
+     * Gets the Protobuf serialization format.
+     *
+     * @return The Protobuf serialization format.
+     */
     public SerializationFormat getProtobuf() {
         return protobuf;
     }
 
+    /**
+     * Sets the Protobuf serialization format.
+     *
+     * @param protobuf The Protobuf serialization format.
+     */
     public void setProtobuf(SerializationFormat protobuf) {
         this.protobuf = protobuf;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(SerializationFormats.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("json");
-        sb.append('=');
-        sb.append(((this.json == null)?"<null>":this.json));
-        sb.append(',');
-        sb.append("xml");
-        sb.append('=');
-        sb.append(((this.xml == null)?"<null>":this.xml));
-        sb.append(',');
-        sb.append("protobuf");
-        sb.append('=');
-        sb.append(((this.protobuf == null)?"<null>":this.protobuf));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return SerializationFormats.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this))
+            + "[json=" + Objects.toString(json, "<null>") + ",xml=" + Objects.toString(xml, "<null>") + ",protobuf="
+            + Objects.toString(protobuf, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.json == null)? 0 :this.json.hashCode()));
-        result = ((result* 31)+((this.protobuf == null)? 0 :this.protobuf.hashCode()));
-        result = ((result* 31)+((this.xml == null)? 0 :this.xml.hashCode()));
-        return result;
+        return Objects.hash(json, protobuf, xml);
     }
 
     @Override
@@ -77,11 +84,13 @@ public class SerializationFormats {
         if (other == this) {
             return true;
         }
-        if ((other instanceof SerializationFormats) == false) {
+
+        if (!(other instanceof SerializationFormats)) {
             return false;
         }
+
         SerializationFormats rhs = ((SerializationFormats) other);
-        return ((((this.json == rhs.json)||((this.json!= null)&&this.json.equals(rhs.json)))&&((this.protobuf == rhs.protobuf)||((this.protobuf!= null)&&this.protobuf.equals(rhs.protobuf))))&&((this.xml == rhs.xml)||((this.xml!= null)&&this.xml.equals(rhs.xml))));
+        return Objects.equals(json, rhs.json) && Objects.equals(protobuf, rhs.protobuf) && Objects.equals(xml, rhs.xml);
     }
 
 }
