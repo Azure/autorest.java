@@ -23,6 +23,12 @@ public class ApiVersion {
     private ApiVersion.Range range;
 
     /**
+     * Creates a new instance of the ApiVersion class.
+     */
+    public ApiVersion() {
+    }
+
+    /**
      * Gets the API version string used in the API. (Required)
      *
      * @return The API version string used in the API.
@@ -87,7 +93,14 @@ public class ApiVersion {
      * Represents the range of the API version.
      */
     public enum Range {
+        /**
+         * Represents a range that is empty.
+         */
         __EMPTY__("+"),
+
+        /**
+         * Represents a range that is empty.
+         */
         __EMPTY___("-");
         private final String value;
 

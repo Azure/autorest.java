@@ -7,7 +7,7 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.fluent.model.ResourceCollectionAssociation;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -237,7 +237,9 @@ public class FluentJavaSettings {
 
         loadBooleanSetting("sdk-integration", b -> sdkIntegration = b);
 
-        Map<String, String> namingOverride = host.getValue(new TypeReference<Map<String, String>>() {}.getType(), "pipeline.fluentgen.naming.override");
+        Map<String, String> namingOverride = host.getValue(
+            TypeFactory.defaultInstance().constructMapType(Map.class, String.class, String.class),
+            "pipeline.fluentgen.naming.override");
         if (namingOverride != null) {
             this.namingOverride.putAll(namingOverride);
         }
@@ -270,7 +272,9 @@ public class FluentJavaSettings {
 
     private void loadResourceCollectionAssociationSetting(Consumer<List<ResourceCollectionAssociation>> action) {
         String settingName = "resource-collection-associations";
-        List<ResourceCollectionAssociation> settingValue = host.getValue(new TypeReference<List<ResourceCollectionAssociation>>() {}.getType(), settingName);
+        List<ResourceCollectionAssociation> settingValue = host.getValue(
+            TypeFactory.defaultInstance().constructCollectionLikeType(List.class, ResourceCollectionAssociation.class),
+            settingName);
         if (settingValue != null) {
             logger.debug("Option, array, {} : {}", settingName, settingValue);
             action.accept(settingValue);

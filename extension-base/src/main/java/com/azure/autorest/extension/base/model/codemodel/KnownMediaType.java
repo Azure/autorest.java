@@ -10,12 +10,39 @@ import java.util.Map;
  * Known media types.
  */
 public enum KnownMediaType {
+    /**
+     * The media type is binary.
+     */
     BINARY("binary"),
+
+    /**
+     * The media type is a form.
+     */
     FORM("form"),
+
+    /**
+     * The media type is JSON.
+     */
     JSON("json"),
+
+    /**
+     * The media type is multipart.
+     */
     MULTIPART("multipart"),
+
+    /**
+     * The media type is text.
+     */
     TEXT("text"),
+
+    /**
+     * The media type is unknown.
+     */
     UNKNOWN("unknown"),
+
+    /**
+     * The media type is XML.
+     */
     XML("xml");
 
     private final String value;

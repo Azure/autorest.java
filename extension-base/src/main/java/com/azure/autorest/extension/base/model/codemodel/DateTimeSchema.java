@@ -12,6 +12,13 @@ public class DateTimeSchema extends PrimitiveSchema {
     private DateTimeSchema.Format format;
 
     /**
+     * Creates a new instance of the DateTimeSchema class.
+     */
+    public DateTimeSchema() {
+        super();
+    }
+
+    /**
      * Gets the date-time format. (Required)
      *
      * @return The date-time format.
@@ -58,7 +65,14 @@ public class DateTimeSchema extends PrimitiveSchema {
      * The format of the date-time.
      */
     public enum Format {
+        /**
+         * The date-time format.
+         */
         DATE_TIME("date-time"),
+
+        /**
+         * The RFC 1123 date-time format.
+         */
         DATE_TIME_RFC_1123("date-time-rfc1123");
         private final String value;
 

@@ -7,4 +7,10 @@ package com.azure.autorest.extension.base.model.codemodel;
  * Represents a time schema.
  */
 public class TimeSchema extends PrimitiveSchema {
+    /**
+     * Creates a new instance of the TimeSchema class.
+     */
+    public TimeSchema() {
+        super();
+    }
 }

@@ -225,6 +225,16 @@ public class Preprocessor extends NewPlugin {
         return wrappedPlugin.getValue(type, key);
     }
 
+//    @Override
+//    public <K, V> Map<K, V> getMapValue(Class<K> keyType, Class<V> valueType, String key) {
+//        return wrappedPlugin.getMapValue(keyType, valueType, key);
+//    }
+//
+//    @Override
+//    public <T> List<T> getListValue(Class<T> valueType, String key) {
+//        return wrappedPlugin.getListValue(valueType, key);
+//    }
+
     @Override
     public String getStringValue(String key) {
         return wrappedPlugin.getStringValue(key);

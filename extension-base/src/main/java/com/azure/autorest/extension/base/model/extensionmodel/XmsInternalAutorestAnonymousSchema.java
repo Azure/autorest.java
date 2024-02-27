@@ -10,6 +10,12 @@ public class XmsInternalAutorestAnonymousSchema {
     private boolean anonymous = true;
 
     /**
+     * Creates a new instance of the XmsInternalAutorestAnonymousSchema class.
+     */
+    public XmsInternalAutorestAnonymousSchema() {
+    }
+
+    /**
      * Gets whether the schema is anonymous.
      *
      * @return Whether the schema is anonymous.

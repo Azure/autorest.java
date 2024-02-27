@@ -15,6 +15,13 @@ public class ArraySchema extends ValueSchema {
     private boolean uniqueItems;
 
     /**
+     * Creates a new instance of the ArraySchema class.
+     */
+    public ArraySchema() {
+        super();
+    }
+
+    /**
      * Gets the type of elements in the array. (Required)
      *
      * @return The type of elements in the array.

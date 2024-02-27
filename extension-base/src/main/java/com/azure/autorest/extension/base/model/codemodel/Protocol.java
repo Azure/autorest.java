@@ -22,6 +22,12 @@ public class Protocol {
     private List<Header> headers;
 
     /**
+     * Creates a new instance of the Protocol class.
+     */
+    public Protocol() {
+    }
+
+    /**
      * Gets the location of the parameter.
      *
      * @return The location of the parameter.

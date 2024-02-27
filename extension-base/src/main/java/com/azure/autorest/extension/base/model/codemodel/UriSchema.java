@@ -14,6 +14,13 @@ public class UriSchema extends PrimitiveSchema {
     private String pattern;
 
     /**
+     * Creates a new instance of the UriSchema class.
+     */
+    public UriSchema() {
+        super();
+    }
+
+    /**
      * Get the maximum length of the URI.
      *
      * @return The maximum length of the URI.

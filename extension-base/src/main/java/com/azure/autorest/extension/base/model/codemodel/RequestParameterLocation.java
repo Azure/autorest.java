@@ -10,12 +10,39 @@ import java.util.Map;
  * The location of a parameter within an HTTP request.
  */
 public enum RequestParameterLocation {
+    /**
+     * The parameter is in the request body.
+     */
     BODY("body"),
+
+    /**
+     * The parameter is in a cookie.
+     */
     COOKIE("cookie"),
+
+    /**
+     * The parameter is in the request URI.
+     */
     URI("uri"),
+
+    /**
+     * The parameter is in the request path.
+     */
     PATH("path"),
+
+    /**
+     * The parameter is in the request header.
+     */
     HEADER("header"),
+
+    /**
+     * The parameter is not in the request.
+     */
     NONE("none"),
+
+    /**
+     * The parameter is in the request query.
+     */
     QUERY("query");
 
     private final String value;

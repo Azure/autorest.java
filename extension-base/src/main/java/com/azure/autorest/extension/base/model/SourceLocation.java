@@ -11,6 +11,12 @@ public class SourceLocation {
     private SmartLocation position;
 
     /**
+     * Creates a new instance of the SourceLocation class.
+     */
+    public SourceLocation() {
+    }
+
+    /**
      * Gets the position of the location.
      *
      * @return The position of the location.

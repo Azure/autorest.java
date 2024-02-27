@@ -14,6 +14,12 @@ public class FlagValue {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the FlagValue class.
+     */
+    public FlagValue() {
+    }
+
+    /**
      * Gets the language of the flag value. (Required)
      *
      * @return The language of the flag value.

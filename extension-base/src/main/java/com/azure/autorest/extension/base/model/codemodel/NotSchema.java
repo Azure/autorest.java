@@ -10,6 +10,12 @@ public class NotSchema extends Schema {
     private Schema not;
 
     /**
+     * Creates a new instance of the NotSchema class.
+     */
+    public NotSchema() {
+    }
+
+    /**
      * Gets the schema that this may not be. (Required)
      *
      * @return The schema that this may not be.

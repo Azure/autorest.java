@@ -19,6 +19,12 @@ public class Scheme {
     private String prefix;
 
     /**
+     * Creates a new instance of the Scheme class.
+     */
+    public Scheme() {
+    }
+
+    /**
      * Gets the type of the security scheme.
      *
      * @return The type of the security scheme.
@@ -112,7 +118,14 @@ public class Scheme {
      * The type of the security scheme.
      */
     public enum SecuritySchemeType {
+        /**
+         * OAuth2 security scheme.
+         */
         OAUTH2("OAuth2"),
+
+        /**
+         * Key security scheme.
+         */
         KEY("Key");
 
         private final String value;

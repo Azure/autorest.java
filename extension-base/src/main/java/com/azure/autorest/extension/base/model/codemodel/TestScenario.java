@@ -18,6 +18,12 @@ public class TestScenario {
     private List<ScenarioStep> resolvedSteps;
 
     /**
+     * Creates a new instance of the TestScenario class.
+     */
+    public TestScenario() {
+    }
+
+    /**
      * Gets the description of the scenario.
      *
      * @return The description of the scenario.

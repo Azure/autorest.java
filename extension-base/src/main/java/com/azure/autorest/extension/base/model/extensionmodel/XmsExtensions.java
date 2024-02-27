@@ -27,6 +27,12 @@ public class XmsExtensions {
     private List<String> xmsVersioningAdded;
 
     /**
+     * Creates a new instance of the XmsExtensions class.
+     */
+    public XmsExtensions() {
+    }
+
+    /**
      * Gets the enum of the model.
      *
      * @return The enum of the model.

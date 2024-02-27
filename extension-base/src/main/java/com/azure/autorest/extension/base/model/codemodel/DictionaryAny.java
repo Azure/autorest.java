@@ -8,6 +8,12 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class DictionaryAny {
 
+    /**
+     * Creates a new instance of the DictionaryAny class.
+     */
+    public DictionaryAny() {
+    }
+
     @Override
     public String toString() {
         return DictionaryAny.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

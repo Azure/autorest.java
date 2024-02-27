@@ -13,6 +13,13 @@ public class DictionarySchema extends ComplexSchema {
     private Boolean nullableItems;
 
     /**
+     * Creates a new instance of the DictionarySchema class.
+     */
+    public DictionarySchema() {
+        super();
+    }
+
+    /**
      * Gets the type of the elements in the dictionary. (Required)
      *
      * @return The type of the elements in the dictionary.

@@ -10,6 +10,12 @@ public class SchemaResponse extends Response {
     private Schema schema;
 
     /**
+     * Creates a new instance of the SchemaResponse class.
+     */
+    public SchemaResponse() {
+    }
+
+    /**
      * Gets the schema of the response.
      *
      * @return The schema of the response.

@@ -12,6 +12,12 @@ public class SmartLocation {
     private List<Object> path;
 
     /**
+     * Creates a new instance of the SmartLocation class.
+     */
+    public SmartLocation() {
+    }
+
+    /**
      * Gets the path of the location.
      *
      * @return The path of the location.

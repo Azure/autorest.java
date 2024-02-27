@@ -12,6 +12,12 @@ public class XmsExamples {
     private Map<String, Object> examples;
 
     /**
+     * Creates a new instance of the XmsExamples class.
+     */
+    public XmsExamples() {
+    }
+
+    /**
      * Gets the examples of the model.
      *
      * @return The examples of the model.

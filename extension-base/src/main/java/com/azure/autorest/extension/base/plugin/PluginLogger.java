@@ -17,9 +17,24 @@ import java.util.stream.Stream;
  * A logger for AutoRest plugins.
  */
 public final class PluginLogger extends MarkerIgnoringBase {
+    /**
+     * The AutoRest plugin.
+     */
     private final NewPlugin plugin;
+
+    /**
+     * The keys for logging.
+     */
     private final List<String> keys;
+
+    /**
+     * Whether tracing is enabled.
+     */
     private final boolean isTracingEnabled;
+
+    /**
+     * Whether debugging is enabled.
+     */
     private final boolean isDebugEnabled;
 
     /**

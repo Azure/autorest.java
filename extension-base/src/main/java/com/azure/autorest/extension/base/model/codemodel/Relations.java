@@ -13,6 +13,12 @@ public class Relations {
     private List<Schema> immediate;
 
     /**
+     * Creates a new instance of the Relations class.
+     */
+    public Relations() {
+    }
+
+    /**
      * Gets all schemas.
      *
      * @return The all schemas.

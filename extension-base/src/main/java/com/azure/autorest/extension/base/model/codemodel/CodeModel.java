@@ -18,6 +18,13 @@ public class CodeModel extends Client {
     private TestModel testModel;
 
     /**
+     * Creates a new instance of the CodeModel class.
+     */
+    public CodeModel() {
+        super();
+    }
+
+    /**
      * Gets the code model information. (Required)
      *
      * @return The code model information.

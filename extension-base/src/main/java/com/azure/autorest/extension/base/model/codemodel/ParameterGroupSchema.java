@@ -14,6 +14,12 @@ public class ParameterGroupSchema extends ComplexSchema {
     private List<Parameter> parameters = new ArrayList<>();
 
     /**
+     * Creates a new instance of the ParameterGroupSchema class.
+     */
+    public ParameterGroupSchema() {
+    }
+
+    /**
      * Gets the collection of properties that are in this object. (Required)
      *
      * @return The collection of properties that are in this object.
