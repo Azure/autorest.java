@@ -216,7 +216,7 @@ public class PartialUpdateHandler {
         for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
             if (generatedMember.isCallableDeclaration()) {
                 if (methodSignatureSet.contains(generatedMember.asCallableDeclaration().getSignature())) {
-                    throw new RuntimeException("Found duplicate methods in the generated file.");
+                    throw new RuntimeException(String.format("Found duplicate methods in the generated file. Signature: %s", generatedMember.asCallableDeclaration().getSignature()));
                 }
                 methodSignatureSet.add(generatedMember.asCallableDeclaration().getSignature());
             }

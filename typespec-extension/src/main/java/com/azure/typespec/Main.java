@@ -134,11 +134,7 @@ public class Main {
         Map<String, String> javaFiles = new ConcurrentHashMap<>();
         JavaSettings settings = JavaSettings.getInstance();
         javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-            if (settings.isHandlePartialUpdate()) {
-                javaFiles.put(javaFile.getFilePath(), typeSpecPlugin.handlePartialUpdate(javaFile.getFilePath(), javaFile.getContents().toString()));
-            } else {
-                javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
-            }
+            javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
         });
 
         // handle customization
