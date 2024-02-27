@@ -65,9 +65,7 @@ public class AndroidServiceClientMapper extends ServiceClientMapper {
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? java.util.Arrays.asList(ClassType.NON_NULL)
-                        : new java.util.ArrayList<>())
+                .annotations(new java.util.ArrayList<>())
                 .build();
     }
 }

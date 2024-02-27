@@ -52,8 +52,7 @@ public class CustomClientParameterMapper implements IMapper<Parameter, ClientMet
         }
         builder.wireType(wireType);
 
-        builder.annotations(settings.isNonNullAnnotations() && parameter.isRequired() ?
-            Collections.singletonList(ClassType.NON_NULL) : new ArrayList<>());
+        builder.annotations(new ArrayList<>());
 
         boolean isConstant = false;
         String defaultValue = null;

@@ -116,7 +116,6 @@ public class JavaSettings {
                 header,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "com.mycompany.app").toLowerCase(),
-                getBooleanValue(host, "non-null-annotations", false),
                 getBooleanValue(host, "client-side-validations", false),
                 getStringValue(host, "client-type-prefix"),
                 getBooleanValue(host, "generate-client-interfaces", false),
@@ -194,7 +193,6 @@ public class JavaSettings {
      * @param fileHeaderText The file header text.
      * @param serviceName The service name.
      * @param packageKeyword The package keyword.
-     * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
      * @param clientSideValidations Whether to add client-side validations to the generated clients.
      * @param clientTypePrefix The prefix that will be added to each generated client type.
      * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group clients.
@@ -280,7 +278,6 @@ public class JavaSettings {
         String fileHeaderText,
         String serviceName,
         String packageKeyword,
-        boolean nonNullAnnotations,
         boolean clientSideValidations,
         String clientTypePrefix,
         boolean generateClientInterfaces,
@@ -346,7 +343,6 @@ public class JavaSettings {
         this.fileHeaderText = fileHeaderText;
         this.serviceName = serviceName;
         this.packageName = packageKeyword;
-        this.nonNullAnnotations = nonNullAnnotations;
         this.clientSideValidations = clientSideValidations;
         this.clientTypePrefix = clientTypePrefix;
         this.generateClientInterfaces = generateClientInterfaces;
@@ -791,20 +787,6 @@ public class JavaSettings {
             }
         }
         return packageBuilder.toString();
-    }
-
-    /**
-     * Whether to add the @NotNull annotation to required parameters in client methods.
-     */
-    private final boolean nonNullAnnotations;
-
-    /**
-     * Whether to add the @NotNull annotation to required parameters in client methods.
-     *
-     * @return Whether to add the @NotNull annotation to required parameters in client methods.
-     */
-    public final boolean isNonNullAnnotations() {
-        return nonNullAnnotations;
     }
 
     private final boolean clientSideValidations;

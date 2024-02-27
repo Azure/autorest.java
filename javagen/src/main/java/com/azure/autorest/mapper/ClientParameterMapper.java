@@ -71,10 +71,9 @@ public class ClientParameterMapper implements IMapper<Parameter, ClientMethodPar
         if (isProtocolMethod) {
             wireType = SchemaUtil.removeModelFromParameter(parameter.getProtocol().getHttp().getIn(), wireType);
         }
-        builder.wireType(wireType);
 
-        builder.annotations(settings.isNonNullAnnotations() && parameter.isRequired() ?
-            Collections.singletonList(ClassType.NON_NULL) : new ArrayList<>());
+        builder.wireType(wireType)
+            .annotations(new ArrayList<>());
 
         boolean isConstant = false;
         String defaultValue = null;
