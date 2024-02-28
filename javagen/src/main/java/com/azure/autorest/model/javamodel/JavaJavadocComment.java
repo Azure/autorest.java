@@ -5,9 +5,14 @@ package com.azure.autorest.model.javamodel;
 
 import com.azure.autorest.util.CodeNamer;
 
+import java.util.regex.Pattern;
+
 public class JavaJavadocComment {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
     private boolean expectsLineSeparator;
+
+    // escape the "@" in Javadoc description, if it is not used in inline tag like {@link }
+    private static final Pattern ESCAPE_AT = Pattern.compile("(?<!\\{)@");
 
     public JavaJavadocComment(JavaFileContents contents) {
         this.contents = contents;
@@ -22,7 +27,12 @@ public class JavaJavadocComment {
     }
 
     private static String processText(String value) {
-        return CodeNamer.escapeComment(CodeNamer.escapeXmlComment(ensurePeriod(trim(value))));
+        String text = CodeNamer.escapeXmlComment(ensurePeriod(trim(value)));
+        if (text != null) {
+            // escape the "@"
+            text = ESCAPE_AT.matcher(text).replaceAll("&#064;");
+        }
+        return CodeNamer.escapeComment(text);
     }
 
     private void addExpectedLineSeparator() {
@@ -32,11 +42,25 @@ public class JavaJavadocComment {
         }
     }
 
+    /**
+     * Adds Javadoc description.
+     * <p>The {@literal &, <, >} characters would be encoded.
+     * The {@literal @} would also be encoded if not used in inline tags.</p>
+     *
+     * @param description the Javadoc description.
+     */
     public final void description(String description) {
         String processedText = processText(description);
         line(processedText);
     }
 
+    /**
+     * Adds a line to Javadoc.
+     * <p>The characters in the line is not encoded.
+     * This API should not be used to write text from external source, e.g. Swagger or TypeSpec.</p>
+     *
+     * @param text the line to be written to Javadoc.
+     */
     public final void line(String text) {
         if (text != null && !text.isEmpty()) {
             contents.line(text);
