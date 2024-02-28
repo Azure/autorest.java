@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
-     * The data_bytes property.
+     * Data as {@code byte[]}
      */
     @Generated
     private final byte[] dataAsBytes;
@@ -35,7 +35,7 @@ public final class BytesData extends Data {
     }
 
     /**
-     * Get the dataAsBytes property: The data_bytes property.
+     * Get the dataAsBytes property: Data as {@code byte[]}.
      * 
      * @return the dataAsBytes value.
      */
@@ -51,7 +51,7 @@ public final class BytesData extends Data {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind_id", getType());
+        jsonWriter.writeStringField("@data.kind", getType());
         jsonWriter.writeBinaryField("data_bytes", this.dataAsBytes);
         return jsonWriter.writeEndObject();
     }
@@ -74,7 +74,7 @@ public final class BytesData extends Data {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind_id".equals(fieldName)) {
+                if ("@data.kind".equals(fieldName)) {
                     type = reader.getString();
                 } else if ("data_bytes".equals(fieldName)) {
                     dataAsBytes = reader.getBinary();

@@ -45,16 +45,21 @@ model DataModel {
   data: Data;
 }
 
+// "@" should be escaped
+@doc("Dummy doc to make the javadoc break at the 'at' symbol. The type of the Data depends on @data.kind.letusmakeitlongsoitwouldbreakbeforethis field")
 @discriminator("kind")
 model Data {
+  // "@" should be escaped
   @clientName("type")
-  @encodedName("application/json", "kind_id")
+  @encodedName("application/json", "@data.kind")
   kind: string;
 }
 
 model BytesData extends Data {
   kind: "bytes";
 
+  // "{@code}" should not be escaped
+  @doc("Data as {@code byte[]}")
   @clientName("dataAsBytes")
   @encodedName("application/json", "data_bytes")
   @projectedName("client", "noeffect")
