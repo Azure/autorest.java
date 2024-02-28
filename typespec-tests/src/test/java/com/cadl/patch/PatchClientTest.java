@@ -110,14 +110,30 @@ public class PatchClientTest {
     }
 
     @Test
-    public void testSerializationForEnum() throws JsonProcessingException {
+    public void testSerializationForEnumProperty() throws JsonProcessingException {
         Resource resource = new Resource();
-        resource.setEnumValue(null);
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
         resource.setEnumValue(null);
         String json = BinaryData.fromObject(resource).toString();
         JsonNode node = OBJECT_MAPPER.readTree(json);
         Assertions.assertEquals(JsonNodeType.NULL, node.get("enumValue").getNodeType());
+    }
+
+    @Test
+    public void testSerializationForHierarchicalProperty() throws JsonProcessingException {
+        Resource resource = new Resource();
+        Fish salmon = new Salmon().setAge(1);
+        Assertions.assertEquals("salmon", salmon.getKind());
+        resource.setFish(salmon);
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        Fish shark = new Shark().setAge(2);
+        shark.setColor(null);
+        resource.setFish(shark);
+        String json = BinaryData.fromObject(resource).toString();
+        JsonNode node = OBJECT_MAPPER.readTree(json);
+        Assertions.assertEquals(JsonNodeType.NULL, node.get("fish").get("color").getNodeType());
+        // TODO: once supported, we should uncomment this validation.
+//        Assertions.assertEquals("shark", node.get("fish").get("kind"));
     }
 
     @Test
