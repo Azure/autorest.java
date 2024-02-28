@@ -118,9 +118,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NON_NULL)
-                        : new ArrayList<>())
+                .annotations(new ArrayList<>())
                 .build();
     }
 
@@ -303,9 +301,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NON_NULL)
-                        : new ArrayList<>())
+                .annotations(new ArrayList<>())
                 .build();
 
         ClientMethodParameter httpPipelineParameter = new ClientMethodParameter.Builder()
@@ -317,9 +313,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NON_NULL)
-                        : new ArrayList<>())
+                .annotations(new ArrayList<>())
                 .build();
 
         ClientMethodParameter serializerAdapterParameter = createSerializerAdapterParameter();
@@ -424,9 +418,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .constant(false)
                     .fromClient(true)
                     .defaultValue("AzureEnvironment.AZURE")
-                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NON_NULL)
-                            : new ArrayList<>())
+                    .annotations(new ArrayList<>())
                     .build();
 
             ClientMethodParameter defaultPollIntervalParameter = new ClientMethodParameter.Builder()
@@ -438,9 +430,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .constant(false)
                     .fromClient(true)
                     .defaultValue("Duration.ofSeconds(30)")
-                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NON_NULL)
-                            : new ArrayList<>())
+                    .annotations(new ArrayList<>())
                     .build();
 
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, serializerAdapterParameter, defaultPollIntervalParameter, azureEnvironmentParameter)));
