@@ -104,7 +104,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
     }
 
     /**
-     * Get the odataLocation property: The @odata.location property.
+     * Get the odataLocation property: The &#064;odata.location property.
      * 
      * @return the odataLocation value.
      */
@@ -113,7 +113,7 @@ public final class PetAPInPropertiesWithAPString implements JsonSerializable<Pet
     }
 
     /**
-     * Set the odataLocation property: The @odata.location property.
+     * Set the odataLocation property: The &#064;odata.location property.
      * 
      * @param odataLocation the odataLocation value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
