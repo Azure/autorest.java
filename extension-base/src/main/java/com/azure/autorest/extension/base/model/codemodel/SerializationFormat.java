@@ -12,6 +12,12 @@ public class SerializationFormat {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the SerializationFormat class.
+     */
+    public SerializationFormat() {
+    }
+
+    /**
      * Gets the extensions.
      *
      * @return The extensions.

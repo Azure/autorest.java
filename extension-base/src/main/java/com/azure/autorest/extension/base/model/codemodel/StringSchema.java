@@ -14,6 +14,13 @@ public class StringSchema extends PrimitiveSchema {
     private String pattern;
 
     /**
+     * Creates a new instance of the StringSchema class.
+     */
+    public StringSchema() {
+        super();
+    }
+
+    /**
      * Gets the maximum length of the string.
      *
      * @return The maximum length of the string.

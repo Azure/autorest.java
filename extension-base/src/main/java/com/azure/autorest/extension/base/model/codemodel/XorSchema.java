@@ -14,6 +14,13 @@ public class XorSchema extends ComplexSchema {
     private List<Schema> oneOf = new ArrayList<>();
 
     /**
+     * Creates a new instance of the XorSchema class.
+     */
+    public XorSchema() {
+        super();
+    }
+
+    /**
      * Gets the set of schemas that this must be one and only one of. (Required)
      *
      * @return The set of schemas that this must be one and only one of.

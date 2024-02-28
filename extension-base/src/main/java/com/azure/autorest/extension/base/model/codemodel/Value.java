@@ -10,49 +10,22 @@ import java.util.List;
  * Represents a value.
  */
 public class Value extends Metadata {
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     */
     private Schema schema;
-    /**
-     * all schema types
-     * (Required)
-     */
     private boolean required;
-
     private boolean nullable;
-    /**
-     * common name of the aspect -- in OAI3 this was typically the key in the parent dictionary
-     * (Required)
-     */
     private String $key;
-    /**
-     * description of the aspect.
-     * (Required)
-     */
     private String description;
-    /**
-     * (Required)
-     */
     private String uid;
-    /**
-     * a short description
-     */
     private String summary;
-    /**
-     * API versions that this applies to. Undefined means all versions
-     */
-    private List<ApiVersion> apiVersions = new ArrayList<ApiVersion>();
-    /**
-     * represents  deprecation information for a given aspect
-     */
+    private List<ApiVersion> apiVersions = new ArrayList<>();
     private Deprecation deprecated;
-    /**
-     * a reference to external documentation
-     */
     private ExternalDocumentation externalDocs;
+
+    /**
+     * Creates a new instance of the Value class.
+     */
+    public Value() {
+    }
 
     /**
      * Gets the summary of the value.

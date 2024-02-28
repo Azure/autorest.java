@@ -20,6 +20,12 @@ public class Property extends Value {
     private ObjectSchema parentSchema;
 
     /**
+     * Creates a new instance of the Property class.
+     */
+    public Property() {
+    }
+
+    /**
      * Gets whether the property is read-only.
      *
      * @return Whether the property is read-only.

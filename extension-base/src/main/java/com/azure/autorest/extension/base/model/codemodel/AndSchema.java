@@ -15,6 +15,13 @@ public class AndSchema extends ComplexSchema {
     private String discriminatorValue;
 
     /**
+     * Creates a new instance of the AndSchema class.
+     */
+    public AndSchema() {
+        super();
+    }
+
+    /**
      * Gets the schemas that this schema composes. (Required)
      *
      * @return The schemas that this schema composes.

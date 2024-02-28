@@ -28,6 +28,12 @@ public class Schema extends Metadata {
     private ExternalDocumentation externalDocs;
 
     /**
+     * Creates a new instance of the Schema class.
+     */
+    public Schema() {
+    }
+
+    /**
      * Gets the all schema types. (Required)
      *
      * @return The all schema types.
@@ -265,37 +271,164 @@ public class Schema extends Metadata {
      * Represents all schema types.
      */
     public enum AllSchemaTypes {
+        /**
+         * Represents any type.
+         */
         ANY("any"),
+
+        /**
+         * Represents any object.
+         */
         ANY_OBJECT("any-object"),
+
+        /**
+         * Represents AND logic.
+         */
         AND("and"),
+
+        /**
+         * Represents arm-id.
+         */
         ARM_ID("arm-id"),
+
+        /**
+         * Represents array.
+         */
         ARRAY("array"),
+
+        /**
+         * Represents binary.
+         */
         BINARY("binary"),
+
+        /**
+         * Represents boolean.
+         */
         BOOLEAN("boolean"),
+
+        /**
+         * Represents byte array.
+         */
         BYTE_ARRAY("byte-array"),
+
+        /**
+         * Represents char.
+         */
         CHAR("char"),
+
+        /**
+         * Represents choice.
+         */
         CHOICE("choice"),
+
+        /**
+         * Represents constant.
+         */
         CONSTANT("constant"),
+
+        /**
+         * Represents credential.
+         */
         CREDENTIAL("credential"),
+
+        /**
+         * Represents date.
+         */
         DATE("date"),
+
+        /**
+         * Represents date-time.
+         */
         DATE_TIME("date-time"),
+
+        /**
+         * Represents dictionary.
+         */
         DICTIONARY("dictionary"),
+
+        /**
+         * Represents duration.
+         */
         DURATION("duration"),
+
+        /**
+         * Represents flag.
+         */
         FLAG("flag"),
+
+        /**
+         * Represents float.
+         */
         GROUP("group"),
+
+        /**
+         * Represents integer.
+         */
         INTEGER("integer"),
+
+        /**
+         * Represents NOT logic.
+         */
         NOT("not"),
+
+        /**
+         * Represents number.
+         */
         NUMBER("number"),
+
+        /**
+         * Represents object.
+         */
         OBJECT("object"),
+
+        /**
+         * Represents odata-query.
+         */
         ODATA_QUERY("odata-query"),
+
+        /**
+         * Represents OR logic.
+         */
         OR("or"),
+
+        /**
+         * Represents parameter-group.
+         */
         PARAMETER_GROUP("parameter-group"),
+
+        /**
+         * Represents sealed-choice.
+         */
         SEALED_CHOICE("sealed-choice"),
+
+        /**
+         * Represents string.
+         */
         STRING("string"),
+
+        /**
+         * Represents time.
+         */
         TIME("time"),
+
+        /**
+         * Represents unixtime.
+         */
         UNIXTIME("unixtime"),
+
+        /**
+         * Represents uri.
+         */
         URI("uri"),
+
+        /**
+         * Represents uuid.
+         */
         UUID("uuid"),
+
+        /**
+         * Represents XOR logic.
+         */
         XOR("xor");
         private final String value;
         private final static Map<String, Schema.AllSchemaTypes> CONSTANTS = new HashMap<>();

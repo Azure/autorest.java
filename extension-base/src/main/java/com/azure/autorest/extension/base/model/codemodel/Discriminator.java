@@ -14,6 +14,12 @@ public class Discriminator {
     private Map<String, ComplexSchema> all;
 
     /**
+     * Creates a new instance of the Discriminator class.
+     */
+    public Discriminator() {
+    }
+
+    /**
      * Gets the property that is used to discriminate between the polymorphic types.
      *
      * @return The property that is used to discriminate between the polymorphic types.

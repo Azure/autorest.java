@@ -14,6 +14,13 @@ public class CredentialSchema extends PrimitiveSchema {
     private String pattern;
 
     /**
+     * Creates a new instance of the CredentialSchema class.
+     */
+    public CredentialSchema() {
+        super();
+    }
+
+    /**
      * Get the maximum length of the string.
      *
      * @return The maximum length of the string.

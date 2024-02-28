@@ -7,4 +7,10 @@ package com.azure.autorest.extension.base.model.codemodel;
  * Represent a binary schema.
  */
 public class BinarySchema extends Schema {
+    /**
+     * Create a new instance of the BinarySchema class.
+     */
+    public BinarySchema() {
+        super();
+    }
 }

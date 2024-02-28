@@ -15,6 +15,12 @@ public class Protocols {
     private Protocol jsonrpc;
 
     /**
+     * Creates a new instance of the Protocols class.
+     */
+    public Protocols() {
+    }
+
+    /**
      * Gets the HTTP protocol.
      *
      * @return The HTTP protocol.

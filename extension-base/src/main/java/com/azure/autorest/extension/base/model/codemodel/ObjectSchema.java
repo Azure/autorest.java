@@ -24,6 +24,12 @@ public class ObjectSchema extends ComplexSchema {
     private String crossLanguageDefinitionId;
 
     /**
+     * Creates a new instance of the ObjectSchema class.
+     */
+    public ObjectSchema() {
+    }
+
+    /**
      * Gets the discriminator for this object.
      *
      * @return The discriminator for this object.

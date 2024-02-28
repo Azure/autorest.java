@@ -13,6 +13,12 @@ public class XmsLongRunningOperationOptions {
     private String finalStateVia;
 
     /**
+     * Creates a new instance of the XmsLongRunningOperationOptions class.
+     */
+    public XmsLongRunningOperationOptions() {
+    }
+
+    /**
      * Gets the final state via.
      *
      * @return The final state via.

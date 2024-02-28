@@ -14,6 +14,12 @@ public class Header {
     private XmsExtensions extensions;
 
     /**
+     * Creates a new instance of the Header class.
+     */
+    public Header() {
+    }
+
+    /**
      * Gets the name of the header.
      *
      * @return The name of the header.

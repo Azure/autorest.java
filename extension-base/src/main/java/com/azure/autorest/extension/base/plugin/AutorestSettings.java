@@ -23,6 +23,12 @@ public class AutorestSettings {
     private final List<String> require = new ArrayList<>();
 
     /**
+     * Creates a new instance of the AutorestSettings class.
+     */
+    public AutorestSettings() {
+    }
+
+    /**
      * Gets the title of what Autorest is generation.
      *
      * @return The title of what Autorest is generating.

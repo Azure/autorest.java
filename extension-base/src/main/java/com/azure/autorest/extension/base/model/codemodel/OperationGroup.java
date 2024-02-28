@@ -15,6 +15,12 @@ public class OperationGroup extends Metadata {
     private Client codeModel;
 
     /**
+     * Creates a new instance of the OperationGroup class.
+     */
+    public OperationGroup() {
+    }
+
+    /**
      * Gets the key of the operation group. (Required)
      *
      * @return The key of the operation group.

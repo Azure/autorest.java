@@ -14,6 +14,13 @@ public class ByteArraySchema extends PrimitiveSchema {
     private ByteArraySchema.Format format;
 
     /**
+     * Creates a new instance of the ByteArraySchema class.
+     */
+    public ByteArraySchema() {
+        super();
+    }
+
+    /**
      * Gets the byte array format. (Required)
      *
      * @return The byte array format.
@@ -60,7 +67,14 @@ public class ByteArraySchema extends PrimitiveSchema {
      * Represents the format of the byte array.
      */
     public enum Format {
+        /**
+         * The byte array is encoded as a base64url string.
+         */
         BASE_64_URL("base64url"),
+
+        /**
+         * The byte array is encoded as a byte string.
+         */
         BYTE("byte");
 
         private final String value;

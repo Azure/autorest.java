@@ -12,6 +12,12 @@ public class XmsArmIdDetails {
     private List<AllowedResource> allowedResources;
 
     /**
+     * Creates a new instance of the XmsArmIdDetails class.
+     */
+    public XmsArmIdDetails() {
+    }
+
+    /**
      * Gets the resources that are allowed to be accessed.
      *
      * @return The resources that are allowed to be accessed.

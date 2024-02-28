@@ -15,6 +15,12 @@ public class XmsPageable {
     private Operation nextOperation;
 
     /**
+     * Creates a new instance of the XmsPageable class.
+     */
+    public XmsPageable() {
+    }
+
+    /**
      * Gets the name of the item in the pageable response.
      *
      * @return The name of the item in the pageable response.

@@ -8,6 +8,13 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class StreamResponse extends Response {
     /**
+     * Creates a new instance of the StreamResponse class.
+     */
+    public StreamResponse() {
+        super();
+    }
+
+    /**
      * Whether the response is a stream.
      *
      * @return Whether the response is a stream.

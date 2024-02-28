@@ -15,6 +15,12 @@ public class NumberSchema extends PrimitiveSchema {
     private boolean exclusiveMinimum;
 
     /**
+     * Creates a new instance of the NumberSchema class.
+     */
+    public NumberSchema() {
+    }
+
+    /**
      * The precision of the number. (Required)
      *
      * @return The precision of the number.

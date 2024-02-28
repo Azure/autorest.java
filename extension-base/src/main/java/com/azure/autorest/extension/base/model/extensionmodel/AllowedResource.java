@@ -13,6 +13,12 @@ public class AllowedResource {
     private String type;
 
     /**
+     * Creates a new instance of the AllowedResource class.
+     */
+    public AllowedResource() {
+    }
+
+    /**
      * Gets the scopes that are allowed to access the resource.
      *
      * @return The scopes that are allowed to access the resource.

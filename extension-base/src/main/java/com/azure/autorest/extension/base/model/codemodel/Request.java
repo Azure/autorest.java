@@ -14,6 +14,12 @@ public class Request extends Metadata {
     private List<Parameter> signatureParameters = new ArrayList<>();
 
     /**
+     * Creates a new instance of the Request class.
+     */
+    public Request() {
+    }
+
+    /**
      * Gets the parameter inputs to the operation.
      *
      * @return The parameter inputs to the operation.

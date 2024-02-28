@@ -8,6 +8,13 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class UnixTimeSchema extends PrimitiveSchema {
 
+    /**
+     * Creates a new instance of the UnixTimeSchema class.
+     */
+    public UnixTimeSchema() {
+        super();
+    }
+
     @Override
     public String toString() {
         return UnixTimeSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

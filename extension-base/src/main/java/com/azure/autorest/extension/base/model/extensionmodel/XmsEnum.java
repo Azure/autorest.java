@@ -14,6 +14,12 @@ public class XmsEnum {
     private List<Value> values;
 
     /**
+     * Creates a new instance of the XmsEnum class.
+     */
+    public XmsEnum() {
+    }
+
+    /**
      * Gets the name of the enum.
      *
      * @return The name of the enum.
@@ -74,6 +80,12 @@ public class XmsEnum {
         private String value;
         private String description;
         private String name;
+
+        /**
+         * Creates a new instance of the Value class.
+         */
+        public Value() {
+        }
 
         /**
          * Gets the value of the enum.

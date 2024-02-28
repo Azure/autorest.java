@@ -17,6 +17,12 @@ public class ScenarioStep {
     private String description;
 
     /**
+     * Creates a new instance of the ScenarioStep class.
+     */
+    public ScenarioStep() {
+    }
+
+    /**
      * Gets the description of the step.
      *
      * @return The description of the step.

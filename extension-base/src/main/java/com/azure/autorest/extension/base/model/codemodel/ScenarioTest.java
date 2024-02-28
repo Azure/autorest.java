@@ -22,6 +22,12 @@ public class ScenarioTest {
     private Boolean useArmTemplate;
 
     /**
+     * Creates a new instance of the ScenarioTest class.
+     */
+    public ScenarioTest() {
+    }
+
+    /**
      * Gets the file path of the scenario test.
      *
      * @return The file path of the scenario test.

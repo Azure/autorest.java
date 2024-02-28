@@ -11,16 +11,42 @@ import java.util.List;
  * Represents a message.
  */
 public class Message {
+
+    /**
+     * Represents a message channel.
+     */
     @JsonProperty("Channel")
     public MessageChannel channel;
+
+    /**
+     * Represents details.
+     */
     @JsonProperty("Details")
     public Object details;
+
+    /**
+     * Represents text.
+     */
     @JsonProperty("Text")
     public String text;
+
+    /**
+     * Represents a key.
+     */
     @JsonProperty("Key")
     public List<String> key;
+
+    /**
+     * Represents a source location.
+     */
     @JsonProperty("Source")
     public List<SourceLocation> source;
+
+    /**
+     * Creates a new instance of the Message class.
+     */
+    public Message() {
+    }
 
     /**
      * Gets the source location of the message.
