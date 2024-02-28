@@ -21,7 +21,7 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * Property
      */
     @Generated
-    private final double property = 42.42;
+    private final double property = 43.125;
 
     /**
      * Creates an instance of FloatLiteralProperty class.

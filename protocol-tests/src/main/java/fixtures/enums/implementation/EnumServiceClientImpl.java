@@ -253,7 +253,7 @@ public final class EnumServiceClientImpl {
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
      * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -294,7 +294,7 @@ public final class EnumServiceClientImpl {
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
      * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -333,7 +333,7 @@ public final class EnumServiceClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
      * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -372,7 +372,7 @@ public final class EnumServiceClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
      * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
