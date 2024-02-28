@@ -47,7 +47,7 @@ public class JavaJavadocComment {
      * <p>The {@literal &, <, >} characters would be encoded.
      * The {@literal @} would also be encoded if not used in inline tags.</p>
      *
-     * @param description the description
+     * @param description the Javadoc description.
      */
     public final void description(String description) {
         String processedText = processText(description);
@@ -59,7 +59,7 @@ public class JavaJavadocComment {
      * <p>The characters in the line is not encoded.
      * This API should not be used to write text from external source, e.g. Swagger or TypeSpec.</p>
      *
-     * @param text the text.
+     * @param text the line to be written to Javadoc.
      */
     public final void line(String text) {
         if (text != null && !text.isEmpty()) {
