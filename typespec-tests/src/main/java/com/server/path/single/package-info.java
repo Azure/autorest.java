@@ -5,7 +5,7 @@
 /**
  * <!-- start generated doc -->
  * Package containing the classes for Single.
- * Illustrates server with a single path parameter @server.
+ * Illustrates server with a single path parameter &#064;server.
  * <!-- end generated doc -->
  */
 package com.server.path.single;

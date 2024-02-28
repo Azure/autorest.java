@@ -13,12 +13,13 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The Data model.
+ * Dummy doc to make the javadoc break at the 'at' symbol. The type of the Data depends on
+ * &#064;data.kind.letusmakeitlongsoitwouldbreakbeforethis field.
  */
 @Immutable
 public class Data implements JsonSerializable<Data> {
     /*
-     * The kind_id property.
+     * The @data.kind property.
      */
     @Generated
     private String type;
@@ -32,7 +33,7 @@ public class Data implements JsonSerializable<Data> {
     }
 
     /**
-     * Get the type property: The kind_id property.
+     * Get the type property: The &#064;data.kind property.
      * 
      * @return the type value.
      */
@@ -42,7 +43,7 @@ public class Data implements JsonSerializable<Data> {
     }
 
     /**
-     * Set the type property: The kind_id property.
+     * Set the type property: The &#064;data.kind property.
      * 
      * @param type the type value to set.
      * @return the Data object itself.
@@ -60,7 +61,7 @@ public class Data implements JsonSerializable<Data> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind_id", this.type);
+        jsonWriter.writeStringField("@data.kind", this.type);
         return jsonWriter.writeEndObject();
     }
 
@@ -81,7 +82,7 @@ public class Data implements JsonSerializable<Data> {
                 while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
                     String fieldName = readerToUse.getFieldName();
                     readerToUse.nextToken();
-                    if ("kind_id".equals(fieldName)) {
+                    if ("@data.kind".equals(fieldName)) {
                         discriminatorValue = readerToUse.getString();
                         break;
                     } else {
@@ -106,7 +107,7 @@ public class Data implements JsonSerializable<Data> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind_id".equals(fieldName)) {
+                if ("@data.kind".equals(fieldName)) {
                     deserializedData.type = reader.getString();
                 } else {
                     reader.skipChildren();

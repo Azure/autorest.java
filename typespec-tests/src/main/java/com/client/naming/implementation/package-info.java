@@ -5,7 +5,7 @@
 /**
  * <!-- start generated doc -->
  * Package containing the implementations for Naming.
- * Describe changing names of types in a client with `@clientName`.
+ * Describe changing names of types in a client with `&#064;clientName`.
  * <!-- end generated doc -->
  */
 package com.client.naming.implementation;

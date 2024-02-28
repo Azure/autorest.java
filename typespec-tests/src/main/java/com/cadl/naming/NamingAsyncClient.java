@@ -84,7 +84,7 @@ public final class NamingAsyncClient {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             kind_id: String (Optional)
+     *             &#64;data.kind: String (Optional)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
