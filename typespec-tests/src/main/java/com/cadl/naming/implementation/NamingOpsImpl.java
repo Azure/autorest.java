@@ -142,7 +142,7 @@ public final class NamingOpsImpl {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             kind_id: String (Optional)
+     *             &#64;data.kind: String (Optional)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
@@ -214,7 +214,7 @@ public final class NamingOpsImpl {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             kind_id: String (Optional)
+     *             &#64;data.kind: String (Optional)
      *         }
      *     }
      *     type: String(Blob/File) (Required)

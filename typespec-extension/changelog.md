@@ -6,6 +6,10 @@ Compatible with compiler 0.53.
 
 - Enhanced convenience API for "application/merge-patch+json".
 
+## 0.13.10 (2024-02-28)
+
+Compatible with compiler 0.53.
+
 ## 0.13.9 (2024-02-27)
 
 Compatible with compiler 0.53.
