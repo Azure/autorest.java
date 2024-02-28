@@ -31,15 +31,15 @@ public class ExtendsTests {
     @Test
     public void testExtendsFloat() {
         Map<String, Double> propertyMap = new LinkedHashMap<>();
-        propertyMap.put("prop", 42.42);
-        ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(42.42);
+        propertyMap.put("prop", 43.125);
+        ExtendsFloatAdditionalProperties body = new ExtendsFloatAdditionalProperties(43.125);
         body.setAdditionalProperties(propertyMap);
         extendsFloatClient.put(body);
 
         ExtendsFloatAdditionalProperties properties = extendsFloatClient.get();
         Assertions.assertNotNull(properties);
         Assertions.assertNotNull(properties.getAdditionalProperties());
-        Assertions.assertEquals(42.42, properties.getId());
+        Assertions.assertEquals(43.125, properties.getId());
         Assertions.assertIterableEquals(propertyMap.entrySet(), properties.getAdditionalProperties().entrySet());
     }
 

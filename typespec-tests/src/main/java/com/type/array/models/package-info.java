@@ -5,7 +5,7 @@
 /**
  * <!-- start generated doc -->
  * Package containing the data models for Array.
- * Illustrates various of dictionaries.
+ * Illustrates various types of arrays.
  * <!-- end generated doc -->
  */
 package com.type.array.models;

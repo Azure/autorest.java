@@ -17,11 +17,11 @@ class Float32ValueClientTest {
     void get() {
         List<Double> response = client.get();
         Assertions.assertEquals(1, response.size());
-        Assertions.assertEquals(42.42, response.get(0));
+        Assertions.assertEquals(43.125, response.get(0));
     }
 
     @Test
     void put() {
-        client.put(Arrays.asList(42.42));
+        client.put(Arrays.asList(43.125));
     }
 }

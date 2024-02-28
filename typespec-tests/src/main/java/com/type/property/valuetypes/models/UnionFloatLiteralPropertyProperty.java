@@ -9,14 +9,14 @@ package com.type.property.valuetypes.models;
  */
 public enum UnionFloatLiteralPropertyProperty {
     /**
-     * Enum value 42.42.
+     * Enum value 43.125.
      */
-    FOUR_TWO_FOUR_TWO(42.42),
+    FOUR_THREE_ONE_TWO_FIVE(43.125),
 
     /**
-     * Enum value 43.43.
+     * Enum value 46.875.
      */
-    FOUR_THREE_FOUR_THREE(43.43);
+    FOUR_SIX_EIGHT_SEVEN_FIVE(46.875);
 
     /**
      * The actual serialized value for a UnionFloatLiteralPropertyProperty instance.
