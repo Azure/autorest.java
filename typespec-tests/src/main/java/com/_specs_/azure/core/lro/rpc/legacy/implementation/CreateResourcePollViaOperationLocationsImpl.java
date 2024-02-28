@@ -126,7 +126,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * {
      *     jobId: String (Required)
      *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
      *     errors (Optional): [
      *          (Optional){
      *             error (Required): {
@@ -173,7 +173,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * {
      *     jobId: String (Required)
      *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
      *     errors (Optional): [
      *          (Optional){
      *             error (Required): {

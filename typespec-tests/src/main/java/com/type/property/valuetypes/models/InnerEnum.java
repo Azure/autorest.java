@@ -9,7 +9,7 @@ import com.azure.core.util.ExpandableStringEnum;
 import java.util.Collection;
 
 /**
- * Enum that will be used as a property for model EnumProperty. Non-extensible.
+ * Enum that will be used as a property for model EnumProperty. Extensible.
  */
 public final class InnerEnum extends ExpandableStringEnum<InnerEnum> {
     /**

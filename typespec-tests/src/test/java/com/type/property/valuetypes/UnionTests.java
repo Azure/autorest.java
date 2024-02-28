@@ -29,11 +29,11 @@ public class UnionTests {
 
     @Test
     public void testUnionFloatLiteral() {
-        UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(UnionFloatLiteralPropertyProperty.FOUR_THREE_FOUR_THREE);
+        UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(UnionFloatLiteralPropertyProperty.FOUR_SIX_EIGHT_SEVEN_FIVE);
         unionFloatClient.put(body);
 
         Assertions.assertNotNull(unionFloatClient.get());
-        Assertions.assertEquals(UnionFloatLiteralPropertyProperty.FOUR_THREE_FOUR_THREE, unionFloatClient.get().getProperty());
+        Assertions.assertEquals(UnionFloatLiteralPropertyProperty.FOUR_SIX_EIGHT_SEVEN_FIVE, unionFloatClient.get().getProperty());
     }
 
     @Test
