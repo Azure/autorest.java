@@ -2814,6 +2814,8 @@ export class CodeModelBuilder {
         innerApplySchemaUsage(schema.elementType, schemaUsage);
       } else if (schema instanceof OrSchema) {
         schema.anyOf?.forEach((it) => innerApplySchemaUsage(it, schemaUsage));
+      } else if (schema instanceof ConstantSchema) {
+        innerApplySchemaUsage(schema.valueType, schemaUsage);
       }
     };
 
