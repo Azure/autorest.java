@@ -28,13 +28,13 @@ public final class JobStatus extends ExpandableStringEnum<JobStatus> {
      * The operation has completed successfully.
      */
     @Generated
-    public static final JobStatus SUCCEEDED = fromString("succeeded");
+    public static final JobStatus SUCCEEDED = fromString("Succeeded");
 
     /**
      * The operation has failed.
      */
     @Generated
-    public static final JobStatus FAILED = fromString("failed");
+    public static final JobStatus FAILED = fromString("Failed");
 
     /**
      * The operation has been canceled by the user.
