@@ -1218,11 +1218,12 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * Get 'begin!*'();:&#064; &amp;=+$,/?#[]end.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
@@ -1237,13 +1238,14 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * Get 'begin!*'();:&#064; &amp;=+$,/?#[]end.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(Context context) {
@@ -1257,11 +1259,11 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * Get 'begin!*'();:&#064; &amp;=+$,/?#[]end.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end on successful completion of {@link Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlEncodedAsync() {
@@ -1269,13 +1271,13 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * Get 'begin!*'();:&#064; &amp;=+$,/?#[]end.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end on successful completion of {@link Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> stringUrlEncodedAsync(Context context) {
@@ -1283,13 +1285,13 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * Get 'begin!*'();:&#064; &amp;=+$,/?#[]end.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:@ &amp;=+$,/?#[]end along with {@link Response}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> stringUrlEncodedWithResponse(Context context) {
@@ -1297,7 +1299,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@ &amp;=+$,/?#[]end.
+     * Get 'begin!*'();:&#064; &amp;=+$,/?#[]end.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1308,7 +1310,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end
+     * Get 'begin!*'();:&#064;&amp;=+$,end
      * 
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
@@ -1329,7 +1331,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end
+     * Get 'begin!*'();:&#064;&amp;=+$,end
      * 
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
@@ -1351,7 +1353,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end
+     * Get 'begin!*'();:&#064;&amp;=+$,end
      * 
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
@@ -1365,7 +1367,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end
+     * Get 'begin!*'();:&#064;&amp;=+$,end
      * 
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
@@ -1381,7 +1383,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end
+     * Get 'begin!*'();:&#064;&amp;=+$,end
      * 
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
@@ -1397,7 +1399,7 @@ public final class Paths {
     }
 
     /**
-     * Get 'begin!*'();:@&amp;=+$,end
+     * Get 'begin!*'();:&#064;&amp;=+$,end
      * 
      * https://tools.ietf.org/html/rfc3986#appendix-A 'path' accept any 'pchar' not encoded.
      * 
@@ -2616,14 +2618,15 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
      * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2643,15 +2646,16 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
      * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2670,14 +2674,15 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
      * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2686,15 +2691,16 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
      * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2703,15 +2709,16 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
      * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -2720,9 +2727,10 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
      * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
