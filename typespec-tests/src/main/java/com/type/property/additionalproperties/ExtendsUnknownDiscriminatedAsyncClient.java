@@ -40,9 +40,7 @@ public final class ExtendsUnknownDiscriminatedAsyncClient {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -68,9 +66,7 @@ public final class ExtendsUnknownDiscriminatedAsyncClient {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -110,8 +106,9 @@ public final class ExtendsUnknownDiscriminatedAsyncClient {
     public Mono<ExtendsUnknownAdditionalPropertiesDiscriminated> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono).map(
-            protocolMethodData -> protocolMethodData.toObject(ExtendsUnknownAdditionalPropertiesDiscriminated.class));
+        return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData
+                .toObject(ExtendsUnknownAdditionalPropertiesDiscriminated.class));
     }
 
     /**

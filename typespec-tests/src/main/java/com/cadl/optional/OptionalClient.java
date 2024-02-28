@@ -40,59 +40,23 @@ public final class OptionalClient {
 
     /**
      * The put operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>booleanNullable</td>
-     * <td>Boolean</td>
-     * <td>No</td>
-     * <td>Boolean with `true` and `false` values.</td>
-     * </tr>
-     * <tr>
-     * <td>string</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
-     * <tr>
-     * <td>stringNullable</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
+     *     <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>request-header-optional</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
@@ -118,9 +82,7 @@ public final class OptionalClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     boolean: Boolean (Optional)

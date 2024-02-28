@@ -40,9 +40,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The getModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -56,9 +54,7 @@ public final class VisibilityAsyncClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -79,8 +75,7 @@ public final class VisibilityAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with visibility properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return output model with visibility properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -90,9 +85,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The headModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -123,9 +116,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The putModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -156,9 +147,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The patchModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -189,9 +178,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The postModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -222,9 +209,7 @@ public final class VisibilityAsyncClient {
 
     /**
      * The deleteModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)

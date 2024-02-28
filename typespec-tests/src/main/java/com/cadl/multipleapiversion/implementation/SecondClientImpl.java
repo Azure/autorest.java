@@ -167,9 +167,7 @@ public final class SecondClientImpl {
 
     /**
      * Resource read operation template.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -195,9 +193,7 @@ public final class SecondClientImpl {
 
     /**
      * Resource read operation template.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)

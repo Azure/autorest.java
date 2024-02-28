@@ -29,8 +29,8 @@ public final class ChildResourcesInterfacesImpl implements ChildResourcesInterfa
 
     public Response<ChildResource> getWithResponse(String resourceGroupName, String topLevelArmResourceName,
         String childResourceName, Context context) {
-        Response<ChildResourceInner> inner = this.serviceClient().getWithResponse(resourceGroupName,
-            topLevelArmResourceName, childResourceName, context);
+        Response<ChildResourceInner> inner = this.serviceClient()
+            .getWithResponse(resourceGroupName, topLevelArmResourceName, childResourceName, context);
         if (inner != null) {
             return new SimpleResponse<>(inner.getRequest(), inner.getStatusCode(), inner.getHeaders(),
                 new ChildResourceImpl(inner.getValue(), this.manager()));

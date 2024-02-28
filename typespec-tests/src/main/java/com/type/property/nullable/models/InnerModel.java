@@ -66,9 +66,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
 
     /**
      * Set the property property: Inner model property.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param property the property value to set.
      * @return the InnerModel object itself.
@@ -110,8 +108,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      * Reads an instance of InnerModel from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of InnerModel if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of InnerModel if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the InnerModel.
      */
     @Generated

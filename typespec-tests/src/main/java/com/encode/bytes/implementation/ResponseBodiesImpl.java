@@ -50,8 +50,7 @@ public final class ResponseBodiesImpl {
     }
 
     /**
-     * The interface defining all the services for BytesClientResponseBodies to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for BytesClientResponseBodies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BytesClientResponseB")
@@ -149,9 +148,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -171,9 +168,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -193,9 +188,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -215,9 +208,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -237,9 +228,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -259,9 +248,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -281,9 +268,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -303,9 +288,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -325,9 +308,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64url operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -347,9 +328,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64url operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>

@@ -59,8 +59,7 @@ public final class GroupsImpl {
     }
 
     /**
-     * The interface defining all the services for RenamedOperationClientGroups to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for RenamedOperationClientGroups to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "RenamedOperationClie")

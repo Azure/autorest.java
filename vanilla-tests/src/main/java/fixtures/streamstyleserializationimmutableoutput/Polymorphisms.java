@@ -53,8 +53,7 @@ public final class Polymorphisms {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServicePolymorphisms to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServicePolymorphisms to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -266,37 +265,37 @@ public final class Polymorphisms {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * 'fishtype':'Salmon',
-     * 'location':'alaska',
-     * 'iswild':true,
-     * 'species':'king',
-     * 'length':1.0,
-     * 'siblings':[
-     * {
-     * 'fishtype':'Shark',
-     * 'age':6,
-     * 'birthday': '2012-01-05T01:00:00Z',
-     * 'length':20.0,
-     * 'species':'predator',
-     * },
-     * {
-     * 'fishtype':'Sawshark',
-     * 'age':105,
-     * 'birthday': '1900-01-05T01:00:00Z',
-     * 'length':10.0,
-     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     * 'species':'dangerous',
-     * },
-     * {
-     * 'fishtype': 'goblin',
-     * 'age': 1,
-     * 'birthday': '2015-08-08T00:00:00Z',
-     * 'length': 30.0,
-     * 'species': 'scary',
-     * 'jawsize': 5
-     * }
-     * ]
-     * };.
+     *         'fishtype':'Salmon',
+     *         'location':'alaska',
+     *         'iswild':true,
+     *         'species':'king',
+     *         'length':1.0,
+     *         'siblings':[
+     *           {
+     *             'fishtype':'Shark',
+     *             'age':6,
+     *             'birthday': '2012-01-05T01:00:00Z',
+     *             'length':20.0,
+     *             'species':'predator',
+     *           },
+     *           {
+     *             'fishtype':'Sawshark',
+     *             'age':105,
+     *             'birthday': '1900-01-05T01:00:00Z',
+     *             'length':10.0,
+     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     *             'species':'dangerous',
+     *           },
+     *           {
+     *             'fishtype': 'goblin',
+     *             'age': 1,
+     *             'birthday': '2015-08-08T00:00:00Z',
+     *             'length': 30.0,
+     *             'species': 'scary',
+     *             'jawsize': 5
+     *           }
+     *         ]
+     *       };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -323,37 +322,37 @@ public final class Polymorphisms {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * 'fishtype':'Salmon',
-     * 'location':'alaska',
-     * 'iswild':true,
-     * 'species':'king',
-     * 'length':1.0,
-     * 'siblings':[
-     * {
-     * 'fishtype':'Shark',
-     * 'age':6,
-     * 'birthday': '2012-01-05T01:00:00Z',
-     * 'length':20.0,
-     * 'species':'predator',
-     * },
-     * {
-     * 'fishtype':'Sawshark',
-     * 'age':105,
-     * 'birthday': '1900-01-05T01:00:00Z',
-     * 'length':10.0,
-     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     * 'species':'dangerous',
-     * },
-     * {
-     * 'fishtype': 'goblin',
-     * 'age': 1,
-     * 'birthday': '2015-08-08T00:00:00Z',
-     * 'length': 30.0,
-     * 'species': 'scary',
-     * 'jawsize': 5
-     * }
-     * ]
-     * };.
+     *         'fishtype':'Salmon',
+     *         'location':'alaska',
+     *         'iswild':true,
+     *         'species':'king',
+     *         'length':1.0,
+     *         'siblings':[
+     *           {
+     *             'fishtype':'Shark',
+     *             'age':6,
+     *             'birthday': '2012-01-05T01:00:00Z',
+     *             'length':20.0,
+     *             'species':'predator',
+     *           },
+     *           {
+     *             'fishtype':'Sawshark',
+     *             'age':105,
+     *             'birthday': '1900-01-05T01:00:00Z',
+     *             'length':10.0,
+     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     *             'species':'dangerous',
+     *           },
+     *           {
+     *             'fishtype': 'goblin',
+     *             'age': 1,
+     *             'birthday': '2015-08-08T00:00:00Z',
+     *             'length': 30.0,
+     *             'species': 'scary',
+     *             'jawsize': 5
+     *           }
+     *         ]
+     *       };.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -381,37 +380,37 @@ public final class Polymorphisms {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * 'fishtype':'Salmon',
-     * 'location':'alaska',
-     * 'iswild':true,
-     * 'species':'king',
-     * 'length':1.0,
-     * 'siblings':[
-     * {
-     * 'fishtype':'Shark',
-     * 'age':6,
-     * 'birthday': '2012-01-05T01:00:00Z',
-     * 'length':20.0,
-     * 'species':'predator',
-     * },
-     * {
-     * 'fishtype':'Sawshark',
-     * 'age':105,
-     * 'birthday': '1900-01-05T01:00:00Z',
-     * 'length':10.0,
-     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     * 'species':'dangerous',
-     * },
-     * {
-     * 'fishtype': 'goblin',
-     * 'age': 1,
-     * 'birthday': '2015-08-08T00:00:00Z',
-     * 'length': 30.0,
-     * 'species': 'scary',
-     * 'jawsize': 5
-     * }
-     * ]
-     * };.
+     *         'fishtype':'Salmon',
+     *         'location':'alaska',
+     *         'iswild':true,
+     *         'species':'king',
+     *         'length':1.0,
+     *         'siblings':[
+     *           {
+     *             'fishtype':'Shark',
+     *             'age':6,
+     *             'birthday': '2012-01-05T01:00:00Z',
+     *             'length':20.0,
+     *             'species':'predator',
+     *           },
+     *           {
+     *             'fishtype':'Sawshark',
+     *             'age':105,
+     *             'birthday': '1900-01-05T01:00:00Z',
+     *             'length':10.0,
+     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     *             'species':'dangerous',
+     *           },
+     *           {
+     *             'fishtype': 'goblin',
+     *             'age': 1,
+     *             'birthday': '2015-08-08T00:00:00Z',
+     *             'length': 30.0,
+     *             'species': 'scary',
+     *             'jawsize': 5
+     *           }
+     *         ]
+     *       };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -427,37 +426,37 @@ public final class Polymorphisms {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * 'fishtype':'Salmon',
-     * 'location':'alaska',
-     * 'iswild':true,
-     * 'species':'king',
-     * 'length':1.0,
-     * 'siblings':[
-     * {
-     * 'fishtype':'Shark',
-     * 'age':6,
-     * 'birthday': '2012-01-05T01:00:00Z',
-     * 'length':20.0,
-     * 'species':'predator',
-     * },
-     * {
-     * 'fishtype':'Sawshark',
-     * 'age':105,
-     * 'birthday': '1900-01-05T01:00:00Z',
-     * 'length':10.0,
-     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     * 'species':'dangerous',
-     * },
-     * {
-     * 'fishtype': 'goblin',
-     * 'age': 1,
-     * 'birthday': '2015-08-08T00:00:00Z',
-     * 'length': 30.0,
-     * 'species': 'scary',
-     * 'jawsize': 5
-     * }
-     * ]
-     * };.
+     *         'fishtype':'Salmon',
+     *         'location':'alaska',
+     *         'iswild':true,
+     *         'species':'king',
+     *         'length':1.0,
+     *         'siblings':[
+     *           {
+     *             'fishtype':'Shark',
+     *             'age':6,
+     *             'birthday': '2012-01-05T01:00:00Z',
+     *             'length':20.0,
+     *             'species':'predator',
+     *           },
+     *           {
+     *             'fishtype':'Sawshark',
+     *             'age':105,
+     *             'birthday': '1900-01-05T01:00:00Z',
+     *             'length':10.0,
+     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     *             'species':'dangerous',
+     *           },
+     *           {
+     *             'fishtype': 'goblin',
+     *             'age': 1,
+     *             'birthday': '2015-08-08T00:00:00Z',
+     *             'length': 30.0,
+     *             'species': 'scary',
+     *             'jawsize': 5
+     *           }
+     *         ]
+     *       };.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -474,37 +473,37 @@ public final class Polymorphisms {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * 'fishtype':'Salmon',
-     * 'location':'alaska',
-     * 'iswild':true,
-     * 'species':'king',
-     * 'length':1.0,
-     * 'siblings':[
-     * {
-     * 'fishtype':'Shark',
-     * 'age':6,
-     * 'birthday': '2012-01-05T01:00:00Z',
-     * 'length':20.0,
-     * 'species':'predator',
-     * },
-     * {
-     * 'fishtype':'Sawshark',
-     * 'age':105,
-     * 'birthday': '1900-01-05T01:00:00Z',
-     * 'length':10.0,
-     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     * 'species':'dangerous',
-     * },
-     * {
-     * 'fishtype': 'goblin',
-     * 'age': 1,
-     * 'birthday': '2015-08-08T00:00:00Z',
-     * 'length': 30.0,
-     * 'species': 'scary',
-     * 'jawsize': 5
-     * }
-     * ]
-     * };.
+     *         'fishtype':'Salmon',
+     *         'location':'alaska',
+     *         'iswild':true,
+     *         'species':'king',
+     *         'length':1.0,
+     *         'siblings':[
+     *           {
+     *             'fishtype':'Shark',
+     *             'age':6,
+     *             'birthday': '2012-01-05T01:00:00Z',
+     *             'length':20.0,
+     *             'species':'predator',
+     *           },
+     *           {
+     *             'fishtype':'Sawshark',
+     *             'age':105,
+     *             'birthday': '1900-01-05T01:00:00Z',
+     *             'length':10.0,
+     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     *             'species':'dangerous',
+     *           },
+     *           {
+     *             'fishtype': 'goblin',
+     *             'age': 1,
+     *             'birthday': '2015-08-08T00:00:00Z',
+     *             'length': 30.0,
+     *             'species': 'scary',
+     *             'jawsize': 5
+     *           }
+     *         ]
+     *       };.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -532,37 +531,37 @@ public final class Polymorphisms {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * 'fishtype':'Salmon',
-     * 'location':'alaska',
-     * 'iswild':true,
-     * 'species':'king',
-     * 'length':1.0,
-     * 'siblings':[
-     * {
-     * 'fishtype':'Shark',
-     * 'age':6,
-     * 'birthday': '2012-01-05T01:00:00Z',
-     * 'length':20.0,
-     * 'species':'predator',
-     * },
-     * {
-     * 'fishtype':'Sawshark',
-     * 'age':105,
-     * 'birthday': '1900-01-05T01:00:00Z',
-     * 'length':10.0,
-     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     * 'species':'dangerous',
-     * },
-     * {
-     * 'fishtype': 'goblin',
-     * 'age': 1,
-     * 'birthday': '2015-08-08T00:00:00Z',
-     * 'length': 30.0,
-     * 'species': 'scary',
-     * 'jawsize': 5
-     * }
-     * ]
-     * };.
+     *         'fishtype':'Salmon',
+     *         'location':'alaska',
+     *         'iswild':true,
+     *         'species':'king',
+     *         'length':1.0,
+     *         'siblings':[
+     *           {
+     *             'fishtype':'Shark',
+     *             'age':6,
+     *             'birthday': '2012-01-05T01:00:00Z',
+     *             'length':20.0,
+     *             'species':'predator',
+     *           },
+     *           {
+     *             'fishtype':'Sawshark',
+     *             'age':105,
+     *             'birthday': '1900-01-05T01:00:00Z',
+     *             'length':10.0,
+     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     *             'species':'dangerous',
+     *           },
+     *           {
+     *             'fishtype': 'goblin',
+     *             'age': 1,
+     *             'birthday': '2015-08-08T00:00:00Z',
+     *             'length': 30.0,
+     *             'species': 'scary',
+     *             'jawsize': 5
+     *           }
+     *         ]
+     *       };.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -577,8 +576,7 @@ public final class Polymorphisms {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync() {
@@ -597,8 +595,7 @@ public final class Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFish>> getDotSyntaxWithResponseAsync(Context context) {
@@ -668,13 +665,11 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
-     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync() {
@@ -688,15 +683,13 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
-     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithDiscriminatorWithResponseAsync(Context context) {
@@ -709,13 +702,11 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
-     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithDiscriminatorAsync() {
@@ -723,15 +714,13 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
-     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithDiscriminatorAsync(Context context) {
@@ -739,15 +728,13 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
-     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified along with {@link Response}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DotFishMarket> getComposedWithDiscriminatorWithResponse(Context context) {
@@ -760,13 +747,11 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
-     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithDiscriminator() {
@@ -774,13 +759,11 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync() {
@@ -794,15 +777,13 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DotFishMarket>> getComposedWithoutDiscriminatorWithResponseAsync(Context context) {
@@ -815,13 +796,11 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithoutDiscriminatorAsync() {
@@ -829,15 +808,13 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DotFishMarket> getComposedWithoutDiscriminatorAsync(Context context) {
@@ -846,15 +823,13 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire along with {@link Response}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DotFishMarket> getComposedWithoutDiscriminatorWithResponse(Context context) {
@@ -867,13 +842,11 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public DotFishMarket getComposedWithoutDiscriminator() {
@@ -885,8 +858,7 @@ public final class Polymorphisms {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     * along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync() {
@@ -905,8 +877,7 @@ public final class Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     * along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync(Context context) {
@@ -923,8 +894,7 @@ public final class Polymorphisms {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     * on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync() {
@@ -938,8 +908,7 @@ public final class Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     * on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync(Context context) {
@@ -953,8 +922,7 @@ public final class Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
-     * along with {@link Response}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Salmon> getComplicatedWithResponse(Context context) {
@@ -971,8 +939,7 @@ public final class Polymorphisms {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     * properties.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Salmon getComplicated() {
@@ -1222,35 +1189,33 @@ public final class Polymorphisms {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
-     * allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     * be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      * {
-     * "fishtype": "sawshark",
-     * "species": "snaggle toothed",
-     * "length": 18.5,
-     * "age": 2,
-     * "birthday": "2013-06-01T01:00:00Z",
-     * "location": "alaska",
-     * "picture": base64(FF FF FF FF FE),
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "birthday": "2012-01-05T01:00:00Z",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "picture": base64(FF FF FF FF FE),
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "sawshark",
+     *     "species": "snaggle toothed",
+     *     "length": 18.5,
+     *     "age": 2,
+     *     "birthday": "2013-06-01T01:00:00Z",
+     *     "location": "alaska",
+     *     "picture": base64(FF FF FF FF FE),
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "birthday": "2012-01-05T01:00:00Z",
+     *             "length": 20,
+     *             "age": 6
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "picture": base64(FF FF FF FF FE),
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1275,35 +1240,33 @@ public final class Polymorphisms {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
-     * allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     * be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      * {
-     * "fishtype": "sawshark",
-     * "species": "snaggle toothed",
-     * "length": 18.5,
-     * "age": 2,
-     * "birthday": "2013-06-01T01:00:00Z",
-     * "location": "alaska",
-     * "picture": base64(FF FF FF FF FE),
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "birthday": "2012-01-05T01:00:00Z",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "picture": base64(FF FF FF FF FE),
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "sawshark",
+     *     "species": "snaggle toothed",
+     *     "length": 18.5,
+     *     "age": 2,
+     *     "birthday": "2013-06-01T01:00:00Z",
+     *     "location": "alaska",
+     *     "picture": base64(FF FF FF FF FE),
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "birthday": "2012-01-05T01:00:00Z",
+     *             "length": 20,
+     *             "age": 6
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "picture": base64(FF FF FF FF FE),
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1328,35 +1291,33 @@ public final class Polymorphisms {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
-     * allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     * be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      * {
-     * "fishtype": "sawshark",
-     * "species": "snaggle toothed",
-     * "length": 18.5,
-     * "age": 2,
-     * "birthday": "2013-06-01T01:00:00Z",
-     * "location": "alaska",
-     * "picture": base64(FF FF FF FF FE),
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "birthday": "2012-01-05T01:00:00Z",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "picture": base64(FF FF FF FF FE),
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "sawshark",
+     *     "species": "snaggle toothed",
+     *     "length": 18.5,
+     *     "age": 2,
+     *     "birthday": "2013-06-01T01:00:00Z",
+     *     "location": "alaska",
+     *     "picture": base64(FF FF FF FF FE),
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "birthday": "2012-01-05T01:00:00Z",
+     *             "length": 20,
+     *             "age": 6
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "picture": base64(FF FF FF FF FE),
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1369,35 +1330,33 @@ public final class Polymorphisms {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
-     * allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     * be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      * {
-     * "fishtype": "sawshark",
-     * "species": "snaggle toothed",
-     * "length": 18.5,
-     * "age": 2,
-     * "birthday": "2013-06-01T01:00:00Z",
-     * "location": "alaska",
-     * "picture": base64(FF FF FF FF FE),
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "birthday": "2012-01-05T01:00:00Z",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "picture": base64(FF FF FF FF FE),
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "sawshark",
+     *     "species": "snaggle toothed",
+     *     "length": 18.5,
+     *     "age": 2,
+     *     "birthday": "2013-06-01T01:00:00Z",
+     *     "location": "alaska",
+     *     "picture": base64(FF FF FF FF FE),
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "birthday": "2012-01-05T01:00:00Z",
+     *             "length": 20,
+     *             "age": 6
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "picture": base64(FF FF FF FF FE),
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1411,35 +1370,33 @@ public final class Polymorphisms {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
-     * allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     * be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      * {
-     * "fishtype": "sawshark",
-     * "species": "snaggle toothed",
-     * "length": 18.5,
-     * "age": 2,
-     * "birthday": "2013-06-01T01:00:00Z",
-     * "location": "alaska",
-     * "picture": base64(FF FF FF FF FE),
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "birthday": "2012-01-05T01:00:00Z",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "picture": base64(FF FF FF FF FE),
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "sawshark",
+     *     "species": "snaggle toothed",
+     *     "length": 18.5,
+     *     "age": 2,
+     *     "birthday": "2013-06-01T01:00:00Z",
+     *     "location": "alaska",
+     *     "picture": base64(FF FF FF FF FE),
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "birthday": "2012-01-05T01:00:00Z",
+     *             "length": 20,
+     *             "age": 6
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "picture": base64(FF FF FF FF FE),
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1464,35 +1421,33 @@ public final class Polymorphisms {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
-     * allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
-     * be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
      * {
-     * "fishtype": "sawshark",
-     * "species": "snaggle toothed",
-     * "length": 18.5,
-     * "age": 2,
-     * "birthday": "2013-06-01T01:00:00Z",
-     * "location": "alaska",
-     * "picture": base64(FF FF FF FF FE),
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "birthday": "2012-01-05T01:00:00Z",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "picture": base64(FF FF FF FF FE),
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "sawshark",
+     *     "species": "snaggle toothed",
+     *     "length": 18.5,
+     *     "age": 2,
+     *     "birthday": "2013-06-01T01:00:00Z",
+     *     "location": "alaska",
+     *     "picture": base64(FF FF FF FF FE),
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "birthday": "2012-01-05T01:00:00Z",
+     *             "length": 20,
+     *             "age": 6
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "picture": base64(FF FF FF FF FE),
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

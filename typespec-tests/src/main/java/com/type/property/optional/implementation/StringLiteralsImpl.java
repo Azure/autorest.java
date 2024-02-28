@@ -52,8 +52,7 @@ public final class StringLiteralsImpl {
     }
 
     /**
-     * The interface defining all the services for OptionalClientStringLiterals to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for OptionalClientStringLiterals to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "OptionalClientString")
@@ -133,9 +132,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Get models that will return all properties in the model.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)
@@ -147,8 +144,7 @@ public final class StringLiteralsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getAllWithResponseAsync(RequestOptions requestOptions) {
@@ -158,9 +154,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Get models that will return all properties in the model.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)
@@ -182,9 +176,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Get models that will return the default object.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)
@@ -196,8 +188,7 @@ public final class StringLiteralsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDefaultWithResponseAsync(RequestOptions requestOptions) {
@@ -207,9 +198,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Get models that will return the default object.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)
@@ -231,9 +220,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Put a body with all properties present.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)
@@ -256,9 +243,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Put a body with all properties present.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)
@@ -281,9 +266,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Put a body with default properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)
@@ -306,9 +289,7 @@ public final class StringLiteralsImpl {
 
     /**
      * Put a body with default properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(hello) (Optional)

@@ -123,8 +123,7 @@ public final class EnumServiceClientImpl {
     }
 
     /**
-     * The interface defining all the services for EnumServiceClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for EnumServiceClient to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "EnumServiceClient")
@@ -427,9 +426,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getColor operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
@@ -449,9 +446,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getColor operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
@@ -471,9 +466,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getColorModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
@@ -494,9 +487,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getColorModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Red/Blue/Green)
      * }</pre>
@@ -516,9 +507,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setColorModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -551,9 +540,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setColorModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -585,9 +572,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setPriority operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -620,9 +605,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setPriority operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -654,9 +637,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getRunningOperation operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -689,9 +670,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getRunningOperation operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -723,9 +702,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getOperation operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -758,9 +735,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * The getOperation operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String(Read/Write) (Required)
@@ -792,28 +767,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringEnumArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>colorArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The colorArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -830,7 +791,8 @@ public final class EnumServiceClientImpl {
     public Mono<Response<BinaryData>> setStringEnumArrayWithResponseAsync(List<String> colorArray,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted = colorArray.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.setStringEnumArray(this.getEndpoint(), colorArrayConverted,
             accept, requestOptions, context));
@@ -838,28 +800,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringEnumArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>colorArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The colorArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -875,7 +823,8 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringEnumArrayWithResponse(List<String> colorArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted = colorArray.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return service.setStringEnumArraySync(this.getEndpoint(), colorArrayConverted, accept, requestOptions,
             Context.NONE);
@@ -883,28 +832,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setIntEnumArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>priorityArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The priorityArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -922,35 +857,22 @@ public final class EnumServiceClientImpl {
         RequestOptions requestOptions) {
         final String accept = "application/json";
         String priorityArrayConverted = priorityArray.stream()
-            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.setIntEnumArray(this.getEndpoint(), priorityArrayConverted,
             accept, requestOptions, context));
     }
 
     /**
      * The setIntEnumArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>priorityArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The priorityArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -967,35 +889,22 @@ public final class EnumServiceClientImpl {
     public Response<BinaryData> setIntEnumArrayWithResponse(List<String> priorityArray, RequestOptions requestOptions) {
         final String accept = "application/json";
         String priorityArrayConverted = priorityArray.stream()
-            .map(paramItemValue -> Objects.toString(paramItemValue, "")).collect(Collectors.joining(","));
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
+            .collect(Collectors.joining(","));
         return service.setIntEnumArraySync(this.getEndpoint(), priorityArrayConverted, accept, requestOptions,
             Context.NONE);
     }
 
     /**
      * The setStringArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>stringArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The stringArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1012,7 +921,8 @@ public final class EnumServiceClientImpl {
     public Mono<Response<BinaryData>> setStringArrayWithResponseAsync(List<String> stringArray,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        String stringArrayConverted = stringArray.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String stringArrayConverted = stringArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.setStringArray(this.getEndpoint(), stringArrayConverted, accept,
             requestOptions, context));
@@ -1020,28 +930,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>stringArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The stringArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1057,7 +953,8 @@ public final class EnumServiceClientImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> setStringArrayWithResponse(List<String> stringArray, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String stringArrayConverted = stringArray.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String stringArrayConverted = stringArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return service.setStringArraySync(this.getEndpoint(), stringArrayConverted, accept, requestOptions,
             Context.NONE);
@@ -1065,28 +962,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setIntArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>intArrayOpt</td>
-     * <td>List&lt;Integer&gt;</td>
-     * <td>No</td>
-     * <td>The intArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1111,28 +994,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setIntArray operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>intArrayOpt</td>
-     * <td>List&lt;Integer&gt;</td>
-     * <td>No</td>
-     * <td>The intArrayOpt parameter. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1155,28 +1024,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringEnumMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>colorArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The colorArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1201,28 +1056,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringEnumMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>colorArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The colorArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>colorArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1246,28 +1087,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setIntEnumMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>priorityArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The priorityArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1292,28 +1119,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setIntEnumMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>priorityArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The priorityArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>priorityArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The priorityArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1337,28 +1150,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>stringArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The stringArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1383,28 +1182,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>stringArrayOpt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The stringArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringArrayOpt</td><td>List&lt;String&gt;</td><td>No</td><td>The stringArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1428,28 +1213,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setIntMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>intArrayOpt</td>
-     * <td>List&lt;Integer&gt;</td>
-     * <td>No</td>
-     * <td>The intArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1474,28 +1245,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setIntMulti operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>intArrayOpt</td>
-     * <td>List&lt;Integer&gt;</td>
-     * <td>No</td>
-     * <td>The intArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intArrayOpt</td><td>List&lt;Integer&gt;</td><td>No</td><td>The intArrayOpt parameter. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1518,28 +1275,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringEnumArrayHeader operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>color-array-opt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The colorArrayOpt parameter</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>color-array-opt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1556,7 +1299,8 @@ public final class EnumServiceClientImpl {
     public Mono<Response<BinaryData>> setStringEnumArrayHeaderWithResponseAsync(List<String> colorArray,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted = colorArray.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.setStringEnumArrayHeader(this.getEndpoint(), colorArrayConverted,
             accept, requestOptions, context));
@@ -1564,28 +1308,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * The setStringEnumArrayHeader operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>color-array-opt</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>The colorArrayOpt parameter</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>color-array-opt</td><td>List&lt;String&gt;</td><td>No</td><td>The colorArrayOpt parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1602,7 +1332,8 @@ public final class EnumServiceClientImpl {
     public Response<BinaryData> setStringEnumArrayHeaderWithResponse(List<String> colorArray,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorArrayConverted = colorArray.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorArrayConverted = colorArray.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return service.setStringEnumArrayHeaderSync(this.getEndpoint(), colorArrayConverted, accept, requestOptions,
             Context.NONE);

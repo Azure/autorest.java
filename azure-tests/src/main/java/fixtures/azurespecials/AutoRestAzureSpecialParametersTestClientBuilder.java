@@ -172,15 +172,13 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
     }
 
     /*
-     * The subscription id, which appears in the path, always modeled in credentials. The value is always
-     * '1234-5678-9012-3456'
+     * The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
      */
     @Generated
     private String subscriptionId;
 
     /**
-     * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always
-     * '1234-5678-9012-3456'.
+     * Sets The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'.
      * 
      * @param subscriptionId the subscriptionId value.
      * @return the AutoRestAzureSpecialParametersTestClientBuilder.
@@ -299,17 +297,21 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
         if (headers.getSize() > 0) {
             policies.add(new AddHeadersPolicy(headers));
         }
-        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
+        this.pipelinePolicies.stream()
+            .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)
             .forEach(p -> policies.add(p));
         HttpPolicyProviders.addBeforeRetryPolicies(policies);
         policies.add(ClientBuilderUtil.validateAndGetRetryPolicy(retryPolicy, retryOptions, new RetryPolicy()));
         policies.add(new AddDatePolicy());
-        this.pipelinePolicies.stream().filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
+        this.pipelinePolicies.stream()
+            .filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_RETRY)
             .forEach(p -> policies.add(p));
         HttpPolicyProviders.addAfterRetryPolicies(policies);
         policies.add(new HttpLoggingPolicy(localHttpLogOptions));
         HttpPipeline httpPipeline = new HttpPipelineBuilder().policies(policies.toArray(new HttpPipelinePolicy[0]))
-            .httpClient(httpClient).clientOptions(localClientOptions).build();
+            .httpClient(httpClient)
+            .clientOptions(localClientOptions)
+            .build();
         return httpPipeline;
     }
 }

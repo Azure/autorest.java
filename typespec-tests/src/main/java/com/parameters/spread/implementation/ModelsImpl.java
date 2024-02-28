@@ -50,8 +50,7 @@ public final class ModelsImpl {
     }
 
     /**
-     * The interface defining all the services for SpreadClientModels to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for SpreadClientModels to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpreadClientModels")
@@ -77,9 +76,7 @@ public final class ModelsImpl {
 
     /**
      * The spreadAsRequestBody operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -104,9 +101,7 @@ public final class ModelsImpl {
 
     /**
      * The spreadAsRequestBody operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

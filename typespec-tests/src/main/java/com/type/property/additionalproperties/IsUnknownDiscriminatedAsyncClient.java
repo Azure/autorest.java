@@ -40,9 +40,7 @@ public final class IsUnknownDiscriminatedAsyncClient {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -68,9 +66,7 @@ public final class IsUnknownDiscriminatedAsyncClient {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)

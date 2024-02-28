@@ -37,9 +37,7 @@ public final class AutoRestSwaggerBatFileServiceClient {
 
     /**
      * Get file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -59,9 +57,7 @@ public final class AutoRestSwaggerBatFileServiceClient {
 
     /**
      * Get a large file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -81,9 +77,7 @@ public final class AutoRestSwaggerBatFileServiceClient {
 
     /**
      * Get empty file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>

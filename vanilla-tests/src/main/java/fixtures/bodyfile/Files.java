@@ -46,8 +46,7 @@ public final class Files {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATFileServiceFiles to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestSwaggerBATFileServiceFiles to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATFi")

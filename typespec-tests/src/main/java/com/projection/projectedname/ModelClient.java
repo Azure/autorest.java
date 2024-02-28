@@ -39,9 +39,7 @@ public final class ModelClient {
 
     /**
      * The client operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -64,9 +62,7 @@ public final class ModelClient {
 
     /**
      * The language operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)

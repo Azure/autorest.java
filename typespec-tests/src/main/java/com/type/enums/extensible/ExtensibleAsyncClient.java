@@ -40,9 +40,7 @@ public final class ExtensibleAsyncClient {
 
     /**
      * The getKnownValue operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -62,9 +60,7 @@ public final class ExtensibleAsyncClient {
 
     /**
      * The getUnknownValue operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -84,9 +80,7 @@ public final class ExtensibleAsyncClient {
 
     /**
      * The putKnownValue operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -107,9 +101,7 @@ public final class ExtensibleAsyncClient {
 
     /**
      * The putUnknownValue operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>

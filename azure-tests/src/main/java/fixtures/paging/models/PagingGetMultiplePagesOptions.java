@@ -53,8 +53,7 @@ public final class PagingGetMultiplePagesOptions implements JsonSerializable<Pag
     }
 
     /**
-     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
+     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      * 
      * @return the timeout value.
      */
@@ -63,8 +62,7 @@ public final class PagingGetMultiplePagesOptions implements JsonSerializable<Pag
     }
 
     /**
-     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
+     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      * 
      * @param timeout the timeout value to set.
      * @return the PagingGetMultiplePagesOptions object itself.
@@ -97,8 +95,7 @@ public final class PagingGetMultiplePagesOptions implements JsonSerializable<Pag
      * Reads an instance of PagingGetMultiplePagesOptions from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of PagingGetMultiplePagesOptions if the JsonReader was pointing to an instance of it, or null
-     * if it was pointing to JSON null.
+     * @return An instance of PagingGetMultiplePagesOptions if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the PagingGetMultiplePagesOptions.
      */
     public static PagingGetMultiplePagesOptions fromJson(JsonReader jsonReader) throws IOException {

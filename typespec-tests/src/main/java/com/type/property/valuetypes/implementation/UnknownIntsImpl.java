@@ -52,8 +52,7 @@ public final class UnknownIntsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientUnknownInts to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for ValueTypesClientUnknownInts to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientUnkn")
@@ -97,9 +96,7 @@ public final class UnknownIntsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: Object (Required)
@@ -121,9 +118,7 @@ public final class UnknownIntsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: Object (Required)
@@ -145,9 +140,7 @@ public final class UnknownIntsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: Object (Required)
@@ -170,9 +163,7 @@ public final class UnknownIntsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: Object (Required)

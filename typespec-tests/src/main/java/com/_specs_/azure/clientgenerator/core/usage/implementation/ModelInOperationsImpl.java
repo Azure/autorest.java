@@ -52,8 +52,7 @@ public final class ModelInOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for UsageClientModelInOperations to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for UsageClientModelInOperations to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UsageClientModelInOp")
@@ -96,15 +95,13 @@ public final class ModelInOperationsImpl {
     }
 
     /**
-     * Expected body parameter:
+     * Expected body parameter: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -126,15 +123,13 @@ public final class ModelInOperationsImpl {
     }
 
     /**
-     * Expected body parameter:
+     * Expected body parameter: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -156,15 +151,13 @@ public final class ModelInOperationsImpl {
     }
 
     /**
-     * Expected response body:
+     * Expected response body: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -185,15 +178,13 @@ public final class ModelInOperationsImpl {
     }
 
     /**
-     * Expected response body:
+     * Expected response body: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

@@ -28,8 +28,7 @@ public final class VirtualMachineScaleSetVMProfile implements JsonSerializable<V
     }
 
     /**
-     * Get the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the
-     * scale set.
+     * Get the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the scale set.
      * 
      * @return the networkProfile value.
      */
@@ -38,8 +37,7 @@ public final class VirtualMachineScaleSetVMProfile implements JsonSerializable<V
     }
 
     /**
-     * Set the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the
-     * scale set.
+     * Set the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the scale set.
      * 
      * @param networkProfile the networkProfile value to set.
      * @return the VirtualMachineScaleSetVMProfile object itself.
@@ -74,8 +72,7 @@ public final class VirtualMachineScaleSetVMProfile implements JsonSerializable<V
      * Reads an instance of VirtualMachineScaleSetVMProfile from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of VirtualMachineScaleSetVMProfile if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
+     * @return An instance of VirtualMachineScaleSetVMProfile if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the VirtualMachineScaleSetVMProfile.
      */
     public static VirtualMachineScaleSetVMProfile fromJson(JsonReader jsonReader) throws IOException {

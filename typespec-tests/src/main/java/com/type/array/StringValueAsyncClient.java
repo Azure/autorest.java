@@ -41,9 +41,7 @@ public final class StringValueAsyncClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *     String (Required)
@@ -65,9 +63,7 @@ public final class StringValueAsyncClient {
 
     /**
      * The put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
      *     String (Required)

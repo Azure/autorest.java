@@ -40,9 +40,7 @@ public final class JsonMergePatchClient {
 
     /**
      * Test content-type: application/merge-patch+json with required body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -64,9 +62,7 @@ public final class JsonMergePatchClient {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -105,9 +101,7 @@ public final class JsonMergePatchClient {
 
     /**
      * Test content-type: application/merge-patch+json with required body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     description: String (Optional)
@@ -128,9 +122,7 @@ public final class JsonMergePatchClient {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -169,9 +161,7 @@ public final class JsonMergePatchClient {
 
     /**
      * Test content-type: application/merge-patch+json with optional body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     description: String (Optional)
@@ -192,9 +182,7 @@ public final class JsonMergePatchClient {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

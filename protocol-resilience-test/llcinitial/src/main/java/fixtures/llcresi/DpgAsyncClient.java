@@ -38,10 +38,8 @@ public final class DpgAsyncClient {
 
     /**
      * Head request, no params.
-     * Initially has no query parameters. After evolution, a new optional query parameter is added.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     *  Initially has no query parameters. After evolution, a new optional query parameter is added.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -61,10 +59,8 @@ public final class DpgAsyncClient {
 
     /**
      * Get true Boolean value on path.
-     * Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     *  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -76,8 +72,7 @@ public final class DpgAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     * Initially only has one required Query Parameter along with {@link Response} on successful completion of
-     * {@link Mono}.
+     *  Initially only has one required Query Parameter along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -86,30 +81,15 @@ public final class DpgAsyncClient {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>optionalParam</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I am an optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -131,17 +111,13 @@ public final class DpgAsyncClient {
 
     /**
      * POST a JSON.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     url: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -162,29 +138,15 @@ public final class DpgAsyncClient {
 
     /**
      * Get true Boolean value on path.
-     * Initially has one optional query parameter. After evolution, a new optional query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     *  Initially has one optional query parameter. After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>optionalParam</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I am an optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -195,7 +157,7 @@ public final class DpgAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     * Initially has one optional query parameter along with {@link Response} on successful completion of {@link Mono}.
+     *  Initially has one optional query parameter along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

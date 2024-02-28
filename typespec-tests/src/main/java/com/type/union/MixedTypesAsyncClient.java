@@ -42,9 +42,7 @@ public final class MixedTypesAsyncClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {
@@ -71,9 +69,7 @@ public final class MixedTypesAsyncClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {

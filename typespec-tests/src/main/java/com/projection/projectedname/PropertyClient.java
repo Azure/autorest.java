@@ -41,9 +41,7 @@ public final class PropertyClient {
 
     /**
      * The json operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
@@ -66,9 +64,7 @@ public final class PropertyClient {
 
     /**
      * The client operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -91,9 +87,7 @@ public final class PropertyClient {
 
     /**
      * The language operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -116,9 +110,7 @@ public final class PropertyClient {
 
     /**
      * The jsonAndClient operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)

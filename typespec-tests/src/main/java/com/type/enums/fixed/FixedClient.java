@@ -38,9 +38,7 @@ public final class FixedClient {
 
     /**
      * getKnownValue.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -60,9 +58,7 @@ public final class FixedClient {
 
     /**
      * putKnownValue.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -83,9 +79,7 @@ public final class FixedClient {
 
     /**
      * putUnknownValue.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>

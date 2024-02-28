@@ -37,9 +37,7 @@ public final class UnknownClient {
 
     /**
      * get unknown value.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -59,9 +57,7 @@ public final class UnknownClient {
 
     /**
      * put unknown value.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>

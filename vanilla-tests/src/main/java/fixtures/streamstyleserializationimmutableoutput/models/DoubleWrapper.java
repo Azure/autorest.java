@@ -53,8 +53,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     }
 
     /**
-     * Get the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: The
-     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
+     * Get the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: The field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
      * 
      * @return the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value.
      */
@@ -63,11 +62,9 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
     }
 
     /**
-     * Set the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: The
-     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
+     * Set the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose property: The field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose property.
      * 
-     * @param field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose the
-     * field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set.
+     * @param field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose the field56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose value to set.
      * @return the DoubleWrapper object itself.
      */
     public DoubleWrapper setField56ZerosAfterTheDotAndNegativeZeroBeforeDotAndThisIsALongFieldNameOnPurpose(
@@ -102,8 +99,7 @@ public final class DoubleWrapper implements JsonSerializable<DoubleWrapper> {
      * Reads an instance of DoubleWrapper from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DoubleWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of DoubleWrapper if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DoubleWrapper.
      */
     public static DoubleWrapper fromJson(JsonReader jsonReader) throws IOException {

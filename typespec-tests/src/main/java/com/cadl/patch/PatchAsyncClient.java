@@ -42,9 +42,7 @@ public final class PatchAsyncClient {
 
     /**
      * The createOrUpdateResource operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -65,9 +63,7 @@ public final class PatchAsyncClient {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -106,9 +102,7 @@ public final class PatchAsyncClient {
 
     /**
      * The createOrUpdateOptionalResource operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -129,9 +123,7 @@ public final class PatchAsyncClient {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -168,9 +160,7 @@ public final class PatchAsyncClient {
 
     /**
      * The createOrUpdateFish operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -180,9 +170,7 @@ public final class PatchAsyncClient {
      *     color: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -199,8 +187,7 @@ public final class PatchAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -288,8 +275,7 @@ public final class PatchAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
-     * completion of {@link Mono}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

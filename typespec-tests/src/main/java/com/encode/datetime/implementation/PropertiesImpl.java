@@ -51,8 +51,7 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for DatetimeClientProperties to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DatetimeClientProperties to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DatetimeClientProper")
@@ -150,17 +149,13 @@ public final class PropertiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
@@ -183,17 +178,13 @@ public final class PropertiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
@@ -216,17 +207,13 @@ public final class PropertiesImpl {
 
     /**
      * The rfc3339 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
@@ -249,17 +236,13 @@ public final class PropertiesImpl {
 
     /**
      * The rfc3339 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: OffsetDateTime (Required)
@@ -282,17 +265,13 @@ public final class PropertiesImpl {
 
     /**
      * The rfc7231 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: DateTimeRfc1123 (Required)
@@ -315,17 +294,13 @@ public final class PropertiesImpl {
 
     /**
      * The rfc7231 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: DateTimeRfc1123 (Required)
@@ -348,17 +323,13 @@ public final class PropertiesImpl {
 
     /**
      * The unixTimestamp operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
@@ -381,17 +352,13 @@ public final class PropertiesImpl {
 
     /**
      * The unixTimestamp operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
@@ -414,9 +381,7 @@ public final class PropertiesImpl {
 
     /**
      * The unixTimestampArray operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -424,9 +389,7 @@ public final class PropertiesImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -452,9 +415,7 @@ public final class PropertiesImpl {
 
     /**
      * The unixTimestampArray operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -462,9 +423,7 @@ public final class PropertiesImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [

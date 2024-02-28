@@ -70,8 +70,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLrosaDs to be used by the
-     * proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLrosaDs to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
@@ -547,28 +546,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a 400 to the initial request.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -584,9 +569,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -625,28 +608,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a 400 to the initial request.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -662,9 +631,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -702,28 +669,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a 400 to the initial request.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -739,9 +692,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -770,35 +721,22 @@ public final class LrosaDsImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.putNonRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a 400 to the initial request.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -814,9 +752,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -845,35 +781,22 @@ public final class LrosaDsImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.putNonRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -889,9 +812,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -930,28 +851,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -967,9 +874,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1007,28 +912,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1044,9 +935,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1076,35 +965,22 @@ public final class LrosaDsImpl {
             () -> this.putNonRetry201Creating400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1120,9 +996,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1152,35 +1026,22 @@ public final class LrosaDsImpl {
             () -> this.putNonRetry201Creating400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1196,9 +1057,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1238,28 +1097,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1275,9 +1120,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1316,28 +1159,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1353,9 +1182,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1386,35 +1213,22 @@ public final class LrosaDsImpl {
             () -> this.putNonRetry201Creating400InvalidJsonWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a Product with 'ProvisioningState' = 'Creating' and 201 response code.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1430,9 +1244,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1462,36 +1274,22 @@ public final class LrosaDsImpl {
             () -> this.putNonRetry201Creating400InvalidJsonWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
-     * the Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1507,9 +1305,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1547,30 +1343,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
-     * the Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1586,9 +1367,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1625,30 +1404,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
-     * the Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1664,9 +1428,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1696,36 +1458,22 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
-     * the Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1741,9 +1489,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -1773,7 +1519,8 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -1826,7 +1573,8 @@ public final class LrosaDsImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteNonRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
@@ -1846,7 +1594,8 @@ public final class LrosaDsImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteNonRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
@@ -1900,7 +1649,8 @@ public final class LrosaDsImpl {
             () -> this.delete202NonRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
@@ -1921,14 +1671,14 @@ public final class LrosaDsImpl {
             () -> this.delete202NonRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1945,8 +1695,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1962,8 +1711,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1978,14 +1726,14 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2000,35 +1748,22 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
      * Long running post request, service returns a 400 with no error body.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2067,28 +1802,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running post request, service returns a 400 with no error body.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2126,28 +1847,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running post request, service returns a 400 with no error body.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2176,35 +1883,22 @@ public final class LrosaDsImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.postNonRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running post request, service returns a 400 with no error body.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2233,35 +1927,22 @@ public final class LrosaDsImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.postNonRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running post request, service returns a 202 with a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2300,28 +1981,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running post request, service returns a 202 with a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2359,28 +2026,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running post request, service returns a 202 with a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2409,35 +2062,22 @@ public final class LrosaDsImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.post202NonRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running post request, service returns a 202 with a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2466,36 +2106,22 @@ public final class LrosaDsImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.post202NonRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2533,30 +2159,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2593,30 +2204,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2646,36 +2242,22 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetry400WithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2705,35 +2287,22 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetry400WithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2749,9 +2318,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2791,28 +2358,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2828,9 +2381,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2869,28 +2420,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2906,9 +2443,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2939,35 +2474,22 @@ public final class LrosaDsImpl {
             () -> this.putError201NoProvisioningStatePayloadWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a 201 to the initial request with no payload.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -2983,9 +2505,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3016,37 +2536,22 @@ public final class LrosaDsImpl {
             () -> this.putError201NoProvisioningStatePayloadWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3062,9 +2567,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3102,31 +2605,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3142,9 +2629,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3182,31 +2667,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3222,9 +2691,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3254,37 +2721,22 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3300,9 +2752,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3332,37 +2782,22 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryNoStatusWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3378,9 +2813,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3419,31 +2852,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3459,9 +2876,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3499,31 +2914,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3539,9 +2938,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3572,37 +2969,22 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryNoStatusPayloadWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3618,9 +3000,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3650,7 +3030,8 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryNoStatusPayloadWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -3703,7 +3084,8 @@ public final class LrosaDsImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.delete204SucceededWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
@@ -3723,14 +3105,14 @@ public final class LrosaDsImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.delete204SucceededWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3747,8 +3129,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3765,8 +3146,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3781,14 +3161,14 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetryNoStatusWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -3803,35 +3183,22 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetryNoStatusWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3870,28 +3237,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3929,28 +3282,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -3979,35 +3318,22 @@ public final class LrosaDsImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.post202NoLocationWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running post request, service returns a 202 to the initial request, without a location header.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4036,37 +3362,22 @@ public final class LrosaDsImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.post202NoLocationWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4104,31 +3415,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4166,31 +3461,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4220,37 +3499,22 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetryNoPayloadWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4280,35 +3544,22 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetryNoPayloadWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4324,9 +3575,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4365,28 +3614,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4402,9 +3637,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4442,28 +3675,14 @@ public final class LrosaDsImpl {
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4479,9 +3698,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4510,35 +3727,22 @@ public final class LrosaDsImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.put200InvalidJsonWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Long running put request, service returns a 200 to the initial request, with an entity that is not a valid json.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4554,9 +3758,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4585,36 +3787,22 @@ public final class LrosaDsImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.put200InvalidJsonWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4630,9 +3818,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4671,30 +3857,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4710,9 +3881,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4750,30 +3919,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4789,9 +3943,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4822,36 +3974,22 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4867,9 +4005,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4899,37 +4035,22 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryInvalidHeaderWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4945,9 +4066,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -4986,31 +4105,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5026,9 +4129,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5066,31 +4167,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5106,9 +4191,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5139,37 +4222,22 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5185,9 +4253,7 @@ public final class LrosaDsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5218,14 +4284,14 @@ public final class LrosaDsImpl {
             () -> this.putAsyncRelativeRetryInvalidJsonPollingWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
-     * 'Location' and 'Retry-After' headers.
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5242,8 +4308,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
-     * 'Location' and 'Retry-After' headers.
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5259,8 +4324,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
-     * 'Location' and 'Retry-After' headers.
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5275,14 +4339,14 @@ public final class LrosaDsImpl {
             () -> this.delete202RetryInvalidHeaderWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid
-     * 'Location' and 'Retry-After' headers.
+     * Long running delete request, service returns a 202 to the initial request receing a reponse with an invalid 'Location' and 'Retry-After' headers.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5297,14 +4361,14 @@ public final class LrosaDsImpl {
             () -> this.delete202RetryInvalidHeaderWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
-     * Azure-AsyncOperation header is invalid.
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5321,8 +4385,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
-     * Azure-AsyncOperation header is invalid.
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5339,8 +4402,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
-     * Azure-AsyncOperation header is invalid.
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5355,14 +4417,14 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the
-     * Azure-AsyncOperation header is invalid.
+     * Long running delete request, service returns a 202 to the initial request. The endpoint indicated in the Azure-AsyncOperation header is invalid.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5377,14 +4439,14 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetryInvalidHeaderWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5402,8 +4464,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5420,8 +4481,7 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5437,14 +4497,14 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -5459,36 +4519,22 @@ public final class LrosaDsImpl {
             () -> this.deleteAsyncRelativeRetryInvalidJsonPollingWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and
-     * 'Retry-After' headers.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5526,30 +4572,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and
-     * 'Retry-After' headers.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5586,30 +4617,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and
-     * 'Retry-After' headers.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5639,36 +4655,22 @@ public final class LrosaDsImpl {
             () -> this.post202RetryInvalidHeaderWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and
-     * 'Retry-After' headers.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with invalid 'Location' and 'Retry-After' headers.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5698,36 +4700,22 @@ public final class LrosaDsImpl {
             () -> this.post202RetryInvalidHeaderWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5765,30 +4753,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5826,30 +4799,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5880,36 +4838,22 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetryInvalidHeaderWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. The endpoint indicated in the Azure-AsyncOperation header is invalid.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -5939,37 +4883,22 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetryInvalidHeaderWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -6008,31 +4937,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -6070,31 +4983,15 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -6125,37 +5022,22 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetryInvalidJsonPollingWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -6186,7 +5068,8 @@ public final class LrosaDsImpl {
             () -> this.postAsyncRelativeRetryInvalidJsonPollingWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }

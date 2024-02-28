@@ -62,8 +62,7 @@ public final class QueriesImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestUrlTestServiceQueries to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestUrlTestServiceQueries to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestUrlTestServi")
@@ -789,23 +788,11 @@ public final class QueriesImpl {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>boolQuery</td>
-     * <td>Boolean</td>
-     * <td>No</td>
-     * <td>null boolean value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -814,8 +801,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null Boolean value on query (query string should be absent) along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return null Boolean value on query (query string should be absent) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getBooleanNullWithResponseAsync(RequestOptions requestOptions) {
@@ -826,23 +812,11 @@ public final class QueriesImpl {
 
     /**
      * Get null Boolean value on query (query string should be absent).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>boolQuery</td>
-     * <td>Boolean</td>
-     * <td>No</td>
-     * <td>null boolean value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>boolQuery</td><td>Boolean</td><td>No</td><td>null boolean value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -932,23 +906,11 @@ public final class QueriesImpl {
 
     /**
      * Get null integer value (no query parameter).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>intQuery</td>
-     * <td>Integer</td>
-     * <td>No</td>
-     * <td>null integer value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -957,8 +919,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(RequestOptions requestOptions) {
@@ -969,23 +930,11 @@ public final class QueriesImpl {
 
     /**
      * Get null integer value (no query parameter).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>intQuery</td>
-     * <td>Integer</td>
-     * <td>No</td>
-     * <td>null integer value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>intQuery</td><td>Integer</td><td>No</td><td>null integer value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1075,23 +1024,11 @@ public final class QueriesImpl {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>longQuery</td>
-     * <td>Long</td>
-     * <td>No</td>
-     * <td>null 64 bit integer value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1100,8 +1037,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return 'null 64 bit integer value (no query param in uri) along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return 'null 64 bit integer value (no query param in uri) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getLongNullWithResponseAsync(RequestOptions requestOptions) {
@@ -1112,23 +1048,11 @@ public final class QueriesImpl {
 
     /**
      * Get 'null 64 bit integer value (no query param in uri).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>longQuery</td>
-     * <td>Long</td>
-     * <td>No</td>
-     * <td>null 64 bit integer value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>longQuery</td><td>Long</td><td>No</td><td>null 64 bit integer value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1219,23 +1143,11 @@ public final class QueriesImpl {
 
     /**
      * Get null numeric value (no query parameter).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>floatQuery</td>
-     * <td>Float</td>
-     * <td>No</td>
-     * <td>null numeric value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1244,8 +1156,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(RequestOptions requestOptions) {
@@ -1256,23 +1167,11 @@ public final class QueriesImpl {
 
     /**
      * Get null numeric value (no query parameter).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>floatQuery</td>
-     * <td>Float</td>
-     * <td>No</td>
-     * <td>null numeric value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>floatQuery</td><td>Float</td><td>No</td><td>null numeric value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1363,23 +1262,11 @@ public final class QueriesImpl {
 
     /**
      * Get null numeric value (no query parameter).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>doubleQuery</td>
-     * <td>Double</td>
-     * <td>No</td>
-     * <td>null numeric value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1388,8 +1275,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(RequestOptions requestOptions) {
@@ -1400,23 +1286,11 @@ public final class QueriesImpl {
 
     /**
      * Get null numeric value (no query parameter).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>doubleQuery</td>
-     * <td>Double</td>
-     * <td>No</td>
-     * <td>null numeric value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>doubleQuery</td><td>Double</td><td>No</td><td>null numeric value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1441,8 +1315,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions) {
@@ -1477,8 +1350,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions) {
@@ -1542,23 +1414,11 @@ public final class QueriesImpl {
 
     /**
      * Get null (no query parameter in url).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>stringQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>null string value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1578,23 +1438,11 @@ public final class QueriesImpl {
 
     /**
      * Get null (no query parameter in url).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>stringQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>null string value</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>stringQuery</td><td>String</td><td>No</td><td>null string value</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1613,23 +1461,11 @@ public final class QueriesImpl {
 
     /**
      * Get using uri with query parameter 'green color'.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>enumQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1638,8 +1474,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return using uri with query parameter 'green color' along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return using uri with query parameter 'green color' along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(RequestOptions requestOptions) {
@@ -1650,23 +1485,11 @@ public final class QueriesImpl {
 
     /**
      * Get using uri with query parameter 'green color'.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>enumQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1685,23 +1508,11 @@ public final class QueriesImpl {
 
     /**
      * Get null (no query parameter in url).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>enumQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>null string value. Allowed values: "red color", "green color", "blue color".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1721,23 +1532,11 @@ public final class QueriesImpl {
 
     /**
      * Get null (no query parameter in url).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>enumQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>null string value. Allowed values: "red color", "green color", "blue color".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>enumQuery</td><td>String</td><td>No</td><td>null string value. Allowed values: "red color", "green color", "blue color".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1756,23 +1555,11 @@ public final class QueriesImpl {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>byteQuery</td>
-     * <td>byte[]</td>
-     * <td>No</td>
-     * <td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1781,8 +1568,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(RequestOptions requestOptions) {
@@ -1793,23 +1579,11 @@ public final class QueriesImpl {
 
     /**
      * Get '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>byteQuery</td>
-     * <td>byte[]</td>
-     * <td>No</td>
-     * <td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>'啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1865,23 +1639,11 @@ public final class QueriesImpl {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>byteQuery</td>
-     * <td>byte[]</td>
-     * <td>No</td>
-     * <td>null as byte array (no query parameters in uri)</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1890,8 +1652,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as byte array (no query parameters in uri) along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return null as byte array (no query parameters in uri) along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteNullWithResponseAsync(RequestOptions requestOptions) {
@@ -1902,23 +1663,11 @@ public final class QueriesImpl {
 
     /**
      * Get null as byte array (no query parameters in uri).
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>byteQuery</td>
-     * <td>byte[]</td>
-     * <td>No</td>
-     * <td>null as byte array (no query parameters in uri)</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>byteQuery</td><td>byte[]</td><td>No</td><td>null as byte array (no query parameters in uri)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1972,23 +1721,11 @@ public final class QueriesImpl {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>dateQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>null as date (no query parameters in uri)</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1997,8 +1734,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(RequestOptions requestOptions) {
@@ -2009,23 +1745,11 @@ public final class QueriesImpl {
 
     /**
      * Get null as date - this should result in no query parameters in uri.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>dateQuery</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>null as date (no query parameters in uri)</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>dateQuery</td><td>String</td><td>No</td><td>null as date (no query parameters in uri)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2079,23 +1803,11 @@ public final class QueriesImpl {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>dateTimeQuery</td>
-     * <td>OffsetDateTime</td>
-     * <td>No</td>
-     * <td>null as date-time (no query parameters)</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2104,8 +1816,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date-time, should result in no query parameters in uri along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return null as date-time, should result in no query parameters in uri along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(RequestOptions requestOptions) {
@@ -2116,23 +1827,11 @@ public final class QueriesImpl {
 
     /**
      * Get null as date-time, should result in no query parameters in uri.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>dateTimeQuery</td>
-     * <td>OffsetDateTime</td>
-     * <td>No</td>
-     * <td>null as date-time (no query parameters)</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2150,26 +1849,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     * In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2178,8 +1863,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     * format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(RequestOptions requestOptions) {
@@ -2189,26 +1873,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
-     * In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2217,8 +1887,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     * format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
@@ -2228,23 +1897,11 @@ public final class QueriesImpl {
 
     /**
      * Get a null array of string using the csv-array format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>a null array of string using the csv-array format. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2253,8 +1910,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return a null array of string using the csv-array format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(RequestOptions requestOptions) {
@@ -2265,23 +1921,11 @@ public final class QueriesImpl {
 
     /**
      * Get a null array of string using the csv-array format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>a null array of string using the csv-array format. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>a null array of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2300,23 +1944,11 @@ public final class QueriesImpl {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2325,8 +1957,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an empty array [] of string using the csv-array format along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return an empty array [] of string using the csv-array format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvEmptyWithResponseAsync(RequestOptions requestOptions) {
@@ -2337,23 +1968,11 @@ public final class QueriesImpl {
 
     /**
      * Get an empty array [] of string using the csv-array format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an empty array [] of string using the csv-array format. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2371,25 +1990,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
-     * the 'arrayQuery' parameter to the service.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2408,25 +2014,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for
-     * the 'arrayQuery' parameter to the service.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Array query has no defined collection format, should default to csv. Pass in ['hello', 'nihao', 'bonjour'] for the 'arrayQuery' parameter to the service.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>Array-typed query parameter. Pass in ['hello', 'nihao', 'bonjour']. In the form of "," separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2445,26 +2038,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     * In the form of " " separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2473,8 +2052,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     * format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(RequestOptions requestOptions) {
@@ -2484,26 +2062,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format.
-     * In the form of " " separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the ssv-array format. In the form of " " separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2512,8 +2076,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
-     * format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
@@ -2522,26 +2085,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     * In the form of " " separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2550,8 +2099,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     * format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(RequestOptions requestOptions) {
@@ -2561,26 +2109,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format.
-     * In the form of " " separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the tsv-array format. In the form of "	" separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2589,8 +2123,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
-     * format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {
@@ -2599,26 +2132,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     * format. In the form of "|" separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2627,8 +2146,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * pipes-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringPipesValidWithResponseAsync(RequestOptions requestOptions) {
@@ -2638,26 +2156,12 @@ public final class QueriesImpl {
     }
 
     /**
-     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     * format.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array format.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>arrayQuery</td>
-     * <td>List&lt;String&gt;</td>
-     * <td>No</td>
-     * <td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array
-     * format. In the form of "|" separated string.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1', 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the pipes-array format. In the form of "|" separated string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -2666,8 +2170,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * pipes-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringPipesValidWithResponse(RequestOptions requestOptions) {

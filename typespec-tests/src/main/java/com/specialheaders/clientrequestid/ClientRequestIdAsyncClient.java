@@ -44,8 +44,7 @@ public final class ClientRequestIdAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return operation with azure client request id header along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return operation with azure client request id header along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

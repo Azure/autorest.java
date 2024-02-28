@@ -98,8 +98,7 @@ public final class BlobName implements XmlSerializable<BlobName> {
      * Reads an instance of BlobName from the XmlReader.
      * 
      * @param xmlReader The XmlReader being read.
-     * @return An instance of BlobName if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     * XML null.
+     * @return An instance of BlobName if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the BlobName.
      */
     public static BlobName fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -110,10 +109,8 @@ public final class BlobName implements XmlSerializable<BlobName> {
      * Reads an instance of BlobName from the XmlReader.
      * 
      * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     * cases where the model can deserialize from different root element names.
-     * @return An instance of BlobName if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     * XML null.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support cases where the model can deserialize from different root element names.
+     * @return An instance of BlobName if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the BlobName.
      */
     public static BlobName fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {

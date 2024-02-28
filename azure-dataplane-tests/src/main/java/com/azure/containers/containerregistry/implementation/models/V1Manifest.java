@@ -201,8 +201,7 @@ public final class V1Manifest extends Manifest {
      * Reads an instance of V1Manifest from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of V1Manifest if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of V1Manifest if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the V1Manifest.
      */
     public static V1Manifest fromJson(JsonReader jsonReader) throws IOException {

@@ -38,15 +38,16 @@ public final class FishTests {
                             .setSiblings(Arrays.asList(new Fish(48.674263f), new Fish(69.22819f))),
                         new Fish(19.268911f).setSpecies("sprozvcput").setSiblings(Arrays.asList(new Fish(94.32142f))))),
                 new Fish(60.36252f).setSpecies("vpjhulsuuv")
-                    .setSiblings(Arrays.asList(
-                        new Fish(13.198918f).setSpecies("f").setSiblings(
-                            Arrays.asList(new Fish(36.488388f), new Fish(47.16013f), new Fish(59.751354f))),
-                        new Fish(17.080189f).setSpecies("yoqpsoaccta").setSiblings(
-                            Arrays.asList(new Fish(2.8880775f), new Fish(55.748093f), new Fish(24.760372f))),
+                    .setSiblings(Arrays.asList(new Fish(13.198918f).setSpecies("f")
+                        .setSiblings(Arrays.asList(new Fish(36.488388f), new Fish(47.16013f), new Fish(59.751354f))),
+                        new Fish(17.080189f).setSpecies("yoqpsoaccta")
+                            .setSiblings(
+                                Arrays.asList(new Fish(2.8880775f), new Fish(55.748093f), new Fish(24.760372f))),
                         new Fish(25.13494f).setSpecies("ygexpaojakhmsb")
                             .setSiblings(Arrays.asList(new Fish(74.25797f), new Fish(45.85249f), new Fish(59.630096f))),
-                        new Fish(14.1341095f).setSpecies("trg").setSiblings(
-                            Arrays.asList(new Fish(3.2438397f), new Fish(55.120502f), new Fish(95.85514f)))))));
+                        new Fish(14.1341095f).setSpecies("trg")
+                            .setSiblings(
+                                Arrays.asList(new Fish(3.2438397f), new Fish(55.120502f), new Fish(95.85514f)))))));
         model = BinaryData.fromObject(model).toObject(Fish.class);
         Assertions.assertEquals("audccsnhs", model.getSpecies());
         Assertions.assertEquals(97.627846f, model.getLength());

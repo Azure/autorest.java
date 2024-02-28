@@ -72,8 +72,7 @@ public final class ClassOptionalWrapper implements JsonSerializable<ClassOptiona
      * Reads an instance of ClassOptionalWrapper from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ClassOptionalWrapper if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of ClassOptionalWrapper if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ClassOptionalWrapper.
      */
     public static ClassOptionalWrapper fromJson(JsonReader jsonReader) throws IOException {

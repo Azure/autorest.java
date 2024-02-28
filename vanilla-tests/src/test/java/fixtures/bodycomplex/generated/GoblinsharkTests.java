@@ -45,7 +45,9 @@ public final class GoblinsharkTests {
                     new Fish(32.68333f).setSpecies("dlwtgrhpdj")
                         .setSiblings(Arrays.asList(new Fish(96.20458f), new Fish(41.591675f), new Fish(73.57942f),
                             new Fish(97.117195f)))))))
-            .setAge(1896643633).setJawsize(315329773).setColor(GoblinSharkColor.BROWN);
+            .setAge(1896643633)
+            .setJawsize(315329773)
+            .setColor(GoblinSharkColor.BROWN);
         model = BinaryData.fromObject(model).toObject(Goblinshark.class);
         Assertions.assertEquals("uvcc", model.getSpecies());
         Assertions.assertEquals(44.622604f, model.getLength());

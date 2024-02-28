@@ -42,7 +42,9 @@ public final class SmartSalmonTests {
                         .setSiblings(Arrays.asList(new Fish(7.825482f), new Fish(94.463844f), new Fish(38.036823f))),
                     new Fish(13.129669f).setSpecies("nohjt").setSiblings(Arrays.asList(new Fish(60.293747f))),
                     new Fish(23.660505f).setSpecies("znorcj").setSiblings(Arrays.asList(new Fish(41.42828f)))))))
-            .setLocation("rfidfvzwdz").setIswild(false).setCollegeDegree("qguhmuo")
+            .setLocation("rfidfvzwdz")
+            .setIswild(false)
+            .setCollegeDegree("qguhmuo")
             .setAdditionalProperties(mapOf("fishtype", "mwisdkfthwxmnt"));
         model = BinaryData.fromObject(model).toObject(SmartSalmon.class);
         Assertions.assertEquals("waopvkmijcmmxd", model.getSpecies());

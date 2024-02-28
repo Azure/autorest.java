@@ -50,8 +50,7 @@ public final class ModelsImpl {
     }
 
     /**
-     * The interface defining all the services for ProjectedNameClientModels to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for ProjectedNameClientModels to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ProjectedNameClientM")
@@ -95,9 +94,7 @@ public final class ModelsImpl {
 
     /**
      * The client operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -120,9 +117,7 @@ public final class ModelsImpl {
 
     /**
      * The client operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -145,9 +140,7 @@ public final class ModelsImpl {
 
     /**
      * The language operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -170,9 +163,7 @@ public final class ModelsImpl {
 
     /**
      * The language operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)

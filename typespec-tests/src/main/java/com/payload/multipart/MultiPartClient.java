@@ -58,8 +58,7 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> basicWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'basic' is
-        // 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'basic' is 'multipart/form-data'
         return this.serviceClient.basicWithResponse(body, requestOptions);
     }
 
@@ -77,8 +76,7 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> complexWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'complex' is
-        // 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'complex' is 'multipart/form-data'
         return this.serviceClient.complexWithResponse(body, requestOptions);
     }
 
@@ -96,8 +94,7 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> jsonPartWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonPart' is
-        // 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonPart' is 'multipart/form-data'
         return this.serviceClient.jsonPartWithResponse(body, requestOptions);
     }
 
@@ -115,8 +112,7 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> binaryArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation
-        // 'binaryArrayParts' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'binaryArrayParts' is 'multipart/form-data'
         return this.serviceClient.binaryArrayPartsWithResponse(body, requestOptions);
     }
 
@@ -134,8 +130,7 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> jsonArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonArrayParts'
-        // is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonArrayParts' is 'multipart/form-data'
         return this.serviceClient.jsonArrayPartsWithResponse(body, requestOptions);
     }
 
@@ -153,8 +148,7 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> multiBinaryPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation
-        // 'multiBinaryParts' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'multiBinaryParts' is 'multipart/form-data'
         return this.serviceClient.multiBinaryPartsWithResponse(body, requestOptions);
     }
 
@@ -172,8 +166,7 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> checkFileNameAndContentTypeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation
-        // 'checkFileNameAndContentType' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'checkFileNameAndContentType' is 'multipart/form-data'
         return this.serviceClient.checkFileNameAndContentTypeWithResponse(body, requestOptions);
     }
 
@@ -196,7 +189,8 @@ public final class MultiPartClient {
         basicWithResponse(new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
             .serializeFileField("profileImage", body.getProfileImage().getContent(),
                 body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
-            .end().getRequestBody(), requestOptions).getValue();
+            .end()
+            .getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -224,7 +218,8 @@ public final class MultiPartClient {
                 body.getPictures().stream().map(PicturesFileDetails::getContent).collect(Collectors.toList()),
                 body.getPictures().stream().map(PicturesFileDetails::getContentType).collect(Collectors.toList()),
                 body.getPictures().stream().map(PicturesFileDetails::getFilename).collect(Collectors.toList()))
-            .end().getRequestBody(), requestOptions).getValue();
+            .end()
+            .getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -243,11 +238,13 @@ public final class MultiPartClient {
     public void jsonPart(JsonPartRequest body) {
         // Generated convenience method for jsonPartWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        jsonPartWithResponse(new MultipartFormDataHelper(requestOptions)
-            .serializeJsonField("address", body.getAddress())
-            .serializeFileField("profileImage", body.getProfileImage().getContent(),
-                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
-            .end().getRequestBody(), requestOptions).getValue();
+        jsonPartWithResponse(
+            new MultipartFormDataHelper(requestOptions).serializeJsonField("address", body.getAddress())
+                .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+                .end()
+                .getRequestBody(),
+            requestOptions).getValue();
     }
 
     /**
@@ -271,7 +268,8 @@ public final class MultiPartClient {
                 body.getPictures().stream().map(PicturesFileDetails::getContent).collect(Collectors.toList()),
                 body.getPictures().stream().map(PicturesFileDetails::getContentType).collect(Collectors.toList()),
                 body.getPictures().stream().map(PicturesFileDetails::getFilename).collect(Collectors.toList()))
-            .end().getRequestBody(), requestOptions).getValue();
+            .end()
+            .getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -290,12 +288,12 @@ public final class MultiPartClient {
     public void jsonArrayParts(JsonArrayPartsRequest body) {
         // Generated convenience method for jsonArrayPartsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        jsonArrayPartsWithResponse(
-            new MultipartFormDataHelper(requestOptions)
-                .serializeFileField("profileImage", body.getProfileImage().getContent(),
-                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
-                .serializeJsonField("previousAddresses", body.getPreviousAddresses()).end().getRequestBody(),
-            requestOptions).getValue();
+        jsonArrayPartsWithResponse(new MultipartFormDataHelper(requestOptions)
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+            .serializeJsonField("previousAddresses", body.getPreviousAddresses())
+            .end()
+            .getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -314,15 +312,14 @@ public final class MultiPartClient {
     public void multiBinaryParts(MultiBinaryPartsRequest body) {
         // Generated convenience method for multiBinaryPartsWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        multiBinaryPartsWithResponse(
-            new MultipartFormDataHelper(requestOptions)
-                .serializeFileField("profileImage", body.getProfileImage().getContent(),
-                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
-                .serializeFileField("picture", body.getPicture() == null ? null : body.getPicture().getContent(),
-                    body.getPicture() == null ? null : body.getPicture().getContentType(),
-                    body.getPicture() == null ? null : body.getPicture().getFilename())
-                .end().getRequestBody(),
-            requestOptions).getValue();
+        multiBinaryPartsWithResponse(new MultipartFormDataHelper(requestOptions)
+            .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+            .serializeFileField("picture", body.getPicture() == null ? null : body.getPicture().getContent(),
+                body.getPicture() == null ? null : body.getPicture().getContentType(),
+                body.getPicture() == null ? null : body.getPicture().getFilename())
+            .end()
+            .getRequestBody(), requestOptions).getValue();
     }
 
     /**
@@ -341,10 +338,12 @@ public final class MultiPartClient {
     public void checkFileNameAndContentType(MultiPartRequest body) {
         // Generated convenience method for checkFileNameAndContentTypeWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        checkFileNameAndContentTypeWithResponse(new MultipartFormDataHelper(requestOptions)
-            .serializeTextField("id", body.getId())
-            .serializeFileField("profileImage", body.getProfileImage().getContent(),
-                body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
-            .end().getRequestBody(), requestOptions).getValue();
+        checkFileNameAndContentTypeWithResponse(
+            new MultipartFormDataHelper(requestOptions).serializeTextField("id", body.getId())
+                .serializeFileField("profileImage", body.getProfileImage().getContent(),
+                    body.getProfileImage().getContentType(), body.getProfileImage().getFilename())
+                .end()
+                .getRequestBody(),
+            requestOptions).getValue();
     }
 }

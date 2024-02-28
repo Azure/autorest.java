@@ -5,8 +5,7 @@
 /**
  * <!-- start generated doc -->
  * Package containing the classes for ServiceDriven.
- * Test that we can grow up a service spec and service deployment into a multi-versioned service with full client
- * support.
+ * Test that we can grow up a service spec and service deployment into a multi-versioned service with full client support.
  * <!-- end generated doc -->
  */
 package com.resiliency.servicedriven.v1;

@@ -30,18 +30,21 @@ public final class SalmonTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Salmon model = new Salmon(66.59647f).setSpecies("dgak").setSiblings(Arrays.asList(
-            new Fish(48.112488f).setSpecies("qedqytbciqfoufl")
-                .setSiblings(
-                    Arrays.asList(
+        Salmon model = new Salmon(66.59647f).setSpecies("dgak")
+            .setSiblings(Arrays.asList(
+                new Fish(48.112488f).setSpecies("qedqytbciqfoufl")
+                    .setSiblings(Arrays.asList(
                         new Fish(37.104095f).setSpecies("kwtmutduqktapspw")
                             .setSiblings(Arrays.asList(new Fish(56.303608f), new Fish(78.37993f))),
                         new Fish(22.323168f).setSpecies("qw").setSiblings(Arrays.asList(new Fish(77.20989f))))),
-            new Fish(4.9203157f).setSpecies("gmbmbexppbh").setSiblings(Arrays.asList(
-                new Fish(49.08141f).setSpecies("s")
-                    .setSiblings(Arrays.asList(new Fish(17.372614f), new Fish(20.176643f))),
-                new Fish(1.0115743f).setSpecies("aoyfhrtxilnerkuj").setSiblings(Arrays.asList(new Fish(16.52248f)))))))
-            .setLocation("hejkotynqgou").setIswild(false);
+                new Fish(4.9203157f).setSpecies("gmbmbexppbh")
+                    .setSiblings(Arrays.asList(
+                        new Fish(49.08141f).setSpecies("s")
+                            .setSiblings(Arrays.asList(new Fish(17.372614f), new Fish(20.176643f))),
+                        new Fish(1.0115743f).setSpecies("aoyfhrtxilnerkuj")
+                            .setSiblings(Arrays.asList(new Fish(16.52248f)))))))
+            .setLocation("hejkotynqgou")
+            .setIswild(false);
         model = BinaryData.fromObject(model).toObject(Salmon.class);
         Assertions.assertEquals("dgak", model.getSpecies());
         Assertions.assertEquals(66.59647f, model.getLength());

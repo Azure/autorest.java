@@ -40,9 +40,7 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The set operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -64,9 +62,7 @@ public final class OptionalExplicitAsyncClient {
 
     /**
      * The omit operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
