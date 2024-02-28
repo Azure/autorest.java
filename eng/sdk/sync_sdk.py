@@ -47,6 +47,16 @@ def update_emitter(version: str):
 
     logging.info('Update emitter-package.json to use @azure-tools/typespec-java version %s', version)
 
+    logging.info('Update emitter-package-lock.json')
+    subprocess.check_call([
+        'pwsh', 
+        './eng/common/scripts/typespec/New-EmitterPackageLock.ps1',
+        '-EmitterPackageJsonPath', 
+        'eng/emitter-package.json',
+        '-OutputDirectory',
+        'eng'], 
+        cwd=sdk_root)
+
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:
     path = os.path.join(module_path, 'src', type, 'java', 'com')
