@@ -124,8 +124,10 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
         if (getUnixTimeLongRequired() != null) {
             jsonWriter.writeLongField("unixTimeLongRequired", getUnixTimeLongRequired().toEpochSecond());
         }
-        jsonWriter.writeStringField("unixTimeDateTimeRequired", getUnixTimeDateTimeRequired() == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getUnixTimeDateTimeRequired()));
+        jsonWriter.writeStringField("unixTimeDateTimeRequired",
+            getUnixTimeDateTimeRequired() == null
+                ? null
+                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getUnixTimeDateTimeRequired()));
         if (getRfc1123NonRequired() != null) {
             jsonWriter.writeStringField("rfc1123NonRequired",
                 Objects.toString(new DateTimeRfc1123(getRfc1123NonRequired()), null));
@@ -139,8 +141,7 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
      * Reads an instance of TransformationAsParentRequiredFields from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of TransformationAsParentRequiredFields if the JsonReader was pointing to an instance of it,
-     * or null if it was pointing to JSON null.
+     * @return An instance of TransformationAsParentRequiredFields if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the TransformationAsParentRequiredFields.
      */
@@ -209,8 +210,12 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
                     reader.skipChildren();
                 }
             }
-            if (rfc1123RequiredFound && nameRequiredFound && urlBase64EncodedRequiredFound && unixTimeLongRequiredFound
-                && unixTimeDateTimeRequiredFound && rfc1123RequiredChildFound) {
+            if (rfc1123RequiredFound
+                && nameRequiredFound
+                && urlBase64EncodedRequiredFound
+                && unixTimeLongRequiredFound
+                && unixTimeDateTimeRequiredFound
+                && rfc1123RequiredChildFound) {
                 TransformationAsParentRequiredFields deserializedTransformationAsParentRequiredFields
                     = new TransformationAsParentRequiredFields(rfc1123Required, nameRequired, urlBase64EncodedRequired,
                         unixTimeLongRequired, unixTimeDateTimeRequired, rfc1123RequiredChild);

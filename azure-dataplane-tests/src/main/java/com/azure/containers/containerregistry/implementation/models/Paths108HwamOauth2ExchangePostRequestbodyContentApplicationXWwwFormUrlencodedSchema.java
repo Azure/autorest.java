@@ -112,8 +112,7 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
     }
 
     /**
-     * Get the refreshToken property: AAD refresh token, mandatory when grant_type is access_token_refresh_token or
-     * refresh_token.
+     * Get the refreshToken property: AAD refresh token, mandatory when grant_type is access_token_refresh_token or refresh_token.
      * 
      * @return the refreshToken value.
      */
@@ -122,8 +121,7 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
     }
 
     /**
-     * Set the refreshToken property: AAD refresh token, mandatory when grant_type is access_token_refresh_token or
-     * refresh_token.
+     * Set the refreshToken property: AAD refresh token, mandatory when grant_type is access_token_refresh_token or refresh_token.
      * 
      * @param refreshToken the refreshToken value to set.
      * @return the Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema object itself.
@@ -135,8 +133,7 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
     }
 
     /**
-     * Get the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or
-     * access_token.
+     * Get the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * 
      * @return the aadAccessToken value.
      */
@@ -145,8 +142,7 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
     }
 
     /**
-     * Set the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or
-     * access_token.
+     * Set the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
      * 
      * @param aadAccessToken the aadAccessToken value to set.
      * @return the Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema object itself.
@@ -172,15 +168,12 @@ public final class Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXW
     }
 
     /**
-     * Reads an instance of Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema from the
-     * JsonReader.
+     * Reads an instance of Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the
-     * JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the
-     * Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
+     * @throws IOException If an error occurs while reading the Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
      */
     public static Paths108HwamOauth2ExchangePostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         fromJson(JsonReader jsonReader) throws IOException {

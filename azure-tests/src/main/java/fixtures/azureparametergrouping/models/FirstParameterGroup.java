@@ -95,8 +95,7 @@ public final class FirstParameterGroup implements JsonSerializable<FirstParamete
      * Reads an instance of FirstParameterGroup from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FirstParameterGroup if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of FirstParameterGroup if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the FirstParameterGroup.
      */
     public static FirstParameterGroup fromJson(JsonReader jsonReader) throws IOException {

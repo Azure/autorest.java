@@ -37,8 +37,7 @@ public final class PolymorphicrecursiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return complex types that are polymorphic and have recursive references along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -51,8 +50,7 @@ public final class PolymorphicrecursiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references on successful completion of
-     * {@link Mono}.
+     * @return complex types that are polymorphic and have recursive references on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -65,56 +63,56 @@ public final class PolymorphicrecursiveAsyncClient {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * "fishtype": "salmon",
-     * "species": "king",
-     * "length": 1,
-     * "age": 1,
-     * "location": "alaska",
-     * "iswild": true,
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "length": 20,
-     * "age": 6,
-     * "siblings": [
-     * {
-     * "fishtype": "salmon",
-     * "species": "coho",
-     * "length": 2,
-     * "age": 2,
-     * "location": "atlantic",
-     * "iswild": true,
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -132,56 +130,56 @@ public final class PolymorphicrecursiveAsyncClient {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * "fishtype": "salmon",
-     * "species": "king",
-     * "length": 1,
-     * "age": 1,
-     * "location": "alaska",
-     * "iswild": true,
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "length": 20,
-     * "age": 6,
-     * "siblings": [
-     * {
-     * "fishtype": "salmon",
-     * "species": "coho",
-     * "length": 2,
-     * "age": 2,
-     * "location": "atlantic",
-     * "iswild": true,
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.

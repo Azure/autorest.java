@@ -58,8 +58,7 @@ public final class Del implements JsonSerializable<Del> {
      * Reads an instance of Del from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Del if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Del if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Del.
      */

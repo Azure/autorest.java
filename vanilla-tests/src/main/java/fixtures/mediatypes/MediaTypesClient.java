@@ -121,8 +121,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * The interface defining all the services for MediaTypesClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for MediaTypesClient to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "MediaTypesClient")
@@ -1169,8 +1168,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1198,8 +1196,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1228,8 +1225,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1247,8 +1243,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1267,8 +1262,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1286,8 +1280,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1304,8 +1297,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1333,8 +1325,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1363,8 +1354,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1382,8 +1372,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1402,8 +1391,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1421,8 +1409,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
-     * byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1438,8 +1425,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1467,8 +1453,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1497,8 +1482,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1516,8 +1500,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1536,8 +1519,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1555,8 +1537,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1574,8 +1555,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1603,8 +1583,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1633,8 +1612,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1652,8 +1630,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1672,8 +1649,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1691,8 +1667,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
-     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param contentType Upload file type.
      * @param message The payload body.
@@ -1709,9 +1684,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1734,9 +1707,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1760,9 +1731,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1777,9 +1746,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1796,9 +1763,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1814,9 +1779,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1831,9 +1794,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1856,9 +1817,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1882,9 +1841,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1899,9 +1856,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1918,9 +1873,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1936,9 +1889,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param contentLength The Content-Length header for the request.
@@ -1953,9 +1904,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1976,9 +1925,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2000,9 +1947,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2016,9 +1961,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2033,9 +1976,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2050,9 +1991,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2066,9 +2005,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2089,9 +2026,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2113,9 +2048,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2129,9 +2062,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2146,9 +2077,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @param context The context to associate with this operation.
@@ -2163,9 +2092,7 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
-     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
-     * 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * 
      * @param message The payload body.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

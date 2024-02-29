@@ -51,8 +51,7 @@ public final class AliasImpl {
     }
 
     /**
-     * The interface defining all the services for SpreadClientAlias to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for SpreadClientAlias to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpreadClientAlias")
@@ -118,9 +117,7 @@ public final class AliasImpl {
 
     /**
      * The spreadAsRequestBody operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -144,9 +141,7 @@ public final class AliasImpl {
 
     /**
      * The spreadAsRequestBody operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -169,9 +164,7 @@ public final class AliasImpl {
 
     /**
      * The spreadAsRequestParameter operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -198,9 +191,7 @@ public final class AliasImpl {
 
     /**
      * The spreadAsRequestParameter operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -226,9 +217,7 @@ public final class AliasImpl {
 
     /**
      * The spreadWithMultipleParameters operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop1: String (Required)
@@ -260,9 +249,7 @@ public final class AliasImpl {
 
     /**
      * The spreadWithMultipleParameters operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop1: String (Required)

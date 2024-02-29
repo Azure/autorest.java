@@ -13,8 +13,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * Dummy doc to make the javadoc break at the 'at' symbol. The type of the Data depends on
- * &#064;data.kind.letusmakeitlongsoitwouldbreakbeforethis field.
+ * Dummy doc to make the javadoc break at the 'at' symbol. The type of the Data depends on &#064;data.kind.letusmakeitlongsoitwouldbreakbeforethis field.
  */
 @Immutable
 public class Data implements JsonSerializable<Data> {
@@ -69,8 +68,7 @@ public class Data implements JsonSerializable<Data> {
      * Reads an instance of Data from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Data if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Data if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Data.
      */
     @Generated

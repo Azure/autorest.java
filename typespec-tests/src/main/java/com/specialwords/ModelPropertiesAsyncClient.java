@@ -40,9 +40,7 @@ public final class ModelPropertiesAsyncClient {
 
     /**
      * The sameAsModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     SameAsModel: String (Required)

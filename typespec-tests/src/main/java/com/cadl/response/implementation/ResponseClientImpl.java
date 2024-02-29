@@ -392,9 +392,7 @@ public final class ResponseClientImpl {
 
     /**
      * The getBinary operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -414,9 +412,7 @@ public final class ResponseClientImpl {
 
     /**
      * The getBinary operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -436,9 +432,7 @@ public final class ResponseClientImpl {
 
     /**
      * The getArray operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *      (Required){
@@ -465,9 +459,7 @@ public final class ResponseClientImpl {
 
     /**
      * The getArray operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *      (Required){
@@ -494,9 +486,7 @@ public final class ResponseClientImpl {
 
     /**
      * The getAnotherArray operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *      (Required){
@@ -524,9 +514,7 @@ public final class ResponseClientImpl {
 
     /**
      * The getAnotherArray operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *      (Required){
@@ -553,9 +541,7 @@ public final class ResponseClientImpl {
 
     /**
      * The createWithHeaders operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -581,9 +567,7 @@ public final class ResponseClientImpl {
 
     /**
      * The createWithHeaders operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -641,9 +625,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -663,9 +645,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -685,9 +665,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -715,9 +693,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -744,9 +720,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -771,7 +745,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidPollResponseWithResponseAsync(resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
@@ -779,9 +754,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -806,7 +779,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidPollResponseWithResponse(resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
@@ -814,9 +788,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -841,7 +813,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidPollResponseWithResponseAsync(resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(OperationDetails1.class),
@@ -850,9 +823,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -877,7 +848,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidPollResponseWithResponse(resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(OperationDetails1.class),
@@ -886,9 +858,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -915,9 +885,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -944,9 +912,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -971,7 +937,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidResultWithResponseAsync(resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
@@ -979,9 +946,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1006,7 +971,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidResultWithResponse(resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
@@ -1014,9 +980,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1041,7 +1005,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidResultWithResponseAsync(resource, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(OperationDetails2.class),
@@ -1050,9 +1015,7 @@ public final class ResponseClientImpl {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1077,7 +1040,8 @@ public final class ResponseClientImpl {
             () -> this.lroInvalidResultWithResponse(resource, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(OperationDetails2.class),
@@ -1086,9 +1050,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listStrings operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1110,9 +1072,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listStrings operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1135,9 +1095,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listStrings operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1159,9 +1117,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listStrings operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1184,9 +1140,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listIntegers operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * int
      * }</pre>
@@ -1209,9 +1163,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listIntegers operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * int
      * }</pre>
@@ -1234,9 +1186,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listIntegers operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * int
      * }</pre>
@@ -1258,9 +1208,7 @@ public final class ResponseClientImpl {
 
     /**
      * The listIntegers operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * int
      * }</pre>
@@ -1283,9 +1231,7 @@ public final class ResponseClientImpl {
 
     /**
      * Get the next page of items.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1313,9 +1259,7 @@ public final class ResponseClientImpl {
 
     /**
      * Get the next page of items.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -1341,9 +1285,7 @@ public final class ResponseClientImpl {
 
     /**
      * Get the next page of items.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * int
      * }</pre>
@@ -1371,9 +1313,7 @@ public final class ResponseClientImpl {
 
     /**
      * Get the next page of items.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * int
      * }</pre>

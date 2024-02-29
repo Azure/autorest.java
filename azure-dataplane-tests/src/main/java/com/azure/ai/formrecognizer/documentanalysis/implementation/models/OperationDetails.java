@@ -286,8 +286,10 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
         jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
         jsonWriter.writeStringField("createdDateTime",
             this.createdDateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdDateTime));
-        jsonWriter.writeStringField("lastUpdatedDateTime", this.lastUpdatedDateTime == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedDateTime));
+        jsonWriter.writeStringField("lastUpdatedDateTime",
+            this.lastUpdatedDateTime == null
+                ? null
+                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.lastUpdatedDateTime));
         jsonWriter.writeStringField("resourceLocation", this.resourceLocation);
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeNumberField("percentCompleted", this.percentCompleted);
@@ -301,8 +303,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * Reads an instance of OperationDetails from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of OperationDetails if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of OperationDetails if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the OperationDetails.
      */

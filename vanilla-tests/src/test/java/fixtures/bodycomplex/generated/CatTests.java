@@ -26,7 +26,9 @@ public final class CatTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Cat model = new Cat().setId(731883185).setName("bifpikxwczb").setColor("jbpzvgnwzsymg")
+        Cat model = new Cat().setId(731883185)
+            .setName("bifpikxwczb")
+            .setColor("jbpzvgnwzsymg")
             .setHates(Arrays.asList(new Dog().setId(808084535).setName("jysagith").setFood("cyzkohdbihanuf")));
         model = BinaryData.fromObject(model).toObject(Cat.class);
         Assertions.assertEquals(731883185, model.getId());

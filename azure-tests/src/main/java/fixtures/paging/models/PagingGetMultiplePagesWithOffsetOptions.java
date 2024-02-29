@@ -79,8 +79,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions
     }
 
     /**
-     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
+     * Get the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      * 
      * @return the timeout value.
      */
@@ -89,8 +88,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions
     }
 
     /**
-     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The
-     * default is 30 seconds.
+     * Set the timeout property: Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.
      * 
      * @param timeout the timeout value to set.
      * @return the PagingGetMultiplePagesWithOffsetOptions object itself.
@@ -124,8 +122,7 @@ public final class PagingGetMultiplePagesWithOffsetOptions
      * Reads an instance of PagingGetMultiplePagesWithOffsetOptions from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of PagingGetMultiplePagesWithOffsetOptions if the JsonReader was pointing to an instance of
-     * it, or null if it was pointing to JSON null.
+     * @return An instance of PagingGetMultiplePagesWithOffsetOptions if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the PagingGetMultiplePagesWithOffsetOptions.
      */

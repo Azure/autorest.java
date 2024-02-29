@@ -17,8 +17,7 @@ import java.io.IOException;
 @Fluent
 public final class ManifestListAttributes implements JsonSerializable<ManifestListAttributes> {
     /*
-     * The MIME type of the referenced object. This will generally be application/vnd.docker.image.manifest.v2+json, but
-     * it could also be application/vnd.docker.image.manifest.v1+json
+     * The MIME type of the referenced object. This will generally be application/vnd.docker.image.manifest.v2+json, but it could also be application/vnd.docker.image.manifest.v1+json
      */
     private String mediaType;
 
@@ -33,8 +32,7 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
     private String digest;
 
     /*
-     * The platform object describes the platform which the image in the manifest runs on. A full list of valid
-     * operating system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH
+     * The platform object describes the platform which the image in the manifest runs on. A full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH
      */
     private Platform platform;
 
@@ -45,9 +43,7 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
     }
 
     /**
-     * Get the mediaType property: The MIME type of the referenced object. This will generally be
-     * application/vnd.docker.image.manifest.v2+json, but it could also be
-     * application/vnd.docker.image.manifest.v1+json.
+     * Get the mediaType property: The MIME type of the referenced object. This will generally be application/vnd.docker.image.manifest.v2+json, but it could also be application/vnd.docker.image.manifest.v1+json.
      * 
      * @return the mediaType value.
      */
@@ -56,9 +52,7 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
     }
 
     /**
-     * Set the mediaType property: The MIME type of the referenced object. This will generally be
-     * application/vnd.docker.image.manifest.v2+json, but it could also be
-     * application/vnd.docker.image.manifest.v1+json.
+     * Set the mediaType property: The MIME type of the referenced object. This will generally be application/vnd.docker.image.manifest.v2+json, but it could also be application/vnd.docker.image.manifest.v1+json.
      * 
      * @param mediaType the mediaType value to set.
      * @return the ManifestListAttributes object itself.
@@ -109,9 +103,7 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
     }
 
     /**
-     * Get the platform property: The platform object describes the platform which the image in the manifest runs on. A
-     * full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS
-     * and $GOARCH.
+     * Get the platform property: The platform object describes the platform which the image in the manifest runs on. A full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH.
      * 
      * @return the platform value.
      */
@@ -120,9 +112,7 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
     }
 
     /**
-     * Set the platform property: The platform object describes the platform which the image in the manifest runs on. A
-     * full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS
-     * and $GOARCH.
+     * Set the platform property: The platform object describes the platform which the image in the manifest runs on. A full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH.
      * 
      * @param platform the platform value to set.
      * @return the ManifestListAttributes object itself.
@@ -149,8 +139,7 @@ public final class ManifestListAttributes implements JsonSerializable<ManifestLi
      * Reads an instance of ManifestListAttributes from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ManifestListAttributes if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of ManifestListAttributes if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ManifestListAttributes.
      */
     public static ManifestListAttributes fromJson(JsonReader jsonReader) throws IOException {

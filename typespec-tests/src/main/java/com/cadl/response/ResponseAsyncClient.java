@@ -50,9 +50,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The getBinary operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -72,9 +70,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The getArray operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *      (Required){
@@ -101,9 +97,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The getAnotherArray operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *      (Required){
@@ -130,9 +124,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The createWithHeaders operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -173,9 +165,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -194,9 +184,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -223,9 +211,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The most basic operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -252,9 +238,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The listStrings operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -274,9 +258,7 @@ public final class ResponseAsyncClient {
 
     /**
      * The listIntegers operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * int
      * }</pre>
@@ -461,11 +443,15 @@ public final class ResponseAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = listStrings(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
+                ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, String>(pagedResponse.getRequest(),
-                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
-                    .map(protocolMethodData -> protocolMethodData.toObject(String.class)).collect(Collectors.toList()),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue()
+                    .stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(String.class))
+                    .collect(Collectors.toList()),
                 pagedResponse.getContinuationToken(), null));
         });
     }
@@ -487,11 +473,15 @@ public final class ResponseAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = listIntegers(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
+                ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, Integer>(pagedResponse.getRequest(),
-                pagedResponse.getStatusCode(), pagedResponse.getHeaders(), pagedResponse.getValue().stream()
-                    .map(protocolMethodData -> protocolMethodData.toObject(Integer.class)).collect(Collectors.toList()),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue()
+                    .stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(Integer.class))
+                    .collect(Collectors.toList()),
                 pagedResponse.getContinuationToken(), null));
         });
     }

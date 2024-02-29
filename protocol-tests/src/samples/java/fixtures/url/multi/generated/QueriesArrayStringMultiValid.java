@@ -16,8 +16,10 @@ public class QueriesArrayStringMultiValid {
                 .buildClient();
         // BEGIN:fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid
         RequestOptions requestOptions = new RequestOptions().addQueryParam("arrayQuery", "ArrayQuery1")
-            .addQueryParam("arrayQuery", "begin!*'();:@ &= $").addQueryParam("arrayQuery", "/?#[]end")
-            .addQueryParam("arrayQuery", "").addQueryParam("arrayQuery", "");
+            .addQueryParam("arrayQuery", "begin!*'();:@ &= $")
+            .addQueryParam("arrayQuery", "/?#[]end")
+            .addQueryParam("arrayQuery", "")
+            .addQueryParam("arrayQuery", "");
         Response<Void> response
             = autoRestUrlMutliCollectionFormatTestServiceClient.arrayStringMultiValidWithResponse(requestOptions);
         // END:fixtures.url.multi.generated.queriesarraystringmultivalid.queriesarraystringmultivalid

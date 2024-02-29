@@ -45,30 +45,16 @@ public final class NamingAsyncClient {
      * summary of POST op
      * 
      * description of POST op.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>etag</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>summary of etag header parameter
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
      * 
-     * description of etag header parameter</td>
-     * </tr>
+     * description of etag header parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     parameters (Optional): {
@@ -76,15 +62,13 @@ public final class NamingAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             &#64;data.kind: String (Optional)
+     *             @data.kind: String (Optional)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
@@ -114,9 +98,7 @@ public final class NamingAsyncClient {
 
     /**
      * The getAnonymous operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

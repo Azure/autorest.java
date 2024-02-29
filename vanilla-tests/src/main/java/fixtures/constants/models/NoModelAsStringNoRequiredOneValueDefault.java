@@ -70,8 +70,7 @@ public final class NoModelAsStringNoRequiredOneValueDefault
      * Reads an instance of NoModelAsStringNoRequiredOneValueDefault from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of NoModelAsStringNoRequiredOneValueDefault if the JsonReader was pointing to an instance of
-     * it, or null if it was pointing to JSON null.
+     * @return An instance of NoModelAsStringNoRequiredOneValueDefault if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the NoModelAsStringNoRequiredOneValueDefault.
      */
     public static NoModelAsStringNoRequiredOneValueDefault fromJson(JsonReader jsonReader) throws IOException {

@@ -128,8 +128,7 @@ public final class ProjectedNameClientImpl {
     }
 
     /**
-     * The interface defining all the services for ProjectedNameClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for ProjectedNameClient to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ProjectedNameClient")

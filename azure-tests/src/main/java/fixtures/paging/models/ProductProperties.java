@@ -95,8 +95,7 @@ public final class ProductProperties implements JsonSerializable<ProductProperti
      * Reads an instance of ProductProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ProductProperties if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of ProductProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ProductProperties.
      */
     public static ProductProperties fromJson(JsonReader jsonReader) throws IOException {

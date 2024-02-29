@@ -95,8 +95,7 @@ public final class Product implements JsonSerializable<Product> {
      * Reads an instance of Product from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Product if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Product if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Product.
      */
     public static Product fromJson(JsonReader jsonReader) throws IOException {

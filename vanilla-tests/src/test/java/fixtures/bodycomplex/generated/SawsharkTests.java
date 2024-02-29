@@ -31,16 +31,16 @@ public final class SawsharkTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Sawshark model
-            = new Sawshark(0.4767537f, OffsetDateTime.parse("2021-10-21T06:57:02Z")).setSpecies("hm")
-                .setSiblings(Arrays.asList(new Fish(4.7570705f).setSpecies("rzayv").setSiblings(Arrays.asList(
+        Sawshark model = new Sawshark(0.4767537f, OffsetDateTime.parse("2021-10-21T06:57:02Z")).setSpecies("hm")
+            .setSiblings(Arrays.asList(new Fish(4.7570705f).setSpecies("rzayv")
+                .setSiblings(Arrays.asList(
                     new Fish(49.651463f).setSpecies("tutqxlngxlefgug").setSiblings(Arrays.asList(new Fish(98.89482f))),
                     new Fish(27.019262f).setSpecies("thz")
                         .setSiblings(Arrays.asList(new Fish(72.372734f), new Fish(38.072437f), new Fish(12.859451f))),
                     new Fish(82.193115f).setSpecies("qfbow")
                         .setSiblings(Arrays.asList(new Fish(22.699678f), new Fish(57.9111f), new Fish(83.07862f))),
                     new Fish(68.073944f).setSpecies("nhzgpphrcgyn").setSiblings(Arrays.asList(new Fish(36.553032f)))))))
-                .setAge(950690565);
+            .setAge(950690565);
         model = BinaryData.fromObject(model).toObject(Sawshark.class);
         Assertions.assertEquals("hm", model.getSpecies());
         Assertions.assertEquals(0.4767537f, model.getLength());

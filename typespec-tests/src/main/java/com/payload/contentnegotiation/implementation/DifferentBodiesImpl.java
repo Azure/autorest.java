@@ -50,8 +50,7 @@ public final class DifferentBodiesImpl {
     }
 
     /**
-     * The interface defining all the services for ContentNegotiationClientDifferentBodies to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for ContentNegotiationClientDifferentBodies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ContentNegotiationCl")
@@ -95,9 +94,7 @@ public final class DifferentBodiesImpl {
 
     /**
      * The getAvatarAsPng operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -117,9 +114,7 @@ public final class DifferentBodiesImpl {
 
     /**
      * The getAvatarAsPng operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -139,9 +134,7 @@ public final class DifferentBodiesImpl {
 
     /**
      * The getAvatarAsJson operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     content: byte[] (Required)
@@ -163,9 +156,7 @@ public final class DifferentBodiesImpl {
 
     /**
      * The getAvatarAsJson operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     content: byte[] (Required)

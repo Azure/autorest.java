@@ -155,17 +155,13 @@ public final class RpcClientImpl {
 
     /**
      * Generate data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -187,8 +183,7 @@ public final class RpcClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> longRunningRpcWithResponseAsync(BinaryData generationOptions,
@@ -200,17 +195,13 @@ public final class RpcClientImpl {
 
     /**
      * Generate data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -244,17 +235,13 @@ public final class RpcClientImpl {
 
     /**
      * Generate data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -287,24 +274,21 @@ public final class RpcClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Generate data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -337,24 +321,21 @@ public final class RpcClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * Generate data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -387,7 +368,8 @@ public final class RpcClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class),
             TypeReference.createInstance(GenerationResult.class));
@@ -395,17 +377,13 @@ public final class RpcClientImpl {
 
     /**
      * Generate data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -438,7 +416,8 @@ public final class RpcClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class),
             TypeReference.createInstance(GenerationResult.class));

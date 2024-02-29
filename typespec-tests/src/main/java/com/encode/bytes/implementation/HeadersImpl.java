@@ -54,8 +54,7 @@ public final class HeadersImpl {
     }
 
     /**
-     * The interface defining all the services for BytesClientHeaders to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for BytesClientHeaders to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BytesClientHeaders")
@@ -255,9 +254,10 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64urlArrayWithResponseAsync(List<byte[]> value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
-            value.stream().map(paramItemValue -> Base64Url.encode(paramItemValue)).collect(Collectors.toList()),
-            CollectionFormat.CSV);
+        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
+            .serializeIterable(
+                value.stream().map(paramItemValue -> Base64Url.encode(paramItemValue)).collect(Collectors.toList()),
+                CollectionFormat.CSV);
         return FluxUtil.withContext(context -> service.base64urlArray(valueConverted, accept, requestOptions, context));
     }
 
@@ -275,9 +275,10 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> base64urlArrayWithResponse(List<byte[]> value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
-            value.stream().map(paramItemValue -> Base64Url.encode(paramItemValue)).collect(Collectors.toList()),
-            CollectionFormat.CSV);
+        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
+            .serializeIterable(
+                value.stream().map(paramItemValue -> Base64Url.encode(paramItemValue)).collect(Collectors.toList()),
+                CollectionFormat.CSV);
         return service.base64urlArraySync(valueConverted, accept, requestOptions, Context.NONE);
     }
 }

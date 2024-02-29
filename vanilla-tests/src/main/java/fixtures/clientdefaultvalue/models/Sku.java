@@ -27,8 +27,7 @@ public final class Sku implements JsonSerializable<Sku> {
     private SkuName name = SkuName.STANDARD;
 
     /*
-     * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from
-     * the key vault.
+     * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
      */
     private Boolean enabledForDeployment = true;
 
@@ -89,8 +88,7 @@ public final class Sku implements JsonSerializable<Sku> {
     }
 
     /**
-     * Get the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to
-     * retrieve certificates stored as secrets from the key vault.
+     * Get the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
      * 
      * @return the enabledForDeployment value.
      */
@@ -99,8 +97,7 @@ public final class Sku implements JsonSerializable<Sku> {
     }
 
     /**
-     * Set the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to
-     * retrieve certificates stored as secrets from the key vault.
+     * Set the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
      * 
      * @param enabledForDeployment the enabledForDeployment value to set.
      * @return the Sku object itself.
@@ -170,8 +167,7 @@ public final class Sku implements JsonSerializable<Sku> {
      * Reads an instance of Sku from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Sku if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Sku if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Sku.
      */

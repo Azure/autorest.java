@@ -191,8 +191,10 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
         jsonWriter.writeStringField("nameRequired", this.nameRequired);
         jsonWriter.writeStringField("urlBase64EncodedRequired", Objects.toString(this.urlBase64EncodedRequired, null));
         jsonWriter.writeLongField("unixTimeLongRequired", this.unixTimeLongRequired);
-        jsonWriter.writeStringField("unixTimeDateTimeRequired", this.unixTimeDateTimeRequired == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.unixTimeDateTimeRequired));
+        jsonWriter.writeStringField("unixTimeDateTimeRequired",
+            this.unixTimeDateTimeRequired == null
+                ? null
+                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.unixTimeDateTimeRequired));
         jsonWriter.writeStringField("rfc1123NonRequired", Objects.toString(this.rfc1123NonRequired, null));
         return jsonWriter.writeEndObject();
     }
@@ -201,8 +203,7 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      * Reads an instance of TransformationAsRequiredFields from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of TransformationAsRequiredFields if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
+     * @return An instance of TransformationAsRequiredFields if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the TransformationAsRequiredFields.
      */
@@ -255,7 +256,10 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
                     reader.skipChildren();
                 }
             }
-            if (rfc1123RequiredFound && nameRequiredFound && urlBase64EncodedRequiredFound && unixTimeLongRequiredFound
+            if (rfc1123RequiredFound
+                && nameRequiredFound
+                && urlBase64EncodedRequiredFound
+                && unixTimeLongRequiredFound
                 && unixTimeDateTimeRequiredFound) {
                 TransformationAsRequiredFields deserializedTransformationAsRequiredFields
                     = new TransformationAsRequiredFields(rfc1123Required, nameRequired, urlBase64EncodedRequired,

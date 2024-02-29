@@ -159,9 +159,7 @@ public final class Resource implements JsonSerializable<Resource> {
 
     /**
      * Set the map property: The map property.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param map the map value to set.
      * @return the Resource object itself.
@@ -364,8 +362,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * Reads an instance of Resource from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Resource.
      */

@@ -27,8 +27,7 @@ public final class FlattenParameterGroup implements JsonSerializable<FlattenPara
     private SimpleProduct simpleBodyProduct;
 
     /*
-     * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San
-     * Francisco will have a different product_id than uberX in Los Angeles.
+     * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      */
     private String productId;
 
@@ -104,8 +103,7 @@ public final class FlattenParameterGroup implements JsonSerializable<FlattenPara
     }
 
     /**
-     * Get the productId property: Unique identifier representing a specific product for a given latitude &amp;
-     * longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * Get the productId property: Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * 
      * @return the productId value.
      */
@@ -114,8 +112,7 @@ public final class FlattenParameterGroup implements JsonSerializable<FlattenPara
     }
 
     /**
-     * Set the productId property: Unique identifier representing a specific product for a given latitude &amp;
-     * longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * Set the productId property: Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * 
      * @param productId the productId value to set.
      * @return the FlattenParameterGroup object itself.
@@ -263,8 +260,7 @@ public final class FlattenParameterGroup implements JsonSerializable<FlattenPara
      * Reads an instance of FlattenParameterGroup from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FlattenParameterGroup if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of FlattenParameterGroup if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FlattenParameterGroup.
      */

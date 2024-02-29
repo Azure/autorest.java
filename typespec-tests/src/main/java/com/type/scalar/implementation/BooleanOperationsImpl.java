@@ -52,8 +52,7 @@ public final class BooleanOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientBooleanOperations to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for ScalarClientBooleanOperations to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientBooleanO")
@@ -97,9 +96,7 @@ public final class BooleanOperationsImpl {
 
     /**
      * get boolean value.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -119,9 +116,7 @@ public final class BooleanOperationsImpl {
 
     /**
      * get boolean value.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -141,9 +136,7 @@ public final class BooleanOperationsImpl {
 
     /**
      * put boolean value.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -164,9 +157,7 @@ public final class BooleanOperationsImpl {
 
     /**
      * put boolean value.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>

@@ -100,8 +100,7 @@ public final class SingleDiscriminatorClientImpl {
     }
 
     /**
-     * The interface defining all the services for SingleDiscriminatorClient to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for SingleDiscriminatorClient to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SingleDiscriminatorC")
@@ -235,9 +234,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -250,8 +247,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponseAsync(RequestOptions requestOptions) {
@@ -261,9 +257,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -276,8 +270,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(RequestOptions requestOptions) {
@@ -287,9 +280,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -313,9 +304,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -339,9 +328,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getRecursiveModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -354,8 +341,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRecursiveModelWithResponseAsync(RequestOptions requestOptions) {
@@ -365,9 +351,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getRecursiveModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -380,8 +364,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRecursiveModelWithResponse(RequestOptions requestOptions) {
@@ -391,9 +374,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putRecursiveModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -417,9 +398,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The putRecursiveModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -443,9 +422,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getMissingDiscriminator operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -458,8 +435,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getMissingDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -469,9 +445,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getMissingDiscriminator operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -484,8 +458,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getMissingDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -495,9 +468,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getWrongDiscriminator operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -510,8 +481,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getWrongDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -521,9 +491,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getWrongDiscriminator operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -536,8 +504,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with
-     * {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getWrongDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -547,9 +514,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getLegacyModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
@@ -562,8 +527,7 @@ public final class SingleDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return define a base class in the legacy way along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return define a base class in the legacy way along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getLegacyModelWithResponseAsync(RequestOptions requestOptions) {
@@ -573,9 +537,7 @@ public final class SingleDiscriminatorClientImpl {
 
     /**
      * The getLegacyModel operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)

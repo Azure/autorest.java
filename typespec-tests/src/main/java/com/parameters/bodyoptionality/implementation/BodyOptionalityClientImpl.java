@@ -114,8 +114,7 @@ public final class BodyOptionalityClientImpl {
     }
 
     /**
-     * The interface defining all the services for BodyOptionalityClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for BodyOptionalityClient to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BodyOptionalityClien")
@@ -159,9 +158,7 @@ public final class BodyOptionalityClientImpl {
 
     /**
      * The requiredExplicit operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -184,9 +181,7 @@ public final class BodyOptionalityClientImpl {
 
     /**
      * The requiredExplicit operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -209,9 +204,7 @@ public final class BodyOptionalityClientImpl {
 
     /**
      * The requiredImplicit operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -234,9 +227,7 @@ public final class BodyOptionalityClientImpl {
 
     /**
      * The requiredImplicit operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

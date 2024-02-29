@@ -58,8 +58,7 @@ public final class NoDecoratorModelInPublic implements JsonSerializable<NoDecora
      * Reads an instance of NoDecoratorModelInPublic from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of NoDecoratorModelInPublic if the JsonReader was pointing to an instance of it, or null if
-     * it was pointing to JSON null.
+     * @return An instance of NoDecoratorModelInPublic if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the NoDecoratorModelInPublic.
      */

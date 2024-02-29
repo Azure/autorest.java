@@ -100,8 +100,7 @@ public final class EnumDiscriminatorClientImpl {
     }
 
     /**
-     * The interface defining all the services for EnumDiscriminatorClient to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for EnumDiscriminatorClient to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "EnumDiscriminatorCli")
@@ -253,9 +252,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Receive model with extensible enum discriminator type.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -268,8 +265,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getExtensibleModelWithResponseAsync(RequestOptions requestOptions) {
@@ -279,9 +275,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Receive model with extensible enum discriminator type.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -304,9 +298,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Send model with extensible enum discriminator type.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -330,9 +322,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Send model with extensible enum discriminator type.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -356,9 +346,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model omitting the discriminator.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -383,9 +371,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model omitting the discriminator.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -408,9 +394,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model containing discriminator value never defined.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -423,8 +407,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return a model containing discriminator value never defined along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>>
@@ -436,9 +419,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model containing discriminator value never defined.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(golden) (Optional)
@@ -461,9 +442,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Receive model with fixed enum discriminator type.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)
@@ -476,8 +455,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFixedModelWithResponseAsync(RequestOptions requestOptions) {
@@ -487,9 +465,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Receive model with fixed enum discriminator type.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)
@@ -512,9 +488,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Send model with fixed enum discriminator type.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)
@@ -538,9 +512,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Send model with fixed enum discriminator type.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)
@@ -564,9 +536,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model omitting the discriminator.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)
@@ -591,9 +561,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model omitting the discriminator.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)
@@ -616,9 +584,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model containing discriminator value never defined.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)
@@ -631,8 +597,7 @@ public final class EnumDiscriminatorClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return a model containing discriminator value never defined along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFixedModelWrongDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -643,9 +608,7 @@ public final class EnumDiscriminatorClientImpl {
 
     /**
      * Get a model containing discriminator value never defined.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String(cobra) (Optional)

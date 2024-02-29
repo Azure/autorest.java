@@ -37,9 +37,7 @@ public final class MediaTypeClient {
 
     /**
      * The sendAsText operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -60,9 +58,7 @@ public final class MediaTypeClient {
 
     /**
      * The getAsText operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -82,9 +78,7 @@ public final class MediaTypeClient {
 
     /**
      * The sendAsJson operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
@@ -105,9 +99,7 @@ public final class MediaTypeClient {
 
     /**
      * The getAsJson operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String
      * }</pre>
