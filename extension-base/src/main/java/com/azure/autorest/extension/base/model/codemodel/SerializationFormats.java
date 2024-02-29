@@ -14,6 +14,12 @@ public class SerializationFormats {
     private SerializationFormat protobuf;
 
     /**
+     * Creates a new instance of the SerializationFormats class.
+     */
+    public SerializationFormats() {
+    }
+
+    /**
      * Gets the JSON serialization format.
      *
      * @return The JSON serialization format.

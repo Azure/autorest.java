@@ -15,6 +15,12 @@ public class ExternalDocumentation {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the ExternalDocumentation class.
+     */
+    public ExternalDocumentation() {
+    }
+
+    /**
      * Gets the description of the external documentation.
      *
      * @return The description of the external documentation.

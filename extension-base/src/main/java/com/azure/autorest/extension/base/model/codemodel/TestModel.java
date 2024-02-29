@@ -12,6 +12,12 @@ public class TestModel {
     private List<ScenarioTest> scenarioTests;
 
     /**
+     * Creates a new instance of the TestModel class.
+     */
+    public TestModel() {
+    }
+
+    /**
      * Gets the API scenario definitions.
      *
      * @return The API scenario definitions.

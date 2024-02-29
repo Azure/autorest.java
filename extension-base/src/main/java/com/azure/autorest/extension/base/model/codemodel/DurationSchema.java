@@ -12,6 +12,13 @@ public class DurationSchema extends PrimitiveSchema {
     private Format format;
 
     /**
+     * Creates a new instance of the DurationSchema class.
+     */
+    public DurationSchema() {
+        super();
+    }
+
+    /**
      * Gets the duration format.
      *
      * @return The duration format.
@@ -58,8 +65,19 @@ public class DurationSchema extends PrimitiveSchema {
      * The format of the duration.
      */
     public enum Format {
+        /**
+         * The duration is in RFC3339 format.
+         */
         DURATION("duration-rfc3339"),
+
+        /**
+         * The duration is in seconds as an integer.
+         */
         SECONDS_INTEGER("seconds-integer"),
+
+        /**
+         * The duration is in seconds as a number.
+         */
         SECONDS_NUMBER("seconds-number");
 
         private final String value;

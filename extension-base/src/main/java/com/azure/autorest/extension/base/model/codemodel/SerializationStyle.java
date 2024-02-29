@@ -10,16 +10,59 @@ import java.util.Map;
  * Represents individual serialization styles.
  */
 public enum SerializationStyle {
+    /**
+     * The serialization style is binary.
+     */
     BINARY("binary"),
+
+    /**
+     * The serialization style is deep object.
+     */
     DEEP_OBJECT("deepObject"),
+
+    /**
+     * The serialization style is form.
+     */
     FORM("form"),
+
+    /**
+     * The serialization style is JSON.
+     */
     JSON("json"),
+
+    /**
+     * The serialization style is label.
+     */
     LABEL("label"),
+
+    /**
+     * The serialization style is matrix.
+     */
     MATRIX("matrix"),
+
+    /**
+     * The serialization style is pipe delimited.
+     */
     PIPE_DELIMITED("pipeDelimited"),
+
+    /**
+     * The serialization style is simple.
+     */
     SIMPLE("simple"),
+
+    /**
+     * The serialization style is space delimited.
+     */
     SPACE_DELIMITED("spaceDelimited"),
+
+    /**
+     * The serialization style is tab delimited.
+     */
     TAB_DELIMITED("tabDelimited"),
+
+    /**
+     * The serialization style is XML.
+     */
     XML("xml");
 
     private final String value;

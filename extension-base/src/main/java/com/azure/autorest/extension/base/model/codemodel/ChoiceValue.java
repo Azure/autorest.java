@@ -14,6 +14,12 @@ public class ChoiceValue {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the ChoiceValue class.
+     */
+    public ChoiceValue() {
+    }
+
+    /**
      * Gets the language for the choice value. (Required)
      *
      * @return The language for the choice value.

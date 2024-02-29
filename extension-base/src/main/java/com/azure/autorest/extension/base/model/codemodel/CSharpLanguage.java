@@ -8,6 +8,12 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class CSharpLanguage {
 
+    /**
+     * Creates a new instance of the CSharpLanguage class.
+     */
+    public CSharpLanguage() {
+    }
+
     @Override
     public String toString() {
         return CSharpLanguage.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

@@ -24,6 +24,12 @@ public class Languages {
     private Language objectivec;
 
     /**
+     * Creates a new instance of the Languages class.
+     */
+    public Languages() {
+    }
+
+    /**
      * Gets the default language. (Required)
      *
      * @return The default language.

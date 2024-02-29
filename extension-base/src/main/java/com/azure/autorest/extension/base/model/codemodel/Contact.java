@@ -15,6 +15,12 @@ public class Contact {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the Contact class.
+     */
+    public Contact() {
+    }
+
+    /**
      * Gets the name of the contact.
      *
      * @return The name of the contact.

@@ -21,6 +21,12 @@ public class Parameter extends Value {
     private String summary;
 
     /**
+     * Creates a new instance of the Parameter class.
+     */
+    public Parameter() {
+    }
+
+    /**
      * Gets the default value for the parameter in the client.
      *
      * @return The default value for the parameter in the client.
@@ -178,8 +184,19 @@ public class Parameter extends Value {
      * The location of the parameter's implementation.
      */
     public enum ImplementationLocation {
+        /**
+         * The parameter is implemented in the client.
+         */
         CLIENT("Client"),
+
+        /**
+         * The parameter is implemented in the context.
+         */
         CONTEXT("Context"),
+
+        /**
+         * The parameter is implemented in the method.
+         */
         METHOD("Method");
         private final String value;
 

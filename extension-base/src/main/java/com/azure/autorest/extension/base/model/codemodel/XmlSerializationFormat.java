@@ -12,16 +12,15 @@ public class XmlSerializationFormat extends SerializationFormat {
     private String name;
     private String namespace;
     private String prefix;
-    /**
-     * (Required)
-     */
     private boolean attribute;
-    /**
-     * (Required)
-     */
     private boolean wrapped;
-
     private boolean text;
+
+    /**
+     * Creates a new instance of the XmlSerializationFormat class.
+     */
+    public XmlSerializationFormat() {
+    }
 
     /**
      * Gets the name of the XML element.

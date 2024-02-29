@@ -22,6 +22,12 @@ public class DictionaryAnyProperty {
     private Map<String, Object> additionalProperties = new HashMap<>();
 
     /**
+     * Creates a new instance of the DictionaryAnyProperty class.
+     */
+    public DictionaryAnyProperty() {
+    }
+
+    /**
      * Gets the additional properties of the dictionary property.
      *
      * @return The additional properties of the dictionary property.

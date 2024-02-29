@@ -18,6 +18,12 @@ public class Info {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the Info class.
+     */
+    public Info() {
+    }
+
+    /**
      * Gets the title of the service. (Required)
      *
      * @return The title of the service.

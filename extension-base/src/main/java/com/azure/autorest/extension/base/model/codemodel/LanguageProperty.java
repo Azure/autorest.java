@@ -19,7 +19,13 @@ import java.util.Map;
 @JsonPropertyOrder
 public class LanguageProperty {
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Map<String, Object> additionalProperties = new HashMap<>();
+
+    /**
+     * Creates a new instance of the LanguageProperty class.
+     */
+    public LanguageProperty() {
+    }
 
     /**
      * Gets the additional properties of the language property.

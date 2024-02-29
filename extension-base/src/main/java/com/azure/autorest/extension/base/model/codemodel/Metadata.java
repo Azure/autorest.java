@@ -9,14 +9,15 @@ import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
  * Represents metadata.
  */
 public class Metadata {
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     */
     private Languages language;
     private Protocols protocol;
     private XmsExtensions extensions;
+
+    /**
+     * Creates a new instance of the Metadata class.
+     */
+    public Metadata() {
+    }
 
     /**
      * Gets the language of the metadata. (Required)

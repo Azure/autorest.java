@@ -14,6 +14,12 @@ public class ConstantValue {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the ConstantValue class.
+     */
+    public ConstantValue() {
+    }
+
+    /**
      * Gets the language of the value. (Required)
      *
      * @return The language of the value.

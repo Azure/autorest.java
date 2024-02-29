@@ -11,6 +11,12 @@ public class Response extends Metadata {
     private Boolean binary;
 
     /**
+     * Creates a new instance of the Response class.
+     */
+    public Response() {
+    }
+
+    /**
      * Gets the schema of the response.
      *
      * @return The schema of the response.

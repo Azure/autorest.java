@@ -8,6 +8,13 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class UuidSchema extends PrimitiveSchema {
 
+    /**
+     * Creates a new instance of the UuidSchema class.
+     */
+    public UuidSchema() {
+        super();
+    }
+
     @Override
     public String toString() {
         return UuidSchema.class.getName() + '@' + Integer.toHexString(System.identityHashCode(this)) + "[]";

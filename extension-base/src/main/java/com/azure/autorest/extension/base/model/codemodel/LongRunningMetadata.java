@@ -12,6 +12,12 @@ public class LongRunningMetadata {
     private Metadata pollingStrategy;
 
     /**
+     * Creates a new instance of the LongRunningMetadata class.
+     */
+    public LongRunningMetadata() {
+    }
+
+    /**
      * Gets the poll result type.
      *
      * @return The poll result type.

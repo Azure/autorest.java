@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.type.TypeFactory;
@@ -37,6 +38,8 @@ import java.util.Objects;
 public abstract class NewPlugin {
     private static final Type MAP_STRING_STRING_TYPE = TypeFactory.defaultInstance()
         .constructMapType(Map.class, String.class, String.class);
+    private static final JavaType LIST_STRING = TypeFactory.defaultInstance()
+        .constructCollectionLikeType(List.class, String.class);
 
     /**
      * The ObjectMapper used to serialize and deserialize JSON.
@@ -85,10 +88,28 @@ public abstract class NewPlugin {
         return connection.request(jsonMapper.constructType(type), "GetValue", sessionId, key);
     }
 
+//    /**
+//     * Gets the Map value of a key.
+//     *
+//     * @param <K> The type of the key.
+//     * @param <V> The type of the value.
+//     * @param keyType The type of the key.
+//     * @param valueType The type of the value.
+//     * @param key The key.
+//     * @return The value of the key.
+//     */
 //    public <K, V> Map<K, V> getMapValue(Class<K> keyType, Class<V> valueType, String key) {
 //        return getValue(jsonMapper.getTypeFactory().constructMapType(Map.class, keyType, valueType), key);
 //    }
 //
+//    /**
+//     * Gets the List value of a key.
+//     *
+//     * @param <T> The type of the value.
+//     * @param valueType The type of the value.
+//     * @param key The key.
+//     * @return The value of the key.
+//     */
 //    public <T> List<T> getListValue(Class<T> valueType, String key) {
 //        return getValue(jsonMapper.getTypeFactory().constructCollectionType(List.class, valueType), key);
 //    }
@@ -112,11 +133,7 @@ public abstract class NewPlugin {
      */
     public String getStringValue(String key, String defaultValue) {
         String ret = getStringValue(key);
-        if (ret == null) {
-            return defaultValue;
-        } else {
-            return ret;
-        }
+        return  (ret == null) ? defaultValue : ret;
     }
 
     /**
@@ -138,11 +155,7 @@ public abstract class NewPlugin {
      */
     public boolean getBooleanValue(String key, boolean defaultValue) {
         Boolean ret = getBooleanValue(key);
-        if (ret == null) {
-            return defaultValue;
-        } else {
-            return ret;
-        }
+        return (ret == null) ? defaultValue : ret;
     }
 
     /**
@@ -151,8 +164,7 @@ public abstract class NewPlugin {
      * @return The input files.
      */
     public List<String> listInputs() {
-        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class),
-            "ListInputs", sessionId, null);
+        return listInputs(null);
     }
 
     /**
@@ -162,8 +174,7 @@ public abstract class NewPlugin {
      * @return The input files of the specific type.
      */
     public List<String> listInputs(String artifactType) {
-        return connection.request(jsonMapper.getTypeFactory().constructCollectionLikeType(List.class, String.class),
-            "ListInputs", sessionId, artifactType);
+        return connection.request(LIST_STRING, "ListInputs", sessionId, artifactType);
     }
 
     /**
