@@ -143,7 +143,6 @@ public class JavaSettings {
                 getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
                 host.getValue(TYPE_FACTORY.constructCollectionLikeType(List.class, String.class), "service-versions"),
-                getBooleanValue(host, "require-x-ms-flattened-to-flatten", false),
                 getStringValue(host, "client-flattened-annotation-target", ""),
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
@@ -223,8 +222,6 @@ public class JavaSettings {
      * @param dataPlaneClient Whether to generate a data plane client.
      * @param useIterable Whether to use Iterable instead of List for collection types.
      * @param serviceVersions The versions of the service.
-     * @param requireXMsFlattenedToFlatten If set to true, a model must have x-ms-flattened to be annotated with
-     * JsonFlatten.
      * @param clientFlattenAnnotationTarget The target for the <code>@JsonFlatten</code> annotation for
      * x-ms-client-flatten.
      * @param keyCredentialHeaderName The header name for the key credential.
@@ -304,7 +301,6 @@ public class JavaSettings {
         boolean dataPlaneClient,
         boolean useIterable,
         List<String> serviceVersions,
-        boolean requireXMsFlattenedToFlatten,
         String clientFlattenAnnotationTarget,
         String keyCredentialHeaderName,
         boolean clientBuilderDisabled,
@@ -366,7 +362,6 @@ public class JavaSettings {
         this.dataPlaneClient = dataPlaneClient;
         this.useIterable = useIterable;
         this.serviceVersions = serviceVersions;
-        this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
         this.clientFlattenAnnotationTarget =
             (clientFlattenAnnotationTarget == null || clientFlattenAnnotationTarget.isEmpty())
                 ? ClientFlattenAnnotationTarget.TYPE
@@ -1198,17 +1193,6 @@ public class JavaSettings {
      */
     public List<String> getServiceVersions() {
         return serviceVersions;
-    }
-
-    private final boolean requireXMsFlattenedToFlatten;
-
-    /**
-     * Whether a model must have x-ms-flattened to be annotated with JsonFlatten.
-     *
-     * @return Whether a model must have x-ms-flattened to be annotated with JsonFlatten.
-     */
-    public boolean requireXMsFlattenedToFlatten() {
-        return requireXMsFlattenedToFlatten;
     }
 
     private final boolean generateSamples;

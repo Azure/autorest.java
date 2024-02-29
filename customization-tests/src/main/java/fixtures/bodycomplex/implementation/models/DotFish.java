@@ -79,7 +79,7 @@ public class DotFish implements JsonSerializable<DotFish> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fish\\.type", this.fishType);
+        jsonWriter.writeStringField("fish.type", this.fishType);
         jsonWriter.writeStringField("species", this.species);
         return jsonWriter.writeEndObject();
     }
@@ -99,7 +99,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                 while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
                     String fieldName = readerToUse.getFieldName();
                     readerToUse.nextToken();
-                    if ("fish\\.type".equals(fieldName)) {
+                    if ("fish.type".equals(fieldName)) {
                         discriminatorValue = readerToUse.getString();
                         break;
                     } else {
@@ -123,7 +123,7 @@ public class DotFish implements JsonSerializable<DotFish> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fish\\.type".equals(fieldName)) {
+                if ("fish.type".equals(fieldName)) {
                     deserializedDotFish.fishType = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     deserializedDotFish.species = reader.getString();
