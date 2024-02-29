@@ -9,7 +9,6 @@ import logging
 import argparse
 import subprocess
 import glob
-import json
 import shutil
 from typing import List
 
@@ -29,23 +28,23 @@ def parse_args() -> argparse.Namespace:
         help='azure-sdk-for-java repository root.',
     )
     parser.add_argument(
-        '--version',
+        '--package-json-path',
         required=True,
-        help='@azure-tools/typespec-java version.',
+        help='path to package.json of typespec-java.',
     )
     return parser.parse_args()
 
 
-def update_emitter(version: str):
-    emitter_package_json_path = os.path.join(sdk_root, 'eng/emitter-package.json')
-    with open(emitter_package_json_path, mode='r', encoding='utf-8') as f:
-        package_json = json.load(f)
-
-    with open(emitter_package_json_path, mode='w', encoding='utf-8') as f:
-        package_json['dependencies']['@azure-tools/typespec-java'] = version
-        json.dump(package_json, f, indent=2)
-
-    logging.info('Update emitter-package.json to use @azure-tools/typespec-java version %s', version)
+def update_emitter(package_json_path: str):
+    logging.info('Update emitter-package.json')
+    subprocess.check_call([
+        'pwsh',
+        './eng/common/scripts/typespec/New-EmitterPackageJson.ps1',
+        '-PackageJsonPath',
+        package_json_path,
+        '-OutputDirectory',
+        'eng'],
+        cwd=sdk_root)
 
     logging.info('Update emitter-package-lock.json')
     subprocess.check_call([
@@ -99,7 +98,7 @@ def main():
     args = vars(parse_args())
     sdk_root = args['sdk_root']
 
-    update_emitter(args['version'])
+    update_emitter(args['package_json_path'])
 
     update_sdks()
 

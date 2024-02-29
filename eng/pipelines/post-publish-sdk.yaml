@@ -47,7 +47,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --version=$(PackageVersion)
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
