@@ -40,9 +40,7 @@ public final class LegacyClient {
 
     /**
      * Poll a Job.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -86,9 +84,7 @@ public final class LegacyClient {
 
     /**
      * Creates a Job.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     comment: String (Required)

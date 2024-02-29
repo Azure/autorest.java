@@ -91,8 +91,7 @@ public final class LROs {
     }
 
     /**
-     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLROs to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLROs to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
@@ -364,8 +363,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -388,8 +386,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -412,8 +409,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -433,8 +429,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -453,8 +448,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -475,8 +469,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -490,8 +483,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -504,8 +496,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -520,8 +511,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @param product Product to patch.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -545,8 +535,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @param product Product to patch.
      * @param context The context to associate with this operation.
@@ -570,8 +559,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @param product Product to patch.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -590,8 +578,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -609,8 +596,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @param product Product to patch.
      * @param context The context to associate with this operation.
@@ -630,8 +616,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @param product Product to patch.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -645,8 +630,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -659,8 +643,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request with location header. We should not have
-     * any subsequent calls after receiving this first response.
+     * Long running put request, service returns a 200 to the initial request with location header. We should not have any subsequent calls after receiving this first response.
      * 
      * @param product Product to patch.
      * @param context The context to associate with this operation.
@@ -970,8 +953,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -994,8 +976,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1018,8 +999,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1037,8 +1017,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1055,8 +1034,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1075,8 +1053,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1090,8 +1067,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1104,8 +1080,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1120,8 +1095,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
-     * 'id': '100', 'name': 'foo' }].
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1138,8 +1112,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
-     * 'id': '100', 'name': 'foo' }].
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1158,8 +1131,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
-     * 'id': '100', 'name': 'foo' }].
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1175,8 +1147,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
-     * 'id': '100', 'name': 'foo' }].
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1194,8 +1165,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
-     * 'id': '100', 'name': 'foo' }].
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1207,8 +1177,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{
-     * 'id': '100', 'name': 'foo' }].
+     * Long running put request, service returns a 202 with empty body to first request, returns a 200 with body [{ 'id': '100', 'name': 'foo' }].
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1222,8 +1191,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1246,8 +1214,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1270,8 +1237,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1289,8 +1255,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1307,8 +1272,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1328,8 +1292,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1343,8 +1306,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1357,8 +1319,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that does not contain ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1373,8 +1334,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1396,8 +1356,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1420,8 +1379,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1439,8 +1397,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1457,8 +1414,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1477,8 +1433,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1492,8 +1447,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1506,8 +1460,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request, with a location header that points to a
-     * polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
+     * Long running put request, service returns a 202 to the initial request, with a location header that points to a polling URL that returns a 200 and an entity that doesn't contains ProvisioningState.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1522,9 +1475,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1547,9 +1498,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1572,9 +1521,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1592,9 +1539,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1611,9 +1556,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1633,9 +1576,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1649,9 +1590,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1664,9 +1603,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1681,9 +1618,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1706,9 +1641,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1731,9 +1664,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1751,9 +1682,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1770,9 +1699,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1792,9 +1719,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1808,9 +1733,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1823,9 +1746,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1840,9 +1761,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1865,9 +1784,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1890,9 +1807,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1910,9 +1825,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1929,9 +1842,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1951,9 +1862,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1967,9 +1876,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1982,9 +1889,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1999,9 +1904,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2024,9 +1927,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2049,9 +1950,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2069,9 +1968,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2088,9 +1985,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2110,9 +2005,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2126,9 +2019,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2141,9 +2032,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running put request, service returns a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2158,8 +2047,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2182,8 +2070,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2206,8 +2093,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2225,8 +2111,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2243,8 +2128,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2264,8 +2148,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2279,8 +2162,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2293,8 +2175,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running put request, service returns a 202 to the initial request with location header. Subsequent calls to operation status do not contain location header.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2309,9 +2190,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2334,9 +2213,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2360,9 +2237,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2380,9 +2255,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2399,9 +2272,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2421,9 +2292,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2437,9 +2306,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2452,9 +2319,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2469,9 +2334,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2494,9 +2357,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2520,9 +2381,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2540,9 +2399,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2559,9 +2416,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2581,9 +2436,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2597,9 +2450,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2612,9 +2463,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2629,9 +2478,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2654,9 +2501,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2680,9 +2525,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2700,9 +2543,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2719,9 +2560,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2741,9 +2580,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2757,9 +2594,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2772,9 +2607,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2789,9 +2622,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2814,9 +2645,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2840,9 +2669,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2860,9 +2687,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2879,9 +2704,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2901,9 +2724,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2917,9 +2738,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2932,9 +2751,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2949,8 +2766,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2973,8 +2789,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -2998,8 +2813,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3017,8 +2831,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3035,8 +2848,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -3056,8 +2868,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3071,8 +2882,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3085,8 +2895,7 @@ public final class LROs {
     }
 
     /**
-     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header.
-     * Subsequent calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running put request, service returns a 202 to the initial request with Azure-AsyncOperation header. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -3668,9 +3477,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3689,9 +3496,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3711,9 +3516,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3730,9 +3533,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3751,9 +3552,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3765,9 +3564,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3781,9 +3578,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3802,9 +3597,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3824,9 +3617,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3843,9 +3634,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3864,9 +3653,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3878,9 +3665,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Failed’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Failed’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3894,9 +3679,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3915,9 +3698,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3937,9 +3718,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3956,9 +3735,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3977,9 +3754,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3991,9 +3766,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
-     * ProvisioningState=’Canceled’.
+     * Long running delete request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Canceled’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4103,8 +3876,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4121,8 +3893,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4141,8 +3912,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4158,8 +3928,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4177,8 +3946,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4190,8 +3958,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4205,8 +3972,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4223,8 +3989,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4243,8 +4008,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4260,8 +4024,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4279,8 +4042,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4292,8 +4054,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
-     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4307,8 +4068,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4325,8 +4085,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4345,8 +4104,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4362,8 +4120,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4381,8 +4138,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4394,8 +4150,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a location header in the initial request. Subsequent calls to
-     * operation status do not contain location header.
+     * Long running delete request, service returns a location header in the initial request. Subsequent calls to operation status do not contain location header.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4409,8 +4164,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
-     * calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4428,8 +4182,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
-     * calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4448,8 +4201,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
-     * calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4465,8 +4217,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
-     * calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4484,8 +4235,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
-     * calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4497,8 +4247,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent
-     * calls to operation status do not contain Azure-AsyncOperation header.
+     * Long running delete request, service returns an Azure-AsyncOperation header in the initial request. Subsequent calls to operation status do not contain Azure-AsyncOperation header.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4512,8 +4261,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4531,8 +4279,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4551,8 +4298,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4568,8 +4314,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4587,8 +4332,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4600,8 +4344,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4615,8 +4358,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4634,8 +4376,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4654,8 +4395,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4671,8 +4411,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4691,8 +4430,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4704,8 +4442,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4719,8 +4456,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4737,8 +4473,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4757,8 +4492,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4774,8 +4508,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4793,8 +4526,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4806,8 +4538,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4821,8 +4552,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4840,8 +4570,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4860,8 +4589,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4877,8 +4605,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4896,8 +4623,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4909,8 +4635,7 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the
-     * Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4924,8 +4649,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a
-     * 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4942,8 +4666,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a
-     * 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4962,8 +4685,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a
-     * 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4979,8 +4701,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a
-     * 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4998,8 +4719,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a
-     * 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5011,8 +4731,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a
-     * 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header. Poll returns a 200 with a response body after success.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5026,8 +4745,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5050,8 +4768,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5074,8 +4791,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5093,8 +4809,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5111,8 +4826,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5131,8 +4845,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5146,8 +4859,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5160,8 +4872,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After'
-     * headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5176,8 +4887,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5200,8 +4910,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5224,8 +4933,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5243,8 +4951,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5261,8 +4968,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5281,8 +4987,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5296,8 +5001,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5310,8 +5014,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with
-     * noresponse body after success.
+     * Long running post request, service returns a 202 to the initial request, with 'Location' header, 204 with noresponse body after success.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5326,8 +5029,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5345,8 +5047,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5365,8 +5066,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5382,8 +5082,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5402,8 +5101,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5415,8 +5113,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should poll Location to get the final object.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5430,8 +5127,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5449,8 +5145,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5469,8 +5164,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5487,8 +5181,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5507,8 +5200,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5520,8 +5212,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5535,9 +5226,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support
-     * initial Autorest behavior.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5555,9 +5244,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support
-     * initial Autorest behavior.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5576,9 +5263,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support
-     * initial Autorest behavior.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5595,9 +5280,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support
-     * initial Autorest behavior.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5616,9 +5299,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support
-     * initial Autorest behavior.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5630,9 +5311,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async
-     * header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support
-     * initial Autorest behavior.
+     * Long running post request, service returns a 202 to the initial request with both Location and Azure-Async header. Poll Azure-Async and it's success. Should NOT poll Location to get the final object if you support initial Autorest behavior.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5646,9 +5325,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5671,9 +5348,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5697,9 +5372,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5717,9 +5390,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5736,9 +5407,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5758,9 +5427,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5774,9 +5441,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5789,9 +5454,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5806,9 +5469,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5831,9 +5492,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5857,9 +5516,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5877,9 +5534,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5896,9 +5551,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5918,9 +5571,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5934,9 +5585,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -5949,9 +5598,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -5966,9 +5613,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -5991,9 +5636,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -6017,9 +5660,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -6037,9 +5678,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -6056,9 +5695,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -6078,9 +5715,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -6094,9 +5729,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -6109,9 +5742,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -6126,9 +5757,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -6151,9 +5780,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -6177,9 +5804,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -6197,9 +5822,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -6216,9 +5839,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -6238,9 +5859,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -6254,9 +5873,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -6269,9 +5886,7 @@ public final class LROs {
     }
 
     /**
-     * Long running post request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
-     * status.
+     * Long running post request, service returns a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.

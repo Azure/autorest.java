@@ -38,9 +38,7 @@ public final class FloatLiteralClient {
 
     /**
      * Get models that will return all properties in the model.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(1.2) (Optional)
@@ -62,9 +60,7 @@ public final class FloatLiteralClient {
 
     /**
      * Get models that will return the default object.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(1.2) (Optional)
@@ -86,9 +82,7 @@ public final class FloatLiteralClient {
 
     /**
      * Put a body with all properties present.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(1.2) (Optional)
@@ -111,9 +105,7 @@ public final class FloatLiteralClient {
 
     /**
      * Put a body with default properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(1.2) (Optional)

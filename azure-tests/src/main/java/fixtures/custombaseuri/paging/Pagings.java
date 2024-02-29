@@ -52,8 +52,7 @@ public final class Pagings {
     }
 
     /**
-     * The interface defining all the services for AutoRestParameterizedHostTestPagingClientPagings to be used by the
-     * proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestParameterizedHostTestPagingClientPagings to be used by the proxy service to perform REST calls.
      */
     @Host("http://{accountName}{host}")
     @ServiceInterface(name = "AutoRestParameterize")

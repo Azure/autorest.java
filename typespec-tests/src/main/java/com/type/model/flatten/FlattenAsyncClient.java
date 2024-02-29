@@ -41,9 +41,7 @@ public final class FlattenAsyncClient {
 
     /**
      * The putFlattenModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -53,9 +51,7 @@ public final class FlattenAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -72,8 +68,7 @@ public final class FlattenAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is the model with one level of flattening along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return this is the model with one level of flattening along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -83,9 +78,7 @@ public final class FlattenAsyncClient {
 
     /**
      * The putNestedFlattenModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -98,9 +91,7 @@ public final class FlattenAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -120,8 +111,7 @@ public final class FlattenAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is the model with two levels of flattening along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return this is the model with two levels of flattening along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

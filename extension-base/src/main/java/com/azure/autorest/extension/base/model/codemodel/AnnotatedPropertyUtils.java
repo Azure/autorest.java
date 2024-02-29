@@ -18,6 +18,13 @@ import java.util.Map;
 public class AnnotatedPropertyUtils extends PropertyUtils {
     private final Map<Class<?>, Map<String, Property>> cachedPropertyMap = new HashMap<>();
 
+    /**
+     * Creates a new instance of AnnotatedPropertyUtils class.
+     */
+    public AnnotatedPropertyUtils() {
+        super();
+    }
+
     @Override
     protected Map<String, Property> getPropertiesMap(Class<?> type, BeanAccess bAccess) {
         if (cachedPropertyMap.get(type) != null) {

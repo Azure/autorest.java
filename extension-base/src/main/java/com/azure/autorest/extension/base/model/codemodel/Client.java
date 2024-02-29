@@ -19,6 +19,13 @@ public class Client extends Metadata {
     private String crossLanguageDefinitionId;
 
     /**
+     * Creates a new instance of the Client class.
+     */
+    public Client() {
+        super();
+    }
+
+    /**
      * Gets the summary of the client.
      *
      * @return The summary of the client.

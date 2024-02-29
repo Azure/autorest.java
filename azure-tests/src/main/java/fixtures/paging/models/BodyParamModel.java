@@ -69,8 +69,7 @@ public final class BodyParamModel implements JsonSerializable<BodyParamModel> {
      * Reads an instance of BodyParamModel from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of BodyParamModel if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of BodyParamModel if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the BodyParamModel.
      */
     public static BodyParamModel fromJson(JsonReader jsonReader) throws IOException {

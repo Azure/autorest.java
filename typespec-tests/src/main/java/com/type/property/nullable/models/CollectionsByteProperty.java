@@ -73,9 +73,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
 
     /**
      * Set the requiredProperty property: Required property.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param requiredProperty the requiredProperty value to set.
      * @return the CollectionsByteProperty object itself.
@@ -99,9 +97,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
 
     /**
      * Set the nullableProperty property: Property.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param nullableProperty the nullableProperty value to set.
      * @return the CollectionsByteProperty object itself.
@@ -151,8 +147,7 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
      * Reads an instance of CollectionsByteProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of CollectionsByteProperty if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of CollectionsByteProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the CollectionsByteProperty.
      */
     @Generated

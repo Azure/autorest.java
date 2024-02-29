@@ -42,9 +42,7 @@ public final class InternalAsyncClient {
 
     /**
      * The postInternal operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property (Required): {
@@ -52,9 +50,7 @@ public final class InternalAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property (Required): {
@@ -79,9 +75,7 @@ public final class InternalAsyncClient {
 
     /**
      * The getInternal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

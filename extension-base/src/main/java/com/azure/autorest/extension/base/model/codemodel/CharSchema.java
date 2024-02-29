@@ -7,6 +7,14 @@ package com.azure.autorest.extension.base.model.codemodel;
  * Represents a char schema.
  */
 public class CharSchema extends PrimitiveSchema {
+
+    /**
+     * Creates a new instance of the CharSchema class.
+     */
+    public CharSchema() {
+        super();
+    }
+
     @Override
     public String toString() {
         return CharSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

@@ -38,9 +38,7 @@ public final class ResponseBodyClient {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -60,9 +58,7 @@ public final class ResponseBodyClient {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -82,9 +78,7 @@ public final class ResponseBodyClient {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -104,9 +98,7 @@ public final class ResponseBodyClient {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -126,9 +118,7 @@ public final class ResponseBodyClient {
 
     /**
      * The base64url operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>

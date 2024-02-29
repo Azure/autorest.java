@@ -61,8 +61,7 @@ public final class MultipleResponsesImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceMultipleResponses to be used by
-     * the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceMultipleResponses to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
@@ -674,9 +673,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -700,9 +697,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -725,9 +720,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 204 response with no payload.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -751,9 +744,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 204 response with no payload.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -776,9 +767,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -802,9 +791,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -827,9 +814,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 202 response with no payload:.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -853,9 +838,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 202 response with no payload:.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -878,9 +861,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -904,9 +885,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -929,9 +908,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -955,9 +932,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -980,9 +955,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1006,9 +979,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1031,9 +1002,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1057,9 +1026,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1082,9 +1049,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1106,9 +1071,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1129,9 +1092,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1153,9 +1114,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'httpCode': '201'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1176,9 +1135,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1200,9 +1157,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1223,9 +1178,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1247,9 +1200,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -1496,9 +1447,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1521,9 +1470,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with valid payload: {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1545,9 +1492,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with no payload.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1570,9 +1515,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with no payload.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1783,11 +1726,8 @@ public final class MultipleResponsesImpl {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1809,11 +1749,8 @@ public final class MultipleResponsesImpl {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1835,9 +1772,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1860,9 +1795,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with payload {'statusCode': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1884,9 +1817,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1909,9 +1840,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1933,9 +1862,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1958,9 +1885,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 400 response with no payload client should treat as an http error with no error model.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -1982,9 +1907,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -2007,9 +1930,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with payload {'statusCode': '400'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -2031,9 +1952,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -2056,9 +1975,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -2080,9 +1997,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)
@@ -2105,9 +2020,7 @@ public final class MultipleResponsesImpl {
 
     /**
      * Send a 202 response with payload {'statusCode': '202'}.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     statusCode: String (Optional)

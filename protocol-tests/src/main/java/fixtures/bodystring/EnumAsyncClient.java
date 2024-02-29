@@ -38,9 +38,7 @@ public final class EnumAsyncClient {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -50,8 +48,7 @@ public final class EnumAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -61,9 +58,7 @@ public final class EnumAsyncClient {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -84,9 +79,7 @@ public final class EnumAsyncClient {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -96,8 +89,7 @@ public final class EnumAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -107,9 +99,7 @@ public final class EnumAsyncClient {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -130,9 +120,7 @@ public final class EnumAsyncClient {
 
     /**
      * Get value 'green-color' from the constant.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     ColorConstant: String (Required)
@@ -145,8 +133,7 @@ public final class EnumAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return value 'green-color' from the constant along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return value 'green-color' from the constant along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -156,9 +143,7 @@ public final class EnumAsyncClient {
 
     /**
      * Sends value 'green-color' from a constant.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     ColorConstant: String (Required)

@@ -102,8 +102,7 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
      * Reads an instance of MetricAlertCriteria from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of MetricAlertCriteria if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of MetricAlertCriteria if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the MetricAlertCriteria.
      */
     public static MetricAlertCriteria fromJson(JsonReader jsonReader) throws IOException {

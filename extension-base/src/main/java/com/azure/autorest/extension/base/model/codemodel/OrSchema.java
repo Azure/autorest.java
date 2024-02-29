@@ -14,6 +14,12 @@ public class OrSchema extends ComplexSchema {
     private List<ObjectSchema> anyOf = new ArrayList<>();
 
     /**
+     * Creates a new instance of the OrSchema class.
+     */
+    public OrSchema() {
+    }
+
+    /**
      * Gets the set of schemas that this schema is composed of. Every schema is optional. (Required)
      *
      * @return The set of schemas that this schema is composed of. Every schema is optional.

@@ -15,6 +15,12 @@ public class Language {
     private String comment;
 
     /**
+     * Creates a new instance of the Language class.
+     */
+    public Language() {
+    }
+
+    /**
      * Gets the name used in actual implementation. (Required)
      *
      * @return The name used in actual implementation.

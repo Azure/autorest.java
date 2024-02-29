@@ -38,15 +38,12 @@ public final class MultipleContentTypesOnRequestClient {
 
     /**
      * one data type maps to multiple content types.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
-     * "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -59,23 +56,19 @@ public final class MultipleContentTypesOnRequestClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(String contentType,
         BinaryData data, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'uploadBytesWithSingleBodyTypeForMultiContentTypes' is
-        // multiple content-type
+        // Convenience API is not generated, as operation 'uploadBytesWithSingleBodyTypeForMultiContentTypes' is multiple content-type
         return this.serviceClient.uploadBytesWithSingleBodyTypeForMultiContentTypesWithResponse(contentType, data,
             requestOptions);
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
-     * "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,17 +81,14 @@ public final class MultipleContentTypesOnRequestClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(String contentType,
         BinaryData data, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'uploadBytesWithMultiBodyTypesForMultiContentTypes' is
-        // multiple content-type
+        // Convenience API is not generated, as operation 'uploadBytesWithMultiBodyTypesForMultiContentTypes' is multiple content-type
         return this.serviceClient.uploadBytesWithMultiBodyTypesForMultiContentTypesWithResponse(contentType, data,
             requestOptions);
     }
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -123,15 +113,12 @@ public final class MultipleContentTypesOnRequestClient {
 
     /**
      * multiple data types map to multiple content types using shared route.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
-     * "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream", "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -144,8 +131,7 @@ public final class MultipleContentTypesOnRequestClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(String contentType,
         BinaryData data, RequestOptions requestOptions) {
-        // Convenience API is not generated, as operation 'uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes' is
-        // multiple content-type
+        // Convenience API is not generated, as operation 'uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypes' is multiple content-type
         return this.serviceClient.uploadJsonOrBytesWithMultiBodyTypesForMultiContentTypesWithResponse(contentType, data,
             requestOptions);
     }

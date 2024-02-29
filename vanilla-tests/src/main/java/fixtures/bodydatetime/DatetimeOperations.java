@@ -50,8 +50,7 @@ public final class DatetimeOperations {
     }
 
     /**
-     * The interface defining all the services for AutoRestDateTimeTestServiceDatetimeOperations to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestDateTimeTestServiceDatetimeOperations to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDateTimeTest")
@@ -787,8 +786,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31t23:59:59.999z along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value 9999-12-31t23:59:59.999z along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
@@ -808,8 +806,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31t23:59:59.999z along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value 9999-12-31t23:59:59.999z along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -878,8 +875,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.999Z along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value 9999-12-31T23:59:59.999Z along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
@@ -899,8 +895,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value 9999-12-31T23:59:59.999Z along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value 9999-12-31T23:59:59.999Z along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -1176,8 +1171,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync() {
@@ -1197,8 +1191,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetLowercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -1215,8 +1208,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync() {
@@ -1231,8 +1223,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999+14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetLowercaseMaxDateTimeAsync(Context context) {
@@ -1271,8 +1262,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync() {
@@ -1292,8 +1282,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetUppercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -1310,8 +1299,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync() {
@@ -1326,8 +1314,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999+14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalPositiveOffsetUppercaseMaxDateTimeAsync(Context context) {
@@ -1471,8 +1458,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync() {
@@ -1492,8 +1478,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetUppercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -1510,8 +1495,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync() {
@@ -1526,8 +1510,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31T23:59:59.999-14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetUppercaseMaxDateTimeAsync(Context context) {
@@ -1566,8 +1549,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync() {
@@ -1587,8 +1569,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetLowercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -1605,8 +1586,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync() {
@@ -1621,8 +1601,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 on successful completion of
-     * {@link Mono}.
+     * @return max datetime value with positive num offset 9999-12-31t23:59:59.999-14:00 on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<OffsetDateTime> getLocalNegativeOffsetLowercaseMaxDateTimeAsync(Context context) {
@@ -1764,8 +1743,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
@@ -1784,8 +1762,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync(Context context) {
@@ -1959,8 +1936,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00+14:00 along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00+14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithResponseAsync() {
@@ -1980,8 +1956,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00+14:00 along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00+14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalPositiveOffsetMinDateTimeWithResponseAsync(Context context) {
@@ -2156,8 +2131,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00-14:00 along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00-14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithResponseAsync() {
@@ -2177,8 +2151,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00-14:00 along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00-14:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNegativeOffsetMinDateTimeWithResponseAsync(Context context) {
@@ -2248,8 +2221,7 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync() {
@@ -2269,8 +2241,7 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync(Context context) {

@@ -14,6 +14,12 @@ public class Security {
     private List<Scheme> schemes = new ArrayList<>();
 
     /**
+     * Creates a new instance of the Security class.
+     */
+    public Security() {
+    }
+
+    /**
      * Gets whether authentication is required.
      *
      * @return Whether authentication is required.

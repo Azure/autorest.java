@@ -8,6 +8,12 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class ODataQuerySchema extends Schema {
 
+    /**
+     * Creates a new instance of the ODataQuerySchema class.
+     */
+    public ODataQuerySchema() {
+    }
+
     @Override
     public String toString() {
         return ODataQuerySchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

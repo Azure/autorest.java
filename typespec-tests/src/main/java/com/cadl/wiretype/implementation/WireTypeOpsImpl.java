@@ -52,8 +52,7 @@ public final class WireTypeOpsImpl {
     }
 
     /**
-     * The interface defining all the services for WireTypeClientWireTypeOps to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for WireTypeClientWireTypeOps to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "WireTypeClientWireTy")
@@ -121,18 +120,14 @@ public final class WireTypeOpsImpl {
 
     /**
      * The superClassMismatch operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -158,18 +153,14 @@ public final class WireTypeOpsImpl {
 
     /**
      * The superClassMismatch operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -194,18 +185,14 @@ public final class WireTypeOpsImpl {
 
     /**
      * The subClassMismatch operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
@@ -231,18 +218,14 @@ public final class WireTypeOpsImpl {
 
     /**
      * The subClassMismatch operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
@@ -268,18 +251,14 @@ public final class WireTypeOpsImpl {
 
     /**
      * The bothClassMismatch operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     base64url: Base64Url (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
@@ -305,18 +284,14 @@ public final class WireTypeOpsImpl {
 
     /**
      * The bothClassMismatch operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     base64url: Base64Url (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)

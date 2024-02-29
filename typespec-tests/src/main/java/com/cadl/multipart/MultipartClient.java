@@ -44,23 +44,11 @@ public final class MultipartClient {
 
     /**
      * The upload operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>compress</td>
-     * <td>Boolean</td>
-     * <td>No</td>
-     * <td>Boolean with `true` and `false` values.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>compress</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -76,8 +64,7 @@ public final class MultipartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> uploadWithResponse(String name, BinaryData data, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is
-        // 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is 'multipart/form-data'
         return this.serviceClient.uploadWithResponse(name, data, requestOptions);
     }
 
@@ -96,8 +83,7 @@ public final class MultipartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> uploadFileWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is
-        // 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is 'multipart/form-data'
         return this.serviceClient.uploadFileWithResponse(name, request, requestOptions);
     }
 
@@ -125,17 +111,22 @@ public final class MultipartClient {
         uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
                 .serializeTextField("resolution", String.valueOf(data.getResolution()))
-                .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
+                .serializeTextField("type", Objects.toString(data.getType()))
+                .serializeJsonField("size", data.getSize())
                 .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
                     data.getImage().getFilename())
                 .serializeFileFields("file",
-                    data.getFile() == null ? null
+                    data.getFile() == null
+                        ? null
                         : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
-                    data.getFile() == null ? null
+                    data.getFile() == null
+                        ? null
                         : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
-                    data.getFile() == null ? null
+                    data.getFile() == null
+                        ? null
                         : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
-                .end().getRequestBody(),
+                .end()
+                .getRequestBody(),
             requestOptions).getValue();
     }
 
@@ -159,17 +150,22 @@ public final class MultipartClient {
         uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
                 .serializeTextField("resolution", String.valueOf(data.getResolution()))
-                .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
+                .serializeTextField("type", Objects.toString(data.getType()))
+                .serializeJsonField("size", data.getSize())
                 .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
                     data.getImage().getFilename())
                 .serializeFileFields("file",
-                    data.getFile() == null ? null
+                    data.getFile() == null
+                        ? null
                         : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
-                    data.getFile() == null ? null
+                    data.getFile() == null
+                        ? null
                         : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
-                    data.getFile() == null ? null
+                    data.getFile() == null
+                        ? null
                         : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
-                .end().getRequestBody(),
+                .end()
+                .getRequestBody(),
             requestOptions).getValue();
     }
 
@@ -194,7 +190,8 @@ public final class MultipartClient {
         BinaryData request = new MultipartFormDataHelper(requestOptions)
             .serializeFileField("file_data", requestObj.getFileData().getContent(),
                 requestObj.getFileData().getContentType(), requestObj.getFileData().getFilename())
-            .end().getRequestBody();
+            .end()
+            .getRequestBody();
         uploadFileWithResponse(name, request, requestOptions).getValue();
     }
 }

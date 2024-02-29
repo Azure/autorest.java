@@ -12,8 +12,9 @@ import java.nio.charset.StandardCharsets;
 
 public class SingleContentTypeUploadImageForSingleContentType {
     public static void main(String[] args) {
-        SingleContentTypeClient singleContentTypeClient = new MultiContentTypesClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildSingleContentTypeClient();
+        SingleContentTypeClient singleContentTypeClient
+            = new MultiContentTypesClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
+                .buildSingleContentTypeClient();
         // BEGIN:com.cadl.multicontenttypes.generated.singlecontenttypeuploadimageforsinglecontenttype.singlecontenttypeuploadimageforsinglecontenttype
         singleContentTypeClient.uploadImageForSingleContentType(
             BinaryData.fromBytes("\"D:\\Program Files\"".getBytes(StandardCharsets.UTF_8)));

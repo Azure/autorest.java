@@ -74,9 +74,7 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
 
     /**
      * Set the requiredProperty property: Required property.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param requiredProperty the requiredProperty value to set.
      * @return the DatetimeProperty object itself.
@@ -100,9 +98,7 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
 
     /**
      * Set the nullableProperty property: Property.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param nullableProperty the nullableProperty value to set.
      * @return the DatetimeProperty object itself.
@@ -125,8 +121,10 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-            jsonWriter.writeStringField("nullableProperty", this.nullableProperty == null ? null
-                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.nullableProperty));
+            jsonWriter.writeStringField("nullableProperty",
+                this.nullableProperty == null
+                    ? null
+                    : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.nullableProperty));
             return jsonWriter.writeEndObject();
         }
     }
@@ -140,8 +138,10 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
             jsonWriter.writeNullField("requiredProperty");
         }
         if (this.nullableProperty != null) {
-            jsonWriter.writeStringField("nullableProperty", this.nullableProperty == null ? null
-                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.nullableProperty));
+            jsonWriter.writeStringField("nullableProperty",
+                this.nullableProperty == null
+                    ? null
+                    : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.nullableProperty));
         } else if (updatedProperties.contains("nullableProperty")) {
             jsonWriter.writeNullField("nullableProperty");
         }
@@ -152,8 +152,7 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
      * Reads an instance of DatetimeProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DatetimeProperty if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of DatetimeProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DatetimeProperty.
      */
     @Generated

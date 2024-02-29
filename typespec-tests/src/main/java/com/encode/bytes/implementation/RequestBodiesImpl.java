@@ -51,8 +51,7 @@ public final class RequestBodiesImpl {
     }
 
     /**
-     * The interface defining all the services for BytesClientRequestBodies to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for BytesClientRequestBodies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BytesClientRequestBo")
@@ -154,9 +153,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -177,9 +174,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -200,9 +195,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -225,9 +218,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -249,9 +240,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -274,9 +263,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -298,9 +285,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -321,9 +306,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -344,9 +327,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64url operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -367,9 +348,7 @@ public final class RequestBodiesImpl {
 
     /**
      * The base64url operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>

@@ -35,6 +35,12 @@ public class Operation extends Metadata {
     private OperationGroup operationGroup;
 
     /**
+     * Creates a new instance of the Operation class.
+     */
+    public Operation() {
+    }
+
+    /**
      * Gets the operation ID.
      *
      * @return The operation ID.

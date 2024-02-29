@@ -11,6 +11,13 @@ public class ConstantSchema extends Schema {
     private ConstantValue value;
 
     /**
+     * Creates a new instance of the ConstantSchema class.
+     */
+    public ConstantSchema() {
+        super();
+    }
+
+    /**
      * Gets the value type. (Required)
      *
      * @return The value type.

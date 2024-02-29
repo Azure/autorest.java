@@ -40,9 +40,7 @@ public final class SharedModelInOperationAsyncClient {
 
     /**
      * The publicMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -55,8 +53,7 @@ public final class SharedModelInOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used by both public and internal operation along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return used by both public and internal operation along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -66,9 +63,7 @@ public final class SharedModelInOperationAsyncClient {
 
     /**
      * The internal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -81,8 +76,7 @@ public final class SharedModelInOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used by both public and internal operation along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return used by both public and internal operation along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

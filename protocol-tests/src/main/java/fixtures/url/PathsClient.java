@@ -388,8 +388,7 @@ public final class PathsClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation
-     * along with {@link Response}.
+     * @return null as date - this should throw or be unusable on the client side, depending on date representation along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -422,8 +421,7 @@ public final class PathsClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
-     * {@link Response}.
+     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -449,18 +447,15 @@ public final class PathsClient {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     * format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
-     * format along with {@link Response}.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -137,8 +137,7 @@ public final class ParmaterizedEndpointClientImpl {
     }
 
     /**
-     * The interface defining all the services for ParmaterizedEndpointClient to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for ParmaterizedEndpointClient to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ParmaterizedEndpoint")

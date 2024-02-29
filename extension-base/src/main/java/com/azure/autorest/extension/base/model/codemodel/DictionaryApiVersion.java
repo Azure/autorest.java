@@ -8,6 +8,12 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class DictionaryApiVersion {
 
+    /**
+     * Creates a new instance of the DictionaryApiVersion class.
+     */
+    public DictionaryApiVersion() {
+    }
+
     @Override
     public String toString() {
         return DictionaryApiVersion.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

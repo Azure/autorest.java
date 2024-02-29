@@ -14,6 +14,12 @@ public class License {
     private DictionaryAny extensions;
 
     /**
+     * Creates a new instance of the License class.
+     */
+    public License() {
+    }
+
+    /**
      * The name of the license. (Required)
      *
      * @return The name of the license.

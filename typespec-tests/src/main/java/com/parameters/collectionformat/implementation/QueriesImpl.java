@@ -52,8 +52,7 @@ public final class QueriesImpl {
     }
 
     /**
-     * The interface defining all the services for CollectionFormatClientQueries to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for CollectionFormatClientQueries to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "CollectionFormatClie")
@@ -201,7 +200,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> ssvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(" "));
         return FluxUtil.withContext(context -> service.ssv(colorsConverted, accept, requestOptions, context));
     }
@@ -220,7 +220,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> ssvWithResponse(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(" "));
         return service.ssvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
@@ -239,7 +240,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> tsvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("	"));
         return FluxUtil.withContext(context -> service.tsv(colorsConverted, accept, requestOptions, context));
     }
@@ -258,7 +260,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> tsvWithResponse(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("	"));
         return service.tsvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
@@ -277,7 +280,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> pipesWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("|"));
         return FluxUtil.withContext(context -> service.pipes(colorsConverted, accept, requestOptions, context));
     }
@@ -296,7 +300,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> pipesWithResponse(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining("|"));
         return service.pipesSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
@@ -315,7 +320,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> csvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.csv(colorsConverted, accept, requestOptions, context));
     }
@@ -334,7 +340,8 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> csvWithResponse(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return service.csvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }

@@ -51,8 +51,7 @@ public final class InternalOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for AccessClientInternalOperations to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AccessClientInternalOperations to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AccessClientInternal")
@@ -114,9 +113,7 @@ public final class InternalOperationsImpl {
 
     /**
      * The noDecoratorInInternal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -129,8 +126,7 @@ public final class InternalOperationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in an internal operation, should be generated but not exported along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return used in an internal operation, should be generated but not exported along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> noDecoratorInInternalWithResponseAsync(String name,
@@ -141,9 +137,7 @@ public final class InternalOperationsImpl {
 
     /**
      * The noDecoratorInInternal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -166,9 +160,7 @@ public final class InternalOperationsImpl {
 
     /**
      * The internalDecoratorInInternal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -181,8 +173,7 @@ public final class InternalOperationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in an internal operation, should be generated but not exported along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return used in an internal operation, should be generated but not exported along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> internalDecoratorInInternalWithResponseAsync(String name,
@@ -194,9 +185,7 @@ public final class InternalOperationsImpl {
 
     /**
      * The internalDecoratorInInternal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -219,9 +208,7 @@ public final class InternalOperationsImpl {
 
     /**
      * The publicDecoratorInInternal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -234,8 +221,7 @@ public final class InternalOperationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in an internal operation but with public decorator, should be generated and exported along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return used in an internal operation but with public decorator, should be generated and exported along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> publicDecoratorInInternalWithResponseAsync(String name,
@@ -247,9 +233,7 @@ public final class InternalOperationsImpl {
 
     /**
      * The publicDecoratorInInternal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -262,8 +246,7 @@ public final class InternalOperationsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in an internal operation but with public decorator, should be generated and exported along with
-     * {@link Response}.
+     * @return used in an internal operation but with public decorator, should be generated and exported along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> publicDecoratorInInternalWithResponse(String name, RequestOptions requestOptions) {

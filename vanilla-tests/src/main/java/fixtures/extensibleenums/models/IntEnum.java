@@ -12,8 +12,7 @@ import java.util.Collection;
  */
 public final class IntEnum extends ExpandableStringEnum<IntEnum> {
     /**
-     * This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for
-     * readability. Please wrap. This should wrap.
+     * This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for readability. Please wrap. This should wrap.
      */
     public static final IntEnum ONE = fromString("1");
 

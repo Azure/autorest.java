@@ -22,6 +22,11 @@ import java.util.Map;
  * Custom constructor for a CodeModel.
  */
 public class CodeModelCustomConstructor extends Constructor {
+    /**
+     * Creates a new instance of the CodeModelCustomConstructor class.
+     *
+     * @param loaderOptions The options for the loader.
+     */
     public CodeModelCustomConstructor(LoaderOptions loaderOptions) {
         super(loaderOptions);
         yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());

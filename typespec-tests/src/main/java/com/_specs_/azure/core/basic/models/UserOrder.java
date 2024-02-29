@@ -88,9 +88,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
 
     /**
      * Set the userId property: The user's id.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param userId the userId value to set.
      * @return the UserOrder object itself.
@@ -114,9 +112,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
 
     /**
      * Set the detail property: The user's order detail.
-     * <p>
-     * Required when create the resource.
-     * </p>
+     * <p>Required when create the resource.</p>
      * 
      * @param detail the detail value to set.
      * @return the UserOrder object itself.
@@ -160,8 +156,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
      * Reads an instance of UserOrder from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of UserOrder if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of UserOrder if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UserOrder.
      */

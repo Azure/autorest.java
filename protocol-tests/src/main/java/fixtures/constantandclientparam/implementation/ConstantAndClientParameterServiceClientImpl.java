@@ -143,8 +143,7 @@ public final class ConstantAndClientParameterServiceClientImpl {
      * Initializes an instance of ConstantAndClientParameterServiceClient client.
      * 
      * @param queryRequiredClientParam Query parameter on the client that is required.
-     * @param queryRequiredDefaultValueClientParam Query parameter on the client that is required and have default
-     * value.
+     * @param queryRequiredDefaultValueClientParam Query parameter on the client that is required and have default value.
      * @param queryNonRequiredClientParam Query parameter on the client that is not required.
      * @param host server parameter.
      * @param serviceVersion Service version.
@@ -162,8 +161,7 @@ public final class ConstantAndClientParameterServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param queryRequiredClientParam Query parameter on the client that is required.
-     * @param queryRequiredDefaultValueClientParam Query parameter on the client that is required and have default
-     * value.
+     * @param queryRequiredDefaultValueClientParam Query parameter on the client that is required and have default value.
      * @param queryNonRequiredClientParam Query parameter on the client that is not required.
      * @param host server parameter.
      * @param serviceVersion Service version.
@@ -181,8 +179,7 @@ public final class ConstantAndClientParameterServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param queryRequiredClientParam Query parameter on the client that is required.
-     * @param queryRequiredDefaultValueClientParam Query parameter on the client that is required and have default
-     * value.
+     * @param queryRequiredDefaultValueClientParam Query parameter on the client that is required and have default value.
      * @param queryNonRequiredClientParam Query parameter on the client that is not required.
      * @param host server parameter.
      * @param serviceVersion Service version.
@@ -202,8 +199,7 @@ public final class ConstantAndClientParameterServiceClientImpl {
     }
 
     /**
-     * The interface defining all the services for ConstantAndClientParameterServiceClient to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for ConstantAndClientParameterServiceClient to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "ConstantAndClientPar")

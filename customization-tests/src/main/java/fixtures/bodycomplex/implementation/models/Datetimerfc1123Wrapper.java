@@ -104,8 +104,7 @@ public final class Datetimerfc1123Wrapper implements JsonSerializable<Datetimerf
      * Reads an instance of Datetimerfc1123Wrapper from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Datetimerfc1123Wrapper if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of Datetimerfc1123Wrapper if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Datetimerfc1123Wrapper.
      */
     public static Datetimerfc1123Wrapper fromJson(JsonReader jsonReader) throws IOException {

@@ -37,15 +37,12 @@ public final class MultiContentTypesClient {
 
     /**
      * multiple data types map to multiple content types.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
-     * "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json", "application/octet-stream", "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

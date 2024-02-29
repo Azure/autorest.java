@@ -24,7 +24,7 @@ import java.util.List;
 @Fluent
 public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
     /*
-     * The list of metric criteria for this 'all of' operation.
+     * The list of metric criteria for this 'all of' operation. 
      */
     @JsonProperty(value = "allOf")
     private List<String> allOf;

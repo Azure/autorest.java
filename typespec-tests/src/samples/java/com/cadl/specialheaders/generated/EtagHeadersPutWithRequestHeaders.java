@@ -12,8 +12,9 @@ import com.cadl.specialheaders.models.Resource;
 
 public class EtagHeadersPutWithRequestHeaders {
     public static void main(String[] args) {
-        EtagHeadersClient etagHeadersClient = new SpecialHeadersClientBuilder()
-            .endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT")).buildEtagHeadersClient();
+        EtagHeadersClient etagHeadersClient
+            = new SpecialHeadersClientBuilder().endpoint(Configuration.getGlobalConfiguration().get("ENDPOINT"))
+                .buildEtagHeadersClient();
         // BEGIN:com.cadl.specialheaders.generated.etagheadersputwithrequestheaders.etagheadersputwithrequestheaders
         Resource response = etagHeadersClient.putWithRequestHeaders("name",
             new Resource().setDescription("This is sample for Etag headers").setType("myType"),

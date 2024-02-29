@@ -40,9 +40,7 @@ public final class EmptyClient {
 
     /**
      * The putEmpty operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      * }
@@ -64,9 +62,7 @@ public final class EmptyClient {
 
     /**
      * The getEmpty operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      * }
@@ -87,16 +83,12 @@ public final class EmptyClient {
 
     /**
      * The postRoundTripEmpty operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      * }

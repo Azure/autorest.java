@@ -64,8 +64,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestPagingTestServicePagings to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestPagingTestServicePagings to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestPagingTestSe")
@@ -1021,8 +1020,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1041,8 +1039,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1063,8 +1060,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1077,8 +1073,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1093,8 +1088,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1106,8 +1100,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1121,8 +1114,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1134,8 +1126,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
-     * call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1356,8 +1347,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1381,8 +1371,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param context The context to associate with this operation.
@@ -1405,8 +1394,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1421,8 +1409,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param context The context to associate with this operation.
@@ -1438,8 +1425,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1453,8 +1439,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param context The context to associate with this operation.
@@ -1469,8 +1454,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1484,8 +1468,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
-     * nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
      * 
      * @param requiredQueryParameter A required integer query parameter. Put in value '100' to pass test.
      * @param context The context to associate with this operation.
@@ -1500,8 +1483,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1522,8 +1504,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @param context The context to associate with this operation.
@@ -1545,8 +1526,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1561,8 +1541,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1576,8 +1555,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @param context The context to associate with this operation.
@@ -1593,8 +1571,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1608,8 +1585,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @param context The context to associate with this operation.
@@ -1624,8 +1600,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1639,8 +1614,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1653,8 +1627,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
-     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @param context The context to associate with this operation.
@@ -2295,8 +2268,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2316,8 +2288,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2338,8 +2309,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2352,8 +2322,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2368,8 +2337,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2381,8 +2349,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2396,8 +2363,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2409,8 +2375,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
-     * nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2424,8 +2389,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2445,8 +2409,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2467,8 +2430,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2481,8 +2443,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2497,8 +2458,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2510,8 +2470,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2525,8 +2484,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2538,8 +2496,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
-     * client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3443,8 +3400,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3464,8 +3420,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3486,8 +3441,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3500,8 +3454,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3516,8 +3469,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3529,8 +3481,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3544,8 +3495,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3557,8 +3507,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to
-     * the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3572,8 +3521,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3593,8 +3541,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3615,8 +3562,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3629,8 +3575,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3645,8 +3590,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3658,8 +3602,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3673,8 +3616,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3686,8 +3628,7 @@ public final class PagingsImpl {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the
-     * returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

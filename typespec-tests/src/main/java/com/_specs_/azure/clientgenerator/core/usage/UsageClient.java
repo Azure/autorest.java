@@ -38,15 +38,13 @@ public final class UsageClient {
     }
 
     /**
-     * Expected body parameter:
+     * Expected body parameter: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -68,15 +66,13 @@ public final class UsageClient {
     }
 
     /**
-     * Expected response body:
+     * Expected response body: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -97,10 +93,10 @@ public final class UsageClient {
     }
 
     /**
-     * Expected body parameter:
+     * Expected body parameter: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
      * 
@@ -121,10 +117,10 @@ public final class UsageClient {
     }
 
     /**
-     * Expected response body:
+     * Expected response body: 
      * ```json
      * {
-     * "name": &lt;any string&gt;
+     *   "name": &lt;any string&gt;
      * }
      * ```.
      * 

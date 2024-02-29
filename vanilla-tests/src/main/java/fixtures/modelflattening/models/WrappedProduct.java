@@ -69,8 +69,7 @@ public final class WrappedProduct implements JsonSerializable<WrappedProduct> {
      * Reads an instance of WrappedProduct from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of WrappedProduct if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of WrappedProduct if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the WrappedProduct.
      */
     public static WrappedProduct fromJson(JsonReader jsonReader) throws IOException {

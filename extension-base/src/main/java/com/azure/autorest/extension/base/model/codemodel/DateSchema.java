@@ -8,6 +8,13 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class DateSchema extends PrimitiveSchema {
 
+    /**
+     * Creates a new instance of the DateSchema class.
+     */
+    public DateSchema() {
+        super();
+    }
+
     @Override
     public String toString() {
         return DateSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

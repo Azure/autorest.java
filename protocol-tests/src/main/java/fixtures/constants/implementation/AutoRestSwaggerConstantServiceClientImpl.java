@@ -22,8 +22,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     private final boolean headerConstant;
 
     /**
-     * Gets Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Gets Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * 
      * @return the headerConstant value.
      */
@@ -37,8 +36,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     private final int queryConstant;
 
     /**
-     * Gets Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Gets Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * 
      * @return the queryConstant value.
      */
@@ -52,8 +50,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     private final String pathConstant;
 
     /**
-     * Gets Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Gets Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * 
      * @return the pathConstant value.
      */
@@ -134,12 +131,9 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceClient client.
      * 
-     * @param headerConstant Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
@@ -154,12 +148,9 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
      * Initializes an instance of AutoRestSwaggerConstantServiceClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param headerConstant Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */
@@ -174,12 +165,9 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param headerConstant Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * @param host server parameter.
      * @param serviceVersion Service version.
      */

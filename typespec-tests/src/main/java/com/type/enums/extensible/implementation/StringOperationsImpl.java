@@ -52,8 +52,7 @@ public final class StringOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ExtensibleClientStringOperations to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for ExtensibleClientStringOperations to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ExtensibleClientStri")
@@ -133,9 +132,7 @@ public final class StringOperationsImpl {
 
     /**
      * The getKnownValue operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -155,9 +152,7 @@ public final class StringOperationsImpl {
 
     /**
      * The getKnownValue operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -177,9 +172,7 @@ public final class StringOperationsImpl {
 
     /**
      * The getUnknownValue operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -199,9 +192,7 @@ public final class StringOperationsImpl {
 
     /**
      * The getUnknownValue operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -221,9 +212,7 @@ public final class StringOperationsImpl {
 
     /**
      * The putKnownValue operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -244,9 +233,7 @@ public final class StringOperationsImpl {
 
     /**
      * The putKnownValue operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -267,9 +254,7 @@ public final class StringOperationsImpl {
 
     /**
      * The putUnknownValue operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>
@@ -290,9 +275,7 @@ public final class StringOperationsImpl {
 
     /**
      * The putUnknownValue operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
      * }</pre>

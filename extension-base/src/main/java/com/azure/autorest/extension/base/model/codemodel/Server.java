@@ -14,6 +14,12 @@ public class Server {
     private List<Value> variables;
 
     /**
+     * Creates a new instance of the Server class.
+     */
+    public Server() {
+    }
+
+    /**
      * Gets the URL of the server.
      *
      * @return The URL of the server.

@@ -43,9 +43,7 @@ public final class ModelAsyncClient {
 
     /**
      * The put1 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -57,9 +55,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -88,9 +84,7 @@ public final class ModelAsyncClient {
 
     /**
      * The put2 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -99,9 +93,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -127,9 +119,7 @@ public final class ModelAsyncClient {
 
     /**
      * The get3 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -154,9 +144,7 @@ public final class ModelAsyncClient {
 
     /**
      * The putNested operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {
@@ -166,9 +154,7 @@ public final class ModelAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {

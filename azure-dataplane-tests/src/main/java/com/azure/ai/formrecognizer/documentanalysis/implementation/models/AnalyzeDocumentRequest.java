@@ -88,8 +88,7 @@ public final class AnalyzeDocumentRequest implements JsonSerializable<AnalyzeDoc
      * Reads an instance of AnalyzeDocumentRequest from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of AnalyzeDocumentRequest if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of AnalyzeDocumentRequest if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the AnalyzeDocumentRequest.
      */
     public static AnalyzeDocumentRequest fromJson(JsonReader jsonReader) throws IOException {

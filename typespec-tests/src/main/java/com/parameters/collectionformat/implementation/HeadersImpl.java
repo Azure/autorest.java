@@ -51,8 +51,7 @@ public final class HeadersImpl {
     }
 
     /**
-     * The interface defining all the services for CollectionFormatClientHeaders to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for CollectionFormatClientHeaders to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "CollectionFormatClie")
@@ -90,7 +89,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> csvWithResponseAsync(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return FluxUtil.withContext(context -> service.csv(colorsConverted, accept, requestOptions, context));
     }
@@ -109,7 +109,8 @@ public final class HeadersImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> csvWithResponse(List<String> colors, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String colorsConverted = colors.stream().map(paramItemValue -> Objects.toString(paramItemValue, ""))
+        String colorsConverted = colors.stream()
+            .map(paramItemValue -> Objects.toString(paramItemValue, ""))
             .collect(Collectors.joining(","));
         return service.csvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }

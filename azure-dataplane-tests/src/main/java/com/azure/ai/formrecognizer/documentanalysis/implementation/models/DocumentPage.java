@@ -38,8 +38,7 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
     private Float height;
 
     /*
-     * The unit used by the width, height, and polygon properties. For images, the unit is "pixel". For PDF, the unit is
-     * "inch".
+     * The unit used by the width, height, and polygon properties. For images, the unit is "pixel". For PDF, the unit is "inch".
      */
     private LengthUnit unit;
 
@@ -90,8 +89,7 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
     }
 
     /**
-     * Get the angle property: The general orientation of the content in clockwise direction, measured in degrees
-     * between (-180, 180].
+     * Get the angle property: The general orientation of the content in clockwise direction, measured in degrees between (-180, 180].
      * 
      * @return the angle value.
      */
@@ -100,8 +98,7 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
     }
 
     /**
-     * Set the angle property: The general orientation of the content in clockwise direction, measured in degrees
-     * between (-180, 180].
+     * Set the angle property: The general orientation of the content in clockwise direction, measured in degrees between (-180, 180].
      * 
      * @param angle the angle value to set.
      * @return the DocumentPage object itself.
@@ -152,8 +149,7 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
     }
 
     /**
-     * Get the unit property: The unit used by the width, height, and polygon properties. For images, the unit is
-     * "pixel". For PDF, the unit is "inch".
+     * Get the unit property: The unit used by the width, height, and polygon properties. For images, the unit is "pixel". For PDF, the unit is "inch".
      * 
      * @return the unit value.
      */
@@ -162,8 +158,7 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
     }
 
     /**
-     * Set the unit property: The unit used by the width, height, and polygon properties. For images, the unit is
-     * "pixel". For PDF, the unit is "inch".
+     * Set the unit property: The unit used by the width, height, and polygon properties. For images, the unit is "pixel". For PDF, the unit is "inch".
      * 
      * @param unit the unit value to set.
      * @return the DocumentPage object itself.
@@ -276,8 +271,7 @@ public final class DocumentPage implements JsonSerializable<DocumentPage> {
      * Reads an instance of DocumentPage from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentPage if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of DocumentPage if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentPage.
      */

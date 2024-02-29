@@ -40,6 +40,12 @@ public class Schemas {
     private List<ParameterGroupSchema> parameterGroups = new ArrayList<>();
 
     /**
+     * Creates a new instance of the Schemas class.
+     */
+    public Schemas() {
+    }
+
+    /**
      * Gets the list of array schemas.
      *
      * @return The list of array schemas.

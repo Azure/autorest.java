@@ -41,8 +41,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     private List<CorsRule> cors;
 
     /*
-     * The default version to use for requests to the Blob service if an incoming request's version is not specified.
-     * Possible values include version 2008-10-27 and all more recent versions
+     * The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions
      */
     private String defaultServiceVersion;
 
@@ -141,9 +140,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     }
 
     /**
-     * Get the defaultServiceVersion property: The default version to use for requests to the Blob service if an
-     * incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent
-     * versions.
+     * Get the defaultServiceVersion property: The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions.
      * 
      * @return the defaultServiceVersion value.
      */
@@ -152,9 +149,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
     }
 
     /**
-     * Set the defaultServiceVersion property: The default version to use for requests to the Blob service if an
-     * incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent
-     * versions.
+     * Set the defaultServiceVersion property: The default version to use for requests to the Blob service if an incoming request's version is not specified. Possible values include version 2008-10-27 and all more recent versions.
      * 
      * @param defaultServiceVersion the defaultServiceVersion value to set.
      * @return the StorageServiceProperties object itself.
@@ -235,8 +230,7 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * Reads an instance of StorageServiceProperties from the XmlReader.
      * 
      * @param xmlReader The XmlReader being read.
-     * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
-     * was pointing to XML null.
+     * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
      */
     public static StorageServiceProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -247,10 +241,8 @@ public final class StorageServiceProperties implements XmlSerializable<StorageSe
      * Reads an instance of StorageServiceProperties from the XmlReader.
      * 
      * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     * cases where the model can deserialize from different root element names.
-     * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it
-     * was pointing to XML null.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support cases where the model can deserialize from different root element names.
+     * @return An instance of StorageServiceProperties if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
      * @throws XMLStreamException If an error occurs while reading the StorageServiceProperties.
      */
     public static StorageServiceProperties fromXml(XmlReader xmlReader, String rootElementName)

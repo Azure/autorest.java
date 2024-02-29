@@ -12,6 +12,13 @@ public class ConvenienceApi extends Metadata {
     private List<Request> requests;
 
     /**
+     * Creates a new instance of the ConvenienceApi class.
+     */
+    public ConvenienceApi() {
+        super();
+    }
+
+    /**
      * Gets the requests of the convenience API.
      *
      * @return The requests of the convenience API.

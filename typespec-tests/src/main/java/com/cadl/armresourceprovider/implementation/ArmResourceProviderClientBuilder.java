@@ -122,11 +122,13 @@ public final class ArmResourceProviderClientBuilder {
      */
     public ArmResourceProviderClientImpl buildClient() {
         AzureEnvironment localEnvironment = (environment != null) ? environment : AzureEnvironment.AZURE;
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline
+        HttpPipeline localPipeline = (pipeline != null)
+            ? pipeline
             : new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build();
         Duration localDefaultPollInterval
             = (defaultPollInterval != null) ? defaultPollInterval : Duration.ofSeconds(30);
-        SerializerAdapter localSerializerAdapter = (serializerAdapter != null) ? serializerAdapter
+        SerializerAdapter localSerializerAdapter = (serializerAdapter != null)
+            ? serializerAdapter
             : SerializerFactory.createDefaultManagementSerializerAdapter();
         ArmResourceProviderClientImpl client = new ArmResourceProviderClientImpl(localPipeline, localSerializerAdapter,
             localDefaultPollInterval, localEnvironment, this.endpoint, this.subscriptionId);

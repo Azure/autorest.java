@@ -8,6 +8,13 @@ package com.azure.autorest.extension.base.model.codemodel;
  */
 public class BooleanSchema extends PrimitiveSchema {
 
+    /**
+     * Creates a new instance of the BooleanSchema class.
+     */
+    public BooleanSchema() {
+        super();
+    }
+
     @Override
     public String toString() {
         return BooleanSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";

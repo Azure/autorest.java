@@ -15,6 +15,12 @@ public class Deprecation {
     private List<ApiVersion> apiVersions = new ArrayList<>();
 
     /**
+     * Creates a new instance of the Deprecation class.
+     */
+    public Deprecation() {
+    }
+
+    /**
      * Gets the deprecated message. (Required)
      *
      * @return The deprecated message.

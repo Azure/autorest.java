@@ -58,8 +58,7 @@ public final class ApiRequest implements JsonSerializable<ApiRequest> {
      * Reads an instance of ApiRequest from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ApiRequest if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of ApiRequest if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ApiRequest.
      */

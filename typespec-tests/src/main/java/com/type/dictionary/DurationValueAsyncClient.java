@@ -42,9 +42,7 @@ public final class DurationValueAsyncClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: Duration (Required)
@@ -66,9 +64,7 @@ public final class DurationValueAsyncClient {
 
     /**
      * The put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: Duration (Required)

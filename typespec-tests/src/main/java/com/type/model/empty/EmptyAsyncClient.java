@@ -42,9 +42,7 @@ public final class EmptyAsyncClient {
 
     /**
      * The putEmpty operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      * }
@@ -66,9 +64,7 @@ public final class EmptyAsyncClient {
 
     /**
      * The getEmpty operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      * }
@@ -79,8 +75,7 @@ public final class EmptyAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return empty model used in operation return type along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return empty model used in operation return type along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -90,16 +85,12 @@ public final class EmptyAsyncClient {
 
     /**
      * The postRoundTripEmpty operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      * }
@@ -111,8 +102,7 @@ public final class EmptyAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return empty model used in both parameter and return type along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return empty model used in both parameter and return type along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

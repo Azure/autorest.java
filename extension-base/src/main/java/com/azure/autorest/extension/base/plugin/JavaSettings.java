@@ -4,9 +4,10 @@
 package com.azure.autorest.extension.base.plugin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.slf4j.Logger;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
  * Settings that are used by the Java AutoRest Generator.
  */
 public class JavaSettings {
+    private static final TypeFactory TYPE_FACTORY = TypeFactory.defaultInstance();
     private static final String VERSION = "4.0.0";
     private static JavaSettings instance;
     private static NewPlugin host;
@@ -90,14 +92,15 @@ public class JavaSettings {
             loadStringSetting("output-folder", autorestSettings::setOutputFolder);
             loadStringSetting("java-sdks-folder", autorestSettings::setJavaSdksFolder);
             // input-file
-            List<Object> inputFiles = host.getValue(List.class, "input-file");
+            Type listObjectType = TYPE_FACTORY.constructCollectionType(List.class, Object.class);
+            List<Object> inputFiles = host.getValue(listObjectType, "input-file");
             if (inputFiles != null) {
                 autorestSettings.getInputFiles().addAll(
                     inputFiles.stream().map(Object::toString).collect(Collectors.toList()));
                 logger.debug("List of input files : {}", autorestSettings.getInputFiles());
             }
             // require (readme.md etc.)
-            List<Object> require = host.getValue(List.class, "require");
+            List<Object> require = host.getValue(listObjectType, "require");
             if (require != null) {
                 autorestSettings.getRequire().addAll(
                     require.stream().map(Object::toString).collect(Collectors.toList()));
@@ -107,8 +110,7 @@ public class JavaSettings {
             setHeader(getStringValue(host, "license-header"));
             instance = new JavaSettings(
                 autorestSettings,
-                host.getValue(new TypeReference<Map<String, Object>>() {
-                }.getType(), "modelerfour"),
+                host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, Object.class), "modelerfour"),
                 getBooleanValue(host, "azure-arm", false),
                 getBooleanValue(host, "sdk-integration", false),
                 getStringValue(host, "fluent"),
@@ -116,7 +118,6 @@ public class JavaSettings {
                 header,
                 getStringValue(host, "service-name"),
                 getStringValue(host, "namespace", "com.mycompany.app").toLowerCase(),
-                getBooleanValue(host, "non-null-annotations", false),
                 getBooleanValue(host, "client-side-validations", false),
                 getStringValue(host, "client-type-prefix"),
                 getBooleanValue(host, "generate-client-interfaces", false),
@@ -141,14 +142,13 @@ public class JavaSettings {
                 getBooleanValue(host, "optional-constant-as-enum", false),
                 getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
-                host.getValue(List.class, "service-versions"),
+                host.getValue(TYPE_FACTORY.constructCollectionLikeType(List.class, String.class), "service-versions"),
                 getBooleanValue(host, "require-x-ms-flattened-to-flatten", false),
                 getStringValue(host, "client-flattened-annotation-target", ""),
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
                 getBooleanValue(host, "skip-formatting", false),
-                host.getValue(new TypeReference<Map<String, PollingDetails>>() {
-                }.getType(), "polling"),
+                host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, PollingDetails.class), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 false, //getBooleanValue(host, "generate-send-request-method", false),
@@ -156,7 +156,7 @@ public class JavaSettings {
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
-                host.getValue(new TypeReference<Map<Integer, String>>() {}.getType(),
+                host.getValue(TYPE_FACTORY.constructMapType(Map.class, Integer.class, String.class),
                     "http-status-code-to-exception-type-mapping"),
                 getBooleanValue(host, "partial-update", false),
                 getBooleanValue(host, "generic-response-type", false),
@@ -194,7 +194,6 @@ public class JavaSettings {
      * @param fileHeaderText The file header text.
      * @param serviceName The service name.
      * @param packageKeyword The package keyword.
-     * @param nonNullAnnotations Whether to add the @NotNull annotation to required parameters in client methods.
      * @param clientSideValidations Whether to add client-side validations to the generated clients.
      * @param clientTypePrefix The prefix that will be added to each generated client type.
      * @param generateClientInterfaces Whether interfaces will be generated for Service and Method Group clients.
@@ -241,10 +240,10 @@ public class JavaSettings {
      * continue being annotated to ensure that there are no backwards compatibility breaks.
      * @param defaultHttpExceptionType The fully-qualified class that should be used as the default exception type. This
      * class must extend from HttpResponseException.
-     * @param useDefaultHttpStatusCodeToExceptionTypeMapping Determines whether a well-known HTTP status code to exception type mapping
-     * should be used if an HTTP status code-exception mapping isn't provided.
-     * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that should be
-     * thrown if that status code is seen. All exception types must be fully-qualified and extend from
+     * @param useDefaultHttpStatusCodeToExceptionTypeMapping Determines whether a well-known HTTP status code to
+     * exception type mapping should be used if an HTTP status code-exception mapping isn't provided.
+     * @param httpStatusCodeToExceptionTypeMapping A mapping of HTTP response status code to the exception type that
+     * should be thrown if that status code is seen. All exception types must be fully-qualified and extend from
      * HttpResponseException.
      * @param handlePartialUpdate If set to true, the generated model will handle partial updates.
      * @param genericResponseTypes If set to true, responses will only use Response, ResponseBase, PagedResponse, and
@@ -280,7 +279,6 @@ public class JavaSettings {
         String fileHeaderText,
         String serviceName,
         String packageKeyword,
-        boolean nonNullAnnotations,
         boolean clientSideValidations,
         String clientTypePrefix,
         boolean generateClientInterfaces,
@@ -346,7 +344,6 @@ public class JavaSettings {
         this.fileHeaderText = fileHeaderText;
         this.serviceName = serviceName;
         this.packageName = packageKeyword;
-        this.nonNullAnnotations = nonNullAnnotations;
         this.clientSideValidations = clientSideValidations;
         this.clientTypePrefix = clientTypePrefix;
         this.generateClientInterfaces = generateClientInterfaces;
@@ -793,20 +790,6 @@ public class JavaSettings {
         return packageBuilder.toString();
     }
 
-    /**
-     * Whether to add the @NotNull annotation to required parameters in client methods.
-     */
-    private final boolean nonNullAnnotations;
-
-    /**
-     * Whether to add the @NotNull annotation to required parameters in client methods.
-     *
-     * @return Whether to add the @NotNull annotation to required parameters in client methods.
-     */
-    public final boolean isNonNullAnnotations() {
-        return nonNullAnnotations;
-    }
-
     private final boolean clientSideValidations;
 
     /**
@@ -1009,9 +992,24 @@ public class JavaSettings {
      * Represents sync methods generation.
      */
     public enum SyncMethodsGeneration {
+        /**
+         * Generate all methods.
+         */
         ALL,
+
+        /**
+         * Generate only essential methods.
+         */
         ESSENTIAL,
+
+        /**
+         * Generate only sync methods.
+         */
         SYNC_ONLY,  // SYNC_ONLY requires "enable-sync-stack"
+
+        /**
+         * Generate no methods.
+         */
         NONE;
 
         /**
@@ -1072,8 +1070,19 @@ public class JavaSettings {
      * Represents the type of credential.
      */
     public enum CredentialType {
+        /**
+         * Token credential.
+         */
         TOKEN_CREDENTIAL,
+
+        /**
+         * Azure key credential.
+         */
         AZURE_KEY_CREDENTIAL,
+
+        /**
+         * No credential.
+         */
         NONE;
 
         /**
@@ -1317,6 +1326,12 @@ public class JavaSettings {
         private String finalType;
         @JsonProperty("poll-interval")
         private String pollInterval;
+
+        /**
+         * Creates a new PollingDetails object.
+         */
+        public PollingDetails() {
+        }
 
         /**
          * The default polling strategy format.

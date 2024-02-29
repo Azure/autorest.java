@@ -11,7 +11,14 @@ import java.util.Objects;
  * Represents a flag schema.
  */
 public class FlagSchema extends ValueSchema {
-    private List<FlagValue> choices = new ArrayList<FlagValue>();
+    private List<FlagValue> choices = new ArrayList<>();
+
+    /**
+     * Creates a new instance of the FlagSchema class.
+     */
+    public FlagSchema() {
+        super();
+    }
 
     /**
      * Get the possible choices in the set. (Required)

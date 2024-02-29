@@ -101,7 +101,7 @@ public final class FlattenClientImpl {
     /**
      * Initializes an instance of FlattenClient client.
      * 
-     * @param endpoint
+     * @param endpoint 
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(String endpoint, FlattenServiceVersion serviceVersion) {
@@ -113,7 +113,7 @@ public final class FlattenClientImpl {
      * Initializes an instance of FlattenClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint
+     * @param endpoint 
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(HttpPipeline httpPipeline, String endpoint, FlattenServiceVersion serviceVersion) {
@@ -125,7 +125,7 @@ public final class FlattenClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint
+     * @param endpoint 
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -206,9 +206,7 @@ public final class FlattenClientImpl {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -236,9 +234,7 @@ public final class FlattenClientImpl {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -266,9 +262,7 @@ public final class FlattenClientImpl {
 
     /**
      * The sendProjectedName operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     file_id: String (Required)
@@ -294,9 +288,7 @@ public final class FlattenClientImpl {
 
     /**
      * The sendProjectedName operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     file_id: String (Required)
@@ -320,28 +312,14 @@ public final class FlattenClientImpl {
 
     /**
      * The sendLong operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>filter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -374,28 +352,14 @@ public final class FlattenClientImpl {
 
     /**
      * The sendLong operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>filter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {

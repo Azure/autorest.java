@@ -17,6 +17,13 @@ public class ChoiceSchema extends ValueSchema {
     private String crossLanguageDefinitionId;
 
     /**
+     * Creates a new instance of the ChoiceSchema class.
+     */
+    public ChoiceSchema() {
+        super();
+    }
+
+    /**
      * Gets the type of the choice. (Required)
      *
      * @return The type of the choice.

@@ -21,8 +21,7 @@ import java.util.Map;
 @Fluent
 public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     /*
-     * Date and time on which the image was built (string, date-time as defined by
-     * https://tools.ietf.org/html/rfc3339#section-5.6)
+     * Date and time on which the image was built (string, date-time as defined by https://tools.ietf.org/html/rfc3339#section-5.6)
      */
     private OffsetDateTime createdOn;
 
@@ -47,8 +46,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     private String source;
 
     /*
-     * Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be
-     * Semantic versioning-compatible
+     * Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be Semantic versioning-compatible
      */
     private String version;
 
@@ -94,8 +92,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     }
 
     /**
-     * Get the createdOn property: Date and time on which the image was built (string, date-time as defined by
-     * https://tools.ietf.org/html/rfc3339#section-5.6).
+     * Get the createdOn property: Date and time on which the image was built (string, date-time as defined by https://tools.ietf.org/html/rfc3339#section-5.6).
      * 
      * @return the createdOn value.
      */
@@ -104,8 +101,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     }
 
     /**
-     * Set the createdOn property: Date and time on which the image was built (string, date-time as defined by
-     * https://tools.ietf.org/html/rfc3339#section-5.6).
+     * Set the createdOn property: Date and time on which the image was built (string, date-time as defined by https://tools.ietf.org/html/rfc3339#section-5.6).
      * 
      * @param createdOn the createdOn value to set.
      * @return the OciAnnotations object itself.
@@ -196,8 +192,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     }
 
     /**
-     * Get the version property: Version of the packaged software. The version MAY match a label or tag in the source
-     * code repository, may also be Semantic versioning-compatible.
+     * Get the version property: Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be Semantic versioning-compatible.
      * 
      * @return the version value.
      */
@@ -206,8 +201,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     }
 
     /**
-     * Set the version property: Version of the packaged software. The version MAY match a label or tag in the source
-     * code repository, may also be Semantic versioning-compatible.
+     * Set the version property: Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be Semantic versioning-compatible.
      * 
      * @param version the version value to set.
      * @return the OciAnnotations object itself.
@@ -258,8 +252,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     }
 
     /**
-     * Get the licenses property: License(s) under which contained software is distributed as an SPDX License
-     * Expression.
+     * Get the licenses property: License(s) under which contained software is distributed as an SPDX License Expression.
      * 
      * @return the licenses value.
      */
@@ -268,8 +261,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     }
 
     /**
-     * Set the licenses property: License(s) under which contained software is distributed as an SPDX License
-     * Expression.
+     * Set the licenses property: License(s) under which contained software is distributed as an SPDX License Expression.
      * 
      * @param licenses the licenses value to set.
      * @return the OciAnnotations object itself.
@@ -390,8 +382,7 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
      * Reads an instance of OciAnnotations from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of OciAnnotations if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of OciAnnotations if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the OciAnnotations.
      */
     public static OciAnnotations fromJson(JsonReader jsonReader) throws IOException {
