@@ -1,5 +1,11 @@
 # Release History
 
+## 0.14.0 (2024-02-29)
+
+Compatible with compiler 0.53.
+
+- Enhanced convenience API for "application/merge-patch+json".
+
 ## 0.13.10 (2024-02-28)
 
 Compatible with compiler 0.53.

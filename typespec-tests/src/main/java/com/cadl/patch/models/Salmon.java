@@ -180,43 +180,53 @@ public final class Salmon extends Fish {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (getKind() != null) {
-            jsonWriter.writeStringField("kind", getKind());
-        } else if (updatedProperties.contains("kind")) {
-            jsonWriter.writeNullField("kind");
+        if (updatedProperties.contains("kind")) {
+            if (getKind() == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", getKind());
+            }
         }
         jsonWriter.writeIntField("age", getAge());
-        if (getColor() != null) {
-            jsonWriter.writeStringField("color", getColor());
-        } else if (updatedProperties.contains("color")) {
-            jsonWriter.writeNullField("color");
+        if (updatedProperties.contains("color")) {
+            if (getColor() == null) {
+                jsonWriter.writeNullField("color");
+            } else {
+                jsonWriter.writeStringField("color", getColor());
+            }
         }
-        if (this.friends != null) {
-            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("friends")) {
-            jsonWriter.writeNullField("friends");
+        if (updatedProperties.contains("friends")) {
+            if (this.friends == null) {
+                jsonWriter.writeNullField("friends");
+            } else {
+                jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+            }
         }
-        if (this.hate != null) {
-            jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
-        } else if (updatedProperties.contains("hate")) {
-            jsonWriter.writeNullField("hate");
+        if (updatedProperties.contains("hate")) {
+            if (this.hate == null) {
+                jsonWriter.writeNullField("hate");
+            } else {
+                jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
+                    if (element != null) {
+                        element.serializeAsJsonMergePatch(true);
+                        writer.writeJson(element);
+                        element.serializeAsJsonMergePatch(false);
+                    } else {
+                        writer.writeNull();
+                    }
+                });
+            }
         }
-        if (this.partner != null) {
-            this.partner.serializeAsJsonMergePatch(true);
-            jsonWriter.writeJsonField("partner", this.partner);
-            this.partner.serializeAsJsonMergePatch(false);
-        } else if (updatedProperties.contains("partner")) {
-            jsonWriter.writeNullField("partner");
+        if (updatedProperties.contains("partner")) {
+            if (this.partner == null) {
+                jsonWriter.writeNullField("partner");
+            } else {
+                this.partner.serializeAsJsonMergePatch(true);
+                jsonWriter.writeJsonField("partner", this.partner);
+                this.partner.serializeAsJsonMergePatch(false);
+            }
         }
         return jsonWriter.writeEndObject();
     }

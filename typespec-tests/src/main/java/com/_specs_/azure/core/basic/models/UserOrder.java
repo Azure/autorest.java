@@ -141,13 +141,15 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("userId", this.userId);
-        if (this.detail != null) {
-            jsonWriter.writeStringField("detail", this.detail);
-        } else if (updatedProperties.contains("detail")) {
-            jsonWriter.writeNullField("detail");
+        if (updatedProperties.contains("detail")) {
+            if (this.detail == null) {
+                jsonWriter.writeNullField("detail");
+            } else {
+                jsonWriter.writeStringField("detail", this.detail);
+            }
         }
         return jsonWriter.writeEndObject();
     }

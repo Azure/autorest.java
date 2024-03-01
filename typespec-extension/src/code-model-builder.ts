@@ -708,7 +708,7 @@ export class CodeModelBuilder {
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
         this.logWarning(apiComment);
-      } else if (operationIsJsonMergePatch(op) && !this.options["stream-style-serialization"]) {
+      } else if (operationIsJsonMergePatch(op) && this.options["stream-style-serialization"] === false) {
         // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;

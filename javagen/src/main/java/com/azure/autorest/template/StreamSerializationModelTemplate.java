@@ -262,7 +262,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static void writeToJsonMergePatch(JavaClass classBlock, ClientModelPropertiesManager propertiesManager,
         Consumer<JavaClass> addGeneratedAnnotation) {
         addGeneratedAnnotation.accept(classBlock);
-        classBlock.publicMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException",
+        classBlock.privateMethod("JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException",
             methodBlock -> serializeJsonProperties(methodBlock, propertiesManager, true));
     }
 
@@ -337,10 +337,12 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
 
         if (isJsonMergePatch) {
             if (property.getClientType().isNullable()) {
-                methodBlock.ifBlock(String.format("%s!=null", getPropertyGetterStatement(property, fromSuperType)), codeBlock -> {
-                    serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, isJsonMergePatch);
-                }).elseIfBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
-                    codeBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
+                methodBlock.ifBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
+                    codeBlock.ifBlock(String.format("%s==null", getPropertyGetterStatement(property, fromSuperType)), ifBlock -> {
+                        ifBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
+                    }).elseBlock(elseBlock -> {
+                        serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, isJsonMergePatch);
+                    });
                 });
             } else {
                 serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, isJsonMergePatch);

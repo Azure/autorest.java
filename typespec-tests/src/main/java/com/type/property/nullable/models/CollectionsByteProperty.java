@@ -127,18 +127,22 @@ public final class CollectionsByteProperty implements JsonSerializable<Collectio
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.requiredProperty != null) {
-            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-        } else if (updatedProperties.contains("requiredProperty")) {
-            jsonWriter.writeNullField("requiredProperty");
+        if (updatedProperties.contains("requiredProperty")) {
+            if (this.requiredProperty == null) {
+                jsonWriter.writeNullField("requiredProperty");
+            } else {
+                jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+            }
         }
-        if (this.nullableProperty != null) {
-            jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
-                (writer, element) -> writer.writeBinary(element));
-        } else if (updatedProperties.contains("nullableProperty")) {
-            jsonWriter.writeNullField("nullableProperty");
+        if (updatedProperties.contains("nullableProperty")) {
+            if (this.nullableProperty == null) {
+                jsonWriter.writeNullField("nullableProperty");
+            } else {
+                jsonWriter.writeArrayField("nullableProperty", this.nullableProperty,
+                    (writer, element) -> writer.writeBinary(element));
+            }
         }
         return jsonWriter.writeEndObject();
     }

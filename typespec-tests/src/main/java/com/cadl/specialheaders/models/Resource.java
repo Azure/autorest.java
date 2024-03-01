@@ -156,17 +156,21 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     @Generated
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
+        if (updatedProperties.contains("description")) {
+            if (this.description == null) {
+                jsonWriter.writeNullField("description");
+            } else {
+                jsonWriter.writeStringField("description", this.description);
+            }
         }
-        if (this.type != null) {
-            jsonWriter.writeStringField("type", this.type);
-        } else if (updatedProperties.contains("type")) {
-            jsonWriter.writeNullField("type");
+        if (updatedProperties.contains("type")) {
+            if (this.type == null) {
+                jsonWriter.writeNullField("type");
+            } else {
+                jsonWriter.writeStringField("type", this.type);
+            }
         }
         return jsonWriter.writeEndObject();
     }
