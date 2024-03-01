@@ -448,13 +448,15 @@ abstract class ConvenienceMethodTemplateBase {
             for (String mediaType : mediaTypes) {
                 // The declared mime type can be of the form "application/json; charset=utf-8" or "application/json"
                 // So, we have to check if the mediaType starts with the supported mime type
-                SupportedMimeType type = SUPPORTED_MIME_TYPES.entrySet().stream()
-                        .filter(supportedMimeType -> mediaType.startsWith(supportedMimeType.getKey()))
-                        .map(Map.Entry::getValue)
-                        .findAny()
-                        .orElse(null);
-                if (type != null) {
-                    return type;
+                if (!mediaType.equals("application/json;q=0.9")) { // skip the error media type
+                    SupportedMimeType type = SUPPORTED_MIME_TYPES.entrySet().stream()
+                            .filter(supportedMimeType -> mediaType.startsWith(supportedMimeType.getKey()))
+                            .map(Map.Entry::getValue)
+                            .findAny()
+                            .orElse(null);
+                    if (type != null) {
+                        return type;
+                    }
                 }
             }
             return SupportedMimeType.BINARY;    // BINARY if not recognized
