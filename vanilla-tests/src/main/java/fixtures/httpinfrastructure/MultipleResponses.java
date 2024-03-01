@@ -49,8 +49,7 @@ public final class MultipleResponses {
     }
 
     /**
-     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceMultipleResponses to be used by
-     * the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceMultipleResponses to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
@@ -2645,8 +2644,7 @@ public final class MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2663,8 +2661,7 @@ public final class MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2683,8 +2680,7 @@ public final class MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2696,8 +2692,7 @@ public final class MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2711,8 +2706,7 @@ public final class MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2726,8 +2720,7 @@ public final class MultipleResponses {
     }
 
     /**
-     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type
-     * for model A.
+     * Send a 200 response with no payload, when a payload is expected - client should return a null object of thde type for model A.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

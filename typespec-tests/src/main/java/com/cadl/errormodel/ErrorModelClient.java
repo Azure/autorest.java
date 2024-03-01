@@ -38,9 +38,7 @@ public final class ErrorModelClient {
 
     /**
      * The read operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

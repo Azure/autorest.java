@@ -95,8 +95,7 @@ public final class SampleResourceGroup implements JsonSerializable<SampleResourc
      * Reads an instance of SampleResourceGroup from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of SampleResourceGroup if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of SampleResourceGroup if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the SampleResourceGroup.
      */
     public static SampleResourceGroup fromJson(JsonReader jsonReader) throws IOException {

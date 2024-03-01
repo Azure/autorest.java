@@ -44,8 +44,7 @@ public final class TagList implements JsonSerializable<TagList> {
     }
 
     /**
-     * Get the registryLoginServer property: Registry login server name. This is likely to be similar to
-     * {registry-name}.azurecr.io.
+     * Get the registryLoginServer property: Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      * 
      * @return the registryLoginServer value.
      */
@@ -54,8 +53,7 @@ public final class TagList implements JsonSerializable<TagList> {
     }
 
     /**
-     * Set the registryLoginServer property: Registry login server name. This is likely to be similar to
-     * {registry-name}.azurecr.io.
+     * Set the registryLoginServer property: Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      * 
      * @param registryLoginServer the registryLoginServer value to set.
      * @return the TagList object itself.
@@ -142,8 +140,7 @@ public final class TagList implements JsonSerializable<TagList> {
      * Reads an instance of TagList from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of TagList if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of TagList if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the TagList.
      */

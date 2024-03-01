@@ -141,8 +141,10 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
         jsonWriter.writeStringField("status", getStatus() == null ? null : getStatus().toString());
         jsonWriter.writeStringField("createdDateTime",
             getCreatedDateTime() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getCreatedDateTime()));
-        jsonWriter.writeStringField("lastUpdatedDateTime", getLastUpdatedDateTime() == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getLastUpdatedDateTime()));
+        jsonWriter.writeStringField("lastUpdatedDateTime",
+            getLastUpdatedDateTime() == null
+                ? null
+                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getLastUpdatedDateTime()));
         jsonWriter.writeStringField("resourceLocation", getResourceLocation());
         jsonWriter.writeStringField("kind", getKind());
         jsonWriter.writeNumberField("percentCompleted", getPercentCompleted());
@@ -157,8 +159,7 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * Reads an instance of DocumentModelCopyToOperationDetails from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentModelCopyToOperationDetails if the JsonReader was pointing to an instance of it,
-     * or null if it was pointing to JSON null.
+     * @return An instance of DocumentModelCopyToOperationDetails if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentModelCopyToOperationDetails.
      */

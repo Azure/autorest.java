@@ -138,8 +138,7 @@ public final class ResourceCollection implements JsonSerializable<ResourceCollec
      * Reads an instance of ResourceCollection from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ResourceCollection if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of ResourceCollection if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ResourceCollection.
      */
     public static ResourceCollection fromJson(JsonReader jsonReader) throws IOException {

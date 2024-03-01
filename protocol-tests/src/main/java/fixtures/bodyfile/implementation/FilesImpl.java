@@ -60,8 +60,7 @@ public final class FilesImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBatFileServiceFiles to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestSwaggerBatFileServiceFiles to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBatFi")
@@ -123,9 +122,7 @@ public final class FilesImpl {
 
     /**
      * Get file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -145,9 +142,7 @@ public final class FilesImpl {
 
     /**
      * Get file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -167,9 +162,7 @@ public final class FilesImpl {
 
     /**
      * Get a large file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -190,9 +183,7 @@ public final class FilesImpl {
 
     /**
      * Get a large file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -212,9 +203,7 @@ public final class FilesImpl {
 
     /**
      * Get empty file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -235,9 +224,7 @@ public final class FilesImpl {
 
     /**
      * Get empty file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>

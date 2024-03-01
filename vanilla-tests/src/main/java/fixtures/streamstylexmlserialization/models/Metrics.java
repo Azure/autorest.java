@@ -85,8 +85,7 @@ public final class Metrics implements XmlSerializable<Metrics> {
     }
 
     /**
-     * Get the includeAPIs property: Indicates whether metrics should generate summary statistics for called API
-     * operations.
+     * Get the includeAPIs property: Indicates whether metrics should generate summary statistics for called API operations.
      * 
      * @return the includeAPIs value.
      */
@@ -95,8 +94,7 @@ public final class Metrics implements XmlSerializable<Metrics> {
     }
 
     /**
-     * Set the includeAPIs property: Indicates whether metrics should generate summary statistics for called API
-     * operations.
+     * Set the includeAPIs property: Indicates whether metrics should generate summary statistics for called API operations.
      * 
      * @param includeAPIs the includeAPIs value to set.
      * @return the Metrics object itself.
@@ -157,8 +155,7 @@ public final class Metrics implements XmlSerializable<Metrics> {
      * Reads an instance of Metrics from the XmlReader.
      * 
      * @param xmlReader The XmlReader being read.
-     * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     * XML null.
+     * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the Metrics.
      */
@@ -170,10 +167,8 @@ public final class Metrics implements XmlSerializable<Metrics> {
      * Reads an instance of Metrics from the XmlReader.
      * 
      * @param xmlReader The XmlReader being read.
-     * @param rootElementName Optional root element name to override the default defined by the model. Used to support
-     * cases where the model can deserialize from different root element names.
-     * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to
-     * XML null.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support cases where the model can deserialize from different root element names.
+     * @return An instance of Metrics if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
      * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the Metrics.
      */

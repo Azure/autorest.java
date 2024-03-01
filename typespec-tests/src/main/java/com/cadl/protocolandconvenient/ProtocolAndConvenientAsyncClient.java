@@ -52,18 +52,14 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * When set protocol false and convenient true, then the protocol method should be package private.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -86,20 +82,15 @@ public final class ProtocolAndConvenientAsyncClient {
     }
 
     /**
-     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
-     * ResourceD should not be generated.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and ResourceD should not be generated.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -123,18 +114,14 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * Setting protocol true and convenient true, both convenient and protocol methods will be generated.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -159,18 +146,14 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * When set protocol false and convenient false.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -194,9 +177,7 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * Long running operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -204,9 +185,7 @@ public final class ProtocolAndConvenientAsyncClient {
      *     type: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -233,29 +212,14 @@ public final class ProtocolAndConvenientAsyncClient {
 
     /**
      * Paging operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>maxresults</td>
-     * <td>Long</td>
-     * <td>No</td>
-     * <td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)`
-     * )</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -316,7 +280,8 @@ public final class ProtocolAndConvenientAsyncClient {
         // Generated convenience method for bothConvenientAndProtocolWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return bothConvenientAndProtocolWithResponse(BinaryData.fromObject(body), requestOptions)
-            .flatMap(FluxUtil::toMono).map(protocolMethodData -> protocolMethodData.toObject(ResourceF.class));
+            .flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(ResourceF.class));
     }
 
     /**
@@ -357,11 +322,13 @@ public final class ProtocolAndConvenientAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
-            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null) ? pagedFluxResponse.byPage().take(1)
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
+                ? pagedFluxResponse.byPage().take(1)
                 : pagedFluxResponse.byPage(continuationToken).take(1);
             return flux.map(pagedResponse -> new PagedResponseBase<Void, ResourceJ>(pagedResponse.getRequest(),
                 pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
-                pagedResponse.getValue().stream()
+                pagedResponse.getValue()
+                    .stream()
                     .map(protocolMethodData -> protocolMethodData.toObject(ResourceJ.class))
                     .collect(Collectors.toList()),
                 pagedResponse.getContinuationToken(), null));

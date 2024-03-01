@@ -59,8 +59,7 @@ public final class Contants {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerConstantServiceContants to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestSwaggerConstantServiceContants to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerConst")

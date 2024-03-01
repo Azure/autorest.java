@@ -47,7 +47,8 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
         if (this.value == null) {
             return null;
         }
-        return this.value.stream().map(el -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(el), ZoneOffset.UTC))
+        return this.value.stream()
+            .map(el -> OffsetDateTime.ofInstant(Instant.ofEpochSecond(el), ZoneOffset.UTC))
             .collect(java.util.stream.Collectors.toList());
     }
 
@@ -66,8 +67,7 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
      * Reads an instance of UnixTimestampArrayDatetimeProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of UnixTimestampArrayDatetimeProperty if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
+     * @return An instance of UnixTimestampArrayDatetimeProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UnixTimestampArrayDatetimeProperty.
      */

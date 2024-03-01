@@ -37,9 +37,7 @@ public final class ReadonlypropertyClient {
 
     /**
      * Get complex types that have readonly properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -62,9 +60,7 @@ public final class ReadonlypropertyClient {
 
     /**
      * Put complex types that have readonly properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Optional)

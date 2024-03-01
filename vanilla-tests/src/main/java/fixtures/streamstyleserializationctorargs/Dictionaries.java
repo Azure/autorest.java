@@ -50,8 +50,7 @@ public final class Dictionaries {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceDictionaries to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceDictionaries to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -138,8 +137,7 @@ public final class Dictionaries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with dictionary property along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync() {
@@ -158,8 +156,7 @@ public final class Dictionaries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with dictionary property along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync(Context context) {
@@ -231,8 +228,7 @@ public final class Dictionaries {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     * "xls":"excel", "exe":"", "":null.
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -257,8 +253,7 @@ public final class Dictionaries {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     * "xls":"excel", "exe":"", "":null.
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -284,8 +279,7 @@ public final class Dictionaries {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     * "xls":"excel", "exe":"", "":null.
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -299,8 +293,7 @@ public final class Dictionaries {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     * "xls":"excel", "exe":"", "":null.
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -315,8 +308,7 @@ public final class Dictionaries {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     * "xls":"excel", "exe":"", "":null.
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -342,8 +334,7 @@ public final class Dictionaries {
     /**
      * Put complex types with dictionary property.
      * 
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
-     * "xls":"excel", "exe":"", "":null.
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -358,8 +349,7 @@ public final class Dictionaries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is empty along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return complex types with dictionary property which is empty along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getEmptyWithResponseAsync() {
@@ -378,8 +368,7 @@ public final class Dictionaries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is empty along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return complex types with dictionary property which is empty along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getEmptyWithResponseAsync(Context context) {
@@ -572,8 +561,7 @@ public final class Dictionaries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is null along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return complex types with dictionary property which is null along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync() {
@@ -592,8 +580,7 @@ public final class Dictionaries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is null along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return complex types with dictionary property which is null along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync(Context context) {
@@ -667,8 +654,7 @@ public final class Dictionaries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
@@ -687,8 +673,7 @@ public final class Dictionaries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync(Context context) {
@@ -705,8 +690,7 @@ public final class Dictionaries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload on successful
-     * completion of {@link Mono}.
+     * @return complex types with dictionary property while server doesn't provide a response payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNotProvidedAsync() {
@@ -720,8 +704,7 @@ public final class Dictionaries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload on successful
-     * completion of {@link Mono}.
+     * @return complex types with dictionary property while server doesn't provide a response payload on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<DictionaryWrapper> getNotProvidedAsync(Context context) {
@@ -735,8 +718,7 @@ public final class Dictionaries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with
-     * {@link Response}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getNotProvidedWithResponse(Context context) {

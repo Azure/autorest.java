@@ -61,8 +61,7 @@ public final class History implements JsonSerializable<History> {
      * Reads an instance of History from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of History if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of History if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the History.
      */
     public static History fromJson(JsonReader jsonReader) throws IOException {

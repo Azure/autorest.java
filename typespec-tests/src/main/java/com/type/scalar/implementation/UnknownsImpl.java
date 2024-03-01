@@ -51,8 +51,7 @@ public final class UnknownsImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientUnknowns to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for ScalarClientUnknowns to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientUnknowns")
@@ -96,9 +95,7 @@ public final class UnknownsImpl {
 
     /**
      * get unknown value.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -118,9 +115,7 @@ public final class UnknownsImpl {
 
     /**
      * get unknown value.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -140,9 +135,7 @@ public final class UnknownsImpl {
 
     /**
      * put unknown value.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -163,9 +156,7 @@ public final class UnknownsImpl {
 
     /**
      * put unknown value.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>

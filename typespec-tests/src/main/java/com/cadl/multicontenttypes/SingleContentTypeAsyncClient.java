@@ -39,9 +39,7 @@ public final class SingleContentTypeAsyncClient {
 
     /**
      * response is binary.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -61,9 +59,7 @@ public final class SingleContentTypeAsyncClient {
 
     /**
      * request is binary.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>

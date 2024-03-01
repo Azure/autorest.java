@@ -59,8 +59,7 @@ public final class QuxBarsImpl {
     }
 
     /**
-     * The interface defining all the services for ServiceClientClientQuxBars to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for ServiceClientClientQuxBars to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "ServiceClientClientQ")

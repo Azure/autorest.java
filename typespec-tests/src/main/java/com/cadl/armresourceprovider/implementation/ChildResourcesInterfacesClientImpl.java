@@ -67,8 +67,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     }
 
     /**
-     * The interface defining all the services for ArmResourceProviderClientChildResourcesInterfaces to be used by the
-     * proxy service to perform REST calls.
+     * The interface defining all the services for ArmResourceProviderClientChildResourcesInterfaces to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ArmResourceProviderC")
@@ -292,8 +291,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
@@ -342,8 +340,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
@@ -553,8 +550,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ChildResourceInner>> updateWithResponseAsync(String resourceGroupName,
@@ -603,8 +599,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return subresource of Top Level Arm Resource along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<ChildResourceInner>> updateWithResponseAsync(String resourceGroupName,
@@ -935,8 +930,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion
-     * of {@link Mono}.
+     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceSinglePageAsync(String resourceGroupName,
@@ -976,8 +970,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion
-     * of {@link Mono}.
+     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceSinglePageAsync(String resourceGroupName,
@@ -1274,7 +1267,8 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     private Mono<Void> actionWithoutBodyAsync(String resourceGroupName, String topLevelArmResourceName,
         String childResourceName, Context context) {
         return beginActionWithoutBodyAsync(resourceGroupName, topLevelArmResourceName, childResourceName, context)
-            .last().flatMap(this.client::getLroFinalResultOrError);
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
@@ -1318,8 +1312,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion
-     * of {@link Mono}.
+     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceNextSinglePageAsync(String nextLink) {
@@ -1349,8 +1342,7 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion
-     * of {@link Mono}.
+     * @return the response of a ChildResource list operation along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<ChildResourceInner>> listByTopLevelArmResourceNextSinglePageAsync(String nextLink,

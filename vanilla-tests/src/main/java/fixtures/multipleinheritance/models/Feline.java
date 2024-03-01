@@ -95,8 +95,7 @@ public class Feline implements JsonSerializable<Feline> {
      * Reads an instance of Feline from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Feline if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Feline if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Feline.
      */
     public static Feline fromJson(JsonReader jsonReader) throws IOException {

@@ -101,8 +101,7 @@ public final class JsonMergePatchClientImpl {
     }
 
     /**
-     * The interface defining all the services for JsonMergePatchClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for JsonMergePatchClient to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "JsonMergePatchClient")
@@ -166,9 +165,7 @@ public final class JsonMergePatchClientImpl {
 
     /**
      * Test content-type: application/merge-patch+json with required body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -190,9 +187,7 @@ public final class JsonMergePatchClientImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -231,9 +226,7 @@ public final class JsonMergePatchClientImpl {
 
     /**
      * Test content-type: application/merge-patch+json with required body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -255,9 +248,7 @@ public final class JsonMergePatchClientImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -296,9 +287,7 @@ public final class JsonMergePatchClientImpl {
 
     /**
      * Test content-type: application/merge-patch+json with required body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     description: String (Optional)
@@ -319,9 +308,7 @@ public final class JsonMergePatchClientImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -362,9 +349,7 @@ public final class JsonMergePatchClientImpl {
 
     /**
      * Test content-type: application/merge-patch+json with required body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     description: String (Optional)
@@ -385,9 +370,7 @@ public final class JsonMergePatchClientImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -427,9 +410,7 @@ public final class JsonMergePatchClientImpl {
 
     /**
      * Test content-type: application/merge-patch+json with optional body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     description: String (Optional)
@@ -450,9 +431,7 @@ public final class JsonMergePatchClientImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -498,9 +477,7 @@ public final class JsonMergePatchClientImpl {
 
     /**
      * Test content-type: application/merge-patch+json with optional body.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     description: String (Optional)
@@ -521,9 +498,7 @@ public final class JsonMergePatchClientImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

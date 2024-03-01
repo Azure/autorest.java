@@ -52,8 +52,7 @@ public final class FloatsOnliesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientFloatsOnlies to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for UnionClientFloatsOnlies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientFloatsOnl")
@@ -97,9 +96,7 @@ public final class FloatsOnliesImpl {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(1.1/2.2/3.3) (Required)
@@ -121,9 +118,7 @@ public final class FloatsOnliesImpl {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(1.1/2.2/3.3) (Required)
@@ -145,9 +140,7 @@ public final class FloatsOnliesImpl {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(1.1/2.2/3.3) (Required)
@@ -170,9 +163,7 @@ public final class FloatsOnliesImpl {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(1.1/2.2/3.3) (Required)

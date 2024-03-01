@@ -68,8 +68,7 @@ public class Element implements JsonSerializable<Element> {
      * Reads an instance of Element from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Element if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Element if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Element.
      */
     @Generated

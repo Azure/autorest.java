@@ -52,8 +52,7 @@ public final class Float32ValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryClientFloat32Values to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for DictionaryClientFloat32Values to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryClientFloa")
@@ -97,9 +96,7 @@ public final class Float32ValuesImpl {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: double (Required)
@@ -121,9 +118,7 @@ public final class Float32ValuesImpl {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: double (Required)
@@ -145,9 +140,7 @@ public final class Float32ValuesImpl {
 
     /**
      * The put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: double (Required)
@@ -170,9 +163,7 @@ public final class Float32ValuesImpl {
 
     /**
      * The put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: double (Required)

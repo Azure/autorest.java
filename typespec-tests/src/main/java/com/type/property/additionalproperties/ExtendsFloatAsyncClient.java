@@ -40,9 +40,7 @@ public final class ExtendsFloatAsyncClient {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: double (Required)
@@ -67,9 +65,7 @@ public final class ExtendsFloatAsyncClient {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: double (Required)

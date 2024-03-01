@@ -37,23 +37,11 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>input</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The input parameter. Allowed values: "value1", "value2".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -73,23 +61,11 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>input</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The input parameter. Allowed values: "value1", "value2".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -209,23 +185,11 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>input</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The input parameter. Allowed values: "value1", "value2".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -244,23 +208,11 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>input</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The input parameter. Allowed values: "value1", "value2".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -279,23 +231,11 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>input</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The input parameter. Allowed values: "value1".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -314,23 +254,11 @@ public final class AutoRestSwaggerConstantServiceAsyncClient {
 
     /**
      * Puts constants to the testserver.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>input</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The input parameter. Allowed values: "value1".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 

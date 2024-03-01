@@ -47,8 +47,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientApiVersionLocals to be used
-     * by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientApiVersionLocals to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
@@ -79,12 +78,11 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalValidWithResponseAsync() {
@@ -99,14 +97,13 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalValidWithResponseAsync(Context context) {
@@ -120,7 +117,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -132,7 +129,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -146,7 +143,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -160,7 +157,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -171,15 +168,13 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     * parameter.
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion) {
@@ -193,16 +188,14 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     * parameter.
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getMethodLocalNullWithResponseAsync(String apiVersion, Context context) {
@@ -215,10 +208,9 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     * parameter.
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -230,7 +222,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -243,10 +235,9 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     * parameter.
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -259,10 +250,9 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     * parameter.
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -275,10 +265,9 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
-     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
-     * parameter.
+     * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -289,7 +278,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -301,12 +290,11 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getPathLocalValidWithResponseAsync() {
@@ -321,14 +309,13 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getPathLocalValidWithResponseAsync(Context context) {
@@ -342,7 +329,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -354,7 +341,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -368,7 +355,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -382,7 +369,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -393,12 +380,11 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync() {
@@ -413,14 +399,13 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return method with api-version modeled in the method along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return method with api-version modeled in the method along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getSwaggerLocalValidWithResponseAsync(Context context) {
@@ -434,7 +419,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -446,7 +431,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -460,7 +445,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -474,7 +459,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

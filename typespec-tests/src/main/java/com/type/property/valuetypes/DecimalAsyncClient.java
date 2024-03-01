@@ -40,9 +40,7 @@ public final class DecimalAsyncClient {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: BigDecimal (Required)
@@ -64,9 +62,7 @@ public final class DecimalAsyncClient {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: BigDecimal (Required)

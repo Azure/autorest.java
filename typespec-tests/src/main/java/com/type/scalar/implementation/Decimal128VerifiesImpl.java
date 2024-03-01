@@ -52,8 +52,7 @@ public final class Decimal128VerifiesImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientDecimal128Verifies to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for ScalarClientDecimal128Verifies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientDecimal1")
@@ -97,9 +96,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The prepareVerify operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *     BigDecimal (Required)
@@ -121,9 +118,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The prepareVerify operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *     BigDecimal (Required)
@@ -145,9 +140,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The verify operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BigDecimal
      * }</pre>
@@ -169,9 +162,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The verify operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BigDecimal
      * }</pre>

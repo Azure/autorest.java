@@ -100,8 +100,7 @@ public final class VirtualMachineScaleSetNetworkConfiguration
      * Reads an instance of VirtualMachineScaleSetNetworkConfiguration from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of VirtualMachineScaleSetNetworkConfiguration if the JsonReader was pointing to an instance
-     * of it, or null if it was pointing to JSON null.
+     * @return An instance of VirtualMachineScaleSetNetworkConfiguration if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the VirtualMachineScaleSetNetworkConfiguration.
      */
     public static VirtualMachineScaleSetNetworkConfiguration fromJson(JsonReader jsonReader) throws IOException {

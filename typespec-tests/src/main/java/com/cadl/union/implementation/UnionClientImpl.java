@@ -88,7 +88,7 @@ public final class UnionClientImpl {
     /**
      * Initializes an instance of UnionClient client.
      * 
-     * @param endpoint
+     * @param endpoint 
      * @param serviceVersion Service version.
      */
     public UnionClientImpl(String endpoint, UnionServiceVersion serviceVersion) {
@@ -100,7 +100,7 @@ public final class UnionClientImpl {
      * Initializes an instance of UnionClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint
+     * @param endpoint 
      * @param serviceVersion Service version.
      */
     public UnionClientImpl(HttpPipeline httpPipeline, String endpoint, UnionServiceVersion serviceVersion) {
@@ -112,7 +112,7 @@ public final class UnionClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint
+     * @param endpoint 
      * @param serviceVersion Service version.
      */
     public UnionClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,

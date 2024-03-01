@@ -27,7 +27,9 @@ public final class SiameseTests {
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        Siamese model = new Siamese().setId(1306784267).setName("tihfx").setColor("qs")
+        Siamese model = new Siamese().setId(1306784267)
+            .setName("tihfx")
+            .setColor("qs")
             .setHates(Arrays.asList(new Dog().setId(853033280).setName("jzyflu").setFood("pewnw"),
                 new Dog().setId(614383228).setName("qhsmyurkdtml").setFood("rh"),
                 new Dog().setId(743792160).setName("mparcryuanzw").setFood("ekuksjtx"),

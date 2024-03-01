@@ -319,9 +319,7 @@ public final class NamingClientImpl {
 
     /**
      * The client operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -344,9 +342,7 @@ public final class NamingClientImpl {
 
     /**
      * The client operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -369,9 +365,7 @@ public final class NamingClientImpl {
 
     /**
      * The language operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -396,9 +390,7 @@ public final class NamingClientImpl {
 
     /**
      * The language operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -421,9 +413,7 @@ public final class NamingClientImpl {
 
     /**
      * The compatibleWithEncodedName operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
@@ -448,9 +438,7 @@ public final class NamingClientImpl {
 
     /**
      * The compatibleWithEncodedName operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     wireName: boolean (Required)

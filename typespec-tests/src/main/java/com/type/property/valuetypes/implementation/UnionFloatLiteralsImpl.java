@@ -52,8 +52,7 @@ public final class UnionFloatLiteralsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientUnionFloatLiterals to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for ValueTypesClientUnionFloatLiterals to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientUnio")
@@ -97,9 +96,7 @@ public final class UnionFloatLiteralsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(43.125/46.875) (Required)
@@ -121,9 +118,7 @@ public final class UnionFloatLiteralsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(43.125/46.875) (Required)
@@ -145,9 +140,7 @@ public final class UnionFloatLiteralsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(43.125/46.875) (Required)
@@ -170,9 +163,7 @@ public final class UnionFloatLiteralsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: String(43.125/46.875) (Required)

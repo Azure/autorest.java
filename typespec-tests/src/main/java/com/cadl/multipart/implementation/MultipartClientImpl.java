@@ -119,8 +119,7 @@ public final class MultipartClientImpl {
     }
 
     /**
-     * The interface defining all the services for MultipartClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for MultipartClient to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "MultipartClient")
@@ -172,23 +171,11 @@ public final class MultipartClientImpl {
 
     /**
      * The upload operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>compress</td>
-     * <td>Boolean</td>
-     * <td>No</td>
-     * <td>Boolean with `true` and `false` values.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>compress</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -211,23 +198,11 @@ public final class MultipartClientImpl {
 
     /**
      * The upload operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>compress</td>
-     * <td>Boolean</td>
-     * <td>No</td>
-     * <td>Boolean with `true` and `false` values.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>compress</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 

@@ -51,8 +51,7 @@ public final class Datetimerfc1123s {
     }
 
     /**
-     * The interface defining all the services for AutoRestRFC1123DateTimeTestServiceDatetimerfc1123s to be used by the
-     * proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestRFC1123DateTimeTestServiceDatetimerfc1123s to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestRFC1123DateT")
@@ -583,8 +582,7 @@ public final class Datetimerfc1123s {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value fri, 31 dec 9999 23:59:59 gmt along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value fri, 31 dec 9999 23:59:59 gmt along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync() {
@@ -604,8 +602,7 @@ public final class Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value fri, 31 dec 9999 23:59:59 gmt along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value fri, 31 dec 9999 23:59:59 gmt along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcLowercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -674,8 +671,7 @@ public final class Datetimerfc1123s {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync() {
@@ -695,8 +691,7 @@ public final class Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return max datetime value FRI, 31 DEC 9999 23:59:59 GMT along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcUppercaseMaxDateTimeWithResponseAsync(Context context) {
@@ -870,8 +865,7 @@ public final class Datetimerfc1123s {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
@@ -890,8 +884,7 @@ public final class Datetimerfc1123s {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return min datetime value Mon, 1 Jan 0001 00:00:00 GMT along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync(Context context) {

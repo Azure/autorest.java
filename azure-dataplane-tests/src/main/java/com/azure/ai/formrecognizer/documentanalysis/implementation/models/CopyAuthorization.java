@@ -75,8 +75,7 @@ public final class CopyAuthorization implements JsonSerializable<CopyAuthorizati
     }
 
     /**
-     * Get the targetResourceRegion property: Location of the target Azure resource where the document model should be
-     * copied to.
+     * Get the targetResourceRegion property: Location of the target Azure resource where the document model should be copied to.
      * 
      * @return the targetResourceRegion value.
      */
@@ -85,8 +84,7 @@ public final class CopyAuthorization implements JsonSerializable<CopyAuthorizati
     }
 
     /**
-     * Set the targetResourceRegion property: Location of the target Azure resource where the document model should be
-     * copied to.
+     * Set the targetResourceRegion property: Location of the target Azure resource where the document model should be copied to.
      * 
      * @param targetResourceRegion the targetResourceRegion value to set.
      * @return the CopyAuthorization object itself.
@@ -187,8 +185,10 @@ public final class CopyAuthorization implements JsonSerializable<CopyAuthorizati
         jsonWriter.writeStringField("targetModelId", this.targetModelId);
         jsonWriter.writeStringField("targetModelLocation", this.targetModelLocation);
         jsonWriter.writeStringField("accessToken", this.accessToken);
-        jsonWriter.writeStringField("expirationDateTime", this.expirationDateTime == null ? null
-            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.expirationDateTime));
+        jsonWriter.writeStringField("expirationDateTime",
+            this.expirationDateTime == null
+                ? null
+                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.expirationDateTime));
         return jsonWriter.writeEndObject();
     }
 
@@ -196,8 +196,7 @@ public final class CopyAuthorization implements JsonSerializable<CopyAuthorizati
      * Reads an instance of CopyAuthorization from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of CopyAuthorization if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of CopyAuthorization if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the CopyAuthorization.
      */

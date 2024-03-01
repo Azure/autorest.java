@@ -37,8 +37,7 @@ public final class ReadonlypropertyAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that have readonly properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types that have readonly properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

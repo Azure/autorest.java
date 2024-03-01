@@ -38,9 +38,7 @@ public final class VisibilityClient {
 
     /**
      * The getModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -54,9 +52,7 @@ public final class VisibilityClient {
      *     deleteProp: Boolean (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -87,9 +83,7 @@ public final class VisibilityClient {
 
     /**
      * The headModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -120,9 +114,7 @@ public final class VisibilityClient {
 
     /**
      * The putModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -153,9 +145,7 @@ public final class VisibilityClient {
 
     /**
      * The patchModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -186,9 +176,7 @@ public final class VisibilityClient {
 
     /**
      * The postModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)
@@ -219,9 +207,7 @@ public final class VisibilityClient {
 
     /**
      * The deleteModel operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     readProp: String (Required)

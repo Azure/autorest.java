@@ -64,8 +64,7 @@ public final class SchemasImpl {
     }
 
     /**
-     * The interface defining all the services for AzureSchemaRegistrySchemas to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for AzureSchemaRegistrySchemas to be used by the proxy service to perform REST calls.
      */
     @Host("https://{endpoint}")
     @ServiceInterface(name = "AzureSchemaRegistryS")
@@ -186,15 +185,13 @@ public final class SchemasImpl {
     /**
      * Get a registered schema by its unique ID reference.
      * 
-     * Gets a registered schema by its unique ID. Azure Schema Registry guarantees that ID is unique within a namespace.
-     * Operation response type is based on serialization of schema requested.
+     * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.
      * 
      * @param id References specific schema in registry namespace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a registered schema by its unique ID along with {@link ResponseBase} on successful completion of
-     * {@link Mono}.
+     * @return a registered schema by its unique ID along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasGetByIdHeaders, Flux<ByteBuffer>>> getByIdWithResponseAsync(String id) {
@@ -207,16 +204,14 @@ public final class SchemasImpl {
     /**
      * Get a registered schema by its unique ID reference.
      * 
-     * Gets a registered schema by its unique ID. Azure Schema Registry guarantees that ID is unique within a namespace.
-     * Operation response type is based on serialization of schema requested.
+     * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.
      * 
      * @param id References specific schema in registry namespace.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a registered schema by its unique ID along with {@link ResponseBase} on successful completion of
-     * {@link Mono}.
+     * @return a registered schema by its unique ID along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasGetByIdHeaders, Flux<ByteBuffer>>> getByIdWithResponseAsync(String id,
@@ -229,8 +224,7 @@ public final class SchemasImpl {
     /**
      * Get a registered schema by its unique ID reference.
      * 
-     * Gets a registered schema by its unique ID. Azure Schema Registry guarantees that ID is unique within a namespace.
-     * Operation response type is based on serialization of schema requested.
+     * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.
      * 
      * @param id References specific schema in registry namespace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -246,8 +240,7 @@ public final class SchemasImpl {
     /**
      * Get a registered schema by its unique ID reference.
      * 
-     * Gets a registered schema by its unique ID. Azure Schema Registry guarantees that ID is unique within a namespace.
-     * Operation response type is based on serialization of schema requested.
+     * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.
      * 
      * @param id References specific schema in registry namespace.
      * @param context The context to associate with this operation.
@@ -264,8 +257,7 @@ public final class SchemasImpl {
     /**
      * Get a registered schema by its unique ID reference.
      * 
-     * Gets a registered schema by its unique ID. Azure Schema Registry guarantees that ID is unique within a namespace.
-     * Operation response type is based on serialization of schema requested.
+     * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.
      * 
      * @param id References specific schema in registry namespace.
      * @param context The context to associate with this operation.
@@ -284,8 +276,7 @@ public final class SchemasImpl {
     /**
      * Get a registered schema by its unique ID reference.
      * 
-     * Gets a registered schema by its unique ID. Azure Schema Registry guarantees that ID is unique within a namespace.
-     * Operation response type is based on serialization of schema requested.
+     * Gets a registered schema by its unique ID.  Azure Schema Registry guarantees that ID is unique within a namespace. Operation response type is based on serialization of schema requested.
      * 
      * @param id References specific schema in registry namespace.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -303,14 +294,12 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of all versions of one schema along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return the list of all versions of one schema along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Integer>> getVersionsSinglePageAsync(String groupName, String schemaName) {
@@ -327,15 +316,13 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the list of all versions of one schema along with {@link PagedResponse} on successful completion of
-     * {@link Mono}.
+     * @return the list of all versions of one schema along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Integer>> getVersionsSinglePageAsync(String groupName, String schemaName,
@@ -352,8 +339,7 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -371,8 +357,7 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -391,8 +376,7 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -413,8 +397,7 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -436,8 +419,7 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -455,8 +437,7 @@ public final class SchemasImpl {
      * 
      * Gets the list of all versions of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -475,15 +456,13 @@ public final class SchemasImpl {
      * 
      * Gets one specific version of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param schemaVersion Version number of specific schema.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return one specific version of one schema along with {@link ResponseBase} on successful completion of
-     * {@link Mono}.
+     * @return one specific version of one schema along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>>>
@@ -499,16 +478,14 @@ public final class SchemasImpl {
      * 
      * Gets one specific version of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param schemaVersion Version number of specific schema.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return one specific version of one schema along with {@link ResponseBase} on successful completion of
-     * {@link Mono}.
+     * @return one specific version of one schema along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasGetSchemaVersionHeaders, Flux<ByteBuffer>>>
@@ -524,8 +501,7 @@ public final class SchemasImpl {
      * 
      * Gets one specific version of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param schemaVersion Version number of specific schema.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -544,8 +520,7 @@ public final class SchemasImpl {
      * 
      * Gets one specific version of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param schemaVersion Version number of specific schema.
      * @param context The context to associate with this operation.
@@ -566,8 +541,7 @@ public final class SchemasImpl {
      * 
      * Gets one specific version of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param schemaVersion Version number of specific schema.
      * @param context The context to associate with this operation.
@@ -590,8 +564,7 @@ public final class SchemasImpl {
      * 
      * Gets one specific version of one schema.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param schemaVersion Version number of specific schema.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -607,11 +580,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -619,8 +590,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
@@ -633,11 +603,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -646,8 +614,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
@@ -661,11 +628,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -673,8 +638,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> queryIdByContentAsync(String groupName, String schemaName, SchemaFormat contentType,
@@ -686,11 +650,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -699,8 +661,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> queryIdByContentAsync(String groupName, String schemaName, SchemaFormat contentType,
@@ -712,11 +673,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -724,8 +683,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
@@ -738,11 +696,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -751,8 +707,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison along with {@link ResponseBase} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ResponseBase<SchemasQueryIdByContentHeaders, Void>> queryIdByContentWithResponseAsync(String groupName,
@@ -765,11 +720,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -777,8 +730,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> queryIdByContentAsync(String groupName, String schemaName, SchemaFormat contentType,
@@ -790,11 +742,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -803,8 +753,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison on successful completion of {@link Mono}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> queryIdByContentAsync(String groupName, String schemaName, SchemaFormat contentType,
@@ -816,11 +765,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -829,8 +776,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison along with {@link ResponseBase}.
+     * @return the ID referencing an existing schema within the specified schema group, as matched by schema content comparison along with {@link ResponseBase}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ResponseBase<SchemasQueryIdByContentHeaders, Void> queryIdByContentWithResponse(String groupName,
@@ -843,11 +789,9 @@ public final class SchemasImpl {
     /**
      * Get ID for existing schema.
      * 
-     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content
-     * comparison.
+     * Gets the ID referencing an existing schema within the specified schema group, as matched by schema content comparison.
      * 
-     * @param groupName Schema group under which schema is registered. Group's serialization type should match the
-     * serialization type specified in the request.
+     * @param groupName Schema group under which schema is registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the registered schema.
@@ -865,11 +809,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -890,11 +832,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -916,11 +856,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -940,11 +878,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -965,11 +901,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -990,11 +924,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -1016,11 +948,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -1040,11 +970,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -1065,11 +993,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -1091,11 +1017,9 @@ public final class SchemasImpl {
     /**
      * Register new schema
      * 
-     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version
-     * 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
+     * Register new schema. If schema of specified name does not exist in specified group, schema is created at version 1. If schema of specified name exists already in specified group, schema is created at latest version + 1.
      * 
-     * @param groupName Schema group under which schema should be registered. Group's serialization type should match
-     * the serialization type specified in the request.
+     * @param groupName Schema group under which schema should be registered.  Group's serialization type should match the serialization type specified in the request.
      * @param schemaName Name of schema.
      * @param contentType Content type of the schema.
      * @param schemaContent String representation (UTF-8) of the schema being registered.
@@ -1119,8 +1043,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return object received from the registry containing the list of schema versions and link to next batch page along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Integer>> getVersionsNextSinglePageAsync(String nextLink) {
@@ -1141,8 +1064,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return object received from the registry containing the list of schema versions and link to next batch page along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<Integer>> getVersionsNextSinglePageAsync(String nextLink, Context context) {
@@ -1161,8 +1083,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse}.
+     * @return object received from the registry containing the list of schema versions and link to next batch page along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Integer> getVersionsNextSinglePage(String nextLink) {
@@ -1183,8 +1104,7 @@ public final class SchemasImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return object received from the registry containing the list of schema versions and link to next batch page
-     * along with {@link PagedResponse}.
+     * @return object received from the registry containing the list of schema versions and link to next batch page along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public PagedResponse<Integer> getVersionsNextSinglePage(String nextLink, Context context) {

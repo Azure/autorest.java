@@ -46,12 +46,9 @@ public final class NamingClient {
      * @param dataRequest summary of Request
      * @param name summary of name query parameter
      * @return summary of Response along with {@link Response}.
-     * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status
-     * code 409.
-     * @throws ResourceNotFoundException ResourceNotFoundException thrown if the request is rejected by server on status
-     * code 404.
-     * @throws ClientAuthenticationException ClientAuthenticationException thrown if the request is rejected by server
-     * on status code 401.
+     * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws ResourceNotFoundException ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ClientAuthenticationException ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws HttpResponseException HttpResponseException thrown if the request is rejected by server.
      */
     @Generated
@@ -62,9 +59,7 @@ public final class NamingClient {
 
     /**
      * The getAnonymous operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

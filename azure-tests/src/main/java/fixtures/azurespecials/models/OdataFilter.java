@@ -95,8 +95,7 @@ public final class OdataFilter implements JsonSerializable<OdataFilter> {
      * Reads an instance of OdataFilter from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of OdataFilter if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of OdataFilter if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the OdataFilter.
      */
     public static OdataFilter fromJson(JsonReader jsonReader) throws IOException {

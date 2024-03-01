@@ -87,13 +87,16 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
     }
 
     public ChildResource create() {
-        this.innerObject = serviceManager.serviceClient().getChildResourcesInterfaces().createOrUpdate(
-            resourceGroupName, topLevelArmResourceName, childResourceName, this.innerModel(), Context.NONE);
+        this.innerObject = serviceManager.serviceClient()
+            .getChildResourcesInterfaces()
+            .createOrUpdate(resourceGroupName, topLevelArmResourceName, childResourceName, this.innerModel(),
+                Context.NONE);
         return this;
     }
 
     public ChildResource create(Context context) {
-        this.innerObject = serviceManager.serviceClient().getChildResourcesInterfaces()
+        this.innerObject = serviceManager.serviceClient()
+            .getChildResourcesInterfaces()
             .createOrUpdate(resourceGroupName, topLevelArmResourceName, childResourceName, this.innerModel(), context);
         return this;
     }
@@ -110,16 +113,20 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
     }
 
     public ChildResource apply() {
-        this.innerObject
-            = serviceManager.serviceClient().getChildResourcesInterfaces().updateWithResponse(resourceGroupName,
-                topLevelArmResourceName, childResourceName, updateProperties, Context.NONE).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getChildResourcesInterfaces()
+            .updateWithResponse(resourceGroupName, topLevelArmResourceName, childResourceName, updateProperties,
+                Context.NONE)
+            .getValue();
         return this;
     }
 
     public ChildResource apply(Context context) {
-        this.innerObject
-            = serviceManager.serviceClient().getChildResourcesInterfaces().updateWithResponse(resourceGroupName,
-                topLevelArmResourceName, childResourceName, updateProperties, context).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getChildResourcesInterfaces()
+            .updateWithResponse(resourceGroupName, topLevelArmResourceName, childResourceName, updateProperties,
+                context)
+            .getValue();
         return this;
     }
 
@@ -134,25 +141,29 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
     }
 
     public ChildResource refresh() {
-        this.innerObject = serviceManager.serviceClient().getChildResourcesInterfaces()
-            .getWithResponse(resourceGroupName, topLevelArmResourceName, childResourceName, Context.NONE).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getChildResourcesInterfaces()
+            .getWithResponse(resourceGroupName, topLevelArmResourceName, childResourceName, Context.NONE)
+            .getValue();
         return this;
     }
 
     public ChildResource refresh(Context context) {
-        this.innerObject = serviceManager.serviceClient().getChildResourcesInterfaces()
-            .getWithResponse(resourceGroupName, topLevelArmResourceName, childResourceName, context).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getChildResourcesInterfaces()
+            .getWithResponse(resourceGroupName, topLevelArmResourceName, childResourceName, context)
+            .getValue();
         return this;
     }
 
     public void actionWithoutBody() {
-        serviceManager.childResourcesInterfaces().actionWithoutBody(resourceGroupName, topLevelArmResourceName,
-            childResourceName);
+        serviceManager.childResourcesInterfaces()
+            .actionWithoutBody(resourceGroupName, topLevelArmResourceName, childResourceName);
     }
 
     public void actionWithoutBody(Context context) {
-        serviceManager.childResourcesInterfaces().actionWithoutBody(resourceGroupName, topLevelArmResourceName,
-            childResourceName, context);
+        serviceManager.childResourcesInterfaces()
+            .actionWithoutBody(resourceGroupName, topLevelArmResourceName, childResourceName, context);
     }
 
     public ChildResourceImpl withRegion(Region location) {

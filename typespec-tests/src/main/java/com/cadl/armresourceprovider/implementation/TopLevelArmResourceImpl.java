@@ -86,13 +86,15 @@ public final class TopLevelArmResourceImpl
     }
 
     public TopLevelArmResource create() {
-        this.innerObject = serviceManager.serviceClient().getTopLevelArmResourceInterfaces()
+        this.innerObject = serviceManager.serviceClient()
+            .getTopLevelArmResourceInterfaces()
             .createOrUpdate(resourceGroupName, topLevelArmResourceName, this.innerModel(), Context.NONE);
         return this;
     }
 
     public TopLevelArmResource create(Context context) {
-        this.innerObject = serviceManager.serviceClient().getTopLevelArmResourceInterfaces()
+        this.innerObject = serviceManager.serviceClient()
+            .getTopLevelArmResourceInterfaces()
             .createOrUpdate(resourceGroupName, topLevelArmResourceName, this.innerModel(), context);
         return this;
     }
@@ -109,14 +111,18 @@ public final class TopLevelArmResourceImpl
     }
 
     public TopLevelArmResource apply() {
-        this.innerObject = serviceManager.serviceClient().getTopLevelArmResourceInterfaces()
-            .updateWithResponse(resourceGroupName, topLevelArmResourceName, updateProperties, Context.NONE).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getTopLevelArmResourceInterfaces()
+            .updateWithResponse(resourceGroupName, topLevelArmResourceName, updateProperties, Context.NONE)
+            .getValue();
         return this;
     }
 
     public TopLevelArmResource apply(Context context) {
-        this.innerObject = serviceManager.serviceClient().getTopLevelArmResourceInterfaces()
-            .updateWithResponse(resourceGroupName, topLevelArmResourceName, updateProperties, context).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getTopLevelArmResourceInterfaces()
+            .updateWithResponse(resourceGroupName, topLevelArmResourceName, updateProperties, context)
+            .getValue();
         return this;
     }
 
@@ -130,14 +136,18 @@ public final class TopLevelArmResourceImpl
     }
 
     public TopLevelArmResource refresh() {
-        this.innerObject = serviceManager.serviceClient().getTopLevelArmResourceInterfaces()
-            .getByResourceGroupWithResponse(resourceGroupName, topLevelArmResourceName, Context.NONE).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getTopLevelArmResourceInterfaces()
+            .getByResourceGroupWithResponse(resourceGroupName, topLevelArmResourceName, Context.NONE)
+            .getValue();
         return this;
     }
 
     public TopLevelArmResource refresh(Context context) {
-        this.innerObject = serviceManager.serviceClient().getTopLevelArmResourceInterfaces()
-            .getByResourceGroupWithResponse(resourceGroupName, topLevelArmResourceName, context).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getTopLevelArmResourceInterfaces()
+            .getByResourceGroupWithResponse(resourceGroupName, topLevelArmResourceName, context)
+            .getValue();
         return this;
     }
 

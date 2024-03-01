@@ -82,13 +82,15 @@ public final class CustomTemplateResourceImpl
     }
 
     public CustomTemplateResource create() {
-        this.innerObject = serviceManager.serviceClient().getCustomTemplateResourceInterfaces()
+        this.innerObject = serviceManager.serviceClient()
+            .getCustomTemplateResourceInterfaces()
             .createOrUpdate(resourceGroupName, customTemplateResourceName, this.innerModel(), Context.NONE);
         return this;
     }
 
     public CustomTemplateResource create(Context context) {
-        this.innerObject = serviceManager.serviceClient().getCustomTemplateResourceInterfaces()
+        this.innerObject = serviceManager.serviceClient()
+            .getCustomTemplateResourceInterfaces()
             .createOrUpdate(resourceGroupName, customTemplateResourceName, this.innerModel(), context);
         return this;
     }
@@ -104,15 +106,18 @@ public final class CustomTemplateResourceImpl
     }
 
     public CustomTemplateResource apply() {
-        this.innerObject = serviceManager.serviceClient().getCustomTemplateResourceInterfaces()
+        this.innerObject = serviceManager.serviceClient()
+            .getCustomTemplateResourceInterfaces()
             .updateWithResponse(resourceGroupName, customTemplateResourceName, this.innerModel(), Context.NONE)
             .getValue();
         return this;
     }
 
     public CustomTemplateResource apply(Context context) {
-        this.innerObject = serviceManager.serviceClient().getCustomTemplateResourceInterfaces()
-            .updateWithResponse(resourceGroupName, customTemplateResourceName, this.innerModel(), context).getValue();
+        this.innerObject = serviceManager.serviceClient()
+            .getCustomTemplateResourceInterfaces()
+            .updateWithResponse(resourceGroupName, customTemplateResourceName, this.innerModel(), context)
+            .getValue();
         return this;
     }
 

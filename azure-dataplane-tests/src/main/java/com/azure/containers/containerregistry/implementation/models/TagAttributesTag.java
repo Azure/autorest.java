@@ -61,8 +61,7 @@ public final class TagAttributesTag implements JsonSerializable<TagAttributesTag
      * Reads an instance of TagAttributesTag from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of TagAttributesTag if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of TagAttributesTag if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the TagAttributesTag.
      */
     public static TagAttributesTag fromJson(JsonReader jsonReader) throws IOException {

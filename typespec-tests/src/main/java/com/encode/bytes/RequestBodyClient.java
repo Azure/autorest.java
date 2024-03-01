@@ -38,9 +38,7 @@ public final class RequestBodyClient {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -61,9 +59,7 @@ public final class RequestBodyClient {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -84,9 +80,7 @@ public final class RequestBodyClient {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -107,9 +101,7 @@ public final class RequestBodyClient {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -130,9 +122,7 @@ public final class RequestBodyClient {
 
     /**
      * The base64url operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>

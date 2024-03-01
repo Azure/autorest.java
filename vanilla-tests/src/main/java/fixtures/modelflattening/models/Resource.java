@@ -171,8 +171,7 @@ public class Resource implements JsonSerializable<Resource> {
      * Reads an instance of Resource from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Resource.
      */
     public static Resource fromJson(JsonReader jsonReader) throws IOException {

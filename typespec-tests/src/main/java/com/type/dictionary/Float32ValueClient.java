@@ -39,9 +39,7 @@ public final class Float32ValueClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: double (Required)
@@ -63,9 +61,7 @@ public final class Float32ValueClient {
 
     /**
      * The put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     String: double (Required)

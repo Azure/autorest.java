@@ -52,8 +52,7 @@ public final class ModelOpsImpl {
     }
 
     /**
-     * The interface defining all the services for ModelClientModelOps to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for ModelClientModelOps to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ModelClientModelOps")
@@ -134,9 +133,7 @@ public final class ModelOpsImpl {
 
     /**
      * The put1 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -148,9 +145,7 @@ public final class ModelOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -180,9 +175,7 @@ public final class ModelOpsImpl {
 
     /**
      * The put1 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -194,9 +187,7 @@ public final class ModelOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -225,9 +216,7 @@ public final class ModelOpsImpl {
 
     /**
      * The put2 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -236,9 +225,7 @@ public final class ModelOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -265,9 +252,7 @@ public final class ModelOpsImpl {
 
     /**
      * The put2 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -276,9 +261,7 @@ public final class ModelOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -304,9 +287,7 @@ public final class ModelOpsImpl {
 
     /**
      * The get3 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -332,9 +313,7 @@ public final class ModelOpsImpl {
 
     /**
      * The get3 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -359,9 +338,7 @@ public final class ModelOpsImpl {
 
     /**
      * The putNested operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {
@@ -371,9 +348,7 @@ public final class ModelOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {
@@ -401,9 +376,7 @@ public final class ModelOpsImpl {
 
     /**
      * The putNested operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {
@@ -413,9 +386,7 @@ public final class ModelOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     nested1 (Required): {

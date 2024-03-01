@@ -42,9 +42,7 @@ public final class FlattenClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -71,9 +69,7 @@ public final class FlattenClient {
 
     /**
      * The sendProjectedName operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     file_id: String (Required)
@@ -97,28 +93,14 @@ public final class FlattenClient {
 
     /**
      * The sendLong operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>filter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -232,9 +214,11 @@ public final class FlattenClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String filter = options.getFilter();
-        SendLongRequest requestObj = new SendLongRequest(options.getInput(), options.getDataInt())
-            .setUser(options.getUser()).setDataIntOptional(options.getDataIntOptional())
-            .setDataLong(options.getDataLong()).setDataFloat(options.getDataFloat());
+        SendLongRequest requestObj
+            = new SendLongRequest(options.getInput(), options.getDataInt()).setUser(options.getUser())
+                .setDataIntOptional(options.getDataIntOptional())
+                .setDataLong(options.getDataLong())
+                .setDataFloat(options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
