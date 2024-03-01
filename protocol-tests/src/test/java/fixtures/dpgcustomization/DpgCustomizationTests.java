@@ -68,6 +68,7 @@ public class DpgCustomizationTests {
         Assertions.assertEquals("raw", rawModel.get("received"));
 
         PagedFlux<BinaryData> pagedFlux = asyncClient.getPages("model", null);
+        pagedFlux.blockLast();
     }
 
     @Test
