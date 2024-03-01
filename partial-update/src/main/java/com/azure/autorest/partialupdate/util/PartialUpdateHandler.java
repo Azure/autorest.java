@@ -467,10 +467,10 @@ public class PartialUpdateHandler {
     }
 
     /**
-     * Checks whether the code block has {code @Generated} annotation.
+     * Checks whether the code block has {@code @Generated} annotation.
      *
      * @param member the code block.
-     * @return whether the code block has {code @Generated} annotation.
+     * @return whether the code block has {@code @Generated} annotation.
      */
     private static boolean hasGeneratedAnnotation(BodyDeclaration<?> member) {
         if (member.getAnnotations() != null && !member.getAnnotations().isEmpty()) {
