@@ -51,8 +51,6 @@ Note that the conversion only happen once in package private `MetricsAdvisorAsyn
 Generated client methods accept and produce `BinaryData` for request payload and response body.
 For frequently invoked methods, one can customize them for better user-experience.
 
-AutoRest Java `generate-models` option is provided to generate models from OpenAPI specs, to `implementation.models` package. They are provided only as reference.
-
 ### Model as Response Body
 
 Here is an [example](https://github.com/weidongxu-microsoft/azure-sdk-for-java/commit/bb9de3dd39e6327998fdc61c55c870f3b9b850bd) of the modification of client to support `DataFeedDetail` as response of paged operation.
