@@ -143,8 +143,10 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
             if (this.nullableProperty == null) {
                 jsonWriter.writeNullField("nullableProperty");
             } else {
-                jsonWriter.writeStringField("nullableProperty", this.nullableProperty == null ? null
-                    : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.nullableProperty));
+                jsonWriter.writeStringField("nullableProperty",
+                    this.nullableProperty == null
+                        ? null
+                        : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.nullableProperty));
             }
         }
         return jsonWriter.writeEndObject();
