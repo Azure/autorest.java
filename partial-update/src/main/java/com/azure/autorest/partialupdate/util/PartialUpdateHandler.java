@@ -12,6 +12,7 @@ import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.CallableDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.InitializerDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.comments.JavadocComment;
@@ -220,6 +221,17 @@ public class PartialUpdateHandler {
                 }
                 methodSignatureSet.add(generatedMember.asCallableDeclaration().getSignature());
             }
+        }
+
+        // 2. Verify there is no more than 1 static initializer declaration
+        List<InitializerDeclaration> staticInitializerDeclaration = generatedFileMembers.stream()
+                .filter(m -> m instanceof InitializerDeclaration)
+                .map(m -> (InitializerDeclaration) m)
+                .filter(InitializerDeclaration::isStatic)
+                .collect(Collectors.toList());
+        if (staticInitializerDeclaration.size() > 1) {
+            throw new RuntimeException(String.format("Found more than 1 static initializer declaration in the generated file. Code:\n%s",
+                    staticInitializerDeclaration.stream().map(m -> m.getBody().toString()).collect(Collectors.joining("\n\n"))));
         }
     }
 
@@ -457,6 +469,10 @@ public class PartialUpdateHandler {
     private static boolean hasGeneratedAnnotation(BodyDeclaration<?> member) {
         if (member.getAnnotations() != null && member.getAnnotations().size() > 0) {
             return member.getAnnotations().stream().anyMatch(annotationExpr -> annotationExpr.getName().toString().equals("Generated"));
+        } else if (member instanceof InitializerDeclaration && ((InitializerDeclaration) member).isStatic()) {
+            // the assumption here is that user should not add static initializer declaration as customization
+            // so any existing one is @Generated
+            return true;
         } else {
             return false;
         }
@@ -474,6 +490,11 @@ public class PartialUpdateHandler {
         if (member1.isCallableDeclaration() && member2.isCallableDeclaration()) {
             // compare signature
             return member1.asCallableDeclaration().getSignature().equals(member2.asCallableDeclaration().getSignature());
+        } else if (member1 instanceof InitializerDeclaration && member2 instanceof InitializerDeclaration
+                && ((InitializerDeclaration) member1).isStatic() && ((InitializerDeclaration) member2).isStatic()) {
+            // the assumption here is that there is at most 1 static initializer declaration
+            // and the static initializer declaration is @Generated; see "hasGeneratedAnnotation"
+            return true;
         } else {
             return isMembersWithSameName(member1, member2);
         }
