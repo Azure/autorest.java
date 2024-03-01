@@ -156,7 +156,7 @@ public class PartialUpdateHandler {
         // if there is a method has @Generated annotation, then the file is in scope of partial update, otherwise return
         // directly
         boolean hasGeneratedAnnotations = generatedFileMembers.stream()
-                .anyMatch(m -> hasGeneratedAnnotation(m, false));
+                .anyMatch(PartialUpdateHandler::hasGeneratedAnnotation);
 
         if (!hasGeneratedAnnotations) {
             return generatedFileContent;
@@ -166,7 +166,7 @@ public class PartialUpdateHandler {
         // 5. Iterate existingFileMembers, keep manual written members, and replace generated members with the
         // corresponding newly generated one
         for (BodyDeclaration<?> existingMember : existingFileMembers) {
-            boolean isGeneratedMethod = hasGeneratedAnnotation(existingMember, true);
+            boolean isGeneratedMethod = isMemberGenerated(existingMember);
             if (!isGeneratedMethod) { // manual written member
                 updatedMembersList.add(existingMember);
             } else {
@@ -187,7 +187,7 @@ public class PartialUpdateHandler {
                 // If the generated member and the existing member is corresponding,
                 // or if there is an existing member who has the same name as the generated member and is manually written,
                 // Then we don't put the generated member to the updatedMembersList.
-                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !hasGeneratedAnnotation(existingMember, true))) {
+                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !isMemberGenerated(existingMember))) {
                     needToAddToUpdateMembersList = false;
                     break;
                 }
@@ -470,19 +470,30 @@ public class PartialUpdateHandler {
      * Checks whether the code block has {code @Generated} annotation.
      *
      * @param member the code block.
-     * @param includeStaticInitializerDeclaration treat the static initializer declaration as {code @Generated}.
      * @return whether the code block has {code @Generated} annotation.
      */
-    private static boolean hasGeneratedAnnotation(BodyDeclaration<?> member, boolean includeStaticInitializerDeclaration) {
-        if (member.getAnnotations() != null && member.getAnnotations().size() > 0) {
+    private static boolean hasGeneratedAnnotation(BodyDeclaration<?> member) {
+        if (member.getAnnotations() != null && !member.getAnnotations().isEmpty()) {
             return member.getAnnotations().stream().anyMatch(annotationExpr -> annotationExpr.getName().toString().equals("Generated"));
-        } else if (includeStaticInitializerDeclaration
-                && member instanceof InitializerDeclaration && ((InitializerDeclaration) member).isStatic()) {
-            // the assumption here is that user should not add static initializer declaration as customization
-            // so any existing one is @Generated
-            return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * Checks whether the code block should be treated as generated.
+     *
+     * @param member the code block.
+     * @return whether the code block should be treated as generated.
+     */
+    private static boolean isMemberGenerated(BodyDeclaration<?> member) {
+        if (member instanceof InitializerDeclaration && ((InitializerDeclaration) member).isStatic()) {
+            // the assumption here is that user should not add static initializer declaration as customization
+            // so any existing one (in a file that is known to be @Generated) is generated member
+            return true;
+        } else {
+            // check @Generated annotation
+            return hasGeneratedAnnotation(member);
         }
     }
 
@@ -506,7 +517,7 @@ public class PartialUpdateHandler {
         } else if (member1 instanceof InitializerDeclaration && member2 instanceof InitializerDeclaration
                 && ((InitializerDeclaration) member1).isStatic() && ((InitializerDeclaration) member2).isStatic()) {
             // the assumption here is that there is at most 1 static initializer declaration
-            // and the static initializer declaration is @Generated; see "hasGeneratedAnnotation"
+            // and the static initializer declaration is generated member; see "hasGeneratedAnnotation"
             return true;
         } else {
             return isMembersWithSameName(member1, member2);
