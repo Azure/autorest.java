@@ -7,7 +7,6 @@ options:
     generate-samples: true
     generate-tests: true
     examples-directory: "{project-root}/tsp/examples"
-    stream-style-serialization: true
     dev-options:
       generate-code-model: true
       support-versioning: true
