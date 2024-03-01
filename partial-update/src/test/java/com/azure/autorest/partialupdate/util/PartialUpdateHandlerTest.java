@@ -6,6 +6,8 @@ package com.azure.autorest.partialupdate.util;
 
 import com.github.javaparser.ast.AccessSpecifier;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.InitializerDeclaration;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
@@ -14,6 +16,8 @@ import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.github.javaparser.StaticJavaParser.parse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -408,4 +412,64 @@ public class PartialUpdateHandlerTest {
         assertEquals("exports com.azure.communication.phonenumbersdemo.models;", compilationUnit.getModule().get().getDirectives().get(2).asModuleExportsDirective().getTokenRange().get().toString());
     }
 
+    @Test
+    public void testStaticBlockOverride() throws Exception {
+        String existingFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/ModelWithStaticBlock.java").toURI()));
+        String generatedFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/ModelWithStaticBlockGenerated.java").toURI()));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        List<InitializerDeclaration> staticInitializerDeclaration = compilationUnit.getTypes().get(0).getMembers().stream()
+                .filter(m -> m instanceof InitializerDeclaration)
+                .map(m -> (InitializerDeclaration) m)
+                .filter(InitializerDeclaration::isStatic)
+                .collect(Collectors.toList());
+        // verify 1 block
+        Assertions.assertEquals(1, staticInitializerDeclaration.size());
+        // verify the block is replaced
+        Assertions.assertTrue(staticInitializerDeclaration.get(0).toString().contains("// token for test"));
+    }
+
+    @Test
+    public void testStaticBlockAdd() throws Exception {
+        String existingFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/ModelWithoutStaticBlock.java").toURI()));
+        String generatedFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/ModelWithStaticBlockGenerated.java").toURI()));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        List<InitializerDeclaration> staticInitializerDeclaration = compilationUnit.getTypes().get(0).getMembers().stream()
+                .filter(m -> m instanceof InitializerDeclaration)
+                .map(m -> (InitializerDeclaration) m)
+                .filter(InitializerDeclaration::isStatic)
+                .collect(Collectors.toList());
+        // verify 1 block
+        Assertions.assertEquals(1, staticInitializerDeclaration.size());
+        // also verify a few other methods is added
+        Assertions.assertNotNull(compilationUnit.getTypes().get(0).getMethodsByName("serializeAsJsonMergePatch"));
+        Assertions.assertNotNull(compilationUnit.getTypes().get(0).getFieldByName("jsonMergePatch"));
+        Assertions.assertNotNull(compilationUnit.getTypes().get(0).getFieldByName("updatedProperties"));
+    }
+
+
+    @Test
+    public void testStaticBlockRemove() throws Exception {
+        String existingFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/ModelWithStaticBlock.java").toURI()));
+        String generatedFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/ModelWithoutStaticBlockGenerated.java").toURI()));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        assertEquals(1, compilationUnit.getTypes().size());
+        List<InitializerDeclaration> staticInitializerDeclaration = compilationUnit.getTypes().get(0).getMembers().stream()
+                .filter(m -> m instanceof InitializerDeclaration)
+                .map(m -> (InitializerDeclaration) m)
+                .filter(InitializerDeclaration::isStatic)
+                .collect(Collectors.toList());
+        // verify 0 block
+        Assertions.assertEquals(0, staticInitializerDeclaration.size());
+    }
 }

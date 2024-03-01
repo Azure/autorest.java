@@ -12,6 +12,7 @@ import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.BodyDeclaration;
 import com.github.javaparser.ast.body.CallableDeclaration;
 import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.InitializerDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.comments.JavadocComment;
@@ -165,7 +166,7 @@ public class PartialUpdateHandler {
         // 5. Iterate existingFileMembers, keep manual written members, and replace generated members with the
         // corresponding newly generated one
         for (BodyDeclaration<?> existingMember : existingFileMembers) {
-            boolean isGeneratedMethod = hasGeneratedAnnotation(existingMember);
+            boolean isGeneratedMethod = isMemberGenerated(existingMember);
             if (!isGeneratedMethod) { // manual written member
                 updatedMembersList.add(existingMember);
             } else {
@@ -186,7 +187,7 @@ public class PartialUpdateHandler {
                 // If the generated member and the existing member is corresponding,
                 // or if there is an existing member who has the same name as the generated member and is manually written,
                 // Then we don't put the generated member to the updatedMembersList.
-                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !hasGeneratedAnnotation(existingMember))) {
+                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !isMemberGenerated(existingMember))) {
                     needToAddToUpdateMembersList = false;
                     break;
                 }
@@ -220,6 +221,17 @@ public class PartialUpdateHandler {
                 }
                 methodSignatureSet.add(generatedMember.asCallableDeclaration().getSignature());
             }
+        }
+
+        // 2. Verify there is no more than 1 static initializer declaration
+        List<InitializerDeclaration> staticInitializerDeclaration = generatedFileMembers.stream()
+                .filter(m -> m instanceof InitializerDeclaration)
+                .map(m -> (InitializerDeclaration) m)
+                .filter(InitializerDeclaration::isStatic)
+                .collect(Collectors.toList());
+        if (staticInitializerDeclaration.size() > 1) {
+            throw new RuntimeException(String.format("Found more than 1 static initializer declaration in the generated file. Code:\n%s",
+                    staticInitializerDeclaration.stream().map(m -> m.getBody().toString()).collect(Collectors.joining("\n\n"))));
         }
     }
 
@@ -454,8 +466,14 @@ public class PartialUpdateHandler {
 
     }
 
+    /**
+     * Checks whether the code block has {@code @Generated} annotation.
+     *
+     * @param member the code block.
+     * @return whether the code block has {@code @Generated} annotation.
+     */
     private static boolean hasGeneratedAnnotation(BodyDeclaration<?> member) {
-        if (member.getAnnotations() != null && member.getAnnotations().size() > 0) {
+        if (member.getAnnotations() != null && !member.getAnnotations().isEmpty()) {
             return member.getAnnotations().stream().anyMatch(annotationExpr -> annotationExpr.getName().toString().equals("Generated"));
         } else {
             return false;
@@ -463,8 +481,30 @@ public class PartialUpdateHandler {
     }
 
     /**
+     * Checks whether the code block should be treated as generated.
+     *
+     * @param member the code block.
+     * @return whether the code block should be treated as generated.
+     */
+    private static boolean isMemberGenerated(BodyDeclaration<?> member) {
+        if (member instanceof InitializerDeclaration && ((InitializerDeclaration) member).isStatic()) {
+            // the assumption here is that user should not add static initializer declaration as customization
+            // so any existing one (in a file that is known to be @Generated) is generated member
+            return true;
+        } else {
+            // check @Generated annotation
+            return hasGeneratedAnnotation(member);
+        }
+    }
+
+    /**
      * Compare whether two members are corresponding: if two members are callable, which means they are constructor or
      * method, we will compare the signature, otherwise, we will compare the name.
+     *
+     * In the case of static initializer declaration, since they do not have a name, we would always treat them as
+     * corresponding.
+     * Given the assumption that user should not add such customization, and generated code cannot have more than 1
+     * such block.
      *
      * @param member1
      * @param member2
@@ -474,6 +514,11 @@ public class PartialUpdateHandler {
         if (member1.isCallableDeclaration() && member2.isCallableDeclaration()) {
             // compare signature
             return member1.asCallableDeclaration().getSignature().equals(member2.asCallableDeclaration().getSignature());
+        } else if (member1 instanceof InitializerDeclaration && member2 instanceof InitializerDeclaration
+                && ((InitializerDeclaration) member1).isStatic() && ((InitializerDeclaration) member2).isStatic()) {
+            // the assumption here is that there is at most 1 static initializer declaration
+            // and the static initializer declaration is generated member; see "hasGeneratedAnnotation"
+            return true;
         } else {
             return isMembersWithSameName(member1, member2);
         }
