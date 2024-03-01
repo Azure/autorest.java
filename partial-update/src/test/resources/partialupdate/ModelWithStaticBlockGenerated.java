@@ -41,6 +41,7 @@ public final class Model {
 
     static {
         JsonMergePatchHelper.setDistributionModeInternalAccessor((model, jsonMergePatchEnabled) -> {
+            // token for test
             model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
             return model;
         });
