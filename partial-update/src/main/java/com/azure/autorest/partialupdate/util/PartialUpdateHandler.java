@@ -482,6 +482,11 @@ public class PartialUpdateHandler {
      * Compare whether two members are corresponding: if two members are callable, which means they are constructor or
      * method, we will compare the signature, otherwise, we will compare the name.
      *
+     * In the case of static initializer declaration, since they do not have a name, we would always treat them as
+     * corresponding.
+     * Given the assumption that user should not add such customization, and generated code cannot have more than 1
+     * such block.
+     *
      * @param member1
      * @param member2
      * @return true if two members are corresponding, false if two members are not corresponding.
