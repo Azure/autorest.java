@@ -652,7 +652,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<String> ret = Collections.emptyList();
 
         JavaSettings settings = JavaSettings.getInstance();
-        boolean hasModels = (!settings.isDataPlaneClient() || settings.isGenerateModels())   // not DPG, or DPG that requires all models
+        boolean hasModels = !settings.isDataPlaneClient()   // not DPG
             // defined models package (it is defined by default)
             && (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty())
             // models package is not same as implementation package

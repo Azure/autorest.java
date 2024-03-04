@@ -44,7 +44,6 @@ import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import fixtures.dpgcustomization.DpgServiceVersion;
-import fixtures.dpgcustomization.models.LroProduct;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -576,64 +575,6 @@ public final class DpgClientImpl {
                     ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.
-     * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<LroProduct, LroProduct> beginLroWithModelAsync(String mode, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.lroWithResponseAsync(mode, requestOptions),
-            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-
-                .setContext(requestOptions != null && requestOptions.getContext() != null
-                    ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(LroProduct.class), TypeReference.createInstance(LroProduct.class));
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.
-     * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<LroProduct, LroProduct> beginLroWithModel(String mode, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.lroWithResponse(mode, requestOptions),
-            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-
-                .setContext(requestOptions != null && requestOptions.getContext() != null
-                    ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(LroProduct.class), TypeReference.createInstance(LroProduct.class));
     }
 
     /**

@@ -152,7 +152,6 @@ public class JavaSettings {
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
                 false, //getBooleanValue(host, "generate-send-request-method", false),
-                getBooleanValue(host, "generate-models", false),
                 getBooleanValue(host, "annotate-getters-and-setters-for-serialization", false),
                 getStringValue(host, "default-http-exception-type"),
                 getBooleanValue(host, "use-default-http-status-code-to-exception-type-mapping", false),
@@ -234,7 +233,6 @@ public class JavaSettings {
      * @param generateSamples Whether to generate samples.
      * @param generateTests Whether to generate tests.
      * @param generateSendRequestMethod Whether to generate the send request method.
-     * @param generateModels Whether to generate models.
      * @param annotateGettersAndSettersForSerialization If set to true, Jackson JsonGetter and JsonSetter will annotate
      * getters and setters in generated models to handle serialization and deserialization. For now, fields will
      * continue being annotated to ensure that there are no backwards compatibility breaks.
@@ -313,7 +311,6 @@ public class JavaSettings {
         boolean generateSamples,
         boolean generateTests,
         boolean generateSendRequestMethod,
-        boolean generateModels,
         boolean annotateGettersAndSettersForSerialization,
         String defaultHttpExceptionType,
         boolean useDefaultHttpStatusCodeToExceptionTypeMapping,
@@ -405,7 +402,6 @@ public class JavaSettings {
         this.generateSamples = generateSamples;
         this.generateTests = generateTests;
         this.generateSendRequestMethod = generateSendRequestMethod;
-        this.generateModels = generateModels;
         this.annotateGettersAndSettersForSerialization = annotateGettersAndSettersForSerialization;
 
         // Error HTTP status code exception type handling.
@@ -1242,17 +1238,6 @@ public class JavaSettings {
      */
     public boolean isGenerateSendRequestMethod() {
         return generateSendRequestMethod;
-    }
-
-    private final boolean generateModels;
-
-    /**
-     * Whether to generate models.
-     *
-     * @return Whether to generate models.
-     */
-    public boolean isGenerateModels() {
-        return generateModels;
     }
 
     private final boolean syncStackEnabled;
