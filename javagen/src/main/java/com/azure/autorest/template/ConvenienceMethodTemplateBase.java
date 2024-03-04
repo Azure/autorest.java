@@ -446,9 +446,17 @@ abstract class ConvenienceMethodTemplateBase {
             // This is mostly for the error response which is in JSON, and is not included in this calculation.
 
             for (String mediaType : mediaTypes) {
-                SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
-                if (type != null) {
-                    return type;
+                // The declared mime type can be of the form "application/json; charset=utf-8" or "application/json"
+                // So, we have to check if the mediaType starts with the supported mime type
+                if (!mediaType.equals("application/json;q=0.9")) { // skip the error media type
+                    SupportedMimeType type = SUPPORTED_MIME_TYPES.entrySet().stream()
+                            .filter(supportedMimeType -> mediaType.startsWith(supportedMimeType.getKey()))
+                            .map(Map.Entry::getValue)
+                            .findAny()
+                            .orElse(null);
+                    if (type != null) {
+                        return type;
+                    }
                 }
             }
             return SupportedMimeType.BINARY;    // BINARY if not recognized
