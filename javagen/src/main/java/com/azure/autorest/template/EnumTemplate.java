@@ -14,11 +14,15 @@ import com.azure.autorest.model.javamodel.JavaContext;
 import com.azure.autorest.model.javamodel.JavaEnum;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
+import com.azure.autorest.model.javamodel.JavaModifier;
+import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
+import com.generic.core.models.HeaderName;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Writes a EnumType to a JavaFile.
@@ -37,10 +41,90 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         JavaSettings settings = JavaSettings.getInstance();
 
         if (enumType.getExpandable()) {
-            writeExpandableStringEnum(enumType, javaFile, settings);
+            if(settings.isBranded()) {
+                writeExpandableStringEnum(enumType, javaFile, settings);
+            } else {
+                writeExpandableStringEnumInterface(enumType, javaFile, settings);
+            }
         } else {
             writeEnum(enumType, javaFile, settings);
         }
+    }
+
+    private void writeExpandableStringEnumInterface(EnumType enumType, JavaFile javaFile, JavaSettings settings) {
+        Set<String> imports = new HashSet<>();
+        imports.add("java.util.Collection");
+        imports.add("java.util.concurrent.ConcurrentHashMap");
+        imports.add("java.util.Map");
+        imports.add(getStringEnumImport());
+        if (!settings.isStreamStyleSerialization()) {
+            imports.add("com.fasterxml.jackson.annotation.JsonCreator");
+        }
+
+        addGeneratedImport(imports);
+
+        javaFile.declareImport(imports);
+        javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
+
+        String enumName = enumType.getName();
+        String declaration = enumName + " implements ExpandableStringEnum<" + enumName + ">";
+
+        javaFile.publicFinalClass(declaration, classBlock -> {
+            IType elementType = enumType.getElementType();
+            String typeName = elementType.getClientType().toString();
+            String pascalTypeName = CodeNamer.toPascalCase(typeName);
+            classBlock.publicStaticFinalVariable("Map<String, " + enumName + "> VALUES = new ConcurrentHashMap<>()");
+
+            for (ClientEnumValue enumValue : enumType.getValues()) {
+                String value = enumValue.getValue();
+                classBlock.javadocComment(CoreUtils.isNullOrEmpty(enumValue.getDescription())
+                        ? "Static value " + value + " for " + enumName + "."
+                        : enumValue.getDescription());
+                addGeneratedAnnotation(classBlock);
+                classBlock.publicStaticFinalVariable(String.format("%1$s %2$s = from%3$s(%4$s)", enumName,
+                        enumValue.getName(), pascalTypeName, elementType.defaultValueExpression(value)));
+            }
+
+            classBlock.variable("String name", JavaVisibility.Private, JavaModifier.Final);
+            classBlock.privateConstructor(enumName + "(String name)", ctor -> {
+                ctor.line("this.name = name;");
+            });
+
+            // fromString(typeName)
+            classBlock.javadocComment(comment -> {
+                comment.description("Creates or finds a " + enumName + " from its string representation.");
+                comment.param("name", "a name to look for");
+                comment.methodReturns("the corresponding " + enumName);
+            });
+
+            addGeneratedAnnotation(classBlock);
+            if (!settings.isStreamStyleSerialization()) {
+                classBlock.annotation("JsonCreator");
+            }
+
+            classBlock.publicStaticMethod(String.format("%1$s from%2$s(%3$s name)", enumName, pascalTypeName, typeName),
+                    function -> {
+                        function.ifBlock("name == null", ifAction -> ifAction.methodReturn("null"));
+                        function.line(enumName + " value = VALUES.get(name);");
+                        function.ifBlock("value != null", ifAction -> {
+                            ifAction.line("return value;");
+                        });
+                        function.methodReturn("VALUES.computeIfAbsent(name, key -> new " + enumName + "(key))");
+                    });
+
+            // values()
+            classBlock.javadocComment(comment -> {
+                comment.description("Gets known " + enumName + " values.");
+                comment.methodReturns("known " + enumName + " values");
+            });
+
+            addGeneratedAnnotation(classBlock);
+            classBlock.publicStaticMethod("Collection<" + enumName + "> values()",
+                    function -> function.methodReturn("VALUES.values()"));
+
+            classBlock.annotation("Override");
+            classBlock.method(JavaVisibility.Public, null, "String toString()", function -> function.methodReturn("name"));
+        });
     }
 
     private void writeExpandableStringEnum(EnumType enumType, JavaFile javaFile, JavaSettings settings) {
@@ -215,18 +299,28 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
             Annotation.GENERATED.addImportsTo(imports);
+            Annotation.METADATA.addImportsTo(imports);
         }
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation(Annotation.GENERATED.getName());
+
+            if (JavaSettings.getInstance().isBranded()) {
+                classBlock.annotation(Annotation.GENERATED.getName());
+            } else {
+                classBlock.annotation(Annotation.METADATA.getName() + "(generated = true)");
+            }
         }
     }
 
     protected void addGeneratedAnnotation(JavaEnum enumBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            enumBlock.annotation(Annotation.GENERATED.getName());
+            if (JavaSettings.getInstance().isBranded()) {
+                enumBlock.annotation(Annotation.GENERATED.getName());
+            } else {
+                enumBlock.annotation(Annotation.METADATA.getName() + "(generated = true)");
+            }
         }
     }
 }

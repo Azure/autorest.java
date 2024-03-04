@@ -121,7 +121,12 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
 
     protected void writeServiceProxyConstruction(JavaBlock constructor, MethodGroupClient methodGroupClient) {
         ClassType proxyType = ClassType.REST_PROXY;
-        constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getSerializerAdapter());",
-                proxyType.getName(), methodGroupClient.getProxy().getName()));
+        if (JavaSettings.getInstance().isBranded()) {
+            constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), client.getSerializerAdapter());",
+                    proxyType.getName(), methodGroupClient.getProxy().getName()));
+        } else {
+            constructor.line(String.format("this.service = %1$s.create(%2$s.class, client.getHttpPipeline(), RestProxyUtils.createDefaultSerializer());",
+                    proxyType.getName(), methodGroupClient.getProxy().getName()));
+        }
     }
 }

@@ -167,6 +167,7 @@ public class JavaSettings {
                 getBooleanValue(host, "include-read-only-in-constructor-args", false),
                 // setting the default as true as the Java design guideline recommends using String for URLs.
                 getBooleanValue(host, "url-as-string", true),
+                getBooleanValue(host, "uuid-as-string", true),
 
                 // setting this to false by default as a lot of existing libraries still use swagger and
                 // were generated with required = true set in JsonProperty annotation
@@ -324,6 +325,7 @@ public class JavaSettings {
         boolean noCustomHeaders,
         boolean includeReadOnlyInConstructorArgs,
         boolean urlAsString,
+        boolean uuidAsString,
         boolean disableRequiredPropertyAnnotation,
         boolean pageSizeEnabled,
         boolean useKeyCredential,
@@ -422,6 +424,7 @@ public class JavaSettings {
         this.noCustomHeaders = noCustomHeaders;
         this.includeReadOnlyInConstructorArgs = includeReadOnlyInConstructorArgs;
         this.urlAsString = urlAsString;
+        this.uuidAsString = uuidAsString;
         this.disableRequiredJsonAnnotation = disableRequiredPropertyAnnotation;
         this.pageSizeEnabled = pageSizeEnabled;
         this.useKeyCredential = useKeyCredential;
@@ -518,6 +521,11 @@ public class JavaSettings {
      */
     public boolean urlAsString() {
         return urlAsString;
+    }
+
+    private final boolean uuidAsString;
+    public boolean uuidAsString() {
+        return uuidAsString;
     }
 
     private final boolean disableRequiredJsonAnnotation;

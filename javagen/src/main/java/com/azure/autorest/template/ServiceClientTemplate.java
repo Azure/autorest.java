@@ -200,8 +200,18 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
                 {
                     if (!settings.isBranded()) {
                         if (constructor.getParameters().equals(Arrays.asList(serviceClient.getHttpPipelineParameter()))) {
+                            constructorBlock.line("this.httpPipeline = httpPipeline;");
+                            for (ServiceClientProperty serviceClientProperty : serviceClient.getProperties().stream().filter(ServiceClientProperty::isReadOnly).collect(Collectors.toList())) {
+                                if (serviceClientProperty.getDefaultValueExpression() != null) {
+                                    constructorBlock.line("this.%s = %s;", serviceClientProperty.getName(), serviceClientProperty.getDefaultValueExpression());
+                                }
+                            }
+
+                            for (MethodGroupClient methodGroupClient : serviceClient.getMethodGroupClients()) {
+                                constructorBlock.line("this.%s = new %s(this);", methodGroupClient.getVariableName(), methodGroupClient.getClassName());
+                            }
+
                             if (serviceClient.getProxy() != null) {
-                                constructorBlock.line("this.httpPipeline = httpPipeline;");
                                 TemplateHelper.createRestProxyInstance(this, serviceClient, constructorBlock);
                             }
                         }
@@ -278,7 +288,10 @@ public class ServiceClientTemplate implements IJavaTemplate<ServiceClient, JavaF
     }
 
     protected String getSerializerPhrase() {
-        return "this.getSerializerAdapter()";
+        if (JavaSettings.getInstance().isBranded()) {
+            return "this.getSerializerAdapter()";
+        }
+        return "RestProxyUtils.createDefaultSerializer()";
     }
 
     protected void writeSerializerMemberInitialization(JavaBlock constructorBlock) {
