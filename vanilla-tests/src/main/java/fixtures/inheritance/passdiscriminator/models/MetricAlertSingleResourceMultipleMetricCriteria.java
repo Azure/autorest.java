@@ -5,7 +5,6 @@
 package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -16,13 +15,12 @@ import java.util.List;
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    property = "odata\\.type",
+    property = "odata.type",
     defaultImpl = MetricAlertSingleResourceMultipleMetricCriteria.class,
     visible = true)
 @JsonTypeName("Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria")
-@JsonFlatten
 @Fluent
-public class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
+public final class MetricAlertSingleResourceMultipleMetricCriteria extends MetricAlertCriteria {
     /*
      * The list of metric criteria for this 'all of' operation. 
      */

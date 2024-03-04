@@ -5,7 +5,6 @@
 package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,14 +15,13 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * The rule criteria that defines the conditions of the alert rule.
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    property = "odata\\.type",
+    property = "odata.type",
     defaultImpl = MetricAlertCriteria.class,
     visible = true)
 @JsonTypeName("MetricAlertCriteria")
@@ -31,16 +29,13 @@ import java.util.regex.Pattern;
     @JsonSubTypes.Type(
         name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
         value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
-@JsonFlatten
 @Fluent
 public class MetricAlertCriteria {
-    private static final Pattern KEY_ESCAPER = Pattern.compile("\\.");;
-
     /*
      * specifies the type of the alert criteria.
      */
     @JsonTypeId
-    @JsonProperty(value = "odata\\.type", required = true)
+    @JsonProperty(value = "odata.type", required = true)
     private Odatatype odataType;
 
     /*
@@ -102,7 +97,7 @@ public class MetricAlertCriteria {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }
-        additionalProperties.put(KEY_ESCAPER.matcher(key).replaceAll("."), value);
+        additionalProperties.put(key, value);
     }
 
     /**
