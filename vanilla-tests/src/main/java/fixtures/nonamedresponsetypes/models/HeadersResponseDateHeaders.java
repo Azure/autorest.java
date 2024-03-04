@@ -7,7 +7,6 @@ package fixtures.nonamedresponsetypes.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.time.LocalDate;
 
 /**
@@ -18,7 +17,6 @@ public final class HeadersResponseDateHeaders {
     /*
      * The value property.
      */
-    @JsonProperty(value = "value")
     private LocalDate value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");

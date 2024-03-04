@@ -3,100 +3,86 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
+import java.util.Objects;
 
 /**
- * license information
- * 
+ * Represents license information.
  */
 public class License {
-
-    /**
-     * the nameof the license
-     * (Required)
-     * 
-     */
     private String name;
-    /**
-     * an uri pointing to the full license text
-     * 
-     */
     private String url;
     private DictionaryAny extensions;
 
     /**
-     * the nameof the license
-     * (Required)
-     * 
+     * Creates a new instance of the License class.
+     */
+    public License() {
+    }
+
+    /**
+     * The name of the license. (Required)
+     *
+     * @return The name of the license.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * the nameof the license
-     * (Required)
-     * 
+     * Sets the name of the license. (Required)
+     *
+     * @param name The name of the license.
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * an uri pointing to the full license text
-     * 
+     * Gets the URL pointing to the full license text.
+     *
+     * @return The URL pointing to the full license text.
      */
     public String getUrl() {
         return url;
     }
 
     /**
-     * an uri pointing to the full license text
-     * 
+     * Sets the URL pointing to the full license text.
+     *
+     * @param url The URL pointing to the full license text.
      */
     public void setUrl(String url) {
         this.url = url;
     }
 
+    /**
+     * Gets the extensions of the license.
+     *
+     * @return The extensions of the license.
+     */
     public DictionaryAny getExtensions() {
         return extensions;
     }
 
+    /**
+     * Sets the extensions of the license.
+     *
+     * @param extensions The extensions of the license.
+     */
     public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(License.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("name");
-        sb.append('=');
-        sb.append(((this.name == null)?"<null>":this.name));
-        sb.append(',');
-        sb.append("url");
-        sb.append('=');
-        sb.append(((this.url == null)?"<null>":this.url));
-        sb.append(',');
-        sb.append("extensions");
-        sb.append('=');
-        sb.append(((this.extensions == null)?"<null>":this.extensions));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return License.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[name="
+            + Objects.toString(name, "<null>") + ",url=" + Objects.toString(url, "<null>") + ",extensions="
+            + Objects.toString(extensions, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.name == null)? 0 :this.name.hashCode()));
-        result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
-        result = ((result* 31)+((this.url == null)? 0 :this.url.hashCode()));
-        return result;
+        return Objects.hash(name, url, extensions);
     }
 
     @Override
@@ -104,11 +90,14 @@ public class License {
         if (other == this) {
             return true;
         }
-        if ((other instanceof License) == false) {
+
+        if (!(other instanceof License)) {
             return false;
         }
+
         License rhs = ((License) other);
-        return ((((this.name == rhs.name)||((this.name!= null)&&this.name.equals(rhs.name)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.url == rhs.url)||((this.url!= null)&&this.url.equals(rhs.url))));
+        return Objects.equals(name, rhs.name) && Objects.equals(url, rhs.url)
+            && Objects.equals(extensions, rhs.extensions);
     }
 
 }

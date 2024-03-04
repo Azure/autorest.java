@@ -5,32 +5,34 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.core.util.CoreUtils;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * An Azure Storage container.
  */
-@JacksonXmlRootElement(localName = "Container")
 @Fluent
-public final class Container {
+public final class Container implements XmlSerializable<Container> {
     /*
      * The Name property.
      */
-    @JsonProperty(value = "Name", required = true)
     private String name;
 
     /*
      * Properties of a container
      */
-    @JsonProperty(value = "Properties", required = true)
     private ContainerProperties properties;
 
     /*
      * Dictionary of <string>
      */
-    @JsonProperty(value = "Metadata")
     private Map<String, String> metadata;
 
     /**
@@ -113,5 +115,75 @@ public final class Container {
         } else {
             getProperties().validate();
         }
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Container" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeStringElement("Name", this.name);
+        xmlWriter.writeXml(this.properties, "Properties");
+        if (this.metadata != null) {
+            xmlWriter.writeStartElement("Metadata");
+            for (Map.Entry<String, String> entry : this.metadata.entrySet()) {
+                xmlWriter.writeStringElement(entry.getKey(), entry.getValue());
+            }
+            xmlWriter.writeEndElement();
+        }
+        return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of Container from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of Container if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Container.
+     */
+    public static Container fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of Container from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support cases where the model can deserialize from different root element names.
+     * @return An instance of Container if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the Container.
+     */
+    public static Container fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "Container" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            Container deserializedContainer = new Container();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
+
+                if ("Name".equals(elementName.getLocalPart())) {
+                    deserializedContainer.name = reader.getStringElement();
+                } else if ("Properties".equals(elementName.getLocalPart())) {
+                    deserializedContainer.properties = ContainerProperties.fromXml(reader, "Properties");
+                } else if ("Metadata".equals(elementName.getLocalPart())) {
+                    while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                        if (deserializedContainer.metadata == null) {
+                            deserializedContainer.metadata = new LinkedHashMap<>();
+                        }
+                        deserializedContainer.metadata.put(reader.getElementName().getLocalPart(),
+                            reader.getStringElement());
+                    }
+                } else {
+                    reader.skipElement();
+                }
+            }
+
+            return deserializedContainer;
+        });
     }
 }

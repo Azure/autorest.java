@@ -43,6 +43,10 @@ public final class GetResponse1 implements JsonSerializable<GetResponse1> {
         return this.prop;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class GetResponse1 implements JsonSerializable<GetResponse1> {
      * Reads an instance of GetResponse1 from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of GetResponse1 if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of GetResponse1 if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the GetResponse1.
      */
+    @Generated
     public static GetResponse1 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Prop prop = null;

@@ -5,8 +5,8 @@
 package com._specs_.azure.core.basic.models;
 
 import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -18,7 +18,7 @@ import java.util.Set;
 /**
  * UserOrder for testing list with expand.
  */
-@Immutable
+@Fluent
 public final class UserOrder implements JsonSerializable<UserOrder> {
     /*
      * The user's id.
@@ -30,13 +30,13 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
      * The user's id.
      */
     @Generated
-    private final int userId;
+    private int userId;
 
     /*
      * The user's order detail
      */
     @Generated
-    private final String detail;
+    private String detail;
 
     @Generated
     private boolean jsonMergePatch;
@@ -61,14 +61,9 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
 
     /**
      * Creates an instance of UserOrder class.
-     * 
-     * @param userId the userId value to set.
-     * @param detail the detail value to set.
      */
     @Generated
-    public UserOrder(int userId, String detail) {
-        this.userId = userId;
-        this.detail = detail;
+    public UserOrder() {
     }
 
     /**
@@ -92,6 +87,20 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     }
 
     /**
+     * Set the userId property: The user's id.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param userId the userId value to set.
+     * @return the UserOrder object itself.
+     */
+    @Generated
+    public UserOrder setUserId(int userId) {
+        this.userId = userId;
+        this.updatedProperties.add("userId");
+        return this;
+    }
+
+    /**
      * Get the detail property: The user's order detail.
      * 
      * @return the detail value.
@@ -101,6 +110,24 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
         return this.detail;
     }
 
+    /**
+     * Set the detail property: The user's order detail.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param detail the detail value to set.
+     * @return the UserOrder object itself.
+     */
+    @Generated
+    public UserOrder setDetail(String detail) {
+        this.detail = detail;
+        this.updatedProperties.add("detail");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -113,13 +140,16 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("userId", this.userId);
-        if (this.detail != null) {
-            jsonWriter.writeStringField("detail", this.detail);
-        } else if (updatedProperties.contains("detail")) {
-            jsonWriter.writeNullField("detail");
+        if (updatedProperties.contains("detail")) {
+            if (this.detail == null) {
+                jsonWriter.writeNullField("detail");
+            } else {
+                jsonWriter.writeStringField("detail", this.detail);
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -128,11 +158,11 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
      * Reads an instance of UserOrder from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of UserOrder if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of UserOrder if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UserOrder.
      */
+    @Generated
     public static UserOrder fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;
@@ -152,8 +182,10 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
                     reader.skipChildren();
                 }
             }
-            UserOrder deserializedUserOrder = new UserOrder(userId, detail);
+            UserOrder deserializedUserOrder = new UserOrder();
             deserializedUserOrder.id = id;
+            deserializedUserOrder.userId = userId;
+            deserializedUserOrder.detail = detail;
 
             return deserializedUserOrder;
         });

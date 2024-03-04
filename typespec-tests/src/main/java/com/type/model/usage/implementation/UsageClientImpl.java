@@ -161,9 +161,7 @@ public final class UsageClientImpl {
 
     /**
      * The input operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
@@ -186,9 +184,7 @@ public final class UsageClientImpl {
 
     /**
      * The input operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
@@ -211,9 +207,7 @@ public final class UsageClientImpl {
 
     /**
      * The output operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
@@ -225,8 +219,7 @@ public final class UsageClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return record used in operation return type along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return record used in operation return type along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> outputWithResponseAsync(RequestOptions requestOptions) {
@@ -236,9 +229,7 @@ public final class UsageClientImpl {
 
     /**
      * The output operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
@@ -260,17 +251,13 @@ public final class UsageClientImpl {
 
     /**
      * The inputAndOutput operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
@@ -283,8 +270,7 @@ public final class UsageClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return record used both as operation parameter and return type along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return record used both as operation parameter and return type along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> inputAndOutputWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
@@ -294,17 +280,13 @@ public final class UsageClientImpl {
 
     /**
      * The inputAndOutput operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     requiredProp: String (Required)

@@ -10,11 +10,12 @@ import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.extension.base.util.FileUtils;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
+import com.azure.autorest.postprocessor.implementation.CodeFormatterUtil;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.slf4j.Logger;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.UncheckedIOException;
 import java.net.URI;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -118,65 +119,19 @@ public class Postprocessor {
         }
 
         if (!settings.isSkipFormatting()) {
-            Path tmpDir = null;
             try {
-                tmpDir = FileUtils.createTempDirectory("spotless" + UUID.randomUUID());
-
-                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
-                    Path file = tmpDir.resolve(javaFile.getKey());
-                    Files.createDirectories(file.getParent());
-                    Files.writeString(file, javaFile.getValue());
-                }
-
-                Path pomPath = tmpDir.resolve("spotless-pom.xml");
-                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/pom.xml"), pomPath);
-                Files.copy(Postprocessor.class.getClassLoader().getResourceAsStream("readme/eclipse-format-azure-sdk-for-java.xml"),
-                    pomPath.resolveSibling("eclipse-format-azure-sdk-for-java.xml"));
-
-                attemptMavenSpotless(pomPath);
-
-                for (Map.Entry<String, String> javaFile : javaFiles.entrySet()) {
-                    Path file = tmpDir.resolve(javaFile.getKey());
-                    plugin.writeFile(javaFile.getKey(), Files.readString(file), null);
-                }
-            } catch (IOException ex) {
-                throw new UncheckedIOException(ex);
-            } finally {
-                if (tmpDir != null) {
-                    Utils.deleteDirectory(tmpDir.toFile());
-                }
+                CodeFormatterUtil.formatCode(javaFiles, plugin);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
             }
         } else {
             javaFiles.forEach((fileName, content) -> plugin.writeFile(fileName, content, null));
         }
     }
 
-    private static void attemptMavenSpotless(Path pomPath) {
-        String[] command = Utils.isWindows()
-            ? new String[] { "cmd", "/c", "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() }
-            : new String[] { "mvn", "spotless:apply", "-P", "spotless", "-f", pomPath.toString() };
-
-        try {
-            File outputFile = Files.createTempFile(pomPath.getParent(), "spotless", ".log").toFile();
-            outputFile.deleteOnExit();
-            Process process = new ProcessBuilder(command)
-                .redirectErrorStream(true)
-                .redirectOutput(ProcessBuilder.Redirect.to(outputFile))
-                .start();
-            process.waitFor(60, TimeUnit.SECONDS);
-
-            if (process.isAlive() || process.exitValue() != 0) {
-                process.destroyForcibly();
-                throw new RuntimeException("Spotless failed to complete within 60 seconds or failed with an error code. "
-                    + Files.readString(outputFile.toPath()));
-            }
-        } catch (IOException | InterruptedException ex) {
-            throw new RuntimeException("Failed to run Spotless on generated code.", ex);
-        }
-    }
-
     private static String getReadme(NewPlugin plugin) {
-        List<String> configurationFiles = plugin.getValue(List.class, "configurationFiles");
+        List<String> configurationFiles = plugin.getValue(
+            TypeFactory.defaultInstance().constructCollectionLikeType(List.class, String.class), "configurationFiles");
         return configurationFiles == null || configurationFiles.isEmpty()
             ? JavaSettings.getInstance().getAutorestSettings().getOutputFolder()
             : configurationFiles.stream().filter(key -> !key.contains(".autorest")).findFirst().orElse(null);
@@ -192,7 +147,8 @@ public class Postprocessor {
         return null;
     }
 
-    public static Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath, String baseDirectory, Logger logger) {
+    public static Class<? extends Customization> loadCustomizationClassFromJavaCode(String filePath,
+        String baseDirectory, Logger logger) {
         Path customizationFile = Paths.get(filePath);
         if (!customizationFile.isAbsolute()) {
             if (baseDirectory != null) {

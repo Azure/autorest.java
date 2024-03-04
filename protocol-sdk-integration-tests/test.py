@@ -31,7 +31,7 @@ def run(script_path: str, output_folder: str, json_path: str, namespace: str,
         security_str += f' --security-scopes={security_scopes}'
     if security_header_name:
         security_str += f' --security-header-name={security_header_name}'
-    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --data-plane --output-folder={output_folder} --namespace={namespace} {security_str} --sdk-integration --generate-samples --generate-tests --generate-models'.split(' ')
+    cmd = f'autorest --input-file={json_path} --version={AUTOREST_CORE_VERSION} --use=../ --java --data-plane --output-folder={output_folder} --namespace={namespace} {security_str} --sdk-integration --generate-samples --generate-tests'.split(' ')
     cmd[0] += ('.cmd' if OS_WINDOWS else '')
     logging.info(' '.join(cmd))
     subprocess.check_call(cmd, cwd=script_path)

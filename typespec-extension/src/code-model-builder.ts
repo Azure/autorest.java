@@ -38,6 +38,9 @@ import {
   getOverloadedOperation,
   isErrorModel,
   EnumMember,
+  walkPropertiesInherited,
+  getService,
+  isVoidType,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -53,9 +56,18 @@ import {
   getHttpOperation,
   getQueryParamOptions,
   getHeaderFieldOptions,
+  isPathParam,
+  HttpOperationBody,
 } from "@typespec/http";
 import { getAddedOnVersions, getVersion } from "@typespec/versioning";
-import { isPollingLocation, getPagedResult, isFixed, getLroMetadata } from "@azure-tools/typespec-azure-core";
+import {
+  isPollingLocation,
+  getPagedResult,
+  isFixed,
+  getLroMetadata,
+  getUnionAsEnum,
+  UnionEnum,
+} from "@azure-tools/typespec-azure-core";
 import {
   SdkContext,
   listClients,
@@ -68,6 +80,9 @@ import {
   isInternal,
   SdkClient,
   getCrossLanguageDefinitionId,
+  getClientNameOverride,
+  shouldFlattenProperty,
+  getWireName,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -112,6 +127,7 @@ import {
   UnixTimeSchema,
   Language,
 } from "@autorest/codemodel";
+import { KnownMediaType } from "@azure-tools/codegen";
 import { CodeModel } from "./common/code-model.js";
 import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
 import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
@@ -142,7 +158,6 @@ import {
   getDurationFormat,
   hasScalarAsBase,
   isNullableType,
-  isSameLiteralTypes,
   getAccess,
   getUsage,
   getUnionDescription,
@@ -151,7 +166,6 @@ import {
   isAllValueInteger,
 } from "./type-utils.js";
 import {
-  getClientApiVersions,
   getServiceVersion,
   operationIsJsonMergePatch,
   isPayloadProperty,
@@ -165,8 +179,8 @@ import {
   isKnownContentType,
   CONTENT_TYPE_KEY,
 } from "./operation-utils.js";
+import { isArmCommonType } from "./type-utils.js";
 import pkg from "lodash";
-import { getExtensions } from "@typespec/openapi";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -261,7 +275,7 @@ export class CodeModelBuilder {
 
   private processHost(server: HttpServer | undefined): Parameter[] {
     const hostParameters: Parameter[] = [];
-    if (server) {
+    if (server && !this.isArmSynthesizedServer(server)) {
       server.parameters.forEach((it) => {
         let parameter;
 
@@ -388,11 +402,12 @@ export class CodeModelBuilder {
   private processModels(clients: SdkClient[]) {
     const processedModels: Set<Type> = new Set();
     for (const client of clients) {
-      const models: (Model | Enum)[] = Array.from(client.service.models.values());
+      const models: (Model | Enum | Union)[] = Array.from(client.service.models.values());
       Array.from(client.service.enums.values()).forEach((it) => models.push(it));
+      Array.from(client.service.unions.values()).forEach((it) => models.push(it));
 
       // lambda to mark model as public
-      const modelAsPublic = (model: Model | Enum) => {
+      const modelAsPublic = (model: Model | Enum | Union) => {
         // check it does not contain Union
         // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
         // if (union) {
@@ -403,7 +418,7 @@ export class CodeModelBuilder {
         //   throw new Error(errorMsg);
         // }
 
-        const schema = this.processSchema(model, model.name);
+        const schema = this.processSchema(model, "");
 
         this.trackSchemaUsage(schema, {
           usage: [SchemaContext.Public],
@@ -416,7 +431,7 @@ export class CodeModelBuilder {
           if (access === "public") {
             modelAsPublic(model);
           } else if (access === "internal") {
-            const schema = this.processSchema(model, model.name);
+            const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.Internal],
@@ -425,7 +440,7 @@ export class CodeModelBuilder {
 
           const usage = getUsage(model);
           if (usage) {
-            const schema = this.processSchema(model, model.name);
+            const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
               usage: usage,
@@ -454,6 +469,10 @@ export class CodeModelBuilder {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
+      // skip models under "Azure.ResourceManager"
+      if (this.isArm() && schema.language.default?.namespace?.startsWith("Azure.ResourceManager")) {
+        return;
+      }
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
       if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
@@ -491,6 +510,14 @@ export class CodeModelBuilder {
           schemaUsage.splice(index, 1);
         }
       }
+
+      // Internal on Anonymous
+      if (schemaUsage?.includes(SchemaContext.Anonymous)) {
+        const index = schemaUsage.indexOf(SchemaContext.Internal);
+        if (index < 0) {
+          schemaUsage.push(SchemaContext.Internal);
+        }
+      }
     }
   }
 
@@ -518,24 +545,21 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
+      } else {
+        // fallback to @service.version
+        const service = getService(this.program, client.service);
+        if (service?.version) {
+          codeModelClient.apiVersions = [];
+          const apiVersion = new ApiVersion();
+          apiVersion.version = service.version;
+          codeModelClient.apiVersions.push(apiVersion);
+        }
       }
-      // } else {
-      //   // fallback to @service.version
-      //   const service = getService(this.program, client.service);
-      //   if (service?.version) {
-      //     codeModelClient.apiVersions = [];
-      //     const apiVersion = new ApiVersion();
-      //     apiVersion.version = service.version;
-      //     codeModelClient.apiVersions.push(apiVersion);
-      //   } else {
-      //     throw new Error(`API version not available for client ${client.name}.`);
-      //   }
-      // }
 
       // server
       let baseUri = "{endpoint}";
       const servers = getServers(this.program, client.service);
-      if (servers && servers.length === 1) {
+      if (servers && servers.length === 1 && !this.isArmSynthesizedServer(servers[0])) {
         baseUri = servers[0].url;
       }
       const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
@@ -566,18 +590,18 @@ export class CodeModelBuilder {
         // operation group with no operation is skipped
         if (operations.length > 0) {
           const groupPath = operationGroup.groupPath.split(".");
-          let oprationGroupName: string;
+          let operationGroupName: string;
           if (groupPath.length > 1) {
             // groupPath should be in format of "OpenAIClient.Chat.Completions"
-            oprationGroupName = groupPath.slice(1).join("");
+            operationGroupName = groupPath.slice(1).join("");
           } else {
             // protection
-            oprationGroupName = operationGroup.type.name;
+            operationGroupName = operationGroup.type.name;
           }
-          codeModelGroup = new OperationGroup(oprationGroupName);
+          codeModelGroup = new OperationGroup(operationGroupName);
           for (const operation of operations) {
             if (!this.needToSkipProcessingOperation(operation, clientContext)) {
-              codeModelGroup.addOperation(this.processOperation(oprationGroupName, operation, clientContext));
+              codeModelGroup.addOperation(this.processOperation(operationGroupName, operation, clientContext));
             }
           }
           codeModelClient.operationGroups.push(codeModelGroup);
@@ -591,7 +615,7 @@ export class CodeModelBuilder {
     let apiVersionSameForAllClients = true;
     let sharedApiVersions = undefined;
     for (const client of this.codeModel.clients) {
-      const apiVersions = getClientApiVersions(client);
+      const apiVersions = client.apiVersions;
       if (!apiVersions) {
         // client does not have apiVersions
         apiVersionSameForAllClients = false;
@@ -612,7 +636,7 @@ export class CodeModelBuilder {
       }
     } else {
       for (const client of this.codeModel.clients) {
-        const apiVersions = getClientApiVersions(client);
+        const apiVersions = client.apiVersions;
         if (apiVersions) {
           client.serviceVersion = getServiceVersion(client);
         }
@@ -620,6 +644,18 @@ export class CodeModelBuilder {
     }
 
     return clients;
+  }
+
+  /**
+   * `@armProviderNamespace` currently will add a default server if not defined globally:
+   * https://github.com/Azure/typespec-azure/blob/8b8d7c05f168d9305a09691c4fedcb88f4a57652/packages/typespec-azure-resource-manager/src/namespace.ts#L121-L128
+   * TODO: if the synthesized server has the right hostParameter, we can use that insteadß
+   *
+   * @param server returned by getServers
+   * @returns whether it's synthesized by `@armProviderNamespace`
+   */
+  private isArmSynthesizedServer(server: HttpServer): boolean {
+    return this.isArm() && (!server.parameters || server.parameters.size == 0);
   }
 
   private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
@@ -672,6 +708,11 @@ export class CodeModelBuilder {
         generateConvenienceApi = false;
         apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is multiple content-type`;
         this.logWarning(apiComment);
+      } else if (operationIsJsonMergePatch(op) && this.options["stream-style-serialization"] === false) {
+        // do not generate convenient method for json merge patch operation if stream-style-serialization is not enabled
+        generateConvenienceApi = false;
+        apiComment = `Convenience API is not generated, as operation '${op.operation.name}' is 'application/merge-patch+json' and stream-style-serialization is not enabled`;
+        this.logWarning(apiComment);
       }
       // else {
       //   const union = operationRefersUnion(this.program, op, this.typeUnionRefCache);
@@ -717,7 +758,9 @@ export class CodeModelBuilder {
     // body
     if (op.parameters.body) {
       if (op.parameters.body.parameter) {
-        this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+        if (!isVoidType(op.parameters.body.parameter.type)) {
+          this.processParameterBody(codeModelOperation, op, op.parameters.body.parameter);
+        }
       } else if (op.parameters.body.type) {
         let bodyType = this.getEffectiveSchemaType(op.parameters.body.type);
 
@@ -888,17 +931,33 @@ export class CodeModelBuilder {
         }
       }
     }
-
-    if (this.isArmLongRunningOperation(this.program, operation)) {
-      op.extensions = op.extensions ?? {};
-      op.extensions["x-ms-long-running-operation"] = true;
-    }
   }
+
+  private _armApiVersionParameter?: Parameter;
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
     if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
       // pre-condition for "isApiVersion": the client supports ApiVersions
-      const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
+      if (this.isArm()) {
+        // Currently we assume ARM tsp only have one client and one api-version.
+        // TODO: How will service define mixed api-versions(like those in Compute RP)?
+        const apiVersion = clientContext.apiVersions[0];
+        if (!this._armApiVersionParameter) {
+          this._armApiVersionParameter = this.createApiVersionParameter(
+            "api-version",
+            param.type === "query" ? ParameterLocation.Query : ParameterLocation.Path,
+            apiVersion,
+          );
+          clientContext.addGlobalParameter(this._armApiVersionParameter);
+        }
+        op.addParameter(this._armApiVersionParameter);
+      } else {
+        const parameter = param.type === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
+        op.addParameter(parameter);
+        clientContext.addGlobalParameter(parameter);
+      }
+    } else if (this.isSubscriptionId(param)) {
+      const parameter = this.subscriptionIdParameter(param);
       op.addParameter(parameter);
       clientContext.addGlobalParameter(parameter);
     } else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
@@ -1119,7 +1178,9 @@ export class CodeModelBuilder {
 
       if (groupToRequestConditions || groupToMatchConditions) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         request.signatureParameters = [];
         op.convenienceApi.requests.push(request);
@@ -1257,10 +1318,10 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
     if (op.convenienceApi && operationIsMultipart(httpOperation)) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.MultipartFormData] });
+      this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    if (!schema.language.default.name && schema instanceof ObjectSchema) {
+    if (schema instanceof ObjectSchema && !schema.language.default.name) {
       // anonymous model
 
       // name the schema for documentation
@@ -1270,11 +1331,14 @@ export class CodeModelBuilder {
         // name the parameter for documentation
         parameter.language.default.name = "request";
       }
+
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
 
       if (op.convenienceApi && op.parameters) {
         op.convenienceApi.requests = [];
-        const request = new Request();
+        const request = new Request({
+          protocol: op.requests![0].protocol,
+        });
         request.parameters = [];
         op.convenienceApi.requests.push(request);
 
@@ -1386,30 +1450,38 @@ export class CodeModelBuilder {
     candidateResponseSchema: Schema | undefined = undefined,
   ) {
     // TODO: what to do if more than 1 response?
+    // It happens when the response type is Union, on one status code.
     let response: Response;
     let headers: Array<HttpHeader> | undefined = undefined;
-    if (resp.responses && resp.responses.length > 0 && resp.responses[0].headers) {
+    if (resp.responses && resp.responses.length > 0) {
       // headers
       headers = [];
-      for (const [key, header] of Object.entries(resp.responses[0].headers)) {
-        const schema = this.processSchema(header, key);
-        headers.push(
-          new HttpHeader(key, schema, {
-            language: {
-              default: {
-                name: key,
-                description: this.getDoc(header),
-              },
-            },
-          }),
-        );
+      for (const response of resp.responses.values()) {
+        if (response.headers) {
+          for (const [key, header] of Object.entries(response.headers)) {
+            const schema = this.processSchema(header, key);
+            headers.push(
+              new HttpHeader(key, schema, {
+                language: {
+                  default: {
+                    name: key,
+                    description: this.getDoc(header),
+                  },
+                },
+              }),
+            );
+          }
+        }
       }
     }
 
+    let responseBody: HttpOperationBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
     let trackConvenienceApi = op.convenienceApi ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
-      const responseBody = resp.responses[0].body;
+      responseBody = resp.responses[0].body;
+    }
+    if (responseBody) {
       const unknownResponseBody =
         responseBody.contentTypes.length > 0 && !isKnownContentType(responseBody.contentTypes);
 
@@ -1422,7 +1494,7 @@ export class CodeModelBuilder {
               statusCodes: this.getStatusCodes(resp.statusCodes),
               headers: headers,
               mediaTypes: responseBody.contentTypes,
-              knownMediaType: "binary",
+              knownMediaType: KnownMediaType.Binary,
             },
           },
           language: {
@@ -1577,7 +1649,6 @@ export class CodeModelBuilder {
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Number":
-        // TODO: float
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Boolean":
@@ -1596,7 +1667,10 @@ export class CodeModelBuilder {
           // use it for extensible enum
           schema = this.processChoiceSchema(knownValues, this.getName(knownValues), false);
         } else {
-          const schemaNameHint = pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
+          const schemaNameHint =
+            type.type.kind === "Scalar" && this.program.checker.isStdType(type.type)
+              ? nameHint // std scalar won't need a nameHint
+              : pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
           schema = this.processSchema(type.type, schemaNameHint);
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
@@ -1618,6 +1692,14 @@ export class CodeModelBuilder {
       case "EnumMember":
         // e.g. "type: TypeEnum.EnumValue1"
         return this.processConstantSchemaForEnumMember(type, this.getName(type));
+
+      case "UnionVariant":
+        // e.g. "type: Union.Variant1"
+        if (type.type.kind === "String" || type.type.kind === "Number" || type.type.kind === "Boolean") {
+          return this.processConstantSchemaForUnionVariant(type, this.getName(type));
+        } else {
+          throw new Error(`Unsupported type reference to UnionVariant.`);
+        }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
@@ -1625,6 +1707,7 @@ export class CodeModelBuilder {
   private processScalar(type: Scalar, formatFromDerived: string | undefined, nameHint: string): Schema {
     const scalarName = type.name;
     if (this.program.checker.isStdType(type)) {
+      nameHint = scalarName;
       switch (scalarName) {
         case "string": {
           const format = formatFromDerived ?? getFormat(this.program, type);
@@ -1865,35 +1948,49 @@ export class CodeModelBuilder {
     );
   }
 
+  private processConstantSchemaForUnionVariant(type: UnionVariant, name: string): ConstantSchema {
+    const valueType = this.processSchema(type.union, this.getName(type.union));
+
+    type Literal = StringLiteral | NumericLiteral | BooleanLiteral;
+
+    return this.codeModel.schemas.add(
+      new ConstantSchema(name, this.getDoc(type), {
+        summary: this.getSummary(type),
+        valueType: valueType,
+        value: new ConstantValue((type.type as Literal).value ?? type.name),
+      }),
+    );
+  }
+
   private processChoiceSchemaForUnion(
     type: Union,
-    variants: UnionVariant[],
+    unionEnum: UnionEnum,
     name: string,
   ): ChoiceSchema | SealedChoiceSchema {
     // variants is Literal
 
-    const kindSet = new Set(variants.map((it) => it.type.kind));
-    // "choice1" | "choice2" is sealed
-    // "choice1" | "choice2" | string is extensible
-    const sealed = kindSet.size === 1;
+    const sealed = !unionEnum.open;
 
-    variants = variants.filter(
-      (it) => it.type.kind === "String" || it.type.kind === "Number" || it.type.kind === "Boolean",
-    );
-    const kind = variants[0].type.kind;
-    const valueType =
-      kind === "String"
-        ? this.stringSchema
-        : kind === "Boolean"
-          ? this.booleanSchema
-          : isAllValueInteger(variants.map((it) => (it.type as any).value))
-            ? this.integerSchema
-            : this.doubleSchema;
+    const variants = [...unionEnum.flattenedMembers.values()];
+    const kindIsString = typeof variants[0].value === "string";
+    const valueType = kindIsString
+      ? this.stringSchema
+      : isAllValueInteger(variants.map((it) => it.value as number))
+        ? this.integerSchema
+        : this.doubleSchema;
 
     const choices: ChoiceValue[] = [];
-    variants.forEach((it) =>
-      choices.push(new ChoiceValue((it.type as any).value.toString(), this.getDoc(it), (it.type as any).value)),
-    );
+    for (const [name, member] of unionEnum.flattenedMembers.entries()) {
+      // get name from "UnionVariant | EnumMember"
+      let valueName = this.getName(member.type);
+      const valueDoc = this.getDoc(member.type);
+      if (!valueName) {
+        // fallback the name to the dict
+        valueName = typeof name === "string" ? name : `${member.value}`;
+      }
+      // TODO: may need to use getWireName on "member.value"
+      choices.push(new ChoiceValue(valueName, valueDoc, member.value));
+    }
 
     const namespace = getNamespace(type);
 
@@ -1911,7 +2008,7 @@ export class CodeModelBuilder {
         },
       },
     });
-    // schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
+    schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type as Union & { name: string });
     return this.codeModel.schemas.add(schema);
   }
 
@@ -1971,6 +2068,21 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
+    if (
+      (this.isArm() &&
+        namespace?.startsWith("Azure.ResourceManager") &&
+        // there's ResourceListResult under Azure.ResourceManager namespace,
+        // which shouldn't be considered Resource schema parent
+        (name?.startsWith("TrackedResource") ||
+          name?.startsWith("ExtensionResource") ||
+          name?.startsWith("ProxyResource"))) ||
+      name === "ArmResource"
+    ) {
+      const objectSchema = this.dummyResourceSchema(type, name, namespace);
+      this.codeModel.schemas.add(objectSchema);
+
+      return objectSchema;
+    }
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
@@ -2013,9 +2125,6 @@ export class CodeModelBuilder {
       }
       if (discriminatorProperty) {
         objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
-        // as we do not expose the discriminator property, its schema is fine to be just a string (and we do not want to generate an enum that not used anywhere)
-        // TODO: support enum schema, if we expose the discriminator property
-        objectSchema.discriminator.property.schema = this.stringSchema;
       } else {
         // fallback to property name, if cannot find the discriminator property
         objectSchema.discriminator = new Discriminator(
@@ -2056,8 +2165,16 @@ export class CodeModelBuilder {
       }
     } else if (isRecordModelType(this.program, type)) {
       // "pure" Record processed elsewhere
+
       // "mixed" Record that have properties, treat the model as "additionalProperties"
-      const parentSchema = this.processDictionarySchema(type, this.getName(type));
+      /* type should have sourceModel, as
+      model Type is Record<> {
+        prop1: string
+      }
+      */
+      const parentSchema = type.sourceModel
+        ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
+        : this.processDictionarySchema(type, this.getName(type));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
       pushDistinct(objectSchema.parents.all, parentSchema);
@@ -2074,19 +2191,27 @@ export class CodeModelBuilder {
         ).propertyName;
 
         const discriminatorProperty = Array.from(type.properties.values()).find(
-          (it) => it.name === discriminatorPropertyName && (it.type.kind === "String" || it.type.kind === "EnumMember"),
+          (it) =>
+            it.name === discriminatorPropertyName &&
+            (it.type.kind === "String" || it.type.kind === "EnumMember" || it.type.kind === "UnionVariant"),
         );
         if (discriminatorProperty) {
           if (discriminatorProperty.type.kind === "String") {
-            // value of StringLiteral of the discriminator property
+            // value as StringLiteral
             objectSchema.discriminatorValue = discriminatorProperty.type.value;
           } else if (discriminatorProperty.type.kind === "EnumMember") {
-            // value of EnumMember of the discriminator property
-            // lint requires value be string, not number
+            // value as EnumMember
+            // lint requires value be string
             objectSchema.discriminatorValue =
               (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
+          } else if (discriminatorProperty.type.kind === "UnionVariant") {
+            // value as UnionVariant
+            objectSchema.discriminatorValue =
+              ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
           }
         } else {
+          // it is possible that the property is Union, e.g. 'kind: "type1" | "type2"'; but such Type appears not to be a concrete model.
+
           // fallback to name of the Model
           objectSchema.discriminatorValue = name;
         }
@@ -2119,11 +2244,40 @@ export class CodeModelBuilder {
 
     if (type.kind === "Model") {
       const effective = getEffectiveModelType(program, type, isSchemaProperty);
-      if (effective.name) {
+      if (this.isArm() && getNamespace(effective as Model)?.startsWith("Azure.ResourceManager")) {
+        // Catalog is TrackedResource<CatalogProperties>
+        return type;
+      } else if (effective.name) {
         return effective;
       }
     }
     return type;
+  }
+
+  private dummyResourceSchema(type: Model, name?: string, namespace?: string): ObjectSchema {
+    const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
+    const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
+    const declaredProperties = walkPropertiesInherited(type);
+    for (const prop of declaredProperties) {
+      resource.addProperty(this.processModelProperty(prop));
+    }
+    return resource;
+  }
+
+  private dummyObjectSchema(type: Model, name: string, namespace?: string): ObjectSchema {
+    return new ObjectScheme(name, this.getDoc(type), {
+      summary: this.getSummary(type),
+      language: {
+        default: {
+          name: name,
+          namespace: namespace,
+        },
+        java: {
+          name: name,
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
   }
 
   private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
@@ -2194,13 +2348,16 @@ export class CodeModelBuilder {
     const schema = this.processSchema(prop, prop.name);
     let nullable = isNullableType(prop.type);
 
-    let extensions = undefined;
+    let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop)) {
-      extensions = {
-        "x-ms-secret": true,
-      };
+      extensions = extensions ?? {};
+      extensions["x-ms-secret"] = true;
       // if the property does not return in response, it had to be nullable
       nullable = true;
+    }
+    if (shouldFlattenProperty(this.sdkContext, prop)) {
+      extensions = extensions ?? {};
+      extensions["x-ms-client-flatten"] = true;
     }
 
     return new Property(this.getName(prop), this.getDoc(prop), schema, {
@@ -2242,9 +2399,10 @@ export class CodeModelBuilder {
       return this.processSchema(nonNullVariants[0].type, name);
     }
 
-    if (isSameLiteralTypes(nonNullVariants)) {
+    const unionEnum = ignoreDiagnostics(getUnionAsEnum(type));
+    if (unionEnum) {
       // enum
-      return this.processChoiceSchemaForUnion(type, nonNullVariants, name);
+      return this.processChoiceSchemaForUnion(type, unionEnum, name);
     }
 
     // TODO: name from typespec-client-generator-core
@@ -2339,6 +2497,8 @@ export class CodeModelBuilder {
         return pascalCase(type.valueAsString);
       case "Boolean":
         return pascalCase(type.value ? "True" : "False");
+      case "Union":
+        return type.name ?? "Union";
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
@@ -2369,10 +2529,15 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Union | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation,
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
+    const emitterClientName = getClientNameOverride(this.sdkContext, target);
+    if (emitterClientName) {
+      return emitterClientName;
+    }
+    // TODO: deprecate getProjectedName
     const languageProjectedName = getProjectedName(this.program, target, "java");
     if (languageProjectedName) {
       return languageProjectedName;
@@ -2406,16 +2571,15 @@ export class CodeModelBuilder {
       this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
       return newName;
     }
+    if (typeof target.name === "symbol") {
+      return "";
+    }
     return target.name || "";
   }
 
   private getSerializedName(target: ModelProperty): string {
-    // First get projected name, if not found, return target.name
-    const jsonProjectedName = getProjectedName(this.program, target, "json");
-    if (jsonProjectedName) {
-      return jsonProjectedName;
-    }
-    return target.name;
+    // TODO: currently this is only for JSON
+    return getWireName(this.sdkContext, target);
   }
 
   private isReadOnly(target: ModelProperty): boolean {
@@ -2514,14 +2678,18 @@ export class CodeModelBuilder {
     );
   }
 
-  private createApiVersionParameter(serializedName: string, parameterLocation: ParameterLocation): Parameter {
+  private createApiVersionParameter(
+    serializedName: string,
+    parameterLocation: ParameterLocation,
+    value = "",
+  ): Parameter {
     return new Parameter(
       serializedName,
       "Version parameter",
       this.codeModel.schemas.add(
         new ConstantSchema(serializedName, "API Version", {
           valueType: this.stringSchema,
-          value: new ConstantValue(""),
+          value: new ConstantValue(value),
         }),
       ),
       {
@@ -2557,6 +2725,42 @@ export class CodeModelBuilder {
     );
   }
 
+  private isSubscriptionId(param: HttpOperationParameter): boolean {
+    return (
+      "subscriptionId".toLocaleLowerCase() === param?.name?.toLocaleLowerCase() &&
+      param.param &&
+      isArmCommonType(param.param) &&
+      isPathParam(this.program, param.param)
+    );
+  }
+
+  private subscriptionIdParameter(parameter: HttpOperationParameter): Parameter {
+    if (!this._subscriptionParameter) {
+      const param = parameter.param;
+      const description = getDoc(this.program, param);
+      this._subscriptionParameter = new Parameter(
+        "subscriptionId",
+        description ? description : "The ID of the target subscription.",
+        this.stringSchema,
+        {
+          implementation: ImplementationLocation.Client,
+          required: true,
+          protocol: {
+            http: new HttpParameter(ParameterLocation.Path),
+          },
+          language: {
+            default: {
+              serializedName: "subscriptionId",
+            },
+          },
+        },
+      );
+    }
+    return this._subscriptionParameter;
+  }
+
+  private _subscriptionParameter?: Parameter;
+
   private propagateSchemaUsage(schema: Schema): void {
     const processedSchemas = new Set<Schema>();
 
@@ -2591,6 +2795,10 @@ export class CodeModelBuilder {
 
             schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
             schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+
+            if (schema.discriminator?.property?.schema) {
+              innerApplySchemaUsage(schema.discriminator?.property?.schema, schemaUsage);
+            }
           }
 
           // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
@@ -2606,15 +2814,19 @@ export class CodeModelBuilder {
         innerApplySchemaUsage(schema.elementType, schemaUsage);
       } else if (schema instanceof OrSchema) {
         schema.anyOf?.forEach((it) => innerApplySchemaUsage(it, schemaUsage));
+      } else if (schema instanceof ConstantSchema) {
+        innerApplySchemaUsage(schema.valueType, schemaUsage);
       }
     };
 
     // Exclude context that not to be propagated
     const schemaUsage = {
       usage: (schema as SchemaUsage).usage?.filter(
-        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous && it !== SchemaContext.MultipartFormData,
+        (it) => it !== SchemaContext.Paged && it !== SchemaContext.Anonymous,
       ),
-      serializationFormats: (schema as SchemaUsage).serializationFormats,
+      serializationFormats: (schema as SchemaUsage).serializationFormats?.filter(
+        (it) => it !== KnownMediaType.Multipart,
+      ),
     };
     // Propagate the usage of the initial schema itself
     innerPropagateSchemaUsage(schema, schemaUsage);
@@ -2632,6 +2844,12 @@ export class CodeModelBuilder {
       if (schemaUsage.usage) {
         pushDistinct((schema.usage = schema.usage || []), ...schemaUsage.usage);
       }
+      if (schemaUsage.serializationFormats) {
+        pushDistinct(
+          (schema.serializationFormats = schema.serializationFormats || []),
+          ...schemaUsage.serializationFormats,
+        );
+      }
     } else if (schema instanceof DictionarySchema) {
       this.trackSchemaUsage(schema.elementType, schemaUsage);
     } else if (schema instanceof ArraySchema) {
@@ -2639,8 +2857,8 @@ export class CodeModelBuilder {
     }
   }
 
-  private isArmLongRunningOperation(program: Program, op: Operation) {
-    return this.codeModel.arm && Boolean(getExtensions(program, op)?.get("x-ms-long-running-operation"));
+  private isArm(): boolean {
+    return Boolean(this.codeModel.arm);
   }
 
   private isSchemaUsageEmpty(schema: Schema): boolean {

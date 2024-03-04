@@ -62,6 +62,10 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
         return this.array;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -74,11 +78,11 @@ public final class StringAndArrayCases implements JsonSerializable<StringAndArra
      * Reads an instance of StringAndArrayCases from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of StringAndArrayCases if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of StringAndArrayCases if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the StringAndArrayCases.
      */
+    @Generated
     public static StringAndArrayCases fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BinaryData string = null;

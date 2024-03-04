@@ -31,7 +31,7 @@ public class LiteralTests {
         floatLiteralClient.put(body);
 
         Assertions.assertNotNull(floatLiteralClient.get());
-        Assertions.assertEquals(42.42, floatLiteralClient.get().getProperty());
+        Assertions.assertEquals(43.125, floatLiteralClient.get().getProperty());
     }
 
     @Test

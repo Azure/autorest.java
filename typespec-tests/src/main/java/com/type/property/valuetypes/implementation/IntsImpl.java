@@ -51,8 +51,7 @@ public final class IntsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientInts to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for ValueTypesClientInts to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientInts")
@@ -96,9 +95,7 @@ public final class IntsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: int (Required)
@@ -120,9 +117,7 @@ public final class IntsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: int (Required)
@@ -144,9 +139,7 @@ public final class IntsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: int (Required)
@@ -169,9 +162,7 @@ public final class IntsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: int (Required)

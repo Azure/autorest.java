@@ -7,27 +7,33 @@ package fixtures.requiredfieldsascotrargstransformation.models;
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
 import com.azure.core.util.DateTimeRfc1123;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * The TransformationAsParentRequiredFields model.
  */
 @Immutable
 public final class TransformationAsParentRequiredFields extends TransformationAsRequiredFields {
+    private static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+
     /*
      * The rfc1123RequiredChild property.
      */
-    @JsonProperty(value = "rfc1123RequiredChild", required = true)
-    private DateTimeRfc1123 rfc1123RequiredChild;
+    private final DateTimeRfc1123 rfc1123RequiredChild;
 
     /*
      * The rfc1123NonRequiredChild property.
      */
-    @JsonProperty(value = "rfc1123NonRequiredChild")
     private DateTimeRfc1123 rfc1123NonRequiredChild;
 
     /**
@@ -45,19 +51,6 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
         OffsetDateTime rfc1123RequiredChild) {
         super(rfc1123Required, nameRequired, urlBase64EncodedRequired, unixTimeLongRequired, unixTimeDateTimeRequired);
         this.rfc1123RequiredChild = new DateTimeRfc1123(rfc1123RequiredChild);
-    }
-
-    @JsonCreator
-    private TransformationAsParentRequiredFields(
-        @JsonProperty(value = "rfc1123Required", required = true) DateTimeRfc1123 rfc1123Required,
-        @JsonProperty(value = "nameRequired", required = true) String nameRequired,
-        @JsonProperty(value = "urlBase64EncodedRequired", required = true) Base64Url urlBase64EncodedRequired,
-        @JsonProperty(value = "unixTimeLongRequired", required = true) long unixTimeLongRequired,
-        @JsonProperty(value = "unixTimeDateTimeRequired", required = true) OffsetDateTime unixTimeDateTimeRequired,
-        @JsonProperty(value = "rfc1123RequiredChild", required = true) DateTimeRfc1123 rfc1123RequiredChild) {
-        this(rfc1123Required.getDateTime(), nameRequired, urlBase64EncodedRequired.decodedBytes(),
-            OffsetDateTime.ofInstant(Instant.ofEpochSecond(unixTimeLongRequired), ZoneOffset.UTC),
-            unixTimeDateTimeRequired, rfc1123RequiredChild.getDateTime());
     }
 
     /**
@@ -111,5 +104,148 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
             throw new IllegalArgumentException(
                 "Missing required property rfc1123RequiredChild in model TransformationAsParentRequiredFields");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        if (getRfc1123Required() != null) {
+            jsonWriter.writeStringField("rfc1123Required",
+                Objects.toString(new DateTimeRfc1123(getRfc1123Required()), null));
+        }
+        jsonWriter.writeStringField("nameRequired", getNameRequired());
+        if (getUrlBase64EncodedRequired() != null) {
+            jsonWriter.writeStringField("urlBase64EncodedRequired",
+                Objects.toString(Base64Url.encode(getUrlBase64EncodedRequired()), null));
+        }
+        if (getUnixTimeLongRequired() != null) {
+            jsonWriter.writeLongField("unixTimeLongRequired", getUnixTimeLongRequired().toEpochSecond());
+        }
+        jsonWriter.writeStringField("unixTimeDateTimeRequired",
+            getUnixTimeDateTimeRequired() == null
+                ? null
+                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getUnixTimeDateTimeRequired()));
+        if (getRfc1123NonRequired() != null) {
+            jsonWriter.writeStringField("rfc1123NonRequired",
+                Objects.toString(new DateTimeRfc1123(getRfc1123NonRequired()), null));
+        }
+        jsonWriter.writeStringField("rfc1123RequiredChild", Objects.toString(this.rfc1123RequiredChild, null));
+        jsonWriter.writeStringField("rfc1123NonRequiredChild", Objects.toString(this.rfc1123NonRequiredChild, null));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of TransformationAsParentRequiredFields from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of TransformationAsParentRequiredFields if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the TransformationAsParentRequiredFields.
+     */
+    public static TransformationAsParentRequiredFields fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            boolean rfc1123RequiredFound = false;
+            OffsetDateTime rfc1123Required = null;
+            boolean nameRequiredFound = false;
+            String nameRequired = null;
+            boolean urlBase64EncodedRequiredFound = false;
+            byte[] urlBase64EncodedRequired = EMPTY_BYTE_ARRAY;
+            boolean unixTimeLongRequiredFound = false;
+            OffsetDateTime unixTimeLongRequired = null;
+            boolean unixTimeDateTimeRequiredFound = false;
+            OffsetDateTime unixTimeDateTimeRequired = null;
+            OffsetDateTime rfc1123NonRequired = null;
+            boolean rfc1123RequiredChildFound = false;
+            OffsetDateTime rfc1123RequiredChild = null;
+            DateTimeRfc1123 rfc1123NonRequiredChild = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("rfc1123Required".equals(fieldName)) {
+                    DateTimeRfc1123 rfc1123RequiredHolder
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                    if (rfc1123RequiredHolder != null) {
+                        rfc1123Required = rfc1123RequiredHolder.getDateTime();
+                    }
+                    rfc1123RequiredFound = true;
+                } else if ("nameRequired".equals(fieldName)) {
+                    nameRequired = reader.getString();
+                    nameRequiredFound = true;
+                } else if ("urlBase64EncodedRequired".equals(fieldName)) {
+                    Base64Url urlBase64EncodedRequiredHolder
+                        = reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
+                    if (urlBase64EncodedRequiredHolder != null) {
+                        urlBase64EncodedRequired = urlBase64EncodedRequiredHolder.decodedBytes();
+                    }
+                    urlBase64EncodedRequiredFound = true;
+                } else if ("unixTimeLongRequired".equals(fieldName)) {
+                    unixTimeLongRequired
+                        = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
+                    unixTimeLongRequiredFound = true;
+                } else if ("unixTimeDateTimeRequired".equals(fieldName)) {
+                    unixTimeDateTimeRequired
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    unixTimeDateTimeRequiredFound = true;
+                } else if ("rfc1123NonRequired".equals(fieldName)) {
+                    DateTimeRfc1123 rfc1123NonRequiredHolder
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                    if (rfc1123NonRequiredHolder != null) {
+                        rfc1123NonRequired = rfc1123NonRequiredHolder.getDateTime();
+                    }
+                } else if ("rfc1123RequiredChild".equals(fieldName)) {
+                    DateTimeRfc1123 rfc1123RequiredChildHolder
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                    if (rfc1123RequiredChildHolder != null) {
+                        rfc1123RequiredChild = rfc1123RequiredChildHolder.getDateTime();
+                    }
+                    rfc1123RequiredChildFound = true;
+                } else if ("rfc1123NonRequiredChild".equals(fieldName)) {
+                    rfc1123NonRequiredChild
+                        = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));
+                } else {
+                    reader.skipChildren();
+                }
+            }
+            if (rfc1123RequiredFound
+                && nameRequiredFound
+                && urlBase64EncodedRequiredFound
+                && unixTimeLongRequiredFound
+                && unixTimeDateTimeRequiredFound
+                && rfc1123RequiredChildFound) {
+                TransformationAsParentRequiredFields deserializedTransformationAsParentRequiredFields
+                    = new TransformationAsParentRequiredFields(rfc1123Required, nameRequired, urlBase64EncodedRequired,
+                        unixTimeLongRequired, unixTimeDateTimeRequired, rfc1123RequiredChild);
+                deserializedTransformationAsParentRequiredFields.setRfc1123NonRequired(rfc1123NonRequired);
+                deserializedTransformationAsParentRequiredFields.rfc1123NonRequiredChild = rfc1123NonRequiredChild;
+
+                return deserializedTransformationAsParentRequiredFields;
+            }
+            List<String> missingProperties = new ArrayList<>();
+            if (!rfc1123RequiredFound) {
+                missingProperties.add("rfc1123Required");
+            }
+            if (!nameRequiredFound) {
+                missingProperties.add("nameRequired");
+            }
+            if (!urlBase64EncodedRequiredFound) {
+                missingProperties.add("urlBase64EncodedRequired");
+            }
+            if (!unixTimeLongRequiredFound) {
+                missingProperties.add("unixTimeLongRequired");
+            }
+            if (!unixTimeDateTimeRequiredFound) {
+                missingProperties.add("unixTimeDateTimeRequired");
+            }
+            if (!rfc1123RequiredChildFound) {
+                missingProperties.add("rfc1123RequiredChild");
+            }
+
+            throw new IllegalStateException(
+                "Missing required property/properties: " + String.join(", ", missingProperties));
+        });
     }
 }

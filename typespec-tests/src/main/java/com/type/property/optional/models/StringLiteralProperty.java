@@ -21,7 +21,7 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * Property
      */
     @Generated
-    private StringLiteralProperty1 property;
+    private StringLiteralPropertyProperty property;
 
     /**
      * Creates an instance of StringLiteralProperty class.
@@ -36,7 +36,7 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * @return the property value.
      */
     @Generated
-    public StringLiteralProperty1 getProperty() {
+    public StringLiteralPropertyProperty getProperty() {
         return this.property;
     }
 
@@ -47,11 +47,15 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * @return the StringLiteralProperty object itself.
      */
     @Generated
-    public StringLiteralProperty setProperty(StringLiteralProperty1 property) {
+    public StringLiteralProperty setProperty(StringLiteralPropertyProperty property) {
         this.property = property;
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -63,10 +67,10 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
      * Reads an instance of StringLiteralProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of StringLiteralProperty if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of StringLiteralProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the StringLiteralProperty.
      */
+    @Generated
     public static StringLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             StringLiteralProperty deserializedStringLiteralProperty = new StringLiteralProperty();
@@ -75,7 +79,8 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedStringLiteralProperty.property = StringLiteralProperty1.fromString(reader.getString());
+                    deserializedStringLiteralProperty.property
+                        = StringLiteralPropertyProperty.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

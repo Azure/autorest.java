@@ -68,10 +68,19 @@ enum Color {
 }
 
 @access(Access.internal, "client")
-enum ColorModel {
-  Red,
-  Blue,
-  Green,
+union ColorModel {
+  string,
+  "Red",
+  "Blue",
+  "Green",
+}
+
+// UnusedEnum will be generated
+@access(Access.public)
+union UnusedEnum {
+  string,
+  "Weekday",
+  "Weekend",
 }
 
 @route("/internal")

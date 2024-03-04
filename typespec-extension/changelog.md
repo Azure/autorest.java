@@ -1,5 +1,80 @@
 # Release History
 
+## 0.14.0 (2024-02-29)
+
+Compatible with compiler 0.53.
+
+- Enhanced convenience API for "application/merge-patch+json".
+
+## 0.13.10 (2024-02-28)
+
+Compatible with compiler 0.53.
+
+## 0.13.9 (2024-02-27)
+
+Compatible with compiler 0.53.
+
+## 0.13.8 (2024-02-26)
+
+Compatible with compiler 0.53.
+
+- Fixed bug that 'partial update' will execute twice when generate from TypeSpec.
+
+## 0.13.7 (2024-02-23)
+
+Compatible with compiler 0.53.
+
+## 0.13.6 (2024-02-20)
+
+Compatible with compiler 0.53.
+
+- Fixed bug related to the support of `union` as extensible enum.
+
+## 0.13.5 (2024-02-09)
+
+Compatible with compiler 0.53.
+
+- Behavior changed on "multipart/form-data" request. If `filename` is not provided, implementation will no longer provide a default filename to `Content-Disposition` line.
+
+## 0.13.4 (2024-02-07)
+
+Compatible with compiler 0.53.
+
+## 0.13.3 (2024-02-04)
+
+Compatible with compiler 0.52.
+
+## 0.13.2 (2024-02-02)
+
+Compatible with compiler 0.52.
+
+- Supported `@encodedName` for "application/json".
+
+## 0.13.1 (2024-01-26)
+
+Compatible with compiler 0.52.
+
+- Behavior changed on "multipart/form-data" request. The file field would take a `##FileDetails` model, instead of `BinaryData`. 
+
+## 0.13.0 (2024-01-25)
+
+Compatible with compiler 0.52.
+
+- Supported `@clientName` from "@azure-tools/typespec-client-generator-core".
+- Supported `@flattenProperty` from "@azure-tools/typespec-client-generator-core".
+
+## 0.12.3 (2024-01-22)
+
+Compatible with compiler 0.51.
+
+- (Preview) Supported generating SDK from management-plane TypeSpec (`@armProviderNamespace`).
+
+## 0.12.2 (2024-01-09)
+
+Compatible with compiler 0.51.
+
+- Supported convenience API for "application/merge-patch+json" (basic functionality), only available when stream-style-serialization is enabled.
+
 ## 0.12.1 (2023-12-18)
 
 Compatible with compiler 0.51.

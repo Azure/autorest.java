@@ -39,13 +39,11 @@ public final class DatetimeOperationClient {
 
     /**
      * Get models that will return all properties in the model.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -64,13 +62,11 @@ public final class DatetimeOperationClient {
 
     /**
      * Get models that will return the default object.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -89,13 +85,11 @@ public final class DatetimeOperationClient {
 
     /**
      * Put a body with all properties present.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -115,13 +109,11 @@ public final class DatetimeOperationClient {
 
     /**
      * Put a body with default properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty: OffsetDateTime (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -192,7 +184,7 @@ public final class DatetimeOperationClient {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
+        BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
@@ -214,7 +206,7 @@ public final class DatetimeOperationClient {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
+        BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
         JsonMergePatchHelper.getDatetimePropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }

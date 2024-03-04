@@ -17,6 +17,11 @@ import java.io.IOException;
 @Fluent
 public class DotFish implements JsonSerializable<DotFish> {
     /*
+     * The fish.type property.
+     */
+    private String fishType;
+
+    /*
      * The species property.
      */
     private String species;
@@ -25,6 +30,27 @@ public class DotFish implements JsonSerializable<DotFish> {
      * Creates an instance of DotFish class.
      */
     public DotFish() {
+        this.fishType = "DotFish";
+    }
+
+    /**
+     * Get the fishType property: The fish.type property.
+     * 
+     * @return the fishType value.
+     */
+    public String getFishType() {
+        return this.fishType;
+    }
+
+    /**
+     * Set the fishType property: The fish.type property.
+     * 
+     * @param fishType the fishType value to set.
+     * @return the DotFish object itself.
+     */
+    DotFish setFishType(String fishType) {
+        this.fishType = fishType;
+        return this;
     }
 
     /**
@@ -55,9 +81,13 @@ public class DotFish implements JsonSerializable<DotFish> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("fish.type", this.fishType);
         jsonWriter.writeStringField("species", this.species);
         return jsonWriter.writeEndObject();
     }
@@ -66,32 +96,30 @@ public class DotFish implements JsonSerializable<DotFish> {
      * Reads an instance of DotFish from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DotFish if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @return An instance of DotFish if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DotFish.
      */
     public static DotFish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
-            JsonReader readerToUse = reader.bufferObject();
-
-            readerToUse.nextToken(); // Prepare for reading
-            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = readerToUse.getFieldName();
-                readerToUse.nextToken();
-                if ("fish\\.type".equals(fieldName)) {
-                    discriminatorValue = readerToUse.getString();
-                    break;
-                } else {
-                    readerToUse.skipChildren();
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("fish.type".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
                 }
-            }
-            // Use the discriminator value to determine which subtype should be deserialized.
-            if ("DotSalmon".equals(discriminatorValue)) {
-                return DotSalmon.fromJson(readerToUse.reset());
-            } else {
-                return fromJsonKnownDiscriminator(readerToUse.reset());
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("DotSalmon".equals(discriminatorValue)) {
+                    return DotSalmon.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
             }
         });
     }
@@ -103,7 +131,9 @@ public class DotFish implements JsonSerializable<DotFish> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("species".equals(fieldName)) {
+                if ("fish.type".equals(fieldName)) {
+                    deserializedDotFish.fishType = reader.getString();
+                } else if ("species".equals(fieldName)) {
                     deserializedDotFish.species = reader.getString();
                 } else {
                     reader.skipChildren();

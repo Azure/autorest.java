@@ -23,8 +23,7 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
     private String service;
 
     /*
-     * Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You
-     * obtained this from the Www-Authenticate response header from the challenge.
+     * Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
      */
     private String scope;
 
@@ -65,8 +64,7 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
     }
 
     /**
-     * Get the scope property: Which is expected to be a valid scope, and can be specified more than once for multiple
-     * scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * Get the scope property: Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
      * 
      * @return the scope value.
      */
@@ -75,8 +73,7 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
     }
 
     /**
-     * Set the scope property: Which is expected to be a valid scope, and can be specified more than once for multiple
-     * scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * Set the scope property: Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
      * 
      * @param scope the scope value to set.
      * @return the PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object itself.
@@ -128,6 +125,9 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -139,15 +139,12 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
     }
 
     /**
-     * Reads an instance of PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema from the
-     * JsonReader.
+     * Reads an instance of PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the
-     * JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the
-     * PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
+     * @throws IOException If an error occurs while reading the PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
      */
     public static PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         fromJson(JsonReader jsonReader) throws IOException {

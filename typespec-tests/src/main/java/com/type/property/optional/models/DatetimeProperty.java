@@ -54,6 +54,10 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -66,10 +70,10 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
      * Reads an instance of DatetimeProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DatetimeProperty if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of DatetimeProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DatetimeProperty.
      */
+    @Generated
     public static DatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DatetimeProperty deserializedDatetimeProperty = new DatetimeProperty();

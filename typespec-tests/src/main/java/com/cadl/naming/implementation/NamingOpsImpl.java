@@ -54,8 +54,7 @@ public final class NamingOpsImpl {
     }
 
     /**
-     * The interface defining all the services for NamingClientNamingOps to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for NamingClientNamingOps to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "NamingClientNamingOp")
@@ -86,7 +85,7 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> getAnonymouse(@HostParam("endpoint") String endpoint,
+        Mono<Response<BinaryData>> getAnonymous(@HostParam("endpoint") String endpoint,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
 
         @Get("/naming")
@@ -95,7 +94,7 @@ public final class NamingOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> getAnonymouseSync(@HostParam("endpoint") String endpoint,
+        Response<BinaryData> getAnonymousSync(@HostParam("endpoint") String endpoint,
             @HeaderParam("accept") String accept, RequestOptions requestOptions, Context context);
     }
 
@@ -103,30 +102,16 @@ public final class NamingOpsImpl {
      * summary of POST op
      * 
      * description of POST op.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>etag</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>summary of etag header parameter
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
      * 
-     * description of etag header parameter</td>
-     * </tr>
+     * description of etag header parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     parameters (Optional): {
@@ -134,15 +119,13 @@ public final class NamingOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             kind_id: String (Optional)
+     *             @data.kind: String (Optional)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
@@ -175,30 +158,16 @@ public final class NamingOpsImpl {
      * summary of POST op
      * 
      * description of POST op.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>etag</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>summary of etag header parameter
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
      * 
-     * description of etag header parameter</td>
-     * </tr>
+     * description of etag header parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     parameters (Optional): {
@@ -206,15 +175,13 @@ public final class NamingOpsImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             kind_id: String (Optional)
+     *             @data.kind: String (Optional)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
@@ -242,10 +209,8 @@ public final class NamingOpsImpl {
     }
 
     /**
-     * The getAnonymouse operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * The getAnonymous operation.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -260,17 +225,15 @@ public final class NamingOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getAnonymouseWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getAnonymousWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil
-            .withContext(context -> service.getAnonymouse(this.client.getEndpoint(), accept, requestOptions, context));
+            .withContext(context -> service.getAnonymous(this.client.getEndpoint(), accept, requestOptions, context));
     }
 
     /**
-     * The getAnonymouse operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * The getAnonymous operation.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -285,8 +248,8 @@ public final class NamingOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getAnonymouseWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getAnonymousWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.getAnonymouseSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
+        return service.getAnonymousSync(this.client.getEndpoint(), accept, requestOptions, Context.NONE);
     }
 }

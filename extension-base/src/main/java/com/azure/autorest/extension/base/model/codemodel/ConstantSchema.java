@@ -3,58 +3,51 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a schema that represents a constant value
- * 
+ * Represents a constant schema.
  */
 public class ConstantSchema extends Schema {
-
-    /**
-     * 
-     * (Required)
-     * 
-     */
     private Schema valueType;
-    /**
-     * a container for the actual constant value
-     * (Required)
-     * 
-     */
     private ConstantValue value;
 
     /**
-     * 
-     * (Required)
-     * 
+     * Creates a new instance of the ConstantSchema class.
+     */
+    public ConstantSchema() {
+        super();
+    }
+
+    /**
+     * Gets the value type. (Required)
+     *
+     * @return The value type.
      */
     public Schema getValueType() {
         return valueType;
     }
 
     /**
-     * 
-     * (Required)
-     * 
+     * Sets the value type. (Required)
+     *
+     * @param valueType The value type.
      */
     public void setValueType(Schema valueType) {
         this.valueType = valueType;
     }
 
     /**
-     * a container for the actual constant value
-     * (Required)
-     * 
+     * Gets the actual constant value. (Required)
+     *
+     * @return The actual constant value.
      */
     public ConstantValue getValue() {
         return value;
     }
 
     /**
-     * a container for the actual constant value
-     * (Required)
-     * 
+     * Sets the actual constant value. (Required)
+     *
+     * @param value The actual constant value.
      */
     public void setValue(ConstantValue value) {
         this.value = value;

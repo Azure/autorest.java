@@ -16,7 +16,7 @@ public final class StringExtensibleNamedUnion extends ExpandableStringEnum<Strin
      * Static value b for StringExtensibleNamedUnion.
      */
     @Generated
-    public static final StringExtensibleNamedUnion B = fromString("b");
+    public static final StringExtensibleNamedUnion OPTIONB = fromString("b");
 
     /**
      * Static value c for StringExtensibleNamedUnion.

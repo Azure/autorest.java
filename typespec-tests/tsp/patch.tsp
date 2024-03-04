@@ -11,7 +11,6 @@ using TypeSpec.Versioning;
 
 @service({
   title: "Patch",
-  version: "1.0.0",
 })
 @useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Cadl.Patch;
@@ -31,10 +30,11 @@ model Resource {
   intValue?: int32;
   enumValue?: "a" | "b" | "c";
 
-  @projectedName("json", "wireNameForInnerModelProperty")
+  @encodedName("application/json", "wireNameForInnerModelProperty")
   innerModelProperty?: InnerModel;
 
   array?: InnerModel[];
+  fish?: Fish;
 }
 
 model InnerModel {

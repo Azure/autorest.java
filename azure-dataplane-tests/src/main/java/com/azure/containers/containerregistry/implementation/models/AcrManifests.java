@@ -44,8 +44,7 @@ public final class AcrManifests implements JsonSerializable<AcrManifests> {
     }
 
     /**
-     * Get the registryLoginServer property: Registry login server name. This is likely to be similar to
-     * {registry-name}.azurecr.io.
+     * Get the registryLoginServer property: Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      * 
      * @return the registryLoginServer value.
      */
@@ -54,8 +53,7 @@ public final class AcrManifests implements JsonSerializable<AcrManifests> {
     }
 
     /**
-     * Set the registryLoginServer property: Registry login server name. This is likely to be similar to
-     * {registry-name}.azurecr.io.
+     * Set the registryLoginServer property: Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      * 
      * @param registryLoginServer the registryLoginServer value to set.
      * @return the AcrManifests object itself.
@@ -125,6 +123,9 @@ public final class AcrManifests implements JsonSerializable<AcrManifests> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -139,8 +140,7 @@ public final class AcrManifests implements JsonSerializable<AcrManifests> {
      * Reads an instance of AcrManifests from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of AcrManifests if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of AcrManifests if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the AcrManifests.
      */
     public static AcrManifests fromJson(JsonReader jsonReader) throws IOException {

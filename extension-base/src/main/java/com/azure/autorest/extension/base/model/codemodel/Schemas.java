@@ -6,499 +6,545 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
- * the full set of schemas for a given service, categorized into convenient collections
- * 
+ * Represents the full set of schemas for a given service, categorized into convenient collections.
  */
 public class Schemas {
-
-    /**
-     * a collection of items
-     * 
-     */
-    private List<ArraySchema> arrays = new ArrayList<ArraySchema>();
-    /**
-     * an associative array (ie, dictionary, hashtable, etc)
-     * 
-     */
-    private List<DictionarySchema> dictionaries = new ArrayList<DictionarySchema>();
+    private List<ArraySchema> arrays = new ArrayList<>();
+    private List<DictionarySchema> dictionaries = new ArrayList<>();
     private List<BinarySchema> binaries = new ArrayList<>();
     private List<ObjectSchema> groups = new ArrayList<>();
-    /**
-     * a true or false value
-     * 
-     */
-    private List<BooleanSchema> booleans = new ArrayList<BooleanSchema>();
-    /**
-     * a number value
-     * 
-     */
-    private List<NumberSchema> numbers = new ArrayList<NumberSchema>();
-    /**
-     * an object of some type
-     * 
-     */
-    private List<ObjectSchema> objects = new ArrayList<ObjectSchema>();
-    /**
-     * a string of characters
-     * (Required)
-     * 
-     */
-    private List<StringSchema> strings = new ArrayList<StringSchema>();
-    /**
-     * UnixTime
-     * 
-     */
-    private List<UnixTimeSchema> unixtimes = new ArrayList<UnixTimeSchema>();
-    /**
-     * ByteArray -- an array of bytes
-     * 
-     */
-    private List<ByteArraySchema> byteArrays = new ArrayList<ByteArraySchema>();
-    private List<Schema> streams = new ArrayList<Schema>();
-    /**
-     * a single character
-     * 
-     */
-    private List<CharSchema> chars = new ArrayList<CharSchema>();
-    /**
-     * a Date
-     * 
-     */
-    private List<DateSchema> dates = new ArrayList<DateSchema>();
-    /**
-     * a DateTime
-     * 
-     */
-    private List<DateTimeSchema> dateTimes = new ArrayList<DateTimeSchema>();
-    /**
-     * a Duration
-     * 
-     */
-    private List<DurationSchema> durations = new ArrayList<DurationSchema>();
-    /**
-     * a universally unique identifier
-     * 
-     */
-    private List<UuidSchema> uuids = new ArrayList<UuidSchema>();
-    /**
-     * an URI of some kind
-     * 
-     */
-    private List<UriSchema> uris = new ArrayList<UriSchema>();
-    /**
-     * a password or credential
-     * 
-     */
-    private List<CredentialSchema> credentials = new ArrayList<CredentialSchema>();
-    /**
-     * OData Query
-     * 
-     */
-    private List<ODataQuerySchema> odataQueries = new ArrayList<ODataQuerySchema>();
-    /**
-     * - this is essentially can be thought of as an 'enum' 
-     * that is a choice between one of several strings
-     * 
-     */
-    private List<ChoiceSchema> choices = new ArrayList<ChoiceSchema>();
-    private List<SealedChoiceSchema> sealedChoices = new ArrayList<SealedChoiceSchema>();
-    private List<FlagSchema> flags = new ArrayList<FlagSchema>();
-    /**
-     * a constant value
-     * 
-     */
-    private List<ConstantSchema> constants = new ArrayList<ConstantSchema>();
-    private List<AndSchema> ands = new ArrayList<AndSchema>();
-    private List<OrSchema> ors = new ArrayList<OrSchema>();
-    private List<XorSchema> xors = new ArrayList<XorSchema>();
-    /**
-     * it's possible that we just may make this an error 
-     * in representation.
-     * 
-     */
-    private List<Schema> unknowns = new ArrayList<Schema>();
-    private List<ParameterGroupSchema> parameterGroups = new ArrayList<ParameterGroupSchema>();
+    private List<BooleanSchema> booleans = new ArrayList<>();
+    private List<NumberSchema> numbers = new ArrayList<>();
+    private List<ObjectSchema> objects = new ArrayList<>();
+    private List<StringSchema> strings = new ArrayList<>();
+    private List<UnixTimeSchema> unixtimes = new ArrayList<>();
+    private List<ByteArraySchema> byteArrays = new ArrayList<>();
+    private List<Schema> streams = new ArrayList<>();
+    private List<CharSchema> chars = new ArrayList<>();
+    private List<DateSchema> dates = new ArrayList<>();
+    private List<DateTimeSchema> dateTimes = new ArrayList<>();
+    private List<DurationSchema> durations = new ArrayList<>();
+    private List<UuidSchema> uuids = new ArrayList<>();
+    private List<UriSchema> uris = new ArrayList<>();
+    private List<CredentialSchema> credentials = new ArrayList<>();
+    private List<ODataQuerySchema> odataQueries = new ArrayList<>();
+    private List<ChoiceSchema> choices = new ArrayList<>();
+    private List<SealedChoiceSchema> sealedChoices = new ArrayList<>();
+    private List<FlagSchema> flags = new ArrayList<>();
+    private List<ConstantSchema> constants = new ArrayList<>();
+    private List<AndSchema> ands = new ArrayList<>();
+    private List<OrSchema> ors = new ArrayList<>();
+    private List<XorSchema> xors = new ArrayList<>();
+    private List<Schema> unknowns = new ArrayList<>();
+    private List<ParameterGroupSchema> parameterGroups = new ArrayList<>();
 
     /**
-     * a collection of items
-     * 
+     * Creates a new instance of the Schemas class.
+     */
+    public Schemas() {
+    }
+
+    /**
+     * Gets the list of array schemas.
+     *
+     * @return The list of array schemas.
      */
     public List<ArraySchema> getArrays() {
         return arrays;
     }
 
     /**
-     * a collection of items
-     * 
+     * Sets the list of array schemas.
+     *
+     * @param arrays The list of array schemas.
      */
     public void setArrays(List<ArraySchema> arrays) {
         this.arrays = arrays;
     }
 
     /**
-     * an associative array (ie, dictionary, hashtable, etc)
-     * 
+     * Gets the list of dictionary schemas.
+     *
+     * @return The list of dictionary schemas.
      */
     public List<DictionarySchema> getDictionaries() {
         return dictionaries;
     }
 
     /**
-     * an associative array (ie, dictionary, hashtable, etc)
-     * 
+     * Sets the list of dictionary schemas.
+     *
+     * @param dictionaries The list of dictionary schemas.
      */
     public void setDictionaries(List<DictionarySchema> dictionaries) {
         this.dictionaries = dictionaries;
     }
 
     /**
-     * a true or false value
-     * 
+     * Gets the list of boolean schemas.
+     *
+     * @return The list of boolean schemas.
      */
     public List<BooleanSchema> getBooleans() {
         return booleans;
     }
 
     /**
-     * a true or false value
-     * 
+     * Sets the list of boolean schemas.
+     *
+     * @param booleans The list of boolean schemas.
      */
     public void setBooleans(List<BooleanSchema> booleans) {
         this.booleans = booleans;
     }
 
     /**
-     * a number value
-     * 
+     * Gets the list of number schemas.
+     *
+     * @return The list of number schemas.
      */
     public List<NumberSchema> getNumbers() {
         return numbers;
     }
 
     /**
-     * a number value
-     * 
+     * Sets the list of number schemas.
+     *
+     * @param numbers The list of number schemas.
      */
     public void setNumbers(List<NumberSchema> numbers) {
         this.numbers = numbers;
     }
 
     /**
-     * an object of some type
-     * 
+     * Gets the list of object schemas.
+     *
+     * @return The list of object schemas.
      */
     public List<ObjectSchema> getObjects() {
         return objects;
     }
 
     /**
-     * an object of some type
-     * 
+     * Sets the list of object schemas.
+     *
+     * @param objects The list of object schemas.
      */
     public void setObjects(List<ObjectSchema> objects) {
         this.objects = objects;
     }
 
     /**
-     * a string of characters
-     * (Required)
-     * 
+     * Gets the list of string schemas.
+     *
+     * @return The list of string schemas.
      */
     public List<StringSchema> getStrings() {
         return strings;
     }
 
     /**
-     * a string of characters
-     * (Required)
-     * 
+     * Sets the list of string schemas.
+     *
+     * @param strings The list of string schemas.
      */
     public void setStrings(List<StringSchema> strings) {
         this.strings = strings;
     }
 
     /**
-     * UnixTime
-     * 
+     * Gets the list of UnixTime schemas.
+     *
+     * @return The list of UnixTime schemas.
      */
     public List<UnixTimeSchema> getUnixtimes() {
         return unixtimes;
     }
 
     /**
-     * UnixTime
-     * 
+     * Sets the list of UnixTime schemas.
+     *
+     * @param unixtimes The list of UnixTime schemas.
      */
     public void setUnixtimes(List<UnixTimeSchema> unixtimes) {
         this.unixtimes = unixtimes;
     }
 
     /**
-     * ByteArray -- an array of bytes
-     * 
+     * Gets the list of ByteArray schemas.
+     *
+     * @return The list of ByteArray schemas.
      */
     public List<ByteArraySchema> getByteArrays() {
         return byteArrays;
     }
 
     /**
-     * ByteArray -- an array of bytes
-     * 
+     * Sets the list of ByteArray schemas.
+     *
+     * @param byteArrays The list of ByteArray schemas.
      */
     public void setByteArrays(List<ByteArraySchema> byteArrays) {
         this.byteArrays = byteArrays;
     }
 
+    /**
+     * Gets the list of streams.
+     *
+     * @return The list of streams.
+     */
     public List<Schema> getStreams() {
         return streams;
     }
 
+    /**
+     * Sets the list of streams.
+     *
+     * @param streams The list of streams.
+     */
     public void setStreams(List<Schema> streams) {
         this.streams = streams;
     }
 
     /**
-     * a single character
-     * 
+     * Gets the list of Char schemas.
+     *
+     * @return The list of Char schemas.
      */
     public List<CharSchema> getChars() {
         return chars;
     }
 
     /**
-     * a single character
-     * 
+     * Sets the list of Char schemas.
+     *
+     * @param chars The list of Char schemas.
      */
     public void setChars(List<CharSchema> chars) {
         this.chars = chars;
     }
 
     /**
-     * a Date
-     * 
+     * Gets the list of Date schemas.
+     *
+     * @return The list of Date schemas.
      */
     public List<DateSchema> getDates() {
         return dates;
     }
 
     /**
-     * a Date
-     * 
+     * Sets the list of Date schemas.
+     *
+     * @param dates The list of Date schemas.
      */
     public void setDates(List<DateSchema> dates) {
         this.dates = dates;
     }
 
     /**
-     * a DateTime
-     * 
+     * Gets the list of DateTime schemas.
+     *
+     * @return The list of DateTime schemas.
      */
     public List<DateTimeSchema> getDateTimes() {
         return dateTimes;
     }
 
     /**
-     * a DateTime
-     * 
+     * Sets the list of DateTime schemas.
+     *
+     * @param dateTimes The list of DateTime schemas.
      */
     public void setDateTimes(List<DateTimeSchema> dateTimes) {
         this.dateTimes = dateTimes;
     }
 
     /**
-     * a Duration
-     * 
+     * Gets the list of Duration schemas.
+     *
+     * @return The list of Duration schemas.
      */
     public List<DurationSchema> getDurations() {
         return durations;
     }
 
     /**
-     * a Duration
-     * 
+     * Sets the list of Duration schemas.
+     *
+     * @param durations The list of Duration schemas.
      */
     public void setDurations(List<DurationSchema> durations) {
         this.durations = durations;
     }
 
     /**
-     * a universally unique identifier
-     * 
+     * Gets the list of Uuid schemas.
+     *
+     * @return The list of Uuid schemas.
      */
     public List<UuidSchema> getUuids() {
         return uuids;
     }
 
     /**
-     * a universally unique identifier
-     * 
+     * Sets the list of Uuid schemas.
+     *
+     * @param uuids The list of Uuid schemas.
      */
     public void setUuids(List<UuidSchema> uuids) {
         this.uuids = uuids;
     }
 
     /**
-     * an URI of some kind
-     * 
+     * Gets the list of Uri schemas.
+     *
+     * @return The list of Uri schemas.
      */
     public List<UriSchema> getUris() {
         return uris;
     }
 
     /**
-     * an URI of some kind
-     * 
+     * Sets the list of Uri schemas.
+     *
+     * @param uris The list of Uri schemas.
      */
     public void setUris(List<UriSchema> uris) {
         this.uris = uris;
     }
 
     /**
-     * a password or credential
-     * 
+     * Gets the list of Credential schemas.
+     *
+     * @return The list of Credential schemas.
      */
     public List<CredentialSchema> getCredentials() {
         return credentials;
     }
 
     /**
-     * a password or credential
-     * 
+     * Sets the list of Credential schemas.
+     *
+     * @param credentials The list of Credential schemas.
      */
     public void setCredentials(List<CredentialSchema> credentials) {
         this.credentials = credentials;
     }
 
     /**
-     * OData Query
-     * 
+     * Gets the list of ODataQuery schemas.
+     *
+     * @return The list of ODataQuery schemas.
      */
     public List<ODataQuerySchema> getOdataQueries() {
         return odataQueries;
     }
 
     /**
-     * OData Query
-     * 
+     * Sets the list of ODataQuery schemas.
+     *
+     * @param odataQueries The list of ODataQuery schemas.
      */
     public void setOdataQueries(List<ODataQuerySchema> odataQueries) {
         this.odataQueries = odataQueries;
     }
 
     /**
-     * - this is essentially can be thought of as an 'enum' 
-     * that is a choice between one of several strings
-     * 
+     * Gets the list of Choice schemas.
+     *
+     * @return The list of Choice schemas.
      */
     public List<ChoiceSchema> getChoices() {
         return choices;
     }
 
     /**
-     * - this is essentially can be thought of as an 'enum' 
-     * that is a choice between one of several strings
-     * 
+     * Sets the list of Choice schemas.
+     *
+     * @param choices The list of Choice schemas.
      */
     public void setChoices(List<ChoiceSchema> choices) {
         this.choices = choices;
     }
 
+    /**
+     * Gets the list of SealedChoice schemas.
+     *
+     * @return The list of SealedChoice schemas.
+     */
     public List<SealedChoiceSchema> getSealedChoices() {
         return sealedChoices;
     }
 
+    /**
+     * Sets the list of SealedChoice schemas.
+     *
+     * @param sealedChoices The list of SealedChoice schemas.
+     */
     public void setSealedChoices(List<SealedChoiceSchema> sealedChoices) {
         this.sealedChoices = sealedChoices;
     }
 
+    /**
+     * Gets the list of Flag schemas.
+     *
+     * @return The list of Flag schemas.
+     */
     public List<FlagSchema> getFlags() {
         return flags;
     }
 
+    /**
+     * Sets the list of Flag schemas.
+     *
+     * @param flags The list of Flag schemas.
+     */
     public void setFlags(List<FlagSchema> flags) {
         this.flags = flags;
     }
 
     /**
-     * a constant value
-     * 
+     * Gets the list of Constant schemas.
+     *
+     * @return The list of Constant schemas.
      */
     public List<ConstantSchema> getConstants() {
         return constants;
     }
 
     /**
-     * a constant value
-     * 
+     * Sets the list of Constant schemas.
+     *
+     * @param constants The list of Constant schemas.
      */
     public void setConstants(List<ConstantSchema> constants) {
         this.constants = constants;
     }
 
+    /**
+     * Gets the list of And schemas.
+     *
+     * @return The list of And schemas.
+     */
     public List<AndSchema> getAnds() {
         return ands;
     }
 
+    /**
+     * Sets the list of And schemas.
+     *
+     * @param ands The list of And schemas.
+     */
     public void setAnds(List<AndSchema> ands) {
         this.ands = ands;
     }
 
+    /**
+     * Gets the list of Or schemas.
+     *
+     * @return The list of Or schemas.
+     */
     public List<OrSchema> getOrs() {
         return ors;
     }
 
+    /**
+     * Sets the list of Or schemas.
+     *
+     * @param ors The list of Or schemas.
+     */
     public void setOrs(List<OrSchema> ors) {
         this.ors = ors;
     }
 
+    /**
+     * Gets the list of Xor schemas.
+     *
+     * @return The list of Xor schemas.
+     */
     public List<XorSchema> getXors() {
         return xors;
     }
 
+    /**
+     * Sets the list of Xor schemas.
+     *
+     * @param xors The list of Xor schemas.
+     */
     public void setXors(List<XorSchema> xors) {
         this.xors = xors;
     }
 
     /**
-     * it's possible that we just may make this an error 
-     * in representation.
-     * 
+     * Gets the list of unknown schemas.
+     *
+     * @return The list of unknown schemas.
      */
     public List<Schema> getUnknowns() {
         return unknowns;
     }
 
     /**
-     * it's possible that we just may make this an error 
-     * in representation.
-     * 
+     * Sets the list of unknown schemas.
+     *
+     * @param unknowns The list of unknown schemas.
      */
     public void setUnknowns(List<Schema> unknowns) {
         this.unknowns = unknowns;
     }
 
+    /**
+     * Gets the list of parameter group schemas.
+     *
+     * @return The list of parameter group schemas.
+     */
     public List<ParameterGroupSchema> getParameterGroups() {
         return parameterGroups;
     }
 
+    /**
+     * Sets the list of parameter group schemas.
+     *
+     * @param parameterGroups The list of parameter group schemas.
+     */
     public void setParameterGroups(List<ParameterGroupSchema> parameterGroups) {
         this.parameterGroups = parameterGroups;
     }
 
+    /**
+     * Gets the list of group schemas.
+     *
+     * @return The list of group schemas.
+     */
     public List<ObjectSchema> getGroups() {
         return groups;
     }
 
+    /**
+     * Sets the list of group schemas.
+     *
+     * @param groups The list of group schemas.
+     */
     public void setGroups(List<ObjectSchema> groups) {
         this.groups = groups;
     }
 
+    /**
+     * Gets the list of binary schemas.
+     *
+     * @return The list of binary schemas.
+     */
     public List<BinarySchema> getBinaries() {
         return binaries;
     }
 
+    /**
+     * Sets the list of binary schemas.
+     *
+     * @param binaries The list of binary schemas.
+     */
     public void setBinaries(List<BinarySchema> binaries) {
         this.binaries = binaries;
     }

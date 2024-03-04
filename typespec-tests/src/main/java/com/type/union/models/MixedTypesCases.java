@@ -98,6 +98,10 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
         return this.booleanProperty;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -112,11 +116,11 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
      * Reads an instance of MixedTypesCases from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of MixedTypesCases if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of MixedTypesCases if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the MixedTypesCases.
      */
+    @Generated
     public static MixedTypesCases fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BinaryData model = null;

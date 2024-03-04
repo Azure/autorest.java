@@ -122,6 +122,9 @@ public final class RepositoryWriteableProperties implements JsonSerializable<Rep
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -136,8 +139,7 @@ public final class RepositoryWriteableProperties implements JsonSerializable<Rep
      * Reads an instance of RepositoryWriteableProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of RepositoryWriteableProperties if the JsonReader was pointing to an instance of it, or null
-     * if it was pointing to JSON null.
+     * @return An instance of RepositoryWriteableProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the RepositoryWriteableProperties.
      */
     public static RepositoryWriteableProperties fromJson(JsonReader jsonReader) throws IOException {

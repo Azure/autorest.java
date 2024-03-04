@@ -13,20 +13,54 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The Data model.
+ * Dummy doc to make the javadoc break at the 'at' symbol. The type of the Data depends on &#064;data.kind.letusmakeitlongsoitwouldbreakbeforethis field.
  */
 @Immutable
 public class Data implements JsonSerializable<Data> {
+    /*
+     * The @data.kind property.
+     */
+    @Generated
+    private String type;
+
     /**
      * Creates an instance of Data class.
      */
     @Generated
     protected Data() {
+        this.type = "Data";
     }
 
+    /**
+     * Get the type property: The &#064;data.kind property.
+     * 
+     * @return the type value.
+     */
+    @Generated
+    public String getType() {
+        return this.type;
+    }
+
+    /**
+     * Set the type property: The &#064;data.kind property.
+     * 
+     * @param type the type value to set.
+     * @return the Data object itself.
+     */
+    @Generated
+    Data setType(String type) {
+        this.type = type;
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("@data.kind", this.type);
         return jsonWriter.writeEndObject();
     }
 
@@ -34,36 +68,36 @@ public class Data implements JsonSerializable<Data> {
      * Reads an instance of Data from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Data if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @return An instance of Data if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Data.
      */
+    @Generated
     public static Data fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
-            JsonReader readerToUse = reader.bufferObject();
-
-            readerToUse.nextToken(); // Prepare for reading
-            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = readerToUse.getFieldName();
-                readerToUse.nextToken();
-                if ("kind_id".equals(fieldName)) {
-                    discriminatorValue = readerToUse.getString();
-                    break;
-                } else {
-                    readerToUse.skipChildren();
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("@data.kind".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
                 }
-            }
-            // Use the discriminator value to determine which subtype should be deserialized.
-            if ("bytes".equals(discriminatorValue)) {
-                return BytesData.fromJson(readerToUse.reset());
-            } else {
-                return fromJsonKnownDiscriminator(readerToUse.reset());
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("bytes".equals(discriminatorValue)) {
+                    return BytesData.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
             }
         });
     }
 
+    @Generated
     static Data fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Data deserializedData = new Data();
@@ -71,7 +105,11 @@ public class Data implements JsonSerializable<Data> {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                reader.skipChildren();
+                if ("@data.kind".equals(fieldName)) {
+                    deserializedData.type = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
             }
 
             return deserializedData;

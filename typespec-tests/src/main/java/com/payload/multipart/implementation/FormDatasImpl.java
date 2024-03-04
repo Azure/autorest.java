@@ -51,8 +51,7 @@ public final class FormDatasImpl {
     }
 
     /**
-     * The interface defining all the services for MultiPartClientFormDatas to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for MultiPartClientFormDatas to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "MultiPartClientFormD")
@@ -187,20 +186,32 @@ public final class FormDatasImpl {
         Response<Void> multiBinaryPartsSync(@HeaderParam("content-type") String contentType,
             @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
             RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/check-filename-and-content-type")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<Void>> checkFileNameAndContentType(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
+
+        // @Multipart not supported by RestProxy
+        @Post("/multipart/form-data/check-filename-and-content-type")
+        @ExpectedResponses({ 204 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<Void> checkFileNameAndContentTypeSync(@HeaderParam("content-type") String contentType,
+            @HeaderParam("accept") String accept, @BodyParam("multipart/form-data") BinaryData body,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
      * Test content-type: multipart/form-data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -219,16 +230,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -247,25 +248,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for mixed scenarios.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *         (recursive schema, see above)
-     *     ]
-     *     pictures (Required): [
-     *         byte[] (Required)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -284,25 +266,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for mixed scenarios.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *         (recursive schema, see above)
-     *     ]
-     *     pictures (Required): [
-     *         byte[] (Required)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -321,18 +284,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains json part and binary part.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -351,18 +302,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains json part and binary part.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     address (Required): {
-     *         city: String (Required)
-     *     }
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -381,17 +320,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     pictures (Required): [
-     *         byte[] (Required)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -411,17 +339,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     id: String (Required)
-     *     pictures (Required): [
-     *         byte[] (Required)
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -440,20 +357,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi json parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *          (Required){
-     *             city: String (Required)
-     *         }
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -473,20 +376,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi json parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     previousAddresses (Required): [
-     *          (Required){
-     *             city: String (Required)
-     *         }
-     *     ]
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -505,17 +394,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     picture: BinaryData (Optional)
-     *     picture: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -535,17 +413,6 @@ public final class FormDatasImpl {
 
     /**
      * Test content-type: multipart/form-data for scenario contains multi binary parts.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     profileImage: BinaryData (Required)
-     *     profileImage: String (Optional)
-     *     picture: BinaryData (Optional)
-     *     picture: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -560,5 +427,43 @@ public final class FormDatasImpl {
         final String contentType = "multipart/form-data";
         final String accept = "application/json";
         return service.multiBinaryPartsSync(contentType, accept, body, requestOptions, Context.NONE);
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> checkFileNameAndContentTypeWithResponseAsync(BinaryData body,
+        RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.checkFileNameAndContentType(contentType, accept, body, requestOptions, context));
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> checkFileNameAndContentTypeWithResponse(BinaryData body, RequestOptions requestOptions) {
+        final String contentType = "multipart/form-data";
+        final String accept = "application/json";
+        return service.checkFileNameAndContentTypeSync(contentType, accept, body, requestOptions, Context.NONE);
     }
 }

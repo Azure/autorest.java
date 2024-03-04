@@ -48,8 +48,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientSubscriptionInCredentials to
-     * be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientSubscriptionInCredentials to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
@@ -87,8 +86,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -110,8 +108,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -134,8 +131,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -147,8 +143,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -162,8 +157,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -177,8 +171,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -189,8 +182,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
-     * client-side validation should prevent you from making this call.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -212,8 +204,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
-     * client-side validation should prevent you from making this call.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -236,8 +227,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
-     * client-side validation should prevent you from making this call.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -249,8 +239,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
-     * client-side validation should prevent you from making this call.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -264,8 +253,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
-     * client-side validation should prevent you from making this call.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -279,8 +267,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
-     * client-side validation should prevent you from making this call.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and client-side validation should prevent you from making this call.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -291,8 +278,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -314,8 +300,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -339,8 +324,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -352,8 +336,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -367,8 +350,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -382,8 +364,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -394,8 +375,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -417,8 +397,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -441,8 +420,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -454,8 +432,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -469,8 +446,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -484,8 +460,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -496,8 +471,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -519,8 +493,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -543,8 +516,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -556,8 +528,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -571,8 +542,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -586,8 +556,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
-     * '1234-5678-9012-3456' to succeed.
+     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

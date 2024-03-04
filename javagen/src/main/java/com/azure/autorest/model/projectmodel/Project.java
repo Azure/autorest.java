@@ -31,6 +31,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -59,12 +60,12 @@ public class Project {
         AZURE_CLIENT_SDK_PARENT("com.azure", "azure-client-sdk-parent", "1.7.0"),
         AZURE_JSON("com.azure", "azure-json", "1.1.0"),
         AZURE_XML("com.azure", "azure-xml", "1.0.0-beta.2"),
-        AZURE_CORE("com.azure", "azure-core", "1.45.1"),
-        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.9"),
-        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.13.11"),
-        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.22.1"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.11.1"),
-        AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.46"),
+        AZURE_CORE("com.azure", "azure-core", "1.46.0"),
+        AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.11.10"),
+        AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.14.0"),
+        AZURE_CORE_TEST("com.azure", "azure-core-test", "1.23.0"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.11.2"),
+        AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.47"),
 
         GENERIC_CORE("com.generic", "generic-core", "1.0.0-beta.1"),
         GENERIC_JSON("com.generic", "generic-json", "1.0.0-beta.1"),
@@ -73,6 +74,8 @@ public class Project {
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),
         JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.3"),
         MOCKITO_CORE("org.mockito", "mockito-core", "4.11.0"),
+        BYTE_BUDDY("net.bytebuddy", "byte-buddy", "1.14.8"),
+        BYTE_BUDDY_AGENT("net.bytebuddy", "byte-buddy-agent", "1.14.8"),
         SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36");
 
         private final String groupId;
@@ -176,20 +179,20 @@ public class Project {
         }
     }
 
-    private Optional<String> findSdkFolder() {
+    private String findSdkFolder() {
         JavaSettings settings = JavaSettings.getInstance();
-        Optional<String> sdkFolderOpt = settings.getAutorestSettings().getJavaSdksFolder();
-        if (!sdkFolderOpt.isPresent()) {
+        String sdkFolderOpt = settings.getAutorestSettings().getJavaSdksFolder();
+        if (sdkFolderOpt == null) {
             LOGGER.info("'java-sdks-folder' parameter not available");
         } else {
-            if (!Paths.get(sdkFolderOpt.get()).isAbsolute()) {
+            if (!Paths.get(sdkFolderOpt).isAbsolute()) {
                 LOGGER.info("'java-sdks-folder' parameter is not an absolute path");
-                sdkFolderOpt = Optional.empty();
+                sdkFolderOpt = null;
             }
         }
 
         // try to deduct it from "output-folder"
-        if (!sdkFolderOpt.isPresent()) {
+        if (sdkFolderOpt == null) {
             String outputFolder = settings.getAutorestSettings().getOutputFolder();
             if (outputFolder != null && Paths.get(outputFolder).isAbsolute()) {
                 Path path = Paths.get(outputFolder).normalize();
@@ -210,12 +213,12 @@ public class Project {
                 }
                 if (path != null) {
                     LOGGER.info("'azure-sdk-for-java' SDK folder '{}' deduced from 'output-folder' parameter", path.toString());
-                    sdkFolderOpt = Optional.of(path.toString());
+                    sdkFolderOpt = path.toString();
                 }
             }
         }
 
-        if (!sdkFolderOpt.isPresent()) {
+        if (sdkFolderOpt == null) {
             LOGGER.warn("'azure-sdk-for-java' SDK folder not found, fallback to default versions for dependencies");
         }
 
@@ -233,15 +236,34 @@ public class Project {
         return ret;
     }
 
+    private static final Map<String, String> VERSION_UPDATE_TAG_MAP = Map.of(
+            // see https://github.com/Azure/azure-sdk-for-java/blob/main/eng/versioning/external_dependencies.txt
+            "net.bytebuddy:byte-buddy", "testdep_net.bytebuddy:byte-buddy",
+            "net.bytebuddy:byte-buddy-agent", "testdep_net.bytebuddy:byte-buddy-agent"
+    );
+
+    /**
+     * Gets the version update tag (x-version-update) for the groupId and artifactId.
+     *
+     * @param groupId the group ID.
+     * @param artifactId the artifact ID.
+     * @return the version update tag.
+     */
+    public static String getVersionUpdateTag(String groupId, String artifactId) {
+        String tag = groupId + ":" + artifactId;
+        String ret = VERSION_UPDATE_TAG_MAP.get(tag);
+        return ret == null ? tag : ret;
+    }
+
     protected void findPackageVersions() {
-        Optional<String> sdkFolderOpt = findSdkFolder();
-        this.integratedWithSdk = sdkFolderOpt.isPresent();
-        if (!sdkFolderOpt.isPresent()) {
+        String sdkFolderOpt = findSdkFolder();
+        this.integratedWithSdk = sdkFolderOpt != null;
+        if (sdkFolderOpt == null) {
             return;
         }
 
         // find dependency version from versioning txt
-        Path sdkPath = Paths.get(sdkFolderOpt.get());
+        Path sdkPath = Paths.get(sdkFolderOpt);
         Path versionClientPath = sdkPath.resolve(Paths.get("eng", "versioning", "version_client.txt"));
         Path versionExternalPath = sdkPath.resolve(Paths.get("eng", "versioning", "external_dependencies.txt"));
         if (Files.isReadable(versionClientPath) && Files.isReadable(versionExternalPath)) {
@@ -264,7 +286,7 @@ public class Project {
         try (BufferedReader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
             reader.lines().forEach(line -> {
                 for (Dependency dependency : Dependency.values()) {
-                    String artifact = dependency.getGroupId() + ":" + dependency.getArtifactId();
+                    String artifact = getVersionUpdateTag(dependency.getGroupId(), dependency.getArtifactId());
                     checkArtifact(line, artifact).ifPresent(dependency::setVersion);
                 }
             });

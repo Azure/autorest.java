@@ -5,30 +5,31 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * A content line object consisting of an adjacent sequence of content elements, such as words and selection marks.
  */
 @Fluent
-public final class DocumentLine {
+public final class DocumentLine implements JsonSerializable<DocumentLine> {
     /*
      * Concatenated content of the contained elements in reading order.
      */
-    @JsonProperty(value = "content", required = true)
     private String content;
 
     /*
      * Bounding polygon of the line.
      */
-    @JsonProperty(value = "polygon")
     private List<Float> polygon;
 
     /*
      * Location of the line in the reading order concatenated content.
      */
-    @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
     /**
@@ -95,5 +96,49 @@ public final class DocumentLine {
     public DocumentLine setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("content", this.content);
+        jsonWriter.writeArrayField("spans", this.spans, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("polygon", this.polygon, (writer, element) -> writer.writeFloat(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DocumentLine from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DocumentLine if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the DocumentLine.
+     */
+    public static DocumentLine fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DocumentLine deserializedDocumentLine = new DocumentLine();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("content".equals(fieldName)) {
+                    deserializedDocumentLine.content = reader.getString();
+                } else if ("spans".equals(fieldName)) {
+                    List<DocumentSpan> spans = reader.readArray(reader1 -> DocumentSpan.fromJson(reader1));
+                    deserializedDocumentLine.spans = spans;
+                } else if ("polygon".equals(fieldName)) {
+                    List<Float> polygon = reader.readArray(reader1 -> reader1.getFloat());
+                    deserializedDocumentLine.polygon = polygon;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDocumentLine;
+        });
     }
 }

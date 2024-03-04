@@ -5,23 +5,25 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Currency field value.
  */
 @Fluent
-public final class CurrencyValue {
+public final class CurrencyValue implements JsonSerializable<CurrencyValue> {
     /*
      * Currency amount.
      */
-    @JsonProperty(value = "amount", required = true)
     private double amount;
 
     /*
      * Currency symbol label, if any.
      */
-    @JsonProperty(value = "currencySymbol")
     private String currencySymbol;
 
     /**
@@ -68,5 +70,44 @@ public final class CurrencyValue {
     public CurrencyValue setCurrencySymbol(String currencySymbol) {
         this.currencySymbol = currencySymbol;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeDoubleField("amount", this.amount);
+        jsonWriter.writeStringField("currencySymbol", this.currencySymbol);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of CurrencyValue from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of CurrencyValue if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the CurrencyValue.
+     */
+    public static CurrencyValue fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            CurrencyValue deserializedCurrencyValue = new CurrencyValue();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("amount".equals(fieldName)) {
+                    deserializedCurrencyValue.amount = reader.getDouble();
+                } else if ("currencySymbol".equals(fieldName)) {
+                    deserializedCurrencyValue.currencySymbol = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedCurrencyValue;
+        });
     }
 }

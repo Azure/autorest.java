@@ -3,15 +3,11 @@
 
 package com.type.property.nullable;
 
-import com.azure.core.util.BinaryData;
-import com.azure.json.JsonProviders;
-import com.azure.json.JsonWriter;
 import com.type.property.nullable.models.StringProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 public class StringClientTests {
 
@@ -24,15 +20,8 @@ public class StringClientTests {
 
         Assertions.assertNull(stringClient.getNull().getNullableProperty());
 
-        stringClient.patchNonNull(new StringProperty("foo", "hello"));
+        stringClient.patchNonNull(new StringProperty().setRequiredProperty("foo").setNullableProperty("hello"));
 
-        StringWriter writer = new StringWriter();
-        JsonWriter jsonWriter = JsonProviders.createWriter(writer);
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("requiredProperty", "foo");
-        jsonWriter.writeNullField("nullableProperty");
-        jsonWriter.writeEndObject();
-        jsonWriter.close();
-        stringClient.patchNullWithResponse(BinaryData.fromString(writer.toString()), null);
+        stringClient.patchNull(new StringProperty().setRequiredProperty("foo").setNullableProperty(null));
     }
 }

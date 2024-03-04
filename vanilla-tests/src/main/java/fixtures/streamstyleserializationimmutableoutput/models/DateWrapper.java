@@ -82,6 +82,9 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -94,8 +97,7 @@ public final class DateWrapper implements JsonSerializable<DateWrapper> {
      * Reads an instance of DateWrapper from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DateWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of DateWrapper if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DateWrapper.
      */
     public static DateWrapper fromJson(JsonReader jsonReader) throws IOException {

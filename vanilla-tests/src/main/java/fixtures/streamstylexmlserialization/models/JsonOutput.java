@@ -55,6 +55,9 @@ public final class JsonOutput implements JsonSerializable<JsonOutput> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -66,8 +69,7 @@ public final class JsonOutput implements JsonSerializable<JsonOutput> {
      * Reads an instance of JsonOutput from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of JsonOutput if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of JsonOutput if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the JsonOutput.
      */
     public static JsonOutput fromJson(JsonReader jsonReader) throws IOException {

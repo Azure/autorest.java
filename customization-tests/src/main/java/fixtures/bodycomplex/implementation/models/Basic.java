@@ -5,29 +5,30 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Basic model.
  */
 @Fluent
-public final class Basic {
+public final class Basic implements JsonSerializable<Basic> {
     /*
      * Basic Id
      */
-    @JsonProperty(value = "id")
     private Integer id;
 
     /*
      * Name property with a very long description that does not fit on a single line and a line break.
      */
-    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The color property.
      */
-    @JsonProperty(value = "color")
     private CMYKColors color;
 
     /**
@@ -57,8 +58,7 @@ public final class Basic {
     }
 
     /**
-     * Get the name property: Name property with a very long description that does not fit on a single line and a line
-     * break.
+     * Get the name property: Name property with a very long description that does not fit on a single line and a line break.
      * 
      * @return the name value.
      */
@@ -67,8 +67,7 @@ public final class Basic {
     }
 
     /**
-     * Set the name property: Name property with a very long description that does not fit on a single line and a line
-     * break.
+     * Set the name property: Name property with a very long description that does not fit on a single line and a line break.
      * 
      * @param name the name value to set.
      * @return the Basic object itself.
@@ -96,5 +95,46 @@ public final class Basic {
     public Basic setColor(CMYKColors color) {
         this.color = color;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("id", this.id);
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Basic from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Basic if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the Basic.
+     */
+    public static Basic fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Basic deserializedBasic = new Basic();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    deserializedBasic.id = reader.getNullable(JsonReader::getInt);
+                } else if ("name".equals(fieldName)) {
+                    deserializedBasic.name = reader.getString();
+                } else if ("color".equals(fieldName)) {
+                    deserializedBasic.color = CMYKColors.fromString(reader.getString());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedBasic;
+        });
     }
 }

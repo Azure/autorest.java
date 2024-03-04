@@ -95,6 +95,10 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
         return this.lroResult;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -110,11 +114,11 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
      * Reads an instance of OperationDetails2 from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of OperationDetails2 if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of OperationDetails2 if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the OperationDetails2.
      */
+    @Generated
     public static OperationDetails2 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;

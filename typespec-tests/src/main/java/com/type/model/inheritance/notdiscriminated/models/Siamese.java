@@ -45,6 +45,10 @@ public final class Siamese extends Cat {
         return this.smart;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -58,11 +62,11 @@ public final class Siamese extends Cat {
      * Reads an instance of Siamese from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Siamese.
      */
+    @Generated
     public static Siamese fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

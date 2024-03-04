@@ -5,6 +5,7 @@ package com.azure.autorest.util;
 
 import com.azure.autorest.extension.base.model.codemodel.AnySchema;
 import com.azure.autorest.extension.base.model.codemodel.Header;
+import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -36,6 +37,7 @@ import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class SchemaUtil {
+
     private SchemaUtil() {
     }
 
@@ -326,7 +328,7 @@ public class SchemaUtil {
     }
 
     public static boolean treatAsXml(Schema schema) {
-        return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains("xml"))
+        return (schema.getSerializationFormats() != null && schema.getSerializationFormats().contains(KnownMediaType.XML.value()))
             || (schema.getSerialization() != null && schema.getSerialization().getXml() != null);
     }
 }

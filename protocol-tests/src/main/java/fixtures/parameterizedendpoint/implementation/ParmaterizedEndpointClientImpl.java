@@ -27,6 +27,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.parameterizedendpoint.ParmaterizedEndpointServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -50,6 +51,20 @@ public final class ParmaterizedEndpointClientImpl {
      */
     public String getEndpoint() {
         return this.endpoint;
+    }
+
+    /**
+     * Service version.
+     */
+    private final ParmaterizedEndpointServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public ParmaterizedEndpointServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -84,10 +99,11 @@ public final class ParmaterizedEndpointClientImpl {
      * Initializes an instance of ParmaterizedEndpointClient client.
      * 
      * @param endpoint The parameterized host. Pass in 'http://localhost:3000' to pass.
+     * @param serviceVersion Service version.
      */
-    public ParmaterizedEndpointClientImpl(String endpoint) {
+    public ParmaterizedEndpointClientImpl(String endpoint, ParmaterizedEndpointServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -95,9 +111,11 @@ public final class ParmaterizedEndpointClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint The parameterized host. Pass in 'http://localhost:3000' to pass.
+     * @param serviceVersion Service version.
      */
-    public ParmaterizedEndpointClientImpl(HttpPipeline httpPipeline, String endpoint) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
+    public ParmaterizedEndpointClientImpl(HttpPipeline httpPipeline, String endpoint,
+        ParmaterizedEndpointServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, serviceVersion);
     }
 
     /**
@@ -106,19 +124,20 @@ public final class ParmaterizedEndpointClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint The parameterized host. Pass in 'http://localhost:3000' to pass.
+     * @param serviceVersion Service version.
      */
     public ParmaterizedEndpointClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        String endpoint) {
+        String endpoint, ParmaterizedEndpointServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
+        this.serviceVersion = serviceVersion;
         this.service
             = RestProxy.create(ParmaterizedEndpointClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for ParmaterizedEndpointClient to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for ParmaterizedEndpointClient to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ParmaterizedEndpoint")

@@ -48,8 +48,7 @@ public final class PathItems {
     }
 
     /**
-     * The interface defining all the services for AutoRestUrlTestServicePathItems to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestUrlTestServicePathItems to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestUrlTestServi")
@@ -104,9 +103,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -143,9 +140,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -183,9 +178,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -204,9 +197,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -224,9 +215,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -246,9 +235,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -268,9 +255,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -288,9 +273,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery',
-     * pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -307,9 +290,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -346,9 +327,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -386,9 +365,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -407,9 +384,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -427,9 +402,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -449,9 +422,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -471,9 +442,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -491,9 +460,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery='localStringQuery'.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery='localStringQuery'.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -510,9 +477,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -549,9 +514,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -589,9 +552,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -610,9 +571,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -630,9 +589,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -652,9 +609,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -674,9 +629,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -694,9 +647,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery',
-     * localStringQuery=null.
+     * send globalStringPath=globalStringPath, pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery=null, pathItemStringQuery='pathItemStringQuery', localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -713,9 +664,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -752,9 +701,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -792,9 +739,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -813,9 +758,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -833,9 +776,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -855,9 +796,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -877,9 +816,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.
@@ -897,9 +834,7 @@ public final class PathItems {
     }
 
     /**
-     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath',
-     * localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null,
-     * localStringQuery=null.
+     * send globalStringPath='globalStringPath', pathItemStringPath='pathItemStringPath', localStringPath='localStringPath', globalStringQuery='globalStringQuery', pathItemStringQuery=null, localStringQuery=null.
      * 
      * @param pathItemStringPath A string value 'pathItemStringPath' that appears in the path.
      * @param localStringPath should contain value 'localStringPath'.

@@ -33,7 +33,7 @@ public class EncodeTests {
         encoded.setDateTimeRfc7231(DATE);
         encoded.setUnixTimestamp(DATE);
         encoded.setBase64(DATA);
-        encoded.setBase64Url(DATA);
+        encoded.setBase64url(DATA);
 
         Assertions.assertEquals(timeInSeconds, encoded.getTimeInSeconds());
         Assertions.assertEquals(timeInSecondsFraction, encoded.getTimeInSecondsFraction());
@@ -59,7 +59,7 @@ public class EncodeTests {
         Assertions.assertEquals(DATE.withNano(0), encoded2.getDateTimeRfc7231());    // correct to seconds
         Assertions.assertEquals(DATE.withNano(0), encoded2.getUnixTimestamp());      // correct to seconds
         Assertions.assertArrayEquals(DATA, encoded2.getBase64());
-        Assertions.assertArrayEquals(DATA, encoded2.getBase64Url());
+        Assertions.assertArrayEquals(DATA, encoded2.getBase64url());
     }
 
     @Test

@@ -25,6 +25,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.bodystring.AutoRestSwaggerBatServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -52,8 +53,16 @@ public final class EnumsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBatServiceEnums to be used by the proxy service to
-     * perform REST calls.
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestSwaggerBatServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
+    }
+
+    /**
+     * The interface defining all the services for AutoRestSwaggerBatServiceEnums to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBatSe")
@@ -137,9 +146,7 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -149,8 +156,7 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
@@ -161,9 +167,7 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -173,8 +177,7 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
-     * {@link Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotExpandableWithResponse(RequestOptions requestOptions) {
@@ -184,9 +187,7 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -209,9 +210,7 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -233,9 +232,7 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -245,8 +242,7 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
@@ -257,9 +253,7 @@ public final class EnumsImpl {
 
     /**
      * Get enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -269,8 +263,7 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
-     * {@link Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedWithResponse(RequestOptions requestOptions) {
@@ -280,9 +273,7 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>
@@ -305,9 +296,7 @@ public final class EnumsImpl {
 
     /**
      * Sends value 'red color' from enumeration of 'red color', 'green-color', 'blue_color'.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(red color/green-color/blue_color)
      * }</pre>

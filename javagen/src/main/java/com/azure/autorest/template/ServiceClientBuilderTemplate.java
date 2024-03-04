@@ -207,8 +207,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                             commonProperties.stream()).collect(Collectors.toList());
 
             for (ServiceClientProperty serviceClientProperty : clientProperties) {
-                classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment ->
-                {
+                classBlock.blockComment(comment -> {
                     comment.line(serviceClientProperty.getDescription());
                 });
                 addGeneratedAnnotation(classBlock);
@@ -395,8 +394,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 .forEach(traitMethod -> {
                     ServiceClientProperty serviceClientProperty = traitMethod.getProperty();
                     if (serviceClientProperty != null) {
-                        classBlock.blockComment(settings.getMaximumJavadocCommentWidth(), comment ->
-                        {
+                        classBlock.blockComment(comment -> {
                             comment.line(serviceClientProperty.getDescription());
                         });
                         addGeneratedAnnotation(classBlock);

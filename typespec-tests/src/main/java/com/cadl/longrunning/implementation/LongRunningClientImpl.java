@@ -34,9 +34,9 @@ import com.azure.core.util.Context;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
-import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
@@ -155,8 +155,7 @@ public final class LongRunningClientImpl {
     }
 
     /**
-     * The interface defining all the services for LongRunningClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for LongRunningClient to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "LongRunningClient")
@@ -268,7 +267,8 @@ public final class LongRunningClientImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.longRunningWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -288,7 +288,8 @@ public final class LongRunningClientImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.longRunningWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -308,7 +309,8 @@ public final class LongRunningClientImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.longRunningWithResponseAsync(requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(Void.class));
     }
@@ -328,20 +330,19 @@ public final class LongRunningClientImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.longRunningWithResponse(requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
                 .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(PollResponse.class), TypeReference.createInstance(Void.class));
     }
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
      *     createdDateTime: OffsetDateTime (Optional)
      *     expirationDateTime: OffsetDateTime (Optional)
      *     lastUpdateDateTime: OffsetDateTime (Optional)
@@ -380,13 +381,11 @@ public final class LongRunningClientImpl {
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
      *     createdDateTime: OffsetDateTime (Optional)
      *     expirationDateTime: OffsetDateTime (Optional)
      *     lastUpdateDateTime: OffsetDateTime (Optional)
@@ -425,42 +424,21 @@ public final class LongRunningClientImpl {
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     configuration: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -486,8 +464,7 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
@@ -497,14 +474,14 @@ public final class LongRunningClientImpl {
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
-                    repeatabilityRequestId);
+                requestLocal.getHeaders()
+                    .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
-                    repeatabilityFirstSent);
+                requestLocal.getHeaders()
+                    .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
         return FluxUtil.withContext(context -> service.createJob(this.getEndpoint(),
@@ -513,42 +490,21 @@ public final class LongRunningClientImpl {
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     configuration: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -584,14 +540,14 @@ public final class LongRunningClientImpl {
         String repeatabilityFirstSent = DateTimeRfc1123.toRfc1123String(OffsetDateTime.now());
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-request-id")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-request-id"),
-                    repeatabilityRequestId);
+                requestLocal.getHeaders()
+                    .set(HttpHeaderName.fromString("repeatability-request-id"), repeatabilityRequestId);
             }
         });
         requestOptionsLocal.addRequestCallback(requestLocal -> {
             if (requestLocal.getHeaders().get(HttpHeaderName.fromString("repeatability-first-sent")) == null) {
-                requestLocal.getHeaders().set(HttpHeaderName.fromString("repeatability-first-sent"),
-                    repeatabilityFirstSent);
+                requestLocal.getHeaders()
+                    .set(HttpHeaderName.fromString("repeatability-first-sent"), repeatabilityFirstSent);
             }
         });
         return service.createJobSync(this.getEndpoint(), this.getServiceVersion().getVersion(), accept, jobData,
@@ -600,42 +556,21 @@ public final class LongRunningClientImpl {
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     configuration: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -670,49 +605,29 @@ public final class LongRunningClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     configuration: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -747,49 +662,29 @@ public final class LongRunningClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     configuration: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -825,7 +720,8 @@ public final class LongRunningClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class),
             TypeReference.createInstance(JobResultResult.class));
@@ -833,42 +729,21 @@ public final class LongRunningClientImpl {
 
     /**
      * A remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>repeatability-request-id</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability request ID header</td>
-     * </tr>
-     * <tr>
-     * <td>repeatability-first-sent</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Repeatability first sent header as HTTP-date</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     configuration: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -904,7 +779,8 @@ public final class LongRunningClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class),
             TypeReference.createInstance(JobResultResult.class));

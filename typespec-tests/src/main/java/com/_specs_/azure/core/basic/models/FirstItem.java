@@ -40,6 +40,10 @@ public final class FirstItem implements JsonSerializable<FirstItem> {
         return this.id;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -50,11 +54,11 @@ public final class FirstItem implements JsonSerializable<FirstItem> {
      * Reads an instance of FirstItem from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FirstItem if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of FirstItem if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FirstItem.
      */
+    @Generated
     public static FirstItem fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             int id = 0;

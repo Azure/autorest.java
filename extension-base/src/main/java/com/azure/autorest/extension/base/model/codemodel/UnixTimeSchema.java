@@ -3,31 +3,26 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a schema that represents a UnixTime value
- * 
+ * Represents a UnixTime value.
  */
 public class UnixTimeSchema extends PrimitiveSchema {
 
+    /**
+     * Creates a new instance of the UnixTimeSchema class.
+     */
+    public UnixTimeSchema() {
+        super();
+    }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(UnixTimeSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return UnixTimeSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        return result;
+        return 1;
     }
 
     @Override
@@ -35,11 +30,8 @@ public class UnixTimeSchema extends PrimitiveSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof UnixTimeSchema) == false) {
-            return false;
-        }
-        UnixTimeSchema rhs = ((UnixTimeSchema) other);
-        return true;
+
+        return other instanceof UnixTimeSchema;
     }
 
 }

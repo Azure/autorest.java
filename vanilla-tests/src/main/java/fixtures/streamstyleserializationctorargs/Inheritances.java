@@ -50,8 +50,7 @@ public final class Inheritances {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceInheritances to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceInheritances to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -177,9 +176,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     * food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -204,9 +201,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     * food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -232,9 +227,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     * food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -248,9 +241,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     * food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -265,9 +256,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     * food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -293,9 +282,7 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
-     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
-     * food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

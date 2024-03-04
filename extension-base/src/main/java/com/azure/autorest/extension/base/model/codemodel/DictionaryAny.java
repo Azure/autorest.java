@@ -3,26 +3,25 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
+/**
+ * Represents a dictionary of any type.
+ */
 public class DictionaryAny {
 
+    /**
+     * Creates a new instance of the DictionaryAny class.
+     */
+    public DictionaryAny() {
+    }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DictionaryAny.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return DictionaryAny.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        return result;
+        return 1;
     }
 
     @Override
@@ -30,11 +29,7 @@ public class DictionaryAny {
         if (other == this) {
             return true;
         }
-        if ((other instanceof DictionaryAny) == false) {
-            return false;
-        }
-        DictionaryAny rhs = ((DictionaryAny) other);
-        return true;
-    }
 
+        return other instanceof DictionaryAny;
+    }
 }

@@ -54,8 +54,7 @@ public final class QueriesImpl {
     }
 
     /**
-     * The interface defining all the services for DurationClientQueries to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DurationClientQueries to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DurationClientQuerie")
@@ -294,7 +293,7 @@ public final class QueriesImpl {
     /**
      * The int32SecondsArray operation.
      * 
-     * @param input Array of Input.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -306,9 +305,10 @@ public final class QueriesImpl {
     public Mono<Response<Void>> int32SecondsArrayWithResponseAsync(List<Duration> input,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        String inputConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
-            input.stream().map(paramItemValue -> paramItemValue.getSeconds()).collect(Collectors.toList()),
-            CollectionFormat.CSV);
+        String inputConverted = JacksonAdapter.createDefaultSerializerAdapter()
+            .serializeIterable(
+                input.stream().map(paramItemValue -> paramItemValue.getSeconds()).collect(Collectors.toList()),
+                CollectionFormat.CSV);
         return FluxUtil
             .withContext(context -> service.int32SecondsArray(inputConverted, accept, requestOptions, context));
     }
@@ -316,7 +316,7 @@ public final class QueriesImpl {
     /**
      * The int32SecondsArray operation.
      * 
-     * @param input Array of Input.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -327,9 +327,10 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> int32SecondsArrayWithResponse(List<Duration> input, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String inputConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
-            input.stream().map(paramItemValue -> paramItemValue.getSeconds()).collect(Collectors.toList()),
-            CollectionFormat.CSV);
+        String inputConverted = JacksonAdapter.createDefaultSerializerAdapter()
+            .serializeIterable(
+                input.stream().map(paramItemValue -> paramItemValue.getSeconds()).collect(Collectors.toList()),
+                CollectionFormat.CSV);
         return service.int32SecondsArraySync(inputConverted, accept, requestOptions, Context.NONE);
     }
 }

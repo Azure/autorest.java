@@ -20,7 +20,7 @@ import java.util.Map;
 @Fluent
 public final class ExtendsModelAdditionalProperties implements JsonSerializable<ExtendsModelAdditionalProperties> {
     /*
-     * Dictionary of ModelForRecord
+     * Additional properties
      */
     @Generated
     private Map<String, ModelForRecord> additionalProperties;
@@ -33,7 +33,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the additionalProperties property: Dictionary of ModelForRecord.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -43,7 +43,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Set the additionalProperties property: Dictionary of ModelForRecord.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsModelAdditionalProperties object itself.
@@ -54,6 +54,10 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -69,10 +73,10 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
      * Reads an instance of ExtendsModelAdditionalProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ExtendsModelAdditionalProperties if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
+     * @return An instance of ExtendsModelAdditionalProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ExtendsModelAdditionalProperties.
      */
+    @Generated
     public static ExtendsModelAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ExtendsModelAdditionalProperties deserializedExtendsModelAdditionalProperties

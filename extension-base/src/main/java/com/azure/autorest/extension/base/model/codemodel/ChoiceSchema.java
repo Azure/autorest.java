@@ -7,47 +7,53 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-
 /**
- * a schema that represents a choice of several values (ie, an 'enum')
+ * Represents a choice schema.
  */
 public class ChoiceSchema extends ValueSchema {
-
-    /**
-     * a Schema that represents a string value (Required)
-     */
     private Schema choiceType;
-    /**
-     * the possible choices for in the set (Required)
-     */
     private List<ChoiceValue> choices = new ArrayList<>();
     private String summary;
-
     private String crossLanguageDefinitionId;
 
     /**
-     * a Schema that represents a string value (Required)
+     * Creates a new instance of the ChoiceSchema class.
+     */
+    public ChoiceSchema() {
+        super();
+    }
+
+    /**
+     * Gets the type of the choice. (Required)
+     *
+     * @return The type of the choice.
      */
     public Schema getChoiceType() {
         return choiceType;
     }
 
     /**
-     * a Schema that represents a string value (Required)
+     * Sets the type of the choice. (Required)
+     *
+     * @param choiceType The type of the choice.
      */
     public void setChoiceType(Schema choiceType) {
         this.choiceType = choiceType;
     }
 
     /**
-     * the possible choices for in the set (Required)
+     * Gets the possible choices. (Required)
+     *
+     * @return The possible choices.
      */
     public List<ChoiceValue> getChoices() {
         return choices;
     }
 
     /**
-     * the possible choices for in the set (Required)
+     * Sets the possible choices. (Required)
+     *
+     * @param choices The possible choices.
      */
     public void setChoices(List<ChoiceValue> choices) {
         this.choices = choices;
@@ -63,10 +69,20 @@ public class ChoiceSchema extends ValueSchema {
         this.summary = summary;
     }
 
+    /**
+     * Gets the cross-language definition id.
+     *
+     * @return The cross-language definition id.
+     */
     public String getCrossLanguageDefinitionId() {
         return crossLanguageDefinitionId;
     }
 
+    /**
+     * Sets the cross-language definition id.
+     *
+     * @param crossLanguageDefinitionId The cross-language definition id.
+     */
     public void setCrossLanguageDefinitionId(String crossLanguageDefinitionId) {
         this.crossLanguageDefinitionId = crossLanguageDefinitionId;
     }
@@ -77,19 +93,9 @@ public class ChoiceSchema extends ValueSchema {
     }
 
     static String sharedToString(ChoiceSchema value, String className) {
-        StringBuilder sb = new StringBuilder();
-        sb.append(className).append('@').append(Integer.toHexString(System.identityHashCode(value))).append('[');
-        sb.append("choiceType=");
-        sb.append(((value.choiceType == null) ? "<null>" : value.choiceType));
-        sb.append(",choices=");
-        sb.append(((value.choices == null) ? "<null>" : value.choices));
-        sb.append(',');
-        if (sb.charAt((sb.length() - 1)) == ',') {
-            sb.setCharAt((sb.length() - 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return className + "@" + Integer.toHexString(System.identityHashCode(value)) + "[choiceType="
+            + Objects.toString(value.choiceType, "<null>") + ",choices=" + Objects.toString(value.choices, "<null>")
+            + ']';
     }
 
     @Override
@@ -98,11 +104,7 @@ public class ChoiceSchema extends ValueSchema {
     }
 
     static int sharedHashCode(ChoiceSchema value) {
-        int result = 1;
-        result = ((result * 31) + Objects.hashCode(value.choiceType));
-        result = ((result * 31) + Objects.hashCode(value.choices));
-        result = ((result * 31) + Objects.hashCode(value.getLanguage().getJava().getName()));
-        return result;
+        return Objects.hash(value.choiceType, value.choices, value.getLanguage().getJava().getName());
     }
 
     @Override
@@ -118,8 +120,7 @@ public class ChoiceSchema extends ValueSchema {
     }
 
     static boolean sharedEquals(ChoiceSchema lhs, ChoiceSchema rhs) {
-        return Objects.equals(lhs.choiceType, rhs.choiceType)
-            && Objects.equals(lhs.choices, rhs.choices)
+        return Objects.equals(lhs.choiceType, rhs.choiceType) && Objects.equals(lhs.choices, rhs.choices)
             && Objects.equals(lhs.getLanguage().getJava().getName(), rhs.getLanguage().getJava().getName());
     }
 }

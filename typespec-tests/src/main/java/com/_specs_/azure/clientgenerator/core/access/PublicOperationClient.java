@@ -39,9 +39,7 @@ public final class PublicOperationClient {
 
     /**
      * The noDecoratorInPublic operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -64,9 +62,7 @@ public final class PublicOperationClient {
 
     /**
      * The publicDecoratorInPublic operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

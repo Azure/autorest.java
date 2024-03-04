@@ -16,8 +16,11 @@ pr:
     include:
       - '*'
     exclude:
-      - 'fluent*'
-      - 'postprocessor'
+      - 'androidgen'
+      - 'azure-dataplane-tests'
+      - 'azure-tests'
+      - 'fluent-tests'
+      - 'partial-update-tests'
       - 'vanilla-tests'
       - 'protocol*'
 
@@ -63,7 +66,6 @@ jobs:
         inputs:
           pwsh: true
           filePath: Generate-TypeSpec.ps1
-          arguments: '-Parallelization 1'
 
       - script: |
           git status
@@ -113,6 +115,6 @@ jobs:
           azureSubscription: "Cadl Ranch Storage"
           scriptType: "bash"
           scriptLocation: "inlineScript"
-          inlineScript: node $(Build.SourcesDirectory)/typespec-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName azuresdkcadlranch --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
+          inlineScript: node $(Build.SourcesDirectory)/typespec-tests/node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js upload-coverage --coverageFile $(Build.SourcesDirectory)/typespec-tests/cadl-ranch-coverage-java.json --generatorName java --storageAccountName azuresdkcadlranch --generatorMode azure --generatorVersion $(node -p -e "require('./typespec-extension/package.json').version")
 
       - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml

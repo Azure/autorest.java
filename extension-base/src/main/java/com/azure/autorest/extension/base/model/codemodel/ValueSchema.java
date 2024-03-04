@@ -3,11 +3,14 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * schema types that are non-object or complex types
- * 
+ * Schema types that are non-object or complex types.
  */
 public class ValueSchema extends Schema {
+    /**
+     * Creates a new instance of the ValueSchema class.
+     */
+    public ValueSchema() {
+        super();
+    }
 }

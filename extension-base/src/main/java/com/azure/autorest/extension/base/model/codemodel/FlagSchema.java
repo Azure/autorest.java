@@ -5,29 +5,34 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * Represents a flag schema.
+ */
 public class FlagSchema extends ValueSchema {
+    private List<FlagValue> choices = new ArrayList<>();
 
     /**
-     * the possible choices for in the set
-     * (Required)
-     * 
+     * Creates a new instance of the FlagSchema class.
      */
-    private List<FlagValue> choices = new ArrayList<FlagValue>();
+    public FlagSchema() {
+        super();
+    }
 
     /**
-     * the possible choices for in the set
-     * (Required)
-     * 
+     * Get the possible choices in the set. (Required)
+     *
+     * @return The possible choices in the set.
      */
     public List<FlagValue> getChoices() {
         return choices;
     }
 
     /**
-     * the possible choices for in the set
-     * (Required)
-     * 
+     * Set the possible choices in the set. (Required)
+     *
+     * @param choices The possible choices in the set.
      */
     public void setChoices(List<FlagValue> choices) {
         this.choices = choices;
@@ -35,25 +40,13 @@ public class FlagSchema extends ValueSchema {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(FlagSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("choices");
-        sb.append('=');
-        sb.append(((this.choices == null)?"<null>":this.choices));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return FlagSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[choices="
+            + choices + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.choices == null)? 0 :this.choices.hashCode()));
-        return result;
+        return Objects.hashCode(choices);
     }
 
     @Override
@@ -61,11 +54,13 @@ public class FlagSchema extends ValueSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof FlagSchema) == false) {
+
+        if (!(other instanceof FlagSchema)) {
             return false;
         }
+
         FlagSchema rhs = ((FlagSchema) other);
-        return ((this.choices == rhs.choices)||((this.choices!= null)&&this.choices.equals(rhs.choices)));
+        return Objects.equals(choices, rhs.choices);
     }
 
 }

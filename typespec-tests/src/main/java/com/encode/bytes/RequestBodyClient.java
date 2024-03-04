@@ -38,9 +38,7 @@ public final class RequestBodyClient {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -61,9 +59,7 @@ public final class RequestBodyClient {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -84,9 +80,7 @@ public final class RequestBodyClient {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -107,9 +101,7 @@ public final class RequestBodyClient {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -129,10 +121,8 @@ public final class RequestBodyClient {
     }
 
     /**
-     * The base64Url operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * The base64url operation.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -147,8 +137,8 @@ public final class RequestBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(BinaryData value, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponse(value, requestOptions);
+    public Response<Void> base64urlWithResponse(BinaryData value, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponse(value, requestOptions);
     }
 
     /**
@@ -228,7 +218,7 @@ public final class RequestBodyClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -240,9 +230,9 @@ public final class RequestBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void base64Url(byte[] value) {
-        // Generated convenience method for base64UrlWithResponse
+    public void base64url(byte[] value) {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions).getValue();
+        base64urlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions).getValue();
     }
 }

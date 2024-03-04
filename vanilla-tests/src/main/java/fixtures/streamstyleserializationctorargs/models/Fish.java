@@ -18,6 +18,11 @@ import java.util.List;
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
     /*
+     * The fishtype property.
+     */
+    private String fishtype;
+
+    /*
      * The species property.
      */
     private String species;
@@ -38,7 +43,28 @@ public class Fish implements JsonSerializable<Fish> {
      * @param length the length value to set.
      */
     public Fish(float length) {
+        this.fishtype = "Fish";
         this.length = length;
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    public String getFishtype() {
+        return this.fishtype;
+    }
+
+    /**
+     * Set the fishtype property: The fishtype property.
+     * 
+     * @param fishtype the fishtype value to set.
+     * @return the Fish object itself.
+     */
+    Fish setFishtype(String fishtype) {
+        this.fishtype = fishtype;
+        return this;
     }
 
     /**
@@ -101,10 +127,14 @@ public class Fish implements JsonSerializable<Fish> {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", this.length);
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("species", this.species);
         jsonWriter.writeArrayField("siblings", this.siblings, (writer, element) -> writer.writeJson(element));
         return jsonWriter.writeEndObject();
@@ -114,43 +144,41 @@ public class Fish implements JsonSerializable<Fish> {
      * Reads an instance of Fish from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
-            JsonReader readerToUse = reader.bufferObject();
-
-            readerToUse.nextToken(); // Prepare for reading
-            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = readerToUse.getFieldName();
-                readerToUse.nextToken();
-                if ("fishtype".equals(fieldName)) {
-                    discriminatorValue = readerToUse.getString();
-                    break;
-                } else {
-                    readerToUse.skipChildren();
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("fishtype".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
                 }
-            }
-            // Use the discriminator value to determine which subtype should be deserialized.
-            if ("salmon".equals(discriminatorValue)) {
-                return Salmon.fromJsonKnownDiscriminator(readerToUse.reset());
-            } else if ("smart_salmon".equals(discriminatorValue)) {
-                return SmartSalmon.fromJson(readerToUse.reset());
-            } else if ("shark".equals(discriminatorValue)) {
-                return Shark.fromJsonKnownDiscriminator(readerToUse.reset());
-            } else if ("sawshark".equals(discriminatorValue)) {
-                return Sawshark.fromJson(readerToUse.reset());
-            } else if ("goblin".equals(discriminatorValue)) {
-                return Goblinshark.fromJson(readerToUse.reset());
-            } else if ("cookiecuttershark".equals(discriminatorValue)) {
-                return Cookiecuttershark.fromJson(readerToUse.reset());
-            } else {
-                return fromJsonKnownDiscriminator(readerToUse.reset());
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("salmon".equals(discriminatorValue)) {
+                    return Salmon.fromJsonKnownDiscriminator(readerToUse.reset());
+                } else if ("smart_salmon".equals(discriminatorValue)) {
+                    return SmartSalmon.fromJson(readerToUse.reset());
+                } else if ("shark".equals(discriminatorValue)) {
+                    return Shark.fromJsonKnownDiscriminator(readerToUse.reset());
+                } else if ("sawshark".equals(discriminatorValue)) {
+                    return Sawshark.fromJson(readerToUse.reset());
+                } else if ("goblin".equals(discriminatorValue)) {
+                    return Goblinshark.fromJson(readerToUse.reset());
+                } else if ("cookiecuttershark".equals(discriminatorValue)) {
+                    return Cookiecuttershark.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
             }
         });
     }
@@ -159,6 +187,7 @@ public class Fish implements JsonSerializable<Fish> {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;
             float length = 0.0f;
+            String fishtype = null;
             String species = null;
             List<Fish> siblings = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -168,6 +197,8 @@ public class Fish implements JsonSerializable<Fish> {
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -178,6 +209,7 @@ public class Fish implements JsonSerializable<Fish> {
             }
             if (lengthFound) {
                 Fish deserializedFish = new Fish(length);
+                deserializedFish.fishtype = fishtype;
                 deserializedFish.species = species;
                 deserializedFish.siblings = siblings;
 

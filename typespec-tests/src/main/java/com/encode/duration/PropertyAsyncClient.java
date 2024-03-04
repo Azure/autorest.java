@@ -21,7 +21,7 @@ import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
-import com.encode.duration.models.Iso8601DurationProperty;
+import com.encode.duration.models.ISO8601DurationProperty;
 import reactor.core.publisher.Mono;
 
 /**
@@ -44,17 +44,13 @@ public final class PropertyAsyncClient {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
@@ -77,17 +73,13 @@ public final class PropertyAsyncClient {
 
     /**
      * The iso8601 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Duration (Required)
@@ -110,17 +102,13 @@ public final class PropertyAsyncClient {
 
     /**
      * The int32Seconds operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: long (Required)
@@ -143,17 +131,13 @@ public final class PropertyAsyncClient {
 
     /**
      * The floatSeconds operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: double (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: double (Required)
@@ -176,9 +160,7 @@ public final class PropertyAsyncClient {
 
     /**
      * The floatSecondsArray operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -186,9 +168,7 @@ public final class PropertyAsyncClient {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -246,11 +226,11 @@ public final class PropertyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Iso8601DurationProperty> iso8601(Iso8601DurationProperty body) {
+    public Mono<ISO8601DurationProperty> iso8601(ISO8601DurationProperty body) {
         // Generated convenience method for iso8601WithResponse
         RequestOptions requestOptions = new RequestOptions();
         return iso8601WithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(Iso8601DurationProperty.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(ISO8601DurationProperty.class));
     }
 
     /**

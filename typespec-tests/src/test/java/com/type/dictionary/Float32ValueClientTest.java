@@ -17,13 +17,13 @@ class Float32ValueClientTest {
     void get() {
         Map<String, Double> response = client.get();
         Assertions.assertTrue(response.containsKey("k1"));
-        Assertions.assertEquals(42.42, response.get("k1"));
+        Assertions.assertEquals(43.125, response.get("k1"));
     }
 
     @Test
     void put() {
         Map<String, Double> map = new HashMap<>();
-        map.put("k1", 42.42);
+        map.put("k1", 43.125);
         client.put(map);
     }
 }

@@ -48,6 +48,8 @@
 
     <!-- This property configures whether PLAYBACK tests are ran in parallel. Default is true. -->
     <parallelizeTests>true</parallelizeTests>
+
+    <maven.javadoc.failOnWarnings>false</maven.javadoc.failOnWarnings>
   </properties>
 
   <dependencyManagement>
@@ -55,7 +57,7 @@
       <dependency>
         <groupId>com.azure</groupId>
         <artifactId>azure-core</artifactId>
-        <version>1.45.1</version>
+        <version>1.46.0</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -151,18 +153,19 @@
             <source>1.8</source>
             <detectJavaApiLink>false</detectJavaApiLink>
             <quiet>true</quiet>
+            <failOnWarnings>${maven.javadoc.failOnWarnings}</failOnWarnings>
           </configuration>
         </plugin>
 
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-checkstyle-plugin</artifactId>
-          <version>3.1.2</version>
+          <version>3.3.1</version>
           <dependencies>
             <dependency>
               <groupId>com.puppycrawl.tools</groupId>
               <artifactId>checkstyle</artifactId>
-              <version>9.2</version>
+              <version>9.3</version>
             </dependency>
           </dependencies>
           <configuration>
@@ -170,7 +173,7 @@
             <configLocation>checkstyle.xml</configLocation>
             <suppressionsLocation>checkstyle-suppressions.xml</suppressionsLocation>
             <propertyExpansion>samedir=</propertyExpansion>
-            <encoding>UTF-8</encoding>
+            <inputEncoding>UTF-8</inputEncoding>
             <consoleOutput>true</consoleOutput>
             <includeTestSourceDirectory>true</includeTestSourceDirectory>
             <linkXRef>true</linkXRef>

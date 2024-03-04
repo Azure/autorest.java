@@ -115,8 +115,7 @@ public final class AutoRestReportServiceForAzure {
     }
 
     /**
-     * The interface defining all the services for AutoRestReportServiceForAzure to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestReportServiceForAzure to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestReportServic")
@@ -131,8 +130,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
-     * only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -150,8 +148,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
-     * only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -170,8 +167,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
-     * only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -198,8 +194,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
-     * only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -214,8 +209,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
-     * only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -230,8 +224,7 @@ public final class AutoRestReportServiceForAzure {
     /**
      * Get test coverage report.
      * 
-     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The
-     * only effect is, that generators that run all tests several times, can distinguish the generated reports.
+     * @param qualifier If specified, qualifies the generated report further (e.g. '2.7' vs '3.5' in for Python). The only effect is, that generators that run all tests several times, can distinguish the generated reports.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

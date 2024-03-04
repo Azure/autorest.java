@@ -43,8 +43,8 @@ alias LongRequest = {
   dataIntOptional?: int32;
   dataLong?: int64;
 
-  @projectedName("json", "data_float")
-  @projectedName("client", "dataFloat")
+  @clientName("dataFloat")
+  @encodedName("application/json", "data_float")
   float?: float64;
 };
 
@@ -66,7 +66,10 @@ interface FlattenOp {
   @post
   sendProjectedName(
     @query id: string,
-    @projectedName("json", "file_id") @projectedName("client", "fileIdentifier") fileId: string,
+
+    @encodedName("application/json", "file_id")
+    @projectedName("client", "fileIdentifier")
+    fileId: string,
   ): OkResponse;
 
   @route("send-long")

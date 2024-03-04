@@ -69,7 +69,7 @@ public final class ModelTemplateHeaderHelper {
         addHttpHeaderNameConstants(classBlock, model);
 
         classBlock.lineComment("HttpHeaders containing the raw property values.");
-        classBlock.javadocComment(settings.getMaximumJavadocCommentWidth(), comment -> {
+        classBlock.javadocComment(comment -> {
             comment.description(String.format("Creates an instance of %1$s class.", model.getName()));
             comment.param("rawHeaders", "The raw HttpHeaders that will be used to create the property values.");
         });

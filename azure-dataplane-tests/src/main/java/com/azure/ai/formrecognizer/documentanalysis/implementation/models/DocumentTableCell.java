@@ -5,60 +5,56 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * An object representing the location and content of a table cell.
  */
 @Fluent
-public final class DocumentTableCell {
+public final class DocumentTableCell implements JsonSerializable<DocumentTableCell> {
     /*
      * Table cell kind.
      */
-    @JsonProperty(value = "kind")
     private DocumentTableCellKind kind;
 
     /*
      * Row index of the cell.
      */
-    @JsonProperty(value = "rowIndex", required = true)
     private int rowIndex;
 
     /*
      * Column index of the cell.
      */
-    @JsonProperty(value = "columnIndex", required = true)
     private int columnIndex;
 
     /*
      * Number of rows spanned by this cell.
      */
-    @JsonProperty(value = "rowSpan")
     private Integer rowSpan;
 
     /*
      * Number of columns spanned by this cell.
      */
-    @JsonProperty(value = "columnSpan")
     private Integer columnSpan;
 
     /*
      * Concatenated content of the table cell in reading order.
      */
-    @JsonProperty(value = "content", required = true)
     private String content;
 
     /*
      * Bounding regions covering the table cell.
      */
-    @JsonProperty(value = "boundingRegions")
     private List<BoundingRegion> boundingRegions;
 
     /*
      * Location of the table cell in the reading order concatenated content.
      */
-    @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
     /**
@@ -225,5 +221,66 @@ public final class DocumentTableCell {
     public DocumentTableCell setSpans(List<DocumentSpan> spans) {
         this.spans = spans;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("rowIndex", this.rowIndex);
+        jsonWriter.writeIntField("columnIndex", this.columnIndex);
+        jsonWriter.writeStringField("content", this.content);
+        jsonWriter.writeArrayField("spans", this.spans, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("kind", this.kind == null ? null : this.kind.toString());
+        jsonWriter.writeNumberField("rowSpan", this.rowSpan);
+        jsonWriter.writeNumberField("columnSpan", this.columnSpan);
+        jsonWriter.writeArrayField("boundingRegions", this.boundingRegions,
+            (writer, element) -> writer.writeJson(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DocumentTableCell from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DocumentTableCell if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the DocumentTableCell.
+     */
+    public static DocumentTableCell fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DocumentTableCell deserializedDocumentTableCell = new DocumentTableCell();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("rowIndex".equals(fieldName)) {
+                    deserializedDocumentTableCell.rowIndex = reader.getInt();
+                } else if ("columnIndex".equals(fieldName)) {
+                    deserializedDocumentTableCell.columnIndex = reader.getInt();
+                } else if ("content".equals(fieldName)) {
+                    deserializedDocumentTableCell.content = reader.getString();
+                } else if ("spans".equals(fieldName)) {
+                    List<DocumentSpan> spans = reader.readArray(reader1 -> DocumentSpan.fromJson(reader1));
+                    deserializedDocumentTableCell.spans = spans;
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDocumentTableCell.kind = DocumentTableCellKind.fromString(reader.getString());
+                } else if ("rowSpan".equals(fieldName)) {
+                    deserializedDocumentTableCell.rowSpan = reader.getNullable(JsonReader::getInt);
+                } else if ("columnSpan".equals(fieldName)) {
+                    deserializedDocumentTableCell.columnSpan = reader.getNullable(JsonReader::getInt);
+                } else if ("boundingRegions".equals(fieldName)) {
+                    List<BoundingRegion> boundingRegions
+                        = reader.readArray(reader1 -> BoundingRegion.fromJson(reader1));
+                    deserializedDocumentTableCell.boundingRegions = boundingRegions;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDocumentTableCell;
+        });
     }
 }

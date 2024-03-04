@@ -15,9 +15,9 @@ public class IsFloatClientTest {
 
     @Test
     public void testPullAndGet() {
-        IsFloatAdditionalProperties body = new IsFloatAdditionalProperties(42.42);
+        IsFloatAdditionalProperties body = new IsFloatAdditionalProperties( 43.125);
         Map<String, Double> propertyMap = new LinkedHashMap<>();
-        propertyMap.put("prop", 42.42);
+        propertyMap.put("prop", 43.125);
         body.setAdditionalProperties(propertyMap);
         client.put(body);
 

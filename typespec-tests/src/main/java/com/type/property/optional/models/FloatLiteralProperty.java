@@ -21,7 +21,7 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * Property
      */
     @Generated
-    private FloatLiteralProperty1 property;
+    private FloatLiteralPropertyProperty property;
 
     /**
      * Creates an instance of FloatLiteralProperty class.
@@ -36,7 +36,7 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * @return the property value.
      */
     @Generated
-    public FloatLiteralProperty1 getProperty() {
+    public FloatLiteralPropertyProperty getProperty() {
         return this.property;
     }
 
@@ -47,11 +47,15 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * @return the FloatLiteralProperty object itself.
      */
     @Generated
-    public FloatLiteralProperty setProperty(FloatLiteralProperty1 property) {
+    public FloatLiteralProperty setProperty(FloatLiteralPropertyProperty property) {
         this.property = property;
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -63,10 +67,10 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
      * Reads an instance of FloatLiteralProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FloatLiteralProperty if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of FloatLiteralProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the FloatLiteralProperty.
      */
+    @Generated
     public static FloatLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             FloatLiteralProperty deserializedFloatLiteralProperty = new FloatLiteralProperty();
@@ -75,7 +79,8 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedFloatLiteralProperty.property = FloatLiteralProperty1.fromDouble(reader.getDouble());
+                    deserializedFloatLiteralProperty.property
+                        = FloatLiteralPropertyProperty.fromDouble(reader.getDouble());
                 } else {
                     reader.skipChildren();
                 }

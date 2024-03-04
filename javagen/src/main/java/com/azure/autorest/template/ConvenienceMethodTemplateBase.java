@@ -16,8 +16,8 @@ import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
+import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.model.clientmodel.MethodTransformationDetail;
 import com.azure.autorest.model.clientmodel.ParameterMapping;
@@ -42,15 +42,14 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -253,7 +252,7 @@ abstract class ConvenienceMethodTemplateBase {
                             .findFirst().orElse(null);
                     if (proxyMethodParameter != null) {
                         MethodParameter methodParameter = new MethodParameter(proxyMethodParameter, clientMethodParameter);
-                        parametersMap.put(methodParameter, findParameterForConvenienceMethod(methodParameter, protocolMethod));
+                        parametersMap.put(methodParameter, findProtocolMethodParameterForConvenienceMethod(methodParameter, protocolMethod));
                     }
                 }
             }
@@ -261,35 +260,51 @@ abstract class ConvenienceMethodTemplateBase {
             // flatten (possible with grouping)
             ClientMethodParameter targetParameter = detail.getOutParameter();
             if (targetParameter.getWireType() == ClassType.BINARY_DATA) {
+                IType targetType = targetParameter.getRawType();
+
+                StringBuilder ctorExpression = new StringBuilder();
+                StringBuilder setterExpression = new StringBuilder();
                 String targetParameterName = targetParameter.getName();
                 String targetParameterObjectName = targetParameterName + "Obj";
-                methodBlock.line(String.format("Map<String, Object> %1$s = new HashMap<>();", targetParameterObjectName));
                 for (ParameterMapping mapping : detail.getParameterMappings()) {
-                    if (mapping.getInputParameter().isRequired() || !convenienceMethod.getOnlyRequiredParameters()) {
-                        String parameterName = mapping.getInputParameter().getName();
-                        String mappingUsage;
-                        if (mapping.getInputParameter().getClientType() instanceof EnumType) {
-                            String enumConversion = ((EnumType) mapping.getInputParameter().getClientType()).getToMethodName() + "()";
-                            mappingUsage = "(" + parameterName + " == null ? null : " + parameterName + "." + enumConversion + ")";
-                        } else {
-                            mappingUsage = parameterName;
-                        }
+                    String parameterName = mapping.getInputParameter().getName();
 
-                        String inputPath;
-                        if (mapping.getInputParameterProperty() != null) {
-                            inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
-                                    CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
+                    String inputPath = parameterName;
+                    boolean propertyRequired = mapping.getInputParameter().isRequired();
+                    if (mapping.getInputParameterProperty() != null) {
+                        inputPath = String.format("%s.%s()", mapping.getInputParameter().getName(),
+                                CodeNamer.getModelNamer().modelPropertyGetterName(mapping.getInputParameterProperty()));
+                        propertyRequired = mapping.getInputParameterProperty().isRequired();
+                    }
+                    if (propertyRequired) {
+                        // required
+                        if (JavaSettings.getInstance().isRequiredFieldsAsConstructorArgs()) {
+                            if (ctorExpression.length() > 0) {
+                                ctorExpression.append(", ");
+                            }
+                            ctorExpression.append(inputPath);
                         } else {
-                            inputPath = mappingUsage;
+                            setterExpression.append(".").append(mapping.getOutputParameterProperty().getSetterName()).append("(").append(inputPath).append(")");
                         }
-
-                        methodBlock.line(String.format("%1$s.put(\"%2$s\", %3$s);",
-                                targetParameterObjectName,
-                                mapping.getOutputParameterProperty().getSerializedName(),
-                                inputPath));
+                    } else if (!convenienceMethod.getOnlyRequiredParameters()) {
+                        // optional
+                        setterExpression.append(".").append(mapping.getOutputParameterProperty().getSetterName()).append("(").append(inputPath).append(")");
                     }
                 }
-                methodBlock.line(String.format("BinaryData %1$s = BinaryData.fromObject(%2$s);", targetParameterName, targetParameterObjectName));
+                methodBlock.line(String.format("%1$s %2$s = new %1$s(%3$s)%4$s;", targetType, targetParameterObjectName, ctorExpression, setterExpression));
+
+                String expression = null;
+                if (targetParameter.getRawType() instanceof ClassType) {
+                    ClientModel model = ClientModelUtil.getClientModel(targetParameter.getRawType().toString());
+                    // serialize model for multipart/form-data
+                    if (model != null && ClientModelUtil.isMultipartModel(model)) {
+                        expression = expressionMultipartFormDataToBinaryData(targetParameterObjectName, model);
+                    }
+                }
+                if (expression == null) {
+                    expression = expressionConvertToBinaryData(targetParameterObjectName, targetParameter.getRawType(), protocolMethod.getProxyMethod().getRequestContentType());
+                }
+                methodBlock.line(String.format("BinaryData %1$s = %2$s;", targetParameterName, expression));
             }
         }
     }
@@ -413,39 +428,47 @@ abstract class ConvenienceMethodTemplateBase {
         XML,
         MULTIPART,
         BINARY,
-        JSON
-    }
+        JSON;
 
-    // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
-    private static final Map<String, SupportedMimeType> SUPPORTED_MIME_TYPES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
-    static {
-        SUPPORTED_MIME_TYPES.put("text/xml", SupportedMimeType.XML);
-        SUPPORTED_MIME_TYPES.put("application/xml", SupportedMimeType.XML);
-        SUPPORTED_MIME_TYPES.put("application/json", SupportedMimeType.JSON);
-        SUPPORTED_MIME_TYPES.put("text/css", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/csv", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/html", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/javascript", SupportedMimeType.TEXT);
-        SUPPORTED_MIME_TYPES.put("text/plain", SupportedMimeType.TEXT);
-        // not in azure-core
-        SUPPORTED_MIME_TYPES.put("application/merge-patch+json", SupportedMimeType.JSON);
-    }
-
-    protected static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
-        // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
-        // This is mostly for the error response which is in JSON, and is not included in this calculation.
-
-        for (String mediaType : mediaTypes) {
-            SupportedMimeType type = SUPPORTED_MIME_TYPES.get(mediaType);
-            if (type != null) {
-                return type;
-            }
+        // azure-core SerializerEncoding.SUPPORTED_MIME_TYPES
+        private static final Map<String, SupportedMimeType> SUPPORTED_MIME_TYPES = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        static {
+            SUPPORTED_MIME_TYPES.put("text/xml", SupportedMimeType.XML);
+            SUPPORTED_MIME_TYPES.put("application/xml", SupportedMimeType.XML);
+            SUPPORTED_MIME_TYPES.put("application/json", SupportedMimeType.JSON);
+            SUPPORTED_MIME_TYPES.put("text/css", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/csv", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/html", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/javascript", SupportedMimeType.TEXT);
+            SUPPORTED_MIME_TYPES.put("text/plain", SupportedMimeType.TEXT);
+            // not in azure-core
+            SUPPORTED_MIME_TYPES.put("application/merge-patch+json", SupportedMimeType.JSON);
         }
-        return SupportedMimeType.BINARY;    // BINARY if not recognized
+
+        public static SupportedMimeType getResponseKnownMimeType(Collection<String> mediaTypes) {
+            // Response adds a "application/json;q=0.9" if no "application/json" specified in media types.
+            // This is mostly for the error response which is in JSON, and is not included in this calculation.
+
+            for (String mediaType : mediaTypes) {
+                // The declared mime type can be of the form "application/json; charset=utf-8" or "application/json"
+                // So, we have to check if the mediaType starts with the supported mime type
+                if (!mediaType.equals("application/json;q=0.9")) { // skip the error media type
+                    SupportedMimeType type = SUPPORTED_MIME_TYPES.entrySet().stream()
+                            .filter(supportedMimeType -> mediaType.startsWith(supportedMimeType.getKey()))
+                            .map(Map.Entry::getValue)
+                            .findAny()
+                            .orElse(null);
+                    if (type != null) {
+                        return type;
+                    }
+                }
+            }
+            return SupportedMimeType.BINARY;    // BINARY if not recognized
+        }
     }
 
     private static String expressionConvertToBinaryData(String name, IType type, String mediaType) {
-        SupportedMimeType mimeType = getResponseKnownMimeType(Collections.singleton(mediaType));
+        SupportedMimeType mimeType = SupportedMimeType.getResponseKnownMimeType(Collections.singleton(mediaType));
         switch (mimeType) {
             case TEXT:
                 return "BinaryData.fromString(" + name + ")";
@@ -599,7 +622,7 @@ abstract class ConvenienceMethodTemplateBase {
             if (bodyType instanceof ClassType) {
                 ClientModel model = ClientModelUtil.getClientModel(bodyType.toString());
                 // serialize model for multipart/form-data
-                if (model != null && model.getImplementationDetails() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.MULTIPART_FORM_DATA)) {
+                if (model != null && ClientModelUtil.isMultipartModel(model)) {
                     return expressionMultipartFormDataToBinaryData(name, model);
                 }
             }
@@ -627,49 +650,69 @@ abstract class ConvenienceMethodTemplateBase {
     }
 
     private static String expressionMultipartFormDataToBinaryData(String name, ClientModel model) {
+        BiFunction<String, String, String> nullableExpression = (propertyExpr, expr) -> propertyExpr + " == null ? null : " + expr;
+
         // serialize model for multipart/form-data
         StringBuilder builder = new StringBuilder().append("new MultipartFormDataHelper(requestOptions)");
-        Set<String> filePropertySerializedNames = new HashSet<>();
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.getWireType() == ClassType.BINARY_DATA) {
-                // application/octet-stream
-                String serializedName = property.getSerializedName();
-                filePropertySerializedNames.add(serializedName);
+            String propertyGetExpression = name + "." + property.getGetterName() + "()";
+            if (isMultipartModel(property.getWireType())) {
+                // file, usually application/octet-stream
 
-                // find corresponding filename property
-                String filenameExpression;
-                Optional<ClientModelProperty> filenameProperty = model.getProperties().stream()
-                        // here is a hack to find matching filename property by finding property of type String and of same serializedName
-                        .filter(p -> p.getWireType() == ClassType.STRING && Objects.equals(serializedName, p.getSerializedName()))
-                        .findFirst();
-                if (filenameProperty.isPresent()) {
-                    filenameExpression = name + "." + filenameProperty.get().getGetterName() + "()";
-                } else {
-                    filenameExpression = ClassType.STRING.defaultValueExpression(property.getSerializedName());
+                String fileExpression = propertyGetExpression + ".getContent()";
+                String contentTypeExpression = propertyGetExpression + ".getContentType()";
+                String filenameExpression = propertyGetExpression + ".getFilename()";
+                if (!property.isRequired()) {
+                    fileExpression = nullableExpression.apply(propertyGetExpression, fileExpression);
+                    contentTypeExpression = nullableExpression.apply(propertyGetExpression, contentTypeExpression);
+                    filenameExpression = nullableExpression.apply(propertyGetExpression, filenameExpression);
                 }
 
                 builder.append(String.format(
-                        ".serializeFileField(%1$s, %2$s.%3$s(), %4$s)",
+                        ".serializeFileField(%1$s, %2$s, %3$s, %4$s)",
                         ClassType.STRING.defaultValueExpression(property.getSerializedName()),
-                        name,
-                        property.getGetterName(),
+                        fileExpression,
+                        contentTypeExpression,
                         filenameExpression
                 ));
-            } else if (filePropertySerializedNames.contains(property.getSerializedName())) {
-                // skip filename property
+            } else if (property.getWireType() instanceof ListType && isMultipartModel(((ListType) property.getWireType()).getElementType())) {
+                // file array
+
+                // For now, we use 3 List, as we do not wish the Helper class refer to different ##FileDetails model.
+                // Later, if we switch to a shared class in azure-core, we can change the implementation.
+                String className = ((ListType) property.getWireType()).getElementType().toString();
+                String streamExpressionFormat = "%1$s.stream().map(%2$s::%3$s).collect(Collectors.toList())";
+                String fileExpression = String.format(streamExpressionFormat,
+                        propertyGetExpression, className, "getContent");
+                String contentTypeExpression = String.format(streamExpressionFormat,
+                        propertyGetExpression, className, "getContentType");
+                String filenameExpression = String.format(streamExpressionFormat,
+                        propertyGetExpression, className, "getFilename");
+                if (!property.isRequired()) {
+                    fileExpression = nullableExpression.apply(propertyGetExpression, fileExpression);
+                    contentTypeExpression = nullableExpression.apply(propertyGetExpression, contentTypeExpression);
+                    filenameExpression = nullableExpression.apply(propertyGetExpression, filenameExpression);
+                }
+
+                builder.append(String.format(
+                        ".serializeFileFields(%1$s, %2$s, %3$s, %4$s)",
+                        ClassType.STRING.defaultValueExpression(property.getSerializedName()),
+                        fileExpression,
+                        contentTypeExpression,
+                        filenameExpression
+                ));
             } else if (ClientModelUtil.isClientModel(property.getWireType())
                     || property.getWireType() instanceof MapType
                     || property.getWireType() instanceof IterableType) {
                 // application/json
-                String stringExpression = name + "." + property.getGetterName() + "()";
                 builder.append(String.format(
                         ".serializeJsonField(%1$s, %2$s)",
                         ClassType.STRING.defaultValueExpression(property.getSerializedName()),
-                        stringExpression
+                        propertyGetExpression
                 ));
             } else {
                 // text/plain
-                String stringExpression = name + "." + property.getGetterName() + "()";
+                String stringExpression = propertyGetExpression;
                 // convert to String
                 if (property.getWireType() instanceof PrimitiveType) {
                     stringExpression = String.format("String.valueOf(%s)", stringExpression);
@@ -687,6 +730,14 @@ abstract class ConvenienceMethodTemplateBase {
         return builder.toString();
     }
 
+    private static boolean isMultipartModel(IType type) {
+        if (ClientModelUtil.isClientModel(type)) {
+            return ClientModelUtil.isMultipartModel(ClientModelUtil.getClientModel(type.toString()));
+        } else {
+            return false;
+        }
+    }
+
     private static Map<MethodParameter, MethodParameter> findParametersForConvenienceMethod(
             ClientMethod convenienceMethod, ClientMethod protocolMethod) {
         Map<MethodParameter, MethodParameter> parameterMap = new LinkedHashMap<>();
@@ -700,7 +751,7 @@ abstract class ConvenienceMethodTemplateBase {
         return parameterMap;
     }
 
-    private static MethodParameter findParameterForConvenienceMethod(
+    private static MethodParameter findProtocolMethodParameterForConvenienceMethod(
             MethodParameter parameter, ClientMethod protocolMethod) {
         List<MethodParameter> protocolParameters = getParameters(protocolMethod, false);
         return protocolParameters.stream().filter(p -> Objects.equals(parameter.getSerializedName(), p.getSerializedName())).findFirst().orElse(null);
@@ -727,7 +778,7 @@ abstract class ConvenienceMethodTemplateBase {
     private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String convenientParameterTypeName, String convenientParameterName, String expression) {
             String variableName = convenientParameterName + "InBinaryData";
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
-            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromString(%2$s.toString());", variableName, expression)); // BinaryData.fromString() will not fire serialization, use toString() to fire serialization
+            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromBytes(%2$s.toBytes());", variableName, expression)); // BinaryData.fromObject() will not fire serialization, use toBytes() to fire serialization
             javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
             return variableName;
     }

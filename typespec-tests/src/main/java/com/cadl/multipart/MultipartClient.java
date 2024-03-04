@@ -17,8 +17,12 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.multipart.implementation.MultipartClientImpl;
 import com.cadl.multipart.implementation.MultipartFormDataHelper;
+import com.cadl.multipart.implementation.models.UploadFileRequest;
+import com.cadl.multipart.models.FileDataFileDetails;
+import com.cadl.multipart.models.FileDetails;
 import com.cadl.multipart.models.FormData;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * Initializes a new instance of the synchronous MultipartClient type.
@@ -39,42 +43,14 @@ public final class MultipartClient {
     }
 
     /**
-     * request is binary.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * The upload operation.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>compress</td>
-     * <td>Boolean</td>
-     * <td>No</td>
-     * <td>Boolean with `true` and `false` values.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>compress</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     name: String (Required)
-     *     resolution: int (Required)
-     *     type: String(JPEG/PNG) (Required)
-     *     size (Required): {
-     *         width: int (Required)
-     *         height: int (Required)
-     *     }
-     *     image: BinaryData (Required)
-     *     image: String (Optional)
-     * }
-     * }</pre>
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
@@ -88,13 +64,31 @@ public final class MultipartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> uploadWithResponse(String name, BinaryData data, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is
-        // 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is 'multipart/form-data'
         return this.serviceClient.uploadWithResponse(name, data, requestOptions);
     }
 
     /**
-     * request is binary.
+     * The uploadFile operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> uploadFileWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is 'multipart/form-data'
+        return this.serviceClient.uploadFileWithResponse(name, request, requestOptions);
+    }
+
+    /**
+     * The upload operation.
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
@@ -117,13 +111,27 @@ public final class MultipartClient {
         uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
                 .serializeTextField("resolution", String.valueOf(data.getResolution()))
-                .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
-                .serializeFileField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
+                .serializeTextField("type", Objects.toString(data.getType()))
+                .serializeJsonField("size", data.getSize())
+                .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
+                    data.getImage().getFilename())
+                .serializeFileFields("file",
+                    data.getFile() == null
+                        ? null
+                        : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
+                    data.getFile() == null
+                        ? null
+                        : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
+                    data.getFile() == null
+                        ? null
+                        : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
+                .end()
+                .getRequestBody(),
             requestOptions).getValue();
     }
 
     /**
-     * request is binary.
+     * The upload operation.
      * 
      * @param name A sequence of textual characters.
      * @param data The data parameter.
@@ -142,8 +150,48 @@ public final class MultipartClient {
         uploadWithResponse(name,
             new MultipartFormDataHelper(requestOptions).serializeTextField("name", data.getName())
                 .serializeTextField("resolution", String.valueOf(data.getResolution()))
-                .serializeTextField("type", Objects.toString(data.getType())).serializeJsonField("size", data.getSize())
-                .serializeFileField("image", data.getImage(), data.getImageFilename()).end().getRequestBody(),
+                .serializeTextField("type", Objects.toString(data.getType()))
+                .serializeJsonField("size", data.getSize())
+                .serializeFileField("image", data.getImage().getContent(), data.getImage().getContentType(),
+                    data.getImage().getFilename())
+                .serializeFileFields("file",
+                    data.getFile() == null
+                        ? null
+                        : data.getFile().stream().map(FileDetails::getContent).collect(Collectors.toList()),
+                    data.getFile() == null
+                        ? null
+                        : data.getFile().stream().map(FileDetails::getContentType).collect(Collectors.toList()),
+                    data.getFile() == null
+                        ? null
+                        : data.getFile().stream().map(FileDetails::getFilename).collect(Collectors.toList()))
+                .end()
+                .getRequestBody(),
             requestOptions).getValue();
+    }
+
+    /**
+     * The uploadFile operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param fileData Represent a byte array.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void uploadFile(String name, FileDataFileDetails fileData) {
+        // Generated convenience method for uploadFileWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        UploadFileRequest requestObj = new UploadFileRequest(fileData);
+        BinaryData request = new MultipartFormDataHelper(requestOptions)
+            .serializeFileField("file_data", requestObj.getFileData().getContent(),
+                requestObj.getFileData().getContentType(), requestObj.getFileData().getFilename())
+            .end()
+            .getRequestBody();
+        uploadFileWithResponse(name, request, requestOptions).getValue();
     }
 }

@@ -45,8 +45,7 @@ public class FluentPomMapper extends PomMapper {
                     Project.Dependency.JUNIT_JUPITER_API, true);
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.JUNIT_JUPITER_ENGINE, true);
-            addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
-                    Project.Dependency.MOCKITO_CORE, true);
+
             addDependencyIdentifier(dependencyIdentifiers, addedDependencyPrefixes,
                     Project.Dependency.SLF4J_SIMPLE, true);
         }

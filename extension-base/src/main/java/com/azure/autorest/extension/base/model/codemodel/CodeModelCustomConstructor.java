@@ -18,7 +18,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Custom constructor for a CodeModel.
+ */
 public class CodeModelCustomConstructor extends Constructor {
+    /**
+     * Creates a new instance of the CodeModelCustomConstructor class.
+     *
+     * @param loaderOptions The options for the loader.
+     */
     public CodeModelCustomConstructor(LoaderOptions loaderOptions) {
         super(loaderOptions);
         yamlClassConstructors.put(NodeId.scalar, new TypeEnumConstruct());
@@ -68,7 +76,7 @@ public class CodeModelCustomConstructor extends Constructor {
         @Override
         public Object construct(Node node) {
             MappingNode mappingNode = (MappingNode) node;
-            for (NodeTuple tuple :  mappingNode.getValue()) {
+            for (NodeTuple tuple : mappingNode.getValue()) {
                 ScalarNode key = (ScalarNode) tuple.getKeyNode();
                 switch (key.getValue()) {
                     case "arrays": {
@@ -199,7 +207,8 @@ public class CodeModelCustomConstructor extends Constructor {
                         } else if (tuple.getValueNode() instanceof MappingNode) {
                             MappingNode value = (MappingNode) tuple.getValueNode();
                             for (NodeTuple item : value.getValue()) {
-                                item.getValueNode().setType(getSchemaTypeFromMappingNode((MappingNode) (item.getValueNode())));
+                                item.getValueNode()
+                                    .setType(getSchemaTypeFromMappingNode((MappingNode) (item.getValueNode())));
                             }
                             break;
                         }
@@ -224,117 +233,64 @@ public class CodeModelCustomConstructor extends Constructor {
                         for (NodeTuple extension : value.getValue()) {
                             ScalarNode keyNode = (ScalarNode) extension.getKeyNode();
                             if ("x-ms-pageable".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsPageable",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsPageable", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-skip-url-encoding".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsSkipUrlEncoding",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsSkipUrlEncoding", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-client-flatten".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsClientFlatten",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsClientFlatten", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-long-running-operation".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsLongRunningOperation",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsLongRunningOperation", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-flattened".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsFlattened",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsFlattened", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-azure-resource".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsAzureResource",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsAzureResource", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-mutability".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsMutability",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsMutability", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-header-collection-prefix".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsHeaderCollectionPrefix",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsHeaderCollectionPrefix",
+                                        keyNode.getStartMark(), keyNode.getEndMark(), keyNode.getScalarStyle()),
+                                    extension.getValueNode()));
                             } else if ("x-internal-autorest-anonymous-schema".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsInternalAutorestAnonymousSchema",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsInternalAutorestAnonymousSchema",
+                                        keyNode.getStartMark(), keyNode.getEndMark(), keyNode.getScalarStyle()),
+                                    extension.getValueNode()));
                             } else if ("x-ms-long-running-operation-options".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsLongRunningOperationOptions",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsLongRunningOperationOptions",
+                                        keyNode.getStartMark(), keyNode.getEndMark(), keyNode.getScalarStyle()),
+                                    extension.getValueNode()));
                             } else if ("x-ms-examples".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsExamples",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsExamples", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-arm-id-details".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsArmIdDetails",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsArmIdDetails", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-secret".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsSecret",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsSecret", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else if ("x-ms-versioning-added".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "xmsVersioningAdded",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "xmsVersioningAdded", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             } else {
                                 // handle properties that do not contain hyphen in name
                                 actualValues.add(new NodeTuple(keyNode, extension.getValueNode()));
@@ -349,13 +305,9 @@ public class CodeModelCustomConstructor extends Constructor {
                         for (NodeTuple extension : value.getValue()) {
                             ScalarNode keyNode = (ScalarNode) extension.getKeyNode();
                             if ("final-state-via".equals(keyNode.getValue())) {
-                                actualValues.add(new NodeTuple(new ScalarNode(
-                                        keyNode.getTag(),
-                                        "finalStateVia",
-                                        keyNode.getStartMark(),
-                                        keyNode.getEndMark(),
-                                        keyNode.getScalarStyle()),
-                                        extension.getValueNode()));
+                                actualValues.add(new NodeTuple(
+                                    new ScalarNode(keyNode.getTag(), "finalStateVia", keyNode.getStartMark(),
+                                        keyNode.getEndMark(), keyNode.getScalarStyle()), extension.getValueNode()));
                             }
                         }
                         value.setValue(actualValues);
@@ -372,9 +324,7 @@ public class CodeModelCustomConstructor extends Constructor {
                 // deserialize to Map<String, Object>, while Object would be LinkedHashMap
                 Map<String, Object> examples = new HashMap<>();
                 for (NodeTuple tuple : node.getValue()) {
-                    examples.put(
-                            ((ScalarNode) tuple.getKeyNode()).getValue(),
-                            constructObject(tuple.getValueNode()));
+                    examples.put(((ScalarNode) tuple.getKeyNode()).getValue(), constructObject(tuple.getValueNode()));
                 }
                 XmsExamples xmsExamples = new XmsExamples();
                 xmsExamples.setExamples(examples);

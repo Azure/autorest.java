@@ -55,8 +55,7 @@ public final class QueriesImpl {
     }
 
     /**
-     * The interface defining all the services for DatetimeClientQueries to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DatetimeClientQueries to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DatetimeClientQuerie")
@@ -295,7 +294,7 @@ public final class QueriesImpl {
     /**
      * The unixTimestampArray operation.
      * 
-     * @param value Array of Value.
+     * @param value The value parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -307,9 +306,10 @@ public final class QueriesImpl {
     public Mono<Response<Void>> unixTimestampArrayWithResponseAsync(List<OffsetDateTime> value,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
-            value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
-            CollectionFormat.CSV);
+        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
+            .serializeIterable(
+                value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
+                CollectionFormat.CSV);
         return FluxUtil
             .withContext(context -> service.unixTimestampArray(valueConverted, accept, requestOptions, context));
     }
@@ -317,7 +317,7 @@ public final class QueriesImpl {
     /**
      * The unixTimestampArray operation.
      * 
-     * @param value Array of Value.
+     * @param value The value parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -328,9 +328,10 @@ public final class QueriesImpl {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> unixTimestampArrayWithResponse(List<OffsetDateTime> value, RequestOptions requestOptions) {
         final String accept = "application/json";
-        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter().serializeIterable(
-            value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
-            CollectionFormat.CSV);
+        String valueConverted = JacksonAdapter.createDefaultSerializerAdapter()
+            .serializeIterable(
+                value.stream().map(paramItemValue -> paramItemValue.toEpochSecond()).collect(Collectors.toList()),
+                CollectionFormat.CSV);
         return service.unixTimestampArraySync(valueConverted, accept, requestOptions, Context.NONE);
     }
 }

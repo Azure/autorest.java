@@ -4,8 +4,8 @@
 
 package com.type.property.nullable.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -20,19 +20,19 @@ import java.util.Set;
 /**
  * Model with a duration property.
  */
-@Immutable
+@Fluent
 public final class DurationProperty implements JsonSerializable<DurationProperty> {
     /*
      * Required property
      */
     @Generated
-    private final String requiredProperty;
+    private String requiredProperty;
 
     /*
      * Property
      */
     @Generated
-    private final Duration nullableProperty;
+    private Duration nullableProperty;
 
     @Generated
     private boolean jsonMergePatch;
@@ -57,14 +57,9 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
 
     /**
      * Creates an instance of DurationProperty class.
-     * 
-     * @param requiredProperty the requiredProperty value to set.
-     * @param nullableProperty the nullableProperty value to set.
      */
     @Generated
-    public DurationProperty(String requiredProperty, Duration nullableProperty) {
-        this.requiredProperty = requiredProperty;
-        this.nullableProperty = nullableProperty;
+    public DurationProperty() {
     }
 
     /**
@@ -78,6 +73,20 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
     }
 
     /**
+     * Set the requiredProperty property: Required property.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param requiredProperty the requiredProperty value to set.
+     * @return the DurationProperty object itself.
+     */
+    @Generated
+    public DurationProperty setRequiredProperty(String requiredProperty) {
+        this.requiredProperty = requiredProperty;
+        this.updatedProperties.add("requiredProperty");
+        return this;
+    }
+
+    /**
      * Get the nullableProperty property: Property.
      * 
      * @return the nullableProperty value.
@@ -87,6 +96,24 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
         return this.nullableProperty;
     }
 
+    /**
+     * Set the nullableProperty property: Property.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param nullableProperty the nullableProperty value to set.
+     * @return the DurationProperty object itself.
+     */
+    @Generated
+    public DurationProperty setNullableProperty(Duration nullableProperty) {
+        this.nullableProperty = nullableProperty;
+        this.updatedProperties.add("nullableProperty");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -100,18 +127,23 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.requiredProperty != null) {
-            jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-        } else if (updatedProperties.contains("requiredProperty")) {
-            jsonWriter.writeNullField("requiredProperty");
+        if (updatedProperties.contains("requiredProperty")) {
+            if (this.requiredProperty == null) {
+                jsonWriter.writeNullField("requiredProperty");
+            } else {
+                jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
+            }
         }
-        if (this.nullableProperty != null) {
-            jsonWriter.writeStringField("nullableProperty",
-                CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
-        } else if (updatedProperties.contains("nullableProperty")) {
-            jsonWriter.writeNullField("nullableProperty");
+        if (updatedProperties.contains("nullableProperty")) {
+            if (this.nullableProperty == null) {
+                jsonWriter.writeNullField("nullableProperty");
+            } else {
+                jsonWriter.writeStringField("nullableProperty",
+                    CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -120,28 +152,28 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
      * Reads an instance of DurationProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DurationProperty if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @return An instance of DurationProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DurationProperty.
      */
+    @Generated
     public static DurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String requiredProperty = null;
-            Duration nullableProperty = null;
+            DurationProperty deserializedDurationProperty = new DurationProperty();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("requiredProperty".equals(fieldName)) {
-                    requiredProperty = reader.getString();
+                    deserializedDurationProperty.requiredProperty = reader.getString();
                 } else if ("nullableProperty".equals(fieldName)) {
-                    nullableProperty = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
+                    deserializedDurationProperty.nullableProperty
+                        = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new DurationProperty(requiredProperty, nullableProperty);
+
+            return deserializedDurationProperty;
         });
     }
 }

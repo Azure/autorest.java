@@ -5,17 +5,20 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Pet model.
  */
 @Fluent
-public class Pet {
+public class Pet implements JsonSerializable<Pet> {
     /*
      * The name property.
      */
-    @JsonProperty(value = "name", required = true)
     private String name;
 
     /**
@@ -53,5 +56,41 @@ public class Pet {
         if (getName() == null) {
             throw new IllegalArgumentException("Missing required property name in model Pet");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Pet from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Pet if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Pet.
+     */
+    public static Pet fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Pet deserializedPet = new Pet();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    deserializedPet.name = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedPet;
+        });
     }
 }

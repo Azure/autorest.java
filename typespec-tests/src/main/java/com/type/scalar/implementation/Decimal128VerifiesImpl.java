@@ -52,8 +52,7 @@ public final class Decimal128VerifiesImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientDecimal128Verifies to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for ScalarClientDecimal128Verifies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientDecimal1")
@@ -97,9 +96,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The prepareVerify operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *     BigDecimal (Required)
@@ -111,7 +108,7 @@ public final class Decimal128VerifiesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return array of ResponseBodyResponse along with {@link Response} on successful completion of {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> prepareVerifyWithResponseAsync(RequestOptions requestOptions) {
@@ -121,9 +118,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The prepareVerify operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
      *     BigDecimal (Required)
@@ -135,7 +130,7 @@ public final class Decimal128VerifiesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return array of ResponseBodyResponse along with {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> prepareVerifyWithResponse(RequestOptions requestOptions) {
@@ -145,9 +140,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The verify operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BigDecimal
      * }</pre>
@@ -169,9 +162,7 @@ public final class Decimal128VerifiesImpl {
 
     /**
      * The verify operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BigDecimal
      * }</pre>

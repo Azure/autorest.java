@@ -5,34 +5,34 @@ package com.azure.autorest.extension.base.model.codemodel;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.Objects;
 
 /**
- * an XOR relationship between several schemas
- * 
+ * Represents an XOR relationship between several schemas
  */
 public class XorSchema extends ComplexSchema {
+    private List<Schema> oneOf = new ArrayList<>();
 
     /**
-     * the set of schemas that this must be one and only one of.
-     * (Required)
-     * 
+     * Creates a new instance of the XorSchema class.
      */
-    private List<Schema> oneOf = new ArrayList<Schema>();
+    public XorSchema() {
+        super();
+    }
 
     /**
-     * the set of schemas that this must be one and only one of.
-     * (Required)
-     * 
+     * Gets the set of schemas that this must be one and only one of. (Required)
+     *
+     * @return The set of schemas that this must be one and only one of.
      */
     public List<Schema> getOneOf() {
         return oneOf;
     }
 
     /**
-     * the set of schemas that this must be one and only one of.
-     * (Required)
-     * 
+     * Sets the set of schemas that this must be one and only one of. (Required)
+     *
+     * @param oneOf The set of schemas that this must be one and only one of.
      */
     public void setOneOf(List<Schema> oneOf) {
         this.oneOf = oneOf;
@@ -40,25 +40,13 @@ public class XorSchema extends ComplexSchema {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(XorSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("oneOf");
-        sb.append('=');
-        sb.append(((this.oneOf == null)?"<null>":this.oneOf));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return XorSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[oneOf="
+            + Objects.toString(oneOf, "<null>") + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.oneOf == null)? 0 :this.oneOf.hashCode()));
-        return result;
+        return Objects.hashCode(oneOf);
     }
 
     @Override
@@ -66,11 +54,12 @@ public class XorSchema extends ComplexSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof XorSchema) == false) {
+
+        if (!(other instanceof XorSchema)) {
             return false;
         }
-        XorSchema rhs = ((XorSchema) other);
-        return ((this.oneOf == rhs.oneOf)||((this.oneOf!= null)&&this.oneOf.equals(rhs.oneOf)));
-    }
 
+        XorSchema rhs = ((XorSchema) other);
+        return Objects.equals(oneOf, rhs.oneOf);
+    }
 }

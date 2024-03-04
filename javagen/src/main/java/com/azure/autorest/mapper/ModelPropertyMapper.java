@@ -8,7 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
-import com.azure.autorest.extension.base.model.codemodel.XmlSerlializationFormat;
+import com.azure.autorest.extension.base.model.codemodel.XmlSerializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -36,6 +36,17 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
     @Override
     public ClientModelProperty map(Property property) {
+        return map(property, false);
+    }
+
+    /**
+     * ClientModelProperty
+     *
+     * @param property the property
+     * @param mutableAsOptional make mutable property optional, for JSON Merge Patch
+     * @return ClientModelProperty
+     */
+    public ClientModelProperty map(Property property, boolean mutableAsOptional) {
         JavaSettings settings = JavaSettings.getInstance();
 
         ClientModelProperty.Builder builder = new ClientModelProperty.Builder()
@@ -43,6 +54,10 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
                 .required(property.isRequired())
                 .readOnly(property.isReadOnly());
 
+        if (mutableAsOptional && !property.isReadOnly() && !property.isIsDiscriminator()) {
+            builder.required(false);
+            builder.requiredForCreate(property.isRequired());
+        }
 
         String description;
         String summaryInProperty = property.getSummary();
@@ -108,9 +123,9 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             }
         }
 
-        XmlSerlializationFormat xmlSerlializationFormat = null;
+        XmlSerializationFormat xmlSerializationFormat = null;
         if (property.getSchema().getSerialization() != null) {
-            xmlSerlializationFormat = property.getSchema().getSerialization().getXml();
+            xmlSerializationFormat = property.getSchema().getSerialization().getXml();
         }
 
         String xmlName = null;
@@ -119,13 +134,13 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
         boolean isXmlAttribute = false;
         boolean isXmlText = false;
         String xmlPrefix = null;
-        if (xmlSerlializationFormat != null) {
-            isXmlWrapper = xmlSerlializationFormat.isWrapped();
-            isXmlAttribute = xmlSerlializationFormat.isAttribute();
-            xmlName = xmlSerlializationFormat.getName();
-            xmlNamespace = xmlSerlializationFormat.getNamespace();
-            isXmlText = xmlSerlializationFormat.isText();
-            xmlPrefix = xmlSerlializationFormat.getPrefix();
+        if (xmlSerializationFormat != null) {
+            isXmlWrapper = xmlSerializationFormat.isWrapped();
+            isXmlAttribute = xmlSerializationFormat.isAttribute();
+            xmlName = xmlSerializationFormat.getName();
+            xmlNamespace = xmlSerializationFormat.getNamespace();
+            isXmlText = xmlSerializationFormat.isText();
+            xmlPrefix = xmlSerializationFormat.getPrefix();
         }
 
         final String xmlParamName = xmlName == null ? serializedName.toString() : xmlName;

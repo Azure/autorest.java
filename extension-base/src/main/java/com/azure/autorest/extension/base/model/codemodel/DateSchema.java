@@ -3,31 +3,26 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a schema that represents a Date value
- * 
+ * Represents a date value.
  */
 public class DateSchema extends PrimitiveSchema {
 
+    /**
+     * Creates a new instance of the DateSchema class.
+     */
+    public DateSchema() {
+        super();
+    }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DateSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return DateSchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        return result;
+        return 1;
     }
 
     @Override
@@ -35,11 +30,8 @@ public class DateSchema extends PrimitiveSchema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof DateSchema) == false) {
-            return false;
-        }
-        DateSchema rhs = ((DateSchema) other);
-        return true;
+
+        return other instanceof DateSchema;
     }
 
 }

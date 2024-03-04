@@ -69,6 +69,9 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
     public void validate() {
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -80,8 +83,7 @@ public final class ReadonlyObj implements JsonSerializable<ReadonlyObj> {
      * Reads an instance of ReadonlyObj from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ReadonlyObj if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of ReadonlyObj if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ReadonlyObj.
      */
     public static ReadonlyObj fromJson(JsonReader jsonReader) throws IOException {

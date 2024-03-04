@@ -26,7 +26,7 @@
     <dependency>
       <groupId>com.azure</groupId>
       <artifactId>azure-core-http-netty</artifactId>
-      <version>1.13.11</version>
+      <version>1.14.0</version>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -45,13 +45,6 @@
 
   <build>
     <plugins>
-      <plugin>
-        <artifactId>exec-maven-plugin</artifactId>
-        <groupId>org.codehaus.mojo</groupId>
-        <version>1.5.0</version>
-        <executions>
-        </executions>
-      </plugin>
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>

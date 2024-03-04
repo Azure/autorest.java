@@ -84,3 +84,24 @@ namespace Cadl.MultipleApiVersion2 {
     get is ResourceOperations.ResourceRead<Resource2>;
   }
 }
+
+@service({
+  title: "MultipleApiVersion3",
+})
+@versioned(Cadl.MultipleApiVersion3.Versions)
+@Azure.ClientGenerator.Core.client({
+  name: "NoApiVersionClient",
+})
+namespace Cadl.MultipleApiVersion3 {
+  enum Versions {
+    v2022_10_01_preview: "2022-10-01-preview",
+    v2022_12_01_preview: "2022-12-01-preview",
+  }
+
+  @route("/client3")
+  interface Client {
+    // no api-version query parameter in the API
+    @post
+    action(@added(Versions.v2022_12_01_preview) @query param1?: string): OkResponse;
+  }
+}

@@ -8,7 +8,6 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.CoreUtils;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Base64;
 
 /**
@@ -19,7 +18,6 @@ public final class HeadersResponseByteHeaders {
     /*
      * The value property.
      */
-    @JsonProperty(value = "value")
     private byte[] value;
 
     private static final HttpHeaderName VALUE = HttpHeaderName.fromString("value");

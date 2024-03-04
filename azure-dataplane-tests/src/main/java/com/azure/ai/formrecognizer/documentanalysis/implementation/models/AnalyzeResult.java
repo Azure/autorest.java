@@ -5,78 +5,71 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 
 /**
  * Document analysis result.
  */
 @Fluent
-public final class AnalyzeResult {
+public final class AnalyzeResult implements JsonSerializable<AnalyzeResult> {
     /*
      * API version used to produce this result.
      */
-    @JsonProperty(value = "apiVersion", required = true)
     private ApiVersion apiVersion;
 
     /*
      * Document model ID used to produce this result.
      */
-    @JsonProperty(value = "modelId", required = true)
     private String modelId;
 
     /*
      * Method used to compute string offset and length.
      */
-    @JsonProperty(value = "stringIndexType", required = true)
     private StringIndexType stringIndexType;
 
     /*
      * Concatenate string representation of all textual and visual elements in reading order.
      */
-    @JsonProperty(value = "content", required = true)
     private String content;
 
     /*
      * Analyzed pages.
      */
-    @JsonProperty(value = "pages", required = true)
     private List<DocumentPage> pages;
 
     /*
      * Extracted paragraphs.
      */
-    @JsonProperty(value = "paragraphs")
     private List<DocumentParagraph> paragraphs;
 
     /*
      * Extracted tables.
      */
-    @JsonProperty(value = "tables")
     private List<DocumentTable> tables;
 
     /*
      * Extracted key-value pairs.
      */
-    @JsonProperty(value = "keyValuePairs")
     private List<DocumentKeyValuePair> keyValuePairs;
 
     /*
      * Extracted font styles.
      */
-    @JsonProperty(value = "styles")
     private List<DocumentStyle> styles;
 
     /*
      * Detected languages.
      */
-    @JsonProperty(value = "languages")
     private List<DocumentLanguage> languages;
 
     /*
      * Extracted documents.
      */
-    @JsonProperty(value = "documents")
     private List<Document> documents;
 
     /**
@@ -303,5 +296,81 @@ public final class AnalyzeResult {
     public AnalyzeResult setDocuments(List<Document> documents) {
         this.documents = documents;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("apiVersion", this.apiVersion == null ? null : this.apiVersion.toString());
+        jsonWriter.writeStringField("modelId", this.modelId);
+        jsonWriter.writeStringField("stringIndexType",
+            this.stringIndexType == null ? null : this.stringIndexType.toString());
+        jsonWriter.writeStringField("content", this.content);
+        jsonWriter.writeArrayField("pages", this.pages, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("paragraphs", this.paragraphs, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("tables", this.tables, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("keyValuePairs", this.keyValuePairs, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("styles", this.styles, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("languages", this.languages, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("documents", this.documents, (writer, element) -> writer.writeJson(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of AnalyzeResult from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of AnalyzeResult if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the AnalyzeResult.
+     */
+    public static AnalyzeResult fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            AnalyzeResult deserializedAnalyzeResult = new AnalyzeResult();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("apiVersion".equals(fieldName)) {
+                    deserializedAnalyzeResult.apiVersion = ApiVersion.fromString(reader.getString());
+                } else if ("modelId".equals(fieldName)) {
+                    deserializedAnalyzeResult.modelId = reader.getString();
+                } else if ("stringIndexType".equals(fieldName)) {
+                    deserializedAnalyzeResult.stringIndexType = StringIndexType.fromString(reader.getString());
+                } else if ("content".equals(fieldName)) {
+                    deserializedAnalyzeResult.content = reader.getString();
+                } else if ("pages".equals(fieldName)) {
+                    List<DocumentPage> pages = reader.readArray(reader1 -> DocumentPage.fromJson(reader1));
+                    deserializedAnalyzeResult.pages = pages;
+                } else if ("paragraphs".equals(fieldName)) {
+                    List<DocumentParagraph> paragraphs
+                        = reader.readArray(reader1 -> DocumentParagraph.fromJson(reader1));
+                    deserializedAnalyzeResult.paragraphs = paragraphs;
+                } else if ("tables".equals(fieldName)) {
+                    List<DocumentTable> tables = reader.readArray(reader1 -> DocumentTable.fromJson(reader1));
+                    deserializedAnalyzeResult.tables = tables;
+                } else if ("keyValuePairs".equals(fieldName)) {
+                    List<DocumentKeyValuePair> keyValuePairs
+                        = reader.readArray(reader1 -> DocumentKeyValuePair.fromJson(reader1));
+                    deserializedAnalyzeResult.keyValuePairs = keyValuePairs;
+                } else if ("styles".equals(fieldName)) {
+                    List<DocumentStyle> styles = reader.readArray(reader1 -> DocumentStyle.fromJson(reader1));
+                    deserializedAnalyzeResult.styles = styles;
+                } else if ("languages".equals(fieldName)) {
+                    List<DocumentLanguage> languages = reader.readArray(reader1 -> DocumentLanguage.fromJson(reader1));
+                    deserializedAnalyzeResult.languages = languages;
+                } else if ("documents".equals(fieldName)) {
+                    List<Document> documents = reader.readArray(reader1 -> Document.fromJson(reader1));
+                    deserializedAnalyzeResult.documents = documents;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedAnalyzeResult;
+        });
     }
 }

@@ -72,8 +72,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     }
 
     /**
-     * The interface defining all the services for LegacyClientCreateResourcePollViaOperationLocations to be used by
-     * the proxy service to perform REST calls.
+     * The interface defining all the services for LegacyClientCreateResourcePollViaOperationLocations to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "LegacyClientCreateRe")
@@ -119,14 +118,12 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Poll a Job.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
      *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
      *     errors (Optional): [
      *          (Optional){
      *             error (Required): {
@@ -166,14 +163,12 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Poll a Job.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     jobId: String (Required)
      *     comment: String (Required)
-     *     status: String(notStarted/running/succeeded/failed/canceled/partiallyCompleted) (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
      *     errors (Optional): [
      *          (Optional){
      *             error (Required): {
@@ -213,9 +208,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Creates a Job.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -239,9 +232,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Creates a Job.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -265,9 +256,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Creates a Job.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -284,12 +273,11 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(BinaryData jobData, RequestOptions requestOptions) {
-        return PollerFlux.create(
-            Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData,
-                requestOptions),
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.client.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
@@ -297,9 +285,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Creates a Job.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -316,12 +302,11 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(
-            Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData,
-                requestOptions),
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.client.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
@@ -329,9 +314,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Creates a Job.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -348,12 +331,11 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<JobResult, Void> beginCreateJobWithModelAsync(BinaryData jobData, RequestOptions requestOptions) {
-        return PollerFlux.create(
-            Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData,
-                requestOptions),
+        return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.client.getServiceVersion().getVersion())),
             TypeReference.createInstance(JobResult.class), TypeReference.createInstance(Void.class));
@@ -361,9 +343,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
 
     /**
      * Creates a Job.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -380,12 +360,11 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<JobResult, Void> beginCreateJobWithModel(BinaryData jobData, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(
-            Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData,
-                requestOptions),
+        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.client.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)
                 .setServiceVersion(this.client.getServiceVersion().getVersion())),
             TypeReference.createInstance(JobResult.class), TypeReference.createInstance(Void.class));

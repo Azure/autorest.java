@@ -6,7 +6,7 @@
 #
 # Before running this script the 'tsp' profile must be built, 'mvn install -P local,tsp'.
 param (
-  [int] $Parallelization = [Environment]::ProcessorCount - 1
+  [int] $Parallelization = [Environment]::ProcessorCount
 )
 
 $ExitCode = 0
@@ -38,6 +38,11 @@ $generateScript = {
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old.tsp") {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
+  } elseif ($tspFile -match "arm.tsp") {
+    # for mgmt, do not generate tests due to random mock values
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+    # also don't generate with stream-style-serialization as azure-core-management hasn't migrated to azure-json yet
+    $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
@@ -96,7 +101,7 @@ if (Test-Path ./tsp-output) {
 }
 
 # run other local tests except partial update
-$job = (Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*") | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
+$job = Get-Item ./tsp/* -Filter "*.tsp" -Exclude "*partialupdate*" | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
 $job | Wait-Job -Timeout 600
 $job | Receive-Job
@@ -111,7 +116,7 @@ Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ 
 
 $job = (Get-ChildItem ./http -Include "main.tsp","old.tsp" -File -Recurse) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob
 
-$job | Wait-Job -Timeout 600
+$job | Wait-Job -Timeout 1200
 $job | Receive-Job
 
 Remove-Item ./http -Recurse -Force

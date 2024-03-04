@@ -62,8 +62,7 @@ public final class ArraysImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceArrays to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceArrays to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -165,9 +164,7 @@ public final class ArraysImpl {
 
     /**
      * Get complex types with array property.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -192,9 +189,7 @@ public final class ArraysImpl {
 
     /**
      * Get complex types with array property.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -218,9 +213,7 @@ public final class ArraysImpl {
 
     /**
      * Put complex types with array property.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -229,8 +222,7 @@ public final class ArraysImpl {
      * }
      * }</pre>
      * 
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     * jumps over the lazy dog".
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -247,9 +239,7 @@ public final class ArraysImpl {
 
     /**
      * Put complex types with array property.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -258,8 +248,7 @@ public final class ArraysImpl {
      * }
      * }</pre>
      * 
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
-     * jumps over the lazy dog".
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -275,9 +264,7 @@ public final class ArraysImpl {
 
     /**
      * Get complex types with array property which is empty.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -291,8 +278,7 @@ public final class ArraysImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property which is empty along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with array property which is empty along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
@@ -303,9 +289,7 @@ public final class ArraysImpl {
 
     /**
      * Get complex types with array property which is empty.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -329,9 +313,7 @@ public final class ArraysImpl {
 
     /**
      * Put complex types with array property which is empty.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -357,9 +339,7 @@ public final class ArraysImpl {
 
     /**
      * Put complex types with array property which is empty.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -384,9 +364,7 @@ public final class ArraysImpl {
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -400,8 +378,7 @@ public final class ArraysImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property while server doesn't provide a response payload along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with array property while server doesn't provide a response payload along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
@@ -412,9 +389,7 @@ public final class ArraysImpl {
 
     /**
      * Get complex types with array property while server doesn't provide a response payload.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     array (Optional): [
@@ -428,8 +403,7 @@ public final class ArraysImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property while server doesn't provide a response payload along with
-     * {@link Response}.
+     * @return complex types with array property while server doesn't provide a response payload along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {

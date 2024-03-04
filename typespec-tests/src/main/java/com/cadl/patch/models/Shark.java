@@ -42,12 +42,21 @@ public final class Shark extends Fish {
 
     /**
      * Creates an instance of Shark class.
-     * 
-     * @param age the age value to set.
      */
     @Generated
-    public Shark(int age) {
-        super(age);
+    public Shark() {
+        setKind("shark");
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
+    public Shark setAge(int age) {
+        super.setAge(age);
+        this.updatedProperties.add("age");
+        return this;
     }
 
     /**
@@ -61,27 +70,40 @@ public final class Shark extends Fish {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", "shark");
+            jsonWriter.writeStringField("kind", getKind());
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
             return jsonWriter.writeEndObject();
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "shark");
+        if (updatedProperties.contains("kind")) {
+            if (getKind() == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", getKind());
+            }
+        }
         jsonWriter.writeIntField("age", getAge());
-        if (getColor() != null) {
-            jsonWriter.writeStringField("color", getColor());
-        } else if (updatedProperties.contains("color")) {
-            jsonWriter.writeNullField("color");
+        if (updatedProperties.contains("color")) {
+            if (getColor() == null) {
+                jsonWriter.writeNullField("color");
+            } else {
+                jsonWriter.writeStringField("color", getColor());
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -90,33 +112,28 @@ public final class Shark extends Fish {
      * Reads an instance of Shark from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Shark.
      */
+    @Generated
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
+            String kind = "shark";
             int age = 0;
             String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"shark".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'shark'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("id".equals(fieldName)) {
+                if ("id".equals(fieldName)) {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
@@ -125,9 +142,11 @@ public final class Shark extends Fish {
                     reader.skipChildren();
                 }
             }
-            Shark deserializedShark = new Shark(age);
+            Shark deserializedShark = new Shark();
             deserializedShark.setId(id);
             deserializedShark.setName(name);
+            deserializedShark.setKind(kind);
+            deserializedShark.setAge(age);
             deserializedShark.setColor(color);
 
             return deserializedShark;

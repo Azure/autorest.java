@@ -148,6 +148,11 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
     }
 
     @Override
+    public boolean isRequiredForCreate() {
+        return (targetProperty == null || targetProperty.isRequiredForCreate()) && referenceProperty.isRequiredForCreate();
+    }
+
+    @Override
     public boolean isConstant() {
         // could we have the whole flattened model as constant?
         return referenceProperty.isConstant();

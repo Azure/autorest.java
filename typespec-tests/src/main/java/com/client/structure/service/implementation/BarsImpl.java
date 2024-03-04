@@ -22,6 +22,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.client.structure.service.ServiceServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -49,8 +50,16 @@ public final class BarsImpl {
     }
 
     /**
-     * The interface defining all the services for ServiceClientClientBars to be used by the proxy service to perform
-     * REST calls.
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public ServiceServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
+    }
+
+    /**
+     * The interface defining all the services for ServiceClientClientBars to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "ServiceClientClientB")

@@ -14,7 +14,7 @@ import java.io.IOException;
  * The DotSalmon model.
  */
 @Immutable
-public class DotSalmon extends DotFish {
+public final class DotSalmon extends DotFish {
     /*
      * The location property.
      */
@@ -29,6 +29,7 @@ public class DotSalmon extends DotFish {
      * Creates an instance of DotSalmon class.
      */
     private DotSalmon() {
+        setFishType("DotSalmon");
     }
 
     /**
@@ -59,10 +60,13 @@ public class DotSalmon extends DotFish {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fish\\.type", "DotSalmon");
+        jsonWriter.writeStringField("fish.type", getFishType());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
@@ -73,9 +77,7 @@ public class DotSalmon extends DotFish {
      * Reads an instance of DotSalmon from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DotSalmon if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @return An instance of DotSalmon if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DotSalmon.
      */
     public static DotSalmon fromJson(JsonReader jsonReader) throws IOException {
@@ -85,13 +87,8 @@ public class DotSalmon extends DotFish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fish\\.type".equals(fieldName)) {
-                    String fishType = reader.getString();
-                    if (!"DotSalmon".equals(fishType)) {
-                        throw new IllegalStateException(
-                            "'fish\\.type' was expected to be non-null and equal to 'DotSalmon'. The found 'fish\\.type' was '"
-                                + fishType + "'.");
-                    }
+                if ("fish.type".equals(fieldName)) {
+                    deserializedDotSalmon.setFishType(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedDotSalmon.setSpecies(reader.getString());
                 } else if ("location".equals(fieldName)) {

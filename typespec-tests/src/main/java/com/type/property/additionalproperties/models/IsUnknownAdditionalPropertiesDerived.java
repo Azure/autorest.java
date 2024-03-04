@@ -7,7 +7,6 @@ package com.type.property.additionalproperties.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
@@ -18,8 +17,7 @@ import java.util.Map;
  * The model extends from a type that is Record&lt;unknown&gt; type.
  */
 @Fluent
-public final class IsUnknownAdditionalPropertiesDerived
-    implements JsonSerializable<IsUnknownAdditionalPropertiesDerived> {
+public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditionalProperties {
     /*
      * The index property
      */
@@ -32,19 +30,15 @@ public final class IsUnknownAdditionalPropertiesDerived
     @Generated
     private Double age;
 
-    /*
-     * The model is from Record<unknown> type.
-     */
-    @Generated
-    private Map<String, Object> additionalProperties;
-
     /**
      * Creates an instance of IsUnknownAdditionalPropertiesDerived class.
      * 
+     * @param name the name value to set.
      * @param index the index value to set.
      */
     @Generated
-    public IsUnknownAdditionalPropertiesDerived(int index) {
+    public IsUnknownAdditionalPropertiesDerived(String name, int index) {
+        super(name);
         this.index = index;
     }
 
@@ -81,34 +75,17 @@ public final class IsUnknownAdditionalPropertiesDerived
     }
 
     /**
-     * Get the additionalProperties property: The model is from Record&lt;unknown&gt; type.
-     * 
-     * @return the additionalProperties value.
+     * {@inheritDoc}
      */
     @Generated
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    /**
-     * Set the additionalProperties property: The model is from Record&lt;unknown&gt; type.
-     * 
-     * @param additionalProperties the additionalProperties value to set.
-     * @return the IsUnknownAdditionalPropertiesDerived object itself.
-     */
-    @Generated
-    public IsUnknownAdditionalPropertiesDerived setAdditionalProperties(Map<String, Object> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-        return this;
-    }
-
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", getName());
         jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeNumberField("age", this.age);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
+        if (getAdditionalProperties() != null) {
+            for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
@@ -119,13 +96,14 @@ public final class IsUnknownAdditionalPropertiesDerived
      * Reads an instance of IsUnknownAdditionalPropertiesDerived from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of IsUnknownAdditionalPropertiesDerived if the JsonReader was pointing to an instance of it,
-     * or null if it was pointing to JSON null.
+     * @return An instance of IsUnknownAdditionalPropertiesDerived if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IsUnknownAdditionalPropertiesDerived.
      */
+    @Generated
     public static IsUnknownAdditionalPropertiesDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            String name = null;
             int index = 0;
             Double age = null;
             Map<String, Object> additionalProperties = null;
@@ -133,7 +111,9 @@ public final class IsUnknownAdditionalPropertiesDerived
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("index".equals(fieldName)) {
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else if ("index".equals(fieldName)) {
                     index = reader.getInt();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getDouble);
@@ -146,9 +126,9 @@ public final class IsUnknownAdditionalPropertiesDerived
                 }
             }
             IsUnknownAdditionalPropertiesDerived deserializedIsUnknownAdditionalPropertiesDerived
-                = new IsUnknownAdditionalPropertiesDerived(index);
+                = new IsUnknownAdditionalPropertiesDerived(name, index);
             deserializedIsUnknownAdditionalPropertiesDerived.age = age;
-            deserializedIsUnknownAdditionalPropertiesDerived.additionalProperties = additionalProperties;
+            deserializedIsUnknownAdditionalPropertiesDerived.setAdditionalProperties(additionalProperties);
 
             return deserializedIsUnknownAdditionalPropertiesDerived;
         });

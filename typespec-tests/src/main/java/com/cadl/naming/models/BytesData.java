@@ -18,36 +18,41 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
-     * The data property.
+     * Data as {@code byte[]}
      */
     @Generated
-    private final byte[] data;
+    private final byte[] dataAsBytes;
 
     /**
      * Creates an instance of BytesData class.
      * 
-     * @param data the data value to set.
+     * @param dataAsBytes the dataAsBytes value to set.
      */
     @Generated
-    private BytesData(byte[] data) {
-        this.data = data;
+    private BytesData(byte[] dataAsBytes) {
+        setType("bytes");
+        this.dataAsBytes = dataAsBytes;
     }
 
     /**
-     * Get the data property: The data property.
+     * Get the dataAsBytes property: Data as {@code byte[]}.
      * 
-     * @return the data value.
+     * @return the dataAsBytes value.
      */
     @Generated
-    public byte[] getData() {
-        return CoreUtils.clone(this.data);
+    public byte[] getDataAsBytes() {
+        return CoreUtils.clone(this.dataAsBytes);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind_id", "bytes");
-        jsonWriter.writeBinaryField("data", this.data);
+        jsonWriter.writeStringField("@data.kind", getType());
+        jsonWriter.writeBinaryField("data_bytes", this.dataAsBytes);
         return jsonWriter.writeEndObject();
     }
 
@@ -55,33 +60,31 @@ public final class BytesData extends Data {
      * Reads an instance of BytesData from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of BytesData if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @return An instance of BytesData if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the BytesData.
      */
+    @Generated
     public static BytesData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            byte[] data = null;
+            String type = "bytes";
+            byte[] dataAsBytes = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind_id".equals(fieldName)) {
-                    String type = reader.getString();
-                    if (!"bytes".equals(type)) {
-                        throw new IllegalStateException(
-                            "'kind_id' was expected to be non-null and equal to 'bytes'. The found 'kind_id' was '"
-                                + type + "'.");
-                    }
-                } else if ("data".equals(fieldName)) {
-                    data = reader.getBinary();
+                if ("@data.kind".equals(fieldName)) {
+                    type = reader.getString();
+                } else if ("data_bytes".equals(fieldName)) {
+                    dataAsBytes = reader.getBinary();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new BytesData(data);
+            BytesData deserializedBytesData = new BytesData(dataAsBytes);
+            deserializedBytesData.setType(type);
+
+            return deserializedBytesData;
         });
     }
 }

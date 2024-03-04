@@ -50,8 +50,7 @@ public final class ErrorOpsImpl {
     }
 
     /**
-     * The interface defining all the services for ErrorModelClientErrorOps to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for ErrorModelClientErrorOps to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ErrorModelClientErro")
@@ -77,9 +76,7 @@ public final class ErrorOpsImpl {
 
     /**
      * The read operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -114,9 +111,7 @@ public final class ErrorOpsImpl {
 
     /**
      * The read operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

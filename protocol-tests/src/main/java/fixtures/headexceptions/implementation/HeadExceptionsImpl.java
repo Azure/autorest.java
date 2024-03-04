@@ -20,6 +20,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.headexceptions.AutoRestHeadExceptionTestServiceVersion;
 import fixtures.headexceptions.models.CustomizedException;
 import reactor.core.publisher.Mono;
 
@@ -49,8 +50,16 @@ public final class HeadExceptionsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestHeadExceptionTestServiceHeadExceptions to be used by the
-     * proxy service to perform REST calls.
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestHeadExceptionTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
+    }
+
+    /**
+     * The interface defining all the services for AutoRestHeadExceptionTestServiceHeadExceptions to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHeadExceptio")

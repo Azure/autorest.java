@@ -24,6 +24,7 @@ public final class MyDerivedType extends MyBaseType {
      * Creates an instance of MyDerivedType class.
      */
     public MyDerivedType() {
+        setKind(MyKind.KIND1);
     }
 
     /**
@@ -74,10 +75,13 @@ public final class MyDerivedType extends MyBaseType {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", MyKind.KIND1 == null ? null : MyKind.KIND1.toString());
+        jsonWriter.writeStringField("kind", getKind() == null ? null : getKind().toString());
         jsonWriter.writeStringField("propB1", getPropB1());
         jsonWriter.writeStringField("propD1", this.propD1);
         if (getPropBH1() != null) {
@@ -92,9 +96,7 @@ public final class MyDerivedType extends MyBaseType {
      * Reads an instance of MyDerivedType from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of MyDerivedType if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing the polymorphic discriminator.
+     * @return An instance of MyDerivedType if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the MyDerivedType.
      */
     public static MyDerivedType fromJson(JsonReader jsonReader) throws IOException {
@@ -105,12 +107,7 @@ public final class MyDerivedType extends MyBaseType {
                 reader.nextToken();
 
                 if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"Kind1".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'Kind1'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
+                    deserializedMyDerivedType.setKind(MyKind.fromString(reader.getString()));
                 } else if ("propB1".equals(fieldName)) {
                     deserializedMyDerivedType.setPropB1(reader.getString());
                 } else if ("propD1".equals(fieldName)) {

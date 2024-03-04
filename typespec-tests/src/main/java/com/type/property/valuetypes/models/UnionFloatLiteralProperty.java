@@ -43,6 +43,10 @@ public final class UnionFloatLiteralProperty implements JsonSerializable<UnionFl
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class UnionFloatLiteralProperty implements JsonSerializable<UnionFl
      * Reads an instance of UnionFloatLiteralProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of UnionFloatLiteralProperty if the JsonReader was pointing to an instance of it, or null if
-     * it was pointing to JSON null.
+     * @return An instance of UnionFloatLiteralProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UnionFloatLiteralProperty.
      */
+    @Generated
     public static UnionFloatLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             UnionFloatLiteralPropertyProperty property = null;

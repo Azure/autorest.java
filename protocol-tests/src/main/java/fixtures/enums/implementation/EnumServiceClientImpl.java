@@ -32,6 +32,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.enums.EnumServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -55,6 +56,20 @@ public final class EnumServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final EnumServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public EnumServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -89,10 +104,11 @@ public final class EnumServiceClientImpl {
      * Initializes an instance of EnumServiceClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public EnumServiceClientImpl(String host) {
+    public EnumServiceClientImpl(String host, EnumServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -100,9 +116,10 @@ public final class EnumServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public EnumServiceClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public EnumServiceClientImpl(HttpPipeline httpPipeline, String host, EnumServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -111,17 +128,19 @@ public final class EnumServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public EnumServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public EnumServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host,
+        EnumServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(EnumServiceClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for EnumServiceClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for EnumServiceClient to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "EnumServiceClient")
@@ -209,31 +228,17 @@ public final class EnumServiceClientImpl {
 
     /**
      * query enums operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>query-non-required-enum</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>non required enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
-     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2", "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -250,31 +255,17 @@ public final class EnumServiceClientImpl {
 
     /**
      * query enums operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>query-non-required-enum</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>non required enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>query-non-required-enum</td><td>String</td><td>No</td><td>non required enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
      * @param queryIntegerEnum integer enum with three values. Allowed values: 100, 200, 300.
      * @param queryBooleanEnum boolean enum with two values. Allowed values: true, false.
-     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * @param queryRequiredEnum required enum with three values. Allowed values: "test1", "test2", "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -291,29 +282,15 @@ public final class EnumServiceClientImpl {
 
     /**
      * enums header operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>header-non-required-string-enum</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>non required string enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2", "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -330,29 +307,15 @@ public final class EnumServiceClientImpl {
 
     /**
      * enums header operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>header-non-required-string-enum</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>non required string enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>header-non-required-string-enum</td><td>String</td><td>No</td><td>non required string enum with three values. Allowed values: "test1", "test2", "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
-     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2",
-     * "test@&lt;/spec.,i`~!&amp;*-al@char/&gt;".
+     * @param headerRequiredStringEnum required string enum with three values. Allowed values: "test1", "test2", "test&#064;&lt;/spec.,i`~!&amp;*-al&#064;char/&gt;".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -367,9 +330,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * enums required body operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
      * }</pre>
@@ -391,9 +352,7 @@ public final class EnumServiceClientImpl {
 
     /**
      * enums required body operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
      * }</pre>
@@ -413,28 +372,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * enums non required body operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(test1/test2)
      * }</pre>
@@ -460,28 +405,14 @@ public final class EnumServiceClientImpl {
 
     /**
      * enums non required body operation.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * String(test1/test2)
      * }</pre>

@@ -5,36 +5,36 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.Map;
 
 /**
  * Document type info.
  */
 @Fluent
-public final class DocumentTypeDetails {
+public final class DocumentTypeDetails implements JsonSerializable<DocumentTypeDetails> {
     /*
      * Document model description.
      */
-    @JsonProperty(value = "description")
     private String description;
 
     /*
      * Custom document model build mode.
      */
-    @JsonProperty(value = "buildMode")
     private DocumentBuildMode buildMode;
 
     /*
      * Description of the document semantic schema using a JSON Schema style syntax.
      */
-    @JsonProperty(value = "fieldSchema", required = true)
     private Map<String, DocumentFieldSchema> fieldSchema;
 
     /*
      * Estimated confidence for each field.
      */
-    @JsonProperty(value = "fieldConfidence")
     private Map<String, Float> fieldConfidence;
 
     /**
@@ -121,5 +121,54 @@ public final class DocumentTypeDetails {
     public DocumentTypeDetails setFieldConfidence(Map<String, Float> fieldConfidence) {
         this.fieldConfidence = fieldConfidence;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeMapField("fieldSchema", this.fieldSchema, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("description", this.description);
+        jsonWriter.writeStringField("buildMode", this.buildMode == null ? null : this.buildMode.toString());
+        jsonWriter.writeMapField("fieldConfidence", this.fieldConfidence,
+            (writer, element) -> writer.writeFloat(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DocumentTypeDetails from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DocumentTypeDetails if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the DocumentTypeDetails.
+     */
+    public static DocumentTypeDetails fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DocumentTypeDetails deserializedDocumentTypeDetails = new DocumentTypeDetails();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("fieldSchema".equals(fieldName)) {
+                    Map<String, DocumentFieldSchema> fieldSchema
+                        = reader.readMap(reader1 -> DocumentFieldSchema.fromJson(reader1));
+                    deserializedDocumentTypeDetails.fieldSchema = fieldSchema;
+                } else if ("description".equals(fieldName)) {
+                    deserializedDocumentTypeDetails.description = reader.getString();
+                } else if ("buildMode".equals(fieldName)) {
+                    deserializedDocumentTypeDetails.buildMode = DocumentBuildMode.fromString(reader.getString());
+                } else if ("fieldConfidence".equals(fieldName)) {
+                    Map<String, Float> fieldConfidence = reader.readMap(reader1 -> reader1.getFloat());
+                    deserializedDocumentTypeDetails.fieldConfidence = fieldConfidence;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDocumentTypeDetails;
+        });
     }
 }

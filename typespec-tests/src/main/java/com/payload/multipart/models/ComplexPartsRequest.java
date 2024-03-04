@@ -4,21 +4,15 @@
 
 package com.payload.multipart.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.util.BinaryData;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
+import com.azure.core.annotation.Immutable;
 import java.util.List;
 
 /**
  * The ComplexPartsRequest model.
  */
-@Fluent
-public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsRequest> {
+@Immutable
+public final class ComplexPartsRequest {
     /*
      * The id property.
      */
@@ -35,13 +29,7 @@ public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsR
      * The profileImage property.
      */
     @Generated
-    private final BinaryData profileImage;
-
-    /*
-     * The filename for profileImage
-     */
-    @Generated
-    private String profileImageFilename = "profileImage";
+    private final ProfileImageFileDetails profileImage;
 
     /*
      * The previousAddresses property.
@@ -53,7 +41,7 @@ public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsR
      * The pictures property.
      */
     @Generated
-    private final List<byte[]> pictures;
+    private final List<PicturesFileDetails> pictures;
 
     /**
      * Creates an instance of ComplexPartsRequest class.
@@ -65,8 +53,8 @@ public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsR
      * @param pictures the pictures value to set.
      */
     @Generated
-    public ComplexPartsRequest(String id, Address address, BinaryData profileImage, List<Address> previousAddresses,
-        List<byte[]> pictures) {
+    public ComplexPartsRequest(String id, Address address, ProfileImageFileDetails profileImage,
+        List<Address> previousAddresses, List<PicturesFileDetails> pictures) {
         this.id = id;
         this.address = address;
         this.profileImage = profileImage;
@@ -100,30 +88,8 @@ public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsR
      * @return the profileImage value.
      */
     @Generated
-    public BinaryData getProfileImage() {
+    public ProfileImageFileDetails getProfileImage() {
         return this.profileImage;
-    }
-
-    /**
-     * Get the profileImageFilename property: The filename for profileImage.
-     * 
-     * @return the profileImageFilename value.
-     */
-    @Generated
-    public String getProfileImageFilename() {
-        return this.profileImageFilename;
-    }
-
-    /**
-     * Set the profileImageFilename property: The filename for profileImage.
-     * 
-     * @param profileImageFilename the profileImageFilename value to set.
-     * @return the ComplexPartsRequest object itself.
-     */
-    @Generated
-    public ComplexPartsRequest setProfileImageFilename(String profileImageFilename) {
-        this.profileImageFilename = profileImageFilename;
-        return this;
     }
 
     /**
@@ -142,66 +108,7 @@ public final class ComplexPartsRequest implements JsonSerializable<ComplexPartsR
      * @return the pictures value.
      */
     @Generated
-    public List<byte[]> getPictures() {
+    public List<PicturesFileDetails> getPictures() {
         return this.pictures;
-    }
-
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("id", this.id);
-        jsonWriter.writeJsonField("address", this.address);
-        jsonWriter.writeUntypedField("profileImage", this.profileImage.toObject(Object.class));
-        jsonWriter.writeArrayField("previousAddresses", this.previousAddresses,
-            (writer, element) -> writer.writeJson(element));
-        jsonWriter.writeArrayField("pictures", this.pictures, (writer, element) -> writer.writeBinary(element));
-        jsonWriter.writeStringField("profileImage", this.profileImageFilename);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ComplexPartsRequest from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ComplexPartsRequest if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the ComplexPartsRequest.
-     */
-    public static ComplexPartsRequest fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String id = null;
-            Address address = null;
-            BinaryData profileImage = null;
-            List<Address> previousAddresses = null;
-            List<byte[]> pictures = null;
-            String profileImageFilename = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    id = reader.getString();
-                } else if ("address".equals(fieldName)) {
-                    address = Address.fromJson(reader);
-                } else if ("profileImage".equals(fieldName)) {
-                    profileImage
-                        = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
-                } else if ("previousAddresses".equals(fieldName)) {
-                    previousAddresses = reader.readArray(reader1 -> Address.fromJson(reader1));
-                } else if ("pictures".equals(fieldName)) {
-                    pictures = reader.readArray(reader1 -> reader1.getBinary());
-                } else if ("profileImage".equals(fieldName)) {
-                    profileImageFilename = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            ComplexPartsRequest deserializedComplexPartsRequest
-                = new ComplexPartsRequest(id, address, profileImage, previousAddresses, pictures);
-            deserializedComplexPartsRequest.profileImageFilename = profileImageFilename;
-
-            return deserializedComplexPartsRequest;
-        });
     }
 }

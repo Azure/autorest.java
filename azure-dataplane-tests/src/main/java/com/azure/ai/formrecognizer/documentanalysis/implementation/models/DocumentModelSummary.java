@@ -5,43 +5,43 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Map;
 
 /**
  * Document model summary.
  */
 @Fluent
-public final class DocumentModelSummary {
+public final class DocumentModelSummary implements JsonSerializable<DocumentModelSummary> {
     /*
      * Unique document model name.
      */
-    @JsonProperty(value = "modelId", required = true)
     private String modelId;
 
     /*
      * Document model description.
      */
-    @JsonProperty(value = "description")
     private String description;
 
     /*
      * Date and time (UTC) when the document model was created.
      */
-    @JsonProperty(value = "createdDateTime", required = true)
     private OffsetDateTime createdDateTime;
 
     /*
      * API version used to create this document model.
      */
-    @JsonProperty(value = "apiVersion")
     private String apiVersion;
 
     /*
      * List of key-value tag attributes associated with the document model.
      */
-    @JsonProperty(value = "tags")
     private Map<String, String> tags;
 
     /**
@@ -148,5 +148,56 @@ public final class DocumentModelSummary {
     public DocumentModelSummary setTags(Map<String, String> tags) {
         this.tags = tags;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("modelId", this.modelId);
+        jsonWriter.writeStringField("createdDateTime",
+            this.createdDateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.createdDateTime));
+        jsonWriter.writeStringField("description", this.description);
+        jsonWriter.writeStringField("apiVersion", this.apiVersion);
+        jsonWriter.writeMapField("tags", this.tags, (writer, element) -> writer.writeString(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DocumentModelSummary from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DocumentModelSummary if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the DocumentModelSummary.
+     */
+    public static DocumentModelSummary fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DocumentModelSummary deserializedDocumentModelSummary = new DocumentModelSummary();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("modelId".equals(fieldName)) {
+                    deserializedDocumentModelSummary.modelId = reader.getString();
+                } else if ("createdDateTime".equals(fieldName)) {
+                    deserializedDocumentModelSummary.createdDateTime
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("description".equals(fieldName)) {
+                    deserializedDocumentModelSummary.description = reader.getString();
+                } else if ("apiVersion".equals(fieldName)) {
+                    deserializedDocumentModelSummary.apiVersion = reader.getString();
+                } else if ("tags".equals(fieldName)) {
+                    Map<String, String> tags = reader.readMap(reader1 -> reader1.getString());
+                    deserializedDocumentModelSummary.tags = tags;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDocumentModelSummary;
+        });
     }
 }

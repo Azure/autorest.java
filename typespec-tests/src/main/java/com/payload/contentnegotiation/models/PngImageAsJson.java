@@ -44,6 +44,10 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
         return CoreUtils.clone(this.content);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -55,11 +59,11 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
      * Reads an instance of PngImageAsJson from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of PngImageAsJson if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of PngImageAsJson if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the PngImageAsJson.
      */
+    @Generated
     public static PngImageAsJson fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             byte[] content = null;

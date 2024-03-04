@@ -368,7 +368,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
      * @param responseBodyType the type of the response body.
      * @param isProtocolMethod whether the client method to be simplified for resilience to API changes.
      * @param settings the JavaSettings.
-     * @param ignoreTypedHeaders Ignores typed headers when creating the return type, if this is set to {@code true}.
+     * @param ignoreTypedHeaders Ignores typed headers when creating the return type, if this is set to true.
      * @return the type for AsyncRestResponse.
      */
     protected IType getAsyncRestResponseReturnType(Operation operation, IType responseBodyType,

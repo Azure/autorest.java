@@ -137,76 +137,115 @@ public class Javagen extends NewPlugin {
     protected JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
                                            boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
-        // Service client
-        if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
-            javaPackage.addServiceClient(client.getServiceClient().getPackage(),
-                client.getServiceClient().getClassName(), client.getServiceClient());
-        } else {
-            // multi-client from TypeSpec
-            for (ServiceClient serviceClient : client.getServiceClients()) {
-                javaPackage.addServiceClient(serviceClient.getPackage(), serviceClient.getClassName(), serviceClient);
+        if (client.getServiceClient() != null || !CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+            // Service client
+            if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+                javaPackage.addServiceClient(client.getServiceClient().getPackage(),
+                        client.getServiceClient().getClassName(), client.getServiceClient());
+            } else {
+                // multi-client from TypeSpec
+                for (ServiceClient serviceClient : client.getServiceClients()) {
+                    javaPackage.addServiceClient(serviceClient.getPackage(), serviceClient.getClassName(), serviceClient);
+                }
             }
-        }
 
-        if (settings.isGenerateClientInterfaces()) {
-            javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(),
-                client.getServiceClient());
-        }
 
-        // Async/sync service clients
-        for (AsyncSyncClient asyncClient : client.getAsyncClients()) {
-            javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
-        }
-        for (AsyncSyncClient syncClient : client.getSyncClients()) {
-            boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
-                // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
-                && settings.isDataPlaneClient()
-                // 1-1 match of SyncClient and AsyncClient
-                && client.getAsyncClients().size() == client.getSyncClients().size();
-            javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient, syncClientWrapAsync);
-        }
-
-        // Service client builder
-        for (ClientBuilder clientBuilder : client.getClientBuilders()) {
-            javaPackage.addServiceClientBuilder(clientBuilder);
-        }
-
-        // Method group
-        for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
-            javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
             if (settings.isGenerateClientInterfaces()) {
-                javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
+                javaPackage.addServiceClientInterface(client.getServiceClient().getInterfaceName(),
+                        client.getServiceClient());
             }
-        }
 
-        // Sample
-        if (settings.isDataPlaneClient() && settings.isGenerateSamples()) {
-            for (ProtocolExample protocolExample : client.getProtocolExamples()) {
-                javaPackage.addProtocolExamples(protocolExample);
+            // Async/sync service clients
+            for (AsyncSyncClient asyncClient : client.getAsyncClients()) {
+                javaPackage.addAsyncServiceClient(asyncClient.getPackageName(), asyncClient);
             }
-            for (ClientMethodExample clientMethodExample : client.getClientMethodExamples()) {
-                javaPackage.addClientMethodExamples(clientMethodExample);
+            for (AsyncSyncClient syncClient : client.getSyncClients()) {
+                boolean syncClientWrapAsync = settings.isSyncClientWrapAsyncClient()
+                        // HLC could have sync method that is harder to convert, e.g. Flux<ByteBuffer> -> InputStream
+                        && settings.isDataPlaneClient()
+                        // 1-1 match of SyncClient and AsyncClient
+                        && client.getAsyncClients().size() == client.getSyncClients().size();
+                javaPackage.addSyncServiceClient(syncClient.getPackageName(), syncClient, syncClientWrapAsync);
             }
-        }
 
-        // Test
-        if (settings.isDataPlaneClient() && settings.isGenerateTests()) {
-            if (!client.getSyncClients().isEmpty() && client.getSyncClients().iterator().next().getClientBuilder() != null) {
-                List<ServiceClient> serviceClients = client.getServiceClients();
-                if (CoreUtils.isNullOrEmpty(serviceClients)) {
-                    serviceClients = Collections.singletonList(client.getServiceClient());
+            // Service client builder
+            for (ClientBuilder clientBuilder : client.getClientBuilders()) {
+                javaPackage.addServiceClientBuilder(clientBuilder);
+            }
+
+            // Method group
+            for (MethodGroupClient methodGroupClient : client.getServiceClient().getMethodGroupClients()) {
+                javaPackage.addMethodGroup(methodGroupClient.getPackage(), methodGroupClient.getClassName(), methodGroupClient);
+                if (settings.isGenerateClientInterfaces()) {
+                    javaPackage.addMethodGroupInterface(methodGroupClient.getInterfaceName(), methodGroupClient);
                 }
-                TestContext testContext = new TestContext(serviceClients, client.getSyncClients());
+            }
 
-                // base test class
-                javaPackage.addProtocolTestBase(testContext);
-
-                // test cases as Disabled
-                if (!client.getProtocolExamples().isEmpty()) {
-                    client.getProtocolExamples().forEach(protocolExample -> javaPackage.addProtocolTest(new TestContext<>(testContext, protocolExample)));
+            // Sample
+            if (settings.isDataPlaneClient() && settings.isGenerateSamples()) {
+                for (ProtocolExample protocolExample : client.getProtocolExamples()) {
+                    javaPackage.addProtocolExamples(protocolExample);
                 }
-                if (!client.getClientMethodExamples().isEmpty()) {
-                    client.getClientMethodExamples().forEach(clientMethodExample -> javaPackage.addClientMethodTest(new TestContext<>(testContext, clientMethodExample)));
+                for (ClientMethodExample clientMethodExample : client.getClientMethodExamples()) {
+                    javaPackage.addClientMethodExamples(clientMethodExample);
+                }
+            }
+
+            // Test
+            if (settings.isDataPlaneClient() && settings.isGenerateTests()) {
+                if (!client.getSyncClients().isEmpty() && client.getSyncClients().iterator().next().getClientBuilder() != null) {
+                    List<ServiceClient> serviceClients = client.getServiceClients();
+                    if (CoreUtils.isNullOrEmpty(serviceClients)) {
+                        serviceClients = Collections.singletonList(client.getServiceClient());
+                    }
+                    TestContext testContext = new TestContext(serviceClients, client.getSyncClients());
+
+                    // base test class
+                    javaPackage.addProtocolTestBase(testContext);
+
+                    // test cases as Disabled
+                    if (!client.getProtocolExamples().isEmpty()) {
+                        client.getProtocolExamples().forEach(protocolExample -> javaPackage.addProtocolTest(new TestContext<>(testContext, protocolExample)));
+                    }
+                    if (!client.getClientMethodExamples().isEmpty()) {
+                        client.getClientMethodExamples().forEach(clientMethodExample -> javaPackage.addClientMethodTest(new TestContext<>(testContext, clientMethodExample)));
+                    }
+                }
+            }
+
+            // Service version
+            if (settings.isDataPlaneClient()) {
+                String packageName = settings.getPackage();
+                if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+                    List<String> serviceVersions = settings.getServiceVersions();
+                    if (CoreUtils.isNullOrEmpty(serviceVersions)) {
+                        List<String> apiVersions = ClientModelUtil.getApiVersions(codeModel);
+                        if (!CoreUtils.isNullOrEmpty(apiVersions)) {
+                            serviceVersions = apiVersions;
+                        } else {
+                            throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
+                        }
+                    }
+
+                    String serviceName;
+                    if (settings.getServiceName() == null) {
+                        serviceName = client.getServiceClient().getInterfaceName();
+                    } else {
+                        serviceName = settings.getServiceName();
+                    }
+                    String className = ClientModelUtil.getServiceVersionClassName(ClientModelUtil.getClientInterfaceName(codeModel));
+                    javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
+                } else {
+                    // multi-client from TypeSpec
+                    for (com.azure.autorest.extension.base.model.codemodel.Client client1 : codeModel.getClients()) {
+                        if (client1.getServiceVersion() != null) {
+                            javaPackage.addServiceVersion(packageName,
+                                    new ServiceVersion(
+                                            SchemaUtil.getJavaName(client1.getServiceVersion()),
+                                            client1.getServiceVersion().getLanguage().getDefault().getDescription(),
+                                            client1.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList())));
+                        }
+                    }
                 }
             }
         }
@@ -216,48 +255,12 @@ public class Javagen extends NewPlugin {
             javaPackage.addGraalVmConfig(Project.AZURE_GROUP_ID, ClientModelUtil.getArtifactId(), client.getGraalVmConfig());
         }
 
-        // Service version
-        if (settings.isDataPlaneClient()) {
-            String packageName = settings.getPackage();
-            if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
-                List<String> serviceVersions = settings.getServiceVersions();
-                if (CoreUtils.isNullOrEmpty(serviceVersions)) {
-                    List<String> apiVersions = ClientModelUtil.getApiVersions(codeModel);
-                    if (!CoreUtils.isNullOrEmpty(apiVersions)) {
-                        serviceVersions = apiVersions;
-                    } else {
-                        throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");
-                    }
-                }
-
-                String serviceName;
-                if (settings.getServiceName() == null) {
-                    serviceName = client.getServiceClient().getInterfaceName();
-                } else {
-                    serviceName = settings.getServiceName();
-                }
-                String className = ClientModelUtil.getServiceVersionClassName(ClientModelUtil.getClientInterfaceName(codeModel));
-                javaPackage.addServiceVersion(packageName, new ServiceVersion(className, serviceName, serviceVersions));
-            } else {
-                // multi-client from TypeSpec
-                for (com.azure.autorest.extension.base.model.codemodel.Client client1 : codeModel.getClients()) {
-                    if (client1.getServiceVersion() != null) {
-                        javaPackage.addServiceVersion(packageName,
-                                new ServiceVersion(
-                                        SchemaUtil.getJavaName(client1.getServiceVersion()),
-                                        client1.getServiceVersion().getLanguage().getDefault().getDescription(),
-                                        client1.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList())));
-                    }
-                }
-            }
-        }
-
         writeClientModels(client, javaPackage, settings);
 
         writeHelperClasses(client, javaPackage, settings);
 
         // Unit tests on client model
-        if (settings.isGenerateTests() && (!settings.isDataPlaneClient() || settings.isGenerateModels())) {
+        if (settings.isGenerateTests() && !settings.isDataPlaneClient()) {
             for (ClientModel model : client.getModels()) {
                 if (!model.isStronglyTypedHeader()) {
                     javaPackage.addModelUnitTest(model);
@@ -308,7 +311,7 @@ public class Javagen extends NewPlugin {
     }
 
     protected void writeClientModels(Client client, JavaPackage javaPackage, JavaSettings settings) {
-        if (!settings.isDataPlaneClient() || settings.isGenerateModels()) {
+        if (!settings.isDataPlaneClient()) {
             // Client model
             for (ClientModel model : client.getModels()) {
                 javaPackage.addModel(model.getPackage(), model.getName(), model);

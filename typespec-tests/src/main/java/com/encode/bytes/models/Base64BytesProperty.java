@@ -44,6 +44,10 @@ public final class Base64BytesProperty implements JsonSerializable<Base64BytesPr
         return CoreUtils.clone(this.value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -55,11 +59,11 @@ public final class Base64BytesProperty implements JsonSerializable<Base64BytesPr
      * Reads an instance of Base64BytesProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Base64BytesProperty if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of Base64BytesProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Base64BytesProperty.
      */
+    @Generated
     public static Base64BytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             byte[] value = null;

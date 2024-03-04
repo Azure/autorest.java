@@ -118,9 +118,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NON_NULL)
-                        : new ArrayList<>())
+                .annotations(new ArrayList<>())
                 .build();
     }
 
@@ -201,7 +199,16 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .filter(p -> p.getImplementation() == Parameter.ImplementationLocation.CLIENT)
                 .distinct()
                 .collect(Collectors.toList());
+        String apiVersionSerializedName = "api-version";
         for (Parameter p : clientParameters) {
+            String serializedName = p.getLanguage().getDefault().getSerializedName();
+
+            if (settings.isDataPlaneClient() && ParameterSynthesizedOrigin.fromValue(p.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION) {
+                // skip api-version, ServiceVersion will always be added to client for DPG
+                apiVersionSerializedName = serializedName;
+                continue;
+            }
+
             String serviceClientPropertyDescription =
                     p.getDescription() != null ? p.getDescription() : p.getLanguage().getJava().getDescription();
 
@@ -222,19 +229,6 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
             }
             String serviceClientPropertyDefaultValueExpression = serviceClientPropertyClientType.defaultValueExpression(ClientModelUtil.getClientDefaultValueOrConstantValue(p));
             boolean serviceClientPropertyRequired = p.isRequired();
-            String serializedName = p.getLanguage().getDefault().getSerializedName();
-
-            if (settings.isDataPlaneClient() && ParameterSynthesizedOrigin.fromValue(p.getOrigin()) == ParameterSynthesizedOrigin.API_VERSION) {
-                serviceClientPropertyDescription = "Service version";
-                serviceClientPropertyClientType = new ClassType.Builder()
-                        .name(serviceVersionClassName)
-                        .packageName(settings.getPackage())
-                        .build();
-                serviceClientPropertyName = "serviceVersion";
-                serviceClientPropertyIsReadOnly = false;
-                serviceClientPropertyDefaultValueExpression = serviceVersionClassName + ".getLatest()";
-                serviceClientPropertyRequired = false;
-            }
 
             if (serviceClientPropertyClientType != ClassType.TOKEN_CREDENTIAL) {
                 ServiceClientProperty serviceClientProperty =
@@ -252,6 +246,22 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     serviceClientProperties.add(serviceClientProperty);
                 }
             }
+        }
+
+        if (settings.isDataPlaneClient() && serviceVersionClassName != null) {
+            // Always add a ServiceVersion parameter for DPG
+            serviceClientProperties.add(new ServiceClientProperty.Builder()
+                    .description("Service version")
+                    .type(new ClassType.Builder()
+                            .name(serviceVersionClassName)
+                            .packageName(settings.getPackage())
+                            .build())
+                    .name("serviceVersion")
+                    .readOnly(false)
+                    .defaultValueExpression(serviceVersionClassName + ".getLatest()")
+                    .required(false)
+                    .requestParameterName(apiVersionSerializedName)
+                    .build());
         }
 
         return serviceClientProperties;
@@ -291,9 +301,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NON_NULL)
-                        : new ArrayList<>())
+                .annotations(new ArrayList<>())
                 .build();
 
         ClientMethodParameter httpPipelineParameter = new ClientMethodParameter.Builder()
@@ -305,9 +313,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .constant(false)
                 .fromClient(true)
                 .defaultValue(null)
-                .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                        ? Collections.singletonList(ClassType.NON_NULL)
-                        : new ArrayList<>())
+                .annotations(new ArrayList<>())
                 .build();
 
         ClientMethodParameter serializerAdapterParameter = createSerializerAdapterParameter();
@@ -412,9 +418,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .constant(false)
                     .fromClient(true)
                     .defaultValue("AzureEnvironment.AZURE")
-                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NON_NULL)
-                            : new ArrayList<>())
+                    .annotations(new ArrayList<>())
                     .build();
 
             ClientMethodParameter defaultPollIntervalParameter = new ClientMethodParameter.Builder()
@@ -426,9 +430,7 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                     .constant(false)
                     .fromClient(true)
                     .defaultValue("Duration.ofSeconds(30)")
-                    .annotations(JavaSettings.getInstance().isNonNullAnnotations()
-                            ? Collections.singletonList(ClassType.NON_NULL)
-                            : new ArrayList<>())
+                    .annotations(new ArrayList<>())
                     .build();
 
             serviceClientConstructors.add(new Constructor(Arrays.asList(httpPipelineParameter, serializerAdapterParameter, defaultPollIntervalParameter, azureEnvironmentParameter)));

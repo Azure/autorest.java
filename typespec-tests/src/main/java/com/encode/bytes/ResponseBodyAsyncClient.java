@@ -40,9 +40,7 @@ public final class ResponseBodyAsyncClient {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -62,9 +60,7 @@ public final class ResponseBodyAsyncClient {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -84,9 +80,7 @@ public final class ResponseBodyAsyncClient {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -106,9 +100,7 @@ public final class ResponseBodyAsyncClient {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -127,10 +119,8 @@ public final class ResponseBodyAsyncClient {
     }
 
     /**
-     * The base64Url operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * The base64url operation.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -144,8 +134,8 @@ public final class ResponseBodyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> base64UrlWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> base64urlWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponseAsync(requestOptions);
     }
 
     /**
@@ -223,7 +213,7 @@ public final class ResponseBodyAsyncClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -234,10 +224,10 @@ public final class ResponseBodyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<byte[]> base64Url() {
-        // Generated convenience method for base64UrlWithResponse
+    public Mono<byte[]> base64url() {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+        return base64urlWithResponse(requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Base64Url.class).decodedBytes());
     }
 }

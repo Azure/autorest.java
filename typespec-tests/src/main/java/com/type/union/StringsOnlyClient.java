@@ -16,10 +16,9 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringsOnliesImpl;
+import com.type.union.implementation.models.SendRequest;
 import com.type.union.models.GetResponse;
 import com.type.union.models.Prop1;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -41,9 +40,7 @@ public final class StringsOnlyClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(a/b/c) (Required)
@@ -65,9 +62,7 @@ public final class StringsOnlyClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(a/b/c) (Required)
@@ -122,8 +117,7 @@ public final class StringsOnlyClient {
     public void send(Prop1 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", (prop == null ? null : prop.toString()));
+        SendRequest requestObj = new SendRequest(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         sendWithResponse(request, requestOptions).getValue();
     }

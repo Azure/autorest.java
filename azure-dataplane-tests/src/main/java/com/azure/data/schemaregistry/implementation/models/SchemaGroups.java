@@ -73,6 +73,9 @@ public final class SchemaGroups implements JsonSerializable<SchemaGroups> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -85,8 +88,7 @@ public final class SchemaGroups implements JsonSerializable<SchemaGroups> {
      * Reads an instance of SchemaGroups from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of SchemaGroups if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of SchemaGroups if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the SchemaGroups.
      */
     public static SchemaGroups fromJson(JsonReader jsonReader) throws IOException {

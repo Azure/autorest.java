@@ -28,12 +28,12 @@ public class PackageInfoTemplate implements IJavaTemplate<PackageInfo, JavaFile>
     public final void write(PackageInfo packageInfo, JavaFile javaFile) {
         JavaSettings settings = JavaSettings.getInstance();
         if (settings.getFileHeaderText() != null && !settings.getFileHeaderText().isEmpty()) {
-            javaFile.lineComment(settings.getMaximumJavadocCommentWidth(), (comment) ->
+            javaFile.lineComment((comment) ->
                 comment.line(settings.getFileHeaderText()));
             javaFile.line();
         }
 
-        javaFile.javadocComment(settings.getMaximumJavadocCommentWidth(), (comment) -> {
+        javaFile.javadocComment((comment) -> {
             if (settings.isHandlePartialUpdate()) {
                 comment.line("<!-- start generated doc -->");
             }

@@ -5,44 +5,40 @@
 package fixtures.annotatedgettersandsetters.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonGetter;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonSetter;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * SKU details.
  */
 @Fluent
-public final class Sku {
+public final class Sku implements JsonSerializable<Sku> {
     /*
      * SKU family name
      */
-    @JsonProperty(value = "family", required = true)
     private SkuFamily family = SkuFamily.A;
 
     /*
      * SKU name to specify whether the key vault is a standard vault or a premium vault.
      */
-    @JsonProperty(value = "name", required = true)
     private SkuName name = SkuName.STANDARD;
 
     /*
-     * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from
-     * the key vault.
+     * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
      */
-    @JsonProperty(value = "enabledForDeployment")
     private Boolean enabledForDeployment = true;
 
     /*
      * softDelete data retention days. It accepts >=7 and <=90.
      */
-    @JsonProperty(value = "softDeleteRetentionInDays")
     private Integer softDeleteRetentionInDays = 90;
 
     /*
      * test string description.
      */
-    @JsonProperty(value = "testString", access = JsonProperty.Access.WRITE_ONLY)
     private String testString = "test string";
 
     /**
@@ -56,7 +52,6 @@ public final class Sku {
      * 
      * @return the family value.
      */
-    @JsonGetter("family")
     public SkuFamily getFamily() {
         return this.family;
     }
@@ -67,7 +62,6 @@ public final class Sku {
      * @param family the family value to set.
      * @return the Sku object itself.
      */
-    @JsonSetter("family")
     public Sku setFamily(SkuFamily family) {
         this.family = family;
         return this;
@@ -78,7 +72,6 @@ public final class Sku {
      * 
      * @return the name value.
      */
-    @JsonGetter("name")
     public SkuName getName() {
         return this.name;
     }
@@ -89,31 +82,26 @@ public final class Sku {
      * @param name the name value to set.
      * @return the Sku object itself.
      */
-    @JsonSetter("name")
     public Sku setName(SkuName name) {
         this.name = name;
         return this;
     }
 
     /**
-     * Get the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to
-     * retrieve certificates stored as secrets from the key vault.
+     * Get the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
      * 
      * @return the enabledForDeployment value.
      */
-    @JsonGetter("enabledForDeployment")
     public Boolean isEnabledForDeployment() {
         return this.enabledForDeployment;
     }
 
     /**
-     * Set the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to
-     * retrieve certificates stored as secrets from the key vault.
+     * Set the enabledForDeployment property: Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
      * 
      * @param enabledForDeployment the enabledForDeployment value to set.
      * @return the Sku object itself.
      */
-    @JsonSetter("enabledForDeployment")
     public Sku setEnabledForDeployment(Boolean enabledForDeployment) {
         this.enabledForDeployment = enabledForDeployment;
         return this;
@@ -124,7 +112,6 @@ public final class Sku {
      * 
      * @return the softDeleteRetentionInDays value.
      */
-    @JsonGetter("softDeleteRetentionInDays")
     public Integer getSoftDeleteRetentionInDays() {
         return this.softDeleteRetentionInDays;
     }
@@ -135,7 +122,6 @@ public final class Sku {
      * @param softDeleteRetentionInDays the softDeleteRetentionInDays value to set.
      * @return the Sku object itself.
      */
-    @JsonSetter("softDeleteRetentionInDays")
     public Sku setSoftDeleteRetentionInDays(Integer softDeleteRetentionInDays) {
         this.softDeleteRetentionInDays = softDeleteRetentionInDays;
         return this;
@@ -162,5 +148,52 @@ public final class Sku {
         if (getName() == null) {
             throw new IllegalArgumentException("Missing required property name in model Sku");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("family", this.family == null ? null : this.family.toString());
+        jsonWriter.writeStringField("name", this.name == null ? null : this.name.toString());
+        jsonWriter.writeBooleanField("enabledForDeployment", this.enabledForDeployment);
+        jsonWriter.writeNumberField("softDeleteRetentionInDays", this.softDeleteRetentionInDays);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Sku from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Sku if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Sku.
+     */
+    public static Sku fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Sku deserializedSku = new Sku();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("family".equals(fieldName)) {
+                    deserializedSku.family = SkuFamily.fromString(reader.getString());
+                } else if ("name".equals(fieldName)) {
+                    deserializedSku.name = SkuName.fromString(reader.getString());
+                } else if ("enabledForDeployment".equals(fieldName)) {
+                    deserializedSku.enabledForDeployment = reader.getNullable(JsonReader::getBoolean);
+                } else if ("softDeleteRetentionInDays".equals(fieldName)) {
+                    deserializedSku.softDeleteRetentionInDays = reader.getNullable(JsonReader::getInt);
+                } else if ("testString".equals(fieldName)) {
+                    deserializedSku.testString = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedSku;
+        });
     }
 }

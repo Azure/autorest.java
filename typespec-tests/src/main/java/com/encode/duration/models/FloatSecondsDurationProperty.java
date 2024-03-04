@@ -44,6 +44,10 @@ public final class FloatSecondsDurationProperty implements JsonSerializable<Floa
         return Duration.ofNanos((long) (this.value * 1000_000_000L));
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -55,11 +59,11 @@ public final class FloatSecondsDurationProperty implements JsonSerializable<Floa
      * Reads an instance of FloatSecondsDurationProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FloatSecondsDurationProperty if the JsonReader was pointing to an instance of it, or null
-     * if it was pointing to JSON null.
+     * @return An instance of FloatSecondsDurationProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FloatSecondsDurationProperty.
      */
+    @Generated
     public static FloatSecondsDurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Duration value = null;

@@ -5,23 +5,25 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Parameter group.
  */
 @Fluent
-public final class Grouper {
+public final class Grouper implements JsonSerializable<Grouper> {
     /*
      * A grouped parameter that is a constant.
      */
-    @JsonProperty(value = "groupedConstant")
     private String groupedConstant = "foo";
 
     /*
      * Optional parameter part of a parameter grouping.
      */
-    @JsonProperty(value = "groupedParameter")
     private String groupedParameter;
 
     /**
@@ -76,5 +78,43 @@ public final class Grouper {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("groupedConstant", this.groupedConstant);
+        jsonWriter.writeStringField("groupedParameter", this.groupedParameter);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Grouper from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Grouper if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the Grouper.
+     */
+    public static Grouper fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Grouper deserializedGrouper = new Grouper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("groupedConstant".equals(fieldName)) {
+                    deserializedGrouper.groupedConstant = reader.getString();
+                } else if ("groupedParameter".equals(fieldName)) {
+                    deserializedGrouper.groupedParameter = reader.getString();
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedGrouper;
+        });
     }
 }

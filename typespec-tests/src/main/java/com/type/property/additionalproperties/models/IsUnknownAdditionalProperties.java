@@ -18,7 +18,7 @@ import java.util.Map;
  * The model is from Record&lt;unknown&gt; type.
  */
 @Fluent
-public final class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknownAdditionalProperties> {
+public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknownAdditionalProperties> {
     /*
      * The name property
      */
@@ -26,7 +26,7 @@ public final class IsUnknownAdditionalProperties implements JsonSerializable<IsU
     private final String name;
 
     /*
-     * The model is from Record<unknown> type.
+     * Additional properties
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -52,7 +52,7 @@ public final class IsUnknownAdditionalProperties implements JsonSerializable<IsU
     }
 
     /**
-     * Get the additionalProperties property: The model is from Record&lt;unknown&gt; type.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class IsUnknownAdditionalProperties implements JsonSerializable<IsU
     }
 
     /**
-     * Set the additionalProperties property: The model is from Record&lt;unknown&gt; type.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsUnknownAdditionalProperties object itself.
@@ -73,6 +73,10 @@ public final class IsUnknownAdditionalProperties implements JsonSerializable<IsU
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -89,11 +93,11 @@ public final class IsUnknownAdditionalProperties implements JsonSerializable<IsU
      * Reads an instance of IsUnknownAdditionalProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of IsUnknownAdditionalProperties if the JsonReader was pointing to an instance of it, or null
-     * if it was pointing to JSON null.
+     * @return An instance of IsUnknownAdditionalProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IsUnknownAdditionalProperties.
      */
+    @Generated
     public static IsUnknownAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

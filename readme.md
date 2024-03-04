@@ -66,7 +66,6 @@ Settings can be provided on the command line through `--name:value` or in a READ
 
 |Option                                                                &nbsp;| Description |
 |------------------|-------------|
-|`--enable-xml`|Generates models and clients that can be sent in XML over the wire. Default is false|
 |`--client-side-validations`|Generate validations for required parameters and required model properties. Default is false.|
 |`--generate-client-as-impl`|Append "Impl" to the names of service clients and method groups and place them in the `implementation` sub-package. Default is false.|
 |`--generate-client-interfaces`|Implies `--generate-client-as-impl` and generates interfaces for all the "Impl"s. Default is false.|
@@ -80,14 +79,12 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--custom-types-subpackage=STRING`|The sub-package that the custom types should be generated in. The types that custom types reference, or inherit from will also be automatically moved to this sub-package. **Recommended usage**: You can set this value to `models` and set `--models-subpackage=implementation.models`to generate models to `implementation.models` by default and pick specific models to be public through `--custom-types=`.|
 |`--client-type-prefix=STRING`|The prefix that will be added to each generated client type.|
 |`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is true.|
-|`--require-x-ms-flattened-to-flatten`|Indicates whether `x-ms-flattened` is required to annotated a class with `@JsonFlatten` if the discriminator has `.` in its name. Default is false.|
-|`--client-flattened-annotation-target=TYPE,FIELD,NONE,DISABLED`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.|
+|`--client-flattened-annotation-target=TYPE,FIELD,NONE,DISABLED`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`.|
 |`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|
 |`--skip-formatting`|Indicates whether to skip formatting Java file. Default is false.|
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 |`--service-name`|Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).|
 |`--partial-update`|Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.|
-|`--pass-discriminator-to-child-deserialization`|Indicates whether the discriminator property is passed to subclass deserialization. Default is false.|
 |`--default-http-exception-type`|The fully-qualified class name that should be used as the default HTTP exception type. The class must extend from `HttpResponseException`.|
 |`--use-default-http-status-code-to-exception-type-mapping`|Indicates whether a default HTTP status code to exception mapping should be used if one isn't provided.|
 |`--http-status-code-to-exception-type-mapping`|The HTTP status code to exception mapping that should be used. All exception types must be fully-qualified and extend from `HttpResponseException`.|
@@ -112,7 +109,6 @@ For example, `generate-client-interfaces`, `generate-client-as-impl`, `generate-
 
 `generate-samples` option can be used for generating samples for client.
 `generate-tests` option can be used for generating tests for client.
-`generate-models` option can be used for generating models.
 
 See [documentation](docs/generate/dataplane.md) for frequently used options, and their effect on generated clients.
 
@@ -339,9 +335,6 @@ help-content:
     activationScope: java
     categoryFriendlyName: Java Generator
     settings:
-      - key: enable-xml
-        type: bool
-        description: Generates models and clients that can be sent in XML over the wire. Default is false
       - key: client-side-validations
         type: bool
         description: Generate validations for required parameters and required model properties. Default is false.
@@ -380,7 +373,7 @@ help-content:
         description: The prefix that will be added to each generated client type.
       - key: client-flattened-annotation-target
         type: string
-        description: \[TYPE,FIELD,NONE,DISABLED] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`. If value is `FIELD`, it implies `require-x-ms-flattened-to-flatten=true`.
+        description: \[TYPE,FIELD,NONE,DISABLED] Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`.
       - key: disable-client-builder
         type: bool
         description: Indicates whether to disable generating the `ClientBuilder` class. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.

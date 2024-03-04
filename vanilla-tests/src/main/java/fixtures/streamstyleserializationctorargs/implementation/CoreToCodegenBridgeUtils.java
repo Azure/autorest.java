@@ -8,6 +8,7 @@ import com.azure.core.models.ResponseError;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
+
 import java.io.IOException;
 import java.time.Duration;
 
@@ -24,8 +25,10 @@ public final class CoreToCodegenBridgeUtils {
      */
     public static JsonWriter responseErrorToJson(JsonWriter jsonWriter, ResponseError responseError)
         throws IOException {
-        return jsonWriter.writeStartObject().writeStringField("code", responseError.getCode())
-            .writeStringField("message", responseError.getMessage()).writeEndObject();
+        return jsonWriter.writeStartObject()
+            .writeStringField("code", responseError.getCode())
+            .writeStringField("message", responseError.getMessage())
+            .writeEndObject();
     }
 
     /**

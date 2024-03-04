@@ -3,11 +3,14 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * schema types that can be objects
- * 
+ * Represents a complex schema (types that can be an object).
  */
 public class ComplexSchema extends Schema {
+    /**
+     * Creates a new instance of the ComplexSchema class.
+     */
+    public ComplexSchema() {
+        super();
+    }
 }

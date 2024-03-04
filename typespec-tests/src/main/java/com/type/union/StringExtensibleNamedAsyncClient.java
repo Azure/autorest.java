@@ -17,10 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringExtensibleNamedsImpl;
+import com.type.union.implementation.models.SendRequest2;
 import com.type.union.models.GetResponse2;
 import com.type.union.models.StringExtensibleNamedUnion;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -43,9 +42,7 @@ public final class StringExtensibleNamedAsyncClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(b/c) (Required)
@@ -67,9 +64,7 @@ public final class StringExtensibleNamedAsyncClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(b/c) (Required)
@@ -126,8 +121,7 @@ public final class StringExtensibleNamedAsyncClient {
     public Mono<Void> send(StringExtensibleNamedUnion prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", (prop == null ? null : prop.toString()));
+        SendRequest2 requestObj = new SendRequest2(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }

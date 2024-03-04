@@ -50,8 +50,7 @@ public final class ParametersImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialWordsClientParameters to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for SpecialWordsClientParameters to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpecialWordsClientPa")
@@ -620,7 +619,7 @@ public final class ParametersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> with(@QueryParam("with") String with, @HeaderParam("accept") String accept,
+        Mono<Response<Void>> withWith(@QueryParam("with") String with, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/special-words/parameters/with")
@@ -629,7 +628,7 @@ public final class ParametersImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> withSync(@QueryParam("with") String with, @HeaderParam("accept") String accept,
+        Response<Void> withWithSync(@QueryParam("with") String with, @HeaderParam("accept") String accept,
             RequestOptions requestOptions, Context context);
 
         @Get("/special-words/parameters/yield")
@@ -1725,7 +1724,7 @@ public final class ParametersImpl {
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param with A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1736,13 +1735,13 @@ public final class ParametersImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> withWithResponseAsync(String with, RequestOptions requestOptions) {
+    public Mono<Response<Void>> withWithWithResponseAsync(String with, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.with(with, accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.withWith(with, accept, requestOptions, context));
     }
 
     /**
-     * The with operation.
+     * The withWith operation.
      * 
      * @param with A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -1753,9 +1752,9 @@ public final class ParametersImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> withWithResponse(String with, RequestOptions requestOptions) {
+    public Response<Void> withWithWithResponse(String with, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.withSync(with, accept, requestOptions, Context.NONE);
+        return service.withWithSync(with, accept, requestOptions, Context.NONE);
     }
 
     /**

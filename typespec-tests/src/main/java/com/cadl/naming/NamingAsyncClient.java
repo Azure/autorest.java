@@ -20,7 +20,7 @@ import com.azure.core.util.FluxUtil;
 import com.cadl.naming.implementation.NamingOpsImpl;
 import com.cadl.naming.models.DataRequest;
 import com.cadl.naming.models.DataResponse;
-import com.cadl.naming.models.GetAnonymouseResponse;
+import com.cadl.naming.models.GetAnonymousResponse;
 import reactor.core.publisher.Mono;
 
 /**
@@ -45,30 +45,16 @@ public final class NamingAsyncClient {
      * summary of POST op
      * 
      * description of POST op.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>etag</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>summary of etag header parameter
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
      * 
-     * description of etag header parameter</td>
-     * </tr>
+     * description of etag header parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     parameters (Optional): {
@@ -76,15 +62,13 @@ public final class NamingAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             kind_id: String (Optional)
+     *             @data.kind: String (Optional)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
@@ -113,10 +97,8 @@ public final class NamingAsyncClient {
     }
 
     /**
-     * The getAnonymouse operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * The getAnonymous operation.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -132,8 +114,8 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getAnonymouseWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getAnonymouseWithResponseAsync(requestOptions);
+    public Mono<Response<BinaryData>> getAnonymousWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.getAnonymousWithResponseAsync(requestOptions);
     }
 
     /**
@@ -199,7 +181,7 @@ public final class NamingAsyncClient {
     }
 
     /**
-     * The getAnonymouse operation.
+     * The getAnonymous operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -210,10 +192,10 @@ public final class NamingAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetAnonymouseResponse> getAnonymouse() {
-        // Generated convenience method for getAnonymouseWithResponse
+    public Mono<GetAnonymousResponse> getAnonymous() {
+        // Generated convenience method for getAnonymousWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAnonymouseWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetAnonymouseResponse.class));
+        return getAnonymousWithResponse(requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(GetAnonymousResponse.class));
     }
 }

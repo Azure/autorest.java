@@ -12,9 +12,9 @@ import com.azure.core.http.rest.Response;
 import fixtures.bodycomplex.implementation.PrimitivesImpl;
 import fixtures.bodycomplex.implementation.models.BooleanWrapper;
 import fixtures.bodycomplex.implementation.models.ByteWrapper;
-import fixtures.bodycomplex.implementation.models.DateWrapper;
-import fixtures.bodycomplex.implementation.models.DatetimeWrapper;
 import fixtures.bodycomplex.implementation.models.Datetimerfc1123Wrapper;
+import fixtures.bodycomplex.implementation.models.DatetimeWrapper;
+import fixtures.bodycomplex.implementation.models.DateWrapper;
 import fixtures.bodycomplex.implementation.models.DoubleWrapper;
 import fixtures.bodycomplex.implementation.models.DurationWrapper;
 import fixtures.bodycomplex.implementation.models.ErrorException;
@@ -47,8 +47,7 @@ public final class PrimitiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with integer properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -216,8 +215,7 @@ public final class PrimitiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with double properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -329,8 +327,7 @@ public final class PrimitiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with string properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -442,8 +439,7 @@ public final class PrimitiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -499,8 +495,7 @@ public final class PrimitiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -556,8 +551,7 @@ public final class PrimitiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return complex types with duration properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

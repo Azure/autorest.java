@@ -3,11 +3,14 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * schema types that are non-object or complex types
- * 
+ * Represent a binary schema.
  */
 public class BinarySchema extends Schema {
+    /**
+     * Create a new instance of the BinarySchema class.
+     */
+    public BinarySchema() {
+        super();
+    }
 }

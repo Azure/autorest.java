@@ -52,8 +52,7 @@ public final class PatchesImpl {
     }
 
     /**
-     * The interface defining all the services for PatchClientPatches to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for PatchClientPatches to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PatchClientPatches")
@@ -123,17 +122,15 @@ public final class PatchesImpl {
 
     /**
      * The createOrUpdateResource operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -144,19 +141,24 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -167,6 +169,13 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * 
@@ -189,17 +198,15 @@ public final class PatchesImpl {
 
     /**
      * The createOrUpdateResource operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -210,19 +217,24 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -233,6 +245,13 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * 
@@ -254,17 +273,15 @@ public final class PatchesImpl {
 
     /**
      * The createOrUpdateOptionalResource operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -275,19 +292,24 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -298,6 +320,13 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * 
@@ -324,17 +353,15 @@ public final class PatchesImpl {
 
     /**
      * The createOrUpdateOptionalResource operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -345,19 +372,24 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
-     *     map (Required): {
+     *     map (Optional, Required on create): {
      *         String (Required): {
-     *             name: String (Required)
+     *             name: String (Optional, Required on create)
      *             description: String (Optional)
      *         }
      *     }
@@ -368,6 +400,13 @@ public final class PatchesImpl {
      *     array (Optional): [
      *         (recursive schema, see above)
      *     ]
+     *     fish (Optional): {
+     *         kind: String (Optional)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
      * }</pre>
      * 
@@ -394,27 +433,23 @@ public final class PatchesImpl {
 
     /**
      * The createOrUpdateFish operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
      *     id: String (Required)
      *     name: String (Required)
-     *     age: int (Required)
+     *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
      *     id: String (Required)
      *     name: String (Required)
-     *     age: int (Required)
+     *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
      * }</pre>
@@ -425,8 +460,7 @@ public final class PatchesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateFishWithResponseAsync(BinaryData fish,
@@ -439,27 +473,23 @@ public final class PatchesImpl {
 
     /**
      * The createOrUpdateFish operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
      *     id: String (Required)
      *     name: String (Required)
-     *     age: int (Required)
+     *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     kind: String (Optional)
      *     id: String (Required)
      *     name: String (Required)
-     *     age: int (Required)
+     *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
      * }</pre>
@@ -470,8 +500,7 @@ public final class PatchesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
-     * {@link Response}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateFishWithResponse(BinaryData fish, RequestOptions requestOptions) {

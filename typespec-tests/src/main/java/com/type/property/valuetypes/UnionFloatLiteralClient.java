@@ -38,12 +38,10 @@ public final class UnionFloatLiteralClient {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(42.42/43.43) (Required)
+     *     property: String(43.125/46.875) (Required)
      * }
      * }</pre>
      * 
@@ -62,12 +60,10 @@ public final class UnionFloatLiteralClient {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(42.42/43.43) (Required)
+     *     property: String(43.125/46.875) (Required)
      * }
      * }</pre>
      * 

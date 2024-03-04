@@ -34,9 +34,9 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -131,8 +131,7 @@ public final class StandardClientImpl {
     }
 
     /**
-     * The interface defining all the services for StandardClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for StandardClient to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "StandardClient")
@@ -200,18 +199,14 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -240,18 +235,14 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -280,18 +271,14 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -317,7 +304,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -326,18 +314,14 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -363,7 +347,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -372,18 +357,14 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -409,7 +390,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
@@ -418,18 +400,14 @@ public final class StandardClientImpl {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -455,7 +433,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
@@ -464,9 +443,7 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -488,8 +465,7 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return provides status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> deleteWithResponseAsync(String name, RequestOptions requestOptions) {
@@ -502,9 +478,7 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -538,9 +512,7 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -571,7 +543,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
@@ -580,9 +553,7 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -613,7 +584,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(Void.class));
     }
@@ -622,9 +594,7 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -656,7 +626,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(Void.class));
     }
@@ -665,9 +636,7 @@ public final class StandardClientImpl {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -698,7 +667,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(Void.class));
     }
@@ -707,9 +677,7 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -732,8 +700,7 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> exportWithResponseAsync(String name, String format,
@@ -747,9 +714,7 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -785,9 +750,7 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -821,7 +784,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -830,9 +794,7 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -865,7 +827,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
@@ -874,9 +837,7 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -910,7 +871,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ExportedUser.class));
     }
@@ -919,9 +881,7 @@ public final class StandardClientImpl {
      * Exports a user.
      * 
      * Exports a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -955,7 +915,8 @@ public final class StandardClientImpl {
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
-                        ? requestOptions.getContext() : Context.NONE)
+                        ? requestOptions.getContext()
+                        : Context.NONE)
                     .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ExportedUser.class));
     }

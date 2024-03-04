@@ -50,8 +50,7 @@ public final class ResponseBodiesImpl {
     }
 
     /**
-     * The interface defining all the services for BytesClientResponseBodies to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for BytesClientResponseBodies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BytesClientResponseB")
@@ -134,7 +133,7 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64Url(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> base64url(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/encode/bytes/body/response/base64url")
@@ -143,15 +142,13 @@ public final class ResponseBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64UrlSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> base64urlSync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
     }
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -171,9 +168,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -193,9 +188,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -215,9 +208,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -237,9 +228,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -259,9 +248,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -281,9 +268,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -303,9 +288,7 @@ public final class ResponseBodiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -324,10 +307,8 @@ public final class ResponseBodiesImpl {
     }
 
     /**
-     * The base64Url operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * The base64url operation.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -340,16 +321,14 @@ public final class ResponseBodiesImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> base64UrlWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> base64urlWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.base64Url(accept, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64url(accept, requestOptions, context));
     }
 
     /**
-     * The base64Url operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * The base64url operation.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -362,8 +341,8 @@ public final class ResponseBodiesImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> base64UrlWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> base64urlWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.base64UrlSync(accept, requestOptions, Context.NONE);
+        return service.base64urlSync(accept, requestOptions, Context.NONE);
     }
 }

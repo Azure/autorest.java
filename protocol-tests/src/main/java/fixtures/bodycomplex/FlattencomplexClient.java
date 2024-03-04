@@ -37,11 +37,10 @@ public final class FlattencomplexClient {
 
     /**
      * The getValid operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     kind: String(Kind1) (Optional)
      *     propB1: String (Optional)
      *     helper (Optional): {
      *         propBH1: String (Optional)

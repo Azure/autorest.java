@@ -52,8 +52,7 @@ public final class DatetimeOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientDatetimeOperations to be used by the proxy service
-     * to perform REST calls.
+     * The interface defining all the services for ValueTypesClientDatetimeOperations to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientDate")
@@ -97,9 +96,7 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Required)
@@ -121,9 +118,7 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Required)
@@ -145,9 +140,7 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Required)
@@ -170,9 +163,7 @@ public final class DatetimeOperationsImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Required)

@@ -41,12 +41,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Receive model with extensible enum discriminator type.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -56,8 +54,7 @@ public final class EnumDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -67,12 +64,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Send model with extensible enum discriminator type.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -93,12 +88,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model omitting the discriminator.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -119,12 +112,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model containing discriminator value never defined.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(golden) (Optional)
      *     weight: int (Required)
      * }
      * }</pre>
@@ -134,8 +125,7 @@ public final class EnumDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return a model containing discriminator value never defined along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -145,12 +135,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Receive model with fixed enum discriminator type.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -160,8 +148,7 @@ public final class EnumDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return test fixed enum type for discriminator along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -171,12 +158,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Send model with fixed enum discriminator type.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -197,12 +182,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model omitting the discriminator.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -222,12 +205,10 @@ public final class EnumDiscriminatorAsyncClient {
 
     /**
      * Get a model containing discriminator value never defined.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String(cobra) (Optional)
      *     length: int (Required)
      * }
      * }</pre>
@@ -237,8 +218,7 @@ public final class EnumDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a model containing discriminator value never defined along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return a model containing discriminator value never defined along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

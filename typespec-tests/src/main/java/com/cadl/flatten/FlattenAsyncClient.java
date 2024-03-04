@@ -17,10 +17,11 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.flatten.implementation.FlattenClientImpl;
+import com.cadl.flatten.implementation.models.SendLongRequest;
+import com.cadl.flatten.implementation.models.SendProjectedNameRequest;
+import com.cadl.flatten.implementation.models.SendRequest;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.User;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -43,9 +44,7 @@ public final class FlattenAsyncClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -72,9 +71,7 @@ public final class FlattenAsyncClient {
 
     /**
      * The sendProjectedName operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     file_id: String (Required)
@@ -99,28 +96,14 @@ public final class FlattenAsyncClient {
 
     /**
      * The sendLong operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>filter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -168,9 +151,7 @@ public final class FlattenAsyncClient {
     public Mono<Void> send(String id, String input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", user);
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input).setUser(user);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -193,8 +174,7 @@ public final class FlattenAsyncClient {
     public Mono<Void> send(String id, String input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -217,8 +197,7 @@ public final class FlattenAsyncClient {
     public Mono<Void> sendProjectedName(String id, String fileIdentifier) {
         // Generated convenience method for sendProjectedNameWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("file_id", fileIdentifier);
+        SendProjectedNameRequest requestObj = new SendProjectedNameRequest(fileIdentifier);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendProjectedNameWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -242,13 +221,11 @@ public final class FlattenAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String filter = options.getFilter();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", options.getUser());
-        requestObj.put("input", options.getInput());
-        requestObj.put("dataInt", options.getDataInt());
-        requestObj.put("dataIntOptional", options.getDataIntOptional());
-        requestObj.put("dataLong", options.getDataLong());
-        requestObj.put("data_float", options.getDataFloat());
+        SendLongRequest requestObj
+            = new SendLongRequest(options.getInput(), options.getDataInt()).setUser(options.getUser())
+                .setDataIntOptional(options.getDataIntOptional())
+                .setDataLong(options.getDataLong())
+                .setDataFloat(options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);

@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.specialheader.SpecialHeaderServiceVersion;
 
 /**
  * Initializes a new instance of the SpecialHeaderClient type.
@@ -27,6 +28,20 @@ public final class SpecialHeaderClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final SpecialHeaderServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public SpecialHeaderServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -75,10 +90,11 @@ public final class SpecialHeaderClientImpl {
      * Initializes an instance of SpecialHeaderClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public SpecialHeaderClientImpl(String host) {
+    public SpecialHeaderClientImpl(String host, SpecialHeaderServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -86,9 +102,10 @@ public final class SpecialHeaderClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public SpecialHeaderClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public SpecialHeaderClientImpl(HttpPipeline httpPipeline, String host, SpecialHeaderServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -97,11 +114,14 @@ public final class SpecialHeaderClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public SpecialHeaderClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public SpecialHeaderClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host,
+        SpecialHeaderServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.headers = new HeadersImpl(this);
     }
 }

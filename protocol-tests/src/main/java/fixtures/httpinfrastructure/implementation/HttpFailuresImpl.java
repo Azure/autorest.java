@@ -23,6 +23,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.httpinfrastructure.AutoRestHttpInfrastructureTestServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -51,8 +52,16 @@ public final class HttpFailuresImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpFailures to be used by the
-     * proxy service to perform REST calls.
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestHttpInfrastructureTestServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
+    }
+
+    /**
+     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpFailures to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
@@ -114,9 +123,7 @@ public final class HttpFailuresImpl {
 
     /**
      * Get empty error form server.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -137,9 +144,7 @@ public final class HttpFailuresImpl {
 
     /**
      * Get empty error form server.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -159,9 +164,7 @@ public final class HttpFailuresImpl {
 
     /**
      * Get empty error form server.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -182,9 +185,7 @@ public final class HttpFailuresImpl {
 
     /**
      * Get empty error form server.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -204,9 +205,7 @@ public final class HttpFailuresImpl {
 
     /**
      * Get empty response from server.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>
@@ -227,9 +226,7 @@ public final class HttpFailuresImpl {
 
     /**
      * Get empty response from server.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * boolean
      * }</pre>

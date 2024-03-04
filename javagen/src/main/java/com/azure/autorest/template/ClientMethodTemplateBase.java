@@ -9,7 +9,6 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
-import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -27,10 +26,11 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -41,10 +41,10 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
         if (clientMethod.getProxyMethod() != null) {
             List<ProxyMethodParameter> queryParameters = clientMethod.getProxyMethod().getAllParameters().stream()
-                    .filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation()))
+                .filter(p -> RequestParameterLocation.QUERY.equals(p.getRequestParameterLocation())
                     // ignore if synthesized by modelerfour, i.e. api-version
-                    .filter(p -> p.getOrigin() == ParameterSynthesizedOrigin.NONE)
-                    .collect(Collectors.toList());
+                    && p.getOrigin() == ParameterSynthesizedOrigin.NONE)
+                .collect(Collectors.toList());
             if (!queryParameters.isEmpty() && hasParametersToPrintInJavadoc(queryParameters)) {
                 optionalParametersJavadoc("Query Parameters", queryParameters, commentBlock);
                 commentBlock.line("You can add these to a request with {@link RequestOptions#addQueryParam}");
@@ -64,21 +64,24 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             // Request body
             Set<IType> typesInJavadoc = new HashSet<>();
 
-            boolean isBodyParamRequired = clientMethod.getProxyMethod().getAllParameters()
+            Optional<ProxyMethodParameter> bodyParameter = clientMethod.getProxyMethod().getAllParameters()
                     .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
-                            .map(ProxyMethodParameter::isRequired).findFirst().orElse(false);
+                    .findFirst();
 
-            clientMethod.getProxyMethod().getAllParameters()
-                    .stream().filter(p -> RequestParameterLocation.BODY.equals(p.getRequestParameterLocation()))
-                    .map(ProxyMethodParameter::getRawType)
-                    .findFirst()
-                    .ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc, isBodyParamRequired));
+            if (bodyParameter.isPresent()) {
+                ClientModel model = ClientModelUtil.getClientModel(bodyParameter.get().getRawType().toString());
+                if (model == null || !ClientModelUtil.isMultipartModel(model)) {
+                    // do not generate JSON schema for Multipart request body
+                    boolean isBodyParamRequired = bodyParameter.map(ProxyMethodParameter::isRequired).orElse(false);
+                    bodyParameter.map(ProxyMethodParameter::getRawType).ifPresent(type -> requestBodySchemaJavadoc(type, commentBlock, typesInJavadoc, isBodyParamRequired));
+                }
+            }
 
             // Response body
             IType responseBodyType;
             if (JavaSettings.getInstance().isDataPlaneClient()) {
                 // special handling for paging method
-                if (clientMethod.getType() == ClientMethodType.PagingSync || clientMethod.getType() == ClientMethodType.PagingAsync || clientMethod.getType() == ClientMethodType.PagingAsyncSinglePage || clientMethod.getType() == ClientMethodType.PagingSyncSinglePage) {
+                if (clientMethod.getType().isPaging()) {
                     String itemName = clientMethod.getMethodPageDetails().getItemName();
                     // rawResponseType has properties: 'value' and 'nextLink'
                     IType rawResponseType = clientMethod.getProxyMethod().getRawResponseBodyType();
@@ -86,25 +89,27 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                         throw new IllegalStateException(String.format("clientMethod.getProxyMethod().getRawResponseBodyType() should be ClassType for paging method. rawResponseType = %s", rawResponseType.toString()));
                     }
                     ClientModel model = ClientModelUtil.getClientModel(((ClassType) rawResponseType).getName());
-                    List<ClientModelProperty> properties = new ArrayList<>();
+                    Map<String, ClientModelProperty> properties = new LinkedHashMap<>();
                     traverseProperties(model, properties);
-                    responseBodyType = properties.stream()
+                    responseBodyType = properties.values().stream()
                             .filter(property -> property.getName().equals(itemName))
-                            .map(clientModelProperty -> clientModelProperty.getClientType())
+                            .map(ClientModelProperty::getClientType)
                             .map(valueListType -> {
                                 // value type is List<T>, we need to get the typeArguments
                                 if (!(valueListType instanceof ListType)) {
-                                    throw new IllegalStateException(String.format("value type must be list for paging method. rawResponseType = %s", rawResponseType.toString()));
+                                    throw new IllegalStateException("value type must be list for paging method. "
+                                        + "rawResponseType = " + rawResponseType);
                                 }
                                 IType[] listTypeArgs = ((ListType) valueListType).getTypeArguments();
                                 if (listTypeArgs.length == 0) {
-                                    throw new IllegalStateException(String.format("list type arguments' length should not be 0 for paging method. rawResponseType = %s", rawResponseType.toString()));
+                                    throw new IllegalStateException(String.format("list type arguments' length should not be 0 for paging method. rawResponseType = %s",
+                                        rawResponseType));
                                 }
                                 return listTypeArgs[0];
                             })
                             .findFirst().orElse(null);
                     if (responseBodyType == null) {
-                        throw new IllegalStateException(String.format("%s not found in properties of rawResponseType. rawResponseType = ", itemName, rawResponseType.toString()));
+                        throw new IllegalStateException(itemName + " not found in properties of rawResponseType. rawResponseType = " + rawResponseType);
                     }
                 } else {
                     responseBodyType = clientMethod.getProxyMethod().getRawResponseBodyType();
@@ -155,7 +160,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
     }
 
-    private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters, JavaJavadocComment commentBlock) {
+    private static void optionalParametersJavadoc(String title, List<ProxyMethodParameter> parameters,
+        JavaJavadocComment commentBlock) {
         commentBlock.line(String.format("<p><strong>%s</strong></p>", title));
         commentBlock.line("<table border=\"1\">");
         commentBlock.line(String.format("    <caption>%s</caption>", title));
@@ -163,12 +169,10 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         for (ProxyMethodParameter parameter : parameters) {
             boolean parameterIsConstantOrFromClient = parameter.isConstant() || parameter.isFromClient();
             if (!parameter.isRequired() && !parameterIsConstantOrFromClient) {
-                commentBlock.line(String.format(
-                        "    <tr><td>%s</td><td>%s</td><td>%s</td><td>%s</td></tr>",
-                        parameter.getRequestParameterName(),
-                        CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
-                        parameter.isRequired() ? "Yes" : "No",
-                        parameterDescriptionOrDefault(parameter)));
+                commentBlock.line(String.format("    <tr><td>%s</td><td>%s</td><td>No</td><td>%s</td></tr>",
+                    parameter.getRequestParameterName(),
+                    CodeNamer.escapeXmlComment(parameter.getClientType().toString()),
+                    parameterDescriptionOrDefault(parameter)));
             }
 
         }
@@ -191,7 +195,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Request Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, true);
+        bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, isBodyParamRequired, true);
         commentBlock.line("}</pre>");
     }
 
@@ -203,64 +207,65 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         }
         commentBlock.line("<p><strong>Response Body Schema</strong></p>");
         commentBlock.line("<pre>{@code");
-        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true);
+        bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true, true);
         commentBlock.line("}</pre>");
     }
 
-    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc, boolean isRequired, boolean isRootSchema) {
+    private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc,
+                                          boolean isRequired, boolean isRequiredForCreate, boolean isRootSchema) {
         String nextIndent = indent + "    ";
         if ((ClientModelUtil.isClientModel(type) || ClientModelUtil.isExternalModel(type)) && !typesInJavadoc.contains(type)) {
             typesInJavadoc.add(type);
             ClientModel model = ClientModelUtil.getClientModel(((ClassType) type).getName());
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": {");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": {");
             } else {
-                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + "{");
             }
-            List<ClientModelProperty> properties = new ArrayList<>();
+            Map<String, ClientModelProperty> properties = new LinkedHashMap<>();
             traverseProperties(model, properties);
-            for (ClientModelProperty property : properties) {
-                bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), false);
+            for (ClientModelProperty property : properties.values()) {
+                bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), property.isRequiredForCreate(),false);
             }
             commentBlock.line(indent + "}");
         } else if (typesInJavadoc.contains(type)) {
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": (recursive schema, see " + name + " above)");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": (recursive schema, see " + name + " above)");
             } else {
                 commentBlock.line(indent + "(recursive schema, see above)");
             }
         } else if (type instanceof ListType) {
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": [");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": [");
             } else {
-                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "[");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + "[");
             }
-            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc, isRequired, false);
+            bodySchemaJavadoc(((ListType) type).getElementType(), commentBlock, nextIndent, null, typesInJavadoc, isRequired, isRequiredForCreate, false);
             commentBlock.line(indent + "]");
         } else if (type instanceof EnumType) {
             String values = ((EnumType) type).getValues().stream()
                     .map(ClientEnumValue::getValue)
                     .collect(Collectors.joining("/"));
             if (name != null) {
-                commentBlock.line(indent + name + ": String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + name + ": String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             } else {
-                commentBlock.line(indent + "String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + "String(" + values + ")" + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             }
         } else if (type instanceof MapType) {
             if (name != null) {
-                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + ": {");
+                commentBlock.line(indent + name + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + ": {");
             } else {
-                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRootSchema) + "{");
+                commentBlock.line(indent + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema) + "{");
             }
             final boolean valueRequired = !((MapType) type).isValueNullable();
-            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, valueRequired, false);
+            bodySchemaJavadoc(((MapType) type).getValueType(), commentBlock, nextIndent, "String", typesInJavadoc, valueRequired, valueRequired, false);
             commentBlock.line(indent + "}");
         } else {
             String javadoc = convertToBodySchemaJavadoc(type);
             if (name != null) {
-                commentBlock.line(indent + name + ": " + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + name + ": " + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             } else {
-                commentBlock.line(indent + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRootSchema));
+                commentBlock.line(indent + javadoc + appendOptionalOrRequiredAttribute(isRequired, isRequiredForCreate, isRootSchema));
             }
         }
     }
@@ -276,11 +281,12 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         return type.toString();
     }
 
-    private static void traverseProperties(ClientModel model, List<ClientModelProperty> properties) {
+    private static void traverseProperties(ClientModel model, Map<String, ClientModelProperty> properties) {
         if (model.getParentModelName() != null) {
             traverseProperties(ClientModelUtil.getClientModel(model.getParentModelName()), properties);
         }
-        properties.addAll(model.getProperties());
+
+        model.getProperties().forEach(p -> properties.put(p.getSerializedName(), p));
     }
 
     private static String parameterDescriptionOrDefault(ProxyMethodParameter parameter) {
@@ -311,7 +317,15 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
         return doc;
     }
 
-    private static String appendOptionalOrRequiredAttribute(boolean isRequired, boolean isRootSchema) {
-        return isRootSchema ? "" : isRequired ? " (Required)" : " (Optional)";
+    private static String appendOptionalOrRequiredAttribute(boolean isRequired, boolean isRequiredForCreate, boolean isRootSchema) {
+        if (isRootSchema) {
+            return "";
+        } else if (isRequired) {
+            return " (Required)";
+        } else if (isRequiredForCreate) {
+            return " (Optional, Required on create)";
+        } else {
+            return " (Optional)";
+        }
     }
 }

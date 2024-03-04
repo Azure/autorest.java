@@ -52,8 +52,7 @@ public final class ExtendsModelArraysImpl {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientExtendsModelArrays to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientExtendsModelArrays to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AdditionalProperties")
@@ -97,9 +96,7 @@ public final class ExtendsModelArraysImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *      (Optional): {
@@ -127,9 +124,7 @@ public final class ExtendsModelArraysImpl {
 
     /**
      * Get call.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *      (Optional): {
@@ -157,9 +152,7 @@ public final class ExtendsModelArraysImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *      (Optional): {
@@ -188,9 +181,7 @@ public final class ExtendsModelArraysImpl {
 
     /**
      * Put operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *      (Optional): {

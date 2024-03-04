@@ -32,7 +32,8 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
      */
     @Generated
     public FloatSecondsDurationArrayProperty(List<Duration> value) {
-        this.value = value.stream().map(el -> (double) el.toNanos() / 1000_000_000L)
+        this.value = value.stream()
+            .map(el -> (double) el.toNanos() / 1000_000_000L)
             .collect(java.util.stream.Collectors.toList());
     }
 
@@ -46,10 +47,15 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
         if (this.value == null) {
             return null;
         }
-        return this.value.stream().map(el -> Duration.ofNanos((long) (el * 1000_000_000L)))
+        return this.value.stream()
+            .map(el -> Duration.ofNanos((long) (el * 1000_000_000L)))
             .collect(java.util.stream.Collectors.toList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -61,11 +67,11 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
      * Reads an instance of FloatSecondsDurationArrayProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FloatSecondsDurationArrayProperty if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
+     * @return An instance of FloatSecondsDurationArrayProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FloatSecondsDurationArrayProperty.
      */
+    @Generated
     public static FloatSecondsDurationArrayProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             List<Duration> value = null;

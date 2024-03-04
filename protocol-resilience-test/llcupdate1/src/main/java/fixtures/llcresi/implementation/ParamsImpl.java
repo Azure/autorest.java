@@ -29,6 +29,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.llcresi.DpgServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -56,8 +57,16 @@ public final class ParamsImpl {
     }
 
     /**
-     * The interface defining all the services for DpgClientParams to be used by the proxy service to perform REST
-     * calls.
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public DpgServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
+    }
+
+    /**
+     * The interface defining all the services for DpgClientParams to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "DpgClientParams")
@@ -195,30 +204,15 @@ public final class ParamsImpl {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -238,30 +232,15 @@ public final class ParamsImpl {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
-     * added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -281,29 +260,15 @@ public final class ParamsImpl {
 
     /**
      * Get true Boolean value on path.
-     * Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     *  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -315,8 +280,7 @@ public final class ParamsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     * Initially only has one required Query Parameter along with {@link Response} on successful completion of
-     * {@link Mono}.
+     *  Initially only has one required Query Parameter along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredWithResponseAsync(String parameter, RequestOptions requestOptions) {
@@ -327,29 +291,15 @@ public final class ParamsImpl {
 
     /**
      * Get true Boolean value on path.
-     * Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     *  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -361,7 +311,7 @@ public final class ParamsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     * Initially only has one required Query Parameter along with {@link Response}.
+     *  Initially only has one required Query Parameter along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getRequiredWithResponse(String parameter, RequestOptions requestOptions) {
@@ -370,36 +320,16 @@ public final class ParamsImpl {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>optionalParam</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I am an optional parameter</td>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -421,36 +351,16 @@ public final class ParamsImpl {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
-     * query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>optionalParam</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I am an optional parameter</td>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -472,22 +382,17 @@ public final class ParamsImpl {
 
     /**
      * POST a JSON or a JPEG.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
      * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
-     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
-     * "http://example.org/myimage.jpeg" }.
+     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -505,22 +410,17 @@ public final class ParamsImpl {
 
     /**
      * POST a JSON or a JPEG.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
      * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
-     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
-     * "http://example.org/myimage.jpeg" }.
+     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -538,7 +438,7 @@ public final class ParamsImpl {
 
     /**
      * Delete something.
-     * Initially the path exists but there is no delete method. After evolution this is a new method in a known path.
+     *  Initially the path exists but there is no delete method. After evolution this is a new method in a known path.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -555,7 +455,7 @@ public final class ParamsImpl {
 
     /**
      * Delete something.
-     * Initially the path exists but there is no delete method. After evolution this is a new method in a known path.
+     *  Initially the path exists but there is no delete method. After evolution this is a new method in a known path.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -571,35 +471,16 @@ public final class ParamsImpl {
 
     /**
      * Get true Boolean value on path.
-     * Initially has one optional query parameter. After evolution, a new optional query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     *  Initially has one optional query parameter. After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>optionalParam</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I am an optional parameter</td>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -610,7 +491,7 @@ public final class ParamsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     * Initially has one optional query parameter along with {@link Response} on successful completion of {@link Mono}.
+     *  Initially has one optional query parameter along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getOptionalWithResponseAsync(RequestOptions requestOptions) {
@@ -621,35 +502,16 @@ public final class ParamsImpl {
 
     /**
      * Get true Boolean value on path.
-     * Initially has one optional query parameter. After evolution, a new optional query parameter is added.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     *  Initially has one optional query parameter. After evolution, a new optional query parameter is added.
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>optionalParam</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I am an optional parameter</td>
-     * </tr>
-     * <tr>
-     * <td>new_parameter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>I'm a new input optional parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -660,7 +522,7 @@ public final class ParamsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     * Initially has one optional query parameter along with {@link Response}.
+     *  Initially has one optional query parameter along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getOptionalWithResponse(RequestOptions requestOptions) {
@@ -670,10 +532,8 @@ public final class ParamsImpl {
 
     /**
      * I'm a new operation.
-     * Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     *  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>
@@ -694,10 +554,8 @@ public final class ParamsImpl {
 
     /**
      * I'm a new operation.
-     * Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     *  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object
      * }</pre>

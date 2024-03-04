@@ -21,6 +21,12 @@ import java.util.Set;
 @Fluent
 public class Fish implements JsonSerializable<Fish> {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind;
+
+    /*
      * The id property.
      */
     @Generated
@@ -36,7 +42,7 @@ public class Fish implements JsonSerializable<Fish> {
      * The age property.
      */
     @Generated
-    private final int age;
+    private int age;
 
     /*
      * The color property.
@@ -67,12 +73,33 @@ public class Fish implements JsonSerializable<Fish> {
 
     /**
      * Creates an instance of Fish class.
-     * 
-     * @param age the age value to set.
      */
     @Generated
-    public Fish(int age) {
-        this.age = age;
+    public Fish() {
+        this.kind = "Fish";
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
+     * Set the kind property: The kind property.
+     * 
+     * @param kind the kind value to set.
+     * @return the Fish object itself.
+     */
+    @Generated
+    Fish setKind(String kind) {
+        this.kind = kind;
+        this.updatedProperties.add("kind");
+        return this;
     }
 
     /**
@@ -91,6 +118,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param id the id value to set.
      * @return the Fish object itself.
      */
+    @Generated
     Fish setId(String id) {
         this.id = id;
         this.updatedProperties.add("id");
@@ -113,6 +141,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @param name the name value to set.
      * @return the Fish object itself.
      */
+    @Generated
     Fish setName(String name) {
         this.name = name;
         this.updatedProperties.add("name");
@@ -127,6 +156,20 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     public int getAge() {
         return this.age;
+    }
+
+    /**
+     * Set the age property: The age property.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param age the age value to set.
+     * @return the Fish object itself.
+     */
+    @Generated
+    public Fish setAge(int age) {
+        this.age = age;
+        this.updatedProperties.add("age");
+        return this;
     }
 
     /**
@@ -152,25 +195,40 @@ public class Fish implements JsonSerializable<Fish> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
+            jsonWriter.writeStringField("kind", this.kind);
             jsonWriter.writeIntField("age", this.age);
             jsonWriter.writeStringField("color", this.color);
             return jsonWriter.writeEndObject();
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        if (updatedProperties.contains("kind")) {
+            if (this.kind == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", this.kind);
+            }
+        }
         jsonWriter.writeIntField("age", this.age);
-        if (this.color != null) {
-            jsonWriter.writeStringField("color", this.color);
-        } else if (updatedProperties.contains("color")) {
-            jsonWriter.writeNullField("color");
+        if (updatedProperties.contains("color")) {
+            if (this.color == null) {
+                jsonWriter.writeNullField("color");
+            } else {
+                jsonWriter.writeStringField("color", this.color);
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -179,43 +237,44 @@ public class Fish implements JsonSerializable<Fish> {
      * Reads an instance of Fish from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @return An instance of Fish if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Fish.
      */
+    @Generated
     public static Fish fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String discriminatorValue = null;
-            JsonReader readerToUse = reader.bufferObject();
-
-            readerToUse.nextToken(); // Prepare for reading
-            while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = readerToUse.getFieldName();
-                readerToUse.nextToken();
-                if ("kind".equals(fieldName)) {
-                    discriminatorValue = readerToUse.getString();
-                    break;
-                } else {
-                    readerToUse.skipChildren();
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("kind".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
                 }
-            }
-            // Use the discriminator value to determine which subtype should be deserialized.
-            if ("shark".equals(discriminatorValue)) {
-                return Shark.fromJson(readerToUse.reset());
-            } else if ("salmon".equals(discriminatorValue)) {
-                return Salmon.fromJson(readerToUse.reset());
-            } else {
-                return fromJsonKnownDiscriminator(readerToUse.reset());
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("shark".equals(discriminatorValue)) {
+                    return Shark.fromJson(readerToUse.reset());
+                } else if ("salmon".equals(discriminatorValue)) {
+                    return Salmon.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
             }
         });
     }
 
+    @Generated
     static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
+            String kind = null;
             int age = 0;
             String color = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -226,6 +285,8 @@ public class Fish implements JsonSerializable<Fish> {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
@@ -234,9 +295,11 @@ public class Fish implements JsonSerializable<Fish> {
                     reader.skipChildren();
                 }
             }
-            Fish deserializedFish = new Fish(age);
+            Fish deserializedFish = new Fish();
             deserializedFish.id = id;
             deserializedFish.name = name;
+            deserializedFish.kind = kind;
+            deserializedFish.age = age;
             deserializedFish.color = color;
 
             return deserializedFish;

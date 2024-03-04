@@ -21,7 +21,7 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
      * Property
      */
     @Generated
-    private BooleanLiteralProperty1 property;
+    private BooleanLiteralPropertyProperty property;
 
     /**
      * Creates an instance of BooleanLiteralProperty class.
@@ -36,7 +36,7 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
      * @return the property value.
      */
     @Generated
-    public BooleanLiteralProperty1 getProperty() {
+    public BooleanLiteralPropertyProperty getProperty() {
         return this.property;
     }
 
@@ -47,11 +47,15 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
      * @return the BooleanLiteralProperty object itself.
      */
     @Generated
-    public BooleanLiteralProperty setProperty(BooleanLiteralProperty1 property) {
+    public BooleanLiteralProperty setProperty(BooleanLiteralPropertyProperty property) {
         this.property = property;
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -63,10 +67,10 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
      * Reads an instance of BooleanLiteralProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of BooleanLiteralProperty if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of BooleanLiteralProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the BooleanLiteralProperty.
      */
+    @Generated
     public static BooleanLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             BooleanLiteralProperty deserializedBooleanLiteralProperty = new BooleanLiteralProperty();
@@ -76,7 +80,7 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
 
                 if ("property".equals(fieldName)) {
                     deserializedBooleanLiteralProperty.property
-                        = BooleanLiteralProperty1.fromBoolean(reader.getBoolean());
+                        = BooleanLiteralPropertyProperty.fromBoolean(reader.getBoolean());
                 } else {
                     reader.skipChildren();
                 }

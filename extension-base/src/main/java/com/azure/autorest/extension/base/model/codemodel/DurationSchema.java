@@ -3,31 +3,84 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
- * a schema that represents a Duration value
- * 
+ * Represents a Duration value.
  */
 public class DurationSchema extends PrimitiveSchema {
+    private Format format;
 
+    /**
+     * Creates a new instance of the DurationSchema class.
+     */
+    public DurationSchema() {
+        super();
+    }
+
+    /**
+     * Gets the duration format.
+     *
+     * @return The duration format.
+     */
+    public Format getFormat() {
+        return format;
+    }
+
+    /**
+     * Sets the duration format.
+     *
+     * @param format The duration format.
+     */
+    public void setFormat(Format format) {
+        this.format = format;
+    }
+
+    @Override
+    public String toString() {
+        return DurationSchema.class.getName() + '@' + Integer.toHexString(System.identityHashCode(this)) + "[format="
+            + Objects.toString(format, "<null>") + ']';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof DurationSchema)) {
+            return false;
+        }
+
+        DurationSchema that = (DurationSchema) o;
+        return format == that.format;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(format);
+    }
+
+    /**
+     * The format of the duration.
+     */
     public enum Format {
-
+        /**
+         * The duration is in RFC3339 format.
+         */
         DURATION("duration-rfc3339"),
+
+        /**
+         * The duration is in seconds as an integer.
+         */
         SECONDS_INTEGER("seconds-integer"),
+
+        /**
+         * The duration is in seconds as a number.
+         */
         SECONDS_NUMBER("seconds-number");
 
         private final String value;
-        private final static Map<String, Format> CONSTANTS = new HashMap<>();
-
-        static {
-            for (Format c: values()) {
-                CONSTANTS.put(c.value, c);
-            }
-        }
 
         Format(String value) {
             this.value = value;
@@ -38,52 +91,32 @@ public class DurationSchema extends PrimitiveSchema {
             return this.value;
         }
 
+        /**
+         * Gets the string value of the format.
+         *
+         * @return The string value of the format.
+         */
         public String value() {
             return this.value;
         }
 
+        /**
+         * Parses a string value to a Format instance.
+         *
+         * @param value The string value to parse.
+         * @return The parsed Format instance.
+         * @throws IllegalArgumentException If the string value does not correspond to a valid Format instance.
+         */
         public static Format fromValue(String value) {
-            Format constant = CONSTANTS.get(value);
-            if (constant == null) {
-                throw new IllegalArgumentException(value);
+            if ("duration-rfc3339".equals(value)) {
+                return DURATION;
+            } else if ("seconds-integer".equals(value)) {
+                return SECONDS_INTEGER;
+            } else if ("seconds-number".equals(value)) {
+                return SECONDS_NUMBER;
             } else {
-                return constant;
+                throw new IllegalArgumentException(value);
             }
         }
-    }
-
-    private Format format;
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(DurationSchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
-    }
-
-    public Format getFormat() {
-        return format;
-    }
-
-    public void setFormat(Format format) {
-        this.format = format;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        DurationSchema that = (DurationSchema) o;
-        return format == that.format;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(format);
     }
 }

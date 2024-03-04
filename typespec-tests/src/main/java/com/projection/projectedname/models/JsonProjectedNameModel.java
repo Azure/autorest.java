@@ -43,6 +43,10 @@ public final class JsonProjectedNameModel implements JsonSerializable<JsonProjec
         return this.defaultName;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class JsonProjectedNameModel implements JsonSerializable<JsonProjec
      * Reads an instance of JsonProjectedNameModel from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of JsonProjectedNameModel if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of JsonProjectedNameModel if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the JsonProjectedNameModel.
      */
+    @Generated
     public static JsonProjectedNameModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean defaultName = false;

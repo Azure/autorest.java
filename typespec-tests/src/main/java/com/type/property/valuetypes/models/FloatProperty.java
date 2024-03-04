@@ -43,6 +43,10 @@ public final class FloatProperty implements JsonSerializable<FloatProperty> {
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class FloatProperty implements JsonSerializable<FloatProperty> {
      * Reads an instance of FloatProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of FloatProperty if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of FloatProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the FloatProperty.
      */
+    @Generated
     public static FloatProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             double property = 0.0;

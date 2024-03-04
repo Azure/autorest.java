@@ -26,7 +26,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     private final String name;
 
     /*
-     * The model is from Record<string> type.
+     * Additional properties
      */
     @Generated
     private Map<String, String> additionalProperties;
@@ -52,7 +52,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     }
 
     /**
-     * Get the additionalProperties property: The model is from Record&lt;string&gt; type.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     }
 
     /**
-     * Set the additionalProperties property: The model is from Record&lt;string&gt; type.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsStringAdditionalProperties object itself.
@@ -73,6 +73,10 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -89,11 +93,11 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
      * Reads an instance of IsStringAdditionalProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of IsStringAdditionalProperties if the JsonReader was pointing to an instance of it, or null
-     * if it was pointing to JSON null.
+     * @return An instance of IsStringAdditionalProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the IsStringAdditionalProperties.
      */
+    @Generated
     public static IsStringAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

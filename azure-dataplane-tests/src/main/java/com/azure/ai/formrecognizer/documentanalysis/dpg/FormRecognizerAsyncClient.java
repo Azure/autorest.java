@@ -42,49 +42,22 @@ public final class FormRecognizerAsyncClient {
      * Analyze document
      * 
      * Analyzes document with document model.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>pages</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>List of 1-based page numbers to analyze. Ex. "1-3,5,7-9"</td>
-     * </tr>
-     * <tr>
-     * <td>locale</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Locale hint for text recognition and document analysis. Value may contain only the language code (ex. "en",
-     * "fr") or BCP 47 language tag (ex. "en-US").</td>
-     * </tr>
-     * <tr>
-     * <td>stringIndexType</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>Method used to compute string offset and length. Allowed values: "textElements", "unicodeCodePoint",
-     * "utf16CodeUnit".</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9"</td></tr>
+     *     <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").</td></tr>
+     *     <tr><td>stringIndexType</td><td>String</td><td>No</td><td>Method used to compute string offset and length. Allowed values: "textElements", "unicodeCodePoint", "utf16CodeUnit".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
      * @param modelId Unique document model name.
-     * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp",
-     * "image/heif", "image/jpeg", "image/png", "image/tiff".
+     * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp", "image/heif", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -103,9 +76,7 @@ public final class FormRecognizerAsyncClient {
      * Get analyze result
      * 
      * Gets the result of document analysis.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     status: String(notStarted/running/failed/succeeded) (Required)
@@ -331,9 +302,7 @@ public final class FormRecognizerAsyncClient {
      * Build document model
      * 
      * Builds a custom document analysis model.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     modelId: String (Required)
@@ -368,9 +337,7 @@ public final class FormRecognizerAsyncClient {
      * Compose document model
      * 
      * Creates a new document model from document types of existing document models.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     modelId: String (Required)
@@ -404,11 +371,8 @@ public final class FormRecognizerAsyncClient {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional
-     * description.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     modelId: String (Required)
@@ -418,9 +382,7 @@ public final class FormRecognizerAsyncClient {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     targetResourceId: String (Required)
@@ -438,8 +400,7 @@ public final class FormRecognizerAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return authorization to copy a document model to the specified target resource and modelId along with
-     * {@link Response} on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -452,9 +413,7 @@ public final class FormRecognizerAsyncClient {
      * Copy document model
      * 
      * Copies document model to the target resource, region, and modelId.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     targetResourceId: String (Required)
@@ -486,9 +445,7 @@ public final class FormRecognizerAsyncClient {
      * List operations
      * 
      * Lists all operations.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     operationId: String (Required)
@@ -522,11 +479,10 @@ public final class FormRecognizerAsyncClient {
      * Get operation
      * 
      * Gets operation info.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     kind: String (Optional)
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
      *     percentCompleted: Integer (Optional)
@@ -571,9 +527,7 @@ public final class FormRecognizerAsyncClient {
      * List document models
      * 
      * List all document models.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     modelId: String (Required)
@@ -603,9 +557,7 @@ public final class FormRecognizerAsyncClient {
      * Get document model
      * 
      * Gets detailed document model information.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     modelId: String (Required)
@@ -675,9 +627,7 @@ public final class FormRecognizerAsyncClient {
      * Get resource info
      * 
      * Return information about the current resource.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     customDocumentModels (Required): {
@@ -692,8 +642,7 @@ public final class FormRecognizerAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return general information regarding the current resource along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return general information regarding the current resource along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

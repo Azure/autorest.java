@@ -5,7 +5,11 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -13,35 +17,30 @@ import java.util.Map;
  * An object describing the location and semantic content of a document.
  */
 @Fluent
-public final class Document {
+public final class Document implements JsonSerializable<Document> {
     /*
      * Document type.
      */
-    @JsonProperty(value = "docType", required = true)
     private String docType;
 
     /*
      * Bounding regions covering the document.
      */
-    @JsonProperty(value = "boundingRegions")
     private List<BoundingRegion> boundingRegions;
 
     /*
      * Location of the document in the reading order concatenated content.
      */
-    @JsonProperty(value = "spans", required = true)
     private List<DocumentSpan> spans;
 
     /*
      * Dictionary of named field values.
      */
-    @JsonProperty(value = "fields")
     private Map<String, DocumentField> fields;
 
     /*
      * Confidence of correctly extracting the document.
      */
-    @JsonProperty(value = "confidence", required = true)
     private float confidence;
 
     /**
@@ -148,5 +147,58 @@ public final class Document {
     public Document setConfidence(float confidence) {
         this.confidence = confidence;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("docType", this.docType);
+        jsonWriter.writeArrayField("spans", this.spans, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeFloatField("confidence", this.confidence);
+        jsonWriter.writeArrayField("boundingRegions", this.boundingRegions,
+            (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeMapField("fields", this.fields, (writer, element) -> writer.writeJson(element));
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Document from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Document if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Document.
+     */
+    public static Document fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Document deserializedDocument = new Document();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("docType".equals(fieldName)) {
+                    deserializedDocument.docType = reader.getString();
+                } else if ("spans".equals(fieldName)) {
+                    List<DocumentSpan> spans = reader.readArray(reader1 -> DocumentSpan.fromJson(reader1));
+                    deserializedDocument.spans = spans;
+                } else if ("confidence".equals(fieldName)) {
+                    deserializedDocument.confidence = reader.getFloat();
+                } else if ("boundingRegions".equals(fieldName)) {
+                    List<BoundingRegion> boundingRegions
+                        = reader.readArray(reader1 -> BoundingRegion.fromJson(reader1));
+                    deserializedDocument.boundingRegions = boundingRegions;
+                } else if ("fields".equals(fieldName)) {
+                    Map<String, DocumentField> fields = reader.readMap(reader1 -> DocumentField.fromJson(reader1));
+                    deserializedDocument.fields = fields;
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDocument;
+        });
     }
 }

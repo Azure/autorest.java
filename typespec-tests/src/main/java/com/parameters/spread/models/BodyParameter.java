@@ -43,6 +43,10 @@ public final class BodyParameter implements JsonSerializable<BodyParameter> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class BodyParameter implements JsonSerializable<BodyParameter> {
      * Reads an instance of BodyParameter from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of BodyParameter if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of BodyParameter if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the BodyParameter.
      */
+    @Generated
     public static BodyParameter fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

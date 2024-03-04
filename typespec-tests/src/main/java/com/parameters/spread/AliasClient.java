@@ -16,9 +16,10 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.spread.implementation.AliasImpl;
+import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
+import com.parameters.spread.implementation.models.SpreadAsRequestParameterRequest;
+import com.parameters.spread.implementation.models.SpreadWithMultipleParametersRequest;
 import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous SpreadClient type.
@@ -40,9 +41,7 @@ public final class AliasClient {
 
     /**
      * The spreadAsRequestBody operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -65,9 +64,7 @@ public final class AliasClient {
 
     /**
      * The spreadAsRequestParameter operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -93,9 +90,7 @@ public final class AliasClient {
 
     /**
      * The spreadWithMultipleParameters operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop1: String (Required)
@@ -140,8 +135,7 @@ public final class AliasClient {
     public void spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("name", name);
+        SpreadAsRequestBodyRequest requestObj = new SpreadAsRequestBodyRequest(name);
         BinaryData request = BinaryData.fromObject(requestObj);
         spreadAsRequestBodyWithResponse(request, requestOptions).getValue();
     }
@@ -164,8 +158,7 @@ public final class AliasClient {
     public void spreadAsRequestParameter(String id, String xMsTestHeader, String name) {
         // Generated convenience method for spreadAsRequestParameterWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("name", name);
+        SpreadAsRequestParameterRequest requestObj = new SpreadAsRequestParameterRequest(name);
         BinaryData request = BinaryData.fromObject(requestObj);
         spreadAsRequestParameterWithResponse(id, xMsTestHeader, request, requestOptions).getValue();
     }
@@ -188,13 +181,8 @@ public final class AliasClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String xMsTestHeader = options.getXMsTestHeader();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop1", options.getProp1());
-        requestObj.put("prop2", options.getProp2());
-        requestObj.put("prop3", options.getProp3());
-        requestObj.put("prop4", options.getProp4());
-        requestObj.put("prop5", options.getProp5());
-        requestObj.put("prop6", options.getProp6());
+        SpreadWithMultipleParametersRequest requestObj = new SpreadWithMultipleParametersRequest(options.getProp1(),
+            options.getProp2(), options.getProp3(), options.getProp4(), options.getProp5(), options.getProp6());
         BinaryData request = BinaryData.fromObject(requestObj);
         spreadWithMultipleParametersWithResponse(id, xMsTestHeader, request, requestOptions).getValue();
     }

@@ -3,19 +3,32 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a response from a service.
- * 
+ * Represents a response from a service.
  */
 public class SchemaResponse extends Response {
     private Schema schema;
 
+    /**
+     * Creates a new instance of the SchemaResponse class.
+     */
+    public SchemaResponse() {
+    }
+
+    /**
+     * Gets the schema of the response.
+     *
+     * @return The schema of the response.
+     */
     public Schema getSchema() {
         return schema;
     }
 
+    /**
+     * Sets the schema of the response.
+     *
+     * @param schema The schema of the response.
+     */
     public void setSchema(Schema schema) {
         this.schema = schema;
     }

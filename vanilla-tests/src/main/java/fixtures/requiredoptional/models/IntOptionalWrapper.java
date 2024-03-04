@@ -5,17 +5,20 @@
 package fixtures.requiredoptional.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The IntOptionalWrapper model.
  */
 @Fluent
-public final class IntOptionalWrapper {
+public final class IntOptionalWrapper implements JsonSerializable<IntOptionalWrapper> {
     /*
      * The value property.
      */
-    @JsonProperty(value = "value")
     private Integer value;
 
     /**
@@ -50,5 +53,40 @@ public final class IntOptionalWrapper {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeNumberField("value", this.value);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of IntOptionalWrapper from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of IntOptionalWrapper if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the IntOptionalWrapper.
+     */
+    public static IntOptionalWrapper fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            IntOptionalWrapper deserializedIntOptionalWrapper = new IntOptionalWrapper();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("value".equals(fieldName)) {
+                    deserializedIntOptionalWrapper.value = reader.getNullable(JsonReader::getInt);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedIntOptionalWrapper;
+        });
     }
 }

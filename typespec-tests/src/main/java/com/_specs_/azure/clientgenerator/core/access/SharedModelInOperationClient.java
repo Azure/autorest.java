@@ -38,9 +38,7 @@ public final class SharedModelInOperationClient {
 
     /**
      * The publicMethod operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -63,9 +61,7 @@ public final class SharedModelInOperationClient {
 
     /**
      * The internal operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)

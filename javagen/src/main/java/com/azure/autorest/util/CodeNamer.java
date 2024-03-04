@@ -275,51 +275,6 @@ public class CodeNamer {
         return result.toUpperCase();
     }
 
-    public static List<String> wordWrap(String text, int width) {
-        Objects.requireNonNull(text);
-        List<String> ret = new ArrayList<>();
-        String[] lines = NEW_LINE.split(text, -1);
-        for (String line : lines) {
-            String processedLine = line.trim();
-
-            // yield empty lines as they are (probably) intentional
-            if (processedLine.length() == 0) {
-                ret.add(processedLine);
-            }
-
-            // feast on the line until it's gone
-            while (processedLine.length() > 0) {
-                // determine potential wrapping points
-                List<Integer> whitespacePositions = new ArrayList<>();
-                for (int i = 0; i != processedLine.length(); i++) {
-                    if (Character.isWhitespace(processedLine.charAt(i))) {
-                        whitespacePositions.add(i);
-                    }
-                }
-                whitespacePositions.add(processedLine.length());
-                int preWidthWrapAt = -1;
-                int postWidthWrapAt = -1;
-                for (int i = 0; i != whitespacePositions.size() - 1; i++) {
-                    if (whitespacePositions.get(i + 1) > width) {
-                        preWidthWrapAt = whitespacePositions.get(i);
-                        postWidthWrapAt = whitespacePositions.get(i + 1);
-                        break;
-                    }
-                }
-                int wrapAt = processedLine.length();
-                if (preWidthWrapAt > 0) {
-                    wrapAt = preWidthWrapAt;
-                } else if (postWidthWrapAt > 0) {
-                    wrapAt = postWidthWrapAt;
-                }
-                // wrap
-                ret.add(processedLine.substring(0, wrapAt));
-                processedLine = processedLine.substring(wrapAt).trim();
-            }
-        }
-        return ret;
-    }
-
     protected static String getEscapedReservedName(String name, String appendValue) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(appendValue);

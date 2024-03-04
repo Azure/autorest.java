@@ -37,11 +37,10 @@ public final class PolymorphicrecursiveClient {
 
     /**
      * Get complex types that are polymorphic and have recursive references.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -65,11 +64,10 @@ public final class PolymorphicrecursiveClient {
 
     /**
      * Put complex types that are polymorphic and have recursive references.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     fishtype: String (Optional)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -80,56 +78,56 @@ public final class PolymorphicrecursiveClient {
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     * "fishtype": "salmon",
-     * "species": "king",
-     * "length": 1,
-     * "age": 1,
-     * "location": "alaska",
-     * "iswild": true,
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "length": 20,
-     * "age": 6,
-     * "siblings": [
-     * {
-     * "fishtype": "salmon",
-     * "species": "coho",
-     * "length": 2,
-     * "age": 2,
-     * "location": "atlantic",
-     * "iswild": true,
-     * "siblings": [
-     * {
-     * "fishtype": "shark",
-     * "species": "predator",
-     * "length": 20,
-     * "age": 6
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
-     * },
-     * {
-     * "fishtype": "sawshark",
-     * "species": "dangerous",
-     * "length": 10,
-     * "age": 105
-     * }
-     * ]
+     *     "fishtype": "salmon",
+     *     "species": "king",
+     *     "length": 1,
+     *     "age": 1,
+     *     "location": "alaska",
+     *     "iswild": true,
+     *     "siblings": [
+     *         {
+     *             "fishtype": "shark",
+     *             "species": "predator",
+     *             "length": 20,
+     *             "age": 6,
+     *             "siblings": [
+     *                 {
+     *                     "fishtype": "salmon",
+     *                     "species": "coho",
+     *                     "length": 2,
+     *                     "age": 2,
+     *                     "location": "atlantic",
+     *                     "iswild": true,
+     *                     "siblings": [
+     *                         {
+     *                             "fishtype": "shark",
+     *                             "species": "predator",
+     *                             "length": 20,
+     *                             "age": 6
+     *                         },
+     *                         {
+     *                             "fishtype": "sawshark",
+     *                             "species": "dangerous",
+     *                             "length": 10,
+     *                             "age": 105
+     *                         }
+     *                     ]
+     *                 },
+     *                 {
+     *                     "fishtype": "sawshark",
+     *                     "species": "dangerous",
+     *                     "length": 10,
+     *                     "age": 105
+     *                 }
+     *             ]
+     *         },
+     *         {
+     *             "fishtype": "sawshark",
+     *             "species": "dangerous",
+     *             "length": 10,
+     *             "age": 105
+     *         }
+     *     ]
      * }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

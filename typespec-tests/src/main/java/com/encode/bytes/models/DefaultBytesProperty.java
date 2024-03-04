@@ -44,6 +44,10 @@ public final class DefaultBytesProperty implements JsonSerializable<DefaultBytes
         return CoreUtils.clone(this.value);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -55,11 +59,11 @@ public final class DefaultBytesProperty implements JsonSerializable<DefaultBytes
      * Reads an instance of DefaultBytesProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DefaultBytesProperty if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of DefaultBytesProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DefaultBytesProperty.
      */
+    @Generated
     public static DefaultBytesProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             byte[] value = null;

@@ -113,6 +113,7 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
         StreamSerializationModelTemplate.xmlWrapperClassXmlSerializableImplementation(classBlock,
             xmlSequenceWrapper.getWrapperClassName(), sequenceType, xmlRootElementName,
             xmlSequenceWrapper.getXmlRootElementNamespace(), xmlListElementName,
-            xmlElementNameCamelCase, xmlSequenceWrapper.getXmlListElementNamespace());
+            xmlElementNameCamelCase, xmlSequenceWrapper.getXmlListElementNamespace(),
+            Templates.getModelTemplate()::addGeneratedAnnotation);
     }
 }

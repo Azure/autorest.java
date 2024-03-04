@@ -23,6 +23,7 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import fixtures.bodyfile.AutoRestSwaggerBatFileServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -50,8 +51,16 @@ public final class FilesImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBatFileServiceFiles to be used by the proxy service
-     * to perform REST calls.
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestSwaggerBatFileServiceVersion getServiceVersion() {
+        return client.getServiceVersion();
+    }
+
+    /**
+     * The interface defining all the services for AutoRestSwaggerBatFileServiceFiles to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBatFi")
@@ -113,9 +122,7 @@ public final class FilesImpl {
 
     /**
      * Get file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -135,9 +142,7 @@ public final class FilesImpl {
 
     /**
      * Get file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -157,9 +162,7 @@ public final class FilesImpl {
 
     /**
      * Get a large file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -180,9 +183,7 @@ public final class FilesImpl {
 
     /**
      * Get a large file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -202,9 +203,7 @@ public final class FilesImpl {
 
     /**
      * Get empty file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -225,9 +224,7 @@ public final class FilesImpl {
 
     /**
      * Get empty file.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>

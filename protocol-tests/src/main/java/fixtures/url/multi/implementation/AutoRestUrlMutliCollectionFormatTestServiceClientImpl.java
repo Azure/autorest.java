@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.url.multi.AutoRestUrlMutliCollectionFormatTestServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestUrlMutliCollectionFormatTestServiceClient type.
@@ -27,6 +28,20 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final AutoRestUrlMutliCollectionFormatTestServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestUrlMutliCollectionFormatTestServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -75,10 +90,12 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientImpl {
      * Initializes an instance of AutoRestUrlMutliCollectionFormatTestServiceClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestUrlMutliCollectionFormatTestServiceClientImpl(String host) {
+    public AutoRestUrlMutliCollectionFormatTestServiceClientImpl(String host,
+        AutoRestUrlMutliCollectionFormatTestServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -86,9 +103,11 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestUrlMutliCollectionFormatTestServiceClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public AutoRestUrlMutliCollectionFormatTestServiceClientImpl(HttpPipeline httpPipeline, String host,
+        AutoRestUrlMutliCollectionFormatTestServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -97,12 +116,15 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestUrlMutliCollectionFormatTestServiceClientImpl(HttpPipeline httpPipeline,
-        SerializerAdapter serializerAdapter, String host) {
+        SerializerAdapter serializerAdapter, String host,
+        AutoRestUrlMutliCollectionFormatTestServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.queries = new QueriesImpl(this);
     }
 }

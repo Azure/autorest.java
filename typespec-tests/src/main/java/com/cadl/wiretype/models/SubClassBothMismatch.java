@@ -24,33 +24,37 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
      * The base64url property.
      */
     @Generated
-    private final Base64Url base64Url;
+    private final Base64Url base64url;
 
     /**
      * Creates an instance of SubClassBothMismatch class.
      * 
      * @param dateTimeRfc7231 the dateTimeRfc7231 value to set.
-     * @param base64Url the base64Url value to set.
+     * @param base64url the base64url value to set.
      */
     @Generated
-    public SubClassBothMismatch(OffsetDateTime dateTimeRfc7231, byte[] base64Url) {
+    public SubClassBothMismatch(OffsetDateTime dateTimeRfc7231, byte[] base64url) {
         super(dateTimeRfc7231);
-        this.base64Url = Base64Url.encode(base64Url);
+        this.base64url = Base64Url.encode(base64url);
     }
 
     /**
-     * Get the base64Url property: The base64url property.
+     * Get the base64url property: The base64url property.
      * 
-     * @return the base64Url value.
+     * @return the base64url value.
      */
     @Generated
-    public byte[] getBase64Url() {
-        if (this.base64Url == null) {
+    public byte[] getBase64url() {
+        if (this.base64url == null) {
             return null;
         }
-        return this.base64Url.decodedBytes();
+        return this.base64url.decodedBytes();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -58,7 +62,7 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
             jsonWriter.writeStringField("dateTimeRfc7231",
                 Objects.toString(new DateTimeRfc1123(getDateTimeRfc7231()), null));
         }
-        jsonWriter.writeStringField("base64url", Objects.toString(this.base64Url, null));
+        jsonWriter.writeStringField("base64url", Objects.toString(this.base64url, null));
         return jsonWriter.writeEndObject();
     }
 
@@ -66,15 +70,15 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
      * Reads an instance of SubClassBothMismatch from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of SubClassBothMismatch if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of SubClassBothMismatch if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SubClassBothMismatch.
      */
+    @Generated
     public static SubClassBothMismatch fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OffsetDateTime dateTimeRfc7231 = null;
-            byte[] base64Url = null;
+            byte[] base64url = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -86,16 +90,16 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
                 } else if ("base64url".equals(fieldName)) {
-                    Base64Url base64UrlHolder
+                    Base64Url base64urlHolder
                         = reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
-                    if (base64UrlHolder != null) {
-                        base64Url = base64UrlHolder.decodedBytes();
+                    if (base64urlHolder != null) {
+                        base64url = base64urlHolder.decodedBytes();
                     }
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new SubClassBothMismatch(dateTimeRfc7231, base64Url);
+            return new SubClassBothMismatch(dateTimeRfc7231, base64url);
         });
     }
 }

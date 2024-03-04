@@ -3,14 +3,9 @@
 
 package com.type.property.nullable;
 
-import com.azure.core.util.BinaryData;
-import com.azure.json.JsonProviders;
-import com.azure.json.JsonWriter;
 import com.type.property.nullable.models.CollectionsByteProperty;
 import org.junit.jupiter.api.Test;
 
-import java.io.IOException;
-import java.io.StringWriter;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,19 +17,12 @@ class CollectionsByteClientTest {
 
     @Test
     void patchNonNullWithResponse() {
-        CollectionsByteProperty collectionsByteProperty = new CollectionsByteProperty("foo", Arrays.asList(new byte[]{104, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 33}, new byte[]{104, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 33}));
-        client.patchNonNullWithResponse(BinaryData.fromObject(collectionsByteProperty), null);
+        CollectionsByteProperty collectionsByteProperty = new CollectionsByteProperty().setRequiredProperty("foo").setNullableProperty(Arrays.asList(new byte[]{104, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 33}, new byte[]{104, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100, 33}));
+        client.patchNonNull(collectionsByteProperty);
     }
     @Test
-    void patchNullWithResponse() throws IOException {
-        StringWriter writer = new StringWriter();
-        JsonWriter jsonWriter = JsonProviders.createWriter(writer);
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("requiredProperty", "foo");
-        jsonWriter.writeNullField("nullableProperty");
-        jsonWriter.writeEndObject();
-        jsonWriter.close();
-        client.patchNullWithResponse(BinaryData.fromString(writer.toString()), null);
+    void patchNullWithResponse() {
+        client.patchNull(new CollectionsByteProperty().setRequiredProperty("foo").setNullableProperty(null));
     }
 
     @Test

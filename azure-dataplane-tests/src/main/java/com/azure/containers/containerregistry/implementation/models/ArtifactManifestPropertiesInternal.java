@@ -63,8 +63,7 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
     private ArtifactOperatingSystem operatingSystem;
 
     /*
-     * List of artifacts that are referenced by this manifest list, with information about the platform each supports.
-     * This list will be empty if this is a leaf manifest and not a manifest list.
+     * List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.
      */
     private List<ArtifactManifestPlatform> relatedArtifacts;
 
@@ -100,8 +99,7 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
     }
 
     /**
-     * Get the registryLoginServer property: Registry login server name. This is likely to be similar to
-     * {registry-name}.azurecr.io.
+     * Get the registryLoginServer property: Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      * 
      * @return the registryLoginServer value.
      */
@@ -110,8 +108,7 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
     }
 
     /**
-     * Set the registryLoginServer property: Registry login server name. This is likely to be similar to
-     * {registry-name}.azurecr.io.
+     * Set the registryLoginServer property: Registry login server name. This is likely to be similar to {registry-name}.azurecr.io.
      * 
      * @param registryLoginServer the registryLoginServer value to set.
      * @return the ArtifactManifestPropertiesInternal object itself.
@@ -262,8 +259,7 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
     }
 
     /**
-     * Get the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information
-     * about the platform each supports. This list will be empty if this is a leaf manifest and not a manifest list.
+     * Get the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.
      * 
      * @return the relatedArtifacts value.
      */
@@ -272,8 +268,7 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
     }
 
     /**
-     * Set the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information
-     * about the platform each supports. This list will be empty if this is a leaf manifest and not a manifest list.
+     * Set the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.
      * 
      * @param relatedArtifacts the relatedArtifacts value to set.
      * @return the ArtifactManifestPropertiesInternal object itself.
@@ -383,14 +378,26 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("registry", this.registryLoginServer);
         jsonWriter.writeStringField("imageName", this.repositoryName);
-        if (digest != null || sizeInBytes != null || createdOn != null || lastUpdatedOn != null || architecture != null
-            || operatingSystem != null || relatedArtifacts != null || tags != null || deleteEnabled != null
-            || writeEnabled != null || listEnabled != null || readEnabled != null) {
+        if (digest != null
+            || sizeInBytes != null
+            || createdOn != null
+            || lastUpdatedOn != null
+            || architecture != null
+            || operatingSystem != null
+            || relatedArtifacts != null
+            || tags != null
+            || deleteEnabled != null
+            || writeEnabled != null
+            || listEnabled != null
+            || readEnabled != null) {
             jsonWriter.writeStartObject("manifest");
             jsonWriter.writeStringField("digest", this.digest);
             jsonWriter.writeNumberField("imageSize", this.sizeInBytes);
@@ -421,8 +428,7 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
      * Reads an instance of ArtifactManifestPropertiesInternal from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ArtifactManifestPropertiesInternal if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
+     * @return An instance of ArtifactManifestPropertiesInternal if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ArtifactManifestPropertiesInternal.
      */

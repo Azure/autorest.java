@@ -44,7 +44,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * The map property.
      */
     @Generated
-    private final Map<String, InnerModel> map;
+    private Map<String, InnerModel> map;
 
     /*
      * The longValue property.
@@ -76,6 +76,12 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private List<InnerModel> array;
 
+    /*
+     * The fish property.
+     */
+    @Generated
+    private Fish fish;
+
     @Generated
     private boolean jsonMergePatch;
 
@@ -99,12 +105,9 @@ public final class Resource implements JsonSerializable<Resource> {
 
     /**
      * Creates an instance of Resource class.
-     * 
-     * @param map the map value to set.
      */
     @Generated
-    public Resource(Map<String, InnerModel> map) {
-        this.map = map;
+    public Resource() {
     }
 
     /**
@@ -158,6 +161,20 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public Map<String, InnerModel> getMap() {
         return this.map;
+    }
+
+    /**
+     * Set the map property: The map property.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param map the map value to set.
+     * @return the Resource object itself.
+     */
+    @Generated
+    public Resource setMap(Map<String, InnerModel> map) {
+        this.map = map;
+        this.updatedProperties.add("map");
+        return this;
     }
 
     /**
@@ -275,69 +292,121 @@ public final class Resource implements JsonSerializable<Resource> {
         return this;
     }
 
+    /**
+     * Get the fish property: The fish property.
+     * 
+     * @return the fish value.
+     */
+    @Generated
+    public Fish getFish() {
+        return this.fish;
+    }
+
+    /**
+     * Set the fish property: The fish property.
+     * 
+     * @param fish the fish value to set.
+     * @return the Resource object itself.
+     */
+    @Generated
+    public Resource setFish(Fish fish) {
+        this.fish = fish;
+        this.updatedProperties.add("fish");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeStringField("description", this.description);
+            jsonWriter.writeMapField("map", this.map, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeNumberField("longValue", this.longValue);
             jsonWriter.writeNumberField("intValue", this.intValue);
             jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
             jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
             jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
+            jsonWriter.writeJsonField("fish", this.fish);
             return jsonWriter.writeEndObject();
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.map != null) {
-            jsonWriter.writeMapField("map", this.map, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
-        } else if (updatedProperties.contains("map")) {
-            jsonWriter.writeNullField("map");
+        if (updatedProperties.contains("description")) {
+            if (this.description == null) {
+                jsonWriter.writeNullField("description");
+            } else {
+                jsonWriter.writeStringField("description", this.description);
+            }
         }
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
+        if (updatedProperties.contains("map")) {
+            if (this.map == null) {
+                jsonWriter.writeNullField("map");
+            } else {
+                jsonWriter.writeMapField("map", this.map, (writer, element) -> {
+                    if (element != null) {
+                        element.serializeAsJsonMergePatch(true);
+                        writer.writeJson(element);
+                        element.serializeAsJsonMergePatch(false);
+                    } else {
+                        writer.writeNull();
+                    }
+                });
+            }
         }
-        if (this.longValue != null) {
-            jsonWriter.writeNumberField("longValue", this.longValue);
-        } else if (updatedProperties.contains("longValue")) {
-            jsonWriter.writeNullField("longValue");
+        if (updatedProperties.contains("longValue")) {
+            if (this.longValue == null) {
+                jsonWriter.writeNullField("longValue");
+            } else {
+                jsonWriter.writeNumberField("longValue", this.longValue);
+            }
         }
-        if (this.intValue != null) {
-            jsonWriter.writeNumberField("intValue", this.intValue);
-        } else if (updatedProperties.contains("intValue")) {
-            jsonWriter.writeNullField("intValue");
+        if (updatedProperties.contains("intValue")) {
+            if (this.intValue == null) {
+                jsonWriter.writeNullField("intValue");
+            } else {
+                jsonWriter.writeNumberField("intValue", this.intValue);
+            }
         }
-        if (this.enumValue != null) {
-            jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
-        } else if (updatedProperties.contains("enumValue")) {
-            jsonWriter.writeNullField("enumValue");
+        if (updatedProperties.contains("enumValue")) {
+            if (this.enumValue == null) {
+                jsonWriter.writeNullField("enumValue");
+            } else {
+                jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
+            }
         }
-        if (this.innerModelProperty != null) {
-            this.innerModelProperty.serializeAsJsonMergePatch(true);
-            jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
-            this.innerModelProperty.serializeAsJsonMergePatch(false);
-        } else if (updatedProperties.contains("innerModelProperty")) {
-            jsonWriter.writeNullField("wireNameForInnerModelProperty");
+        if (updatedProperties.contains("innerModelProperty")) {
+            if (this.innerModelProperty == null) {
+                jsonWriter.writeNullField("wireNameForInnerModelProperty");
+            } else {
+                this.innerModelProperty.serializeAsJsonMergePatch(true);
+                jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
+                this.innerModelProperty.serializeAsJsonMergePatch(false);
+            }
         }
-        if (this.array != null) {
-            jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("array")) {
-            jsonWriter.writeNullField("array");
+        if (updatedProperties.contains("array")) {
+            if (this.array == null) {
+                jsonWriter.writeNullField("array");
+            } else {
+                jsonWriter.writeArrayField("array", this.array, (writer, element) -> writer.writeJson(element));
+            }
+        }
+        if (updatedProperties.contains("fish")) {
+            if (this.fish == null) {
+                jsonWriter.writeNullField("fish");
+            } else {
+                this.fish.serializeAsJsonMergePatch(true);
+                jsonWriter.writeJsonField("fish", this.fish);
+                this.fish.serializeAsJsonMergePatch(false);
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -346,22 +415,23 @@ public final class Resource implements JsonSerializable<Resource> {
      * Reads an instance of Resource from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
+     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Resource.
      */
+    @Generated
     public static Resource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            Map<String, InnerModel> map = null;
             String description = null;
+            Map<String, InnerModel> map = null;
             Long longValue = null;
             Integer intValue = null;
             ResourceEnumValue enumValue = null;
             InnerModel innerModelProperty = null;
             List<InnerModel> array = null;
+            Fish fish = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -370,10 +440,10 @@ public final class Resource implements JsonSerializable<Resource> {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("map".equals(fieldName)) {
-                    map = reader.readMap(reader1 -> InnerModel.fromJson(reader1));
                 } else if ("description".equals(fieldName)) {
                     description = reader.getString();
+                } else if ("map".equals(fieldName)) {
+                    map = reader.readMap(reader1 -> InnerModel.fromJson(reader1));
                 } else if ("longValue".equals(fieldName)) {
                     longValue = reader.getNullable(JsonReader::getLong);
                 } else if ("intValue".equals(fieldName)) {
@@ -384,19 +454,23 @@ public final class Resource implements JsonSerializable<Resource> {
                     innerModelProperty = InnerModel.fromJson(reader);
                 } else if ("array".equals(fieldName)) {
                     array = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
+                } else if ("fish".equals(fieldName)) {
+                    fish = Fish.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            Resource deserializedResource = new Resource(map);
+            Resource deserializedResource = new Resource();
             deserializedResource.id = id;
             deserializedResource.name = name;
             deserializedResource.description = description;
+            deserializedResource.map = map;
             deserializedResource.longValue = longValue;
             deserializedResource.intValue = intValue;
             deserializedResource.enumValue = enumValue;
             deserializedResource.innerModelProperty = innerModelProperty;
             deserializedResource.array = array;
+            deserializedResource.fish = fish;
 
             return deserializedResource;
         });

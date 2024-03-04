@@ -5,7 +5,6 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -37,7 +36,6 @@ public final class DocumentBuildMode extends ExpandableStringEnum<DocumentBuildM
      * @param name a name to look for.
      * @return the corresponding DocumentBuildMode.
      */
-    @JsonCreator
     public static DocumentBuildMode fromString(String name) {
         return fromString(name, DocumentBuildMode.class);
     }

@@ -5,7 +5,6 @@
 package fixtures.constants.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -33,7 +32,6 @@ public final class ModelAsStringNoRequiredOneValueNoDefaultEnum
      * @param name a name to look for.
      * @return the corresponding ModelAsStringNoRequiredOneValueNoDefaultEnum.
      */
-    @JsonCreator
     public static ModelAsStringNoRequiredOneValueNoDefaultEnum fromString(String name) {
         return fromString(name, ModelAsStringNoRequiredOneValueNoDefaultEnum.class);
     }

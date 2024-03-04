@@ -6,8 +6,8 @@ package com.encode.bytes;
 import com.payload.FileUtils;
 import com.azure.core.util.BinaryData;
 import com.encode.bytes.models.Base64BytesProperty;
-import com.encode.bytes.models.Base64UrlArrayBytesProperty;
-import com.encode.bytes.models.Base64UrlBytesProperty;
+import com.encode.bytes.models.Base64urlArrayBytesProperty;
+import com.encode.bytes.models.Base64urlBytesProperty;
 import com.encode.bytes.models.DefaultBytesProperty;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,9 +32,9 @@ public class EncodeBytesTests {
 
         queryClient.base64(DATA);
 
-        queryClient.base64Url(DATA);
+        queryClient.base64url(DATA);
 
-        queryClient.base64UrlArray(Arrays.asList(DATA, DATA));
+        queryClient.base64urlArray(Arrays.asList(DATA, DATA));
     }
 
     @Test
@@ -43,9 +43,9 @@ public class EncodeBytesTests {
 
         headerClient.base64(DATA);
 
-        headerClient.base64Url(DATA);
+        headerClient.base64url(DATA);
 
-        headerClient.base64UrlArray(Arrays.asList(DATA, DATA));
+        headerClient.base64urlArray(Arrays.asList(DATA, DATA));
     }
 
     @Test
@@ -54,9 +54,9 @@ public class EncodeBytesTests {
 
         propertyClient.base64(new Base64BytesProperty(DATA));
 
-        propertyClient.base64Url(new Base64UrlBytesProperty(DATA));
+        propertyClient.base64url(new Base64urlBytesProperty(DATA));
 
-        propertyClient.base64UrlArray(new Base64UrlArrayBytesProperty(Arrays.asList(DATA, DATA)));
+        propertyClient.base64urlArray(new Base64urlArrayBytesProperty(Arrays.asList(DATA, DATA)));
     }
 
     @Test
@@ -65,7 +65,7 @@ public class EncodeBytesTests {
         requestClient.octetStream(BinaryData.fromBytes(PNG));
         requestClient.customContentType(BinaryData.fromBytes(PNG));
         requestClient.base64(DATA);
-        requestClient.base64Url(DATA);
+        requestClient.base64url(DATA);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class EncodeBytesTests {
         bytes = responseClient.base64();
         Assertions.assertArrayEquals(DATA, bytes);
 
-        bytes = responseClient.base64Url();
+        bytes = responseClient.base64url();
         Assertions.assertArrayEquals(DATA, bytes);
     }
 }

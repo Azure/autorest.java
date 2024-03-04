@@ -26,7 +26,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     private final String name;
 
     /*
-     * Dictionary of any
+     * Additional properties
      */
     @Generated
     private Map<String, Object> additionalProperties;
@@ -52,7 +52,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     }
 
     /**
-     * Get the additionalProperties property: Dictionary of any.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +62,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
     }
 
     /**
-     * Set the additionalProperties property: Dictionary of any.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsUnknownAdditionalProperties object itself.
@@ -73,6 +73,10 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -89,11 +93,11 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
      * Reads an instance of ExtendsUnknownAdditionalProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ExtendsUnknownAdditionalProperties if the JsonReader was pointing to an instance of it, or
-     * null if it was pointing to JSON null.
+     * @return An instance of ExtendsUnknownAdditionalProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ExtendsUnknownAdditionalProperties.
      */
+    @Generated
     public static ExtendsUnknownAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

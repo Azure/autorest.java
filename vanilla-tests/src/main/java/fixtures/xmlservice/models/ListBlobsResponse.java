@@ -5,62 +5,57 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.core.util.CoreUtils;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
  * An enumeration of blobs.
  */
-@JacksonXmlRootElement(localName = "EnumerationResults")
 @Fluent
-public final class ListBlobsResponse {
+public final class ListBlobsResponse implements XmlSerializable<ListBlobsResponse> {
     /*
      * The ServiceEndpoint property.
      */
-    @JacksonXmlProperty(localName = "ServiceEndpoint", isAttribute = true)
     private String serviceEndpoint;
 
     /*
      * The ContainerName property.
      */
-    @JacksonXmlProperty(localName = "ContainerName", isAttribute = true)
     private String containerName;
 
     /*
      * The Prefix property.
      */
-    @JsonProperty(value = "Prefix", required = true)
     private String prefix;
 
     /*
      * The Marker property.
      */
-    @JsonProperty(value = "Marker", required = true)
     private String marker;
 
     /*
      * The MaxResults property.
      */
-    @JsonProperty(value = "MaxResults", required = true)
     private int maxResults;
 
     /*
      * The Delimiter property.
      */
-    @JsonProperty(value = "Delimiter", required = true)
     private String delimiter;
 
     /*
      * The Blobs property.
      */
-    @JsonProperty(value = "Blobs", required = true)
     private Blobs blobs;
 
     /*
      * The NextMarker property.
      */
-    @JsonProperty(value = "NextMarker", required = true)
     private String nextMarker;
 
     /**
@@ -255,5 +250,76 @@ public final class ListBlobsResponse {
         if (getNextMarker() == null) {
             throw new IllegalArgumentException("Missing required property nextMarker in model ListBlobsResponse");
         }
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeStringAttribute("ServiceEndpoint", this.serviceEndpoint);
+        xmlWriter.writeStringAttribute("ContainerName", this.containerName);
+        xmlWriter.writeStringElement("Prefix", this.prefix);
+        xmlWriter.writeStringElement("Marker", this.marker);
+        xmlWriter.writeIntElement("MaxResults", this.maxResults);
+        xmlWriter.writeStringElement("Delimiter", this.delimiter);
+        xmlWriter.writeXml(this.blobs, "Blobs");
+        xmlWriter.writeStringElement("NextMarker", this.nextMarker);
+        return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of ListBlobsResponse from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ListBlobsResponse.
+     */
+    public static ListBlobsResponse fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of ListBlobsResponse from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support cases where the model can deserialize from different root element names.
+     * @return An instance of ListBlobsResponse if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the ListBlobsResponse.
+     */
+    public static ListBlobsResponse fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "EnumerationResults" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            ListBlobsResponse deserializedListBlobsResponse = new ListBlobsResponse();
+            deserializedListBlobsResponse.serviceEndpoint = reader.getStringAttribute(null, "ServiceEndpoint");
+            deserializedListBlobsResponse.containerName = reader.getStringAttribute(null, "ContainerName");
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
+
+                if ("Prefix".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.prefix = reader.getStringElement();
+                } else if ("Marker".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.marker = reader.getStringElement();
+                } else if ("MaxResults".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.maxResults = reader.getIntElement();
+                } else if ("Delimiter".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.delimiter = reader.getStringElement();
+                } else if ("Blobs".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.blobs = Blobs.fromXml(reader, "Blobs");
+                } else if ("NextMarker".equals(elementName.getLocalPart())) {
+                    deserializedListBlobsResponse.nextMarker = reader.getStringElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
+
+            return deserializedListBlobsResponse;
+        });
     }
 }

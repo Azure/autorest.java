@@ -83,8 +83,4 @@ public class XmlFile {
     public void blockComment(Consumer<XmlLineComment> commentAction) {
         getContents().blockComment(commentAction);
     }
-
-    public void blockComment(int wordWrapWidth, Consumer<XmlLineComment> commentAction) {
-        getContents().blockComment(wordWrapWidth, commentAction);
-    }
 }

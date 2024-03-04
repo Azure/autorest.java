@@ -46,6 +46,10 @@ public final class UnixTimestampDatetimeProperty implements JsonSerializable<Uni
         return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.value), ZoneOffset.UTC);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -57,11 +61,11 @@ public final class UnixTimestampDatetimeProperty implements JsonSerializable<Uni
      * Reads an instance of UnixTimestampDatetimeProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of UnixTimestampDatetimeProperty if the JsonReader was pointing to an instance of it, or null
-     * if it was pointing to JSON null.
+     * @return An instance of UnixTimestampDatetimeProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UnixTimestampDatetimeProperty.
      */
+    @Generated
     public static UnixTimestampDatetimeProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             OffsetDateTime value = null;

@@ -43,6 +43,10 @@ public final class GenerationOptions implements JsonSerializable<GenerationOptio
         return this.prompt;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class GenerationOptions implements JsonSerializable<GenerationOptio
      * Reads an instance of GenerationOptions from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of GenerationOptions if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of GenerationOptions if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the GenerationOptions.
      */
+    @Generated
     public static GenerationOptions fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String prompt = null;

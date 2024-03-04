@@ -41,7 +41,7 @@ npm run testserver-run
 
 Fluent tests is different. It depends on the real OpenAPI 2.0 swaggers for ARM services.
 
-The generated code is not checked-in. Instead, code is generated on-the-fly during the test, via [`prepare-tests.bat` script](https://github.com/Azure/autorest.java/blob/main/fluent-tests/prepare-tests.bat).
+The generated code is not checked-in. Instead, code is generated on-the-fly during the test, via [`Initialize-Tests.ps1` script](https://github.com/Azure/autorest.java/blob/main/fluent-tests/Initialize-Tests.ps1).
 
 `CompilationTests` relies on Java compiler to pin-down certain features of the generated code, while `RuntimeTests` executes the generated code and verify the result.
 

@@ -5,25 +5,26 @@
 package fixtures.discriminatorflattening.requirexmsflattened.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * Describes a virtual machine scale set network profile's network configurations.
  */
-@JsonFlatten
 @Fluent
-public class VirtualMachineScaleSetNetworkConfiguration {
+public class VirtualMachineScaleSetNetworkConfiguration
+    implements JsonSerializable<VirtualMachineScaleSetNetworkConfiguration> {
     /*
      * The network configuration name.
      */
-    @JsonProperty(value = "name")
     private String name;
 
     /*
      * Specifies the primary network interface in case the virtual machine has more than 1 network interface.
      */
-    @JsonProperty(value = "properties.primary")
     private Boolean primary;
 
     /**
@@ -53,8 +54,7 @@ public class VirtualMachineScaleSetNetworkConfiguration {
     }
 
     /**
-     * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1
-     * network interface.
+     * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1 network interface.
      * 
      * @return the primary value.
      */
@@ -63,8 +63,7 @@ public class VirtualMachineScaleSetNetworkConfiguration {
     }
 
     /**
-     * Set the primary property: Specifies the primary network interface in case the virtual machine has more than 1
-     * network interface.
+     * Set the primary property: Specifies the primary network interface in case the virtual machine has more than 1 network interface.
      * 
      * @param primary the primary value to set.
      * @return the VirtualMachineScaleSetNetworkConfiguration object itself.
@@ -80,5 +79,58 @@ public class VirtualMachineScaleSetNetworkConfiguration {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        if (primary != null) {
+            jsonWriter.writeStartObject("properties");
+            jsonWriter.writeBooleanField("primary", this.primary);
+            jsonWriter.writeEndObject();
+        }
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of VirtualMachineScaleSetNetworkConfiguration from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of VirtualMachineScaleSetNetworkConfiguration if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the VirtualMachineScaleSetNetworkConfiguration.
+     */
+    public static VirtualMachineScaleSetNetworkConfiguration fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            VirtualMachineScaleSetNetworkConfiguration deserializedVirtualMachineScaleSetNetworkConfiguration
+                = new VirtualMachineScaleSetNetworkConfiguration();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    deserializedVirtualMachineScaleSetNetworkConfiguration.name = reader.getString();
+                } else if ("properties".equals(fieldName) && reader.currentToken() == JsonToken.START_OBJECT) {
+                    while (reader.nextToken() != JsonToken.END_OBJECT) {
+                        fieldName = reader.getFieldName();
+                        reader.nextToken();
+
+                        if ("primary".equals(fieldName)) {
+                            deserializedVirtualMachineScaleSetNetworkConfiguration.primary
+                                = reader.getNullable(JsonReader::getBoolean);
+                        } else {
+                            reader.skipChildren();
+                        }
+                    }
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedVirtualMachineScaleSetNetworkConfiguration;
+        });
     }
 }

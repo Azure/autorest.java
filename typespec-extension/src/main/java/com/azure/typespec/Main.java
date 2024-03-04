@@ -95,6 +95,8 @@ public class Main {
         // initialize plugin
         TypeSpecFluentPlugin fluentPlugin = new TypeSpecFluentPlugin(emitterOptions, sdkIntegration);
 
+        codeModel = fluentPlugin.preProcess(codeModel);
+
         // client
         Client client = fluentPlugin.processClient(codeModel);
 
@@ -102,9 +104,16 @@ public class Main {
         FluentJavaPackage javaPackage = fluentPlugin.processTemplates(codeModel, client);
 
         // write
+
+        // java files
         Postprocessor.writeToFiles(javaPackage.getJavaFiles().stream()
             .collect(Collectors.toMap(JavaFile::getFilePath, file -> file.getContents().toString())), fluentPlugin,
             fluentPlugin.getLogger());
+
+        // XML include POM
+        javaPackage.getXmlFiles().forEach(xmlFile -> fluentPlugin.writeFile(xmlFile.getFilePath(), xmlFile.getContents().toString(), null));
+        // Others
+        javaPackage.getTextFiles().forEach(textFile -> fluentPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
     }
 
     private static void handleDPG(CodeModel codeModel, EmitterOptions emitterOptions, boolean sdkIntegration, String outputDir) {
@@ -125,11 +134,7 @@ public class Main {
         Map<String, String> javaFiles = new ConcurrentHashMap<>();
         JavaSettings settings = JavaSettings.getInstance();
         javaPackage.getJavaFiles().parallelStream().forEach(javaFile -> {
-            if (settings.isHandlePartialUpdate()) {
-                javaFiles.put(javaFile.getFilePath(), typeSpecPlugin.handlePartialUpdate(javaFile.getFilePath(), javaFile.getContents().toString()));
-            } else {
-                javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
-            }
+            javaFiles.put(javaFile.getFilePath(), javaFile.getContents().toString());
         });
 
         // handle customization

@@ -25,16 +25,16 @@ public final class JobStatus extends ExpandableStringEnum<JobStatus> {
     public static final JobStatus RUNNING = fromString("running");
 
     /**
-     * Static value succeeded for JobStatus.
+     * Static value Succeeded for JobStatus.
      */
     @Generated
-    public static final JobStatus SUCCEEDED = fromString("succeeded");
+    public static final JobStatus SUCCEEDED = fromString("Succeeded");
 
     /**
-     * Static value failed for JobStatus.
+     * Static value Failed for JobStatus.
      */
     @Generated
-    public static final JobStatus FAILED = fromString("failed");
+    public static final JobStatus FAILED = fromString("Failed");
 
     /**
      * Static value canceled for JobStatus.

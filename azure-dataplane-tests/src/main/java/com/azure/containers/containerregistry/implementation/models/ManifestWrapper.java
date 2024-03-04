@@ -308,6 +308,9 @@ public final class ManifestWrapper extends Manifest {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -330,8 +333,7 @@ public final class ManifestWrapper extends Manifest {
      * Reads an instance of ManifestWrapper from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ManifestWrapper if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of ManifestWrapper if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the ManifestWrapper.
      */
     public static ManifestWrapper fromJson(JsonReader jsonReader) throws IOException {

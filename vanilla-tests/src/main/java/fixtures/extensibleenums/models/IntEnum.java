@@ -5,7 +5,6 @@
 package fixtures.extensibleenums.models;
 
 import com.azure.core.util.ExpandableStringEnum;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import java.util.Collection;
 
 /**
@@ -13,8 +12,7 @@ import java.util.Collection;
  */
 public final class IntEnum extends ExpandableStringEnum<IntEnum> {
     /**
-     * This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for
-     * readability. Please wrap. This should wrap.
+     * This is a really long comment to see what wrapping looks like. This comment is really long and it should wrap for readability. Please wrap. This should wrap.
      */
     public static final IntEnum ONE = fromString("1");
 
@@ -43,7 +41,6 @@ public final class IntEnum extends ExpandableStringEnum<IntEnum> {
      * @param name a name to look for.
      * @return the corresponding IntEnum.
      */
-    @JsonCreator
     public static IntEnum fromString(String name) {
         return fromString(name, IntEnum.class);
     }

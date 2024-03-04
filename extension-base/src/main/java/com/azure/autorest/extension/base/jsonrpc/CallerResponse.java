@@ -8,13 +8,42 @@ import com.fasterxml.jackson.databind.JavaType;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
+/**
+ * Represents a response from a remote procedure call.
+ *
+ * @param <T> The type of the result of the remote procedure call.
+ */
 public class CallerResponse<T> extends CompletableFuture<T> {
-    public int id;
-    public JavaType type;
+    private final int id;
+    private final JavaType type;
 
+    /**
+     * Creates a new CallerResponse.
+     *
+     * @param id The id of the remote procedure call.
+     * @param type The type of the result of the remote procedure call.
+     */
     public CallerResponse(int id, JavaType type) {
         this.id = id;
         this.type = type;
+    }
+
+    /**
+     * Gets the id of the remote procedure call.
+     *
+     * @return The id of the remote procedure call.
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * Gets the type of the result of the remote procedure call.
+     *
+     * @return The type of the result of the remote procedure call.
+     */
+    public JavaType getType() {
+        return type;
     }
 
     @SuppressWarnings("unchecked")

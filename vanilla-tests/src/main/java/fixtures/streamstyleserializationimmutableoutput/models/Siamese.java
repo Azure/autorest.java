@@ -93,6 +93,9 @@ public final class Siamese extends Cat {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -108,8 +111,7 @@ public final class Siamese extends Cat {
      * Reads an instance of Siamese from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Siamese if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the Siamese.
      */
     public static Siamese fromJson(JsonReader jsonReader) throws IOException {

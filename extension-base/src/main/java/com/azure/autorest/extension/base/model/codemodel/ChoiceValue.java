@@ -6,98 +6,83 @@ package com.azure.autorest.extension.base.model.codemodel;
 import java.util.Objects;
 
 /**
- * an individual choice in a ChoiceSchema
- * 
+ * Represents a choice value.
  */
 public class ChoiceValue {
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
-     */
     private Languages language;
-    /**
-     * the actual value
-     * (Required)
-     * 
-     */
     private String value;
     private DictionaryAny extensions;
 
     /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
+     * Creates a new instance of the ChoiceValue class.
+     */
+    public ChoiceValue() {
+    }
+
+    /**
+     * Gets the language for the choice value. (Required)
+     *
+     * @return The language for the choice value.
      */
     public Languages getLanguage() {
         return language;
     }
 
     /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
+     * Sets the language for the choice value. (Required)
+     *
+     * @param language The language for the choice value.
      */
     public void setLanguage(Languages language) {
         this.language = language;
     }
 
     /**
-     * the actual value
-     * (Required)
-     * 
+     * Gets the value of the choice. (Required)
+     *
+     * @return The value of the choice.
      */
     public String getValue() {
         return value;
     }
 
     /**
-     * the actual value
-     * (Required)
-     * 
+     * Sets the value of the choice. (Required)
+     *
+     * @param value The value of the choice.
      */
     public void setValue(String value) {
         this.value = value;
     }
 
+    /**
+     * Gets the extensions for the choice value.
+     *
+     * @return The extensions for the choice value.
+     */
     public DictionaryAny getExtensions() {
         return extensions;
     }
 
+    /**
+     * Sets the extensions for the choice value.
+     *
+     * @param extensions The extensions for the choice value.
+     */
     public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ChoiceValue.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("language");
-        sb.append('=');
-        sb.append(((this.language == null)?"<null>":this.language));
-        sb.append(',');
-        sb.append("value");
-        sb.append('=');
-        sb.append(((this.value == null)?"<null>":this.value));
-        sb.append(',');
-        sb.append("extensions");
-        sb.append('=');
-        sb.append(((this.extensions == null)?"<null>":this.extensions));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return ChoiceValue.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[language="
+            + Objects.toString(language, "<null>") + ",value=" + Objects.toString(value, "<null>") + ",extensions="
+            + Objects.toString(extensions, "<null>") + ']';
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.value == null)? 0 :this.value.hashCode()));
-        return result;
+        return Objects.hash(value);
     }
 
     @Override
@@ -105,9 +90,11 @@ public class ChoiceValue {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ChoiceValue) == false) {
+
+        if (!(other instanceof ChoiceValue)) {
             return false;
         }
+
         ChoiceValue rhs = ((ChoiceValue) other);
         return Objects.equals(this.value, rhs.value);
     }

@@ -5,7 +5,10 @@
 package fixtures.multipleinheritance.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The Kitten model.
@@ -15,7 +18,6 @@ public final class Kitten extends Cat {
     /*
      * The eatsMiceYet property.
      */
-    @JsonProperty(value = "eatsMiceYet")
     private Boolean eatsMiceYet;
 
     /**
@@ -88,5 +90,53 @@ public final class Kitten extends Cat {
     @Override
     public void validate() {
         super.validate();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", getName());
+        jsonWriter.writeBooleanField("likesMilk", isLikesMilk());
+        jsonWriter.writeBooleanField("meows", isMeows());
+        jsonWriter.writeBooleanField("hisses", isHisses());
+        jsonWriter.writeBooleanField("eatsMiceYet", this.eatsMiceYet);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of Kitten from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of Kitten if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the Kitten.
+     */
+    public static Kitten fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Kitten deserializedKitten = new Kitten();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("name".equals(fieldName)) {
+                    deserializedKitten.setName(reader.getString());
+                } else if ("likesMilk".equals(fieldName)) {
+                    deserializedKitten.setLikesMilk(reader.getNullable(JsonReader::getBoolean));
+                } else if ("meows".equals(fieldName)) {
+                    deserializedKitten.setMeows(reader.getNullable(JsonReader::getBoolean));
+                } else if ("hisses".equals(fieldName)) {
+                    deserializedKitten.setHisses(reader.getNullable(JsonReader::getBoolean));
+                } else if ("eatsMiceYet".equals(fieldName)) {
+                    deserializedKitten.eatsMiceYet = reader.getNullable(JsonReader::getBoolean);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedKitten;
+        });
     }
 }

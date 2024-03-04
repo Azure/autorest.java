@@ -51,8 +51,7 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for BytesClientProperties to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for BytesClientProperties to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BytesClientPropertie")
@@ -99,7 +98,7 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64Url(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> base64url(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64url")
@@ -108,7 +107,7 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64UrlSync(@HeaderParam("accept") String accept,
+        Response<BinaryData> base64urlSync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64url-array")
@@ -117,7 +116,7 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<BinaryData>> base64UrlArray(@HeaderParam("accept") String accept,
+        Mono<Response<BinaryData>> base64urlArray(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
 
         @Post("/encode/bytes/property/base64url-array")
@@ -126,23 +125,19 @@ public final class PropertiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<BinaryData> base64UrlArraySync(@HeaderParam("accept") String accept,
+        Response<BinaryData> base64urlArraySync(@HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData body, RequestOptions requestOptions, Context context);
     }
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -165,17 +160,13 @@ public final class PropertiesImpl {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -198,17 +189,13 @@ public final class PropertiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -231,17 +218,13 @@ public final class PropertiesImpl {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -263,18 +246,14 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The base64Url operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * The base64url operation.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
@@ -290,24 +269,20 @@ public final class PropertiesImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> base64UrlWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> base64urlWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.base64Url(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64url(accept, body, requestOptions, context));
     }
 
     /**
-     * The base64Url operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * The base64url operation.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
@@ -323,16 +298,14 @@ public final class PropertiesImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> base64UrlWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<BinaryData> base64urlWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.base64UrlSync(accept, body, requestOptions, Context.NONE);
+        return service.base64urlSync(accept, body, requestOptions, Context.NONE);
     }
 
     /**
-     * The base64UrlArray operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * The base64urlArray operation.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -340,9 +313,7 @@ public final class PropertiesImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -360,16 +331,14 @@ public final class PropertiesImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> base64UrlArrayWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> base64urlArrayWithResponseAsync(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.base64UrlArray(accept, body, requestOptions, context));
+        return FluxUtil.withContext(context -> service.base64urlArray(accept, body, requestOptions, context));
     }
 
     /**
-     * The base64UrlArray operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * The base64urlArray operation.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -377,9 +346,7 @@ public final class PropertiesImpl {
      *     ]
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     value (Required): [
@@ -397,8 +364,8 @@ public final class PropertiesImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> base64UrlArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
+    public Response<BinaryData> base64urlArrayWithResponse(BinaryData body, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.base64UrlArraySync(accept, body, requestOptions, Context.NONE);
+        return service.base64urlArraySync(accept, body, requestOptions, Context.NONE);
     }
 }

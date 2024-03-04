@@ -33,6 +33,7 @@ import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ClientResponse;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -132,13 +133,17 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             codeModel.getOperationGroups().stream().flatMap(og -> og.getOperations().stream())
                 .map(o -> parseHeader(o, settings)).filter(Objects::nonNull));
 
-        final List<ClientModel> clientModels = autoRestModelTypes
+        List<ClientModel> clientModelsFromCodeModel = autoRestModelTypes
             .distinct()
             .map(autoRestCompositeType -> Mappers.getModelMapper().map(autoRestCompositeType))
             .filter(Objects::nonNull)
             .distinct()
             .collect(Collectors.toList());
-
+        // append some models not from CodeModel (currently, only for ##FileDetails models for multipart/form-data request)
+        // TODO (weidxu): we can remove this code block, if ##FileDetails moves to azure-core
+        final List<ClientModel> clientModels = Stream.concat(clientModelsFromCodeModel.stream(), ClientModels.getInstance().getModels().stream())
+            .distinct()
+            .collect(Collectors.toList());
         builder.models(clientModels);
 
         // union model (class)
@@ -163,15 +168,32 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         builder.clientName(serviceClientName).clientDescription(serviceClientDescription);
 
         Map<ServiceClient, com.azure.autorest.extension.base.model.codemodel.Client> serviceClientsMap = new LinkedHashMap<>();
-        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
-            serviceClientsMap = processClients(codeModel.getClients(), codeModel);
-            builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
-        } else {
-            // service client
-            ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
-            builder.serviceClient(serviceClient);
 
-            serviceClientsMap.put(serviceClient, codeModel);
+        boolean multipleClientsWithOperationsPresent = codeModel.getClients()
+                .stream()
+                .flatMap(client -> client.getOperationGroups().stream())
+                .flatMap(og -> og.getOperations().stream())
+                .findAny()
+                .isPresent();
+
+        boolean singleClientOperationsPresent = codeModel.getOperationGroups()
+                .stream()
+                .flatMap(og -> og.getOperations().stream())
+                .findAny()
+                .isPresent();
+
+        if (multipleClientsWithOperationsPresent || singleClientOperationsPresent) {
+            // set the service clients only if there are client operations present
+            if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+                serviceClientsMap = processClients(codeModel.getClients(), codeModel);
+                builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
+            } else {
+                // service client
+                ServiceClient serviceClient = Mappers.getServiceClientMapper().map(codeModel);
+                builder.serviceClient(serviceClient);
+
+                serviceClientsMap.put(serviceClient, codeModel);
+            }
         }
 
         // package info
@@ -630,7 +652,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<String> ret = Collections.emptyList();
 
         JavaSettings settings = JavaSettings.getInstance();
-        boolean hasModels = (!settings.isDataPlaneClient() || settings.isGenerateModels())   // not DPG, or DPG that requires all models
+        boolean hasModels = !settings.isDataPlaneClient()   // not DPG
             // defined models package (it is defined by default)
             && (settings.getModelsSubpackage() != null && !settings.getModelsSubpackage().isEmpty())
             // models package is not same as implementation package

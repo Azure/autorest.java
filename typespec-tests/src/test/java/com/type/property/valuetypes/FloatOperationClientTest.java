@@ -14,12 +14,12 @@ class FloatOperationClientTest {
     @Test
     void get() {
         FloatProperty floatProperty = client.get();
-        Assertions.assertEquals(42.42, floatProperty.getProperty());
+        Assertions.assertEquals(43.125, floatProperty.getProperty());
     }
 
     @Test
     void put() {
-        FloatProperty floatProperty = new FloatProperty(42.42);
+        FloatProperty floatProperty = new FloatProperty(43.125);
         client.put(floatProperty);
     }
 }

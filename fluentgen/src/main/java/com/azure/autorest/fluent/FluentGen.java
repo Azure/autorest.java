@@ -316,7 +316,7 @@ public class FluentGen extends Javagen {
             }
 
             // Utils
-            javaPackage.addUtils();
+            javaPackage.addResourceManagerUtils();
 
             // module-info
             javaPackage.addModuleInfo(fluentClient.getModuleInfo());
@@ -353,9 +353,6 @@ public class FluentGen extends Javagen {
                 for (FluentMethodMockUnitTest unitTest : fluentClient.getMockUnitTests()) {
                     javaPackage.addOperationUnitTest(unitTest);
                 }
-                // enable inline mock maker for final class/method
-                writeFile("src/test/resources/mockito-extensions/org.mockito.plugins.MockMaker",
-                        "mock-maker-inline\n", null);
             }
         }
 

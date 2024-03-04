@@ -63,7 +63,6 @@ jobs:
         inputs:
           pwsh: true
           filePath: Generate.ps1
-          arguments: '-Parallelization 1'
 
       - script: |
           git status

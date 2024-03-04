@@ -3,31 +3,25 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
-
 /**
- * a schema that represents a ODataQuery value
- * 
+ * Represents an ODataQuery value.
  */
 public class ODataQuerySchema extends Schema {
 
+    /**
+     * Creates a new instance of the ODataQuerySchema class.
+     */
+    public ODataQuerySchema() {
+    }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ODataQuerySchema.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return ODataQuerySchema.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        return result;
+        return 1;
     }
 
     @Override
@@ -35,11 +29,7 @@ public class ODataQuerySchema extends Schema {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ODataQuerySchema) == false) {
-            return false;
-        }
-        ODataQuerySchema rhs = ((ODataQuerySchema) other);
-        return true;
-    }
 
+        return other instanceof ODataQuerySchema;
+    }
 }

@@ -5,52 +5,47 @@
 package fixtures.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonAnyGetter;
-import com.fasterxml.jackson.annotation.JsonAnySetter;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.HashMap;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
  * The PetAPInPropertiesWithAPString model.
  */
 @Fluent
-public final class PetAPInPropertiesWithAPString {
+public final class PetAPInPropertiesWithAPString implements JsonSerializable<PetAPInPropertiesWithAPString> {
     /*
      * The id property.
      */
-    @JsonProperty(value = "id", required = true)
     private int id;
 
     /*
      * The name property.
      */
-    @JsonProperty(value = "name")
     private String name;
 
     /*
      * The status property.
      */
-    @JsonProperty(value = "status", access = JsonProperty.Access.WRITE_ONLY)
     private Boolean status;
 
     /*
      * The @odata.location property.
      */
-    @JsonProperty(value = "@odata.location", required = true)
     private String odataLocation;
 
     /*
      * Dictionary of <number>
      */
-    @JsonProperty(value = "additionalProperties")
     private Map<String, Float> additionalPropertiesProperty;
 
     /*
      * Dictionary of <string>
      */
-    @JsonIgnore
     private Map<String, String> additionalProperties;
 
     /**
@@ -109,7 +104,7 @@ public final class PetAPInPropertiesWithAPString {
     }
 
     /**
-     * Get the odataLocation property: The @odata.location property.
+     * Get the odataLocation property: The &#064;odata.location property.
      * 
      * @return the odataLocation value.
      */
@@ -118,7 +113,7 @@ public final class PetAPInPropertiesWithAPString {
     }
 
     /**
-     * Set the odataLocation property: The @odata.location property.
+     * Set the odataLocation property: The &#064;odata.location property.
      * 
      * @param odataLocation the odataLocation value to set.
      * @return the PetAPInPropertiesWithAPString object itself.
@@ -154,7 +149,6 @@ public final class PetAPInPropertiesWithAPString {
      * 
      * @return the additionalProperties value.
      */
-    @JsonAnyGetter
     public Map<String, String> getAdditionalProperties() {
         return this.additionalProperties;
     }
@@ -170,14 +164,6 @@ public final class PetAPInPropertiesWithAPString {
         return this;
     }
 
-    @JsonAnySetter
-    void setAdditionalProperties(String key, String value) {
-        if (additionalProperties == null) {
-            additionalProperties = new HashMap<>();
-        }
-        additionalProperties.put(key, value);
-    }
-
     /**
      * Validates the instance.
      * 
@@ -188,5 +174,67 @@ public final class PetAPInPropertiesWithAPString {
             throw new IllegalArgumentException(
                 "Missing required property odataLocation in model PetAPInPropertiesWithAPString");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeIntField("id", this.id);
+        jsonWriter.writeStringField("@odata.location", this.odataLocation);
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeMapField("additionalProperties", this.additionalPropertiesProperty,
+            (writer, element) -> writer.writeFloat(element));
+        if (additionalProperties != null) {
+            for (Map.Entry<String, String> additionalProperty : additionalProperties.entrySet()) {
+                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
+            }
+        }
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of PetAPInPropertiesWithAPString from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of PetAPInPropertiesWithAPString if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the PetAPInPropertiesWithAPString.
+     */
+    public static PetAPInPropertiesWithAPString fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            PetAPInPropertiesWithAPString deserializedPetAPInPropertiesWithAPString
+                = new PetAPInPropertiesWithAPString();
+            Map<String, String> additionalProperties = null;
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("id".equals(fieldName)) {
+                    deserializedPetAPInPropertiesWithAPString.id = reader.getInt();
+                } else if ("@odata.location".equals(fieldName)) {
+                    deserializedPetAPInPropertiesWithAPString.odataLocation = reader.getString();
+                } else if ("name".equals(fieldName)) {
+                    deserializedPetAPInPropertiesWithAPString.name = reader.getString();
+                } else if ("status".equals(fieldName)) {
+                    deserializedPetAPInPropertiesWithAPString.status = reader.getNullable(JsonReader::getBoolean);
+                } else if ("additionalProperties".equals(fieldName)) {
+                    Map<String, Float> additionalPropertiesProperty = reader.readMap(reader1 -> reader1.getFloat());
+                    deserializedPetAPInPropertiesWithAPString.additionalPropertiesProperty
+                        = additionalPropertiesProperty;
+                } else {
+                    if (additionalProperties == null) {
+                        additionalProperties = new LinkedHashMap<>();
+                    }
+
+                    additionalProperties.put(fieldName, reader.getString());
+                }
+            }
+            deserializedPetAPInPropertiesWithAPString.additionalProperties = additionalProperties;
+
+            return deserializedPetAPInPropertiesWithAPString;
+        });
     }
 }

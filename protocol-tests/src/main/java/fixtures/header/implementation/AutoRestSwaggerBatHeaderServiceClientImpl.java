@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.header.AutoRestSwaggerBatHeaderServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerBatHeaderServiceClient type.
@@ -27,6 +28,20 @@ public final class AutoRestSwaggerBatHeaderServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final AutoRestSwaggerBatHeaderServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestSwaggerBatHeaderServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -75,10 +90,12 @@ public final class AutoRestSwaggerBatHeaderServiceClientImpl {
      * Initializes an instance of AutoRestSwaggerBatHeaderServiceClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestSwaggerBatHeaderServiceClientImpl(String host) {
+    public AutoRestSwaggerBatHeaderServiceClientImpl(String host,
+        AutoRestSwaggerBatHeaderServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -86,9 +103,11 @@ public final class AutoRestSwaggerBatHeaderServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public AutoRestSwaggerBatHeaderServiceClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public AutoRestSwaggerBatHeaderServiceClientImpl(HttpPipeline httpPipeline, String host,
+        AutoRestSwaggerBatHeaderServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -97,12 +116,14 @@ public final class AutoRestSwaggerBatHeaderServiceClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestSwaggerBatHeaderServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        String host) {
+        String host, AutoRestSwaggerBatHeaderServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.headers = new HeadersImpl(this);
     }
 }

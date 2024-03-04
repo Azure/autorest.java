@@ -5,12 +5,15 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.fluent.model.clientmodel.FluentExample;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.postprocessor.implementation.CodeFormatterUtil;
 
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class SampleTemplate {
 
@@ -20,6 +23,18 @@ public class SampleTemplate {
 
     public String write(List<FluentExample> examples, List<JavaFile> sampleJavaFiles) {
         assert examples.size() == sampleJavaFiles.size();
+
+        // clean up copyright etc.
+        List<Map.Entry<String, String>> javaFiles = sampleJavaFiles.stream()
+                .map(e -> Map.entry(e.getFilePath(), cleanJavaFile(e)))
+                .collect(Collectors.toList());
+        // format code
+        List<String> javaFileContents;
+        try {
+            javaFileContents = CodeFormatterUtil.formatCode(javaFiles);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
 
         heading("Code snippets and samples", 1);
 
@@ -39,13 +54,13 @@ public class SampleTemplate {
         }
 
         int index = 0;
-        for (JavaFile sampleJavaFile : sampleJavaFiles) {
+        for (String javaFileContent : javaFileContents) {
             String sectionName = sectionNames.get(index);
             heading(sectionName, 3);
 
             builder.append("```java");
             newLine();
-            builder.append(formatJavaFile(sampleJavaFile));
+            builder.append(javaFileContent);
             builder.append("```");
             newLine();
             newLine();
@@ -56,9 +71,8 @@ public class SampleTemplate {
         return builder.toString();
     }
 
-    private static String formatJavaFile(JavaFile javaFile) {
+    private static String cleanJavaFile(JavaFile javaFile) {
         String content = javaFile.getContents().toString();
-        String path = javaFile.getFilePath();
 
         // remove copyright and package statement
         List<String> formattedLines = new ArrayList<>();

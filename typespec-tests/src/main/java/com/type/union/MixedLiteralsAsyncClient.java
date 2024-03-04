@@ -17,10 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.MixedLiteralsImpl;
+import com.type.union.implementation.models.SendRequest8;
 import com.type.union.models.GetResponse8;
 import com.type.union.models.MixedLiteralsCases;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -43,9 +42,7 @@ public final class MixedLiteralsAsyncClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {
@@ -72,9 +69,7 @@ public final class MixedLiteralsAsyncClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {
@@ -136,8 +131,7 @@ public final class MixedLiteralsAsyncClient {
     public Mono<Void> send(MixedLiteralsCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", prop);
+        SendRequest8 requestObj = new SendRequest8(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }

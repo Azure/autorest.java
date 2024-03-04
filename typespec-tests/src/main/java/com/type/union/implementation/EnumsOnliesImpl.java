@@ -52,8 +52,7 @@ public final class EnumsOnliesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientEnumsOnlies to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for UnionClientEnumsOnlies to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientEnumsOnli")
@@ -97,14 +96,12 @@ public final class EnumsOnliesImpl {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>
@@ -124,14 +121,12 @@ public final class EnumsOnliesImpl {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>
@@ -151,14 +146,12 @@ public final class EnumsOnliesImpl {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>
@@ -179,14 +172,12 @@ public final class EnumsOnliesImpl {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop (Required): {
-     *         lr: BinaryData (Required)
-     *         ud: BinaryData (Required)
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      *     }
      * }
      * }</pre>

@@ -5,24 +5,23 @@
 package fixtures.inheritance.passdiscriminator.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.annotation.JsonFlatten;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Pattern;
 
 /**
  * The rule criteria that defines the conditions of the alert rule.
  */
 @JsonTypeInfo(
     use = JsonTypeInfo.Id.NAME,
-    include = JsonTypeInfo.As.PROPERTY,
-    property = "odata\\.type",
+    property = "odata.type",
     defaultImpl = MetricAlertCriteria.class,
     visible = true)
 @JsonTypeName("MetricAlertCriteria")
@@ -30,10 +29,14 @@ import java.util.regex.Pattern;
     @JsonSubTypes.Type(
         name = "Microsoft.Azure.Monitor.SingleResourceMultipleMetricCriteria",
         value = MetricAlertSingleResourceMultipleMetricCriteria.class) })
-@JsonFlatten
 @Fluent
 public class MetricAlertCriteria {
-    private static final Pattern KEY_ESCAPER = Pattern.compile("\\.");;
+    /*
+     * specifies the type of the alert criteria.
+     */
+    @JsonTypeId
+    @JsonProperty(value = "odata.type", required = true)
+    private Odatatype odataType;
 
     /*
      * The rule criteria that defines the conditions of the alert rule.
@@ -45,6 +48,27 @@ public class MetricAlertCriteria {
      * Creates an instance of MetricAlertCriteria class.
      */
     public MetricAlertCriteria() {
+        this.odataType = Odatatype.fromString("MetricAlertCriteria");
+    }
+
+    /**
+     * Get the odataType property: specifies the type of the alert criteria.
+     * 
+     * @return the odataType value.
+     */
+    public Odatatype getOdataType() {
+        return this.odataType;
+    }
+
+    /**
+     * Set the odataType property: specifies the type of the alert criteria.
+     * 
+     * @param odataType the odataType value to set.
+     * @return the MetricAlertCriteria object itself.
+     */
+    MetricAlertCriteria setOdataType(Odatatype odataType) {
+        this.odataType = odataType;
+        return this;
     }
 
     /**
@@ -73,7 +97,7 @@ public class MetricAlertCriteria {
         if (additionalProperties == null) {
             additionalProperties = new HashMap<>();
         }
-        additionalProperties.put(KEY_ESCAPER.matcher(key).replaceAll("."), value);
+        additionalProperties.put(key, value);
     }
 
     /**

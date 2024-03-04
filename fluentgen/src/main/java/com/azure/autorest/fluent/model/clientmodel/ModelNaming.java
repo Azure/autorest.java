@@ -29,7 +29,7 @@ public class ModelNaming {
 
     public static final String METHOD_PARAMETER_NAME_ID = "id";
 
-    public static final String CLASS_UTILS = "Utils";
+    public static final String CLASS_RESOURCE_MANAGER_UTILS = "ResourceManagerUtils";
 
     private ModelNaming() {
     }

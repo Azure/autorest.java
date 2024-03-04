@@ -114,7 +114,7 @@ public class ModelExampleUtil {
             if (model != null) {
                 if (model.isPolymorphic()) {
                     // polymorphic, need to get the correct subclass from discriminator
-                    String serializedName = model.getPolymorphicDiscriminator();
+                    String serializedName = model.getPolymorphicDiscriminatorName();
                     List<String> jsonPropertyNames = Collections.singletonList(serializedName);
                     if (model.getNeedsFlatten()) {
                         jsonPropertyNames = ClientModelUtil.splitFlattenedSerializedName(serializedName);

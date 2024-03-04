@@ -17,10 +17,9 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.FloatsOnliesImpl;
+import com.type.union.implementation.models.SendRequest4;
 import com.type.union.models.GetResponse4;
 import com.type.union.models.Prop3;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -43,9 +42,7 @@ public final class FloatsOnlyAsyncClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(1.1/2.2/3.3) (Required)
@@ -67,9 +64,7 @@ public final class FloatsOnlyAsyncClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     prop: String(1.1/2.2/3.3) (Required)
@@ -126,8 +121,7 @@ public final class FloatsOnlyAsyncClient {
     public Mono<Void> send(Prop3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("prop", (prop == null ? null : prop.toDouble()));
+        SendRequest4 requestObj = new SendRequest4(prop);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
     }

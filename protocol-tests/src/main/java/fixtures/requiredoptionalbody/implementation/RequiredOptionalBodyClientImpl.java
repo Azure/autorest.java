@@ -31,6 +31,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.requiredoptionalbody.RequiredOptionalBodyServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -54,6 +55,20 @@ public final class RequiredOptionalBodyClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final RequiredOptionalBodyServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public RequiredOptionalBodyServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -88,10 +103,11 @@ public final class RequiredOptionalBodyClientImpl {
      * Initializes an instance of RequiredOptionalBodyClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public RequiredOptionalBodyClientImpl(String host) {
+    public RequiredOptionalBodyClientImpl(String host, RequiredOptionalBodyServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -99,9 +115,11 @@ public final class RequiredOptionalBodyClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, String host,
+        RequiredOptionalBodyServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -110,18 +128,20 @@ public final class RequiredOptionalBodyClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public RequiredOptionalBodyClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host,
+        RequiredOptionalBodyServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.service
             = RestProxy.create(RequiredOptionalBodyClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
     /**
-     * The interface defining all the services for RequiredOptionalBodyClient to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for RequiredOptionalBodyClient to be used by the proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "RequiredOptionalBody")
@@ -167,9 +187,7 @@ public final class RequiredOptionalBodyClientImpl {
 
     /**
      * Creates or updates a deployment.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -186,9 +204,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -225,9 +241,7 @@ public final class RequiredOptionalBodyClientImpl {
 
     /**
      * Creates or updates a deployment.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -244,9 +258,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -282,28 +294,14 @@ public final class RequiredOptionalBodyClientImpl {
 
     /**
      * optional object.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -320,9 +318,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -362,28 +358,14 @@ public final class RequiredOptionalBodyClientImpl {
 
     /**
      * optional object.
-     * <p>
-     * <strong>Header Parameters</strong>
-     * </p>
+     * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>Content-Type</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>The content type. Allowed values: "application/json".</td>
-     * </tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)
@@ -400,9 +382,7 @@ public final class RequiredOptionalBodyClientImpl {
      *     }
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     deploymentId: String (Required)

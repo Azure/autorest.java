@@ -73,6 +73,7 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -140,6 +141,7 @@ public class RuntimeTests {
     public void testPom() throws ParserConfigurationException, IOException, SAXException {
         File pomFile = new File("pom_generated_resources.xml");
 
+        // verify pom basic
         Map<String, String> rootTags = new HashMap<>();
 
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
@@ -159,6 +161,15 @@ public class RuntimeTests {
 
         Assertions.assertTrue(rootTags.containsKey("name"));
         Assertions.assertTrue(rootTags.get("name").contains("Azure SDK"));
+
+        // verify x-version-update tag used in Azure Java repo
+        String content = new String(Files.readAllBytes(pomFile.toPath()));
+        Assertions.assertFalse(content.contains("<artifactId>mockito-core</artifactId>"));
+        Assertions.assertFalse(content.contains("<artifactId>byte-buddy</artifactId>"));
+        Assertions.assertFalse(content.contains("<artifactId>byte-buddy-agent</artifactId>"));
+        Assertions.assertFalse(content.contains("<!-- {x-version-update;org.mockito:mockito-core;external_dependency} -->"));
+        Assertions.assertFalse(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy;external_dependency} -->"));
+        Assertions.assertFalse(content.contains("<!-- {x-version-update;testdep_net.bytebuddy:byte-buddy-agent;external_dependency} -->"));
     }
 
     @Test
@@ -437,7 +448,7 @@ public class RuntimeTests {
         assertMethodNotExist(StorageAccountsClient.class, "getByResourceGroupWithResponseAsync", "String", "String", "StorageAccountExpand", "Context");
     }
 
-    private static void assertMethodNotExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
+    private static <T> void assertMethodNotExist(Class<T> clazz, String methodName, String... parameterTypeSimpleNames) {
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();
         for(Method method : methods) {
@@ -451,7 +462,7 @@ public class RuntimeTests {
         }
     }
 
-    private static void assertMethodExist(Class clazz, String methodName, String... parameterTypeSimpleNames) {
+    private static <T> void assertMethodExist(Class<T> clazz, String methodName, String... parameterTypeSimpleNames) {
         boolean found = false;
         String parametersSignature = String.join(",", parameterTypeSimpleNames);
         Method[] methods = clazz.getDeclaredMethods();

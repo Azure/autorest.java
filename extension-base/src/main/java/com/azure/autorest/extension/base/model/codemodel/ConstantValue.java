@@ -3,103 +3,85 @@
 
 package com.azure.autorest.extension.base.model.codemodel;
 
-
+import java.util.Objects;
 
 /**
- * a container for the actual constant value
- * 
+ * Represents a constant value.
  */
 public class ConstantValue {
-
-    /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
-     */
     private Languages language;
-    /**
-     * the actual constant value to use
-     * (Required)
-     * 
-     */
     private Object value;
     private DictionaryAny extensions;
 
     /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
+     * Creates a new instance of the ConstantValue class.
+     */
+    public ConstantValue() {
+    }
+
+    /**
+     * Gets the language of the value. (Required)
+     *
+     * @return The language of the value.
      */
     public Languages getLanguage() {
         return language;
     }
 
     /**
-     * custom extensible metadata for individual language generators
-     * (Required)
-     * 
+     * Sets the language of the value. (Required)
+     *
+     * @param language The language of the value.
      */
     public void setLanguage(Languages language) {
         this.language = language;
     }
 
     /**
-     * the actual constant value to use
-     * (Required)
-     * 
+     * Gets the actual constant value to use. (Required)
+     *
+     * @return The actual constant value to use.
      */
     public Object getValue() {
         return value;
     }
 
     /**
-     * the actual constant value to use
-     * (Required)
-     * 
+     * Sets the actual constant value to use. (Required)
+     *
+     * @param value The actual constant value to use.
      */
     public void setValue(Object value) {
         this.value = value;
     }
 
+    /**
+     * Gets the custom extensible metadata for individual language generators.
+     *
+     * @return The custom extensible metadata for individual language generators.
+     */
     public DictionaryAny getExtensions() {
         return extensions;
     }
 
+    /**
+     * Sets the custom extensible metadata for individual language generators.
+     *
+     * @param extensions The custom extensible metadata for individual language generators.
+     */
     public void setExtensions(DictionaryAny extensions) {
         this.extensions = extensions;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(ConstantValue.class.getName()).append('@').append(Integer.toHexString(System.identityHashCode(this))).append('[');
-        sb.append("language");
-        sb.append('=');
-        sb.append(((this.language == null)?"<null>":this.language));
-        sb.append(',');
-        sb.append("value");
-        sb.append('=');
-        sb.append(((this.value == null)?"<null>":this.value));
-        sb.append(',');
-        sb.append("extensions");
-        sb.append('=');
-        sb.append(((this.extensions == null)?"<null>":this.extensions));
-        sb.append(',');
-        if (sb.charAt((sb.length()- 1)) == ',') {
-            sb.setCharAt((sb.length()- 1), ']');
-        } else {
-            sb.append(']');
-        }
-        return sb.toString();
+        return ConstantValue.class.getName() + "@" + Integer.toHexString(System.identityHashCode(this)) + "[language="
+            + language + ", value=" + value + ", extensions=" + extensions + "]";
     }
 
     @Override
     public int hashCode() {
-        int result = 1;
-        result = ((result* 31)+((this.language == null)? 0 :this.language.hashCode()));
-        result = ((result* 31)+((this.extensions == null)? 0 :this.extensions.hashCode()));
-        result = ((result* 31)+((this.value == null)? 0 :this.value.hashCode()));
-        return result;
+        return Objects.hash(language, extensions, value);
     }
 
     @Override
@@ -107,11 +89,13 @@ public class ConstantValue {
         if (other == this) {
             return true;
         }
-        if ((other instanceof ConstantValue) == false) {
+
+        if (!(other instanceof ConstantValue)) {
             return false;
         }
-        ConstantValue rhs = ((ConstantValue) other);
-        return ((((this.language == rhs.language)||((this.language!= null)&&this.language.equals(rhs.language)))&&((this.extensions == rhs.extensions)||((this.extensions!= null)&&this.extensions.equals(rhs.extensions))))&&((this.value == rhs.value)||((this.value!= null)&&this.value.equals(rhs.value))));
-    }
 
+        ConstantValue rhs = ((ConstantValue) other);
+        return Objects.equals(language, rhs.language) && Objects.equals(extensions, rhs.extensions)
+            && Objects.equals(value, rhs.value);
+    }
 }

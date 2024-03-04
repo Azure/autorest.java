@@ -35,6 +35,7 @@ public final class SmartSalmon extends Salmon {
      */
     public SmartSalmon(float length) {
         super(length);
+        setFishtype("smart_salmon");
     }
 
     /**
@@ -123,11 +124,14 @@ public final class SmartSalmon extends Salmon {
         super.validate();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fishtype", "smart_salmon");
         jsonWriter.writeFloatField("length", getLength());
+        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("location", getLocation());
@@ -145,16 +149,15 @@ public final class SmartSalmon extends Salmon {
      * Reads an instance of SmartSalmon from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of SmartSalmon if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @return An instance of SmartSalmon if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SmartSalmon.
      */
     public static SmartSalmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;
             float length = 0.0f;
+            String fishtype = "smart_salmon";
             String species = null;
             List<Fish> siblings = null;
             String location = null;
@@ -165,16 +168,11 @@ public final class SmartSalmon extends Salmon {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fishtype".equals(fieldName)) {
-                    String fishtype = reader.getString();
-                    if (!"smart_salmon".equals(fishtype)) {
-                        throw new IllegalStateException(
-                            "'fishtype' was expected to be non-null and equal to 'smart_salmon'. The found 'fishtype' was '"
-                                + fishtype + "'.");
-                    }
-                } else if ("length".equals(fieldName)) {
+                if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -195,6 +193,7 @@ public final class SmartSalmon extends Salmon {
             }
             if (lengthFound) {
                 SmartSalmon deserializedSmartSalmon = new SmartSalmon(length);
+                deserializedSmartSalmon.setFishtype(fishtype);
                 deserializedSmartSalmon.setSpecies(species);
                 deserializedSmartSalmon.setSiblings(siblings);
                 deserializedSmartSalmon.setLocation(location);

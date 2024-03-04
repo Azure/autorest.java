@@ -39,15 +39,13 @@ public final class CollectionsModelClient {
 
     /**
      * Get models that will return all properties in the model.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }
@@ -68,15 +66,13 @@ public final class CollectionsModelClient {
 
     /**
      * Get models that will return the default object.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }
@@ -97,15 +93,13 @@ public final class CollectionsModelClient {
 
     /**
      * Put a body with all properties present.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }
@@ -127,15 +121,13 @@ public final class CollectionsModelClient {
 
     /**
      * Put a body with default properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Required)
-     *     nullableProperty (Required): [
-     *          (Required){
-     *             property: String (Required)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      *         }
      *     ]
      * }
@@ -208,7 +200,7 @@ public final class CollectionsModelClient {
         // Generated convenience method for patchNonNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
+        BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNonNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }
@@ -230,7 +222,7 @@ public final class CollectionsModelClient {
         // Generated convenience method for patchNullWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromString(BinaryData.fromObject(body).toString());
+        BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
         JsonMergePatchHelper.getCollectionsModelPropertyAccessor().prepareModelForJsonMergePatch(body, false);
         patchNullWithResponse(bodyInBinaryData, requestOptions).getValue();
     }

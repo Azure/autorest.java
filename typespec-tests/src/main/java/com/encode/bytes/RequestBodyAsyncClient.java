@@ -40,9 +40,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The defaultMethod operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -63,9 +61,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The octetStream operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -86,9 +82,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The customContentType operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -109,9 +103,7 @@ public final class RequestBodyAsyncClient {
 
     /**
      * The base64 operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -131,10 +123,8 @@ public final class RequestBodyAsyncClient {
     }
 
     /**
-     * The base64Url operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * The base64url operation.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * Base64Url
      * }</pre>
@@ -149,8 +139,8 @@ public final class RequestBodyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> base64UrlWithResponse(BinaryData value, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponseAsync(value, requestOptions);
+    public Mono<Response<Void>> base64urlWithResponse(BinaryData value, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponseAsync(value, requestOptions);
     }
 
     /**
@@ -234,7 +224,7 @@ public final class RequestBodyAsyncClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -247,10 +237,10 @@ public final class RequestBodyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> base64Url(byte[] value) {
-        // Generated convenience method for base64UrlWithResponse
+    public Mono<Void> base64url(byte[] value) {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return base64UrlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions)
+        return base64urlWithResponse(BinaryData.fromObject(Base64Url.encode(value)), requestOptions)
             .flatMap(FluxUtil::toMono);
     }
 }

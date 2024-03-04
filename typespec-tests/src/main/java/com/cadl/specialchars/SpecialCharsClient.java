@@ -16,9 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.specialchars.implementation.BuiltinOpsImpl;
+import com.cadl.specialchars.implementation.models.ReadRequest;
 import com.cadl.specialchars.models.Resource;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous SpecialCharsClient type.
@@ -40,17 +39,13 @@ public final class SpecialCharsClient {
 
     /**
      * The read operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -92,8 +87,7 @@ public final class SpecialCharsClient {
     public Resource read(String id) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("id", id);
+        ReadRequest requestObj = new ReadRequest(id);
         BinaryData request = BinaryData.fromObject(requestObj);
         return readWithResponse(request, requestOptions).getValue().toObject(Resource.class);
     }

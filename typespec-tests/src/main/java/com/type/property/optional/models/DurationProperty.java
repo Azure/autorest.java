@@ -54,6 +54,10 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -65,10 +69,10 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
      * Reads an instance of DurationProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DurationProperty if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
+     * @return An instance of DurationProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the DurationProperty.
      */
+    @Generated
     public static DurationProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             DurationProperty deserializedDurationProperty = new DurationProperty();

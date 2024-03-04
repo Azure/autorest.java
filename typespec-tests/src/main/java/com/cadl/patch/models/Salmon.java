@@ -17,8 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic
- * instances.
+ * The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.
  */
 @Fluent
 public final class Salmon extends Fish {
@@ -63,12 +62,10 @@ public final class Salmon extends Fish {
 
     /**
      * Creates an instance of Salmon class.
-     * 
-     * @param age the age value to set.
      */
     @Generated
-    public Salmon(int age) {
-        super(age);
+    public Salmon() {
+        setKind("salmon");
     }
 
     /**
@@ -145,19 +142,34 @@ public final class Salmon extends Fish {
      */
     @Generated
     @Override
+    public Salmon setAge(int age) {
+        super.setAge(age);
+        this.updatedProperties.add("age");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
     public Salmon setColor(String color) {
         super.setColor(color);
         this.updatedProperties.add("color");
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", "salmon");
+            jsonWriter.writeStringField("kind", getKind());
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
             jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
@@ -167,39 +179,54 @@ public final class Salmon extends Fish {
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", "salmon");
+        if (updatedProperties.contains("kind")) {
+            if (getKind() == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", getKind());
+            }
+        }
         jsonWriter.writeIntField("age", getAge());
-        if (getColor() != null) {
-            jsonWriter.writeStringField("color", getColor());
-        } else if (updatedProperties.contains("color")) {
-            jsonWriter.writeNullField("color");
+        if (updatedProperties.contains("color")) {
+            if (getColor() == null) {
+                jsonWriter.writeNullField("color");
+            } else {
+                jsonWriter.writeStringField("color", getColor());
+            }
         }
-        if (this.friends != null) {
-            jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
-        } else if (updatedProperties.contains("friends")) {
-            jsonWriter.writeNullField("friends");
+        if (updatedProperties.contains("friends")) {
+            if (this.friends == null) {
+                jsonWriter.writeNullField("friends");
+            } else {
+                jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
+            }
         }
-        if (this.hate != null) {
-            jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
-                if (element != null) {
-                    element.serializeAsJsonMergePatch(true);
-                    writer.writeJson(element);
-                    element.serializeAsJsonMergePatch(false);
-                } else {
-                    writer.writeNull();
-                }
-            });
-        } else if (updatedProperties.contains("hate")) {
-            jsonWriter.writeNullField("hate");
+        if (updatedProperties.contains("hate")) {
+            if (this.hate == null) {
+                jsonWriter.writeNullField("hate");
+            } else {
+                jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
+                    if (element != null) {
+                        element.serializeAsJsonMergePatch(true);
+                        writer.writeJson(element);
+                        element.serializeAsJsonMergePatch(false);
+                    } else {
+                        writer.writeNull();
+                    }
+                });
+            }
         }
-        if (this.partner != null) {
-            this.partner.serializeAsJsonMergePatch(true);
-            jsonWriter.writeJsonField("partner", this.partner);
-            this.partner.serializeAsJsonMergePatch(false);
-        } else if (updatedProperties.contains("partner")) {
-            jsonWriter.writeNullField("partner");
+        if (updatedProperties.contains("partner")) {
+            if (this.partner == null) {
+                jsonWriter.writeNullField("partner");
+            } else {
+                this.partner.serializeAsJsonMergePatch(true);
+                jsonWriter.writeJsonField("partner", this.partner);
+                this.partner.serializeAsJsonMergePatch(false);
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -208,16 +235,16 @@ public final class Salmon extends Fish {
      * Reads an instance of Salmon from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties or the
-     * polymorphic discriminator.
+     * @return An instance of Salmon if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Salmon.
      */
+    @Generated
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
+            String kind = "salmon";
             int age = 0;
             String color = null;
             List<Fish> friends = null;
@@ -227,17 +254,12 @@ public final class Salmon extends Fish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("kind".equals(fieldName)) {
-                    String kind = reader.getString();
-                    if (!"salmon".equals(kind)) {
-                        throw new IllegalStateException(
-                            "'kind' was expected to be non-null and equal to 'salmon'. The found 'kind' was '" + kind
-                                + "'.");
-                    }
-                } else if ("id".equals(fieldName)) {
+                if ("id".equals(fieldName)) {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
@@ -252,9 +274,11 @@ public final class Salmon extends Fish {
                     reader.skipChildren();
                 }
             }
-            Salmon deserializedSalmon = new Salmon(age);
+            Salmon deserializedSalmon = new Salmon();
             deserializedSalmon.setId(id);
             deserializedSalmon.setName(name);
+            deserializedSalmon.setKind(kind);
+            deserializedSalmon.setAge(age);
             deserializedSalmon.setColor(color);
             deserializedSalmon.friends = friends;
             deserializedSalmon.hate = hate;

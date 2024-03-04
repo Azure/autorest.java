@@ -10,6 +10,7 @@ import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.policy.UserAgentPolicy;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
+import fixtures.constants.AutoRestSwaggerConstantServiceVersion;
 
 /**
  * Initializes a new instance of the AutoRestSwaggerConstantServiceClient type.
@@ -21,8 +22,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     private final boolean headerConstant;
 
     /**
-     * Gets Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Gets Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * 
      * @return the headerConstant value.
      */
@@ -36,8 +36,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     private final int queryConstant;
 
     /**
-     * Gets Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Gets Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * 
      * @return the queryConstant value.
      */
@@ -51,8 +50,7 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     private final String pathConstant;
 
     /**
-     * Gets Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Gets Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * 
      * @return the pathConstant value.
      */
@@ -72,6 +70,20 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final AutoRestSwaggerConstantServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public AutoRestSwaggerConstantServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -119,36 +131,33 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceClient client.
      * 
-     * @param headerConstant Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestSwaggerConstantServiceClientImpl(boolean headerConstant, int queryConstant, String pathConstant,
-        String host) {
+        String host, AutoRestSwaggerConstantServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant, host);
+            JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant, host,
+            serviceVersion);
     }
 
     /**
      * Initializes an instance of AutoRestSwaggerConstantServiceClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param headerConstant Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestSwaggerConstantServiceClientImpl(HttpPipeline httpPipeline, boolean headerConstant,
-        int queryConstant, String pathConstant, String host) {
+        int queryConstant, String pathConstant, String host, AutoRestSwaggerConstantServiceVersion serviceVersion) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), headerConstant, queryConstant, pathConstant,
-            host);
+            host, serviceVersion);
     }
 
     /**
@@ -156,22 +165,22 @@ public final class AutoRestSwaggerConstantServiceClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param headerConstant Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
     public AutoRestSwaggerConstantServiceClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
-        boolean headerConstant, int queryConstant, String pathConstant, String host) {
+        boolean headerConstant, int queryConstant, String pathConstant, String host,
+        AutoRestSwaggerConstantServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.headerConstant = headerConstant;
         this.queryConstant = queryConstant;
         this.pathConstant = pathConstant;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.contants = new ContantsImpl(this);
     }
 }

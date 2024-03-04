@@ -5,17 +5,21 @@
 package fixtures.constants.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 
 /**
  * The ModelAsStringRequiredOneValueNoDefault model.
  */
 @Fluent
-public final class ModelAsStringRequiredOneValueNoDefault {
+public final class ModelAsStringRequiredOneValueNoDefault
+    implements JsonSerializable<ModelAsStringRequiredOneValueNoDefault> {
     /*
      * The parameter property.
      */
-    @JsonProperty(value = "parameter", required = true)
     private ModelAsStringRequiredOneValueNoDefaultEnum parameter;
 
     /**
@@ -54,5 +58,43 @@ public final class ModelAsStringRequiredOneValueNoDefault {
             throw new IllegalArgumentException(
                 "Missing required property parameter in model ModelAsStringRequiredOneValueNoDefault");
         }
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("parameter", this.parameter == null ? null : this.parameter.toString());
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of ModelAsStringRequiredOneValueNoDefault from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of ModelAsStringRequiredOneValueNoDefault if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the ModelAsStringRequiredOneValueNoDefault.
+     */
+    public static ModelAsStringRequiredOneValueNoDefault fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            ModelAsStringRequiredOneValueNoDefault deserializedModelAsStringRequiredOneValueNoDefault
+                = new ModelAsStringRequiredOneValueNoDefault();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("parameter".equals(fieldName)) {
+                    deserializedModelAsStringRequiredOneValueNoDefault.parameter
+                        = ModelAsStringRequiredOneValueNoDefaultEnum.fromString(reader.getString());
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedModelAsStringRequiredOneValueNoDefault;
+        });
     }
 }

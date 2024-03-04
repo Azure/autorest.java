@@ -52,8 +52,7 @@ public final class HeadersImpl {
     }
 
     /**
-     * The interface defining all the services for DurationClientHeaders to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for DurationClientHeaders to be used by the proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DurationClientHeader")
@@ -220,7 +219,7 @@ public final class HeadersImpl {
     /**
      * The iso8601Array operation.
      * 
-     * @param duration Array of Duration.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -240,7 +239,7 @@ public final class HeadersImpl {
     /**
      * The iso8601Array operation.
      * 
-     * @param duration Array of Duration.
+     * @param duration The duration parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

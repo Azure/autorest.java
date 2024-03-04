@@ -4,8 +4,8 @@
 
 package com.type.property.nullable.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -18,13 +18,13 @@ import java.util.Set;
 /**
  * Inner model used in collections model property.
  */
-@Immutable
+@Fluent
 public final class InnerModel implements JsonSerializable<InnerModel> {
     /*
      * Inner model property
      */
     @Generated
-    private final String property;
+    private String property;
 
     @Generated
     private boolean jsonMergePatch;
@@ -49,12 +49,9 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
 
     /**
      * Creates an instance of InnerModel class.
-     * 
-     * @param property the property value to set.
      */
     @Generated
-    public InnerModel(String property) {
-        this.property = property;
+    public InnerModel() {
     }
 
     /**
@@ -67,6 +64,24 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         return this.property;
     }
 
+    /**
+     * Set the property property: Inner model property.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param property the property value to set.
+     * @return the InnerModel object itself.
+     */
+    @Generated
+    public InnerModel setProperty(String property) {
+        this.property = property;
+        this.updatedProperties.add("property");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -78,12 +93,15 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.property != null) {
-            jsonWriter.writeStringField("property", this.property);
-        } else if (updatedProperties.contains("property")) {
-            jsonWriter.writeNullField("property");
+        if (updatedProperties.contains("property")) {
+            if (this.property == null) {
+                jsonWriter.writeNullField("property");
+            } else {
+                jsonWriter.writeStringField("property", this.property);
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -92,25 +110,25 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      * Reads an instance of InnerModel from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of InnerModel if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @return An instance of InnerModel if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the InnerModel.
      */
+    @Generated
     public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String property = null;
+            InnerModel deserializedInnerModel = new InnerModel();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    property = reader.getString();
+                    deserializedInnerModel.property = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new InnerModel(property);
+
+            return deserializedInnerModel;
         });
     }
 }

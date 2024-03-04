@@ -70,7 +70,7 @@ public final class QueryClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -82,14 +82,14 @@ public final class QueryClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlWithResponse(byte[] value, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlWithResponse(value, requestOptions);
+    public Response<Void> base64urlWithResponse(byte[] value, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlWithResponse(value, requestOptions);
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * 
-     * @param value Array of Value.
+     * @param value The value parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,8 +99,8 @@ public final class QueryClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> base64UrlArrayWithResponse(List<byte[]> value, RequestOptions requestOptions) {
-        return this.serviceClient.base64UrlArrayWithResponse(value, requestOptions);
+    public Response<Void> base64urlArrayWithResponse(List<byte[]> value, RequestOptions requestOptions) {
+        return this.serviceClient.base64urlArrayWithResponse(value, requestOptions);
     }
 
     /**
@@ -142,7 +142,7 @@ public final class QueryClient {
     }
 
     /**
-     * The base64Url operation.
+     * The base64url operation.
      * 
      * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -154,16 +154,16 @@ public final class QueryClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void base64Url(byte[] value) {
-        // Generated convenience method for base64UrlWithResponse
+    public void base64url(byte[] value) {
+        // Generated convenience method for base64urlWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        base64UrlWithResponse(value, requestOptions).getValue();
+        base64urlWithResponse(value, requestOptions).getValue();
     }
 
     /**
-     * The base64UrlArray operation.
+     * The base64urlArray operation.
      * 
-     * @param value Array of Value.
+     * @param value The value parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -173,9 +173,9 @@ public final class QueryClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void base64UrlArray(List<byte[]> value) {
-        // Generated convenience method for base64UrlArrayWithResponse
+    public void base64urlArray(List<byte[]> value) {
+        // Generated convenience method for base64urlArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        base64UrlArrayWithResponse(value, requestOptions).getValue();
+        base64urlArrayWithResponse(value, requestOptions).getValue();
     }
 }

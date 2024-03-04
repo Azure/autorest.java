@@ -43,6 +43,10 @@ public final class UnknownStringProperty implements JsonSerializable<UnknownStri
         return this.property;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class UnknownStringProperty implements JsonSerializable<UnknownStri
      * Reads an instance of UnknownStringProperty from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of UnknownStringProperty if the JsonReader was pointing to an instance of it, or null if it
-     * was pointing to JSON null.
+     * @return An instance of UnknownStringProperty if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the UnknownStringProperty.
      */
+    @Generated
     public static UnknownStringProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             Object property = null;

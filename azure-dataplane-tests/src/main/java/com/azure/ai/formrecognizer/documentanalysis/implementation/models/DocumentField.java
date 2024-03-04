@@ -5,122 +5,109 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.azure.json.JsonReader;
+import com.azure.json.JsonSerializable;
+import com.azure.json.JsonToken;
+import com.azure.json.JsonWriter;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * An object representing the content and location of a field value.
  */
 @Fluent
-public final class DocumentField {
+public final class DocumentField implements JsonSerializable<DocumentField> {
     /*
      * Data type of the field value.
      */
-    @JsonProperty(value = "type", required = true)
     private DocumentFieldType type;
 
     /*
      * String value.
      */
-    @JsonProperty(value = "valueString")
     private String valueString;
 
     /*
      * Date value in YYYY-MM-DD format (ISO 8601).
      */
-    @JsonProperty(value = "valueDate")
     private LocalDate valueDate;
 
     /*
      * Time value in hh:mm:ss format (ISO 8601).
      */
-    @JsonProperty(value = "valueTime")
     private String valueTime;
 
     /*
      * Phone number value in E.164 format (ex. +19876543210).
      */
-    @JsonProperty(value = "valuePhoneNumber")
     private String valuePhoneNumber;
 
     /*
      * Floating point value.
      */
-    @JsonProperty(value = "valueNumber")
     private Float valueNumber;
 
     /*
      * Integer value.
      */
-    @JsonProperty(value = "valueInteger")
     private Long valueInteger;
 
     /*
      * Selection mark value.
      */
-    @JsonProperty(value = "valueSelectionMark")
     private SelectionMarkState valueSelectionMark;
 
     /*
      * Presence of signature.
      */
-    @JsonProperty(value = "valueSignature")
     private DocumentSignatureType valueSignature;
 
     /*
      * 3-letter country code value (ISO 3166-1 alpha-3).
      */
-    @JsonProperty(value = "valueCountryRegion")
     private String valueCountryRegion;
 
     /*
      * Array of field values.
      */
-    @JsonProperty(value = "valueArray")
     private List<DocumentField> valueArray;
 
     /*
      * Dictionary of named field values.
      */
-    @JsonProperty(value = "valueObject")
     private Map<String, DocumentField> valueObject;
 
     /*
      * Currency value.
      */
-    @JsonProperty(value = "valueCurrency")
     private CurrencyValue valueCurrency;
 
     /*
      * Address value.
      */
-    @JsonProperty(value = "valueAddress")
     private AddressValue valueAddress;
 
     /*
      * Field content.
      */
-    @JsonProperty(value = "content")
     private String content;
 
     /*
      * Bounding regions covering the field.
      */
-    @JsonProperty(value = "boundingRegions")
     private List<BoundingRegion> boundingRegions;
 
     /*
      * Location of the field in the reading order concatenated content.
      */
-    @JsonProperty(value = "spans")
     private List<DocumentSpan> spans;
 
     /*
      * Confidence of correctly extracting the field.
      */
-    @JsonProperty(value = "confidence")
     private Float confidence;
 
     /**
@@ -487,5 +474,101 @@ public final class DocumentField {
     public DocumentField setConfidence(Float confidence) {
         this.confidence = confidence;
         return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
+        jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("type", this.type == null ? null : this.type.toString());
+        jsonWriter.writeStringField("valueString", this.valueString);
+        jsonWriter.writeStringField("valueDate", Objects.toString(this.valueDate, null));
+        jsonWriter.writeStringField("valueTime", this.valueTime);
+        jsonWriter.writeStringField("valuePhoneNumber", this.valuePhoneNumber);
+        jsonWriter.writeNumberField("valueNumber", this.valueNumber);
+        jsonWriter.writeNumberField("valueInteger", this.valueInteger);
+        jsonWriter.writeStringField("valueSelectionMark",
+            this.valueSelectionMark == null ? null : this.valueSelectionMark.toString());
+        jsonWriter.writeStringField("valueSignature",
+            this.valueSignature == null ? null : this.valueSignature.toString());
+        jsonWriter.writeStringField("valueCountryRegion", this.valueCountryRegion);
+        jsonWriter.writeArrayField("valueArray", this.valueArray, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeMapField("valueObject", this.valueObject, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeJsonField("valueCurrency", this.valueCurrency);
+        jsonWriter.writeJsonField("valueAddress", this.valueAddress);
+        jsonWriter.writeStringField("content", this.content);
+        jsonWriter.writeArrayField("boundingRegions", this.boundingRegions,
+            (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeArrayField("spans", this.spans, (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeNumberField("confidence", this.confidence);
+        return jsonWriter.writeEndObject();
+    }
+
+    /**
+     * Reads an instance of DocumentField from the JsonReader.
+     * 
+     * @param jsonReader The JsonReader being read.
+     * @return An instance of DocumentField if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @throws IOException If an error occurs while reading the DocumentField.
+     */
+    public static DocumentField fromJson(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            DocumentField deserializedDocumentField = new DocumentField();
+            while (reader.nextToken() != JsonToken.END_OBJECT) {
+                String fieldName = reader.getFieldName();
+                reader.nextToken();
+
+                if ("type".equals(fieldName)) {
+                    deserializedDocumentField.type = DocumentFieldType.fromString(reader.getString());
+                } else if ("valueString".equals(fieldName)) {
+                    deserializedDocumentField.valueString = reader.getString();
+                } else if ("valueDate".equals(fieldName)) {
+                    deserializedDocumentField.valueDate
+                        = reader.getNullable(nonNullReader -> LocalDate.parse(nonNullReader.getString()));
+                } else if ("valueTime".equals(fieldName)) {
+                    deserializedDocumentField.valueTime = reader.getString();
+                } else if ("valuePhoneNumber".equals(fieldName)) {
+                    deserializedDocumentField.valuePhoneNumber = reader.getString();
+                } else if ("valueNumber".equals(fieldName)) {
+                    deserializedDocumentField.valueNumber = reader.getNullable(JsonReader::getFloat);
+                } else if ("valueInteger".equals(fieldName)) {
+                    deserializedDocumentField.valueInteger = reader.getNullable(JsonReader::getLong);
+                } else if ("valueSelectionMark".equals(fieldName)) {
+                    deserializedDocumentField.valueSelectionMark = SelectionMarkState.fromString(reader.getString());
+                } else if ("valueSignature".equals(fieldName)) {
+                    deserializedDocumentField.valueSignature = DocumentSignatureType.fromString(reader.getString());
+                } else if ("valueCountryRegion".equals(fieldName)) {
+                    deserializedDocumentField.valueCountryRegion = reader.getString();
+                } else if ("valueArray".equals(fieldName)) {
+                    List<DocumentField> valueArray = reader.readArray(reader1 -> DocumentField.fromJson(reader1));
+                    deserializedDocumentField.valueArray = valueArray;
+                } else if ("valueObject".equals(fieldName)) {
+                    Map<String, DocumentField> valueObject = reader.readMap(reader1 -> DocumentField.fromJson(reader1));
+                    deserializedDocumentField.valueObject = valueObject;
+                } else if ("valueCurrency".equals(fieldName)) {
+                    deserializedDocumentField.valueCurrency = CurrencyValue.fromJson(reader);
+                } else if ("valueAddress".equals(fieldName)) {
+                    deserializedDocumentField.valueAddress = AddressValue.fromJson(reader);
+                } else if ("content".equals(fieldName)) {
+                    deserializedDocumentField.content = reader.getString();
+                } else if ("boundingRegions".equals(fieldName)) {
+                    List<BoundingRegion> boundingRegions
+                        = reader.readArray(reader1 -> BoundingRegion.fromJson(reader1));
+                    deserializedDocumentField.boundingRegions = boundingRegions;
+                } else if ("spans".equals(fieldName)) {
+                    List<DocumentSpan> spans = reader.readArray(reader1 -> DocumentSpan.fromJson(reader1));
+                    deserializedDocumentField.spans = spans;
+                } else if ("confidence".equals(fieldName)) {
+                    deserializedDocumentField.confidence = reader.getNullable(JsonReader::getFloat);
+                } else {
+                    reader.skipChildren();
+                }
+            }
+
+            return deserializedDocumentField;
+        });
     }
 }

@@ -9,14 +9,14 @@ import logging
 import argparse
 import subprocess
 import glob
-import json
 import shutil
 from typing import List
 
 sdk_root: str
 
 skip_artifacts: List[str] = [
-    'azure-ai-anomalydetector'  # deprecated
+    'azure-ai-anomalydetector',         # deprecated
+    'azure-ai-vision-imageanalysis'     # temporary disabled for modification on Javadoc
 ]
 
 
@@ -28,23 +28,33 @@ def parse_args() -> argparse.Namespace:
         help='azure-sdk-for-java repository root.',
     )
     parser.add_argument(
-        '--version',
+        '--package-json-path',
         required=True,
-        help='@azure-tools/typespec-java version.',
+        help='path to package.json of typespec-java.',
     )
     return parser.parse_args()
 
 
-def update_emitter(version: str):
-    emitter_package_json_path = os.path.join(sdk_root, 'eng/emitter-package.json')
-    with open(emitter_package_json_path, mode='r', encoding='utf-8') as f:
-        package_json = json.load(f)
+def update_emitter(package_json_path: str):
+    logging.info('Update emitter-package.json')
+    subprocess.check_call([
+        'pwsh',
+        './eng/common/scripts/typespec/New-EmitterPackageJson.ps1',
+        '-PackageJsonPath',
+        package_json_path,
+        '-OutputDirectory',
+        'eng'],
+        cwd=sdk_root)
 
-    with open(emitter_package_json_path, mode='w', encoding='utf-8') as f:
-        package_json['dependencies']['@azure-tools/typespec-java'] = version
-        json.dump(package_json, f, indent=2)
-
-    logging.info('Update emitter-package.json to use @azure-tools/typespec-java version %s', version)
+    logging.info('Update emitter-package-lock.json')
+    subprocess.check_call([
+        'pwsh', 
+        './eng/common/scripts/typespec/New-EmitterPackageLock.ps1',
+        '-EmitterPackageJsonPath', 
+        'eng/emitter-package.json',
+        '-OutputDirectory',
+        'eng'], 
+        cwd=sdk_root)
 
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:
@@ -71,16 +81,7 @@ def update_sdks():
         generated_test_exists = os.path.isdir(generated_test_path)
 
         logging.info('Generate for module %s', artifact)
-
-        cmd = [
-            'pwsh',
-            os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Sync.ps1'),
-            module_path
-        ]
-        subprocess.check_call(cmd, cwd=sdk_root)
-
-        cmd[1] = os.path.join(sdk_root, 'eng/common/scripts/TypeSpec-Project-Generate.ps1')
-        subprocess.check_call(cmd, cwd=sdk_root)
+        subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
 
         if not generated_samples_exists:
             shutil.rmtree(generated_samples_path, ignore_errors=True)
@@ -97,7 +98,7 @@ def main():
     args = vars(parse_args())
     sdk_root = args['sdk_root']
 
-    update_emitter(args['version'])
+    update_emitter(args['package_json_path'])
 
     update_sdks()
 

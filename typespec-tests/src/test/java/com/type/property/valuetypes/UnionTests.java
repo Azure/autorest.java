@@ -29,19 +29,19 @@ public class UnionTests {
 
     @Test
     public void testUnionFloatLiteral() {
-        UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(UnionFloatLiteralPropertyProperty.FORTY_THREE43);
+        UnionFloatLiteralProperty body = new UnionFloatLiteralProperty(UnionFloatLiteralPropertyProperty.FOUR_SIX_EIGHT_SEVEN_FIVE);
         unionFloatClient.put(body);
 
         Assertions.assertNotNull(unionFloatClient.get());
-        Assertions.assertEquals(UnionFloatLiteralPropertyProperty.FORTY_THREE43, unionFloatClient.get().getProperty());
+        Assertions.assertEquals(UnionFloatLiteralPropertyProperty.FOUR_SIX_EIGHT_SEVEN_FIVE, unionFloatClient.get().getProperty());
     }
 
     @Test
     public void testUnionIntLiteral() {
-        UnionIntLiteralProperty body = new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty.FORTY_TWO);
+        UnionIntLiteralProperty body = new UnionIntLiteralProperty(UnionIntLiteralPropertyProperty.FOUR_TWO);
         unionIntClient.put(body);
 
         Assertions.assertNotNull(unionIntClient.get());
-        Assertions.assertEquals(UnionIntLiteralPropertyProperty.FORTY_TWO, unionIntClient.get().getProperty());
+        Assertions.assertEquals(UnionIntLiteralPropertyProperty.FOUR_TWO, unionIntClient.get().getProperty());
     }
 }

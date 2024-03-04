@@ -43,7 +43,7 @@ import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
-import fixtures.dpgcustomization.models.LroProduct;
+import fixtures.dpgcustomization.DpgServiceVersion;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
@@ -71,6 +71,20 @@ public final class DpgClientImpl {
      */
     public String getHost() {
         return this.host;
+    }
+
+    /**
+     * Service version.
+     */
+    private final DpgServiceVersion serviceVersion;
+
+    /**
+     * Gets Service version.
+     * 
+     * @return the serviceVersion value.
+     */
+    public DpgServiceVersion getServiceVersion() {
+        return this.serviceVersion;
     }
 
     /**
@@ -105,10 +119,11 @@ public final class DpgClientImpl {
      * Initializes an instance of DpgClient client.
      * 
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public DpgClientImpl(String host) {
+    public DpgClientImpl(String host, DpgServiceVersion serviceVersion) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), host);
+            JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -116,9 +131,10 @@ public final class DpgClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public DpgClientImpl(HttpPipeline httpPipeline, String host) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host);
+    public DpgClientImpl(HttpPipeline httpPipeline, String host, DpgServiceVersion serviceVersion) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), host, serviceVersion);
     }
 
     /**
@@ -127,11 +143,14 @@ public final class DpgClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param host server parameter.
+     * @param serviceVersion Service version.
      */
-    public DpgClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host) {
+    public DpgClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String host,
+        DpgServiceVersion serviceVersion) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.host = host;
+        this.serviceVersion = serviceVersion;
         this.service = RestProxy.create(DpgClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
@@ -244,24 +263,20 @@ public final class DpgClientImpl {
 
     /**
      * Get models that you will either return to end users as a raw body, or with a model added during grow up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that you will either return to end users as a raw body, or with a model added during grow up along
-     * with {@link Response} on successful completion of {@link Mono}.
+     * @return models that you will either return to end users as a raw body, or with a model added during grow up along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getModelWithResponseAsync(String mode, RequestOptions requestOptions) {
@@ -271,24 +286,20 @@ public final class DpgClientImpl {
 
     /**
      * Get models that you will either return to end users as a raw body, or with a model added during grow up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that you will either return to end users as a raw body, or with a model added during grow up along
-     * with {@link Response}.
+     * @return models that you will either return to end users as a raw body, or with a model added during grow up along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getModelWithResponse(String mode, RequestOptions requestOptions) {
@@ -297,27 +308,21 @@ public final class DpgClientImpl {
     }
 
     /**
-     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model
-     * instead, and put in 'model' as mode.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     hello: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param input Please put {'hello': 'world!'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -335,27 +340,21 @@ public final class DpgClientImpl {
     }
 
     /**
-     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model
-     * instead, and put in 'model' as mode.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode.
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     hello: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param input Please put {'hello': 'world!'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -372,24 +371,20 @@ public final class DpgClientImpl {
 
     /**
      * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup
-     * along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getPagesSinglePageAsync(String mode, RequestOptions requestOptions) {
@@ -401,24 +396,20 @@ public final class DpgClientImpl {
 
     /**
      * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
-     * paginated response with {@link PagedFlux}.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as paginated response with {@link PagedFlux}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedFlux<BinaryData> getPagesAsync(String mode, RequestOptions requestOptions) {
@@ -431,24 +422,20 @@ public final class DpgClientImpl {
 
     /**
      * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup
-     * along with {@link PagedResponse}.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup along with {@link PagedResponse}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private PagedResponse<BinaryData> getPagesSinglePage(String mode, RequestOptions requestOptions) {
@@ -460,24 +447,20 @@ public final class DpgClientImpl {
 
     /**
      * Get pages that you will either return to users in pages of raw bodies, or pages of models following growup.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
-     * paginated response with {@link PagedIterable}.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as paginated response with {@link PagedIterable}.
      */
     @ServiceMethod(returns = ReturnType.COLLECTION)
     public PagedIterable<BinaryData> getPages(String mode, RequestOptions requestOptions) {
@@ -489,11 +472,8 @@ public final class DpgClientImpl {
     }
 
     /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
@@ -501,8 +481,7 @@ public final class DpgClientImpl {
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -517,11 +496,8 @@ public final class DpgClientImpl {
     }
 
     /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
@@ -529,8 +505,7 @@ public final class DpgClientImpl {
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -545,11 +520,8 @@ public final class DpgClientImpl {
     }
 
     /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
@@ -557,8 +529,7 @@ public final class DpgClientImpl {
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -571,17 +542,15 @@ public final class DpgClientImpl {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.lroWithResponseAsync(mode, requestOptions),
             new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
@@ -589,8 +558,7 @@ public final class DpgClientImpl {
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -603,80 +571,15 @@ public final class DpgClientImpl {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.lroWithResponse(mode, requestOptions),
             new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
 
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
+                .setContext(requestOptions != null && requestOptions.getContext() != null
+                    ? requestOptions.getContext()
                     : Context.NONE)),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
     /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<LroProduct, LroProduct> beginLroWithModelAsync(String mode, RequestOptions requestOptions) {
-        return PollerFlux.create(Duration.ofSeconds(1), () -> this.lroWithResponseAsync(mode, requestOptions),
-            new DefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(LroProduct.class), TypeReference.createInstance(LroProduct.class));
-    }
-
-    /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
-     * of a model after the SDK has grown up.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
-     * <pre>{@code
-     * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
-     * }
-     * }</pre>
-     * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
-     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
-     */
-    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<LroProduct, LroProduct> beginLroWithModel(String mode, RequestOptions requestOptions) {
-        return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.lroWithResponse(mode, requestOptions),
-            new SyncDefaultPollingStrategy<>(new PollingStrategyOptions(this.getHttpPipeline())
-
-                .setContext(requestOptions != null && requestOptions.getContext() != null ? requestOptions.getContext()
-                    : Context.NONE)),
-            TypeReference.createInstance(LroProduct.class), TypeReference.createInstance(LroProduct.class));
-    }
-
-    /**
      * Get the next page of items.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)
@@ -705,9 +608,7 @@ public final class DpgClientImpl {
 
     /**
      * Get the next page of items.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     received: String(raw/model) (Required)

@@ -17,8 +17,8 @@ import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollOperationDetails;
 
 /**
  * Initializes a new instance of the asynchronous StandardClient type.
@@ -42,18 +42,14 @@ public final class StandardAsyncClient {
      * Adds a user or replaces a user's fields.
      * 
      * Creates or replaces a User.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
      * }</pre>
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -81,9 +77,7 @@ public final class StandardAsyncClient {
      * Deletes a user.
      * 
      * Deletes a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -117,9 +111,7 @@ public final class StandardAsyncClient {
      * Exports a user.
      * 
      * Exports a User.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)

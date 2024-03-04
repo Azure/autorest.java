@@ -16,14 +16,14 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollerFlux;
+import com.azure.core.util.polling.PollOperationDetails;
 import com.cadl.union.implementation.UnionFlattenOpsImpl;
+import com.cadl.union.implementation.models.SendLongRequest;
+import com.cadl.union.implementation.models.SendRequest;
 import com.cadl.union.models.Result;
 import com.cadl.union.models.SendLongOptions;
 import com.cadl.union.models.User;
-import java.util.HashMap;
-import java.util.Map;
 import reactor.core.publisher.Mono;
 
 /**
@@ -46,9 +46,7 @@ public final class UnionAsyncClient {
 
     /**
      * The send operation.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -75,28 +73,14 @@ public final class UnionAsyncClient {
 
     /**
      * The sendLong operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>filter</td>
-     * <td>String</td>
-     * <td>No</td>
-     * <td>A sequence of textual characters.</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -127,23 +111,11 @@ public final class UnionAsyncClient {
 
     /**
      * The get operation.
-     * <p>
-     * <strong>Query Parameters</strong>
-     * </p>
+     * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     * <caption>Query Parameters</caption>
-     * <tr>
-     * <th>Name</th>
-     * <th>Type</th>
-     * <th>Required</th>
-     * <th>Description</th>
-     * </tr>
-     * <tr>
-     * <td>data</td>
-     * <td>BinaryData</td>
-     * <td>No</td>
-     * <td>The data parameter</td>
-     * </tr>
+     *     <caption>Query Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>data</td><td>BinaryData</td><td>No</td><td>The data parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -162,9 +134,7 @@ public final class UnionAsyncClient {
 
     /**
      * A long-running remote procedure call (RPC) operation.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -212,9 +182,7 @@ public final class UnionAsyncClient {
     public Mono<Void> send(String id, BinaryData input, User user) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", user);
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input).setUser(user);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -237,8 +205,7 @@ public final class UnionAsyncClient {
     public Mono<Void> send(String id, BinaryData input) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("input", input);
+        SendRequest requestObj = new SendRequest(input);
         BinaryData request = BinaryData.fromObject(requestObj);
         return sendWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
     }
@@ -262,13 +229,11 @@ public final class UnionAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         String id = options.getId();
         String filter = options.getFilter();
-        Map<String, Object> requestObj = new HashMap<>();
-        requestObj.put("user", options.getUser());
-        requestObj.put("input", options.getInput());
-        requestObj.put("dataInt", options.getDataInt());
-        requestObj.put("dataUnion", options.getDataUnion());
-        requestObj.put("dataLong", options.getDataLong());
-        requestObj.put("data_float", options.getDataFloat());
+        SendLongRequest requestObj
+            = new SendLongRequest(options.getInput(), options.getDataInt()).setUser(options.getUser())
+                .setDataUnion(options.getDataUnion())
+                .setDataLong(options.getDataLong())
+                .setDataFloat(options.getDataFloat());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);

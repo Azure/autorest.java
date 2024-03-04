@@ -5,50 +5,42 @@
 package fixtures.xmlservice.models;
 
 import com.azure.core.annotation.Fluent;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
+import com.azure.core.util.CoreUtils;
+import com.azure.xml.XmlReader;
+import com.azure.xml.XmlSerializable;
+import com.azure.xml.XmlToken;
+import com.azure.xml.XmlWriter;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLStreamException;
 
 /**
- * CORS is an HTTP feature that enables a web application running under one domain to access resources in another
- * domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from
- * calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs
- * in another domain.
+ * CORS is an HTTP feature that enables a web application running under one domain to access resources in another domain. Web browsers implement a security restriction known as same-origin policy that prevents a web page from calling APIs in a different domain; CORS provides a secure way to allow one domain (the origin domain) to call APIs in another domain.
  */
-@JacksonXmlRootElement(localName = "CorsRule")
 @Fluent
-public final class CorsRule {
+public final class CorsRule implements XmlSerializable<CorsRule> {
     /*
-     * The origin domains that are permitted to make a request against the storage service via CORS. The origin domain
-     * is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with
-     * the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all
-     * origin domains to make requests via CORS.
+     * The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.
      */
-    @JsonProperty(value = "AllowedOrigins", required = true)
     private String allowedOrigins;
 
     /*
      * The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated)
      */
-    @JsonProperty(value = "AllowedMethods", required = true)
     private String allowedMethods;
 
     /*
      * the request headers that the origin domain may specify on the CORS request.
      */
-    @JsonProperty(value = "AllowedHeaders", required = true)
     private String allowedHeaders;
 
     /*
-     * The response headers that may be sent in the response to the CORS request and exposed by the browser to the
-     * request issuer
+     * The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer
      */
-    @JsonProperty(value = "ExposedHeaders", required = true)
     private String exposedHeaders;
 
     /*
      * The maximum amount time that a browser should cache the preflight OPTIONS request.
      */
-    @JsonProperty(value = "MaxAgeInSeconds", required = true)
     private int maxAgeInSeconds;
 
     /**
@@ -58,10 +50,7 @@ public final class CorsRule {
     }
 
     /**
-     * Get the allowedOrigins property: The origin domains that are permitted to make a request against the storage
-     * service via CORS. The origin domain is the domain from which the request originates. Note that the origin must
-     * be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the
-     * wildcard character '*' to allow all origin domains to make requests via CORS.
+     * Get the allowedOrigins property: The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.
      * 
      * @return the allowedOrigins value.
      */
@@ -70,10 +59,7 @@ public final class CorsRule {
     }
 
     /**
-     * Set the allowedOrigins property: The origin domains that are permitted to make a request against the storage
-     * service via CORS. The origin domain is the domain from which the request originates. Note that the origin must
-     * be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the
-     * wildcard character '*' to allow all origin domains to make requests via CORS.
+     * Set the allowedOrigins property: The origin domains that are permitted to make a request against the storage service via CORS. The origin domain is the domain from which the request originates. Note that the origin must be an exact case-sensitive match with the origin that the user age sends to the service. You can also use the wildcard character '*' to allow all origin domains to make requests via CORS.
      * 
      * @param allowedOrigins the allowedOrigins value to set.
      * @return the CorsRule object itself.
@@ -84,8 +70,7 @@ public final class CorsRule {
     }
 
     /**
-     * Get the allowedMethods property: The methods (HTTP request verbs) that the origin domain may use for a CORS
-     * request. (comma separated).
+     * Get the allowedMethods property: The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated).
      * 
      * @return the allowedMethods value.
      */
@@ -94,8 +79,7 @@ public final class CorsRule {
     }
 
     /**
-     * Set the allowedMethods property: The methods (HTTP request verbs) that the origin domain may use for a CORS
-     * request. (comma separated).
+     * Set the allowedMethods property: The methods (HTTP request verbs) that the origin domain may use for a CORS request. (comma separated).
      * 
      * @param allowedMethods the allowedMethods value to set.
      * @return the CorsRule object itself.
@@ -126,8 +110,7 @@ public final class CorsRule {
     }
 
     /**
-     * Get the exposedHeaders property: The response headers that may be sent in the response to the CORS request and
-     * exposed by the browser to the request issuer.
+     * Get the exposedHeaders property: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer.
      * 
      * @return the exposedHeaders value.
      */
@@ -136,8 +119,7 @@ public final class CorsRule {
     }
 
     /**
-     * Set the exposedHeaders property: The response headers that may be sent in the response to the CORS request and
-     * exposed by the browser to the request issuer.
+     * Set the exposedHeaders property: The response headers that may be sent in the response to the CORS request and exposed by the browser to the request issuer.
      * 
      * @param exposedHeaders the exposedHeaders value to set.
      * @return the CorsRule object itself.
@@ -148,8 +130,7 @@ public final class CorsRule {
     }
 
     /**
-     * Get the maxAgeInSeconds property: The maximum amount time that a browser should cache the preflight OPTIONS
-     * request.
+     * Get the maxAgeInSeconds property: The maximum amount time that a browser should cache the preflight OPTIONS request.
      * 
      * @return the maxAgeInSeconds value.
      */
@@ -158,8 +139,7 @@ public final class CorsRule {
     }
 
     /**
-     * Set the maxAgeInSeconds property: The maximum amount time that a browser should cache the preflight OPTIONS
-     * request.
+     * Set the maxAgeInSeconds property: The maximum amount time that a browser should cache the preflight OPTIONS request.
      * 
      * @param maxAgeInSeconds the maxAgeInSeconds value to set.
      * @return the CorsRule object itself.
@@ -187,5 +167,69 @@ public final class CorsRule {
         if (getExposedHeaders() == null) {
             throw new IllegalArgumentException("Missing required property exposedHeaders in model CorsRule");
         }
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter) throws XMLStreamException {
+        return toXml(xmlWriter, null);
+    }
+
+    @Override
+    public XmlWriter toXml(XmlWriter xmlWriter, String rootElementName) throws XMLStreamException {
+        rootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "CorsRule" : rootElementName;
+        xmlWriter.writeStartElement(rootElementName);
+        xmlWriter.writeStringElement("AllowedOrigins", this.allowedOrigins);
+        xmlWriter.writeStringElement("AllowedMethods", this.allowedMethods);
+        xmlWriter.writeStringElement("AllowedHeaders", this.allowedHeaders);
+        xmlWriter.writeStringElement("ExposedHeaders", this.exposedHeaders);
+        xmlWriter.writeIntElement("MaxAgeInSeconds", this.maxAgeInSeconds);
+        return xmlWriter.writeEndElement();
+    }
+
+    /**
+     * Reads an instance of CorsRule from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the CorsRule.
+     */
+    public static CorsRule fromXml(XmlReader xmlReader) throws XMLStreamException {
+        return fromXml(xmlReader, null);
+    }
+
+    /**
+     * Reads an instance of CorsRule from the XmlReader.
+     * 
+     * @param xmlReader The XmlReader being read.
+     * @param rootElementName Optional root element name to override the default defined by the model. Used to support cases where the model can deserialize from different root element names.
+     * @return An instance of CorsRule if the XmlReader was pointing to an instance of it, or null if it was pointing to XML null.
+     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
+     * @throws XMLStreamException If an error occurs while reading the CorsRule.
+     */
+    public static CorsRule fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
+        String finalRootElementName = CoreUtils.isNullOrEmpty(rootElementName) ? "CorsRule" : rootElementName;
+        return xmlReader.readObject(finalRootElementName, reader -> {
+            CorsRule deserializedCorsRule = new CorsRule();
+            while (reader.nextElement() != XmlToken.END_ELEMENT) {
+                QName elementName = reader.getElementName();
+
+                if ("AllowedOrigins".equals(elementName.getLocalPart())) {
+                    deserializedCorsRule.allowedOrigins = reader.getStringElement();
+                } else if ("AllowedMethods".equals(elementName.getLocalPart())) {
+                    deserializedCorsRule.allowedMethods = reader.getStringElement();
+                } else if ("AllowedHeaders".equals(elementName.getLocalPart())) {
+                    deserializedCorsRule.allowedHeaders = reader.getStringElement();
+                } else if ("ExposedHeaders".equals(elementName.getLocalPart())) {
+                    deserializedCorsRule.exposedHeaders = reader.getStringElement();
+                } else if ("MaxAgeInSeconds".equals(elementName.getLocalPart())) {
+                    deserializedCorsRule.maxAgeInSeconds = reader.getIntElement();
+                } else {
+                    reader.skipElement();
+                }
+            }
+
+            return deserializedCorsRule;
+        });
     }
 }

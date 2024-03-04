@@ -24,7 +24,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      * The name property.
      */
     @Generated
-    private final String name;
+    private String name;
 
     /*
      * The description property.
@@ -55,12 +55,9 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
 
     /**
      * Creates an instance of InnerModel class.
-     * 
-     * @param name the name value to set.
      */
     @Generated
-    public InnerModel(String name) {
-        this.name = name;
+    public InnerModel() {
     }
 
     /**
@@ -71,6 +68,20 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     @Generated
     public String getName() {
         return this.name;
+    }
+
+    /**
+     * Set the name property: The name property.
+     * <p>Required when create the resource.</p>
+     * 
+     * @param name the name value to set.
+     * @return the InnerModel object itself.
+     */
+    @Generated
+    public InnerModel setName(String name) {
+        this.name = name;
+        this.updatedProperties.add("name");
+        return this;
     }
 
     /**
@@ -96,6 +107,10 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         return this;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         if (jsonMergePatch) {
@@ -108,17 +123,22 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
         }
     }
 
-    public JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
+    @Generated
+    private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (this.name != null) {
-            jsonWriter.writeStringField("name", this.name);
-        } else if (updatedProperties.contains("name")) {
-            jsonWriter.writeNullField("name");
+        if (updatedProperties.contains("name")) {
+            if (this.name == null) {
+                jsonWriter.writeNullField("name");
+            } else {
+                jsonWriter.writeStringField("name", this.name);
+            }
         }
-        if (this.description != null) {
-            jsonWriter.writeStringField("description", this.description);
-        } else if (updatedProperties.contains("description")) {
-            jsonWriter.writeNullField("description");
+        if (updatedProperties.contains("description")) {
+            if (this.description == null) {
+                jsonWriter.writeNullField("description");
+            } else {
+                jsonWriter.writeStringField("description", this.description);
+            }
         }
         return jsonWriter.writeEndObject();
     }
@@ -127,29 +147,25 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
      * Reads an instance of InnerModel from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of InnerModel if the JsonReader was pointing to an instance of it, or null if it was pointing
-     * to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
+     * @return An instance of InnerModel if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the InnerModel.
      */
+    @Generated
     public static InnerModel fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String name = null;
-            String description = null;
+            InnerModel deserializedInnerModel = new InnerModel();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedInnerModel.name = reader.getString();
                 } else if ("description".equals(fieldName)) {
-                    description = reader.getString();
+                    deserializedInnerModel.description = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            InnerModel deserializedInnerModel = new InnerModel(name);
-            deserializedInnerModel.description = description;
 
             return deserializedInnerModel;
         });

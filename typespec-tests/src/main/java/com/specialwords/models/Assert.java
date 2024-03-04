@@ -43,6 +43,10 @@ public final class Assert implements JsonSerializable<Assert> {
         return this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -54,11 +58,11 @@ public final class Assert implements JsonSerializable<Assert> {
      * Reads an instance of Assert from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Assert if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of Assert if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Assert.
      */
+    @Generated
     public static Assert fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;

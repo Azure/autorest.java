@@ -37,9 +37,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with integer properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Integer (Optional)
@@ -62,9 +60,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with integer properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Integer (Optional)
@@ -88,9 +84,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with long properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Long (Optional)
@@ -113,9 +107,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with long properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Long (Optional)
@@ -139,9 +131,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with float properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Float (Optional)
@@ -164,9 +154,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with float properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Float (Optional)
@@ -190,9 +178,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with double properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Double (Optional)
@@ -215,9 +201,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with double properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field1: Double (Optional)
@@ -241,9 +225,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with bool properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field_true: Boolean (Optional)
@@ -266,9 +248,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with bool properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field_true: Boolean (Optional)
@@ -292,9 +272,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with string properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: String (Optional)
@@ -318,9 +296,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with string properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: String (Optional)
@@ -345,9 +321,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with date properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: String (Optional)
@@ -370,9 +344,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with date properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: String (Optional)
@@ -396,9 +368,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with datetime properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: OffsetDateTime (Optional)
@@ -421,9 +391,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with datetime properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: OffsetDateTime (Optional)
@@ -447,9 +415,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with datetimeRfc1123 properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: DateTimeRfc1123 (Optional)
@@ -472,9 +438,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with datetimeRfc1123 properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: DateTimeRfc1123 (Optional)
@@ -498,9 +462,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with duration properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: Duration (Optional)
@@ -522,9 +484,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with duration properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: Duration (Optional)
@@ -547,9 +507,7 @@ public final class PrimitiveClient {
 
     /**
      * Get complex types with byte properties.
-     * <p>
-     * <strong>Response Body Schema</strong>
-     * </p>
+     * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: byte[] (Optional)
@@ -571,9 +529,7 @@ public final class PrimitiveClient {
 
     /**
      * Put complex types with byte properties.
-     * <p>
-     * <strong>Request Body Schema</strong>
-     * </p>
+     * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
      *     field: byte[] (Optional)

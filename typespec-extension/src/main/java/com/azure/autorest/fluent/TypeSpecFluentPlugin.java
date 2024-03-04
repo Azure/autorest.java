@@ -50,21 +50,24 @@ public class TypeSpecFluentPlugin extends FluentGen {
             SETTINGS_MAP.put("fluent", "lite");
         }
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
+        // SETTINGS_MAP.put("stream-style-serialization", emitterOptions.getStreamStyleSerialization());
 
         JavaSettingsAccessor.setHost(this);
         LOGGER.info("Output folder: {}", emitterOptions.getOutputDir());
         LOGGER.info("Namespace: {}", JavaSettings.getInstance().getPackage());
     }
 
-    public Client processClient(CodeModel codeModel) {
+    public CodeModel preProcess(CodeModel codeModel) {
         // transform code model
-        FluentNamer fluentNamer = new TypeSpecFluentNamer(this, pluginName, sessionId, SETTINGS_MAP);
-        codeModel = fluentNamer.transform(codeModel);
+        FluentNamer fluentNamer = new TypeSpecFluentNamer(this, pluginName, sessionId, SETTINGS_MAP, codeModel);
+        return fluentNamer.processCodeModel();
+    }
+
+    public Client processClient(CodeModel codeModel) {
 
         // call FluentGen.handleMap
-        Client client = handleMap(codeModel);
 
-        return client;
+        return handleMap(codeModel);
     }
 
     public FluentJavaPackage processTemplates(CodeModel codeModel, Client client) {
@@ -97,7 +100,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
         SETTINGS_MAP.put("license-header", "MICROSOFT_MIT_SMALL_TYPESPEC");
 
-        SETTINGS_MAP.put("generic-response-type", true);
+        SETTINGS_MAP.put("generic-response-type", false);
         SETTINGS_MAP.put("generate-client-interfaces", true);
         SETTINGS_MAP.put("client-logger", true);
 
@@ -105,6 +108,27 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("client-flattened-annotation-target", "none");
         SETTINGS_MAP.put("null-byte-array-maps-to-empty-array", true);
         SETTINGS_MAP.put("graal-vm-config", true);
+        SETTINGS_MAP.put("sync-methods", "all");
+        SETTINGS_MAP.put("client-side-validations", true);
+        SETTINGS_MAP.put("stream-style-serialization", false);
+        SETTINGS_MAP.put("pipeline.fluentgen.naming.override", getNamingOverrides());
+    }
+
+    private static Map<String, String> getNamingOverrides() {
+        Map<String, String> namingOverrides = new HashMap<>();
+        namingOverrides.put("eTag", "etag");
+        namingOverrides.put("userName", "username");
+        namingOverrides.put("metaData", "metadata");
+        namingOverrides.put("timeStamp", "timestamp");
+        namingOverrides.put("hostName", "hostname");
+        namingOverrides.put("webHook", "webhook");
+        namingOverrides.put("coolDown", "cooldown");
+        namingOverrides.put("resourceregion", "resourceRegion");
+        namingOverrides.put("sTag", "stag");
+        namingOverrides.put("tagname", "tagName");
+        namingOverrides.put("tagvalue", "tagValue");
+
+        return namingOverrides;
     }
 
     @SuppressWarnings("unchecked")
