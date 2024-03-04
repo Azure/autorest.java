@@ -83,6 +83,11 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
+  getAllModels,
+  SdkModelType,
+  SdkEnumType,
+  SdkType,
+  AccessFlags,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -194,7 +199,7 @@ export class CodeModelBuilder {
   private codeModel: CodeModel;
 
   readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
-  readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, nndefined means type visited but not completed
+  readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, undefined means type visited but not completed
 
   private operationExamples: Map<Operation, any> = new Map<Operation, any>();
 
@@ -400,7 +405,7 @@ export class CodeModelBuilder {
   }
 
   private processModels(clients: SdkClient[]) {
-    const processedModels: Set<Type> = new Set();
+    const processedModels: Set<SdkModelType | SdkEnumType> = new Set();
     for (const client of clients) {
       const models: (Model | Enum | Union)[] = Array.from(client.service.models.values());
       Array.from(client.service.enums.values()).forEach((it) => models.push(it));
@@ -425,9 +430,11 @@ export class CodeModelBuilder {
         });
       };
 
-      for (const model of models) {
+      const sdkModels: (SdkModelType | SdkEnumType)[] = getAllModels(this.sdkContext);
+
+      for (const model of sdkModels) {
         if (!processedModels.has(model)) {
-          const access = getAccess(model);
+          const access = model.access;
           if (access === "public") {
             modelAsPublic(model);
           } else if (access === "internal") {
@@ -1632,20 +1639,46 @@ export class CodeModelBuilder {
     );
   }
 
-  private processSchema(type: Type, nameHint: string): Schema {
+  private processSchema(type: SdkType, nameHint: string): Schema {
     return this.schemaCache.process(type, nameHint) || fail("Unable to process schema.");
   }
 
-  private processSchemaImpl(type: Type, nameHint: string): Schema {
+  private processSchemaImpl(type: SdkType, nameHint: string): Schema {
     switch (type.kind) {
-      case "Intrinsic":
-        if (isUnknownType(type)) {
-          return this.processAnySchema(type, nameHint);
+      // case "Intrinsic":
+      //   if (isUnknownType(type)) {
+      //     return this.processAnySchema(type, nameHint);
+      //   } else {
+      //     throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
+      //   }
+      case "any":
+        return this.processAnySchema(type, nameHint);
+
+      case "enum":
+        return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
+
+      case "union":
+        return this.processUnionSchema(type, this.getName(type, nameHint));
+
+      case "model":
+        if (isArrayModelType(this.program, type)) {
+          return this.processArraySchema(type, nameHint);
         } else {
-          throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
+          return this.processObjectSchema(type, this.getName(type, nameHint));
         }
 
-      case "String":
+      case "dict":
+        // "pure" Record that does not have properties in it
+        if (type.properties.size == 0) {
+          return this.processDictionarySchema(type, nameHint);
+        } else {
+          return this.processObjectSchema(type, this.getName(type, nameHint));
+        }
+      
+      case "array":
+        return this.processArraySchema(type, nameHint);
+
+      case SdkBuiltInKinds:
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Number":
@@ -1653,12 +1686,6 @@ export class CodeModelBuilder {
 
       case "Boolean":
         return this.processConstantSchemaForLiteral(type, nameHint);
-
-      case "Enum":
-        return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
-
-      case "Union":
-        return this.processUnionSchema(type, this.getName(type, nameHint));
 
       case "ModelProperty": {
         let schema = undefined;
@@ -1676,18 +1703,8 @@ export class CodeModelBuilder {
         return this.applyModelPropertyDecorators(type, nameHint, schema);
       }
 
-      case "Scalar":
-        return this.processScalar(type, undefined, nameHint);
-
-      case "Model":
-        if (isArrayModelType(this.program, type)) {
-          return this.processArraySchema(type, nameHint);
-        } else if (isRecordModelType(this.program, type) && type.properties.size == 0) {
-          // "pure" Record that does not have properties in it
-          return this.processDictionarySchema(type, nameHint);
-        } else {
-          return this.processObjectSchema(type, this.getName(type, nameHint));
-        }
+      // case "Scalar":
+      //   return this.processScalar(type, undefined, nameHint);
 
       case "EnumMember":
         // e.g. "type: TypeEnum.EnumValue1"
@@ -1797,7 +1814,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processAnySchema(type: IntrinsicType, name: string): AnySchema {
+  private processAnySchema(type: SdkType, name: string): AnySchema {
     return this.anySchema;
   }
 
