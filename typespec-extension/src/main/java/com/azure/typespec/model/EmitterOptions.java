@@ -25,7 +25,10 @@ public class EmitterOptions {
     private String outputDir;
 
     @JsonProperty(value = "branded")
-    private Boolean branded = true;
+    private Boolean branded = false;
+
+    @JsonProperty(value = "flavor")
+    private String flavor;
 
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="service-name")
@@ -156,6 +159,10 @@ public class EmitterOptions {
 
     public String getModelsSubpackage() {
         return modelsSubpackage;
+    }
+
+    public String getFlavor() {
+        return flavor;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {

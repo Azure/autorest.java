@@ -193,6 +193,8 @@ export class CodeModelBuilder {
 
   private codeModel: CodeModel;
 
+  private isAzure: boolean = false;
+
   readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, nndefined means type visited but not completed
 
@@ -204,6 +206,10 @@ export class CodeModelBuilder {
 
     if (this.options["skip-special-headers"]) {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
+    }
+
+    if (this.options["flavor"]?.toLocaleLowerCase() === "azure" || this.options["branded"] === true) {
+      this.isAzure = true;
     }
 
     this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
@@ -364,7 +370,7 @@ export class CodeModelBuilder {
                 // HTTP Authentication should use "Basic token" or "Bearer token"
                 schemeOrApiKeyPrefix = pascalCase(schemeOrApiKeyPrefix);
 
-                if (!(this.options.branded === false)) {
+                if (this.isAzure) {
                   // Azure would not allow BasicAuth or BearerAuth
                   this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
                   continue;
