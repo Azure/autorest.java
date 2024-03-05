@@ -21,10 +21,9 @@ import com.cadl.flatten.implementation.JsonMergePatchHelper;
 import com.cadl.flatten.implementation.models.SendLongRequest;
 import com.cadl.flatten.implementation.models.SendProjectedNameRequest;
 import com.cadl.flatten.implementation.models.SendRequest;
-import com.cadl.flatten.implementation.models.UpdateRequest;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.TodoItem;
-import com.cadl.flatten.models.TodoItemPatch;
+import com.cadl.flatten.models.UpdateRequest;
 import com.cadl.flatten.models.User;
 import reactor.core.publisher.Mono;
 
@@ -282,7 +281,7 @@ public final class FlattenAsyncClient {
      * The update operation.
      * 
      * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
-     * @param patch The patch parameter.
+     * @param request The request parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -293,13 +292,11 @@ public final class FlattenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<TodoItem> update(long id, TodoItemPatch patch) {
+    public Mono<TodoItem> update(long id, UpdateRequest request) {
         // Generated convenience method for updateWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        UpdateRequest requestObj = new UpdateRequest(patch);
-        BinaryData request = BinaryData.fromObject(requestObj);
         JsonMergePatchHelper.getUpdateRequestAccessor().prepareModelForJsonMergePatch(request, true);
-        BinaryData requestInBinaryData = BinaryData.fromBytes(null.toBytes());
+        BinaryData requestInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(request).toBytes());
         JsonMergePatchHelper.getUpdateRequestAccessor().prepareModelForJsonMergePatch(request, false);
         return updateWithResponse(id, requestInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(TodoItem.class));

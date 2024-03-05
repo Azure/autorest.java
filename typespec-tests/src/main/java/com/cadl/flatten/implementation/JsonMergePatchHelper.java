@@ -4,8 +4,8 @@
 
 package com.cadl.flatten.implementation;
 
-import com.cadl.flatten.implementation.models.UpdateRequest;
 import com.cadl.flatten.models.TodoItemPatch;
+import com.cadl.flatten.models.UpdateRequest;
 
 /**
  * This is the Helper class to enable json merge patch serialization for a model.
