@@ -1325,11 +1325,16 @@ export class CodeModelBuilder {
       // anonymous model
 
       // name the schema for documentation
-      schema.language.default.name = op.language.default.name + "Request";
+      schema.language.default.name = pascalCase(op.language.default.name) + "Request";
 
       if (!parameter.language.default.name) {
         // name the parameter for documentation
         parameter.language.default.name = "request";
+      }
+
+      if (operationIsJsonMergePatch(httpOperation)) {
+        // skip model flatten, if "application/merge-patch+json"
+        return;
       }
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
