@@ -339,7 +339,7 @@ abstract class ConvenienceMethodTemplateBase {
         // collection format
         imports.add(JacksonAdapter.class.getName());
         imports.add(CollectionFormat.class.getName());
-        imports.add(TypeReference.class.getName());
+        ClassType.TYPE_REFERENCE.addImportsTo(imports, false);
 
         // byte[]
         ClassType.BASE_64_URL.addImportsTo(imports, false);

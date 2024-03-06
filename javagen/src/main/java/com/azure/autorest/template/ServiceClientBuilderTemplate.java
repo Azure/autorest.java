@@ -135,7 +135,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
         String classDefinition = serviceClientBuilderName;
 
-        if (!settings.isAzureOrFluent() && /* TODO: generic not having Trait */ settings.isBranded() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
+        if (!settings.isAzureOrFluent() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
             String serviceClientBuilderGeneric = "<" + serviceClientBuilderName + ">";
 
             String interfaces = clientBuilder.getBuilderTraits().stream()
@@ -184,9 +184,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                         javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                     });
                 } else {
+                    addGeneratedAnnotation(classBlock);
+                    classBlock.privateFinalMemberVariable("List<HttpPipelinePolicy>", "pipelinePolicies");
+
                     classBlock.javadocComment(String.format("Create an instance of the %s.", serviceClientBuilderName));
                     addGeneratedAnnotation(classBlock);
                     classBlock.publicConstructor(String.format("%1$s()", serviceClientBuilderName), javaBlock -> {
+                        javaBlock.line("this.pipelinePolicies = new ArrayList<>();");
                     });
                 }
             }
@@ -294,7 +298,13 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                 }
 
                 if (!settings.isBranded()) {
-                    function.line(String.format("%1$s client = new %1$s(%2$s);", serviceClient.getClassName(), "this.createHttpPipeline()"));
+                    if (constructorArgs != null && !constructorArgs.isEmpty()) {
+                        function.line(String.format("%1$s client = new %2$s(%3$s%4$s);",
+                                serviceClient.getClassName(), serviceClient.getClassName(),
+                                getLocalBuildVariableName("pipeline"), constructorArgs));
+                    } else {
+                        function.line(String.format("%1$s client = new %1$s(%2$s);", serviceClient.getClassName(), getLocalBuildVariableName("pipeline")));
+                    }
                 } else if (settings.isFluent()) {
                     function.line(String.format("%1$s client = new %2$s(%3$s, %4$s, %5$s, %6$s%7$s);",
                             serviceClient.getClassName(),

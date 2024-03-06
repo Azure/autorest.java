@@ -3,6 +3,7 @@
 
 package com.azure.autorest.mapper;
 
+import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.ArraySchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
@@ -458,27 +459,24 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
     }
 
     private void addBuilderTraits(ClientBuilder clientBuilder, ServiceClient serviceClient) {
-        if (!JavaSettings.getInstance().isBranded()) {
-            // TODO: generic
-            if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-                clientBuilder.addBuilderTrait(ClientBuilderTrait.KEY_CREDENTIAL_TRAIT);
-            }
-            return;
-        }
-
         clientBuilder.addBuilderTrait(ClientBuilderTrait.HTTP_TRAIT);
+
         clientBuilder.addBuilderTrait(ClientBuilderTrait.CONFIGURATION_TRAIT);
         if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2)) {
             clientBuilder.addBuilderTrait(ClientBuilderTrait.TOKEN_CREDENTIAL_TRAIT);
         }
         if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-            if (JavaSettings.getInstance().isUseKeyCredential()) {
+            if (JavaSettings.getInstance().isBranded() || JavaSettings.getInstance().isUseKeyCredential()) {
                 clientBuilder.addBuilderTrait(ClientBuilderTrait.KEY_CREDENTIAL_TRAIT);
             } else {
                 clientBuilder.addBuilderTrait(ClientBuilderTrait.AZURE_KEY_CREDENTIAL_TRAIT);
             }
         }
         serviceClient.getProperties().stream()
+                .map(property -> {
+                    Javagen.getPluginInstance().getLogger().info("Client property name " + property.getName());
+                    return property;
+                })
             .filter(property -> property.getName().equals("endpoint"))
             .findFirst()
             .ifPresent(property -> clientBuilder.addBuilderTrait(ClientBuilderTrait.getEndpointTrait(property)));
@@ -611,7 +609,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
         requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.CORE.getPackageName(), true));
         if (settings.isStreamStyleSerialization()) {
-            requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.JSON.getPackageName(), false));
+            requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.JSON.getPackageName(), true));
         }
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();

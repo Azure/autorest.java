@@ -32,6 +32,7 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
+import com.azure.core.annotation.ReturnType;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.serializer.CollectionFormat;
@@ -669,7 +670,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generateProtocolPagingPlainSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.COLLECTION);
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
@@ -723,7 +724,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private void generatePagedSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
 
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             if (!settings.isSyncStackEnabled()) {
@@ -775,7 +776,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
 
     protected void generatePagingSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.COLLECTION);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
             function.methodReturn(String.format("new PagedIterable<>(%s(%s))", clientMethod.getProxyMethod().getSimpleAsyncMethodName(), clientMethod.getArgumentList()));
@@ -783,7 +784,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generatePagingPlainSync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.COLLECTION);
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
@@ -850,7 +851,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generatePagingAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.COLLECTION)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.COLLECTION);
         if (clientMethod.getMethodPageDetails().nonNullNextLink()) {
             writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
                 addOptionalVariables(function, clientMethod);
@@ -887,8 +888,14 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         }
     }
 
+    private static void addServiceMethodAnnotation(JavaType typeBlock, ReturnType returnType) {
+        if (JavaSettings.getInstance().isBranded()) {
+            typeBlock.annotation("ServiceMethod(returns = ReturnType." + returnType.name() + ");");
+        }
+    }
+
     protected void generateResumable(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         typeBlock.publicMethod(clientMethod.getDeclaration(), function -> {
             ProxyMethodParameter parameter = restAPIMethod.getParameters().get(0);
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
@@ -897,7 +904,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generateSimpleAsync(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
             addOptionalVariables(function, clientMethod);
             function.line("return %s(%s)", clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName(), clientMethod.getArgumentList());
@@ -918,7 +925,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     private void generateSimpleSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
             addOptionalVariables(function, clientMethod);
 
@@ -948,7 +955,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     private void generateSimplePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod,
         JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), (function -> {
             addOptionalVariables(function, clientMethod);
 
@@ -980,7 +987,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             asyncMethodName = clientMethod.getProxyMethod().getSimpleAsyncRestResponseMethodName();
         }
         String effectiveAsyncMethodName = asyncMethodName;
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addOptionalVariables(function, clientMethod);
             if (clientMethod.getReturnValue().getType() == ClassType.INPUT_STREAM) {
@@ -1044,7 +1051,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     protected void generatePlainSyncMethod(ClientMethod clientMethod, JavaType typeBlock,
         ProxyMethod restAPIMethod, JavaSettings settings) {
         String effectiveProxyMethodName = clientMethod.getProxyMethod().getName();
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
 
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
@@ -1144,7 +1151,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generatePagedAsyncSinglePage(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
 
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
@@ -1282,7 +1289,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generateSimpleAsyncRestResponse(ClientMethod clientMethod, JavaType typeBlock, ProxyMethod restAPIMethod, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             addValidations(function, clientMethod.getRequiredNullableParameterExpressions(), clientMethod.getValidateExpressions(), settings);
             addOptionalAndConstantVariables(function, clientMethod, restAPIMethod.getParameters(), settings);
@@ -1577,7 +1584,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generateSendRequestAsync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.line("return FluxUtil.withContext(context -> %1$s.getHttpPipeline().send(%2$s, context)",
                 clientMethod.getClientReference(), clientMethod.getArgumentList());
@@ -1589,7 +1596,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void generateSendRequestSync(ClientMethod clientMethod, JavaType typeBlock, JavaSettings settings) {
-        typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+        addServiceMethodAnnotation(typeBlock, ReturnType.SINGLE);
         writeMethod(typeBlock, clientMethod.getMethodVisibility(), clientMethod.getDeclaration(), function -> {
             function.methodReturn("this.sendRequestAsync(httpRequest).contextWrite(c -> c.putAll(FluxUtil.toReactorContext(context).readOnly())).block()");
         });

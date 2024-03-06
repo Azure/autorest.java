@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.SequenceInputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.UUID;
 
 // DO NOT modify this helper class
@@ -16,6 +17,8 @@ public final class MultipartFormDataHelper {
      * Line separator for the multipart HTTP request.
      */
     private static final String CRLF = "\r\n";
+
+    private static final String APPLICATION_OCTET_STREAM = "application/octet-stream";
 
     /**
      * Value to be used as part of the divider for the multipart requests.
@@ -79,8 +82,8 @@ public final class MultipartFormDataHelper {
     public MultipartFormDataHelper serializeTextField(String fieldName, String value) {
         if (value != null) {
             String serialized = partSeparator
-                    + CRLF + "Content-Disposition: form-data; name=\""
-                    + fieldName + "\"" + CRLF + CRLF
+                    + CRLF + "Content-Disposition: form-data; name=\"" + escapeName(fieldName) + "\""
+                    + CRLF + CRLF
                     + value
                     + CRLF;
             byte[] data = serialized.getBytes(encoderCharset);
@@ -99,7 +102,8 @@ public final class MultipartFormDataHelper {
      */
     public MultipartFormDataHelper serializeJsonField(String fieldName, Object jsonObject) {
         if (jsonObject != null) {
-            String serialized = partSeparator + CRLF + "Content-Disposition: form-data; name=\"" + fieldName + "\""
+            String serialized = partSeparator + CRLF
+                    + "Content-Disposition: form-data; name=\"" + escapeName(fieldName) + "\""
                     + CRLF + "Content-Type: application/json"
                     + CRLF + CRLF + BinaryData.fromObject(jsonObject) + CRLF;
             byte[] data = serialized.getBytes(encoderCharset);
@@ -108,32 +112,53 @@ public final class MultipartFormDataHelper {
         return this;
     }
 
-    // application/octet-stream
     /**
-     * Formats a application/octet-stream field for a multipart HTTP request.
+     * Formats a file field for a multipart HTTP request.
      *
      * @param fieldName the field name
      * @param file the BinaryData of the file
+     * @param contentType the content-type of the file
      * @param filename the filename
      * @return the MultipartFormDataHelper instance
      */
-    public MultipartFormDataHelper serializeFileField(String fieldName, BinaryData file, String filename) {
+    public MultipartFormDataHelper serializeFileField(
+            String fieldName,
+            BinaryData file,
+            String contentType,
+            String filename) {
         if (file != null) {
-            // Multipart preamble
-            String fileFieldPreamble = partSeparator
-                    + CRLF + "Content-Disposition: form-data; name=\"" + fieldName
-                    + "\"; filename=\"" + filename + "\""
-                    + CRLF + "Content-Type: application/octet-stream" + CRLF + CRLF;
-            byte[] data = fileFieldPreamble.getBytes(encoderCharset);
-            appendBytes(data);
+            if (contentType != null && !contentType.isEmpty()) {
+                contentType = APPLICATION_OCTET_STREAM;
+            }
+            writeFileField(fieldName, file, contentType, filename);
+        }
+        return this;
+    }
 
-            // Writing the file into the request as a byte stream
-            requestLength += file.getLength();
-            requestDataStream = new SequenceInputStream(requestDataStream, file.toStream());
-
-            // CRLF
-            data = CRLF.getBytes(encoderCharset);
-            appendBytes(data);
+    /**
+     * Formats a file field (potentially multiple files) for a multipart HTTP request.
+     *
+     * @param fieldName the field name
+     * @param files the List of BinaryData of the files
+     * @param contentTypes the List of content-type of the files
+     * @param filenames the List of filenames
+     * @return the MultipartFormDataHelper instance
+     */
+    public MultipartFormDataHelper serializeFileFields(
+            String fieldName,
+            List<BinaryData> files,
+            List<String> contentTypes,
+            List<String> filenames) {
+        if (files != null) {
+            for (int i = 0; i < files.size(); ++i) {
+                BinaryData file = files.get(i);
+                String contentType = contentTypes.get(i);
+                if (contentType != null && !contentType.isEmpty()) {
+                    contentType = APPLICATION_OCTET_STREAM;
+                }
+                String filename = filenames.get(i);
+                writeFileField(fieldName, file, contentType, filename);
+            }
         }
         return this;
     }
@@ -156,8 +181,34 @@ public final class MultipartFormDataHelper {
         return this;
     }
 
+    private void writeFileField(String fieldName, BinaryData file, String contentType, String filename) {
+        String contentDispositionFilename = "";
+        if (filename != null && !filename.isEmpty()) {
+            contentDispositionFilename = "; filename=\"" + escapeName(filename) + "\"";
+        }
+
+        // Multipart preamble
+        String fileFieldPreamble = partSeparator
+                + CRLF + "Content-Disposition: form-data; name=\"" + escapeName(fieldName) + "\"" + contentDispositionFilename
+                + CRLF + "Content-Type: " + contentType + CRLF + CRLF;
+        byte[] data = fileFieldPreamble.getBytes(encoderCharset);
+        appendBytes(data);
+
+        // Writing the file into the request as a byte stream
+        requestLength += file.getLength();
+        requestDataStream = new SequenceInputStream(requestDataStream, file.toStream());
+
+        // CRLF
+        data = CRLF.getBytes(encoderCharset);
+        appendBytes(data);
+    }
+
     private void appendBytes(byte[] bytes) {
         requestLength += bytes.length;
         requestDataStream = new SequenceInputStream(requestDataStream, new ByteArrayInputStream(bytes));
+    }
+
+    private static String escapeName(String name) {
+        return name.replace("\n", "%0A").replace("\r", "%0D").replace("\"", "%22");
     }
 }

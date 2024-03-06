@@ -188,10 +188,9 @@ export class CodeModelBuilder {
   private typeNameOptions: TypeNameOptions;
   private namespace: string;
   private sdkContext: SdkContext;
-
   private options: EmitterOptions;
-
   private codeModel: CodeModel;
+  private loggingEnabled: boolean = false;
 
   readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, nndefined means type visited but not completed
@@ -201,6 +200,9 @@ export class CodeModelBuilder {
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
+    if(this.options["dev-options"]?.loglevel) {
+      this.loggingEnabled = true;
+    }
 
     if (this.options["skip-special-headers"]) {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
@@ -210,7 +212,7 @@ export class CodeModelBuilder {
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
-      throw Error("Can not emit yaml for a namespace that doesn't exist.");
+      throw Error("Cannot emit yaml for a namespace that doesn't exist.");
     }
 
     // java namespace
@@ -2622,7 +2624,9 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    logWarning(this.program, msg);
+    if(this.loggingEnabled) {
+        logWarning(this.program, msg);
+    }
   }
 
   private trace(msg: string) {
