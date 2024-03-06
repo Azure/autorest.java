@@ -199,7 +199,7 @@ export class CodeModelBuilder {
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
-    if(this.options["dev-options"]?.loglevel) {
+    if (this.options["dev-options"]?.loglevel) {
       this.loggingEnabled = true;
     }
 
@@ -2623,8 +2623,8 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    if(this.loggingEnabled) {
-        logWarning(this.program, msg);
+    if (this.loggingEnabled) {
+      logWarning(this.program, msg);
     }
   }
 
