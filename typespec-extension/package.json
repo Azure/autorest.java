@@ -50,8 +50,8 @@
     "@typespec/rest": ">=0.53.0 <1.0.0",
     "@typespec/openapi": ">=0.53.0 <1.0.0",
     "@typespec/versioning": ">=0.53.0 <1.0.0",
-    "@azure-tools/typespec-azure-core": ">=0.39.1 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.39.1 <1.0.0"
+    "@azure-tools/typespec-azure-core": ">=0.34.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.34.0 <1.0.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.20.0",
@@ -63,21 +63,21 @@
     "@types/lodash": "~4.14.202",
     "@types/js-yaml": "~4.0.9",
     "@types/mocha": "~10.0.6",
-    "@types/node": "~20.11.16",
+    "@types/node": "~20.11.24",
     "c8": "~9.1.0",
-    "eslint": "~8.56.0",
-    "mocha": "~10.2.0",
+    "eslint": "~8.57.0",
+    "mocha": "~10.3.0",
     "rimraf": "~5.0.5",
     "typescript": "~5.3.3",
-    "@typescript-eslint/parser": "~6.21.0",
-    "@typescript-eslint/eslint-plugin": "~6.21.0",
+    "@typescript-eslint/parser": "~7.1.1",
+    "@typescript-eslint/eslint-plugin": "~7.1.1",
     "eslint-plugin-deprecation": "~2.0.0",
-    "@azure-tools/typespec-azure-core": "0.39.1",
-    "@azure-tools/typespec-client-generator-core": "0.39.1",
-    "@typespec/compiler": "0.53.1",
-    "@typespec/http": "0.53.0",
-    "@typespec/openapi": "0.53.0",
-    "@typespec/rest": "0.53.0",
-    "@typespec/versioning": "0.53.0"
+    "@azure-tools/typespec-azure-core": "0.40.0",
+    "@azure-tools/typespec-client-generator-core": "0.40.0",
+    "@typespec/compiler": "0.54.0",
+    "@typespec/http": "0.54.0",
+    "@typespec/openapi": "0.54.0",
+    "@typespec/rest": "0.54.0",
+    "@typespec/versioning": "0.54.0"
   }
 }
