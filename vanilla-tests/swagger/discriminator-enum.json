@@ -1,0 +1,89 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "EnumDiscriminator",
+    "version": "0000-00-00",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "tags": [],
+  "paths": {
+    "/extensible-enum": {
+      "get": {
+        "operationId": "GetExtensibleModel",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Dog"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Dog": {
+      "type": "object",
+      "description": "Test extensible enum type for discriminator",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DogKind",
+          "description": "discriminator property"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Weight of the dog"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "weight"
+      ]
+    },
+    "DogKind": {
+      "type": "string",
+      "description": "extensible enum type for discriminator",
+      "enum": [
+        "golden"
+      ],
+      "x-ms-enum": {
+        "name": "DogKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Golden",
+            "value": "golden",
+            "description": "Species golden"
+          }
+        ]
+      }
+    },
+    "Golden": {
+      "type": "object",
+      "description": "Golden dog model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dog"
+        }
+      ],
+      "x-ms-discriminator-value": "golden"
+    }
+  },
+  "parameters": {}
+}
