@@ -890,7 +890,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     private static void addServiceMethodAnnotation(JavaType typeBlock, ReturnType returnType) {
         if (JavaSettings.getInstance().isBranded()) {
-            typeBlock.annotation("ServiceMethod(returns = ReturnType." + returnType.name() + ");");
+            typeBlock.annotation("ServiceMethod(returns = ReturnType." + returnType.name() + ")");
         }
     }
 
