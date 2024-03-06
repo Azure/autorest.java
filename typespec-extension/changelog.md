@@ -2,7 +2,7 @@
 
 ## 0.14.1 (Unreleased)
 
-Compatible with compiler 0.53.
+Compatible with compiler 0.54.
 
 ## 0.14.0 (2024-02-29)
 
