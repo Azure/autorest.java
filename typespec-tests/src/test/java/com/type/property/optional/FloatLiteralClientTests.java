@@ -14,7 +14,7 @@ public class FloatLiteralClientTests {
     @Test
     public void getAll() {
         FloatLiteralProperty floatLiteralProperty = client.getAll();
-        Assertions.assertEquals(FloatLiteralPropertyProperty.ONE_TWO, floatLiteralProperty.getProperty());
+        Assertions.assertEquals(FloatLiteralPropertyProperty.ONE_TWO_FIVE, floatLiteralProperty.getProperty());
     }
 
     @Test
@@ -26,7 +26,7 @@ public class FloatLiteralClientTests {
     @Test
     public void putAll() {
         FloatLiteralProperty floatLiteralProperty = new FloatLiteralProperty();
-        floatLiteralProperty.setProperty(FloatLiteralPropertyProperty.ONE_TWO);
+        floatLiteralProperty.setProperty(FloatLiteralPropertyProperty.ONE_TWO_FIVE);
         client.putAll(floatLiteralProperty);
     }
 
