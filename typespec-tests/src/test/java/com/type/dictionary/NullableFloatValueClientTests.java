@@ -32,7 +32,7 @@ public class NullableFloatValueClientTests {
     public void put() throws Exception {
         MapModel model = new MapModel();
         model.map = new HashMap<>();
-        model.map.put("k1", 1.2);
+        model.map.put("k1", 1.25);
         model.map.put("k2", 0.5);
         model.map.put("k3", null);
 

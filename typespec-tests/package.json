@@ -9,12 +9,12 @@
     "testserver-run": "npx cadl-ranch serve ./node_modules/@azure-tools/cadl-ranch-specs/http --coverageFile ./cadl-ranch-coverage-java.json"
   },
   "dependencies": {
-    "@azure-tools/cadl-ranch-specs": "0.31.0",
+    "@azure-tools/cadl-ranch-specs": "0.31.2",
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.14.1.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": "~0.53.0",
-    "@azure-tools/typespec-azure-resource-manager": "~0.39.0",
+    "@typespec/prettier-plugin-typespec": "~0.54.0",
+    "@azure-tools/typespec-azure-resource-manager": "~0.40.0",
     "prettier-plugin-organize-imports": "3.2.4",
     "prettier": "~3.2.5"
   },
@@ -24,8 +24,8 @@
     "@typespec/rest": ">=0.53.0 <1.0.0",
     "@typespec/versioning": ">=0.53.0 <1.0.0",
     "@typespec/openapi": ">=0.53.0 <1.0.0",
-    "@azure-tools/typespec-azure-core": ">=0.39.1 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.39.1 <1.0.0"
+    "@azure-tools/typespec-azure-core": ">=0.34.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.34.0 <1.0.0"
   },
   "private": true
 }
