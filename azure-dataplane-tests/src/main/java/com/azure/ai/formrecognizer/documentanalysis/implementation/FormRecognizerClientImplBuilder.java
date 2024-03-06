@@ -6,11 +6,11 @@ package com.azure.ai.formrecognizer.documentanalysis.implementation;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ServiceClientBuilder;
+import com.azure.core.client.traits.AzureKeyCredentialTrait;
 import com.azure.core.client.traits.ConfigurationTrait;
 import com.azure.core.client.traits.EndpointTrait;
 import com.azure.core.client.traits.HttpTrait;
-import com.azure.core.client.traits.KeyCredentialTrait;
-import com.azure.core.credential.KeyCredential;
+import com.azure.core.credential.AzureKeyCredential;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
@@ -47,7 +47,7 @@ import java.util.Objects;
 @ServiceClientBuilder(serviceClients = { FormRecognizerClientImpl.class })
 public final class FormRecognizerClientImplBuilder
     implements HttpTrait<FormRecognizerClientImplBuilder>, ConfigurationTrait<FormRecognizerClientImplBuilder>,
-    KeyCredentialTrait<FormRecognizerClientImplBuilder>, EndpointTrait<FormRecognizerClientImplBuilder> {
+    AzureKeyCredentialTrait<FormRecognizerClientImplBuilder>, EndpointTrait<FormRecognizerClientImplBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -176,18 +176,18 @@ public final class FormRecognizerClientImplBuilder
     }
 
     /*
-     * The KeyCredential used for authentication.
+     * The AzureKeyCredential used for authentication.
      */
     @Generated
-    private KeyCredential keyCredential;
+    private AzureKeyCredential azureKeyCredential;
 
     /**
      * {@inheritDoc}.
      */
     @Generated
     @Override
-    public FormRecognizerClientImplBuilder credential(KeyCredential keyCredential) {
-        this.keyCredential = keyCredential;
+    public FormRecognizerClientImplBuilder credential(AzureKeyCredential keyCredential) {
+        this.azureKeyCredential = azureKeyCredential;
         return this;
     }
 

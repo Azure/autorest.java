@@ -466,7 +466,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
             clientBuilder.addBuilderTrait(ClientBuilderTrait.TOKEN_CREDENTIAL_TRAIT);
         }
         if (serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-            if (JavaSettings.getInstance().isBranded() || JavaSettings.getInstance().isUseKeyCredential()) {
+            if (!JavaSettings.getInstance().isBranded() || JavaSettings.getInstance().isUseKeyCredential()) {
                 clientBuilder.addBuilderTrait(ClientBuilderTrait.KEY_CREDENTIAL_TRAIT);
             } else {
                 clientBuilder.addBuilderTrait(ClientBuilderTrait.AZURE_KEY_CREDENTIAL_TRAIT);
