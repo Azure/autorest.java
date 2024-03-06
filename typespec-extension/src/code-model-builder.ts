@@ -38,7 +38,6 @@ import {
   getOverloadedOperation,
   EnumMember,
   walkPropertiesInherited,
-  getService,
   isVoidType,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
@@ -543,15 +542,6 @@ export class CodeModelBuilder {
         for (const version of versioning.getVersions()) {
           const apiVersion = new ApiVersion();
           apiVersion.version = version.value;
-          codeModelClient.apiVersions.push(apiVersion);
-        }
-      } else {
-        // fallback to @service.version
-        const service = getService(this.program, client.service);
-        if (service?.version) {
-          codeModelClient.apiVersions = [];
-          const apiVersion = new ApiVersion();
-          apiVersion.version = service.version;
           codeModelClient.apiVersions.push(apiVersion);
         }
       }
