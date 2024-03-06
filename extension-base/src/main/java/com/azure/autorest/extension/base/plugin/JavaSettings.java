@@ -166,7 +166,7 @@ public class JavaSettings {
                 getBooleanValue(host, "include-read-only-in-constructor-args", false),
                 // setting the default as true as the Java design guideline recommends using String for URLs.
                 getBooleanValue(host, "url-as-string", true),
-                getBooleanValue(host, "uuid-as-string", true),
+                getBooleanValue(host, "uuid-as-string", false),
 
                 // setting this to false by default as a lot of existing libraries still use swagger and
                 // were generated with required = true set in JsonProperty annotation
