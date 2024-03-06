@@ -1324,6 +1324,7 @@ export class CodeModelBuilder {
 
       if (operationIsJsonMergePatch(httpOperation)) {
         // skip model flatten, if "application/merge-patch+json"
+        schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
         return;
       }
 
