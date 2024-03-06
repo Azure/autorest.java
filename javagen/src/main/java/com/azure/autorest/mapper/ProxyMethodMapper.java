@@ -27,7 +27,6 @@ import com.azure.autorest.util.SchemaUtil;
 import com.azure.autorest.util.XmsExampleWrapper;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
-import com.generic.core.http.exception.HttpExceptionType;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;

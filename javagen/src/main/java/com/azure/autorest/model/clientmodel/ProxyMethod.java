@@ -400,8 +400,8 @@ public class ProxyMethod {
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         imports.add(RestProxyUtils.class.getName());
-        Annotation.HttpRequestInformation.addImportsTo(imports);
-        Annotation.UnexpectedResponseExceptionInformation.addImportsTo(imports);
+        Annotation.HTTP_REQUEST_INFORMATION.addImportsTo(imports);
+        Annotation.UNEXPECTED_RESPONSE_EXCEPTION_INFORMATION.addImportsTo(imports);
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
                 Annotation.UNEXPECTED_RESPONSE_EXCEPTION_TYPE.addImportsTo(imports);

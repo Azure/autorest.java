@@ -36,7 +36,6 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.TypeReference;
 
 import java.util.Arrays;
 import java.util.Collection;
