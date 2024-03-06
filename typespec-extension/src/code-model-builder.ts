@@ -36,7 +36,6 @@ import {
   getProjectedName,
   getEncode,
   getOverloadedOperation,
-  isErrorModel,
   EnumMember,
   walkPropertiesInherited,
   getService,
@@ -83,6 +82,7 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
+  isErrorOrChildOfError,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -1587,7 +1587,10 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCodes === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+    if (
+      resp.statusCodes === "*" ||
+      (bodyType && bodyType.kind === "Model" && isErrorOrChildOfError(this.sdkContext, bodyType))
+    ) {
       // "*", or the model is @error
       op.addException(response);
 
