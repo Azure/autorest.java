@@ -16,7 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * The DotSalmon model.
  */
 @Fluent
-public class DotSalmon extends DotFish {
+public final class DotSalmon extends DotFish {
     /*
      * The location property.
      */
@@ -89,7 +89,7 @@ public class DotSalmon extends DotFish {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("fish\\.type", getFishType());
+        jsonWriter.writeStringField("fish.type", getFishType());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.isWild);
@@ -110,7 +110,7 @@ public class DotSalmon extends DotFish {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("fish\\.type".equals(fieldName)) {
+                if ("fish.type".equals(fieldName)) {
                     deserializedDotSalmon.setFishType(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedDotSalmon.setSpecies(reader.getString());
