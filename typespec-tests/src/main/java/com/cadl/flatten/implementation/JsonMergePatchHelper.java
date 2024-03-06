@@ -5,30 +5,31 @@
 package com.cadl.flatten.implementation;
 
 import com.cadl.flatten.models.TodoItemPatch;
-import com.cadl.flatten.models.UpdateRequest;
+import com.cadl.flatten.models.UpdatePatchRequest;
 
 /**
  * This is the Helper class to enable json merge patch serialization for a model.
  */
 public class JsonMergePatchHelper {
-    private static UpdateRequestAccessor updateRequestAccessor;
+    private static UpdatePatchRequestAccessor updatePatchRequestAccessor;
 
     private static TodoItemPatchAccessor todoItemPatchAccessor;
 
-    public interface UpdateRequestAccessor {
-        UpdateRequest prepareModelForJsonMergePatch(UpdateRequest updateRequest, boolean jsonMergePatchEnabled);
+    public interface UpdatePatchRequestAccessor {
+        UpdatePatchRequest prepareModelForJsonMergePatch(UpdatePatchRequest updatePatchRequest,
+            boolean jsonMergePatchEnabled);
     }
 
     public interface TodoItemPatchAccessor {
         TodoItemPatch prepareModelForJsonMergePatch(TodoItemPatch todoItemPatch, boolean jsonMergePatchEnabled);
     }
 
-    public static void setUpdateRequestAccessor(UpdateRequestAccessor accessor) {
-        updateRequestAccessor = accessor;
+    public static void setUpdatePatchRequestAccessor(UpdatePatchRequestAccessor accessor) {
+        updatePatchRequestAccessor = accessor;
     }
 
-    public static UpdateRequestAccessor getUpdateRequestAccessor() {
-        return updateRequestAccessor;
+    public static UpdatePatchRequestAccessor getUpdatePatchRequestAccessor() {
+        return updatePatchRequestAccessor;
     }
 
     public static void setTodoItemPatchAccessor(TodoItemPatchAccessor accessor) {

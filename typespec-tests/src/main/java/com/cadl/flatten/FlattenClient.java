@@ -22,7 +22,7 @@ import com.cadl.flatten.implementation.models.SendProjectedNameRequest;
 import com.cadl.flatten.implementation.models.SendRequest;
 import com.cadl.flatten.models.SendLongOptions;
 import com.cadl.flatten.models.TodoItem;
-import com.cadl.flatten.models.UpdateRequest;
+import com.cadl.flatten.models.UpdatePatchRequest;
 import com.cadl.flatten.models.User;
 
 /**
@@ -285,12 +285,12 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public TodoItem update(long id, UpdateRequest request) {
+    public TodoItem update(long id, UpdatePatchRequest request) {
         // Generated convenience method for updateWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getUpdateRequestAccessor().prepareModelForJsonMergePatch(request, true);
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, true);
         BinaryData requestInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(request).toBytes());
-        JsonMergePatchHelper.getUpdateRequestAccessor().prepareModelForJsonMergePatch(request, false);
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, false);
         return updateWithResponse(id, requestInBinaryData, requestOptions).getValue().toObject(TodoItem.class);
     }
 }

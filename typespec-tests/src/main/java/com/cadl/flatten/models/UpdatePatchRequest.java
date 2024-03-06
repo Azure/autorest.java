@@ -16,10 +16,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The UpdateRequest model.
+ * The UpdatePatchRequest model.
  */
 @Fluent
-public final class UpdateRequest implements JsonSerializable<UpdateRequest> {
+public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchRequest> {
     /*
      * The patch property.
      */
@@ -41,17 +41,17 @@ public final class UpdateRequest implements JsonSerializable<UpdateRequest> {
     }
 
     static {
-        JsonMergePatchHelper.setUpdateRequestAccessor((model, jsonMergePatchEnabled) -> {
+        JsonMergePatchHelper.setUpdatePatchRequestAccessor((model, jsonMergePatchEnabled) -> {
             model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
             return model;
         });
     }
 
     /**
-     * Creates an instance of UpdateRequest class.
+     * Creates an instance of UpdatePatchRequest class.
      */
     @Generated
-    public UpdateRequest() {
+    public UpdatePatchRequest() {
     }
 
     /**
@@ -69,10 +69,10 @@ public final class UpdateRequest implements JsonSerializable<UpdateRequest> {
      * <p>Required when create the resource.</p>
      * 
      * @param patch the patch value to set.
-     * @return the UpdateRequest object itself.
+     * @return the UpdatePatchRequest object itself.
      */
     @Generated
-    public UpdateRequest setPatch(TodoItemPatch patch) {
+    public UpdatePatchRequest setPatch(TodoItemPatch patch) {
         this.patch = patch;
         this.updatedProperties.add("patch");
         return this;
@@ -109,28 +109,28 @@ public final class UpdateRequest implements JsonSerializable<UpdateRequest> {
     }
 
     /**
-     * Reads an instance of UpdateRequest from the JsonReader.
+     * Reads an instance of UpdatePatchRequest from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of UpdateRequest if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the UpdateRequest.
+     * @return An instance of UpdatePatchRequest if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the UpdatePatchRequest.
      */
     @Generated
-    public static UpdateRequest fromJson(JsonReader jsonReader) throws IOException {
+    public static UpdatePatchRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            UpdateRequest deserializedUpdateRequest = new UpdateRequest();
+            UpdatePatchRequest deserializedUpdatePatchRequest = new UpdatePatchRequest();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("patch".equals(fieldName)) {
-                    deserializedUpdateRequest.patch = TodoItemPatch.fromJson(reader);
+                    deserializedUpdatePatchRequest.patch = TodoItemPatch.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
 
-            return deserializedUpdateRequest;
+            return deserializedUpdatePatchRequest;
         });
     }
 }
