@@ -50,7 +50,7 @@ import {
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
-  ServiceAuthentication,
+  Authentication,
   HttpStatusCodesEntry,
   getHttpOperation,
   getQueryParamOptions,
@@ -333,7 +333,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processAuth(auth: ServiceAuthentication) {
+  private processAuth(auth: Authentication) {
     const securitySchemes: SecurityScheme[] = [];
     for (const option of auth.options) {
       for (const scheme of option.schemes) {
