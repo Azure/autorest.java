@@ -16,10 +16,13 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.flatten.implementation.FlattenClientImpl;
+import com.cadl.flatten.implementation.JsonMergePatchHelper;
 import com.cadl.flatten.implementation.models.SendLongRequest;
 import com.cadl.flatten.implementation.models.SendProjectedNameRequest;
 import com.cadl.flatten.implementation.models.SendRequest;
 import com.cadl.flatten.models.SendLongOptions;
+import com.cadl.flatten.models.TodoItem;
+import com.cadl.flatten.models.UpdatePatchRequest;
 import com.cadl.flatten.models.User;
 
 /**
@@ -130,6 +133,47 @@ public final class FlattenClient {
     }
 
     /**
+     * The update operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     patch (Optional, Required on create): {
+     *         title: String (Optional)
+     *         description: String (Optional)
+     *         status: String(NotStarted/InProgress/Completed) (Optional)
+     *     }
+     * }
+     * }</pre>
+     * <p><strong>Response Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     * }
+     * }</pre>
+     * 
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> updateWithResponse(long id, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.updateWithResponse(id, request, requestOptions);
+    }
+
+    /**
      * The send operation.
      * 
      * @param id A sequence of textual characters.
@@ -224,5 +268,29 @@ public final class FlattenClient {
             requestOptions.addQueryParam("filter", filter, false);
         }
         sendLongWithResponse(id, request, requestOptions).getValue();
+    }
+
+    /**
+     * The update operation.
+     * 
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param request The request parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public TodoItem update(long id, UpdatePatchRequest request) {
+        // Generated convenience method for updateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, true);
+        BinaryData requestInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(request).toBytes());
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, false);
+        return updateWithResponse(id, requestInBinaryData, requestOptions).getValue().toObject(TodoItem.class);
     }
 }

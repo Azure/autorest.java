@@ -36,10 +36,8 @@ import {
   getProjectedName,
   getEncode,
   getOverloadedOperation,
-  isErrorModel,
   EnumMember,
   walkPropertiesInherited,
-  getService,
   isVoidType,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
@@ -51,7 +49,7 @@ import {
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
-  ServiceAuthentication,
+  Authentication,
   HttpStatusCodesEntry,
   getHttpOperation,
   getQueryParamOptions,
@@ -83,6 +81,7 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
+  isErrorOrChildOfError,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -339,7 +338,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processAuth(auth: ServiceAuthentication) {
+  private processAuth(auth: Authentication) {
     const securitySchemes: SecurityScheme[] = [];
     for (const option of auth.options) {
       for (const scheme of option.schemes) {
@@ -549,15 +548,6 @@ export class CodeModelBuilder {
         for (const version of versioning.getVersions()) {
           const apiVersion = new ApiVersion();
           apiVersion.version = version.value;
-          codeModelClient.apiVersions.push(apiVersion);
-        }
-      } else {
-        // fallback to @service.version
-        const service = getService(this.program, client.service);
-        if (service?.version) {
-          codeModelClient.apiVersions = [];
-          const apiVersion = new ApiVersion();
-          apiVersion.version = service.version;
           codeModelClient.apiVersions.push(apiVersion);
         }
       }
@@ -1331,11 +1321,17 @@ export class CodeModelBuilder {
       // anonymous model
 
       // name the schema for documentation
-      schema.language.default.name = op.language.default.name + "Request";
+      schema.language.default.name = pascalCase(op.language.default.name) + "Request";
 
       if (!parameter.language.default.name) {
         // name the parameter for documentation
         parameter.language.default.name = "request";
+      }
+
+      if (operationIsJsonMergePatch(httpOperation)) {
+        // skip model flatten, if "application/merge-patch+json"
+        schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
+        return;
       }
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
@@ -1593,7 +1589,10 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (resp.statusCodes === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
+    if (
+      resp.statusCodes === "*" ||
+      (bodyType && bodyType.kind === "Model" && isErrorOrChildOfError(this.sdkContext, bodyType))
+    ) {
       // "*", or the model is @error
       op.addException(response);
 
