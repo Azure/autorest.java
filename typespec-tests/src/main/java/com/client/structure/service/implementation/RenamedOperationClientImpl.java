@@ -28,7 +28,6 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.ServiceServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -66,20 +65,6 @@ public final class RenamedOperationClientImpl {
      */
     public String getClient() {
         return this.client;
-    }
-
-    /**
-     * Service version.
-     */
-    private final ServiceServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public ServiceServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /**
@@ -129,11 +114,10 @@ public final class RenamedOperationClientImpl {
      * 
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     * @param serviceVersion Service version.
      */
-    public RenamedOperationClientImpl(String endpoint, String client, ServiceServiceVersion serviceVersion) {
+    public RenamedOperationClientImpl(String endpoint, String client) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -142,11 +126,9 @@ public final class RenamedOperationClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     * @param serviceVersion Service version.
      */
-    public RenamedOperationClientImpl(HttpPipeline httpPipeline, String endpoint, String client,
-        ServiceServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
+    public RenamedOperationClientImpl(HttpPipeline httpPipeline, String endpoint, String client) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -156,15 +138,13 @@ public final class RenamedOperationClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     * @param serviceVersion Service version.
      */
     public RenamedOperationClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String client, ServiceServiceVersion serviceVersion) {
+        String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.client = client;
-        this.serviceVersion = serviceVersion;
         this.groups = new GroupsImpl(this);
         this.service
             = RestProxy.create(RenamedOperationClientService.class, this.httpPipeline, this.getSerializerAdapter());
