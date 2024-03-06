@@ -186,7 +186,7 @@ public final class FormRecognizerClientImplBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientImplBuilder credential(AzureKeyCredential keyCredential) {
+    public FormRecognizerClientImplBuilder credential(AzureKeyCredential azureKeyCredential) {
         this.azureKeyCredential = azureKeyCredential;
         return this;
     }
