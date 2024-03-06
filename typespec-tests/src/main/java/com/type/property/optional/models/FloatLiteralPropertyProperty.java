@@ -9,9 +9,9 @@ package com.type.property.optional.models;
  */
 public enum FloatLiteralPropertyProperty {
     /**
-     * Enum value 1.2.
+     * Enum value 1.25.
      */
-    ONE_TWO(1.2);
+    ONE_TWO_FIVE(1.25);
 
     /**
      * The actual serialized value for a FloatLiteralPropertyProperty instance.
