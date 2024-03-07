@@ -390,7 +390,11 @@ export class CodeModelBuilder {
   }
 
   private isBranded(): boolean {
-    return this.options["package-dir"]?.toLocaleLowerCase().startsWith("azure") || !this.options["flavor"] || this.options["flavor"].toLocaleLowerCase() === "azure";
+    return (
+      this.options["package-dir"]?.toLocaleLowerCase().startsWith("azure") ||
+      !this.options["flavor"] ||
+      this.options["flavor"].toLocaleLowerCase() === "azure"
+    );
   }
 
   private isInternal(context: SdkContext, operation: Operation): boolean {
