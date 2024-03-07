@@ -17,7 +17,6 @@ export interface EmitterOptions {
   "namespace"?: string;
   "output-dir"?: string;
 
-  "branded"?: boolean;
   "flavor"?: string;
 
   "service-name"?: string;
