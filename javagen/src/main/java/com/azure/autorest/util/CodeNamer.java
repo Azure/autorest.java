@@ -9,12 +9,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
-
-import static com.azure.autorest.preprocessor.namer.CodeNamer.BASIC_LATIC_CHARACTERS;
 
 public class CodeNamer {
 
@@ -170,10 +169,11 @@ public class CodeNamer {
             } else {
                 // all char is '_', then transform some '_' to
 
-                if (result.startsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(0))) {
-                    result = BASIC_LATIC_CHARACTERS.get(name.charAt(0)) + result.substring(1);
-                    if (result.endsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(name.length() - 1))) {
-                        result = result.substring(0, result.length() - 1) + BASIC_LATIC_CHARACTERS.get(name.charAt(name.length() - 1));
+                Map<Character, String> basicLaticCharacters = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLaticCharacters();
+                if (result.startsWith("_") && basicLaticCharacters.containsKey(name.charAt(0))) {
+                    result = basicLaticCharacters.get(name.charAt(0)) + result.substring(1);
+                    if (result.endsWith("_") && basicLaticCharacters.containsKey(name.charAt(name.length() - 1))) {
+                        result = result.substring(0, result.length() - 1) + basicLaticCharacters.get(name.charAt(name.length() - 1));
                     }
                 }
             }
