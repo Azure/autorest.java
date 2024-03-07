@@ -4,6 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import java.util.List;
+import java.util.Map;
 
 public class Pom {
     private String parentIdentifier;
@@ -15,6 +16,7 @@ public class Pom {
     private String serviceName;
     private String serviceDescription;
     private List<String> dependencyIdentifiers;
+    private Map<String, String> repositories;
 
     private boolean requireCompilerPlugins = false;
 
@@ -104,6 +106,15 @@ public class Pom {
 
     public Pom setRequireCompilerPlugins(boolean requireCompilerPlugins) {
         this.requireCompilerPlugins = requireCompilerPlugins;
+        return this;
+    }
+
+    public Map<String, String> getRepositories() {
+        return repositories;
+    }
+
+    public Pom setRepositories(Map<String, String> repositories) {
+        this.repositories = repositories;
         return this;
     }
 }

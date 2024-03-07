@@ -160,7 +160,13 @@ public class TypeSpecPlugin extends Javagen {
                 .filter(ModelUtil::isGeneratingModel)
                 .anyMatch(ClientModelUtil::isMultipartModel);
         if (generateMultipartFormDataHelper) {
-            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+            if (JavaSettings.getInstance().isBranded()) {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+            } else {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()),
+                        ClientModelUtil.GENERIC_MULTI_PART_FORM_DATA_HELPER_CLASS_NAME,
+                        ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+            }
         }
     }
 
