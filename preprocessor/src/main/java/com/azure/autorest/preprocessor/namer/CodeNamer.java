@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
-    private static final Map<Character, String> BASIC_LATIC_CHARACTERS = new HashMap<>() {{
+    private static final Map<Character, String> BASIC_LATIN_CHARACTERS = new HashMap<>() {{
         put((char) 32, "Space");
         put((char) 33, "ExclamationMark");
         put((char) 34, "QuotationMark");
@@ -93,8 +93,8 @@ public class CodeNamer {
     private CodeNamer() {
     }
 
-    public static Map<Character, String> getBasicLaticCharacters() {
-        return BASIC_LATIC_CHARACTERS;
+    public static Map<Character, String> getBasicLatinCharacters() {
+        return BASIC_LATIN_CHARACTERS;
     }
 
     public static String toCamelCase(String name) {
@@ -170,11 +170,11 @@ public class CodeNamer {
 
         // here we have only letters and digits or an empty String
         if (correctName == null || correctName.isEmpty() ||
-                BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0))) {
+                BASIC_LATIN_CHARACTERS.containsKey(correctName.charAt(0))) {
             StringBuilder sb = new StringBuilder();
             for (char symbol : name.toCharArray()) {
-                if (BASIC_LATIC_CHARACTERS.containsKey(symbol)) {
-                    sb.append(BASIC_LATIC_CHARACTERS.get(symbol));
+                if (BASIC_LATIN_CHARACTERS.containsKey(symbol)) {
+                    sb.append(BASIC_LATIN_CHARACTERS.get(symbol));
                 } else {
                     sb.append(symbol);
                 }

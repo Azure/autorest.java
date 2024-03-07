@@ -169,7 +169,7 @@ public class CodeNamer {
             } else {
                 // all char is '_', then transform some '_' to
 
-                Map<Character, String> basicLaticCharacters = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLaticCharacters();
+                Map<Character, String> basicLaticCharacters = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacters();
                 if (result.startsWith("_") && basicLaticCharacters.containsKey(name.charAt(0))) {
                     result = basicLaticCharacters.get(name.charAt(0)) + result.substring(1);
                     if (result.endsWith("_") && basicLaticCharacters.containsKey(name.charAt(name.length() - 1))) {
