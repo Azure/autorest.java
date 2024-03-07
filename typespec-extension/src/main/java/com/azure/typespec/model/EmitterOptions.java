@@ -24,11 +24,8 @@ public class EmitterOptions {
     @JsonProperty(value="output-dir")
     private String outputDir;
 
-    @JsonProperty(value = "branded")
-    private Boolean branded = false;
-
     @JsonProperty(value = "flavor")
-    private String flavor;
+    private String flavor = "Azure";
 
     @JsonDeserialize(using = EmptyStringToNullDeserializer.class)
     @JsonProperty(value="service-name")
@@ -147,10 +144,6 @@ public class EmitterOptions {
 
     public void setPolling(Map<String, JavaSettings.PollingDetails> polling) {
         this.polling = polling;
-    }
-
-    public Boolean getBranded() {
-        return branded;
     }
 
     public Boolean getArm() {

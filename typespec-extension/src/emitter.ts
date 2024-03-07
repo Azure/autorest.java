@@ -61,8 +61,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "namespace": { type: "string", nullable: true },
     "output-dir": { type: "string", nullable: true },
 
-    "branded": { type: "boolean", nullable: true, default: false },
-    "flavor": { type: "string", nullable: true},
+    "flavor": { type: "string", nullable: true, default: "Azure"},
 
     // service
     "service-name": { type: "string", nullable: true },

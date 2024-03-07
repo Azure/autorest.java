@@ -285,7 +285,7 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("polling", options.getPolling());
         }
 
-        if (!(options.getFlavor() != null && options.getFlavor().equalsIgnoreCase("azure") || options.getBranded() == Boolean.TRUE)) {
+        if (options.getFlavor() != null && !options.getFlavor().equalsIgnoreCase("azure")) {
             SETTINGS_MAP.put("branded", Boolean.FALSE);
 
             SETTINGS_MAP.put("sdk-integration", false);
