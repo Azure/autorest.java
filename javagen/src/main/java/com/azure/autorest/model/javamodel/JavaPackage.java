@@ -220,15 +220,19 @@ public class JavaPackage {
     }
 
     public final void addJavaFromResources(String packageName, String name) {
-        JavaFile javaFile = javaFileFactory.createSourceFile(packageName, name);
-        try (InputStream inputStream = JavaPackage.class.getClassLoader().getResourceAsStream(name + ".java");
+        addJavaFromResources(packageName, name, name);
+    }
+
+    public final void addJavaFromResources(String packageName, String resourceName, String fileName) {
+        JavaFile javaFile = javaFileFactory.createSourceFile(packageName, fileName);
+        try (InputStream inputStream = JavaPackage.class.getClassLoader().getResourceAsStream(resourceName + ".java");
              BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
             Iterator<String> linesIterator = bufferedReader.lines().iterator();
             while (linesIterator.hasNext()) {
                 javaFile.line(linesIterator.next());
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to read " + name + ".java from resources.", e);
+            throw new RuntimeException("Failed to read " + resourceName + ".java from resources.", e);
         }
         addJavaFile(javaFile);
     }

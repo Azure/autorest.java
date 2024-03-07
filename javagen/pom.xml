@@ -17,6 +17,13 @@
   <artifactId>azure-autorest-javagen</artifactId>
   <version>1.0.0-beta.1</version>
 
+  <repositories>
+    <repository>
+      <id>clientcore</id>
+      <url>https://clientcore.blob.core.windows.net/artifacts</url>
+    </repository>
+  </repositories>
+
   <dependencies>
     <dependency>
       <groupId>com.fasterxml.jackson.core</groupId>
@@ -67,6 +74,11 @@
       <artifactId>junit</artifactId>
       <version>4.13.2</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.generic</groupId>
+      <artifactId>generic-core</artifactId>
+      <version>1.0.0-beta.1</version>
     </dependency>
   </dependencies>
 

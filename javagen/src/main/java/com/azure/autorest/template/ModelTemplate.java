@@ -497,10 +497,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             .concat(model.getProperties().stream(), propertyReferences.stream())
             .anyMatch(p -> ClientModelUtil.hasSetter(p, settings));
 
-        if (fluent) {
-            javaFile.annotation("Fluent");
+        if (JavaSettings.getInstance().isBranded()) {
+            if (fluent) {
+                javaFile.annotation("Fluent");
+            } else {
+                javaFile.annotation("Immutable");
+            }
         } else {
-            javaFile.annotation("Immutable");
+            if (fluent) {
+                javaFile.annotation("Metadata(conditions = {TypeConditions.FLUENT})");
+            } else {
+                javaFile.annotation("Metadata(conditions = {TypeConditions.IMMUTABLE})");
+            }
         }
     }
 
@@ -1181,12 +1189,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     protected void addGeneratedImport(Set<String> imports) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
             Annotation.GENERATED.addImportsTo(imports);
+            Annotation.METADATA.addImportsTo(imports);
         }
     }
 
     protected void addGeneratedAnnotation(JavaContext classBlock) {
         if (JavaSettings.getInstance().isDataPlaneClient()) {
-            classBlock.annotation(Annotation.GENERATED.getName());
+            if (JavaSettings.getInstance().isBranded()) {
+                classBlock.annotation(Annotation.GENERATED.getName());
+            } else {
+                classBlock.annotation(Annotation.METADATA.getName() + "(generated = true)");
+            }
         }
     }
 
