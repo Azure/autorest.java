@@ -294,6 +294,9 @@ public class TypeSpecPlugin extends Javagen {
         if (options.getFlavor() != null) {
             SETTINGS_MAP.put("flavor", options.getFlavor());
         }
+        if (options.getPackageDir() != null && options.getPackageDir().toLowerCase().startsWith("azure")) {
+            SETTINGS_MAP.put("flavor", "Azure");
+        }
 
         if (options.getFlavor() != null && !"azure".equalsIgnoreCase(options.getFlavor())) {
             SETTINGS_MAP.put("sdk-integration", false);

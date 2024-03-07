@@ -16,6 +16,7 @@ import { fileURLToPath } from "url";
 export interface EmitterOptions {
   "namespace"?: string;
   "output-dir"?: string;
+  "package-dir"?: string;
 
   "flavor"?: string;
 
@@ -59,6 +60,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   properties: {
     "namespace": { type: "string", nullable: true },
     "output-dir": { type: "string", nullable: true },
+    "package-dir": { type: "string", nullable: true },
 
     "flavor": { type: "string", nullable: true, default: "Azure" },
 
