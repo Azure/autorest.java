@@ -365,7 +365,7 @@ export class CodeModelBuilder {
                 // HTTP Authentication should use "Basic token" or "Bearer token"
                 schemeOrApiKeyPrefix = pascalCase(schemeOrApiKeyPrefix);
 
-                if (this.options["flavor"]?.toLocaleLowerCase() === "azure") {
+                if (this.isBranded()) {
                   // Azure would not allow BasicAuth or BearerAuth
                   this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
                   continue;
@@ -387,6 +387,10 @@ export class CodeModelBuilder {
         schemes: securitySchemes,
       });
     }
+  }
+
+  private isBranded(): boolean {
+    return !this.options["flavor"] || this.options["flavor"].toLocaleLowerCase() === "azure"
   }
 
   private isInternal(context: SdkContext, operation: Operation): boolean {
