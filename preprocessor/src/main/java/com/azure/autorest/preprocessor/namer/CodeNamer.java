@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
-    private static final Map<Character, String> BASIC_LATIC_CHARACTERS = new HashMap<Character, String>() {{
+    public static final Map<Character, String> BASIC_LATIC_CHARACTERS = new HashMap<Character, String>() {{
         put((char) 32, "Space");
         put((char) 33, "ExclamationMark");
         put((char) 34, "QuotationMark");
@@ -60,7 +60,7 @@ public class CodeNamer {
         put((char) 125, "RightCurlyBracket");
         put((char) 126, "Tilde");
     }};
-    private static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
+    public static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
             "abstract", "assert", "boolean", "Boolean", "break",
             "byte", "Byte", "case", "catch", "char",
             "Character", "class", "Class", "const", "continue",
@@ -239,7 +239,7 @@ public class CodeNamer {
         return getEscapedReservedName(name, "Method");
     }
 
-    protected static String getEscapedReservedName(String name, String appendValue) {
+    public static String getEscapedReservedName(String name, String appendValue) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(appendValue);
 
