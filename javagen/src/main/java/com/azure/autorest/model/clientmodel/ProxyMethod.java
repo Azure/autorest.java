@@ -8,7 +8,10 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
+import com.generic.core.http.exception.HttpExceptionType;
+import com.generic.core.implementation.http.rest.RestProxyUtils;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,6 +21,14 @@ import java.util.stream.Collectors;
  * A method within a Proxy.
  */
 public class ProxyMethod {
+
+    private static final Map<ClassType, HttpExceptionType> EXCEPTION_TYPE_MAP = new HashMap<>() {{
+        put(ClassType.CLIENT_AUTHENTICATION_EXCEPTION, HttpExceptionType.CLIENT_AUTHENTICATION);
+        put(ClassType.RESOURCE_EXISTS_EXCEPTION, HttpExceptionType.RESOURCE_EXISTS);
+        put(ClassType.RESOURCE_NOT_FOUND_EXCEPTION, HttpExceptionType.RESOURCE_NOT_FOUND);
+        put(ClassType.RESOURCE_MODIFIED_EXCEPTION, HttpExceptionType.RESOURCE_MODIFIED);
+    }};
+
     /**
      * Get the Content-Type of the request.
      */
@@ -388,6 +399,9 @@ public class ProxyMethod {
      * implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
+        imports.add(RestProxyUtils.class.getName());
+        Annotation.HTTP_REQUEST_INFORMATION.addImportsTo(imports);
+        Annotation.UNEXPECTED_RESPONSE_EXCEPTION_INFORMATION.addImportsTo(imports);
         if (includeImplementationImports) {
             if (getUnexpectedResponseExceptionType() != null) {
                 Annotation.UNEXPECTED_RESPONSE_EXCEPTION_TYPE.addImportsTo(imports);
@@ -425,6 +439,11 @@ public class ProxyMethod {
             }
         }
     }
+
+    public HttpExceptionType getHttpExceptionType(ClassType classType) {
+        return EXCEPTION_TYPE_MAP.get(classType);
+    }
+
 
     public static class Builder {
         protected String requestContentType;

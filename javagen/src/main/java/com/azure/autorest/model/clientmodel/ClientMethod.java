@@ -417,7 +417,7 @@ public class ClientMethod {
                         imports.add("com.fasterxml.jackson.core.type.TypeReference");
                     }
                 } else {
-                    imports.add("com.azure.core.util.serializer.TypeReference");
+                    imports.add(ClassType.TYPE_REFERENCE.getFullName());
                     imports.add("java.time.Duration");
                     imports.add(PollingStrategyOptions.class.getName());
 

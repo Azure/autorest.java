@@ -249,7 +249,9 @@ public class TemplateUtil {
                 typeBlock.annotation("ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)");
                 break;
             default:
-                typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                if (JavaSettings.getInstance().isBranded()) {
+                    typeBlock.annotation("ServiceMethod(returns = ReturnType.SINGLE)");
+                }
                 break;
         }
     }
@@ -290,8 +292,7 @@ public class TemplateUtil {
     public static void addClientLogger(JavaClass classBlock, String className, JavaFileContents javaFileContents) {
         String content = javaFileContents.toString();
         if (content.contains("throw LOGGER")
-                || content.contains("LOGGER.logThrowable")
-                || content.contains("LOGGER.logException")
+                || content.contains("LOGGER.log")
                 || content.contains("LOGGER.info")) {
             // hack to add LOGGER class variable only if LOGGER is used in code
             classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
