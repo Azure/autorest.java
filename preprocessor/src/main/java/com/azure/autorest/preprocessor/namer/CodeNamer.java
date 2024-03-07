@@ -161,10 +161,6 @@ public class CodeNamer {
         return getValidName(name, '_', '-');
     }
 
-    protected static String removeInvalidCharactersNamespace(String name) {
-        return getValidName(name, '_', '-', '.');
-    }
-
     public static String getValidName(String name, char... allowedCharacters) {
         String correctName = removeInvalidCharacters(name, allowedCharacters);
 
