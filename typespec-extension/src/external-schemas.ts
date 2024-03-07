@@ -1,4 +1,6 @@
-import { ArraySchema, ObjectSchema, Property, Schemas, StringSchema } from "@autorest/codemodel";
+import { ArraySchema, BinarySchema, ObjectSchema, Property, Schemas, StringSchema } from "@autorest/codemodel";
+import { KnownMediaType } from "@azure-tools/codegen";
+import { getJavaNamespace, pascalCase } from "./utils.js";
 
 /*
  * These schema need to reflect
@@ -102,4 +104,61 @@ export function createPollOperationDetailsSchema(schemas: Schemas, stringSchema:
     }),
   );
   return pollOperationDetailsSchema;
+}
+
+const fileDetailsMap: Map<string, ObjectSchema> = new Map();
+
+export function getFileDetailsSchema(
+  filePropertyName: string,
+  namespace: string,
+  schemas: Schemas,
+  binarySchema: BinarySchema,
+  stringSchema: StringSchema,
+): ObjectSchema {
+  const schemaName =
+    pascalCase(filePropertyName) + (filePropertyName.toLocaleLowerCase().endsWith("file") ? "Details" : "FileDetails");
+  let fileDetailsSchema = fileDetailsMap.get(schemaName);
+  if (!fileDetailsSchema) {
+    fileDetailsSchema = new ObjectSchema(
+      schemaName,
+      'The file details for the "' + filePropertyName + '" field.',
+      {
+        language: {
+          default: {
+            namespace: namespace,
+          },
+          java: {
+            namespace: getJavaNamespace(namespace),
+          },
+        },
+        serializationFormats: [KnownMediaType.Multipart],
+      },
+    );
+    fileDetailsSchema.serializationFormats;
+    schemas.add(fileDetailsSchema);
+    fileDetailsSchema.addProperty(
+      new Property("content", "The content of the file.", binarySchema, {
+        required: true,
+        nullable: false,
+        readOnly: false,
+      }),
+    );
+    fileDetailsSchema.addProperty(
+      new Property("filename", "The filename of the file.", stringSchema, {
+        required: false,
+        nullable: false,
+        readOnly: false,
+      }),
+    );
+    fileDetailsSchema.addProperty(
+      new Property("contentType", "The content-type of the file.", stringSchema, {
+        required: false,
+        nullable: false,
+        readOnly: false,
+        clientDefaultValue: "application/octet-stream",
+      }),
+    );
+    fileDetailsMap.set(schemaName, fileDetailsSchema);
+  }
+  return fileDetailsSchema;
 }
