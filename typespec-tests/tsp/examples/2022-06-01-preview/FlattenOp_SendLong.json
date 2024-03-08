@@ -2,7 +2,7 @@
   "operationId": "FlattenOp_SendLong",
   "title": "FlattenOp SendLong",
   "parameters": {
-    "id":  "myRequiredId",
+    "name":  "myRequiredId",
     "filter": "name=myName",
     "request": {
       "user": {
@@ -12,7 +12,10 @@
       "dataInt": 11,
       "dataIntOptional": 12,
       "dataLong": 13,
-      "data_float": 14.0
+      "data_float": 14.0,
+      "title": "title",
+      "description": "description",
+      "status": "NotStarted"
     }
   },
   "responses": {
