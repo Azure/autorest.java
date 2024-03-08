@@ -190,6 +190,7 @@ public final class MultipartClient {
         BinaryData request = new MultipartFormDataHelper(requestOptions)
             .serializeFileField("file_data", requestObj.getFileData().getContent(),
                 requestObj.getFileData().getContentType(), requestObj.getFileData().getFilename())
+            .serializeTextField("constant", requestObj.getConstant())
             .end()
             .getRequestBody();
         uploadFileWithResponse(name, request, requestOptions).getValue();
