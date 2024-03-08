@@ -31,7 +31,7 @@ public class JavaSettings {
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
     private static Logger logger;
     private final boolean useKeyCredential;
-    private final boolean branded;
+    private final String flavor;
     private final boolean noCustomHeaders;
 
     static void setHeader(String value) {
@@ -175,7 +175,7 @@ public class JavaSettings {
                 getBooleanValue(host, "use-key-credential", false),
                 getBooleanValue(host, "null-byte-array-maps-to-empty-array", false),
                 getBooleanValue(host, "graal-vm-config", false),
-                getBooleanValue(host, "branded", true)
+                getStringValue(host, "flavor", "Azure")
             );
         }
         return instance;
@@ -264,7 +264,7 @@ public class JavaSettings {
      * @param nullByteArrayMapsToEmptyArray If set to true, {@code ArrayType.BYTE_ARRAY} will return an empty array
      * instead of null when the default value expression is null.
      * @param generateGraalVmConfig If set to true, the generated client will have support for GraalVM.
-     * @param branded Whether to generate with Azure branding.
+     * @param flavor The brand name we use to geneate SDK.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -327,7 +327,7 @@ public class JavaSettings {
         boolean useKeyCredential,
         boolean nullByteArrayMapsToEmptyArray,
         boolean generateGraalVmConfig,
-        boolean branded) {
+        String flavor) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -425,7 +425,7 @@ public class JavaSettings {
         this.useKeyCredential = useKeyCredential;
         this.nullByteArrayMapsToEmptyArray = nullByteArrayMapsToEmptyArray;
         this.generateGraalVmConfig = generateGraalVmConfig;
-        this.branded = branded;
+        this.flavor = flavor;
     }
 
     /**
@@ -434,7 +434,7 @@ public class JavaSettings {
      * @return Whether to generate with Azure branding.
      */
     public boolean isBranded() {
-        return branded;
+        return "azure".equalsIgnoreCase(this.flavor);
     }
 
     private final String keyCredentialHeaderName;
@@ -519,6 +519,12 @@ public class JavaSettings {
     }
 
     private final boolean uuidAsString;
+
+    /**
+     * Whether to use string for uuid.
+     *
+     * @return Whether to use string for uuid.
+     */
     public boolean uuidAsString() {
         return uuidAsString;
     }

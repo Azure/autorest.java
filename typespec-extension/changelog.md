@@ -1,5 +1,11 @@
 # Release History
 
+## 0.15.0 (2024-03-08)
+
+Compatible with compiler 0.54.
+
+- Supported "flavor" from typespec config.
+
 ## 0.14.1 (2024-03-07)
 
 Compatible with compiler 0.54.
