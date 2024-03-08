@@ -108,6 +108,15 @@ export const $lib = createTypeSpecLibrary({
 export async function $onEmit(context: EmitContext<EmitterOptions>) {
   const program = context.program;
   const options = context.options;
+  if (!options["flavor"]) {
+    if (options["package-dir"]?.toLocaleLowerCase().startsWith("azure")) {
+      // Azure package
+      options["flavor"] = "Azure";
+    } else {
+      // default
+      options["flavor"] = "Azure";
+    }
+  }
   const builder = new CodeModelBuilder(program, context);
   const codeModel = await builder.build();
 
@@ -117,16 +126,6 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
 
     const outputPath = options["output-dir"] ?? context.emitterOutputDir;
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
-
-    if (!options["flavor"]) {
-      if (options["package-dir"]?.toLocaleLowerCase().startsWith("azure")) {
-        // Azure package
-        options["flavor"] = "Azure";
-      } else {
-        // default
-        options["flavor"] = "Azure";
-      }
-    }
 
     options["arm"] = codeModel.arm;
 

@@ -72,9 +72,6 @@ public class EmitterOptions {
     @JsonProperty(value="dev-options")
     private DevOptions devOptions;
 
-    @JsonProperty(value="package-dir")
-    private String packageDir;
-
     public String getNamespace() {
         return namespace;
     }
@@ -159,10 +156,6 @@ public class EmitterOptions {
 
     public String getFlavor() {
         return flavor;
-    }
-
-    public String getPackageDir() {
-        return packageDir;
     }
 
     public static class EmptyStringToNullDeserializer extends JsonDeserializer<String> {
