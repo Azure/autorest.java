@@ -118,6 +118,16 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const outputPath = options["output-dir"] ?? context.emitterOutputDir;
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
 
+    if (!options["flavor"]) {
+      if (options["package-dir"]?.toLocaleLowerCase().startsWith("azure")) {
+        // Azure package
+        options["flavor"] = "Azure";
+      } else {
+        // default
+        options["flavor"] = "Azure";
+      }
+    }
+
     options["arm"] = codeModel.arm;
 
     const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
