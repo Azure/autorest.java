@@ -1358,7 +1358,11 @@ export class CodeModelBuilder {
           } else {
             // property from anonymous model
             const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
-            if (existBodyProperty) {
+            if (
+              existBodyProperty &&
+              !existBodyProperty.readOnly &&
+              !(existBodyProperty.schema instanceof ConstantSchema)
+            ) {
               request.parameters.push(
                 new VirtualParameter(
                   existBodyProperty.language.default.name,
