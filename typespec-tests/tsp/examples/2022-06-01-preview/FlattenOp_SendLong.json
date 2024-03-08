@@ -15,7 +15,8 @@
       "data_float": 14.0,
       "title": "title",
       "description": "description",
-      "status": "NotStarted"
+      "status": "NotStarted",
+      "constant": "constant"
     }
   },
   "responses": {
