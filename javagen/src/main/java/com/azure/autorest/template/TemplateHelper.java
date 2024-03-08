@@ -49,26 +49,18 @@ public final class TemplateHelper {
     }
 
     private static void createGenericHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
-        // TODO: generic "createDefaultPipeline" not ready
-//        function.line("HttpPipeline httpPipeline = HttpPipelineBuilder.createDefaultPipeline();");
-//        function.methodReturn("httpPipeline");
-//        // TODO: default pipeline is immutable and we need to add KeyCredential policy to the pipeline depending on securityInfo.
-
         function.line("HttpPipelineBuilder httpPipelineBuilder = new HttpPipelineBuilder();");
         if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
             function.ifBlock("keyCredential != null", action -> {
-                if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
-                    function.line("policies.add(new KeyCredentialPolicy(\""
-                            + securityInfo.getHeaderName()
-                            + "\", keyCredential));");
-                } else {
-                    function.line("policies.add(new KeyCredentialPolicy(\""
-                            + securityInfo.getHeaderName()
-                            + "\", keyCredential, \""
-                            + securityInfo.getHeaderValuePrefix()
-                            + "\"));");
-                }
+                final String prefixExpr = CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())
+                        ? "null"
+                        : ClassType.STRING.defaultValueExpression(securityInfo.getHeaderValuePrefix());
+                function.line("policies.add(new KeyCredentialPolicy(\""
+                        + securityInfo.getHeaderName()
+                        + "\", keyCredential, "
+                        + prefixExpr
+                        + "));");
             });
             function.line("httpPipelineBuilder.policies(policies.toArray(new HttpPipelinePolicy[0]));");
         }

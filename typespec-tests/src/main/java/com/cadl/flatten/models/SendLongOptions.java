@@ -18,10 +18,10 @@ import java.io.IOException;
 @Fluent
 public final class SendLongOptions implements JsonSerializable<SendLongOptions> {
     /*
-     * The id property.
+     * The name property.
      */
     @Generated
-    private final String id;
+    private final String name;
 
     /*
      * The filter property.
@@ -65,28 +65,56 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
     @Generated
     private Double dataFloat;
 
+    /*
+     * The item's title
+     */
+    @Generated
+    private final String title;
+
+    /*
+     * A longer description of the todo item in markdown format
+     */
+    @Generated
+    private String description;
+
+    /*
+     * The status of the todo item
+     */
+    @Generated
+    private final Status status;
+
+    /*
+     * The _dummy property.
+     */
+    @Generated
+    private String dummy;
+
     /**
      * Creates an instance of SendLongOptions class.
      * 
-     * @param id the id value to set.
+     * @param name the name value to set.
      * @param input the input value to set.
      * @param dataInt the dataInt value to set.
+     * @param title the title value to set.
+     * @param status the status value to set.
      */
     @Generated
-    public SendLongOptions(String id, String input, int dataInt) {
-        this.id = id;
+    public SendLongOptions(String name, String input, int dataInt, String title, Status status) {
+        this.name = name;
         this.input = input;
         this.dataInt = dataInt;
+        this.title = title;
+        this.status = status;
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the name property: The name property.
      * 
-     * @return the id value.
+     * @return the name value.
      */
     @Generated
-    public String getId() {
-        return this.id;
+    public String getName() {
+        return this.name;
     }
 
     /**
@@ -220,20 +248,88 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
     }
 
     /**
+     * Get the title property: The item's title.
+     * 
+     * @return the title value.
+     */
+    @Generated
+    public String getTitle() {
+        return this.title;
+    }
+
+    /**
+     * Get the description property: A longer description of the todo item in markdown format.
+     * 
+     * @return the description value.
+     */
+    @Generated
+    public String getDescription() {
+        return this.description;
+    }
+
+    /**
+     * Set the description property: A longer description of the todo item in markdown format.
+     * 
+     * @param description the description value to set.
+     * @return the SendLongOptions object itself.
+     */
+    @Generated
+    public SendLongOptions setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Get the status property: The status of the todo item.
+     * 
+     * @return the status value.
+     */
+    @Generated
+    public Status getStatus() {
+        return this.status;
+    }
+
+    /**
+     * Get the dummy property: The _dummy property.
+     * 
+     * @return the dummy value.
+     */
+    @Generated
+    public String getDummy() {
+        return this.dummy;
+    }
+
+    /**
+     * Set the dummy property: The _dummy property.
+     * 
+     * @param dummy the dummy value to set.
+     * @return the SendLongOptions object itself.
+     */
+    @Generated
+    public SendLongOptions setDummy(String dummy) {
+        this.dummy = dummy;
+        return this;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("id", this.id);
+        jsonWriter.writeStringField("name", this.name);
         jsonWriter.writeStringField("input", this.input);
         jsonWriter.writeIntField("dataInt", this.dataInt);
+        jsonWriter.writeStringField("title", this.title);
+        jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
         jsonWriter.writeStringField("filter", this.filter);
         jsonWriter.writeJsonField("user", this.user);
         jsonWriter.writeNumberField("dataIntOptional", this.dataIntOptional);
         jsonWriter.writeNumberField("dataLong", this.dataLong);
         jsonWriter.writeNumberField("data_float", this.dataFloat);
+        jsonWriter.writeStringField("description", this.description);
+        jsonWriter.writeStringField("_dummy", this.dummy);
         return jsonWriter.writeEndObject();
     }
 
@@ -248,24 +344,32 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
     @Generated
     public static SendLongOptions fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
+            String name = null;
             String input = null;
             int dataInt = 0;
+            String title = null;
+            Status status = null;
             String filter = null;
             User user = null;
             Integer dataIntOptional = null;
             Long dataLong = null;
             Double dataFloat = null;
+            String description = null;
+            String dummy = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
                 } else if ("input".equals(fieldName)) {
                     input = reader.getString();
                 } else if ("dataInt".equals(fieldName)) {
                     dataInt = reader.getInt();
+                } else if ("title".equals(fieldName)) {
+                    title = reader.getString();
+                } else if ("status".equals(fieldName)) {
+                    status = Status.fromString(reader.getString());
                 } else if ("filter".equals(fieldName)) {
                     filter = reader.getString();
                 } else if ("user".equals(fieldName)) {
@@ -276,16 +380,22 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
                     dataLong = reader.getNullable(JsonReader::getLong);
                 } else if ("data_float".equals(fieldName)) {
                     dataFloat = reader.getNullable(JsonReader::getDouble);
+                } else if ("description".equals(fieldName)) {
+                    description = reader.getString();
+                } else if ("_dummy".equals(fieldName)) {
+                    dummy = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            SendLongOptions deserializedSendLongOptions = new SendLongOptions(id, input, dataInt);
+            SendLongOptions deserializedSendLongOptions = new SendLongOptions(name, input, dataInt, title, status);
             deserializedSendLongOptions.filter = filter;
             deserializedSendLongOptions.user = user;
             deserializedSendLongOptions.dataIntOptional = dataIntOptional;
             deserializedSendLongOptions.dataLong = dataLong;
             deserializedSendLongOptions.dataFloat = dataFloat;
+            deserializedSendLongOptions.description = description;
+            deserializedSendLongOptions.dummy = dummy;
 
             return deserializedSendLongOptions;
         });

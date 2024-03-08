@@ -48,10 +48,12 @@ public final class FlattenClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     name: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
@@ -114,10 +116,19 @@ public final class FlattenClient {
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -128,8 +139,8 @@ public final class FlattenClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendLongWithResponse(id, request, requestOptions);
+    public Response<Void> sendLongWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.sendLongWithResponse(name, request, requestOptions);
     }
 
     /**
@@ -256,18 +267,21 @@ public final class FlattenClient {
     public void sendLong(SendLongOptions options) {
         // Generated convenience method for sendLongWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        String id = options.getId();
+        String name = options.getName();
         String filter = options.getFilter();
         SendLongRequest requestObj
-            = new SendLongRequest(options.getInput(), options.getDataInt()).setUser(options.getUser())
+            = new SendLongRequest(options.getInput(), options.getDataInt(), options.getTitle(), options.getStatus())
+                .setUser(options.getUser())
                 .setDataIntOptional(options.getDataIntOptional())
                 .setDataLong(options.getDataLong())
-                .setDataFloat(options.getDataFloat());
+                .setDataFloat(options.getDataFloat())
+                .setDescription(options.getDescription())
+                .setDummy(options.getDummy());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
         }
-        sendLongWithResponse(id, request, requestOptions).getValue();
+        sendLongWithResponse(name, request, requestOptions).getValue();
     }
 
     /**

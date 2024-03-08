@@ -19,6 +19,18 @@ public final class UploadFileRequest {
     @Generated
     private final FileDataFileDetails fileData;
 
+    /*
+     * The readOnly property.
+     */
+    @Generated
+    private String readOnly;
+
+    /*
+     * The constant property.
+     */
+    @Generated
+    private final String constant = "constant";
+
     /**
      * Creates an instance of UploadFileRequest class.
      * 
@@ -37,5 +49,25 @@ public final class UploadFileRequest {
     @Generated
     public FileDataFileDetails getFileData() {
         return this.fileData;
+    }
+
+    /**
+     * Get the readOnly property: The readOnly property.
+     * 
+     * @return the readOnly value.
+     */
+    @Generated
+    public String getReadOnly() {
+        return this.readOnly;
+    }
+
+    /**
+     * Get the constant property: The constant property.
+     * 
+     * @return the constant value.
+     */
+    @Generated
+    public String getConstant() {
+        return this.constant;
     }
 }
