@@ -191,7 +191,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sendLong(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
+        Mono<Response<Void>> sendLong(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
@@ -201,7 +201,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendLongSync(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
+        Response<Void> sendLongSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
@@ -233,10 +233,12 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     name: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
@@ -261,10 +263,12 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     name: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
@@ -354,10 +358,19 @@ public final class FlattenClientImpl {
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -367,10 +380,10 @@ public final class FlattenClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendLongWithResponseAsync(String id, BinaryData request,
+    public Mono<Response<Void>> sendLongWithResponseAsync(String name, BinaryData request,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.sendLong(this.getEndpoint(), id,
+        return FluxUtil.withContext(context -> service.sendLong(this.getEndpoint(), name,
             this.getServiceVersion().getVersion(), accept, request, requestOptions, context));
     }
 
@@ -394,10 +407,19 @@ public final class FlattenClientImpl {
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -407,9 +429,9 @@ public final class FlattenClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> sendLongWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.sendLongSync(this.getEndpoint(), id, this.getServiceVersion().getVersion(), accept, request,
+        return service.sendLongSync(this.getEndpoint(), name, this.getServiceVersion().getVersion(), accept, request,
             requestOptions, Context.NONE);
     }
 
