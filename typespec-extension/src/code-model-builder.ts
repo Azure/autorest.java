@@ -39,6 +39,7 @@ import {
   EnumMember,
   walkPropertiesInherited,
   isVoidType,
+  isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -81,7 +82,6 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
-  isErrorOrChildOfError,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -1593,10 +1593,7 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (
-      resp.statusCodes === "*" ||
-      (bodyType && bodyType.kind === "Model" && isErrorOrChildOfError(this.sdkContext, bodyType))
-    ) {
+    if (resp.statusCodes === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
       // "*", or the model is @error
       op.addException(response);
 
