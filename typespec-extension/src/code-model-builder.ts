@@ -36,11 +36,10 @@ import {
   getProjectedName,
   getEncode,
   getOverloadedOperation,
-  isErrorModel,
   EnumMember,
   walkPropertiesInherited,
-  getService,
   isVoidType,
+  isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -51,7 +50,7 @@ import {
   HttpOperationParameter,
   HttpOperationResponse,
   HttpServer,
-  ServiceAuthentication,
+  Authentication,
   HttpStatusCodesEntry,
   getHttpOperation,
   getQueryParamOptions,
@@ -193,10 +192,9 @@ export class CodeModelBuilder {
   private typeNameOptions: TypeNameOptions;
   private namespace: string;
   private sdkContext: SdkContext;
-
   private options: EmitterOptions;
-
   private codeModel: CodeModel;
+  private loggingEnabled: boolean = false;
 
   readonly schemaCache = new ProcessingCache((type: Type, name: string) => this.processSchemaImpl(type, name));
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, undefined means type visited but not completed
@@ -206,6 +204,9 @@ export class CodeModelBuilder {
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
     this.program = program1;
+    if (this.options["dev-options"]?.loglevel) {
+      this.loggingEnabled = true;
+    }
 
     if (this.options["skip-special-headers"]) {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
@@ -215,7 +216,7 @@ export class CodeModelBuilder {
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
-      throw Error("Can not emit yaml for a namespace that doesn't exist.");
+      throw Error("Cannot emit yaml for a namespace that doesn't exist.");
     }
 
     // java namespace
@@ -338,7 +339,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processAuth(auth: ServiceAuthentication) {
+  private processAuth(auth: Authentication) {
     const securitySchemes: SecurityScheme[] = [];
     for (const option of auth.options) {
       for (const scheme of option.schemes) {
@@ -369,7 +370,7 @@ export class CodeModelBuilder {
                 // HTTP Authentication should use "Basic token" or "Bearer token"
                 schemeOrApiKeyPrefix = pascalCase(schemeOrApiKeyPrefix);
 
-                if (!(this.options.branded === false)) {
+                if (this.isBranded()) {
                   // Azure would not allow BasicAuth or BearerAuth
                   this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
                   continue;
@@ -391,6 +392,10 @@ export class CodeModelBuilder {
         schemes: securitySchemes,
       });
     }
+  }
+
+  private isBranded(): boolean {
+    return !this.options["flavor"] || this.options["flavor"].toLocaleLowerCase() === "azure";
   }
 
   private isInternal(context: SdkContext, operation: Operation): boolean {
@@ -550,15 +555,6 @@ export class CodeModelBuilder {
         for (const version of versioning.getVersions()) {
           const apiVersion = new ApiVersion();
           apiVersion.version = version.value;
-          codeModelClient.apiVersions.push(apiVersion);
-        }
-      } else {
-        // fallback to @service.version
-        const service = getService(this.program, client.service);
-        if (service?.version) {
-          codeModelClient.apiVersions = [];
-          const apiVersion = new ApiVersion();
-          apiVersion.version = service.version;
           codeModelClient.apiVersions.push(apiVersion);
         }
       }
@@ -1332,11 +1328,17 @@ export class CodeModelBuilder {
       // anonymous model
 
       // name the schema for documentation
-      schema.language.default.name = op.language.default.name + "Request";
+      schema.language.default.name = pascalCase(op.language.default.name) + "Request";
 
       if (!parameter.language.default.name) {
         // name the parameter for documentation
         parameter.language.default.name = "request";
+      }
+
+      if (operationIsJsonMergePatch(httpOperation)) {
+        // skip model flatten, if "application/merge-patch+json"
+        schema.language.default.name = pascalCase(op.language.default.name) + "PatchRequest";
+        return;
       }
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Anonymous] });
@@ -1363,7 +1365,11 @@ export class CodeModelBuilder {
           } else {
             // property from anonymous model
             const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
-            if (existBodyProperty) {
+            if (
+              existBodyProperty &&
+              !existBodyProperty.readOnly &&
+              !(existBodyProperty.schema instanceof ConstantSchema)
+            ) {
               request.parameters.push(
                 new VirtualParameter(
                   existBodyProperty.language.default.name,
@@ -2639,7 +2645,9 @@ export class CodeModelBuilder {
   }
 
   private logWarning(msg: string) {
-    logWarning(this.program, msg);
+    if (this.loggingEnabled) {
+      logWarning(this.program, msg);
+    }
   }
 
   private trace(msg: string) {

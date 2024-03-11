@@ -137,19 +137,25 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
     protected static void generateJavadocExceptions(ClientMethod clientMethod, JavaJavadocComment commentBlock, boolean useFullClassName) {
         ProxyMethod restAPIMethod = clientMethod.getProxyMethod();
-        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
-            commentBlock.methodThrows(useFullClassName
-                            ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
-                            : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
-                    "thrown if the request is rejected by server");
-        }
-        if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
-            for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+        if (JavaSettings.getInstance().isBranded()) {
+            if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionType() != null) {
                 commentBlock.methodThrows(useFullClassName
-                                ? exception.getKey().getFullName()
-                                : exception.getKey().getName(),
-                        String.format("thrown if the request is rejected by server on status code %s",
-                                exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(", "))));
+                                ? restAPIMethod.getUnexpectedResponseExceptionType().getFullName()
+                                : restAPIMethod.getUnexpectedResponseExceptionType().getName(),
+                        "thrown if the request is rejected by server");
+            }
+            if (restAPIMethod != null && restAPIMethod.getUnexpectedResponseExceptionTypes() != null) {
+                for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
+                    commentBlock.methodThrows(useFullClassName
+                                    ? exception.getKey().getFullName()
+                                    : exception.getKey().getName(),
+                            String.format("thrown if the request is rejected by server on status code %s",
+                                    exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(", "))));
+                }
+            }
+        } else {
+            if (restAPIMethod != null && (restAPIMethod.getUnexpectedResponseExceptionType() != null || restAPIMethod.getUnexpectedResponseExceptionTypes() != null)) {
+                commentBlock.methodThrows("HttpResponseException", "thrown if the service returns an error");
             }
         }
     }

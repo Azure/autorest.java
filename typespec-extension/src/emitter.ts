@@ -16,8 +16,9 @@ import { fileURLToPath } from "url";
 export interface EmitterOptions {
   "namespace"?: string;
   "output-dir"?: string;
+  "package-dir"?: string;
 
-  "branded"?: boolean;
+  "flavor"?: string;
 
   "service-name"?: string;
   "service-versions"?: string[];
@@ -59,8 +60,9 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
   properties: {
     "namespace": { type: "string", nullable: true },
     "output-dir": { type: "string", nullable: true },
+    "package-dir": { type: "string", nullable: true },
 
-    "branded": { type: "boolean", nullable: true, default: true },
+    "flavor": { type: "string", nullable: true, default: "Azure" },
 
     // service
     "service-name": { type: "string", nullable: true },
@@ -106,6 +108,15 @@ export const $lib = createTypeSpecLibrary({
 export async function $onEmit(context: EmitContext<EmitterOptions>) {
   const program = context.program;
   const options = context.options;
+  if (!options["flavor"]) {
+    if (options["package-dir"]?.toLocaleLowerCase().startsWith("azure")) {
+      // Azure package
+      options["flavor"] = "Azure";
+    } else {
+      // default
+      options["flavor"] = "Azure";
+    }
+  }
   const builder = new CodeModelBuilder(program, context);
   const codeModel = await builder.build();
 

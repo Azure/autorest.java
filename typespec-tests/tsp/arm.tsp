@@ -4,21 +4,27 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-@armProviderNamespace
-@service({
-  title: "ArmResource",
-  version: "2023-11-01",
-})
-@doc("Arm Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
-namespace Cadl.ArmResourceProvider;
-
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+
+@armProviderNamespace
+@service({
+  title: "ArmResource",
+})
+@versioned(Versions)
+@doc("Arm Resource Provider management API.")
+namespace Cadl.ArmResourceProvider;
+
+@doc("Azure API versions.")
+enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Public API version.")
+  v2023_11_01: "2023-11-01",
+}
 
 //----------------------- Child Resources -----------------------
 @doc("Subresource of Top Level Arm Resource.")

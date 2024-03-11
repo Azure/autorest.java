@@ -195,6 +195,7 @@ public final class MultipartAsyncClient {
         BinaryData request = new MultipartFormDataHelper(requestOptions)
             .serializeFileField("file_data", requestObj.getFileData().getContent(),
                 requestObj.getFileData().getContentType(), requestObj.getFileData().getFilename())
+            .serializeTextField("constant", requestObj.getConstant())
             .end()
             .getRequestBody();
         return uploadFileWithResponse(name, request, requestOptions).flatMap(FluxUtil::toMono);

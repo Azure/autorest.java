@@ -223,24 +223,6 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     /*
-     * Service version
-     */
-    @Generated
-    private ServiceServiceVersion serviceVersion;
-
-    /**
-     * Sets Service version.
-     * 
-     * @param serviceVersion the serviceVersion value.
-     * @return the ServiceClientClientBuilder.
-     */
-    @Generated
-    public ServiceClientClientBuilder serviceVersion(ServiceServiceVersion serviceVersion) {
-        this.serviceVersion = serviceVersion;
-        return this;
-    }
-
-    /*
      * The retry policy that will attempt to retry failed requests, if applicable.
      */
     @Generated
@@ -266,10 +248,8 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     @Generated
     private ServiceClientClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        ServiceServiceVersion localServiceVersion
-            = (serviceVersion != null) ? serviceVersion : ServiceServiceVersion.getLatest();
         ServiceClientClientImpl client = new ServiceClientClientImpl(localPipeline,
-            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client, localServiceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;
     }
 

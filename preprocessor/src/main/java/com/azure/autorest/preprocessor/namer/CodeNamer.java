@@ -16,7 +16,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
-    private static final Map<Character, String> BASIC_LATIC_CHARACTERS = new HashMap<Character, String>() {{
+    private static final Map<Character, String> BASIC_LATIN_CHARACTERS = new HashMap<>() {{
         put((char) 32, "Space");
         put((char) 33, "ExclamationMark");
         put((char) 34, "QuotationMark");
@@ -93,6 +93,10 @@ public class CodeNamer {
     private CodeNamer() {
     }
 
+    public static Map<Character, String> getBasicLatinCharacters() {
+        return BASIC_LATIN_CHARACTERS;
+    }
+
     public static String toCamelCase(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
@@ -161,20 +165,16 @@ public class CodeNamer {
         return getValidName(name, '_', '-');
     }
 
-    protected static String removeInvalidCharactersNamespace(String name) {
-        return getValidName(name, '_', '-', '.');
-    }
-
     public static String getValidName(String name, char... allowedCharacters) {
         String correctName = removeInvalidCharacters(name, allowedCharacters);
 
         // here we have only letters and digits or an empty String
         if (correctName == null || correctName.isEmpty() ||
-                BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0))) {
+                BASIC_LATIN_CHARACTERS.containsKey(correctName.charAt(0))) {
             StringBuilder sb = new StringBuilder();
             for (char symbol : name.toCharArray()) {
-                if (BASIC_LATIC_CHARACTERS.containsKey(symbol)) {
-                    sb.append(BASIC_LATIC_CHARACTERS.get(symbol));
+                if (BASIC_LATIN_CHARACTERS.containsKey(symbol)) {
+                    sb.append(BASIC_LATIN_CHARACTERS.get(symbol));
                 } else {
                     sb.append(symbol);
                 }
@@ -239,7 +239,7 @@ public class CodeNamer {
         return getEscapedReservedName(name, "Method");
     }
 
-    protected static String getEscapedReservedName(String name, String appendValue) {
+    public static String getEscapedReservedName(String name, String appendValue) {
         Objects.requireNonNull(name);
         Objects.requireNonNull(appendValue);
 

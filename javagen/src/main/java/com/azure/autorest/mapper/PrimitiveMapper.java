@@ -46,6 +46,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
     protected IType createPrimitiveType(PrimitiveSchema primaryType) {
         boolean isLowLevelClient = JavaSettings.getInstance().isDataPlaneClient();
         boolean urlAsString = JavaSettings.getInstance().urlAsString();
+        boolean uuidAsString = JavaSettings.getInstance().uuidAsString();
 
         switch (primaryType.getType()) {
 //            case null:
@@ -106,7 +107,7 @@ public class PrimitiveMapper implements IMapper<PrimitiveSchema, IType> {
                 }
                 return durationType;
             case UNIXTIME: return isLowLevelClient ? PrimitiveType.LONG : PrimitiveType.UNIX_TIME_LONG;
-            case UUID: return isLowLevelClient ? ClassType.STRING : ClassType.UUID;
+            case UUID: return isLowLevelClient || uuidAsString ? ClassType.STRING : ClassType.UUID;
             case OBJECT: return ClassType.OBJECT;
             case CREDENTIAL: return ClassType.TOKEN_CREDENTIAL;
             default:

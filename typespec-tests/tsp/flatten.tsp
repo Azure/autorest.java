@@ -32,8 +32,10 @@ model ApiVersionParameter {
 }
 
 alias Request = {
+  @visibility("read") @key name: string;
   user?: User;
   input: string;
+  constant: "constant";
 };
 
 alias LongRequest = {
@@ -50,6 +52,45 @@ alias LongRequest = {
 
 model User {
   user: string;
+}
+
+model TodoItem {
+  /** The item's unique id */
+  @visibility("read") @key id: safeint;
+
+  /** The item's title */
+  @maxLength(255)
+  title: string;
+
+  /** A longer description of the todo item in markdown format */
+  description?: string;
+
+  /** The status of the todo item */
+  status: "NotStarted" | "InProgress" | "Completed";
+
+  /** When the todo item was created. */
+  @visibility("read") createdAt: utcDateTime;
+
+  /** When the todo item was last updated */
+  @visibility("read") updatedAt: utcDateTime;
+
+  /** When the todo item was makred as completed */
+  @visibility("read") completedAt?: utcDateTime;
+
+  // hack to get a different schema for create
+  // (fastify glue doesn't support readonly)
+  @visibility("create") _dummy?: string;
+}
+
+model TodoItemPatch {
+  /** The item's title */
+  title?: TodoItem.title;
+
+  /** A longer description of the todo item in markdown format */
+  description?: TodoItem.description | null;
+
+  /** The status of the todo item */
+  status?: "NotStarted" | "InProgress" | "Completed";
 }
 
 @client({
@@ -75,9 +116,17 @@ interface FlattenOp {
   @route("send-long")
   @post
   sendLong(
-    @query id: string,
+    @query name: string,
     @query filter?: string,
     ...LongRequest,
+    ...TodoItem,
+    constant: "constant",
     ...ApiVersionParameter,
   ): OkResponse;
+
+  @patch update(
+    @header contentType: "application/merge-patch+json",
+    @path id: TodoItem.id,
+    patch: TodoItemPatch,
+  ): TodoItem;
 }

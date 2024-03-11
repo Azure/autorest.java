@@ -9,6 +9,8 @@ import com.azure.core.annotation.ExpectedResponses;
 import com.azure.core.annotation.HeaderParam;
 import com.azure.core.annotation.Host;
 import com.azure.core.annotation.HostParam;
+import com.azure.core.annotation.Patch;
+import com.azure.core.annotation.PathParam;
 import com.azure.core.annotation.Post;
 import com.azure.core.annotation.QueryParam;
 import com.azure.core.annotation.ReturnType;
@@ -189,7 +191,7 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> sendLong(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
+        Mono<Response<Void>> sendLong(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
 
@@ -199,9 +201,31 @@ public final class FlattenClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> sendLongSync(@HostParam("endpoint") String endpoint, @QueryParam("id") String id,
+        Response<Void> sendLongSync(@HostParam("endpoint") String endpoint, @QueryParam("name") String name,
             @QueryParam("api-version") String apiVersion, @HeaderParam("accept") String accept,
             @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+
+        @Patch("/flatten/{id}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Mono<Response<BinaryData>> update(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @PathParam("id") long id,
+            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData request,
+            RequestOptions requestOptions, Context context);
+
+        @Patch("/flatten/{id}")
+        @ExpectedResponses({ 200 })
+        @UnexpectedResponseExceptionType(value = ClientAuthenticationException.class, code = { 401 })
+        @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
+        @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
+        @UnexpectedResponseExceptionType(HttpResponseException.class)
+        Response<BinaryData> updateSync(@HostParam("endpoint") String endpoint,
+            @HeaderParam("content-type") String contentType, @PathParam("id") long id,
+            @HeaderParam("accept") String accept, @BodyParam("application/merge-patch+json") BinaryData request,
+            RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -209,10 +233,12 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     name: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
@@ -237,10 +263,12 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     name: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
@@ -330,10 +358,19 @@ public final class FlattenClientImpl {
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -343,10 +380,10 @@ public final class FlattenClientImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendLongWithResponseAsync(String id, BinaryData request,
+    public Mono<Response<Void>> sendLongWithResponseAsync(String name, BinaryData request,
         RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.sendLong(this.getEndpoint(), id,
+        return FluxUtil.withContext(context -> service.sendLong(this.getEndpoint(), name,
             this.getServiceVersion().getVersion(), accept, request, requestOptions, context));
     }
 
@@ -370,10 +407,19 @@ public final class FlattenClientImpl {
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -383,9 +429,95 @@ public final class FlattenClientImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> sendLongWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.sendLongSync(this.getEndpoint(), id, this.getServiceVersion().getVersion(), accept, request,
+        return service.sendLongSync(this.getEndpoint(), name, this.getServiceVersion().getVersion(), accept, request,
             requestOptions, Context.NONE);
+    }
+
+    /**
+     * The update operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     patch (Optional, Required on create): {
+     *         title: String (Optional)
+     *         description: String (Optional)
+     *         status: String(NotStarted/InProgress/Completed) (Optional)
+     *     }
+     * }
+     * }</pre>
+     * <p><strong>Response Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     * }
+     * }</pre>
+     * 
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> updateWithResponseAsync(long id, BinaryData request,
+        RequestOptions requestOptions) {
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return FluxUtil.withContext(
+            context -> service.update(this.getEndpoint(), contentType, id, accept, request, requestOptions, context));
+    }
+
+    /**
+     * The update operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     patch (Optional, Required on create): {
+     *         title: String (Optional)
+     *         description: String (Optional)
+     *         status: String(NotStarted/InProgress/Completed) (Optional)
+     *     }
+     * }
+     * }</pre>
+     * <p><strong>Response Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     * }
+     * }</pre>
+     * 
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<BinaryData> updateWithResponse(long id, BinaryData request, RequestOptions requestOptions) {
+        final String contentType = "application/merge-patch+json";
+        final String accept = "application/json";
+        return service.updateSync(this.getEndpoint(), contentType, id, accept, request, requestOptions, Context.NONE);
     }
 }

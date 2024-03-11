@@ -28,7 +28,6 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
-import com.client.structure.service.ServiceServiceVersion;
 import reactor.core.publisher.Mono;
 
 /**
@@ -66,20 +65,6 @@ public final class ServiceClientClientImpl {
      */
     public String getClient() {
         return this.client;
-    }
-
-    /**
-     * Service version.
-     */
-    private final ServiceServiceVersion serviceVersion;
-
-    /**
-     * Gets Service version.
-     * 
-     * @return the serviceVersion value.
-     */
-    public ServiceServiceVersion getServiceVersion() {
-        return this.serviceVersion;
     }
 
     /**
@@ -185,11 +170,10 @@ public final class ServiceClientClientImpl {
      * 
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     * @param serviceVersion Service version.
      */
-    public ServiceClientClientImpl(String endpoint, String client, ServiceServiceVersion serviceVersion) {
+    public ServiceClientClientImpl(String endpoint, String client) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
-            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
+            JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -198,11 +182,9 @@ public final class ServiceClientClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     * @param serviceVersion Service version.
      */
-    public ServiceClientClientImpl(HttpPipeline httpPipeline, String endpoint, String client,
-        ServiceServiceVersion serviceVersion) {
-        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client, serviceVersion);
+    public ServiceClientClientImpl(HttpPipeline httpPipeline, String endpoint, String client) {
+        this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint, client);
     }
 
     /**
@@ -212,15 +194,13 @@ public final class ServiceClientClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param client Need to be set as 'default', 'multi-client', 'renamed-operation', 'two-operation-group' in client.
-     * @param serviceVersion Service version.
      */
     public ServiceClientClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
-        String client, ServiceServiceVersion serviceVersion) {
+        String client) {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.endpoint = endpoint;
         this.client = client;
-        this.serviceVersion = serviceVersion;
         this.bazFoos = new BazFoosImpl(this);
         this.quxes = new QuxesImpl(this);
         this.quxBars = new QuxBarsImpl(this);

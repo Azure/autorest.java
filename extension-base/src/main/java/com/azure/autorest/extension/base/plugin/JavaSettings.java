@@ -31,7 +31,7 @@ public class JavaSettings {
     private static final Map<String, Object> SIMPLE_JAVA_SETTINGS = new HashMap<>();
     private static Logger logger;
     private final boolean useKeyCredential;
-    private final boolean branded;
+    private final String flavor;
     private final boolean noCustomHeaders;
 
     static void setHeader(String value) {
@@ -143,7 +143,6 @@ public class JavaSettings {
                 getBooleanValue(host, "data-plane", false),
                 getBooleanValue(host, "use-iterable", false),
                 host.getValue(TYPE_FACTORY.constructCollectionLikeType(List.class, String.class), "service-versions"),
-                getBooleanValue(host, "require-x-ms-flattened-to-flatten", false),
                 getStringValue(host, "client-flattened-annotation-target", ""),
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
@@ -167,6 +166,7 @@ public class JavaSettings {
                 getBooleanValue(host, "include-read-only-in-constructor-args", false),
                 // setting the default as true as the Java design guideline recommends using String for URLs.
                 getBooleanValue(host, "url-as-string", true),
+                getBooleanValue(host, "uuid-as-string", false),
 
                 // setting this to false by default as a lot of existing libraries still use swagger and
                 // were generated with required = true set in JsonProperty annotation
@@ -175,7 +175,7 @@ public class JavaSettings {
                 getBooleanValue(host, "use-key-credential", false),
                 getBooleanValue(host, "null-byte-array-maps-to-empty-array", false),
                 getBooleanValue(host, "graal-vm-config", false),
-                getBooleanValue(host, "branded", true)
+                getStringValue(host, "flavor", "Azure")
             );
         }
         return instance;
@@ -222,8 +222,6 @@ public class JavaSettings {
      * @param dataPlaneClient Whether to generate a data plane client.
      * @param useIterable Whether to use Iterable instead of List for collection types.
      * @param serviceVersions The versions of the service.
-     * @param requireXMsFlattenedToFlatten If set to true, a model must have x-ms-flattened to be annotated with
-     * JsonFlatten.
      * @param clientFlattenAnnotationTarget The target for the <code>@JsonFlatten</code> annotation for
      * x-ms-client-flatten.
      * @param keyCredentialHeaderName The header name for the key credential.
@@ -266,7 +264,7 @@ public class JavaSettings {
      * @param nullByteArrayMapsToEmptyArray If set to true, {@code ArrayType.BYTE_ARRAY} will return an empty array
      * instead of null when the default value expression is null.
      * @param generateGraalVmConfig If set to true, the generated client will have support for GraalVM.
-     * @param branded Whether to generate with Azure branding.
+     * @param flavor The brand name we use to geneate SDK.
      */
     private JavaSettings(AutorestSettings autorestSettings,
         Map<String, Object> modelerSettings,
@@ -302,7 +300,6 @@ public class JavaSettings {
         boolean dataPlaneClient,
         boolean useIterable,
         List<String> serviceVersions,
-        boolean requireXMsFlattenedToFlatten,
         String clientFlattenAnnotationTarget,
         String keyCredentialHeaderName,
         boolean clientBuilderDisabled,
@@ -324,12 +321,13 @@ public class JavaSettings {
         boolean noCustomHeaders,
         boolean includeReadOnlyInConstructorArgs,
         boolean urlAsString,
+        boolean uuidAsString,
         boolean disableRequiredPropertyAnnotation,
         boolean pageSizeEnabled,
         boolean useKeyCredential,
         boolean nullByteArrayMapsToEmptyArray,
         boolean generateGraalVmConfig,
-        boolean branded) {
+        String flavor) {
 
         this.autorestSettings = autorestSettings;
         this.modelerSettings = new ModelerSettings(modelerSettings);
@@ -363,7 +361,6 @@ public class JavaSettings {
         this.dataPlaneClient = dataPlaneClient;
         this.useIterable = useIterable;
         this.serviceVersions = serviceVersions;
-        this.requireXMsFlattenedToFlatten = requireXMsFlattenedToFlatten;
         this.clientFlattenAnnotationTarget =
             (clientFlattenAnnotationTarget == null || clientFlattenAnnotationTarget.isEmpty())
                 ? ClientFlattenAnnotationTarget.TYPE
@@ -422,12 +419,13 @@ public class JavaSettings {
         this.noCustomHeaders = noCustomHeaders;
         this.includeReadOnlyInConstructorArgs = includeReadOnlyInConstructorArgs;
         this.urlAsString = urlAsString;
+        this.uuidAsString = uuidAsString;
         this.disableRequiredJsonAnnotation = disableRequiredPropertyAnnotation;
         this.pageSizeEnabled = pageSizeEnabled;
         this.useKeyCredential = useKeyCredential;
         this.nullByteArrayMapsToEmptyArray = nullByteArrayMapsToEmptyArray;
         this.generateGraalVmConfig = generateGraalVmConfig;
-        this.branded = branded;
+        this.flavor = flavor;
     }
 
     /**
@@ -436,7 +434,7 @@ public class JavaSettings {
      * @return Whether to generate with Azure branding.
      */
     public boolean isBranded() {
-        return branded;
+        return "azure".equalsIgnoreCase(this.flavor);
     }
 
     private final String keyCredentialHeaderName;
@@ -518,6 +516,17 @@ public class JavaSettings {
      */
     public boolean urlAsString() {
         return urlAsString;
+    }
+
+    private final boolean uuidAsString;
+
+    /**
+     * Whether to use string for uuid.
+     *
+     * @return Whether to use string for uuid.
+     */
+    public boolean uuidAsString() {
+        return uuidAsString;
     }
 
     private final boolean disableRequiredJsonAnnotation;
@@ -1194,17 +1203,6 @@ public class JavaSettings {
      */
     public List<String> getServiceVersions() {
         return serviceVersions;
-    }
-
-    private final boolean requireXMsFlattenedToFlatten;
-
-    /**
-     * Whether a model must have x-ms-flattened to be annotated with JsonFlatten.
-     *
-     * @return Whether a model must have x-ms-flattened to be annotated with JsonFlatten.
-     */
-    public boolean requireXMsFlattenedToFlatten() {
-        return requireXMsFlattenedToFlatten;
     }
 
     private final boolean generateSamples;

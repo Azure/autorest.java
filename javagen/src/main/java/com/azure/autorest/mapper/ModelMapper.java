@@ -244,12 +244,6 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             if (settings.getModelerSettings().isFlattenModel()  // enabled by modelerfour
                 && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
                 needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
-                if (isPolymorphic) {
-                    String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
-                    // OR the need flattening based on the model containing 'x-ms-flattened' and if the discriminator
-                    // contains '.' and 'x-ms-flattened' isn't required for flattening.
-                    needsFlatten |= (discriminatorSerializedName.contains(".") && !settings.requireXMsFlattenedToFlatten());
-                }
             }
 
             String polymorphicDiscriminator = null;

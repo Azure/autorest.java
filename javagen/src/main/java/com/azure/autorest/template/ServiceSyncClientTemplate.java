@@ -171,10 +171,15 @@ public class ServiceSyncClientTemplate implements IJavaTemplate<AsyncSyncClient,
   protected void addServiceClientAnnotationImport(Set<String> imports) {
     Annotation.SERVICE_CLIENT.addImportsTo(imports);
     Annotation.GENERATED.addImportsTo(imports);
+    Annotation.METADATA.addImportsTo(imports);
   }
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
-    classBlock.annotation(Annotation.GENERATED.getName());
+    if (JavaSettings.getInstance().isBranded()) {
+      classBlock.annotation(Annotation.GENERATED.getName());
+    } else {
+      classBlock.annotation(Annotation.METADATA.getName() + "(generated = true)");
+    }
   }
 
   private void writeConvenienceMethods(List<ConvenienceMethod> convenienceMethods, JavaClass classBlock) {

@@ -43,7 +43,7 @@ public final class UnionFloatLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(1.2/2.3) (Optional)
+     *     property: String(1.25/2.375) (Optional)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class UnionFloatLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(1.2/2.3) (Optional)
+     *     property: String(1.25/2.375) (Optional)
      * }
      * }</pre>
      * 
@@ -87,7 +87,7 @@ public final class UnionFloatLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(1.2/2.3) (Optional)
+     *     property: String(1.25/2.375) (Optional)
      * }
      * }</pre>
      * 
@@ -110,7 +110,7 @@ public final class UnionFloatLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(1.2/2.3) (Optional)
+     *     property: String(1.25/2.375) (Optional)
      * }
      * }</pre>
      * 

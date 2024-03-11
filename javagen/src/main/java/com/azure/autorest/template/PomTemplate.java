@@ -108,6 +108,17 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                 });
             }
 
+            if (!branded && pom.getRepositories() != null && !pom.getRepositories().isEmpty()) {
+                projectBlock.block("repositories", repositoriesBlock -> {
+                    for (Map.Entry<String, String> repository : pom.getRepositories().entrySet()) {
+                        repositoriesBlock.block("repository", repositoryBlock -> {
+                            repositoryBlock.tag("id", repository.getKey());
+                            repositoryBlock.tag("url", repository.getValue());
+                        });
+                    }
+                });
+            }
+
             projectBlock.block("properties", propertiesBlock -> {
                 propertiesBlock.tag("project.build.sourceEncoding", "UTF-8");
                 writeJacoco(propertiesBlock);

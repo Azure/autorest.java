@@ -124,6 +124,10 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
     }
 
     protected void addGeneratedAnnotation(JavaType typeBlock) {
-        typeBlock.annotation(Annotation.GENERATED.getName());
+        if (JavaSettings.getInstance().isBranded()) {
+            typeBlock.annotation(Annotation.GENERATED.getName());
+        } else {
+            typeBlock.annotation(Annotation.METADATA.getName() + "(generated = true)");
+        }
     }
 }

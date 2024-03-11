@@ -17,10 +17,13 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.cadl.flatten.implementation.FlattenClientImpl;
+import com.cadl.flatten.implementation.JsonMergePatchHelper;
 import com.cadl.flatten.implementation.models.SendLongRequest;
 import com.cadl.flatten.implementation.models.SendProjectedNameRequest;
 import com.cadl.flatten.implementation.models.SendRequest;
 import com.cadl.flatten.models.SendLongOptions;
+import com.cadl.flatten.models.TodoItem;
+import com.cadl.flatten.models.UpdatePatchRequest;
 import com.cadl.flatten.models.User;
 import reactor.core.publisher.Mono;
 
@@ -47,10 +50,12 @@ public final class FlattenAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     name: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
      *     input: String (Required)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
@@ -114,10 +119,19 @@ public final class FlattenAsyncClient {
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     *     constant: String (Required)
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param name A sequence of textual characters.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -128,8 +142,49 @@ public final class FlattenAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendLongWithResponse(String id, BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendLongWithResponseAsync(id, request, requestOptions);
+    public Mono<Response<Void>> sendLongWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.sendLongWithResponseAsync(name, request, requestOptions);
+    }
+
+    /**
+     * The update operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     patch (Optional, Required on create): {
+     *         title: String (Optional)
+     *         description: String (Optional)
+     *         status: String(NotStarted/InProgress/Completed) (Optional)
+     *     }
+     * }
+     * }</pre>
+     * <p><strong>Response Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
+     * }
+     * }</pre>
+     * 
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<BinaryData>> updateWithResponse(long id, BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.updateWithResponseAsync(id, request, requestOptions);
     }
 
     /**
@@ -219,17 +274,45 @@ public final class FlattenAsyncClient {
     public Mono<Void> sendLong(SendLongOptions options) {
         // Generated convenience method for sendLongWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        String id = options.getId();
+        String name = options.getName();
         String filter = options.getFilter();
         SendLongRequest requestObj
-            = new SendLongRequest(options.getInput(), options.getDataInt()).setUser(options.getUser())
+            = new SendLongRequest(options.getInput(), options.getDataInt(), options.getTitle(), options.getStatus())
+                .setUser(options.getUser())
                 .setDataIntOptional(options.getDataIntOptional())
                 .setDataLong(options.getDataLong())
-                .setDataFloat(options.getDataFloat());
+                .setDataFloat(options.getDataFloat())
+                .setDescription(options.getDescription())
+                .setDummy(options.getDummy());
         BinaryData request = BinaryData.fromObject(requestObj);
         if (filter != null) {
             requestOptions.addQueryParam("filter", filter, false);
         }
-        return sendLongWithResponse(id, request, requestOptions).flatMap(FluxUtil::toMono);
+        return sendLongWithResponse(name, request, requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The update operation.
+     * 
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param request The request parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the response body on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<TodoItem> update(long id, UpdatePatchRequest request) {
+        // Generated convenience method for updateWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, true);
+        BinaryData requestInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(request).toBytes());
+        JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, false);
+        return updateWithResponse(id, requestInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
+            .map(protocolMethodData -> protocolMethodData.toObject(TodoItem.class));
     }
 }
