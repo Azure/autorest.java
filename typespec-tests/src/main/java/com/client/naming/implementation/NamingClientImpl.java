@@ -85,6 +85,20 @@ public final class NamingClientImpl {
     }
 
     /**
+     * The UnionEnumsImpl object to access its operations.
+     */
+    private final UnionEnumsImpl unionEnums;
+
+    /**
+     * Gets the UnionEnumsImpl object to access its operations.
+     * 
+     * @return the UnionEnumsImpl object.
+     */
+    public UnionEnumsImpl getUnionEnums() {
+        return this.unionEnums;
+    }
+
+    /**
      * Initializes an instance of NamingClient client.
      */
     public NamingClientImpl() {
@@ -111,6 +125,7 @@ public final class NamingClientImpl {
         this.httpPipeline = httpPipeline;
         this.serializerAdapter = serializerAdapter;
         this.models = new ModelsImpl(this);
+        this.unionEnums = new UnionEnumsImpl(this);
         this.service = RestProxy.create(NamingClientService.class, this.httpPipeline, this.getSerializerAdapter());
     }
 
