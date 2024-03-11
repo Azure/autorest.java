@@ -5,7 +5,7 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ProxyMethodExample;
-import com.azure.autorest.util.CodeNamer;
+import com.azure.autorest.preprocessor.namer.CodeNamer;
 import com.azure.autorest.util.XmsExampleWrapper;
 
 import java.util.Locale;

@@ -7,78 +7,15 @@ import org.atteo.evo.inflector.English;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
-    private static final Map<Character, String> BASIC_LATIC_CHARACTERS = new HashMap<Character, String>() {{
-        put((char) 32, "Space");
-        put((char) 33, "ExclamationMark");
-        put((char) 34, "QuotationMark");
-        put((char) 35, "NumberSign");
-        put((char) 36, "DollarSign");
-        put((char) 37, "PercentSign");
-        put((char) 38, "Ampersand");
-        put((char) 39, "Apostrophe");
-        put((char) 40, "LeftParenthesis");
-        put((char) 41, "RightParenthesis");
-        put((char) 42, "Asterisk");
-        put((char) 43, "PlusSign");
-        put((char) 44, "Comma");
-        put((char) 45, "HyphenMinus");
-        put((char) 46, "FullStop");
-        put((char) 47, "Slash");
-        put((char) 48, "Zero");
-        put((char) 49, "One");
-        put((char) 50, "Two");
-        put((char) 51, "Three");
-        put((char) 52, "Four");
-        put((char) 53, "Five");
-        put((char) 54, "Six");
-        put((char) 55, "Seven");
-        put((char) 56, "Eight");
-        put((char) 57, "Nine");
-        put((char) 58, "Colon");
-        put((char) 59, "Semicolon");
-        put((char) 60, "LessThanSign");
-        put((char) 61, "EqualSign");
-        put((char) 62, "GreaterThanSign");
-        put((char) 63, "QuestionMark");
-        put((char) 64, "AtSign");
-        put((char) 91, "LeftSquareBracket");
-        put((char) 92, "Backslash");
-        put((char) 93, "RightSquareBracket");
-        put((char) 94, "CircumflexAccent");
-        put((char) 96, "GraveAccent");
-        put((char) 123, "LeftCurlyBracket");
-        put((char) 124, "VerticalBar");
-        put((char) 125, "RightCurlyBracket");
-        put((char) 126, "Tilde");
-    }};
-    private static final Set<String> RESERVED_WORDS = new HashSet<>(Arrays.asList(
-            "abstract", "assert", "boolean", "Boolean", "break",
-            "byte", "Byte", "case", "catch", "char",
-            "Character", "class", "Class", "const", "continue",
-            "default", "do", "double", "Double", "else",
-            "enum", "extends", "false", "final", "finally",
-            "float", "Float", "for", "goto", "if",
-            "implements", "import", "int", "Integer", "long",
-            "Long", "interface", "instanceof", "native", "new",
-            "null", "package", "private", "protected", "public",
-            "return", "short", "Short", "static", "strictfp",
-            "super", "switch", "synchronized", "this", "throw",
-            "throws", "transient", "true", "try", "void",
-            "Void", "volatile", "while", "Date", "Datetime",
-            "OffsetDateTime", "Duration", "Period", "Stream",
-            "String", "Object", "header", "_"
-    ));
 
     private static NamerFactory factory = new DefaultNamerFactory();
 
@@ -86,7 +23,6 @@ public class CodeNamer {
     private static final Pattern ESCAPE_COMMENT = Pattern.compile(Pattern.quote("*/"));
     private static final Pattern MERGE_UNDERSCORES = Pattern.compile("_{2,}");
     private static final Pattern CHARACTERS_TO_REPLACE_WITH_UNDERSCORE = Pattern.compile("[\\\\/.+ -]+");
-    private static final Pattern NEW_LINE = Pattern.compile("\r?\n");
 
     public static void setFactory(NamerFactory templateFactory) {
         factory = templateFactory;
@@ -172,44 +108,14 @@ public class CodeNamer {
     }
 
     public static String removeInvalidCharacters(String name) {
-        return getValidName(name, '_', '-');
-    }
-
-    protected static String removeInvalidCharactersNamespace(String name) {
-        return getValidName(name, '_', '-', '.');
-    }
-
-    public static String getValidName(String name, char... allowedCharacters) {
-        String correctName = removeInvalidCharacters(name, allowedCharacters);
-
-        // here we have only letters and digits or an empty String
-        if (correctName == null || correctName.isEmpty() ||
-                BASIC_LATIC_CHARACTERS.containsKey(correctName.charAt(0))) {
-            StringBuilder sb = new StringBuilder();
-            for (char symbol : name.toCharArray()) {
-                if (BASIC_LATIC_CHARACTERS.containsKey(symbol)) {
-                    sb.append(BASIC_LATIC_CHARACTERS.get(symbol));
-                } else {
-                    sb.append(symbol);
-                }
-            }
-            correctName = removeInvalidCharacters(sb.toString(), allowedCharacters);
-        }
-
-        // if it is still empty String, throw
-        if (correctName == null || correctName.isEmpty()) {
-            throw new IllegalArgumentException(
-                    String.format("Property name %s cannot be used as an Identifier, as it contains only invalid characters.", name));
-        }
-
-        return correctName;
+        return com.azure.autorest.preprocessor.namer.CodeNamer.getValidName(name, '_', '-');
     }
 
     public static String getPropertyName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return getEscapedReservedName(toCamelCase(removeInvalidCharacters(name)), "Property");
+        return com.azure.autorest.preprocessor.namer.CodeNamer.getEscapedReservedName(toCamelCase(removeInvalidCharacters(name)), "Property");
     }
 
     public static String getPlural(String name) {
@@ -263,27 +169,17 @@ public class CodeNamer {
             } else {
                 // all char is '_', then transform some '_' to
 
-                if (result.startsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(0))) {
-                    result = BASIC_LATIC_CHARACTERS.get(name.charAt(0)) + result.substring(1);
-                    if (result.endsWith("_") && BASIC_LATIC_CHARACTERS.containsKey(name.charAt(name.length() - 1))) {
-                        result = result.substring(0, result.length() - 1) + BASIC_LATIC_CHARACTERS.get(name.charAt(name.length() - 1));
+                Map<Character, String> basicLaticCharacters = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacters();
+                if (result.startsWith("_") && basicLaticCharacters.containsKey(name.charAt(0))) {
+                    result = basicLaticCharacters.get(name.charAt(0)) + result.substring(1);
+                    if (result.endsWith("_") && basicLaticCharacters.containsKey(name.charAt(name.length() - 1))) {
+                        result = result.substring(0, result.length() - 1) + basicLaticCharacters.get(name.charAt(name.length() - 1));
                     }
                 }
             }
         }
 
         return result.toUpperCase();
-    }
-
-    protected static String getEscapedReservedName(String name, String appendValue) {
-        Objects.requireNonNull(name);
-        Objects.requireNonNull(appendValue);
-
-        if (RESERVED_WORDS.contains(name)) {
-            name += appendValue;
-        }
-
-        return name;
     }
 
     private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = new HashSet<>(Arrays.asList(
@@ -296,25 +192,5 @@ public class CodeNamer {
             name += "Param";
         }
         return name;
-    }
-
-    private static String removeInvalidCharacters(String name, char... allowerCharacters) {
-        if (name == null || name.isEmpty()) {
-            return name;
-        }
-
-        StringBuilder builder = new StringBuilder();
-        List<Character> allowed = new ArrayList<>();
-        for (Character c : allowerCharacters) {
-            allowed.add(c);
-        }
-        for (Character c : name.toCharArray()) {
-            if (Character.isLetterOrDigit(c) || allowed.contains(c)) {
-                builder.append(c);
-            } else {
-                builder.append("_");
-            }
-        }
-        return builder.toString();
     }
 }
