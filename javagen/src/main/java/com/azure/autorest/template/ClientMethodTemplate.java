@@ -384,6 +384,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         expression = "null";
                     } else if (!parameter.getExplode()) {
                         CollectionFormat collectionFormat = parameter.getCollectionFormat();
+                        String delimiter = ClassType.STRING.defaultValueExpression(collectionFormat.getDelimiter());
                         if (elementType instanceof EnumType) {
                             // EnumTypes should provide a toString implementation that represents the wire value.
                             // Circumvent the use of JacksonAdapter and handle this manually.
@@ -403,12 +404,12 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 expression =
                                     parameterName + ".stream()\n" +
                                         "    .map(paramItemValue -> Objects.toString(" + enumToString + ", \"\"))\n" +
-                                        "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                                        "    .collect(Collectors.joining(" + delimiter + "))";
                             } else {
                                 expression =
                                     "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
                                         "    .map(paramItemValue -> Objects.toString(" + enumToString + ", \"\"))\n" +
-                                        "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                                        "    .collect(Collectors.joining(" + delimiter + "))";
                             }
                         } else {
                             if (elementType == ClassType.STRING
@@ -416,11 +417,11 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 if (alreadyNullChecked) {
                                     expression = parameterName + ".stream()\n" +
                                         "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
-                                        "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                                        "    .collect(Collectors.joining(" + delimiter + "))";
                                 } else {
                                     expression = "(" + parameterName + " == null) ? null : " + parameterName + ".stream()\n" +
                                         "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
-                                        "    .collect(Collectors.joining(\"" + collectionFormat.getDelimiter() + "\"))";
+                                        "    .collect(Collectors.joining(" + delimiter + "))";
                                 }
                             } else {
                                 // Always use serializeIterable as Iterable supports both Iterable and List.

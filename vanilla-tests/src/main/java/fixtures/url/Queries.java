@@ -3854,7 +3854,7 @@ public final class Queries {
             ? null
             : arrayQuery.stream()
                 .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                .collect(Collectors.joining("	"));
+                .collect(Collectors.joining("\t"));
         return FluxUtil.withContext(
             context -> service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context));
     }
@@ -3880,7 +3880,7 @@ public final class Queries {
             ? null
             : arrayQuery.stream()
                 .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-                .collect(Collectors.joining("	"));
+                .collect(Collectors.joining("\t"));
         return service.arrayStringTsvValid(this.client.getHost(), arrayQueryConverted, accept, context);
     }
 
