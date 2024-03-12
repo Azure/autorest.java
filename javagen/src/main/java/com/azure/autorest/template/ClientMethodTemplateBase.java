@@ -303,7 +303,8 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
                 description += " Call {@link RequestOptions#addQueryParam} to add string to array.";
             } else {
                 // collectionFormat: csv, ssv, tsv, pipes
-                description += String.format(" In the form of \"%s\" separated string.", parameter.getCollectionFormat().getDelimiter());
+                description += String.format(" In the form of %s separated string.",
+                        ClassType.STRING.defaultValueExpression(parameter.getCollectionFormat().getDelimiter()));
             }
         }
         return description;
