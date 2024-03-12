@@ -436,6 +436,20 @@ public final class ValueTypesClientImpl {
     }
 
     /**
+     * The UnionEnumValuesImpl object to access its operations.
+     */
+    private final UnionEnumValuesImpl unionEnumValues;
+
+    /**
+     * Gets the UnionEnumValuesImpl object to access its operations.
+     * 
+     * @return the UnionEnumValuesImpl object.
+     */
+    public UnionEnumValuesImpl getUnionEnumValues() {
+        return this.unionEnumValues;
+    }
+
+    /**
      * Initializes an instance of ValueTypesClient client.
      */
     public ValueTypesClientImpl() {
@@ -489,5 +503,6 @@ public final class ValueTypesClientImpl {
         this.unionStringLiterals = new UnionStringLiteralsImpl(this);
         this.unionIntLiterals = new UnionIntLiteralsImpl(this);
         this.unionFloatLiterals = new UnionFloatLiteralsImpl(this);
+        this.unionEnumValues = new UnionEnumValuesImpl(this);
     }
 }

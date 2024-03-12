@@ -5,9 +5,9 @@
 package com.cadl.flatten.models;
 
 /**
- * Defines values for TodoItemStatus.
+ * Defines values for Status.
  */
-public enum TodoItemStatus {
+public enum Status {
     /**
      * Enum value NotStarted.
      */
@@ -24,26 +24,26 @@ public enum TodoItemStatus {
     COMPLETED("Completed");
 
     /**
-     * The actual serialized value for a TodoItemStatus instance.
+     * The actual serialized value for a Status instance.
      */
     private final String value;
 
-    TodoItemStatus(String value) {
+    Status(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a TodoItemStatus instance.
+     * Parses a serialized value to a Status instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed TodoItemStatus object, or null if unable to parse.
+     * @return the parsed Status object, or null if unable to parse.
      */
-    public static TodoItemStatus fromString(String value) {
+    public static Status fromString(String value) {
         if (value == null) {
             return null;
         }
-        TodoItemStatus[] items = TodoItemStatus.values();
-        for (TodoItemStatus item : items) {
+        Status[] items = Status.values();
+        for (Status item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

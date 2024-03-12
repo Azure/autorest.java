@@ -70,6 +70,7 @@ import java.util.Objects;
         UnionStringLiteralClient.class,
         UnionIntLiteralClient.class,
         UnionFloatLiteralClient.class,
+        UnionEnumValueClient.class,
         BooleanOperationAsyncClient.class,
         StringOperationAsyncClient.class,
         BytesAsyncClient.class,
@@ -97,7 +98,8 @@ import java.util.Objects;
         BooleanLiteralAsyncClient.class,
         UnionStringLiteralAsyncClient.class,
         UnionIntLiteralAsyncClient.class,
-        UnionFloatLiteralAsyncClient.class })
+        UnionFloatLiteralAsyncClient.class,
+        UnionEnumValueAsyncClient.class })
 public final class ValueTypesClientBuilder
     implements HttpTrait<ValueTypesClientBuilder>, ConfigurationTrait<ValueTypesClientBuilder> {
     @Generated
@@ -580,6 +582,16 @@ public final class ValueTypesClientBuilder
     }
 
     /**
+     * Builds an instance of UnionEnumValueAsyncClient class.
+     * 
+     * @return an instance of UnionEnumValueAsyncClient.
+     */
+    @Generated
+    public UnionEnumValueAsyncClient buildUnionEnumValueAsyncClient() {
+        return new UnionEnumValueAsyncClient(buildInnerClient().getUnionEnumValues());
+    }
+
+    /**
      * Builds an instance of BooleanOperationClient class.
      * 
      * @return an instance of BooleanOperationClient.
@@ -857,6 +869,16 @@ public final class ValueTypesClientBuilder
     @Generated
     public UnionFloatLiteralClient buildUnionFloatLiteralClient() {
         return new UnionFloatLiteralClient(buildInnerClient().getUnionFloatLiterals());
+    }
+
+    /**
+     * Builds an instance of UnionEnumValueClient class.
+     * 
+     * @return an instance of UnionEnumValueClient.
+     */
+    @Generated
+    public UnionEnumValueClient buildUnionEnumValueClient() {
+        return new UnionEnumValueClient(buildInnerClient().getUnionEnumValues());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(ValueTypesClientBuilder.class);

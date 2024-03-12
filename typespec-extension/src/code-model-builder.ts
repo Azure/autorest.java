@@ -39,6 +39,7 @@ import {
   EnumMember,
   walkPropertiesInherited,
   isVoidType,
+  isErrorModel,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -81,7 +82,6 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
-  isErrorOrChildOfError,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -365,7 +365,7 @@ export class CodeModelBuilder {
                 // HTTP Authentication should use "Basic token" or "Bearer token"
                 schemeOrApiKeyPrefix = pascalCase(schemeOrApiKeyPrefix);
 
-                if (!(this.options.branded === false)) {
+                if (this.isBranded()) {
                   // Azure would not allow BasicAuth or BearerAuth
                   this.logWarning(`{scheme.scheme} auth method is currently not supported.`);
                   continue;
@@ -387,6 +387,10 @@ export class CodeModelBuilder {
         schemes: securitySchemes,
       });
     }
+  }
+
+  private isBranded(): boolean {
+    return !this.options["flavor"] || this.options["flavor"].toLocaleLowerCase() === "azure";
   }
 
   private isInternal(context: SdkContext, operation: Operation): boolean {
@@ -1357,7 +1361,11 @@ export class CodeModelBuilder {
           } else {
             // property from anonymous model
             const existBodyProperty = schema.properties?.find((it) => it.serializedName === serializedName);
-            if (existBodyProperty) {
+            if (
+              existBodyProperty &&
+              !existBodyProperty.readOnly &&
+              !(existBodyProperty.schema instanceof ConstantSchema)
+            ) {
               request.parameters.push(
                 new VirtualParameter(
                   existBodyProperty.language.default.name,
@@ -1588,10 +1596,7 @@ export class CodeModelBuilder {
         },
       });
     }
-    if (
-      resp.statusCodes === "*" ||
-      (bodyType && bodyType.kind === "Model" && isErrorOrChildOfError(this.sdkContext, bodyType))
-    ) {
+    if (resp.statusCodes === "*" || (bodyType && isErrorModel(this.program, bodyType))) {
       // "*", or the model is @error
       op.addException(response);
 

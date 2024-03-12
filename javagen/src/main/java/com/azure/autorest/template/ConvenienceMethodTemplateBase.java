@@ -655,74 +655,76 @@ abstract class ConvenienceMethodTemplateBase {
         StringBuilder builder = new StringBuilder().append("new MultipartFormDataHelper(requestOptions)");
         for (ClientModelProperty property : model.getProperties()) {
             String propertyGetExpression = name + "." + property.getGetterName() + "()";
-            if (isMultipartModel(property.getWireType())) {
-                // file, usually application/octet-stream
+            if (!property.isReadOnly()) {
+                if (isMultipartModel(property.getWireType())) {
+                    // file, usually application/octet-stream
 
-                String fileExpression = propertyGetExpression + ".getContent()";
-                String contentTypeExpression = propertyGetExpression + ".getContentType()";
-                String filenameExpression = propertyGetExpression + ".getFilename()";
-                if (!property.isRequired()) {
-                    fileExpression = nullableExpression.apply(propertyGetExpression, fileExpression);
-                    contentTypeExpression = nullableExpression.apply(propertyGetExpression, contentTypeExpression);
-                    filenameExpression = nullableExpression.apply(propertyGetExpression, filenameExpression);
+                    String fileExpression = propertyGetExpression + ".getContent()";
+                    String contentTypeExpression = propertyGetExpression + ".getContentType()";
+                    String filenameExpression = propertyGetExpression + ".getFilename()";
+                    if (!property.isRequired()) {
+                        fileExpression = nullableExpression.apply(propertyGetExpression, fileExpression);
+                        contentTypeExpression = nullableExpression.apply(propertyGetExpression, contentTypeExpression);
+                        filenameExpression = nullableExpression.apply(propertyGetExpression, filenameExpression);
+                    }
+
+                    builder.append(String.format(
+                            ".serializeFileField(%1$s, %2$s, %3$s, %4$s)",
+                            ClassType.STRING.defaultValueExpression(property.getSerializedName()),
+                            fileExpression,
+                            contentTypeExpression,
+                            filenameExpression
+                    ));
+                } else if (property.getWireType() instanceof ListType && isMultipartModel(((ListType) property.getWireType()).getElementType())) {
+                    // file array
+
+                    // For now, we use 3 List, as we do not wish the Helper class refer to different ##FileDetails model.
+                    // Later, if we switch to a shared class in azure-core, we can change the implementation.
+                    String className = ((ListType) property.getWireType()).getElementType().toString();
+                    String streamExpressionFormat = "%1$s.stream().map(%2$s::%3$s).collect(Collectors.toList())";
+                    String fileExpression = String.format(streamExpressionFormat,
+                            propertyGetExpression, className, "getContent");
+                    String contentTypeExpression = String.format(streamExpressionFormat,
+                            propertyGetExpression, className, "getContentType");
+                    String filenameExpression = String.format(streamExpressionFormat,
+                            propertyGetExpression, className, "getFilename");
+                    if (!property.isRequired()) {
+                        fileExpression = nullableExpression.apply(propertyGetExpression, fileExpression);
+                        contentTypeExpression = nullableExpression.apply(propertyGetExpression, contentTypeExpression);
+                        filenameExpression = nullableExpression.apply(propertyGetExpression, filenameExpression);
+                    }
+
+                    builder.append(String.format(
+                            ".serializeFileFields(%1$s, %2$s, %3$s, %4$s)",
+                            ClassType.STRING.defaultValueExpression(property.getSerializedName()),
+                            fileExpression,
+                            contentTypeExpression,
+                            filenameExpression
+                    ));
+                } else if (ClientModelUtil.isClientModel(property.getWireType())
+                        || property.getWireType() instanceof MapType
+                        || property.getWireType() instanceof IterableType) {
+                    // application/json
+                    builder.append(String.format(
+                            ".serializeJsonField(%1$s, %2$s)",
+                            ClassType.STRING.defaultValueExpression(property.getSerializedName()),
+                            propertyGetExpression
+                    ));
+                } else {
+                    // text/plain
+                    String stringExpression = propertyGetExpression;
+                    // convert to String
+                    if (property.getWireType() instanceof PrimitiveType) {
+                        stringExpression = String.format("String.valueOf(%s)", stringExpression);
+                    } else if (property.getWireType() != ClassType.STRING) {
+                        stringExpression = String.format("Objects.toString(%s)", stringExpression);
+                    }
+                    builder.append(String.format(
+                            ".serializeTextField(%1$s, %2$s)",
+                            ClassType.STRING.defaultValueExpression(property.getSerializedName()),
+                            stringExpression
+                    ));
                 }
-
-                builder.append(String.format(
-                        ".serializeFileField(%1$s, %2$s, %3$s, %4$s)",
-                        ClassType.STRING.defaultValueExpression(property.getSerializedName()),
-                        fileExpression,
-                        contentTypeExpression,
-                        filenameExpression
-                ));
-            } else if (property.getWireType() instanceof ListType && isMultipartModel(((ListType) property.getWireType()).getElementType())) {
-                // file array
-
-                // For now, we use 3 List, as we do not wish the Helper class refer to different ##FileDetails model.
-                // Later, if we switch to a shared class in azure-core, we can change the implementation.
-                String className = ((ListType) property.getWireType()).getElementType().toString();
-                String streamExpressionFormat = "%1$s.stream().map(%2$s::%3$s).collect(Collectors.toList())";
-                String fileExpression = String.format(streamExpressionFormat,
-                        propertyGetExpression, className, "getContent");
-                String contentTypeExpression = String.format(streamExpressionFormat,
-                        propertyGetExpression, className, "getContentType");
-                String filenameExpression = String.format(streamExpressionFormat,
-                        propertyGetExpression, className, "getFilename");
-                if (!property.isRequired()) {
-                    fileExpression = nullableExpression.apply(propertyGetExpression, fileExpression);
-                    contentTypeExpression = nullableExpression.apply(propertyGetExpression, contentTypeExpression);
-                    filenameExpression = nullableExpression.apply(propertyGetExpression, filenameExpression);
-                }
-
-                builder.append(String.format(
-                        ".serializeFileFields(%1$s, %2$s, %3$s, %4$s)",
-                        ClassType.STRING.defaultValueExpression(property.getSerializedName()),
-                        fileExpression,
-                        contentTypeExpression,
-                        filenameExpression
-                ));
-            } else if (ClientModelUtil.isClientModel(property.getWireType())
-                    || property.getWireType() instanceof MapType
-                    || property.getWireType() instanceof IterableType) {
-                // application/json
-                builder.append(String.format(
-                        ".serializeJsonField(%1$s, %2$s)",
-                        ClassType.STRING.defaultValueExpression(property.getSerializedName()),
-                        propertyGetExpression
-                ));
-            } else {
-                // text/plain
-                String stringExpression = propertyGetExpression;
-                // convert to String
-                if (property.getWireType() instanceof PrimitiveType) {
-                    stringExpression = String.format("String.valueOf(%s)", stringExpression);
-                } else if (property.getWireType() != ClassType.STRING) {
-                    stringExpression = String.format("Objects.toString(%s)", stringExpression);
-                }
-                builder.append(String.format(
-                        ".serializeTextField(%1$s, %2$s)",
-                        ClassType.STRING.defaultValueExpression(property.getSerializedName()),
-                        stringExpression
-                ));
             }
         }
         builder.append(".end().getRequestBody()");
