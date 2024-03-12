@@ -94,6 +94,11 @@
             com.azure.core.test*:
             com.azure.json,com.azure.core.*
           </excludePackageNames>
+          <sourceFileExcludes>
+            <sourceFileExclude>module-info.java</sourceFileExclude>
+            <!-- Java 11 seems having a bug on line starting with @, in @code tag -->
+            <sourceFileExclude>com/cadl/naming/NamingAsyncClient.java</sourceFileExclude>
+          </sourceFileExcludes>
           <failOnError>true</failOnError>
           <failOnWarnings>true</failOnWarnings>
           <doclint>all</doclint>
