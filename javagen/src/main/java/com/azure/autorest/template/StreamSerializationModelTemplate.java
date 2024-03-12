@@ -505,6 +505,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 // becomes reality this will need to be reworked to handle that case.
                 serializeJsonContainerProperty(methodBlock, "writeMap", elementType, ((MapType) elementType).getValueType(),
                     serializedName, propertyValueGetter, depth + 1, isJsonMergePatch);
+            } else if (elementType == ClassType.BINARY_DATA) {
+                methodBlock.line(lambdaWriterName + ".writeUntyped(" + elementName + ")");
             } else {
                 throw new RuntimeException("Unknown value type " + elementType + " in " + containerType
                     + " serialization. Need to add support for it.");
@@ -1189,6 +1191,8 @@ hasConstructorArguments, settings));
                 deserializeJsonContainerProperty(methodBlock, "readMap", elementWireType,
                     ((MapType) elementWireType).getValueType(), ((MapType) elementClientType).getValueType(),
                     depth + 1);
+            } else if (elementWireType == ClassType.BINARY_DATA) {
+                methodBlock.line(lambdaReaderName + ".readUntyped()");
             } else {
                 throw new RuntimeException("Unknown value type " + elementWireType + " in " + containerType
                     + " serialization. Need to add support for it.");

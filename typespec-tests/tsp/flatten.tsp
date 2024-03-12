@@ -32,8 +32,10 @@ model ApiVersionParameter {
 }
 
 alias Request = {
+  @visibility("read") @key name: string;
   user?: User;
   input: string;
+  constant: "constant";
 };
 
 alias LongRequest = {
@@ -114,9 +116,11 @@ interface FlattenOp {
   @route("send-long")
   @post
   sendLong(
-    @query id: string,
+    @query name: string,
     @query filter?: string,
     ...LongRequest,
+    ...TodoItem,
+    constant: "constant",
     ...ApiVersionParameter,
   ): OkResponse;
 

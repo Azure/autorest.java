@@ -160,7 +160,13 @@ public class TypeSpecPlugin extends Javagen {
                 .filter(ModelUtil::isGeneratingModel)
                 .anyMatch(ClientModelUtil::isMultipartModel);
         if (generateMultipartFormDataHelper) {
-            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+            if (JavaSettings.getInstance().isBranded()) {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()), ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+            } else {
+                javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()),
+                        ClientModelUtil.GENERIC_MULTI_PART_FORM_DATA_HELPER_CLASS_NAME,
+                        ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
+            }
         }
     }
 
@@ -285,9 +291,11 @@ public class TypeSpecPlugin extends Javagen {
             SETTINGS_MAP.put("polling", options.getPolling());
         }
 
-        if (options.getBranded() == Boolean.FALSE) {
-            SETTINGS_MAP.put("branded", options.getBranded());
+        if (options.getFlavor() != null) {
+            SETTINGS_MAP.put("flavor", options.getFlavor());
+        }
 
+        if (options.getFlavor() != null && !"azure".equalsIgnoreCase(options.getFlavor())) {
             SETTINGS_MAP.put("sdk-integration", false);
             SETTINGS_MAP.put("license-header", "SMALL_TYPESPEC");
 

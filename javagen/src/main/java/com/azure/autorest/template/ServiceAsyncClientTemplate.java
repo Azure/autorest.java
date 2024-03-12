@@ -141,7 +141,11 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
   }
 
   protected void addGeneratedAnnotation(JavaContext classBlock) {
-    classBlock.annotation(Annotation.GENERATED.getName());
+    if (JavaSettings.getInstance().isBranded()) {
+      classBlock.annotation(Annotation.GENERATED.getName());
+    } else {
+      classBlock.annotation(Annotation.METADATA.getName() + "(generated = true)");
+    }
   }
 
   /**

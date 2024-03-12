@@ -171,9 +171,15 @@ public class ProxyMethodParameter extends MethodParameter {
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
         if (getRequestParameterLocation() != RequestParameterLocation.NONE/* && getRequestParameterLocation() != RequestParameterLocation.FormData*/) {
-            imports.add(String.format("%1$s.annotation.%2$sParam",
-                    ExternalPackage.CORE.getPackageName(),
-                    CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
+            if (settings.isBranded()) {
+                imports.add(String.format("%1$s.annotation.%2$sParam",
+                        ExternalPackage.CORE.getPackageName(),
+                        CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
+            } else {
+                imports.add(String.format("%1$s.http.annotation.%2$sParam",
+                        ExternalPackage.CORE.getPackageName(),
+                        CodeNamer.toPascalCase(getRequestParameterLocation().toString())));
+            }
         }
         if (getRequestParameterLocation() != RequestParameterLocation.BODY) {
             if (getClientType() == ArrayType.BYTE_ARRAY) {
@@ -188,6 +194,10 @@ public class ProxyMethodParameter extends MethodParameter {
 //        if (getRequestParameterLocation() == RequestParameterLocation.FormData) {
 //            imports.add(String.format("com.azure.core.annotation.FormParam"));
 //        }
+
+        if (!settings.isBranded()) {
+            imports.add("com.generic.core.http.models.HttpMethod");
+        }
 
         getWireType().addImportsTo(imports, includeImplementationImports);
     }
