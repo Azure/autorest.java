@@ -119,21 +119,17 @@ export function getFileDetailsSchema(
     pascalCase(filePropertyName) + (filePropertyName.toLocaleLowerCase().endsWith("file") ? "Details" : "FileDetails");
   let fileDetailsSchema = fileDetailsMap.get(schemaName);
   if (!fileDetailsSchema) {
-    fileDetailsSchema = new ObjectSchema(
-      schemaName,
-      'The file details for the "' + filePropertyName + '" field.',
-      {
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
+    fileDetailsSchema = new ObjectSchema(schemaName, 'The file details for the "' + filePropertyName + '" field.', {
+      language: {
+        default: {
+          namespace: namespace,
         },
-        serializationFormats: [KnownMediaType.Multipart],
+        java: {
+          namespace: getJavaNamespace(namespace),
+        },
       },
-    );
+      serializationFormats: [KnownMediaType.Multipart],
+    });
     fileDetailsSchema.serializationFormats;
     schemas.add(fileDetailsSchema);
     fileDetailsSchema.addProperty(
