@@ -3,9 +3,11 @@
 
 package com.client.naming;
 
+import com.client.naming.models.ClientExtensibleEnum;
 import com.client.naming.models.ClientModel;
 import com.client.naming.models.ClientNameAndJsonEncodedNameModel;
 import com.client.naming.models.ClientNameModel;
+import com.client.naming.models.ExtensibleEnum;
 import com.client.naming.models.JavaModel;
 import com.client.naming.models.LanguageClientNameModel;
 import org.junit.jupiter.api.Test;
@@ -16,6 +18,8 @@ public class NamingTests {
 
     // client name should be "ClientModel", currently a bug in TCGC
     private final ModelClient modelClient = new NamingClientBuilder().buildModelClient();
+
+    private final UnionEnumClient enumClient = new NamingClientBuilder().buildUnionEnumClient();
 
     @Test
     public void testNaming() {
@@ -37,5 +41,9 @@ public class NamingTests {
         // model
         modelClient.client(new ClientModel(true));
         modelClient.language(new JavaModel(true));
+
+        // enum
+        enumClient.unionEnumName(ClientExtensibleEnum.ENUM_VALUE1);
+        enumClient.unionEnumMemberName(ExtensibleEnum.CLIENT_ENUM_VALUE1);
     }
 }
