@@ -9,24 +9,24 @@ import com.azure.core.annotation.Generated;
 import com.azure.core.util.BinaryData;
 
 /**
- * The file details model for the picture.
+ * The file details for the "picture" field.
  */
 @Fluent
 public final class PictureFileDetails {
     /*
-     * The content of the file
+     * The content of the file.
      */
     @Generated
     private final BinaryData content;
 
     /*
-     * The filename of the file
+     * The filename of the file.
      */
     @Generated
     private String filename;
 
     /*
-     * The content-type of the file
+     * The content-type of the file.
      */
     @Generated
     private String contentType = "application/octet-stream";

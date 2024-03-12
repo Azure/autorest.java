@@ -173,7 +173,7 @@ public final class MultipartClient {
      * The uploadFile operation.
      * 
      * @param name A sequence of textual characters.
-     * @param fileData Represent a byte array.
+     * @param fileData The file details for the "file_data" field.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
