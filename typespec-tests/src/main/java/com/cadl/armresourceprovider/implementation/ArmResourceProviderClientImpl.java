@@ -5,6 +5,7 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.annotation.ServiceClient;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpResponse;
