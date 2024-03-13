@@ -78,5 +78,10 @@ public class ValidateDiscriminatorIsPassedTests {
         String subclassJson = BinaryData.fromObject(subclass).toString();
         jsonNode = OBJECT_MAPPER.readTree(subclassJson);
         assertEquals(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString(), jsonNode.get("odata.type").asText());
+
+        String unknownJson = "{\"odata.type\": \"invalid\"}";
+        MetricAlertCriteria criteria = BinaryData.fromString(unknownJson).toObject(MetricAlertCriteria.class);
+        assertEquals("invalid", criteria.getOdataType().toString());
+        assertEquals(MetricAlertCriteria.class, criteria.getClass());
     }
 }
