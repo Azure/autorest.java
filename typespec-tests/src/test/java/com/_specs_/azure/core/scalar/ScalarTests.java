@@ -10,33 +10,35 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class ScalarTests {
-    private ScalarClient client = new ScalarClientBuilder()
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+
+    private final static String LOCATION_REGION = "eastus";
+    private final ScalarClient client = new ScalarClientBuilder()
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC))
             .buildClient();
 
     @Test
     public void testGet() {
-        Assertions.assertEquals("eastus", client.get());
+        Assertions.assertEquals(LOCATION_REGION, client.get());
     }
 
     @Test
     public void testHeader() {
-        client.headerMethod("eastus");
+        client.headerMethod(LOCATION_REGION);
     }
 
     @Test
     public void testPost() {
-        AzureLocationModel azureLocationModel = client.post(new AzureLocationModel("eastus"));
-        Assertions.assertEquals("eastus", azureLocationModel.getLocation());
+        AzureLocationModel azureLocationModel = client.post(new AzureLocationModel(LOCATION_REGION));
+        Assertions.assertEquals(LOCATION_REGION, azureLocationModel.getLocation());
     }
 
     @Test
     public void testPut() {
-        client.put("eastus");
+        client.put(LOCATION_REGION);
     }
 
     @Test
     public void testQuery() {
-        client.query("eastus");
+        client.query(LOCATION_REGION);
     }
 }
