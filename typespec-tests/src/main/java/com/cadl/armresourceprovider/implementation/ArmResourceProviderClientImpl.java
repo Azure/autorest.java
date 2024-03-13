@@ -307,7 +307,7 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
         }
 
         public String getHeaderValue(String s) {
-            return httpHeaders.getValue(s);
+            return httpHeaders.getValue(HttpHeaderName.fromString(s));
         }
 
         public HttpHeaders getHeaders() {
