@@ -138,7 +138,7 @@ import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { createPollOperationDetailsSchema } from "./external-schemas.js";
+import { createPollOperationDetailsSchema, getFileDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
   stringArrayContainsIgnoreCase,
@@ -1314,6 +1314,9 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
     if (op.convenienceApi && operationIsMultipart(httpOperation)) {
+      if (schema instanceof ObjectSchema) {
+        this.processMultipartFormDataSchema(schema);
+      }
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
@@ -2510,6 +2513,34 @@ export class CodeModelBuilder {
     }
   }
 
+  private processMultipartFormDataSchema(schema: ObjectSchema) {
+    if (schema.properties) {
+      for (const property of schema.properties) {
+        if (property.schema instanceof ByteArraySchema) {
+          property.schema = getFileDetailsSchema(
+            property.language.default.name,
+            schema.language.default.namespace,
+            this.codeModel.schemas,
+            this.binarySchema,
+            this.stringSchema,
+          );
+        } else if (property.schema instanceof ArraySchema && property.schema.elementType instanceof ByteArraySchema) {
+          property.schema = new ArraySchema(
+            property.language.default.name,
+            property.language.default.description,
+            getFileDetailsSchema(
+              property.language.default.name,
+              schema.language.default.namespace,
+              this.codeModel.schemas,
+              this.binarySchema,
+              this.stringSchema,
+            ),
+          );
+        }
+      }
+    }
+  }
+
   private getDefaultValue(type: Type | undefined): any {
     if (type) {
       switch (type.kind) {
@@ -2676,6 +2707,11 @@ export class CodeModelBuilder {
   private _anySchema?: AnySchema;
   get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private _binarySchema?: BinarySchema;
+  get binarySchema(): BinarySchema {
+    return this._binarySchema || (this._binarySchema = this.codeModel.schemas.add(new BinarySchema("simple binary")));
   }
 
   private _pollResultSchema?: ObjectSchema;

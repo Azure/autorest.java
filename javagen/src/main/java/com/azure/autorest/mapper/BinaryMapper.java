@@ -4,6 +4,8 @@
 package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.BinarySchema;
+import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 
@@ -28,6 +30,8 @@ public class BinaryMapper implements IMapper<BinarySchema, IType> {
     if (binarySchema == null) {
       return null;
     }
-    return GenericType.FLUX_BYTE_BUFFER;
+    return JavaSettings.getInstance().isDataPlaneClient()
+            ? ClassType.BINARY_DATA
+            : GenericType.FLUX_BYTE_BUFFER;
   }
 }
