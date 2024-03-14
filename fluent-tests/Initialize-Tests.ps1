@@ -130,7 +130,7 @@ $job = @(
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/196886564583ff59186bd0ef44d923120aaf3f78/specification/managednetworkfabric/resource-manager/Microsoft.ManagedNetworkFabric/stable/2023-06-15/NetworkFabrics.json --java.namespace=com.azure.mgmtlitetest.managednetworkfabric",
 
     # polymorphic models in different packages
-    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/64337ca106a20055b389f9652ea8cf942aa94252/specification/consumption/resource-manager/Microsoft.Consumption/stable/2023-11-01/consumption.json --java.namespace=com.azure.mgmtlitetest.consumption"
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=https://github.com/Azure/azure-rest-api-specs/blob/64337ca106a20055b389f9652ea8cf942aa94252/specification/consumption/resource-manager/Microsoft.Consumption/stable/2023-11-01/consumption.json --java.namespace=com.azure.mgmtlitetest.consumption --generate-tests=false"
 
     # schema clean-up
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/schema-cleanup.json --java.namespace=com.azure.mgmtlitetest.schemacleanup"
