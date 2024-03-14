@@ -57,7 +57,7 @@ public class Fish implements JsonSerializable<Fish> {
      * @return the Fish object itself.
      */
     @Generated
-    Fish setKind(String kind) {
+    protected Fish setKind(String kind) {
         this.kind = kind;
         return this;
     }

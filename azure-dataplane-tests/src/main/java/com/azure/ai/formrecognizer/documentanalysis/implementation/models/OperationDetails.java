@@ -91,7 +91,7 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
      * @param kind the kind value to set.
      * @return the OperationDetails object itself.
      */
-    OperationDetails setKind(String kind) {
+    protected OperationDetails setKind(String kind) {
         this.kind = kind;
         return this;
     }

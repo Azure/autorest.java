@@ -48,7 +48,7 @@ public class DotFish implements JsonSerializable<DotFish> {
      * @param fishType the fishType value to set.
      * @return the DotFish object itself.
      */
-    DotFish setFishType(String fishType) {
+    protected DotFish setFishType(String fishType) {
         this.fishType = fishType;
         return this;
     }

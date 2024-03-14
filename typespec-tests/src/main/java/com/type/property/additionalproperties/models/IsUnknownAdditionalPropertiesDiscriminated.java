@@ -66,7 +66,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
      * @return the IsUnknownAdditionalPropertiesDiscriminated object itself.
      */
     @Generated
-    IsUnknownAdditionalPropertiesDiscriminated setKind(String kind) {
+    protected IsUnknownAdditionalPropertiesDiscriminated setKind(String kind) {
         this.kind = kind;
         return this;
     }
