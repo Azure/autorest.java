@@ -72,13 +72,16 @@ public class ValidateDiscriminatorIsPassedTests {
         MetricAlertCriteria superclass = new MetricAlertCriteria();
         String superclassJson = BinaryData.fromObject(superclass).toString();
         JsonNode jsonNode = OBJECT_MAPPER.readTree(superclassJson);
+        assertEquals(1, jsonNode.size());
         assertEquals("MetricAlertCriteria", jsonNode.get("odata.type").asText());
 
         MetricAlertCriteria subclass = new MetricAlertSingleResourceMultipleMetricCriteria();
         String subclassJson = BinaryData.fromObject(subclass).toString();
         jsonNode = OBJECT_MAPPER.readTree(subclassJson);
+        assertEquals(1, jsonNode.size());
         assertEquals(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString(), jsonNode.get("odata.type").asText());
 
+        // de-serialization of unknown type
         String unknownJson = "{\"odata.type\": \"invalid\"}";
         MetricAlertCriteria criteria = BinaryData.fromString(unknownJson).toObject(MetricAlertCriteria.class);
         assertEquals("invalid", criteria.getOdataType().toString());
