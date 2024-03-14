@@ -3,14 +3,19 @@
 
 package fixtures.inheritance.passdiscriminator;
 
+import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertCriteria;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
+import fixtures.inheritance.passdiscriminator.models.Odatatype;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.Objects;
 
@@ -58,5 +63,28 @@ public class ValidateDiscriminatorIsPassedTests {
         }
 
         fail("Generation didn't match expected pattern when passing discriminator property to child classes.");
+    }
+
+    private final static ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+
+    @Test
+    public void testJacksonSerialization() throws IOException {
+        MetricAlertCriteria superclass = new MetricAlertCriteria();
+        String superclassJson = BinaryData.fromObject(superclass).toString();
+        JsonNode jsonNode = OBJECT_MAPPER.readTree(superclassJson);
+        assertEquals(1, jsonNode.size());
+        assertEquals("MetricAlertCriteria", jsonNode.get("odata.type").asText());
+
+        MetricAlertCriteria subclass = new MetricAlertSingleResourceMultipleMetricCriteria();
+        String subclassJson = BinaryData.fromObject(subclass).toString();
+        jsonNode = OBJECT_MAPPER.readTree(subclassJson);
+        assertEquals(1, jsonNode.size());
+        assertEquals(Odatatype.MICROSOFT_AZURE_MONITOR_SINGLE_RESOURCE_MULTIPLE_METRIC_CRITERIA.toString(), jsonNode.get("odata.type").asText());
+
+        // de-serialization of unknown type
+        String unknownJson = "{\"odata.type\": \"invalid\"}";
+        MetricAlertCriteria criteria = BinaryData.fromString(unknownJson).toObject(MetricAlertCriteria.class);
+        assertEquals("invalid", criteria.getOdataType().toString());
+        assertEquals(MetricAlertCriteria.class, criteria.getClass());
     }
 }
