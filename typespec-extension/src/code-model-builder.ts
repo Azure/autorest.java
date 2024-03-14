@@ -2134,10 +2134,12 @@ export class CodeModelBuilder {
       }
       if (discriminatorProperty) {
         objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+        objectSchema.discriminator.property.isDiscriminator = true;
       } else {
         // fallback to property name, if cannot find the discriminator property
         objectSchema.discriminator = new Discriminator(
           new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
+            isDiscriminator: true,
             required: true,
             serializedName: discriminatorPropertyName,
           }),
