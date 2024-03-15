@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -27,7 +28,6 @@ import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaVisibility;
-import com.azure.core.util.CoreUtils;
 
 import java.net.URI;
 import java.time.Duration;
@@ -86,7 +86,7 @@ public class ClientModelUtil {
                     .crossLanguageDefinitionId(client.getCrossLanguageDefinitionId());
 
             final List<ConvenienceMethod> convenienceMethods = client.getOperationGroups().stream()
-                    .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
+                    .filter(og -> ExtensionUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))    // no resource group
                     .findAny()
                     .map(og -> getConvenienceMethods(serviceClient::getClientMethods, og))
                     .orElse(Collections.emptyList());
@@ -331,7 +331,7 @@ public class ClientModelUtil {
 
     public static List<String> getApiVersions(CodeModel codeModel) {
         List<String> versions = codeModel.getClients().stream()
-                .filter(c -> !CoreUtils.isNullOrEmpty(c.getApiVersions()))
+                .filter(c -> !ExtensionUtils.isNullOrEmpty(c.getApiVersions()))
                 .map(c -> c.getApiVersions().stream().map(ApiVersion::getVersion).collect(Collectors.toList()))
                 .findFirst().orElse(null);
         if (versions == null) {
@@ -348,7 +348,7 @@ public class ClientModelUtil {
     public static String getArtifactId() {
         JavaSettings settings = JavaSettings.getInstance();
         String artifactId = settings.getArtifactId();
-        if (settings.isDataPlaneClient() && CoreUtils.isNullOrEmpty(artifactId)) {
+        if (settings.isDataPlaneClient() && ExtensionUtils.isNullOrEmpty(artifactId)) {
             // convert package/namespace to artifact
             artifactId = settings.getPackage().toLowerCase(Locale.ROOT)
                     .replace("com.", "")
@@ -750,11 +750,11 @@ public class ClientModelUtil {
             .collect(Collectors.toSet());
 
         // LongRunningMetadata in methods
-        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+        if (!ExtensionUtils.isNullOrEmpty(codeModel.getClients())) {
             for (Client client : codeModel.getClients()) {
-                if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+                if (!ExtensionUtils.isNullOrEmpty(client.getOperationGroups())) {
                     for (OperationGroup og : client.getOperationGroups()) {
-                        if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
+                        if (!ExtensionUtils.isNullOrEmpty(og.getOperations())) {
                             externalPackageNames.addAll(og.getOperations().stream()
                                 .filter(o -> o.getLroMetadata() != null && o.getLroMetadata().getPollingStrategy() != null && o.getLroMetadata().getPollingStrategy().getLanguage() != null && o.getLroMetadata().getPollingStrategy().getLanguage().getJava() != null)
                                 .map(o -> o.getLroMetadata().getPollingStrategy().getLanguage().getJava().getNamespace())

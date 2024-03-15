@@ -16,6 +16,8 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethod.Builder;
@@ -45,8 +47,6 @@ import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.http.HttpMethod;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -174,7 +174,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             summary = operation.getLanguage().getDefault() == null ? null : operation.getLanguage().getDefault().getSummary();
         }
         String description = operation.getLanguage().getJava() == null ? null : operation.getLanguage().getJava().getDescription();
-        if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+        if (ExtensionUtils.isNullOrEmpty(summary) && ExtensionUtils.isNullOrEmpty(description)) {
             builder.description(String.format("The %s operation.", operation.getLanguage().getJava().getName()));
         } else {
             builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
@@ -182,7 +182,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
 
         // API comment
         ImplementationDetails.Builder implDetailsBuilder = null;
-        if (operation.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(operation.getLanguage().getJava().getComment())) {
+        if (operation.getLanguage().getJava() != null && !ExtensionUtils.isNullOrEmpty(operation.getLanguage().getJava().getComment())) {
             implDetailsBuilder = new ImplementationDetails.Builder().comment(operation.getLanguage().getJava().getComment());
             builder.implementationDetails(implDetailsBuilder.build());
         }
@@ -1523,7 +1523,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         IType nextLinkType = responseBodyModel.getProperties().stream()
             .filter(p -> p.getSerializedName().equals(xmsPageable.getNextLinkName()))
             .map(ClientModelProperty::getClientType).findAny().orElse(null);
-        if (nextLinkType == null && !CoreUtils.isNullOrEmpty(responseBodyModel.getParentModelName())) {
+        if (nextLinkType == null && !ExtensionUtils.isNullOrEmpty(responseBodyModel.getParentModelName())) {
             // try find nextLink property in parent model
             nextLinkType = getPageableNextLinkType(xmsPageable, responseBodyModel.getParentModelName());
         }
@@ -1587,7 +1587,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // try the description of the operation
         if (operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {
             String operationDescription = operation.getLanguage().getDefault().getDescription();
-            if (!CoreUtils.isNullOrEmpty(operationDescription)) {
+            if (!ExtensionUtils.isNullOrEmpty(operationDescription)) {
                 if (operationDescription.toLowerCase().startsWith("get ") || operationDescription.toLowerCase().startsWith("gets ")) {
                     int startIndex = operationDescription.indexOf(" ") + 1;
                     description = formatReturnTypeDescription(operationDescription.substring(startIndex));
@@ -1598,11 +1598,11 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         // try the description on the schema of return type
         if (description == null && operation.getResponses() != null && !operation.getResponses().isEmpty()) {
             Schema responseSchema = operation.getResponses().get(0).getSchema();
-            if (responseSchema != null && !CoreUtils.isNullOrEmpty(responseSchema.getSummary())) {
+            if (responseSchema != null && !ExtensionUtils.isNullOrEmpty(responseSchema.getSummary())) {
                 description = formatReturnTypeDescription(responseSchema.getSummary());
             } else if (responseSchema != null && responseSchema.getLanguage() != null && responseSchema.getLanguage().getDefault() != null) {
                 String responseSchemaDescription = responseSchema.getLanguage().getDefault().getDescription();
-                if (!CoreUtils.isNullOrEmpty(responseSchemaDescription)) {
+                if (!ExtensionUtils.isNullOrEmpty(responseSchemaDescription)) {
                     description = formatReturnTypeDescription(responseSchemaDescription);
                 }
             }

@@ -3,11 +3,6 @@
 
 package com.azure.autorest.model.clientmodel;
 
-import com.azure.json.JsonReader;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import com.azure.xml.XmlWriter;
-
 import java.util.Set;
 
 /**
@@ -98,7 +93,7 @@ public interface IType {
     String validate(String expression);
 
     /**
-     * Gets the {@link JsonToken} associated to the type.
+     * Gets the {@code JsonToken} associated to the type.
      * <p>
      * The following table shows what will be returned:
      * <ul>
@@ -111,7 +106,7 @@ public interface IType {
      * All other types will return null, such as Enums which don't have a specific type. In the case of Enums the value
      * type should be inspected.
      *
-     * @return The {@link JsonToken} associated to the type.
+     * @return The {@code JsonToken} associated to the type.
      */
     String jsonToken();
 
@@ -121,7 +116,7 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a JSON
      * deserialization method and support needs to be added.
      *
-     * @param jsonReaderName The name of the {@link JsonReader} performing deserialization.
+     * @param jsonReaderName The name of the {@code JsonReader} performing deserialization.
      * @return The JSON deserialization method, or null i it isn't supported directly.
      */
     String jsonDeserializationMethod(String jsonReaderName);
@@ -134,7 +129,7 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a serialization
      * method and support needs to be added.
      *
-     * @param jsonWriterName The name of the {@link JsonWriter} performing serialization.
+     * @param jsonWriterName The name of the {@code JsonWriter} performing serialization.
      * @param fieldName The name of the JSON field, optional.
      * @param valueGetter The value getter.
      * @return The method call that will handle JSON serialization, or null if it isn't supported directly.
@@ -150,7 +145,7 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have an XML
      * deserialization method and support needs to be added.
      *
-     * @param xmlReaderName The name of the {@link com.azure.xml.XmlReader} performing deserialization.
+     * @param xmlReaderName The name of the {@code XmlReader} performing deserialization.
      * @param attributeName The attribute name, if null this is considered to be an element call.
      * @param attributeNamespace The attribute namespace, optional, ignored if {@code attributeName} is null.
      * @param namespaceIsConstant Whether the {@code attributeNamespace} is a constant instead of a string.
@@ -167,7 +162,7 @@ public interface IType {
      * If null is returned it either means the type is complex, such as a List or Map, or doesn't have a serialization
      * method and support needs to be added.
      *
-     * @param xmlWriterName The name of the {@link XmlWriter} performing serialization.
+     * @param xmlWriterName The name of the {@code XmlWriter} performing serialization.
      * @param attributeOrElementName The name of the XML attribute or element, optional.
      * @param namespaceUri The namespace URI of the XML attribute or element, optional.
      * @param valueGetter The value getter.

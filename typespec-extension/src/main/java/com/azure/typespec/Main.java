@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.AnnotatedPropertyUtils;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.CodeModelCustomConstructor;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.TypeSpecFluentPlugin;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
@@ -15,8 +16,6 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.CoreUtils;
 import com.azure.typespec.model.EmitterOptions;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -149,14 +148,14 @@ public class Main {
         // resources
         if (settings.isBranded()) {
             String artifactId = ClientModelUtil.getArtifactId();
-            if (!CoreUtils.isNullOrEmpty(artifactId)) {
+            if (!ExtensionUtils.isNullOrEmpty(artifactId)) {
                 typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project.version}\n", null);
             }
         }
 
         boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null && emitterOptions.includeApiViewProperties();
-        if (includeApiViewProperties && !CoreUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
+        if (includeApiViewProperties && !ExtensionUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
             StringBuilder sb = new StringBuilder("{\n  \"CrossLanguageDefinitionId\": {\n");
             AtomicBoolean first = new AtomicBoolean(true);
             typeSpecPlugin.getCrossLanguageDefinitionMap().forEach((key, value) -> {
@@ -177,20 +176,23 @@ public class Main {
     private static EmitterOptions loadEmitterOptions(CodeModel codeModel) {
 
         EmitterOptions options = null;
-        String emitterOptionsJson = Configuration.getGlobalConfiguration().get("emitterOptions");
+        String emitterOptionsJson = System.getProperty("emitterOptions");
+        if (emitterOptionsJson == null) {
+            emitterOptionsJson = System.getenv("emitterOptions");
+        }
 
         if (emitterOptionsJson != null) {
             try {
                 options = OBJECT_MAPPER.readValue(emitterOptionsJson, EmitterOptions.class);
                 // namespace
-                if (CoreUtils.isNullOrEmpty(options.getNamespace())) {
-                    if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+                if (ExtensionUtils.isNullOrEmpty(options.getNamespace())) {
+                    if (codeModel.getLanguage().getJava() != null && !ExtensionUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
                         options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
                     }
                 }
 
                 // output path
-                if (CoreUtils.isNullOrEmpty(options.getOutputDir())) {
+                if (ExtensionUtils.isNullOrEmpty(options.getOutputDir())) {
                     options.setOutputDir("typespec-tests/tsp-output/");
                 } else if (!options.getOutputDir().endsWith("/")) {
                     options.setOutputDir(options.getOutputDir() + "/");
@@ -204,7 +206,7 @@ public class Main {
             // default if emitterOptions fails
             options = new EmitterOptions();
             options.setOutputDir("typespec-tests/tsp-output/");
-            if (codeModel.getLanguage().getJava() != null && !CoreUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
+            if (codeModel.getLanguage().getJava() != null && !ExtensionUtils.isNullOrEmpty(codeModel.getLanguage().getJava().getNamespace())) {
                 options.setNamespace(codeModel.getLanguage().getJava().getNamespace());
             }
         }

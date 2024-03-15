@@ -5,6 +5,8 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.CollectionFormat;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -32,10 +34,6 @@ import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.CollectionFormat;
-import com.azure.core.util.serializer.JacksonAdapter;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -108,7 +106,7 @@ abstract class ConvenienceMethodTemplateBase {
         methodBlock.line("RequestOptions requestOptions = new RequestOptions();");
 
         // parameter transformation
-        if (!CoreUtils.isNullOrEmpty(convenienceMethod.getMethodTransformationDetails())) {
+        if (!ExtensionUtils.isNullOrEmpty(convenienceMethod.getMethodTransformationDetails())) {
             convenienceMethod.getMethodTransformationDetails().forEach(d -> writeParameterTransformation(d, convenienceMethod, protocolMethod, methodBlock, parametersMap));
         }
 
@@ -206,7 +204,7 @@ abstract class ConvenienceMethodTemplateBase {
     abstract void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock);
 
     private static boolean isGroupByTransformation(MethodTransformationDetail detail) {
-        return !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
+        return !ExtensionUtils.isNullOrEmpty(detail.getParameterMappings())
                 && detail.getParameterMappings().iterator().next().getOutputParameterPropertyName() == null;
     }
 
@@ -333,10 +331,10 @@ abstract class ConvenienceMethodTemplateBase {
         ClassType.REQUEST_OPTIONS.addImportsTo(imports, false);
         imports.add(Collectors.class.getName());
         imports.add(Objects.class.getName());
-        imports.add(FluxUtil.class.getName());
+        imports.add("com.azure.core.util.FluxUtil");
 
         // collection format
-        imports.add(JacksonAdapter.class.getName());
+        imports.add("com.azure.core.util.serializer.JacksonAdapter");
         imports.add(CollectionFormat.class.getName());
         ClassType.TYPE_REFERENCE.addImportsTo(imports, false);
 

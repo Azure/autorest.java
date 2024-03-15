@@ -6,6 +6,10 @@ package com.azure.autorest.util;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.Base64Url;
+import com.azure.autorest.extension.base.util.CollectionFormat;
+import com.azure.autorest.extension.base.util.DateTimeRfc1123;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -23,10 +27,6 @@ import com.azure.autorest.model.clientmodel.examplemodel.LiteralNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MapNode;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.examplemodel.ObjectNode;
-import com.azure.core.util.Base64Url;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.DateTimeRfc1123;
-import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.time.Instant;
@@ -397,7 +397,7 @@ public class ModelExampleUtil {
 
         List<ClientModel> parentModels = new ArrayList<>();
         String parentModelName = model.getParentModelName();
-        while (!CoreUtils.isNullOrEmpty(parentModelName)) {
+        while (!ExtensionUtils.isNullOrEmpty(parentModelName)) {
             ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
             if (parentModel != null) {
                 parentModels.add(parentModel);

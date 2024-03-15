@@ -6,9 +6,9 @@ package com.azure.autorest.fluent.transformer;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
-import com.azure.core.http.HttpMethod;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;

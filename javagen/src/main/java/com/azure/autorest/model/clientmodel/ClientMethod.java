@@ -5,13 +5,10 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.UrlBuilder;
-import com.azure.core.util.polling.PollingStrategyOptions;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -360,7 +357,7 @@ public class ClientMethod {
             ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
 
             // for query parameter modification in RequestOptions (UrlBuilder.parse)
-            imports.add(UrlBuilder.class.getName());
+            imports.add("com.azure.core.util.UrlBuilder");
         }
 
         getReturnValue().addImportsTo(imports, includeImplementationImports);
@@ -396,7 +393,7 @@ public class ClientMethod {
             // Add FluxUtil as an import if this is an asynchronous method and the last parameter isn't the Context
             // parameter.
             if (proxyMethod != null && !proxyMethod.isSync()
-                && (CoreUtils.isNullOrEmpty(parameters)
+                && (ExtensionUtils.isNullOrEmpty(parameters)
                     || parameters.get(parameters.size() - 1) != ClientMethodParameter.CONTEXT_PARAMETER)) {
                 imports.add("com.azure.core.util.FluxUtil");
             }
@@ -419,7 +416,7 @@ public class ClientMethod {
                 } else {
                     imports.add(ClassType.TYPE_REFERENCE.getFullName());
                     imports.add("java.time.Duration");
-                    imports.add(PollingStrategyOptions.class.getName());
+                    imports.add("com.azure.core.util.polling.PollingStrategyOptions");
 
                     if (getMethodPollingDetails() != null) {
                         for (String pollingStrategy : KNOWN_POLLING_STRATEGIES) {
@@ -447,7 +444,7 @@ public class ClientMethod {
             }
 
             if (type == ClientMethodType.SendRequestAsync || type == ClientMethodType.SendRequestSync) {
-                imports.add(SimpleResponse.class.getName());
+                imports.add("com.azure.core.http.rest.SimpleResponse");
                 ClassType.BINARY_DATA.addImportsTo(imports, false);
                 ClassType.HTTP_REQUEST.addImportsTo(imports, false);
             }

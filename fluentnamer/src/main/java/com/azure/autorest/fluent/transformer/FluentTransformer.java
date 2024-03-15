@@ -11,10 +11,10 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.codemodel.UuidSchema;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -171,9 +171,9 @@ public class FluentTransformer {
 
     private static CodeModel removeXml(CodeModel codeModel) {
         // remove xml from serializationFormats, as mgmt currently does not have dependency on jackson-dataformat-xml package
-        if (!CoreUtils.isNullOrEmpty(codeModel.getSchemas().getObjects())) {
+        if (!ExtensionUtils.isNullOrEmpty(codeModel.getSchemas().getObjects())) {
             codeModel.getSchemas().getObjects().forEach(o -> {
-                if (!CoreUtils.isNullOrEmpty(o.getSerializationFormats())) {
+                if (!ExtensionUtils.isNullOrEmpty(o.getSerializationFormats())) {
                     o.getSerializationFormats().remove("xml");
                 }
             });

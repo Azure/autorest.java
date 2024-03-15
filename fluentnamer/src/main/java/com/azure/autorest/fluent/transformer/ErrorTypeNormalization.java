@@ -15,10 +15,10 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -180,7 +180,7 @@ public class ErrorTypeNormalization {
     }
 
     private static boolean usedMoreThanException(Schema schema) {
-        return !CoreUtils.isNullOrEmpty(schema.getUsage())
+        return !ExtensionUtils.isNullOrEmpty(schema.getUsage())
                 && (schema.getUsage().contains(SchemaContext.INPUT) || schema.getUsage().contains(SchemaContext.OUTPUT));
     }
 

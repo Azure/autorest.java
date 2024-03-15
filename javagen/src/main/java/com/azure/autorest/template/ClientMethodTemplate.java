@@ -5,6 +5,10 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.CollectionFormat;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpHeaderName;
+import com.azure.autorest.extension.base.util.ReturnType;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -32,10 +36,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.annotation.ReturnType;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.serializer.CollectionFormat;
 
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -490,7 +490,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         // this logic relies on: codegen requires either source defines "content-type" header parameter, or codegen generates a "content-type" header parameter (ref ProxyMethodMapper class)
         boolean singleContentType = clientMethod.getProxyMethod().getAllParameters().stream()
                 .noneMatch(p -> p.getRequestParameterLocation() == RequestParameterLocation.HEADER
-                        && HttpHeaderName.CONTENT_TYPE.getCaseInsensitiveName().equalsIgnoreCase(p.getRequestParameterName())
+                        && HttpHeaderName.CONTENT_TYPE.toString().equalsIgnoreCase(p.getRequestParameterName())
                         && p.getRawType() instanceof EnumType
                         && ((EnumType) p.getRawType()).getValues().size() > 1);
         final boolean contentTypeRequestHeaders = bodyParameterOptional && singleContentType;
@@ -801,7 +801,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                     .stream()
                     .noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
                     nextMethodArgs = nextMethodArgs.replace("context", "Context.NONE");
-                    if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
+                    if (!ExtensionUtils.isNullOrEmpty(firstPageArgs)) {
                         firstPageArgs = firstPageArgs + ", Context.NONE";
                     } else {
                         // If there are no first page arguments don't include a leading comma.
@@ -830,7 +830,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                 if (clientMethod.getParameters()
                     .stream()
                     .noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
-                    if (!CoreUtils.isNullOrEmpty(firstPageArgs)) {
+                    if (!ExtensionUtils.isNullOrEmpty(firstPageArgs)) {
                         firstPageArgs = firstPageArgs + ", Context.NONE";
                     } else {
                         // If there are no first page arguments don't include a leading comma.
@@ -931,7 +931,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod);
 
             String argumentList = clientMethod.getArgumentList();
-            if (CoreUtils.isNullOrEmpty(argumentList)) {
+            if (ExtensionUtils.isNullOrEmpty(argumentList)) {
                 // If there are no arguments the argument is Context.NONE
                 argumentList = "Context.NONE";
             } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
@@ -961,7 +961,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             addOptionalVariables(function, clientMethod);
 
             String argumentList = clientMethod.getArgumentList();
-            if (CoreUtils.isNullOrEmpty(argumentList)) {
+            if (ExtensionUtils.isNullOrEmpty(argumentList)) {
                 // If there are no arguments the argument is Context.NONE
                 argumentList = "Context.NONE";
             } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
@@ -1145,7 +1145,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
 
     protected static String parameterDescriptionOrDefault(ClientMethodParameter parameter) {
         String paramJavadoc = parameter.getDescription();
-        if (CoreUtils.isNullOrEmpty(paramJavadoc)) {
+        if (ExtensionUtils.isNullOrEmpty(paramJavadoc)) {
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());
         }
         return paramJavadoc;
@@ -1410,7 +1410,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
         String pollingStrategy = getSyncPollingStrategy(clientMethod, contextParam);
 
         String argumentList = clientMethod.getArgumentList();
-        if (CoreUtils.isNullOrEmpty(argumentList)) {
+        if (ExtensionUtils.isNullOrEmpty(argumentList)) {
             // If there are no arguments the argument is Context.NONE
             argumentList = "Context.NONE";
         } else if (clientMethod.getParameters().stream().noneMatch(p -> p.getClientType() == ClassType.CONTEXT)) {
@@ -1535,7 +1535,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 ClassType.STRING.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
                                 p.getParameterReference()
                         )).collect(Collectors.joining());
-                if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
+                if (!ExtensionUtils.isNullOrEmpty(endpointReplacementExpr)) {
                     endpoint = ClassType.STRING.defaultValueExpression(baseUrl) + endpointReplacementExpr;
                 }
             }
@@ -1567,7 +1567,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                                 ClassType.STRING.defaultValueExpression(String.format("{%s}", p.getRequestParameterName())),
                                 p.getParameterReference()
                         )).collect(Collectors.joining());
-                if (!CoreUtils.isNullOrEmpty(endpointReplacementExpr)) {
+                if (!ExtensionUtils.isNullOrEmpty(endpointReplacementExpr)) {
                     endpoint = ClassType.STRING.defaultValueExpression(baseUrl) + endpointReplacementExpr;
                 }
             }

@@ -3,7 +3,7 @@
 
 package com.azure.autorest.model.javamodel;
 
-import com.azure.core.util.CoreUtils;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -85,7 +85,7 @@ public class JavaClass implements JavaType {
      */
     public final void variable(String variableDeclaration, JavaVisibility visibility, JavaModifier... modifiers) {
         addExpectedNewLine();
-        String modifier = CoreUtils.isNullOrEmpty(modifiers) ? ""
+        String modifier = ExtensionUtils.isNullOrEmpty(modifiers) ? ""
             : Arrays.stream(modifiers).map(JavaModifier::toString).collect(Collectors.joining(" "));
         contents.line(visibility + " " + modifier + " " + variableDeclaration + ";");
         addNewLine = true;

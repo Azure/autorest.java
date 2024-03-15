@@ -3,22 +3,12 @@
 
 package com.azure.autorest.util;
 
-import com.azure.autorest.Javagen;
-import com.azure.autorest.extension.base.plugin.PluginLogger;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 
 import java.util.Arrays;
-import java.util.Optional;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class TypeUtil {
-
-    private static final PluginLogger LOGGER = new PluginLogger(Javagen.getPluginInstance(), TypeUtil.class);
-
-    private static final ConcurrentMap<String, Optional<Class<?>>> TYPE_CLASS_MAP = new ConcurrentHashMap<>();
-
     private TypeUtil() {
     }
 
@@ -28,21 +18,10 @@ public class TypeUtil {
      * @param parentClasses classes to match either one
      * @return whether the given type is GenericType and is subclass of either of the given classes
      */
-    public static boolean isGenericTypeClassSubclassOf(IType type, Class<?>... parentClasses) {
+    public static boolean isGenericTypeClassSubclassOf(IType type, String... parentClasses) {
         if (!(type instanceof GenericType) || parentClasses == null || parentClasses.length == 0) return false;
-        Class<?> genericClass = getGenericClass((GenericType) type);
-        return genericClass != null && Arrays.stream(parentClasses).anyMatch(p -> p.isAssignableFrom(genericClass));
-    }
+        String genericClass = ((GenericType) type).getPackage() + "." + ((GenericType) type).getName();
 
-    private static Class<?> getGenericClass(GenericType type) {
-        String className = String.format("%s.%s", type.getPackage(), type.getName());
-        return TYPE_CLASS_MAP.computeIfAbsent(className, key -> {
-            try {
-                return Optional.of(Class.forName(key));
-            } catch (ClassNotFoundException e) {
-                LOGGER.warn(String.format("class %s not found!", key), e);
-                return Optional.empty();
-            }
-        }).orElse(null);
+        return Arrays.asList(parentClasses).contains(genericClass);
     }
 }

@@ -17,6 +17,8 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
@@ -26,8 +28,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
-import com.azure.core.http.HttpMethod;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -65,7 +65,7 @@ public class MethodUtil {
         // https://docs.oasis-open.org/odata/repeatable-requests/v1.0/cs01/repeatable-requests-v1.0-cs01.html
 
         boolean ret = false;
-        if (proxyMethod != null && !CoreUtils.isNullOrEmpty(proxyMethod.getSpecialHeaders())) {
+        if (proxyMethod != null && !ExtensionUtils.isNullOrEmpty(proxyMethod.getSpecialHeaders())) {
             // check supported HTTP method
             if (isHttpMethodSupportRepeatableRequestHeaders(proxyMethod.getHttpMethod())) {
                 // check 2 headers exists
@@ -123,7 +123,7 @@ public class MethodUtil {
      * @return the HttpMethod from operation. <code>null</code> if not recognized.
      */
     public static HttpMethod getHttpMethod(Operation operation) {
-        if (!CoreUtils.isNullOrEmpty(operation.getRequests())
+        if (!ExtensionUtils.isNullOrEmpty(operation.getRequests())
                 && operation.getRequests().get(0).getProtocol() != null
                 && operation.getRequests().get(0).getProtocol().getHttp() != null) {
             try {
@@ -221,7 +221,7 @@ public class MethodUtil {
     public static int getContentTypeCount(List<Request> requests) {
         Set<String> mediaTypes = new HashSet<>();
         for (Request request : requests) {
-            if (!CoreUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
+            if (!ExtensionUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
                 mediaTypes.addAll(request.getProtocol().getHttp().getMediaTypes());
             }
         }
@@ -363,7 +363,7 @@ public class MethodUtil {
     private static List<ChoiceValue> getContentTypeChoiceValues(List<Request> requests) {
         List<ChoiceValue> choiceValues = new ArrayList<>();
         for (Request request : requests) {
-            if (!CoreUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
+            if (!ExtensionUtils.isNullOrEmpty(request.getProtocol().getHttp().getMediaTypes())) {
                 for (String mediaType : request.getProtocol().getHttp().getMediaTypes()) {
                     ChoiceValue choiceValue = new ChoiceValue();
                     choiceValue.setValue(mediaType);

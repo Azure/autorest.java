@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -18,7 +19,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ final class MapperUtils {
             String summary = enumType.getSummary();
             String description = enumType.getLanguage().getJava() == null ? null : enumType.getLanguage().getJava().getDescription();
             description = SchemaUtil.mergeSummaryWithDescription(summary, description);
-            if (CoreUtils.isNullOrEmpty(description)) {
+            if (ExtensionUtils.isNullOrEmpty(description)) {
                 description = "Defines values for " + enumTypeName + ".";
             }
 

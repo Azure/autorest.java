@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.implementation.ClientModelPropertiesManager;
 import com.azure.autorest.implementation.ClientModelPropertyWithMetadata;
 import com.azure.autorest.implementation.JsonFlattenedPropertiesTree;
@@ -21,11 +22,6 @@ import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.util.CoreUtils;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
-import com.azure.xml.XmlWriter;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -68,10 +64,10 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             imports.add(QName.class.getName());
             imports.add(XMLStreamException.class.getName());
 
-            imports.add(XmlSerializable.class.getName());
-            imports.add(XmlWriter.class.getName());
-            imports.add(XmlReader.class.getName());
-            imports.add(XmlToken.class.getName());
+            imports.add("com.azure.xml.XmlSerializable");
+            imports.add("com.azure.xml.XmlWriter");
+            imports.add("com.azure.xml.XmlReader");
+            imports.add("com.azure.xml.XmlToken");
         } else {
             imports.add(IOException.class.getName());
 
@@ -109,9 +105,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             return classSignature;
         }
 
-        String interfaceName = (model.getXmlName() != null)
-            ? XmlSerializable.class.getSimpleName()
-            : ClassType.JSON_SERIALIZABLE.getName();
+        String interfaceName = (model.getXmlName() != null) ? "XmlSerializable" : ClassType.JSON_SERIALIZABLE.getName();
 
         return classSignature + " implements " + interfaceName + "<" + model.getName() + ">";
     }
@@ -707,7 +701,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
     private static List<ClientModel> getAllChildTypes(ClientModel model, List<ClientModel> childTypes) {
         for (ClientModel childType : model.getDerivedModels()) {
             childTypes.add(childType);
-            if (!CoreUtils.isNullOrEmpty(childType.getDerivedModels())) {
+            if (!ExtensionUtils.isNullOrEmpty(childType.getDerivedModels())) {
                 getAllChildTypes(childType, childTypes);
             }
         }
@@ -978,7 +972,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         JavaBlock methodBlock, JavaIfBlock ifBlock, String fieldNameVariableName, boolean fromSuper,
         boolean hasConstructorArguments, JavaSettings settings) {
         String jsonPropertyName = property.getSerializedName();
-        if (CoreUtils.isNullOrEmpty(jsonPropertyName)) {
+        if (ExtensionUtils.isNullOrEmpty(jsonPropertyName)) {
             return ifBlock;
         }
 
@@ -1399,8 +1393,8 @@ hasConstructorArguments, settings));
     }
 
     private static boolean isSuperTypeWithDiscriminator(ClientModel model) {
-        return !CoreUtils.isNullOrEmpty(model.getPolymorphicDiscriminatorName())
-            && !CoreUtils.isNullOrEmpty(model.getDerivedModels());
+        return !ExtensionUtils.isNullOrEmpty(model.getPolymorphicDiscriminatorName())
+            && !ExtensionUtils.isNullOrEmpty(model.getDerivedModels());
     }
 
     /**
@@ -1470,7 +1464,7 @@ hasConstructorArguments, settings));
         String propertyValueGetter;
         if (element.isPolymorphicDiscriminator()) {
             // The most super type won't have a value for the polymorphic discriminator, use the model name.
-            if (CoreUtils.isNullOrEmpty(element.getDefaultValue())) {
+            if (ExtensionUtils.isNullOrEmpty(element.getDefaultValue())) {
                 propertyValueGetter = "\"" + modelName + "\"";
             } else {
                 propertyValueGetter = element.getDefaultValue();
@@ -1632,7 +1626,7 @@ hasConstructorArguments, settings));
             }
         }, addGeneratedAnnotation);
 
-        if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
+        if (!ExtensionUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
             readXmlObject(classBlock, propertiesManager, true,
                 methodBlock -> writeFromXmlDeserialization(methodBlock, propertiesManager, settings),
                 addGeneratedAnnotation);
@@ -1883,7 +1877,7 @@ hasConstructorArguments, settings));
         String xmlElementName = property.getXmlName();
         String xmlNamespace = propertiesManager.getXmlNamespaceConstant(property.getXmlNamespace());
 
-        if (CoreUtils.isNullOrEmpty(xmlElementName)) {
+        if (ExtensionUtils.isNullOrEmpty(xmlElementName)) {
             return ifBlock;
         }
 
@@ -2010,7 +2004,7 @@ hasConstructorArguments, settings));
     private static String getSimpleXmlDeserialization(IType wireType, String readerName, String elementName,
         String attributeName, String attributeNamespace, boolean namespaceIsConstant) {
         if (wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
-            return CoreUtils.isNullOrEmpty(elementName)
+            return ExtensionUtils.isNullOrEmpty(elementName)
                 ? wireType + ".fromXml(" + readerName + ")"
                 : wireType + ".fromXml(" + readerName + ", \"" + elementName + "\")";
         } else {
@@ -2036,7 +2030,7 @@ hasConstructorArguments, settings));
     private static String getXmlNameConditional(String localPart, String namespace, String elementName,
         boolean namespaceIsConstant) {
         String condition = "\"" + localPart + "\".equals(" + elementName + ".getLocalPart())";
-        if (!CoreUtils.isNullOrEmpty(namespace)) {
+        if (!ExtensionUtils.isNullOrEmpty(namespace)) {
             if (namespaceIsConstant) {
                 condition += " && " + namespace + ".equals(" + elementName + ".getNamespaceURI())";
             } else {

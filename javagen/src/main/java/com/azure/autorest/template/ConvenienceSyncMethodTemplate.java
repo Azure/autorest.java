@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -15,9 +16,6 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.ResponseBase;
-import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -36,7 +34,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     }
 
     public void addImports(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
-        if (!CoreUtils.isNullOrEmpty(convenienceMethods)) {
+        if (!ExtensionUtils.isNullOrEmpty(convenienceMethods)) {
             super.addImports(imports, convenienceMethods);
         }
 
@@ -197,7 +195,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
         if (type instanceof GenericType
                 && (
                 ClassType.RESPONSE.getName().equals(((GenericType) type).getName())
-                        || (PagedIterable.class.getSimpleName().equals(((GenericType) type).getName())))) {
+                        || ("PagedIterable".equals(((GenericType) type).getName())))) {
             type = ((GenericType) type).getTypeArguments()[0];
         } else if (isResponseBase(type)) {
             // TODO: ResponseBase is not in use, hence it may have bug
@@ -207,7 +205,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     }
 
     private boolean isResponseBase(IType type) {
-        return type instanceof GenericType && ResponseBase.class.getSimpleName().equals(((GenericType) type).getName());
+        return type instanceof GenericType && "ResponseBase".equals(((GenericType) type).getName());
     }
 
     private String expressionConvertFromBinaryData(IType responseBodyType, IType rawType, String invocationExpression,

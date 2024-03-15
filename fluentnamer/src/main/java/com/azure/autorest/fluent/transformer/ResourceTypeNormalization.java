@@ -14,12 +14,12 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.ResourceType;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -215,7 +215,7 @@ class ResourceTypeNormalization {
 
         LOGGER.info("Rename system data from '{}' to 'SystemData'", previousName);
 
-        if (CoreUtils.isNullOrEmpty(compositeType.getProperties())) {
+        if (ExtensionUtils.isNullOrEmpty(compositeType.getProperties())) {
             LOGGER.warn("Ignored properties {}, for {}",
                     compositeType.getProperties().stream().map(Utils::getJavaName).collect(Collectors.toList()),
                     previousName);
@@ -369,7 +369,7 @@ class ResourceTypeNormalization {
         compositeType.getParents().getImmediate().add(0, parentType);
         compositeType.getParents().getAll().add(0, parentType);
 
-        if (compositeType.getChildren() != null && !CoreUtils.isNullOrEmpty(compositeType.getChildren().getAll())) {
+        if (compositeType.getChildren() != null && !ExtensionUtils.isNullOrEmpty(compositeType.getChildren().getAll())) {
             // add parent to children of this type as well
             compositeType.getChildren().getAll().stream()
                     .filter(o -> o instanceof ObjectSchema)

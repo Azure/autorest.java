@@ -7,13 +7,13 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.OrSchema;
 import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.UnionModel;
 import com.azure.autorest.model.clientmodel.UnionModels;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -87,7 +87,7 @@ public class UnionModelMapper implements IMapper<OrSchema, List<UnionModel>> {
     private static void processDescription(UnionModel.Builder builder, Schema type) {
         String summary = type.getSummary();
         String description = type.getLanguage().getJava() == null ? null : type.getLanguage().getJava().getDescription();
-        if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+        if (ExtensionUtils.isNullOrEmpty(summary) && ExtensionUtils.isNullOrEmpty(description)) {
             builder.description(String.format("The %s model.", type.getLanguage().getJava().getName()));
         } else {
             builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));

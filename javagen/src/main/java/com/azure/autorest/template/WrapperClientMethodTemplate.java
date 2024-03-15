@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -16,7 +17,6 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -65,7 +65,7 @@ public class WrapperClientMethodTemplate extends ClientMethodTemplateBase {
         Consumer<JavaBlock> method = function -> {
 
             // API comment
-            if (clientMethod.getImplementationDetails() != null && !CoreUtils.isNullOrEmpty(clientMethod.getImplementationDetails().getComment())) {
+            if (clientMethod.getImplementationDetails() != null && !ExtensionUtils.isNullOrEmpty(clientMethod.getImplementationDetails().getComment())) {
                 function.line("// " + clientMethod.getImplementationDetails().getComment());
             }
 

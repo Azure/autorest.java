@@ -4,7 +4,7 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.core.util.CoreUtils;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -150,7 +150,7 @@ public class ClientModel {
         this.imports = imports;
         this.description = description;
         this.isPolymorphic = isPolymorphic;
-        this.isPolymorphicParent = isPolymorphic && !CoreUtils.isNullOrEmpty(derivedModels);
+        this.isPolymorphicParent = isPolymorphic && !ExtensionUtils.isNullOrEmpty(derivedModels);
         this.polymorphicDiscriminator = polymorphicDiscriminator;
         this.polymorphicDiscriminatorName = polymorphicDiscriminatorName;
         this.serializedName = serializedName;

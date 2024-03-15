@@ -5,6 +5,7 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ResourceClientModel;
@@ -30,18 +31,8 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.autorest.util.TypeUtil;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.Response;
-import com.azure.core.http.rest.ResponseBase;
-import com.azure.core.http.rest.SimpleResponse;
-import com.azure.core.http.rest.StreamResponse;
-import com.azure.core.util.Context;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -53,10 +44,8 @@ public class FluentUtils {
 
     private static final Logger LOGGER = new PluginLogger(FluentGen.getPluginInstance(), FluentUtils.class);
 
-    private static final Set<String> RESERVED_CLASS_NAMES = Collections.unmodifiableSet(new HashSet<>(Arrays.asList(
-            Response.class.getSimpleName(),
-            Context.class.getSimpleName()
-    )));
+    private static final Set<String> RESERVED_CLASS_NAMES = Set.of("com.azure.core.http.rest.Response",
+        "com.azure.core.util.Context");
 
     private FluentUtils() {
     }
@@ -106,7 +95,7 @@ public class FluentUtils {
     public static String getServiceName(String clientName) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
-        if (CoreUtils.isNullOrEmpty(serviceName)) {
+        if (ExtensionUtils.isNullOrEmpty(serviceName)) {
             serviceName = getServiceNameFromClientName(clientName, settings.getPackage());
         }
         return serviceName;
@@ -130,7 +119,7 @@ public class FluentUtils {
             }
         }
 
-        if (CoreUtils.isNullOrEmpty(serviceName)) {
+        if (ExtensionUtils.isNullOrEmpty(serviceName)) {
             serviceName = packageLastName;
         }
         return serviceName;
@@ -139,7 +128,7 @@ public class FluentUtils {
     public static String getArtifactId() {
         JavaSettings settings = JavaSettings.getInstance();
         String artifactId = ClientModelUtil.getArtifactId();
-        if (CoreUtils.isNullOrEmpty(artifactId)) {
+        if (ExtensionUtils.isNullOrEmpty(artifactId)) {
             artifactId = getArtifactIdFromPackageName(settings.getPackage().toLowerCase(Locale.ROOT));
         }
         return artifactId;
@@ -190,10 +179,10 @@ public class FluentUtils {
             wrapperType = wrapperElementType == type.getValueType() ? type : new MapType(wrapperElementType);
         } else if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
-            if (PagedIterable.class.getSimpleName().equals(type.getName())) {
+            if ("PagedIterable".equals(type.getName())) {
                 IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
                 wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.PagedIterable(wrapperItemType);
-            } else if (Response.class.getSimpleName().equals(type.getName())) {
+            } else if ("Response".equals(type.getName())) {
                 IType wrapperItemType = getFluentWrapperType(type.getTypeArguments()[0]);
                 wrapperType = wrapperItemType == type.getTypeArguments()[0] ? type : GenericType.Response(wrapperItemType);
             }
@@ -316,10 +305,10 @@ public class FluentUtils {
         if (clientType instanceof GenericType) {
             // Response<>
             GenericType type = (GenericType) clientType;
-            if (Response.class.getSimpleName().equals(type.getName())) {
+            if ("Response".equals(type.getName())) {
                 ret = true;
             } else {
-                ret = TypeUtil.isGenericTypeClassSubclassOf(type, Response.class);
+                ret = TypeUtil.isGenericTypeClassSubclassOf(type, "com.azure.core.http.rest.Response");
             }
         } else if (clientType instanceof ClassType) {
             // ClientResponse is type of a subclass of Response<>
@@ -336,9 +325,9 @@ public class FluentUtils {
         IType bodyType = null;
         if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
-            if (Response.class.getSimpleName().equals(type.getName())) {
+            if ("Response".equals(type.getName())) {
                 bodyType = type.getTypeArguments()[0];
-            } else if (TypeUtil.isGenericTypeClassSubclassOf(type, Response.class)) {
+            } else if (TypeUtil.isGenericTypeClassSubclassOf(type, "com.azure.core.http.rest.Response")) {
                 bodyType = getValueTypeFromResponseTypeSubType(type);
             }
         } else if (clientType instanceof ClassType) {
@@ -355,11 +344,11 @@ public class FluentUtils {
 
     private static IType getValueTypeFromResponseTypeSubType(GenericType type) {
         IType bodyType;
-        if (ResponseBase.class.getSimpleName().equals(type.getName())) {
+        if ("ResponseBase".equals(type.getName())) {
             bodyType = type.getTypeArguments()[1];
-        } else if (SimpleResponse.class.getSimpleName().equals(type.getName())) {
+        } else if ("SimpleResponse".equals(type.getName())) {
             bodyType = type.getTypeArguments()[0];
-        } else if (StreamResponse.class.getSimpleName().equals(type.getName())) {
+        } else if ("StreamResponse".equals(type.getName())) {
             bodyType = GenericType.FLUX_BYTE_BUFFER;
         } else {
             log("Unable to determine value type for Response subtype: %s, fallback to typeArguments[0].", type);

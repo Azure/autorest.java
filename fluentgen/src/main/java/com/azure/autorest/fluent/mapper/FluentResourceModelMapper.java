@@ -4,12 +4,12 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
 import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.mapper.IMapper;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClientModel;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class FluentResourceModelMapper implements IMapper<ObjectSchema, FluentRe
         if (clientModel != null && FluentUtils.isInnerClassType(clientModel.getPackage(), clientModel.getName())) {
             List<ClientModel> parentModels = new ArrayList<>();
             String parentModelName = clientModel.getParentModelName();
-            while (!CoreUtils.isNullOrEmpty(parentModelName)) {
+            while (!ExtensionUtils.isNullOrEmpty(parentModelName)) {
                 ClientModel parentModel = FluentUtils.getClientModel(parentModelName);
                 if (parentModel != null) {
                     parentModels.add(parentModel);

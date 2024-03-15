@@ -16,25 +16,6 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.credential.TokenCredential;
-import com.azure.core.http.HttpClient;
-import com.azure.core.http.HttpPipeline;
-import com.azure.core.http.HttpPipelineBuilder;
-import com.azure.core.http.HttpPipelinePosition;
-import com.azure.core.http.policy.AddDatePolicy;
-import com.azure.core.http.policy.AddHeadersFromContextPolicy;
-import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.http.policy.HttpLoggingPolicy;
-import com.azure.core.http.policy.HttpPipelinePolicy;
-import com.azure.core.http.policy.HttpPolicyProviders;
-import com.azure.core.http.policy.RequestIdPolicy;
-import com.azure.core.http.policy.RetryOptions;
-import com.azure.core.http.policy.RetryPolicy;
-import com.azure.core.http.policy.UserAgentPolicy;
-import com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy;
-import com.azure.core.management.profile.AzureProfile;
-import com.azure.core.util.Configuration;
-import com.azure.core.util.logging.ClientLogger;
 import org.slf4j.Logger;
 
 import java.time.Duration;
@@ -84,34 +65,34 @@ public class FluentManagerTemplate {
         String managerName = manager.getType().getName();
 
         Set<String> imports = new HashSet<>(Arrays.asList(
-                // java
-                Objects.class.getName(),
-                Duration.class.getName(),
-                ChronoUnit.class.getName(),
-                List.class.getName(),
-                ArrayList.class.getName(),
-                Collectors.class.getName(),
-                // azure-core
-                TokenCredential.class.getName(),
-                ClientLogger.class.getName(),
-                Configuration.class.getName(),
-                HttpClient.class.getName(),
-                HttpPipeline.class.getName(),
-                HttpPipelineBuilder.class.getName(),
-                HttpPipelinePolicy.class.getName(),
-                HttpPipelinePosition.class.getName(),
-                HttpPolicyProviders.class.getName(),
-                RetryOptions.class.getName(),
-                AddHeadersFromContextPolicy.class.getName(),
-                RequestIdPolicy.class.getName(),
-                RetryPolicy.class.getName(),
-                AddDatePolicy.class.getName(),
-                HttpLoggingPolicy.class.getName(),
-                HttpLogOptions.class.getName(),
-                ArmChallengeAuthenticationPolicy.class.getName(),
-                UserAgentPolicy.class.getName(),
-                // azure-core-management
-                AzureProfile.class.getName()
+            // java
+            Objects.class.getName(),
+            Duration.class.getName(),
+            ChronoUnit.class.getName(),
+            List.class.getName(),
+            ArrayList.class.getName(),
+            Collectors.class.getName(),
+            // azure-core
+            "com.azure.core.credential.TokenCredential",
+            "com.azure.core.util.logging.ClientLogger",
+            "com.azure.core.util.Configuration",
+            "com.azure.core.http.HttpClient",
+            "com.azure.core.http.HttpPipeline",
+            "com.azure.core.http.HttpPipelineBuilder",
+            "com.azure.core.http.HttpPipelinePolicy",
+            "com.azure.core.http.HttpPipelinePosition",
+            "com.azure.core.http.HttpPolicyProviders",
+            "com.azure.core.http.policy.AddDatePolicy",
+            "com.azure.core.http.policy.AddHeadersFromContextPolicy",
+            "com.azure.core.http.policy.HttpLogOptions",
+            "com.azure.core.http.policy.HttpLoggingPolicy",
+            "com.azure.core.http.policy.RequestIdPolicy",
+            "com.azure.core.http.policy.RetryOptions",
+            "com.azure.core.http.policy.RetryPolicy",
+            "com.azure.core.http.policy.UserAgentPolicy",
+            "com.azure.core.management.http.policy.ArmChallengeAuthenticationPolicy",
+            // azure-core-management
+            "com.azure.core.management.profile.AzureProfile"
         ));
 
         if (requiresSubscriptionIdParameter && subscriptionIdParameterType != null) {

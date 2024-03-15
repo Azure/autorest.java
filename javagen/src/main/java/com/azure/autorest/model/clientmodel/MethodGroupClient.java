@@ -4,8 +4,8 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Set;
@@ -174,7 +174,7 @@ public class MethodGroupClient {
             clientMethod.addImportsTo(imports, includeImplementationImports, settings);
         }
 
-        if (includeImplementationImports && !CoreUtils.isNullOrEmpty(getProperties())) {
+        if (includeImplementationImports && !ExtensionUtils.isNullOrEmpty(getProperties())) {
             for (ServiceClientProperty property : getProperties()) {
                 property.addImportsTo(imports, includeImplementationImports);
             }

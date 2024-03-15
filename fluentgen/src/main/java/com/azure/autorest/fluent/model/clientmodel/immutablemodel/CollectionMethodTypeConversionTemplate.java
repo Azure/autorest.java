@@ -11,7 +11,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import com.azure.core.http.rest.SimpleResponse;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -39,7 +38,7 @@ public class CollectionMethodTypeConversionTemplate implements ImmutableMethod {
             imports.add(Collections.class.getName());
         }
         if (FluentUtils.isResponseType(innerType)) {
-            imports.add(SimpleResponse.class.getName());
+            imports.add("com.azure.core.http.rest.SimpleResponse");
         }
 
         conversionMethodTemplate = MethodTemplate.builder()

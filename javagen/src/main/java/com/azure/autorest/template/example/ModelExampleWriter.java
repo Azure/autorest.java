@@ -166,8 +166,8 @@ public class ModelExampleWriter {
          * @param jsonStr the JSON String.
          */
         protected String codeDeserializeJsonString(String jsonStr) {
-            imports.add(com.azure.core.util.serializer.JacksonAdapter.class.getName());
-            imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
+            imports.add("com.azure.core.util.serializer.JacksonAdapter");
+            imports.add("com.azure.core.util.serializer.SerializerEncoding");
 
             return String.format("JacksonAdapter.createDefaultSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",
                     ClassType.STRING.defaultValueExpression(jsonStr));
@@ -312,7 +312,7 @@ public class ModelExampleWriter {
                 }
                 return builder.toString();
             } else if (node instanceof BinaryDataNode) {
-                this.imports.add(com.azure.core.util.BinaryData.class.getName());
+                this.imports.add("com.azure.core.util.BinaryData");
                 this.imports.add(java.nio.charset.StandardCharsets.class.getName());
                 return binaryDataNodeExpression((BinaryDataNode) node);
             }

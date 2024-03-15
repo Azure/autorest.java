@@ -6,6 +6,7 @@ package com.azure.typespec.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.ServiceClientMapper;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
@@ -15,7 +16,6 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -35,7 +35,7 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
 
         Proxy proxy = null;
         OperationGroup clientOperationGroup = client.getOperationGroups().stream()
-                .filter(og -> CoreUtils.isNullOrEmpty(SchemaUtil.getJavaName(og)))
+                .filter(og -> ExtensionUtils.isNullOrEmpty(SchemaUtil.getJavaName(og)))
                 .findFirst().orElse(null);
         if (clientOperationGroup != null) {
             proxy = processClientOperations(builder, clientOperationGroup.getOperations(), baseName);
@@ -48,7 +48,7 @@ public class TypeSpecServiceClientMapper extends ServiceClientMapper {
 
         List<MethodGroupClient> methodGroupClients = new ArrayList<>();
         client.getOperationGroups().stream()
-                .filter(og -> !CoreUtils.isNullOrEmpty(SchemaUtil.getJavaName(og)))
+                .filter(og -> !ExtensionUtils.isNullOrEmpty(SchemaUtil.getJavaName(og)))
                 .forEach(og -> methodGroupClients.add(Mappers.getMethodGroupMapper().map(og, properties)));
         builder.methodGroupClients(methodGroupClients);
 

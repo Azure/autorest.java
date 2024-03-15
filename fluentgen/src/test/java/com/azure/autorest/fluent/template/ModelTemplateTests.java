@@ -6,6 +6,7 @@ package com.azure.autorest.fluent.template;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
 import com.azure.autorest.mapper.ClientMapper;
@@ -13,7 +14,6 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
-import com.azure.core.util.CoreUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -34,7 +34,7 @@ public class ModelTemplateTests {
     /**
      * Issue: https://github.com/Azure/autorest.java/issues/1320
      * Remove duplicate setter methods from child schema when parent schema contains same property
-     * mainly to test {@link com.azure.autorest.template.ModelTemplate#getParentSettersToOverride(ClientModel, JavaSettings, List)}
+     * mainly to test {@code com.azure.autorest.template.ModelTemplate#getParentSettersToOverride(ClientModel, JavaSettings, List)}
      */
     @Test
     public void deduplicateTest(){
@@ -43,7 +43,7 @@ public class ModelTemplateTests {
         ClientModel model = client.getModels().stream().filter(clientModel -> clientModel.getName().equals("Site")).findAny().get();
         ModelTemplateAccessor templateAccessor = new ModelTemplateAccessor();
         List<ClientModelPropertyReference> propertyReferences = templateAccessor.getClientModelPropertyReferences0(model);
-        if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
+        if (!ExtensionUtils.isNullOrEmpty(model.getPropertyReferences())) {
             propertyReferences.addAll(model.getPropertyReferences());
         }
         // real test here

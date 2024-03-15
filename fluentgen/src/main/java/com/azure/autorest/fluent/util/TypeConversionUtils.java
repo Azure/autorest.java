@@ -9,8 +9,6 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.Response;
 
 import java.util.Objects;
 
@@ -56,14 +54,14 @@ public class TypeConversionUtils {
             expression = String.format("%1$s.entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, %2$s -> %3$s))", variableName, nestedPropertyName, conversionExpression(type.getValueType(), valuePropertyName));
         } else if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
-            if (PagedIterable.class.getSimpleName().equals(type.getName())) {
+            if ("PagedIterable".equals(type.getName())) {
                 IType valueType = type.getTypeArguments()[0];
                 if (valueType instanceof ClassType) {
                     String nestedPropertyName = nextPropertyName(variableName);
                     expression = String.format("%1$s.mapPage(%2$s, %3$s -> new %4$s(%5$s, this.%6$s()))",
                             ModelNaming.CLASS_RESOURCE_MANAGER_UTILS, variableName, nestedPropertyName, getModelImplName((ClassType) valueType), nestedPropertyName, ModelNaming.METHOD_MANAGER);
                 }
-            } else if (Response.class.getSimpleName().equals(type.getName())) {
+            } else if ("Response".equals(type.getName())) {
                 IType valueType = type.getTypeArguments()[0];
                 if (valueType instanceof ClassType || valueType instanceof GenericType) {
                     String valuePropertyName = variableName + ".getValue()";
@@ -103,7 +101,7 @@ public class TypeConversionUtils {
         boolean ret = false;
         if (clientType instanceof GenericType) {
             GenericType type = (GenericType) clientType;
-            if (PagedIterable.class.getSimpleName().equals(type.getName())) {
+            if ("PagedIterable".equals(type.getName())) {
                 ret = true;
             }
         }

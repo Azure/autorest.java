@@ -6,11 +6,11 @@ package com.azure.autorest.model.projectmodel;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ExternalPackage;
 import com.azure.autorest.template.TemplateHelper;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -115,7 +115,7 @@ public class Project {
     public Project(Client client, List<String> apiVersions) {
         JavaSettings settings = JavaSettings.getInstance();
         String serviceName = settings.getServiceName();
-        if (CoreUtils.isNullOrEmpty(serviceName)) {
+        if (ExtensionUtils.isNullOrEmpty(serviceName)) {
             serviceName = client.getClientName();
         }
 

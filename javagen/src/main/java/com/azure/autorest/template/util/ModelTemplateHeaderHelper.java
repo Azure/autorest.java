@@ -4,6 +4,8 @@
 package com.azure.autorest.template.util;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpHeaderName;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -19,11 +21,7 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.ModelTemplate;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.HttpHeaders;
-import com.azure.core.util.CoreUtils;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,33 +30,22 @@ import java.util.Map;
 import java.util.TreeMap;
 
 /**
- * Utility class for {@link ModelTemplate} that handles generating {@link HttpHeaders} deserialization to POJOs.
+ * Utility class for {@link ModelTemplate} that handles generating {@code HttpHeaders} deserialization to POJOs.
  */
 public final class ModelTemplateHeaderHelper {
     private static final Map<String, String> HEADER_TO_KNOWN_HTTPHEADERNAME;
 
     static {
         Map<String, String> headerToKnownHttpHeaderName = new TreeMap<>(String::compareToIgnoreCase);
-        for (Field httpHeaderNameConstant : HttpHeaderName.class.getDeclaredFields()) {
-            if (httpHeaderNameConstant.getType() != HttpHeaderName.class
-                || !isPublicConstant(httpHeaderNameConstant.getModifiers())) {
-                continue;
-            }
-
-            try {
-                HttpHeaderName httpHeaderName = (HttpHeaderName) httpHeaderNameConstant.get(null);
-                String constantName = httpHeaderNameConstant.getName();
-                headerToKnownHttpHeaderName.put(httpHeaderName.getCaseInsensitiveName(), constantName);
-            } catch (IllegalAccessException ignored) {
-                // Do nothing.
-            }
+        for (HttpHeaderName knownHeaderName : HttpHeaderName.values()) {
+            headerToKnownHttpHeaderName.put(knownHeaderName.toString().toLowerCase(), knownHeaderName.name());
         }
 
         HEADER_TO_KNOWN_HTTPHEADERNAME = Collections.unmodifiableMap(headerToKnownHttpHeaderName);
     }
 
     /**
-     * Adds an {@link HttpHeaders}-based constructor to a model.
+     * Adds an {@code HttpHeaders}-based constructor to a model.
      *
      * @param classBlock The class block for the model.
      * @param model The model itself.
@@ -78,14 +65,14 @@ public final class ModelTemplateHeaderHelper {
             // the raw headers.
             List<ClientModelProperty> collectionProperties = new ArrayList<>();
             for (ClientModelProperty property : model.getProperties()) {
-                if (CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+                if (ExtensionUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
                     generateHeaderDeserializationFunction(property, constructor);
                 } else {
                     collectionProperties.add(property);
                 }
             }
 
-            if (!CoreUtils.isNullOrEmpty(collectionProperties)) {
+            if (!ExtensionUtils.isNullOrEmpty(collectionProperties)) {
                 // Bundle all collection properties into one iteration over the HttpHeaders.
                 generateHeaderCollectionDeserialization(collectionProperties, constructor);
             }
@@ -102,7 +89,7 @@ public final class ModelTemplateHeaderHelper {
      */
     public static String getHttpHeaderNameInstanceExpression(String headerName) {
         // match the init logic of HEADER_TO_KNOWN_HTTPHEADERNAME
-        String caseInsensitiveName = HttpHeaderName.fromString(headerName).getCaseInsensitiveName();
+        String caseInsensitiveName = headerName.toLowerCase();
 
         if (HEADER_TO_KNOWN_HTTPHEADERNAME.containsKey(caseInsensitiveName)) {
             // known name
@@ -121,7 +108,7 @@ public final class ModelTemplateHeaderHelper {
      */
     private static void addHttpHeaderNameConstants(JavaClass classBlock, ClientModel model) {
         for (ClientModelProperty property : model.getProperties()) {
-            if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+            if (!ExtensionUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
                 // Header collections aren't able to use HttpHeaderName.
                 continue;
             }

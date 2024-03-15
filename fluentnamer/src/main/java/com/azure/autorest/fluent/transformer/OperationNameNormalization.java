@@ -12,10 +12,10 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.fluent.model.WellKnownMethodName;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
-import com.azure.core.http.HttpMethod;
 import org.slf4j.Logger;
 
 import java.util.Arrays;

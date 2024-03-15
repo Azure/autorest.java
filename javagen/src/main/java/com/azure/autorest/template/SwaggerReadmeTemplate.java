@@ -5,9 +5,9 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.AutorestSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.projectmodel.Project;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.util.CoreUtils;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -82,7 +82,7 @@ public class SwaggerReadmeTemplate {
         // try use "require"
         boolean useRequire = false;
         List<String> requireList = autorestSettings.getRequire();
-        if (!CoreUtils.isNullOrEmpty(requireList)) {
+        if (!ExtensionUtils.isNullOrEmpty(requireList)) {
             String require = requireList.iterator().next();
 
             if (require.contains("data-plane")) {
@@ -116,7 +116,7 @@ public class SwaggerReadmeTemplate {
 
         // the file is copied from javagen/data-plane.md to resources, using maven-resources-plugin
         String defaultDpgReadme = TemplateUtil.loadTextFromResource("data-plane.md");
-        if (!CoreUtils.isNullOrEmpty(defaultDpgReadme)) {
+        if (!ExtensionUtils.isNullOrEmpty(defaultDpgReadme)) {
             Matcher matcher = MARKDOWN_YAML_BLOCK.matcher(defaultDpgReadme);
             Yaml yaml = new Yaml();
             while (matcher.find()) {

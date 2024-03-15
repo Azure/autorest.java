@@ -10,12 +10,6 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import com.azure.core.http.rest.PagedFlux;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
-import com.azure.core.util.CoreUtils;
-import reactor.core.publisher.Flux;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +49,7 @@ public class ResourceManagerUtilsTemplate implements IJavaTemplate<Void, JavaFil
                         Iterator.class.getName(),
                         List.class.getName(),
                         ArrayList.class.getName(),
-                        CoreUtils.class.getName(),
+                        "com.azure.core.util.CoreUtils",
                         Collections.class.getName()))
                 .visibility(JavaVisibility.PackagePrivate)
                 .modifiers(Collections.singletonList(JavaModifier.Static))
@@ -66,11 +60,11 @@ public class ResourceManagerUtilsTemplate implements IJavaTemplate<Void, JavaFil
     }
 
     private static final List<String> IMPORTS_UTILS_PAGED_ITERABLE = Arrays.asList(
-            PagedFlux.class.getName(),
-            PagedIterable.class.getName(),
-            PagedResponse.class.getName(),
-            PagedResponseBase.class.getName(),
-            Flux.class.getName(),
+            "com.azure.core.http.rest.PagedFlux",
+            "com.azure.core.http.rest.PagedIterable",
+            "com.azure.core.http.rest.PagedResponse",
+            "com.azure.core.http.rest.PagedResponseBase",
+            "reactor.core.publisher.Flux",
             Iterator.class.getName(),
             Function.class.getName(),
             Collectors.class.getName(),

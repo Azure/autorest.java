@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -24,7 +25,6 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -291,13 +291,13 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
     private static String parameterDescriptionOrDefault(ProxyMethodParameter parameter) {
         String paramJavadoc = parameter.getDescription();
-        if (CoreUtils.isNullOrEmpty(paramJavadoc)) {
+        if (ExtensionUtils.isNullOrEmpty(paramJavadoc)) {
             paramJavadoc = String.format("The %1$s parameter", parameter.getName());
         }
         String description = CodeNamer.escapeXmlComment(paramJavadoc);
         // query with array, add additional description
         if (parameter.getRequestParameterLocation() == RequestParameterLocation.QUERY && parameter.getCollectionFormat() != null) {
-            description = (CoreUtils.isNullOrEmpty(description) || description.endsWith(".")) ? description : (description + ".");
+            description = (ExtensionUtils.isNullOrEmpty(description) || description.endsWith(".")) ? description : (description + ".");
             if (parameter.getExplode()) {
                 // collectionFormat: multi
                 description += " Call {@link RequestOptions#addQueryParam} to add string to array.";
@@ -312,7 +312,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
 
     private static String methodParameterDescriptionOrDefault(ClientMethodParameter p) {
         String doc = p.getDescription();
-        if (CoreUtils.isNullOrEmpty(doc)) {
+        if (ExtensionUtils.isNullOrEmpty(doc)) {
             doc = String.format("The %1$s parameter", p.getName());
         }
         return doc;

@@ -8,12 +8,12 @@ import com.azure.autorest.TypeSpecPlugin;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.core.util.CoreUtils;
 import com.azure.typespec.model.EmitterOptions;
 import com.azure.typespec.util.FileUtil;
 import org.slf4j.Logger;
@@ -34,10 +34,10 @@ public class TypeSpecFluentPlugin extends FluentGen {
 
         this.emitterOptions = emitterOptions;
         SETTINGS_MAP.put("namespace", emitterOptions.getNamespace());
-        if (!CoreUtils.isNullOrEmpty(emitterOptions.getOutputDir())) {
+        if (!ExtensionUtils.isNullOrEmpty(emitterOptions.getOutputDir())) {
             SETTINGS_MAP.put("output-folder", emitterOptions.getOutputDir());
         }
-        if (!CoreUtils.isNullOrEmpty(emitterOptions.getServiceName())) {
+        if (!ExtensionUtils.isNullOrEmpty(emitterOptions.getServiceName())) {
             SETTINGS_MAP.put("service-name", emitterOptions.getServiceName());
         }
         if (emitterOptions.getGenerateSamples() != null) {

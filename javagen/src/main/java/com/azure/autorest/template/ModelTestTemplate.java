@@ -12,9 +12,7 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.autorest.util.ModelTestCaseUtil;
-import com.azure.core.util.serializer.JacksonAdapter;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.SerializerEncoding;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
 import java.util.HashSet;
@@ -25,7 +23,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
     private static final ModelTestTemplate INSTANCE = new ModelTestTemplate();
 
-    private static final SerializerAdapter SERIALIZER = JacksonAdapter.createDefaultSerializerAdapter();
+    private static final com.fasterxml.jackson.databind.ObjectMapper SERIALIZER = new ObjectMapper();
 
     private ModelTestTemplate() {
     }
@@ -48,7 +46,7 @@ public class ModelTestTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         ExampleNode exampleNode;
         try {
             Map<String, Object> jsonObject = ModelTestCaseUtil.jsonFromModel(model);
-            jsonStr = SERIALIZER.serialize(jsonObject, SerializerEncoding.JSON);
+            jsonStr = SERIALIZER.writeValueAsString(jsonObject);
 
             exampleNode = ModelExampleUtil.parseNode(model.getType(), jsonObject);
         } catch (IOException e) {

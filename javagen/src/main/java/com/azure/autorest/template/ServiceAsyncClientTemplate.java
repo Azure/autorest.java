@@ -5,6 +5,7 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -21,8 +22,6 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.client.traits.EndpointTrait;
-import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -160,7 +159,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
   static void addEndpointMethod(JavaClass classBlock, ClientBuilder clientBuilder, ServiceClient serviceClient, String clientReference) {
     // expose "getEndpoint" as public, as companion to "sendRequest" method
     if (JavaSettings.getInstance().isGenerateSendRequestMethod()) {
-      ClientMethod referenceClientMethod = !CoreUtils.isNullOrEmpty(serviceClient.getClientMethods())
+      ClientMethod referenceClientMethod = !ExtensionUtils.isNullOrEmpty(serviceClient.getClientMethods())
           ? serviceClient.getClientMethods().iterator().next()
           : serviceClient.getMethodGroupClients().stream().flatMap(mg -> mg.getClientMethods().stream()).findFirst().orElse(null);
 
@@ -176,7 +175,7 @@ public class ServiceAsyncClientTemplate implements IJavaTemplate<AsyncSyncClient
         final String endpointExpr = ClassType.STRING.defaultValueExpression(baseUrl) + endpointReplacementExpr;
 
         clientBuilder.getBuilderTraits().stream()
-            .filter(t -> EndpointTrait.class.getSimpleName().equals(t.getTraitInterfaceName()))
+            .filter(t -> "EndpointTrait".equals(t.getTraitInterfaceName()))
             .map(t -> t.getTraitMethods().iterator().next().getProperty())
             .findAny().ifPresent(serviceClientProperty -> {
               classBlock.javadocComment(comment -> {

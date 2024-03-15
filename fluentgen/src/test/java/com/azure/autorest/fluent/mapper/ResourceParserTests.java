@@ -4,6 +4,7 @@
 package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.FluentGenAccessor;
 import com.azure.autorest.fluent.TestUtils;
@@ -17,7 +18,6 @@ import com.azure.autorest.fluent.model.clientmodel.fluentmodel.delete.ResourceDe
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.get.ResourceRefresh;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.update.ResourceUpdate;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.core.http.HttpMethod;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

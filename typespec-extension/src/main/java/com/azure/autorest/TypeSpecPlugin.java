@@ -7,17 +7,17 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.Client;
-import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.util.CoreUtils;
 import com.azure.typespec.mapper.TypeSpecMapperFactory;
 import com.azure.typespec.model.EmitterOptions;
 import com.azure.typespec.util.FileUtil;
@@ -242,16 +242,16 @@ public class TypeSpecPlugin extends Javagen {
         super(new MockConnection(), "dummy", "dummy");
         this.emitterOptions = options;
         SETTINGS_MAP.put("namespace", options.getNamespace());
-        if (!CoreUtils.isNullOrEmpty(options.getOutputDir())) {
+        if (!ExtensionUtils.isNullOrEmpty(options.getOutputDir())) {
             SETTINGS_MAP.put("output-folder", options.getOutputDir());
         }
-        if (!CoreUtils.isNullOrEmpty(options.getServiceName())) {
+        if (!ExtensionUtils.isNullOrEmpty(options.getServiceName())) {
             SETTINGS_MAP.put("service-name", options.getServiceName());
         }
         if (options.getPartialUpdate() != null) {
             SETTINGS_MAP.put("partial-update", options.getPartialUpdate());
         }
-        if (!CoreUtils.isNullOrEmpty(options.getServiceVersions())) {
+        if (!ExtensionUtils.isNullOrEmpty(options.getServiceVersions())) {
             SETTINGS_MAP.put("service-versions", options.getServiceVersions());
         }
         if (options.getGenerateSamples() != null) {

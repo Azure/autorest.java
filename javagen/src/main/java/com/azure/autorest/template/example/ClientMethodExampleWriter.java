@@ -3,6 +3,9 @@
 
 package com.azure.autorest.template.example;
 
+import com.azure.autorest.extension.base.util.ContentType;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -25,11 +28,6 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ModelExampleUtil;
-import com.azure.core.http.ContentType;
-import com.azure.core.http.HttpMethod;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.polling.SyncPoller;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -86,7 +84,7 @@ public class ClientMethodExampleWriter {
                 IType returnType = method.getReturnValue().getType();
                 if (returnType instanceof GenericType) {
                     GenericType responseType = (GenericType) returnType;
-                    if (SyncPoller.class.getSimpleName().equals(responseType.getName())) {
+                    if ("SyncPoller".equals(responseType.getName())) {
                         // SyncPoller<>
 
                         if (response.getStatusCode() / 100 == 2) {
@@ -96,7 +94,7 @@ public class ClientMethodExampleWriter {
                             // but x-ms-examples usually does not include the final result
                             methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
                         }
-                    } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
+                    } else if ("PagedIterable".equals(responseType.getName())) {
                         // PagedIterable<>
 
                         methodBlock.line();
@@ -104,9 +102,9 @@ public class ClientMethodExampleWriter {
                         // assert status code
                         methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
                         // assert headers
-                        response.getHttpHeaders().stream().forEach(header -> {
-                            String expectedValueStr = ClassType.STRING.defaultValueExpression(header.getValue());
-                            String keyStr = ClassType.STRING.defaultValueExpression(header.getName());
+                        response.getHttpHeaders().forEach((key, value) -> {
+                            String expectedValueStr = ClassType.STRING.defaultValueExpression(value);
+                            String keyStr = ClassType.STRING.defaultValueExpression(key);
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON of first item, or assert count=0
@@ -331,13 +329,13 @@ public class ClientMethodExampleWriter {
 
     private boolean isGroupingParameter(ClientMethod convenienceMethod, MethodParameter methodParameter) {
         List<MethodTransformationDetail> details = convenienceMethod.getMethodTransformationDetails();
-        if (CoreUtils.isNullOrEmpty(details) || details.size() <= 1) {
+        if (ExtensionUtils.isNullOrEmpty(details) || details.size() <= 1) {
             return false;
         }
 
         return details.stream().allMatch(
                 detail ->
-                        !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
+                        !ExtensionUtils.isNullOrEmpty(detail.getParameterMappings())
                                 && detail.getOutParameter() != null
                                 &&
                                 // same name
@@ -351,12 +349,12 @@ public class ClientMethodExampleWriter {
 
     private boolean isFlattenParameter(ClientMethod convenienceMethod, MethodParameter methodParameter) {
         List<MethodTransformationDetail> details = convenienceMethod.getMethodTransformationDetails();
-        if (CoreUtils.isNullOrEmpty(details) || details.size() != 1) {
+        if (ExtensionUtils.isNullOrEmpty(details) || details.size() != 1) {
             return false;
         }
         return details.stream().anyMatch(
                 detail ->
-                        !CoreUtils.isNullOrEmpty(detail.getParameterMappings())
+                        !ExtensionUtils.isNullOrEmpty(detail.getParameterMappings())
                                 && detail.getOutParameter() != null
                                 && detail.getParameterMappings().stream()
                                 .allMatch(mapping -> mapping.getOutputParameterPropertyName() != null

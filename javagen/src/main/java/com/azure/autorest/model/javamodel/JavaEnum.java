@@ -3,8 +3,8 @@
 
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.IType;
-import com.azure.core.util.CoreUtils;
 
 import java.util.Collections;
 import java.util.List;
@@ -62,7 +62,7 @@ public class JavaEnum {
 
     public final void value(String name, String value, String description, IType type) {
         addExpectedCommaAndNewLine();
-        contents.javadocComment(CoreUtils.isNullOrEmpty(description) ? "Enum value " + value + "." : description);
+        contents.javadocComment(ExtensionUtils.isNullOrEmpty(description) ? "Enum value " + value + "." : description);
         contents.text(name + "(" + type.defaultValueExpression(value) + ")");
         previouslyAddedValue = true;
         addNewLine = true;

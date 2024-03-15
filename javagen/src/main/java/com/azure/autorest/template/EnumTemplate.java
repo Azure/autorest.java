@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
@@ -17,7 +18,6 @@ import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -75,7 +75,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
             for (ClientEnumValue enumValue : enumType.getValues()) {
                 String value = enumValue.getValue();
-                classBlock.javadocComment(CoreUtils.isNullOrEmpty(enumValue.getDescription())
+                classBlock.javadocComment(ExtensionUtils.isNullOrEmpty(enumValue.getDescription())
                         ? "Static value " + value + " for " + enumName + "."
                         : enumValue.getDescription());
                 addGeneratedAnnotation(classBlock);
@@ -147,7 +147,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
             String pascalTypeName = CodeNamer.toPascalCase(typeName);
             for (ClientEnumValue enumValue : enumType.getValues()) {
                 String value = enumValue.getValue();
-                classBlock.javadocComment(CoreUtils.isNullOrEmpty(enumValue.getDescription())
+                classBlock.javadocComment(ExtensionUtils.isNullOrEmpty(enumValue.getDescription())
                     ? "Static value " + value + " for " + enumName + "."
                     : enumValue.getDescription());
                 addGeneratedAnnotation(classBlock);

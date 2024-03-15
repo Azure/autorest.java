@@ -7,13 +7,13 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.PipelinePolicyDetails;
 import com.azure.autorest.model.clientmodel.SecurityInfo;
 import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 public final class TemplateHelper {
@@ -53,7 +53,7 @@ public final class TemplateHelper {
         if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
             function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
             function.ifBlock("keyCredential != null", action -> {
-                final String prefixExpr = CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())
+                final String prefixExpr = ExtensionUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())
                         ? "null"
                         : ClassType.STRING.defaultValueExpression(securityInfo.getHeaderValuePrefix());
                 function.line("policies.add(new KeyCredentialPolicy(\""
@@ -85,7 +85,7 @@ public final class TemplateHelper {
         function.line("policies.add(new UserAgentPolicy(applicationId, clientName, "
                 + "clientVersion, buildConfiguration));");
 
-        if (pipelinePolicyDetails != null && !CoreUtils.isNullOrEmpty(pipelinePolicyDetails.getRequestIdHeaderName())) {
+        if (pipelinePolicyDetails != null && !ExtensionUtils.isNullOrEmpty(pipelinePolicyDetails.getRequestIdHeaderName())) {
             function.line(String.format("policies.add(new RequestIdPolicy(\"%s\"));", pipelinePolicyDetails.getRequestIdHeaderName()));
         } else {
             function.line("policies.add(new RequestIdPolicy());");
@@ -106,7 +106,7 @@ public final class TemplateHelper {
         function.line("policies.add(new AddDatePolicy());");
 
         if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-            if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderName())) {
+            if (ExtensionUtils.isNullOrEmpty(securityInfo.getHeaderName())) {
                 LOGGER.error("key-credential-header-name is required for " +
                         "key-based credential type");
                 throw new IllegalStateException("key-credential-header-name is required for " +
@@ -115,7 +115,7 @@ public final class TemplateHelper {
 
             if (settings.isUseKeyCredential()) {
                 function.ifBlock("keyCredential != null", action -> {
-                    if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                    if (ExtensionUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
                         function.line("policies.add(new KeyCredentialPolicy(\""
                                 + securityInfo.getHeaderName()
                                 + "\", keyCredential));");
@@ -129,7 +129,7 @@ public final class TemplateHelper {
                 });
             } else {
                 function.ifBlock("azureKeyCredential != null", action -> {
-                    if (CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
+                    if (ExtensionUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())) {
                         function.line("policies.add(new AzureKeyCredentialPolicy(\""
                                 + securityInfo.getHeaderName()
                                 + "\", azureKeyCredential));");
