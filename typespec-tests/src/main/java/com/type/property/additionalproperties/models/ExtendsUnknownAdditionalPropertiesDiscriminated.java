@@ -66,7 +66,7 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
      * @return the ExtendsUnknownAdditionalPropertiesDiscriminated object itself.
      */
     @Generated
-    ExtendsUnknownAdditionalPropertiesDiscriminated setKind(String kind) {
+    protected ExtendsUnknownAdditionalPropertiesDiscriminated setKind(String kind) {
         this.kind = kind;
         return this;
     }

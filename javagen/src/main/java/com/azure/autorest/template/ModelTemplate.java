@@ -215,9 +215,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     boolean definedByModel = modelDefinesProperty(model, property);
                     if (hasDerivedTypes && notIncludedInConstructor && definedByModel
                         && (settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
+                        // Super class and child classes may be in different packages.
+                        // Since we call polymorphic setter in child classes' constructor, we need the setter to be visibility of protected.
+                        methodVisibility = property.isPolymorphicDiscriminator() ? JavaVisibility.Protected : JavaVisibility.PackagePrivate;
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
-                        classBlock.method(JavaVisibility.PackagePrivate, null,
+                        classBlock.method(methodVisibility, null,
                             model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
                                 + property.getName() + ")",
                             methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,

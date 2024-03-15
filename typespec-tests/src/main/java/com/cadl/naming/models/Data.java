@@ -48,7 +48,7 @@ public class Data implements JsonSerializable<Data> {
      * @return the Data object itself.
      */
     @Generated
-    Data setType(String type) {
+    protected Data setType(String type) {
         this.type = type;
         return this;
     }

@@ -57,7 +57,7 @@ public class Snake implements JsonSerializable<Snake> {
      * @return the Snake object itself.
      */
     @Generated
-    Snake setKind(SnakeKind kind) {
+    protected Snake setKind(SnakeKind kind) {
         this.kind = kind;
         return this;
     }

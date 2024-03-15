@@ -48,7 +48,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @param kind the kind value to set.
      * @return the Dog object itself.
      */
-    Dog setKind(DogKind kind) {
+    protected Dog setKind(DogKind kind) {
         this.kind = kind;
         return this;
     }
