@@ -27,7 +27,8 @@ public class ReturnTypeDescriptionAssembler {
         String assembledDesc = description;
         if (TypeUtil.isGenericTypeClassSubclassOf(returnType, "reactor.core.publisher.Mono")) {
             assembledDesc = assembleForMono(description, returnType, baseType);
-        } else if (TypeUtil.isGenericTypeClassSubclassOf(returnType, "com.azure.core.http.rest.Response")) {
+        } else if (TypeUtil.isGenericTypeClassSubclassOf(returnType, "com.azure.core.http.rest.Response",
+            "com.azure.core.http.rest.ResponseBase", "com.azure.core.http.rest.PagedResponse")) {
             assembledDesc = assembleForResponse(description, returnType, baseType);
         } else if (TypeUtil.isGenericTypeClassSubclassOf(returnType, "com.azure.core.http.rest.PagedIterable",
             "com.azure.core.http.rest.PagedFlux")) {
@@ -47,7 +48,8 @@ public class ReturnTypeDescriptionAssembler {
      */
     private static String assembleForMono(String description, GenericType returnType, IType baseType) {
         String assembledDesc;
-        if (TypeUtil.isGenericTypeClassSubclassOf(returnType.getTypeArguments()[0], "com.azure.core.http.rest.Response")) { // Mono<Response<?>>
+        if (TypeUtil.isGenericTypeClassSubclassOf(returnType.getTypeArguments()[0], "com.azure.core.http.rest.Response",
+            "com.azure.core.http.rest.ResponseBase", "com.azure.core.http.rest.PagedResponse")) { // Mono<Response<?>>
             assembledDesc = String.format(
                     "%s on successful completion of {@link Mono}",
                     assembleForResponse(description, (GenericType) returnType.getTypeArguments()[0], baseType)

@@ -38,7 +38,7 @@ public final class ModelTemplateHeaderHelper {
     static {
         Map<String, String> headerToKnownHttpHeaderName = new TreeMap<>(String::compareToIgnoreCase);
         for (HttpHeaderName knownHeaderName : HttpHeaderName.values()) {
-            headerToKnownHttpHeaderName.put(knownHeaderName.toString().toLowerCase(), knownHeaderName.name());
+            headerToKnownHttpHeaderName.put(knownHeaderName.getCaseInsensitiveName(), knownHeaderName.name());
         }
 
         HEADER_TO_KNOWN_HTTPHEADERNAME = Collections.unmodifiableMap(headerToKnownHttpHeaderName);

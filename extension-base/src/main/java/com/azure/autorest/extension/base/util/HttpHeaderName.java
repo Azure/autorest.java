@@ -3,6 +3,8 @@
 
 package com.azure.autorest.extension.base.util;
 
+import java.util.Locale;
+
 /**
  * Represents an HTTP header name.
  */
@@ -10,340 +12,366 @@ public enum HttpHeaderName {
     /**
      * {@code Accept}/{@code accept}
      */
-    ACCEPT,
+    ACCEPT("Accept"),
 
     /**
      * {@code Accept-Charset}/{@code accept-charset}
      */
-    ACCEPT_CHARSET,
+    ACCEPT_CHARSET("Accept-Charset"),
 
     /**
      * {@code Access-Control-Allow-Credentials}/{@code access-control-allow-credentials}
      */
-    ACCESS_CONTROL_ALLOW_CREDENTIALS,
+    ACCESS_CONTROL_ALLOW_CREDENTIALS
+       ("Access-Control-Allow-Credentials"),
 
     /**
      * {@code Access-Control-Allow-Headers}/{@code access-control-allow-headers}
      */
-    ACCESS_CONTROL_ALLOW_HEADERS,
+    ACCESS_CONTROL_ALLOW_HEADERS("Access-Control-Allow-Headers"),
 
     /**
      * {@code Access-Control-Allow-Methods}/{@code access-control-allow-methods}
      */
-    ACCESS_CONTROL_ALLOW_METHODS,
+    ACCESS_CONTROL_ALLOW_METHODS("Access-Control-Allow-Methods"),
 
     /**
      * {@code Access-Control-Allow-Origin}/{@code access-control-allow-origin}
      */
-    ACCESS_CONTROL_ALLOW_ORIGIN,
+    ACCESS_CONTROL_ALLOW_ORIGIN("Access-Control-Allow-Origin"),
 
     /**
      * {@code Access-Control-Expose-Headers}/{@code access-control-expose-headers}
      */
-    ACCESS_CONTROL_EXPOSE_HEADERS,
+    ACCESS_CONTROL_EXPOSE_HEADERS("Access-Control-Expose-Headers"),
 
     /**
      * {@code Access-Control-Max-Age}/{@code access-control-max-age}
      */
-    ACCESS_CONTROL_MAX_AGE,
+    ACCESS_CONTROL_MAX_AGE("Access-Control-Max-Age"),
 
     /**
      * {@code Accept-Datetime}/{@code accept-datetime}
      */
-    ACCEPT_DATETIME,
+    ACCEPT_DATETIME("Accept-Datetime"),
 
     /**
      * {@code Accept-Encoding}/{@code accept-encoding}
      */
-    ACCEPT_ENCODING,
+    ACCEPT_ENCODING("Accept-Encoding"),
 
     /**
      * {@code Accept-Language}/{@code accept-language}
      */
-    ACCEPT_LANGUAGE,
+    ACCEPT_LANGUAGE("Accept-Language"),
 
     /**
      * {@code Accept-Patch}/{@code accept-patch}
      */
-    ACCEPT_PATCH,
+    ACCEPT_PATCH("Accept-Patch"),
 
     /**
      * {@code Accept-Ranges}/{@code accept-ranges}
      */
-    ACCEPT_RANGES,
+    ACCEPT_RANGES("Accept-Ranges"),
 
     /**
      * {@code Age}/{@code age}
      */
-    AGE,
+    AGE("Age"),
 
     /**
      * {@code Allow}/{@code allow}
      */
-    ALLOW,
+    ALLOW("Allow"),
 
     /**
      * {@code Authorization}/{@code authorization}
      */
-    AUTHORIZATION,
+    AUTHORIZATION("Authorization"),
 
     /**
      * {@code Cache-Control}/{@code cache-control}
      */
-    CACHE_CONTROL,
+    CACHE_CONTROL("Cache-Control"),
 
     /**
      * {@code Connection}/{@code connection}
      */
-    CONNECTION,
+    CONNECTION("Connection"),
 
     /**
      * {@code Content-Disposition}/{@code content-disposition}
      */
-    CONTENT_DISPOSITION,
+    CONTENT_DISPOSITION("Content-Disposition"),
 
     /**
      * {@code Content-Encoding}/{@code content-encoding}
      */
-    CONTENT_ENCODING,
+    CONTENT_ENCODING("Content-Encoding"),
 
     /**
      * {@code Content-Language}/{@code content-language}
      */
-    CONTENT_LANGUAGE,
+    CONTENT_LANGUAGE("Content-Language"),
 
     /**
      * {@code Content-Length}/{@code content-length}
      */
-    CONTENT_LENGTH,
+    CONTENT_LENGTH("Content-Length"),
 
     /**
      * {@code Content-Location}/{@code content-location}
      */
-    CONTENT_LOCATION,
+    CONTENT_LOCATION("Content-Location"),
 
     /**
      * {@code Content-MD5}/{@code content-md5}
      */
-    CONTENT_MD5,
+    CONTENT_MD5("Content-MD5"),
 
     /**
      * {@code Content-Range}/{@code content-range}
      */
-    CONTENT_RANGE,
+    CONTENT_RANGE("Content-Range"),
 
     /**
      * {@code Content-Type}/{@code content-type}
      */
-    CONTENT_TYPE,
+    CONTENT_TYPE("Content-Type"),
 
     /**
      * {@code Cookie}/{@code cookie}
      */
-    COOKIE,
+    COOKIE("Cookie"),
 
     /**
      * {@code Date}/{@code date}
      */
-    DATE,
+    DATE("Date"),
 
     /**
      * {@code ETag}/{@code etag}
      */
-    ETAG,
+    ETAG("ETag"),
 
     /**
      * {@code Expect}/{@code expect}
      */
-    EXPECT,
+    EXPECT("Expect"),
 
     /**
      * {@code Expires}/{@code expires}
      */
-    EXPIRES,
+    EXPIRES("Expires"),
 
     /**
      * {@code Forwarded}/{@code forwarded}
      */
-    FORWARDED,
+    FORWARDED("Forwarded"),
 
     /**
      * {@code From}/{@code from}
      */
-    FROM,
+    FROM("From"),
 
     /**
      * {@code Host}/{@code host}
      */
-    HOST,
+    HOST("Host"),
 
     /**
      * {@code HTTP2-Settings}/{@code http2-settings}
      */
-    HTTP2_SETTINGS,
+    HTTP2_SETTINGS("HTTP2-Settings"),
 
     /**
      * {@code If-Match}/{@code if-match}
      */
-    IF_MATCH,
+    IF_MATCH("If-Match"),
 
     /**
      * {@code If-Modified-Since}/{@code if-modified-since}
      */
-    IF_MODIFIED_SINCE,
+    IF_MODIFIED_SINCE("If-Modified-Since"),
 
     /**
      * {@code If-None-Match}/{@code if-none-match}
      */
-    IF_NONE_MATCH,
+    IF_NONE_MATCH("If-None-Match"),
 
     /**
      * {@code If-Range}/{@code if-range}
      */
-    IF_RANGE,
+    IF_RANGE("If-Range"),
 
     /**
      * {@code If-Unmodified-Since}/{@code if-unmodified-since}
      */
-    IF_UNMODIFIED_SINCE,
+    IF_UNMODIFIED_SINCE("If-Unmodified-Since"),
 
     /**
      * {@code Last-Modified}/{@code last-modified}
      */
-    LAST_MODIFIED,
+    LAST_MODIFIED("Last-Modified"),
 
     /**
      * {@code Link}/{@code link}
      */
-    LINK,
+    LINK("Link"),
 
     /**
      * {@code Location}/{@code location}
      */
-    LOCATION,
+    LOCATION("Location"),
 
     /**
      * {@code Max-Forwards}/{@code max-forwards}
      */
-    MAX_FORWARDS,
+    MAX_FORWARDS("Max-Forwards"),
 
     /**
      * {@code Origin}/{@code origin}
      */
-    ORIGIN,
+    ORIGIN("Origin"),
 
     /**
      * {@code Pragma}/{@code pragma}
      */
-    PRAGMA,
+    PRAGMA("Pragma"),
 
     /**
      * {@code Prefer}/{@code prefer}
      */
-    PREFER,
+    PREFER("Prefer"),
 
     /**
      * {@code Preference-Applied}/{@code preference-applied}
      */
-    PREFERENCE_APPLIED,
+    PREFERENCE_APPLIED("Preference-Applied"),
 
     /**
      * {@code Proxy-Authenticate}/{@code proxy-authenticate}
      */
-    PROXY_AUTHENTICATE,
+    PROXY_AUTHENTICATE("Proxy-Authenticate"),
 
     /**
      * {@code Proxy-Authorization}/{@code proxy-authorization}
      */
-    PROXY_AUTHORIZATION,
+    PROXY_AUTHORIZATION("Proxy-Authorization"),
 
     /**
      * {@code Range}/{@code range}
      */
-    RANGE,
+    RANGE("Range"),
 
     /**
      * {@code Referer}/{@code referer}
      */
-    REFERER,
+    REFERER("Referer"),
 
     /**
      * {@code Retry-After}/{@code retry-after}
      */
-    RETRY_AFTER,
+    RETRY_AFTER("Retry-After"),
 
     /**
      * {@code Server}/{@code server}
      */
-    SERVER,
+    SERVER("Server"),
 
     /**
      * {@code Set-Cookie}/{@code set-cookie}
      */
-    SET_COOKIE,
+    SET_COOKIE("Set-Cookie"),
 
     /**
      * {@code Strict-Transport-Security}/{@code strict-transport-security}
      */
-    STRICT_TRANSPORT_SECURITY,
+    STRICT_TRANSPORT_SECURITY("Strict-Transport-Security"),
 
     /**
      * {@code TE}/{@code te}
      */
-    TE,
+    TE("TE"),
 
     /**
      * {@code Trailer}/{@code trailer}
      */
-    TRAILER,
+    TRAILER("Trailer"),
 
     /**
      * {@code Transfer-Encoding}/{@code transfer-encoding}
      */
-    TRANSFER_ENCODING,
+    TRANSFER_ENCODING("Transfer-Encoding"),
 
     /**
      * {@code User-Agent}/{@code user-agent}
      */
-    USER_AGENT,
+    USER_AGENT("User-Agent"),
 
     /**
      * {@code Upgrade}/{@code upgrade}
      */
-    UPGRADE,
+    UPGRADE("Upgrade"),
 
     /**
      * {@code Vary}/{@code vary}
      */
-    VARY,
+    VARY("Vary"),
 
     /**
      * {@code Via}/{@code via}
      */
-    VIA,
+    VIA("Via"),
 
     /**
      * {@code Warning}/{@code warning}
      */
-    WARNING,
+    WARNING("Warning"),
 
     /**
      * {@code WWW-Authenticate}/{@code www-authenticate}
      */
-    WWW_AUTHENTICATE,
+    WWW_AUTHENTICATE("WWW-Authenticate"),
 
     /**
      * {@code x-ms-client-request-id}
      */
-    X_MS_CLIENT_REQUEST_ID,
+    X_MS_CLIENT_REQUEST_ID("x-ms-client-request-id"),
 
     /**
      * {@code x-ms-request-id}
      */
-    X_MS_REQUEST_ID,
+    X_MS_REQUEST_ID("x-ms-request-id"),
 
     /**
      * {@code traceparent}
      */
-    TRACEPARENT
+    TRACEPARENT("traceparent");
+
+    private final String caseInsensitive;
+    private final String caseSensitive;
+
+    /**
+     * Gets the HTTP header name.
+     * @return The HTTP header name.
+     */
+    public String getCaseSensitiveName() {
+        return caseSensitive;
+    }
+
+    /**
+     * Gets the HTTP header name lower cased.
+     *
+     * @return The HTTP header name lower cased.
+     */
+    public String getCaseInsensitiveName() {
+        return caseInsensitive;
+    }
+    
+    HttpHeaderName(String name) {
+        this.caseSensitive = name;
+        this.caseInsensitive = name.toLowerCase(Locale.ROOT);
+    }
 }

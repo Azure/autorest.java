@@ -308,7 +308,8 @@ public class FluentUtils {
             if ("Response".equals(type.getName())) {
                 ret = true;
             } else {
-                ret = TypeUtil.isGenericTypeClassSubclassOf(type, "com.azure.core.http.rest.Response");
+                ret = TypeUtil.isGenericTypeClassSubclassOf(type, "com.azure.core.http.rest.Response",
+                    "com.azure.core.http.rest.ResponseBase", "com.azure.core.http.rest.PagedResponse");
             }
         } else if (clientType instanceof ClassType) {
             // ClientResponse is type of a subclass of Response<>
@@ -327,7 +328,8 @@ public class FluentUtils {
             GenericType type = (GenericType) clientType;
             if ("Response".equals(type.getName())) {
                 bodyType = type.getTypeArguments()[0];
-            } else if (TypeUtil.isGenericTypeClassSubclassOf(type, "com.azure.core.http.rest.Response")) {
+            } else if (TypeUtil.isGenericTypeClassSubclassOf(type, "com.azure.core.http.rest.Response",
+                "com.azure.core.http.rest.ResponseBase", "com.azure.core.http.rest.PagedResponse")) {
                 bodyType = getValueTypeFromResponseTypeSubType(type);
             }
         } else if (clientType instanceof ClassType) {

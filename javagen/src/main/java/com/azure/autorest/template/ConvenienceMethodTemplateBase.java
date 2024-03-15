@@ -335,7 +335,7 @@ abstract class ConvenienceMethodTemplateBase {
 
         // collection format
         imports.add("com.azure.core.util.serializer.JacksonAdapter");
-        imports.add(CollectionFormat.class.getName());
+        imports.add("com.azure.core.util.serializer.CollectionFormat");
         ClassType.TYPE_REFERENCE.addImportsTo(imports, false);
 
         // byte[]
