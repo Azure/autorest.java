@@ -19,59 +19,59 @@ enum Color {
   Green,
 }
 
-union ColorModel {
-  ColorModelBase,
-  Blue: "Blue",
-  Green: "Green",
-}
+// union ColorModel {
+//   ColorModelBase,
+//   Blue: "Blue",
+//   Green: "Green",
+// }
 
-union ColorModelBase {
-  string,
-  Red: "Red",
-}
+// union ColorModelBase {
+//   string,
+//   Red: "Red",
+// }
 
-@access(Access.public)
-union PriorityModel {
-  int32,
-  High: 100,
-  Low: 0,
-}
+// @access(Access.public)
+// union PriorityModel {
+//   int32,
+//   High: 100,
+//   Low: 0,
+// }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
-@fixed
-enum Priority {
-  High: 100,
-  Low: 0,
-}
+// #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
+// @fixed
+// enum Priority {
+//   High: 100,
+//   Low: 0,
+// }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
-@fixed
-enum Unit {
-  Grams: 1,
-  KiloGrams: 0.001,
-  Milligram: 1000,
-}
+// #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
+// @fixed
+// enum Unit {
+//   Grams: 1,
+//   KiloGrams: 0.001,
+//   Milligram: 1000,
+// }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
-@fixed
-enum OperationStateValues {
-  Running,
-  Completed,
-  Failed,
-}
+// #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
+// @fixed
+// enum OperationStateValues {
+//   Running,
+//   Completed,
+//   Failed,
+// }
 
-model Operation {
-  name: "Read" | "Write";
-  best: true;
-  age: 50;
-  priority: Priority;
-  color: ColorModel;
-  unit: Unit;
-  priorityValue: Priority.Low;
-  colorValue: Color.Green;
-  colorModelValue: ColorModel.Blue;
-  unitValue: Unit.Milligram;
-}
+// model Operation {
+//   name: "Read" | "Write";
+//   best: true;
+//   age: 50;
+//   priority: Priority;
+//   color: ColorModel;
+//   unit: Unit;
+//   priorityValue: Priority.Low;
+//   colorValue: Color.Green;
+//   colorModelValue: ColorModel.Blue;
+//   unitValue: Unit.Milligram;
+// }
 
 @client({
   service: Cadl.EnumService,
@@ -83,151 +83,151 @@ interface EnumOp {
   @route("/color")
   getColor(): Color;
 
-  @get
-  @route("/colormodel")
-  getColorModel(): {
-    @body body: ColorModel;
-  };
+  // @get
+  // @route("/colormodel")
+  // getColorModel(): {
+  //   @body body: ColorModel;
+  // };
 
-  @post
-  @route("operation/colormodel")
-  setColorModel(@query color: ColorModel): Operation;
+  // @post
+  // @route("operation/colormodel")
+  // setColorModel(@query color: ColorModel): Operation;
 
-  @post
-  @route("operation/priority")
-  setPriority(@query priority: Priority): Operation;
+  // @post
+  // @route("operation/priority")
+  // setPriority(@query priority: Priority): Operation;
 
-  @get
-  @route("operation/state/running")
-  getRunningOperation(@query state: "Running"): Operation;
+  // @get
+  // @route("operation/state/running")
+  // getRunningOperation(@query state: "Running"): Operation;
 
-  @get
-  @route("operation/state")
-  getOperation(@query state: OperationStateValues): Operation;
+  // @get
+  // @route("operation/state")
+  // getOperation(@query state: OperationStateValues): Operation;
 
-  @post
-  @route("operation/stringenumarray")
-  setStringEnumArray(
-    @query({
-      format: "csv",
-    })
-    colorArray: ColorModel[],
+  // @post
+  // @route("operation/stringenumarray")
+  // setStringEnumArray(
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   colorArray: ColorModel[],
 
-    @query({
-      format: "csv",
-    })
-    colorArrayOpt?: ColorModel[],
-  ): string;
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   colorArrayOpt?: ColorModel[],
+  // ): string;
 
-  @post
-  @route("operation/intenumarray")
-  setIntEnumArray(
-    @query({
-      format: "csv",
-    })
-    priorityArray: Priority[],
+  // @post
+  // @route("operation/intenumarray")
+  // setIntEnumArray(
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   priorityArray: Priority[],
 
-    @query({
-      format: "csv",
-    })
-    priorityArrayOpt?: Priority[],
-  ): string;
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   priorityArrayOpt?: Priority[],
+  // ): string;
 
-  @post
-  @route("operation/stringarray")
-  setStringArray(
-    @query({
-      format: "csv",
-    })
-    stringArray: string[],
+  // @post
+  // @route("operation/stringarray")
+  // setStringArray(
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   stringArray: string[],
 
-    @query({
-      format: "csv",
-    })
-    stringArrayOpt?: string[],
-  ): string;
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   stringArrayOpt?: string[],
+  // ): string;
 
-  @post
-  @route("operation/intarray")
-  setIntArray(
-    @query({
-      format: "csv",
-    })
-    intArray: int32[],
+  // @post
+  // @route("operation/intarray")
+  // setIntArray(
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   intArray: int32[],
 
-    @query({
-      format: "csv",
-    })
-    intArrayOpt?: int32[],
-  ): string;
+  //   @query({
+  //     format: "csv",
+  //   })
+  //   intArrayOpt?: int32[],
+  // ): string;
 
-  @post
-  @route("operation/stringenummulti")
-  setStringEnumMulti(
-    @query({
-      format: "multi",
-    })
-    colorArray: ColorModel[],
+  // @post
+  // @route("operation/stringenummulti")
+  // setStringEnumMulti(
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   colorArray: ColorModel[],
 
-    @query({
-      format: "multi",
-    })
-    colorArrayOpt?: ColorModel[],
-  ): string;
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   colorArrayOpt?: ColorModel[],
+  // ): string;
 
-  @post
-  @route("operation/intenummulti")
-  setIntEnumMulti(
-    @query({
-      format: "multi",
-    })
-    priorityArray: Priority[],
+  // @post
+  // @route("operation/intenummulti")
+  // setIntEnumMulti(
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   priorityArray: Priority[],
 
-    @query({
-      format: "multi",
-    })
-    priorityArrayOpt?: Priority[],
-  ): string;
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   priorityArrayOpt?: Priority[],
+  // ): string;
 
-  @post
-  @route("operation/stringmulti")
-  setStringMulti(
-    @query({
-      format: "multi",
-    })
-    stringArray: string[],
+  // @post
+  // @route("operation/stringmulti")
+  // setStringMulti(
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   stringArray: string[],
 
-    @query({
-      format: "multi",
-    })
-    stringArrayOpt?: string[],
-  ): string;
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   stringArrayOpt?: string[],
+  // ): string;
 
-  @post
-  @route("operation/intmulti")
-  setIntMulti(
-    @query({
-      format: "multi",
-    })
-    intArray: int32[],
+  // @post
+  // @route("operation/intmulti")
+  // setIntMulti(
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   intArray: int32[],
 
-    @query({
-      format: "multi",
-    })
-    intArrayOpt?: int32[],
-  ): string;
+  //   @query({
+  //     format: "multi",
+  //   })
+  //   intArrayOpt?: int32[],
+  // ): string;
 
-  @post
-  @route("operation/stringenumarrayheader")
-  setStringEnumArrayHeader(
-    @header({
-      format: "csv",
-    })
-    colorArray: ColorModel[],
+  // @post
+  // @route("operation/stringenumarrayheader")
+  // setStringEnumArrayHeader(
+  //   @header({
+  //     format: "csv",
+  //   })
+  //   colorArray: ColorModel[],
 
-    @header({
-      format: "csv",
-    })
-    colorArrayOpt?: ColorModel[],
-  ): string;
+  //   @header({
+  //     format: "csv",
+  //   })
+  //   colorArrayOpt?: ColorModel[],
+  // ): string;
 }
