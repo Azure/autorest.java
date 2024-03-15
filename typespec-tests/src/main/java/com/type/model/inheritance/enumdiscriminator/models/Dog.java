@@ -57,7 +57,7 @@ public class Dog implements JsonSerializable<Dog> {
      * @return the Dog object itself.
      */
     @Generated
-    Dog setKind(DogKind kind) {
+    protected Dog setKind(DogKind kind) {
         this.kind = kind;
         return this;
     }

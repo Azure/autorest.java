@@ -50,7 +50,7 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
      * @param odataType the odataType value to set.
      * @return the MetricAlertCriteria object itself.
      */
-    MetricAlertCriteria setOdataType(Odatatype odataType) {
+    protected MetricAlertCriteria setOdataType(Odatatype odataType) {
         this.odataType = odataType;
         return this;
     }

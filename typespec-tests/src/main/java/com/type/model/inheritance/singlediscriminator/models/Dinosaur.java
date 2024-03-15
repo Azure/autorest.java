@@ -57,7 +57,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      * @return the Dinosaur object itself.
      */
     @Generated
-    Dinosaur setKind(String kind) {
+    protected Dinosaur setKind(String kind) {
         this.kind = kind;
         return this;
     }
