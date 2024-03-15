@@ -244,7 +244,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -272,7 +272,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -299,7 +299,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -360,7 +360,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -420,7 +420,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fish.type: String (Optional)
+     *     fish.type: String (Required)
      *     species: String (Optional)
      * }
      * }</pre>
@@ -444,7 +444,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fish.type: String (Optional)
+     *     fish.type: String (Required)
      *     species: String (Optional)
      * }
      * }</pre>
@@ -468,7 +468,7 @@ public final class PolymorphismsImpl {
      * <pre>{@code
      * {
      *     sampleSalmon (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
@@ -477,7 +477,7 @@ public final class PolymorphismsImpl {
      *         (recursive schema, see above)
      *     ]
      *     sampleFish (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *     }
      *     fishes (Optional): [
@@ -506,7 +506,7 @@ public final class PolymorphismsImpl {
      * <pre>{@code
      * {
      *     sampleSalmon (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
@@ -515,7 +515,7 @@ public final class PolymorphismsImpl {
      *         (recursive schema, see above)
      *     ]
      *     sampleFish (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *     }
      *     fishes (Optional): [
@@ -543,7 +543,7 @@ public final class PolymorphismsImpl {
      * <pre>{@code
      * {
      *     sampleSalmon (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
@@ -552,7 +552,7 @@ public final class PolymorphismsImpl {
      *         (recursive schema, see above)
      *     ]
      *     sampleFish (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *     }
      *     fishes (Optional): [
@@ -581,7 +581,7 @@ public final class PolymorphismsImpl {
      * <pre>{@code
      * {
      *     sampleSalmon (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *         location: String (Optional)
      *         iswild: Boolean (Optional)
@@ -590,7 +590,7 @@ public final class PolymorphismsImpl {
      *         (recursive schema, see above)
      *     ]
      *     sampleFish (Optional): {
-     *         fish.type: String (Optional)
+     *         fish.type: String (Required)
      *         species: String (Optional)
      *     }
      *     fishes (Optional): [
@@ -617,12 +617,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -654,12 +654,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -690,12 +690,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -728,12 +728,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -765,12 +765,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -785,12 +785,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -824,12 +824,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -844,12 +844,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
      *          (Optional){
-     *             fishtype: String (Optional)
+     *             fishtype: String (Required)
      *             species: String (Optional)
      *             length: float (Required)
      *             siblings (Optional): [
@@ -883,7 +883,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -938,7 +938,7 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
