@@ -99,7 +99,7 @@ public final class ExtendsUnknownDiscriminatedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     name: String (Required)
      *      (Optional): {
      *         String: Object (Required)
@@ -125,7 +125,7 @@ public final class ExtendsUnknownDiscriminatedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     name: String (Required)
      *      (Optional): {
      *         String: Object (Required)
@@ -151,7 +151,7 @@ public final class ExtendsUnknownDiscriminatedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     name: String (Required)
      *      (Optional): {
      *         String: Object (Required)
@@ -178,7 +178,7 @@ public final class ExtendsUnknownDiscriminatedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     name: String (Required)
      *      (Optional): {
      *         String: Object (Required)

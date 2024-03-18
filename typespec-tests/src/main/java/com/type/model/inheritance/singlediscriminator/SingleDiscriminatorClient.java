@@ -42,7 +42,7 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -65,7 +65,7 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -89,7 +89,7 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -112,7 +112,7 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -136,7 +136,7 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -159,7 +159,7 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     wingspan: int (Required)
      * }
      * }</pre>
@@ -182,7 +182,7 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     size: int (Required)
      * }
      * }</pre>
