@@ -40,7 +40,7 @@ public final class PolymorphicrecursiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [
@@ -67,7 +67,7 @@ public final class PolymorphicrecursiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Optional)
+     *     fishtype: String (Required)
      *     species: String (Optional)
      *     length: float (Required)
      *     siblings (Optional): [

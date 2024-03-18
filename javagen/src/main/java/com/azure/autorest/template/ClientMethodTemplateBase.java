@@ -225,7 +225,7 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             Map<String, ClientModelProperty> properties = new LinkedHashMap<>();
             traverseProperties(model, properties);
             for (ClientModelProperty property : properties.values()) {
-                bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired(), property.isRequiredForCreate(),false);
+                bodySchemaJavadoc(property.getWireType(), commentBlock, nextIndent, property.getSerializedName(), typesInJavadoc, property.isRequired() || property.isPolymorphicDiscriminator(), property.isRequiredForCreate(),false);
             }
             commentBlock.line(indent + "}");
         } else if (typesInJavadoc.contains(type)) {

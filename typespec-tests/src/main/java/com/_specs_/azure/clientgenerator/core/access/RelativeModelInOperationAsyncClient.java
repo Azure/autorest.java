@@ -87,7 +87,7 @@ public final class RelativeModelInOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     name: String (Required)
      * }
      * }</pre>
