@@ -54,8 +54,6 @@ public class ClientModelUtil {
     public static final String MULTI_PART_FORM_DATA_HELPER_CLASS_NAME = "MultipartFormDataHelper";
     public static final String GENERIC_MULTI_PART_FORM_DATA_HELPER_CLASS_NAME = "GenericMultipartFormDataHelper";
 
-    public static final String CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME = "CoreToCodegenBridgeUtils";
-
     private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
@@ -626,19 +624,6 @@ public class ClientModelUtil {
                 return true;
             }
         }
-    }
-
-    /**
-     * Checks where {@code CoreToCodegenBridgeUtils} should be generated.
-     * <p>
-     * At this time this is a no-op as there are no cases where a Core to codegen bridge is needed.
-     *
-     * @param model the model
-     * @param settings Java settings
-     * @return Whether to generate the {@code CoreToCodegenBridgeUtils} utility class.
-     */
-    public static boolean generateCoreToCodegenBridgeUtils(ClientModel model, JavaSettings settings) {
-        return false;
     }
 
     /**
