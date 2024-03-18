@@ -6,7 +6,6 @@ package com.azure.autorest.model.clientmodel;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.util.ExtensionUtils;
-import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
 
 import java.io.InputStream;
@@ -100,6 +99,24 @@ public class ClassType implements IType {
         }
     }
 
+    public static final ClassType REQUEST_CONDITIONS = new Builder().packageName("com.azure.core.http").name("RequestConditions").build();
+    public static final ClassType MATCH_CONDITIONS = new Builder().packageName("com.azure.core.http").name("MatchConditions").build();
+    public static final ClassType CORE_UTILS = getClassTypeBuilder("com.azure.core.util", "CoreUtils").build();
+    public static final ClassType RESPONSE = getClassTypeBuilder("com.azure.core.http.rest", "Response").build();
+    public static final ClassType SIMPLE_RESPONSE = getClassTypeBuilder("com.azure.core.http.rest", "SimpleResponse").build();
+    public static final ClassType EXPANDABLE_STRING_ENUM = getClassTypeBuilder("com.azure.core.util", "ExpandableStringEnum").build();
+    public static final ClassType HTTP_PIPELINE_BUILDER = getClassTypeBuilder("com.azure.core.http", "HttpPipelineBuilder").build();
+    public static final ClassType KEY_CREDENTIAL_POLICY = getClassTypeBuilder("com.azure.core.http.policy", "KeyCredentialPolicy").build();
+    public static final ClassType KEY_CREDENTIAL_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "KeyCredentialTrait").build();
+    public static final ClassType ENDPOINT_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "EndpointTrait").build();
+    public static final ClassType HTTP_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "HttpTrait").build();
+    public static final ClassType CONFIGURATION_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "ConfigurationTrait").build();
+    public static final ClassType POLL_OPERATION_DETAILS = getClassTypeBuilder("com.azure.core.util.polling", "PollOperationDetails").build();
+    public static final ClassType JSON_SERIALIZABLE = getClassTypeBuilder("com.azure.json", "JsonSerializable").build();
+    public static final ClassType JSON_WRITER = getClassTypeBuilder("com.azure.json", "JsonWriter").build();
+    public static final ClassType JSON_READER = getClassTypeBuilder("com.azure.json", "JsonReader").build();
+    public static final ClassType JSON_TOKEN = getClassTypeBuilder("com.azure.json", "JsonToken").build();
+    public static final ClassType TYPE_REFERENCE = getClassTypeBuilder("com.azure.core.util.serializer", "TypeReference").build();
 
     public static final ClassType VOID = new ClassType.Builder(false).knownClass(Void.class).build();
 
@@ -205,7 +222,7 @@ public class ClassType implements IType {
     public static final ClassType DURATION = new Builder(false).knownClass(Duration.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "Duration.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
-        .serializationValueGetterModifier(valueGetter -> ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".durationToStringWithDays(" + valueGetter + ")")
+        .serializationValueGetterModifier(valueGetter -> CORE_UTILS.getName() + ".durationToStringWithDays(" + valueGetter + ")")
         .jsonDeserializationMethod("getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
         .xmlElementDeserializationMethod("getNullableElement(Duration::parse)")
@@ -425,25 +442,6 @@ public class ClassType implements IType {
         .packageName("com.azure.core.models").name("ResponseInnerError")
         .jsonToken("JsonToken.START_OBJECT")
         .build();
-
-    public static final ClassType REQUEST_CONDITIONS = new Builder().packageName("com.azure.core.http").name("RequestConditions").build();
-    public static final ClassType MATCH_CONDITIONS = new Builder().packageName("com.azure.core.http").name("MatchConditions").build();
-    public static final ClassType CORE_UTILS = getClassTypeBuilder("com.azure.core.util", "CoreUtils").build();
-    public static final ClassType RESPONSE = getClassTypeBuilder("com.azure.core.http.rest", "Response").build();
-    public static final ClassType SIMPLE_RESPONSE = getClassTypeBuilder("com.azure.core.http.rest", "SimpleResponse").build();
-    public static final ClassType EXPANDABLE_STRING_ENUM = getClassTypeBuilder("com.azure.core.util", "ExpandableStringEnum").build();
-    public static final ClassType HTTP_PIPELINE_BUILDER = getClassTypeBuilder("com.azure.core.http", "HttpPipelineBuilder").build();
-    public static final ClassType KEY_CREDENTIAL_POLICY = getClassTypeBuilder("com.azure.core.http.policy", "KeyCredentialPolicy").build();
-    public static final ClassType KEY_CREDENTIAL_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "KeyCredentialTrait").build();
-    public static final ClassType ENDPOINT_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "EndpointTrait").build();
-    public static final ClassType HTTP_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "HttpTrait").build();
-    public static final ClassType CONFIGURATION_TRAIT = getClassTypeBuilder("com.azure.core.client.traits", "ConfigurationTrait").build();
-    public static final ClassType POLL_OPERATION_DETAILS = getClassTypeBuilder("com.azure.core.util.polling", "PollOperationDetails").build();
-    public static final ClassType JSON_SERIALIZABLE = getClassTypeBuilder("com.azure.json", "JsonSerializable").build();
-    public static final ClassType JSON_WRITER = getClassTypeBuilder("com.azure.json", "JsonWriter").build();
-    public static final ClassType JSON_READER = getClassTypeBuilder("com.azure.json", "JsonReader").build();
-    public static final ClassType JSON_TOKEN = getClassTypeBuilder("com.azure.json", "JsonToken").build();
-    public static final ClassType TYPE_REFERENCE = getClassTypeBuilder("com.azure.core.util.serializer", "TypeReference").build();
 
     private final String fullName;
     private final String packageName;

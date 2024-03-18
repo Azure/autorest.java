@@ -6,11 +6,11 @@ package com.type.property.nullable.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.type.property.nullable.implementation.CoreToCodegenBridgeUtils;
 import com.type.property.nullable.implementation.JsonMergePatchHelper;
 import java.io.IOException;
 import java.time.Duration;
@@ -121,8 +121,7 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeStringField("requiredProperty", this.requiredProperty);
-            jsonWriter.writeStringField("nullableProperty",
-                CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
+            jsonWriter.writeStringField("nullableProperty", CoreUtils.durationToStringWithDays(this.nullableProperty));
             return jsonWriter.writeEndObject();
         }
     }
@@ -142,7 +141,7 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
                 jsonWriter.writeNullField("nullableProperty");
             } else {
                 jsonWriter.writeStringField("nullableProperty",
-                    CoreToCodegenBridgeUtils.durationToStringWithDays(this.nullableProperty));
+                    CoreUtils.durationToStringWithDays(this.nullableProperty));
             }
         }
         return jsonWriter.writeEndObject();
