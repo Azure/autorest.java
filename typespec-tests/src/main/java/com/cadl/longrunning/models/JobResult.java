@@ -11,7 +11,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.longrunning.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 import java.time.OffsetDateTime;
 
@@ -146,8 +145,7 @@ public final class JobResult implements JsonSerializable<JobResult> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeFieldName("error");
-        CoreToCodegenBridgeUtils.responseErrorToJson(jsonWriter, this.error);
+        jsonWriter.writeJsonField("error", this.error);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -188,7 +186,7 @@ public final class JobResult implements JsonSerializable<JobResult> {
                     lastUpdateDateTime
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("error".equals(fieldName)) {
-                    error = CoreToCodegenBridgeUtils.responseErrorFromJson(reader);
+                    error = ResponseError.fromJson(reader);
                 } else if ("result".equals(fieldName)) {
                     result = JobResultResult.fromJson(reader);
                 } else {
