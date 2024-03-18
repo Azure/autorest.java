@@ -5,11 +5,11 @@
 package fixtures.bodycomplex.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import fixtures.bodycomplex.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -55,7 +55,7 @@ public final class DurationWrapper implements JsonSerializable<DurationWrapper> 
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("field", CoreToCodegenBridgeUtils.durationToStringWithDays(this.field));
+        jsonWriter.writeStringField("field", CoreUtils.durationToStringWithDays(this.field));
         return jsonWriter.writeEndObject();
     }
 

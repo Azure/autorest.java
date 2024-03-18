@@ -89,8 +89,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         imports.add(List.class.getName());
         imports.add(Map.class.getName());
         imports.add(Objects.class.getName());
-        imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "."
-            + ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME);
     }
 
     @Override
@@ -377,11 +375,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
             propertyValueGetter);
-        if (wireType == ClassType.RESPONSE_ERROR) {
-            // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
-            methodBlock.line("jsonWriter.writeFieldName(\"" + serializedName + "\");");
-            methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(jsonWriter, " + propertyValueGetter + ");");
-        } else if (fieldSerializationMethod != null) {
+        if (fieldSerializationMethod != null) {
             if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
                 methodBlock.line(propertyValueGetter + ".serializeAsJsonMergePatch(true);");
             }
@@ -475,11 +469,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         methodBlock.indent(() -> {
-            if (elementType == ClassType.RESPONSE_ERROR) {
-                // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
-                methodBlock.line(lambdaWriterName + ".writeFieldName(\"" + serializedName + "\");");
-                methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorToJson(" + lambdaWriterName + ", " + propertyValueGetter + ");");
-            } else if (valueSerializationMethod != null) {
+            if (valueSerializationMethod != null) {
                 if (isJsonMergePatch && containerType instanceof MapType) {
                     methodBlock.block("", codeBlock -> {
                         codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
@@ -1038,15 +1028,7 @@ hasConstructorArguments, settings));
         // Attempt to determine whether the wire type is simple deserialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String simpleDeserialization = getSimpleJsonDeserialization(wireType, "reader");
-        if (wireType == ClassType.RESPONSE_ERROR) {
-            // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
-            if (!hasConstructorArguments) {
-                handleSettingDeserializedValue(deserializationBlock, modelVariableName, property,
-                    ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorFromJson(reader)", fromSuper);
-            } else {
-                deserializationBlock.line(property.getName() + " = " + ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorFromJson(reader);");
-            }
-        } else if (simpleDeserialization != null) {
+        if (simpleDeserialization != null) {
             // Need to convert the wire type to the client type for constructors.
             // Need to convert the wire type to the client type for public setters.
             boolean convertToClientType = (clientType != wireType)
@@ -1153,10 +1135,7 @@ hasConstructorArguments, settings));
             methodBlock.line(callingReaderName + "." + utilityMethod + "(" + lambdaReaderName + " ->");
         }
         methodBlock.indent(() -> {
-            if (elementWireType == ClassType.RESPONSE_ERROR) {
-                // While azure-core hasn't shipped ResponseError implementing JsonSerializable it has special handling.
-                methodBlock.line(ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".responseErrorFromJson(" + lambdaReaderName + ")");
-            } else if (valueDeserializationMethod != null) {
+            if (valueDeserializationMethod != null) {
                 if (convertToClientType) {
                     // If the wire type is nullable don't attempt to call the convert to client type until it's known that
                     // a value was deserialized. This protects against cases such as UnixTimeLong where the wire type is
