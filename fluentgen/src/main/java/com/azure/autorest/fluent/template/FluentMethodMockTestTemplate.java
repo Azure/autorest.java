@@ -14,7 +14,14 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.util.CodeNamer;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -40,7 +47,20 @@ public class FluentMethodMockTestTemplate
 
     private static final FluentMethodMockTestTemplate INSTANCE = new FluentMethodMockTestTemplate();
 
-    private static final ObjectMapper SERIALIZER = new ObjectMapper();
+    private static final ObjectMapper SERIALIZER = JsonMapper.builder()
+        .enable(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS)
+        .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .serializationInclusion(JsonInclude.Include.NON_NULL)
+        .addModule(new JavaTimeModule())
+        .visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+        .visibility(PropertyAccessor.SETTER, JsonAutoDetect.Visibility.NONE)
+        .visibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)
+        .visibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE)
+        .build();
 
     private FluentMethodMockTestTemplate() {
     }
