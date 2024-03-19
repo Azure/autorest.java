@@ -14,7 +14,7 @@ resources:
     type: github
     name: Azure/azure-sdk-for-java
     endpoint: azure
-    ref: main
+    ref: dpg_sync-0.15.3
 
 jobs:
 - job: Generate_SDK
@@ -56,7 +56,7 @@ jobs:
       WorkingDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java
       ScriptDirectory: $(Build.SourcesDirectory)/azure-sdk-for-java/eng/common/scripts
       RepoName: azure-sdk-for-java
-      BaseBranchName: 'refs/heads/main'
+      BaseBranchName: 'refs/heads/dpg_sync-0.15.3'
       PRBranchName: typespec-java-generation-$(Build.BuildId)
       CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
       PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
