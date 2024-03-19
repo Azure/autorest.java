@@ -142,7 +142,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -170,7 +170,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -218,7 +218,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -246,7 +246,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -293,7 +293,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -321,7 +321,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -373,7 +373,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -401,7 +401,7 @@ public final class PatchesImpl {
      *         (recursive schema, see above)
      *     ]
      *     fish (Optional): {
-     *         kind: String (Optional)
+     *         kind: String (Required)
      *         id: String (Required)
      *         name: String (Required)
      *         age: int (Optional, Required on create)
@@ -436,7 +436,7 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     id: String (Required)
      *     name: String (Required)
      *     age: int (Optional, Required on create)
@@ -446,7 +446,7 @@ public final class PatchesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     id: String (Required)
      *     name: String (Required)
      *     age: int (Optional, Required on create)
@@ -476,7 +476,7 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     id: String (Required)
      *     name: String (Required)
      *     age: int (Optional, Required on create)
@@ -486,7 +486,7 @@ public final class PatchesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     id: String (Required)
      *     name: String (Required)
      *     age: int (Optional, Required on create)

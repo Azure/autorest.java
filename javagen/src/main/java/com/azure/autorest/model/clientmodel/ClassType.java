@@ -5,7 +5,6 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
-import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.client.traits.ConfigurationTrait;
 import com.azure.core.client.traits.EndpointTrait;
@@ -149,6 +148,23 @@ public class ClassType implements IType {
         }
     }
 
+    public static final ClassType REQUEST_CONDITIONS = new Builder().knownClass(RequestConditions.class).build();
+    public static final ClassType MATCH_CONDITIONS = new Builder().knownClass(MatchConditions.class).build();
+    public static final ClassType CORE_UTILS = getClassTypeBuilder(CoreUtils.class).build();
+    public static final ClassType RESPONSE = getClassTypeBuilder(Response.class).build();
+    public static final ClassType SIMPLE_RESPONSE = getClassTypeBuilder(SimpleResponse.class).build();
+    public static final ClassType EXPANDABLE_STRING_ENUM = getClassTypeBuilder(ExpandableStringEnum.class).build();
+    public static final ClassType HTTP_PIPELINE_BUILDER = getClassTypeBuilder(HttpPipelineBuilder.class).build();
+    public static final ClassType KEY_CREDENTIAL_POLICY = getClassTypeBuilder(KeyCredentialPolicy.class).build();
+    public static final ClassType KEY_CREDENTIAL_TRAIT = getClassTypeBuilder(KeyCredentialTrait.class).build();
+    public static final ClassType ENDPOINT_TRAIT = getClassTypeBuilder(EndpointTrait.class).build();
+    public static final ClassType HTTP_TRAIT = getClassTypeBuilder(HttpTrait.class).build();
+    public static final ClassType CONFIGURATION_TRAIT = getClassTypeBuilder(ConfigurationTrait.class).build();
+    public static final ClassType POLL_OPERATION_DETAILS = getClassTypeBuilder(PollOperationDetails.class).build();
+    public static final ClassType JSON_SERIALIZABLE = getClassTypeBuilder(JsonSerializable.class).build();
+    public static final ClassType JSON_WRITER = getClassTypeBuilder(JsonWriter.class).build();
+    public static final ClassType JSON_READER = getClassTypeBuilder(JsonReader.class).build();
+    public static final ClassType JSON_TOKEN = getClassTypeBuilder(JsonToken.class).build();
 
     public static final ClassType VOID = new ClassType.Builder(false).knownClass(Void.class).build();
 
@@ -254,7 +270,7 @@ public class ClassType implements IType {
     public static final ClassType DURATION = new Builder(false).knownClass(Duration.class)
         .defaultValueExpressionConverter(defaultValueExpression -> "Duration.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
-        .serializationValueGetterModifier(valueGetter -> ClientModelUtil.CORE_TO_CODEGEN_BRIDGE_UTILS_CLASS_NAME + ".durationToStringWithDays(" + valueGetter + ")")
+        .serializationValueGetterModifier(valueGetter -> CORE_UTILS.getName() + ".durationToStringWithDays(" + valueGetter + ")")
         .jsonDeserializationMethod("getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
         .xmlElementDeserializationMethod("getNullableElement(Duration::parse)")
@@ -470,24 +486,6 @@ public class ClassType implements IType {
         .packageName("com.azure.core.models").name("ResponseInnerError")
         .jsonToken("JsonToken.START_OBJECT")
         .build();
-
-    public static final ClassType REQUEST_CONDITIONS = new Builder().knownClass(RequestConditions.class).build();
-    public static final ClassType MATCH_CONDITIONS = new Builder().knownClass(MatchConditions.class).build();
-    public static final ClassType CORE_UTILS = getClassTypeBuilder(CoreUtils.class).build();
-    public static final ClassType RESPONSE = getClassTypeBuilder(Response.class).build();
-    public static final ClassType SIMPLE_RESPONSE = getClassTypeBuilder(SimpleResponse.class).build();
-    public static final ClassType EXPANDABLE_STRING_ENUM = getClassTypeBuilder(ExpandableStringEnum.class).build();
-    public static final ClassType HTTP_PIPELINE_BUILDER = getClassTypeBuilder(HttpPipelineBuilder.class).build();
-    public static final ClassType KEY_CREDENTIAL_POLICY = getClassTypeBuilder(KeyCredentialPolicy.class).build();
-    public static final ClassType KEY_CREDENTIAL_TRAIT = getClassTypeBuilder(KeyCredentialTrait.class).build();
-    public static final ClassType ENDPOINT_TRAIT = getClassTypeBuilder(EndpointTrait.class).build();
-    public static final ClassType HTTP_TRAIT = getClassTypeBuilder(HttpTrait.class).build();
-    public static final ClassType CONFIGURATION_TRAIT = getClassTypeBuilder(ConfigurationTrait.class).build();
-    public static final ClassType POLL_OPERATION_DETAILS = getClassTypeBuilder(PollOperationDetails.class).build();
-    public static final ClassType JSON_SERIALIZABLE = getClassTypeBuilder(JsonSerializable.class).build();
-    public static final ClassType JSON_WRITER = getClassTypeBuilder(JsonWriter.class).build();
-    public static final ClassType JSON_READER = getClassTypeBuilder(JsonReader.class).build();
-    public static final ClassType JSON_TOKEN = getClassTypeBuilder(JsonToken.class).build();
 
     private final String fullName;
     private final String packageName;

@@ -6,11 +6,11 @@ package com.encode.duration.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.encode.duration.implementation.CoreToCodegenBridgeUtils;
 import java.io.IOException;
 import java.time.Duration;
 
@@ -52,7 +52,7 @@ public final class DefaultDurationProperty implements JsonSerializable<DefaultDu
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("value", CoreToCodegenBridgeUtils.durationToStringWithDays(this.value));
+        jsonWriter.writeStringField("value", CoreUtils.durationToStringWithDays(this.value));
         return jsonWriter.writeEndObject();
     }
 

@@ -482,7 +482,7 @@ public final class FormRecognizerAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Optional)
+     *     kind: String (Required)
      *     operationId: String (Required)
      *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
      *     percentCompleted: Integer (Optional)
