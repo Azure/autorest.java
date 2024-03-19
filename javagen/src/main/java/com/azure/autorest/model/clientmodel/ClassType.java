@@ -102,12 +102,12 @@ public class ClassType implements IType {
     }
 
     private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
-        put(RestProxy.class, new ClassDetails(RestProxy.class, "com.generic.core.implementation.http.RestProxy"));
+        put(RestProxy.class, new ClassDetails(RestProxy.class, "com.generic.core.http.RestProxy"));
         put(HttpPipeline.class, new ClassDetails(HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
         put(HttpPipelineBuilder.class, new ClassDetails(HttpPipelineBuilder.class, "com.generic.core.http.pipeline.HttpPipelineBuilder"));
         put(Context.class, new ClassDetails(Context.class, "com.generic.core.models.Context"));
         put(HttpClient.class, new ClassDetails(HttpClient.class, "com.generic.core.http.client.HttpClient"));
-        put(HttpLogOptions.class, new ClassDetails(HttpLogOptions.class, "com.generic.core.http.policy.HttpLoggingPolicy.HttpLogOptions"));
+        put(HttpLogOptions.class, new ClassDetails(HttpLogOptions.class, "com.generic.core.http.models.HttpLogOptions"));
         put(HttpPipelinePolicy.class, new ClassDetails(HttpPipelinePolicy.class, "com.generic.core.http.pipeline.HttpPipelinePolicy"));
         put(KeyCredentialPolicy.class, new ClassDetails(KeyCredentialPolicy.class, "com.generic.core.http.policy.KeyCredentialPolicy"));
         put(Configuration.class, new ClassDetails(Configuration.class, "com.generic.core.util.configuration.Configuration"));
@@ -116,7 +116,7 @@ public class ClassType implements IType {
         put(HttpRequest.class, new ClassDetails(HttpRequest.class, "com.generic.core.http.models.HttpRequest"));
         put(RequestOptions.class, new ClassDetails(RequestOptions.class, "com.generic.core.http.models.RequestOptions"));
         put(BinaryData.class, new ClassDetails(BinaryData.class, "com.generic.core.models.BinaryData"));
-        put(RetryOptions.class, new ClassDetails(RetryOptions.class, "com.generic.core.http.models.RetryOptions"));
+        put(RetryOptions.class, new ClassDetails(RetryOptions.class, "com.generic.core.http.models.HttpRetryOptions"));
         put(Response.class, new ClassDetails(Response.class, "com.generic.core.http.Response"));
         put(SimpleResponse.class, new ClassDetails(SimpleResponse.class, "com.generic.core.http.SimpleResponse"));
         put(ExpandableStringEnum.class, new ClassDetails(ExpandableStringEnum.class, "com.generic.core.models.ExpandableStringEnum"));
@@ -488,7 +488,6 @@ public class ClassType implements IType {
     public static final ClassType JSON_WRITER = getClassTypeBuilder(JsonWriter.class).build();
     public static final ClassType JSON_READER = getClassTypeBuilder(JsonReader.class).build();
     public static final ClassType JSON_TOKEN = getClassTypeBuilder(JsonToken.class).build();
-    public static final ClassType TYPE_REFERENCE = getClassTypeBuilder(TypeReference.class).build();
 
     private final String fullName;
     private final String packageName;

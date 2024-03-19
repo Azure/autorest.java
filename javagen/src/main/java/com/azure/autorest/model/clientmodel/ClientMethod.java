@@ -12,7 +12,10 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.UrlBuilder;
 import com.azure.core.util.polling.PollingStrategyOptions;
+import com.azure.core.util.serializer.TypeReference;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -417,7 +420,12 @@ public class ClientMethod {
                         imports.add("com.fasterxml.jackson.core.type.TypeReference");
                     }
                 } else {
-                    imports.add(ClassType.TYPE_REFERENCE.getFullName());
+                    imports.add(TypeReference.class.getName());
+                    if (!JavaSettings.getInstance().isBranded()) {
+                        imports.add(Type.class.getName());
+                        imports.add(ParameterizedType.class.getName());
+                    }
+
                     imports.add("java.time.Duration");
                     imports.add(PollingStrategyOptions.class.getName());
 
