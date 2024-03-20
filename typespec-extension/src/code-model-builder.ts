@@ -94,6 +94,9 @@ import {
   SdkUnionType,
   SdkModelPropertyType,
   SdkBodyModelPropertyType,
+  SdkBuiltInKinds,
+  SdkBuiltInType,
+  SdkConstantType,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -1711,7 +1714,7 @@ export class CodeModelBuilder {
   //       } else {
   //         return this.processObjectSchema(type, this.getName(type, nameHint));
   //       }
-      
+
   //     case "array":
   //       return this.processArraySchema(type, nameHint);
 
@@ -1746,7 +1749,7 @@ export class CodeModelBuilder {
   //     case "azureLocation":
   //       return emitBuiltInType(type);
 
-  //     case "String":  
+  //     case "String":
   //       return this.processConstantSchemaForLiteral(type, nameHint);
 
   //     case "Number":
@@ -1789,7 +1792,8 @@ export class CodeModelBuilder {
   //   throw new Error(`Unrecognized type: '${type.kind}'.`);
   // }
 
-  private processSchemaImpl(type: Type , nameHint: string): Schema {
+  private processSchemaImpl(type: Type, nameHint: string): Schema {
+    const sdkType = getClientType(this.sdkContext, type);
     switch (type.kind) {
       // case "any":
       //   return this.processAnySchemaFromSdkType(type, nameHint);
@@ -1837,21 +1841,26 @@ export class CodeModelBuilder {
         }
 
       case "String":
-        return this.processConstantSchemaForLiteral(type, nameHint);
+        return this.processConstantSchemaForLiteralFromSdkType(sdkType as SdkConstantType, nameHint);
 
       case "Number":
-        return this.processConstantSchemaForLiteral(type, nameHint);
+        return this.processConstantSchemaForLiteralFromSdkType(sdkType as SdkConstantType, nameHint);
 
       case "Boolean":
-        return this.processConstantSchemaForLiteral(type, nameHint);
+        return this.processConstantSchemaForLiteralFromSdkType(sdkType as SdkConstantType, nameHint);
 
       case "Enum":
-        const sdkType: SdkEnumType = getClientType(this.sdkContext, type) as SdkEnumType;
-        return this.processChoiceSchemaFromSdkType(sdkType, sdkType.name);
+        return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, nameHint);
 
       case "Union":
-        return this.processUnionSchemaFromSdkType(getClientType(this.sdkContext, type) as SdkUnionType, this.getName(type, nameHint));
-  
+        if (sdkType.kind === "enum") {
+          return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, nameHint);
+        }
+        return this.processUnionSchemaFromSdkType(
+          getClientType(this.sdkContext, type) as SdkUnionType,
+          this.getName(type, nameHint),
+        );
+
       case "ModelProperty": {
         let schema = undefined;
         const knownValues = getKnownValues(this.program, type);
@@ -1878,7 +1887,7 @@ export class CodeModelBuilder {
           // "pure" Record that does not have properties in it
           return this.processDictionarySchema(type, nameHint);
         } else {
-          return this.processObjectSchema(type, this.getName(type, nameHint));
+          return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, (sdkType as SdkModelType).generatedName ?? (sdkType as SdkModelType).name);
         }
 
       case "EnumMember":
@@ -1893,7 +1902,7 @@ export class CodeModelBuilder {
           throw new Error(`Unsupported type reference to UnionVariant.`);
         }
     }
-    
+
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
 
@@ -2113,24 +2122,23 @@ export class CodeModelBuilder {
 
   private processChoiceSchemaFromSdkType(
     type: SdkEnumType,
-    name: string
+    name: string,
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type.__raw as Enum);
-    // const valueType =
-    //   typeof type.members.values().next().value.value === "number"
-    //     ? isAllValueInteger(Array.from(type.members.values()).map((it) => it.value as number))
-    //       ? this.integerSchema
-    //       : this.doubleSchema
-    //     : this.stringSchema;
-    const valueType = type.valueType;
+    const valueType = this.isSdkIntKinds(type.valueType)
+      ? this.integerSchema
+      : this.isSdkFloatKinds(type.valueType)
+        ? this.doubleSchema
+        : this.stringSchema;
 
     const choices: ChoiceValue[] = [];
-    type.values.forEach((it: SdkEnumValueType) => choices.push(new ChoiceValue(it.name, it.description ?? "", it.value ?? it.name)));
+    type.values.forEach((it: SdkEnumValueType) =>
+      choices.push(new ChoiceValue(it.name, it.description ?? "", it.value ?? it.name)),
+    );
 
     const schemaType = type.isFixed ? SealedChoiceSchema : ChoiceSchema;
 
-    valueType.__raw = undefined;
-    const schema = new schemaType(name, type.description ?? "", {
+    const schema = new schemaType(type.name ? type.name : name, type.description ?? "", {
       summary: this.getSummary(type.__raw),
       choiceType: valueType as any,
       choices: choices,
@@ -2166,6 +2174,51 @@ export class CodeModelBuilder {
         valueType: valueType,
         value: new ConstantValue(type.value),
       }),
+    );
+  }
+
+  private processConstantSchemaForLiteralFromSdkType(type: SdkConstantType, name: string): ConstantSchema {
+    const valueType =
+    type.valueType.kind === "string"
+      ? this.stringSchema
+      : type.valueType.kind === "boolean"
+        ? this.booleanSchema
+        : this.isSdkIntKinds(type.valueType)
+          ? this.integerSchema
+          : this.doubleSchema;
+
+    return this.codeModel.schemas.add(
+      new ConstantSchema(name, this.getDoc(type.__raw as (StringLiteral | NumericLiteral | BooleanLiteral)), {
+        summary: this.getSummary(type.__raw),
+        valueType: valueType,
+        value: new ConstantValue(type.value),
+      }),
+    );
+  }
+
+  private isSdkIntKinds(type: SdkType): boolean {
+    return [
+      "numeric",
+      "integer",
+      "safeint",
+      "int8",
+      "int16",
+      "int32",
+      "int64",
+      "uint8",
+      "uint16",
+      "uint32",
+      "uint64",
+    ].includes(type.kind);
+  }
+
+  private isSdkFloatKinds(type: SdkType): boolean {
+    return ["float", "float32", "float64", "decimal", "decimal128"].includes(type.kind);
+  }
+
+  private isSdkStringKinds(type: SdkType): boolean {
+    return ["string", "password", "guid", "url", "uuid", "eTag", "armId", "ipAddress", "azureLocation"].includes(
+      type.kind,
     );
   }
 
@@ -2503,6 +2556,124 @@ export class CodeModelBuilder {
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type.__raw as Model, objectSchema);
 
+    // discriminator
+    let discriminatorPropertyName: string | undefined = undefined;
+    type discriminatorTypeWithPropertyName = Partial<Discriminator> & { propertyName: string };
+    const discriminator = getDiscriminator(this.program, type);
+    if (discriminator) {
+      discriminatorPropertyName = discriminator.propertyName;
+      // find the discriminator property from model
+      // the property is required for getting its serializedName
+      let discriminatorProperty = Array.from(type.properties.values()).find(
+        (it) => it.name === discriminatorPropertyName,
+      );
+      if (!discriminatorProperty) {
+        // try find the discriminator property from any of its derived models
+        for (const deriveModel of type.derivedModels) {
+          discriminatorProperty = Array.from(deriveModel.properties.values()).find(
+            (it) => it.name === discriminatorPropertyName,
+          );
+          if (discriminatorProperty) {
+            // found
+            break;
+          }
+        }
+      }
+      if (discriminatorProperty) {
+        objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+      } else {
+        // fallback to property name, if cannot find the discriminator property
+        objectSchema.discriminator = new Discriminator(
+          new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
+            required: true,
+            serializedName: discriminatorPropertyName,
+          }),
+        );
+      }
+      (objectSchema.discriminator as discriminatorTypeWithPropertyName).propertyName = discriminatorPropertyName;
+    }
+
+    // parent
+    if (type.baseModel) {
+      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel));
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+
+      if (parentSchema instanceof ObjectSchema) {
+        pushDistinct(objectSchema.parents.all, parentSchema);
+
+        parentSchema.children = parentSchema.children || new Relations();
+        pushDistinct(parentSchema.children.immediate, objectSchema);
+        pushDistinct(parentSchema.children.all, objectSchema);
+
+        if (parentSchema.parents) {
+          pushDistinct(objectSchema.parents.all, ...parentSchema.parents.all);
+
+          parentSchema.parents.all.forEach((it) => {
+            if (it instanceof ObjectSchema && it.children) {
+              pushDistinct(it.children.all, objectSchema);
+            }
+          });
+        }
+      } else {
+        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
+        pushDistinct(objectSchema.parents.all, parentSchema);
+      }
+    } else if (isRecordModelType(this.program, type)) {
+      // "pure" Record processed elsewhere
+
+      // "mixed" Record that have properties, treat the model as "additionalProperties"
+      /* type should have sourceModel, as
+      model Type is Record<> {
+        prop1: string
+      }
+      */
+      const parentSchema = type.sourceModel
+        ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
+        : this.processDictionarySchema(type, this.getName(type));
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+      pushDistinct(objectSchema.parents.all, parentSchema);
+    }
+
+    // value of the discriminator property
+    if (objectSchema.parents) {
+      const parentWithDiscriminator = objectSchema.parents.all.find(
+        (it) => it instanceof ObjectSchema && it.discriminator,
+      );
+      if (parentWithDiscriminator) {
+        discriminatorPropertyName = (
+          (parentWithDiscriminator as ObjectSchema).discriminator as discriminatorTypeWithPropertyName
+        ).propertyName;
+
+        const discriminatorProperty = Array.from(type.properties.values()).find(
+          (it) =>
+            it.name === discriminatorPropertyName &&
+            (it.type.kind === "String" || it.type.kind === "EnumMember" || it.type.kind === "UnionVariant"),
+        );
+        if (discriminatorProperty) {
+          if (discriminatorProperty.type.kind === "String") {
+            // value as StringLiteral
+            objectSchema.discriminatorValue = discriminatorProperty.type.value;
+          } else if (discriminatorProperty.type.kind === "EnumMember") {
+            // value as EnumMember
+            // lint requires value be string
+            objectSchema.discriminatorValue =
+              (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
+          } else if (discriminatorProperty.type.kind === "UnionVariant") {
+            // value as UnionVariant
+            objectSchema.discriminatorValue =
+              ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
+          }
+        } else {
+          // it is possible that the property is Union, e.g. 'kind: "type1" | "type2"'; but such Type appears not to be a concrete model.
+
+          // fallback to name of the Model
+          objectSchema.discriminatorValue = name;
+        }
+      }
+    }    
+
     // properties
     for (const prop of type.properties) {
       objectSchema.addProperty(this.processModelPropertyFromSdkType(prop));
@@ -2512,7 +2683,6 @@ export class CodeModelBuilder {
     // type.derivedModels?.filter(modelContainsDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
 
     return objectSchema;
-
   }
 
   private getEffectiveSchemaType(type: Type): Type {
@@ -2650,7 +2820,7 @@ export class CodeModelBuilder {
     });
   }
 
-  private  processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
+  private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
     const schema = this.processSchema(prop.__raw as Type, prop.nameInClient);
     let nullable = prop.type.nullable;
 
@@ -2754,7 +2924,6 @@ export class CodeModelBuilder {
   }
 
   private processUnionSchemaFromSdkType(type: SdkUnionType, name: string): Schema {
-
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(type.__raw as Union);
     const baseName = type.name ?? pascalCase(name) + "Model";
