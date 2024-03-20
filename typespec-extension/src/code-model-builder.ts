@@ -2557,122 +2557,130 @@ export class CodeModelBuilder {
     this.schemaCache.set(type.__raw as Model, objectSchema);
 
     // discriminator
-    let discriminatorPropertyName: string | undefined = undefined;
-    type discriminatorTypeWithPropertyName = Partial<Discriminator> & { propertyName: string };
-    const discriminator = getDiscriminator(this.program, type);
-    if (discriminator) {
-      discriminatorPropertyName = discriminator.propertyName;
-      // find the discriminator property from model
-      // the property is required for getting its serializedName
-      let discriminatorProperty = Array.from(type.properties.values()).find(
-        (it) => it.name === discriminatorPropertyName,
-      );
-      if (!discriminatorProperty) {
-        // try find the discriminator property from any of its derived models
-        for (const deriveModel of type.derivedModels) {
-          discriminatorProperty = Array.from(deriveModel.properties.values()).find(
-            (it) => it.name === discriminatorPropertyName,
-          );
-          if (discriminatorProperty) {
-            // found
-            break;
-          }
-        }
-      }
-      if (discriminatorProperty) {
-        objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
-      } else {
-        // fallback to property name, if cannot find the discriminator property
-        objectSchema.discriminator = new Discriminator(
-          new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
-            required: true,
-            serializedName: discriminatorPropertyName,
-          }),
-        );
-      }
-      (objectSchema.discriminator as discriminatorTypeWithPropertyName).propertyName = discriminatorPropertyName;
-    }
+    // if (type.discriminatedSubtypes && type.discriminatorProperty) {
+    //   for (const discriminatorValue in type.discriminatedSubtypes) {
+    //     const subType = type.discriminatedSubtypes[discriminatorValue];
+    //     objectSchema.discriminator = new Discriminator();
+    //   }
+    //   // objectSchema.discriminator = new Discriminator(this.processModelPropertyFromSdkType(type.discriminatorProperty));
+    // }
+    // let discriminatorPropertyName: string | undefined = undefined;
+    // type discriminatorTypeWithPropertyName = Partial<Discriminator> & { propertyName: string };
+    // const discriminatorPropertyName = type.discriminatedSubtypes
+    // const discriminator = getDiscriminator(this.program, type);
+    // if (discriminator) {
+    //   discriminatorPropertyName = discriminator.propertyName;
+    //   // find the discriminator property from model
+    //   // the property is required for getting its serializedName
+    //   let discriminatorProperty = Array.from(type.properties.values()).find(
+    //     (it) => it.name === discriminatorPropertyName,
+    //   );
+    //   if (!discriminatorProperty) {
+    //     // try find the discriminator property from any of its derived models
+    //     for (const deriveModel of type.derivedModels) {
+    //       discriminatorProperty = Array.from(deriveModel.properties.values()).find(
+    //         (it) => it.name === discriminatorPropertyName,
+    //       );
+    //       if (discriminatorProperty) {
+    //         // found
+    //         break;
+    //       }
+    //     }
+    //   }
+    //   if (discriminatorProperty) {
+    //     objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+    //   } else {
+    //     // fallback to property name, if cannot find the discriminator property
+    //     objectSchema.discriminator = new Discriminator(
+    //       new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
+    //         required: true,
+    //         serializedName: discriminatorPropertyName,
+    //       }),
+    //     );
+    //   }
+    //   (objectSchema.discriminator as discriminatorTypeWithPropertyName).propertyName = discriminatorPropertyName;
+    // }
 
-    // parent
-    if (type.baseModel) {
-      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel));
-      objectSchema.parents = new Relations();
-      objectSchema.parents.immediate.push(parentSchema);
+    // // parent
+    // if (type.baseModel) {
+    //   const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel));
+    //   objectSchema.parents = new Relations();
+    //   objectSchema.parents.immediate.push(parentSchema);
 
-      if (parentSchema instanceof ObjectSchema) {
-        pushDistinct(objectSchema.parents.all, parentSchema);
+    //   if (parentSchema instanceof ObjectSchema) {
+    //     pushDistinct(objectSchema.parents.all, parentSchema);
 
-        parentSchema.children = parentSchema.children || new Relations();
-        pushDistinct(parentSchema.children.immediate, objectSchema);
-        pushDistinct(parentSchema.children.all, objectSchema);
+    //     parentSchema.children = parentSchema.children || new Relations();
+    //     pushDistinct(parentSchema.children.immediate, objectSchema);
+    //     pushDistinct(parentSchema.children.all, objectSchema);
 
-        if (parentSchema.parents) {
-          pushDistinct(objectSchema.parents.all, ...parentSchema.parents.all);
+    //     if (parentSchema.parents) {
+    //       pushDistinct(objectSchema.parents.all, ...parentSchema.parents.all);
 
-          parentSchema.parents.all.forEach((it) => {
-            if (it instanceof ObjectSchema && it.children) {
-              pushDistinct(it.children.all, objectSchema);
-            }
-          });
-        }
-      } else {
-        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
-        pushDistinct(objectSchema.parents.all, parentSchema);
-      }
-    } else if (isRecordModelType(this.program, type)) {
-      // "pure" Record processed elsewhere
+    //       parentSchema.parents.all.forEach((it) => {
+    //         if (it instanceof ObjectSchema && it.children) {
+    //           pushDistinct(it.children.all, objectSchema);
+    //         }
+    //       });
+    //     }
+    //   } else {
+    //     // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
+    //     pushDistinct(objectSchema.parents.all, parentSchema);
+    //   }
+    // } else if (isRecordModelType(this.program, type)) {
+    //   // "pure" Record processed elsewhere
 
-      // "mixed" Record that have properties, treat the model as "additionalProperties"
-      /* type should have sourceModel, as
-      model Type is Record<> {
-        prop1: string
-      }
-      */
-      const parentSchema = type.sourceModel
-        ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
-        : this.processDictionarySchema(type, this.getName(type));
-      objectSchema.parents = new Relations();
-      objectSchema.parents.immediate.push(parentSchema);
-      pushDistinct(objectSchema.parents.all, parentSchema);
-    }
+    //   // "mixed" Record that have properties, treat the model as "additionalProperties"
+    //   /* type should have sourceModel, as
+    //   model Type is Record<> {
+    //     prop1: string
+    //   }
+    //   */
+    //   const parentSchema = type.sourceModel
+    //     ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
+    //     : this.processDictionarySchema(type, this.getName(type));
+    //   objectSchema.parents = new Relations();
+    //   objectSchema.parents.immediate.push(parentSchema);
+    //   pushDistinct(objectSchema.parents.all, parentSchema);
+    // }
 
-    // value of the discriminator property
-    if (objectSchema.parents) {
-      const parentWithDiscriminator = objectSchema.parents.all.find(
-        (it) => it instanceof ObjectSchema && it.discriminator,
-      );
-      if (parentWithDiscriminator) {
-        discriminatorPropertyName = (
-          (parentWithDiscriminator as ObjectSchema).discriminator as discriminatorTypeWithPropertyName
-        ).propertyName;
+    // // value of the discriminator property
+    // if (objectSchema.parents) {
+    //   const parentWithDiscriminator = objectSchema.parents.all.find(
+    //     (it) => it instanceof ObjectSchema && it.discriminator,
+    //   );
+    //   if (parentWithDiscriminator) {
+    //     discriminatorPropertyName = (
+    //       (parentWithDiscriminator as ObjectSchema).discriminator as discriminatorTypeWithPropertyName
+    //     ).propertyName;
 
-        const discriminatorProperty = Array.from(type.properties.values()).find(
-          (it) =>
-            it.name === discriminatorPropertyName &&
-            (it.type.kind === "String" || it.type.kind === "EnumMember" || it.type.kind === "UnionVariant"),
-        );
-        if (discriminatorProperty) {
-          if (discriminatorProperty.type.kind === "String") {
-            // value as StringLiteral
-            objectSchema.discriminatorValue = discriminatorProperty.type.value;
-          } else if (discriminatorProperty.type.kind === "EnumMember") {
-            // value as EnumMember
-            // lint requires value be string
-            objectSchema.discriminatorValue =
-              (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
-          } else if (discriminatorProperty.type.kind === "UnionVariant") {
-            // value as UnionVariant
-            objectSchema.discriminatorValue =
-              ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
-          }
-        } else {
-          // it is possible that the property is Union, e.g. 'kind: "type1" | "type2"'; but such Type appears not to be a concrete model.
+    //     const discriminatorProperty = Array.from(type.properties.values()).find(
+    //       (it) =>
+    //         it.name === discriminatorPropertyName &&
+    //         (it.type.kind === "String" || it.type.kind === "EnumMember" || it.type.kind === "UnionVariant"),
+    //     );
+    //     if (discriminatorProperty) {
+    //       if (discriminatorProperty.type.kind === "String") {
+    //         // value as StringLiteral
+    //         objectSchema.discriminatorValue = discriminatorProperty.type.value;
+    //       } else if (discriminatorProperty.type.kind === "EnumMember") {
+    //         // value as EnumMember
+    //         // lint requires value be string
+    //         objectSchema.discriminatorValue =
+    //           (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
+    //       } else if (discriminatorProperty.type.kind === "UnionVariant") {
+    //         // value as UnionVariant
+    //         objectSchema.discriminatorValue =
+    //           ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
+    //       }
+    //     } else {
+    //       // it is possible that the property is Union, e.g. 'kind: "type1" | "type2"'; but such Type appears not to be a concrete model.
 
-          // fallback to name of the Model
-          objectSchema.discriminatorValue = name;
-        }
-      }
-    }    
+    //       // fallback to name of the Model
+    //       objectSchema.discriminatorValue = name;
+    //     }
+    //   }
+    // }    
 
     // properties
     for (const prop of type.properties) {
