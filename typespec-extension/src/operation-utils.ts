@@ -68,13 +68,13 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
     let exampleDir = version
       ? resolvePath(operationExamplesDirectory, version)
       : resolvePath(operationExamplesDirectory);
-    if (!(await isDirectoryExists(program, exampleDir))) {
+    if (!(await directoryExists(program, exampleDir))) {
       if (program.projectRoot) {
         // try resolve "examples-directory" relative to program.projectRoot
         exampleDir = version
           ? resolvePath(program.projectRoot, operationExamplesDirectory, version)
           : resolvePath(program.projectRoot, operationExamplesDirectory);
-        if (!(await isDirectoryExists(program, exampleDir))) {
+        if (!(await directoryExists(program, exampleDir))) {
           logWarning(program, `Examples directory '${exampleDir}' does not exist.`);
           return operationExamplesMap;
         }
@@ -111,7 +111,7 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
   return operationExamplesMap;
 }
 
-async function isDirectoryExists(program: Program, directory: string) {
+async function directoryExists(program: Program, directory: string) {
   try {
     if (!(await program.host.stat(directory)).isDirectory()) {
       return false;
