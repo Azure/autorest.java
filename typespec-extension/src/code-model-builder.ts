@@ -531,6 +531,10 @@ export class CodeModelBuilder {
     for (const client of clients) {
       if (client.arm) {
         this.codeModel.arm = true;
+        if (!this.options["disable-etag-grouping"]) {
+          // for ARM, disable etag grouping by default
+          this.options["disable-etag-grouping"] = true;
+        }
       }
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
@@ -781,7 +785,9 @@ export class CodeModelBuilder {
     }
 
     // group ETag header parameters, if exists
-    this.processEtagHeaderParameters(codeModelOperation, op);
+    if (!this.options["disable-etag-grouping"]) {
+      this.processEtagHeaderParameters(codeModelOperation, op);
+    }
 
     // lro metadata
     const lroMetadata = this.processLroMetadata(codeModelOperation, op);

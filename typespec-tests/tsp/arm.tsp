@@ -132,12 +132,13 @@ interface TopLevelArmResourceInterface
   extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {}
 
 @armResourceOperations
-interface CustomTemplateResourceInterface extends ResourceCreate<
-    CustomTemplateResource,
-    Azure.ResourceManager.Foundations.BaseParameters<CustomTemplateResource> &
-          IfMatchParameters<CustomTemplateResource> &
-          IfNoneMatchParameters<CustomTemplateResource>
-  > {
+interface CustomTemplateResourceInterface
+  extends ResourceCreate<
+      CustomTemplateResource,
+      Azure.ResourceManager.Foundations.BaseParameters<CustomTemplateResource> &
+        IfMatchParameters<CustomTemplateResource> &
+        IfNoneMatchParameters<CustomTemplateResource>
+    > {
   update is ArmResourceUpdateSync<CustomTemplateResource>;
 }
 

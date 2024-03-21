@@ -42,6 +42,7 @@ export interface EmitterOptions {
   "polling"?: any;
 
   "arm"?: boolean;
+  "disable-etag-grouping"?: boolean;
 
   "dev-options"?: DevOptions;
 }
@@ -91,6 +92,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "polling": { type: "object", additionalProperties: true, nullable: true },
 
     "arm": { type: "boolean", nullable: true },
+    "disable-etag-grouping": { type: "boolean", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },
