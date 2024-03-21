@@ -9,7 +9,6 @@ import com.azure.autorest.util.MethodNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
 import com.generic.core.http.exception.HttpExceptionType;
-import com.generic.core.implementation.http.rest.RestProxyUtils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -399,7 +398,6 @@ public class ProxyMethod {
      * implementations.
      */
     public void addImportsTo(Set<String> imports, boolean includeImplementationImports, JavaSettings settings) {
-        imports.add(RestProxyUtils.class.getName());
         Annotation.HTTP_REQUEST_INFORMATION.addImportsTo(imports);
         Annotation.UNEXPECTED_RESPONSE_EXCEPTION_INFORMATION.addImportsTo(imports);
         if (includeImplementationImports) {
