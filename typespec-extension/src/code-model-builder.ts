@@ -671,7 +671,12 @@ export class CodeModelBuilder {
     const operationName = this.getName(operation);
     const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
-    const operationExample = this.operationExamples.get(operation);
+    let operationExample = this.operationExamples.get(operation);
+    if (!operationExample && operation.sourceOperation) {
+      // if the operation is customized in client.tsp, the operation would be different from that of main.tsp
+      // try the operation.sourceOperation
+      operationExample = this.operationExamples.get(operation.sourceOperation);
+    }
 
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
