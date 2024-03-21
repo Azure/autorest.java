@@ -8,21 +8,6 @@ import com.azure.autorest.fluent.util.FluentUtils;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.template.ServiceClientTemplate;
 import com.azure.autorest.template.prototype.MethodTemplate;
-import com.azure.core.http.HttpHeaders;
-import com.azure.core.http.HttpResponse;
-import com.azure.core.http.rest.Response;
-import com.azure.core.management.exception.ManagementError;
-import com.azure.core.management.exception.ManagementException;
-import com.azure.core.management.polling.PollResult;
-import com.azure.core.management.polling.PollerFactory;
-import com.azure.core.util.Context;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.polling.AsyncPollResponse;
-import com.azure.core.util.polling.LongRunningOperationStatus;
-import com.azure.core.util.polling.PollerFlux;
-import com.azure.core.util.serializer.SerializerEncoding;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -39,7 +24,7 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
     static {
         if (JavaSettings.getInstance().isFluentLite()) {
             MethodTemplate getContextMethod = MethodTemplate.builder()
-                    .imports(Collections.singleton(Context.class.getName()))
+                    .imports(Collections.singleton("com.azure.core.util.Context"))
                     .methodSignature("Context getContext()")
                     .comment(comment -> {
                         comment.description("Gets default client context.");
@@ -49,9 +34,8 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                     .build();
 
             MethodTemplate mergeContextMethod = MethodTemplate.builder()
-                    .imports(Arrays.asList(
-                            Context.class.getName(),
-                            CoreUtils.class.getName(),
+                    .imports(Arrays.asList("com.azure.core.util.Context",
+                            "com.azure.core.util.CoreUtils",
                             Map.class.getName()))
                     .methodSignature("Context mergeContext(Context context)")
                     .comment(comment -> {
@@ -64,14 +48,14 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
 
             MethodTemplate getLroResultMethod = MethodTemplate.builder()
                     .imports(Arrays.asList(
-                            PollerFlux.class.getName(),
-                            PollResult.class.getName(),
-                            Mono.class.getName(),
-                            Flux.class.getName(),
-                            Response.class.getName(),
+                            "com.azure.core.util.polling.PollerFlux",
+                            "com.azure.core.management.polling.PollResult",
+                            "reactor.core.publisher.Mono",
+                            "reactor.core.publisher.Flux",
+                            "com.azure.core.http.rest.Response",
                             ByteBuffer.class.getName(),
                             Type.class.getName(),
-                            PollerFactory.class.getName()))
+                            "com.azure.core.management.polling.PollerFactory"))
                     .methodSignature("<T, U> PollerFlux<PollResult<T>, U> getLroResult(Mono<Response<Flux<ByteBuffer>>> activationResponse, HttpPipeline httpPipeline, Type pollResultType, Type finalResultType, Context context)")
                     .comment(comment -> {
                         comment.description("Gets long running operation result.");
@@ -89,18 +73,18 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
 
             MethodTemplate getLroFinalResultOrErrorMethod = MethodTemplate.builder()
                     .imports(Arrays.asList(
-                            PollerFlux.class.getName(),
-                            PollResult.class.getName(),
-                            Mono.class.getName(),
-                            AsyncPollResponse.class.getName(),
-                            ManagementError.class.getName(),
-                            ManagementException.class.getName(),
-                            HttpResponse.class.getName(),
-                            LongRunningOperationStatus.class.getName(),
-                            SerializerEncoding.class.getName(),
+                            "com.azure.core.util.polling.PollerFlux",
+                            "com.azure.core.management.polling.PollResult",
+                            "reactor.core.publisher.Mono",
+                            "com.azure.core.util.polling.AsyncPollResponse",
+                            "com.azure.core.management.exception.ManagementError",
+                            "com.azure.core.management.exception.ManagementException",
+                            "com.azure.core.http.HttpResponse",
+                            "com.azure.core.util.polling.LongRunningOperationStatus",
+                            "com.azure.core.util.serializer.SerializerEncoding",
                             IOException.class.getName(),
                             // below import is actually used in HttpResponseImpl
-                            HttpHeaders.class.getName(),
+                            "com.azure.core.http.HttpHeaders",
                             Charset.class.getName(),
                             StandardCharsets.class.getName()))
                     .methodSignature("<T, U> Mono<U> getLroFinalResultOrError(AsyncPollResponse<PollResult<T>, U> response)")

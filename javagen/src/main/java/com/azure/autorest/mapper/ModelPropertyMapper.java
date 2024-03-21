@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -17,7 +18,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +65,7 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             summaryInProperty = property.getSchema() == null ? null : property.getSchema().getSummary();
         }
         String descriptionInProperty = property.getLanguage().getJava() == null ? null : property.getLanguage().getJava().getDescription();
-        if (CoreUtils.isNullOrEmpty(summaryInProperty) && CoreUtils.isNullOrEmpty(descriptionInProperty)) {
+        if (ExtensionUtils.isNullOrEmpty(summaryInProperty) && ExtensionUtils.isNullOrEmpty(descriptionInProperty)) {
             description = String.format("The %s property.", property.getSerializedName());
         } else {
             description = SchemaUtil.mergeSummaryWithDescription(summaryInProperty, descriptionInProperty);
@@ -77,16 +77,16 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
                 if (property.getParentSchema() != null) {
                     flattened = property.getParentSchema().getProperties().stream()
-                            .anyMatch(p -> !CoreUtils.isNullOrEmpty(p.getFlattenedNames()));
+                            .anyMatch(p -> !ExtensionUtils.isNullOrEmpty(p.getFlattenedNames()));
                     if (!flattened) {
                         String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(property.getParentSchema());
                         flattened = discriminatorSerializedName.contains(".");
                     }
                 } else {
-                    flattened = !CoreUtils.isNullOrEmpty(property.getFlattenedNames());
+                    flattened = !ExtensionUtils.isNullOrEmpty(property.getFlattenedNames());
                 }
             } else if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD) {
-                flattened = !CoreUtils.isNullOrEmpty(property.getFlattenedNames());
+                flattened = !ExtensionUtils.isNullOrEmpty(property.getFlattenedNames());
             }
         }
         builder.needsFlatten(flattened);

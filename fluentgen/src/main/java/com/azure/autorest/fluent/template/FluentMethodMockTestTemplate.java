@@ -14,14 +14,14 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.IJavaTemplate;
 import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.credential.AccessToken;
-import com.azure.core.http.HttpResponse;
-import com.azure.core.management.profile.AzureProfile;
-import com.azure.core.management.serializer.SerializerFactory;
-import com.azure.core.util.serializer.SerializerAdapter;
-import com.azure.core.util.serializer.SerializerEncoding;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.PropertyAccessor;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -47,7 +47,20 @@ public class FluentMethodMockTestTemplate
 
     private static final FluentMethodMockTestTemplate INSTANCE = new FluentMethodMockTestTemplate();
 
-    private static final SerializerAdapter SERIALIZER = SerializerFactory.createDefaultManagementSerializerAdapter();
+    private static final ObjectMapper SERIALIZER = JsonMapper.builder()
+        .enable(SerializationFeature.WRITE_EMPTY_JSON_ARRAYS)
+        .enable(DeserializationFeature.ACCEPT_EMPTY_STRING_AS_NULL_OBJECT)
+        .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+        .disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS)
+        .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
+        .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+        .serializationInclusion(JsonInclude.Include.NON_NULL)
+        .addModule(new JavaTimeModule())
+        .visibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY)
+        .visibility(PropertyAccessor.SETTER, JsonAutoDetect.Visibility.NONE)
+        .visibility(PropertyAccessor.GETTER, JsonAutoDetect.Visibility.NONE)
+        .visibility(PropertyAccessor.IS_GETTER, JsonAutoDetect.Visibility.NONE)
+        .build();
 
     private FluentMethodMockTestTemplate() {
     }
@@ -58,13 +71,13 @@ public class FluentMethodMockTestTemplate
 
     @Override
     public void write(ClientMethodInfo info, JavaFile javaFile) {
-        Set<String> imports = new HashSet<>(
-            Arrays.asList(AccessToken.class.getName(), ClassType.HTTP_CLIENT.getFullName(),
-                ClassType.HTTP_HEADERS.getFullName(), ClassType.HTTP_REQUEST.getFullName(),
-                HttpResponse.class.getName(), "com.azure.core.test.http.MockHttpResponse",
-                ClassType.AZURE_ENVIRONMENT.getFullName(), AzureProfile.class.getName(), "org.junit.jupiter.api.Test",
-                ByteBuffer.class.getName(), Mono.class.getName(), Flux.class.getName(),
-                StandardCharsets.class.getName(), OffsetDateTime.class.getName()));
+        Set<String> imports = new HashSet<>(Arrays.asList("com.azure.core.credential.AccessToken",
+            ClassType.HTTP_CLIENT.getFullName(), ClassType.HTTP_HEADERS.getFullName(),
+            ClassType.HTTP_REQUEST.getFullName(), "com.azure.core.http.HttpResponse",
+            "com.azure.core.test.http.MockHttpResponse", ClassType.AZURE_ENVIRONMENT.getFullName(),
+            "com.azure.core.management.profile.AzureProfile", "org.junit.jupiter.api.Test", ByteBuffer.class.getName(),
+            "reactor.core.publisher.Mono", "reactor.core.publisher.Flux", StandardCharsets.class.getName(),
+            OffsetDateTime.class.getName()));
 
         String className = info.className;
         FluentMethodMockUnitTest fluentMethodMockUnitTest = info.fluentMethodMockUnitTest;
@@ -109,7 +122,7 @@ public class FluentMethodMockTestTemplate
         String verificationObjectName = fluentMethodMockUnitTest.getResponseVerificationVariableName();
         String jsonStr;
         try {
-            jsonStr = SERIALIZER.serialize(jsonObject, SerializerEncoding.JSON);
+            jsonStr = SERIALIZER.writeValueAsString(jsonObject);
         } catch (IOException e) {
             throw new IllegalStateException("Failed to serialize Object to JSON string", e);
         }

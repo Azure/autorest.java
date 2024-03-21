@@ -3,8 +3,9 @@
 
 package com.azure.autorest.template;
 
-import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.MethodGroupClient;
 import com.azure.autorest.model.clientmodel.ServiceClientProperty;
@@ -15,7 +16,6 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.ModelNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
 import java.util.List;
@@ -87,7 +87,7 @@ public class MethodGroupTemplate implements IJavaTemplate<MethodGroupClient, Jav
                 constructor.line("this.client = client;");
             });
 
-            if (!CoreUtils.isNullOrEmpty(methodGroupClient.getProperties())) {
+            if (!ExtensionUtils.isNullOrEmpty(methodGroupClient.getProperties())) {
                 for (ServiceClientProperty property : methodGroupClient.getProperties()) {
                     classBlock.javadocComment(comment ->
                     {

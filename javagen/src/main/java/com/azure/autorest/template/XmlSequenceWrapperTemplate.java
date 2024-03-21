@@ -10,11 +10,6 @@ import com.azure.autorest.model.clientmodel.XmlSequenceWrapper;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.xml.XmlProviders;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
-import com.azure.xml.XmlToken;
-import com.azure.xml.XmlWriter;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.XMLStreamException;
@@ -47,8 +42,8 @@ public class XmlSequenceWrapperTemplate implements IJavaTemplate<XmlSequenceWrap
 
         if (settings.isStreamStyleSerialization()) {
             javaFile.declareImport(ArrayList.class.getName(), ClassType.CORE_UTILS.getFullName(), QName.class.getName(),
-                XmlProviders.class.getName(), XmlReader.class.getName(), XmlSerializable.class.getName(),
-                XMLStreamException.class.getName(), XmlToken.class.getName(), XmlWriter.class.getName());
+                "com.azure.xml.XmlProviders", "com.azure.xml.XmlReader", "com.azure.xml.XmlSerializable",
+                "com.azure.xml.XmlWriter", "com.azure.xml.XmlToken", XMLStreamException.class.getName());
         }
 
         javaFile.javadocComment(comment -> comment.description(

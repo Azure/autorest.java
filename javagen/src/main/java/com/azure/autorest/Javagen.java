@@ -9,6 +9,7 @@ import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.mapper.PomMapper;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
@@ -38,7 +39,6 @@ import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -99,7 +99,7 @@ public class Javagen extends NewPlugin {
             }
 
             String artifactId = ClientModelUtil.getArtifactId();
-            if (!CoreUtils.isNullOrEmpty(artifactId)) {
+            if (!ExtensionUtils.isNullOrEmpty(artifactId)) {
                 writeFile("src/main/resources/" + artifactId + ".properties",
                     "name=${project.artifactId}\nversion=${project.version}\n", null);
             }
@@ -137,9 +137,9 @@ public class Javagen extends NewPlugin {
     protected JavaPackage writeToTemplates(CodeModel codeModel, Client client, JavaSettings settings,
                                            boolean generateSwaggerMarkdown) {
         JavaPackage javaPackage = new JavaPackage(this);
-        if (client.getServiceClient() != null || !CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+        if (client.getServiceClient() != null || !ExtensionUtils.isNullOrEmpty(client.getServiceClients())) {
             // Service client
-            if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+            if (ExtensionUtils.isNullOrEmpty(client.getServiceClients())) {
                 javaPackage.addServiceClient(client.getServiceClient().getPackage(),
                         client.getServiceClient().getClassName(), client.getServiceClient());
             } else {
@@ -195,10 +195,10 @@ public class Javagen extends NewPlugin {
             if (settings.isDataPlaneClient() && settings.isGenerateTests()) {
                 if (!client.getSyncClients().isEmpty() && client.getSyncClients().iterator().next().getClientBuilder() != null) {
                     List<ServiceClient> serviceClients = client.getServiceClients();
-                    if (CoreUtils.isNullOrEmpty(serviceClients)) {
+                    if (ExtensionUtils.isNullOrEmpty(serviceClients)) {
                         serviceClients = Collections.singletonList(client.getServiceClient());
                     }
-                    TestContext testContext = new TestContext(serviceClients, client.getSyncClients());
+                    TestContext<?> testContext = new TestContext<>(serviceClients, client.getSyncClients());
 
                     // base test class
                     javaPackage.addProtocolTestBase(testContext);
@@ -216,11 +216,11 @@ public class Javagen extends NewPlugin {
             // Service version
             if (settings.isDataPlaneClient()) {
                 String packageName = settings.getPackage();
-                if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+                if (ExtensionUtils.isNullOrEmpty(client.getServiceClients())) {
                     List<String> serviceVersions = settings.getServiceVersions();
-                    if (CoreUtils.isNullOrEmpty(serviceVersions)) {
+                    if (ExtensionUtils.isNullOrEmpty(serviceVersions)) {
                         List<String> apiVersions = ClientModelUtil.getApiVersions(codeModel);
-                        if (!CoreUtils.isNullOrEmpty(apiVersions)) {
+                        if (!ExtensionUtils.isNullOrEmpty(apiVersions)) {
                             serviceVersions = apiVersions;
                         } else {
                             throw new IllegalArgumentException("'api-version' not found. Please configure 'serviceVersions' option.");

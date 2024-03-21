@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.mapper.ExampleParser;
 import com.azure.autorest.fluent.mapper.FluentMapper;
 import com.azure.autorest.fluent.mapper.FluentMapperFactory;
@@ -48,7 +49,6 @@ import com.azure.autorest.postprocessor.Postprocessor;
 import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.LoaderOptions;
@@ -180,7 +180,7 @@ public class FluentGen extends Javagen {
 
         // Service client
         String interfacePackage = ClientModelUtil.getServiceClientInterfacePackageName();
-        if (CoreUtils.isNullOrEmpty(client.getServiceClients())) {
+        if (ExtensionUtils.isNullOrEmpty(client.getServiceClients())) {
             ServiceClient serviceClient = client.getServiceClient();
             addServiceClient(javaSettings, javaPackage, interfacePackage, serviceClient);
         } else {

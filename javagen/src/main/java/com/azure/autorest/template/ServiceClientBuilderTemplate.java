@@ -6,6 +6,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -24,16 +25,6 @@ import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.http.HttpPipelinePosition;
-import com.azure.core.http.policy.AddDatePolicy;
-import com.azure.core.http.policy.AddHeadersFromContextPolicy;
-import com.azure.core.http.policy.AddHeadersPolicy;
-import com.azure.core.http.policy.AzureKeyCredentialPolicy;
-import com.azure.core.http.policy.BearerTokenAuthenticationPolicy;
-import com.azure.core.http.policy.HttpLoggingPolicy;
-import com.azure.core.http.policy.HttpPolicyProviders;
-import com.azure.core.http.policy.RequestIdPolicy;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -135,7 +126,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         javaFile.annotation(String.format("ServiceClientBuilder(serviceClients = %1$s)", builderTypes));
         String classDefinition = serviceClientBuilderName;
 
-        if (!settings.isAzureOrFluent() && !CoreUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
+        if (!settings.isAzureOrFluent() && !ExtensionUtils.isNullOrEmpty(clientBuilder.getBuilderTraits())) {
             String serviceClientBuilderGeneric = "<" + serviceClientBuilderName + ">";
 
             String interfaces = clientBuilder.getBuilderTraits().stream()
@@ -168,7 +159,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     // properties for sdk name and version
                     String propertiesValue = "new HashMap<>()";
                     String artifactId = ClientModelUtil.getArtifactId();
-                    if (!CoreUtils.isNullOrEmpty(artifactId)) {
+                    if (!ExtensionUtils.isNullOrEmpty(artifactId)) {
                         propertiesValue = "CoreUtils.getProperties" + "(\"" + artifactId + ".properties\")";
                     }
                     addGeneratedAnnotation(classBlock);
@@ -482,21 +473,21 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
     }
 
     protected void addHttpPolicyImports(Set<String> imports) {
-        imports.add(BearerTokenAuthenticationPolicy.class.getName());
+        imports.add("com.azure.core.http.policy.BearerTokenAuthenticationPolicy");
 
         // one of the key credential policy imports will be removed by the formatter depending
         // on which one is used
-        imports.add(AzureKeyCredentialPolicy.class.getName());
+        imports.add("com.azure.core.http.policy.AzureKeyCredentialPolicy");
         ClassType.KEY_CREDENTIAL_POLICY.addImportsTo(imports, false);
 
-        imports.add(HttpPolicyProviders.class.getName());
+        imports.add("com.azure.core.http.policy.HttpPolicyProviders");
         ClassType.HTTP_PIPELINE_POLICY.addImportsTo(imports, false);
-        imports.add(HttpLoggingPolicy.class.getName());
-        imports.add(AddHeadersPolicy.class.getName());
-        imports.add(RequestIdPolicy.class.getName());
-        imports.add(AddHeadersFromContextPolicy.class.getName());
-        imports.add(AddDatePolicy.class.getName());
-        imports.add(HttpPipelinePosition.class.getName());
+        imports.add("com.azure.core.http.policy.HttpLoggingPolicy");
+        imports.add("com.azure.core.http.policy.AddHeadersPolicy");
+        imports.add("com.azure.core.http.policy.RequestIdPolicy");
+        imports.add("com.azure.core.http.policy.AddHeadersFromContextPolicy");
+        imports.add("com.azure.core.http.policy.AddDatePolicy");
+        imports.add("com.azure.core.http.HttpPipelinePosition");
         imports.add(Collectors.class.getName());
     }
 

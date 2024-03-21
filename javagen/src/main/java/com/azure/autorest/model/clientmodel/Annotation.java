@@ -9,78 +9,31 @@ import java.util.Set;
 
 public class Annotation {
 
-    public static final Annotation GENERATED = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.Generated.class)
-            .build();
+    public static final Annotation GENERATED = new Annotation("com.azure.core.annotation", "Generated");
+    public static final Annotation HOST = new Annotation("com.azure.core.annotation", "Host");
+    public static final Annotation SERVICE_INTERFACE = new Annotation("com.azure.core.annotation", "ServiceInterface");
+    public static final Annotation SERVICE_CLIENT = new Annotation("com.azure.core.annotation", "ServiceClient");
+    public static final Annotation SERVICE_METHOD = new Annotation("com.azure.core.annotation", "ServiceMethod");
+    public static final Annotation SERVICE_CLIENT_BUILDER
+        = new Annotation("com.azure.core.annotation", "ServiceClientBuilder");
+    public static final Annotation UNEXPECTED_RESPONSE_EXCEPTION_TYPE
+        = new Annotation("com.azure.core.annotation", "UnexpectedResponseExceptionType");
+    public static final Annotation EXPECTED_RESPONSE = new Annotation("com.azure.core.annotation", "ExpectedResponses");
+    public static final Annotation HEADERS = new Annotation("com.azure.core.annotation", "Headers");
+    public static final Annotation FORM_PARAM = new Annotation("com.azure.core.annotation", "FormParam");
+    public static final Annotation RETURN_VALUE_WIRE_TYPE
+        = new Annotation("com.azure.core.annotation", "ReturnValueWireType");
+    public static final Annotation RETURN_TYPE = new Annotation("com.azure.core.annotation", "ReturnType");
+    public static final Annotation IMMUTABLE = new Annotation("com.azure.core.annotation", "Immutable");
+    public static final Annotation FLUENT = new Annotation("com.azure.core.annotation", "Fluent");
+    public static final Annotation HEADER_COLLECTION = new Annotation("com.azure.core.annotation", "HeaderCollection");
 
-    public static final Annotation HOST = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.Host.class)
-            .build();
-
-    public static final Annotation SERVICE_INTERFACE = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.ServiceInterface.class)
-            .build();
-
-    public static final Annotation SERVICE_CLIENT = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.ServiceClient.class)
-            .build();
-
-    public static final Annotation SERVICE_METHOD = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.ServiceMethod.class)
-            .build();
-
-    public static final Annotation SERVICE_CLIENT_BUILDER = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.ServiceClientBuilder.class)
-            .build();
-
-    public static final Annotation UNEXPECTED_RESPONSE_EXCEPTION_TYPE = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.UnexpectedResponseExceptionType.class)
-            .build();
-
-    public static final Annotation EXPECTED_RESPONSE = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.ExpectedResponses.class)
-            .build();
-
-    public static final Annotation HEADERS = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.Headers.class)
-            .build();
-
-    public static final Annotation FORM_PARAM = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.FormParam.class)
-            .build();
-
-    public static final Annotation RETURN_VALUE_WIRE_TYPE = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.ReturnValueWireType.class)
-            .build();
-
-    public static final Annotation RETURN_TYPE = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.ReturnType.class)
-            .build();
-
-    public static final Annotation IMMUTABLE = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.Immutable.class)
-            .build();
-
-    public static final Annotation FLUENT = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.Fluent.class)
-            .build();
-
-    public static final Annotation HEADER_COLLECTION = new Annotation.Builder()
-            .knownClass(com.azure.core.annotation.HeaderCollection.class)
-            .build();
-
-    public static final Annotation METADATA = new Annotation.Builder()
-            .knownClass(com.generic.core.annotation.Metadata.class)
-            .build();
-    public static final Annotation HTTP_REQUEST_INFORMATION = new Annotation.Builder()
-            .knownClass(com.generic.core.http.annotation.HttpRequestInformation.class)
-            .build();
-    public static final Annotation UNEXPECTED_RESPONSE_EXCEPTION_INFORMATION = new Annotation.Builder()
-            .knownClass(com.generic.core.http.annotation.UnexpectedResponseExceptionInformation.class)
-            .build();
-    public static final Annotation TYPE_CONDITIONS = new Annotation.Builder()
-            .knownClass(com.generic.core.annotation.TypeConditions.class)
-            .build();
+    public static final Annotation METADATA = new Annotation("com.generic.core.annotation", "Metadata");
+    public static final Annotation HTTP_REQUEST_INFORMATION
+        = new Annotation("com.generic.core.http.annotation", "HttpRequestInformation");
+    public static final Annotation UNEXPECTED_RESPONSE_EXCEPTION_INFORMATION
+        = new Annotation("com.generic.core.http.annotation", "UnexpectedResponseExceptionInformation");
+    public static final Annotation TYPE_CONDITIONS = new Annotation("com.generic.core.annotation", "TypeConditions");
 
     private final String fullName;
     private final String packageName;

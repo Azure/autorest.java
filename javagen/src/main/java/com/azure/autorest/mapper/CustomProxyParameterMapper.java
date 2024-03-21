@@ -10,6 +10,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.CollectionFormat;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.IType;
@@ -18,7 +19,6 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.autorest.model.clientmodel.ProxyMethodParameter;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.serializer.CollectionFormat;
 
 public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMethodParameter> {
 
@@ -141,9 +141,6 @@ public class CustomProxyParameterMapper implements IMapper<Parameter, ProxyMetho
         CollectionFormat collectionFormat = null;
         if (parameter.getProtocol().getHttp().getStyle() != null) {
             switch (parameter.getProtocol().getHttp().getStyle()) {
-                case SIMPLE:
-                    collectionFormat = CollectionFormat.CSV;
-                    break;
                 case SPACE_DELIMITED:
                     collectionFormat = CollectionFormat.SSV;
                     break;

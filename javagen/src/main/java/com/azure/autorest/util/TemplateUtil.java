@@ -6,6 +6,7 @@ package com.azure.autorest.util;
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -19,7 +20,6 @@ import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFileContents;
 import com.azure.autorest.model.javamodel.JavaType;
 import com.azure.autorest.template.Templates;
-import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -307,7 +307,7 @@ public class TemplateUtil {
      * @return escaped string
      */
     public static String escapeString(String str) {
-        if (CoreUtils.isNullOrEmpty(str)) {
+        if (ExtensionUtils.isNullOrEmpty(str)) {
             return str;
         }
 

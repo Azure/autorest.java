@@ -5,6 +5,8 @@ package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.fluent.FluentGen;
 import com.azure.autorest.fluent.model.ResourceTypeName;
 import com.azure.autorest.fluent.model.arm.ModelCategory;
@@ -13,7 +15,6 @@ import com.azure.autorest.fluent.model.clientmodel.FluentClient;
 import com.azure.autorest.fluent.model.clientmodel.FluentCollectionMethod;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceCollection;
 import com.azure.autorest.fluent.model.clientmodel.FluentResourceModel;
-import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.ResourceLocalVariables;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.action.ResourceActions;
 import com.azure.autorest.fluent.model.clientmodel.fluentmodel.create.ResourceCreate;
@@ -26,11 +27,9 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.examplemodel.MethodParameter;
 import com.azure.autorest.template.prototype.MethodTemplate;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.http.HttpMethod;
-import com.azure.core.management.Region;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -84,7 +83,7 @@ public class ResourceParser {
             if (FluentUtils.modelHasLocationProperty(model) && !model.hasProperty("region")) {
                 // if resource instance has location property, add region() method
                 methods.add(MethodTemplate.builder()
-                        .imports(Collections.singletonList(Region.class.getName()))
+                        .imports(Collections.singletonList("com.azure.core.management.Region"))
                         .comment(commentBlock -> {
                             commentBlock.description("Gets the region of the resource.");
                             commentBlock.methodReturns("the region of the resource.");
@@ -369,7 +368,7 @@ public class ResourceParser {
 
                                     // requires named parameters in URL
                                     boolean urlParameterSegmentsNamed = urlPathSegments.getReverseParameterSegments().stream()
-                                            .noneMatch(s -> CoreUtils.isNullOrEmpty(s.getSegmentName()));
+                                            .noneMatch(s -> ExtensionUtils.isNullOrEmpty(s.getSegmentName()));
 
                                     boolean categoryMatch = false;
                                     if (urlParameterSegmentsNamed && urlPathSegments.hasSubscription()) {
@@ -396,7 +395,7 @@ public class ResourceParser {
                                     if (!categoryMatch && (category == ModelCategory.SCOPE_AS_PARENT || category == ModelCategory.SCOPE_NESTED_CHILD)) {
                                         // check for scope, required named parameters except scope
                                         boolean urlParameterSegmentsNamedExceptScope = urlPathSegments.getReverseParameterSegments().stream()
-                                                .noneMatch(s -> s.getType() != UrlPathSegments.ParameterSegmentType.SCOPE && CoreUtils.isNullOrEmpty(s.getSegmentName()));
+                                                .noneMatch(s -> s.getType() != UrlPathSegments.ParameterSegmentType.SCOPE && ExtensionUtils.isNullOrEmpty(s.getSegmentName()));
 
                                         if (urlParameterSegmentsNamedExceptScope && urlPathSegments.hasScope()
                                                 && !urlPathSegments.hasSubscription() && !urlPathSegments.hasResourceGroup()) {

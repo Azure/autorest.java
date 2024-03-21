@@ -5,13 +5,13 @@ package com.azure.autorest.fluent.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.model.FluentType;
 import com.azure.autorest.fluent.model.clientmodel.FluentStatic;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.ProxyMethodMapper;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ProxyMethod;
-import com.azure.core.util.CoreUtils;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +28,7 @@ public class FluentProxyMethodMapper extends ProxyMethodMapper {
     protected void buildUnexpectedResponseExceptionTypes(ProxyMethod.Builder builder,
                                                          Operation operation, List<Integer> expectedStatusCodes,
                                                          JavaSettings settings) {
-        if (CoreUtils.isNullOrEmpty(operation.getExceptions())) {
+        if (ExtensionUtils.isNullOrEmpty(operation.getExceptions())) {
             // use ManagementException
             builder.unexpectedResponseExceptionType(FluentType.MANAGEMENT_EXCEPTION);
         } else {

@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -13,14 +14,14 @@ import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.http.rest.PagedResponse;
-import com.azure.core.http.rest.PagedResponseBase;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.FluxUtil;
-import reactor.core.publisher.Flux;
 
 import java.util.List;
 import java.util.Set;
+
+;
+;
+;
+;
 
 public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBase {
 
@@ -34,16 +35,16 @@ public class ConvenienceAsyncMethodTemplate extends ConvenienceMethodTemplateBas
     }
 
     public void addImports(Set<String> imports, List<ConvenienceMethod> convenienceMethods) {
-        if (!CoreUtils.isNullOrEmpty(convenienceMethods)) {
+        if (!ExtensionUtils.isNullOrEmpty(convenienceMethods)) {
             super.addImports(imports, convenienceMethods);
 
             // async e.g. FluxUtil::toMono
-            imports.add(FluxUtil.class.getName());
+            imports.add("com.azure.core.util.FluxUtil");
 
             // async pageable
-            imports.add(PagedResponse.class.getName());
-            imports.add(PagedResponseBase.class.getName());
-            imports.add(Flux.class.getName());
+            imports.add("com.azure.core.http.rest.PagedResponse");
+            imports.add("com.azure.core.http.rest.PagedResponseBase");
+            imports.add("reactor.core.publisher.Flux");
         }
     }
 

@@ -5,8 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
-import com.azure.core.http.HttpHeaders;
-import com.azure.core.util.CoreUtils;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
@@ -20,6 +19,7 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -94,20 +94,18 @@ public class ProxyMethodExample {
     public static class Response {
 
         private final int statusCode;
-        private final HttpHeaders httpHeaders;
+        private final Map<String, String> httpHeaders;
         private final Object body;
 
         @SuppressWarnings("unchecked")
         public Response(int statusCode, Object response) {
             this.statusCode = statusCode;
-            this.httpHeaders = new HttpHeaders();
+            this.httpHeaders = new HashMap<>();
             if (response instanceof Map) {
                 Map<String, Object> responseMap = (Map<String, Object>) response;
                 if (responseMap.containsKey("headers") && responseMap.get("headers") instanceof Map) {
                     Map<String, Object> headersMap = (Map<String, Object>) responseMap.get("headers");
-                    headersMap.forEach((header, value) -> {
-                        httpHeaders.add(header, value.toString());
-                    });
+                    headersMap.forEach((header, value) -> httpHeaders.put(header, value.toString()));
                 }
                 this.body = responseMap.getOrDefault("body", null);
             } else {
@@ -121,7 +119,7 @@ public class ProxyMethodExample {
         }
 
         /** @return the http headers */
-        public HttpHeaders getHttpHeaders() {
+        public Map<String, String> getHttpHeaders() {
             return httpHeaders;
         }
 
@@ -230,7 +228,7 @@ public class ProxyMethodExample {
      * @return the relative path of the original file
      */
     public String getRelativeOriginalFileName() {
-        if (relativeOriginalFileName == null && !CoreUtils.isNullOrEmpty(this.getOriginalFile())) {
+        if (relativeOriginalFileName == null && !ExtensionUtils.isNullOrEmpty(this.getOriginalFile())) {
             String originalFileName = this.getOriginalFile();
             try {
                 URL url = new URI(originalFileName).toURL();

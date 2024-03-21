@@ -6,6 +6,7 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.IType;
@@ -16,7 +17,6 @@ import com.azure.autorest.model.clientmodel.ServiceClientProperty;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,7 +80,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         }
         builder.className(className);
 
-        if (!CoreUtils.isNullOrEmpty(methodGroup.getOperations())) {
+        if (!ExtensionUtils.isNullOrEmpty(methodGroup.getOperations())) {
             Proxy.Builder proxyBuilder = createProxyBuilder();
 
             String restAPIName = CodeNamer.toPascalCase(CodeNamer.getPlural(methodGroup.getLanguage().getJava().getName()));
@@ -143,7 +143,7 @@ public class MethodGroupMapper implements IMapper<OperationGroup, MethodGroupCli
         builder.clientMethods(clientMethods);
         builder.supportedInterfaces(supportedInterfaces(methodGroup, clientMethods));
 
-        if (!CoreUtils.isNullOrEmpty(parentClientProperties) && settings.isGenerateClientAsImpl()) {
+        if (!ExtensionUtils.isNullOrEmpty(parentClientProperties) && settings.isGenerateClientAsImpl()) {
             // filter for serviceVersion
             builder.properties(parentClientProperties.stream()
                 .filter(p -> Objects.equals("serviceVersion", p.getName()))

@@ -13,12 +13,6 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaIfBlock;
 import com.azure.autorest.util.CodeNamer;
-import com.azure.core.credential.AccessToken;
-import com.azure.core.http.HttpClient;
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
-import com.azure.core.util.Configuration;
-import reactor.core.publisher.Mono;
 
 import java.time.OffsetDateTime;
 import java.util.Arrays;
@@ -29,13 +23,19 @@ import java.util.Locale;
 import java.util.Set;
 import java.util.function.Consumer;
 
+;
+;
+;
+;
+;
+
 public class ProtocolTestWriter {
 
     private final Set<String> imports;
     private final Consumer<JavaClass> clientVariableWriter;
     private final Consumer<JavaBlock> clientInitializationWriter;
 
-    public ProtocolTestWriter(TestContext testContext) {
+    public ProtocolTestWriter(TestContext<?> testContext) {
         final List<ServiceClient> serviceClients = testContext.getServiceClients();
         final ServiceClient serviceClient = serviceClients.iterator().next();
         final List<AsyncSyncClient> syncClients = testContext.getSyncClients();
@@ -43,13 +43,13 @@ public class ProtocolTestWriter {
                 && serviceClient.getSecurityInfo().getSecurityTypes().contains(Scheme.SecuritySchemeType.OAUTH2);
 
         this.imports = new HashSet<>(Arrays.asList(
-                AccessToken.class.getName(),
-                HttpClient.class.getName(),
-                HttpLogDetailLevel.class.getName(),
-                HttpLogOptions.class.getName(),
-                Configuration.class.getName(),
+                "com.azure.core.credential.AccessToken",
+                "com.azure.core.http.HttpClient",
+                "com.azure.core.http.policy.HttpLogDetailLevel",
+                "com.azure.core.http.policy.HttpLogOptions",
+                "com.azure.core.util.Configuration",
                 OffsetDateTime.class.getName(),
-                Mono.class.getName(),
+                "reactor.core.publisher.Mono",
                 "com.azure.identity.DefaultAzureCredentialBuilder",
                 "com.azure.core.test.TestProxyTestBase",
                 "com.azure.core.test.TestMode",
@@ -65,11 +65,8 @@ public class ProtocolTestWriter {
         // base test class
         imports.add(String.format("%s.%s", testContext.getPackageName(), testContext.getTestBaseClassName()));
 
-        this.clientVariableWriter = classBlock -> {
-            syncClients.forEach(c -> {
-                classBlock.protectedMemberVariable(c.getClassName(), CodeNamer.toCamelCase(c.getClassName()));
-            });
-        };
+        this.clientVariableWriter = classBlock -> syncClients.forEach(c ->
+            classBlock.protectedMemberVariable(c.getClassName(), CodeNamer.toCamelCase(c.getClassName())));
 
         this.clientInitializationWriter = methodBlock -> {
             Iterator<ServiceClient> serviceClientIterator = serviceClients.iterator();

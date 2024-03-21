@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.Property;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.XmlSerializationFormat;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
@@ -22,7 +23,6 @@ import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeId;
@@ -190,7 +190,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
             String summary = compositeType.getSummary();
             String description = compositeType.getLanguage().getJava() == null ? null : compositeType.getLanguage().getJava().getDescription();
-            if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+            if (ExtensionUtils.isNullOrEmpty(summary) && ExtensionUtils.isNullOrEmpty(description)) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
             } else {
                 builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
@@ -222,7 +222,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     && compositeType.getSerialization().getXml() != null;
                 if (hasXmlFormat) {
                     final XmlSerializationFormat xml = compositeType.getSerialization().getXml();
-                    String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
+                    String xmlName = ExtensionUtils.isNullOrEmpty(xml.getName())
                         ? compositeType.getLanguage().getDefault().getName()
                         : xml.getName();
                     builder.xmlName(xmlName);
@@ -285,7 +285,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     // complete mapping before the parent. So, the parent is last to complete and the children models
                     // will be fully defined. If the inverse was done, children checking the parent, the parent would
                     // be null or an infinite loop would happen.
-                    if (!CoreUtils.isNullOrEmpty(derivedTypes)) {
+                    if (!ExtensionUtils.isNullOrEmpty(derivedTypes)) {
                         for (ClientModel derivedType : derivedTypes) {
                             if (Objects.equals(derivedType.getPolymorphicDiscriminator().getSerializedName(), polymorphicDiscriminator)) {
                                 derivedType.getPolymorphicDiscriminator().setRequired(modelProperty.isRequired());
@@ -318,7 +318,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 additionalProperties.getLanguage().setJava(new Language());
                 additionalProperties.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES);
                 String additionalPropertiesDescription = schema.getLanguage().getJava().getDescription();
-                if (CoreUtils.isNullOrEmpty(additionalPropertiesDescription)) {
+                if (ExtensionUtils.isNullOrEmpty(additionalPropertiesDescription)) {
                     additionalPropertiesDescription = "Additional properties";
                 }
                 additionalProperties.getLanguage().getJava().setDescription(additionalPropertiesDescription);
@@ -513,7 +513,7 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
             // properties from the parents of the target model
-            if (targetModelSchema.getParents() != null && !CoreUtils.isNullOrEmpty(targetModelSchema.getParents().getAll())) {
+            if (targetModelSchema.getParents() != null && !ExtensionUtils.isNullOrEmpty(targetModelSchema.getParents().getAll())) {
                 // take parent of the target model, as rest parents (if any) is already flattened into the target model
                 ParentSchemaInfo parentSchemaInfo = getParentSchemaInfo(targetModelSchema);
                 if (parentSchemaInfo.hasParentSchema()) {

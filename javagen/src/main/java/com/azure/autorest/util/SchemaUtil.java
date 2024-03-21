@@ -15,6 +15,8 @@ import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -23,8 +25,6 @@ import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
-import com.azure.core.http.HttpMethod;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -198,10 +198,10 @@ public class SchemaUtil {
         }
 
         List<String> parts = new ArrayList<>();
-        if (!CoreUtils.isNullOrEmpty(summary)) {
+        if (!ExtensionUtils.isNullOrEmpty(summary)) {
             parts.add(summary);
         }
-        if (!CoreUtils.isNullOrEmpty(description)) {
+        if (!ExtensionUtils.isNullOrEmpty(description)) {
             parts.add(description);
         }
         return String.join("\n\n", parts);
@@ -253,7 +253,7 @@ public class SchemaUtil {
             String namespace = compositeType.getLanguage().getDefault().getNamespace();
             String name = compositeType.getLanguage().getDefault().getName();
 
-            if (!CoreUtils.isNullOrEmpty(namespace) && !CoreUtils.isNullOrEmpty(name)) {
+            if (!ExtensionUtils.isNullOrEmpty(namespace) && !ExtensionUtils.isNullOrEmpty(name)) {
                 if (Objects.equals(namespace, "Azure.Core.Foundations")) {
                     // https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/core/azure-core/src/main/java/com/azure/core/models/ResponseError.java
                     if (Objects.equals(name, "Error")) {

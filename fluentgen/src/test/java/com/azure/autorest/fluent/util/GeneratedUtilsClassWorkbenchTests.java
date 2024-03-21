@@ -3,7 +3,7 @@
 
 package com.azure.autorest.fluent.util;
 
-import com.azure.core.util.CoreUtils;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -49,7 +49,7 @@ public class GeneratedUtilsClassWorkbenchTests {
             while (idItrReverted.hasNext() && pathIndex > 0) {
                 String idSegment = idItrReverted.next();
                 String pathSegment = pathSegments.get(--pathIndex);
-                if (!CoreUtils.isNullOrEmpty(idSegment) && !CoreUtils.isNullOrEmpty(pathSegment)) {
+                if (!ExtensionUtils.isNullOrEmpty(idSegment) && !ExtensionUtils.isNullOrEmpty(pathSegment)) {
                     if (pathSegment.equalsIgnoreCase(parameterNameParentheses)) {
                         if (pathIndex == 0 || (pathIndex == 1 && pathSegments.get(0).isEmpty())) {
                             List<String> segments = new ArrayList<>();

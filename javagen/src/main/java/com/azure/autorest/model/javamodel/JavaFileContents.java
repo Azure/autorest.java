@@ -3,7 +3,7 @@
 
 package com.azure.autorest.model.javamodel;
 
-import com.azure.core.util.CoreUtils;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -246,7 +246,7 @@ public class JavaFileContents {
 
     public void classBlock(JavaVisibility visibility, List<JavaModifier> modifiers, String classDeclaration,
         Consumer<JavaClass> classAction) {
-        String text = CoreUtils.isNullOrEmpty(modifiers)
+        String text = ExtensionUtils.isNullOrEmpty(modifiers)
             ? visibility + " class " + classDeclaration
             : visibility + " " + toString(modifiers) + " class " + classDeclaration;
         block(text, blockAction -> {
@@ -259,7 +259,7 @@ public class JavaFileContents {
 
     public void method(JavaVisibility visibility, List<JavaModifier> modifiers, String methodSignature,
         Consumer<JavaBlock> method) {
-        String text = CoreUtils.isNullOrEmpty(modifiers)
+        String text = ExtensionUtils.isNullOrEmpty(modifiers)
             ? visibility + " " + methodSignature
             : visibility + " " + toString(modifiers) + " " + methodSignature;
 

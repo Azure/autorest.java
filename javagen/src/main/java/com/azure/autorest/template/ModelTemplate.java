@@ -4,6 +4,7 @@
 package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
@@ -29,10 +30,6 @@ import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
-import com.azure.core.http.HttpHeader;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.logging.ClientLogger;
-import com.azure.core.util.serializer.JacksonAdapter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonSetter;
@@ -85,7 +82,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         List<ClientModelPropertyReference> propertyReferences = this.getClientModelPropertyReferences(model);
         propertyReferences.forEach(p -> p.addImportsTo(imports, false));
 
-        if (!CoreUtils.isNullOrEmpty(model.getPropertyReferences())) {
+        if (!ExtensionUtils.isNullOrEmpty(model.getPropertyReferences())) {
             if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
                 model.getPropertyReferences().forEach(p -> p.addImportsTo(imports, false));
             }
@@ -209,7 +206,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // The package-private setter is added when the property isn't included in the constructor and is
                     // defined by this model.
                     boolean streamStyle = settings.isStreamStyleSerialization();
-                    boolean hasDerivedTypes = !CoreUtils.isNullOrEmpty(model.getDerivedModels());
+                    boolean hasDerivedTypes = !ExtensionUtils.isNullOrEmpty(model.getDerivedModels());
                     boolean notIncludedInConstructor = !ClientModelUtil.includePropertyInConstructor(property,
                         settings);
                     boolean definedByModel = modelDefinesProperty(model, property);
@@ -352,17 +349,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // If the import isn't used it will be removed later on.
             imports.add(Base64.class.getName());
             imports.add(HashMap.class.getName());
-            imports.add(HttpHeader.class.getName());
+            imports.add("com.azure.core.http.HttpHeader");
             imports.add(UUID.class.getName());
             imports.add(URL.class.getName());
             imports.add(IOException.class.getName());
             imports.add(UncheckedIOException.class.getName());
-            imports.add(ClientLogger.class.getName());
+            imports.add("com.azure.core.util.logging.ClientLogger");
 
             // JacksonAdapter will be removed in the future once model types are converted to using stream-style
             // serialization. For now, it's needed to handle the rare scenario where the strong type is a non-Java
             // base type.
-            imports.add(JacksonAdapter.class.getName());
+            imports.add("com.azure.core.util.serializer.JacksonAdapter");
         }
 
         String lastParentName = model.getName();
@@ -471,7 +468,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
         if (model.isUsedInXml()) {
-            if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
+            if (!ExtensionUtils.isNullOrEmpty(model.getXmlNamespace())) {
                 javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
                     model.getXmlName(), model.getXmlNamespace()));
             } else {
@@ -634,7 +631,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         IType propertyClientType = property.getWireType().getClientType();
 
         String listElementName = property.getXmlListElementName();
-        String jacksonAnnotation = CoreUtils.isNullOrEmpty(property.getXmlNamespace())
+        String jacksonAnnotation = ExtensionUtils.isNullOrEmpty(property.getXmlNamespace())
             ? "JacksonXmlProperty(localName = \"" + listElementName + "\")"
             : "JacksonXmlProperty(localName = \"" + listElementName + "\", namespace = \"" + property.getXmlNamespace() + "\")";
 
@@ -677,7 +674,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         boolean treatAsXml = model.isUsedInXml();
         if (modelRequireSerialization(model)) {
-            if (!CoreUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
+            if (!ExtensionUtils.isNullOrEmpty(property.getHeaderCollectionPrefix())) {
                 classBlock.annotation("HeaderCollection(\"" + property.getHeaderCollectionPrefix() + "\")");
             } else if (treatAsXml && property.isXmlAttribute()) {
                 classBlock.annotation("JacksonXmlProperty(localName = \"" + property.getXmlName() + "\", isAttribute = true)");
@@ -689,7 +686,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 classBlock.annotation("JsonIgnore");
             } else if (treatAsXml && property.getWireType() instanceof ListType && !property.isXmlWrapper()) {
                 classBlock.annotation("JsonProperty(\"" + property.getXmlListElementName() + "\")");
-            } else if (!CoreUtils.isNullOrEmpty(property.getAnnotationArguments())) {
+            } else if (!ExtensionUtils.isNullOrEmpty(property.getAnnotationArguments())) {
                 classBlock.annotation("JsonProperty(" + property.getAnnotationArguments() + ")");
             }
         }
@@ -1149,7 +1146,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
                 && property.getWireType() != property.getClientType());
 
-        if (!ret && !CoreUtils.isNullOrEmpty(model.getParentModelName())) {
+        if (!ret && !ExtensionUtils.isNullOrEmpty(model.getParentModelName())) {
             ret = ClientModelUtil.getParentProperties(model).stream()
                 .anyMatch(property -> property.getClientType() == ArrayType.BYTE_ARRAY
                     && property.getWireType() != property.getClientType());

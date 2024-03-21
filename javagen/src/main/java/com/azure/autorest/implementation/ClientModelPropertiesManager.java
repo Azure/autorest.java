@@ -4,14 +4,10 @@
 package com.azure.autorest.implementation;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.core.util.CoreUtils;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.xml.XmlReader;
-import com.azure.xml.XmlSerializable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -157,7 +153,7 @@ public final class ClientModelPropertiesManager {
                 superXmlElements.add(property);
             }
 
-            if (!CoreUtils.isNullOrEmpty(property.getXmlPrefix())) {
+            if (!ExtensionUtils.isNullOrEmpty(property.getXmlPrefix())) {
                 xmlNamespaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
             }
         }
@@ -223,7 +219,7 @@ public final class ClientModelPropertiesManager {
                 xmlElements.add(property);
             }
 
-            if (!CoreUtils.isNullOrEmpty(property.getXmlPrefix())) {
+            if (!ExtensionUtils.isNullOrEmpty(property.getXmlPrefix())) {
                 xmlNamespaceWithPrefix.put(property.getXmlPrefix(), property.getXmlNamespace());
             }
         }
@@ -231,7 +227,7 @@ public final class ClientModelPropertiesManager {
         boolean requiredConstructorProperties = hasRequiredProperties && settings.isRequiredFieldsAsConstructorArgs();
         boolean readOnlyConstructorProperties = settings.isRequiredFieldsAsConstructorArgs()
             && settings.isIncludeReadOnlyInConstructorArgs()
-            && (!CoreUtils.isNullOrEmpty(readOnlyProperties) || !CoreUtils.isNullOrEmpty(superReadOnlyProperties));
+            && (!ExtensionUtils.isNullOrEmpty(readOnlyProperties) || !ExtensionUtils.isNullOrEmpty(superReadOnlyProperties));
 
         this.hasRequiredProperties = hasRequiredProperties;
         this.requiredPropertiesCount = requiredProperties.size() + superRequiredProperties.size();
@@ -485,7 +481,7 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
-     * Gets the variable name for {@link JsonReader#getFieldName()} in {@link JsonSerializable#fromJson(JsonReader)}
+     * Gets the variable name for {@code JsonReader#getFieldName()} in {@code JsonSerializable#fromJson(JsonReader)}
      * implementations.
      * <p>
      * This is used instead of a static variable name as deserialization maintains holders for required properties which
@@ -500,7 +496,7 @@ public final class ClientModelPropertiesManager {
     }
 
     /**
-     * Gets the variable name for {@link XmlReader#getElementName()} in {@link XmlSerializable#fromXml(XmlReader)}
+     * Gets the variable name for {@code XmlReader#getElementName()} in {@code XmlSerializable#fromXml(XmlReader)}
      * implementations.
      * <p>
      * This is used instead of a static variable name as deserialization maintains holders for required properties which
@@ -662,7 +658,7 @@ public final class ClientModelPropertiesManager {
         Map<String, ClientModelPropertyWithMetadata> flattenedProperties) {
         JsonFlattenedPropertiesTree structure = JsonFlattenedPropertiesTree.createBaseNode();
 
-        if (!CoreUtils.isNullOrEmpty(discriminatorProperty)) {
+        if (!ExtensionUtils.isNullOrEmpty(discriminatorProperty)) {
             String[] propertyHierarchy = SPLIT_KEY_PATTERN.split(discriminatorProperty);
             if (propertyHierarchy.length > 1) {
                 structure = JsonFlattenedPropertiesTree.createBaseNode();

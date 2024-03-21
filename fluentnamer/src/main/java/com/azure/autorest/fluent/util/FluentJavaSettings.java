@@ -5,8 +5,8 @@ package com.azure.autorest.fluent.util;
 
 import com.azure.autorest.extension.base.plugin.NewPlugin;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.model.ResourceCollectionAssociation;
-import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 import org.slf4j.Logger;
 
@@ -181,14 +181,14 @@ public class FluentJavaSettings {
         loadStringSetting("remove-inner", s -> splitStringToSet(s, javaNamesForRemoveInner));
 
         loadStringSetting("rename-model", s -> {
-            if (!CoreUtils.isNullOrEmpty(s)) {
+            if (!ExtensionUtils.isNullOrEmpty(s)) {
                 String[] renamePairs = s.split(Pattern.quote(","));
                 for (String pair : renamePairs) {
                     String[] fromAndTo = pair.split(Pattern.quote(":"));
                     if (fromAndTo.length == 2) {
                         String from = fromAndTo[0];
                         String to = fromAndTo[1];
-                        if (!CoreUtils.isNullOrEmpty(from) && !CoreUtils.isNullOrEmpty(to)) {
+                        if (!ExtensionUtils.isNullOrEmpty(from) && !ExtensionUtils.isNullOrEmpty(to)) {
                             renameModel.put(from, to);
                         }
                     }
@@ -203,14 +203,14 @@ public class FluentJavaSettings {
         loadStringSetting("remove-operation-group", s -> splitStringToSet(s, javaNamesForRemoveOperationGroup));
 
         loadStringSetting("rename-operation-group", s -> {
-            if (!CoreUtils.isNullOrEmpty(s)) {
+            if (!ExtensionUtils.isNullOrEmpty(s)) {
                 String[] renamePairs = s.split(Pattern.quote(","));
                 for (String pair : renamePairs) {
                     String[] fromAndTo = pair.split(Pattern.quote(":"));
                     if (fromAndTo.length == 2) {
                         String from = fromAndTo[0];
                         String to = fromAndTo[1];
-                        if (!CoreUtils.isNullOrEmpty(from) && !CoreUtils.isNullOrEmpty(to)) {
+                        if (!ExtensionUtils.isNullOrEmpty(from) && !ExtensionUtils.isNullOrEmpty(to)) {
                             renameOperationGroup.put(from, to);
                         }
                     }
@@ -246,7 +246,7 @@ public class FluentJavaSettings {
     }
 
     private void splitStringToSet(String s, Set<String> set) {
-        if (!CoreUtils.isNullOrEmpty(s)) {
+        if (!ExtensionUtils.isNullOrEmpty(s)) {
             set.addAll(Arrays.stream(s.split(Pattern.quote(",")))
                 .map(String::trim)
                 .filter(s1 -> !s1.isEmpty())

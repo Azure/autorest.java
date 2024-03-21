@@ -17,10 +17,10 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.Value;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
 import com.azure.autorest.preprocessor.namer.CodeNamer;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -223,7 +223,7 @@ public class SchemaNameNormalization {
 
         codeModel.getSchemas().getObjects().forEach(schema -> {
             String name = Utils.getDefaultName(schema);
-            if (schema.getChildren() != null && !CoreUtils.isNullOrEmpty(schema.getChildren().getImmediate())
+            if (schema.getChildren() != null && !ExtensionUtils.isNullOrEmpty(schema.getChildren().getImmediate())
                     && name.startsWith(prefix) && name.contains(allOf)) {
                 int index = name.lastIndexOf(allOf) + allOf.length();
                 boolean unnamed = false;

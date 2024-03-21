@@ -3,6 +3,8 @@
 
 package com.azure.autorest.util;
 
+import com.azure.autorest.extension.base.util.DateTimeRfc1123;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.ClientModel;
@@ -11,8 +13,6 @@ import com.azure.autorest.model.clientmodel.EnumType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
-import com.azure.core.util.CoreUtils;
-import com.azure.core.util.DateTimeRfc1123;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
@@ -72,7 +72,7 @@ public class ModelTestCaseUtil {
 
         // superclasses
         String parentModelName = model.getParentModelName();
-        while (!CoreUtils.isNullOrEmpty(parentModelName)) {
+        while (!ExtensionUtils.isNullOrEmpty(parentModelName)) {
             ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
             if (parentModel != null) {
                 for (ClientModelProperty property : parentModel.getProperties()) {

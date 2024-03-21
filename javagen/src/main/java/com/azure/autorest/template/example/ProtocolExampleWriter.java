@@ -7,6 +7,8 @@ import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.CollectionFormat;
+import com.azure.autorest.extension.base.util.ContentType;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
@@ -23,13 +25,6 @@ import com.azure.autorest.model.clientmodel.ServiceClient;
 import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelExampleUtil;
-import com.azure.core.http.ContentType;
-import com.azure.core.http.HttpHeaderName;
-import com.azure.core.http.rest.PagedIterable;
-import com.azure.core.http.rest.Response;
-import com.azure.core.util.polling.LongRunningOperationStatus;
-import com.azure.core.util.polling.SyncPoller;
-import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -81,8 +76,8 @@ public class ProtocolExampleWriter {
 
         // assertion
         imports.add("org.junit.jupiter.api.Assertions");
-        imports.add(LongRunningOperationStatus.class.getName());
-        imports.add(HttpHeaderName.class.getName());
+        imports.add("com.azure.core.util.polling.LongRunningOperationStatus");
+        imports.add("com.azure.core.http.HttpHeaderName");
 
         // method invocation
         // parameter values and required invocation on RequestOptions
@@ -239,15 +234,15 @@ public class ProtocolExampleWriter {
                 IType returnType = method.getReturnValue().getType();
                 if (returnType instanceof GenericType) {
                     GenericType responseType = (GenericType) returnType;
-                    if (Response.class.getSimpleName().equals(responseType.getName())) {
+                    if ("Response".equals(responseType.getName())) {
                         // Response<>
 
                         // assert status code
                         methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getStatusCode());", response.getStatusCode()));
                         // assert headers
-                        response.getHttpHeaders().stream().forEach(header -> {
-                            String expectedValueStr = ClassType.STRING.defaultValueExpression(header.getValue());
-                            String keyStr = ClassType.STRING.defaultValueExpression(header.getName());
+                        response.getHttpHeaders().forEach((key, value) -> {
+                            String expectedValueStr = ClassType.STRING.defaultValueExpression(value);
+                            String keyStr = ClassType.STRING.defaultValueExpression(key);
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON body
@@ -258,7 +253,7 @@ public class ProtocolExampleWriter {
                             String expectedJsonStr = ClassType.STRING.defaultValueExpression(response.getJsonBody());
                             methodBlock.line(String.format("Assertions.assertEquals(BinaryData.fromString(%1$s).toObject(Object.class), response.getValue().toObject(Object.class));", expectedJsonStr));
                         }
-                    } else if (SyncPoller.class.getSimpleName().equals(responseType.getName())) {
+                    } else if ("SyncPoller".equals(responseType.getName())) {
                         // SyncPoller<>
 
                         if (response.getStatusCode() / 100 == 2) {
@@ -266,15 +261,15 @@ public class ProtocolExampleWriter {
                             // but x-ms-examples usually does not include the final result
                             methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
                         }
-                    } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
+                    } else if ("PagedIterable".equals(responseType.getName())) {
                         // PagedIterable<>
 
                         // assert status code
                         methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getStatusCode());", response.getStatusCode()));
                         // assert headers
-                        response.getHttpHeaders().stream().forEach(header -> {
-                            String expectedValueStr = ClassType.STRING.defaultValueExpression(header.getValue());
-                            String keyStr = ClassType.STRING.defaultValueExpression(header.getName());
+                        response.getHttpHeaders().forEach((key, value) -> {
+                            String expectedValueStr = ClassType.STRING.defaultValueExpression(value);
+                            String keyStr = ClassType.STRING.defaultValueExpression(key);
                             methodBlock.line(String.format("Assertions.assertEquals(%1$s, response.iterableByPage().iterator().next().getHeaders().get(HttpHeaderName.fromString(%2$s)).getValue());", expectedValueStr, keyStr));
                         });
                         // assert JSON of first item, or assert count=0

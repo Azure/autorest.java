@@ -11,6 +11,8 @@ import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocatio
 import com.azure.autorest.extension.base.model.codemodel.Response;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
+import com.azure.autorest.extension.base.util.HttpMethod;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.GenericType;
@@ -25,8 +27,6 @@ import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.SchemaUtil;
 import com.azure.autorest.util.XmsExampleWrapper;
-import com.azure.core.http.HttpMethod;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
@@ -91,7 +91,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 .isResumable(false);
 
         String operationId = operation.getOperationId();
-        if (CoreUtils.isNullOrEmpty(operationId) && operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // operationId or language.default could be null for generated method like "listNext"
+        if (ExtensionUtils.isNullOrEmpty(operationId) && operation.getLanguage() != null && operation.getLanguage().getDefault() != null) {  // operationId or language.default could be null for generated method like "listNext"
             if (operationGroupNotNull(operation, settings)) {
                 operationId = operation.getOperationGroup().getLanguage().getDefault().getName() + "_" + operation.getLanguage().getDefault().getName();
             } else {
@@ -317,7 +317,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         return operation.getOperationGroup() != null
                 && operation.getOperationGroup().getLanguage() != null
                 && operation.getOperationGroup().getLanguage().getDefault() != null
-                && !CoreUtils.isNullOrEmpty(operation.getOperationGroup().getLanguage().getDefault().getName());
+                && !ExtensionUtils.isNullOrEmpty(operation.getOperationGroup().getLanguage().getDefault().getName());
     }
 
     private ProxyMethodParameter getContextParameter() {
@@ -547,7 +547,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 }
 
                 if (swaggerDefaultExceptionType == null
-                        && !CoreUtils.isNullOrEmpty(operation.getExceptions())
+                        && !ExtensionUtils.isNullOrEmpty(operation.getExceptions())
                         // m4 could return Response without schema, when the Swagger uses e.g. "produces: [ application/x-rdp ]"
                         && operation.getExceptions().get(0).getSchema() != null) {
                     // no default error, use the 1st to keep backward compatibility
@@ -623,7 +623,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
             String conflictMethodSignature = methodSignature.toString();
 
             // first try to append media type
-            if (!CoreUtils.isNullOrEmpty(requestContentType)) {
+            if (!ExtensionUtils.isNullOrEmpty(requestContentType)) {
                 methodSignature.set(0,
                         operationName + CodeNamer.toPascalCase(CodeNamer.removeInvalidCharacters(requestContentType)));
             }
@@ -648,7 +648,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
     private static ClassType getDefaultHttpExceptionTypeFromSettings(JavaSettings settings) {
         String defaultHttpExceptionType = settings.getDefaultHttpExceptionType();
 
-        return CoreUtils.isNullOrEmpty(defaultHttpExceptionType)
+        return ExtensionUtils.isNullOrEmpty(defaultHttpExceptionType)
             ? null
             : createExceptionTypeFromFullyQualifiedClass(defaultHttpExceptionType);
     }
@@ -664,7 +664,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         }
 
         Map<Integer, String> customExceptionMapping = settings.getHttpStatusCodeToExceptionTypeMapping();
-        if (!CoreUtils.isNullOrEmpty(customExceptionMapping)) {
+        if (!ExtensionUtils.isNullOrEmpty(customExceptionMapping)) {
             customExceptionMapping.forEach((key, value) ->
                 exceptionMapping.put(key, createExceptionTypeFromFullyQualifiedClass(value)));
         }
@@ -718,7 +718,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
      */
     protected List<ProxyMethodParameter> getSpecialParameters(Operation operation) {
         List<ProxyMethodParameter> specialParameters = new ArrayList<>();
-        if (!CoreUtils.isNullOrEmpty(operation.getSpecialHeaders()) && !CoreUtils.isNullOrEmpty(operation.getRequests())) {
+        if (!ExtensionUtils.isNullOrEmpty(operation.getSpecialHeaders()) && !ExtensionUtils.isNullOrEmpty(operation.getRequests())) {
             HttpMethod httpMethod = MethodUtil.getHttpMethod(operation);
             if (MethodUtil.isHttpMethodSupportRepeatableRequestHeaders(httpMethod)) {
                 List<String> specialHeaders = operation.getSpecialHeaders().stream()

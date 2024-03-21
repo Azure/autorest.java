@@ -4,14 +4,8 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.LogLevel;
 import com.azure.autorest.model.javamodel.JavaBlock;
-import com.azure.core.client.traits.AzureKeyCredentialTrait;
-import com.azure.core.client.traits.EndpointTrait;
-import com.azure.core.client.traits.KeyCredentialTrait;
-import com.azure.core.client.traits.TokenCredentialTrait;
-import com.azure.core.credential.AzureKeyCredential;
-import com.azure.core.credential.TokenCredential;
-import com.azure.core.util.logging.LogLevel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -249,7 +243,7 @@ public class ClientBuilderTrait {
         ClientBuilderTrait endpointTrait = ClientBuilderTrait.endpointTrait;
         if (endpointTrait == null) {
             endpointTrait = new ClientBuilderTrait();
-            endpointTrait.setTraitInterfaceName(EndpointTrait.class.getSimpleName());
+            endpointTrait.setTraitInterfaceName("EndpointTrait");
 
             List<String> importPackages = new ArrayList<>();
             endpointTrait.setImportPackages(importPackages);
@@ -284,10 +278,10 @@ public class ClientBuilderTrait {
 
     private static ClientBuilderTrait createTokenCredentialTrait() {
         ClientBuilderTrait tokenCredentialTrait = new ClientBuilderTrait();
-        tokenCredentialTrait.setTraitInterfaceName(TokenCredentialTrait.class.getSimpleName());
+        tokenCredentialTrait.setTraitInterfaceName("TokenCredentialTrait");
         List<String> importPackages = new ArrayList<>();
         tokenCredentialTrait.setImportPackages(importPackages);
-        importPackages.add(TokenCredentialTrait.class.getName());
+        importPackages.add("com.azure.core.client.traits.TokenCredentialTrait");
 
         List<ClientBuilderTraitMethod> clientBuilderTraitMethods = new ArrayList<>();
         tokenCredentialTrait.setTraitMethods(clientBuilderTraitMethods);
@@ -302,7 +296,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.TOKEN_CREDENTIAL,
                 property, "{@inheritDoc}", methodImpl);
-        importPackages.add(TokenCredential.class.getName());
+        importPackages.add("com.azure.core.credential.TokenCredential");
 
         clientBuilderTraitMethods.add(clientMethod);
         return tokenCredentialTrait;
@@ -310,10 +304,10 @@ public class ClientBuilderTrait {
 
     private static ClientBuilderTrait createAzureKeyCredentialTrait() {
         ClientBuilderTrait azureKeyCredentialTrait = new ClientBuilderTrait();
-        azureKeyCredentialTrait.setTraitInterfaceName(AzureKeyCredentialTrait.class.getSimpleName());
+        azureKeyCredentialTrait.setTraitInterfaceName("AzureKeyCredentialTrait");
         List<String> importPackages = new ArrayList<>();
         azureKeyCredentialTrait.setImportPackages(importPackages);
-        importPackages.add(AzureKeyCredentialTrait.class.getName());
+        importPackages.add("com.azure.core.client.traits.AzureKeyCredentialTrait");
 
         List<ClientBuilderTraitMethod> clientBuilderTraitMethods = new ArrayList<>();
         azureKeyCredentialTrait.setTraitMethods(clientBuilderTraitMethods);
@@ -328,7 +322,7 @@ public class ClientBuilderTrait {
         };
         ClientBuilderTraitMethod clientMethod = createTraitMethod("credential", propertyName, ClassType.AZURE_KEY_CREDENTIAL,
                 property, "{@inheritDoc}", methodImpl);
-        importPackages.add(AzureKeyCredential.class.getName());
+        importPackages.add("com.azure.core.credential.AzureKeyCredential");
 
         clientBuilderTraitMethods.add(clientMethod);
         return azureKeyCredentialTrait;
@@ -336,7 +330,7 @@ public class ClientBuilderTrait {
 
     private static ClientBuilderTrait createKeyCredentialTrait() {
         ClientBuilderTrait keyCredentialTrait = new ClientBuilderTrait();
-        keyCredentialTrait.setTraitInterfaceName(KeyCredentialTrait.class.getSimpleName());
+        keyCredentialTrait.setTraitInterfaceName("KeyCredentialTrait");
         List<String> importPackages = new ArrayList<>();
         keyCredentialTrait.setImportPackages(importPackages);
         importPackages.add(ClassType.KEY_CREDENTIAL_TRAIT.getFullName());

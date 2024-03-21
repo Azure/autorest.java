@@ -29,16 +29,5 @@
       <artifactId>azure-autorest-javagen</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
-
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-core</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-core-management</artifactId>
-      <version>1.12.0</version>
-    </dependency>
   </dependencies>
 </project>

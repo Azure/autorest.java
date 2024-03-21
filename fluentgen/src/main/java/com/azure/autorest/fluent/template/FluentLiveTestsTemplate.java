@@ -3,6 +3,7 @@
 
 package com.azure.autorest.fluent.template;
 
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.model.clientmodel.FluentExampleLiveTestStep;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestCase;
 import com.azure.autorest.fluent.model.clientmodel.FluentLiveTestStep;
@@ -10,7 +11,6 @@ import com.azure.autorest.fluent.model.clientmodel.FluentLiveTests;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ModelExampleWriter;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 
@@ -39,7 +39,7 @@ public class FluentLiveTestsTemplate {
                             ");", liveTests.getManagerName(), liveTests.getManagerType().getName())
                 ));
                 // write method signature
-                if (!CoreUtils.isNullOrEmpty(testCase.getDescription())) {
+                if (!ExtensionUtils.isNullOrEmpty(testCase.getDescription())) {
                     classBlock.javadocComment(testCase.getDescription());
                 }
                 classBlock.annotation("Test");
@@ -51,7 +51,7 @@ public class FluentLiveTestsTemplate {
                 classBlock.publicMethod(methodSignature, methodBlock -> {
                     for (FluentLiveTestStep step : testCase.getSteps()) {
                         if (step instanceof FluentExampleLiveTestStep) {
-                            if (!CoreUtils.isNullOrEmpty(step.getDescription())) {
+                            if (!ExtensionUtils.isNullOrEmpty(step.getDescription())) {
                                 methodBlock.line("// " + step.getDescription());
                             }
                             FluentExampleLiveTestStep exampleStep = (FluentExampleLiveTestStep) step;

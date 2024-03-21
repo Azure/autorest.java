@@ -6,9 +6,9 @@ package com.azure.autorest.fluent.transformer;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.Metadata;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.fluentnamer.FluentNamer;
-import com.azure.core.util.CoreUtils;
 import org.slf4j.Logger;
 
 import java.util.Map;
@@ -37,7 +37,7 @@ public class SchemaRenamer {
     private static void checkRename(Metadata m, Map<String, String> renameModel) {
         String name = Utils.getJavaName(m);
         String newName = renameModel.get(name);
-        if (!CoreUtils.isNullOrEmpty(newName)) {
+        if (!ExtensionUtils.isNullOrEmpty(newName)) {
             LOGGER.info("Rename model from '{}' to '{}'", name, newName);
             m.getLanguage().getJava().setName(newName);
         }

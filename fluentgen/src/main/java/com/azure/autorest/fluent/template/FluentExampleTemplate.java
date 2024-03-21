@@ -199,8 +199,8 @@ public class FluentExampleTemplate {
 
         @Override
         protected String codeDeserializeJsonString(String jsonStr) {
-            imports.add(com.azure.core.management.serializer.SerializerFactory.class.getName());
-            imports.add(com.azure.core.util.serializer.SerializerEncoding.class.getName());
+            imports.add("com.azure.core.management.serializer.SerializerFactory");
+            imports.add("com.azure.core.util.serializer.SerializerEncoding");
             imports.add(java.io.IOException.class.getName());
 
             return String.format("SerializerFactory.createDefaultManagementSerializerAdapter().deserialize(%s, Object.class, SerializerEncoding.JSON)",

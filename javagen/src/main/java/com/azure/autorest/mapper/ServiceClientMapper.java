@@ -12,6 +12,7 @@ import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
@@ -29,7 +30,6 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -67,12 +67,12 @@ public class ServiceClientMapper implements IMapper<CodeModel, ServiceClient> {
                 .className(serviceClientClassName)
                 .packageName(packageName);
 
-        if (!CoreUtils.isNullOrEmpty(codeModel.getOperationGroups())) {
+        if (!ExtensionUtils.isNullOrEmpty(codeModel.getOperationGroups())) {
             builder.baseUrl(getBaseUrl(codeModel));
         }
 
         List<Operation> codeModelRestAPIMethods = codeModel.getOperationGroups().stream()
-                .filter(og -> CoreUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))
+                .filter(og -> ExtensionUtils.isNullOrEmpty(og.getLanguage().getJava().getName()))
                 .flatMap(og -> og.getOperations().stream())
                 .collect(Collectors.toList());
 

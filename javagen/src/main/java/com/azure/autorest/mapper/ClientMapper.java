@@ -24,6 +24,7 @@ import com.azure.autorest.extension.base.model.codemodel.Scheme;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsExtensions;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.Client;
@@ -50,7 +51,6 @@ import com.azure.autorest.template.Templates;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -185,7 +185,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         if (multipleClientsWithOperationsPresent || singleClientOperationsPresent) {
             // set the service clients only if there are client operations present
-            if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+            if (!ExtensionUtils.isNullOrEmpty(codeModel.getClients())) {
                 serviceClientsMap = processClients(codeModel.getClients(), codeModel);
                 builder.serviceClients(new ArrayList(serviceClientsMap.keySet()));
             } else {
@@ -208,7 +208,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                     serviceClientDescription)));
         }
         if (settings.isFluent()) {
-            if (settings.isFluentLite() && !CoreUtils.isNullOrEmpty(settings.getImplementationSubpackage())) {
+            if (settings.isFluentLite() && !ExtensionUtils.isNullOrEmpty(settings.getImplementationSubpackage())) {
                 String implementationPackage = settings.getPackage(settings.getImplementationSubpackage());
                 if (!packageInfos.containsKey(implementationPackage)) {
                     packageInfos.put(implementationPackage, new PackageInfo(
@@ -217,7 +217,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                             serviceClientName, serviceClientDescription)));
                 }
             }
-            if (!CoreUtils.isNullOrEmpty(settings.getFluentSubpackage())) {
+            if (!ExtensionUtils.isNullOrEmpty(settings.getFluentSubpackage())) {
                 String fluentPackage = settings.getPackage(settings.getFluentSubpackage());
                 if (!packageInfos.containsKey(fluentPackage)) {
                     packageInfos.put(fluentPackage, new PackageInfo(
@@ -385,7 +385,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
         };
 
         // convenience examples
-        syncClients.stream().filter(c -> !CoreUtils.isNullOrEmpty(c.getConvenienceMethods()))
+        syncClients.stream().filter(c -> !ExtensionUtils.isNullOrEmpty(c.getConvenienceMethods()))
             .forEach(c -> c.getConvenienceMethods()
                 .forEach(m -> handleConvenienceExample.accept(c, m)));
         builder.clientMethodExamples(convenienceExamples);

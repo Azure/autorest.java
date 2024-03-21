@@ -3,6 +3,7 @@
 
 package com.azure.autorest.template;
 
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.UnionModel;
@@ -10,8 +11,6 @@ import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaJavadocComment;
 import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
-import com.azure.core.annotation.Immutable;
-import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import java.util.Collections;
@@ -19,6 +18,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+
+;
 
 public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
 
@@ -35,13 +36,13 @@ public class UnionModelTemplate implements IJavaTemplate<UnionModel, JavaFile> {
     public void write(UnionModel model, JavaFile javaFile) {
         // presently, subclass would only contain one "value" property.
 
-        final boolean isAbstractClass = CoreUtils.isNullOrEmpty(model.getParentModelName());
+        final boolean isAbstractClass = ExtensionUtils.isNullOrEmpty(model.getParentModelName());
         final String superClassName = model.getParentModelName();
 
         Set<String> imports = new HashSet<>();
         model.addImportsTo(imports);
 
-        imports.add(Immutable.class.getName());
+        imports.add("com.azure.core.annotation.Immutable");
         imports.add(JsonValue.class.getName());
 
         javaFile.declareImport(imports);

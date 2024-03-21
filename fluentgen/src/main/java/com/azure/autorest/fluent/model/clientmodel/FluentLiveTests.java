@@ -4,9 +4,9 @@
 package com.azure.autorest.fluent.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.ExtensionUtils;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
-import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -73,14 +73,14 @@ public class FluentLiveTests {
         }
 
         public Builder addImports(Collection<String> imports) {
-            if (!CoreUtils.isNullOrEmpty(imports)) {
+            if (!ExtensionUtils.isNullOrEmpty(imports)) {
                 this.imports.addAll(imports);
             }
             return this;
         }
 
         public Builder addHelperFeatures(Collection<ExampleHelperFeature> helperFeatures) {
-            if (!CoreUtils.isNullOrEmpty(helperFeatures)) {
+            if (!ExtensionUtils.isNullOrEmpty(helperFeatures)) {
                 this.helperFeatures.addAll(helperFeatures);
             }
             return this;
