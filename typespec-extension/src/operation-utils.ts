@@ -70,6 +70,7 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
       : resolvePath(operationExamplesDirectory);
     if (!(await isDirectoryExists(program, exampleDir))) {
       if (program.projectRoot) {
+        // try resolve "examples-directory" relative to program.projectRoot
         exampleDir = version
           ? resolvePath(program.projectRoot, operationExamplesDirectory, version)
           : resolvePath(program.projectRoot, operationExamplesDirectory);
