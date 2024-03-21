@@ -23,4 +23,12 @@ public class ResourceCollectionAssociation {
     public void setCollection(String collection) {
         this.collection = collection;
     }
+
+    @Override
+    public String toString() {
+        return "ResourceCollectionAssociation{" +
+                "resource='" + resource + '\'' +
+                ", collection='" + collection + '\'' +
+                '}';
+    }
 }

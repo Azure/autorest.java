@@ -32,6 +32,7 @@ import org.slf4j.Logger;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -64,11 +65,7 @@ public class FluentMapper {
             Optional<FluentResourceModel> modelOpt = fluentClient.getResourceModels().stream().filter(m -> Objects.equals(m.getName(), modelName)).findFirst();
             if (modelOpt.isPresent()) {
                 FluentResourceModel model = modelOpt.get();
-                if (collectionName == null) {
-//                    // this resource model does not associate with any collection
-//                    // use a dummy ResourceCreate to prevent future parseResourcesCategory invocation from process the model
-//                    model.setResourceCreate(ResourceCreate.NO_ASSOCIATION);
-                } else {
+                if (collectionName != null) {
                     Optional<FluentResourceCollection> collectionOpt = fluentClient.getResourceCollections().stream().filter(c -> Objects.equals(c.getInterfaceType().getName(), collectionName)).findFirst();
                     if (collectionOpt.isPresent()) {
                         FluentResourceCollection collection = collectionOpt.get();
@@ -83,12 +80,6 @@ public class FluentMapper {
         }
         fluentClient.getResourceCollections()
                 .forEach(c -> ResourceParser.parseResourcesCategory(c, fluentClient.getResourceModels(), FluentStatic.getClient().getModels()));
-//        // clean up NO_ASSOCIATION
-//        for (FluentResourceModel model : fluentClient.getResourceModels()) {
-//            if (model.getResourceCreate() == ResourceCreate.NO_ASSOCIATION) {
-//                model.setResourceCreate(null);
-//            }
-//        }
         ResourceParser.processAdditionalMethods(fluentClient);
 
         // samples
@@ -179,6 +170,16 @@ public class FluentMapper {
 
         final FluentObjectMapper objectMapper = (FluentObjectMapper) Mappers.getObjectMapper();
 
+        final Set<String> skipResourceModels = new HashSet<>();
+        for (ResourceCollectionAssociation overrideAssociation : fluentJavaSettings.getResourceCollectionAssociations()) {
+            String modelName = overrideAssociation.getResource();
+            String collectionName = overrideAssociation.getCollection();
+            if (collectionName == null) {
+                LOGGER.info("Skip resource collection for model '{}'.", modelName);
+                skipResourceModels.add(modelName);
+            }
+        }
+
         Set<ObjectSchema> compositeTypes = Stream.concat(Stream.concat(Stream.concat(
                 // ObjectSchema
                 codeModel.getOperationGroups().stream()
@@ -213,6 +214,7 @@ public class FluentMapper {
                 .filter(s -> s instanceof ObjectSchema)
                 .map(s -> (ObjectSchema) s)
                 .filter(FluentType::nonResourceType)
+                .filter(o -> !skipResourceModels.contains(Utils.getJavaName(o)))
                 .collect(Collectors.toSet());
 
         Set<ObjectSchema> errorTypes = codeModel.getOperationGroups().stream()
