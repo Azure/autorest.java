@@ -145,7 +145,8 @@ public interface CustomTemplateResource {
         /**
          * The stage of the CustomTemplateResource definition which contains all the minimum required properties for the resource to be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithProperties {
+        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithProperties,
+            DefinitionStages.WithIfMatch, DefinitionStages.WithIfNoneMatch {
             /**
              * Executes the create request.
              * 
@@ -186,6 +187,32 @@ public interface CustomTemplateResource {
              * @return the next definition stage.
              */
             WithCreate withProperties(CustomTemplateResourceProperties properties);
+        }
+
+        /**
+         * The stage of the CustomTemplateResource definition allowing to specify ifMatch.
+         */
+        interface WithIfMatch {
+            /**
+             * Specifies the ifMatch property: The request should only proceed if an entity matches this string..
+             * 
+             * @param ifMatch The request should only proceed if an entity matches this string.
+             * @return the next definition stage.
+             */
+            WithCreate withIfMatch(String ifMatch);
+        }
+
+        /**
+         * The stage of the CustomTemplateResource definition allowing to specify ifNoneMatch.
+         */
+        interface WithIfNoneMatch {
+            /**
+             * Specifies the ifNoneMatch property: The request should only proceed if no entity matches this string..
+             * 
+             * @param ifNoneMatch The request should only proceed if no entity matches this string.
+             * @return the next definition stage.
+             */
+            WithCreate withIfNoneMatch(String ifNoneMatch);
         }
     }
 

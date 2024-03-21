@@ -70,7 +70,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         @UnexpectedResponseExceptionType(ManagementException.class)
         Mono<Response<Flux<ByteBuffer>>> createOrUpdate(@HostParam("endpoint") String endpoint,
             @QueryParam("api-version") String apiVersion, @PathParam("subscriptionId") String subscriptionId,
-            @PathParam("resourceGroupName") String resourceGroupName,
+            @PathParam("resourceGroupName") String resourceGroupName, @HeaderParam("If-Match") String ifMatch,
+            @HeaderParam("If-None-Match") String ifNoneMatch,
             @PathParam("customTemplateResourceName") String customTemplateResourceName,
             @HeaderParam("accept") String accept, @BodyParam("application/json") CustomTemplateResourceInner resource,
             Context context);
@@ -93,6 +94,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param customTemplateResourceName arm resource name for path.
      * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -100,7 +103,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
-        String customTemplateResourceName, CustomTemplateResourceInner resource) {
+        String customTemplateResourceName, CustomTemplateResourceInner resource, String ifMatch, String ifNoneMatch) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -125,8 +128,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         final String accept = "application/json";
         return FluxUtil
             .withContext(context -> service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
-                this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, accept, resource,
-                context))
+                this.client.getSubscriptionId(), resourceGroupName, ifMatch, ifNoneMatch, customTemplateResourceName,
+                accept, resource, context))
             .contextWrite(context -> context.putAll(FluxUtil.toReactorContext(this.client.getContext()).readOnly()));
     }
 
@@ -136,6 +139,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param customTemplateResourceName arm resource name for path.
      * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -144,7 +149,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<Flux<ByteBuffer>>> createOrUpdateWithResponseAsync(String resourceGroupName,
-        String customTemplateResourceName, CustomTemplateResourceInner resource, Context context) {
+        String customTemplateResourceName, CustomTemplateResourceInner resource, String ifMatch, String ifNoneMatch,
+        Context context) {
         if (this.client.getEndpoint() == null) {
             return Mono.error(
                 new IllegalArgumentException("Parameter this.client.getEndpoint() is required and cannot be null."));
@@ -169,7 +175,32 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
         final String accept = "application/json";
         context = this.client.mergeContext(context);
         return service.createOrUpdate(this.client.getEndpoint(), this.client.getApiVersion(),
-            this.client.getSubscriptionId(), resourceGroupName, customTemplateResourceName, accept, resource, context);
+            this.client.getSubscriptionId(), resourceGroupName, ifMatch, ifNoneMatch, customTemplateResourceName,
+            accept, resource, context);
+    }
+
+    /**
+     * Create a CustomTemplateResource.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param customTemplateResourceName arm resource name for path.
+     * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return the {@link PollerFlux} for polling of concrete tracked resource types can be created by aliasing this type using a specific property type.
+     */
+    @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
+    private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdateAsync(
+        String resourceGroupName, String customTemplateResourceName, CustomTemplateResourceInner resource,
+        String ifMatch, String ifNoneMatch) {
+        Mono<Response<Flux<ByteBuffer>>> mono = createOrUpdateWithResponseAsync(resourceGroupName,
+            customTemplateResourceName, resource, ifMatch, ifNoneMatch);
+        return this.client.<CustomTemplateResourceInner, CustomTemplateResourceInner>getLroResult(mono,
+            this.client.getHttpPipeline(), CustomTemplateResourceInner.class, CustomTemplateResourceInner.class,
+            this.client.getContext());
     }
 
     /**
@@ -186,8 +217,10 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdateAsync(
         String resourceGroupName, String customTemplateResourceName, CustomTemplateResourceInner resource) {
-        Mono<Response<Flux<ByteBuffer>>> mono
-            = createOrUpdateWithResponseAsync(resourceGroupName, customTemplateResourceName, resource);
+        final String ifMatch = null;
+        final String ifNoneMatch = null;
+        Mono<Response<Flux<ByteBuffer>>> mono = createOrUpdateWithResponseAsync(resourceGroupName,
+            customTemplateResourceName, resource, ifMatch, ifNoneMatch);
         return this.client.<CustomTemplateResourceInner, CustomTemplateResourceInner>getLroResult(mono,
             this.client.getHttpPipeline(), CustomTemplateResourceInner.class, CustomTemplateResourceInner.class,
             this.client.getContext());
@@ -199,6 +232,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param customTemplateResourceName arm resource name for path.
      * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -208,10 +243,10 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     private PollerFlux<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdateAsync(
         String resourceGroupName, String customTemplateResourceName, CustomTemplateResourceInner resource,
-        Context context) {
+        String ifMatch, String ifNoneMatch, Context context) {
         context = this.client.mergeContext(context);
-        Mono<Response<Flux<ByteBuffer>>> mono
-            = createOrUpdateWithResponseAsync(resourceGroupName, customTemplateResourceName, resource, context);
+        Mono<Response<Flux<ByteBuffer>>> mono = createOrUpdateWithResponseAsync(resourceGroupName,
+            customTemplateResourceName, resource, ifMatch, ifNoneMatch, context);
         return this.client.<CustomTemplateResourceInner, CustomTemplateResourceInner>getLroResult(mono,
             this.client.getHttpPipeline(), CustomTemplateResourceInner.class, CustomTemplateResourceInner.class,
             context);
@@ -231,7 +266,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdate(
         String resourceGroupName, String customTemplateResourceName, CustomTemplateResourceInner resource) {
-        return this.beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource).getSyncPoller();
+        final String ifMatch = null;
+        final String ifNoneMatch = null;
+        return this
+            .beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, ifMatch, ifNoneMatch)
+            .getSyncPoller();
     }
 
     /**
@@ -240,6 +279,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param customTemplateResourceName arm resource name for path.
      * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -249,9 +290,32 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollResult<CustomTemplateResourceInner>, CustomTemplateResourceInner> beginCreateOrUpdate(
         String resourceGroupName, String customTemplateResourceName, CustomTemplateResourceInner resource,
-        Context context) {
-        return this.beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, context)
+        String ifMatch, String ifNoneMatch, Context context) {
+        return this
+            .beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, ifMatch, ifNoneMatch,
+                context)
             .getSyncPoller();
+    }
+
+    /**
+     * Create a CustomTemplateResource.
+     * 
+     * @param resourceGroupName The name of the resource group. The name is case insensitive.
+     * @param customTemplateResourceName arm resource name for path.
+     * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws ManagementException thrown if the request is rejected by server.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return concrete tracked resource types can be created by aliasing this type using a specific property type on successful completion of {@link Mono}.
+     */
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    private Mono<CustomTemplateResourceInner> createOrUpdateAsync(String resourceGroupName,
+        String customTemplateResourceName, CustomTemplateResourceInner resource, String ifMatch, String ifNoneMatch) {
+        return beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, ifMatch, ifNoneMatch)
+            .last()
+            .flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
@@ -268,7 +332,10 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CustomTemplateResourceInner> createOrUpdateAsync(String resourceGroupName,
         String customTemplateResourceName, CustomTemplateResourceInner resource) {
-        return beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource).last()
+        final String ifMatch = null;
+        final String ifNoneMatch = null;
+        return beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, ifMatch, ifNoneMatch)
+            .last()
             .flatMap(this.client::getLroFinalResultOrError);
     }
 
@@ -278,6 +345,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param customTemplateResourceName arm resource name for path.
      * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -286,9 +355,10 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<CustomTemplateResourceInner> createOrUpdateAsync(String resourceGroupName,
-        String customTemplateResourceName, CustomTemplateResourceInner resource, Context context) {
-        return beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, context).last()
-            .flatMap(this.client::getLroFinalResultOrError);
+        String customTemplateResourceName, CustomTemplateResourceInner resource, String ifMatch, String ifNoneMatch,
+        Context context) {
+        return beginCreateOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, ifMatch, ifNoneMatch,
+            context).last().flatMap(this.client::getLroFinalResultOrError);
     }
 
     /**
@@ -305,7 +375,10 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CustomTemplateResourceInner createOrUpdate(String resourceGroupName, String customTemplateResourceName,
         CustomTemplateResourceInner resource) {
-        return createOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource).block();
+        final String ifMatch = null;
+        final String ifNoneMatch = null;
+        return createOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, ifMatch, ifNoneMatch)
+            .block();
     }
 
     /**
@@ -314,6 +387,8 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * @param resourceGroupName The name of the resource group. The name is case insensitive.
      * @param customTemplateResourceName arm resource name for path.
      * @param resource Resource create parameters.
+     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifNoneMatch The request should only proceed if no entity matches this string.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -322,8 +397,9 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public CustomTemplateResourceInner createOrUpdate(String resourceGroupName, String customTemplateResourceName,
-        CustomTemplateResourceInner resource, Context context) {
-        return createOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, context).block();
+        CustomTemplateResourceInner resource, String ifMatch, String ifNoneMatch, Context context) {
+        return createOrUpdateAsync(resourceGroupName, customTemplateResourceName, resource, ifMatch, ifNoneMatch,
+            context).block();
     }
 
     /**
