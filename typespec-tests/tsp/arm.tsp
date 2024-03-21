@@ -106,6 +106,19 @@ model ResponseWithHeader<T> {
   ...Body<T>;
 }
 
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "built-in conditional request includes time based conditional headers"
+alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.ArmResource> = {
+  @header("If-Match")
+  @doc("The request should only proceed if an entity matches this string.")
+  ifMatch?: string;
+};
+
+alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.ArmResource> = {
+  @header("If-None-Match")
+  @doc("The request should only proceed if no entity matches this string.")
+  ifNoneMatch?: string;
+};
+
 //----------------------- Paths -----------------------
 @armResourceOperations
 interface ChildResourcesInterface
@@ -119,7 +132,12 @@ interface TopLevelArmResourceInterface
   extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {}
 
 @armResourceOperations
-interface CustomTemplateResourceInterface extends ResourceCreate<CustomTemplateResource> {
+interface CustomTemplateResourceInterface extends ResourceCreate<
+    CustomTemplateResource,
+    Azure.ResourceManager.Foundations.BaseParameters<CustomTemplateResource> &
+          IfMatchParameters<CustomTemplateResource> &
+          IfNoneMatchParameters<CustomTemplateResource>
+  > {
   update is ArmResourceUpdateSync<CustomTemplateResource>;
 }
 
