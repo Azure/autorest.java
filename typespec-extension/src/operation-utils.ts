@@ -53,7 +53,8 @@ export function isKnownContentType(contentTypes: string[]): boolean {
 
 export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
   const operationExamplesMap = new Map<Operation, any>();
-  if (options["examples-directory"]) {
+  const operationExamplesDirectory = options["examples-directory"];
+  if (operationExamplesDirectory) {
     const operationIdExamplesMap = new Map<string, any>();
 
     const service = ignoreDiagnostics(getAllHttpServices(program))[0];
@@ -64,14 +65,19 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
       version = versions[versions.length - 1].value;
     }
 
-    const exampleDir = version
-      ? resolvePath(options["examples-directory"], version)
-      : resolvePath(options["examples-directory"]);
-    try {
-      if (!(await program.host.stat(exampleDir)).isDirectory()) return operationExamplesMap;
-    } catch (err) {
-      logWarning(program, `Examples directory '${exampleDir}' does not exist.`);
-      return operationExamplesMap;
+    let exampleDir = version
+      ? resolvePath(operationExamplesDirectory, version)
+      : resolvePath(operationExamplesDirectory);
+    if (!(await isDirectoryExists(program, exampleDir))) {
+      if (program.projectRoot) {
+        exampleDir = version
+          ? resolvePath(program.projectRoot, operationExamplesDirectory, version)
+          : resolvePath(program.projectRoot, operationExamplesDirectory);
+        if (!(await isDirectoryExists(program, exampleDir))) {
+          logWarning(program, `Examples directory '${exampleDir}' does not exist.`);
+          return operationExamplesMap;
+        }
+      }
     }
     const exampleFiles = await program.host.readDir(exampleDir);
     for (const fileName of exampleFiles) {
@@ -102,6 +108,17 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
     }
   }
   return operationExamplesMap;
+}
+
+async function isDirectoryExists(program: Program, directory: string) {
+  try {
+    if (!(await program.host.stat(directory)).isDirectory()) {
+      return false;
+    }
+  } catch (err) {
+    return false;
+  }
+  return true;
 }
 
 function pascalCaseForOperationId(name: string) {
