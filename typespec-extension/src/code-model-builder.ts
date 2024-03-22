@@ -533,6 +533,11 @@ export class CodeModelBuilder {
         this.codeModel.arm = true;
         this.options["group-etag-headers"] = false;
       }
+    }
+    // preprocess group-etag-headers
+    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
+    
+    for (const client of clients) {
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
 
@@ -639,9 +644,6 @@ export class CodeModelBuilder {
         }
       }
     }
-
-    // postprocess for group-etag-headers
-    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
     return clients;
   }
