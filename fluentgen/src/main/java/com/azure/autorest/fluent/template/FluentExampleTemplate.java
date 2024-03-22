@@ -17,6 +17,7 @@ import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +47,9 @@ public class FluentExampleTemplate {
         });
         javaFile.publicFinalClass(className, classBlock -> {
             for (ExampleMethod exampleMethod : exampleMethods) {
-                classBlock.blockComment(getExampleTag(exampleMethod.getExample()));
+                if (!CoreUtils.isNullOrEmpty(exampleMethod.getExample().getOriginalFileName())) {
+                    classBlock.blockComment(getExampleTag(exampleMethod.getExample()));
+                }
 
                 classBlock.javadocComment(commentBlock -> {
                     commentBlock.description(String.format("Sample code: %1$s", exampleMethod.getExample().getName()));
