@@ -207,8 +207,6 @@ export class CodeModelBuilder {
       this.options["skip-special-headers"].forEach((it) => SPECIAL_HEADER_NAMES.add(it.toLowerCase()));
     }
 
-    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
-
     this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
@@ -533,6 +531,7 @@ export class CodeModelBuilder {
     for (const client of clients) {
       if (client.arm) {
         this.codeModel.arm = true;
+        this.options["group-etag-headers"] = false;
       }
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
@@ -640,6 +639,9 @@ export class CodeModelBuilder {
         }
       }
     }
+
+    // postprocess for group-etag-headers
+    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
     return clients;
   }

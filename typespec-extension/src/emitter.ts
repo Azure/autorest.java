@@ -41,7 +41,6 @@ export interface EmitterOptions {
   "customization-class"?: string;
   "polling"?: any;
 
-  "arm"?: boolean;
   "group-etag-headers"?: boolean;
 
   "dev-options"?: DevOptions;
@@ -91,7 +90,6 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "customization-class": { type: "string", nullable: true },
     "polling": { type: "object", additionalProperties: true, nullable: true },
 
-    "arm": { type: "boolean", nullable: true },
     "group-etag-headers": { type: "boolean", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
@@ -129,7 +127,7 @@ export async function $onEmit(context: EmitContext<EmitterOptions>) {
     const outputPath = options["output-dir"] ?? context.emitterOutputDir;
     options["output-dir"] = getNormalizedAbsolutePath(outputPath, undefined);
 
-    options["arm"] = codeModel.arm;
+    (options as any)["arm"] = codeModel.arm;
 
     const codeModelFileName = resolvePath(outputPath, "./code-model.yaml");
 
