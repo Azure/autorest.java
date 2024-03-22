@@ -531,7 +531,13 @@ export class CodeModelBuilder {
     for (const client of clients) {
       if (client.arm) {
         this.codeModel.arm = true;
+        this.options["group-etag-headers"] = false;
       }
+    }
+    // preprocess group-etag-headers
+    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
+
+    for (const client of clients) {
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
 
@@ -786,7 +792,9 @@ export class CodeModelBuilder {
     }
 
     // group ETag header parameters, if exists
-    this.processEtagHeaderParameters(codeModelOperation, op);
+    if (this.options["group-etag-headers"]) {
+      this.processEtagHeaderParameters(codeModelOperation, op);
+    }
 
     // lro metadata
     const lroMetadata = this.processLroMetadata(codeModelOperation, op);

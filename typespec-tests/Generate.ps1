@@ -40,7 +40,7 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
   } elseif ($tspFile -match "arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"" --option ""@azure-tools/typespec-java.group-etag-headers=false"""
     # also don't generate with stream-style-serialization as azure-core-management hasn't migrated to azure-json yet
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
   }
