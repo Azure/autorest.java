@@ -6,8 +6,6 @@ package com._specs_.azure.core.lro.rpc.legacy;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobData;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobResult;
 import com._specs_.azure.core.lro.rpc.legacy.models.JobStatus;
-import com.azure.core.http.policy.HttpLogDetailLevel;
-import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollResponse;
@@ -18,7 +16,6 @@ import org.junit.jupiter.api.Test;
 public class LegacyRpcTests {
 
     private final LegacyClient client = new LegacyClientBuilder()
-            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
             .buildClient();
 
     @Test
