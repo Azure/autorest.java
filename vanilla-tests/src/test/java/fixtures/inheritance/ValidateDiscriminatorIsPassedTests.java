@@ -14,7 +14,6 @@ import fixtures.inheritance.passdiscriminator.models.MetricAlertCriteria;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import fixtures.inheritance.passdiscriminator.models.Odatatype;
 import org.junit.Test;
-import org.junit.jupiter.api.Disabled;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -34,14 +33,13 @@ public class ValidateDiscriminatorIsPassedTests {
         assertEquals(JsonTypeInfo.As.PROPERTY, jsonTypeInfo.include());
     }
 
-    @Disabled("design changed")
     @Test
     public void subClassAcceptsDiscriminator() {
         JsonTypeInfo jsonTypeInfo = MetricAlertSingleResourceMultipleMetricCriteria.class
             .getAnnotation(JsonTypeInfo.class);
         assertNotNull(jsonTypeInfo);
         assertTrue(jsonTypeInfo.visible());
-        assertEquals(JsonTypeInfo.As.EXISTING_PROPERTY, jsonTypeInfo.include());
+        assertEquals(JsonTypeInfo.As.PROPERTY, jsonTypeInfo.include());
 
         String discriminatorValue = MetricAlertSingleResourceMultipleMetricCriteria.class
             .getAnnotation(JsonTypeName.class)
