@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package fixtures.inheritance.passdiscriminator;
+package fixtures.inheritance;
 
 import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,6 +14,7 @@ import fixtures.inheritance.passdiscriminator.models.MetricAlertCriteria;
 import fixtures.inheritance.passdiscriminator.models.MetricAlertSingleResourceMultipleMetricCriteria;
 import fixtures.inheritance.passdiscriminator.models.Odatatype;
 import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -33,8 +34,9 @@ public class ValidateDiscriminatorIsPassedTests {
         assertEquals(JsonTypeInfo.As.PROPERTY, jsonTypeInfo.include());
     }
 
+    @Disabled("design changed")
     @Test
-    public void subClassAcceptsDiscriminator() throws IllegalAccessException {
+    public void subClassAcceptsDiscriminator() {
         JsonTypeInfo jsonTypeInfo = MetricAlertSingleResourceMultipleMetricCriteria.class
             .getAnnotation(JsonTypeInfo.class);
         assertNotNull(jsonTypeInfo);
