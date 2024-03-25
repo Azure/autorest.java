@@ -19,6 +19,11 @@ import java.util.Map;
 @Fluent
 public final class DocumentModelCopyToOperationDetails extends OperationDetails {
     /*
+     * Type of operation.
+     */
+    private String kind = "documentModelCopyTo";
+
+    /*
      * Operation result upon success.
      */
     private DocumentModelDetails result;
@@ -27,7 +32,16 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
      * Creates an instance of DocumentModelCopyToOperationDetails class.
      */
     public DocumentModelCopyToOperationDetails() {
-        setKind("documentModelCopyTo");
+    }
+
+    /**
+     * Get the kind property: Type of operation.
+     * 
+     * @return the kind value.
+     */
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -146,11 +160,11 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
                 ? null
                 : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getLastUpdatedDateTime()));
         jsonWriter.writeStringField("resourceLocation", getResourceLocation());
-        jsonWriter.writeStringField("kind", getKind());
         jsonWriter.writeNumberField("percentCompleted", getPercentCompleted());
         jsonWriter.writeStringField("apiVersion", getApiVersion());
         jsonWriter.writeMapField("tags", getTags(), (writer, element) -> writer.writeString(element));
         jsonWriter.writeJsonField("error", getError());
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeJsonField("result", this.result);
         return jsonWriter.writeEndObject();
     }
@@ -184,8 +198,6 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
                         reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
                 } else if ("resourceLocation".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails.setResourceLocation(reader.getString());
-                } else if ("kind".equals(fieldName)) {
-                    deserializedDocumentModelCopyToOperationDetails.setKind(reader.getString());
                 } else if ("percentCompleted".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails
                         .setPercentCompleted(reader.getNullable(JsonReader::getInt));
@@ -196,6 +208,8 @@ public final class DocumentModelCopyToOperationDetails extends OperationDetails 
                     deserializedDocumentModelCopyToOperationDetails.setTags(tags);
                 } else if ("error".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails.setError(Error.fromJson(reader));
+                } else if ("kind".equals(fieldName)) {
+                    deserializedDocumentModelCopyToOperationDetails.kind = reader.getString();
                 } else if ("result".equals(fieldName)) {
                     deserializedDocumentModelCopyToOperationDetails.result = DocumentModelDetails.fromJson(reader);
                 } else {

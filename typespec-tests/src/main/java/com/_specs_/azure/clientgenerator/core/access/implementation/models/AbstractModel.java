@@ -51,18 +51,6 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
     }
 
     /**
-     * Set the kind property: The kind property.
-     * 
-     * @param kind the kind value to set.
-     * @return the AbstractModel object itself.
-     */
-    @Generated
-    protected AbstractModel setKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the name property: The name property.
      * 
      * @return the name value.

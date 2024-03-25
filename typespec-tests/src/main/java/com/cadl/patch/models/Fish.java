@@ -90,19 +90,6 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Set the kind property: The kind property.
-     * 
-     * @param kind the kind value to set.
-     * @return the Fish object itself.
-     */
-    @Generated
-    protected Fish setKind(String kind) {
-        this.kind = kind;
-        this.updatedProperties.add("kind");
-        return this;
-    }
-
-    /**
      * Get the id property: The id property.
      * 
      * @return the id value.

@@ -42,18 +42,6 @@ public class Data implements JsonSerializable<Data> {
     }
 
     /**
-     * Set the type property: The &#064;data.kind property.
-     * 
-     * @param type the type value to set.
-     * @return the Data object itself.
-     */
-    @Generated
-    protected Data setType(String type) {
-        this.type = type;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated

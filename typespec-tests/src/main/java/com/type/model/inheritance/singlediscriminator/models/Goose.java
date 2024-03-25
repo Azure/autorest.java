@@ -16,6 +16,12 @@ import java.io.IOException;
  */
 @Immutable
 public final class Goose extends Bird {
+    /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "goose";
+
     /**
      * Creates an instance of Goose class.
      * 
@@ -24,7 +30,17 @@ public final class Goose extends Bird {
     @Generated
     public Goose(int wingspan) {
         super(wingspan);
-        setKind("goose");
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -35,7 +51,7 @@ public final class Goose extends Bird {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("wingspan", getWingspan());
-        jsonWriter.writeStringField("kind", getKind());
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -65,7 +81,7 @@ public final class Goose extends Bird {
                 }
             }
             Goose deserializedGoose = new Goose(wingspan);
-            deserializedGoose.setKind(kind);
+            deserializedGoose.kind = kind;
 
             return deserializedGoose;
         });

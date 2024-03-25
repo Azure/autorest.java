@@ -16,6 +16,12 @@ import java.io.IOException;
  */
 @Immutable
 public final class SawShark extends Shark {
+    /*
+     * The sharktype property.
+     */
+    @Generated
+    private final String sharktype;
+
     /**
      * Creates an instance of SawShark class.
      * 
@@ -28,6 +34,17 @@ public final class SawShark extends Shark {
     }
 
     /**
+     * Get the sharktype property: The sharktype property.
+     * 
+     * @return the sharktype value.
+     */
+    @Generated
+    @Override
+    public String getSharktype() {
+        return this.sharktype;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -35,8 +52,7 @@ public final class SawShark extends Shark {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("age", getAge());
-        jsonWriter.writeStringField("sharktype", getSharktype());
-        jsonWriter.writeStringField("kind", getKind());
+        jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }
 
@@ -53,7 +69,6 @@ public final class SawShark extends Shark {
         return jsonReader.readObject(reader -> {
             int age = 0;
             String sharktype = "saw";
-            String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -62,16 +77,11 @@ public final class SawShark extends Shark {
                     age = reader.getInt();
                 } else if ("sharktype".equals(fieldName)) {
                     sharktype = reader.getString();
-                } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            SawShark deserializedSawShark = new SawShark(age, sharktype);
-            deserializedSawShark.setKind(kind);
-
-            return deserializedSawShark;
+            return new SawShark(age, sharktype);
         });
     }
 }

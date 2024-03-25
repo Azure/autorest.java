@@ -18,11 +18,25 @@ import java.util.List;
  */
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    /*
+     * The fishtype property.
+     */
+    private String fishtype = "cookiecuttershark";
+
     /**
      * Creates an instance of Cookiecuttershark class.
      */
     public Cookiecuttershark() {
-        setFishtype("cookiecuttershark");
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -79,10 +93,10 @@ public final class Cookiecuttershark extends Shark {
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
-        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         return jsonWriter.writeEndObject();
     }
 
@@ -106,8 +120,6 @@ public final class Cookiecuttershark extends Shark {
                 } else if ("birthday".equals(fieldName)) {
                     deserializedCookiecuttershark.setBirthday(
                         reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedCookiecuttershark.setFishtype(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedCookiecuttershark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {
@@ -115,6 +127,8 @@ public final class Cookiecuttershark extends Shark {
                     deserializedCookiecuttershark.setSiblings(siblings);
                 } else if ("age".equals(fieldName)) {
                     deserializedCookiecuttershark.setAge(reader.getNullable(JsonReader::getInt));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedCookiecuttershark.fishtype = reader.getString();
                 } else {
                     reader.skipChildren();
                 }

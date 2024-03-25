@@ -19,6 +19,12 @@ import java.util.Map;
 @Fluent
 public final class Eagle extends Bird {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "eagle";
+
+    /*
      * The friends property.
      */
     @Generated
@@ -44,7 +50,17 @@ public final class Eagle extends Bird {
     @Generated
     public Eagle(int wingspan) {
         super(wingspan);
-        setKind("eagle");
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -121,7 +137,7 @@ public final class Eagle extends Bird {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("wingspan", getWingspan());
-        jsonWriter.writeStringField("kind", getKind());
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
         jsonWriter.writeJsonField("partner", this.partner);
@@ -163,7 +179,7 @@ public final class Eagle extends Bird {
                 }
             }
             Eagle deserializedEagle = new Eagle(wingspan);
-            deserializedEagle.setKind(kind);
+            deserializedEagle.kind = kind;
             deserializedEagle.friends = friends;
             deserializedEagle.hate = hate;
             deserializedEagle.partner = partner;

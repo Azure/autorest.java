@@ -57,17 +57,6 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Set the fishtype property: The fishtype property.
-     * 
-     * @param fishtype the fishtype value to set.
-     * @return the Fish object itself.
-     */
-    protected Fish setFishtype(String fishtype) {
-        this.fishtype = fishtype;
-        return this;
-    }
-
-    /**
      * Get the species property: The species property.
      * 
      * @return the species value.
