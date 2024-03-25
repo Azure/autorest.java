@@ -31,6 +31,7 @@ public final class SawShark extends Shark {
     @Generated
     public SawShark(int age, String sharktype) {
         super(age, sharktype);
+        this.sharktype = "saw";
     }
 
     /**
