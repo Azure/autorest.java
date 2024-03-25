@@ -168,23 +168,26 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                if (!property.isPolymorphicDiscriminator() || modelDefinesProperty(model, property)) {
-                    // Only the super most parent model should have the polymorphic discriminator getter.
-                    // The child models should use the parent's getter.
-                    generateGetterJavadoc(classBlock, model, property);
-                    addGeneratedAnnotation(classBlock);
-                    if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
-                        classBlock.annotation("JsonAnyGetter");
-                    }
-                    if (!propertyIsReadOnly) {
-                        TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
-                    }
-
-                    classBlock.method(methodVisibility, null,
-                        propertyClientType + " " + getGetterName(model, property) + "()",
-                        methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                            methodBlock, settings));
+                generateGetterJavadoc(classBlock, model, property);
+                addGeneratedAnnotation(classBlock);
+                if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
+                    classBlock.annotation("JsonAnyGetter");
                 }
+                if (!propertyIsReadOnly) {
+                    TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
+                }
+
+                // getter method of discriminator property in subclass is handled differently
+                final boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
+                if (polymorphicDiscriminatorInSubclass && !settings.isStreamStyleSerialization()) {
+                    // add JsonTypeId and JsonProperty annotations to the getter method
+                    // so that this getter method in subclass would override Jackson's handling of the discriminator property in superclass
+                    addFieldAnnotations(model, property, classBlock, settings);
+                }
+                classBlock.method(methodVisibility, null,
+                    propertyClientType + " " + getGetterName(model, property) + "()",
+                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, model, property, treatAsXml,
+                            methodBlock, settings));
 
                 // The model is immutable output only if and only if the immutable output model setting is enabled and
                 // the usage of the model include output and does not include input.
@@ -214,8 +217,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         settings);
                     boolean definedByModel = modelDefinesProperty(model, property);
                     if (hasDerivedTypes && notIncludedInConstructor && definedByModel
-                        && (streamStyle || property.isPolymorphicDiscriminator())) {
-                        methodVisibility = /*property.isPolymorphicDiscriminator() ? JavaVisibility.Protected : */JavaVisibility.PackagePrivate;
+                        && streamStyle && !property.isPolymorphicDiscriminator()) {
+                        methodVisibility = JavaVisibility.PackagePrivate;
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
                         classBlock.method(methodVisibility, null,
@@ -934,17 +937,27 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      *
      * @param propertyWireType The property wire type.
      * @param propertyClientType The client property type.
+     * @param model The model.
      * @param property The property.
      * @param treatAsXml Whether the getter should treat the property as XML.
      * @param methodBlock Where the getter method is being added.
+     * @param settings Java settings.
      */
-    private static void addGetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
+    private static void addGetterMethod(IType propertyWireType, IType propertyClientType,
+        ClientModel model, ClientModelProperty property,
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
         String expression = "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
             expression = TemplateHelper.getByteCloneExpression(expression);
+        }
+        final boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
+        if (polymorphicDiscriminatorInSubclass) {
+            String discriminatorValue = property.getDefaultValue() != null
+                ? property.getDefaultValue()
+                : property.getClientType().defaultValueExpression(model.getSerializedName());
+            expression = discriminatorValue;
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
