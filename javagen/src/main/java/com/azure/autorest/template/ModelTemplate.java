@@ -179,10 +179,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 // getter method of discriminator property in subclass is handled differently
                 final boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
-                if (polymorphicDiscriminatorInSubclass && !settings.isStreamStyleSerialization()) {
-                    // add JsonTypeId and JsonProperty annotations to the getter method
-                    // so that this getter method in subclass would override Jackson's handling of the discriminator property in superclass
-                    addFieldAnnotations(model, property, classBlock, settings);
+                if (polymorphicDiscriminatorInSubclass) {
+                    classBlock.annotation("Override");
+                    if (!settings.isStreamStyleSerialization()) {
+                        // add JsonTypeId and JsonProperty annotations to the getter method
+                        // so that this getter method in subclass would override Jackson's handling of the discriminator property in superclass
+                        addFieldAnnotations(model, property, classBlock, settings);
+                    }
                 }
                 classBlock.method(methodVisibility, null,
                     propertyClientType + " " + getGetterName(model, property) + "()",
