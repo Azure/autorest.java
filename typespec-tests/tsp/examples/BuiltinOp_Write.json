@@ -1,0 +1,44 @@
+{
+  "operationId": "BuiltinOp_WriteConvenience",
+  "title": "BuiltinOp Write",
+  "parameters": {
+    "body": {
+      "boolean": true,
+      "string": "string",
+      "bytes": [1,2,3],
+      "int": 10,
+      "safeint": 10,
+      "decimal": 1.0,
+      "long": 10,
+      "float": 1.0,
+      "double": 1.0,
+      "duration":"P1h",
+      "date": "1999-01-01",
+      "dateTime": "1988-07-20T13:34:45",
+      "stringList": ["a", "b", "c"],
+      "bytesDict": {
+        "myBytes": [1, 2, 3]
+      },
+      "url": "https://www.example.org",
+      "nullableFloatDict": {
+        "max": 15.0,
+        "min": 14.0,
+        "average": 14.3
+      },
+      "encoded": {}
+    }
+  },
+  "responses": {
+    "200": {},
+    "default": {
+      "headers": {
+        "Content-Type": "application/json",
+        "x-ms-error-code": "Error Code"
+      },
+      "body": {
+        "code": "Error Code",
+        "message": "Error Message"
+      }
+    }
+  }
+}
