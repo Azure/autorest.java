@@ -571,11 +571,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // required, in which case the default value will be set in the constructor.
                     if (property.getDefaultValue() != null
                         && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
-                        if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
-                            fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
-                        } else {
-                            fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
-                        }
+                        fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
                     } else {
                         fieldSignature = propertyType + " " + propertyName;
                     }
