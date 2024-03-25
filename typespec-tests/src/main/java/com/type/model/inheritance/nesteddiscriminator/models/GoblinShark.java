@@ -31,6 +31,7 @@ public final class GoblinShark extends Shark {
     @Generated
     public GoblinShark(int age, String sharktype) {
         super(age, sharktype);
+        this.sharktype = "goblin";
     }
 
     /**
