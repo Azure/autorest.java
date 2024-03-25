@@ -83,8 +83,13 @@ public class ValidateDiscriminatorIsPassedTests {
 
         // de-serialization of unknown type
         String unknownJson = "{\"odata.type\": \"invalid\"}";
-        MetricAlertCriteria criteria = BinaryData.fromString(unknownJson).toObject(MetricAlertCriteria.class);
-        assertEquals("invalid", criteria.getOdataType().toString());
-        assertEquals(MetricAlertCriteria.class, criteria.getClass());
+        MetricAlertCriteria unknown = BinaryData.fromString(unknownJson).toObject(MetricAlertCriteria.class);
+        assertEquals("invalid", unknown.getOdataType().toString());
+        assertEquals(MetricAlertCriteria.class, unknown.getClass());
+        // serialization keeps the unknown type
+        unknownJson = BinaryData.fromObject(unknown).toString();
+        jsonNode = OBJECT_MAPPER.readTree(unknownJson);
+        assertEquals(1, jsonNode.size());
+        assertEquals("invalid", jsonNode.get("odata.type").asText());
     }
 }
