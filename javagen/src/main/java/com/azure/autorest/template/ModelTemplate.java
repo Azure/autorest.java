@@ -214,10 +214,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         settings);
                     boolean definedByModel = modelDefinesProperty(model, property);
                     if (hasDerivedTypes && notIncludedInConstructor && definedByModel
-                        && (settings.isStreamStyleSerialization() || property.isPolymorphicDiscriminator())) {
-                        // Super class and child classes may be in different packages.
-                        // Since we call polymorphic setter in child classes' constructor, we need the setter to be visibility of protected.
-                        methodVisibility = property.isPolymorphicDiscriminator() ? JavaVisibility.Protected : JavaVisibility.PackagePrivate;
+                        && (streamStyle || property.isPolymorphicDiscriminator())) {
+                        methodVisibility = /*property.isPolymorphicDiscriminator() ? JavaVisibility.Protected : */JavaVisibility.PackagePrivate;
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
                         classBlock.method(methodVisibility, null,
@@ -829,9 +827,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
                 if (modelDefinesProperty(model, polymorphicProperty)) {
                     constructor.line("this." + polymorphicProperty.getName() + " = " + discriminatorValue + ";");
-                } else {
-                    constructor.line(polymorphicProperty.getSetterName() + "(" + discriminatorValue + ");");
                 }
+//                else {
+//                    constructor.line(polymorphicProperty.getSetterName() + "(" + discriminatorValue + ");");
+//                }
             }
 
             // constant properties should already be initialized in class variable definition
