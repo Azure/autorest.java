@@ -181,15 +181,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 final boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
                 if (polymorphicDiscriminatorInSubclass) {
                     classBlock.annotation("Override");
-                    if (!settings.isStreamStyleSerialization()) {
-                        // add JsonTypeId and JsonProperty annotations to the getter method
-                        // so that this getter method in subclass would override Jackson's handling of the discriminator property in superclass
-                        addFieldAnnotations(model, property, classBlock, settings);
-                    }
                 }
                 classBlock.method(methodVisibility, null,
                     propertyClientType + " " + getGetterName(model, property) + "()",
-                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, model, property, treatAsXml,
+                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings));
 
                 // The model is immutable output only if and only if the immutable output model setting is enabled and
@@ -545,12 +540,12 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property)) {
-                // Only the super most parent model should have the polymorphic discriminator as a field.
-                // The child models should use the parent's field. If the polymorphic property is required, it will be
-                // initialized in the parent's constructor. Otherwise, it will be set using the package-private setter.
-                continue;
-            }
+//            if (property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property)) {
+//                // Only the super most parent model should have the polymorphic discriminator as a field.
+//                // The child models should use the parent's field. If the polymorphic property is required, it will be
+//                // initialized in the parent's constructor. Otherwise, it will be set using the package-private setter.
+//                continue;
+//            }
 
             String propertyName = property.getName();
             IType propertyType = property.getWireType();
@@ -940,27 +935,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      *
      * @param propertyWireType The property wire type.
      * @param propertyClientType The client property type.
-     * @param model The model.
      * @param property The property.
      * @param treatAsXml Whether the getter should treat the property as XML.
      * @param methodBlock Where the getter method is being added.
      * @param settings Java settings.
      */
-    private static void addGetterMethod(IType propertyWireType, IType propertyClientType,
-        ClientModel model, ClientModelProperty property,
+    private static void addGetterMethod(IType propertyWireType, IType propertyClientType, ClientModelProperty property,
         boolean treatAsXml, JavaBlock methodBlock, JavaSettings settings) {
         String sourceTypeName = propertyWireType.toString();
         String targetTypeName = propertyClientType.toString();
         String expression = "this." + property.getName();
         if (propertyWireType.equals(ArrayType.BYTE_ARRAY)) {
             expression = TemplateHelper.getByteCloneExpression(expression);
-        }
-        final boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
-        if (polymorphicDiscriminatorInSubclass) {
-            String discriminatorValue = property.getDefaultValue() != null
-                ? property.getDefaultValue()
-                : property.getClientType().defaultValueExpression(model.getSerializedName());
-            expression = discriminatorValue;
         }
 
         if (sourceTypeName.equals(targetTypeName)) {
