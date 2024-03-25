@@ -9,6 +9,8 @@ import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.longrunning.models.JobData;
 import com.cadl.longrunning.models.JobResultResult;
+import java.util.HashMap;
+import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -19,11 +21,23 @@ public final class LongRunningCreateJobTests extends LongRunningClientTestBase {
     @Disabled
     public void testLongRunningCreateJobTests() {
         // method invocation
-        SyncPoller<PollOperationDetails, JobResultResult> response
-            = longRunningClient.beginCreateJob(new JobData().setConfiguration("{}"));
+        SyncPoller<PollOperationDetails, JobResultResult> response = longRunningClient
+            .beginCreateJob(new JobData(mapOf("max", 15.0D, "min", 14.0D, "average", 14.3D)).setConfiguration("{}"));
 
         // response assertion
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED,
             response.waitForCompletion().getStatus());
+    }
+
+    // Use "Map.of" if available
+    @SuppressWarnings("unchecked")
+    private static <T> Map<String, T> mapOf(Object... inputs) {
+        Map<String, T> map = new HashMap<>();
+        for (int i = 0; i < inputs.length; i += 2) {
+            String key = (String) inputs[i];
+            T value = (T) inputs[i + 1];
+            map.put(key, value);
+        }
+        return map;
     }
 }
