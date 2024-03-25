@@ -56,6 +56,9 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationTest.java"""
   } elseif ($tspFile -match "encode[\\/]bytes[\\/]main.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationEncodeBytes.java"""
+  } elseif ($tspFile -match "type[\\/]model[\\/]inheritance[\\/]nested-discriminator[\\/]main.tsp") {
+    # nested discriminator is not supported
+    $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationGoblinShark.java"""
   }
 
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
