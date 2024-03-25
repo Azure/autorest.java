@@ -11,7 +11,7 @@ import org.slf4j.Logger;
 /**
  * This class contains the customization code to customize the AutoRest generated code for App Configuration.
  */
-public class CustomizationGoblinShark extends Customization {
+public class CustomizationNestedDiscriminator extends Customization {
 
     @Override
     public void customize(LibraryCustomization customization, Logger logger) {
@@ -22,5 +22,10 @@ public class CustomizationGoblinShark extends Customization {
 
         ConstructorCustomization constructorCustomization = classCustomization.getConstructor("GoblinShark");
         constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"goblin\";");
+
+        classCustomization = packageCustomization.getClass("SawShark");
+
+        constructorCustomization = classCustomization.getConstructor("SawShark");
+        constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"saw\";");
     }
 }

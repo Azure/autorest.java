@@ -27,7 +27,6 @@ import com.azure.autorest.model.javamodel.JavaModifier;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.template.util.ModelTemplateHeaderHelper;
 import com.azure.autorest.util.ClientModelUtil;
-import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.TemplateUtil;
 import com.azure.core.http.HttpHeader;
 import com.azure.core.util.CoreUtils;
@@ -587,11 +586,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     // required, in which case the default value will be set in the constructor.
                     if (property.getDefaultValue() != null
                         && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
-                        if (property.isPolymorphicDiscriminator() && !settings.isStreamStyleSerialization()) {
-                            fieldSignature = propertyType + " " + CodeNamer.getEnumMemberName(propertyName) + " = " + property.getDefaultValue();
-                        } else {
-                            fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
-                        }
+                        fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
                     } else {
                         fieldSignature = propertyType + " " + propertyName;
                     }
