@@ -164,6 +164,59 @@ public final class BuiltinClient {
     }
 
     /**
+     * The writeConvenience operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * <pre>{@code
+     * {
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     decimal: BigDecimal (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     date: LocalDate (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
+     *     }
+     *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
+     *     }
+     * }
+     * }</pre>
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> writeConvenienceWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.writeConvenienceWithResponse(body, requestOptions);
+    }
+
+    /**
      * The read operation.
      * 
      * @param queryParam A sequence of textual characters.
@@ -221,5 +274,24 @@ public final class BuiltinClient {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return readWithResponse(queryParam, queryParamEncoded, requestOptions).getValue().toObject(Builtin.class);
+    }
+
+    /**
+     * The writeConvenience operation.
+     * 
+     * @param body The body parameter.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void writeConvenience(Builtin body) {
+        // Generated convenience method for writeConvenienceWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        writeConvenienceWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
 }
