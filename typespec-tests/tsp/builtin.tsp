@@ -82,7 +82,4 @@ interface BuiltinOp {
 
   @convenientAPI(false)
   write(@body body: Builtin): OkResponse;
-
-  @route("writeconvenience")
-  writeConvenience(@body body: Builtin): OkResponse;
 }

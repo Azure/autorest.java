@@ -3,7 +3,12 @@
   "title": "LongRunning CreateJob",
   "parameters": {
     "body" : {
-      "configuration":  "{}"
+      "configuration":  "{}",
+      "nullableFloatDict": {
+        "max": 15.0,
+        "min": 14.0,
+        "average": 14.3
+      }
     }
   },
   "responses": {
