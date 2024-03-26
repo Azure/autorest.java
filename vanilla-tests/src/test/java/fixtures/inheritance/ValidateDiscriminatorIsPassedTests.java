@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-package fixtures.inheritance.passdiscriminator;
+package fixtures.inheritance;
 
 import com.azure.core.util.BinaryData;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,12 +34,12 @@ public class ValidateDiscriminatorIsPassedTests {
     }
 
     @Test
-    public void subClassAcceptsDiscriminator() throws IllegalAccessException {
+    public void subClassAcceptsDiscriminator() {
         JsonTypeInfo jsonTypeInfo = MetricAlertSingleResourceMultipleMetricCriteria.class
             .getAnnotation(JsonTypeInfo.class);
         assertNotNull(jsonTypeInfo);
         assertTrue(jsonTypeInfo.visible());
-        assertEquals(JsonTypeInfo.As.EXISTING_PROPERTY, jsonTypeInfo.include());
+        assertEquals(JsonTypeInfo.As.PROPERTY, jsonTypeInfo.include());
 
         String discriminatorValue = MetricAlertSingleResourceMultipleMetricCriteria.class
             .getAnnotation(JsonTypeName.class)
@@ -83,8 +83,13 @@ public class ValidateDiscriminatorIsPassedTests {
 
         // de-serialization of unknown type
         String unknownJson = "{\"odata.type\": \"invalid\"}";
-        MetricAlertCriteria criteria = BinaryData.fromString(unknownJson).toObject(MetricAlertCriteria.class);
-        assertEquals("invalid", criteria.getOdataType().toString());
-        assertEquals(MetricAlertCriteria.class, criteria.getClass());
+        MetricAlertCriteria unknown = BinaryData.fromString(unknownJson).toObject(MetricAlertCriteria.class);
+        assertEquals("invalid", unknown.getOdataType().toString());
+        assertEquals(MetricAlertCriteria.class, unknown.getClass());
+        // serialization keeps the unknown type
+        unknownJson = BinaryData.fromObject(unknown).toString();
+        jsonNode = OBJECT_MAPPER.readTree(unknownJson);
+        assertEquals(1, jsonNode.size());
+        assertEquals("invalid", jsonNode.get("odata.type").asText());
     }
 }

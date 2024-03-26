@@ -19,6 +19,12 @@ import java.util.Set;
  */
 @Fluent
 public final class Shark extends Fish {
+    /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "shark";
+
     @Generated
     private boolean jsonMergePatch;
 
@@ -45,7 +51,17 @@ public final class Shark extends Fish {
      */
     @Generated
     public Shark() {
-        setKind("shark");
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -80,9 +96,9 @@ public final class Shark extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", getKind());
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
+            jsonWriter.writeStringField("kind", this.kind);
             return jsonWriter.writeEndObject();
         }
     }
@@ -90,19 +106,19 @@ public final class Shark extends Fish {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("kind")) {
-            if (getKind() == null) {
-                jsonWriter.writeNullField("kind");
-            } else {
-                jsonWriter.writeStringField("kind", getKind());
-            }
-        }
         jsonWriter.writeIntField("age", getAge());
         if (updatedProperties.contains("color")) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
             } else {
                 jsonWriter.writeStringField("color", getColor());
+            }
+        }
+        if (updatedProperties.contains("kind")) {
+            if (this.kind == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", this.kind);
             }
         }
         return jsonWriter.writeEndObject();
@@ -121,9 +137,9 @@ public final class Shark extends Fish {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            String kind = "shark";
             int age = 0;
             String color = null;
+            String kind = "shark";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -132,12 +148,12 @@ public final class Shark extends Fish {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
@@ -145,9 +161,9 @@ public final class Shark extends Fish {
             Shark deserializedShark = new Shark();
             deserializedShark.setId(id);
             deserializedShark.setName(name);
-            deserializedShark.setKind(kind);
             deserializedShark.setAge(age);
             deserializedShark.setColor(color);
+            deserializedShark.kind = kind;
 
             return deserializedShark;
         });

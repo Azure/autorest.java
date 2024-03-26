@@ -38,6 +38,7 @@ namespace Cadl.LongRunning {
 
   model JobData {
     configuration?: string;
+    nullableFloatDict: Record<float64 | null>;
   }
 
   model JobResult

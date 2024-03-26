@@ -181,17 +181,21 @@ public class TemplateUtil {
 
     /**
      * Gets the expression of the creation of TypeReference for different types.
-     * It uses a static varialbe for Generic type. See {@link #writeTypeReferenceStaticVariable(JavaClass, GenericType)}
+     * It uses a static variable for Generic type. See {@link #writeTypeReferenceStaticVariable(JavaClass, GenericType)}
      *
      * @param type the type.
      * @return the expression
      */
     public static String getTypeReferenceCreation(IType type) {
         // see writeTypeReferenceStaticClass
-
         // Array, class, enum, and primitive types are all able to use TypeReference.createInstance which will create
         // or use a singleton instance.
         // Generic types must use a custom instance that supports complex generic parameters.
+        if (!JavaSettings.getInstance().isBranded()) {
+            return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
+                    ? type.asNullable() + ".class"
+                    : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
+        }
         return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
             ? String.format("TypeReference.createInstance(%s.class)", type.asNullable())
             : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
@@ -207,6 +211,21 @@ public class TemplateUtil {
     public static void writeTypeReferenceStaticVariable(JavaClass classBlock, GenericType type) {
         // see getLongRunningOperationTypeReferenceExpression
 
+        if (!JavaSettings.getInstance().isBranded()) {
+            StringBuilder sb = new StringBuilder();
+            for (IType typeArgument : type.getTypeArguments()) {
+                if (sb.length() > 0) {
+                    sb.append(", ");
+                }
+                sb.append(typeArgument.getClientType().toString()).append(".class");
+            }
+            classBlock.privateStaticFinalVariable(String.format("Type %1$s = new ParameterizedType() {"
+                            + "@Override public Type getRawType() { return " + type.getName() + ".class; }"
+                            + "@Override public Type[] getActualTypeArguments() { return new Type[] { " + sb + " }; }"
+                            + "@Override public Type getOwnerType() { return null; } }",
+                    CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
+            return;
+        }
         classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {}",
             type, CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
     }
@@ -292,6 +311,7 @@ public class TemplateUtil {
     public static void addClientLogger(JavaClass classBlock, String className, JavaFileContents javaFileContents) {
         String content = javaFileContents.toString();
         if (content.contains("throw LOGGER")
+                || content.contains("LOGGER.at")
                 || content.contains("LOGGER.log")
                 || content.contains("LOGGER.info")) {
             // hack to add LOGGER class variable only if LOGGER is used in code

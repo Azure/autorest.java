@@ -51,18 +51,6 @@ public class Snake implements JsonSerializable<Snake> {
     }
 
     /**
-     * Set the kind property: discriminator property.
-     * 
-     * @param kind the kind value to set.
-     * @return the Snake object itself.
-     */
-    @Generated
-    protected Snake setKind(SnakeKind kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the length property: Length of the snake.
      * 
      * @return the length value.

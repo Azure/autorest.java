@@ -86,17 +86,6 @@ public class OperationDetails implements JsonSerializable<OperationDetails> {
     }
 
     /**
-     * Set the kind property: Type of operation.
-     * 
-     * @param kind the kind value to set.
-     * @return the OperationDetails object itself.
-     */
-    protected OperationDetails setKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the operationId property: Operation ID.
      * 
      * @return the operationId value.

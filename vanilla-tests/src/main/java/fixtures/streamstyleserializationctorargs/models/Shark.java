@@ -21,6 +21,11 @@ import java.util.List;
 @Fluent
 public class Shark extends Fish {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "shark";
+
+    /*
      * The age property.
      */
     private Integer age;
@@ -38,8 +43,17 @@ public class Shark extends Fish {
      */
     public Shark(float length, OffsetDateTime birthday) {
         super(length);
-        setFishtype("shark");
         this.birthday = birthday;
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -112,11 +126,11 @@ public class Shark extends Fish {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("birthday",
             this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("age", this.age);
         return jsonWriter.writeEndObject();
     }
@@ -162,11 +176,11 @@ public class Shark extends Fish {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;
             float length = 0.0f;
-            String fishtype = "shark";
             String species = null;
             List<Fish> siblings = null;
             boolean birthdayFound = false;
             OffsetDateTime birthday = null;
+            String fishtype = "shark";
             Integer age = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -175,8 +189,6 @@ public class Shark extends Fish {
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
-                } else if ("fishtype".equals(fieldName)) {
-                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -184,6 +196,8 @@ public class Shark extends Fish {
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                     birthdayFound = true;
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getInt);
                 } else {
@@ -192,9 +206,9 @@ public class Shark extends Fish {
             }
             if (lengthFound && birthdayFound) {
                 Shark deserializedShark = new Shark(length, birthday);
-                deserializedShark.setFishtype(fishtype);
                 deserializedShark.setSpecies(species);
                 deserializedShark.setSiblings(siblings);
+                deserializedShark.fishtype = fishtype;
                 deserializedShark.age = age;
 
                 return deserializedShark;

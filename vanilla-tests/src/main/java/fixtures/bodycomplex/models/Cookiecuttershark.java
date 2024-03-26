@@ -19,6 +19,11 @@ import java.util.List;
  */
 @Fluent
 public final class Cookiecuttershark extends Shark {
+    /*
+     * The fishtype property.
+     */
+    private String fishtype = "cookiecuttershark";
+
     /**
      * Creates an instance of Cookiecuttershark class.
      * 
@@ -27,7 +32,16 @@ public final class Cookiecuttershark extends Shark {
      */
     public Cookiecuttershark(float length, OffsetDateTime birthday) {
         super(length, birthday);
-        setFishtype("cookiecuttershark");
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -76,10 +90,10 @@ public final class Cookiecuttershark extends Shark {
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
-        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         return jsonWriter.writeEndObject();
     }
 
@@ -97,10 +111,10 @@ public final class Cookiecuttershark extends Shark {
             float length = 0.0f;
             boolean birthdayFound = false;
             OffsetDateTime birthday = null;
-            String fishtype = "cookiecuttershark";
             String species = null;
             List<Fish> siblings = null;
             Integer age = null;
+            String fishtype = "cookiecuttershark";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -111,24 +125,24 @@ public final class Cookiecuttershark extends Shark {
                 } else if ("birthday".equals(fieldName)) {
                     birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                     birthdayFound = true;
-                } else if ("fishtype".equals(fieldName)) {
-                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
                     siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getInt);
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
             if (lengthFound && birthdayFound) {
                 Cookiecuttershark deserializedCookiecuttershark = new Cookiecuttershark(length, birthday);
-                deserializedCookiecuttershark.setFishtype(fishtype);
                 deserializedCookiecuttershark.setSpecies(species);
                 deserializedCookiecuttershark.setSiblings(siblings);
                 deserializedCookiecuttershark.setAge(age);
+                deserializedCookiecuttershark.fishtype = fishtype;
 
                 return deserializedCookiecuttershark;
             }

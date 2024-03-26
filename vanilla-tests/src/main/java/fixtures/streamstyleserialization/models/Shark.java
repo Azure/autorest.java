@@ -20,6 +20,11 @@ import java.util.List;
 @Fluent
 public class Shark extends Fish {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "shark";
+
+    /*
      * The age property.
      */
     private Integer age;
@@ -33,7 +38,16 @@ public class Shark extends Fish {
      * Creates an instance of Shark class.
      */
     public Shark() {
-        setFishtype("shark");
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -126,11 +140,11 @@ public class Shark extends Fish {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("birthday",
             this.birthday == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.birthday));
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("age", this.age);
         return jsonWriter.writeEndObject();
     }
@@ -181,8 +195,6 @@ public class Shark extends Fish {
 
                 if ("length".equals(fieldName)) {
                     deserializedShark.setLength(reader.getFloat());
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedShark.setFishtype(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedShark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {
@@ -191,6 +203,8 @@ public class Shark extends Fish {
                 } else if ("birthday".equals(fieldName)) {
                     deserializedShark.birthday
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedShark.fishtype = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     deserializedShark.age = reader.getNullable(JsonReader::getInt);
                 } else {

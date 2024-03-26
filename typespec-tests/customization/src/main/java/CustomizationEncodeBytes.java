@@ -2,7 +2,6 @@
 // Licensed under the MIT License.
 
 import com.azure.autorest.customization.ClassCustomization;
-import com.azure.autorest.customization.ConstructorCustomization;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;

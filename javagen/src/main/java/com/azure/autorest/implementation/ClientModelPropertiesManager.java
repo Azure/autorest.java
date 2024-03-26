@@ -136,9 +136,11 @@ public final class ClientModelPropertiesManager {
                 discriminatorProperty = new ClientModelPropertyWithMetadata(model, property, true);
             }
 
-            superPropertyConsumer(property, superRequiredProperties, superConstructorProperties,
-                superReadOnlyProperties, superSetterProperties, settings);
-            hasRequiredProperties |= property.isRequired();
+            if (!property.isPolymorphicDiscriminator()) {
+                superPropertyConsumer(property, superRequiredProperties, superConstructorProperties,
+                    superReadOnlyProperties, superSetterProperties, settings);
+                hasRequiredProperties |= property.isRequired();
+            }
 
             if (property.getNeedsFlatten()) {
                 flattenedProperties.put(property.getName(), new ClientModelPropertyWithMetadata(model, property, true));
@@ -170,14 +172,7 @@ public final class ClientModelPropertiesManager {
         readOnlyProperties = new LinkedHashMap<>();
         ClientModelProperty additionalProperties = null;
         for (ClientModelProperty property : model.getProperties()) {
-            if (property.isPolymorphicDiscriminator() && discriminatorProperty != null
-                && Objects.equals(discriminatorProperty.getProperty().getSerializedName(), property.getSerializedName())) {
-                // The super type has defined the discriminator property, don't include it in the models properties
-                // but override the property it's pointing to in the super properties. Overriding is needed to ensure
-                // the correct default value is used.
-                superPropertyConsumer(property, superRequiredProperties, superConstructorProperties,
-                    superReadOnlyProperties, superSetterProperties, settings);
-            } else if (property.isRequired()) {
+            if (property.isRequired()) {
                 hasRequiredProperties = true;
                 requiredProperties.put(property.getSerializedName(), property);
 

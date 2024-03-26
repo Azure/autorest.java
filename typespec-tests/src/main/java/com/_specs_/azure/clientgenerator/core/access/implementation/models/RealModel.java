@@ -16,6 +16,12 @@ import java.io.IOException;
  */
 @Immutable
 public final class RealModel extends AbstractModel {
+    /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "real";
+
     /**
      * Creates an instance of RealModel class.
      * 
@@ -24,7 +30,17 @@ public final class RealModel extends AbstractModel {
     @Generated
     private RealModel(String name) {
         super(name);
-        setKind("real");
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -35,7 +51,7 @@ public final class RealModel extends AbstractModel {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", getName());
-        jsonWriter.writeStringField("kind", getKind());
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -65,7 +81,7 @@ public final class RealModel extends AbstractModel {
                 }
             }
             RealModel deserializedRealModel = new RealModel(name);
-            deserializedRealModel.setKind(kind);
+            deserializedRealModel.kind = kind;
 
             return deserializedRealModel;
         });

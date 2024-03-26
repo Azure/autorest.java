@@ -22,6 +22,12 @@ import java.util.Set;
 @Fluent
 public final class Salmon extends Fish {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "salmon";
+
+    /*
      * The friends property.
      */
     @Generated
@@ -65,7 +71,17 @@ public final class Salmon extends Fish {
      */
     @Generated
     public Salmon() {
-        setKind("salmon");
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -169,9 +185,9 @@ public final class Salmon extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
-            jsonWriter.writeStringField("kind", getKind());
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
+            jsonWriter.writeStringField("kind", this.kind);
             jsonWriter.writeArrayField("friends", this.friends, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeMapField("hate", this.hate, (writer, element) -> writer.writeJson(element));
             jsonWriter.writeJsonField("partner", this.partner);
@@ -182,19 +198,19 @@ public final class Salmon extends Fish {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("kind")) {
-            if (getKind() == null) {
-                jsonWriter.writeNullField("kind");
-            } else {
-                jsonWriter.writeStringField("kind", getKind());
-            }
-        }
         jsonWriter.writeIntField("age", getAge());
         if (updatedProperties.contains("color")) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
             } else {
                 jsonWriter.writeStringField("color", getColor());
+            }
+        }
+        if (updatedProperties.contains("kind")) {
+            if (this.kind == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", this.kind);
             }
         }
         if (updatedProperties.contains("friends")) {
@@ -244,9 +260,9 @@ public final class Salmon extends Fish {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
-            String kind = "salmon";
             int age = 0;
             String color = null;
+            String kind = "salmon";
             List<Fish> friends = null;
             Map<String, Fish> hate = null;
             Fish partner = null;
@@ -258,12 +274,12 @@ public final class Salmon extends Fish {
                     id = reader.getString();
                 } else if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else if ("friends".equals(fieldName)) {
                     friends = reader.readArray(reader1 -> Fish.fromJson(reader1));
                 } else if ("hate".equals(fieldName)) {
@@ -277,9 +293,9 @@ public final class Salmon extends Fish {
             Salmon deserializedSalmon = new Salmon();
             deserializedSalmon.setId(id);
             deserializedSalmon.setName(name);
-            deserializedSalmon.setKind(kind);
             deserializedSalmon.setAge(age);
             deserializedSalmon.setColor(color);
+            deserializedSalmon.kind = kind;
             deserializedSalmon.friends = friends;
             deserializedSalmon.hate = hate;
             deserializedSalmon.partner = partner;

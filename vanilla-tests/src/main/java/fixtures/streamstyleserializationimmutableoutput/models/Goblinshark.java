@@ -19,6 +19,11 @@ import java.util.List;
 @Fluent
 public final class Goblinshark extends Shark {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "goblin";
+
+    /*
      * The jawsize property.
      */
     private Integer jawsize;
@@ -32,7 +37,16 @@ public final class Goblinshark extends Shark {
      * Creates an instance of Goblinshark class.
      */
     public Goblinshark() {
-        setFishtype("goblin");
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -139,10 +153,10 @@ public final class Goblinshark extends Shark {
         jsonWriter.writeFloatField("length", getLength());
         jsonWriter.writeStringField("birthday",
             getBirthday() == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(getBirthday()));
-        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeNumberField("age", getAge());
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeNumberField("jawsize", this.jawsize);
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         return jsonWriter.writeEndObject();
@@ -168,8 +182,6 @@ public final class Goblinshark extends Shark {
                 } else if ("birthday".equals(fieldName)) {
                     deserializedGoblinshark.setBirthday(
                         reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
-                } else if ("fishtype".equals(fieldName)) {
-                    deserializedGoblinshark.setFishtype(reader.getString());
                 } else if ("species".equals(fieldName)) {
                     deserializedGoblinshark.setSpecies(reader.getString());
                 } else if ("siblings".equals(fieldName)) {
@@ -177,6 +189,8 @@ public final class Goblinshark extends Shark {
                     deserializedGoblinshark.setSiblings(siblings);
                 } else if ("age".equals(fieldName)) {
                     deserializedGoblinshark.setAge(reader.getNullable(JsonReader::getInt));
+                } else if ("fishtype".equals(fieldName)) {
+                    deserializedGoblinshark.fishtype = reader.getString();
                 } else if ("jawsize".equals(fieldName)) {
                     deserializedGoblinshark.jawsize = reader.getNullable(JsonReader::getInt);
                 } else if ("color".equals(fieldName)) {

@@ -36,7 +36,10 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -338,7 +341,11 @@ abstract class ConvenienceMethodTemplateBase {
         // collection format
         imports.add(JacksonAdapter.class.getName());
         imports.add(CollectionFormat.class.getName());
-        ClassType.TYPE_REFERENCE.addImportsTo(imports, false);
+        imports.add(TypeReference.class.getName());
+        if (!JavaSettings.getInstance().isBranded()) {
+            imports.add(Type.class.getName());
+            imports.add(ParameterizedType.class.getName());
+        }
 
         // byte[]
         ClassType.BASE_64_URL.addImportsTo(imports, false);

@@ -16,6 +16,12 @@ import java.io.IOException;
  */
 @Immutable
 public final class TRex extends Dinosaur {
+    /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "t-rex";
+
     /**
      * Creates an instance of TRex class.
      * 
@@ -24,7 +30,17 @@ public final class TRex extends Dinosaur {
     @Generated
     private TRex(int size) {
         super(size);
-        setKind("t-rex");
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -35,7 +51,7 @@ public final class TRex extends Dinosaur {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeIntField("size", getSize());
-        jsonWriter.writeStringField("kind", getKind());
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -65,7 +81,7 @@ public final class TRex extends Dinosaur {
                 }
             }
             TRex deserializedTRex = new TRex(size);
-            deserializedTRex.setKind(kind);
+            deserializedTRex.kind = kind;
 
             return deserializedTRex;
         });

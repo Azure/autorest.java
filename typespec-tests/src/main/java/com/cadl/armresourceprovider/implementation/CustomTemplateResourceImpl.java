@@ -76,6 +76,10 @@ public final class CustomTemplateResourceImpl
 
     private String customTemplateResourceName;
 
+    private String createIfMatch;
+
+    private String createIfNoneMatch;
+
     public CustomTemplateResourceImpl withExistingResourceGroup(String resourceGroupName) {
         this.resourceGroupName = resourceGroupName;
         return this;
@@ -84,14 +88,16 @@ public final class CustomTemplateResourceImpl
     public CustomTemplateResource create() {
         this.innerObject = serviceManager.serviceClient()
             .getCustomTemplateResourceInterfaces()
-            .createOrUpdate(resourceGroupName, customTemplateResourceName, this.innerModel(), Context.NONE);
+            .createOrUpdate(resourceGroupName, customTemplateResourceName, this.innerModel(), createIfMatch,
+                createIfNoneMatch, Context.NONE);
         return this;
     }
 
     public CustomTemplateResource create(Context context) {
         this.innerObject = serviceManager.serviceClient()
             .getCustomTemplateResourceInterfaces()
-            .createOrUpdate(resourceGroupName, customTemplateResourceName, this.innerModel(), context);
+            .createOrUpdate(resourceGroupName, customTemplateResourceName, this.innerModel(), createIfMatch,
+                createIfNoneMatch, context);
         return this;
     }
 
@@ -99,6 +105,8 @@ public final class CustomTemplateResourceImpl
         this.innerObject = new CustomTemplateResourceInner();
         this.serviceManager = serviceManager;
         this.customTemplateResourceName = name;
+        this.createIfMatch = null;
+        this.createIfNoneMatch = null;
     }
 
     public CustomTemplateResourceImpl update() {
@@ -147,6 +155,16 @@ public final class CustomTemplateResourceImpl
 
     public CustomTemplateResourceImpl withProperties(CustomTemplateResourceProperties properties) {
         this.innerModel().withProperties(properties);
+        return this;
+    }
+
+    public CustomTemplateResourceImpl withIfMatch(String ifMatch) {
+        this.createIfMatch = ifMatch;
+        return this;
+    }
+
+    public CustomTemplateResourceImpl withIfNoneMatch(String ifNoneMatch) {
+        this.createIfNoneMatch = ifNoneMatch;
         return this;
     }
 }

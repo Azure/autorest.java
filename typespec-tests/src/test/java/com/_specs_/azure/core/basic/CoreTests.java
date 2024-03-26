@@ -3,6 +3,7 @@
 
 package com._specs_.azure.core.basic;
 
+import com._specs_.azure.core.basic.models.ListItemInputBody;
 import com._specs_.azure.core.basic.models.User;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.rest.PagedFlux;
@@ -151,5 +152,14 @@ public class CoreTests {
         Assertions.assertEquals("John", user1.getName());
 
         syncClient.listWithPage().forEach(u -> {});
+    }
+
+    @Test
+    public void testMisc() {
+        syncClient.listWithParameters(new ListItemInputBody("Madge"));
+
+        TwoModelsAsPageItemClient client = new BasicClientBuilder().buildTwoModelsAsPageItemClient();
+        client.listFirstItem();
+        client.listSecondItem();
     }
 }
