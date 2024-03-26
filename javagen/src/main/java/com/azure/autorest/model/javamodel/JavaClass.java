@@ -28,12 +28,12 @@ public class JavaClass implements JavaType {
     }
 
     public final void privateMemberVariable(String variableType, String variableName) {
-        privateMemberVariable(String.format("%1$s %2$s", variableType, variableName));
+        privateMemberVariable(variableType + " " + variableName);
     }
 
     public final void privateMemberVariable(String variableDeclaration) {
         addExpectedNewLine();
-        contents.line(String.format("private %1$s;", variableDeclaration));
+        contents.line("private " + variableDeclaration + ";");
         addNewLine = true;
     }
 
@@ -45,31 +45,31 @@ public class JavaClass implements JavaType {
 
     public final void privateFinalMemberVariable(String variableType, String variableName) {
         addExpectedNewLine();
-        contents.line(String.format("private final %1$s %2$s;", variableType, variableName));
+        contents.line("private final " + variableType + " " + variableName + ";");
         addNewLine = true;
     }
 
     public final void privateFinalMemberVariable(String variableType, String variableName, String finalValue) {
         addExpectedNewLine();
-        contents.line(String.format("private final %1$s %2$s = %3$s;", variableType, variableName, finalValue));
+        contents.line("private final " + variableType + " " + variableName + " = " + finalValue + ";");
         addNewLine = true;
     }
 
     public final void publicStaticFinalVariable(String variableDeclaration) {
         addExpectedNewLine();
-        contents.line(String.format("public static final %1$s;", variableDeclaration));
+        contents.line("public static final " + variableDeclaration + ";");
         addNewLine = true;
     }
 
     public final void privateStaticFinalVariable(String variableDeclaration) {
         addExpectedNewLine();
-        contents.line(String.format("private static final %1$s;", variableDeclaration));
+        contents.line("private static final " + variableDeclaration + ";");
         addNewLine = true;
     }
 
     public final void protectedMemberVariable(String variableType, String variableName) {
         addExpectedNewLine();
-        contents.line(String.format("protected %1$s %2$s;", variableType, variableName));
+        contents.line("protected " + variableType + " " + variableName + ";");
         addNewLine = true;
     }
 

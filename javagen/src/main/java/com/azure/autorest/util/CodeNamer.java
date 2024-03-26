@@ -6,10 +6,9 @@ package com.azure.autorest.util;
 import org.atteo.evo.inflector.English;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -23,6 +22,7 @@ public class CodeNamer {
     private static final Pattern ESCAPE_COMMENT = Pattern.compile(Pattern.quote("*/"));
     private static final Pattern MERGE_UNDERSCORES = Pattern.compile("_{2,}");
     private static final Pattern CHARACTERS_TO_REPLACE_WITH_UNDERSCORE = Pattern.compile("[\\\\/.+ -]+");
+    private static final Pattern NEW_LINE = Pattern.compile("\r?\n");
 
     public static void setFactory(NamerFactory templateFactory) {
         factory = templateFactory;
@@ -71,9 +71,9 @@ public class CodeNamer {
         }
 
         return CAMEL_CASE_SPLIT.splitAsStream(name)
-                .filter(s -> s != null && !s.isEmpty())
-                .map(s -> formatCase(s, false))
-                .collect(Collectors.joining());
+            .filter(s -> s != null && !s.isEmpty())
+            .map(s -> formatCase(s, false))
+            .collect(Collectors.joining());
     }
 
     public static String escapeXmlComment(String comment) {
@@ -81,10 +81,7 @@ public class CodeNamer {
             return null;
         }
 
-        return comment
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;");
+        return comment.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
     }
 
     public static String escapeComment(String comment) {
@@ -97,11 +94,12 @@ public class CodeNamer {
 
     private static String formatCase(String name, boolean toLower) {
         if (name != null && !name.isEmpty()) {
-            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0)) && Character.isUpperCase(name.charAt(1)))) {
+            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0))
+                && Character.isUpperCase(name.charAt(1)))) {
                 name = toLower ? name.toLowerCase() : name.toUpperCase();
             } else {
-                name = (toLower ? Character.toLowerCase(name.charAt(0))
-                        : Character.toUpperCase(name.charAt(0))) + name.substring(1);
+                name = (toLower ? Character.toLowerCase(name.charAt(0)) : Character.toUpperCase(name.charAt(0)))
+                    + name.substring(1);
             }
         }
         return name;
@@ -115,7 +113,8 @@ public class CodeNamer {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return com.azure.autorest.preprocessor.namer.CodeNamer.getEscapedReservedName(toCamelCase(removeInvalidCharacters(name)), "Property");
+        return com.azure.autorest.preprocessor.namer.CodeNamer.getEscapedReservedName(
+            toCamelCase(removeInvalidCharacters(name)), "Property");
     }
 
     public static String getPlural(String name) {
@@ -169,11 +168,13 @@ public class CodeNamer {
             } else {
                 // all char is '_', then transform some '_' to
 
-                Map<Character, String> basicLaticCharacters = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacters();
+                Map<Character, String> basicLaticCharacters
+                    = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacters();
                 if (result.startsWith("_") && basicLaticCharacters.containsKey(name.charAt(0))) {
                     result = basicLaticCharacters.get(name.charAt(0)) + result.substring(1);
                     if (result.endsWith("_") && basicLaticCharacters.containsKey(name.charAt(name.length() - 1))) {
-                        result = result.substring(0, result.length() - 1) + basicLaticCharacters.get(name.charAt(name.length() - 1));
+                        result = result.substring(0, result.length() - 1) + basicLaticCharacters.get(
+                            name.charAt(name.length() - 1));
                     }
                 }
             }
@@ -182,15 +183,61 @@ public class CodeNamer {
         return result.toUpperCase();
     }
 
-    private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = new HashSet<>(Arrays.asList(
-            "service",      // the ServiceInterface local variable
-            "client"        // the ManagementClient local variable
-    ));
+    private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = Set.of(
+        "service",      // the ServiceInterface local variable
+        "client"        // the ManagementClient local variable
+    );
 
     public static String getEscapedReservedClientMethodParameterName(String name) {
         if (RESERVED_CLIENT_METHOD_PARAMETER_NAME.contains(name)) {
             name += "Param";
         }
         return name;
+    }
+
+    public static List<String> wordWrap(String text, int width) {
+        Objects.requireNonNull(text);
+        List<String> ret = new ArrayList<>();
+        String[] lines = NEW_LINE.split(text, -1);
+        for (String line : lines) {
+            String processedLine = line.trim();
+
+            // yield empty lines as they are (probably) intentional
+            if (processedLine.isEmpty()) {
+                ret.add(processedLine);
+            }
+
+            // feast on the line until it's gone
+            while (!processedLine.isEmpty()) {
+                // determine potential wrapping points
+                List<Integer> whitespacePositions = new ArrayList<>();
+                for (int i = 0; i != processedLine.length(); i++) {
+                    if (Character.isWhitespace(processedLine.charAt(i))) {
+                        whitespacePositions.add(i);
+                    }
+                }
+                whitespacePositions.add(processedLine.length());
+                int preWidthWrapAt = -1;
+                int postWidthWrapAt = -1;
+                for (int i = 0; i != whitespacePositions.size() - 1; i++) {
+                    if (whitespacePositions.get(i + 1) > width) {
+                        preWidthWrapAt = whitespacePositions.get(i);
+                        postWidthWrapAt = whitespacePositions.get(i + 1);
+                        break;
+                    }
+                }
+                int wrapAt = processedLine.length();
+                if (preWidthWrapAt > 0) {
+                    wrapAt = preWidthWrapAt;
+                } else if (postWidthWrapAt > 0) {
+                    wrapAt = postWidthWrapAt;
+                }
+                // wrap
+                ret.add(processedLine.substring(0, wrapAt));
+                processedLine = processedLine.substring(wrapAt).trim();
+            }
+        }
+
+        return ret;
     }
 }

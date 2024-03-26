@@ -3,6 +3,7 @@
 
 package com.azure.autorest.model.javamodel;
 
+import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -76,8 +77,27 @@ public class JavaFileContents {
         removeFromPrefix(SINGLE_INDENT);
     }
 
+    private List<String> wordWrap(String line, boolean addPrefix) {
+        ArrayList<String> lines = new ArrayList<>();
+
+        // Subtract an extra column from the word wrap width because columns generally are
+        // 1 -based instead of 0-based.
+        int wordWrapIndexMinusLinePrefixLength = 120 - (addPrefix ? linePrefix.length() : 0) - 1;
+        List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
+        for (int i = 0; i < wrappedLines.size() - 1; i++) {
+            lines.add(wrappedLines.get(i) + System.lineSeparator());
+        }
+
+        String lastWrappedLine = wrappedLines.isEmpty() ? null : wrappedLines.get(wrappedLines.size() - 1);
+        if (lastWrappedLine != null && !lastWrappedLine.isEmpty()) {
+            lines.add(lastWrappedLine);
+        }
+
+        return lines;
+    }
+
     private void text(String text, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
 
         if (text == null || text.isEmpty()) {
             lines.add("");
@@ -88,12 +108,14 @@ public class JavaFileContents {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
                     String line = text.substring(lineStartIndex);
-                    lines.add(line);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
+                    lines.addAll(wrappedLines);
                     lineStartIndex = textLength;
                 } else {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    lines.add(line);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
+                    lines.addAll(wrappedLines);
                     lineStartIndex = nextLineStartIndex;
                 }
             }
@@ -122,15 +144,11 @@ public class JavaFileContents {
     }
 
     private void line(String text, boolean addPrefix) {
-        text(String.format("%s%s", text, System.lineSeparator()), addPrefix);
+        text(text + System.lineSeparator(), addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void line(String text, Object... formattedArguments) {
-        if (formattedArguments != null && formattedArguments.length > 0) {
-            text = String.format(text, formattedArguments);
-        }
-
+    public void line(String text) {
         if (currentLineType == CurrentLineType.Empty) {
             line(text, true);
         } else if (currentLineType == CurrentLineType.Text) {
@@ -142,6 +160,14 @@ public class JavaFileContents {
         currentLineType = CurrentLineType.Empty;
     }
 
+    public void line(String text, Object... formattedArguments) {
+        if (formattedArguments != null && formattedArguments.length > 0) {
+            text = String.format(text, formattedArguments);
+        }
+
+        line(text);
+    }
+
     public void line() {
         line("");
     }
@@ -151,7 +177,7 @@ public class JavaFileContents {
     }
 
     public void block(String text, Consumer<JavaBlock> bodyAction) {
-        line("%s {", text);
+        line(text + " {");
         indent(() ->
                 bodyAction.accept(new JavaBlock(this)));
         line("}");
@@ -167,7 +193,7 @@ public class JavaFileContents {
             importSet.addAll(imports);
             for (String toImport : importSet) {
                 if (toImport != null && !toImport.isEmpty()) {
-                    line("import %s;", toImport);
+                    line("import " + toImport + ";");
                 }
             }
             line();
@@ -213,7 +239,7 @@ public class JavaFileContents {
     }
 
     public void returnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock) {
-        line("return %s {", anonymousClassDeclaration);
+        line("return " + anonymousClassDeclaration + " {");
         indent(() -> {
             JavaClass javaClass = new JavaClass(this);
             anonymousClassBlock.accept(javaClass);
@@ -222,7 +248,7 @@ public class JavaFileContents {
     }
 
     public void anonymousClass(String anonymousClassDeclaration, String instanceName, Consumer<JavaClass> anonymousClassBlock) {
-        line("%1$s %2$s = new %1$s() {", anonymousClassDeclaration, instanceName);
+        line(anonymousClassDeclaration + " " + instanceName + " = new" + anonymousClassDeclaration + "() {");
         indent(() -> {
             JavaClass javaClass = new JavaClass(this);
             anonymousClassBlock.accept(javaClass);
@@ -238,7 +264,7 @@ public class JavaFileContents {
         if (annotations != null && !annotations.isEmpty()) {
             for (String annotation : annotations) {
                 if (annotation != null && !annotation.isEmpty()) {
-                    line("@%s", annotation);
+                    line("@" + annotation);
                 }
             }
         }
@@ -267,11 +293,11 @@ public class JavaFileContents {
     }
 
     public void constructor(JavaVisibility visibility, String constructorSignature, Consumer<JavaBlock> constructor) {
-        block(String.format("%s %s", visibility, constructorSignature), constructor);
+        block(visibility + " " + constructorSignature, constructor);
     }
 
     public void enumBlock(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction) {
-        block(String.format("%s enum %s", visibility, enumName), block -> {
+        block(visibility + " enum " + enumName, block -> {
             if (enumAction != null) {
                 JavaEnum javaEnum = new JavaEnum(this);
                 enumAction.accept(javaEnum);
@@ -281,20 +307,20 @@ public class JavaFileContents {
     }
 
     public void interfaceBlock(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceAction) {
-        line("%s interface %s {", visibility, interfaceSignature);
+        line(visibility + " interface " + interfaceSignature + " {");
         indent(() -> interfaceAction.accept(new JavaInterface(this)));
         line("}");
     }
 
     public void ifBlock(String condition, Consumer<JavaBlock> ifAction) {
-        line("if (%s) {", condition);
+        line("if (" + condition + ") {");
         indent(() -> ifAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
     public void elseIfBlock(String condition, Consumer<JavaBlock> ifAction) {
-        line(String.format(" else if (%s) {", condition), false);
+        line(" else if (" + condition + ") {", false);
         indent(() -> ifAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
@@ -314,14 +340,14 @@ public class JavaFileContents {
     }
 
     public void tryBlock(String resource, Consumer<JavaBlock> tryAction) {
-        line("try (%s) {", resource);
+        line("try (" + resource + ") {");
         indent(() -> tryAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
     public void catchBlock(String exception, Consumer<JavaBlock> catchAction) {
-        line(String.format(" catch (%s) {", exception), false);
+        line(" catch (" + exception + ") {", false);
         indent(() -> catchAction.accept(new JavaBlock(this)));
         line("}");
         currentLineType = CurrentLineType.AfterIf;
@@ -334,7 +360,7 @@ public class JavaFileContents {
     }
 
     public void lambda(String parameterType, String parameterName, Consumer<JavaLambda> body) {
-        text(String.format("(%s %s) -> ", parameterType, parameterName));
+        text("(" + parameterType + " " + parameterName + ") -> ");
         try (JavaLambda lambda = new JavaLambda(this)) {
             body.accept(lambda);
         }

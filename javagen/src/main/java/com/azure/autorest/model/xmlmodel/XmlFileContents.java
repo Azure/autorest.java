@@ -3,8 +3,11 @@
 
 package com.azure.autorest.model.xmlmodel;
 
+import com.azure.autorest.util.CodeNamer;
+
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -78,8 +81,27 @@ public class XmlFileContents {
         removeFromPrefix(singleIndent);
     }
 
-    private void text(String text, boolean addPrefix) {
+    private List<String> wordWrap(String line, boolean addPrefix) {
         ArrayList<String> lines = new ArrayList<String>();
+
+        // Subtract an extra column from the word wrap width because columns generally are
+        // 1 -based instead of 0-based.
+        int wordWrapIndexMinusLinePrefixLength = 120 - (addPrefix ? linePrefix.length() : 0) - 1;
+        List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
+        for (int i = 0; i != wrappedLines.size() - 1; i++) {
+            lines.add(wrappedLines.get(i) + "\n");
+        }
+
+        String lastWrappedLine = wrappedLines.get(wrappedLines.size() - 1);
+        if (lastWrappedLine != null && !lastWrappedLine.isEmpty()) {
+            lines.add(lastWrappedLine);
+        }
+
+        return lines;
+    }
+
+    private void text(String text, boolean addPrefix) {
+        ArrayList<String> lines = new ArrayList<>();
 
         if (text == null || text.isEmpty()) {
             lines.add("");
@@ -90,12 +112,14 @@ public class XmlFileContents {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
                     String line = text.substring(lineStartIndex);
-                    lines.add(line);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
+                    lines.addAll(wrappedLines);
                     lineStartIndex = textLength;
                 } else {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    lines.add(line);
+                    List<String> wrappedLines = wordWrap(line, addPrefix);
+                    lines.addAll(wrappedLines);
                     lineStartIndex = nextLineStartIndex;
                 }
             }
@@ -124,15 +148,11 @@ public class XmlFileContents {
     }
 
     private void line(String text, boolean addPrefix) {
-        text(String.format("%1$s%2$s", text, System.lineSeparator()), addPrefix);
+        text(text + System.lineSeparator(), addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void line(String text, Object... formattedArguments) {
-        if (formattedArguments != null && formattedArguments.length > 0) {
-            text = String.format(text, formattedArguments);
-        }
-
+    public void line(String text) {
         if (currentLineType == CurrentLineType.Empty) {
             line(text, true);
         } else if (currentLineType == CurrentLineType.Text) {
@@ -144,33 +164,41 @@ public class XmlFileContents {
         currentLineType = CurrentLineType.Empty;
     }
 
+    public void line(String text, Object... formattedArguments) {
+        if (formattedArguments != null && formattedArguments.length > 0) {
+            text = String.format(text, formattedArguments);
+        }
+
+        line(text);
+    }
+
     public void line() {
         line("");
     }
 
     public void tag(String tag, String value) {
-        line("<%s>%s</%s>", tag, value, tag);
+        line("<" + tag + ">" + value + "</" + tag + ">");
     }
 
     public void block(String text, Consumer<XmlBlock> bodyAction) {
-        line("<%s>", text);
+        line("<" + text + ">");
         indent(() ->
                 bodyAction.accept(new XmlBlock(this)));
-        line("</%s>", text);
+        line("</" + text + ">");
     }
 
     public void block(String text, Map<String, String> annotations, Consumer<XmlBlock> bodyAction) {
         if (annotations != null && !annotations.isEmpty()) {
             String append = annotations.entrySet().stream()
-                    .map(entry -> String.format("%s=\"%s\"", entry.getKey(), entry.getValue()))
-                    .collect(Collectors.joining(" "));
-            line("<%s %s>", text, append);
+                .map(entry -> entry.getKey() + "=\"" + entry.getValue() + "\"")
+                .collect(Collectors.joining(" "));
+            line("<" + text + " " + append + ">");
         } else {
-            line("<%s>", text);
+            line("<" + text + ">");
         }
         indent(() ->
                 bodyAction.accept(new XmlBlock(this)));
-        line("</%s>", text);
+        line("</" + text + ">");
     }
 
     public void blockComment(String text) {

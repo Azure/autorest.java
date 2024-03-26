@@ -70,19 +70,19 @@ public class JavaJavadocComment {
 
     public final void param(String parameterName, String parameterDescription) {
         addExpectedLineSeparator();
-        contents.line(String.format("@param %1$s %2$s", parameterName, processText(parameterDescription)));
+        contents.line("@param " + parameterName + " " + processText(parameterDescription));
     }
 
     public final void methodReturns(String returnValueDescription) {
         if (returnValueDescription != null && !returnValueDescription.isEmpty()) {
             addExpectedLineSeparator();
-            contents.line(String.format("@return %1$s", processText(returnValueDescription)));
+            contents.line("@return " + processText(returnValueDescription));
         }
     }
 
     public final void methodThrows(String exceptionTypeName, String description) {
         addExpectedLineSeparator();
-        contents.line(String.format("@throws %1$s %2$s", exceptionTypeName, processText(description)));
+        contents.line("@throws " + exceptionTypeName + " " + processText(description));
     }
 
     public final void inheritDoc() {
@@ -92,6 +92,6 @@ public class JavaJavadocComment {
 
     public final void deprecated(String description) {
         addExpectedLineSeparator();
-        contents.line(String.format("@deprecated %1$s", description));
+        contents.line("@deprecated " + description);
     }
 }
