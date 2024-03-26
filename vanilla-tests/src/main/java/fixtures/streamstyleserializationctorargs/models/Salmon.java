@@ -17,6 +17,11 @@ import java.util.List;
 @Fluent
 public class Salmon extends Fish {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "salmon";
+
+    /*
      * The location property.
      */
     private String location;
@@ -33,7 +38,16 @@ public class Salmon extends Fish {
      */
     public Salmon(float length) {
         super(length);
-        setFishtype("salmon");
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -111,9 +125,9 @@ public class Salmon extends Fish {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("location", this.location);
         jsonWriter.writeBooleanField("iswild", this.iswild);
         return jsonWriter.writeEndObject();
@@ -156,9 +170,9 @@ public class Salmon extends Fish {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;
             float length = 0.0f;
-            String fishtype = "salmon";
             String species = null;
             List<Fish> siblings = null;
+            String fishtype = "salmon";
             String location = null;
             Boolean iswild = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -168,12 +182,12 @@ public class Salmon extends Fish {
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
-                } else if ("fishtype".equals(fieldName)) {
-                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
                     siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("location".equals(fieldName)) {
                     location = reader.getString();
                 } else if ("iswild".equals(fieldName)) {
@@ -184,9 +198,9 @@ public class Salmon extends Fish {
             }
             if (lengthFound) {
                 Salmon deserializedSalmon = new Salmon(length);
-                deserializedSalmon.setFishtype(fishtype);
                 deserializedSalmon.setSpecies(species);
                 deserializedSalmon.setSiblings(siblings);
+                deserializedSalmon.fishtype = fishtype;
                 deserializedSalmon.location = location;
                 deserializedSalmon.iswild = iswild;
 

@@ -19,6 +19,11 @@ import java.util.Map;
 @Fluent
 public final class SmartSalmon extends Salmon {
     /*
+     * The fishtype property.
+     */
+    private String fishtype = "smart_salmon";
+
+    /*
      * The college_degree property.
      */
     private String collegeDegree;
@@ -35,7 +40,16 @@ public final class SmartSalmon extends Salmon {
      */
     public SmartSalmon(float length) {
         super(length);
-        setFishtype("smart_salmon");
+    }
+
+    /**
+     * Get the fishtype property: The fishtype property.
+     * 
+     * @return the fishtype value.
+     */
+    @Override
+    public String getFishtype() {
+        return this.fishtype;
     }
 
     /**
@@ -131,11 +145,11 @@ public final class SmartSalmon extends Salmon {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeFloatField("length", getLength());
-        jsonWriter.writeStringField("fishtype", getFishtype());
         jsonWriter.writeStringField("species", getSpecies());
         jsonWriter.writeArrayField("siblings", getSiblings(), (writer, element) -> writer.writeJson(element));
         jsonWriter.writeStringField("location", getLocation());
         jsonWriter.writeBooleanField("iswild", iswild());
+        jsonWriter.writeStringField("fishtype", this.fishtype);
         jsonWriter.writeStringField("college_degree", this.collegeDegree);
         if (additionalProperties != null) {
             for (Map.Entry<String, Object> additionalProperty : additionalProperties.entrySet()) {
@@ -157,11 +171,11 @@ public final class SmartSalmon extends Salmon {
         return jsonReader.readObject(reader -> {
             boolean lengthFound = false;
             float length = 0.0f;
-            String fishtype = "smart_salmon";
             String species = null;
             List<Fish> siblings = null;
             String location = null;
             Boolean iswild = null;
+            String fishtype = "smart_salmon";
             String collegeDegree = null;
             Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -171,8 +185,6 @@ public final class SmartSalmon extends Salmon {
                 if ("length".equals(fieldName)) {
                     length = reader.getFloat();
                     lengthFound = true;
-                } else if ("fishtype".equals(fieldName)) {
-                    fishtype = reader.getString();
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();
                 } else if ("siblings".equals(fieldName)) {
@@ -181,6 +193,8 @@ public final class SmartSalmon extends Salmon {
                     location = reader.getString();
                 } else if ("iswild".equals(fieldName)) {
                     iswild = reader.getNullable(JsonReader::getBoolean);
+                } else if ("fishtype".equals(fieldName)) {
+                    fishtype = reader.getString();
                 } else if ("college_degree".equals(fieldName)) {
                     collegeDegree = reader.getString();
                 } else {
@@ -193,11 +207,11 @@ public final class SmartSalmon extends Salmon {
             }
             if (lengthFound) {
                 SmartSalmon deserializedSmartSalmon = new SmartSalmon(length);
-                deserializedSmartSalmon.setFishtype(fishtype);
                 deserializedSmartSalmon.setSpecies(species);
                 deserializedSmartSalmon.setSiblings(siblings);
                 deserializedSmartSalmon.setLocation(location);
                 deserializedSmartSalmon.setIswild(iswild);
+                deserializedSmartSalmon.fishtype = fishtype;
                 deserializedSmartSalmon.collegeDegree = collegeDegree;
                 deserializedSmartSalmon.additionalProperties = additionalProperties;
 

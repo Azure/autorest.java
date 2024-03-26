@@ -60,18 +60,6 @@ public class ExtendsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Set the kind property: The discriminator.
-     * 
-     * @param kind the kind value to set.
-     * @return the ExtendsUnknownAdditionalPropertiesDiscriminated object itself.
-     */
-    @Generated
-    protected ExtendsUnknownAdditionalPropertiesDiscriminated setKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the name property: The name property.
      * 
      * @return the name value.
