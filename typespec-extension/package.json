@@ -73,7 +73,7 @@
     "@typescript-eslint/eslint-plugin": "~7.1.1",
     "eslint-plugin-deprecation": "~2.0.0",
     "@azure-tools/typespec-azure-core": "0.40.0",
-    "@azure-tools/typespec-client-generator-core": "0.40.0",
+    "@azure-tools/typespec-client-generator-core": "0.41.0-dev.15",
     "@typespec/compiler": "0.54.0",
     "@typespec/http": "0.54.0",
     "@typespec/openapi": "0.54.0",

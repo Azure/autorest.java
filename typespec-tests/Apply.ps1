@@ -1,9 +1,9 @@
 
 Remove-Item ./tsp-output -Recurse -Force
 
-tsp compile tsp/union.tsp
+tsp compile tsp/patch.tsp
 
-Remove-Item -Path ./src/main/java/com/cadl/union -Recurse -Force
+Remove-Item -Path ./src/main/java/com/cadl/patch -Recurse -Force
 
-Copy-Item -Path ./tsp-output/src/main/java/com/cadl/union -Destination ./src/main/java/com/cadl/ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
+Copy-Item -Path ./tsp-output/src/main/java/com/cadl/patch -Destination ./src/main/java/com/cadl/ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 

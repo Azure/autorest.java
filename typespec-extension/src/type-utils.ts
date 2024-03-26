@@ -1,6 +1,7 @@
 import {
   DecoratedType,
   DecoratorApplication,
+  DurationKnownEncoding,
   EncodeData,
   Enum,
   EnumMember,
@@ -25,6 +26,7 @@ import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
+import { SdkDurationType, SdkType } from "@azure-tools/typespec-client-generator-core";
 
 /** Acts as a cache for processing inputs.
  *
@@ -117,6 +119,21 @@ export function getDurationFormat(encode: EncodeData): DurationSchema["format"] 
       format = "seconds-number";
     } else {
       throw new Error(`Unrecognized scalar type used by duration encoded as seconds: '${scalarName}'.`);
+    }
+  }
+  return format;
+}
+
+export function getDurationFormatFromSdkType(type: SdkDurationType): DurationSchema["format"] {
+  let format: DurationSchema["format"] = "duration-rfc3339";
+  // duration encoded as seconds
+  if (type.encode === "seconds") {
+    if (isSdkIntKind(type.wireType.kind)) {
+      format = "seconds-integer";
+    } else if (isSdkFloatKind(type.wireType.kind)) {
+      format = "seconds-number";
+    } else {
+      throw new Error(`Unrecognized scalar type used by duration encoded as seconds: '${type.kind}'.`);
     }
   }
   return format;
@@ -334,4 +351,29 @@ function getDecoratorScopedValue<T>(
     return value;
   }
   return undefined;
+}
+
+
+export function isSdkIntKind(kind: string): boolean {
+  return [
+    "numeric",
+    "integer",
+    "safeint",
+    "int8",
+    "int16",
+    "int32",
+    "int64",
+    "uint8",
+    "uint16",
+    "uint32",
+    "uint64",
+  ].includes(kind);
+}
+
+export function isSdkFloatKind(kind: string): boolean {
+  return ["float", "float32", "float64", "decimal", "decimal128"].includes(kind);
+}
+
+export function isSdkStringKind(kind: string): boolean {
+  return ["string", "password", "guid", "url", "uuid", "eTag", "armId", "ipAddress", "azureLocation"].includes(kind);
 }
