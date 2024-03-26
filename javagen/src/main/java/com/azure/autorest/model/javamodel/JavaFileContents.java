@@ -173,7 +173,7 @@ public class JavaFileContents {
     }
 
     public void declarePackage(String pkg) {
-        line("package %s;", pkg);
+        line("package " + pkg + ";");
     }
 
     public void block(String text, Consumer<JavaBlock> bodyAction) {
@@ -235,7 +235,7 @@ public class JavaFileContents {
     }
 
     public void methodReturn(String text) {
-        line("return %s;", text);
+        line("return " + text + ";");
     }
 
     public void returnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock) {
@@ -248,7 +248,7 @@ public class JavaFileContents {
     }
 
     public void anonymousClass(String anonymousClassDeclaration, String instanceName, Consumer<JavaClass> anonymousClassBlock) {
-        line(anonymousClassDeclaration + " " + instanceName + " = new" + anonymousClassDeclaration + "() {");
+        line(anonymousClassDeclaration + " " + instanceName + " = new " + anonymousClassDeclaration + "() {");
         indent(() -> {
             JavaClass javaClass = new JavaClass(this);
             anonymousClassBlock.accept(javaClass);
