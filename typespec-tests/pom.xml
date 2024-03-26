@@ -70,4 +70,42 @@
       <scope>test</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <source>1.8</source>
+          <doctitle>Azure SDK for Java Reference Documentation</doctitle>
+          <windowtitle>Azure SDK for Java Reference Documentation</windowtitle>
+          <bottom>Visit the &lt;a href="https://docs.microsoft.com/java/azure/"&gt;Azure for Java Developers&lt;/a&gt; site
+            for more Java documentation, including quick starts, tutorials, and code samples.
+          </bottom>
+          <linksource>false</linksource>
+          <excludePackageNames combine.children="append">
+            *.impl*:
+            *.implementation:
+            *.implementation*:
+            *.samples:
+            com.azure.tools.checkstyle*:
+            com.azure.core.test*:
+            com.azure.json,com.azure.core.*
+          </excludePackageNames>
+          <sourceFileExcludes>
+            <sourceFileExclude>module-info.java</sourceFileExclude>
+            <!-- Java 11 seems having a bug on line starting with @, in @code tag -->
+            <sourceFileExclude>com/cadl/naming/NamingAsyncClient.java</sourceFileExclude>
+          </sourceFileExcludes>
+          <failOnError>true</failOnError>
+          <failOnWarnings>true</failOnWarnings>
+          <doclint>all</doclint>
+          <quiet>true</quiet>
+          <jarOutputDirectory>${packageOutputDirectory}</jarOutputDirectory>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

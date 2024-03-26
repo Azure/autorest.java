@@ -6,8 +6,10 @@ package com.azure.autorest.template;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodExample;
 import com.azure.autorest.model.clientmodel.TestContext;
+import com.azure.autorest.model.clientmodel.examplemodel.ExampleHelperFeature;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.template.example.ClientMethodExampleWriter;
+import com.azure.autorest.template.example.ModelExampleWriter;
 import com.azure.autorest.template.example.ProtocolTestWriter;
 import com.azure.autorest.util.CodeNamer;
 
@@ -45,11 +47,19 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
         context.annotation("Disabled");
         context.publicFinalClass(String.format("%1$s extends %2$s", className, testContext.getTestBaseClassName()), classBlock -> {
             classBlock.annotation("Test", "Disabled");  // "DoNotRecord(skipInPlayback = true)" not added
-            classBlock.publicMethod(String.format("void test%1$s()", className), methodBlock -> {
+            Set<ExampleHelperFeature> helperFeatures = caseWriter.getHelperFeatures();
+            String methodSignature = String.format("void test%1$s()", className);
+            if (helperFeatures.contains(ExampleHelperFeature.ThrowsIOException)) {
+                methodSignature += " throws IOException";
+            }
+            classBlock.publicMethod(methodSignature, methodBlock -> {
                 methodBlock.line("// method invocation");
                 caseWriter.writeMethodInvocation(methodBlock);
                 caseWriter.writeResponseAssertion(methodBlock);
             });
+            if (helperFeatures.contains(ExampleHelperFeature.MapOfMethod)) {
+                ModelExampleWriter.writeMapOfMethod(classBlock);
+            }
         });
     }
 }

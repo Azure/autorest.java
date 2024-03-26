@@ -76,6 +76,18 @@ jobs:
           [ -z "`git status --porcelain -- :!package-lock.json`" ]
         displayName: 'Check no Diff'
 
+      - task: Maven@3
+        displayName: 'Verify Test Code'
+        inputs:
+          mavenPomFile: 'typespec-tests/pom.xml'
+          goals: 'verify'
+          options: '$(DefaultOptions) -DskipTests -T 1C'
+          mavenOptions: '$(MemoryOptions) $(LoggingOptions)'
+          javaHomeOption: 'JDKVersion'
+          jdkVersionOption: $(JavaVersion)
+          jdkArchitectureOption: 'x64'
+          publishJUnitResults: false
+
       - script: |
           node node_modules/\@azure-tools/cadl-ranch/dist/cli/cli.js serve node_modules/\@azure-tools/cadl-ranch-specs/http/ --coverageFile ./cadl-ranch-coverage-java.json &
         displayName: 'Start Cadl Ranch Test Server'

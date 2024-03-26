@@ -158,7 +158,7 @@ import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { DurationSchema } from "./common/schemas/time.js";
 import { PreNamer } from "./prenamer/prenamer.js";
 import { EmitterOptions } from "./emitter.js";
-import { createPollOperationDetailsSchema } from "./external-schemas.js";
+import { createPollOperationDetailsSchema, getFileDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
   stringArrayContainsIgnoreCase,
@@ -586,7 +586,13 @@ export class CodeModelBuilder {
     for (const client of clients) {
       if (client.arm) {
         this.codeModel.arm = true;
+        this.options["group-etag-headers"] = false;
       }
+    }
+    // preprocess group-etag-headers
+    this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
+
+    for (const client of clients) {
       const codeModelClient = new CodeModelClient(client.name, this.getDoc(client.type), {
         summary: this.getSummary(client.type),
 
@@ -726,7 +732,12 @@ export class CodeModelBuilder {
     const operationName = this.getName(operation);
     const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
-    const operationExample = this.operationExamples.get(operation);
+    let operationExample = this.operationExamples.get(operation);
+    if (!operationExample && operation.sourceOperation) {
+      // if the operation is customized in client.tsp, the operation would be different from that of main.tsp
+      // try the operation.sourceOperation
+      operationExample = this.operationExamples.get(operation.sourceOperation);
+    }
 
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
@@ -836,7 +847,9 @@ export class CodeModelBuilder {
     }
 
     // group ETag header parameters, if exists
-    this.processEtagHeaderParameters(codeModelOperation, op);
+    if (this.options["group-etag-headers"]) {
+      this.processEtagHeaderParameters(codeModelOperation, op);
+    }
 
     // lro metadata
     const lroMetadata = this.processLroMetadata(codeModelOperation, op);
@@ -1369,6 +1382,9 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
     if (op.convenienceApi && operationIsMultipart(httpOperation)) {
+      if (schema instanceof ObjectSchema) {
+        this.processMultipartFormDataSchema(schema);
+      }
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
@@ -2591,10 +2607,12 @@ export class CodeModelBuilder {
       }
       if (discriminatorProperty) {
         objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
+        objectSchema.discriminator.property.isDiscriminator = true;
       } else {
         // fallback to property name, if cannot find the discriminator property
         objectSchema.discriminator = new Discriminator(
           new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
+            isDiscriminator: true,
             required: true,
             serializedName: discriminatorPropertyName,
           }),
@@ -3159,6 +3177,34 @@ export class CodeModelBuilder {
     }
   }
 
+  private processMultipartFormDataSchema(schema: ObjectSchema) {
+    if (schema.properties) {
+      for (const property of schema.properties) {
+        if (property.schema instanceof ByteArraySchema) {
+          property.schema = getFileDetailsSchema(
+            property.language.default.name,
+            schema.language.default.namespace,
+            this.codeModel.schemas,
+            this.binarySchema,
+            this.stringSchema,
+          );
+        } else if (property.schema instanceof ArraySchema && property.schema.elementType instanceof ByteArraySchema) {
+          property.schema = new ArraySchema(
+            property.language.default.name,
+            property.language.default.description,
+            getFileDetailsSchema(
+              property.language.default.name,
+              schema.language.default.namespace,
+              this.codeModel.schemas,
+              this.binarySchema,
+              this.stringSchema,
+            ),
+          );
+        }
+      }
+    }
+  }
+
   private getDefaultValue(type: Type | undefined): any {
     if (type) {
       switch (type.kind) {
@@ -3346,6 +3392,11 @@ export class CodeModelBuilder {
   private _anySchema?: AnySchema;
   get anySchema(): AnySchema {
     return this._anySchema ?? (this._anySchema = this.codeModel.schemas.add(new AnySchema("Anything")));
+  }
+
+  private _binarySchema?: BinarySchema;
+  get binarySchema(): BinarySchema {
+    return this._binarySchema || (this._binarySchema = this.codeModel.schemas.add(new BinarySchema("simple binary")));
   }
 
   private _pollResultSchema?: ObjectSchema;

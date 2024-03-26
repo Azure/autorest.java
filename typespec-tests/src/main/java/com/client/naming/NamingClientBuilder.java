@@ -41,7 +41,13 @@ import java.util.Objects;
  * A builder for creating a new instance of the NamingClient type.
  */
 @ServiceClientBuilder(
-    serviceClients = { NamingClient.class, ModelClient.class, NamingAsyncClient.class, ModelAsyncClient.class })
+    serviceClients = {
+        NamingClient.class,
+        ModelClient.class,
+        UnionEnumClient.class,
+        NamingAsyncClient.class,
+        ModelAsyncClient.class,
+        UnionEnumAsyncClient.class })
 public final class NamingClientBuilder
     implements HttpTrait<NamingClientBuilder>, ConfigurationTrait<NamingClientBuilder> {
     @Generated
@@ -262,6 +268,16 @@ public final class NamingClientBuilder
     }
 
     /**
+     * Builds an instance of UnionEnumAsyncClient class.
+     * 
+     * @return an instance of UnionEnumAsyncClient.
+     */
+    @Generated
+    public UnionEnumAsyncClient buildUnionEnumAsyncClient() {
+        return new UnionEnumAsyncClient(buildInnerClient().getUnionEnums());
+    }
+
+    /**
      * Builds an instance of NamingClient class.
      * 
      * @return an instance of NamingClient.
@@ -279,6 +295,16 @@ public final class NamingClientBuilder
     @Generated
     public ModelClient buildModelClient() {
         return new ModelClient(buildInnerClient().getModels());
+    }
+
+    /**
+     * Builds an instance of UnionEnumClient class.
+     * 
+     * @return an instance of UnionEnumClient.
+     */
+    @Generated
+    public UnionEnumClient buildUnionEnumClient() {
+        return new UnionEnumClient(buildInnerClient().getUnionEnums());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(NamingClientBuilder.class);

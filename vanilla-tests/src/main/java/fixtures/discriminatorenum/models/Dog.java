@@ -43,17 +43,6 @@ public class Dog implements JsonSerializable<Dog> {
     }
 
     /**
-     * Set the kind property: discriminator property.
-     * 
-     * @param kind the kind value to set.
-     * @return the Dog object itself.
-     */
-    Dog setKind(DogKind kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the weight property: Weight of the dog.
      * 
      * @return the weight value.

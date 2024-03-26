@@ -34,6 +34,7 @@ import com.type.property.valuetypes.ModelClient;
 import com.type.property.valuetypes.NeverClient;
 import com.type.property.valuetypes.StringLiteralClient;
 import com.type.property.valuetypes.StringOperationClient;
+import com.type.property.valuetypes.UnionEnumValueClient;
 import com.type.property.valuetypes.UnionFloatLiteralClient;
 import com.type.property.valuetypes.UnionIntLiteralClient;
 import com.type.property.valuetypes.UnionStringLiteralClient;
@@ -99,6 +100,8 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
     protected UnionIntLiteralClient unionIntLiteralClient;
 
     protected UnionFloatLiteralClient unionFloatLiteralClient;
+
+    protected UnionEnumValueClient unionEnumValueClient;
 
     @Override
     protected void beforeTest() {
@@ -379,6 +382,16 @@ class ValueTypesClientTestBase extends TestProxyTestBase {
             unionFloatLiteralClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         unionFloatLiteralClient = unionFloatLiteralClientbuilder.buildUnionFloatLiteralClient();
+
+        ValueTypesClientBuilder unionEnumValueClientbuilder
+            = new ValueTypesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            unionEnumValueClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            unionEnumValueClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        unionEnumValueClient = unionEnumValueClientbuilder.buildUnionEnumValueClient();
 
     }
 }

@@ -48,17 +48,6 @@ public class MyBaseType implements JsonSerializable<MyBaseType> {
     }
 
     /**
-     * Set the kind property: The kind property.
-     * 
-     * @param kind the kind value to set.
-     * @return the MyBaseType object itself.
-     */
-    MyBaseType setKind(MyKind kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the propB1 property: The propB1 property.
      * 
      * @return the propB1 value.

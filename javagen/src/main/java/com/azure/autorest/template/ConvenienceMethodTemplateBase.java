@@ -36,7 +36,10 @@ import com.azure.core.util.CoreUtils;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.serializer.CollectionFormat;
 import com.azure.core.util.serializer.JacksonAdapter;
+import com.azure.core.util.serializer.TypeReference;
 
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -338,7 +341,11 @@ abstract class ConvenienceMethodTemplateBase {
         // collection format
         imports.add(JacksonAdapter.class.getName());
         imports.add(CollectionFormat.class.getName());
-        ClassType.TYPE_REFERENCE.addImportsTo(imports, false);
+        imports.add(TypeReference.class.getName());
+        if (!JavaSettings.getInstance().isBranded()) {
+            imports.add(Type.class.getName());
+            imports.add(ParameterizedType.class.getName());
+        }
 
         // byte[]
         ClassType.BASE_64_URL.addImportsTo(imports, false);
@@ -564,7 +571,7 @@ abstract class ConvenienceMethodTemplateBase {
                 // multi, RestProxy will handle the array with "multipleQueryParams = true"
                 return name;
             } else {
-                String delimiter = parameter.getCollectionFormat().getDelimiter();
+                String delimiter = ClassType.STRING.defaultValueExpression(parameter.getCollectionFormat().getDelimiter());
                 IType elementType = ((IterableType) type).getElementType();
                 if (elementType instanceof EnumType) {
                     // EnumTypes should provide a toString implementation that represents the wire value.
@@ -579,12 +586,12 @@ abstract class ConvenienceMethodTemplateBase {
                         : "paramItemValue == null ? null : paramItemValue." + enumType.getToMethodName() + "()";
                     return name + ".stream()\n" +
                         "    .map(paramItemValue -> Objects.toString(" + enumToString + ", \"\"))\n" +
-                        "    .collect(Collectors.joining(\"" + delimiter + "\"))";
+                        "    .collect(Collectors.joining(" + delimiter + "))";
                 } else if (elementType == ClassType.STRING
                     || (elementType instanceof ClassType && ((ClassType) elementType).isBoxedType())) {
                     return name + ".stream()\n" +
                         "    .map(paramItemValue -> Objects.toString(paramItemValue, \"\"))\n" +
-                        "    .collect(Collectors.joining(\"" + delimiter + "\"))";
+                        "    .collect(Collectors.joining(" + delimiter + "))";
                 } else {
                     // Always use serializeIterable as Iterable supports both Iterable and List.
 

@@ -242,7 +242,7 @@ public final class QueriesImpl {
         final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-            .collect(Collectors.joining("	"));
+            .collect(Collectors.joining("\t"));
         return FluxUtil.withContext(context -> service.tsv(colorsConverted, accept, requestOptions, context));
     }
 
@@ -262,7 +262,7 @@ public final class QueriesImpl {
         final String accept = "application/json";
         String colorsConverted = colors.stream()
             .map(paramItemValue -> Objects.toString(paramItemValue, ""))
-            .collect(Collectors.joining("	"));
+            .collect(Collectors.joining("\t"));
         return service.tsvSync(colorsConverted, accept, requestOptions, Context.NONE);
     }
 

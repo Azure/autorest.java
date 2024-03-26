@@ -95,6 +95,7 @@ public class ClientMethodExampleWriter {
                             // it should have a 202 leading to SUCCESSFULLY_COMPLETED
                             // but x-ms-examples usually does not include the final result
                             methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
+                            this.imports.add("com.azure.core.util.polling.LongRunningOperationStatus");
                         }
                     } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
                         // PagedIterable<>

@@ -40,7 +40,7 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
   } elseif ($tspFile -match "arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"" --option ""@azure-tools/typespec-java.group-etag-headers=false"""
     # also don't generate with stream-style-serialization as azure-core-management hasn't migrated to azure-json yet
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
   }
@@ -56,6 +56,9 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationTest.java"""
   } elseif ($tspFile -match "encode[\\/]bytes[\\/]main.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationEncodeBytes.java"""
+  } elseif ($tspFile -match "type[\\/]model[\\/]inheritance[\\/]nested-discriminator[\\/]main.tsp") {
+    # nested discriminator is not supported
+    $tspOptions += " --option ""@azure-tools/typespec-java.customization-class=../../customization/src/main/java/CustomizationNestedDiscriminator.java"""
   }
 
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"

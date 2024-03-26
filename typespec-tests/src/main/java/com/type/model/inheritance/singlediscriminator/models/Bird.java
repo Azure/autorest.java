@@ -51,18 +51,6 @@ public class Bird implements JsonSerializable<Bird> {
     }
 
     /**
-     * Set the kind property: The kind property.
-     * 
-     * @param kind the kind value to set.
-     * @return the Bird object itself.
-     */
-    @Generated
-    Bird setKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the wingspan property: The wingspan property.
      * 
      * @return the wingspan value.

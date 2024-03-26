@@ -223,6 +223,9 @@ public class ServiceClient {
         }
 
         if (includeImplementationImports) {
+            if (settings.isFluent()) {
+                ClassType.HTTP_HEADER_NAME.addImportsTo(imports, includeImplementationImports);
+            }
             if (settings.isFluentPremium()) {
                 imports.add("com.azure.resourcemanager.resources.fluentcore.AzureServiceClient");
             }

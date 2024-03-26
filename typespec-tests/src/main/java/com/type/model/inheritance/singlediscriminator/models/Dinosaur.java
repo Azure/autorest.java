@@ -51,18 +51,6 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     }
 
     /**
-     * Set the kind property: The kind property.
-     * 
-     * @param kind the kind value to set.
-     * @return the Dinosaur object itself.
-     */
-    @Generated
-    Dinosaur setKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the size property: The size property.
      * 
      * @return the size value.

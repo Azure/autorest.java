@@ -16,11 +16,14 @@ import com.azure.core.test.TestProxyTestBase;
 import com.client.naming.ModelClient;
 import com.client.naming.NamingClient;
 import com.client.naming.NamingClientBuilder;
+import com.client.naming.UnionEnumClient;
 
 class NamingClientTestBase extends TestProxyTestBase {
     protected NamingClient namingClient;
 
     protected ModelClient modelClient;
+
+    protected UnionEnumClient unionEnumClient;
 
     @Override
     protected void beforeTest() {
@@ -41,6 +44,15 @@ class NamingClientTestBase extends TestProxyTestBase {
             modelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         modelClient = modelClientbuilder.buildModelClient();
+
+        NamingClientBuilder unionEnumClientbuilder = new NamingClientBuilder().httpClient(HttpClient.createDefault())
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            unionEnumClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            unionEnumClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        unionEnumClient = unionEnumClientbuilder.buildUnionEnumClient();
 
     }
 }

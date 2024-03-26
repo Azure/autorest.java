@@ -436,6 +436,9 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     configuration: String (Optional)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
@@ -502,6 +505,9 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     configuration: String (Optional)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
@@ -568,6 +574,9 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     configuration: String (Optional)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
@@ -625,6 +634,9 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     configuration: String (Optional)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
@@ -682,6 +694,9 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     configuration: String (Optional)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
@@ -741,6 +756,9 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     configuration: String (Optional)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>

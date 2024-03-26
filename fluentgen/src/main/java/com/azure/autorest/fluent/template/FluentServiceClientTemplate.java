@@ -145,7 +145,7 @@ public class FluentServiceClientTemplate extends ServiceClientTemplate {
                 });
 
                 block.publicMethod("String getHeaderValue(String s)", code -> {
-                    code.methodReturn("httpHeaders.getValue(s)");
+                    code.methodReturn("httpHeaders.getValue(HttpHeaderName.fromString(s))");
                 });
 
                 block.publicMethod("HttpHeaders getHeaders()", code -> {

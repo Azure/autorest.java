@@ -205,15 +205,15 @@ public class ClientBuilderTrait {
         } else {
             switch (level) {
                 case VERBOSE:
-                    return String.format("LOGGER.log(LogLevel.VERBOSE, () -> \"%s\");", message);
+                    return String.format("LOGGER.atVerbose().log(() -> \"%s\");", message);
                 case INFORMATIONAL:
-                    return String.format("LOGGER.log(LogLevel.INFORMATIONAL, () -> \"%s\");", message);
+                    return String.format("LOGGER.atInfo().log(() -> \"%s\");", message);
                 case WARNING:
-                    return String.format("LOGGER.log(LogLevel.WARNING, () -> \"%s\");", message);
+                    return String.format("LOGGER.atWarning().log(() -> \"%s\");", message);
                 case ERROR:
-                    return String.format("LOGGER.log(LogLevel.ERROR, () -> \"%s\");", message);
+                    return String.format("LOGGER.atError().log(() -> \"%s\");", message);
                 default:
-                    return String.format("LOGGER.log(LogLevel.INFORMATIONAL, () -> \"%s\");", message);
+                    return String.format("LOGGER.atInfo().log(() -> \"%s\");", message);
             }
         }
     }

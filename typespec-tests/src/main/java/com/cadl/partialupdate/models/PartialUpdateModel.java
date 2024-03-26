@@ -107,14 +107,26 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
         return this.aggregate;
     }
 
+    /**
+     * javadoc
+     * @param aggregate javadoc
+     */
     public void setAggregate(String aggregate) {
         this.aggregate = aggregate;
     }
 
+    /**
+     * javadoc
+     * @return javadoc
+     */
     public String getTestProperty() {
         return testProperty;
     }
 
+    /**
+     * javadoc
+     * @param testProperty javadoc
+     */
     public void setTestProperty(String testProperty) {
         this.testProperty = testProperty;
     }

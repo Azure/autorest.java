@@ -51,18 +51,6 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Set the kind property: The kind property.
-     * 
-     * @param kind the kind value to set.
-     * @return the Fish object itself.
-     */
-    @Generated
-    Fish setKind(String kind) {
-        this.kind = kind;
-        return this;
-    }
-
-    /**
      * Get the age property: The age property.
      * 
      * @return the age value.

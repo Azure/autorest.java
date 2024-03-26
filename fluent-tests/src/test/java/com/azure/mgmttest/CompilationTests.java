@@ -7,6 +7,7 @@ import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
+import com.azure.mgmtlitetest.consumption.models.LegacyReservationRecommendation;
 import com.azure.mgmttest.appservice.fluent.WebSiteManagementClient;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.authorization.models.GraphError;
@@ -159,5 +160,9 @@ public class CompilationTests {
     public void testSharedError() {
         ErrorDetails errorDetails = mock(ErrorDetails.class);
         errorDetails.getHttpStatusCode();
+    }
+
+    public void testPolymophicSubClass() {
+        LegacyReservationRecommendation legacyReservationRecommendation = new LegacyReservationRecommendation();
     }
 }

@@ -5,7 +5,6 @@ package com.azure.autorest.mapper;
 
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.ConvenienceApi;
-import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
 import com.azure.autorest.extension.base.model.codemodel.LongRunningMetadata;
 import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Operation;
@@ -17,7 +16,6 @@ import com.azure.autorest.extension.base.model.codemodel.Schema;
 import com.azure.autorest.extension.base.model.extensionmodel.XmsPageable;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.extension.base.plugin.JavaSettings.SyncMethodsGeneration;
-import com.azure.autorest.model.clientmodel.ArrayType;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethod.Builder;
@@ -47,7 +45,6 @@ import com.azure.autorest.util.MethodNamer;
 import com.azure.autorest.util.MethodUtil;
 import com.azure.autorest.util.ReturnTypeDescriptionAssembler;
 import com.azure.autorest.util.SchemaUtil;
-import com.azure.autorest.util.TypeUtil;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
@@ -233,21 +230,6 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 for (Parameter parameter : codeModelParameters) {
                     ClientMethodParameter clientMethodParameter = Mappers.getClientParameterMapper()
                         .map(parameter, isProtocolMethod);
-
-                    if (parameter.getOriginalParameter() != null && parameter.getTargetProperty() != null
-                            && MethodUtil.isContentTypeInRequest(request, KnownMediaType.MULTIPART.getContentType())) {
-                        // flattened parameter from a multipart/form-data request field
-                        // TODO (weidxu): the mapping in processParameterTransformations is not correct, as the ClientModelProperty is updated in ModelMapper
-                        if (clientMethodParameter.getWireType() == ArrayType.BYTE_ARRAY
-                                || (clientMethodParameter.getWireType() instanceof ListType && ((ListType) clientMethodParameter.getWireType()).getElementType() == ArrayType.BYTE_ARRAY)) {
-                            IType fileDetailsModelType = TypeUtil.getMultipartFileDetailsModel(SchemaUtil.getJavaName(parameter.getTargetProperty()));
-                            IType type = clientMethodParameter.getWireType() == ArrayType.BYTE_ARRAY ? fileDetailsModelType : new ListType(fileDetailsModelType);
-                            clientMethodParameter = clientMethodParameter.newBuilder()
-                                    .wireType(type)
-                                    .rawType(type)
-                                    .build();
-                        }
-                    }
 
                     if (isJsonPatch) {
                         clientMethodParameter = CustomClientParameterMapper.getInstance().map(parameter);
