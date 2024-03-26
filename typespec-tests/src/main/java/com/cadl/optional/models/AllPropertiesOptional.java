@@ -13,7 +13,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -112,6 +114,18 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
      */
     @Generated
     private OffsetDateTime dateTime;
+
+    /*
+     * The epochDateTimeRequiredNullable property.
+     */
+    @Generated
+    private OffsetDateTime epochDateTimeRequiredNullable;
+
+    /*
+     * The epochDateTimeNullable property.
+     */
+    @Generated
+    private Long epochDateTimeNullable;
 
     /*
      * The stringList property.
@@ -289,6 +303,29 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
+     * Get the epochDateTimeRequiredNullable property: The epochDateTimeRequiredNullable property.
+     * 
+     * @return the epochDateTimeRequiredNullable value.
+     */
+    @Generated
+    public OffsetDateTime getEpochDateTimeRequiredNullable() {
+        return this.epochDateTimeRequiredNullable;
+    }
+
+    /**
+     * Get the epochDateTimeNullable property: The epochDateTimeNullable property.
+     * 
+     * @return the epochDateTimeNullable value.
+     */
+    @Generated
+    public OffsetDateTime getEpochDateTimeNullable() {
+        if (this.epochDateTimeNullable == null) {
+            return null;
+        }
+        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.epochDateTimeNullable), ZoneOffset.UTC);
+    }
+
+    /**
      * Get the stringList property: The stringList property.
      * 
      * @return the stringList value.
@@ -341,6 +378,9 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
         jsonWriter.writeStringField("duration", CoreUtils.durationToStringWithDays(this.duration));
         jsonWriter.writeStringField("dateTime",
             this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
+        jsonWriter.writeStringField("epochDateTimeRequiredNullable", this.epochDateTimeRequiredNullable == null ? null
+            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.epochDateTimeRequiredNullable));
+        jsonWriter.writeNumberField("epochDateTimeNullable", this.epochDateTimeNullable);
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
         jsonWriter.writeJsonField("immutable", this.immutable);
@@ -395,6 +435,11 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
                 } else if ("dateTime".equals(fieldName)) {
                     deserializedAllPropertiesOptional.dateTime
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("epochDateTimeRequiredNullable".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.epochDateTimeRequiredNullable
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("epochDateTimeNullable".equals(fieldName)) {
+                    deserializedAllPropertiesOptional.epochDateTimeNullable = reader.getNullable(JsonReader::getLong);
                 } else if ("stringList".equals(fieldName)) {
                     List<String> stringList = reader.readArray(reader1 -> reader1.getString());
                     deserializedAllPropertiesOptional.stringList = stringList;

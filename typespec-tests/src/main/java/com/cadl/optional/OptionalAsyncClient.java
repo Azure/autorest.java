@@ -76,6 +76,8 @@ public final class OptionalAsyncClient {
      *     double: Double (Optional)
      *     duration: Duration (Optional)
      *     dateTime: OffsetDateTime (Optional)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Required)
+     *     epochDateTimeNullable: Long (Optional)
      *     stringList (Optional): [
      *         String (Optional)
      *     ]
@@ -102,6 +104,8 @@ public final class OptionalAsyncClient {
      *     double: Double (Optional)
      *     duration: Duration (Optional)
      *     dateTime: OffsetDateTime (Optional)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Optional)
+     *     epochDateTimeNullable: Long (Optional)
      *     stringList (Optional): [
      *         String (Optional)
      *     ]

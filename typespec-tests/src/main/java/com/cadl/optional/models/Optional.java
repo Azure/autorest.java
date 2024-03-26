@@ -13,7 +13,9 @@ import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
 import java.time.Duration;
+import java.time.Instant;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +116,18 @@ public final class Optional implements JsonSerializable<Optional> {
     private OffsetDateTime dateTime;
 
     /*
+     * The epochDateTimeRequiredNullable property.
+     */
+    @Generated
+    private final OffsetDateTime epochDateTimeRequiredNullable;
+
+    /*
+     * The epochDateTimeNullable property.
+     */
+    @Generated
+    private Long epochDateTimeNullable;
+
+    /*
      * The stringList property.
      */
     @Generated
@@ -132,14 +146,16 @@ public final class Optional implements JsonSerializable<Optional> {
      * @param booleanRequiredNullable the booleanRequiredNullable value to set.
      * @param stringRequired the stringRequired value to set.
      * @param stringRequiredNullable the stringRequiredNullable value to set.
+     * @param epochDateTimeRequiredNullable the epochDateTimeRequiredNullable value to set.
      */
     @Generated
     public Optional(boolean booleanRequired, Boolean booleanRequiredNullable, String stringRequired,
-        String stringRequiredNullable) {
+        String stringRequiredNullable, OffsetDateTime epochDateTimeRequiredNullable) {
         this.booleanRequired = booleanRequired;
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;
         this.stringRequiredNullable = stringRequiredNullable;
+        this.epochDateTimeRequiredNullable = epochDateTimeRequiredNullable;
     }
 
     /**
@@ -425,6 +441,45 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
+     * Get the epochDateTimeRequiredNullable property: The epochDateTimeRequiredNullable property.
+     * 
+     * @return the epochDateTimeRequiredNullable value.
+     */
+    @Generated
+    public OffsetDateTime getEpochDateTimeRequiredNullable() {
+        return this.epochDateTimeRequiredNullable;
+    }
+
+    /**
+     * Get the epochDateTimeNullable property: The epochDateTimeNullable property.
+     * 
+     * @return the epochDateTimeNullable value.
+     */
+    @Generated
+    public OffsetDateTime getEpochDateTimeNullable() {
+        if (this.epochDateTimeNullable == null) {
+            return null;
+        }
+        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.epochDateTimeNullable), ZoneOffset.UTC);
+    }
+
+    /**
+     * Set the epochDateTimeNullable property: The epochDateTimeNullable property.
+     * 
+     * @param epochDateTimeNullable the epochDateTimeNullable value to set.
+     * @return the Optional object itself.
+     */
+    @Generated
+    public Optional setEpochDateTimeNullable(OffsetDateTime epochDateTimeNullable) {
+        if (epochDateTimeNullable == null) {
+            this.epochDateTimeNullable = null;
+        } else {
+            this.epochDateTimeNullable = epochDateTimeNullable.toEpochSecond();
+        }
+        return this;
+    }
+
+    /**
      * Get the stringList property: The stringList property.
      * 
      * @return the stringList value.
@@ -479,6 +534,8 @@ public final class Optional implements JsonSerializable<Optional> {
         jsonWriter.writeBooleanField("booleanRequiredNullable", this.booleanRequiredNullable);
         jsonWriter.writeStringField("stringRequired", this.stringRequired);
         jsonWriter.writeStringField("stringRequiredNullable", this.stringRequiredNullable);
+        jsonWriter.writeStringField("epochDateTimeRequiredNullable", this.epochDateTimeRequiredNullable == null ? null
+            : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.epochDateTimeRequiredNullable));
         jsonWriter.writeBooleanField("boolean", this.booleanProperty);
         jsonWriter.writeBooleanField("booleanNullable", this.booleanNullable);
         jsonWriter.writeStringField("string", this.string);
@@ -491,6 +548,7 @@ public final class Optional implements JsonSerializable<Optional> {
         jsonWriter.writeStringField("duration", CoreUtils.durationToStringWithDays(this.duration));
         jsonWriter.writeStringField("dateTime",
             this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
+        jsonWriter.writeNumberField("epochDateTimeNullable", this.epochDateTimeNullable);
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
         return jsonWriter.writeEndObject();
@@ -511,6 +569,7 @@ public final class Optional implements JsonSerializable<Optional> {
             Boolean booleanRequiredNullable = null;
             String stringRequired = null;
             String stringRequiredNullable = null;
+            OffsetDateTime epochDateTimeRequiredNullable = null;
             Boolean booleanProperty = null;
             Boolean booleanNullable = null;
             String string = null;
@@ -522,6 +581,7 @@ public final class Optional implements JsonSerializable<Optional> {
             Double doubleProperty = null;
             Duration duration = null;
             OffsetDateTime dateTime = null;
+            OffsetDateTime epochDateTimeNullable = null;
             List<String> stringList = null;
             Map<String, byte[]> bytesDict = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -536,6 +596,9 @@ public final class Optional implements JsonSerializable<Optional> {
                     stringRequired = reader.getString();
                 } else if ("stringRequiredNullable".equals(fieldName)) {
                     stringRequiredNullable = reader.getString();
+                } else if ("epochDateTimeRequiredNullable".equals(fieldName)) {
+                    epochDateTimeRequiredNullable
+                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("boolean".equals(fieldName)) {
                     booleanProperty = reader.getNullable(JsonReader::getBoolean);
                 } else if ("booleanNullable".equals(fieldName)) {
@@ -558,6 +621,12 @@ public final class Optional implements JsonSerializable<Optional> {
                     duration = reader.getNullable(nonNullReader -> Duration.parse(nonNullReader.getString()));
                 } else if ("dateTime".equals(fieldName)) {
                     dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                } else if ("epochDateTimeNullable".equals(fieldName)) {
+                    Long epochDateTimeNullable = reader.getNullable(JsonReader::getLong);
+                    if (epochDateTimeNullable != null) {
+                        epochDateTimeNullable
+                            = OffsetDateTime.ofInstant(Instant.ofEpochSecond(epochDateTimeNullable), ZoneOffset.UTC);
+                    }
                 } else if ("stringList".equals(fieldName)) {
                     stringList = reader.readArray(reader1 -> reader1.getString());
                 } else if ("bytesDict".equals(fieldName)) {
@@ -566,8 +635,8 @@ public final class Optional implements JsonSerializable<Optional> {
                     reader.skipChildren();
                 }
             }
-            Optional deserializedOptional
-                = new Optional(booleanRequired, booleanRequiredNullable, stringRequired, stringRequiredNullable);
+            Optional deserializedOptional = new Optional(booleanRequired, booleanRequiredNullable, stringRequired,
+                stringRequiredNullable, epochDateTimeRequiredNullable);
             deserializedOptional.booleanProperty = booleanProperty;
             deserializedOptional.booleanNullable = booleanNullable;
             deserializedOptional.string = string;
@@ -579,6 +648,7 @@ public final class Optional implements JsonSerializable<Optional> {
             deserializedOptional.doubleProperty = doubleProperty;
             deserializedOptional.duration = duration;
             deserializedOptional.dateTime = dateTime;
+            deserializedOptional.epochDateTimeNullable = epochDateTimeNullable;
             deserializedOptional.stringList = stringList;
             deserializedOptional.bytesDict = bytesDict;
 

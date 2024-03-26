@@ -23,6 +23,10 @@ model Optional {
   double?: float64;
   duration?: duration;
   dateTime?: utcDateTime;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  epochDateTimeRequiredNullable: utcDateTime | null;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  epochDateTimeNullable?: utcDateTime;
   stringList?: string[];
   bytesDict?: Record<bytes>;
 }
