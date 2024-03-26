@@ -85,7 +85,7 @@ public class JavaFileContents {
         int wordWrapIndexMinusLinePrefixLength = 120 - (addPrefix ? linePrefix.length() : 0) - 1;
         List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
         for (int i = 0; i < wrappedLines.size() - 1; i++) {
-            lines.add(wrappedLines.get(i) + System.lineSeparator());
+            lines.add(wrappedLines.get(i) + "\n");
         }
 
         String lastWrappedLine = wrappedLines.isEmpty() ? null : wrappedLines.get(wrappedLines.size() - 1);
@@ -144,7 +144,7 @@ public class JavaFileContents {
     }
 
     private void line(String text, boolean addPrefix) {
-        text(text + System.lineSeparator(), addPrefix);
+        text(text + "\n", addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 

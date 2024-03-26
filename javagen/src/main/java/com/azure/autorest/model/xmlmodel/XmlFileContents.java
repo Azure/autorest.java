@@ -148,7 +148,7 @@ public class XmlFileContents {
     }
 
     private void line(String text, boolean addPrefix) {
-        text(text + System.lineSeparator(), addPrefix);
+        text(text + "\n", addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 
