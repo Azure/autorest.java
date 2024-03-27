@@ -146,7 +146,6 @@ public class JavaSettings {
                 getStringValue(host, "client-flattened-annotation-target", ""),
                 getStringValue(host, "key-credential-header-name", ""),
                 getBooleanValue(host, "disable-client-builder", false),
-                getBooleanValue(host, "skip-formatting", false),
                 host.getValue(TYPE_FACTORY.constructMapType(Map.class, String.class, PollingDetails.class), "polling"),
                 getBooleanValue(host, "generate-samples", false),
                 getBooleanValue(host, "generate-tests", false),
@@ -226,7 +225,6 @@ public class JavaSettings {
      * x-ms-client-flatten.
      * @param keyCredentialHeaderName The header name for the key credential.
      * @param clientBuilderDisabled Whether to disable the client builder.
-     * @param skipFormatting Whether to skip formatting the generated code.
      * @param pollingConfig The polling configuration.
      * @param generateSamples Whether to generate samples.
      * @param generateTests Whether to generate tests.
@@ -303,7 +301,6 @@ public class JavaSettings {
         String clientFlattenAnnotationTarget,
         String keyCredentialHeaderName,
         boolean clientBuilderDisabled,
-        boolean skipFormatting,
         Map<String, PollingDetails> pollingConfig,
         boolean generateSamples,
         boolean generateTests,
@@ -389,7 +386,6 @@ public class JavaSettings {
         this.customizationClass = customizationClass;
         this.keyCredentialHeaderName = keyCredentialHeaderName;
         this.clientBuilderDisabled = clientBuilderDisabled;
-        this.skipFormatting = skipFormatting;
         if (pollingConfig != null) {
             if (!pollingConfig.containsKey("default")) {
                 pollingConfig.put("default", new PollingDetails());
@@ -1141,17 +1137,6 @@ public class JavaSettings {
      */
     public final String getCustomizationClass() {
         return customizationClass;
-    }
-
-    boolean skipFormatting;
-
-    /**
-     * Whether to skip formatting java files.
-     *
-     * @return whether to skip formatting java files.
-     */
-    public boolean isSkipFormatting() {
-        return skipFormatting;
     }
 
     private final boolean optionalConstantAsEnum;
