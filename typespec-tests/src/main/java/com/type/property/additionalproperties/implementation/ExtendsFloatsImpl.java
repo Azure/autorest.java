@@ -52,7 +52,8 @@ public final class ExtendsFloatsImpl {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientExtendsFloats to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientExtendsFloats to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AdditionalProperties")
@@ -99,10 +100,10 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
+     * id: double (Required)
+     * (Optional): {
+     * String: double (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -124,10 +125,10 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
+     * id: double (Required)
+     * (Optional): {
+     * String: double (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -149,10 +150,10 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
+     * id: double (Required)
+     * (Optional): {
+     * String: double (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -175,10 +176,10 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
+     * id: double (Required)
+     * (Optional): {
+     * String: double (Required)
+     * }
      * }
      * }</pre>
      * 

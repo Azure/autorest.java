@@ -52,7 +52,8 @@ public final class CollectionsModelsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientCollectionsModels to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientCollectionsModels to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientColl")
@@ -99,11 +100,11 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *          (Required){
-     *             property: String (Required)
-     *         }
-     *     ]
+     * property (Required): [
+     * (Required){
+     * property: String (Required)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -125,11 +126,11 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *          (Required){
-     *             property: String (Required)
-     *         }
-     *     ]
+     * property (Required): [
+     * (Required){
+     * property: String (Required)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -151,11 +152,11 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *          (Required){
-     *             property: String (Required)
-     *         }
-     *     ]
+     * property (Required): [
+     * (Required){
+     * property: String (Required)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -178,11 +179,11 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *          (Required){
-     *             property: String (Required)
-     *         }
-     *     ]
+     * property (Required): [
+     * (Required){
+     * property: String (Required)
+     * }
+     * ]
      * }
      * }</pre>
      * 

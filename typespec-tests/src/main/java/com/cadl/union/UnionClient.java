@@ -47,10 +47,10 @@ public final class UnionClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     user (Optional): {
-     *         user: String (Required)
-     *     }
-     *     input: BinaryData (Required)
+     * user (Optional): {
+     * user: String (Required)
+     * }
+     * input: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -73,22 +73,22 @@ public final class UnionClient {
      * The sendLong operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     user (Optional): {
-     *         user: String (Required)
-     *     }
-     *     input: String (Required)
-     *     dataInt: int (Required)
-     *     dataUnion: BinaryData (Optional)
-     *     dataLong: Long (Optional)
-     *     data_float: Double (Optional)
+     * user (Optional): {
+     * user: String (Required)
+     * }
+     * input: String (Required)
+     * dataInt: int (Required)
+     * dataUnion: BinaryData (Optional)
+     * dataLong: Long (Optional)
+     * data_float: Double (Optional)
      * }
      * }</pre>
      * 
@@ -111,9 +111,9 @@ public final class UnionClient {
      * The get operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>data</td><td>BinaryData</td><td>No</td><td>The data parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>data</td><td>BinaryData</td><td>No</td><td>The data parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -135,16 +135,16 @@ public final class UnionClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 

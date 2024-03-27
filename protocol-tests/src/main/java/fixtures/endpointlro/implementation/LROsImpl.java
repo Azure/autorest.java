@@ -68,7 +68,8 @@ public final class LROsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLROs to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLROs to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("https://{Endpoint}/resource/{ProjectName}")
     @ServiceInterface(name = "AutoRestLongRunningO")
@@ -95,30 +96,34 @@ public final class LROsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -143,30 +148,34 @@ public final class LROsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -191,30 +200,34 @@ public final class LROsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -239,30 +252,34 @@ public final class LROsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 to the initial request, with an entity that contains ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 

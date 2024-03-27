@@ -55,15 +55,15 @@ public final class ProtocolAndConvenientAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -82,19 +82,20 @@ public final class ProtocolAndConvenientAsyncClient {
     }
 
     /**
-     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and ResourceD should not be generated.
+     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
+     * ResourceD should not be generated.
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -117,15 +118,15 @@ public final class ProtocolAndConvenientAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -149,15 +150,15 @@ public final class ProtocolAndConvenientAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -180,17 +181,17 @@ public final class ProtocolAndConvenientAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -214,17 +215,18 @@ public final class ProtocolAndConvenientAsyncClient {
      * Paging operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
+     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 

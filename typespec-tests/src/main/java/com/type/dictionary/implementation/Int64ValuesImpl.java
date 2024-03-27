@@ -52,7 +52,8 @@ public final class Int64ValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryClientInt64Values to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for DictionaryClientInt64Values to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryClientInt6")
@@ -99,7 +100,7 @@ public final class Int64ValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: long (Required)
+     * String: long (Required)
      * }
      * }</pre>
      * 
@@ -121,7 +122,7 @@ public final class Int64ValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: long (Required)
+     * String: long (Required)
      * }
      * }</pre>
      * 
@@ -143,7 +144,7 @@ public final class Int64ValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: long (Required)
+     * String: long (Required)
      * }
      * }</pre>
      * 
@@ -166,7 +167,7 @@ public final class Int64ValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: long (Required)
+     * String: long (Required)
      * }
      * }</pre>
      * 

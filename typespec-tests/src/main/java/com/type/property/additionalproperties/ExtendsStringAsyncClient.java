@@ -43,10 +43,10 @@ public final class ExtendsStringAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: String (Required)
-     *     }
+     * name: String (Required)
+     * (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -68,10 +68,10 @@ public final class ExtendsStringAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: String (Required)
-     *     }
+     * name: String (Required)
+     * (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 

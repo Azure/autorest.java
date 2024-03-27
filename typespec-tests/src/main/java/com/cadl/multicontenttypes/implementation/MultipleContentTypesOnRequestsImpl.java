@@ -52,7 +52,8 @@ public final class MultipleContentTypesOnRequestsImpl {
     }
 
     /**
-     * The interface defining all the services for MultiContentTypesClientMultipleContentTypesOnRequests to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for MultiContentTypesClientMultipleContentTypesOnRequests to be used by
+     * the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "MultiContentTypesCli")
@@ -147,7 +148,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -172,7 +174,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -196,7 +199,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -221,7 +225,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -243,8 +248,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -271,8 +276,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -300,7 +305,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
+     * "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -324,7 +330,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
+     * "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

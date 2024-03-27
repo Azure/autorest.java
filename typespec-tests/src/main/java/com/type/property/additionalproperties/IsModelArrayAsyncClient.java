@@ -46,11 +46,11 @@ public final class IsModelArrayAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     * String (Required): [
+     * (Required){
+     * state: String (Required)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -72,11 +72,11 @@ public final class IsModelArrayAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     * String (Required): [
+     * (Required){
+     * state: String (Required)
+     * }
+     * ]
      * }
      * }</pre>
      * 

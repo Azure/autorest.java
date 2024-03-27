@@ -51,7 +51,8 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for DatetimeClientProperties to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for DatetimeClientProperties to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DatetimeClientProper")
@@ -152,13 +153,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -181,13 +182,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -210,13 +211,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -239,13 +240,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: OffsetDateTime (Required)
+     * value: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -268,13 +269,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: DateTimeRfc1123 (Required)
+     * value: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: DateTimeRfc1123 (Required)
+     * value: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      * 
@@ -297,13 +298,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: DateTimeRfc1123 (Required)
+     * value: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: DateTimeRfc1123 (Required)
+     * value: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      * 
@@ -326,13 +327,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: long (Required)
+     * value: long (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: long (Required)
+     * value: long (Required)
      * }
      * }</pre>
      * 
@@ -355,13 +356,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: long (Required)
+     * value: long (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value: long (Required)
+     * value: long (Required)
      * }
      * }</pre>
      * 
@@ -384,17 +385,17 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value (Required): [
-     *         long (Required)
-     *     ]
+     * value (Required): [
+     * long (Required)
+     * ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value (Required): [
-     *         long (Required)
-     *     ]
+     * value (Required): [
+     * long (Required)
+     * ]
      * }
      * }</pre>
      * 
@@ -418,17 +419,17 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value (Required): [
-     *         long (Required)
-     *     ]
+     * value (Required): [
+     * long (Required)
+     * ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     value (Required): [
-     *         long (Required)
-     *     ]
+     * value (Required): [
+     * long (Required)
+     * ]
      * }
      * }</pre>
      * 

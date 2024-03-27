@@ -45,7 +45,7 @@ public final class DurationValueAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: Duration (Required)
+     * String: Duration (Required)
      * }
      * }</pre>
      * 
@@ -67,7 +67,7 @@ public final class DurationValueAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: Duration (Required)
+     * String: Duration (Required)
      * }
      * }</pre>
      * 

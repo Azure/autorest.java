@@ -61,7 +61,7 @@ public final class DifferentBodyClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     content: byte[] (Required)
+     * content: byte[] (Required)
      * }
      * }</pre>
      * 

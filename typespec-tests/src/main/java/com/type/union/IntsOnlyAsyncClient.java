@@ -45,7 +45,7 @@ public final class IntsOnlyAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: String(1/2/3) (Required)
+     * prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 
@@ -67,7 +67,7 @@ public final class IntsOnlyAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: String(1/2/3) (Required)
+     * prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 

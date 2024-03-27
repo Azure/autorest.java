@@ -41,7 +41,7 @@ public final class JsonClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     wireName: boolean (Required)
+     * wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -64,7 +64,7 @@ public final class JsonClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     wireName: boolean (Required)
+     * wireName: boolean (Required)
      * }
      * }</pre>
      * 

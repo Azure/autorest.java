@@ -52,7 +52,8 @@ public final class IsUnknownDiscriminatedsImpl {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientIsUnknownDiscriminateds to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientIsUnknownDiscriminateds to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AdditionalProperties")
@@ -99,11 +100,11 @@ public final class IsUnknownDiscriminatedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
+     * kind: String (Required)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -125,11 +126,11 @@ public final class IsUnknownDiscriminatedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
+     * kind: String (Required)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -151,11 +152,11 @@ public final class IsUnknownDiscriminatedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
+     * kind: String (Required)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -178,11 +179,11 @@ public final class IsUnknownDiscriminatedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
+     * kind: String (Required)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
      * }
      * }</pre>
      * 

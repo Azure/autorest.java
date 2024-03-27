@@ -13,7 +13,8 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * The platform object describes the platform which the image in the manifest runs on. A full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH.
+ * The platform object describes the platform which the image in the manifest runs on. A full list of valid operating
+ * system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH.
  */
 @Fluent
 public final class Platform implements JsonSerializable<Platform> {
@@ -33,17 +34,20 @@ public final class Platform implements JsonSerializable<Platform> {
     private String osVersion;
 
     /*
-     * The optional os.features field specifies an array of strings, each listing a required OS feature (for example on Windows win32k
+     * The optional os.features field specifies an array of strings, each listing a required OS feature (for example on
+     * Windows win32k
      */
     private List<String> osFeatures;
 
     /*
-     * The optional variant field specifies a variant of the CPU, for example armv6l to specify a particular CPU variant of the ARM CPU.
+     * The optional variant field specifies a variant of the CPU, for example armv6l to specify a particular CPU
+     * variant of the ARM CPU.
      */
     private String variant;
 
     /*
-     * The optional features field specifies an array of strings, each listing a required CPU feature (for example sse4 or aes
+     * The optional features field specifies an array of strings, each listing a required CPU feature (for example sse4
+     * or aes
      */
     private List<String> features;
 
@@ -94,7 +98,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Get the osVersion property: The optional os.version field specifies the operating system version, for example 10.0.10586.
+     * Get the osVersion property: The optional os.version field specifies the operating system version, for example
+     * 10.0.10586.
      * 
      * @return the osVersion value.
      */
@@ -103,7 +108,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Set the osVersion property: The optional os.version field specifies the operating system version, for example 10.0.10586.
+     * Set the osVersion property: The optional os.version field specifies the operating system version, for example
+     * 10.0.10586.
      * 
      * @param osVersion the osVersion value to set.
      * @return the Platform object itself.
@@ -114,7 +120,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Get the osFeatures property: The optional os.features field specifies an array of strings, each listing a required OS feature (for example on Windows win32k.
+     * Get the osFeatures property: The optional os.features field specifies an array of strings, each listing a
+     * required OS feature (for example on Windows win32k.
      * 
      * @return the osFeatures value.
      */
@@ -123,7 +130,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Set the osFeatures property: The optional os.features field specifies an array of strings, each listing a required OS feature (for example on Windows win32k.
+     * Set the osFeatures property: The optional os.features field specifies an array of strings, each listing a
+     * required OS feature (for example on Windows win32k.
      * 
      * @param osFeatures the osFeatures value to set.
      * @return the Platform object itself.
@@ -134,7 +142,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Get the variant property: The optional variant field specifies a variant of the CPU, for example armv6l to specify a particular CPU variant of the ARM CPU.
+     * Get the variant property: The optional variant field specifies a variant of the CPU, for example armv6l to
+     * specify a particular CPU variant of the ARM CPU.
      * 
      * @return the variant value.
      */
@@ -143,7 +152,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Set the variant property: The optional variant field specifies a variant of the CPU, for example armv6l to specify a particular CPU variant of the ARM CPU.
+     * Set the variant property: The optional variant field specifies a variant of the CPU, for example armv6l to
+     * specify a particular CPU variant of the ARM CPU.
      * 
      * @param variant the variant value to set.
      * @return the Platform object itself.
@@ -154,7 +164,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Get the features property: The optional features field specifies an array of strings, each listing a required CPU feature (for example sse4 or aes.
+     * Get the features property: The optional features field specifies an array of strings, each listing a required
+     * CPU feature (for example sse4 or aes.
      * 
      * @return the features value.
      */
@@ -163,7 +174,8 @@ public final class Platform implements JsonSerializable<Platform> {
     }
 
     /**
-     * Set the features property: The optional features field specifies an array of strings, each listing a required CPU feature (for example sse4 or aes.
+     * Set the features property: The optional features field specifies an array of strings, each listing a required
+     * CPU feature (for example sse4 or aes.
      * 
      * @param features the features value to set.
      * @return the Platform object itself.
@@ -192,7 +204,8 @@ public final class Platform implements JsonSerializable<Platform> {
      * Reads an instance of Platform from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Platform if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of Platform if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
      * @throws IOException If an error occurs while reading the Platform.
      */
     public static Platform fromJson(JsonReader jsonReader) throws IOException {

@@ -52,7 +52,8 @@ public final class MixedTypesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientMixedTypes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientMixedTypes to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientMixedType")
@@ -99,12 +100,12 @@ public final class MixedTypesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         model: BinaryData (Required)
-     *         literal: BinaryData (Required)
-     *         int: BinaryData (Required)
-     *         boolean: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * model: BinaryData (Required)
+     * literal: BinaryData (Required)
+     * int: BinaryData (Required)
+     * boolean: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -126,12 +127,12 @@ public final class MixedTypesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         model: BinaryData (Required)
-     *         literal: BinaryData (Required)
-     *         int: BinaryData (Required)
-     *         boolean: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * model: BinaryData (Required)
+     * literal: BinaryData (Required)
+     * int: BinaryData (Required)
+     * boolean: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -153,12 +154,12 @@ public final class MixedTypesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         model: BinaryData (Required)
-     *         literal: BinaryData (Required)
-     *         int: BinaryData (Required)
-     *         boolean: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * model: BinaryData (Required)
+     * literal: BinaryData (Required)
+     * int: BinaryData (Required)
+     * boolean: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -181,12 +182,12 @@ public final class MixedTypesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         model: BinaryData (Required)
-     *         literal: BinaryData (Required)
-     *         int: BinaryData (Required)
-     *         boolean: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * model: BinaryData (Required)
+     * literal: BinaryData (Required)
+     * int: BinaryData (Required)
+     * boolean: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 

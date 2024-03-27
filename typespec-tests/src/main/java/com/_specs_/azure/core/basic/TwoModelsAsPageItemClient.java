@@ -38,11 +38,12 @@ public final class TwoModelsAsPageItemClient {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * FirstItem.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: int (Required)
+     * id: int (Required)
      * }
      * }</pre>
      * 
@@ -60,11 +61,12 @@ public final class TwoModelsAsPageItemClient {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * SecondItem.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -82,7 +84,8 @@ public final class TwoModelsAsPageItemClient {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for FirstItem.
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * FirstItem.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -101,7 +104,8 @@ public final class TwoModelsAsPageItemClient {
     }
 
     /**
-     * Two operations with two different page item types should be successfully generated. Should generate model for SecondItem.
+     * Two operations with two different page item types should be successfully generated. Should generate model for
+     * SecondItem.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -52,7 +52,8 @@ public final class ModelValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryClientModelValues to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for DictionaryClientModelValues to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryClientMode")
@@ -99,12 +100,12 @@ public final class ModelValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         property: String (Required)
-     *         children (Optional): {
-     *             String (Required): (recursive schema, see String above)
-     *         }
-     *     }
+     * String (Required): {
+     * property: String (Required)
+     * children (Optional): {
+     * String (Required): (recursive schema, see String above)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -126,12 +127,12 @@ public final class ModelValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         property: String (Required)
-     *         children (Optional): {
-     *             String (Required): (recursive schema, see String above)
-     *         }
-     *     }
+     * String (Required): {
+     * property: String (Required)
+     * children (Optional): {
+     * String (Required): (recursive schema, see String above)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -153,12 +154,12 @@ public final class ModelValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         property: String (Required)
-     *         children (Optional): {
-     *             String (Required): (recursive schema, see String above)
-     *         }
-     *     }
+     * String (Required): {
+     * property: String (Required)
+     * children (Optional): {
+     * String (Required): (recursive schema, see String above)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -181,12 +182,12 @@ public final class ModelValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         property: String (Required)
-     *         children (Optional): {
-     *             String (Required): (recursive schema, see String above)
-     *         }
-     *     }
+     * String (Required): {
+     * property: String (Required)
+     * children (Optional): {
+     * String (Required): (recursive schema, see String above)
+     * }
+     * }
      * }
      * }</pre>
      * 

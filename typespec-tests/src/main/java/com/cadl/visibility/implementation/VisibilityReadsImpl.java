@@ -51,7 +51,8 @@ public final class VisibilityReadsImpl {
     }
 
     /**
-     * The interface defining all the services for VisibilityClientVisibilityReads to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for VisibilityClientVisibilityReads to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "VisibilityClientVisi")
@@ -80,9 +81,9 @@ public final class VisibilityReadsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: int (Required)
-     *     secretName: String (Required)
-     *     name: String (Required)
+     * id: int (Required)
+     * secretName: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -104,9 +105,9 @@ public final class VisibilityReadsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: int (Required)
-     *     secretName: String (Required)
-     *     name: String (Required)
+     * id: int (Required)
+     * secretName: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 

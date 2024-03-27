@@ -42,7 +42,7 @@ public final class UnknownValueClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     *     Object (Required)
+     * Object (Required)
      * ]
      * }</pre>
      * 
@@ -64,7 +64,7 @@ public final class UnknownValueClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     *     Object (Required)
+     * Object (Required)
      * ]
      * }</pre>
      * 

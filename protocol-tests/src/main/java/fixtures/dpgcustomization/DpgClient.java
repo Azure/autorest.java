@@ -42,17 +42,19 @@ public final class DpgClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     received: String(raw/model) (Required)
+     * received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that you will either return to end users as a raw body, or with a model added during grow up along with {@link Response}.
+     * @return models that you will either return to end users as a raw body, or with a model added during grow up
+     * along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -61,21 +63,23 @@ public final class DpgClient {
     }
 
     /**
-     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model instead, and put in 'model' as mode.
+     * Post either raw response as a model and pass in 'raw' for mode, or grow up your operation to take a model
+     * instead, and put in 'model' as mode.
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     hello: String (Required)
+     * hello: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     received: String(raw/model) (Required)
+     * received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param input Please put {'hello': 'world!'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -95,17 +99,19 @@ public final class DpgClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     received: String(raw/model) (Required)
+     * received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as paginated response with {@link PagedIterable}.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup
+     * as paginated response with {@link PagedIterable}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -114,16 +120,18 @@ public final class DpgClient {
     }
 
     /**
-     * Long running put request that will either return to end users a final payload of a raw body, or a final payload of a model after the SDK has grown up.
+     * Long running put request that will either return to end users a final payload of a raw body, or a final payload
+     * of a model after the SDK has grown up.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     received: String(raw/model) (Required)
-     *     provisioningState: String (Required)
+     * received: String(raw/model) (Required)
+     * provisioningState: String (Required)
      * }
      * }</pre>
      * 
-     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body, and 'model' if you are going to convert the raw body to a customized body before returning to users.
+     * @param mode The mode with which you'll be handling your returned body. 'raw' for just dealing with the raw body,
+     * and 'model' if you are going to convert the raw body to a customized body before returning to users.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

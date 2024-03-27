@@ -63,7 +63,8 @@ public final class PrimitivesImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServicePrimitives to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServicePrimitives to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -492,8 +493,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Integer (Optional)
-     *     field2: Integer (Optional)
+     * field1: Integer (Optional)
+     * field2: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -502,7 +503,8 @@ public final class PrimitivesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with integer properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with integer properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getIntWithResponseAsync(RequestOptions requestOptions) {
@@ -515,8 +517,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Integer (Optional)
-     *     field2: Integer (Optional)
+     * field1: Integer (Optional)
+     * field2: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -538,8 +540,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Integer (Optional)
-     *     field2: Integer (Optional)
+     * field1: Integer (Optional)
+     * field2: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -563,8 +565,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Integer (Optional)
-     *     field2: Integer (Optional)
+     * field1: Integer (Optional)
+     * field2: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -587,8 +589,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Long (Optional)
-     *     field2: Long (Optional)
+     * field1: Long (Optional)
+     * field2: Long (Optional)
      * }
      * }</pre>
      * 
@@ -610,8 +612,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Long (Optional)
-     *     field2: Long (Optional)
+     * field1: Long (Optional)
+     * field2: Long (Optional)
      * }
      * }</pre>
      * 
@@ -633,8 +635,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Long (Optional)
-     *     field2: Long (Optional)
+     * field1: Long (Optional)
+     * field2: Long (Optional)
      * }
      * }</pre>
      * 
@@ -658,8 +660,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Long (Optional)
-     *     field2: Long (Optional)
+     * field1: Long (Optional)
+     * field2: Long (Optional)
      * }
      * }</pre>
      * 
@@ -682,8 +684,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Float (Optional)
-     *     field2: Float (Optional)
+     * field1: Float (Optional)
+     * field2: Float (Optional)
      * }
      * }</pre>
      * 
@@ -692,7 +694,8 @@ public final class PrimitivesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with float properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with float properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getFloatWithResponseAsync(RequestOptions requestOptions) {
@@ -706,8 +709,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Float (Optional)
-     *     field2: Float (Optional)
+     * field1: Float (Optional)
+     * field2: Float (Optional)
      * }
      * }</pre>
      * 
@@ -729,8 +732,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Float (Optional)
-     *     field2: Float (Optional)
+     * field1: Float (Optional)
+     * field2: Float (Optional)
      * }
      * }</pre>
      * 
@@ -754,8 +757,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Float (Optional)
-     *     field2: Float (Optional)
+     * field1: Float (Optional)
+     * field2: Float (Optional)
      * }
      * }</pre>
      * 
@@ -778,8 +781,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Double (Optional)
-     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
+     * field1: Double (Optional)
+     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double
+     * (Optional)
      * }
      * }</pre>
      * 
@@ -788,7 +792,8 @@ public final class PrimitivesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with double properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with double properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDoubleWithResponseAsync(RequestOptions requestOptions) {
@@ -802,8 +807,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Double (Optional)
-     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
+     * field1: Double (Optional)
+     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double
+     * (Optional)
      * }
      * }</pre>
      * 
@@ -825,8 +831,9 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Double (Optional)
-     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
+     * field1: Double (Optional)
+     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double
+     * (Optional)
      * }
      * }</pre>
      * 
@@ -850,8 +857,9 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Double (Optional)
-     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
+     * field1: Double (Optional)
+     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double
+     * (Optional)
      * }
      * }</pre>
      * 
@@ -874,8 +882,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field_true: Boolean (Optional)
-     *     field_false: Boolean (Optional)
+     * field_true: Boolean (Optional)
+     * field_false: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -897,8 +905,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field_true: Boolean (Optional)
-     *     field_false: Boolean (Optional)
+     * field_true: Boolean (Optional)
+     * field_false: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -920,8 +928,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field_true: Boolean (Optional)
-     *     field_false: Boolean (Optional)
+     * field_true: Boolean (Optional)
+     * field_false: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -945,8 +953,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field_true: Boolean (Optional)
-     *     field_false: Boolean (Optional)
+     * field_true: Boolean (Optional)
+     * field_false: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -969,9 +977,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     empty: String (Optional)
-     *     null: String (Optional)
+     * field: String (Optional)
+     * empty: String (Optional)
+     * null: String (Optional)
      * }
      * }</pre>
      * 
@@ -980,7 +988,8 @@ public final class PrimitivesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with string properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with string properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getStringWithResponseAsync(RequestOptions requestOptions) {
@@ -994,9 +1003,9 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     empty: String (Optional)
-     *     null: String (Optional)
+     * field: String (Optional)
+     * empty: String (Optional)
+     * null: String (Optional)
      * }
      * }</pre>
      * 
@@ -1018,9 +1027,9 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     empty: String (Optional)
-     *     null: String (Optional)
+     * field: String (Optional)
+     * empty: String (Optional)
+     * null: String (Optional)
      * }
      * }</pre>
      * 
@@ -1044,9 +1053,9 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     empty: String (Optional)
-     *     null: String (Optional)
+     * field: String (Optional)
+     * empty: String (Optional)
+     * null: String (Optional)
      * }
      * }</pre>
      * 
@@ -1069,8 +1078,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     leap: String (Optional)
+     * field: String (Optional)
+     * leap: String (Optional)
      * }
      * }</pre>
      * 
@@ -1092,8 +1101,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     leap: String (Optional)
+     * field: String (Optional)
+     * leap: String (Optional)
      * }
      * }</pre>
      * 
@@ -1115,8 +1124,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     leap: String (Optional)
+     * field: String (Optional)
+     * leap: String (Optional)
      * }
      * }</pre>
      * 
@@ -1140,8 +1149,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     leap: String (Optional)
+     * field: String (Optional)
+     * leap: String (Optional)
      * }
      * }</pre>
      * 
@@ -1164,8 +1173,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     * field: OffsetDateTime (Optional)
+     * now: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -1174,7 +1183,8 @@ public final class PrimitivesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeWithResponseAsync(RequestOptions requestOptions) {
@@ -1188,8 +1198,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     * field: OffsetDateTime (Optional)
+     * now: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -1211,8 +1221,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     * field: OffsetDateTime (Optional)
+     * now: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -1236,8 +1246,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     * field: OffsetDateTime (Optional)
+     * now: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -1260,8 +1270,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123 (Optional)
-     *     now: DateTimeRfc1123 (Optional)
+     * field: DateTimeRfc1123 (Optional)
+     * now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      * 
@@ -1270,7 +1280,8 @@ public final class PrimitivesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDateTimeRfc1123WithResponseAsync(RequestOptions requestOptions) {
@@ -1284,8 +1295,8 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123 (Optional)
-     *     now: DateTimeRfc1123 (Optional)
+     * field: DateTimeRfc1123 (Optional)
+     * now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      * 
@@ -1307,8 +1318,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123 (Optional)
-     *     now: DateTimeRfc1123 (Optional)
+     * field: DateTimeRfc1123 (Optional)
+     * now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      * 
@@ -1333,8 +1344,8 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123 (Optional)
-     *     now: DateTimeRfc1123 (Optional)
+     * field: DateTimeRfc1123 (Optional)
+     * now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      * 
@@ -1357,7 +1368,7 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: Duration (Optional)
+     * field: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -1366,7 +1377,8 @@ public final class PrimitivesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with duration properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with duration properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDurationWithResponseAsync(RequestOptions requestOptions) {
@@ -1380,7 +1392,7 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: Duration (Optional)
+     * field: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -1402,7 +1414,7 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: Duration (Optional)
+     * field: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -1426,7 +1438,7 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: Duration (Optional)
+     * field: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -1449,7 +1461,7 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: byte[] (Optional)
+     * field: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -1471,7 +1483,7 @@ public final class PrimitivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: byte[] (Optional)
+     * field: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -1493,7 +1505,7 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: byte[] (Optional)
+     * field: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -1517,7 +1529,7 @@ public final class PrimitivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: byte[] (Optional)
+     * field: byte[] (Optional)
      * }
      * }</pre>
      * 

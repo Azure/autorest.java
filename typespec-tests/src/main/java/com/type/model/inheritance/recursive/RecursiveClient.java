@@ -41,10 +41,10 @@ public final class RecursiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     extension (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     level: int (Required)
+     * extension (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * level: int (Required)
      * }
      * }</pre>
      * 
@@ -67,10 +67,10 @@ public final class RecursiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     extension (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     level: int (Required)
+     * extension (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * level: int (Required)
      * }
      * }</pre>
      * 

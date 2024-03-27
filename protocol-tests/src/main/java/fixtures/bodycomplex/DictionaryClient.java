@@ -40,9 +40,9 @@ public final class DictionaryClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultProgram (Optional): {
-     *         String: String (Required)
-     *     }
+     * defaultProgram (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -64,13 +64,14 @@ public final class DictionaryClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultProgram (Optional): {
-     *         String: String (Required)
-     *     }
+     * defaultProgram (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
-     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint", "xls":"excel", "exe":"", "":null.
+     * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
+     * "xls":"excel", "exe":"", "":null.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -89,9 +90,9 @@ public final class DictionaryClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultProgram (Optional): {
-     *         String: String (Required)
-     *     }
+     * defaultProgram (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -113,9 +114,9 @@ public final class DictionaryClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultProgram (Optional): {
-     *         String: String (Required)
-     *     }
+     * defaultProgram (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -138,9 +139,9 @@ public final class DictionaryClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultProgram (Optional): {
-     *         String: String (Required)
-     *     }
+     * defaultProgram (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -162,9 +163,9 @@ public final class DictionaryClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultProgram (Optional): {
-     *         String: String (Required)
-     *     }
+     * defaultProgram (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -173,7 +174,8 @@ public final class DictionaryClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link Response}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link
+     * Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

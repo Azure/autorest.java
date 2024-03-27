@@ -40,8 +40,8 @@ public final class ReadonlypropertyClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
+     * id: String (Optional)
+     * size: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -63,8 +63,8 @@ public final class ReadonlypropertyClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
+     * id: String (Optional)
+     * size: Integer (Optional)
      * }
      * }</pre>
      * 

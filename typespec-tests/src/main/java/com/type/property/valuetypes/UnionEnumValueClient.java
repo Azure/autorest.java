@@ -41,7 +41,7 @@ public final class UnionEnumValueClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(value2) (Required)
+     * property: String(value2) (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class UnionEnumValueClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(value2) (Required)
+     * property: String(value2) (Required)
      * }
      * }</pre>
      * 

@@ -43,8 +43,8 @@ public final class RequiredAndOptionalAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 
@@ -53,7 +53,8 @@ public final class RequiredAndOptionalAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -66,8 +67,8 @@ public final class RequiredAndOptionalAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 
@@ -76,7 +77,8 @@ public final class RequiredAndOptionalAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return only the required properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return only the required properties along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -89,8 +91,8 @@ public final class RequiredAndOptionalAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 
@@ -113,8 +115,8 @@ public final class RequiredAndOptionalAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 

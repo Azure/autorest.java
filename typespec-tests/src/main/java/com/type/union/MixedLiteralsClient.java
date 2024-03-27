@@ -43,12 +43,12 @@ public final class MixedLiteralsClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         stringLiteral: BinaryData (Required)
-     *         intLiteral: BinaryData (Required)
-     *         floatLiteral: BinaryData (Required)
-     *         booleanLiteral: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * stringLiteral: BinaryData (Required)
+     * intLiteral: BinaryData (Required)
+     * floatLiteral: BinaryData (Required)
+     * booleanLiteral: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -70,12 +70,12 @@ public final class MixedLiteralsClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         stringLiteral: BinaryData (Required)
-     *         intLiteral: BinaryData (Required)
-     *         floatLiteral: BinaryData (Required)
-     *         booleanLiteral: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * stringLiteral: BinaryData (Required)
+     * intLiteral: BinaryData (Required)
+     * floatLiteral: BinaryData (Required)
+     * booleanLiteral: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 

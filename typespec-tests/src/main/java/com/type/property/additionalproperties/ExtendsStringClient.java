@@ -41,10 +41,10 @@ public final class ExtendsStringClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: String (Required)
-     *     }
+     * name: String (Required)
+     * (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -66,10 +66,10 @@ public final class ExtendsStringClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: String (Required)
-     *     }
+     * name: String (Required)
+     * (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 

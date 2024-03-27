@@ -41,7 +41,7 @@ public final class UnknownIntClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Object (Required)
+     * property: Object (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class UnknownIntClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Object (Required)
+     * property: Object (Required)
      * }
      * }</pre>
      * 

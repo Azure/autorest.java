@@ -48,7 +48,8 @@ public final class ByteOperations {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATByteServiceByteOperations to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestSwaggerBATByteServiceByteOperations to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATBy")
@@ -265,7 +266,8 @@ public final class ByteOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) along with {@link Response} on successful completion of {@link Mono}.
+     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNonAsciiWithResponseAsync() {
@@ -284,7 +286,8 @@ public final class ByteOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) along with {@link Response} on successful completion of {@link Mono}.
+     * @return non-ascii byte string hex(FF FE FD FC FB FA F9 F8 F7 F6) along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getNonAsciiWithResponseAsync(Context context) {
@@ -455,7 +458,8 @@ public final class ByteOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link Mono}.
+     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getInvalidWithResponseAsync() {
@@ -474,7 +478,8 @@ public final class ByteOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link Mono}.
+     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getInvalidWithResponseAsync(Context context) {

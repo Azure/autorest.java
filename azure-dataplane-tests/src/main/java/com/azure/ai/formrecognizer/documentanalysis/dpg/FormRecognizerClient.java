@@ -43,11 +43,14 @@ public final class FormRecognizerClient {
      * Analyzes document with document model.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9"</td></tr>
-     *     <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").</td></tr>
-     *     <tr><td>stringIndexType</td><td>String</td><td>No</td><td>Method used to compute string offset and length. Allowed values: "textElements", "unicodeCodePoint", "utf16CodeUnit".</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze.  Ex.
+     * "1-3,5,7-9"</td></tr>
+     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis.  Value
+     * may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").</td></tr>
+     * <tr><td>stringIndexType</td><td>String</td><td>No</td><td>Method used to compute string offset and length.
+     * Allowed values: "textElements", "unicodeCodePoint", "utf16CodeUnit".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -56,7 +59,8 @@ public final class FormRecognizerClient {
      * }</pre>
      * 
      * @param modelId Unique document model name.
-     * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp", "image/heif", "image/jpeg", "image/png", "image/tiff".
+     * @param contentType Upload file type. Allowed values: "application/octet-stream", "application/pdf", "image/bmp",
+     * "image/heif", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -78,206 +82,208 @@ public final class FormRecognizerClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     status: String(notStarted/running/failed/succeeded) (Required)
-     *     createdDateTime: OffsetDateTime (Required)
-     *     lastUpdatedDateTime: OffsetDateTime (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Required)
-     *             message: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
-     *     analyzeResult (Optional): {
-     *         apiVersion: String(2022-08-31) (Required)
-     *         modelId: String (Required)
-     *         stringIndexType: String(textElements/unicodeCodePoint/utf16CodeUnit) (Required)
-     *         content: String (Required)
-     *         pages (Required): [
-     *              (Required){
-     *                 pageNumber: int (Required)
-     *                 angle: Float (Optional)
-     *                 width: Float (Optional)
-     *                 height: Float (Optional)
-     *                 unit: String(pixel/inch) (Optional)
-     *                 spans (Required): [
-     *                      (Required){
-     *                         offset: int (Required)
-     *                         length: int (Required)
-     *                     }
-     *                 ]
-     *                 words (Optional): [
-     *                      (Optional){
-     *                         content: String (Required)
-     *                         polygon (Optional): [
-     *                             float (Optional)
-     *                         ]
-     *                         span (Required): (recursive schema, see span above)
-     *                         confidence: float (Required)
-     *                     }
-     *                 ]
-     *                 selectionMarks (Optional): [
-     *                      (Optional){
-     *                         state: String(selected/unselected) (Required)
-     *                         polygon (Optional): [
-     *                             float (Optional)
-     *                         ]
-     *                         span (Required): (recursive schema, see span above)
-     *                         confidence: float (Required)
-     *                     }
-     *                 ]
-     *                 lines (Optional): [
-     *                      (Optional){
-     *                         content: String (Required)
-     *                         polygon (Optional): [
-     *                             float (Optional)
-     *                         ]
-     *                         spans (Required): [
-     *                             (recursive schema, see above)
-     *                         ]
-     *                     }
-     *                 ]
-     *             }
-     *         ]
-     *         paragraphs (Optional): [
-     *              (Optional){
-     *                 role: String(pageHeader/pageFooter/pageNumber/title/sectionHeading/footnote) (Optional)
-     *                 content: String (Required)
-     *                 boundingRegions (Optional): [
-     *                      (Optional){
-     *                         pageNumber: int (Required)
-     *                         polygon (Required): [
-     *                             float (Required)
-     *                         ]
-     *                     }
-     *                 ]
-     *                 spans (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *             }
-     *         ]
-     *         tables (Optional): [
-     *              (Optional){
-     *                 rowCount: int (Required)
-     *                 columnCount: int (Required)
-     *                 cells (Required): [
-     *                      (Required){
-     *                         kind: String(content/rowHeader/columnHeader/stubHead/description) (Optional)
-     *                         rowIndex: int (Required)
-     *                         columnIndex: int (Required)
-     *                         rowSpan: Integer (Optional)
-     *                         columnSpan: Integer (Optional)
-     *                         content: String (Required)
-     *                         boundingRegions (Optional): [
-     *                             (recursive schema, see above)
-     *                         ]
-     *                         spans (Required): [
-     *                             (recursive schema, see above)
-     *                         ]
-     *                     }
-     *                 ]
-     *                 boundingRegions (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 spans (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *             }
-     *         ]
-     *         keyValuePairs (Optional): [
-     *              (Optional){
-     *                 key (Required): {
-     *                     content: String (Required)
-     *                     boundingRegions (Optional): [
-     *                         (recursive schema, see above)
-     *                     ]
-     *                     spans (Required): [
-     *                         (recursive schema, see above)
-     *                     ]
-     *                 }
-     *                 value (Optional): (recursive schema, see value above)
-     *                 confidence: float (Required)
-     *             }
-     *         ]
-     *         styles (Optional): [
-     *              (Optional){
-     *                 isHandwritten: Boolean (Optional)
-     *                 spans (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 confidence: float (Required)
-     *             }
-     *         ]
-     *         languages (Optional): [
-     *              (Optional){
-     *                 locale: String (Required)
-     *                 spans (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 confidence: float (Required)
-     *             }
-     *         ]
-     *         documents (Optional): [
-     *              (Optional){
-     *                 docType: String (Required)
-     *                 boundingRegions (Optional): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 spans (Required): [
-     *                     (recursive schema, see above)
-     *                 ]
-     *                 fields (Optional): {
-     *                     String (Required): {
-     *                         type: String(string/date/time/phoneNumber/number/integer/selectionMark/countryRegion/signature/array/object/currency/address) (Required)
-     *                         valueString: String (Optional)
-     *                         valueDate: String (Optional)
-     *                         valueTime: String (Optional)
-     *                         valuePhoneNumber: String (Optional)
-     *                         valueNumber: Float (Optional)
-     *                         valueInteger: Long (Optional)
-     *                         valueSelectionMark: String(selected/unselected) (Optional)
-     *                         valueSignature: String(signed/unsigned) (Optional)
-     *                         valueCountryRegion: String (Optional)
-     *                         valueArray (Optional): [
-     *                             (recursive schema, see above)
-     *                         ]
-     *                         valueObject (Optional): {
-     *                             String (Required): (recursive schema, see String above)
-     *                         }
-     *                         valueCurrency (Optional): {
-     *                             amount: double (Required)
-     *                             currencySymbol: String (Optional)
-     *                         }
-     *                         valueAddress (Optional): {
-     *                             houseNumber: String (Optional)
-     *                             poBox: String (Optional)
-     *                             road: String (Optional)
-     *                             city: String (Optional)
-     *                             state: String (Optional)
-     *                             postalCode: String (Optional)
-     *                             countryRegion: String (Optional)
-     *                             streetAddress: String (Optional)
-     *                         }
-     *                         content: String (Optional)
-     *                         boundingRegions (Optional): [
-     *                             (recursive schema, see above)
-     *                         ]
-     *                         spans (Optional): [
-     *                             (recursive schema, see above)
-     *                         ]
-     *                         confidence: Float (Optional)
-     *                     }
-     *                 }
-     *                 confidence: float (Required)
-     *             }
-     *         ]
-     *     }
+     * status: String(notStarted/running/failed/succeeded) (Required)
+     * createdDateTime: OffsetDateTime (Required)
+     * lastUpdatedDateTime: OffsetDateTime (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * innererror (Optional): {
+     * code: String (Required)
+     * message: String (Optional)
+     * innererror (Optional): (recursive schema, see innererror above)
+     * }
+     * }
+     * analyzeResult (Optional): {
+     * apiVersion: String(2022-08-31) (Required)
+     * modelId: String (Required)
+     * stringIndexType: String(textElements/unicodeCodePoint/utf16CodeUnit) (Required)
+     * content: String (Required)
+     * pages (Required): [
+     * (Required){
+     * pageNumber: int (Required)
+     * angle: Float (Optional)
+     * width: Float (Optional)
+     * height: Float (Optional)
+     * unit: String(pixel/inch) (Optional)
+     * spans (Required): [
+     * (Required){
+     * offset: int (Required)
+     * length: int (Required)
+     * }
+     * ]
+     * words (Optional): [
+     * (Optional){
+     * content: String (Required)
+     * polygon (Optional): [
+     * float (Optional)
+     * ]
+     * span (Required): (recursive schema, see span above)
+     * confidence: float (Required)
+     * }
+     * ]
+     * selectionMarks (Optional): [
+     * (Optional){
+     * state: String(selected/unselected) (Required)
+     * polygon (Optional): [
+     * float (Optional)
+     * ]
+     * span (Required): (recursive schema, see span above)
+     * confidence: float (Required)
+     * }
+     * ]
+     * lines (Optional): [
+     * (Optional){
+     * content: String (Required)
+     * polygon (Optional): [
+     * float (Optional)
+     * ]
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * }
+     * ]
+     * paragraphs (Optional): [
+     * (Optional){
+     * role: String(pageHeader/pageFooter/pageNumber/title/sectionHeading/footnote) (Optional)
+     * content: String (Required)
+     * boundingRegions (Optional): [
+     * (Optional){
+     * pageNumber: int (Required)
+     * polygon (Required): [
+     * float (Required)
+     * ]
+     * }
+     * ]
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * tables (Optional): [
+     * (Optional){
+     * rowCount: int (Required)
+     * columnCount: int (Required)
+     * cells (Required): [
+     * (Required){
+     * kind: String(content/rowHeader/columnHeader/stubHead/description) (Optional)
+     * rowIndex: int (Required)
+     * columnIndex: int (Required)
+     * rowSpan: Integer (Optional)
+     * columnSpan: Integer (Optional)
+     * content: String (Required)
+     * boundingRegions (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * boundingRegions (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * keyValuePairs (Optional): [
+     * (Optional){
+     * key (Required): {
+     * content: String (Required)
+     * boundingRegions (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * value (Optional): (recursive schema, see value above)
+     * confidence: float (Required)
+     * }
+     * ]
+     * styles (Optional): [
+     * (Optional){
+     * isHandwritten: Boolean (Optional)
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * confidence: float (Required)
+     * }
+     * ]
+     * languages (Optional): [
+     * (Optional){
+     * locale: String (Required)
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * confidence: float (Required)
+     * }
+     * ]
+     * documents (Optional): [
+     * (Optional){
+     * docType: String (Required)
+     * boundingRegions (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * spans (Required): [
+     * (recursive schema, see above)
+     * ]
+     * fields (Optional): {
+     * String (Required): {
+     * type:
+     * String(string/date/time/phoneNumber/number/integer/selectionMark/countryRegion/signature/array/object/currency/address)
+     * (Required)
+     * valueString: String (Optional)
+     * valueDate: String (Optional)
+     * valueTime: String (Optional)
+     * valuePhoneNumber: String (Optional)
+     * valueNumber: Float (Optional)
+     * valueInteger: Long (Optional)
+     * valueSelectionMark: String(selected/unselected) (Optional)
+     * valueSignature: String(signed/unsigned) (Optional)
+     * valueCountryRegion: String (Optional)
+     * valueArray (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * valueObject (Optional): {
+     * String (Required): (recursive schema, see String above)
+     * }
+     * valueCurrency (Optional): {
+     * amount: double (Required)
+     * currencySymbol: String (Optional)
+     * }
+     * valueAddress (Optional): {
+     * houseNumber: String (Optional)
+     * poBox: String (Optional)
+     * road: String (Optional)
+     * city: String (Optional)
+     * state: String (Optional)
+     * postalCode: String (Optional)
+     * countryRegion: String (Optional)
+     * streetAddress: String (Optional)
+     * }
+     * content: String (Optional)
+     * boundingRegions (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * spans (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * confidence: Float (Optional)
+     * }
+     * }
+     * confidence: float (Required)
+     * }
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -304,16 +310,16 @@ public final class FormRecognizerClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     modelId: String (Required)
-     *     description: String (Optional)
-     *     buildMode: String(template/neural) (Required)
-     *     azureBlobSource (Optional): {
-     *         containerUrl: String (Required)
-     *         prefix: String (Optional)
-     *     }
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
+     * modelId: String (Required)
+     * description: String (Optional)
+     * buildMode: String(template/neural) (Required)
+     * azureBlobSource (Optional): {
+     * containerUrl: String (Required)
+     * prefix: String (Optional)
+     * }
+     * tags (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -339,16 +345,16 @@ public final class FormRecognizerClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     modelId: String (Required)
-     *     description: String (Optional)
-     *     componentModels (Required): [
-     *          (Required){
-     *             modelId: String (Required)
-     *         }
-     *     ]
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
+     * modelId: String (Required)
+     * description: String (Optional)
+     * componentModels (Required): [
+     * (Required){
+     * modelId: String (Required)
+     * }
+     * ]
+     * tags (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -370,26 +376,27 @@ public final class FormRecognizerClient {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * Generates authorization to copy a document model to this location with specified modelId and optional
+     * description.
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     modelId: String (Required)
-     *     description: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
+     * modelId: String (Required)
+     * description: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     targetResourceId: String (Required)
-     *     targetResourceRegion: String (Required)
-     *     targetModelId: String (Required)
-     *     targetModelLocation: String (Required)
-     *     accessToken: String (Required)
-     *     expirationDateTime: OffsetDateTime (Required)
+     * targetResourceId: String (Required)
+     * targetResourceRegion: String (Required)
+     * targetModelId: String (Required)
+     * targetModelLocation: String (Required)
+     * accessToken: String (Required)
+     * expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -399,7 +406,8 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link Response}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with {@link
+     * Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -415,12 +423,12 @@ public final class FormRecognizerClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     targetResourceId: String (Required)
-     *     targetResourceRegion: String (Required)
-     *     targetModelId: String (Required)
-     *     targetModelLocation: String (Required)
-     *     accessToken: String (Required)
-     *     expirationDateTime: OffsetDateTime (Required)
+     * targetResourceId: String (Required)
+     * targetResourceRegion: String (Required)
+     * targetModelId: String (Required)
+     * targetModelLocation: String (Required)
+     * accessToken: String (Required)
+     * expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -447,17 +455,17 @@ public final class FormRecognizerClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     operationId: String (Required)
-     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     *     percentCompleted: Integer (Optional)
-     *     createdDateTime: OffsetDateTime (Required)
-     *     lastUpdatedDateTime: OffsetDateTime (Required)
-     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     *     resourceLocation: String (Required)
-     *     apiVersion: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
+     * operationId: String (Required)
+     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     * percentCompleted: Integer (Optional)
+     * createdDateTime: OffsetDateTime (Required)
+     * lastUpdatedDateTime: OffsetDateTime (Required)
+     * kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
+     * resourceLocation: String (Required)
+     * apiVersion: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -481,30 +489,30 @@ public final class FormRecognizerClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     operationId: String (Required)
-     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     *     percentCompleted: Integer (Optional)
-     *     createdDateTime: OffsetDateTime (Required)
-     *     lastUpdatedDateTime: OffsetDateTime (Required)
-     *     resourceLocation: String (Required)
-     *     apiVersion: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Required)
-     *             message: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
+     * kind: String (Required)
+     * operationId: String (Required)
+     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     * percentCompleted: Integer (Optional)
+     * createdDateTime: OffsetDateTime (Required)
+     * lastUpdatedDateTime: OffsetDateTime (Required)
+     * resourceLocation: String (Required)
+     * apiVersion: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * innererror (Optional): {
+     * code: String (Required)
+     * message: String (Optional)
+     * innererror (Optional): (recursive schema, see innererror above)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -529,13 +537,13 @@ public final class FormRecognizerClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     modelId: String (Required)
-     *     description: String (Optional)
-     *     createdDateTime: OffsetDateTime (Required)
-     *     apiVersion: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
+     * modelId: String (Required)
+     * description: String (Optional)
+     * createdDateTime: OffsetDateTime (Required)
+     * apiVersion: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -559,33 +567,35 @@ public final class FormRecognizerClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     modelId: String (Required)
-     *     description: String (Optional)
-     *     createdDateTime: OffsetDateTime (Required)
-     *     apiVersion: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     docTypes (Optional): {
-     *         String (Required): {
-     *             description: String (Optional)
-     *             buildMode: String(template/neural) (Optional)
-     *             fieldSchema (Required): {
-     *                 String (Required): {
-     *                     type: String(string/date/time/phoneNumber/number/integer/selectionMark/countryRegion/signature/array/object/currency/address) (Required)
-     *                     description: String (Optional)
-     *                     example: String (Optional)
-     *                     items (Optional): (recursive schema, see items above)
-     *                     properties (Optional): {
-     *                         String (Required): (recursive schema, see String above)
-     *                     }
-     *                 }
-     *             }
-     *             fieldConfidence (Optional): {
-     *                 String: float (Required)
-     *             }
-     *         }
-     *     }
+     * modelId: String (Required)
+     * description: String (Optional)
+     * createdDateTime: OffsetDateTime (Required)
+     * apiVersion: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * docTypes (Optional): {
+     * String (Required): {
+     * description: String (Optional)
+     * buildMode: String(template/neural) (Optional)
+     * fieldSchema (Required): {
+     * String (Required): {
+     * type:
+     * String(string/date/time/phoneNumber/number/integer/selectionMark/countryRegion/signature/array/object/currency/address)
+     * (Required)
+     * description: String (Optional)
+     * example: String (Optional)
+     * items (Optional): (recursive schema, see items above)
+     * properties (Optional): {
+     * String (Required): (recursive schema, see String above)
+     * }
+     * }
+     * }
+     * fieldConfidence (Optional): {
+     * String: float (Required)
+     * }
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -629,10 +639,10 @@ public final class FormRecognizerClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     customDocumentModels (Required): {
-     *         count: int (Required)
-     *         limit: int (Required)
-     *     }
+     * customDocumentModels (Required): {
+     * count: int (Required)
+     * limit: int (Required)
+     * }
      * }
      * }</pre>
      * 

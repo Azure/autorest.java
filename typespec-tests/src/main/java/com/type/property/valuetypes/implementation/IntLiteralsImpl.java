@@ -52,7 +52,8 @@ public final class IntLiteralsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientIntLiterals to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientIntLiterals to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientIntL")
@@ -99,7 +100,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: long (Required)
+     * property: long (Required)
      * }
      * }</pre>
      * 
@@ -121,7 +122,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: long (Required)
+     * property: long (Required)
      * }
      * }</pre>
      * 
@@ -143,7 +144,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: long (Required)
+     * property: long (Required)
      * }
      * }</pre>
      * 
@@ -166,7 +167,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: long (Required)
+     * property: long (Required)
      * }
      * }</pre>
      * 

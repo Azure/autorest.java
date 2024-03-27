@@ -51,7 +51,8 @@ public final class BytesImpl {
     }
 
     /**
-     * The interface defining all the services for NullableClientBytes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for NullableClientBytes to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "NullableClientBytes")
@@ -138,8 +139,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -148,7 +149,8 @@ public final class BytesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNonNullWithResponseAsync(RequestOptions requestOptions) {
@@ -161,8 +163,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -184,8 +186,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -194,7 +196,8 @@ public final class BytesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
@@ -207,8 +210,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -230,12 +233,13 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -256,12 +260,13 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -281,12 +286,13 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -306,12 +312,13 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: byte[] (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

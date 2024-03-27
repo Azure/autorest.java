@@ -45,12 +45,12 @@ public final class MixedTypesAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         model: BinaryData (Required)
-     *         literal: BinaryData (Required)
-     *         int: BinaryData (Required)
-     *         boolean: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * model: BinaryData (Required)
+     * literal: BinaryData (Required)
+     * int: BinaryData (Required)
+     * boolean: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -72,12 +72,12 @@ public final class MixedTypesAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         model: BinaryData (Required)
-     *         literal: BinaryData (Required)
-     *         int: BinaryData (Required)
-     *         boolean: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * model: BinaryData (Required)
+     * literal: BinaryData (Required)
+     * int: BinaryData (Required)
+     * boolean: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 

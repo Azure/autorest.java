@@ -52,7 +52,8 @@ public final class UnknownDictsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientUnknownDicts to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientUnknownDicts to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientUnkn")
@@ -99,7 +100,7 @@ public final class UnknownDictsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Object (Required)
+     * property: Object (Required)
      * }
      * }</pre>
      * 
@@ -121,7 +122,7 @@ public final class UnknownDictsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Object (Required)
+     * property: Object (Required)
      * }
      * }</pre>
      * 
@@ -143,7 +144,7 @@ public final class UnknownDictsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Object (Required)
+     * property: Object (Required)
      * }
      * }</pre>
      * 
@@ -166,7 +167,7 @@ public final class UnknownDictsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Object (Required)
+     * property: Object (Required)
      * }
      * }</pre>
      * 

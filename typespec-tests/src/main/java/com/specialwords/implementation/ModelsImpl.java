@@ -50,7 +50,8 @@ public final class ModelsImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialWordsClientModels to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for SpecialWordsClientModels to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpecialWordsClientMo")
@@ -655,7 +656,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -678,7 +679,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -701,7 +702,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -724,7 +725,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -747,7 +748,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -770,7 +771,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -793,7 +794,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -816,7 +817,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -839,7 +840,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -862,7 +863,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -885,7 +886,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -908,7 +909,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -931,7 +932,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -954,7 +955,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -977,7 +978,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1000,7 +1001,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1023,7 +1024,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1046,7 +1047,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1069,7 +1070,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1092,7 +1093,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1115,7 +1116,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1138,7 +1139,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1161,7 +1162,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1184,7 +1185,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1207,7 +1208,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1230,7 +1231,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1253,7 +1254,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1276,7 +1277,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1299,7 +1300,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1322,7 +1323,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1345,7 +1346,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1368,7 +1369,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1391,7 +1392,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1414,7 +1415,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1437,7 +1438,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1460,7 +1461,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1483,7 +1484,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1506,7 +1507,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1529,7 +1530,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1552,7 +1553,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1575,7 +1576,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1598,7 +1599,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1621,7 +1622,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1644,7 +1645,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1667,7 +1668,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1690,7 +1691,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1713,7 +1714,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1736,7 +1737,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1759,7 +1760,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1782,7 +1783,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1805,7 +1806,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1828,7 +1829,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1851,7 +1852,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1874,7 +1875,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1897,7 +1898,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1920,7 +1921,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1943,7 +1944,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1966,7 +1967,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -1989,7 +1990,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -2012,7 +2013,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -2035,7 +2036,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -2058,7 +2059,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -2081,7 +2082,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -2104,7 +2105,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -2127,7 +2128,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -2150,7 +2151,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 

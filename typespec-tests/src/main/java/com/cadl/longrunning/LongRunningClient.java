@@ -62,26 +62,26 @@ public final class LongRunningClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
-     *     createdDateTime: OffsetDateTime (Optional)
-     *     expirationDateTime: OffsetDateTime (Optional)
-     *     lastUpdateDateTime: OffsetDateTime (Optional)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
-     *     result (Optional): {
-     *         data: String (Required)
-     *     }
+     * id: String (Required)
+     * status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     * createdDateTime: OffsetDateTime (Optional)
+     * expirationDateTime: OffsetDateTime (Optional)
+     * lastUpdateDateTime: OffsetDateTime (Optional)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * innererror (Optional): {
+     * code: String (Optional)
+     * innererror (Optional): (recursive schema, see innererror above)
+     * }
+     * }
+     * result (Optional): {
+     * data: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -103,38 +103,39 @@ public final class LongRunningClient {
      * A remote procedure call (RPC) operation.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
-     *     <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as HTTP-date</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>repeatability-request-id</td><td>String</td><td>No</td><td>Repeatability request ID header</td></tr>
+     * <tr><td>repeatability-first-sent</td><td>String</td><td>No</td><td>Repeatability first sent header as
+     * HTTP-date</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     configuration: String (Optional)
-     *     nullableFloatDict (Required): {
-     *         String: Double (Optional)
-     *     }
+     * configuration: String (Optional)
+     * nullableFloatDict (Required): {
+     * String: Double (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * innererror (Optional): {
+     * code: String (Optional)
+     * innererror (Optional): (recursive schema, see innererror above)
+     * }
+     * }
      * }
      * }</pre>
      * 

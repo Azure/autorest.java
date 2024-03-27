@@ -41,9 +41,9 @@ public final class ArrayAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     array (Optional): [
-     *         String (Optional)
-     *     ]
+     * array (Optional): [
+     * String (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -65,13 +65,14 @@ public final class ArrayAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     array (Optional): [
-     *         String (Optional)
-     *     ]
+     * array (Optional): [
+     * String (Optional)
+     * ]
      * }
      * }</pre>
      * 
-     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox jumps over the lazy dog".
+     * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
+     * jumps over the lazy dog".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -90,9 +91,9 @@ public final class ArrayAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     array (Optional): [
-     *         String (Optional)
-     *     ]
+     * array (Optional): [
+     * String (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -101,7 +102,8 @@ public final class ArrayAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property which is empty along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with array property which is empty along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -114,9 +116,9 @@ public final class ArrayAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     array (Optional): [
-     *         String (Optional)
-     *     ]
+     * array (Optional): [
+     * String (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -139,9 +141,9 @@ public final class ArrayAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     array (Optional): [
-     *         String (Optional)
-     *     ]
+     * array (Optional): [
+     * String (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -150,7 +152,8 @@ public final class ArrayAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with array property while server doesn't provide a response payload along with {@link
+     * Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

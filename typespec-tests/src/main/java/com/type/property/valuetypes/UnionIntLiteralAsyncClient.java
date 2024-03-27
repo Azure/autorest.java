@@ -43,7 +43,7 @@ public final class UnionIntLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(42/43) (Required)
+     * property: String(42/43) (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class UnionIntLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: String(42/43) (Required)
+     * property: String(42/43) (Required)
      * }
      * }</pre>
      * 

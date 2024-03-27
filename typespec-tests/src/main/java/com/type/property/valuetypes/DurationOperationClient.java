@@ -41,7 +41,7 @@ public final class DurationOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Duration (Required)
+     * property: Duration (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class DurationOperationClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Duration (Required)
+     * property: Duration (Required)
      * }
      * }</pre>
      * 

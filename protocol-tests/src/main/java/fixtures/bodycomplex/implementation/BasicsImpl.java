@@ -63,7 +63,8 @@ public final class BasicsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceBasics to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceBasics to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -184,9 +185,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -195,7 +196,8 @@ public final class BasicsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex type {id: 2, name: 'abc', color: 'YELLOW'} along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
@@ -209,9 +211,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -233,9 +235,9 @@ public final class BasicsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -259,9 +261,9 @@ public final class BasicsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -285,9 +287,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -296,7 +298,8 @@ public final class BasicsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a basic complex type that is invalid for the local strong type along with {@link Response} on successful completion of {@link Mono}.
+     * @return a basic complex type that is invalid for the local strong type along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getInvalidWithResponseAsync(RequestOptions requestOptions) {
@@ -310,9 +313,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -334,9 +337,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -359,9 +362,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -383,9 +386,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -394,7 +397,8 @@ public final class BasicsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a basic complex type whose properties are null along with {@link Response} on successful completion of {@link Mono}.
+     * @return a basic complex type whose properties are null along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
@@ -407,9 +411,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -431,9 +435,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -442,7 +446,8 @@ public final class BasicsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a basic complex type while the server doesn't provide a response payload along with {@link Response} on successful completion of {@link Mono}.
+     * @return a basic complex type while the server doesn't provide a response payload along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
@@ -456,9 +461,9 @@ public final class BasicsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: Integer (Optional)
-     *     name: String (Optional)
-     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     * id: Integer (Optional)
+     * name: String (Optional)
+     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 

@@ -41,9 +41,9 @@ public final class DictionaryStringClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): {
-     *         String: String (Required)
-     *     }
+     * property (Required): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -65,9 +65,9 @@ public final class DictionaryStringClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): {
-     *         String: String (Required)
-     *     }
+     * property (Required): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 

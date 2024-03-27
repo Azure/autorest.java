@@ -44,74 +44,74 @@ public final class OptionalAsyncClient {
      * The put operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
-     *     <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>booleanNullable</td><td>Boolean</td><td>No</td><td>Boolean with `true` and `false` values.</td></tr>
+     * <tr><td>string</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <tr><td>stringNullable</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>request-header-optional</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     boolean: Boolean (Optional)
-     *     booleanNullable: Boolean (Optional)
-     *     booleanRequired: boolean (Required)
-     *     booleanRequiredNullable: Boolean (Required)
-     *     string: String (Optional)
-     *     stringNullable: String (Optional)
-     *     stringRequired: String (Required)
-     *     stringRequiredNullable: String (Required)
-     *     bytes: byte[] (Optional)
-     *     int: Integer (Optional)
-     *     long: Long (Optional)
-     *     float: Double (Optional)
-     *     double: Double (Optional)
-     *     duration: Duration (Optional)
-     *     dateTime: OffsetDateTime (Optional)
-     *     stringList (Optional): [
-     *         String (Optional)
-     *     ]
-     *     bytesDict (Optional): {
-     *         String: byte[] (Required)
-     *     }
+     * boolean: Boolean (Optional)
+     * booleanNullable: Boolean (Optional)
+     * booleanRequired: boolean (Required)
+     * booleanRequiredNullable: Boolean (Required)
+     * string: String (Optional)
+     * stringNullable: String (Optional)
+     * stringRequired: String (Required)
+     * stringRequiredNullable: String (Required)
+     * bytes: byte[] (Optional)
+     * int: Integer (Optional)
+     * long: Long (Optional)
+     * float: Double (Optional)
+     * double: Double (Optional)
+     * duration: Duration (Optional)
+     * dateTime: OffsetDateTime (Optional)
+     * stringList (Optional): [
+     * String (Optional)
+     * ]
+     * bytesDict (Optional): {
+     * String: byte[] (Required)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     boolean: Boolean (Optional)
-     *     booleanNullable: Boolean (Optional)
-     *     booleanRequired: Boolean (Optional)
-     *     booleanRequiredNullable: Boolean (Optional)
-     *     string: String (Optional)
-     *     stringNullable: String (Optional)
-     *     stringRequired: String (Optional)
-     *     stringRequiredNullable: String (Optional)
-     *     bytes: byte[] (Optional)
-     *     int: Integer (Optional)
-     *     long: Long (Optional)
-     *     float: Double (Optional)
-     *     double: Double (Optional)
-     *     duration: Duration (Optional)
-     *     dateTime: OffsetDateTime (Optional)
-     *     stringList (Optional): [
-     *         String (Optional)
-     *     ]
-     *     bytesDict (Optional): {
-     *         String: byte[] (Required)
-     *     }
-     *     immutable (Optional): {
-     *         stringReadWriteRequired: String (Required)
-     *         stringReadOnlyOptional: String (Optional)
-     *     }
+     * boolean: Boolean (Optional)
+     * booleanNullable: Boolean (Optional)
+     * booleanRequired: Boolean (Optional)
+     * booleanRequiredNullable: Boolean (Optional)
+     * string: String (Optional)
+     * stringNullable: String (Optional)
+     * stringRequired: String (Optional)
+     * stringRequiredNullable: String (Optional)
+     * bytes: byte[] (Optional)
+     * int: Integer (Optional)
+     * long: Long (Optional)
+     * float: Double (Optional)
+     * double: Double (Optional)
+     * duration: Duration (Optional)
+     * dateTime: OffsetDateTime (Optional)
+     * stringList (Optional): [
+     * String (Optional)
+     * ]
+     * bytesDict (Optional): {
+     * String: byte[] (Required)
+     * }
+     * immutable (Optional): {
+     * stringReadWriteRequired: String (Required)
+     * stringReadOnlyOptional: String (Optional)
+     * }
      * }
      * }</pre>
      * 

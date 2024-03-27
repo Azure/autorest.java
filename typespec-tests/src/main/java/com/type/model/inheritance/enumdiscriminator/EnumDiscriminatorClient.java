@@ -42,8 +42,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(golden) (Required)
-     *     weight: int (Required)
+     * kind: String(golden) (Required)
+     * weight: int (Required)
      * }
      * }</pre>
      * 
@@ -65,8 +65,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(golden) (Required)
-     *     weight: int (Required)
+     * kind: String(golden) (Required)
+     * weight: int (Required)
      * }
      * }</pre>
      * 
@@ -89,8 +89,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(golden) (Required)
-     *     weight: int (Required)
+     * kind: String(golden) (Required)
+     * weight: int (Required)
      * }
      * }</pre>
      * 
@@ -112,8 +112,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(golden) (Required)
-     *     weight: int (Required)
+     * kind: String(golden) (Required)
+     * weight: int (Required)
      * }
      * }</pre>
      * 
@@ -135,8 +135,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(cobra) (Required)
-     *     length: int (Required)
+     * kind: String(cobra) (Required)
+     * length: int (Required)
      * }
      * }</pre>
      * 
@@ -158,8 +158,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(cobra) (Required)
-     *     length: int (Required)
+     * kind: String(cobra) (Required)
+     * length: int (Required)
      * }
      * }</pre>
      * 
@@ -182,8 +182,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(cobra) (Required)
-     *     length: int (Required)
+     * kind: String(cobra) (Required)
+     * length: int (Required)
      * }
      * }</pre>
      * 
@@ -205,8 +205,8 @@ public final class EnumDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(cobra) (Required)
-     *     length: int (Required)
+     * kind: String(cobra) (Required)
+     * length: int (Required)
      * }
      * }</pre>
      * 

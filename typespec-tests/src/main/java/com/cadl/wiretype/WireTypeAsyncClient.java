@@ -45,15 +45,15 @@ public final class WireTypeAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
-     *     dateTime: OffsetDateTime (Required)
+     * dateTimeRfc7231: DateTimeRfc1123 (Required)
+     * dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
-     *     dateTime: OffsetDateTime (Required)
+     * dateTimeRfc7231: DateTimeRfc1123 (Required)
+     * dateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -77,15 +77,15 @@ public final class WireTypeAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     dateTime: OffsetDateTime (Required)
-     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
+     * dateTime: OffsetDateTime (Required)
+     * dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     dateTime: OffsetDateTime (Required)
-     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
+     * dateTime: OffsetDateTime (Required)
+     * dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
      * }</pre>
      * 
@@ -109,15 +109,15 @@ public final class WireTypeAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
-     *     base64url: Base64Url (Required)
+     * dateTimeRfc7231: DateTimeRfc1123 (Required)
+     * base64url: Base64Url (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     dateTimeRfc7231: DateTimeRfc1123 (Required)
-     *     base64url: Base64Url (Required)
+     * dateTimeRfc7231: DateTimeRfc1123 (Required)
+     * base64url: Base64Url (Required)
      * }
      * }</pre>
      * 

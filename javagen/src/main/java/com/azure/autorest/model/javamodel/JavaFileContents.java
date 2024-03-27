@@ -96,7 +96,7 @@ public class JavaFileContents {
         return lines;
     }
 
-    private void text(String text, boolean addPrefix) {
+    private void text(String text, boolean addPrefix, boolean wordWrap) {
         ArrayList<String> lines = new ArrayList<>();
 
         if (text == null || text.isEmpty()) {
@@ -108,14 +108,22 @@ public class JavaFileContents {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
                     String line = text.substring(lineStartIndex);
-                    List<String> wrappedLines = wordWrap(line, addPrefix);
-                    lines.addAll(wrappedLines);
+                    if (wordWrap) {
+                        List<String> wrappedLines = wordWrap(line, addPrefix);
+                        lines.addAll(wrappedLines);
+                    } else {
+                        lines.add(line);
+                    }
                     lineStartIndex = textLength;
                 } else {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    List<String> wrappedLines = wordWrap(line, addPrefix);
-                    lines.addAll(wrappedLines);
+                    if (wordWrap) {
+                        List<String> wrappedLines = wordWrap(line, addPrefix);
+                        lines.addAll(wrappedLines);
+                    } else {
+                        lines.add(line);
+                    }
                     lineStartIndex = nextLineStartIndex;
                 }
             }
@@ -133,29 +141,33 @@ public class JavaFileContents {
 
     public final void text(String text) {
         if (currentLineType == CurrentLineType.Empty) {
-            text(text, true);
+            text(text, true, false);
         } else if (currentLineType == CurrentLineType.Text) {
-            text(text, false);
+            text(text, false, false);
         } else if (currentLineType == CurrentLineType.AfterIf) {
             line("", false);
-            text(text, true);
+            text(text, true, false);
         }
         currentLineType = CurrentLineType.Text;
     }
 
-    private void line(String text, boolean addPrefix) {
-        text(text + "\n", addPrefix);
+    private void line(String text, boolean addPrefix, boolean wordWrap) {
+        text(text + "\n", addPrefix, wordWrap);
         currentLineType = CurrentLineType.Empty;
     }
 
     public void line(String text) {
+        line(text, false);
+    }
+
+    void line(String text, boolean wordWrap) {
         if (currentLineType == CurrentLineType.Empty) {
-            line(text, true);
+            line(text, true, wordWrap);
         } else if (currentLineType == CurrentLineType.Text) {
-            line(text, false);
+            line(text, false, wordWrap);
         } else if (currentLineType == CurrentLineType.AfterIf) {
-            line("", false);
-            line(text, true);
+            line("", false, wordWrap);
+            line(text, true, wordWrap);
         }
         currentLineType = CurrentLineType.Empty;
     }

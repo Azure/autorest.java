@@ -70,7 +70,8 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
      * Reads an instance of SubClassBothMismatch from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of SubClassBothMismatch if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of SubClassBothMismatch if the JsonReader was pointing to an instance of it, or null if it
+     * was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SubClassBothMismatch.
      */
@@ -89,12 +90,14 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
+
                 } else if ("base64url".equals(fieldName)) {
                     Base64Url base64urlHolder
                         = reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
                     if (base64urlHolder != null) {
                         base64url = base64urlHolder.decodedBytes();
                     }
+
                 } else {
                     reader.skipChildren();
                 }

@@ -43,7 +43,7 @@ public final class BooleanLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: boolean (Required)
+     * property: boolean (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class BooleanLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: boolean (Required)
+     * property: boolean (Required)
      * }
      * }</pre>
      * 

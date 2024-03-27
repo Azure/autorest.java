@@ -45,57 +45,57 @@ public final class PatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional, Required on create): {
-     *         String (Required): {
-     *             name: String (Optional, Required on create)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     longValue: Long (Optional)
-     *     intValue: Integer (Optional)
-     *     enumValue: String(a/b/c) (Optional)
-     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     fish (Optional): {
-     *         kind: String (Required)
-     *         id: String (Required)
-     *         name: String (Required)
-     *         age: int (Optional, Required on create)
-     *         color: String (Optional)
-     *     }
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional, Required on create): {
+     * String (Required): {
+     * name: String (Optional, Required on create)
+     * description: String (Optional)
+     * }
+     * }
+     * longValue: Long (Optional)
+     * intValue: Integer (Optional)
+     * enumValue: String(a/b/c) (Optional)
+     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * fish (Optional): {
+     * kind: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * age: int (Optional, Required on create)
+     * color: String (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional, Required on create): {
-     *         String (Required): {
-     *             name: String (Optional, Required on create)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     longValue: Long (Optional)
-     *     intValue: Integer (Optional)
-     *     enumValue: String(a/b/c) (Optional)
-     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     fish (Optional): {
-     *         kind: String (Required)
-     *         id: String (Required)
-     *         name: String (Required)
-     *         age: int (Optional, Required on create)
-     *         color: String (Optional)
-     *     }
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional, Required on create): {
+     * String (Required): {
+     * name: String (Optional, Required on create)
+     * description: String (Optional)
+     * }
+     * }
+     * longValue: Long (Optional)
+     * intValue: Integer (Optional)
+     * enumValue: String(a/b/c) (Optional)
+     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * fish (Optional): {
+     * kind: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * age: int (Optional, Required on create)
+     * color: String (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -119,57 +119,57 @@ public final class PatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional, Required on create): {
-     *         String (Required): {
-     *             name: String (Optional, Required on create)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     longValue: Long (Optional)
-     *     intValue: Integer (Optional)
-     *     enumValue: String(a/b/c) (Optional)
-     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     fish (Optional): {
-     *         kind: String (Required)
-     *         id: String (Required)
-     *         name: String (Required)
-     *         age: int (Optional, Required on create)
-     *         color: String (Optional)
-     *     }
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional, Required on create): {
+     * String (Required): {
+     * name: String (Optional, Required on create)
+     * description: String (Optional)
+     * }
+     * }
+     * longValue: Long (Optional)
+     * intValue: Integer (Optional)
+     * enumValue: String(a/b/c) (Optional)
+     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * fish (Optional): {
+     * kind: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * age: int (Optional, Required on create)
+     * color: String (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional, Required on create): {
-     *         String (Required): {
-     *             name: String (Optional, Required on create)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     longValue: Long (Optional)
-     *     intValue: Integer (Optional)
-     *     enumValue: String(a/b/c) (Optional)
-     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     fish (Optional): {
-     *         kind: String (Required)
-     *         id: String (Required)
-     *         name: String (Required)
-     *         age: int (Optional, Required on create)
-     *         color: String (Optional)
-     *     }
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional, Required on create): {
+     * String (Required): {
+     * name: String (Optional, Required on create)
+     * description: String (Optional)
+     * }
+     * }
+     * longValue: Long (Optional)
+     * intValue: Integer (Optional)
+     * enumValue: String(a/b/c) (Optional)
+     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * fish (Optional): {
+     * kind: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * age: int (Optional, Required on create)
+     * color: String (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -191,21 +191,21 @@ public final class PatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     id: String (Required)
-     *     name: String (Required)
-     *     age: int (Optional, Required on create)
-     *     color: String (Optional)
+     * kind: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * age: int (Optional, Required on create)
+     * color: String (Optional)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     id: String (Required)
-     *     name: String (Required)
-     *     age: int (Optional, Required on create)
-     *     color: String (Optional)
+     * kind: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * age: int (Optional, Required on create)
+     * color: String (Optional)
      * }
      * }</pre>
      * 
@@ -215,7 +215,8 @@ public final class PatchAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link
+     * Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -303,7 +304,8 @@ public final class PatchAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

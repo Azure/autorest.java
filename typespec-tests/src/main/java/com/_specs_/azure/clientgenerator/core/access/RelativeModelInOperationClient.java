@@ -42,20 +42,20 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "inner":
-     *   {
-     *     "name": &lt;any string&gt;
-     *   }
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     inner (Required): {
-     *         name: String (Required)
-     *     }
+     * name: String (Required)
+     * inner (Required): {
+     * name: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -78,15 +78,15 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "kind": "real"
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
      * }
      * ```.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     name: String (Required)
+     * kind: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -109,11 +109,11 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "inner":
-     *   {
-     *     "name": &lt;any string&gt;
-     *   }
+     * "name": &lt;any string&gt;,
+     * "inner":
+     * {
+     * "name": &lt;any string&gt;
+     * }
      * }
      * ```.
      * 
@@ -139,8 +139,8 @@ public final class RelativeModelInOperationClient {
      * Expected response body:
      * ```json
      * {
-     *   "name": &lt;any string&gt;,
-     *   "kind": "real"
+     * "name": &lt;any string&gt;,
+     * "kind": "real"
      * }
      * ```.
      * 

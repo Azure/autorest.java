@@ -36,12 +36,13 @@ public final class DpgClient {
     }
 
     /**
-     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is added.
+     * Head request, no params. Initially has no query parameters. After evolution, a new optional query parameter is
+     * added.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -64,12 +65,12 @@ public final class DpgClient {
 
     /**
      * Get true Boolean value on path.
-     *  Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
+     * Initially only has one required Query Parameter. After evolution, a new optional query parameter is added.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -84,7 +85,7 @@ public final class DpgClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     *  Initially only has one required Query Parameter along with {@link Response}.
+     * Initially only has one required Query Parameter along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -93,13 +94,14 @@ public final class DpgClient {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional query parameter is added.
+     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional
+     * query parameter is added.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -133,7 +135,8 @@ public final class DpgClient {
      * }</pre>
      * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
-     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url: "http://example.org/myimage.jpeg" }.
+     * @param parameter I am a body parameter with a new content type. My only valid JSON entry is { url:
+     * "http://example.org/myimage.jpeg" }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -150,7 +153,7 @@ public final class DpgClient {
 
     /**
      * Delete something.
-     *  Initially the path exists but there is no delete method. After evolution this is a new method in a known path.
+     * Initially the path exists but there is no delete method. After evolution this is a new method in a known path.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -167,13 +170,13 @@ public final class DpgClient {
 
     /**
      * Get true Boolean value on path.
-     *  Initially has one optional query parameter. After evolution, a new optional query parameter is added.
+     * Initially has one optional query parameter. After evolution, a new optional query parameter is added.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
-     *     <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>optionalParam</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <tr><td>new_parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -187,7 +190,7 @@ public final class DpgClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     *  Initially has one optional query parameter along with {@link Response}.
+     * Initially has one optional query parameter along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -197,7 +200,7 @@ public final class DpgClient {
 
     /**
      * I'm a new operation.
-     *  Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path.
+     * Initiallty neither path or method exist for this operation. After evolution, this is a new method in a new path.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * Object

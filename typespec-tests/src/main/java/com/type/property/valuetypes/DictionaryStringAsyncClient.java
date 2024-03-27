@@ -43,9 +43,9 @@ public final class DictionaryStringAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): {
-     *         String: String (Required)
-     *     }
+     * property (Required): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -67,9 +67,9 @@ public final class DictionaryStringAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): {
-     *         String: String (Required)
-     *     }
+     * property (Required): {
+     * String: String (Required)
+     * }
      * }
      * }</pre>
      * 

@@ -41,11 +41,11 @@ public final class IsUnknownDiscriminatedClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
+     * kind: String (Required)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -67,11 +67,11 @@ public final class IsUnknownDiscriminatedClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
+     * kind: String (Required)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
      * }
      * }</pre>
      * 

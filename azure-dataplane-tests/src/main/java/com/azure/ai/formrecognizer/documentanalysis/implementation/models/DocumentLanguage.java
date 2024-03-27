@@ -18,7 +18,8 @@ import java.util.List;
 @Fluent
 public final class DocumentLanguage implements JsonSerializable<DocumentLanguage> {
     /*
-     * Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47 language tag (ex. "zh-Hans").
+     * Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47 language tag (ex.
+     * "zh-Hans").
      */
     private String locale;
 
@@ -39,7 +40,8 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
     }
 
     /**
-     * Get the locale property: Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47 language tag (ex. "zh-Hans").
+     * Get the locale property: Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47
+     * language tag (ex. "zh-Hans").
      * 
      * @return the locale value.
      */
@@ -48,7 +50,8 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
     }
 
     /**
-     * Set the locale property: Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47 language tag (ex. "zh-Hans").
+     * Set the locale property: Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47
+     * language tag (ex. "zh-Hans").
      * 
      * @param locale the locale value to set.
      * @return the DocumentLanguage object itself.
@@ -114,7 +117,8 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
      * Reads an instance of DocumentLanguage from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of DocumentLanguage if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of DocumentLanguage if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DocumentLanguage.
      */

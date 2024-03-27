@@ -131,7 +131,8 @@ public final class StandardClientImpl {
     }
 
     /**
-     * The interface defining all the services for StandardClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for StandardClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "StandardClient")
@@ -202,15 +203,15 @@ public final class StandardClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * 
@@ -238,15 +239,15 @@ public final class StandardClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * 
@@ -274,15 +275,15 @@ public final class StandardClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * 
@@ -317,15 +318,15 @@ public final class StandardClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * 
@@ -360,15 +361,15 @@ public final class StandardClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * 
@@ -403,15 +404,15 @@ public final class StandardClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     role: String (Required)
+     * name: String (Required)
+     * role: String (Required)
      * }
      * }</pre>
      * 
@@ -446,16 +447,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -465,7 +466,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return provides status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
+     * @return provides status details for long running operations along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> deleteWithResponseAsync(String name, RequestOptions requestOptions) {
@@ -481,16 +483,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -515,16 +517,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -556,16 +558,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -597,16 +599,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -639,16 +641,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -680,16 +682,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -700,7 +702,8 @@ public final class StandardClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> exportWithResponseAsync(String name, String format,
@@ -717,16 +720,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -753,16 +756,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -797,16 +800,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -840,16 +843,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 
@@ -884,16 +887,16 @@ public final class StandardClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     status: String (Required)
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *     }
+     * id: String (Required)
+     * status: String (Required)
+     * error (Optional): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
      * }
      * }</pre>
      * 

@@ -52,7 +52,8 @@ public final class StringAndArraysImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientStringAndArrays to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientStringAndArrays to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientStringAnd")
@@ -99,10 +100,10 @@ public final class StringAndArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         string: BinaryData (Required)
-     *         array: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * string: BinaryData (Required)
+     * array: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -124,10 +125,10 @@ public final class StringAndArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         string: BinaryData (Required)
-     *         array: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * string: BinaryData (Required)
+     * array: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -149,10 +150,10 @@ public final class StringAndArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         string: BinaryData (Required)
-     *         array: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * string: BinaryData (Required)
+     * array: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -175,10 +176,10 @@ public final class StringAndArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         string: BinaryData (Required)
-     *         array: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * string: BinaryData (Required)
+     * array: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 

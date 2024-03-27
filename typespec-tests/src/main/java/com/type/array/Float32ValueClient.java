@@ -42,7 +42,7 @@ public final class Float32ValueClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     *     double (Required)
+     * double (Required)
      * ]
      * }</pre>
      * 
@@ -64,7 +64,7 @@ public final class Float32ValueClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     *     double (Required)
+     * double (Required)
      * ]
      * }</pre>
      * 

@@ -52,7 +52,8 @@ public final class CollectionsModelsImpl {
     }
 
     /**
-     * The interface defining all the services for NullableClientCollectionsModels to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for NullableClientCollectionsModels to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "NullableClientCollec")
@@ -139,12 +140,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -153,7 +154,8 @@ public final class CollectionsModelsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNonNullWithResponseAsync(RequestOptions requestOptions) {
@@ -166,12 +168,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -193,12 +195,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -207,7 +209,8 @@ public final class CollectionsModelsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNullWithResponseAsync(RequestOptions requestOptions) {
@@ -220,12 +223,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -247,12 +250,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -277,12 +280,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -306,12 +309,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -335,12 +338,12 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty (Optional, Required on create): [
-     *          (Optional, Required on create){
-     *             property: String (Optional, Required on create)
-     *         }
-     *     ]
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty (Optional, Required on create): [
+     * (Optional, Required on create){
+     * property: String (Optional, Required on create)
+     * }
+     * ]
      * }
      * }</pre>
      * 

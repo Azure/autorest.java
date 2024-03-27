@@ -41,9 +41,9 @@ public final class CollectionsStringClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *         String (Required)
-     *     ]
+     * property (Required): [
+     * String (Required)
+     * ]
      * }
      * }</pre>
      * 
@@ -65,9 +65,9 @@ public final class CollectionsStringClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *         String (Required)
-     *     ]
+     * property (Required): [
+     * String (Required)
+     * ]
      * }
      * }</pre>
      * 

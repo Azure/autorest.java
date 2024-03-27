@@ -41,11 +41,11 @@ public final class CollectionsModelClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *          (Optional){
-     *             property: String (Optional)
-     *         }
-     *     ]
+     * property (Optional): [
+     * (Optional){
+     * property: String (Optional)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -67,11 +67,11 @@ public final class CollectionsModelClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *          (Optional){
-     *             property: String (Optional)
-     *         }
-     *     ]
+     * property (Optional): [
+     * (Optional){
+     * property: String (Optional)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -93,11 +93,11 @@ public final class CollectionsModelClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *          (Optional){
-     *             property: String (Optional)
-     *         }
-     *     ]
+     * property (Optional): [
+     * (Optional){
+     * property: String (Optional)
+     * }
+     * ]
      * }
      * }</pre>
      * 
@@ -120,11 +120,11 @@ public final class CollectionsModelClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *          (Optional){
-     *             property: String (Optional)
-     *         }
-     *     ]
+     * property (Optional): [
+     * (Optional){
+     * property: String (Optional)
+     * }
+     * ]
      * }
      * }</pre>
      * 

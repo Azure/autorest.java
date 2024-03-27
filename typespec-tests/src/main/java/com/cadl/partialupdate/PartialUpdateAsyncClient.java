@@ -43,10 +43,10 @@ public final class PartialUpdateAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     boolean: boolean (Required)
-     *     string: String (Required)
-     *     bytes: byte[] (Required)
-     *     aggregate: String (Optional)
+     * boolean: boolean (Required)
+     * string: String (Required)
+     * bytes: byte[] (Required)
+     * aggregate: String (Optional)
      * }
      * }</pre>
      *

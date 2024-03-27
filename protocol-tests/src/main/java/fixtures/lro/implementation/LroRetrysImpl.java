@@ -71,7 +71,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLroRetrys to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestLongRunningOperationTestServiceLroRetrys to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestLongRunningO")
@@ -204,44 +205,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -266,44 +272,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -327,44 +338,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -388,44 +404,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -449,44 +470,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -511,44 +537,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -573,44 +604,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -634,44 +670,49 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 500, then a 200 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -695,21 +736,24 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -729,21 +773,24 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -762,21 +809,24 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -801,21 +851,24 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -839,7 +892,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
+     * until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -856,7 +910,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
+     * until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -872,7 +927,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
+     * until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -893,7 +949,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Polls return this value
+     * until the last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -914,7 +971,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -931,7 +989,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -948,7 +1007,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -970,7 +1030,8 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running delete request, service returns a 500, then a 202 to the initial request. Poll the endpoint
+     * indicated in the Azure-AsyncOperation header for operation status.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -992,28 +1053,31 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+     * 'Retry-After' headers, Polls return a 200 with a response body after success.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -1038,28 +1102,31 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+     * 'Retry-After' headers, Polls return a 200 with a response body after success.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -1083,28 +1150,31 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+     * 'Retry-After' headers, Polls return a 200 with a response body after success.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -1127,28 +1197,31 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and 'Retry-After' headers, Polls return a 200 with a response body after success.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with 'Location' and
+     * 'Retry-After' headers, Polls return a 200 with a response body after success.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -1171,28 +1244,32 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -1217,28 +1294,32 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -1263,28 +1344,32 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -1308,28 +1393,32 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
+     * operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
+     * "application/json".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     type: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     location: String (Optional)
-     *     name: String (Optional)
-     *     properties (Optional): {
-     *         provisioningState: String (Optional)
-     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     *     }
+     * id: String (Optional)
+     * type: String (Optional)
+     * tags (Optional): {
+     * String: String (Required)
+     * }
+     * location: String (Optional)
+     * name: String (Optional)
+     * properties (Optional): {
+     * provisioningState: String (Optional)
+     * provisioningStateValues:
+     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     * }
      * }
      * }</pre>
      * 

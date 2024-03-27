@@ -81,7 +81,8 @@ public final class ProtocolAndConvenienceOpsImpl {
     }
 
     /**
-     * The interface defining all the services for ProtocolAndConvenientClientProtocolAndConvenienceOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ProtocolAndConvenientClientProtocolAndConvenienceOps to be used by
+     * the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ProtocolAndConvenien")
@@ -234,15 +235,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -266,15 +267,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -293,19 +294,20 @@ public final class ProtocolAndConvenienceOpsImpl {
     }
 
     /**
-     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and ResourceD should not be generated.
+     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
+     * ResourceD should not be generated.
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -325,19 +327,20 @@ public final class ProtocolAndConvenienceOpsImpl {
     }
 
     /**
-     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and ResourceD should not be generated.
+     * When set protocol true and convenient false, only the protocol method should be generated, ResourceC and
+     * ResourceD should not be generated.
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -360,15 +363,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -393,15 +396,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -425,15 +428,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -457,15 +460,15 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
+     * id: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -488,17 +491,17 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -524,17 +527,17 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -560,17 +563,17 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -603,17 +606,17 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -646,17 +649,17 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -689,17 +692,17 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -731,17 +734,18 @@ public final class ProtocolAndConvenienceOpsImpl {
      * Paging operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
+     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -750,7 +754,8 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
@@ -766,17 +771,18 @@ public final class ProtocolAndConvenienceOpsImpl {
      * Paging operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
+     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -820,17 +826,18 @@ public final class ProtocolAndConvenienceOpsImpl {
      * Paging operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
+     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -854,17 +861,18 @@ public final class ProtocolAndConvenienceOpsImpl {
      * Paging operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
+     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -909,9 +917,9 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -923,7 +931,8 @@ public final class ProtocolAndConvenienceOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return paged collection of ResourceJ items along with {@link PagedResponse} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
@@ -940,9 +949,9 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * type: String (Required)
      * }
      * }</pre>
      * 

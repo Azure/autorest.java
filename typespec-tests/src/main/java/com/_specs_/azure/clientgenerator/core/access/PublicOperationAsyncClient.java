@@ -44,7 +44,7 @@ public final class PublicOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -54,7 +54,8 @@ public final class PublicOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in a public operation, should be generated and exported along with {@link Response} on successful completion of {@link Mono}.
+     * @return used in a public operation, should be generated and exported along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -67,7 +68,7 @@ public final class PublicOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
+     * name: String (Required)
      * }
      * }</pre>
      * 
@@ -77,7 +78,8 @@ public final class PublicOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in a public operation, should be generated and exported along with {@link Response} on successful completion of {@link Mono}.
+     * @return used in a public operation, should be generated and exported along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

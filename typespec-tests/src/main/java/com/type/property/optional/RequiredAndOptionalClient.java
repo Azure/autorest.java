@@ -41,8 +41,8 @@ public final class RequiredAndOptionalClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 
@@ -64,8 +64,8 @@ public final class RequiredAndOptionalClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 
@@ -87,8 +87,8 @@ public final class RequiredAndOptionalClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 
@@ -111,8 +111,8 @@ public final class RequiredAndOptionalClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     optionalProperty: String (Optional)
-     *     requiredProperty: int (Required)
+     * optionalProperty: String (Optional)
+     * requiredProperty: int (Required)
      * }
      * }</pre>
      * 

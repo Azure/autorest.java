@@ -49,7 +49,8 @@ public final class AvailabilitySets {
     }
 
     /**
-     * The interface defining all the services for AutoRestParameterFlatteningAvailabilitySets to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestParameterFlatteningAvailabilitySets to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestParameterFla")

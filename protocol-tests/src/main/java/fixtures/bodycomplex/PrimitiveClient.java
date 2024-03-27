@@ -40,8 +40,8 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Integer (Optional)
-     *     field2: Integer (Optional)
+     * field1: Integer (Optional)
+     * field2: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -63,8 +63,8 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Integer (Optional)
-     *     field2: Integer (Optional)
+     * field1: Integer (Optional)
+     * field2: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -87,8 +87,8 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Long (Optional)
-     *     field2: Long (Optional)
+     * field1: Long (Optional)
+     * field2: Long (Optional)
      * }
      * }</pre>
      * 
@@ -110,8 +110,8 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Long (Optional)
-     *     field2: Long (Optional)
+     * field1: Long (Optional)
+     * field2: Long (Optional)
      * }
      * }</pre>
      * 
@@ -134,8 +134,8 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Float (Optional)
-     *     field2: Float (Optional)
+     * field1: Float (Optional)
+     * field2: Float (Optional)
      * }
      * }</pre>
      * 
@@ -157,8 +157,8 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Float (Optional)
-     *     field2: Float (Optional)
+     * field1: Float (Optional)
+     * field2: Float (Optional)
      * }
      * }</pre>
      * 
@@ -181,8 +181,9 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Double (Optional)
-     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
+     * field1: Double (Optional)
+     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double
+     * (Optional)
      * }
      * }</pre>
      * 
@@ -204,8 +205,9 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field1: Double (Optional)
-     *     field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double (Optional)
+     * field1: Double (Optional)
+     * field_56_zeros_after_the_dot_and_negative_zero_before_dot_and_this_is_a_long_field_name_on_purpose: Double
+     * (Optional)
      * }
      * }</pre>
      * 
@@ -228,8 +230,8 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field_true: Boolean (Optional)
-     *     field_false: Boolean (Optional)
+     * field_true: Boolean (Optional)
+     * field_false: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -251,8 +253,8 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field_true: Boolean (Optional)
-     *     field_false: Boolean (Optional)
+     * field_true: Boolean (Optional)
+     * field_false: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -275,9 +277,9 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     empty: String (Optional)
-     *     null: String (Optional)
+     * field: String (Optional)
+     * empty: String (Optional)
+     * null: String (Optional)
      * }
      * }</pre>
      * 
@@ -299,9 +301,9 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     empty: String (Optional)
-     *     null: String (Optional)
+     * field: String (Optional)
+     * empty: String (Optional)
+     * null: String (Optional)
      * }
      * }</pre>
      * 
@@ -324,8 +326,8 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     leap: String (Optional)
+     * field: String (Optional)
+     * leap: String (Optional)
      * }
      * }</pre>
      * 
@@ -347,8 +349,8 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: String (Optional)
-     *     leap: String (Optional)
+     * field: String (Optional)
+     * leap: String (Optional)
      * }
      * }</pre>
      * 
@@ -371,8 +373,8 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     * field: OffsetDateTime (Optional)
+     * now: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -394,8 +396,8 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: OffsetDateTime (Optional)
-     *     now: OffsetDateTime (Optional)
+     * field: OffsetDateTime (Optional)
+     * now: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -418,8 +420,8 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123 (Optional)
-     *     now: DateTimeRfc1123 (Optional)
+     * field: DateTimeRfc1123 (Optional)
+     * now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      * 
@@ -441,8 +443,8 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: DateTimeRfc1123 (Optional)
-     *     now: DateTimeRfc1123 (Optional)
+     * field: DateTimeRfc1123 (Optional)
+     * now: DateTimeRfc1123 (Optional)
      * }
      * }</pre>
      * 
@@ -465,7 +467,7 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: Duration (Optional)
+     * field: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -487,7 +489,7 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: Duration (Optional)
+     * field: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -510,7 +512,7 @@ public final class PrimitiveClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: byte[] (Optional)
+     * field: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -532,7 +534,7 @@ public final class PrimitiveClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     field: byte[] (Optional)
+     * field: byte[] (Optional)
      * }
      * }</pre>
      * 

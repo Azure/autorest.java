@@ -42,8 +42,8 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -52,7 +52,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -65,8 +66,8 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -89,8 +90,8 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -99,7 +100,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -112,8 +114,8 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -136,8 +138,8 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -146,7 +148,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -159,8 +162,8 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -169,7 +172,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -182,8 +186,8 @@ public final class SingleDiscriminatorClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     size: int (Required)
+     * kind: String (Required)
+     * size: int (Required)
      * }
      * }</pre>
      * 

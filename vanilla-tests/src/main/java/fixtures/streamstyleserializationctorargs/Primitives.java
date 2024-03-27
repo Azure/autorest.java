@@ -60,7 +60,8 @@ public final class Primitives {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServicePrimitives to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServicePrimitives to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -357,7 +358,8 @@ public final class Primitives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with integer properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponseAsync() {
@@ -376,7 +378,8 @@ public final class Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with integer properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with integer properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<IntWrapper>> getIntWithResponseAsync(Context context) {
@@ -781,7 +784,8 @@ public final class Primitives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with float properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with float properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<FloatWrapper>> getFloatWithResponseAsync() {
@@ -800,7 +804,8 @@ public final class Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with float properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with float properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<FloatWrapper>> getFloatWithResponseAsync(Context context) {
@@ -993,7 +998,8 @@ public final class Primitives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with double properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync() {
@@ -1012,7 +1018,8 @@ public final class Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with double properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with double properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DoubleWrapper>> getDoubleWithResponseAsync(Context context) {
@@ -1417,7 +1424,8 @@ public final class Primitives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with string properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponseAsync() {
@@ -1436,7 +1444,8 @@ public final class Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with string properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with string properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<StringWrapper>> getStringWithResponseAsync(Context context) {
@@ -1841,7 +1850,8 @@ public final class Primitives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync() {
@@ -1860,7 +1870,8 @@ public final class Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with datetime properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DatetimeWrapper>> getDateTimeWithResponseAsync(Context context) {
@@ -2054,7 +2065,8 @@ public final class Primitives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync() {
@@ -2073,7 +2085,8 @@ public final class Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with datetimeRfc1123 properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Datetimerfc1123Wrapper>> getDateTimeRfc1123WithResponseAsync(Context context) {
@@ -2268,7 +2281,8 @@ public final class Primitives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with duration properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponseAsync() {
@@ -2287,7 +2301,8 @@ public final class Primitives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with duration properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types with duration properties along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DurationWrapper>> getDurationWithResponseAsync(Context context) {

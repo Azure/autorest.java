@@ -52,7 +52,8 @@ public final class CollectionsStringsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientCollectionsStrings to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientCollectionsStrings to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientColl")
@@ -99,9 +100,9 @@ public final class CollectionsStringsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *         String (Required)
-     *     ]
+     * property (Required): [
+     * String (Required)
+     * ]
      * }
      * }</pre>
      * 
@@ -123,9 +124,9 @@ public final class CollectionsStringsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *         String (Required)
-     *     ]
+     * property (Required): [
+     * String (Required)
+     * ]
      * }
      * }</pre>
      * 
@@ -147,9 +148,9 @@ public final class CollectionsStringsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *         String (Required)
-     *     ]
+     * property (Required): [
+     * String (Required)
+     * ]
      * }
      * }</pre>
      * 
@@ -172,9 +173,9 @@ public final class CollectionsStringsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Required): [
-     *         String (Required)
-     *     ]
+     * property (Required): [
+     * String (Required)
+     * ]
      * }
      * }</pre>
      * 

@@ -41,7 +41,7 @@ public final class DurationOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Duration (Optional)
+     * property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class DurationOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Duration (Optional)
+     * property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -85,7 +85,7 @@ public final class DurationOperationClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Duration (Optional)
+     * property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -108,7 +108,7 @@ public final class DurationOperationClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: Duration (Optional)
+     * property: Duration (Optional)
      * }
      * }</pre>
      * 

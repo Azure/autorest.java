@@ -63,7 +63,8 @@ public final class PolymorphismsImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServicePolymorphisms to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServicePolymorphisms to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -244,12 +245,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
@@ -272,12 +273,12 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
@@ -299,48 +300,48 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     *         'fishtype':'Salmon',
-     *         'location':'alaska',
-     *         'iswild':true,
-     *         'species':'king',
-     *         'length':1.0,
-     *         'siblings':[
-     *           {
-     *             'fishtype':'Shark',
-     *             'age':6,
-     *             'birthday': '2012-01-05T01:00:00Z',
-     *             'length':20.0,
-     *             'species':'predator',
-     *           },
-     *           {
-     *             'fishtype':'Sawshark',
-     *             'age':105,
-     *             'birthday': '1900-01-05T01:00:00Z',
-     *             'length':10.0,
-     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     *             'species':'dangerous',
-     *           },
-     *           {
-     *             'fishtype': 'goblin',
-     *             'age': 1,
-     *             'birthday': '2015-08-08T00:00:00Z',
-     *             'length': 30.0,
-     *             'species': 'scary',
-     *             'jawsize': 5
-     *           }
-     *         ]
-     *       };.
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -360,48 +361,48 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
-     *         'fishtype':'Salmon',
-     *         'location':'alaska',
-     *         'iswild':true,
-     *         'species':'king',
-     *         'length':1.0,
-     *         'siblings':[
-     *           {
-     *             'fishtype':'Shark',
-     *             'age':6,
-     *             'birthday': '2012-01-05T01:00:00Z',
-     *             'length':20.0,
-     *             'species':'predator',
-     *           },
-     *           {
-     *             'fishtype':'Sawshark',
-     *             'age':105,
-     *             'birthday': '1900-01-05T01:00:00Z',
-     *             'length':10.0,
-     *             'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
-     *             'species':'dangerous',
-     *           },
-     *           {
-     *             'fishtype': 'goblin',
-     *             'age': 1,
-     *             'birthday': '2015-08-08T00:00:00Z',
-     *             'length': 30.0,
-     *             'species': 'scary',
-     *             'jawsize': 5
-     *           }
-     *         ]
-     *       };.
+     * 'fishtype':'Salmon',
+     * 'location':'alaska',
+     * 'iswild':true,
+     * 'species':'king',
+     * 'length':1.0,
+     * 'siblings':[
+     * {
+     * 'fishtype':'Shark',
+     * 'age':6,
+     * 'birthday': '2012-01-05T01:00:00Z',
+     * 'length':20.0,
+     * 'species':'predator',
+     * },
+     * {
+     * 'fishtype':'Sawshark',
+     * 'age':105,
+     * 'birthday': '1900-01-05T01:00:00Z',
+     * 'length':10.0,
+     * 'picture': new Buffer([255, 255, 255, 255, 254]).toString('base64'),
+     * 'species':'dangerous',
+     * },
+     * {
+     * 'fishtype': 'goblin',
+     * 'age': 1,
+     * 'birthday': '2015-08-08T00:00:00Z',
+     * 'length': 30.0,
+     * 'species': 'scary',
+     * 'jawsize': 5
+     * }
+     * ]
+     * };.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -420,8 +421,8 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fish.type: String (Required)
-     *     species: String (Optional)
+     * fish.type: String (Required)
+     * species: String (Optional)
      * }
      * }</pre>
      * 
@@ -430,7 +431,8 @@ public final class PolymorphismsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, JSON key contains a dot along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDotSyntaxWithResponseAsync(RequestOptions requestOptions) {
@@ -444,8 +446,8 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fish.type: String (Required)
-     *     species: String (Optional)
+     * fish.type: String (Required)
+     * species: String (Optional)
      * }
      * }</pre>
      * 
@@ -463,26 +465,28 @@ public final class PolymorphismsImpl {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
+     * wire.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     sampleSalmon (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *         location: String (Optional)
-     *         iswild: Boolean (Optional)
-     *     }
-     *     salmons (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     sampleFish (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *     }
-     *     fishes (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * sampleSalmon (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
+     * }
+     * salmons (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * sampleFish (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * }
+     * fishes (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
@@ -491,7 +495,8 @@ public final class PolymorphismsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * with discriminator specified along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -501,26 +506,28 @@ public final class PolymorphismsImpl {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
+     * wire.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     sampleSalmon (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *         location: String (Optional)
-     *         iswild: Boolean (Optional)
-     *     }
-     *     salmons (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     sampleFish (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *     }
-     *     fishes (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * sampleSalmon (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
+     * }
+     * salmons (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * sampleFish (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * }
+     * fishes (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
@@ -529,7 +536,8 @@ public final class PolymorphismsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, with discriminator specified along with {@link Response}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * with discriminator specified along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -538,26 +546,28 @@ public final class PolymorphismsImpl {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
+     * property.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     sampleSalmon (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *         location: String (Optional)
-     *         iswild: Boolean (Optional)
-     *     }
-     *     salmons (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     sampleFish (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *     }
-     *     fishes (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * sampleSalmon (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
+     * }
+     * salmons (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * sampleFish (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * }
+     * fishes (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
@@ -566,7 +576,8 @@ public final class PolymorphismsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * without discriminator specified on wire along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComposedWithoutDiscriminatorWithResponseAsync(RequestOptions requestOptions) {
@@ -576,26 +587,28 @@ public final class PolymorphismsImpl {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
+     * property.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     sampleSalmon (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *         location: String (Optional)
-     *         iswild: Boolean (Optional)
-     *     }
-     *     salmons (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     sampleFish (Optional): {
-     *         fish.type: String (Required)
-     *         species: String (Optional)
-     *     }
-     *     fishes (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * sampleSalmon (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
+     * }
+     * salmons (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * sampleFish (Optional): {
+     * fish.type: String (Required)
+     * species: String (Optional)
+     * }
+     * fishes (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
@@ -604,7 +617,8 @@ public final class PolymorphismsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type, without discriminator specified on wire along with {@link Response}.
+     * @return complex object composing a polymorphic scalar property and array property with polymorphic element type,
+     * without discriminator specified on wire along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComposedWithoutDiscriminatorWithResponse(RequestOptions requestOptions) {
@@ -617,21 +631,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -640,7 +654,8 @@ public final class PolymorphismsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
+     * properties along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getComplicatedWithResponseAsync(RequestOptions requestOptions) {
@@ -654,21 +669,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -677,7 +692,8 @@ public final class PolymorphismsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties along with {@link Response}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
+     * properties along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getComplicatedWithResponse(RequestOptions requestOptions) {
@@ -690,21 +706,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -728,21 +744,21 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -765,41 +781,41 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -824,41 +840,41 @@ public final class PolymorphismsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *          (Optional){
-     *             fishtype: String (Required)
-     *             species: String (Optional)
-     *             length: float (Required)
-     *             siblings (Optional): [
-     *                 (recursive schema, see above)
-     *             ]
-     *         }
-     *     ]
-     *     location: String (Optional)
-     *     iswild: Boolean (Optional)
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (Optional){
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * }
+     * ]
+     * location: String (Optional)
+     * iswild: Boolean (Optional)
      * }
      * }</pre>
      * 
@@ -879,44 +895,46 @@ public final class PolymorphismsImpl {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
+     * allowed from the client.
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
+     * be sent:
      * {
-     *     "fishtype": "sawshark",
-     *     "species": "snaggle toothed",
-     *     "length": 18.5,
-     *     "age": 2,
-     *     "birthday": "2013-06-01T01:00:00Z",
-     *     "location": "alaska",
-     *     "picture": base64(FF FF FF FF FE),
-     *     "siblings": [
-     *         {
-     *             "fishtype": "shark",
-     *             "species": "predator",
-     *             "birthday": "2012-01-05T01:00:00Z",
-     *             "length": 20,
-     *             "age": 6
-     *         },
-     *         {
-     *             "fishtype": "sawshark",
-     *             "species": "dangerous",
-     *             "picture": base64(FF FF FF FF FE),
-     *             "length": 10,
-     *             "age": 105
-     *         }
-     *     ]
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
      * }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -934,44 +952,46 @@ public final class PolymorphismsImpl {
     }
 
     /**
-     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be allowed from the client.
+     * Put complex types that are polymorphic, attempting to omit required 'birthday' field - the request should not be
+     * allowed from the client.
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     fishtype: String (Required)
-     *     species: String (Optional)
-     *     length: float (Required)
-     *     siblings (Optional): [
-     *         (recursive schema, see above)
-     *     ]
+     * fishtype: String (Required)
+     * species: String (Optional)
+     * length: float (Required)
+     * siblings (Optional): [
+     * (recursive schema, see above)
+     * ]
      * }
      * }</pre>
      * 
-     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to be sent:
+     * @param complexBody Please attempt put a sawshark that looks like this, the client should not allow this data to
+     * be sent:
      * {
-     *     "fishtype": "sawshark",
-     *     "species": "snaggle toothed",
-     *     "length": 18.5,
-     *     "age": 2,
-     *     "birthday": "2013-06-01T01:00:00Z",
-     *     "location": "alaska",
-     *     "picture": base64(FF FF FF FF FE),
-     *     "siblings": [
-     *         {
-     *             "fishtype": "shark",
-     *             "species": "predator",
-     *             "birthday": "2012-01-05T01:00:00Z",
-     *             "length": 20,
-     *             "age": 6
-     *         },
-     *         {
-     *             "fishtype": "sawshark",
-     *             "species": "dangerous",
-     *             "picture": base64(FF FF FF FF FE),
-     *             "length": 10,
-     *             "age": 105
-     *         }
-     *     ]
+     * "fishtype": "sawshark",
+     * "species": "snaggle toothed",
+     * "length": 18.5,
+     * "age": 2,
+     * "birthday": "2013-06-01T01:00:00Z",
+     * "location": "alaska",
+     * "picture": base64(FF FF FF FF FE),
+     * "siblings": [
+     * {
+     * "fishtype": "shark",
+     * "species": "predator",
+     * "birthday": "2012-01-05T01:00:00Z",
+     * "length": 20,
+     * "age": 6
+     * },
+     * {
+     * "fishtype": "sawshark",
+     * "species": "dangerous",
+     * "picture": base64(FF FF FF FF FE),
+     * "length": 10,
+     * "age": 105
+     * }
+     * ]
      * }.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

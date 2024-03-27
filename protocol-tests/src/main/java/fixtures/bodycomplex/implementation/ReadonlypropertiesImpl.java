@@ -63,7 +63,8 @@ public final class ReadonlypropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceReadonlyproperties to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceReadonlyproperties to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -112,8 +113,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
+     * id: String (Optional)
+     * size: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -122,7 +123,8 @@ public final class ReadonlypropertiesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that have readonly properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that have readonly properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
@@ -136,8 +138,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
+     * id: String (Optional)
+     * size: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -159,8 +161,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
+     * id: String (Optional)
+     * size: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -184,8 +186,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Optional)
-     *     size: Integer (Optional)
+     * id: String (Optional)
+     * size: Integer (Optional)
      * }
      * }</pre>
      * 

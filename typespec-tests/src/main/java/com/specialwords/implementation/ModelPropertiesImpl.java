@@ -51,7 +51,8 @@ public final class ModelPropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialWordsClientModelProperties to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for SpecialWordsClientModelProperties to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpecialWordsClientMo")
@@ -80,7 +81,7 @@ public final class ModelPropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     SameAsModel: String (Required)
+     * SameAsModel: String (Required)
      * }
      * }</pre>
      * 
@@ -103,7 +104,7 @@ public final class ModelPropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     SameAsModel: String (Required)
+     * SameAsModel: String (Required)
      * }
      * }</pre>
      * 

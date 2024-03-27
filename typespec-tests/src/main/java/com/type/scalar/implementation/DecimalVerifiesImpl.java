@@ -52,7 +52,8 @@ public final class DecimalVerifiesImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientDecimalVerifies to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ScalarClientDecimalVerifies to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientDecimalV")
@@ -99,7 +100,7 @@ public final class DecimalVerifiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     *     BigDecimal (Required)
+     * BigDecimal (Required)
      * ]
      * }</pre>
      * 
@@ -121,7 +122,7 @@ public final class DecimalVerifiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     *     BigDecimal (Required)
+     * BigDecimal (Required)
      * ]
      * }</pre>
      * 

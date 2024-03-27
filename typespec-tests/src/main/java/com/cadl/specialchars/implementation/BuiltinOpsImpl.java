@@ -52,7 +52,8 @@ public final class BuiltinOpsImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialCharsClientBuiltinOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for SpecialCharsClientBuiltinOps to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "SpecialCharsClientBu")
@@ -81,17 +82,17 @@ public final class BuiltinOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
+     * id: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     aggregate: String (Optional)
-     *     condition: String (Optional)
-     *     requestName: String (Optional)
-     *     value: Double (Optional)
+     * id: String (Required)
+     * aggregate: String (Optional)
+     * condition: String (Optional)
+     * requestName: String (Optional)
+     * value: Double (Optional)
      * }
      * }</pre>
      * 
@@ -115,17 +116,17 @@ public final class BuiltinOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
+     * id: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     aggregate: String (Optional)
-     *     condition: String (Optional)
-     *     requestName: String (Optional)
-     *     value: Double (Optional)
+     * id: String (Required)
+     * aggregate: String (Optional)
+     * condition: String (Optional)
+     * requestName: String (Optional)
+     * value: Double (Optional)
      * }
      * }</pre>
      * 

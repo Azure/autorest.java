@@ -51,7 +51,8 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for ProjectedNameClientProperties to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ProjectedNameClientProperties to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ProjectedNameClientP")
@@ -142,7 +143,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     wireName: boolean (Required)
+     * wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -166,7 +167,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     wireName: boolean (Required)
+     * wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -189,7 +190,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultName: boolean (Required)
+     * defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -214,7 +215,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultName: boolean (Required)
+     * defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -237,7 +238,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultName: boolean (Required)
+     * defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -262,7 +263,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     defaultName: boolean (Required)
+     * defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -285,7 +286,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     wireName: boolean (Required)
+     * wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -310,7 +311,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     wireName: boolean (Required)
+     * wireName: boolean (Required)
      * }
      * }</pre>
      * 

@@ -43,9 +43,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *         byte[] (Optional)
-     *     ]
+     * property (Optional): [
+     * byte[] (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -54,7 +54,8 @@ public final class CollectionsByteAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -67,9 +68,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *         byte[] (Optional)
-     *     ]
+     * property (Optional): [
+     * byte[] (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -78,7 +79,8 @@ public final class CollectionsByteAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -91,9 +93,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *         byte[] (Optional)
-     *     ]
+     * property (Optional): [
+     * byte[] (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -116,9 +118,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property (Optional): [
-     *         byte[] (Optional)
-     *     ]
+     * property (Optional): [
+     * byte[] (Optional)
+     * ]
      * }
      * }</pre>
      * 

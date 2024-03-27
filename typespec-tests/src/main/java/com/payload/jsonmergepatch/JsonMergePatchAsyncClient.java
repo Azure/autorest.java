@@ -45,45 +45,45 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional): {
-     *         String (Required): {
-     *             name: String (Optional)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     intValue: Integer (Optional)
-     *     floatValue: Double (Optional)
-     *     innerModel (Optional): (recursive schema, see innerModel above)
-     *     intArray (Optional): [
-     *         int (Optional)
-     *     ]
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional): {
+     * String (Required): {
+     * name: String (Optional)
+     * description: String (Optional)
+     * }
+     * }
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * intValue: Integer (Optional)
+     * floatValue: Double (Optional)
+     * innerModel (Optional): (recursive schema, see innerModel above)
+     * intArray (Optional): [
+     * int (Optional)
+     * ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional): {
-     *         String (Required): {
-     *             name: String (Optional)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     intValue: Integer (Optional)
-     *     floatValue: Double (Optional)
-     *     innerModel (Optional): (recursive schema, see innerModel above)
-     *     intArray (Optional): [
-     *         int (Optional)
-     *     ]
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional): {
+     * String (Required): {
+     * name: String (Optional)
+     * description: String (Optional)
+     * }
+     * }
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * intValue: Integer (Optional)
+     * floatValue: Double (Optional)
+     * innerModel (Optional): (recursive schema, see innerModel above)
+     * intArray (Optional): [
+     * int (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -106,44 +106,44 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     description: String (Optional)
-     *     map (Optional): {
-     *         String (Required): {
-     *             name: String (Optional)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     intValue: Integer (Optional)
-     *     floatValue: Double (Optional)
-     *     innerModel (Optional): (recursive schema, see innerModel above)
-     *     intArray (Optional): [
-     *         int (Optional)
-     *     ]
+     * description: String (Optional)
+     * map (Optional): {
+     * String (Required): {
+     * name: String (Optional)
+     * description: String (Optional)
+     * }
+     * }
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * intValue: Integer (Optional)
+     * floatValue: Double (Optional)
+     * innerModel (Optional): (recursive schema, see innerModel above)
+     * intArray (Optional): [
+     * int (Optional)
+     * ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional): {
-     *         String (Required): {
-     *             name: String (Optional)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     intValue: Integer (Optional)
-     *     floatValue: Double (Optional)
-     *     innerModel (Optional): (recursive schema, see innerModel above)
-     *     intArray (Optional): [
-     *         int (Optional)
-     *     ]
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional): {
+     * String (Required): {
+     * name: String (Optional)
+     * description: String (Optional)
+     * }
+     * }
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * intValue: Integer (Optional)
+     * floatValue: Double (Optional)
+     * innerModel (Optional): (recursive schema, see innerModel above)
+     * intArray (Optional): [
+     * int (Optional)
+     * ]
      * }
      * }</pre>
      * 
@@ -166,44 +166,44 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     description: String (Optional)
-     *     map (Optional): {
-     *         String (Required): {
-     *             name: String (Optional)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     intValue: Integer (Optional)
-     *     floatValue: Double (Optional)
-     *     innerModel (Optional): (recursive schema, see innerModel above)
-     *     intArray (Optional): [
-     *         int (Optional)
-     *     ]
+     * description: String (Optional)
+     * map (Optional): {
+     * String (Required): {
+     * name: String (Optional)
+     * description: String (Optional)
+     * }
+     * }
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * intValue: Integer (Optional)
+     * floatValue: Double (Optional)
+     * innerModel (Optional): (recursive schema, see innerModel above)
+     * intArray (Optional): [
+     * int (Optional)
+     * ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     map (Optional): {
-     *         String (Required): {
-     *             name: String (Optional)
-     *             description: String (Optional)
-     *         }
-     *     }
-     *     array (Optional): [
-     *         (recursive schema, see above)
-     *     ]
-     *     intValue: Integer (Optional)
-     *     floatValue: Double (Optional)
-     *     innerModel (Optional): (recursive schema, see innerModel above)
-     *     intArray (Optional): [
-     *         int (Optional)
-     *     ]
+     * name: String (Required)
+     * description: String (Optional)
+     * map (Optional): {
+     * String (Required): {
+     * name: String (Optional)
+     * description: String (Optional)
+     * }
+     * }
+     * array (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * intValue: Integer (Optional)
+     * floatValue: Double (Optional)
+     * innerModel (Optional): (recursive schema, see innerModel above)
+     * intArray (Optional): [
+     * int (Optional)
+     * ]
      * }
      * }</pre>
      * 

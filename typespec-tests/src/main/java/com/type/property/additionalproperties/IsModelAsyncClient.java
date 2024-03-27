@@ -45,9 +45,9 @@ public final class IsModelAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
-     *     }
+     * String (Required): {
+     * state: String (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -69,9 +69,9 @@ public final class IsModelAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
-     *     }
+     * String (Required): {
+     * state: String (Required)
+     * }
      * }
      * }</pre>
      * 

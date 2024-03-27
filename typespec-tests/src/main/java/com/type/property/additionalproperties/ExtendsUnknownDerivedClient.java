@@ -41,12 +41,12 @@ public final class ExtendsUnknownDerivedClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
-     *     index: int (Required)
-     *     age: Double (Optional)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
+     * index: int (Required)
+     * age: Double (Optional)
      * }
      * }</pre>
      * 
@@ -68,12 +68,12 @@ public final class ExtendsUnknownDerivedClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
-     *     index: int (Required)
-     *     age: Double (Optional)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
+     * index: int (Required)
+     * age: Double (Optional)
      * }
      * }</pre>
      * 

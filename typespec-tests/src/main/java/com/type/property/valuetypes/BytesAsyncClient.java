@@ -43,7 +43,7 @@ public final class BytesAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: byte[] (Required)
+     * property: byte[] (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class BytesAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     property: byte[] (Required)
+     * property: byte[] (Required)
      * }
      * }</pre>
      * 

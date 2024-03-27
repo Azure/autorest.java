@@ -73,12 +73,12 @@ public final class ResponseAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     *      (Required){
-     *         id: String (Required)
-     *         name: String (Required)
-     *         description: String (Optional)
-     *         type: String (Required)
-     *     }
+     * (Required){
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * type: String (Required)
+     * }
      * ]
      * }</pre>
      * 
@@ -100,12 +100,12 @@ public final class ResponseAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     *      (Required){
-     *         id: String (Required)
-     *         name: String (Required)
-     *         description: String (Optional)
-     *         type: String (Required)
-     *     }
+     * (Required){
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * type: String (Required)
+     * }
      * ]
      * }</pre>
      * 
@@ -127,10 +127,10 @@ public final class ResponseAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -187,10 +187,10 @@ public final class ResponseAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * type: String (Required)
      * }
      * }</pre>
      * 
@@ -214,10 +214,10 @@ public final class ResponseAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     id: String (Required)
-     *     name: String (Required)
-     *     description: String (Optional)
-     *     type: String (Required)
+     * id: String (Required)
+     * name: String (Required)
+     * description: String (Optional)
+     * type: String (Required)
      * }
      * }</pre>
      * 

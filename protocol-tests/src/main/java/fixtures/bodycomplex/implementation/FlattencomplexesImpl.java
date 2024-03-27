@@ -61,7 +61,8 @@ public final class FlattencomplexesImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexes to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -90,11 +91,11 @@ public final class FlattencomplexesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(Kind1) (Required)
-     *     propB1: String (Optional)
-     *     helper (Optional): {
-     *         propBH1: String (Optional)
-     *     }
+     * kind: String(Kind1) (Required)
+     * propB1: String (Optional)
+     * helper (Optional): {
+     * propBH1: String (Optional)
+     * }
      * }
      * }</pre>
      * 
@@ -117,11 +118,11 @@ public final class FlattencomplexesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String(Kind1) (Required)
-     *     propB1: String (Optional)
-     *     helper (Optional): {
-     *         propBH1: String (Optional)
-     *     }
+     * kind: String(Kind1) (Required)
+     * propB1: String (Optional)
+     * helper (Optional): {
+     * propBH1: String (Optional)
+     * }
      * }
      * }</pre>
      * 

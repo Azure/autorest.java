@@ -79,7 +79,8 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * The interface defining all the services for AzureContainerRegistryContainerRegistries to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AzureContainerRegistryContainerRegistries to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{url}")
     @ServiceInterface(name = "AzureContainerRegist")
@@ -441,11 +442,13 @@ public final class ContainerRegistriesImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param reference A tag or a digest, pointing to a specific image.
-     * @param accept Accept header string delimited by comma. For example, application/vnd.docker.distribution.manifest.v2+json.
+     * @param accept Accept header string delimited by comma. For example,
+     * application/vnd.docker.distribution.manifest.v2+json.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest along with {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getManifestWithResponseAsync(String name, String reference, String accept) {
@@ -458,12 +461,14 @@ public final class ContainerRegistriesImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param reference A tag or a digest, pointing to a specific image.
-     * @param accept Accept header string delimited by comma. For example, application/vnd.docker.distribution.manifest.v2+json.
+     * @param accept Accept header string delimited by comma. For example,
+     * application/vnd.docker.distribution.manifest.v2+json.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest along with {@link Response} on successful completion of {@link Mono}.
+     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getManifestWithResponseAsync(String name, String reference, String accept,
@@ -476,11 +481,13 @@ public final class ContainerRegistriesImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param reference A tag or a digest, pointing to a specific image.
-     * @param accept Accept header string delimited by comma. For example, application/vnd.docker.distribution.manifest.v2+json.
+     * @param accept Accept header string delimited by comma. For example,
+     * application/vnd.docker.distribution.manifest.v2+json.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest on successful completion of {@link Mono}.
+     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getManifestAsync(String name, String reference, String accept) {
@@ -492,12 +499,14 @@ public final class ContainerRegistriesImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param reference A tag or a digest, pointing to a specific image.
-     * @param accept Accept header string delimited by comma. For example, application/vnd.docker.distribution.manifest.v2+json.
+     * @param accept Accept header string delimited by comma. For example,
+     * application/vnd.docker.distribution.manifest.v2+json.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest on successful completion of {@link Mono}.
+     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<BinaryData> getManifestAsync(String name, String reference, String accept, Context context) {
@@ -510,12 +519,14 @@ public final class ContainerRegistriesImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param reference A tag or a digest, pointing to a specific image.
-     * @param accept Accept header string delimited by comma. For example, application/vnd.docker.distribution.manifest.v2+json.
+     * @param accept Accept header string delimited by comma. For example,
+     * application/vnd.docker.distribution.manifest.v2+json.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest along with {@link Response}.
+     * @return the manifest identified by `name` and `reference` where `reference` can be a tag or digest along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getManifestWithResponse(String name, String reference, String accept, Context context) {
@@ -527,7 +538,8 @@ public final class ContainerRegistriesImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param reference A tag or a digest, pointing to a specific image.
-     * @param accept Accept header string delimited by comma. For example, application/vnd.docker.distribution.manifest.v2+json.
+     * @param accept Accept header string delimited by comma. For example,
+     * application/vnd.docker.distribution.manifest.v2+json.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -748,7 +760,8 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
+     * `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -765,7 +778,8 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
+     * `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -782,7 +796,8 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
+     * `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -797,7 +812,8 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
+     * `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -813,7 +829,8 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
+     * `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -830,7 +847,8 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
+     * `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -846,7 +864,8 @@ public final class ContainerRegistriesImpl {
     /**
      * List repositories.
      * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -865,7 +884,8 @@ public final class ContainerRegistriesImpl {
     /**
      * List repositories.
      * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -882,7 +902,8 @@ public final class ContainerRegistriesImpl {
     /**
      * List repositories.
      * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -902,7 +923,8 @@ public final class ContainerRegistriesImpl {
     /**
      * List repositories.
      * 
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1205,7 +1227,8 @@ public final class ContainerRegistriesImpl {
      * List tags of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
@@ -1229,7 +1252,8 @@ public final class ContainerRegistriesImpl {
      * List tags of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
@@ -1250,7 +1274,8 @@ public final class ContainerRegistriesImpl {
      * List tags of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
@@ -1274,7 +1299,8 @@ public final class ContainerRegistriesImpl {
      * List tags of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param digest filter by digest.
@@ -1608,7 +1634,8 @@ public final class ContainerRegistriesImpl {
      * List manifests of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.
@@ -1631,7 +1658,8 @@ public final class ContainerRegistriesImpl {
      * List manifests of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.
@@ -1651,7 +1679,8 @@ public final class ContainerRegistriesImpl {
      * List manifests of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.
@@ -1674,7 +1703,8 @@ public final class ContainerRegistriesImpl {
      * List manifests of a repository.
      * 
      * @param name Name of the image (including the namespace).
-     * @param last Query parameter for the last item in previous query. Result set will include values lexically after last.
+     * @param last Query parameter for the last item in previous query. Result set will include values lexically after
+     * last.
      * @param n query parameter for max number of items.
      * @param orderBy orderby query parameter.
      * @param context The context to associate with this operation.

@@ -50,7 +50,8 @@ public final class DifferentBodiesImpl {
     }
 
     /**
-     * The interface defining all the services for ContentNegotiationClientDifferentBodies to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ContentNegotiationClientDifferentBodies to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ContentNegotiationCl")
@@ -137,7 +138,7 @@ public final class DifferentBodiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     content: byte[] (Required)
+     * content: byte[] (Required)
      * }
      * }</pre>
      * 
@@ -159,7 +160,7 @@ public final class DifferentBodiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     content: byte[] (Required)
+     * content: byte[] (Required)
      * }
      * }</pre>
      * 

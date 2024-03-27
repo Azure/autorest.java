@@ -52,7 +52,8 @@ public final class MixedLiteralsImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientMixedLiterals to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientMixedLiterals to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientMixedLite")
@@ -99,12 +100,12 @@ public final class MixedLiteralsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         stringLiteral: BinaryData (Required)
-     *         intLiteral: BinaryData (Required)
-     *         floatLiteral: BinaryData (Required)
-     *         booleanLiteral: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * stringLiteral: BinaryData (Required)
+     * intLiteral: BinaryData (Required)
+     * floatLiteral: BinaryData (Required)
+     * booleanLiteral: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -126,12 +127,12 @@ public final class MixedLiteralsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         stringLiteral: BinaryData (Required)
-     *         intLiteral: BinaryData (Required)
-     *         floatLiteral: BinaryData (Required)
-     *         booleanLiteral: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * stringLiteral: BinaryData (Required)
+     * intLiteral: BinaryData (Required)
+     * floatLiteral: BinaryData (Required)
+     * booleanLiteral: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -153,12 +154,12 @@ public final class MixedLiteralsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         stringLiteral: BinaryData (Required)
-     *         intLiteral: BinaryData (Required)
-     *         floatLiteral: BinaryData (Required)
-     *         booleanLiteral: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * stringLiteral: BinaryData (Required)
+     * intLiteral: BinaryData (Required)
+     * floatLiteral: BinaryData (Required)
+     * booleanLiteral: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -181,12 +182,12 @@ public final class MixedLiteralsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         stringLiteral: BinaryData (Required)
-     *         intLiteral: BinaryData (Required)
-     *         floatLiteral: BinaryData (Required)
-     *         booleanLiteral: BinaryData (Required)
-     *     }
+     * prop (Required): {
+     * stringLiteral: BinaryData (Required)
+     * intLiteral: BinaryData (Required)
+     * floatLiteral: BinaryData (Required)
+     * booleanLiteral: BinaryData (Required)
+     * }
      * }
      * }</pre>
      * 

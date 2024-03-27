@@ -68,7 +68,8 @@ public final class SubClass extends SuperClassMismatch {
      * Reads an instance of SubClass from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of SubClass if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of SubClass if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the SubClass.
      */
@@ -87,6 +88,7 @@ public final class SubClass extends SuperClassMismatch {
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
+
                 } else if ("dateTime".equals(fieldName)) {
                     dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else {

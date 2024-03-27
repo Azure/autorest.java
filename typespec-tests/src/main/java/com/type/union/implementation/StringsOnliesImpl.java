@@ -52,7 +52,8 @@ public final class StringsOnliesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientStringsOnlies to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientStringsOnlies to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientStringsOn")
@@ -99,7 +100,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     * prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 
@@ -121,7 +122,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     * prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 
@@ -143,7 +144,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     * prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 
@@ -166,7 +167,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: String(a/b/c) (Required)
+     * prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 

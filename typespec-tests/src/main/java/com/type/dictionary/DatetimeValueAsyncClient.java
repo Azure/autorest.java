@@ -45,7 +45,7 @@ public final class DatetimeValueAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: OffsetDateTime (Required)
+     * String: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -67,7 +67,7 @@ public final class DatetimeValueAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: OffsetDateTime (Required)
+     * String: OffsetDateTime (Required)
      * }
      * }</pre>
      * 

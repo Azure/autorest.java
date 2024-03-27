@@ -64,7 +64,8 @@ public final class AzureLocationScalarsImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientAzureLocationScalars to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ScalarClientAzureLocationScalars to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientAzureLoc")
@@ -247,13 +248,13 @@ public final class AzureLocationScalarsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     location: String (Required)
+     * location: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     location: String (Required)
+     * location: String (Required)
      * }
      * }</pre>
      * 
@@ -276,13 +277,13 @@ public final class AzureLocationScalarsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     location: String (Required)
+     * location: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     location: String (Required)
+     * location: String (Required)
      * }
      * }</pre>
      * 

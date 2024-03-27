@@ -11,6 +11,6 @@ public class XmlLineComment {
     }
 
     public final void line(String text) {
-        contents.line(text);
+        contents.line(text, true);
     }
 }

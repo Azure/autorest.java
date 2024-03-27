@@ -44,8 +44,8 @@ public final class SingleDiscriminatorAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -54,7 +54,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -67,8 +68,8 @@ public final class SingleDiscriminatorAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -91,8 +92,8 @@ public final class SingleDiscriminatorAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -101,7 +102,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -114,8 +116,8 @@ public final class SingleDiscriminatorAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -138,8 +140,8 @@ public final class SingleDiscriminatorAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -148,7 +150,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -161,8 +164,8 @@ public final class SingleDiscriminatorAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     wingspan: int (Required)
+     * kind: String (Required)
+     * wingspan: int (Required)
      * }
      * }</pre>
      * 
@@ -171,7 +174,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link
+     * Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -184,8 +188,8 @@ public final class SingleDiscriminatorAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     kind: String (Required)
-     *     size: int (Required)
+     * kind: String (Required)
+     * size: int (Required)
      * }
      * }</pre>
      * 
@@ -194,7 +198,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return define a base class in the legacy way along with {@link Response} on successful completion of {@link Mono}.
+     * @return define a base class in the legacy way along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -210,7 +215,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -249,7 +255,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -288,7 +295,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -307,7 +315,8 @@ public final class SingleDiscriminatorAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return this is base model for polymorphic single level inheritance with a discriminator on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

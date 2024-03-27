@@ -42,7 +42,7 @@ public final class Int64ValueClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: long (Required)
+     * String: long (Required)
      * }
      * }</pre>
      * 
@@ -64,7 +64,7 @@ public final class Int64ValueClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     String: long (Required)
+     * String: long (Required)
      * }
      * }</pre>
      * 

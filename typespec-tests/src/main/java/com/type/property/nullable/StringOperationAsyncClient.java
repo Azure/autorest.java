@@ -44,8 +44,8 @@ public final class StringOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: String (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -54,7 +54,8 @@ public final class StringOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return all properties in the model along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return all properties in the model along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -67,8 +68,8 @@ public final class StringOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: String (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -77,7 +78,8 @@ public final class StringOperationAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that will return the default object along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that will return the default object along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -90,12 +92,13 @@ public final class StringOperationAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: String (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -114,12 +117,13 @@ public final class StringOperationAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     requiredProperty: String (Optional, Required on create)
-     *     nullableProperty: String (Optional, Required on create)
+     * requiredProperty: String (Optional, Required on create)
+     * nullableProperty: String (Optional, Required on create)
      * }
      * }</pre>
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -174,7 +178,8 @@ public final class StringOperationAsyncClient {
     /**
      * Put a body with all properties present.
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -197,7 +202,8 @@ public final class StringOperationAsyncClient {
     /**
      * Put a body with default properties.
      * 
-     * @param body Template type for testing models with nullable property. Pass in the type of the property you are looking for.
+     * @param body Template type for testing models with nullable property. Pass in the type of the property you are
+     * looking for.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

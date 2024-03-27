@@ -50,7 +50,8 @@ public final class DecimalTypeAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a decimal number with any length and precision along with {@link Response} on successful completion of {@link Mono}.
+     * @return a decimal number with any length and precision along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

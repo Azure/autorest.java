@@ -52,7 +52,8 @@ public final class EnumsOnliesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientEnumsOnlies to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientEnumsOnlies to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientEnumsOnli")
@@ -99,10 +100,10 @@ public final class EnumsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         lr: String(left/right/up/down) (Required)
-     *         ud: String(up/down) (Required)
-     *     }
+     * prop (Required): {
+     * lr: String(left/right/up/down) (Required)
+     * ud: String(up/down) (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -124,10 +125,10 @@ public final class EnumsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         lr: String(left/right/up/down) (Required)
-     *         ud: String(up/down) (Required)
-     *     }
+     * prop (Required): {
+     * lr: String(left/right/up/down) (Required)
+     * ud: String(up/down) (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -149,10 +150,10 @@ public final class EnumsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         lr: String(left/right/up/down) (Required)
-     *         ud: String(up/down) (Required)
-     *     }
+     * prop (Required): {
+     * lr: String(left/right/up/down) (Required)
+     * ud: String(up/down) (Required)
+     * }
      * }
      * }</pre>
      * 
@@ -175,10 +176,10 @@ public final class EnumsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop (Required): {
-     *         lr: String(left/right/up/down) (Required)
-     *         ud: String(up/down) (Required)
-     *     }
+     * prop (Required): {
+     * lr: String(left/right/up/down) (Required)
+     * ud: String(up/down) (Required)
+     * }
      * }
      * }</pre>
      * 

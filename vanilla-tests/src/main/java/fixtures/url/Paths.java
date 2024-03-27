@@ -54,7 +54,8 @@ public final class Paths {
     }
 
     /**
-     * The interface defining all the services for AutoRestUrlTestServicePaths to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestUrlTestServicePaths to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestUrlTestServi")
@@ -679,7 +680,8 @@ public final class Paths {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
+     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
@@ -700,7 +702,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
+     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(Context context) {
@@ -1129,7 +1132,8 @@ public final class Paths {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
@@ -1150,7 +1154,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(Context context) {
@@ -1219,7 +1224,8 @@ public final class Paths {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
@@ -1240,7 +1246,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(Context context) {
@@ -1604,7 +1611,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of {@link Mono}.
+     * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumPath) {
@@ -1627,7 +1635,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of {@link Mono}.
+     * @return using uri with 'green color' in path parameter along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumValidWithResponseAsync(UriColor enumPath, Context context) {
@@ -1706,7 +1715,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on successful completion of {@link Mono}.
+     * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumPath) {
@@ -1729,7 +1739,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on successful completion of {@link Mono}.
+     * @return null (should throw on the client before the request is sent on wire) along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> enumNullWithResponseAsync(UriColor enumPath, Context context) {
@@ -1751,7 +1762,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null (should throw on the client before the request is sent on wire) on successful completion of {@link Mono}.
+     * @return null (should throw on the client before the request is sent on wire) on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumPath) {
@@ -1766,7 +1778,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null (should throw on the client before the request is sent on wire) on successful completion of {@link Mono}.
+     * @return null (should throw on the client before the request is sent on wire) on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> enumNullAsync(UriColor enumPath, Context context) {
@@ -1808,7 +1821,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful completion of {@link Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath) {
@@ -1833,7 +1847,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful completion of {@link Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multibyte value as utf-8 encoded byte array along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> byteMultiByteWithResponseAsync(byte[] bytePath, Context context) {
@@ -2199,7 +2214,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation along with {@link Response} on successful completion of {@link Mono}.
+     * @return null as date - this should throw or be unusable on the client side, depending on date representation
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate datePath) {
@@ -2222,7 +2238,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation along with {@link Response} on successful completion of {@link Mono}.
+     * @return null as date - this should throw or be unusable on the client side, depending on date representation
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate datePath, Context context) {
@@ -2244,7 +2261,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation on successful completion of {@link Mono}.
+     * @return null as date - this should throw or be unusable on the client side, depending on date representation on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate datePath) {
@@ -2259,7 +2277,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation on successful completion of {@link Mono}.
+     * @return null as date - this should throw or be unusable on the client side, depending on date representation on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate datePath, Context context) {
@@ -2274,7 +2293,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should throw or be unusable on the client side, depending on date representation along with {@link Response}.
+     * @return null as date - this should throw or be unusable on the client side, depending on date representation
+     * along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateNullWithResponse(LocalDate datePath, Context context) {
@@ -2299,7 +2319,8 @@ public final class Paths {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
+     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
@@ -2320,7 +2341,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
+     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link
+     * Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(Context context) {
@@ -2391,7 +2413,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with {@link Response} on successful completion of {@link Mono}.
+     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath) {
@@ -2415,7 +2438,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with {@link Response} on successful completion of {@link Mono}.
+     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeNullWithResponseAsync(OffsetDateTime dateTimePath, Context context) {
@@ -2437,7 +2461,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time on successful completion of {@link Mono}.
+     * @return null as date-time, should be disallowed or throw depending on representation of date-time on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimePath) {
@@ -2452,7 +2477,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time on successful completion of {@link Mono}.
+     * @return null as date-time, should be disallowed or throw depending on representation of date-time on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateTimeNullAsync(OffsetDateTime dateTimePath, Context context) {
@@ -2467,7 +2493,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with {@link Response}.
+     * @return null as date-time, should be disallowed or throw depending on representation of date-time along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> dateTimeNullWithResponse(OffsetDateTime dateTimePath, Context context) {
@@ -2494,7 +2521,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of {@link Mono}.
+     * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath) {
@@ -2519,7 +2547,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of {@link Mono}.
+     * @return 'lorem' encoded value as 'bG9yZW0' (base64url) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> base64UrlWithResponseAsync(byte[] base64UrlPath, Context context) {
@@ -2593,13 +2622,16 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath) {
@@ -2619,14 +2651,17 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayCsvInPathWithResponseAsync(List<String> arrayPath, Context context) {
@@ -2645,13 +2680,16 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayCsvInPathAsync(List<String> arrayPath) {
@@ -2659,14 +2697,17 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayCsvInPathAsync(List<String> arrayPath, Context context) {
@@ -2674,14 +2715,17 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format along with {@link Response}.
+     * @return an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayCsvInPathWithResponse(List<String> arrayPath, Context context) {
@@ -2689,9 +2733,11 @@ public final class Paths {
     }
 
     /**
-     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * Get an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format.
      * 
-     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array format.
+     * @param arrayPath an array of string ['ArrayPath1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2708,7 +2754,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful completion of {@link Mono}.
+     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(OffsetDateTime unixTimeUrlPath) {
@@ -2734,7 +2781,8 @@ public final class Paths {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful completion of {@link Mono}.
+     * @return the date 2016-04-13 encoded value as '1460505600' (Unix time) along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> unixTimeUrlWithResponseAsync(OffsetDateTime unixTimeUrlPath, Context context) {

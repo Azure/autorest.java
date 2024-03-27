@@ -50,7 +50,8 @@ public final class ErrorOpsImpl {
     }
 
     /**
-     * The interface defining all the services for ErrorModelClientErrorOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ErrorModelClientErrorOps to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ErrorModelClientErro")
@@ -79,19 +80,19 @@ public final class ErrorOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     error (Required): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
+     * name: String (Required)
+     * error (Required): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * innererror (Optional): {
+     * code: String (Optional)
+     * innererror (Optional): (recursive schema, see innererror above)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -114,19 +115,19 @@ public final class ErrorOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *     error (Required): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
+     * name: String (Required)
+     * error (Required): {
+     * code: String (Required)
+     * message: String (Required)
+     * target: String (Optional)
+     * details (Optional): [
+     * (recursive schema, see above)
+     * ]
+     * innererror (Optional): {
+     * code: String (Optional)
+     * innererror (Optional): (recursive schema, see innererror above)
+     * }
+     * }
      * }
      * }</pre>
      * 

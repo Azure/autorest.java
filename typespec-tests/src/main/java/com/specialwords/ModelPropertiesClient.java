@@ -41,7 +41,7 @@ public final class ModelPropertiesClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     SameAsModel: String (Required)
+     * SameAsModel: String (Required)
      * }
      * }</pre>
      * 

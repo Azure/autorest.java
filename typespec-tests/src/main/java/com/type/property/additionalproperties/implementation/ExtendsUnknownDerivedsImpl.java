@@ -52,7 +52,8 @@ public final class ExtendsUnknownDerivedsImpl {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientExtendsUnknownDeriveds to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientExtendsUnknownDeriveds to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AdditionalProperties")
@@ -99,12 +100,12 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
-     *     index: int (Required)
-     *     age: Double (Optional)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
+     * index: int (Required)
+     * age: Double (Optional)
      * }
      * }</pre>
      * 
@@ -126,12 +127,12 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
-     *     index: int (Required)
-     *     age: Double (Optional)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
+     * index: int (Required)
+     * age: Double (Optional)
      * }
      * }</pre>
      * 
@@ -153,12 +154,12 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
-     *     index: int (Required)
-     *     age: Double (Optional)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
+     * index: int (Required)
+     * age: Double (Optional)
      * }
      * }</pre>
      * 
@@ -181,12 +182,12 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
-     *     index: int (Required)
-     *     age: Double (Optional)
+     * name: String (Required)
+     * (Optional): {
+     * String: Object (Required)
+     * }
+     * index: int (Required)
+     * age: Double (Optional)
      * }
      * }</pre>
      * 

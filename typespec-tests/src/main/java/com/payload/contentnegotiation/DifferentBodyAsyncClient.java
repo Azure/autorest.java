@@ -63,7 +63,7 @@ public final class DifferentBodyAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     content: byte[] (Required)
+     * content: byte[] (Required)
      * }
      * }</pre>
      * 

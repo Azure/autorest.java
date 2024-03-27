@@ -52,7 +52,8 @@ public final class ExtendsModelsImpl {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientExtendsModels to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientExtendsModels to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AdditionalProperties")
@@ -99,11 +100,11 @@ public final class ExtendsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
+     * (Optional): {
+     * String (Required): {
+     * state: String (Required)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -125,11 +126,11 @@ public final class ExtendsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
+     * (Optional): {
+     * String (Required): {
+     * state: String (Required)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -151,11 +152,11 @@ public final class ExtendsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
+     * (Optional): {
+     * String (Required): {
+     * state: String (Required)
+     * }
+     * }
      * }
      * }</pre>
      * 
@@ -178,11 +179,11 @@ public final class ExtendsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
+     * (Optional): {
+     * String (Required): {
+     * state: String (Required)
+     * }
+     * }
      * }
      * }</pre>
      * 

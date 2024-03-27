@@ -42,7 +42,7 @@ public final class ModelsOnlyClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: BinaryData (Required)
+     * prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -64,7 +64,7 @@ public final class ModelsOnlyClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *     prop: BinaryData (Required)
+     * prop: BinaryData (Required)
      * }
      * }</pre>
      * 
