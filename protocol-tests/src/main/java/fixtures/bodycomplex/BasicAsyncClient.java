@@ -41,9 +41,9 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -66,9 +66,9 @@ public final class BasicAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -91,9 +91,9 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -116,9 +116,9 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -140,9 +140,9 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 
@@ -165,9 +165,9 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String(cyan/Magenta/YELLOW/blacK) (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
      * }</pre>
      * 

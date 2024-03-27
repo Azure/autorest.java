@@ -100,9 +100,9 @@ public final class ExtendsUnknownsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * }
      * }</pre>
@@ -125,9 +125,9 @@ public final class ExtendsUnknownsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * }
      * }</pre>
@@ -150,9 +150,9 @@ public final class ExtendsUnknownsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * }
      * }</pre>
@@ -176,9 +176,9 @@ public final class ExtendsUnknownsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * }
      * }</pre>

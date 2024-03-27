@@ -100,7 +100,7 @@ public final class ExtensibleEnumsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(ValueOne/ValueTwo) (Required)
+     *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class ExtensibleEnumsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(ValueOne/ValueTwo) (Required)
+     *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class ExtensibleEnumsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(ValueOne/ValueTwo) (Required)
+     *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class ExtensibleEnumsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(ValueOne/ValueTwo) (Required)
+     *     property: String(ValueOne/ValueTwo) (Required)
      * }
      * }</pre>
      * 

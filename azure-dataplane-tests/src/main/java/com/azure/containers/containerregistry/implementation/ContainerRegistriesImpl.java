@@ -760,8 +760,7 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
-     * `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -778,8 +777,7 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
-     * `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -796,8 +794,7 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
-     * `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -812,8 +809,7 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
-     * `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -829,8 +825,7 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
-     * `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.
@@ -847,8 +842,7 @@ public final class ContainerRegistriesImpl {
     }
 
     /**
-     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by
-     * `digest`.
+     * Delete the manifest identified by `name` and `reference`. Note that a manifest can _only_ be deleted by `digest`.
      * 
      * @param name Name of the image (including the namespace).
      * @param reference Digest of a BLOB.

@@ -41,7 +41,7 @@ public final class UnionStringLiteralClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(hello/world) (Required)
+     *     property: String(hello/world) (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class UnionStringLiteralClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(hello/world) (Required)
+     *     property: String(hello/world) (Required)
      * }
      * }</pre>
      * 

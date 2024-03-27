@@ -100,7 +100,7 @@ public final class ModelsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: BinaryData (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class ModelsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: BinaryData (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class ModelsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: BinaryData (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class ModelsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: BinaryData (Required)
+     *     prop: BinaryData (Required)
      * }
      * }</pre>
      * 

@@ -46,7 +46,7 @@ public final class AliasAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -69,7 +69,7 @@ public final class AliasAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -95,12 +95,12 @@ public final class AliasAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop1: String (Required)
-     * prop2: String (Required)
-     * prop3: String (Required)
-     * prop4: String (Required)
-     * prop5: String (Required)
-     * prop6: String (Required)
+     *     prop1: String (Required)
+     *     prop2: String (Required)
+     *     prop3: String (Required)
+     *     prop4: String (Required)
+     *     prop5: String (Required)
+     *     prop6: String (Required)
      * }
      * }</pre>
      * 

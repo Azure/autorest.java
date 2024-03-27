@@ -100,7 +100,7 @@ public final class UnknownIntsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Object (Required)
+     *     property: Object (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class UnknownIntsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Object (Required)
+     *     property: Object (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class UnknownIntsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Object (Required)
+     *     property: Object (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class UnknownIntsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Object (Required)
+     *     property: Object (Required)
      * }
      * }</pre>
      * 

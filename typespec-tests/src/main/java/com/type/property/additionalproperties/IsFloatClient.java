@@ -41,9 +41,9 @@ public final class IsFloatClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: double (Required)
-     * (Optional): {
-     * String: double (Required)
+     *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
      * }
      * }
      * }</pre>
@@ -66,9 +66,9 @@ public final class IsFloatClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: double (Required)
-     * (Optional): {
-     * String: double (Required)
+     *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
      * }
      * }
      * }</pre>

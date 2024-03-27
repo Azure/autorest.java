@@ -143,7 +143,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -190,7 +190,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -215,7 +215,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -238,7 +238,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -263,7 +263,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -286,7 +286,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -311,7 +311,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 

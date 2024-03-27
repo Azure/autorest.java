@@ -41,34 +41,34 @@ public final class RequiredOptionalBodyAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -102,34 +102,34 @@ public final class RequiredOptionalBodyAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>

@@ -43,7 +43,7 @@ public final class DecimalAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: BigDecimal (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class DecimalAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: BigDecimal (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 

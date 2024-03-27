@@ -43,7 +43,7 @@ public final class FloatLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(1.25) (Optional)
+     *     property: String(1.25) (Optional)
      * }
      * }</pre>
      * 
@@ -66,7 +66,7 @@ public final class FloatLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(1.25) (Optional)
+     *     property: String(1.25) (Optional)
      * }
      * }</pre>
      * 
@@ -89,7 +89,7 @@ public final class FloatLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(1.25) (Optional)
+     *     property: String(1.25) (Optional)
      * }
      * }</pre>
      * 
@@ -112,7 +112,7 @@ public final class FloatLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(1.25) (Optional)
+     *     property: String(1.25) (Optional)
      * }
      * }</pre>
      * 

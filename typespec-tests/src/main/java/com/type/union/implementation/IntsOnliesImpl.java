@@ -52,8 +52,8 @@ public final class IntsOnliesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientIntsOnlies to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for UnionClientIntsOnlies to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientIntsOnlie")
@@ -100,7 +100,7 @@ public final class IntsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1/2/3) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class IntsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1/2/3) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class IntsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1/2/3) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class IntsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1/2/3) (Required)
+     *     prop: String(1/2/3) (Required)
      * }
      * }</pre>
      * 

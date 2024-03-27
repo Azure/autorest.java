@@ -197,7 +197,6 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
                     if (rfc1123NonRequiredHolder != null) {
                         rfc1123NonRequired = rfc1123NonRequiredHolder.getDateTime();
                     }
-
                 } else if ("rfc1123RequiredChild".equals(fieldName)) {
                     DateTimeRfc1123 rfc1123RequiredChildHolder
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));

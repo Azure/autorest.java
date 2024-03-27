@@ -43,9 +43,9 @@ public final class CollectionsStringAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): [
-     * String (Required)
-     * ]
+     *     property (Required): [
+     *         String (Required)
+     *     ]
      * }
      * }</pre>
      * 
@@ -67,9 +67,9 @@ public final class CollectionsStringAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): [
-     * String (Required)
-     * ]
+     *     property (Required): [
+     *         String (Required)
+     *     ]
      * }
      * }</pre>
      * 

@@ -113,8 +113,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * size: Integer (Optional)
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -138,8 +138,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * size: Integer (Optional)
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -161,8 +161,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * size: Integer (Optional)
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      * 
@@ -186,8 +186,8 @@ public final class ReadonlypropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * size: Integer (Optional)
+     *     id: String (Optional)
+     *     size: Integer (Optional)
      * }
      * }</pre>
      * 

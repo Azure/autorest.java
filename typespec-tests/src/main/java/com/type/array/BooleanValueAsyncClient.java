@@ -44,7 +44,7 @@ public final class BooleanValueAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * boolean (Required)
+     *     boolean (Required)
      * ]
      * }</pre>
      * 
@@ -66,7 +66,7 @@ public final class BooleanValueAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * boolean (Required)
+     *     boolean (Required)
      * ]
      * }</pre>
      * 

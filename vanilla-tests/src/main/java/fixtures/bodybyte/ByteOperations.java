@@ -458,8 +458,7 @@ public final class ByteOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getInvalidWithResponseAsync() {
@@ -478,8 +477,7 @@ public final class ByteOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return invalid byte value ':::SWAGGER::::' along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<byte[]>> getInvalidWithResponseAsync(Context context) {

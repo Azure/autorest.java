@@ -100,11 +100,11 @@ public final class ModelValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * property: String (Required)
-     * children (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *      (Required){
+     *         property: String (Required)
+     *         children (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * ]
      * }</pre>
@@ -127,11 +127,11 @@ public final class ModelValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * property: String (Required)
-     * children (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *      (Required){
+     *         property: String (Required)
+     *         children (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * ]
      * }</pre>
@@ -154,11 +154,11 @@ public final class ModelValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * property: String (Required)
-     * children (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *      (Required){
+     *         property: String (Required)
+     *         children (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * ]
      * }</pre>
@@ -182,11 +182,11 @@ public final class ModelValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * property: String (Required)
-     * children (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *      (Required){
+     *         property: String (Required)
+     *         children (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * ]
      * }</pre>

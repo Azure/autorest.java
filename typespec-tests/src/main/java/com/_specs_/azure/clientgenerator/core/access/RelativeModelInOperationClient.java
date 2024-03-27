@@ -52,9 +52,9 @@ public final class RelativeModelInOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * inner (Required): {
-     * name: String (Required)
+     *     name: String (Required)
+     *     inner (Required): {
+     *         name: String (Required)
      * }
      * }
      * }</pre>
@@ -85,8 +85,8 @@ public final class RelativeModelInOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * name: String (Required)
+     *     kind: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 

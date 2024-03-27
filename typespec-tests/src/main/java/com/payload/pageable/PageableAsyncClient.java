@@ -52,7 +52,7 @@ public final class PageableAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 

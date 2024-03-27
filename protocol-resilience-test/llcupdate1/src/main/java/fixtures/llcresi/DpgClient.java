@@ -94,7 +94,7 @@ public final class DpgClient {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional
+     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">

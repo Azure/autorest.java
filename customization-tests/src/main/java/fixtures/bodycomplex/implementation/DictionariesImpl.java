@@ -99,8 +99,8 @@ public final class DictionariesImpl {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return complex types with dictionary property along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync() {
@@ -115,8 +115,8 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return complex types with dictionary property along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync(Context context) {
@@ -445,8 +445,8 @@ public final class DictionariesImpl {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is null along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return complex types with dictionary property which is null along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync() {
@@ -461,8 +461,8 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property which is null along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return complex types with dictionary property which is null along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync(Context context) {
@@ -527,8 +527,8 @@ public final class DictionariesImpl {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
@@ -543,8 +543,8 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync(Context context) {
@@ -587,8 +587,8 @@ public final class DictionariesImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with dictionary property while server doesn't provide a response payload along with {@link
-     * Response}.
+     * @return complex types with dictionary property while server doesn't provide a response payload along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getNotProvidedWithResponse(Context context) {

@@ -44,7 +44,7 @@ public final class Int64ValueAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: long (Required)
+     *     String: long (Required)
      * }
      * }</pre>
      * 
@@ -66,7 +66,7 @@ public final class Int64ValueAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: long (Required)
+     *     String: long (Required)
      * }
      * }</pre>
      * 

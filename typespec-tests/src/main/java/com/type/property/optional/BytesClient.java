@@ -41,7 +41,7 @@ public final class BytesClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class BytesClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -85,7 +85,7 @@ public final class BytesClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -109,7 +109,7 @@ public final class BytesClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 

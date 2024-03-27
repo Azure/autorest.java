@@ -46,10 +46,10 @@ public final class RepeatabilityHeadersAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -81,19 +81,19 @@ public final class RepeatabilityHeadersAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -126,10 +126,10 @@ public final class RepeatabilityHeadersAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -161,19 +161,19 @@ public final class RepeatabilityHeadersAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 

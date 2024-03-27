@@ -139,8 +139,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -163,8 +163,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -186,8 +186,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -210,8 +210,8 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -233,8 +233,8 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -260,8 +260,8 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -286,8 +286,8 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -312,8 +312,8 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty: byte[] (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty: byte[] (Optional, Required on create)
      * }
      * }</pre>
      * 

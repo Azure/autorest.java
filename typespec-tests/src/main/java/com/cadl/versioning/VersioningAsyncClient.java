@@ -58,15 +58,15 @@ public final class VersioningAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -99,9 +99,9 @@ public final class VersioningAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 

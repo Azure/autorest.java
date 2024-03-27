@@ -43,7 +43,7 @@ public final class BooleanLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(true) (Optional)
+     *     property: String(true) (Optional)
      * }
      * }</pre>
      * 
@@ -66,7 +66,7 @@ public final class BooleanLiteralAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(true) (Optional)
+     *     property: String(true) (Optional)
      * }
      * }</pre>
      * 
@@ -89,7 +89,7 @@ public final class BooleanLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(true) (Optional)
+     *     property: String(true) (Optional)
      * }
      * }</pre>
      * 
@@ -112,7 +112,7 @@ public final class BooleanLiteralAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(true) (Optional)
+     *     property: String(true) (Optional)
      * }
      * }</pre>
      * 

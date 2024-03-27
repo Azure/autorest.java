@@ -248,8 +248,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -276,8 +276,8 @@ public final class MultipleContentTypesOnRequestsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 

@@ -168,9 +168,9 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -193,9 +193,9 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -217,9 +217,9 @@ public final class ArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -244,9 +244,9 @@ public final class ArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -270,9 +270,9 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -296,9 +296,9 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -320,9 +320,9 @@ public final class ArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -346,9 +346,9 @@ public final class ArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -371,9 +371,9 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -382,8 +382,8 @@ public final class ArraysImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotProvidedWithResponseAsync(RequestOptions requestOptions) {
@@ -397,9 +397,9 @@ public final class ArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * array (Optional): [
-     * String (Optional)
-     * ]
+     *     array (Optional): [
+     *         String (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -408,8 +408,8 @@ public final class ArraysImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     * Response}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotProvidedWithResponse(RequestOptions requestOptions) {

@@ -102,7 +102,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -125,7 +125,7 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -148,7 +148,7 @@ public final class PropertiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -170,7 +170,7 @@ public final class PropertiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * wireName: boolean (Required)
+     *     wireName: boolean (Required)
      * }
      * }</pre>
      * 

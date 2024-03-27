@@ -83,7 +83,6 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
-
                 } else {
                     reader.skipChildren();
                 }

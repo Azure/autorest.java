@@ -51,8 +51,8 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for BytesClientProperties to be used by the proxy service to perform
-     * REST calls.
+     * The interface defining all the services for BytesClientProperties to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BytesClientPropertie")
@@ -135,13 +135,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * 
@@ -164,13 +164,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * 
@@ -193,13 +193,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * 
@@ -222,13 +222,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: byte[] (Required)
+     *     value: byte[] (Required)
      * }
      * }</pre>
      * 
@@ -251,13 +251,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Base64Url (Required)
+     *     value: Base64Url (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Base64Url (Required)
+     *     value: Base64Url (Required)
      * }
      * }</pre>
      * 
@@ -280,13 +280,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Base64Url (Required)
+     *     value: Base64Url (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Base64Url (Required)
+     *     value: Base64Url (Required)
      * }
      * }</pre>
      * 
@@ -309,17 +309,17 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * Base64Url (Required)
-     * ]
+     *     value (Required): [
+     *         Base64Url (Required)
+     *     ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * Base64Url (Required)
-     * ]
+     *     value (Required): [
+     *         Base64Url (Required)
+     *     ]
      * }
      * }</pre>
      * 
@@ -342,17 +342,17 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * Base64Url (Required)
-     * ]
+     *     value (Required): [
+     *         Base64Url (Required)
+     *     ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * Base64Url (Required)
-     * ]
+     *     value (Required): [
+     *         Base64Url (Required)
+     *     ]
      * }
      * }</pre>
      * 

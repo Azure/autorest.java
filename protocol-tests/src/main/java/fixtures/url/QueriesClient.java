@@ -386,8 +386,8 @@ public final class QueriesClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color",
-     * "green color", "blue color".</td></tr>
+     * <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green
+     * color", "blue color".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -552,8 +552,7 @@ public final class QueriesClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query
-     * parameters)</td></tr>
+     * <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -588,8 +587,8 @@ public final class QueriesClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -688,8 +687,8 @@ public final class QueriesClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -715,8 +714,8 @@ public final class QueriesClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

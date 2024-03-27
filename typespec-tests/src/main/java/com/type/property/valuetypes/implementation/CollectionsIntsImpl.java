@@ -100,9 +100,9 @@ public final class CollectionsIntsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): [
-     * int (Required)
-     * ]
+     *     property (Required): [
+     *         int (Required)
+     *     ]
      * }
      * }</pre>
      * 
@@ -124,9 +124,9 @@ public final class CollectionsIntsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): [
-     * int (Required)
-     * ]
+     *     property (Required): [
+     *         int (Required)
+     *     ]
      * }
      * }</pre>
      * 
@@ -148,9 +148,9 @@ public final class CollectionsIntsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): [
-     * int (Required)
-     * ]
+     *     property (Required): [
+     *         int (Required)
+     *     ]
      * }
      * }</pre>
      * 
@@ -173,9 +173,9 @@ public final class CollectionsIntsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): [
-     * int (Required)
-     * ]
+     *     property (Required): [
+     *         int (Required)
+     *     ]
      * }
      * }</pre>
      * 

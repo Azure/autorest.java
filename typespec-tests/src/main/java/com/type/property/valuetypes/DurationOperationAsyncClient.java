@@ -43,7 +43,7 @@ public final class DurationOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Required)
+     *     property: Duration (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class DurationOperationAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Required)
+     *     property: Duration (Required)
      * }
      * }</pre>
      * 

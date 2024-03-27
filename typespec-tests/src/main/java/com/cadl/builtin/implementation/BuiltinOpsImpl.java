@@ -122,23 +122,23 @@ public final class BuiltinOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * boolean: boolean (Required)
-     * string: String (Required)
-     * bytes: byte[] (Required)
-     * int: int (Required)
-     * safeint: long (Required)
-     * decimal: BigDecimal (Required)
-     * long: long (Required)
-     * float: double (Required)
-     * double: double (Required)
-     * duration: Duration (Required)
-     * date: LocalDate (Required)
-     * dateTime: OffsetDateTime (Required)
-     * stringList (Required): [
-     * String (Required)
-     * ]
-     * bytesDict (Required): {
-     * String: byte[] (Required)
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     decimal: BigDecimal (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     date: LocalDate (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
      * }
      * url: String (Required)
      * nullableFloatDict (Required): {
@@ -196,23 +196,23 @@ public final class BuiltinOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * boolean: boolean (Required)
-     * string: String (Required)
-     * bytes: byte[] (Required)
-     * int: int (Required)
-     * safeint: long (Required)
-     * decimal: BigDecimal (Required)
-     * long: long (Required)
-     * float: double (Required)
-     * double: double (Required)
-     * duration: Duration (Required)
-     * date: LocalDate (Required)
-     * dateTime: OffsetDateTime (Required)
-     * stringList (Required): [
-     * String (Required)
-     * ]
-     * bytesDict (Required): {
-     * String: byte[] (Required)
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     decimal: BigDecimal (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     date: LocalDate (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
      * }
      * url: String (Required)
      * nullableFloatDict (Required): {
@@ -252,23 +252,23 @@ public final class BuiltinOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * boolean: boolean (Required)
-     * string: String (Required)
-     * bytes: byte[] (Required)
-     * int: int (Required)
-     * safeint: long (Required)
-     * decimal: BigDecimal (Required)
-     * long: long (Required)
-     * float: double (Required)
-     * double: double (Required)
-     * duration: Duration (Required)
-     * date: LocalDate (Required)
-     * dateTime: OffsetDateTime (Required)
-     * stringList (Required): [
-     * String (Required)
-     * ]
-     * bytesDict (Required): {
-     * String: byte[] (Required)
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     decimal: BigDecimal (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     date: LocalDate (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
      * }
      * url: String (Required)
      * nullableFloatDict (Required): {
@@ -306,23 +306,23 @@ public final class BuiltinOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * boolean: boolean (Required)
-     * string: String (Required)
-     * bytes: byte[] (Required)
-     * int: int (Required)
-     * safeint: long (Required)
-     * decimal: BigDecimal (Required)
-     * long: long (Required)
-     * float: double (Required)
-     * double: double (Required)
-     * duration: Duration (Required)
-     * date: LocalDate (Required)
-     * dateTime: OffsetDateTime (Required)
-     * stringList (Required): [
-     * String (Required)
-     * ]
-     * bytesDict (Required): {
-     * String: byte[] (Required)
+     *     boolean: boolean (Required)
+     *     string: String (Required)
+     *     bytes: byte[] (Required)
+     *     int: int (Required)
+     *     safeint: long (Required)
+     *     decimal: BigDecimal (Required)
+     *     long: long (Required)
+     *     float: double (Required)
+     *     double: double (Required)
+     *     duration: Duration (Required)
+     *     date: LocalDate (Required)
+     *     dateTime: OffsetDateTime (Required)
+     *     stringList (Required): [
+     *         String (Required)
+     *     ]
+     *     bytesDict (Required): {
+     *         String: byte[] (Required)
      * }
      * url: String (Required)
      * nullableFloatDict (Required): {

@@ -99,7 +99,7 @@ public final class IntsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: int (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 
@@ -121,7 +121,7 @@ public final class IntsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: int (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 
@@ -143,7 +143,7 @@ public final class IntsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: int (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 
@@ -166,7 +166,7 @@ public final class IntsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: int (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 

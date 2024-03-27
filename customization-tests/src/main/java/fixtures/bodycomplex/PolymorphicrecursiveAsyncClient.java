@@ -51,8 +51,8 @@ public final class PolymorphicrecursiveAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references on successful completion of {@link
-     * Mono}.
+     * @return complex types that are polymorphic and have recursive references on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

@@ -17,8 +17,7 @@ import fixtures.constants.AutoRestSwaggerConstantServiceVersion;
  */
 public final class AutoRestSwaggerConstantServiceClientImpl {
     /**
-     * Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
      */
     private final boolean headerConstant;
 

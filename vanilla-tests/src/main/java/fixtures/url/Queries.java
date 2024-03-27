@@ -763,8 +763,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null integer value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(Integer intQuery) {
@@ -784,8 +784,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null integer value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(Integer intQuery, Context context) {
@@ -974,8 +974,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync() {
@@ -996,8 +995,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(Context context) {
@@ -1371,8 +1369,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(Float floatQuery) {
@@ -1392,8 +1390,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(Float floatQuery, Context context) {
@@ -1674,8 +1672,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(Double doubleQuery) {
@@ -1695,8 +1693,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(Double doubleQuery, Context context) {
@@ -1795,8 +1793,8 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync() {
@@ -1817,8 +1815,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(Context context) {
@@ -1887,8 +1885,8 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync() {
@@ -1909,8 +1907,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(Context context) {
@@ -2869,8 +2867,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should result in no query parameters in uri along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate dateQuery) {
@@ -2890,8 +2888,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should result in no query parameters in uri along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(LocalDate dateQuery, Context context) {
@@ -2910,8 +2908,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should result in no query parameters in uri on successful completion of {@link
-     * Mono}.
+     * @return null as date - this should result in no query parameters in uri on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate dateQuery) {
@@ -2923,8 +2920,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should result in no query parameters in uri on successful completion of {@link
-     * Mono}.
+     * @return null as date - this should result in no query parameters in uri on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync() {
@@ -2940,8 +2936,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return null as date - this should result in no query parameters in uri on successful completion of {@link
-     * Mono}.
+     * @return null as date - this should result in no query parameters in uri on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> dateNullAsync(LocalDate dateQuery, Context context) {
@@ -2993,8 +2988,7 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync() {
@@ -3015,8 +3009,7 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(Context context) {
@@ -3208,13 +3201,13 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the csv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(List<String> arrayQuery) {
@@ -3236,14 +3229,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the csv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(List<String> arrayQuery, Context context) {
@@ -3264,13 +3257,13 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the csv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery) {
@@ -3283,8 +3276,8 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync() {
@@ -3296,14 +3289,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the csv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringCsvValidAsync(List<String> arrayQuery, Context context) {
@@ -3314,14 +3307,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the csv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(List<String> arrayQuery, Context context) {
@@ -3332,8 +3325,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the csv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * csv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3363,8 +3356,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a null array of string using the csv-array format along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(List<String> arrayQuery) {
@@ -3390,8 +3383,8 @@ public final class Queries {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a null array of string using the csv-array format along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(List<String> arrayQuery, Context context) {
@@ -3770,13 +3763,13 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the ssv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(List<String> arrayQuery) {
@@ -3798,14 +3791,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the ssv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * ssv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(List<String> arrayQuery, Context context) {
@@ -3826,13 +3819,13 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the ssv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery) {
@@ -3845,8 +3838,8 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync() {
@@ -3858,14 +3851,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the ssv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * ssv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringSsvValidAsync(List<String> arrayQuery, Context context) {
@@ -3876,14 +3869,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the ssv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * ssv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(List<String> arrayQuery, Context context) {
@@ -3894,8 +3887,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the ssv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * ssv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3922,13 +3915,13 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the tsv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(List<String> arrayQuery) {
@@ -3950,14 +3943,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the tsv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * tsv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(List<String> arrayQuery, Context context) {
@@ -3978,13 +3971,13 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the tsv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery) {
@@ -3997,8 +3990,8 @@ public final class Queries {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync() {
@@ -4010,14 +4003,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the tsv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * tsv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> arrayStringTsvValidAsync(List<String> arrayQuery, Context context) {
@@ -4028,14 +4021,14 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the tsv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * tsv-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(List<String> arrayQuery, Context context) {
@@ -4046,8 +4039,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the tsv-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * tsv-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4074,8 +4067,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the pipes-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4102,8 +4095,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the pipes-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * pipes-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -4130,8 +4123,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the pipes-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4162,8 +4155,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the pipes-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * pipes-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -4180,8 +4173,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the pipes-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * pipes-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -4198,8 +4191,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the pipes-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the pipes-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * pipes-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

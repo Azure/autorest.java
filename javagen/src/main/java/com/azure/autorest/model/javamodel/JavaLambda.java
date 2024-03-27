@@ -7,7 +7,7 @@ import java.io.Closeable;
 import java.util.function.Consumer;
 
 public class JavaLambda implements Closeable {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
     private boolean isFirstStatement;
     private boolean needsClosingCurlyBracket;
 

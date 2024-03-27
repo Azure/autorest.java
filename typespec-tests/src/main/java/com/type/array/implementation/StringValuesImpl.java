@@ -100,7 +100,7 @@ public final class StringValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * String (Required)
+     *     String (Required)
      * ]
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class StringValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * String (Required)
+     *     String (Required)
      * ]
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class StringValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * String (Required)
+     *     String (Required)
      * ]
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class StringValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * String (Required)
+     *     String (Required)
      * ]
      * }</pre>
      * 

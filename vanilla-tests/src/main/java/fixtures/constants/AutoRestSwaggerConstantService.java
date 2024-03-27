@@ -16,8 +16,7 @@ import com.azure.core.util.serializer.SerializerAdapter;
  */
 public final class AutoRestSwaggerConstantService {
     /**
-     * Constant header property on the client that is a required parameter for operation
-     * 'constants_putClientConstants'.
+     * Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
      */
     private final boolean headerConstant;
 

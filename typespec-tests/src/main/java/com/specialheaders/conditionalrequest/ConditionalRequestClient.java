@@ -65,8 +65,8 @@ public final class ConditionalRequestClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches
-     * this string.</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
+     * string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 

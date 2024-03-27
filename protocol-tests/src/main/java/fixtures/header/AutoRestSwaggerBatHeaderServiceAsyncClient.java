@@ -106,8 +106,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value":
-     * -2.
+     * Send a post request with header values "scenario": "positive", "value": 1 or "scenario": "negative", "value": -2.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 1 or -2.
@@ -217,8 +216,8 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative",
-     * "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -296,8 +295,8 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox
-     * jumps over the lazy dog" or null or ""</td></tr>
+     * <tr><td>value</td><td>String</td><td>No</td><td>Send a post request with header values "The quick brown fox jumps
+     * over the lazy dog" or null or ""</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
@@ -371,8 +370,8 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario":
-     * "min", "value": "0001-01-01T00:00:00Z".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -399,8 +398,8 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -526,8 +525,7 @@ public final class AutoRestSwaggerBatHeaderServiceAsyncClient {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value":
-     * null.
+     * Send a post request with header values "scenario": "valid", "value": "GREY" or "scenario": "null", "value": null.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>

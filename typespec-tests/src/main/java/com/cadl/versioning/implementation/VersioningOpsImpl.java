@@ -158,15 +158,15 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -200,15 +200,15 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -241,15 +241,15 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -288,15 +288,15 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -335,15 +335,15 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -384,15 +384,15 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -434,9 +434,9 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -445,8 +445,8 @@ public final class VersioningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
@@ -472,9 +472,9 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -508,9 +508,9 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -544,9 +544,9 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -571,9 +571,9 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -585,8 +585,8 @@ public final class VersioningOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of Resource items along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
@@ -603,9 +603,9 @@ public final class VersioningOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 

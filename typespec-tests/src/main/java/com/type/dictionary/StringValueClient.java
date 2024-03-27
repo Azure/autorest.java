@@ -42,7 +42,7 @@ public final class StringValueClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: String (Required)
+     *     String: String (Required)
      * }
      * }</pre>
      * 
@@ -64,7 +64,7 @@ public final class StringValueClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: String (Required)
+     *     String: String (Required)
      * }
      * }</pre>
      * 

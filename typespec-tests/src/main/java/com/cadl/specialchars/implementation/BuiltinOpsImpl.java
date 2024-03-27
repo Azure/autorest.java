@@ -82,17 +82,17 @@ public final class BuiltinOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
+     *     id: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * aggregate: String (Optional)
-     * condition: String (Optional)
-     * requestName: String (Optional)
-     * value: Double (Optional)
+     *     id: String (Required)
+     *     aggregate: String (Optional)
+     *     condition: String (Optional)
+     *     requestName: String (Optional)
+     *     value: Double (Optional)
      * }
      * }</pre>
      * 
@@ -116,17 +116,17 @@ public final class BuiltinOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
+     *     id: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * aggregate: String (Optional)
-     * condition: String (Optional)
-     * requestName: String (Optional)
-     * value: Double (Optional)
+     *     id: String (Required)
+     *     aggregate: String (Optional)
+     *     condition: String (Optional)
+     *     requestName: String (Optional)
+     *     value: Double (Optional)
      * }
      * }</pre>
      * 

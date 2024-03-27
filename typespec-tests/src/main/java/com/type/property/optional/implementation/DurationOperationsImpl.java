@@ -136,7 +136,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -159,7 +159,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -181,7 +181,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -204,7 +204,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -226,7 +226,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -249,7 +249,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -272,7 +272,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -295,7 +295,7 @@ public final class DurationOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 

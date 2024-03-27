@@ -100,8 +100,8 @@ public final class DictionaryStringsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * String: String (Required)
+     *     property (Required): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -124,8 +124,8 @@ public final class DictionaryStringsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * String: String (Required)
+     *     property (Required): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -148,8 +148,8 @@ public final class DictionaryStringsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * String: String (Required)
+     *     property (Required): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -173,8 +173,8 @@ public final class DictionaryStringsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * String: String (Required)
+     *     property (Required): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>

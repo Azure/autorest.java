@@ -126,13 +126,13 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -154,13 +154,13 @@ public final class PatchesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -202,13 +202,13 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -230,13 +230,13 @@ public final class PatchesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -277,13 +277,13 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -305,13 +305,13 @@ public final class PatchesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -357,13 +357,13 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -385,13 +385,13 @@ public final class PatchesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional, Required on create): {
-     * String (Required): {
-     * name: String (Optional, Required on create)
-     * description: String (Optional)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional, Required on create): {
+     *         String (Required): {
+     *             name: String (Optional, Required on create)
+     *             description: String (Optional)
      * }
      * }
      * longValue: Long (Optional)
@@ -437,21 +437,21 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
+     *     kind: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Optional, Required on create)
+     *     color: String (Optional)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
+     *     kind: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Optional, Required on create)
+     *     color: String (Optional)
      * }
      * }</pre>
      * 
@@ -461,8 +461,8 @@ public final class PatchesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> createOrUpdateFishWithResponseAsync(BinaryData fish,
@@ -478,21 +478,21 @@ public final class PatchesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
+     *     kind: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Optional, Required on create)
+     *     color: String (Optional)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
+     *     kind: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     age: int (Optional, Required on create)
+     *     color: String (Optional)
      * }
      * }</pre>
      * 
@@ -502,8 +502,8 @@ public final class PatchesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with {@link
-     * Response}.
+     * @return this is base model for polymorphic multiple levels inheritance with a discriminator along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> createOrUpdateFishWithResponse(BinaryData fish, RequestOptions requestOptions) {

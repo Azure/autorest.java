@@ -436,8 +436,8 @@ public final class ArraysImpl {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getNotProvidedWithResponseAsync() {
@@ -452,8 +452,8 @@ public final class ArraysImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ArrayWrapper>> getNotProvidedWithResponseAsync(Context context) {
@@ -496,8 +496,8 @@ public final class ArraysImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     * Response}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ArrayWrapper> getNotProvidedWithResponse(Context context) {

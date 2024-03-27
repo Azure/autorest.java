@@ -79,7 +79,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -99,7 +99,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -120,7 +120,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -132,7 +132,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -146,7 +146,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -160,7 +160,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -171,7 +171,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
      * parameter.
@@ -193,7 +193,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
      * parameter.
@@ -215,7 +215,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
      * parameter.
@@ -230,7 +230,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -243,7 +243,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
      * parameter.
@@ -259,7 +259,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
      * parameter.
@@ -275,7 +275,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @param apiVersion This should appear as a method parameter, use value null, this should result in no serialized
      * parameter.
@@ -289,7 +289,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = null to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = null to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -301,7 +301,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -321,7 +321,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -342,7 +342,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -354,7 +354,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -368,7 +368,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -382,7 +382,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -393,7 +393,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -413,7 +413,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -434,7 +434,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -446,7 +446,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -460,7 +460,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -474,7 +474,7 @@ public final class ApiVersionLocals {
     }
 
     /**
-     * Get method with api-version modeled in the method.  pass in api-version = '2.0' to succeed.
+     * Get method with api-version modeled in the method. pass in api-version = '2.0' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

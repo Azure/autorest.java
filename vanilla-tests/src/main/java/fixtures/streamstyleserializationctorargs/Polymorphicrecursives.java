@@ -124,8 +124,8 @@ public final class Polymorphicrecursives {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references on successful completion of {@link
-     * Mono}.
+     * @return complex types that are polymorphic and have recursive references on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync() {
@@ -139,8 +139,8 @@ public final class Polymorphicrecursives {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic and have recursive references on successful completion of {@link
-     * Mono}.
+     * @return complex types that are polymorphic and have recursive references on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Fish> getValidAsync(Context context) {

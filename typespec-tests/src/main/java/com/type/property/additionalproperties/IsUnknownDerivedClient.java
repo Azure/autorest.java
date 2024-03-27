@@ -41,9 +41,9 @@ public final class IsUnknownDerivedClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * index: int (Required)
      * age: Double (Optional)
@@ -68,9 +68,9 @@ public final class IsUnknownDerivedClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * index: int (Required)
      * age: Double (Optional)

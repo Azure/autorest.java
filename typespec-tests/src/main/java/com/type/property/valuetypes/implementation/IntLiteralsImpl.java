@@ -100,7 +100,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: long (Required)
+     *     property: long (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: long (Required)
+     *     property: long (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: long (Required)
+     *     property: long (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class IntLiteralsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: long (Required)
+     *     property: long (Required)
      * }
      * }</pre>
      * 

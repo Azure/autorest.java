@@ -52,15 +52,15 @@ public final class LiteralServiceAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * literal: String (Required)
-     * optionalLiteral: String(optionalLiteral) (Optional)
+     *     literal: String (Required)
+     *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * literal: String (Required)
-     * optionalLiteral: String(optionalLiteral) (Optional)
+     *     literal: String (Required)
+     *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
      * }</pre>
      * 

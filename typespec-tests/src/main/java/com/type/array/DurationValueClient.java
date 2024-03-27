@@ -43,7 +43,7 @@ public final class DurationValueClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * Duration (Required)
+     *     Duration (Required)
      * ]
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class DurationValueClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * Duration (Required)
+     *     Duration (Required)
      * ]
      * }</pre>
      * 

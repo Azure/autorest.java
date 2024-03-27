@@ -43,10 +43,10 @@ public final class ExtendsModelArrayAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * (Optional): {
-     * String (Required): [
-     * (Required){
-     * state: String (Required)
+     *      (Optional): {
+     *         String (Required): [
+     *              (Required){
+     *                 state: String (Required)
      * }
      * ]
      * }
@@ -71,10 +71,10 @@ public final class ExtendsModelArrayAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * (Optional): {
-     * String (Required): [
-     * (Required){
-     * state: String (Required)
+     *      (Optional): {
+     *         String (Required): [
+     *              (Required){
+     *                 state: String (Required)
      * }
      * ]
      * }

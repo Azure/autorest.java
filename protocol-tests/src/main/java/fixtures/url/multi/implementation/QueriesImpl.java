@@ -228,8 +228,8 @@ public final class QueriesImpl {
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1',
-     * 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call {@link
-     * RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call
+     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -256,8 +256,8 @@ public final class QueriesImpl {
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>arrayQuery</td><td>List&lt;String&gt;</td><td>No</td><td>an array of string ['ArrayQuery1',
-     * 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call {@link
-     * RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * 'begin!*'();:@ &amp;=+$,/?#[]end' , null, ''] using the mult-array format. Call
+     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 

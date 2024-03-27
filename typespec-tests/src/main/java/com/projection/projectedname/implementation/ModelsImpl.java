@@ -98,7 +98,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -121,7 +121,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class ModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 

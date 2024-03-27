@@ -27,8 +27,7 @@ public final class FlattenParameterGroup implements JsonSerializable<FlattenPara
     private SimpleProduct simpleBodyProduct;
 
     /*
-     * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San
-     * Francisco will have a different product_id than uberX in Los Angeles.
+     * Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      */
     private String productId;
 

@@ -100,9 +100,9 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * index: int (Required)
      * age: Double (Optional)
@@ -127,9 +127,9 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * index: int (Required)
      * age: Double (Optional)
@@ -154,9 +154,9 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * index: int (Required)
      * age: Double (Optional)
@@ -182,9 +182,9 @@ public final class ExtendsUnknownDerivedsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * (Optional): {
-     * String: Object (Required)
+     *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
      * }
      * index: int (Required)
      * age: Double (Optional)

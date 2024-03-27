@@ -100,7 +100,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Required)
+     *     property: String (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class StringOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Required)
+     *     property: String (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class StringOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Required)
+     *     property: String (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class StringOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Required)
+     *     property: String (Required)
      * }
      * }</pre>
      * 

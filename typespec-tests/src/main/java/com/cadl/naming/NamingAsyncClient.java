@@ -57,17 +57,17 @@ public final class NamingAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * parameters (Optional): {
-     * type: String(Type1/Type2) (Required)
+     *     parameters (Optional): {
+     *         type: String(Type1/Type2) (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * data (Required): {
-     * data (Required): {
+     *     name: String (Required)
+     *     data (Required): {
+     *         data (Required): {
      * @data.kind: String (Required)
      * }
      * }
@@ -101,7 +101,7 @@ public final class NamingAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 

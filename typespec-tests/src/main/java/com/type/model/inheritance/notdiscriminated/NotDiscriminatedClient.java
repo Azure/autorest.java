@@ -41,9 +41,9 @@ public final class NotDiscriminatedClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 
@@ -66,9 +66,9 @@ public final class NotDiscriminatedClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 
@@ -90,17 +90,17 @@ public final class NotDiscriminatedClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 

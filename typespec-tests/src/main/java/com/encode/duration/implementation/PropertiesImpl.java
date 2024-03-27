@@ -153,13 +153,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * 
@@ -182,13 +182,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * 
@@ -211,13 +211,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * 
@@ -240,13 +240,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: Duration (Required)
+     *     value: Duration (Required)
      * }
      * }</pre>
      * 
@@ -269,13 +269,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: long (Required)
+     *     value: long (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: long (Required)
+     *     value: long (Required)
      * }
      * }</pre>
      * 
@@ -298,13 +298,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: long (Required)
+     *     value: long (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: long (Required)
+     *     value: long (Required)
      * }
      * }</pre>
      * 
@@ -327,13 +327,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: double (Required)
+     *     value: double (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: double (Required)
+     *     value: double (Required)
      * }
      * }</pre>
      * 
@@ -356,13 +356,13 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: double (Required)
+     *     value: double (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value: double (Required)
+     *     value: double (Required)
      * }
      * }</pre>
      * 
@@ -385,17 +385,17 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * double (Required)
-     * ]
+     *     value (Required): [
+     *         double (Required)
+     *     ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * double (Required)
-     * ]
+     *     value (Required): [
+     *         double (Required)
+     *     ]
      * }
      * }</pre>
      * 
@@ -419,17 +419,17 @@ public final class PropertiesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * double (Required)
-     * ]
+     *     value (Required): [
+     *         double (Required)
+     *     ]
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * value (Required): [
-     * double (Required)
-     * ]
+     *     value (Required): [
+     *         double (Required)
+     *     ]
      * }
      * }</pre>
      * 

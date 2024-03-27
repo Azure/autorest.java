@@ -713,8 +713,7 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -734,8 +733,7 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -755,8 +753,7 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -770,8 +767,7 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -786,8 +782,7 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -802,8 +797,7 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put null and the client library should throw before the request is
-     * sent.
+     * Test explicitly required integer. Please put null and the client library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

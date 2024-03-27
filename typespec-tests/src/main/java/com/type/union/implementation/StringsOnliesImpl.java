@@ -100,7 +100,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(a/b/c) (Required)
+     *     prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(a/b/c) (Required)
+     *     prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(a/b/c) (Required)
+     *     prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class StringsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(a/b/c) (Required)
+     *     prop: String(a/b/c) (Required)
      * }
      * }</pre>
      * 

@@ -45,21 +45,21 @@ public final class LegacyAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * jobId: String (Required)
-     * comment: String (Required)
-     * status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
-     * errors (Optional): [
-     * (Optional){
-     * error (Required): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * innererror (Optional): {
-     * code: String (Optional)
-     * innererror (Optional): (recursive schema, see innererror above)
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Optional): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Optional)
+     *                     innererror (Optional): (recursive schema, see innererror above)
      * }
      * }
      * }
@@ -89,7 +89,7 @@ public final class LegacyAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * comment: String (Required)
+     *     comment: String (Required)
      * }
      * }</pre>
      * 

@@ -165,10 +165,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -182,10 +182,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -233,10 +233,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -250,10 +250,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -300,10 +300,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -317,10 +317,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -367,10 +367,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -384,10 +384,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -421,7 +421,7 @@ public final class LrosCustomHeadersImpl {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -434,10 +434,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -451,10 +451,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -489,7 +489,7 @@ public final class LrosCustomHeadersImpl {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -502,10 +502,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -519,10 +519,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -556,7 +556,7 @@ public final class LrosCustomHeadersImpl {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -569,10 +569,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -586,10 +586,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -623,7 +623,7 @@ public final class LrosCustomHeadersImpl {
     /**
      * x-ms-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 is required message header for all requests. Long
      * running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -636,10 +636,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -653,10 +653,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -702,10 +702,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -752,10 +752,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -801,10 +801,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -849,10 +849,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -898,10 +898,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -949,10 +949,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -999,10 +999,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1049,10 +1049,10 @@ public final class LrosCustomHeadersImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)

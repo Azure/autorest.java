@@ -43,7 +43,7 @@ public final class StringOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Required)
+     *     property: String (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class StringOperationAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Required)
+     *     property: String (Required)
      * }
      * }</pre>
      * 

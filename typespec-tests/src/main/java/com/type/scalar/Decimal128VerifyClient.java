@@ -43,7 +43,7 @@ public final class Decimal128VerifyClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * BigDecimal (Required)
+     *     BigDecimal (Required)
      * ]
      * }</pre>
      * 

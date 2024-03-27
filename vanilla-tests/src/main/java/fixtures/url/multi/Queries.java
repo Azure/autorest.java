@@ -342,8 +342,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the mult-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the mult-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * mult-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -368,8 +368,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the mult-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the mult-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * mult-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -394,8 +394,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the mult-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the mult-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * mult-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -426,8 +426,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the mult-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the mult-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * mult-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -444,8 +444,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the mult-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the mult-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * mult-array format.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -462,8 +462,8 @@ public final class Queries {
      * Get an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the mult-array
      * format.
      * 
-     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using
-     * the mult-array format.
+     * @param arrayQuery an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
+     * mult-array format.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

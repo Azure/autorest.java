@@ -668,9 +668,8 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
-     * wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
+     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -689,9 +688,8 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
-     * wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
+     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -711,9 +709,8 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
-     * wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
+     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -726,9 +723,8 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
-     * wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
+     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -743,9 +739,8 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
-     * wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
+     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -765,9 +760,8 @@ public final class Polymorphisms {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
-     * wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
+     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -781,8 +775,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
-     * property.
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -802,8 +795,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
-     * property.
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -824,8 +816,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
-     * property.
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -839,8 +830,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
-     * property.
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -857,8 +847,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
-     * property.
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -879,8 +868,7 @@ public final class Polymorphisms {
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
-     * property.
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -897,8 +885,8 @@ public final class Polymorphisms {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     * properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync() {
@@ -917,8 +905,8 @@ public final class Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     * properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+     * along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Salmon>> getComplicatedWithResponseAsync(Context context) {
@@ -935,8 +923,8 @@ public final class Polymorphisms {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     * properties on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync() {
@@ -950,8 +938,8 @@ public final class Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     * properties on successful completion of {@link Mono}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+     * on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Salmon> getComplicatedAsync(Context context) {
@@ -965,8 +953,8 @@ public final class Polymorphisms {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     * properties along with {@link Response}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+     * along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Salmon> getComplicatedWithResponse(Context context) {

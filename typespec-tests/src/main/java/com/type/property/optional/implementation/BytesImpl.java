@@ -135,7 +135,7 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -158,7 +158,7 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -180,7 +180,7 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -203,7 +203,7 @@ public final class BytesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -225,7 +225,7 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -249,7 +249,7 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -273,7 +273,7 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 
@@ -297,7 +297,7 @@ public final class BytesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: byte[] (Optional)
+     *     property: byte[] (Optional)
      * }
      * }</pre>
      * 

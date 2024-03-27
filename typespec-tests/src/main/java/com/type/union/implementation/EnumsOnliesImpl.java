@@ -100,9 +100,9 @@ public final class EnumsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop (Required): {
-     * lr: String(left/right/up/down) (Required)
-     * ud: String(up/down) (Required)
+     *     prop (Required): {
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      * }
      * }
      * }</pre>
@@ -125,9 +125,9 @@ public final class EnumsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop (Required): {
-     * lr: String(left/right/up/down) (Required)
-     * ud: String(up/down) (Required)
+     *     prop (Required): {
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      * }
      * }
      * }</pre>
@@ -150,9 +150,9 @@ public final class EnumsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop (Required): {
-     * lr: String(left/right/up/down) (Required)
-     * ud: String(up/down) (Required)
+     *     prop (Required): {
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      * }
      * }
      * }</pre>
@@ -176,9 +176,9 @@ public final class EnumsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop (Required): {
-     * lr: String(left/right/up/down) (Required)
-     * ud: String(up/down) (Required)
+     *     prop (Required): {
+     *         lr: String(left/right/up/down) (Required)
+     *         ud: String(up/down) (Required)
      * }
      * }
      * }</pre>

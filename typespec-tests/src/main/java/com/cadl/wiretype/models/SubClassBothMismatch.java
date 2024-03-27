@@ -90,14 +90,12 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
-
                 } else if ("base64url".equals(fieldName)) {
                     Base64Url base64urlHolder
                         = reader.getNullable(nonNullReader -> new Base64Url(nonNullReader.getString()));
                     if (base64urlHolder != null) {
                         base64url = base64urlHolder.decodedBytes();
                     }
-
                 } else {
                     reader.skipChildren();
                 }

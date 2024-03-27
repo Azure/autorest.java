@@ -408,13 +408,13 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -423,13 +423,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -461,13 +461,13 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -476,13 +476,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -513,13 +513,13 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -528,13 +528,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -565,13 +565,13 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -580,13 +580,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -617,13 +617,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -652,13 +652,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -702,13 +702,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -720,8 +720,7 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listSinglePageAsync(RequestOptions requestOptions) {
@@ -756,13 +755,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -828,13 +827,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -880,13 +879,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -934,13 +933,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -952,8 +951,7 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithPageSinglePageAsync(RequestOptions requestOptions) {
@@ -970,13 +968,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1004,13 +1002,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1038,13 +1036,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1080,19 +1078,19 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * inputName: String (Required)
+     *     inputName: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1105,8 +1103,7 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithParametersSinglePageAsync(BinaryData bodyInput,
@@ -1132,19 +1129,19 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * inputName: String (Required)
+     *     inputName: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1181,19 +1178,19 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * inputName: String (Required)
+     *     inputName: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1231,19 +1228,19 @@ public final class BasicClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * inputName: String (Required)
+     *     inputName: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1272,13 +1269,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1307,13 +1304,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1341,13 +1338,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1375,13 +1372,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1450,13 +1447,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1486,13 +1483,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1522,13 +1519,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1543,8 +1540,7 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listNextSinglePageAsync(String nextLink, RequestOptions requestOptions) {
@@ -1561,13 +1557,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1597,13 +1593,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1618,8 +1614,7 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithPageNextSinglePageAsync(String nextLink,
@@ -1635,13 +1630,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1671,13 +1666,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1692,8 +1687,7 @@ public final class BasicClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return paged collection of User items along with {@link PagedResponse} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> listWithParametersNextSinglePageAsync(String nextLink,
@@ -1710,13 +1704,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1746,13 +1740,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -1784,13 +1778,13 @@ public final class BasicClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)

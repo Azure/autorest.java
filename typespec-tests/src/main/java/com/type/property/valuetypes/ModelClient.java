@@ -41,8 +41,8 @@ public final class ModelClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * property: String (Required)
+     *     property (Required): {
+     *         property: String (Required)
      * }
      * }
      * }</pre>
@@ -65,8 +65,8 @@ public final class ModelClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * property: String (Required)
+     *     property (Required): {
+     *         property: String (Required)
      * }
      * }
      * }</pre>

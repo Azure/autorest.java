@@ -43,9 +43,9 @@ public final class StringAndArrayClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop (Required): {
-     * string: BinaryData (Required)
-     * array: BinaryData (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
      * }
      * }
      * }</pre>
@@ -68,9 +68,9 @@ public final class StringAndArrayClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop (Required): {
-     * string: BinaryData (Required)
-     * array: BinaryData (Required)
+     *     prop (Required): {
+     *         string: BinaryData (Required)
+     *         array: BinaryData (Required)
      * }
      * }
      * }</pre>

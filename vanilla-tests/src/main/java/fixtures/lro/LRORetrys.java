@@ -116,7 +116,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -141,7 +141,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -166,7 +166,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -186,7 +186,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -205,7 +205,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -227,7 +227,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -243,7 +243,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -258,7 +258,7 @@ public final class LRORetrys {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -437,8 +437,8 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -458,8 +458,8 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
@@ -480,8 +480,8 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -499,8 +499,8 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
@@ -520,8 +520,8 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -534,8 +534,8 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
@@ -908,9 +908,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -934,9 +934,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -960,9 +960,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -981,9 +981,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1001,9 +1001,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -1024,9 +1024,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1040,9 +1040,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1055,9 +1055,9 @@ public final class LRORetrys {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.

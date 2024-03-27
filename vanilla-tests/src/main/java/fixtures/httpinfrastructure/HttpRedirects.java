@@ -522,7 +522,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -541,7 +541,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      * 
      * @param context The context to associate with this operation.
@@ -562,7 +562,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -575,7 +575,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      * 
      * @param context The context to associate with this operation.
@@ -590,7 +590,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      * 
      * @param context The context to associate with this operation.
@@ -605,7 +605,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -791,8 +791,8 @@ public final class HttpRedirects {
     }
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but
-     * should return the received 302 to the caller for evaluation.
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -810,8 +810,8 @@ public final class HttpRedirects {
     }
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but
-     * should return the received 302 to the caller for evaluation.
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -831,8 +831,8 @@ public final class HttpRedirects {
     }
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but
-     * should return the received 302 to the caller for evaluation.
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -844,8 +844,8 @@ public final class HttpRedirects {
     }
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but
-     * should return the received 302 to the caller for evaluation.
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -859,8 +859,8 @@ public final class HttpRedirects {
     }
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but
-     * should return the received 302 to the caller for evaluation.
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -874,8 +874,8 @@ public final class HttpRedirects {
     }
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but
-     * should return the received 302 to the caller for evaluation.
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -886,7 +886,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -905,7 +905,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
      * 
      * @param context The context to associate with this operation.
@@ -926,7 +926,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -939,7 +939,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
      * 
      * @param context The context to associate with this operation.
@@ -954,7 +954,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
      * 
      * @param context The context to associate with this operation.
@@ -969,7 +969,7 @@ public final class HttpRedirects {
     }
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
      * 
      * @throws ErrorException thrown if the request is rejected by server.

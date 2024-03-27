@@ -160,8 +160,7 @@ public final class ResponseClientImpl {
     }
 
     /**
-     * The interface defining all the services for ResponseClient to be used by the proxy service to perform REST
-     * calls.
+     * The interface defining all the services for ResponseClient to be used by the proxy service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "ResponseClient")
@@ -436,11 +435,11 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
      * }
      * ]
      * }</pre>
@@ -463,11 +462,11 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
      * }
      * ]
      * }</pre>
@@ -490,11 +489,11 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
      * }
      * ]
      * }</pre>
@@ -518,11 +517,11 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * (Required){
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
      * }
      * ]
      * }</pre>
@@ -545,10 +544,10 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -571,10 +570,10 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -669,10 +668,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -697,10 +696,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -724,10 +723,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -758,10 +757,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -792,10 +791,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -827,10 +826,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -862,10 +861,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -889,10 +888,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -916,10 +915,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -950,10 +949,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -984,10 +983,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -1019,10 +1018,10 @@ public final class ResponseClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Required)
      * }
      * }</pre>
      * 

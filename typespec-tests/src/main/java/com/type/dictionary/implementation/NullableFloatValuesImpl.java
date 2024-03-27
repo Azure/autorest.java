@@ -100,7 +100,7 @@ public final class NullableFloatValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: Double (Optional)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class NullableFloatValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: Double (Optional)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class NullableFloatValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: Double (Optional)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class NullableFloatValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: Double (Optional)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 

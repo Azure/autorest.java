@@ -71,8 +71,8 @@ public final class UnionFlattenOpsImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientUnionFlattenOps to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for UnionClientUnionFlattenOps to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}/openai")
     @ServiceInterface(name = "UnionClientUnionFlat")
@@ -161,8 +161,8 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * user (Optional): {
-     * user: String (Required)
+     *     user (Optional): {
+     *         user: String (Required)
      * }
      * input: BinaryData (Required)
      * }
@@ -189,8 +189,8 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * user (Optional): {
-     * user: String (Required)
+     *     user (Optional): {
+     *         user: String (Required)
      * }
      * input: BinaryData (Required)
      * }
@@ -224,8 +224,8 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * user (Optional): {
-     * user: String (Required)
+     *     user (Optional): {
+     *         user: String (Required)
      * }
      * input: String (Required)
      * dataInt: int (Required)
@@ -264,8 +264,8 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * user (Optional): {
-     * user: String (Required)
+     *     user (Optional): {
+     *         user: String (Required)
      * }
      * input: String (Required)
      * dataInt: int (Required)
@@ -342,15 +342,15 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -375,15 +375,15 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -407,15 +407,15 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -445,15 +445,15 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -483,15 +483,15 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>
@@ -521,15 +521,15 @@ public final class UnionFlattenOpsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
      * }
      * }
      * }</pre>

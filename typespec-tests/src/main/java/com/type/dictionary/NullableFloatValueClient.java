@@ -42,7 +42,7 @@ public final class NullableFloatValueClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: Double (Optional)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 
@@ -64,7 +64,7 @@ public final class NullableFloatValueClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String: Double (Optional)
+     *     String: Double (Optional)
      * }
      * }</pre>
      * 

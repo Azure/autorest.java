@@ -124,30 +124,30 @@ public final class EtagHeadersImpl {
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches
-     * this string.</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
+     * string.</td></tr>
      * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the
      * entity was not modified after this time.</td></tr>
-     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the
-     * entity was modified after this time.</td></tr>
+     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity
+     * was modified after this time.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -176,30 +176,30 @@ public final class EtagHeadersImpl {
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches
-     * this string.</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
+     * string.</td></tr>
      * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the
      * entity was not modified after this time.</td></tr>
-     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the
-     * entity was modified after this time.</td></tr>
+     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity
+     * was modified after this time.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -228,26 +228,26 @@ public final class EtagHeadersImpl {
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches
-     * this string.</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
+     * string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 
@@ -276,26 +276,26 @@ public final class EtagHeadersImpl {
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
      * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches
-     * this string.</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
+     * string.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * description: String (Optional)
-     * type: String (Optional, Required on create)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
      * }
      * }</pre>
      * 

@@ -50,9 +50,9 @@ public final class FlattenAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * user (Optional): {
-     * user: String (Required)
+     *     name: String (Required)
+     *     user (Optional): {
+     *         user: String (Required)
      * }
      * input: String (Required)
      * constant: String (Required)
@@ -79,7 +79,7 @@ public final class FlattenAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * file_id: String (Required)
+     *     file_id: String (Required)
      * }
      * }</pre>
      * 
@@ -111,8 +111,8 @@ public final class FlattenAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * user (Optional): {
-     * user: String (Required)
+     *     user (Optional): {
+     *         user: String (Required)
      * }
      * input: String (Required)
      * dataInt: int (Required)
@@ -151,29 +151,29 @@ public final class FlattenAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * patch (Optional, Required on create): {
-     * title: String (Optional)
-     * description: String (Optional)
-     * status: String(NotStarted/InProgress/Completed) (Optional)
+     *     patch (Optional, Required on create): {
+     *         title: String (Optional)
+     *         description: String (Optional)
+     *         status: String(NotStarted/InProgress/Completed) (Optional)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: long (Required)
-     * title: String (Required)
-     * description: String (Optional)
-     * status: String(NotStarted/InProgress/Completed) (Required)
-     * createdAt: OffsetDateTime (Required)
-     * updatedAt: OffsetDateTime (Required)
-     * completedAt: OffsetDateTime (Optional)
-     * _dummy: String (Optional)
+     *     id: long (Required)
+     *     title: String (Required)
+     *     description: String (Optional)
+     *     status: String(NotStarted/InProgress/Completed) (Required)
+     *     createdAt: OffsetDateTime (Required)
+     *     updatedAt: OffsetDateTime (Required)
+     *     completedAt: OffsetDateTime (Optional)
+     *     _dummy: String (Optional)
      * }
      * }</pre>
      * 
-     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991
-     * (2^53 − 1)` ).
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53
+     * − 1)` ).
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -295,8 +295,8 @@ public final class FlattenAsyncClient {
     /**
      * The update operation.
      * 
-     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991
-     * (2^53 − 1)` ).
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53
+     * − 1)` ).
      * @param request The request parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

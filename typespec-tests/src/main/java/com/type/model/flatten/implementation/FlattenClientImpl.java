@@ -145,20 +145,20 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         description: String (Required)
+     *         age: int (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         description: String (Required)
+     *         age: int (Required)
      * }
      * }
      * }</pre>
@@ -184,20 +184,20 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         description: String (Required)
+     *         age: int (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         description: String (Required)
+     *         age: int (Required)
      * }
      * }
      * }</pre>
@@ -221,12 +221,12 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * summary: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         summary: String (Required)
+     *         properties (Required): {
+     *             description: String (Required)
+     *             age: int (Required)
      * }
      * }
      * }
@@ -234,12 +234,12 @@ public final class FlattenClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * summary: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         summary: String (Required)
+     *         properties (Required): {
+     *             description: String (Required)
+     *             age: int (Required)
      * }
      * }
      * }
@@ -266,12 +266,12 @@ public final class FlattenClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * summary: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         summary: String (Required)
+     *         properties (Required): {
+     *             description: String (Required)
+     *             age: int (Required)
      * }
      * }
      * }
@@ -279,12 +279,12 @@ public final class FlattenClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * properties (Required): {
-     * summary: String (Required)
-     * properties (Required): {
-     * description: String (Required)
-     * age: int (Required)
+     *     name: String (Required)
+     *     properties (Required): {
+     *         summary: String (Required)
+     *         properties (Required): {
+     *             description: String (Required)
+     *             age: int (Required)
      * }
      * }
      * }

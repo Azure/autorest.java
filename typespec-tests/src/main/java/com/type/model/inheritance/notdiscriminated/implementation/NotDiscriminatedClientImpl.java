@@ -167,9 +167,9 @@ public final class NotDiscriminatedClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 
@@ -192,9 +192,9 @@ public final class NotDiscriminatedClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 
@@ -217,9 +217,9 @@ public final class NotDiscriminatedClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 
@@ -228,8 +228,8 @@ public final class NotDiscriminatedClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the third level model in the normal multiple levels inheritance along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return the third level model in the normal multiple levels inheritance along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getValidWithResponseAsync(RequestOptions requestOptions) {
@@ -242,9 +242,9 @@ public final class NotDiscriminatedClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 
@@ -266,17 +266,17 @@ public final class NotDiscriminatedClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 
@@ -286,8 +286,8 @@ public final class NotDiscriminatedClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the third level model in the normal multiple levels inheritance along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return the third level model in the normal multiple levels inheritance along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> putValidWithResponseAsync(BinaryData input, RequestOptions requestOptions) {
@@ -300,17 +300,17 @@ public final class NotDiscriminatedClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * age: int (Required)
-     * smart: boolean (Required)
+     *     name: String (Required)
+     *     age: int (Required)
+     *     smart: boolean (Required)
      * }
      * }</pre>
      * 

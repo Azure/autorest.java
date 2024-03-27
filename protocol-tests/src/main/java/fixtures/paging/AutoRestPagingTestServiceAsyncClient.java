@@ -40,9 +40,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -65,9 +65,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -90,9 +90,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -115,9 +115,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -140,15 +140,15 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Optional)
+     *     name: String (Optional)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -173,9 +173,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -202,16 +202,16 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
      * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
      * response.</td></tr>
-     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing
-     * the request, in seconds. The default is 30 seconds.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -235,9 +235,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -257,8 +257,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter`
-     * as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
+     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
      * <caption>Query Parameters</caption>
@@ -269,9 +269,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -294,9 +294,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -323,16 +323,16 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
      * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
      * response.</td></tr>
-     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing
-     * the request, in seconds. The default is 30 seconds.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -359,16 +359,16 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
      * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
      * response.</td></tr>
-     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing
-     * the request, in seconds. The default is 30 seconds.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -393,9 +393,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -419,9 +419,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -444,9 +444,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -469,9 +469,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -494,9 +494,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -519,9 +519,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -547,9 +547,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -579,16 +579,16 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
      * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
      * response.</td></tr>
-     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing
-     * the request, in seconds. The default is 30 seconds.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -612,9 +612,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -638,9 +638,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>
@@ -663,9 +663,9 @@ public final class AutoRestPagingTestServiceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * id: Integer (Optional)
-     * name: String (Optional)
+     *     properties (Optional): {
+     *         id: Integer (Optional)
+     *         name: String (Optional)
      * }
      * }
      * }</pre>

@@ -13,7 +13,7 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class JavaClass implements JavaType {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
     private boolean addNewLine;
 
     public JavaClass(JavaFileContents contents) {

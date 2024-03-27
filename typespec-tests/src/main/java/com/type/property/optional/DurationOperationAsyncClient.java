@@ -43,7 +43,7 @@ public final class DurationOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -66,7 +66,7 @@ public final class DurationOperationAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -89,7 +89,7 @@ public final class DurationOperationAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 
@@ -112,7 +112,7 @@ public final class DurationOperationAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: Duration (Optional)
+     *     property: Duration (Optional)
      * }
      * }</pre>
      * 

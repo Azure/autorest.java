@@ -157,8 +157,8 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getNotExpandableWithResponseAsync(RequestOptions requestOptions) {
@@ -179,8 +179,8 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getNotExpandableWithResponse(RequestOptions requestOptions) {
@@ -245,8 +245,8 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getReferencedWithResponseAsync(RequestOptions requestOptions) {
@@ -267,8 +267,8 @@ public final class EnumsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> getReferencedWithResponse(RequestOptions requestOptions) {

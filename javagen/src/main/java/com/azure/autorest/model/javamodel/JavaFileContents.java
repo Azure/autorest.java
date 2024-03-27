@@ -3,7 +3,6 @@
 
 package com.azure.autorest.model.javamodel;
 
-import com.azure.autorest.util.CodeNamer;
 import com.azure.core.util.CoreUtils;
 
 import java.util.ArrayList;
@@ -77,26 +76,7 @@ public class JavaFileContents {
         removeFromPrefix(SINGLE_INDENT);
     }
 
-    private List<String> wordWrap(String line, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<>();
-
-        // Subtract an extra column from the word wrap width because columns generally are
-        // 1 -based instead of 0-based.
-        int wordWrapIndexMinusLinePrefixLength = 120 - (addPrefix ? linePrefix.length() : 0) - 1;
-        List<String> wrappedLines = CodeNamer.wordWrap(line, wordWrapIndexMinusLinePrefixLength);
-        for (int i = 0; i < wrappedLines.size() - 1; i++) {
-            lines.add(wrappedLines.get(i) + "\n");
-        }
-
-        String lastWrappedLine = wrappedLines.isEmpty() ? null : wrappedLines.get(wrappedLines.size() - 1);
-        if (lastWrappedLine != null && !lastWrappedLine.isEmpty()) {
-            lines.add(lastWrappedLine);
-        }
-
-        return lines;
-    }
-
-    private void text(String text, boolean addPrefix, boolean wordWrap) {
+    private void text(String text, boolean addPrefix) {
         ArrayList<String> lines = new ArrayList<>();
 
         if (text == null || text.isEmpty()) {
@@ -108,22 +88,12 @@ public class JavaFileContents {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
                     String line = text.substring(lineStartIndex);
-                    if (wordWrap) {
-                        List<String> wrappedLines = wordWrap(line, addPrefix);
-                        lines.addAll(wrappedLines);
-                    } else {
-                        lines.add(line);
-                    }
+                    lines.add(line);
                     lineStartIndex = textLength;
                 } else {
                     int nextLineStartIndex = newLineCharacterIndex + 1;
                     String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    if (wordWrap) {
-                        List<String> wrappedLines = wordWrap(line, addPrefix);
-                        lines.addAll(wrappedLines);
-                    } else {
-                        lines.add(line);
-                    }
+                    lines.add(line);
                     lineStartIndex = nextLineStartIndex;
                 }
             }
@@ -141,33 +111,29 @@ public class JavaFileContents {
 
     public final void text(String text) {
         if (currentLineType == CurrentLineType.Empty) {
-            text(text, true, false);
+            text(text, true);
         } else if (currentLineType == CurrentLineType.Text) {
-            text(text, false, false);
+            text(text, false);
         } else if (currentLineType == CurrentLineType.AfterIf) {
             line("", false);
-            text(text, true, false);
+            text(text, true);
         }
         currentLineType = CurrentLineType.Text;
     }
 
-    private void line(String text, boolean addPrefix, boolean wordWrap) {
-        text(text + "\n", addPrefix, wordWrap);
+    private void line(String text, boolean addPrefix) {
+        text(text + "\n", addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 
     public void line(String text) {
-        line(text, false);
-    }
-
-    void line(String text, boolean wordWrap) {
         if (currentLineType == CurrentLineType.Empty) {
-            line(text, true, wordWrap);
+            line(text, true);
         } else if (currentLineType == CurrentLineType.Text) {
-            line(text, false, wordWrap);
+            line(text, false);
         } else if (currentLineType == CurrentLineType.AfterIf) {
-            line("", false, wordWrap);
-            line(text, true, wordWrap);
+            line("", false);
+            line(text, true);
         }
         currentLineType = CurrentLineType.Empty;
     }

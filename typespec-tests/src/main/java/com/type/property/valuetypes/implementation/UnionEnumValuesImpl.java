@@ -100,7 +100,7 @@ public final class UnionEnumValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(value2) (Required)
+     *     property: String(value2) (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class UnionEnumValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(value2) (Required)
+     *     property: String(value2) (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class UnionEnumValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(value2) (Required)
+     *     property: String(value2) (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class UnionEnumValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(value2) (Required)
+     *     property: String(value2) (Required)
      * }
      * }</pre>
      * 

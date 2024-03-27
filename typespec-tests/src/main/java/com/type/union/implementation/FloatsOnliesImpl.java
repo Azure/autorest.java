@@ -100,7 +100,7 @@ public final class FloatsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1.1/2.2/3.3) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class FloatsOnliesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1.1/2.2/3.3) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class FloatsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1.1/2.2/3.3) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class FloatsOnliesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(1.1/2.2/3.3) (Required)
+     *     prop: String(1.1/2.2/3.3) (Required)
      * }
      * }</pre>
      * 

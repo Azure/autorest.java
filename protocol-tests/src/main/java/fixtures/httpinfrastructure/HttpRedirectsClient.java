@@ -56,7 +56,7 @@ public final class HttpRedirectsClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * String (Required)
+     *     String (Required)
      * ]
      * }</pre>
      * 
@@ -106,7 +106,7 @@ public final class HttpRedirectsClient {
     }
 
     /**
-     * Put true Boolean value in request returns 301.  This request should not be automatically redirected, but should
+     * Put true Boolean value in request returns 301. This request should not be automatically redirected, but should
      * return the received 301 to the caller for evaluation.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -167,8 +167,8 @@ public final class HttpRedirectsClient {
     }
 
     /**
-     * Patch true Boolean value in request returns 302.  This request should not be automatically redirected, but
-     * should return the received 302 to the caller for evaluation.
+     * Patch true Boolean value in request returns 302. This request should not be automatically redirected, but should
+     * return the received 302 to the caller for evaluation.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -196,7 +196,7 @@ public final class HttpRedirectsClient {
     }
 
     /**
-     * Post true Boolean value in request returns 303.  This request should be automatically redirected usign a get,
+     * Post true Boolean value in request returns 303. This request should be automatically redirected usign a get,
      * ultimately returning a 200 status code.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">

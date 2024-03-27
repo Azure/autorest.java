@@ -41,7 +41,7 @@ public final class FloatOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: double (Required)
+     *     property: double (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class FloatOperationClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: double (Required)
+     *     property: double (Required)
      * }
      * }</pre>
      * 

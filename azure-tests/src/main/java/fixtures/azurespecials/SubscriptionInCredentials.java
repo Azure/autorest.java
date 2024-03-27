@@ -87,7 +87,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -110,7 +110,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -134,7 +134,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -147,7 +147,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -162,7 +162,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -177,7 +177,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -189,7 +189,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
      * client-side validation should prevent you from making this call.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -212,7 +212,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
      * client-side validation should prevent you from making this call.
      * 
      * @param context The context to associate with this operation.
@@ -236,7 +236,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
      * client-side validation should prevent you from making this call.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -249,7 +249,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
      * client-side validation should prevent you from making this call.
      * 
      * @param context The context to associate with this operation.
@@ -264,7 +264,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
      * client-side validation should prevent you from making this call.
      * 
      * @param context The context to associate with this operation.
@@ -279,7 +279,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to null, and
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to null, and
      * client-side validation should prevent you from making this call.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -291,7 +291,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -314,7 +314,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -339,7 +339,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -352,7 +352,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -367,7 +367,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -382,7 +382,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -394,7 +394,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -417,7 +417,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -441,7 +441,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -454,7 +454,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -469,7 +469,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -484,7 +484,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -496,7 +496,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -519,7 +519,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -543,7 +543,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
@@ -556,7 +556,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -571,7 +571,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @param context The context to associate with this operation.
@@ -586,7 +586,7 @@ public final class SubscriptionInCredentials {
     }
 
     /**
-     * POST method with subscriptionId modeled in credentials.  Set the credential subscriptionId to
+     * POST method with subscriptionId modeled in credentials. Set the credential subscriptionId to
      * '1234-5678-9012-3456' to succeed.
      * 
      * @throws ErrorException thrown if the request is rejected by server.

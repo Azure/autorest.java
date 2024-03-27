@@ -283,8 +283,8 @@ public final class ParamsImpl {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return true Boolean value on path.
-     * Initially only has one required Query Parameter along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * Initially only has one required Query Parameter along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getRequiredWithResponseAsync(String parameter, RequestOptions requestOptions) {
@@ -324,7 +324,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional
+     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
@@ -356,7 +356,7 @@ public final class ParamsImpl {
     }
 
     /**
-     * Initially has one required query parameter and one optional query parameter.  After evolution, a new optional
+     * Initially has one required query parameter and one optional query parameter. After evolution, a new optional
      * query parameter is added.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">

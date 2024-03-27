@@ -43,29 +43,29 @@ public final class VisibilityAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * readProp: String (Required)
-     * queryProp: Integer (Required)
-     * createProp (Required): [
-     * String (Required)
-     * ]
-     * updateProp (Required): [
-     * int (Required)
-     * ]
-     * deleteProp: Boolean (Required)
+     *     readProp: String (Required)
+     *     queryProp: Integer (Required)
+     *     createProp (Required): [
+     *         String (Required)
+     *     ]
+     *     updateProp (Required): [
+     *         int (Required)
+     *     ]
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * readProp: String (Required)
-     * queryProp: Integer (Required)
-     * createProp (Required): [
-     * String (Required)
-     * ]
-     * updateProp (Required): [
-     * int (Required)
-     * ]
-     * deleteProp: Boolean (Required)
+     *     readProp: String (Required)
+     *     queryProp: Integer (Required)
+     *     createProp (Required): [
+     *         String (Required)
+     *     ]
+     *     updateProp (Required): [
+     *         int (Required)
+     *     ]
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      * 
@@ -75,8 +75,8 @@ public final class VisibilityAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return output model with visibility properties along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return output model with visibility properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -89,15 +89,15 @@ public final class VisibilityAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * readProp: String (Required)
-     * queryProp: Integer (Required)
-     * createProp (Required): [
-     * String (Required)
-     * ]
-     * updateProp (Required): [
-     * int (Required)
-     * ]
-     * deleteProp: Boolean (Required)
+     *     readProp: String (Required)
+     *     queryProp: Integer (Required)
+     *     createProp (Required): [
+     *         String (Required)
+     *     ]
+     *     updateProp (Required): [
+     *         int (Required)
+     *     ]
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      * 
@@ -120,15 +120,15 @@ public final class VisibilityAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * readProp: String (Required)
-     * queryProp: Integer (Required)
-     * createProp (Required): [
-     * String (Required)
-     * ]
-     * updateProp (Required): [
-     * int (Required)
-     * ]
-     * deleteProp: Boolean (Required)
+     *     readProp: String (Required)
+     *     queryProp: Integer (Required)
+     *     createProp (Required): [
+     *         String (Required)
+     *     ]
+     *     updateProp (Required): [
+     *         int (Required)
+     *     ]
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      * 
@@ -151,15 +151,15 @@ public final class VisibilityAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * readProp: String (Required)
-     * queryProp: Integer (Required)
-     * createProp (Required): [
-     * String (Required)
-     * ]
-     * updateProp (Required): [
-     * int (Required)
-     * ]
-     * deleteProp: Boolean (Required)
+     *     readProp: String (Required)
+     *     queryProp: Integer (Required)
+     *     createProp (Required): [
+     *         String (Required)
+     *     ]
+     *     updateProp (Required): [
+     *         int (Required)
+     *     ]
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      * 
@@ -182,15 +182,15 @@ public final class VisibilityAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * readProp: String (Required)
-     * queryProp: Integer (Required)
-     * createProp (Required): [
-     * String (Required)
-     * ]
-     * updateProp (Required): [
-     * int (Required)
-     * ]
-     * deleteProp: Boolean (Required)
+     *     readProp: String (Required)
+     *     queryProp: Integer (Required)
+     *     createProp (Required): [
+     *         String (Required)
+     *     ]
+     *     updateProp (Required): [
+     *         int (Required)
+     *     ]
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      * 
@@ -213,15 +213,15 @@ public final class VisibilityAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * readProp: String (Required)
-     * queryProp: Integer (Required)
-     * createProp (Required): [
-     * String (Required)
-     * ]
-     * updateProp (Required): [
-     * int (Required)
-     * ]
-     * deleteProp: Boolean (Required)
+     *     readProp: String (Required)
+     *     queryProp: Integer (Required)
+     *     createProp (Required): [
+     *         String (Required)
+     *     ]
+     *     updateProp (Required): [
+     *         int (Required)
+     *     ]
+     *     deleteProp: Boolean (Required)
      * }
      * }</pre>
      * 

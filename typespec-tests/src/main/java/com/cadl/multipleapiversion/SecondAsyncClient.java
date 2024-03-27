@@ -43,9 +43,9 @@ public final class SecondAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 

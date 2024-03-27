@@ -43,16 +43,16 @@ public final class InternalClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * name: String (Required)
+     *     property (Required): {
+     *         name: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Required): {
-     * name: String (Required)
+     *     property (Required): {
+     *         name: String (Required)
      * }
      * }
      * }</pre>
@@ -76,7 +76,7 @@ public final class InternalClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 

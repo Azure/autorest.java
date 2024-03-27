@@ -138,7 +138,7 @@ public final class DifferentBodiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * content: byte[] (Required)
+     *     content: byte[] (Required)
      * }
      * }</pre>
      * 
@@ -160,7 +160,7 @@ public final class DifferentBodiesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * content: byte[] (Required)
+     *     content: byte[] (Required)
      * }
      * }</pre>
      * 

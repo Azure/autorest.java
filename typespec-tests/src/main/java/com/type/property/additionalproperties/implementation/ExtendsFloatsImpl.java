@@ -100,9 +100,9 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: double (Required)
-     * (Optional): {
-     * String: double (Required)
+     *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
      * }
      * }
      * }</pre>
@@ -125,9 +125,9 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: double (Required)
-     * (Optional): {
-     * String: double (Required)
+     *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
      * }
      * }
      * }</pre>
@@ -150,9 +150,9 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: double (Required)
-     * (Optional): {
-     * String: double (Required)
+     *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
      * }
      * }
      * }</pre>
@@ -176,9 +176,9 @@ public final class ExtendsFloatsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: double (Required)
-     * (Optional): {
-     * String: double (Required)
+     *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
      * }
      * }
      * }</pre>

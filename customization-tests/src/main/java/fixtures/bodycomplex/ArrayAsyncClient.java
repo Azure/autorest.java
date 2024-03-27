@@ -152,8 +152,8 @@ public final class ArrayAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types with array property while server doesn't provide a response payload along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return complex types with array property while server doesn't provide a response payload along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

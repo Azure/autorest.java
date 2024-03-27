@@ -45,12 +45,12 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional): {
-     * String (Required): {
-     * name: String (Optional)
-     * description: String (Optional)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional): {
+     *         String (Required): {
+     *             name: String (Optional)
+     *             description: String (Optional)
      * }
      * }
      * array (Optional): [
@@ -67,12 +67,12 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional): {
-     * String (Required): {
-     * name: String (Optional)
-     * description: String (Optional)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional): {
+     *         String (Required): {
+     *             name: String (Optional)
+     *             description: String (Optional)
      * }
      * }
      * array (Optional): [
@@ -106,11 +106,11 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * description: String (Optional)
-     * map (Optional): {
-     * String (Required): {
-     * name: String (Optional)
-     * description: String (Optional)
+     *     description: String (Optional)
+     *     map (Optional): {
+     *         String (Required): {
+     *             name: String (Optional)
+     *             description: String (Optional)
      * }
      * }
      * array (Optional): [
@@ -127,12 +127,12 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional): {
-     * String (Required): {
-     * name: String (Optional)
-     * description: String (Optional)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional): {
+     *         String (Required): {
+     *             name: String (Optional)
+     *             description: String (Optional)
      * }
      * }
      * array (Optional): [
@@ -166,11 +166,11 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * description: String (Optional)
-     * map (Optional): {
-     * String (Required): {
-     * name: String (Optional)
-     * description: String (Optional)
+     *     description: String (Optional)
+     *     map (Optional): {
+     *         String (Required): {
+     *             name: String (Optional)
+     *             description: String (Optional)
      * }
      * }
      * array (Optional): [
@@ -187,12 +187,12 @@ public final class JsonMergePatchAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * description: String (Optional)
-     * map (Optional): {
-     * String (Required): {
-     * name: String (Optional)
-     * description: String (Optional)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     map (Optional): {
+     *         String (Required): {
+     *             name: String (Optional)
+     *             description: String (Optional)
      * }
      * }
      * array (Optional): [

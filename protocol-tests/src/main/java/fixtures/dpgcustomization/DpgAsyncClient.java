@@ -43,7 +43,7 @@ public final class DpgAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * received: String(raw/model) (Required)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
@@ -54,8 +54,8 @@ public final class DpgAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return models that you will either return to end users as a raw body, or with a model added during grow up
-     * along with {@link Response} on successful completion of {@link Mono}.
+     * @return models that you will either return to end users as a raw body, or with a model added during grow up along
+     * with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -69,13 +69,13 @@ public final class DpgAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * hello: String (Required)
+     *     hello: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * received: String(raw/model) (Required)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
@@ -101,7 +101,7 @@ public final class DpgAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * received: String(raw/model) (Required)
+     *     received: String(raw/model) (Required)
      * }
      * }</pre>
      * 
@@ -112,8 +112,8 @@ public final class DpgAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup
-     * as paginated response with {@link PagedFlux}.
+     * @return pages that you will either return to users in pages of raw bodies, or pages of models following growup as
+     * paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
@@ -127,8 +127,8 @@ public final class DpgAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * received: String(raw/model) (Required)
-     * provisioningState: String (Required)
+     *     received: String(raw/model) (Required)
+     *     provisioningState: String (Required)
      * }
      * }</pre>
      * 

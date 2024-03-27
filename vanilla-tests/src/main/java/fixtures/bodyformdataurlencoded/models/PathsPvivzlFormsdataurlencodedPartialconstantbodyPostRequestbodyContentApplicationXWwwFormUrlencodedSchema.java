@@ -12,8 +12,7 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
- * model.
+ * The PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema model.
  */
 @Fluent
 public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
@@ -36,8 +35,7 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
 
     /**
      * Creates an instance of
-     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     * class.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
     }
@@ -56,8 +54,8 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * 
      * @param grantType the grantType value to set.
      * @return the
-     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     * object itself.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
+     * itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setGrantType(String grantType) {
@@ -79,8 +77,8 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * 
      * @param service the service value to set.
      * @return the
-     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     * object itself.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
+     * itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setService(String service) {
@@ -104,8 +102,8 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * 
      * @param aadAccessToken the aadAccessToken value to set.
      * @return the
-     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
-     * object itself.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
+     * itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setAadAccessToken(String aadAccessToken) {
@@ -148,8 +146,8 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of
-     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema if
-     * the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the
+     * JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the
      * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.

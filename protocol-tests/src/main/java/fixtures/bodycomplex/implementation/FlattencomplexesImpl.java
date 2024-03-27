@@ -91,10 +91,10 @@ public final class FlattencomplexesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String(Kind1) (Required)
-     * propB1: String (Optional)
-     * helper (Optional): {
-     * propBH1: String (Optional)
+     *     kind: String(Kind1) (Required)
+     *     propB1: String (Optional)
+     *     helper (Optional): {
+     *         propBH1: String (Optional)
      * }
      * }
      * }</pre>
@@ -118,10 +118,10 @@ public final class FlattencomplexesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String(Kind1) (Required)
-     * propB1: String (Optional)
-     * helper (Optional): {
-     * propBH1: String (Optional)
+     *     kind: String(Kind1) (Required)
+     *     propB1: String (Optional)
+     *     helper (Optional): {
+     *         propBH1: String (Optional)
      * }
      * }
      * }</pre>

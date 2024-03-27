@@ -113,12 +113,12 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
@@ -142,12 +142,12 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
@@ -169,12 +169,12 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
@@ -250,12 +250,12 @@ public final class PolymorphicrecursivesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 

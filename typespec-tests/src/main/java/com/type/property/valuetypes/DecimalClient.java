@@ -41,7 +41,7 @@ public final class DecimalClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: BigDecimal (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class DecimalClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: BigDecimal (Required)
+     *     property: BigDecimal (Required)
      * }
      * }</pre>
      * 

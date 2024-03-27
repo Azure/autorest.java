@@ -21,8 +21,8 @@ public interface Enums {
      * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Colors>> getNotExpandableWithResponseAsync();
@@ -34,8 +34,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Colors>> getNotExpandableWithResponseAsync(Context context);
@@ -71,8 +71,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Colors> getNotExpandableWithResponse(Context context);
@@ -166,8 +166,8 @@ public interface Enums {
      * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Colors>> getReferencedWithResponseAsync();
@@ -179,8 +179,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Colors>> getReferencedWithResponseAsync(Context context);
@@ -216,8 +216,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with {@link
-     * Response}.
+     * @return enum value 'red color' from enumeration of 'red color', 'green-color', 'blue_color' along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Colors> getReferencedWithResponse(Context context);
@@ -311,8 +311,8 @@ public interface Enums {
      * 
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return value 'green-color' from the constant along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<RefColorConstant>> getReferencedConstantWithResponseAsync();
@@ -324,8 +324,8 @@ public interface Enums {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws fixtures.bodystring.models.ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return value 'green-color' from the constant along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return value 'green-color' from the constant along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<RefColorConstant>> getReferencedConstantWithResponseAsync(Context context);

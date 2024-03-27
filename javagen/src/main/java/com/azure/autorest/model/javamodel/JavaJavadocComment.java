@@ -65,35 +65,35 @@ public class JavaJavadocComment {
      */
     public final void line(String text) {
         if (text != null && !text.isEmpty()) {
-            contents.line(text, true);
+            contents.line(text);
             expectsLineSeparator = true;
         }
     }
 
     public final void param(String parameterName, String parameterDescription) {
         addExpectedLineSeparator();
-        contents.line("@param " + parameterName + " " + processText(parameterDescription), true);
+        contents.line("@param " + parameterName + " " + processText(parameterDescription));
     }
 
     public final void methodReturns(String returnValueDescription) {
         if (returnValueDescription != null && !returnValueDescription.isEmpty()) {
             addExpectedLineSeparator();
-            contents.line("@return " + processText(returnValueDescription), true);
+            contents.line("@return " + processText(returnValueDescription));
         }
     }
 
     public final void methodThrows(String exceptionTypeName, String description) {
         addExpectedLineSeparator();
-        contents.line("@throws " + exceptionTypeName + " " + processText(description), true);
+        contents.line("@throws " + exceptionTypeName + " " + processText(description));
     }
 
     public final void inheritDoc() {
         addExpectedLineSeparator();
-        contents.line("{@inheritDoc}", true);
+        contents.line("{@inheritDoc}");
     }
 
     public final void deprecated(String description) {
         addExpectedLineSeparator();
-        contents.line("@deprecated " + description, true);
+        contents.line("@deprecated " + description);
     }
 }

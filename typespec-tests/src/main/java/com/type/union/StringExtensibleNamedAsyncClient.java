@@ -45,7 +45,7 @@ public final class StringExtensibleNamedAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 
@@ -67,7 +67,7 @@ public final class StringExtensibleNamedAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * prop: String(b/c) (Required)
+     *     prop: String(b/c) (Required)
      * }
      * }</pre>
      * 

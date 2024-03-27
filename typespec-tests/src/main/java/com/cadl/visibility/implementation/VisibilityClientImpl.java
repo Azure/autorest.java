@@ -235,9 +235,9 @@ public final class VisibilityClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -259,9 +259,9 @@ public final class VisibilityClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -283,15 +283,15 @@ public final class VisibilityClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -315,15 +315,15 @@ public final class VisibilityClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -346,16 +346,16 @@ public final class VisibilityClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -378,16 +378,16 @@ public final class VisibilityClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -410,15 +410,15 @@ public final class VisibilityClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * secretName: String (Required)
+     *     name: String (Required)
+     *     secretName: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * secretName: String (Required)
+     *     name: String (Required)
+     *     secretName: String (Required)
      * }
      * }</pre>
      * 
@@ -442,15 +442,15 @@ public final class VisibilityClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * secretName: String (Required)
+     *     name: String (Required)
+     *     secretName: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * secretName: String (Required)
+     *     name: String (Required)
+     *     secretName: String (Required)
      * }
      * }</pre>
      * 

@@ -44,10 +44,10 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * byte[] (Optional, Required on create)
-     * ]
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
+     *     ]
      * }
      * }</pre>
      * 
@@ -70,10 +70,10 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * byte[] (Optional, Required on create)
-     * ]
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
+     *     ]
      * }
      * }</pre>
      * 
@@ -96,10 +96,10 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * byte[] (Optional, Required on create)
-     * ]
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
+     *     ]
      * }
      * }</pre>
      * 
@@ -122,10 +122,10 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * byte[] (Optional, Required on create)
-     * ]
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *         byte[] (Optional, Required on create)
+     *     ]
      * }
      * }</pre>
      * 

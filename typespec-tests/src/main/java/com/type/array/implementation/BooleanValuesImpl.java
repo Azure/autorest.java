@@ -100,7 +100,7 @@ public final class BooleanValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * boolean (Required)
+     *     boolean (Required)
      * ]
      * }</pre>
      * 
@@ -122,7 +122,7 @@ public final class BooleanValuesImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * boolean (Required)
+     *     boolean (Required)
      * ]
      * }</pre>
      * 
@@ -144,7 +144,7 @@ public final class BooleanValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * boolean (Required)
+     *     boolean (Required)
      * ]
      * }</pre>
      * 
@@ -167,7 +167,7 @@ public final class BooleanValuesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * boolean (Required)
+     *     boolean (Required)
      * ]
      * }</pre>
      * 

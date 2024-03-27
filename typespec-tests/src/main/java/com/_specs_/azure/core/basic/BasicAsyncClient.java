@@ -54,13 +54,13 @@ public final class BasicAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -69,13 +69,13 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -105,13 +105,13 @@ public final class BasicAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -120,13 +120,13 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -156,13 +156,13 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -206,13 +206,13 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -237,13 +237,13 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -276,19 +276,19 @@ public final class BasicAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * inputName: String (Required)
+     *     inputName: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -314,13 +314,13 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)
@@ -366,13 +366,13 @@ public final class BasicAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * name: String (Optional, Required on create)
-     * orders (Optional): [
-     * (Optional){
-     * id: int (Required)
-     * userId: int (Optional, Required on create)
-     * detail: String (Optional, Required on create)
+     *     id: int (Required)
+     *     name: String (Optional, Required on create)
+     *     orders (Optional): [
+     *          (Optional){
+     *             id: int (Required)
+     *             userId: int (Optional, Required on create)
+     *             detail: String (Optional, Required on create)
      * }
      * ]
      * etag: String (Required)

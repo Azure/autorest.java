@@ -82,13 +82,13 @@ public final class ScalarClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * location: String (Required)
+     *     location: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * location: String (Required)
+     *     location: String (Required)
      * }
      * }</pre>
      * 

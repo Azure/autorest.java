@@ -1523,7 +1523,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1548,7 +1548,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1573,7 +1573,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1593,7 +1593,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -1612,7 +1612,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1634,7 +1634,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1650,7 +1650,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -1665,7 +1665,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1682,7 +1682,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1707,7 +1707,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1732,7 +1732,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1752,7 +1752,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -1771,7 +1771,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1793,7 +1793,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1809,7 +1809,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -1824,7 +1824,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Updating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Updating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param product Product to put.
@@ -1841,7 +1841,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
@@ -1866,7 +1866,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
@@ -1891,7 +1891,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
@@ -1911,7 +1911,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -1930,7 +1930,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
@@ -1952,7 +1952,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
@@ -1968,7 +1968,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -1983,7 +1983,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Created’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Created’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param product Product to put.
@@ -2000,7 +2000,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
@@ -2025,7 +2025,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
@@ -2050,7 +2050,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
@@ -2070,7 +2070,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -2089,7 +2089,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
@@ -2111,7 +2111,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
@@ -2127,7 +2127,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -2142,7 +2142,7 @@ public final class LROs {
 
     /**
      * Long running put request, service returns a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param product Product to put.
@@ -3669,7 +3669,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3690,7 +3690,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
@@ -3712,7 +3712,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3731,7 +3731,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
@@ -3752,7 +3752,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3766,7 +3766,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
@@ -3782,7 +3782,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3803,7 +3803,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param context The context to associate with this operation.
@@ -3825,7 +3825,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3844,7 +3844,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param context The context to associate with this operation.
@@ -3865,7 +3865,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3879,7 +3879,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Failed’.
      * 
      * @param context The context to associate with this operation.
@@ -3895,7 +3895,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3916,7 +3916,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param context The context to associate with this operation.
@@ -3938,7 +3938,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3957,7 +3957,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param context The context to associate with this operation.
@@ -3978,7 +3978,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
@@ -3992,7 +3992,7 @@ public final class LROs {
 
     /**
      * Long running delete request, service returns a 202 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Canceled’.
      * 
      * @param context The context to associate with this operation.
@@ -4103,8 +4103,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4121,8 +4121,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4141,8 +4141,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4158,8 +4158,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4177,8 +4177,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4190,8 +4190,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4205,8 +4205,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4223,8 +4223,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4243,8 +4243,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4260,8 +4260,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -4279,8 +4279,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -4292,8 +4292,8 @@ public final class LROs {
     }
 
     /**
-     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the
-     * last poll returns a ‘200’ with ProvisioningState=’Succeeded’.
+     * Long running delete request, service returns a 202 to the initial request. Polls return this value until the last
+     * poll returns a ‘200’ with ProvisioningState=’Succeeded’.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

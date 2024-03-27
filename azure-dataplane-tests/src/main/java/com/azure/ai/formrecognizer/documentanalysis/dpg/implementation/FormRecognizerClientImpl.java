@@ -465,9 +465,9 @@ public final class FormRecognizerClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze.  Ex.
+     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze. Ex.
      * "1-3,5,7-9"</td></tr>
-     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis.  Value
+     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis. Value
      * may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").</td></tr>
      * <tr><td>stringIndexType</td><td>String</td><td>No</td><td>Method used to compute string offset and length.
      * Allowed values: "textElements", "unicodeCodePoint", "utf16CodeUnit".</td></tr>
@@ -504,9 +504,9 @@ public final class FormRecognizerClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze.  Ex.
+     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze. Ex.
      * "1-3,5,7-9"</td></tr>
-     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis.  Value
+     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis. Value
      * may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").</td></tr>
      * <tr><td>stringIndexType</td><td>String</td><td>No</td><td>Method used to compute string offset and length.
      * Allowed values: "textElements", "unicodeCodePoint", "utf16CodeUnit".</td></tr>
@@ -543,9 +543,9 @@ public final class FormRecognizerClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze.  Ex.
+     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze. Ex.
      * "1-3,5,7-9"</td></tr>
-     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis.  Value
+     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis. Value
      * may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").</td></tr>
      * <tr><td>stringIndexType</td><td>String</td><td>No</td><td>Method used to compute string offset and length.
      * Allowed values: "textElements", "unicodeCodePoint", "utf16CodeUnit".</td></tr>
@@ -588,9 +588,9 @@ public final class FormRecognizerClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze.  Ex.
+     * <tr><td>pages</td><td>String</td><td>No</td><td>List of 1-based page numbers to analyze. Ex.
      * "1-3,5,7-9"</td></tr>
-     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis.  Value
+     * <tr><td>locale</td><td>String</td><td>No</td><td>Locale hint for text recognition and document analysis. Value
      * may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").</td></tr>
      * <tr><td>stringIndexType</td><td>String</td><td>No</td><td>Method used to compute string offset and length.
      * Allowed values: "textElements", "unicodeCodePoint", "utf16CodeUnit".</td></tr>
@@ -632,20 +632,20 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * status: String(notStarted/running/failed/succeeded) (Required)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * innererror (Optional): {
-     * code: String (Required)
-     * message: String (Optional)
-     * innererror (Optional): (recursive schema, see innererror above)
+     *     status: String(notStarted/running/failed/succeeded) (Required)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             message: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
      * }
      * }
      * analyzeResult (Optional): {
@@ -861,20 +861,20 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * status: String(notStarted/running/failed/succeeded) (Required)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * innererror (Optional): {
-     * code: String (Required)
-     * message: String (Optional)
-     * innererror (Optional): (recursive schema, see innererror above)
+     *     status: String(notStarted/running/failed/succeeded) (Required)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Required)
+     *             message: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
      * }
      * }
      * analyzeResult (Optional): {
@@ -1090,12 +1090,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * buildMode: String(template/neural) (Required)
-     * azureBlobSource (Optional): {
-     * containerUrl: String (Required)
-     * prefix: String (Optional)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     buildMode: String(template/neural) (Required)
+     *     azureBlobSource (Optional): {
+     *         containerUrl: String (Required)
+     *         prefix: String (Optional)
      * }
      * tags (Optional): {
      * String: String (Required)
@@ -1126,12 +1126,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * buildMode: String(template/neural) (Required)
-     * azureBlobSource (Optional): {
-     * containerUrl: String (Required)
-     * prefix: String (Optional)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     buildMode: String(template/neural) (Required)
+     *     azureBlobSource (Optional): {
+     *         containerUrl: String (Required)
+     *         prefix: String (Optional)
      * }
      * tags (Optional): {
      * String: String (Required)
@@ -1161,12 +1161,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * buildMode: String(template/neural) (Required)
-     * azureBlobSource (Optional): {
-     * containerUrl: String (Required)
-     * prefix: String (Optional)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     buildMode: String(template/neural) (Required)
+     *     azureBlobSource (Optional): {
+     *         containerUrl: String (Required)
+     *         prefix: String (Optional)
      * }
      * tags (Optional): {
      * String: String (Required)
@@ -1203,12 +1203,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * buildMode: String(template/neural) (Required)
-     * azureBlobSource (Optional): {
-     * containerUrl: String (Required)
-     * prefix: String (Optional)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     buildMode: String(template/neural) (Required)
+     *     azureBlobSource (Optional): {
+     *         containerUrl: String (Required)
+     *         prefix: String (Optional)
      * }
      * tags (Optional): {
      * String: String (Required)
@@ -1245,11 +1245,11 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * componentModels (Required): [
-     * (Required){
-     * modelId: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     componentModels (Required): [
+     *          (Required){
+     *             modelId: String (Required)
      * }
      * ]
      * tags (Optional): {
@@ -1281,11 +1281,11 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * componentModels (Required): [
-     * (Required){
-     * modelId: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     componentModels (Required): [
+     *          (Required){
+     *             modelId: String (Required)
      * }
      * ]
      * tags (Optional): {
@@ -1316,11 +1316,11 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * componentModels (Required): [
-     * (Required){
-     * modelId: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     componentModels (Required): [
+     *          (Required){
+     *             modelId: String (Required)
      * }
      * ]
      * tags (Optional): {
@@ -1358,11 +1358,11 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * componentModels (Required): [
-     * (Required){
-     * modelId: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     componentModels (Required): [
+     *          (Required){
+     *             modelId: String (Required)
      * }
      * ]
      * tags (Optional): {
@@ -1401,22 +1401,22 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * targetResourceId: String (Required)
-     * targetResourceRegion: String (Required)
-     * targetModelId: String (Required)
-     * targetModelLocation: String (Required)
-     * accessToken: String (Required)
-     * expirationDateTime: OffsetDateTime (Required)
+     *     targetResourceId: String (Required)
+     *     targetResourceRegion: String (Required)
+     *     targetModelId: String (Required)
+     *     targetModelLocation: String (Required)
+     *     accessToken: String (Required)
+     *     expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -1426,8 +1426,8 @@ public final class FormRecognizerClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> authorizeCopyDocumentModelWithResponseAsync(BinaryData authorizeCopyRequest,
@@ -1445,22 +1445,22 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * targetResourceId: String (Required)
-     * targetResourceRegion: String (Required)
-     * targetModelId: String (Required)
-     * targetModelLocation: String (Required)
-     * accessToken: String (Required)
-     * expirationDateTime: OffsetDateTime (Required)
+     *     targetResourceId: String (Required)
+     *     targetResourceRegion: String (Required)
+     *     targetModelId: String (Required)
+     *     targetModelLocation: String (Required)
+     *     accessToken: String (Required)
+     *     expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -1470,8 +1470,8 @@ public final class FormRecognizerClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link
-     * Response}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<BinaryData> authorizeCopyDocumentModelWithResponse(BinaryData authorizeCopyRequest,
@@ -1488,12 +1488,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * targetResourceId: String (Required)
-     * targetResourceRegion: String (Required)
-     * targetModelId: String (Required)
-     * targetModelLocation: String (Required)
-     * accessToken: String (Required)
-     * expirationDateTime: OffsetDateTime (Required)
+     *     targetResourceId: String (Required)
+     *     targetResourceRegion: String (Required)
+     *     targetModelId: String (Required)
+     *     targetModelLocation: String (Required)
+     *     accessToken: String (Required)
+     *     expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -1521,12 +1521,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * targetResourceId: String (Required)
-     * targetResourceRegion: String (Required)
-     * targetModelId: String (Required)
-     * targetModelLocation: String (Required)
-     * accessToken: String (Required)
-     * expirationDateTime: OffsetDateTime (Required)
+     *     targetResourceId: String (Required)
+     *     targetResourceRegion: String (Required)
+     *     targetModelId: String (Required)
+     *     targetModelLocation: String (Required)
+     *     accessToken: String (Required)
+     *     expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -1554,12 +1554,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * targetResourceId: String (Required)
-     * targetResourceRegion: String (Required)
-     * targetModelId: String (Required)
-     * targetModelLocation: String (Required)
-     * accessToken: String (Required)
-     * expirationDateTime: OffsetDateTime (Required)
+     *     targetResourceId: String (Required)
+     *     targetResourceRegion: String (Required)
+     *     targetModelId: String (Required)
+     *     targetModelLocation: String (Required)
+     *     accessToken: String (Required)
+     *     expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -1593,12 +1593,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * targetResourceId: String (Required)
-     * targetResourceRegion: String (Required)
-     * targetModelId: String (Required)
-     * targetModelLocation: String (Required)
-     * accessToken: String (Required)
-     * expirationDateTime: OffsetDateTime (Required)
+     *     targetResourceId: String (Required)
+     *     targetResourceRegion: String (Required)
+     *     targetModelId: String (Required)
+     *     targetModelLocation: String (Required)
+     *     accessToken: String (Required)
+     *     expirationDateTime: OffsetDateTime (Required)
      * }
      * }</pre>
      * 
@@ -1632,16 +1632,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -1651,8 +1651,8 @@ public final class FormRecognizerClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getOperationsSinglePageAsync(RequestOptions requestOptions) {
@@ -1671,16 +1671,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -1708,16 +1708,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -1745,16 +1745,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -1782,16 +1782,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     kind: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * error (Optional): {
      * code: String (Required)
@@ -1831,16 +1831,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     kind: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * error (Optional): {
      * code: String (Required)
@@ -1880,12 +1880,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -1895,8 +1895,8 @@ public final class FormRecognizerClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getDocumentModelsSinglePageAsync(RequestOptions requestOptions) {
@@ -1915,12 +1915,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -1948,12 +1948,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -1981,12 +1981,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -2014,12 +2014,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * docTypes (Optional): {
      * String (Required): {
@@ -2052,8 +2052,7 @@ public final class FormRecognizerClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return detailed document model information along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return detailed document model information along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> getDocumentModelWithResponseAsync(String modelId, RequestOptions requestOptions) {
@@ -2069,12 +2068,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * docTypes (Optional): {
      * String (Required): {
@@ -2163,9 +2162,9 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * customDocumentModels (Required): {
-     * count: int (Required)
-     * limit: int (Required)
+     *     customDocumentModels (Required): {
+     *         count: int (Required)
+     *         limit: int (Required)
      * }
      * }
      * }</pre>
@@ -2192,9 +2191,9 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * customDocumentModels (Required): {
-     * count: int (Required)
-     * limit: int (Required)
+     *     customDocumentModels (Required): {
+     *         count: int (Required)
+     *         limit: int (Required)
      * }
      * }
      * }</pre>
@@ -2218,16 +2217,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -2240,8 +2239,8 @@ public final class FormRecognizerClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getOperationsNextSinglePageAsync(String nextLink,
@@ -2259,16 +2258,16 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * operationId: String (Required)
-     * status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     * percentCompleted: Integer (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * lastUpdatedDateTime: OffsetDateTime (Required)
-     * kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     * resourceLocation: String (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     operationId: String (Required)
+     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
+     *     percentCompleted: Integer (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     lastUpdatedDateTime: OffsetDateTime (Required)
+     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
+     *     resourceLocation: String (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -2297,12 +2296,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -2315,8 +2314,8 @@ public final class FormRecognizerClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link
-     * Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<PagedResponse<BinaryData>> getDocumentModelsNextSinglePageAsync(String nextLink,
@@ -2334,12 +2333,12 @@ public final class FormRecognizerClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * modelId: String (Required)
-     * description: String (Optional)
-     * createdDateTime: OffsetDateTime (Required)
-     * apiVersion: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     modelId: String (Required)
+     *     description: String (Optional)
+     *     createdDateTime: OffsetDateTime (Required)
+     *     apiVersion: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>

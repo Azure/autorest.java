@@ -5,10 +5,7 @@ package com.azure.autorest.util;
 
 import org.atteo.evo.inflector.English;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
@@ -19,7 +16,6 @@ public class CodeNamer {
 
     private static final Pattern MERGE_UNDERSCORES = Pattern.compile("_{2,}");
     private static final Pattern CHARACTERS_TO_REPLACE_WITH_UNDERSCORE = Pattern.compile("[\\\\/.+ -]+");
-    private static final Pattern NEW_LINE = Pattern.compile("\r?\n");
 
     public static void setFactory(NamerFactory templateFactory) {
         factory = templateFactory;
@@ -161,51 +157,5 @@ public class CodeNamer {
             name += "Param";
         }
         return name;
-    }
-
-    public static List<String> wordWrap(String text, int width) {
-        Objects.requireNonNull(text);
-        List<String> ret = new ArrayList<>();
-        String[] lines = NEW_LINE.split(text, -1);
-        for (String line : lines) {
-            String processedLine = line.trim();
-
-            // yield empty lines as they are (probably) intentional
-            if (processedLine.isEmpty()) {
-                ret.add(processedLine);
-            }
-
-            // feast on the line until it's gone
-            while (!processedLine.isEmpty()) {
-                // determine potential wrapping points
-                List<Integer> whitespacePositions = new ArrayList<>();
-                for (int i = 0; i != processedLine.length(); i++) {
-                    if (Character.isWhitespace(processedLine.charAt(i))) {
-                        whitespacePositions.add(i);
-                    }
-                }
-                whitespacePositions.add(processedLine.length());
-                int preWidthWrapAt = -1;
-                int postWidthWrapAt = -1;
-                for (int i = 0; i != whitespacePositions.size() - 1; i++) {
-                    if (whitespacePositions.get(i + 1) > width) {
-                        preWidthWrapAt = whitespacePositions.get(i);
-                        postWidthWrapAt = whitespacePositions.get(i + 1);
-                        break;
-                    }
-                }
-                int wrapAt = processedLine.length();
-                if (preWidthWrapAt > 0) {
-                    wrapAt = preWidthWrapAt;
-                } else if (postWidthWrapAt > 0) {
-                    wrapAt = postWidthWrapAt;
-                }
-                // wrap
-                ret.add(processedLine.substring(0, wrapAt));
-                processedLine = processedLine.substring(wrapAt).trim();
-            }
-        }
-
-        return ret;
     }
 }

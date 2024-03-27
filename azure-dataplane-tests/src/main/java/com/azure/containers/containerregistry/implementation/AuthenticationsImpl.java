@@ -52,8 +52,8 @@ public final class AuthenticationsImpl {
     }
 
     /**
-     * The interface defining all the services for AzureContainerRegistryAuthentications to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AzureContainerRegistryAuthentications to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{url}")
     @ServiceInterface(name = "AzureContainerRegist")

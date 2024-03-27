@@ -51,8 +51,8 @@ public final class RelativeModelInOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for AccessClientRelativeModelInOperations to be used by the proxy
-     * service to perform REST calls.
+     * The interface defining all the services for AccessClientRelativeModelInOperations to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AccessClientRelative")
@@ -109,9 +109,9 @@ public final class RelativeModelInOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * inner (Required): {
-     * name: String (Required)
+     *     name: String (Required)
+     *     inner (Required): {
+     *         name: String (Required)
      * }
      * }
      * }</pre>
@@ -146,9 +146,9 @@ public final class RelativeModelInOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
-     * inner (Required): {
-     * name: String (Required)
+     *     name: String (Required)
+     *     inner (Required): {
+     *         name: String (Required)
      * }
      * }
      * }</pre>
@@ -179,8 +179,8 @@ public final class RelativeModelInOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * name: String (Required)
+     *     kind: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -211,8 +211,8 @@ public final class RelativeModelInOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * kind: String (Required)
-     * name: String (Required)
+     *     kind: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 

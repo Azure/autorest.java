@@ -50,8 +50,8 @@ public final class DatetimeOperations {
     }
 
     /**
-     * The interface defining all the services for AutoRestDateTimeTestServiceDatetimeOperations to be used by the
-     * proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestDateTimeTestServiceDatetimeOperations to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestDateTimeTest")
@@ -1764,8 +1764,8 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync() {
@@ -1784,8 +1784,8 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return min datetime value 0001-01-01T00:00:00Z along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getUtcMinDateTimeWithResponseAsync(Context context) {
@@ -2248,8 +2248,8 @@ public final class DatetimeOperations {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync() {
@@ -2269,8 +2269,8 @@ public final class DatetimeOperations {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return min datetime value 0001-01-01T00:00:00 along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<OffsetDateTime>> getLocalNoOffsetMinDateTimeWithResponseAsync(Context context) {

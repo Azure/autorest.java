@@ -136,9 +136,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }
@@ -163,9 +163,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }
@@ -189,9 +189,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }
@@ -216,9 +216,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }
@@ -242,9 +242,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }
@@ -269,9 +269,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }
@@ -296,9 +296,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }
@@ -323,9 +323,9 @@ public final class CollectionsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * (Optional){
-     * property: String (Optional)
+     *     property (Optional): [
+     *          (Optional){
+     *             property: String (Optional)
      * }
      * ]
      * }

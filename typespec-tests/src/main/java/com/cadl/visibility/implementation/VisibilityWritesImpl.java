@@ -82,15 +82,15 @@ public final class VisibilityWritesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -114,15 +114,15 @@ public final class VisibilityWritesImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * name: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: int (Required)
-     * secretName: String (Required)
-     * name: String (Required)
+     *     id: int (Required)
+     *     secretName: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 

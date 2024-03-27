@@ -90,7 +90,6 @@ public final class SubClassMismatch extends SuperClass {
                     if (dateTimeRfc7231Holder != null) {
                         dateTimeRfc7231 = dateTimeRfc7231Holder.getDateTime();
                     }
-
                 } else {
                     reader.skipChildren();
                 }

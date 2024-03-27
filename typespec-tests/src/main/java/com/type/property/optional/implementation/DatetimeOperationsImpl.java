@@ -136,7 +136,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -159,7 +159,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -181,7 +181,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -204,7 +204,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -226,7 +226,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -249,7 +249,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -272,7 +272,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 
@@ -295,7 +295,7 @@ public final class DatetimeOperationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: OffsetDateTime (Optional)
+     *     property: OffsetDateTime (Optional)
      * }
      * }</pre>
      * 

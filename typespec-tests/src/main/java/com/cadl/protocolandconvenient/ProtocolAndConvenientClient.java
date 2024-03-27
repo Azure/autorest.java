@@ -49,15 +49,15 @@ public final class ProtocolAndConvenientClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -81,15 +81,15 @@ public final class ProtocolAndConvenientClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -112,15 +112,15 @@ public final class ProtocolAndConvenientClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -143,15 +143,15 @@ public final class ProtocolAndConvenientClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
      * }
      * }</pre>
      * 
@@ -174,17 +174,17 @@ public final class ProtocolAndConvenientClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 
@@ -217,9 +217,9 @@ public final class ProtocolAndConvenientClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * name: String (Required)
-     * type: String (Required)
+     *     id: String (Required)
+     *     name: String (Required)
+     *     type: String (Required)
      * }
      * }</pre>
      * 

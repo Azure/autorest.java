@@ -82,7 +82,6 @@ public final class Base64urlBytesProperty implements JsonSerializable<Base64urlB
                     if (valueHolder != null) {
                         value = valueHolder.decodedBytes();
                     }
-
                 } else {
                     reader.skipChildren();
                 }

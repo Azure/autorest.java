@@ -62,21 +62,21 @@ public final class LongRunningClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
-     * createdDateTime: OffsetDateTime (Optional)
-     * expirationDateTime: OffsetDateTime (Optional)
-     * lastUpdateDateTime: OffsetDateTime (Optional)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * innererror (Optional): {
-     * code: String (Optional)
-     * innererror (Optional): (recursive schema, see innererror above)
+     *     id: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
      * }
      * }
      * result (Optional): {
@@ -113,27 +113,27 @@ public final class LongRunningClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * configuration: String (Optional)
-     * nullableFloatDict (Required): {
-     * String: Double (Optional)
+     *     configuration: String (Optional)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Required)
-     * status: String (Required)
-     * error (Optional): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * innererror (Optional): {
-     * code: String (Optional)
-     * innererror (Optional): (recursive schema, see innererror above)
+     *     id: String (Required)
+     *     status: String (Required)
+     *     error (Optional): {
+     *         code: String (Required)
+     *         message: String (Required)
+     *         target: String (Optional)
+     *         details (Optional): [
+     *             (recursive schema, see above)
+     *         ]
+     *         innererror (Optional): {
+     *             code: String (Optional)
+     *             innererror (Optional): (recursive schema, see innererror above)
      * }
      * }
      * }

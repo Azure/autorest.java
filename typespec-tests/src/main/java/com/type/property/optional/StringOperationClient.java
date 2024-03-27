@@ -41,7 +41,7 @@ public final class StringOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Optional)
+     *     property: String (Optional)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class StringOperationClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Optional)
+     *     property: String (Optional)
      * }
      * }</pre>
      * 
@@ -85,7 +85,7 @@ public final class StringOperationClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Optional)
+     *     property: String (Optional)
      * }
      * }</pre>
      * 
@@ -109,7 +109,7 @@ public final class StringOperationClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String (Optional)
+     *     property: String (Optional)
      * }
      * }</pre>
      * 

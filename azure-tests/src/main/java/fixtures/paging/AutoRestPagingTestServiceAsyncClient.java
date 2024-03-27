@@ -177,8 +177,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter`
-     * as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
+     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @param filter OData filter options. Pass in 'foo'.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -193,8 +193,8 @@ public final class AutoRestPagingTestServiceAsyncClient {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter`
-     * as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
+     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

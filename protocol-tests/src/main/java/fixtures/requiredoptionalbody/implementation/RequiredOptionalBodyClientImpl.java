@@ -141,8 +141,8 @@ public final class RequiredOptionalBodyClientImpl {
     }
 
     /**
-     * The interface defining all the services for RequiredOptionalBodyClient to be used by the proxy service to
-     * perform REST calls.
+     * The interface defining all the services for RequiredOptionalBodyClient to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "RequiredOptionalBody")
@@ -191,34 +191,34 @@ public final class RequiredOptionalBodyClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -245,34 +245,34 @@ public final class RequiredOptionalBodyClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -306,34 +306,34 @@ public final class RequiredOptionalBodyClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
@@ -371,34 +371,34 @@ public final class RequiredOptionalBodyClientImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * deploymentId: String (Required)
-     * startDateTime: OffsetDateTime (Required)
-     * groupId: String (Required)
-     * deviceClassSubgroups (Optional): [
-     * String (Optional)
-     * ]
-     * isCanceled: Boolean (Optional)
-     * isRetried: Boolean (Optional)
-     * OperationFilterStatus: String(Running/NotStarted) (Required)
-     * tags (Optional): {
-     * String: String (Required)
+     *     deploymentId: String (Required)
+     *     startDateTime: OffsetDateTime (Required)
+     *     groupId: String (Required)
+     *     deviceClassSubgroups (Optional): [
+     *         String (Optional)
+     *     ]
+     *     isCanceled: Boolean (Optional)
+     *     isRetried: Boolean (Optional)
+     *     OperationFilterStatus: String(Running/NotStarted) (Required)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * }
      * }</pre>

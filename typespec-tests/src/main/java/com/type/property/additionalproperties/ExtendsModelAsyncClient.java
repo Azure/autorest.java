@@ -43,9 +43,9 @@ public final class ExtendsModelAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * (Optional): {
-     * String (Required): {
-     * state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
      * }
      * }
      * }
@@ -69,9 +69,9 @@ public final class ExtendsModelAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * (Optional): {
-     * String (Required): {
-     * state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
      * }
      * }
      * }

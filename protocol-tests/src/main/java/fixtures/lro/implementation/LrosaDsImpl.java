@@ -558,10 +558,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -575,10 +575,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -623,10 +623,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -640,10 +640,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -687,10 +687,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -704,10 +704,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -750,10 +750,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -767,10 +767,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -813,10 +813,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -830,10 +830,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -878,10 +878,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -895,10 +895,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -942,10 +942,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -959,10 +959,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1006,10 +1006,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1023,10 +1023,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1070,10 +1070,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1087,10 +1087,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1136,10 +1136,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1153,10 +1153,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1201,10 +1201,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1218,10 +1218,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1266,10 +1266,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1283,10 +1283,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1318,8 +1318,8 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1331,10 +1331,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1348,10 +1348,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1384,8 +1384,8 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1397,10 +1397,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1414,10 +1414,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1449,8 +1449,8 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1462,10 +1462,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1479,10 +1479,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1514,8 +1514,8 @@ public final class LrosaDsImpl {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1527,10 +1527,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1544,10 +1544,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1824,10 +1824,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1872,10 +1872,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1919,10 +1919,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1965,10 +1965,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2011,10 +2011,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2059,10 +2059,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2106,10 +2106,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2152,10 +2152,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2199,10 +2199,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2248,10 +2248,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2296,10 +2296,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2344,10 +2344,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2391,10 +2391,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2408,10 +2408,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2457,10 +2457,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2474,10 +2474,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2522,10 +2522,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2539,10 +2539,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2587,10 +2587,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2604,10 +2604,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2654,10 +2654,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2671,10 +2671,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2721,10 +2721,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2738,10 +2738,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2788,10 +2788,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2805,10 +2805,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2854,10 +2854,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2871,10 +2871,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2920,10 +2920,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2937,10 +2937,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -2988,10 +2988,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3005,10 +3005,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3055,10 +3055,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3072,10 +3072,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3122,10 +3122,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3139,10 +3139,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3343,10 +3343,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3391,10 +3391,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3438,10 +3438,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3484,10 +3484,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3532,10 +3532,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3582,10 +3582,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3632,10 +3632,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3681,10 +3681,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3728,10 +3728,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3745,10 +3745,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3793,10 +3793,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3810,10 +3810,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3857,10 +3857,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3874,10 +3874,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3920,10 +3920,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3937,10 +3937,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -3984,10 +3984,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4001,10 +4001,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4051,10 +4051,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4068,10 +4068,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4117,10 +4117,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4134,10 +4134,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4183,10 +4183,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4200,10 +4200,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4249,10 +4249,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4266,10 +4266,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4317,10 +4317,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4334,10 +4334,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4384,10 +4384,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4401,10 +4401,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4451,10 +4451,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4468,10 +4468,10 @@ public final class LrosaDsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4764,10 +4764,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4813,10 +4813,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4861,10 +4861,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4909,10 +4909,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -4957,10 +4957,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -5006,10 +5006,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -5055,10 +5055,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -5104,10 +5104,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -5153,10 +5153,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -5204,10 +5204,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -5254,10 +5254,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -5304,10 +5304,10 @@ public final class LrosaDsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)

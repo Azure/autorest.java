@@ -44,7 +44,7 @@ public final class ModelAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 
@@ -67,7 +67,7 @@ public final class ModelAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * defaultName: boolean (Required)
+     *     defaultName: boolean (Required)
      * }
      * }</pre>
      * 

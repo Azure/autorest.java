@@ -43,7 +43,7 @@ public final class UnionEnumValueAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(value2) (Required)
+     *     property: String(value2) (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class UnionEnumValueAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(value2) (Required)
+     *     property: String(value2) (Required)
      * }
      * }</pre>
      * 

@@ -42,10 +42,10 @@ public final class CollectionsModelClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * (Optional, Required on create){
-     * property: String (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      * }
      * ]
      * }
@@ -69,10 +69,10 @@ public final class CollectionsModelClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * (Optional, Required on create){
-     * property: String (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      * }
      * ]
      * }
@@ -96,10 +96,10 @@ public final class CollectionsModelClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * (Optional, Required on create){
-     * property: String (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      * }
      * ]
      * }
@@ -124,10 +124,10 @@ public final class CollectionsModelClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProperty: String (Optional, Required on create)
-     * nullableProperty (Optional, Required on create): [
-     * (Optional, Required on create){
-     * property: String (Optional, Required on create)
+     *     requiredProperty: String (Optional, Required on create)
+     *     nullableProperty (Optional, Required on create): [
+     *          (Optional, Required on create){
+     *             property: String (Optional, Required on create)
      * }
      * ]
      * }

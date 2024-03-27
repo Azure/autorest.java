@@ -40,12 +40,12 @@ public final class PolymorphismClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
@@ -67,12 +67,12 @@ public final class PolymorphismClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
@@ -127,8 +127,8 @@ public final class PolymorphismClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fish.type: String (Required)
-     * species: String (Optional)
+     *     fish.type: String (Required)
+     *     species: String (Optional)
      * }
      * }</pre>
      * 
@@ -146,17 +146,16 @@ public final class PolymorphismClient {
     }
 
     /**
-     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * with discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the
-     * wire.
+     * Get complex object composing a polymorphic scalar property and array property with polymorphic element type, with
+     * discriminator specified. Deserialization must NOT fail and use the discriminator type specified on the wire.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * sampleSalmon (Optional): {
-     * fish.type: String (Required)
-     * species: String (Optional)
-     * location: String (Optional)
-     * iswild: Boolean (Optional)
+     *     sampleSalmon (Optional): {
+     *         fish.type: String (Required)
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      * }
      * salmons (Optional): [
      * (recursive schema, see above)
@@ -187,16 +186,15 @@ public final class PolymorphismClient {
 
     /**
      * Get complex object composing a polymorphic scalar property and array property with polymorphic element type,
-     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the
-     * property.
+     * without discriminator specified on wire. Deserialization must NOT fail and use the explicit type of the property.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * sampleSalmon (Optional): {
-     * fish.type: String (Required)
-     * species: String (Optional)
-     * location: String (Optional)
-     * iswild: Boolean (Optional)
+     *     sampleSalmon (Optional): {
+     *         fish.type: String (Required)
+     *         species: String (Optional)
+     *         location: String (Optional)
+     *         iswild: Boolean (Optional)
      * }
      * salmons (Optional): [
      * (recursive schema, see above)
@@ -230,17 +228,17 @@ public final class PolymorphismClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (Optional){
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             fishtype: String (Required)
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
+     *                 (recursive schema, see above)
+     *             ]
      * }
      * ]
      * location: String (Optional)
@@ -253,8 +251,8 @@ public final class PolymorphismClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional
-     * properties along with {@link Response}.
+     * @return complex types that are polymorphic, but not at the root of the hierarchy; also have additional properties
+     * along with {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -267,17 +265,17 @@ public final class PolymorphismClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (Optional){
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             fishtype: String (Required)
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
+     *                 (recursive schema, see above)
+     *             ]
      * }
      * ]
      * location: String (Optional)
@@ -304,17 +302,17 @@ public final class PolymorphismClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (Optional){
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             fishtype: String (Required)
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
+     *                 (recursive schema, see above)
+     *             ]
      * }
      * ]
      * location: String (Optional)
@@ -324,17 +322,17 @@ public final class PolymorphismClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (Optional){
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *          (Optional){
+     *             fishtype: String (Required)
+     *             species: String (Optional)
+     *             length: float (Required)
+     *             siblings (Optional): [
+     *                 (recursive schema, see above)
+     *             ]
      * }
      * ]
      * location: String (Optional)
@@ -363,12 +361,12 @@ public final class PolymorphismClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * fishtype: String (Required)
-     * species: String (Optional)
-     * length: float (Required)
-     * siblings (Optional): [
-     * (recursive schema, see above)
-     * ]
+     *     fishtype: String (Required)
+     *     species: String (Optional)
+     *     length: float (Required)
+     *     siblings (Optional): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 

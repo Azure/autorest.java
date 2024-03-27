@@ -45,7 +45,7 @@ public final class DecimalVerifyAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * BigDecimal (Required)
+     *     BigDecimal (Required)
      * ]
      * }</pre>
      * 

@@ -109,20 +109,18 @@ public final class LROsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>
@@ -161,20 +159,18 @@ public final class LROsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>
@@ -213,20 +209,18 @@ public final class LROsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>
@@ -265,20 +259,18 @@ public final class LROsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
      * }
      * }
      * }</pre>

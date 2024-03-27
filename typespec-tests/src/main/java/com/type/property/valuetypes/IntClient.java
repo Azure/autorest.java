@@ -41,7 +41,7 @@ public final class IntClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: int (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class IntClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: int (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 

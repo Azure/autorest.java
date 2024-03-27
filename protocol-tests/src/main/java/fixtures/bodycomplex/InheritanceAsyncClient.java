@@ -41,14 +41,14 @@ public final class InheritanceAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String (Optional)
-     * hates (Optional): [
-     * (Optional){
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * food: String (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      * }
      * ]
      * breed: String (Optional)
@@ -73,14 +73,14 @@ public final class InheritanceAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * color: String (Optional)
-     * hates (Optional): [
-     * (Optional){
-     * id: Integer (Optional)
-     * name: String (Optional)
-     * food: String (Optional)
+     *     id: Integer (Optional)
+     *     name: String (Optional)
+     *     color: String (Optional)
+     *     hates (Optional): [
+     *          (Optional){
+     *             id: Integer (Optional)
+     *             name: String (Optional)
+     *             food: String (Optional)
      * }
      * ]
      * breed: String (Optional)

@@ -41,9 +41,9 @@ public final class ExtendsModelClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * (Optional): {
-     * String (Required): {
-     * state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
      * }
      * }
      * }
@@ -67,9 +67,9 @@ public final class ExtendsModelClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * (Optional): {
-     * String (Required): {
-     * state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
      * }
      * }
      * }

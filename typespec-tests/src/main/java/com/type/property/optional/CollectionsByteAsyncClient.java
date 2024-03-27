@@ -43,9 +43,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * byte[] (Optional)
-     * ]
+     *     property (Optional): [
+     *         byte[] (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -68,9 +68,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * byte[] (Optional)
-     * ]
+     *     property (Optional): [
+     *         byte[] (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -93,9 +93,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * byte[] (Optional)
-     * ]
+     *     property (Optional): [
+     *         byte[] (Optional)
+     *     ]
      * }
      * }</pre>
      * 
@@ -118,9 +118,9 @@ public final class CollectionsByteAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property (Optional): [
-     * byte[] (Optional)
-     * ]
+     *     property (Optional): [
+     *         byte[] (Optional)
+     *     ]
      * }
      * }</pre>
      * 

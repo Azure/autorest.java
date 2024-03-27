@@ -59,26 +59,26 @@ public final class OptionalClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * boolean: Boolean (Optional)
-     * booleanNullable: Boolean (Optional)
-     * booleanRequired: boolean (Required)
-     * booleanRequiredNullable: Boolean (Required)
-     * string: String (Optional)
-     * stringNullable: String (Optional)
-     * stringRequired: String (Required)
-     * stringRequiredNullable: String (Required)
-     * bytes: byte[] (Optional)
-     * int: Integer (Optional)
-     * long: Long (Optional)
-     * float: Double (Optional)
-     * double: Double (Optional)
-     * duration: Duration (Optional)
-     * dateTime: OffsetDateTime (Optional)
-     * stringList (Optional): [
-     * String (Optional)
-     * ]
-     * bytesDict (Optional): {
-     * String: byte[] (Required)
+     *     boolean: Boolean (Optional)
+     *     booleanNullable: Boolean (Optional)
+     *     booleanRequired: boolean (Required)
+     *     booleanRequiredNullable: Boolean (Required)
+     *     string: String (Optional)
+     *     stringNullable: String (Optional)
+     *     stringRequired: String (Required)
+     *     stringRequiredNullable: String (Required)
+     *     bytes: byte[] (Optional)
+     *     int: Integer (Optional)
+     *     long: Long (Optional)
+     *     float: Double (Optional)
+     *     double: Double (Optional)
+     *     duration: Duration (Optional)
+     *     dateTime: OffsetDateTime (Optional)
+     *     stringList (Optional): [
+     *         String (Optional)
+     *     ]
+     *     bytesDict (Optional): {
+     *         String: byte[] (Required)
      * }
      * epochDateTimeRequiredNullable: Long (Required)
      * epochDateTimeNullable: Long (Optional)
@@ -87,26 +87,26 @@ public final class OptionalClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * boolean: Boolean (Optional)
-     * booleanNullable: Boolean (Optional)
-     * booleanRequired: Boolean (Optional)
-     * booleanRequiredNullable: Boolean (Optional)
-     * string: String (Optional)
-     * stringNullable: String (Optional)
-     * stringRequired: String (Optional)
-     * stringRequiredNullable: String (Optional)
-     * bytes: byte[] (Optional)
-     * int: Integer (Optional)
-     * long: Long (Optional)
-     * float: Double (Optional)
-     * double: Double (Optional)
-     * duration: Duration (Optional)
-     * dateTime: OffsetDateTime (Optional)
-     * stringList (Optional): [
-     * String (Optional)
-     * ]
-     * bytesDict (Optional): {
-     * String: byte[] (Required)
+     *     boolean: Boolean (Optional)
+     *     booleanNullable: Boolean (Optional)
+     *     booleanRequired: Boolean (Optional)
+     *     booleanRequiredNullable: Boolean (Optional)
+     *     string: String (Optional)
+     *     stringNullable: String (Optional)
+     *     stringRequired: String (Optional)
+     *     stringRequiredNullable: String (Optional)
+     *     bytes: byte[] (Optional)
+     *     int: Integer (Optional)
+     *     long: Long (Optional)
+     *     float: Double (Optional)
+     *     double: Double (Optional)
+     *     duration: Duration (Optional)
+     *     dateTime: OffsetDateTime (Optional)
+     *     stringList (Optional): [
+     *         String (Optional)
+     *     ]
+     *     bytesDict (Optional): {
+     *         String: byte[] (Required)
      * }
      * epochDateTimeRequiredNullable: Long (Optional)
      * epochDateTimeNullable: Long (Optional)

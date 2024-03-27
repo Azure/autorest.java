@@ -41,7 +41,7 @@ public final class UnionFloatLiteralClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(43.125/46.875) (Required)
+     *     property: String(43.125/46.875) (Required)
      * }
      * }</pre>
      * 
@@ -63,7 +63,7 @@ public final class UnionFloatLiteralClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * property: String(43.125/46.875) (Required)
+     *     property: String(43.125/46.875) (Required)
      * }
      * }</pre>
      * 

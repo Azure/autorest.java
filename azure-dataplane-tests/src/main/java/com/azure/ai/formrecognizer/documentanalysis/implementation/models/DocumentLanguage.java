@@ -18,8 +18,7 @@ import java.util.List;
 @Fluent
 public final class DocumentLanguage implements JsonSerializable<DocumentLanguage> {
     /*
-     * Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47 language tag (ex.
-     * "zh-Hans").
+     * Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47 language tag (ex. "zh-Hans").
      */
     private String locale;
 
@@ -40,7 +39,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
     }
 
     /**
-     * Get the locale property: Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47
+     * Get the locale property: Detected language. Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47
      * language tag (ex. "zh-Hans").
      * 
      * @return the locale value.
@@ -50,7 +49,7 @@ public final class DocumentLanguage implements JsonSerializable<DocumentLanguage
     }
 
     /**
-     * Set the locale property: Detected language.  Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47
+     * Set the locale property: Detected language. Value may an ISO 639-1 language code (ex. "en", "fr") or BCP 47
      * language tag (ex. "zh-Hans").
      * 
      * @param locale the locale value to set.

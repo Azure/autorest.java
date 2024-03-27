@@ -43,7 +43,7 @@ public final class UsageClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProp: String (Required)
+     *     requiredProp: String (Required)
      * }
      * }</pre>
      * 
@@ -66,7 +66,7 @@ public final class UsageClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProp: String (Required)
+     *     requiredProp: String (Required)
      * }
      * }</pre>
      * 
@@ -88,13 +88,13 @@ public final class UsageClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProp: String (Required)
+     *     requiredProp: String (Required)
      * }
      * }</pre>
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * requiredProp: String (Required)
+     *     requiredProp: String (Required)
      * }
      * }</pre>
      * 

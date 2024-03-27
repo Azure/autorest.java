@@ -1348,7 +1348,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1369,7 +1369,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1390,7 +1390,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1408,7 +1408,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1427,7 +1427,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1448,7 +1448,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1464,7 +1464,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1483,7 +1483,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1502,7 +1502,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1518,7 +1518,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1535,7 +1535,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1554,7 +1554,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

@@ -678,8 +678,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -702,8 +702,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -727,8 +727,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -746,8 +746,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -764,8 +764,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.
@@ -785,8 +785,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -800,8 +800,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @throws CloudErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -814,8 +814,8 @@ public final class LrosaDs {
     }
 
     /**
-     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated
-     * in the Azure-AsyncOperation header for operation status.
+     * Long running put request, service returns a 200 with ProvisioningState=’Creating’. Poll the endpoint indicated in
+     * the Azure-AsyncOperation header for operation status.
      * 
      * @param product Product to put.
      * @param context The context to associate with this operation.

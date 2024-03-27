@@ -921,8 +921,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null integer value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null integer value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getIntNullWithResponseAsync(RequestOptions requestOptions) {
@@ -997,8 +997,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '-10000000000' 64 bit integer value along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> getNegativeTenBillionWithResponseAsync(RequestOptions requestOptions) {
@@ -1161,8 +1160,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> floatNullWithResponseAsync(RequestOptions requestOptions) {
@@ -1281,8 +1280,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return null numeric value (no query parameter) along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> doubleNullWithResponseAsync(RequestOptions requestOptions) {
@@ -1322,8 +1321,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '啊齄丂狛狜隣郎隣兀﨩' multi-byte string value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUnicodeWithResponseAsync(RequestOptions requestOptions) {
@@ -1358,8 +1357,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return 'begin!*'();:&#064; &amp;=+$,/?#[]end along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> stringUrlEncodedWithResponseAsync(RequestOptions requestOptions) {
@@ -1474,8 +1473,8 @@ public final class QueriesImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color",
-     * "green color", "blue color".</td></tr>
+     * <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green
+     * color", "blue color".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1500,8 +1499,8 @@ public final class QueriesImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color",
-     * "green color", "blue color".</td></tr>
+     * <tr><td>enumQuery</td><td>String</td><td>No</td><td>'green color' enum value. Allowed values: "red color", "green
+     * color", "blue color".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1752,8 +1751,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return null as date - this should result in no query parameters in uri along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return null as date - this should result in no query parameters in uri along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateNullWithResponseAsync(RequestOptions requestOptions) {
@@ -1793,8 +1792,7 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return '2012-01-01T01:01:01Z' as date-time along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> dateTimeValidWithResponseAsync(RequestOptions requestOptions) {
@@ -1827,8 +1825,7 @@ public final class QueriesImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query
-     * parameters)</td></tr>
+     * <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1853,8 +1850,7 @@ public final class QueriesImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query
-     * parameters)</td></tr>
+     * <tr><td>dateTimeQuery</td><td>OffsetDateTime</td><td>No</td><td>null as date-time (no query parameters)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -1889,8 +1885,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvValidWithResponseAsync(RequestOptions requestOptions) {
@@ -1917,8 +1913,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * csv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the csv-array
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringCsvValidWithResponse(RequestOptions requestOptions) {
@@ -1942,8 +1938,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a null array of string using the csv-array format along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return a null array of string using the csv-array format along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringCsvNullWithResponseAsync(RequestOptions requestOptions) {
@@ -2096,8 +2092,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringSsvValidWithResponseAsync(RequestOptions requestOptions) {
@@ -2124,8 +2120,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * ssv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the ssv-array
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringSsvValidWithResponse(RequestOptions requestOptions) {
@@ -2151,8 +2147,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format along with {@link Response} on successful completion of {@link Mono}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> arrayStringTsvValidWithResponseAsync(RequestOptions requestOptions) {
@@ -2179,8 +2175,8 @@ public final class QueriesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the
-     * tsv-array format along with {@link Response}.
+     * @return an array of string ['ArrayQuery1', 'begin!*'();:&#064; &amp;=+$,/?#[]end' , null, ''] using the tsv-array
+     * format along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> arrayStringTsvValidWithResponse(RequestOptions requestOptions) {

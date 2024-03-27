@@ -206,7 +206,7 @@ public final class LroRetrysImpl {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -219,10 +219,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -236,10 +236,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -273,7 +273,7 @@ public final class LroRetrysImpl {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -286,10 +286,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -303,10 +303,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -339,7 +339,7 @@ public final class LroRetrysImpl {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -352,10 +352,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -369,10 +369,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -405,7 +405,7 @@ public final class LroRetrysImpl {
 
     /**
      * Long running put request, service returns a 500, then a 201 to the initial request, with an entity that contains
-     * ProvisioningState=’Creating’.  Polls return this value until the last poll returns a ‘200’ with
+     * ProvisioningState=’Creating’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
@@ -418,10 +418,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -435,10 +435,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -484,10 +484,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -501,10 +501,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -551,10 +551,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -568,10 +568,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -618,10 +618,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -635,10 +635,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -684,10 +684,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -701,10 +701,10 @@ public final class LroRetrysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -736,16 +736,16 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -773,16 +773,16 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -809,16 +809,16 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -851,16 +851,16 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running delete request, service returns a 500, then a  202 to the initial request, with an entity that
-     * contains ProvisioningState=’Accepted’.  Polls return this value until the last poll returns a ‘200’ with
+     * Long running delete request, service returns a 500, then a 202 to the initial request, with an entity that
+     * contains ProvisioningState=’Accepted’. Polls return this value until the last poll returns a ‘200’ with
      * ProvisioningState=’Succeeded’.
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1066,10 +1066,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1115,10 +1115,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1163,10 +1163,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1210,10 +1210,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1244,9 +1244,9 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1258,10 +1258,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1294,9 +1294,9 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1308,10 +1308,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1344,9 +1344,9 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1358,10 +1358,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)
@@ -1393,9 +1393,9 @@ public final class LroRetrysImpl {
     }
 
     /**
-     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that
-     * contains ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for
-     * operation status.
+     * Long running post request, service returns a 500, then a 202 to the initial request, with an entity that contains
+     * ProvisioningState=’Creating’. Poll the endpoint indicated in the Azure-AsyncOperation header for operation
+     * status.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -1407,10 +1407,10 @@ public final class LroRetrysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * id: String (Optional)
-     * type: String (Optional)
-     * tags (Optional): {
-     * String: String (Required)
+     *     id: String (Optional)
+     *     type: String (Optional)
+     *     tags (Optional): {
+     *         String: String (Required)
      * }
      * location: String (Optional)
      * name: String (Optional)

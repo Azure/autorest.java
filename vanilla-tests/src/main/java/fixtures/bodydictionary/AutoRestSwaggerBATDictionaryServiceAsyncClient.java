@@ -176,8 +176,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return dictionary with key as empty string along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return dictionary with key as empty string along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -328,8 +327,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' on successful completion of {@link
-     * Mono}.
+     * @return boolean dictionary value '{"0": true, "1": "boolean", "2": false}' on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -399,8 +398,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return integer dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response} on successful
-     * completion of {@link Mono}.
+     * @return integer dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -510,8 +509,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return long dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response} on successful completion
-     * of {@link Mono}.
+     * @return long dictionary value {"0": 1, "1": null, "2": 0} along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -786,8 +785,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -800,8 +799,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} on successful completion of {@link
-     * Mono}.
+     * @return string dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -898,8 +896,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return integer dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"} along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -922,7 +920,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * 
      * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -937,7 +935,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * 
      * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1037,7 +1035,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
      * 
      * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
@@ -1054,7 +1052,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Set dictionary value  {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
+     * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
      * 
      * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
@@ -1116,8 +1114,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} on successful completion of {@link
-     * Mono}.
+     * @return date dictionary value {"0": "2000-12-01t00:00:01z", "1": "date-time"} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1131,9 +1129,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980
-     * 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1147,8 +1144,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980
-     * 00:11:35 GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} on successful completion of {@link Mono}.
+     * @return date-time-rfc1123 dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
+     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1219,7 +1216,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * 
      * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1234,7 +1231,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Set dictionary value  {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * 
      * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1331,8 +1328,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded on
-     * successful completion of {@link Mono}.
+     * @return byte dictionary value {"0": hex(FF FF FF FA), "1": null} with the first item base64 encoded on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1341,8 +1338,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
-     * "Lorem ipsum"}.
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
+     * ipsum"}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1356,8 +1353,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2":
-     * "Lorem ipsum"}.
+     * Get base64url dictionary value {"0": "a string that gets encoded with base64url", "1": "test string", "2": "Lorem
+     * ipsum"}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1375,8 +1372,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return dictionary of complex type null value along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return dictionary of complex type null value along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1402,8 +1399,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty dictionary of complex type {} along with {@link Response} on successful completion of {@link
-     * Mono}.
+     * @return empty dictionary of complex type {} along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1425,8 +1421,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer":
-     * 5, "string": "6"}}.
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
+     * "string": "6"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1440,8 +1436,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer":
-     * 5, "string": "6"}}.
+     * Get dictionary of complex type with null item {"0": {"integer": 1, "string": "2"}, "1": null, "2": {"integer": 5,
+     * "string": "6"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1460,8 +1456,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2":
-     * {"integer": 5, "string": "6"}} along with {@link Response} on successful completion of {@link Mono}.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
+     * 5, "string": "6"}} along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1475,8 +1471,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2":
-     * {"integer": 5, "string": "6"}} on successful completion of {@link Mono}.
+     * @return dictionary of complex type with empty item {"0": {"integer": 1, "string": "2"}, "1:" {}, "2": {"integer":
+     * 5, "string": "6"}} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1485,8 +1481,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
-     * "2": {"integer": 5, "string": "6"}}.
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
+     * {"integer": 5, "string": "6"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1500,8 +1496,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"},
-     * "2": {"integer": 5, "string": "6"}}.
+     * Get dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string": "4"}, "2":
+     * {"integer": 5, "string": "6"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1633,8 +1629,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with {@link
-     * Response} on successful completion of {@link Mono}.
+     * @return an array of array of strings [{"0": ["1", "2", "3"], "1": [], "2": ["7", "8", "9"]} along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1687,8 +1683,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * 
-     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8",
-     * "9"]}.
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1703,8 +1698,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * 
-     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8",
-     * "9"]}.
+     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1772,8 +1766,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1788,14 +1782,14 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} on successful completion of {@link
-     * Mono}.
+     * "3": "three"}, "1": null, "2": {"7": "seven", "8": "eight", "9": "nine"}} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1804,14 +1798,14 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response} on
-     * successful completion of {@link Mono}.
+     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1820,14 +1814,13 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} on successful completion of {@link
-     * Mono}.
+     * "3": "three"}, "1": {}, "2": {"7": "seven", "8": "eight", "9": "nine"}} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1836,14 +1829,14 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
-     * along with {@link Response} on successful completion of {@link Mono}.
+     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along
+     * with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1852,8 +1845,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1868,8 +1861,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
      * "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
@@ -1878,8 +1871,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
      * @return an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}
-     * along with {@link Response} on successful completion of {@link Mono}.
+     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}} along
+     * with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -1888,8 +1881,8 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     }
 
     /**
-     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two",
-     * "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
+     * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
+     * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
      * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
      * "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":

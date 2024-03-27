@@ -605,7 +605,6 @@ public final class Optional implements JsonSerializable<Optional> {
                         epochDateTimeRequiredNullable = OffsetDateTime
                             .ofInstant(Instant.ofEpochSecond(epochDateTimeRequiredNullableHolder), ZoneOffset.UTC);
                     }
-
                 } else if ("boolean".equals(fieldName)) {
                     booleanProperty = reader.getNullable(JsonReader::getBoolean);
                 } else if ("booleanNullable".equals(fieldName)) {

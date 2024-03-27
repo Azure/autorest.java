@@ -44,7 +44,7 @@ public final class UnknownValueAsyncClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * [
-     * Object (Required)
+     *     Object (Required)
      * ]
      * }</pre>
      * 
@@ -66,7 +66,7 @@ public final class UnknownValueAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * [
-     * Object (Required)
+     *     Object (Required)
      * ]
      * }</pre>
      * 

@@ -72,8 +72,8 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     }
 
     /**
-     * The interface defining all the services for LegacyClientCreateResourcePollViaOperationLocations to be used by
-     * the proxy service to perform REST calls.
+     * The interface defining all the services for LegacyClientCreateResourcePollViaOperationLocations to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "LegacyClientCreateRe")
@@ -122,21 +122,21 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * jobId: String (Required)
-     * comment: String (Required)
-     * status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
-     * errors (Optional): [
-     * (Optional){
-     * error (Required): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * innererror (Optional): {
-     * code: String (Optional)
-     * innererror (Optional): (recursive schema, see innererror above)
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Optional): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Optional)
+     *                     innererror (Optional): (recursive schema, see innererror above)
      * }
      * }
      * }
@@ -167,21 +167,21 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * jobId: String (Required)
-     * comment: String (Required)
-     * status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
-     * errors (Optional): [
-     * (Optional){
-     * error (Required): {
-     * code: String (Required)
-     * message: String (Required)
-     * target: String (Optional)
-     * details (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * innererror (Optional): {
-     * code: String (Optional)
-     * innererror (Optional): (recursive schema, see innererror above)
+     *     jobId: String (Required)
+     *     comment: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled/partiallyCompleted) (Required)
+     *     errors (Optional): [
+     *          (Optional){
+     *             error (Required): {
+     *                 code: String (Required)
+     *                 message: String (Required)
+     *                 target: String (Optional)
+     *                 details (Optional): [
+     *                     (recursive schema, see above)
+     *                 ]
+     *                 innererror (Optional): {
+     *                     code: String (Optional)
+     *                     innererror (Optional): (recursive schema, see innererror above)
      * }
      * }
      * }
@@ -212,7 +212,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * comment: String (Required)
+     *     comment: String (Required)
      * }
      * }</pre>
      * 
@@ -236,7 +236,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * comment: String (Required)
+     *     comment: String (Required)
      * }
      * }</pre>
      * 
@@ -260,7 +260,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * comment: String (Required)
+     *     comment: String (Required)
      * }
      * }</pre>
      * 
@@ -289,7 +289,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * comment: String (Required)
+     *     comment: String (Required)
      * }
      * }</pre>
      * 
@@ -318,7 +318,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * comment: String (Required)
+     *     comment: String (Required)
      * }
      * }</pre>
      * 
@@ -347,7 +347,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * comment: String (Required)
+     *     comment: String (Required)
      * }
      * }</pre>
      * 

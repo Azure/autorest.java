@@ -100,9 +100,9 @@ public final class IsModelArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String (Required): [
-     * (Required){
-     * state: String (Required)
+     *     String (Required): [
+     *          (Required){
+     *             state: String (Required)
      * }
      * ]
      * }
@@ -126,9 +126,9 @@ public final class IsModelArraysImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String (Required): [
-     * (Required){
-     * state: String (Required)
+     *     String (Required): [
+     *          (Required){
+     *             state: String (Required)
      * }
      * ]
      * }
@@ -152,9 +152,9 @@ public final class IsModelArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String (Required): [
-     * (Required){
-     * state: String (Required)
+     *     String (Required): [
+     *          (Required){
+     *             state: String (Required)
      * }
      * ]
      * }
@@ -179,9 +179,9 @@ public final class IsModelArraysImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     * String (Required): [
-     * (Required){
-     * state: String (Required)
+     *     String (Required): [
+     *          (Required){
+     *             state: String (Required)
      * }
      * ]
      * }

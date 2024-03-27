@@ -202,8 +202,8 @@ public final class AutoRestAzureSpecialParametersTestClient {
     /**
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      * 
-     * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value
-     * is always '1234-5678-9012-3456'.
+     * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is
+     * always '1234-5678-9012-3456'.
      * @param host server parameter.
      * @param apiVersion Api Version.
      */
@@ -216,8 +216,8 @@ public final class AutoRestAzureSpecialParametersTestClient {
      * Initializes an instance of AutoRestAzureSpecialParametersTestClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value
-     * is always '1234-5678-9012-3456'.
+     * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is
+     * always '1234-5678-9012-3456'.
      * @param host server parameter.
      * @param apiVersion Api Version.
      */
@@ -231,8 +231,8 @@ public final class AutoRestAzureSpecialParametersTestClient {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value
-     * is always '1234-5678-9012-3456'.
+     * @param subscriptionId The subscription id, which appears in the path, always modeled in credentials. The value is
+     * always '1234-5678-9012-3456'.
      * @param host server parameter.
      * @param apiVersion Api Version.
      */

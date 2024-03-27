@@ -65,8 +65,8 @@ public final class ResiliencyServiceDrivenClientImpl {
     private final String serviceDeploymentVersion;
 
     /**
-     * Gets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for
-     * the deployment when the service had only one api version. 'v2' is for the deployment when the service had
+     * Gets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
+     * deployment when the service had only one api version. 'v2' is for the deployment when the service had
      * api-versions 'v1' and 'v2'.
      * 
      * @return the serviceDeploymentVersion value.
@@ -122,8 +122,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      * 
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
-     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment
-     * when the service had api-versions 'v1' and 'v2'.
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(String endpoint, String serviceDeploymentVersion,
@@ -138,8 +138,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
-     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment
-     * when the service had api-versions 'v1' and 'v2'.
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, String endpoint,
@@ -155,8 +155,8 @@ public final class ResiliencyServiceDrivenClientImpl {
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
-     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment
-     * when the service had api-versions 'v1' and 'v2'.
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
