@@ -15,7 +15,7 @@ using Azure.ClientGenerator.Core;
 namespace Cadl.Naming;
 
 @summary("summary of Response")
-@doc("description of Response")
+@doc("description of Response. Include tab '	' in doc.")
 @friendlyName("DataResponse")
 model Response {
   @summary("summary of name property")

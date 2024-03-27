@@ -31,6 +31,8 @@ public class JavaJavadocComment {
         if (text != null) {
             // escape the "@"
             text = ESCAPE_AT.matcher(text).replaceAll("&#064;");
+            // escape tab
+            text = text.replace("\t", " ");
         }
         return CodeNamer.escapeComment(text);
     }
