@@ -19,9 +19,6 @@ extends:
               image: $(LINUXVMIMAGE)
               os: linux
 
-            variables:
-              - group: Release Secrets for GitHub
-
             timeoutInMinutes: 30
 
             steps:
