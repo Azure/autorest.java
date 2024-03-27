@@ -39,15 +39,18 @@ public final class CollectionsModelClient {
     /**
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Optional): [
      *          (Optional){
      *             property: String (Optional)
+     *         }
+     *     ]
      * }
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -65,15 +68,18 @@ public final class CollectionsModelClient {
     /**
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Optional): [
      *          (Optional){
      *             property: String (Optional)
+     *         }
+     *     ]
      * }
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -91,15 +97,18 @@ public final class CollectionsModelClient {
     /**
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Optional): [
      *          (Optional){
      *             property: String (Optional)
+     *         }
+     *     ]
      * }
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -118,15 +127,18 @@ public final class CollectionsModelClient {
     /**
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Optional): [
      *          (Optional){
      *             property: String (Optional)
+     *         }
+     *     ]
      * }
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

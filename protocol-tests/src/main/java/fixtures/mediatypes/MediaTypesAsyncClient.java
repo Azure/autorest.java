@@ -39,13 +39,20 @@ public final class MediaTypesAsyncClient {
     /**
      * Analyze body, that could be different media types.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -64,9 +71,12 @@ public final class MediaTypesAsyncClient {
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -94,13 +104,20 @@ public final class MediaTypesAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -119,13 +136,20 @@ public final class MediaTypesAsyncClient {
      * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
      * byte stream of 'hello, world!' for application/octet-stream.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
@@ -147,13 +171,20 @@ public final class MediaTypesAsyncClient {
      * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
      * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream",
      * "text/plain".
@@ -178,13 +209,20 @@ public final class MediaTypesAsyncClient {
      * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
      * 'application/octet-stream'.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType The content type. Allowed values: "application/octet-stream", "text/plain",
      * "application/json".
@@ -206,13 +244,20 @@ public final class MediaTypesAsyncClient {
     /**
      * Body that's either text/plain or application/json.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param message The payload body.

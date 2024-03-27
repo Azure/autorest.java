@@ -254,12 +254,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Receive model with extensible enum discriminator type.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -278,12 +281,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Receive model with extensible enum discriminator type.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -301,12 +307,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Send model with extensible enum discriminator type.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input Dog to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -325,12 +334,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Send model with extensible enum discriminator type.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input Dog to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -349,12 +361,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model omitting the discriminator.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -374,12 +389,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model omitting the discriminator.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -397,12 +415,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model containing discriminator value never defined.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -423,12 +444,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model containing discriminator value never defined.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(golden) (Required)
      *     weight: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -446,12 +470,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Receive model with fixed enum discriminator type.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -470,12 +497,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Receive model with fixed enum discriminator type.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -493,12 +523,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Send model with fixed enum discriminator type.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input Snake to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -517,12 +550,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Send model with fixed enum discriminator type.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input Snake to create.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -541,12 +577,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model omitting the discriminator.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -566,12 +605,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model omitting the discriminator.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -589,12 +631,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model containing discriminator value never defined.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -614,12 +659,15 @@ public final class EnumDiscriminatorClientImpl {
     /**
      * Get a model containing discriminator value never defined.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String(cobra) (Required)
      *     length: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

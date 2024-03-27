@@ -162,11 +162,14 @@ public final class UsageClientImpl {
     /**
      * The input operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input Record used in operation parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -185,11 +188,14 @@ public final class UsageClientImpl {
     /**
      * The input operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input Record used in operation parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -208,11 +214,14 @@ public final class UsageClientImpl {
     /**
      * The output operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -231,11 +240,14 @@ public final class UsageClientImpl {
     /**
      * The output operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -253,17 +265,24 @@ public final class UsageClientImpl {
     /**
      * The inputAndOutput operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Record used both as operation parameter and return type.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -283,17 +302,24 @@ public final class UsageClientImpl {
     /**
      * The inputAndOutput operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     requiredProp: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Record used both as operation parameter and return type.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

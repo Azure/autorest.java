@@ -340,9 +340,12 @@ public final class EnumServiceClientImpl {
     /**
      * enums required body operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param bodyRequiredEnum body required enum.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -362,9 +365,12 @@ public final class EnumServiceClientImpl {
     /**
      * enums required body operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String(test1/test2/test@</spec.,i`~!&*-al@char/>)
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param bodyRequiredEnum body required enum.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -390,9 +396,12 @@ public final class EnumServiceClientImpl {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String(test1/test2)
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -424,9 +433,12 @@ public final class EnumServiceClientImpl {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String(test1/test2)
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

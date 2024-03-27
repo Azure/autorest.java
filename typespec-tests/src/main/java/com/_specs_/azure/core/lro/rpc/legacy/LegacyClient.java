@@ -41,7 +41,9 @@ public final class LegacyClient {
     /**
      * Poll a Job.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     jobId: String (Required)
      *     comment: String (Required)
@@ -58,15 +60,16 @@ public final class LegacyClient {
      *                 innererror (Optional): {
      *                     code: String (Optional)
      *                     innererror (Optional): (recursive schema, see innererror above)
+     *                 }
+     *             }
+     *         }
+     *     ]
+     *     results (Optional): [
+     *         String (Optional)
+     *     ]
      * }
-     * }
-     * }
-     * ]
-     * results (Optional): [
-     * String (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param jobId A processing job identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -85,11 +88,14 @@ public final class LegacyClient {
     /**
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     comment: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

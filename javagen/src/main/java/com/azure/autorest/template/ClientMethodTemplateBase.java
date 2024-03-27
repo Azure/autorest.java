@@ -194,9 +194,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             return;
         }
         commentBlock.line("<p><strong>Request Body Schema</strong></p>");
-        commentBlock.line("<pre>{@code");
+        commentBlock.line("<pre><code>");
         bodySchemaJavadoc(requestBodyType, commentBlock, "", null, typesInJavadoc, isBodyParamRequired, isBodyParamRequired, true);
-        commentBlock.line("}</pre>");
+        commentBlock.line("</code></pre>");
     }
 
     private static void responseBodySchemaJavadoc(IType responseBodyType, JavaJavadocComment commentBlock, Set<IType> typesInJavadoc) {
@@ -206,9 +206,9 @@ public abstract class ClientMethodTemplateBase implements IJavaTemplate<ClientMe
             return;
         }
         commentBlock.line("<p><strong>Response Body Schema</strong></p>");
-        commentBlock.line("<pre>{@code");
+        commentBlock.line("<pre><code>");
         bodySchemaJavadoc(responseBodyType, commentBlock, "", null, typesInJavadoc, true, true, true);
-        commentBlock.line("}</pre>");
+        commentBlock.line("</code></pre>");
     }
 
     private static void bodySchemaJavadoc(IType type, JavaJavadocComment commentBlock, String indent, String name, Set<IType> typesInJavadoc,

@@ -168,13 +168,16 @@ public final class FirstClientImpl {
     /**
      * Resource read operation template.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     type: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -194,13 +197,16 @@ public final class FirstClientImpl {
     /**
      * Resource read operation template.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     type: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param name A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

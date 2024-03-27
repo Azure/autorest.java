@@ -42,11 +42,14 @@ public final class ModelsOnlyAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     prop: BinaryData (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,11 +67,14 @@ public final class ModelsOnlyAsyncClient {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     prop: BinaryData (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

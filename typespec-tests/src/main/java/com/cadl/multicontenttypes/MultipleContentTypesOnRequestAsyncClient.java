@@ -41,9 +41,12 @@ public final class MultipleContentTypesOnRequestAsyncClient {
     /**
      * one data type maps to multiple content types.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
      * "image/png".
@@ -67,9 +70,12 @@ public final class MultipleContentTypesOnRequestAsyncClient {
     /**
      * multiple data types map to multiple content types using shared route.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
      * "image/png".
@@ -93,12 +99,15 @@ public final class MultipleContentTypesOnRequestAsyncClient {
     /**
      * multiple data types map to multiple content types using shared route.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -119,9 +128,12 @@ public final class MultipleContentTypesOnRequestAsyncClient {
     /**
      * multiple data types map to multiple content types using shared route.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
      * "image/jpeg", "image/png".

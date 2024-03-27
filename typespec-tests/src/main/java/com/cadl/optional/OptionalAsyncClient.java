@@ -59,7 +59,9 @@ public final class OptionalAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     boolean: Boolean (Optional)
      *     booleanNullable: Boolean (Optional)
@@ -81,13 +83,17 @@ public final class OptionalAsyncClient {
      *     ]
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
+     *     }
+     *     epochDateTimeRequiredNullable: Long (Required)
+     *     epochDateTimeNullable: Long (Optional)
      * }
-     * epochDateTimeRequiredNullable: Long (Required)
-     * epochDateTimeNullable: Long (Optional)
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     boolean: Boolean (Optional)
      *     booleanNullable: Boolean (Optional)
@@ -109,15 +115,16 @@ public final class OptionalAsyncClient {
      *     ]
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
+     *     }
+     *     epochDateTimeRequiredNullable: Long (Optional)
+     *     epochDateTimeNullable: Long (Optional)
+     *     immutable (Optional): {
+     *         stringReadWriteRequired: String (Required)
+     *         stringReadOnlyOptional: String (Optional)
+     *     }
      * }
-     * epochDateTimeRequiredNullable: Long (Optional)
-     * epochDateTimeNullable: Long (Optional)
-     * immutable (Optional): {
-     * stringReadWriteRequired: String (Required)
-     * stringReadOnlyOptional: String (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestHeaderRequired A sequence of textual characters.
      * @param booleanRequired Boolean with `true` and `false` values.

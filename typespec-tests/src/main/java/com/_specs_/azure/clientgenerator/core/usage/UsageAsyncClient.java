@@ -47,11 +47,14 @@ public final class UsageAsyncClient {
      * }
      * ```.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Usage override to roundtrip.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -75,11 +78,14 @@ public final class UsageAsyncClient {
      * }
      * ```.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

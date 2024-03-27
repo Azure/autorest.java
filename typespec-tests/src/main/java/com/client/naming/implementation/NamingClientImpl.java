@@ -335,11 +335,14 @@ public final class NamingClientImpl {
     /**
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     defaultName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param clientNameModel The clientNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -358,11 +361,14 @@ public final class NamingClientImpl {
     /**
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     defaultName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param clientNameModel The clientNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -381,11 +387,14 @@ public final class NamingClientImpl {
     /**
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     defaultName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param languageClientNameModel The languageClientNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -406,11 +415,14 @@ public final class NamingClientImpl {
     /**
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     defaultName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param languageClientNameModel The languageClientNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -429,11 +441,14 @@ public final class NamingClientImpl {
     /**
      * The compatibleWithEncodedName operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     wireName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -454,11 +469,14 @@ public final class NamingClientImpl {
     /**
      * The compatibleWithEncodedName operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     wireName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param clientNameAndJsonEncodedNameModel The clientNameAndJsonEncodedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

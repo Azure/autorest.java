@@ -49,39 +49,44 @@ public final class LrosCustomHeaderClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
      *         String: String (Required)
+     *     }
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     }
      * }
-     * location: String (Optional)
-     * name: String (Optional)
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
      *         String: String (Required)
+     *     }
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     }
      * }
-     * location: String (Optional)
-     * name: String (Optional)
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -110,39 +115,44 @@ public final class LrosCustomHeaderClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
      *         String: String (Required)
+     *     }
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     }
      * }
-     * location: String (Optional)
-     * name: String (Optional)
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
      *         String: String (Required)
+     *     }
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     }
      * }
-     * location: String (Optional)
-     * name: String (Optional)
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -170,22 +180,24 @@ public final class LrosCustomHeaderClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
      *         String: String (Required)
+     *     }
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     }
      * }
-     * location: String (Optional)
-     * name: String (Optional)
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -214,22 +226,24 @@ public final class LrosCustomHeaderClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Optional)
      *     type: String (Optional)
      *     tags (Optional): {
      *         String: String (Required)
+     *     }
+     *     location: String (Optional)
+     *     name: String (Optional)
+     *     properties (Optional): {
+     *         provisioningState: String (Optional)
+     *         provisioningStateValues: String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
+     *     }
      * }
-     * location: String (Optional)
-     * name: String (Optional)
-     * properties (Optional): {
-     * provisioningState: String (Optional)
-     * provisioningStateValues:
-     * String(Succeeded/Failed/canceled/Accepted/Creating/Created/Updating/Updated/Deleting/Deleted/OK) (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

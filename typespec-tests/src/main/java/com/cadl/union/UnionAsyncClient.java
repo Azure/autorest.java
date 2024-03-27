@@ -47,14 +47,17 @@ public final class UnionAsyncClient {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     user (Optional): {
      *         user: String (Required)
+     *     }
+     *     input: BinaryData (Required)
      * }
-     * input: BinaryData (Required)
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
@@ -81,18 +84,21 @@ public final class UnionAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     user (Optional): {
      *         user: String (Required)
+     *     }
+     *     input: String (Required)
+     *     dataInt: int (Required)
+     *     dataUnion: BinaryData (Optional)
+     *     dataLong: Long (Optional)
+     *     data_float: Double (Optional)
      * }
-     * input: String (Required)
-     * dataInt: int (Required)
-     * dataUnion: BinaryData (Optional)
-     * dataLong: Long (Optional)
-     * data_float: Double (Optional)
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param id A sequence of textual characters.
      * @param request The request parameter.
@@ -135,7 +141,9 @@ public final class UnionAsyncClient {
     /**
      * A long-running remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -146,9 +154,10 @@ public final class UnionAsyncClient {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

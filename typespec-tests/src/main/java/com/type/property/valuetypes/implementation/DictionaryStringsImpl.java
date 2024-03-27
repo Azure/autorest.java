@@ -98,13 +98,16 @@ public final class DictionaryStringsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Required): {
      *         String: String (Required)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -122,13 +125,16 @@ public final class DictionaryStringsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Required): {
      *         String: String (Required)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -146,13 +152,16 @@ public final class DictionaryStringsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Required): {
      *         String: String (Required)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -171,13 +180,16 @@ public final class DictionaryStringsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property (Required): {
      *         String: String (Required)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

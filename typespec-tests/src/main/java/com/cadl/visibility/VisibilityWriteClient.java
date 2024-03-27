@@ -40,19 +40,26 @@ public final class VisibilityWriteClient {
     /**
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

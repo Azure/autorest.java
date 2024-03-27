@@ -39,11 +39,14 @@ public final class BytesClient {
     /**
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: byte[] (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -61,11 +64,14 @@ public final class BytesClient {
     /**
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: byte[] (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -83,11 +89,14 @@ public final class BytesClient {
     /**
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: byte[] (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Template type for testing models with optional property. Pass in the type of the property you are
      * looking for.
@@ -107,11 +116,14 @@ public final class BytesClient {
     /**
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: byte[] (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Template type for testing models with optional property. Pass in the type of the property you are
      * looking for.

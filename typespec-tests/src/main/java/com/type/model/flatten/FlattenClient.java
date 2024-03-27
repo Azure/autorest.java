@@ -40,25 +40,32 @@ public final class FlattenClient {
     /**
      * The putFlattenModel operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     properties (Required): {
      *         description: String (Required)
      *         age: int (Required)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     properties (Required): {
      *         description: String (Required)
      *         age: int (Required)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input This is the model with one level of flattening.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -77,7 +84,9 @@ public final class FlattenClient {
     /**
      * The putNestedFlattenModel operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     properties (Required): {
@@ -85,12 +94,16 @@ public final class FlattenClient {
      *         properties (Required): {
      *             description: String (Required)
      *             age: int (Required)
+     *         }
+     *     }
      * }
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     properties (Required): {
@@ -98,10 +111,11 @@ public final class FlattenClient {
      *         properties (Required): {
      *             description: String (Required)
      *             age: int (Required)
+     *         }
+     *     }
      * }
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input This is the model with two levels of flattening.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -116,23 +116,30 @@ public final class EtagHeadersOptionalBodiesImpl {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
      *     type: String (Optional, Required on create)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
      *     type: String (Optional, Required on create)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -182,23 +189,30 @@ public final class EtagHeadersOptionalBodiesImpl {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
      *     type: String (Optional, Required on create)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
      *     description: String (Optional)
      *     type: String (Optional, Required on create)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param format A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

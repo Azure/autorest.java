@@ -62,7 +62,9 @@ public final class LongRunningAsyncClient {
     /**
      * A remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
@@ -79,13 +81,14 @@ public final class LongRunningAsyncClient {
      *         innererror (Optional): {
      *             code: String (Optional)
      *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
-     * }
-     * result (Optional): {
-     * data: String (Required)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param id Universally Unique Identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -113,16 +116,22 @@ public final class LongRunningAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     configuration: String (Optional)
      *     nullableFloatDict (Required): {
      *         String: Double (Optional)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -136,10 +145,11 @@ public final class LongRunningAsyncClient {
      *         innererror (Optional): {
      *             code: String (Optional)
      *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

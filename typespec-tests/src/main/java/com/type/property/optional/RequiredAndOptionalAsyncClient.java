@@ -41,12 +41,15 @@ public final class RequiredAndOptionalAsyncClient {
     /**
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -65,12 +68,15 @@ public final class RequiredAndOptionalAsyncClient {
     /**
      * Get models that will return only the required properties.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -89,12 +95,15 @@ public final class RequiredAndOptionalAsyncClient {
     /**
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with required and optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -113,12 +122,15 @@ public final class RequiredAndOptionalAsyncClient {
     /**
      * Put a body with only required properties.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     optionalProperty: String (Optional)
      *     requiredProperty: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with required and optional properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -38,9 +38,12 @@ public final class StringOperationClient {
     /**
      * get string value.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -58,9 +61,12 @@ public final class StringOperationClient {
     /**
      * put string value.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

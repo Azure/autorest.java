@@ -44,11 +44,14 @@ public final class PropertyAsyncClient {
     /**
      * The json operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     wireName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param jsonProjectedNameModel The jsonProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -67,11 +70,14 @@ public final class PropertyAsyncClient {
     /**
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     defaultName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param clientProjectedNameModel The clientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -90,11 +96,14 @@ public final class PropertyAsyncClient {
     /**
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     defaultName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param languageProjectedNameModel The languageProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -114,11 +123,14 @@ public final class PropertyAsyncClient {
     /**
      * The jsonAndClient operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     wireName: boolean (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param jsonAndClientProjectedNameModel The jsonAndClientProjectedNameModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

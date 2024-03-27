@@ -41,7 +41,9 @@ public final class ErrorModelAsyncClient {
     /**
      * The read operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     error (Required): {
@@ -54,10 +56,11 @@ public final class ErrorModelAsyncClient {
      *         innererror (Optional): {
      *             code: String (Optional)
      *             innererror (Optional): (recursive schema, see innererror above)
+     *         }
+     *     }
      * }
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

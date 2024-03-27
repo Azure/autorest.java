@@ -91,19 +91,26 @@ public final class LiteralOpsImpl {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param model The model parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -132,19 +139,26 @@ public final class LiteralOpsImpl {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     literal: String (Required)
      *     optionalLiteral: String(optionalLiteral) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param model The model parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

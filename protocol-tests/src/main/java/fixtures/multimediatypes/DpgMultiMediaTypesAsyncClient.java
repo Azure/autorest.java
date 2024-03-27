@@ -39,13 +39,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and binary types with json type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
@@ -66,13 +73,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and binary types with binary type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/pdf", "image/jpeg", "image/png", "image/tiff".
      * @param input Input parameter.
@@ -93,13 +107,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and octet media types with json type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
@@ -120,13 +141,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and octet media types with octet type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream".
      * @param message The payload body.
@@ -147,13 +175,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and encoding types with json type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param message The payload body.
@@ -174,13 +209,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and encoding types with encoding type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain; charset=UTF-8".
      * @param input Input parameter.
@@ -201,13 +243,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and text types with text type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
@@ -228,13 +277,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and text types with json type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "text/plain".
      * @param input Input parameter.
@@ -255,13 +311,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and image types with json type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
@@ -282,13 +345,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and image types with json type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType The content type. Allowed values: "application/json", "image/jpeg".
      * @param input Input parameter.
@@ -317,13 +387,20 @@ public final class DpgMultiMediaTypesAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -341,13 +418,20 @@ public final class DpgMultiMediaTypesAsyncClient {
     /**
      * json and image types with non-required body and json type first.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param contentType Upload file type. Allowed values: "application/json", "image/jpeg".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -376,13 +460,20 @@ public final class DpgMultiMediaTypesAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * BinaryData
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

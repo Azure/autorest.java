@@ -134,11 +134,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -157,11 +160,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -179,11 +185,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -202,11 +211,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -224,11 +236,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with union of int literal property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -247,11 +262,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with union of int literal property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -270,11 +288,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with union of int literal property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -293,11 +314,14 @@ public final class UnionIntLiteralsImpl {
     /**
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     property: String(1/2) (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Model with union of int literal property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

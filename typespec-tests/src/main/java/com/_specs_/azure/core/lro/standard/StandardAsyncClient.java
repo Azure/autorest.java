@@ -43,19 +43,26 @@ public final class StandardAsyncClient {
      * 
      * Creates or replaces a User.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param name The name of user.
      * @param resource The resource instance.
@@ -78,7 +85,9 @@ public final class StandardAsyncClient {
      * 
      * Deletes a User.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
@@ -89,9 +98,10 @@ public final class StandardAsyncClient {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param name The name of user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -112,7 +122,9 @@ public final class StandardAsyncClient {
      * 
      * Exports a User.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -123,9 +135,10 @@ public final class StandardAsyncClient {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param name The name of user.
      * @param format The format of the data.

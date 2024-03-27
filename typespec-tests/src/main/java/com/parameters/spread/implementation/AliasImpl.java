@@ -119,11 +119,14 @@ public final class AliasImpl {
     /**
      * The spreadAsRequestBody operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -143,11 +146,14 @@ public final class AliasImpl {
     /**
      * The spreadAsRequestBody operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -166,11 +172,14 @@ public final class AliasImpl {
     /**
      * The spreadAsRequestParameter operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
@@ -193,11 +202,14 @@ public final class AliasImpl {
     /**
      * The spreadAsRequestParameter operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
@@ -219,7 +231,9 @@ public final class AliasImpl {
     /**
      * The spreadWithMultipleParameters operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     prop1: String (Required)
      *     prop2: String (Required)
@@ -228,7 +242,8 @@ public final class AliasImpl {
      *     prop5: String (Required)
      *     prop6: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
@@ -251,7 +266,9 @@ public final class AliasImpl {
     /**
      * The spreadWithMultipleParameters operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     prop1: String (Required)
      *     prop2: String (Required)
@@ -260,7 +277,8 @@ public final class AliasImpl {
      *     prop5: String (Required)
      *     prop6: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.

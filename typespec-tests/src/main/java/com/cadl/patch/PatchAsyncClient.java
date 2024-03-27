@@ -43,7 +43,9 @@ public final class PatchAsyncClient {
     /**
      * The createOrUpdateResource operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -52,26 +54,30 @@ public final class PatchAsyncClient {
      *         String (Required): {
      *             name: String (Optional, Required on create)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     fish (Optional): {
+     *         kind: String (Required)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
-     * }
-     * longValue: Long (Optional)
-     * intValue: Integer (Optional)
-     * enumValue: String(a/b/c) (Optional)
-     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * fish (Optional): {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -80,24 +86,25 @@ public final class PatchAsyncClient {
      *         String (Required): {
      *             name: String (Optional, Required on create)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     fish (Optional): {
+     *         kind: String (Required)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
-     * }
-     * longValue: Long (Optional)
-     * intValue: Integer (Optional)
-     * enumValue: String(a/b/c) (Optional)
-     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * fish (Optional): {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -117,7 +124,9 @@ public final class PatchAsyncClient {
     /**
      * The createOrUpdateOptionalResource operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -126,26 +135,30 @@ public final class PatchAsyncClient {
      *         String (Required): {
      *             name: String (Optional, Required on create)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     fish (Optional): {
+     *         kind: String (Required)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
-     * }
-     * longValue: Long (Optional)
-     * intValue: Integer (Optional)
-     * enumValue: String(a/b/c) (Optional)
-     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * fish (Optional): {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -154,24 +167,25 @@ public final class PatchAsyncClient {
      *         String (Required): {
      *             name: String (Optional, Required on create)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     longValue: Long (Optional)
+     *     intValue: Integer (Optional)
+     *     enumValue: String(a/b/c) (Optional)
+     *     wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     fish (Optional): {
+     *         kind: String (Required)
+     *         id: String (Required)
+     *         name: String (Required)
+     *         age: int (Optional, Required on create)
+     *         color: String (Optional)
+     *     }
      * }
-     * }
-     * longValue: Long (Optional)
-     * intValue: Integer (Optional)
-     * enumValue: String(a/b/c) (Optional)
-     * wireNameForInnerModelProperty (Optional): (recursive schema, see wireNameForInnerModelProperty above)
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * fish (Optional): {
-     * kind: String (Required)
-     * id: String (Required)
-     * name: String (Required)
-     * age: int (Optional, Required on create)
-     * color: String (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -189,7 +203,9 @@ public final class PatchAsyncClient {
     /**
      * The createOrUpdateFish operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String (Required)
      *     id: String (Required)
@@ -197,9 +213,13 @@ public final class PatchAsyncClient {
      *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     kind: String (Required)
      *     id: String (Required)
@@ -207,7 +227,8 @@ public final class PatchAsyncClient {
      *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -54,9 +54,12 @@ public final class DpgRequiredHeaderQueryAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * Object
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.
@@ -87,9 +90,12 @@ public final class DpgRequiredHeaderQueryAsyncClient {
     /**
      * Get Required Header Parameters.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * Object
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param parameterInt I am a required int parameter.
      * @param parameterBoolean I am a required boolean parameter.

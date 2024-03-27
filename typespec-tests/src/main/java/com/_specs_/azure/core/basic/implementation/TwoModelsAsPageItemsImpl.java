@@ -152,11 +152,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * FirstItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -180,11 +183,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * FirstItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -206,11 +212,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * FirstItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -232,11 +241,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * FirstItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -258,11 +270,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * SecondItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -286,11 +301,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * SecondItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -312,11 +330,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * SecondItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -338,11 +359,14 @@ public final class TwoModelsAsPageItemsImpl {
      * Two operations with two different page item types should be successfully generated. Should generate model for
      * SecondItem.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -363,11 +387,14 @@ public final class TwoModelsAsPageItemsImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items
      * 
@@ -392,11 +419,14 @@ public final class TwoModelsAsPageItemsImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     id: int (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items
      * 
@@ -419,11 +449,14 @@ public final class TwoModelsAsPageItemsImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items
      * 
@@ -448,11 +481,14 @@ public final class TwoModelsAsPageItemsImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param nextLink The URL to get the next list of items
      * 

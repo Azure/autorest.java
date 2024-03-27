@@ -167,7 +167,9 @@ public final class JsonMergePatchClientImpl {
     /**
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -175,21 +177,25 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -197,19 +203,20 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Details about a resource.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -228,7 +235,9 @@ public final class JsonMergePatchClientImpl {
     /**
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -236,21 +245,25 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -258,19 +271,20 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Details about a resource.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -289,28 +303,34 @@ public final class JsonMergePatchClientImpl {
     /**
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     description: String (Optional)
      *     map (Optional): {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -318,19 +338,20 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Details about a resource for patch operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -351,28 +372,34 @@ public final class JsonMergePatchClientImpl {
     /**
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     description: String (Optional)
      *     map (Optional): {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -380,19 +407,20 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Details about a resource for patch operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -412,28 +440,34 @@ public final class JsonMergePatchClientImpl {
     /**
      * Test content-type: application/merge-patch+json with optional body.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     description: String (Optional)
      *     map (Optional): {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -441,19 +475,20 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -479,28 +514,34 @@ public final class JsonMergePatchClientImpl {
     /**
      * Test content-type: application/merge-patch+json with optional body.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     description: String (Optional)
      *     map (Optional): {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -508,19 +549,20 @@ public final class JsonMergePatchClientImpl {
      *         String (Required): {
      *             name: String (Optional)
      *             description: String (Optional)
+     *         }
+     *     }
+     *     array (Optional): [
+     *         (recursive schema, see above)
+     *     ]
+     *     intValue: Integer (Optional)
+     *     floatValue: Double (Optional)
+     *     innerModel (Optional): (recursive schema, see innerModel above)
+     *     intArray (Optional): [
+     *         int (Optional)
+     *     ]
      * }
-     * }
-     * array (Optional): [
-     * (recursive schema, see above)
-     * ]
-     * intValue: Integer (Optional)
-     * floatValue: Double (Optional)
-     * innerModel (Optional): (recursive schema, see innerModel above)
-     * intArray (Optional): [
-     * int (Optional)
-     * ]
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

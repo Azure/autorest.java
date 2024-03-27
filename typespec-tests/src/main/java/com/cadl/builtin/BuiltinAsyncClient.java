@@ -62,7 +62,9 @@ public final class BuiltinAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     boolean: boolean (Required)
      *     string: String (Required)
@@ -81,22 +83,23 @@ public final class BuiltinAsyncClient {
      *     ]
      *     bytesDict (Required): {
      *         String: byte[] (Required)
+     *     }
+     *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
+     *     }
      * }
-     * url: String (Required)
-     * nullableFloatDict (Required): {
-     * String: Double (Optional)
-     * }
-     * encoded (Required): {
-     * timeInSeconds: Long (Optional)
-     * timeInSecondsFraction: Double (Optional)
-     * dateTime: OffsetDateTime (Optional)
-     * dateTimeRfc7231: DateTimeRfc1123 (Optional)
-     * unixTimestamp: Long (Optional)
-     * base64: byte[] (Optional)
-     * base64url: Base64Url (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param queryParam A sequence of textual characters.
      * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
@@ -117,7 +120,9 @@ public final class BuiltinAsyncClient {
     /**
      * The write operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     boolean: boolean (Required)
      *     string: String (Required)
@@ -136,22 +141,23 @@ public final class BuiltinAsyncClient {
      *     ]
      *     bytesDict (Required): {
      *         String: byte[] (Required)
+     *     }
+     *     url: String (Required)
+     *     nullableFloatDict (Required): {
+     *         String: Double (Optional)
+     *     }
+     *     encoded (Required): {
+     *         timeInSeconds: Long (Optional)
+     *         timeInSecondsFraction: Double (Optional)
+     *         dateTime: OffsetDateTime (Optional)
+     *         dateTimeRfc7231: DateTimeRfc1123 (Optional)
+     *         unixTimestamp: Long (Optional)
+     *         base64: byte[] (Optional)
+     *         base64url: Base64Url (Optional)
+     *     }
      * }
-     * url: String (Required)
-     * nullableFloatDict (Required): {
-     * String: Double (Optional)
-     * }
-     * encoded (Required): {
-     * timeInSeconds: Long (Optional)
-     * timeInSecondsFraction: Double (Optional)
-     * dateTime: OffsetDateTime (Optional)
-     * dateTimeRfc7231: DateTimeRfc1123 (Optional)
-     * unixTimestamp: Long (Optional)
-     * base64: byte[] (Optional)
-     * base64url: Base64Url (Optional)
-     * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -41,10 +41,13 @@ public final class EmptyClient {
     /**
      * The putEmpty operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param input Empty model used in operation parameters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -63,10 +66,13 @@ public final class EmptyClient {
     /**
      * The getEmpty operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -84,15 +90,22 @@ public final class EmptyClient {
     /**
      * The postRoundTripEmpty operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param body Empty model used in both parameter and return type.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

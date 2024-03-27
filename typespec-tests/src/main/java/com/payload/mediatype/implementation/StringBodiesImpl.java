@@ -138,9 +138,12 @@ public final class StringBodiesImpl {
     /**
      * The sendAsText operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param text A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -160,9 +163,12 @@ public final class StringBodiesImpl {
     /**
      * The sendAsText operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param text A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -182,9 +188,12 @@ public final class StringBodiesImpl {
     /**
      * The getAsText operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -202,9 +211,12 @@ public final class StringBodiesImpl {
     /**
      * The getAsText operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -222,9 +234,12 @@ public final class StringBodiesImpl {
     /**
      * The sendAsJson operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param text A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -244,9 +259,12 @@ public final class StringBodiesImpl {
     /**
      * The sendAsJson operation.
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param text A sequence of textual characters.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -266,9 +284,12 @@ public final class StringBodiesImpl {
     /**
      * The getAsJson operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -286,9 +307,12 @@ public final class StringBodiesImpl {
     /**
      * The getAsJson operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

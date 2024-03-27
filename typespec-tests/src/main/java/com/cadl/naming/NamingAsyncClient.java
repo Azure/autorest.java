@@ -55,26 +55,33 @@ public final class NamingAsyncClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     parameters (Optional): {
      *         type: String(Type1/Type2) (Required)
+     *     }
      * }
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     * @data.kind: String (Required)
+     *             @data.kind: String (Required)
+     *         }
+     *     }
+     *     type: String(Blob/File) (Required)
+     *     status: String(Running/Completed/Failed) (Required)
      * }
-     * }
-     * type: String(Blob/File) (Required)
-     * status: String(Running/Completed/Failed) (Required)
-     * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param name summary of name query parameter
      * 
@@ -99,11 +106,14 @@ public final class NamingAsyncClient {
     /**
      * The getAnonymous operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

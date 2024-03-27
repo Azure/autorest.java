@@ -49,9 +49,12 @@ public final class EnumServiceClient {
     /**
      * The getColor operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String(Red/Blue/Green)
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -69,9 +72,12 @@ public final class EnumServiceClient {
     /**
      * The getColorModel operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String(Red/Blue/Green)
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -89,7 +95,9 @@ public final class EnumServiceClient {
     /**
      * The setColorModel operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
@@ -102,7 +110,8 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      *     unitValue: String(1/0.001/1000) (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -121,7 +130,9 @@ public final class EnumServiceClient {
     /**
      * The setPriority operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
@@ -134,7 +145,8 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      *     unitValue: String(1/0.001/1000) (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param priority The priority parameter. Allowed values: 100, 0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -153,7 +165,9 @@ public final class EnumServiceClient {
     /**
      * The getRunningOperation operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
@@ -166,7 +180,8 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      *     unitValue: String(1/0.001/1000) (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -184,7 +199,9 @@ public final class EnumServiceClient {
     /**
      * The getOperation operation.
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
@@ -197,7 +214,8 @@ public final class EnumServiceClient {
      *     colorModelValue: String(Red/Blue/Green) (Required)
      *     unitValue: String(1/0.001/1000) (Required)
      * }
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -224,9 +242,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param colorArray The colorArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -253,9 +274,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param priorityArray The priorityArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -282,9 +306,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param stringArray The stringArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -311,9 +338,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param intArray The intArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -340,9 +370,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param colorArray The colorArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -369,9 +402,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param priorityArray The priorityArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -398,9 +434,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param stringArray The stringArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -427,9 +466,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param intArray The intArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -455,9 +497,12 @@ public final class EnumServiceClient {
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
-     * <pre>{@code
+     * 
+     * <pre>
+     * <code>
      * String
-     * }</pre>
+     * </code>
+     * </pre>
      * 
      * @param colorArray The colorArray parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
