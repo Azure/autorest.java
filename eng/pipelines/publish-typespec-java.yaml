@@ -18,7 +18,8 @@ extends:
 
           pool:
             name: $(LINUXPOOL)
-            vmImage: $(LINUXVMIMAGE)
+            image: $(LINUXVMIMAGE)
+            os: linux
 
           steps:
           - task: NodeTool@0
