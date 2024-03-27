@@ -39,13 +39,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,13 +62,11 @@ public final class MultipleResponsesClient {
      * Send a 204 response with no payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -89,13 +85,11 @@ public final class MultipleResponsesClient {
      * Send a 201 response with valid payload: {'statusCode': '201'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -114,13 +108,11 @@ public final class MultipleResponsesClient {
      * Send a 202 response with no payload:.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -139,13 +131,11 @@ public final class MultipleResponsesClient {
      * Send a 400 response with valid error payload: {'status': 400, 'message': 'client error'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -164,13 +154,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -189,13 +177,11 @@ public final class MultipleResponsesClient {
      * Send a 201 response with valid payload: {'statusCode': '201', 'textStatusCode': 'Created'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -214,13 +200,11 @@ public final class MultipleResponsesClient {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -239,11 +223,9 @@ public final class MultipleResponsesClient {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * Object
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -262,11 +244,9 @@ public final class MultipleResponsesClient {
      * Send a 200 response with valid payload: {'httpCode': '201'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * Object
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -285,11 +265,9 @@ public final class MultipleResponsesClient {
      * Send a 200 response with valid payload: {'httpStatusCode': '404'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * Object
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -308,11 +286,9 @@ public final class MultipleResponsesClient {
      * Send a 400 response with valid payload: {'code': '400', 'message': 'client error'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * Object
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -443,13 +419,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with valid payload: {'statusCode': '200'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -468,13 +442,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with no payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -590,13 +562,11 @@ public final class MultipleResponsesClient {
      * for model A.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -615,13 +585,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with payload {'statusCode': '200'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -640,13 +608,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '200'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -665,13 +631,11 @@ public final class MultipleResponsesClient {
      * Send a 400 response with no payload client should treat as an http error with no error model.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -690,13 +654,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with payload {'statusCode': '400'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -715,13 +677,11 @@ public final class MultipleResponsesClient {
      * Send a 200 response with invalid payload {'statusCodeInvalid': '400'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -740,13 +700,11 @@ public final class MultipleResponsesClient {
      * Send a 202 response with payload {'statusCode': '202'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     statusCode: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

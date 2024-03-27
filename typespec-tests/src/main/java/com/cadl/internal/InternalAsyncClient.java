@@ -44,27 +44,23 @@ public final class InternalAsyncClient {
      * The postInternal operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property (Required): {
      *         name: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property (Required): {
      *         name: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param apiRequest The apiRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -84,13 +80,11 @@ public final class InternalAsyncClient {
      * The getInternal operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

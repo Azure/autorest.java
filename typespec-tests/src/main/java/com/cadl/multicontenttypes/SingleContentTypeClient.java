@@ -39,11 +39,9 @@ public final class SingleContentTypeClient {
      * response is binary.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * BinaryData
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -62,11 +60,9 @@ public final class SingleContentTypeClient {
      * request is binary.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * BinaryData
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

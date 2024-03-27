@@ -184,15 +184,13 @@ public final class BasicsImpl {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -213,15 +211,13 @@ public final class BasicsImpl {
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -240,15 +236,13 @@ public final class BasicsImpl {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -269,15 +263,13 @@ public final class BasicsImpl {
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -298,15 +290,13 @@ public final class BasicsImpl {
      * Get a basic complex type that is invalid for the local strong type.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -327,15 +317,13 @@ public final class BasicsImpl {
      * Get a basic complex type that is invalid for the local strong type.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -354,15 +342,13 @@ public final class BasicsImpl {
      * Get a basic complex type that is empty.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -382,15 +368,13 @@ public final class BasicsImpl {
      * Get a basic complex type that is empty.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -409,15 +393,13 @@ public final class BasicsImpl {
      * Get a basic complex type whose properties are null.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -437,15 +419,13 @@ public final class BasicsImpl {
      * Get a basic complex type whose properties are null.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -464,15 +444,13 @@ public final class BasicsImpl {
      * Get a basic complex type while the server doesn't provide a response payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -493,15 +471,13 @@ public final class BasicsImpl {
      * Get a basic complex type while the server doesn't provide a response payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
      *     color: String(cyan/Magenta/YELLOW/blacK) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

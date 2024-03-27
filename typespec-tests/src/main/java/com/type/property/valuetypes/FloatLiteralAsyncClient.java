@@ -42,13 +42,11 @@ public final class FloatLiteralAsyncClient {
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property: double (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -67,13 +65,11 @@ public final class FloatLiteralAsyncClient {
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property: double (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

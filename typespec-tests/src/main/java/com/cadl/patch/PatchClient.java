@@ -42,8 +42,7 @@ public final class PatchClient {
      * The createOrUpdateResource operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -69,13 +68,11 @@ public final class PatchClient {
      *         color: String (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -101,8 +98,7 @@ public final class PatchClient {
      *         color: String (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -122,8 +118,7 @@ public final class PatchClient {
      * The createOrUpdateOptionalResource operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -149,13 +144,11 @@ public final class PatchClient {
      *         color: String (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     name: String (Required)
@@ -181,8 +174,7 @@ public final class PatchClient {
      *         color: String (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -201,8 +193,7 @@ public final class PatchClient {
      * The createOrUpdateFish operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     kind: String (Required)
      *     id: String (Required)
@@ -210,13 +201,11 @@ public final class PatchClient {
      *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     kind: String (Required)
      *     id: String (Required)
@@ -224,8 +213,7 @@ public final class PatchClient {
      *     age: int (Optional, Required on create)
      *     color: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param fish This is base model for polymorphic multiple levels inheritance with a discriminator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

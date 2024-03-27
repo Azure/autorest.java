@@ -186,15 +186,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -215,15 +213,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -242,15 +238,13 @@ public final class DictionariesImpl {
      * Put complex types with dictionary property.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
      * "xls":"excel", "exe":"", "":null.
@@ -272,15 +266,13 @@ public final class DictionariesImpl {
      * Put complex types with dictionary property.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put a dictionary with 5 key-value pairs: "txt":"notepad", "bmp":"mspaint",
      * "xls":"excel", "exe":"", "":null.
@@ -301,15 +293,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property which is empty.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -330,15 +320,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property which is empty.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -357,15 +345,13 @@ public final class DictionariesImpl {
      * Put complex types with dictionary property which is empty.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put an empty dictionary.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -386,15 +372,13 @@ public final class DictionariesImpl {
      * Put complex types with dictionary property which is empty.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put an empty dictionary.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -414,15 +398,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property which is null.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -442,15 +424,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property which is null.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -469,15 +449,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property while server doesn't provide a response payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -498,15 +476,13 @@ public final class DictionariesImpl {
      * Get complex types with dictionary property while server doesn't provide a response payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultProgram (Optional): {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

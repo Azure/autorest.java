@@ -44,25 +44,21 @@ public final class WireTypeAsyncClient {
      * The superClassMismatch operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     dateTime: OffsetDateTime (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param subClass The subClass parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -83,25 +79,21 @@ public final class WireTypeAsyncClient {
      * The subClassMismatch operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     dateTime: OffsetDateTime (Required)
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param subClassMismatch The subClassMismatch parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -122,25 +114,21 @@ public final class WireTypeAsyncClient {
      * The bothClassMismatch operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     base64url: Base64Url (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     dateTimeRfc7231: DateTimeRfc1123 (Required)
      *     base64url: Base64Url (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param subClassBothMismatch The subClassBothMismatch parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

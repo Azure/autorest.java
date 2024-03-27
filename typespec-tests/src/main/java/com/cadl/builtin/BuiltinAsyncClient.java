@@ -63,8 +63,7 @@ public final class BuiltinAsyncClient {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     boolean: boolean (Required)
      *     string: String (Required)
@@ -98,8 +97,7 @@ public final class BuiltinAsyncClient {
      *         base64url: Base64Url (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param queryParam A sequence of textual characters.
      * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/.
@@ -121,8 +119,7 @@ public final class BuiltinAsyncClient {
      * The write operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     boolean: boolean (Required)
      *     string: String (Required)
@@ -156,8 +153,7 @@ public final class BuiltinAsyncClient {
      *         base64url: Base64Url (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

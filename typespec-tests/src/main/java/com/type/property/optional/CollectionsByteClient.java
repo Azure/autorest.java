@@ -40,15 +40,13 @@ public final class CollectionsByteClient {
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property (Optional): [
      *         byte[] (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -67,15 +65,13 @@ public final class CollectionsByteClient {
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property (Optional): [
      *         byte[] (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -94,15 +90,13 @@ public final class CollectionsByteClient {
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property (Optional): [
      *         byte[] (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with collection bytes properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -122,15 +116,13 @@ public final class CollectionsByteClient {
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property (Optional): [
      *         byte[] (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with collection bytes properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

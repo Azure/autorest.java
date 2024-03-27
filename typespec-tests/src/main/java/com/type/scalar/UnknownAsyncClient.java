@@ -41,11 +41,9 @@ public final class UnknownAsyncClient {
      * get unknown value.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * Object
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,11 +62,9 @@ public final class UnknownAsyncClient {
      * put unknown value.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * Object
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body _.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

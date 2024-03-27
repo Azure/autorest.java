@@ -341,8 +341,7 @@ public final class LongRunningClientImpl {
      * A remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
@@ -365,8 +364,7 @@ public final class LongRunningClientImpl {
      *         data: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param id Universally Unique Identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -387,8 +385,7 @@ public final class LongRunningClientImpl {
      * A remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
@@ -411,8 +408,7 @@ public final class LongRunningClientImpl {
      *         data: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param id Universally Unique Identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -442,21 +438,18 @@ public final class LongRunningClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     configuration: String (Optional)
      *     nullableFloatDict (Required): {
      *         String: Double (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -473,8 +466,7 @@ public final class LongRunningClientImpl {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -520,21 +512,18 @@ public final class LongRunningClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     configuration: String (Optional)
      *     nullableFloatDict (Required): {
      *         String: Double (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -551,8 +540,7 @@ public final class LongRunningClientImpl {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -597,21 +585,18 @@ public final class LongRunningClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     configuration: String (Optional)
      *     nullableFloatDict (Required): {
      *         String: Double (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -628,8 +613,7 @@ public final class LongRunningClientImpl {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -665,21 +649,18 @@ public final class LongRunningClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     configuration: String (Optional)
      *     nullableFloatDict (Required): {
      *         String: Double (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -696,8 +677,7 @@ public final class LongRunningClientImpl {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -733,21 +713,18 @@ public final class LongRunningClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     configuration: String (Optional)
      *     nullableFloatDict (Required): {
      *         String: Double (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -764,8 +741,7 @@ public final class LongRunningClientImpl {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -803,21 +779,18 @@ public final class LongRunningClientImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     configuration: String (Optional)
      *     nullableFloatDict (Required): {
      *         String: Double (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -834,8 +807,7 @@ public final class LongRunningClientImpl {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobData The jobData parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

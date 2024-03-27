@@ -135,11 +135,9 @@ public final class StringOperationsImpl {
      * The getKnownValue operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -158,11 +156,9 @@ public final class StringOperationsImpl {
      * The getKnownValue operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -181,11 +177,9 @@ public final class StringOperationsImpl {
      * The getUnknownValue operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -204,11 +198,9 @@ public final class StringOperationsImpl {
      * The getUnknownValue operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -227,11 +219,9 @@ public final class StringOperationsImpl {
      * The putKnownValue operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -251,11 +241,9 @@ public final class StringOperationsImpl {
      * The putKnownValue operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -275,11 +263,9 @@ public final class StringOperationsImpl {
      * The putUnknownValue operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -299,11 +285,9 @@ public final class StringOperationsImpl {
      * The putUnknownValue operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
-     * </code>
-     * </pre>
+     * <pre>{@code
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
+     * }</pre>
      * 
      * @param body Days of the week.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -40,11 +40,9 @@ public final class DecimalTypeClient {
      * The responseBody operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * BigDecimal
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -63,11 +61,9 @@ public final class DecimalTypeClient {
      * The requestBody operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * BigDecimal
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body A decimal number with any length and precision. This represent any `decimal` value possible.
      * It is commonly represented as `BigDecimal` in some languages.

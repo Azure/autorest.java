@@ -81,25 +81,21 @@ public final class VisibilityWritesImpl {
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -120,25 +116,21 @@ public final class VisibilityWritesImpl {
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

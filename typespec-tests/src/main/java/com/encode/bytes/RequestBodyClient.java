@@ -40,11 +40,9 @@ public final class RequestBodyClient {
      * The defaultMethod operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * byte[]
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -64,11 +62,9 @@ public final class RequestBodyClient {
      * The octetStream operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * BinaryData
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -88,11 +84,9 @@ public final class RequestBodyClient {
      * The customContentType operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * BinaryData
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -112,11 +106,9 @@ public final class RequestBodyClient {
      * The base64 operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * byte[]
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -136,11 +128,9 @@ public final class RequestBodyClient {
      * The base64url operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * Base64Url
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

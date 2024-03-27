@@ -44,25 +44,21 @@ public final class StandardClient {
      * Creates or replaces a User.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     role: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param name The name of user.
      * @param resource The resource instance.
@@ -86,8 +82,7 @@ public final class StandardClient {
      * Deletes a User.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
@@ -100,8 +95,7 @@ public final class StandardClient {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param name The name of user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -123,8 +117,7 @@ public final class StandardClient {
      * Exports a User.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -137,8 +130,7 @@ public final class StandardClient {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param name The name of user.
      * @param format The format of the data.

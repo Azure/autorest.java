@@ -112,8 +112,7 @@ public final class PolymorphicrecursivesImpl {
      * Get complex types that are polymorphic and have recursive references.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -122,8 +121,7 @@ public final class PolymorphicrecursivesImpl {
      *         (recursive schema, see above)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -144,8 +142,7 @@ public final class PolymorphicrecursivesImpl {
      * Get complex types that are polymorphic and have recursive references.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -154,8 +151,7 @@ public final class PolymorphicrecursivesImpl {
      *         (recursive schema, see above)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -174,8 +170,7 @@ public final class PolymorphicrecursivesImpl {
      * Put complex types that are polymorphic and have recursive references.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -184,8 +179,7 @@ public final class PolymorphicrecursivesImpl {
      *         (recursive schema, see above)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {
@@ -258,8 +252,7 @@ public final class PolymorphicrecursivesImpl {
      * Put complex types that are polymorphic and have recursive references.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     fishtype: String (Required)
      *     species: String (Optional)
@@ -268,8 +261,7 @@ public final class PolymorphicrecursivesImpl {
      *         (recursive schema, see above)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put a salmon that looks like this:
      * {

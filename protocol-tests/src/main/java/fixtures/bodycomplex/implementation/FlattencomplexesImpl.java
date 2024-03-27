@@ -90,8 +90,7 @@ public final class FlattencomplexesImpl {
      * The getValid operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     kind: String(Kind1) (Required)
      *     propB1: String (Optional)
@@ -99,8 +98,7 @@ public final class FlattencomplexesImpl {
      *         propBH1: String (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -120,8 +118,7 @@ public final class FlattencomplexesImpl {
      * The getValid operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     kind: String(Kind1) (Required)
      *     propB1: String (Optional)
@@ -129,8 +126,7 @@ public final class FlattencomplexesImpl {
      *         propBH1: String (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

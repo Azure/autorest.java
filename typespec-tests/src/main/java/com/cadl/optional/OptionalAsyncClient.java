@@ -60,8 +60,7 @@ public final class OptionalAsyncClient {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
      *     booleanNullable: Boolean (Optional)
@@ -87,13 +86,11 @@ public final class OptionalAsyncClient {
      *     epochDateTimeRequiredNullable: Long (Required)
      *     epochDateTimeNullable: Long (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     boolean: Boolean (Optional)
      *     booleanNullable: Boolean (Optional)
@@ -123,8 +120,7 @@ public final class OptionalAsyncClient {
      *         stringReadOnlyOptional: String (Optional)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestHeaderRequired A sequence of textual characters.
      * @param booleanRequired Boolean with `true` and `false` values.

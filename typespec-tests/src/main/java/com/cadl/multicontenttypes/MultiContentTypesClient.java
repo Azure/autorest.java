@@ -39,11 +39,9 @@ public final class MultiContentTypesClient {
      * multiple data types map to multiple content types.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * BinaryData
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param contentType The contentType parameter. Allowed values: "text/plain", "application/json",
      * "application/octet-stream", "image/jpeg", "image/png".

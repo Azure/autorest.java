@@ -114,32 +114,28 @@ public final class NamingOpsImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     parameters (Optional): {
      *         type: String(Type1/Type2) (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             @data.kind: String (Required)
+     *             &#64;data.kind: String (Required)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
      *     status: String(Running/Completed/Failed) (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param name summary of name query parameter
      * 
@@ -177,32 +173,28 @@ public final class NamingOpsImpl {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     parameters (Optional): {
      *         type: String(Type1/Type2) (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             @data.kind: String (Required)
+     *             &#64;data.kind: String (Required)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
      *     status: String(Running/Completed/Failed) (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param name summary of name query parameter
      * 
@@ -227,13 +219,11 @@ public final class NamingOpsImpl {
      * The getAnonymous operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -253,13 +243,11 @@ public final class NamingOpsImpl {
      * The getAnonymous operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

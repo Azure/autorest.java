@@ -40,8 +40,7 @@ public final class ExtendsModelClient {
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *      (Optional): {
      *         String (Required): {
@@ -49,8 +48,7 @@ public final class ExtendsModelClient {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -69,8 +67,7 @@ public final class ExtendsModelClient {
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *      (Optional): {
      *         String (Required): {
@@ -78,8 +75,7 @@ public final class ExtendsModelClient {
      *         }
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

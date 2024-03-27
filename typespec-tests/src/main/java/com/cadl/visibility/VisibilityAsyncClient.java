@@ -45,15 +45,13 @@ public final class VisibilityAsyncClient {
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -72,25 +70,21 @@ public final class VisibilityAsyncClient {
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -110,26 +104,22 @@ public final class VisibilityAsyncClient {
      * The query operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: int (Required)
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: int (Required)
      *     secretName: String (Required)
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param dog The dog parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -149,25 +139,21 @@ public final class VisibilityAsyncClient {
      * The roundtrip operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -97,13 +97,11 @@ public final class ModelsImpl {
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param clientModel The clientModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -123,13 +121,11 @@ public final class ModelsImpl {
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param clientModel The clientModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -149,13 +145,11 @@ public final class ModelsImpl {
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param javaModel The javaModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -175,13 +169,11 @@ public final class ModelsImpl {
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     defaultName: boolean (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param javaModel The javaModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

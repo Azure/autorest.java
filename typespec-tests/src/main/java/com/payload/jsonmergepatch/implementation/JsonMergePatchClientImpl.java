@@ -168,8 +168,7 @@ public final class JsonMergePatchClientImpl {
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -189,13 +188,11 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -215,8 +212,7 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Details about a resource.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -236,8 +232,7 @@ public final class JsonMergePatchClientImpl {
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -257,13 +252,11 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -283,8 +276,7 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Details about a resource.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -304,8 +296,7 @@ public final class JsonMergePatchClientImpl {
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     description: String (Optional)
      *     map (Optional): {
@@ -324,13 +315,11 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -350,8 +339,7 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Details about a resource for patch operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -373,8 +361,7 @@ public final class JsonMergePatchClientImpl {
      * Test content-type: application/merge-patch+json with required body.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     description: String (Optional)
      *     map (Optional): {
@@ -393,13 +380,11 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -419,8 +404,7 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Details about a resource for patch operation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -441,8 +425,7 @@ public final class JsonMergePatchClientImpl {
      * Test content-type: application/merge-patch+json with optional body.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     description: String (Optional)
      *     map (Optional): {
@@ -461,13 +444,11 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -487,8 +468,7 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -515,8 +495,7 @@ public final class JsonMergePatchClientImpl {
      * Test content-type: application/merge-patch+json with optional body.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     description: String (Optional)
      *     map (Optional): {
@@ -535,13 +514,11 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      *     description: String (Optional)
@@ -561,8 +538,7 @@ public final class JsonMergePatchClientImpl {
      *         int (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

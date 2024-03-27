@@ -42,13 +42,11 @@ public final class BodyOptionalityAsyncClient {
      * The requiredExplicit operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -68,13 +66,11 @@ public final class BodyOptionalityAsyncClient {
      * The requiredImplicit operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param bodyModel The bodyModel parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

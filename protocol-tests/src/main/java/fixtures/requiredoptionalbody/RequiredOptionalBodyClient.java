@@ -39,8 +39,7 @@ public final class RequiredOptionalBodyClient {
      * Creates or updates a deployment.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     deploymentId: String (Required)
      *     startDateTime: OffsetDateTime (Required)
@@ -55,13 +54,11 @@ public final class RequiredOptionalBodyClient {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     deploymentId: String (Required)
      *     startDateTime: OffsetDateTime (Required)
@@ -76,8 +73,7 @@ public final class RequiredOptionalBodyClient {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param deployment The deployment properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -107,8 +103,7 @@ public final class RequiredOptionalBodyClient {
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     deploymentId: String (Required)
      *     startDateTime: OffsetDateTime (Required)
@@ -123,13 +118,11 @@ public final class RequiredOptionalBodyClient {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     deploymentId: String (Required)
      *     startDateTime: OffsetDateTime (Required)
@@ -144,8 +137,7 @@ public final class RequiredOptionalBodyClient {
      *         String: String (Required)
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

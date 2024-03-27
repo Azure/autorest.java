@@ -167,15 +167,13 @@ public final class ArraysImpl {
      * Get complex types with array property.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -195,15 +193,13 @@ public final class ArraysImpl {
      * Get complex types with array property.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -222,15 +218,13 @@ public final class ArraysImpl {
      * Put complex types with array property.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
      * jumps over the lazy dog".
@@ -252,15 +246,13 @@ public final class ArraysImpl {
      * Put complex types with array property.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put an array with 4 items: "1, 2, 3, 4", "", null, "&amp;S#$(*Y", "The quick brown fox
      * jumps over the lazy dog".
@@ -281,15 +273,13 @@ public final class ArraysImpl {
      * Get complex types with array property which is empty.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -310,15 +300,13 @@ public final class ArraysImpl {
      * Get complex types with array property which is empty.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -337,15 +325,13 @@ public final class ArraysImpl {
      * Put complex types with array property which is empty.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put an empty array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -366,15 +352,13 @@ public final class ArraysImpl {
      * Put complex types with array property which is empty.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put an empty array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -394,15 +378,13 @@ public final class ArraysImpl {
      * Get complex types with array property while server doesn't provide a response payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -423,15 +405,13 @@ public final class ArraysImpl {
      * Get complex types with array property while server doesn't provide a response payload.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     array (Optional): [
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

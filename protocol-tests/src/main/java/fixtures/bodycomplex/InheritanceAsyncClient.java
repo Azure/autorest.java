@@ -40,8 +40,7 @@ public final class InheritanceAsyncClient {
      * Get complex types that extend others.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
@@ -55,8 +54,7 @@ public final class InheritanceAsyncClient {
      *     ]
      *     breed: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -75,8 +73,7 @@ public final class InheritanceAsyncClient {
      * Put complex types that extend others.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: Integer (Optional)
      *     name: String (Optional)
@@ -90,8 +87,7 @@ public final class InheritanceAsyncClient {
      *     ]
      *     breed: String (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
      * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and

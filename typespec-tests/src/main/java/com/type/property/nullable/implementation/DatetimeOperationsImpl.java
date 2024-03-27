@@ -139,14 +139,12 @@ public final class DatetimeOperationsImpl {
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -166,14 +164,12 @@ public final class DatetimeOperationsImpl {
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -192,14 +188,12 @@ public final class DatetimeOperationsImpl {
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -219,14 +213,12 @@ public final class DatetimeOperationsImpl {
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -245,14 +237,12 @@ public final class DatetimeOperationsImpl {
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -274,14 +264,12 @@ public final class DatetimeOperationsImpl {
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -302,14 +290,12 @@ public final class DatetimeOperationsImpl {
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -330,14 +316,12 @@ public final class DatetimeOperationsImpl {
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     requiredProperty: String (Optional, Required on create)
      *     nullableProperty: OffsetDateTime (Optional, Required on create)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with a datetime property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

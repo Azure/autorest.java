@@ -157,18 +157,15 @@ public final class RpcClientImpl {
      * Generate data.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -181,8 +178,7 @@ public final class RpcClientImpl {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -205,18 +201,15 @@ public final class RpcClientImpl {
      * Generate data.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -229,8 +222,7 @@ public final class RpcClientImpl {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -252,18 +244,15 @@ public final class RpcClientImpl {
      * Generate data.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -276,8 +265,7 @@ public final class RpcClientImpl {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -306,18 +294,15 @@ public final class RpcClientImpl {
      * Generate data.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -330,8 +315,7 @@ public final class RpcClientImpl {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -360,18 +344,15 @@ public final class RpcClientImpl {
      * Generate data.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -384,8 +365,7 @@ public final class RpcClientImpl {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -415,18 +395,15 @@ public final class RpcClientImpl {
      * Generate data.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     prompt: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     id: String (Required)
      *     status: String (Required)
@@ -439,8 +416,7 @@ public final class RpcClientImpl {
      *         ]
      *     }
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param generationOptions Options for the generation.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

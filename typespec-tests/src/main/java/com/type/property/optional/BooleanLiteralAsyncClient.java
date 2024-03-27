@@ -42,13 +42,11 @@ public final class BooleanLiteralAsyncClient {
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property: String(true) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -68,13 +66,11 @@ public final class BooleanLiteralAsyncClient {
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property: String(true) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -94,13 +90,11 @@ public final class BooleanLiteralAsyncClient {
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property: String(true) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with boolean literal property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -120,13 +114,11 @@ public final class BooleanLiteralAsyncClient {
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     property: String(true) (Optional)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param body Model with boolean literal property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

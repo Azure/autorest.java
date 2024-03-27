@@ -44,8 +44,7 @@ public final class LegacyAsyncClient {
      * Poll a Job.
      * <p><strong>Response Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     jobId: String (Required)
      *     comment: String (Required)
@@ -70,8 +69,7 @@ public final class LegacyAsyncClient {
      *         String (Optional)
      *     ]
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobId A processing job identifier.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -91,13 +89,11 @@ public final class LegacyAsyncClient {
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     comment: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param jobData Data of the job.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.

@@ -43,13 +43,11 @@ public final class AliasClient {
      * The spreadAsRequestBody operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -69,13 +67,11 @@ public final class AliasClient {
      * The spreadAsRequestParameter operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     name: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
@@ -98,8 +94,7 @@ public final class AliasClient {
      * The spreadWithMultipleParameters operation.
      * <p><strong>Request Body Schema</strong></p>
      * 
-     * <pre>
-     * <code>
+     * <pre>{@code
      * {
      *     prop1: String (Required)
      *     prop2: String (Required)
@@ -108,8 +103,7 @@ public final class AliasClient {
      *     prop5: String (Required)
      *     prop6: String (Required)
      * }
-     * </code>
-     * </pre>
+     * }</pre>
      * 
      * @param id A sequence of textual characters.
      * @param xMsTestHeader A sequence of textual characters.
