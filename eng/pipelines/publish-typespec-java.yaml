@@ -85,25 +85,25 @@ extends:
                 $PACKAGE_VERSION = node -p -e "require('./typespec-extension/package.json').version"
                 Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-          # - task: PowerShell@2
-          #   displayName: 'Create GitHub Releases'
-          #   inputs:
-          #     filePath: eng/scripts/Create-Release.ps1
-          #     arguments: >
-          #       -releaseSha '$(Build.SourceVersion)'
-          #       -tagName '@azure-tools/typespec-java_$(PackageVersion)'
-          #       -title '@azure-tools/typespec-java_$(PackageVersion)'
-          #       -releaseNotes '- Bug fix'
-          #     pwsh: true
-          #   timeoutInMinutes: 5
-          #   env:
-          #     GH_TOKEN: $(azuresdk-github-pat)
+          - task: PowerShell@2
+            displayName: 'Create GitHub Releases'
+            inputs:
+              filePath: eng/scripts/Create-Release.ps1
+              arguments: >
+                -releaseSha '$(Build.SourceVersion)'
+                -tagName '@azure-tools/typespec-java_$(PackageVersion)'
+                -title '@azure-tools/typespec-java_$(PackageVersion)'
+                -releaseNotes '- Bug fix'
+              pwsh: true
+            timeoutInMinutes: 5
+            env:
+              GH_TOKEN: $(azuresdk-github-pat)
 
-          # - script: |
-          #     npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
-          #     ls *.tgz | npm publish -0 --access public
-          #     npm config delete //registry.npmjs.org/:_authToken
-          #   displayName: 'Publish TypeSpec Java to NPM'
-          #   workingDirectory: ./typespec-extension
+          - script: |
+              npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
+              ls *.tgz | npm publish -0 --access public
+              npm config delete //registry.npmjs.org/:_authToken
+            displayName: 'Publish TypeSpec Java to NPM'
+            workingDirectory: ./typespec-extension
 
-          # - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
+          - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
