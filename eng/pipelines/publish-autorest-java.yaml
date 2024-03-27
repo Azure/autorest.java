@@ -62,24 +62,24 @@ extends:
                     $PACKAGE_VERSION = node -p -e "require('./package.json').version"
                     Write-Host("##vso[task.setvariable variable=PackageVersion]$PACKAGE_VERSION")
 
-              # - task: PowerShell@2
-              #   displayName: 'Create GitHub Releases'
-              #   inputs:
-              #     filePath: eng/scripts/Create-Release.ps1
-              #     arguments: >
-              #       -releaseSha '$(Build.SourceVersion)'
-              #       -tagName 'v$(PackageVersion)'
-              #       -title 'AutoRest Java v$(PackageVersion)'
-              #       -releaseNotes '- Bug fix'
-              #     pwsh: true
-              #   timeoutInMinutes: 5
-              #   env:
-              #     GH_TOKEN: $(azuresdk-github-pat)
+              - task: PowerShell@2
+                displayName: 'Create GitHub Releases'
+                inputs:
+                  filePath: eng/scripts/Create-Release.ps1
+                  arguments: >
+                    -releaseSha '$(Build.SourceVersion)'
+                    -tagName 'v$(PackageVersion)'
+                    -title 'AutoRest Java v$(PackageVersion)'
+                    -releaseNotes '- Bug fix'
+                  pwsh: true
+                timeoutInMinutes: 5
+                env:
+                  GH_TOKEN: $(azuresdk-github-pat)
 
-              # - script: |
-              #     npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
-              #     ls *.tgz | npm publish -0 --access public
-              #     npm config delete //registry.npmjs.org/:_authToken
-              #   displayName: 'Publish AutoRest Java to NPM'
+              - script: |
+                  npm config set //registry.npmjs.org/:_authToken=$(azure-sdk-npm-token)
+                  ls *.tgz | npm publish -0 --access public
+                  npm config delete //registry.npmjs.org/:_authToken
+                displayName: 'Publish AutoRest Java to NPM'
 
-              # - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
+              - template: /eng/pipelines/steps/cleanup-maven-local-cache.yml
