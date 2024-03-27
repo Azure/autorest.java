@@ -1811,133 +1811,63 @@ export class CodeModelBuilder {
 
   private processSchemaImpl(type: Type, nameHint: string): Schema {
     const sdkType: SdkType = getClientType(this.sdkContext, type);
+  private processSchemaFromSdkTypeImpl(type: SdkType, nameHint: string): Schema {
     switch (type.kind) {
-      // case "any":
-      //   return this.processAnySchemaFromSdkType(type, nameHint);
+      case "any":
+        return this.processAnySchemaFromSdkType(type, nameHint);
 
-      // case "enum":
-      //   return this.processChoiceSchemaFromSdkType(type, type.name);
+      case "constant":
+        return this.processConstantSchemaFromSdkType(type as SdkConstantType, nameHint);
 
-      // case "bytes":
-      // case "boolean":
-      // case "plainDate":
-      // case "plainTime":
-      // case "numeric":
-      // case "integer":
-      // case "safeint":
-      // case "int8":
-      // case "uint8":
-      // case "int16":
-      // case "uint16":
-      // case "int32":
-      // case "uint32":
-      // case "int64":
-      // case "uint64":
-      // case "float":
-      // case "float32":
-      // case "float64":
-      // case "decimal":
-      // case "decimal128":
-      // case "string":
-      // case "password":
-      // case "guid":
-      // case "url":
-      // case "uuid":
-      // case "eTag":
-      // case "armId":
-      // case "ipAddress":
-      // case "azureLocation":
-      //   return emitBuiltInType(type);
+      case "enum":
+        return this.processChoiceSchemaFromSdkType(type, type.name);
 
-      case "Intrinsic":
-        if (isUnknownType(type)) {
-          const sdkType: SdkType = getClientType(this.sdkContext, type) as SdkType;
-          return this.processAnySchemaFromSdkType(sdkType, nameHint);
-        } else {
-          throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
-        }
+      case "union":
+        return this.processUnionSchemaFromSdkType(type, type.name);
 
-      case "String":
-        return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
+      case "model":
+        return this.processObjectSchemaFromSdkType(type, type.name);
+        
+      case "dict":
+        return this.processDictionarySchemaFromSdkType(type, nameHint);
+        
+      case "array":
+        return this.processArraySchemaFromSdkType(type, nameHint);
 
-      case "Number":
-        return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
+      case "bytes":
+      case "boolean":
+      case "plainDate":
+      case "plainTime":
+      case "numeric":
+      case "integer":
+      case "safeint":
+      case "int8":
+      case "uint8":
+      case "int16":
+      case "uint16":
+      case "int32":
+      case "uint32":
+      case "int64":
+      case "uint64":
+      case "float":
+      case "float32":
+      case "float64":
+      case "decimal":
+      case "decimal128":
+      case "string":
+      case "password":
+      case "guid":
+      case "url":
+      case "uuid":
+      case "eTag":
+      case "armId":
+      case "ipAddress":
+      case "azureLocation":
+        return this.processBuiltInFromSdkType(type as SdkBuiltInType, nameHint);
 
-      case "Boolean":
-        return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
-
-      case "Enum":
-        return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, nameHint);
-
-      case "Union":
-        if (sdkType.kind === "enum") {
-          return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, nameHint);
-        }
-        if (sdkType.kind === "model") {
-          return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, nameHint);
-        }
-        if (isSdkBuiltInKind(sdkType.kind)) {
-          return this.processBuiltInFromSdkType(sdkType as SdkBuiltInType, nameHint);
-        }
-        return this.processUnionSchemaFromSdkType(
-          getClientType(this.sdkContext, type) as SdkUnionType,
-          this.getName(type, nameHint),
-        );
-
-      case "ModelProperty": {
-        let schema = undefined;
-        if (sdkType.kind === "enum") {
-          return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, (sdkType as SdkEnumType).name);
-        } else if(sdkType.kind === "constant") {
-          return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
-        }
-        else {
-          const schemaNameHint =
-            type.type.kind === "Scalar" && this.program.checker.isStdType(type.type)
-              ? nameHint // std scalar won't need a nameHint
-              : pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
-          schema = this.processSchema(type.type, schemaNameHint);
-        }
-        return this.applyModelPropertyDecorators(type, nameHint, schema);
-      }
-
-      case "Scalar":
-        switch (sdkType.kind) {
-          case "utcDateTime":
-          case "offsetDateTime":
-            if ((sdkType as SdkDatetimeType).encode === "unixTimestamp") {
-              return this.processUnixTimeSchemaFromSdkType(sdkType as SdkDatetimeType, nameHint);
-            } else {
-              return this.processDateTimeSchemaFromSdkType(sdkType as SdkDatetimeType, nameHint, (sdkType as SdkDatetimeType).encode === "rfc7231");
-            }
-          case "duration":
-            return this.processDurationSchemaFromSdkType(sdkType as SdkDurationType, nameHint, getDurationFormatFromSdkType(sdkType as SdkDurationType));
-        }
-        return this.processScalar(type, undefined, nameHint);
-
-      case "Model":
-        if (isArrayModelType(this.program, type)) {
-          return this.processArraySchemaFromSdkType(sdkType as SdkArrayType, nameHint);
-        } else if (isRecordModelType(this.program, type) && type.properties.size == 0) {
-          // "pure" Record that does not have properties in it
-          return this.processDictionarySchema(type, nameHint);
-        } else {
-          return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, (sdkType as SdkModelType).name);
-        }
-
-      case "EnumMember":
-        // e.g. "type: TypeEnum.EnumValue1"
-        return this.processConstantSchemaForEnumMember(type, this.getName(type));
-
-      case "UnionVariant":
-        // e.g. "type: Union.Variant1"
-        if (type.type.kind === "String" || type.type.kind === "Number" || type.type.kind === "Boolean") {
-          return this.processConstantSchemaForUnionVariant(type, this.getName(type));
-        } else {
-          throw new Error(`Unsupported type reference to UnionVariant.`);
-        }
+      case "duration":
+        return this.processDurationSchemaFromSdkType(type as SdkDurationType, nameHint, getDurationFormatFromSdkType(type as SdkDurationType));
     }
-
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
 
