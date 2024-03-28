@@ -50,7 +50,8 @@ public final class Readonlyproperties {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceReadonlyproperties to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceReadonlyproperties to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -87,7 +88,8 @@ public final class Readonlyproperties {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that have readonly properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that have readonly properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ReadonlyObj>> getValidWithResponseAsync() {
@@ -106,7 +108,8 @@ public final class Readonlyproperties {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return complex types that have readonly properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that have readonly properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ReadonlyObj>> getValidWithResponseAsync(Context context) {

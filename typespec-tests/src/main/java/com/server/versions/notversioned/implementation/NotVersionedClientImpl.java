@@ -119,7 +119,8 @@ public final class NotVersionedClientImpl {
     }
 
     /**
-     * The interface defining all the services for NotVersionedClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for NotVersionedClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "NotVersionedClient")

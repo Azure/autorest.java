@@ -45,7 +45,8 @@ public final class Paths {
     }
 
     /**
-     * The interface defining all the services for AutoRestParameterizedHostTestClientPaths to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestParameterizedHostTestClientPaths to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("http://{accountName}{host}")
     @ServiceInterface(name = "AutoRestParameterize")

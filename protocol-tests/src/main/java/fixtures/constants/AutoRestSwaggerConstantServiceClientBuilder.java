@@ -182,7 +182,8 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     private boolean headerConstant = true;
 
     /**
-     * Sets Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * Sets Constant header property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * 
      * @param headerConstant the headerConstant value.
      * @return the AutoRestSwaggerConstantServiceClientBuilder.
@@ -200,7 +201,8 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     private int queryConstant = 100;
 
     /**
-     * Sets Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * Sets Constant query property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * 
      * @param queryConstant the queryConstant value.
      * @return the AutoRestSwaggerConstantServiceClientBuilder.
@@ -218,7 +220,8 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     private String pathConstant;
 
     /**
-     * Sets Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * Sets Constant path property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * 
      * @param pathConstant the pathConstant value.
      * @return the AutoRestSwaggerConstantServiceClientBuilder.

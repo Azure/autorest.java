@@ -51,7 +51,8 @@ public final class UnionEnumsImpl {
     }
 
     /**
-     * The interface defining all the services for NamingClientUnionEnums to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for NamingClientUnionEnums to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "NamingClientUnionEnu")
@@ -96,6 +97,7 @@ public final class UnionEnumsImpl {
     /**
      * The unionEnumName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String(value1)
      * }</pre>
@@ -117,6 +119,7 @@ public final class UnionEnumsImpl {
     /**
      * The unionEnumName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String(value1)
      * }</pre>
@@ -138,8 +141,9 @@ public final class UnionEnumsImpl {
     /**
      * The unionEnumMemberName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(value1/value2)
+     * String(value1 / value2)
      * }</pre>
      * 
      * @param body The body parameter.
@@ -159,8 +163,9 @@ public final class UnionEnumsImpl {
     /**
      * The unionEnumMemberName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(value1/value2)
+     * String(value1 / value2)
      * }</pre>
      * 
      * @param body The body parameter.

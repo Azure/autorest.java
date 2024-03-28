@@ -41,6 +41,7 @@ public final class RecursiveAsyncClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     extension (Optional): [
@@ -67,6 +68,7 @@ public final class RecursiveAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     extension (Optional): [

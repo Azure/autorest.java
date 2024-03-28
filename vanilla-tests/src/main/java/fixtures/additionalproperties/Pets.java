@@ -52,7 +52,8 @@ public final class Pets {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientPets to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientPets to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AdditionalProperties")

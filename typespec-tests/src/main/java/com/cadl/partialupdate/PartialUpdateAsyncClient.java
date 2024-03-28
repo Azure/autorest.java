@@ -41,6 +41,7 @@ public final class PartialUpdateAsyncClient {
     /**
      * The read operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     boolean: boolean (Required)

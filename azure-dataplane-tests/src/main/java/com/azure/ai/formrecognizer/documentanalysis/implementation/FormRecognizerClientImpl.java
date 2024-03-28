@@ -176,7 +176,8 @@ public final class FormRecognizerClientImpl {
     }
 
     /**
-     * The interface defining all the services for FormRecognizerClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for FormRecognizerClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}/formrecognizer")
     @ServiceInterface(name = "FormRecognizerClient")
@@ -422,8 +423,9 @@ public final class FormRecognizerClientImpl {
      * Analyzes document with document model.
      * 
      * @param modelId Unique document model name.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -445,8 +447,9 @@ public final class FormRecognizerClientImpl {
      * Analyzes document with document model.
      * 
      * @param modelId Unique document model name.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -470,8 +473,9 @@ public final class FormRecognizerClientImpl {
      * Analyzes document with document model.
      * 
      * @param modelId Unique document model name.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -494,8 +498,9 @@ public final class FormRecognizerClientImpl {
      * Analyzes document with document model.
      * 
      * @param modelId Unique document model name.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -520,8 +525,9 @@ public final class FormRecognizerClientImpl {
      * Analyzes document with document model.
      * 
      * @param modelId Unique document model name.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -548,8 +554,9 @@ public final class FormRecognizerClientImpl {
      * Analyzes document with document model.
      * 
      * @param modelId Unique document model name.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -575,8 +582,9 @@ public final class FormRecognizerClientImpl {
      * Analyzes document with document model.
      * 
      * @param modelId Unique document model name.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param context The context to associate with this operation.
@@ -603,8 +611,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -629,8 +638,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -656,8 +666,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -686,8 +697,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -717,8 +729,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -743,8 +756,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -770,8 +784,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -797,8 +812,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -826,8 +842,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -857,8 +874,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -886,8 +904,9 @@ public final class FormRecognizerClientImpl {
      * 
      * @param modelId Unique document model name.
      * @param contentType Upload file type.
-     * @param pages List of 1-based page numbers to analyze.  Ex. "1-3,5,7-9".
-     * @param locale Locale hint for text recognition and document analysis.  Value may contain only the language code (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
+     * @param pages List of 1-based page numbers to analyze. Ex. "1-3,5,7-9".
+     * @param locale Locale hint for text recognition and document analysis. Value may contain only the language code
+     * (ex. "en", "fr") or BCP 47 language tag (ex. "en-US").
      * @param stringIndexType Method used to compute string offset and length.
      * @param analyzeRequest Analyze request parameters.
      * @param contentLength The Content-Length header for the request.
@@ -1321,13 +1340,15 @@ public final class FormRecognizerClientImpl {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * Generates authorization to copy a document model to this location with specified modelId and optional
+     * description.
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link Response} on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CopyAuthorization>>
@@ -1340,14 +1361,16 @@ public final class FormRecognizerClientImpl {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * Generates authorization to copy a document model to this location with specified modelId and optional
+     * description.
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link Response} on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<CopyAuthorization>>
@@ -1360,13 +1383,15 @@ public final class FormRecognizerClientImpl {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * Generates authorization to copy a document model to this location with specified modelId and optional
+     * description.
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CopyAuthorization> authorizeCopyDocumentModelAsync(AuthorizeCopyRequest authorizeCopyRequest) {
@@ -1377,14 +1402,16 @@ public final class FormRecognizerClientImpl {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * Generates authorization to copy a document model to this location with specified modelId and optional
+     * description.
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId on successful completion of {@link Mono}.
+     * @return authorization to copy a document model to the specified target resource and modelId on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<CopyAuthorization> authorizeCopyDocumentModelAsync(AuthorizeCopyRequest authorizeCopyRequest,
@@ -1396,14 +1423,16 @@ public final class FormRecognizerClientImpl {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * Generates authorization to copy a document model to this location with specified modelId and optional
+     * description.
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return authorization to copy a document model to the specified target resource and modelId along with {@link Response}.
+     * @return authorization to copy a document model to the specified target resource and modelId along with
+     * {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<CopyAuthorization> authorizeCopyDocumentModelWithResponse(AuthorizeCopyRequest authorizeCopyRequest,
@@ -1416,7 +1445,8 @@ public final class FormRecognizerClientImpl {
     /**
      * Generate copy authorization
      * 
-     * Generates authorization to copy a document model to this location with specified modelId and optional description.
+     * Generates authorization to copy a document model to this location with specified modelId and optional
+     * description.
      * 
      * @param authorizeCopyRequest Authorize copy request parameters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1592,7 +1622,8 @@ public final class FormRecognizerClientImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsSinglePageAsync() {
@@ -1612,7 +1643,8 @@ public final class FormRecognizerClientImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsSinglePageAsync(Context context) {
@@ -1834,7 +1866,8 @@ public final class FormRecognizerClientImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsSinglePageAsync() {
@@ -1855,7 +1888,8 @@ public final class FormRecognizerClientImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsSinglePageAsync(Context context) {
@@ -2179,7 +2213,8 @@ public final class FormRecognizerClientImpl {
      * 
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource along with {@link Response} on successful completion of {@link Mono}.
+     * @return general information regarding the current resource along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceDetails>> getResourceDetailsWithResponseAsync() {
@@ -2197,7 +2232,8 @@ public final class FormRecognizerClientImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return general information regarding the current resource along with {@link Response} on successful completion of {@link Mono}.
+     * @return general information regarding the current resource along with {@link Response} on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceDetails>> getResourceDetailsWithResponseAsync(Context context) {
@@ -2275,7 +2311,8 @@ public final class FormRecognizerClientImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsNextSinglePageAsync(String nextLink) {
@@ -2295,7 +2332,8 @@ public final class FormRecognizerClientImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list Operations response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list Operations response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<OperationSummary>> getOperationsNextSinglePageAsync(String nextLink, Context context) {
@@ -2355,7 +2393,8 @@ public final class FormRecognizerClientImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsNextSinglePageAsync(String nextLink) {
@@ -2376,7 +2415,8 @@ public final class FormRecognizerClientImpl {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return list document models response object along with {@link PagedResponse} on successful completion of {@link Mono}.
+     * @return list document models response object along with {@link PagedResponse} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<PagedResponse<DocumentModelSummary>> getDocumentModelsNextSinglePageAsync(String nextLink,

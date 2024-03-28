@@ -63,7 +63,8 @@ public final class Explicits {
     }
 
     /**
-     * The interface defining all the services for AutoRestRequiredOptionalTestServiceExplicits to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestRequiredOptionalTestServiceExplicits to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestRequiredOpti")
@@ -931,7 +932,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -956,7 +958,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -982,7 +985,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -996,7 +1000,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -1011,7 +1016,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -1026,7 +1032,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a valid int-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1168,7 +1175,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1188,7 +1196,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
@@ -1208,7 +1217,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1222,7 +1232,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
@@ -1237,7 +1248,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
@@ -1252,7 +1264,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required integer. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1612,7 +1625,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1637,7 +1651,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -1663,7 +1678,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1677,7 +1693,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -1692,7 +1709,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -1707,7 +1725,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a valid string-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1849,7 +1868,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1873,7 +1893,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
@@ -1897,7 +1918,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1911,7 +1933,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
@@ -1926,7 +1949,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
@@ -1941,7 +1965,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required string. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2076,7 +2101,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2101,7 +2127,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2126,7 +2153,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2140,7 +2168,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2155,7 +2184,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2170,7 +2200,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put null and the client library should throw before the request
+     * is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2311,7 +2342,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2336,7 +2368,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2362,7 +2395,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2376,7 +2410,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2391,7 +2426,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2406,7 +2442,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required complex object. Please put a valid class-wrapper with 'value' = null and the client
+     * library should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2775,7 +2812,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2800,7 +2838,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2826,7 +2865,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2840,7 +2880,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2855,7 +2896,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
@@ -2870,7 +2912,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a valid array-wrapper with 'value' = null and the client library
+     * should throw before the request is sent.
      * 
      * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3012,7 +3055,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter Array of Post0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3039,7 +3083,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter Array of Post0ItemsItem.
      * @param context The context to associate with this operation.
@@ -3067,7 +3112,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter Array of Post0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -3081,7 +3127,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter Array of Post0ItemsItem.
      * @param context The context to associate with this operation.
@@ -3096,7 +3143,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter Array of Post0ItemsItem.
      * @param context The context to associate with this operation.
@@ -3111,7 +3159,8 @@ public final class Explicits {
     }
 
     /**
-     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should throw before the request is sent.
+     * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
+     * throw before the request is sent.
      * 
      * @param headerParameter Array of Post0ItemsItem.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

@@ -34,7 +34,8 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
     private String aadAccessToken;
 
     /**
-     * Creates an instance of PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
+     * Creates an instance of
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema class.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema() {
     }
@@ -52,7 +53,9 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * Set the grantType property: Constant part of a formdata body.
      * 
      * @param grantType the grantType value to set.
-     * @return the PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object itself.
+     * @return the
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
+     * itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setGrantType(String grantType) {
@@ -73,7 +76,9 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
      * Set the service property: Indicates the name of your Azure container registry.
      * 
      * @param service the service value to set.
-     * @return the PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object itself.
+     * @return the
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
+     * itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setService(String service) {
@@ -82,7 +87,8 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
     }
 
     /**
-     * Get the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * Get the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or
+     * access_token.
      * 
      * @return the aadAccessToken value.
      */
@@ -91,10 +97,13 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
     }
 
     /**
-     * Set the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
+     * Set the aadAccessToken property: AAD access token, mandatory when grant_type is access_token_refresh_token or
+     * access_token.
      * 
      * @param aadAccessToken the aadAccessToken value to set.
-     * @return the PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object itself.
+     * @return the
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema object
+     * itself.
      */
     public PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema
         setAadAccessToken(String aadAccessToken) {
@@ -131,12 +140,17 @@ public final class PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestb
     }
 
     /**
-     * Reads an instance of PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema from the JsonReader.
+     * Reads an instance of
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema from
+     * the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema if the
+     * JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
+     * @throws IOException If an error occurs while reading the
+     * PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema.
      */
     public static
         PathsPvivzlFormsdataurlencodedPartialconstantbodyPostRequestbodyContentApplicationXWwwFormUrlencodedSchema

@@ -51,7 +51,8 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for BytesClientProperties to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for BytesClientProperties to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BytesClientPropertie")
@@ -132,12 +133,15 @@ public final class PropertiesImpl {
     /**
      * The defaultMethod operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -161,12 +165,15 @@ public final class PropertiesImpl {
     /**
      * The defaultMethod operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -190,12 +197,15 @@ public final class PropertiesImpl {
     /**
      * The base64 operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -219,12 +229,15 @@ public final class PropertiesImpl {
     /**
      * The base64 operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -248,12 +261,15 @@ public final class PropertiesImpl {
     /**
      * The base64url operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
@@ -277,12 +293,15 @@ public final class PropertiesImpl {
     /**
      * The base64url operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
@@ -306,6 +325,7 @@ public final class PropertiesImpl {
     /**
      * The base64urlArray operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value (Required): [
@@ -313,7 +333,9 @@ public final class PropertiesImpl {
      *     ]
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value (Required): [
@@ -339,6 +361,7 @@ public final class PropertiesImpl {
     /**
      * The base64urlArray operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value (Required): [
@@ -346,7 +369,9 @@ public final class PropertiesImpl {
      *     ]
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value (Required): [

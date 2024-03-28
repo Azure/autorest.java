@@ -38,6 +38,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that must return result of the default 'value' node.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -63,6 +64,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that gets an empty next link and should stop after page 1.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -88,6 +90,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that must ignore any kind of nextLink, and stop after page 1.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -113,6 +116,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that finishes on the first call without a nextlink.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -138,12 +142,15 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that finishes on the first call with body params without a nextlink.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Optional)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -169,8 +176,10 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final) call, will give you an items list of 1.
+     * A paging operation whose first response's items list is empty, but still returns a next link. Second (and final)
+     * call, will give you an items list of 1.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -197,14 +206,17 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that includes a nextLink that has 10 pages.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
+     * response.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -228,8 +240,10 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation that includes a next operation. It has a different query parameter from it's next operation nextOperationWithQueryParams. Returns a ProductResult.
+     * A paging operation that includes a next operation. It has a different query parameter from it's next operation
+     * nextOperationWithQueryParams. Returns a ProductResult.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -254,15 +268,17 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
+     * Define `filter` as a query param for all calls. However, the returned next link will also include the `filter` as
+     * part of it. Make sure you don't end up duplicating the `filter` param in the url sent.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>$filter</td><td>String</td><td>No</td><td>OData filter options. Pass in 'foo'</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>$filter</td><td>String</td><td>No</td><td>OData filter options. Pass in 'foo'</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -288,6 +304,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * Paging with max page size. We don't want to.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -314,14 +331,17 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that includes a nextLink in odata format that has 10 pages.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
+     * response.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -348,14 +368,17 @@ public final class AutoRestPagingTestServiceClient {
      * A paging operation that includes a nextLink that has 10 pages.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
+     * response.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -380,8 +403,10 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation that fails on the first call with 500 and then retries and then get a response including a nextLink that has 10 pages.
+     * A paging operation that fails on the first call with 500 and then retries and then get a response including a
+     * nextLink that has 10 pages.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -405,8 +430,10 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The client should retry and finish all 10 pages eventually.
+     * A paging operation that includes a nextLink that has 10 pages, of which the 2nd call fails first with 500. The
+     * client should retry and finish all 10 pages eventually.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -432,6 +459,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives a 400 on the first call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -457,6 +485,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives a 400 on the second call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -482,6 +511,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that receives an invalid nextLink.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -507,6 +537,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -535,6 +566,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that doesn't return a full URL, just a fragment with parameters grouped.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -564,14 +596,17 @@ public final class AutoRestPagingTestServiceClient {
      * A long-running paging operation that includes a nextLink that has 10 pages.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
-     *     <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the response.</td></tr>
-     *     <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the request, in seconds. The default is 30 seconds.</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>client-request-id</td><td>String</td><td>No</td><td>The clientRequestId parameter</td></tr>
+     * <tr><td>maxresults</td><td>Integer</td><td>No</td><td>Sets the maximum number of items to return in the
+     * response.</td></tr>
+     * <tr><td>timeout</td><td>Integer</td><td>No</td><td>Sets the maximum time that the server can spend processing the
+     * request, in seconds. The default is 30 seconds.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -595,8 +630,10 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to append your client's api version to the next link.
+     * A paging operation with api version. When calling the next link, you want to append your client's api version to
+     * the next link.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -620,8 +657,10 @@ public final class AutoRestPagingTestServiceClient {
     }
 
     /**
-     * A paging operation with api version. When calling the next link, you want to reformat it and override the returned api version with your client's api version.
+     * A paging operation with api version. When calling the next link, you want to reformat it and override the
+     * returned api version with your client's api version.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {
@@ -647,6 +686,7 @@ public final class AutoRestPagingTestServiceClient {
     /**
      * A paging operation that returns a paging model whose item name is is overriden by x-ms-client-name 'indexes'.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     properties (Optional): {

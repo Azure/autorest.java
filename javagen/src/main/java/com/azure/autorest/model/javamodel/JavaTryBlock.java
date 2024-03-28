@@ -6,7 +6,7 @@ package com.azure.autorest.model.javamodel;
 import java.util.function.Consumer;
 
 public class JavaTryBlock {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
 
     public JavaTryBlock(JavaFileContents contents) {
         this.contents = contents;

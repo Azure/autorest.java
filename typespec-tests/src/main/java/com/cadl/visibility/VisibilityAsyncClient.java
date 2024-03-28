@@ -44,6 +44,7 @@ public final class VisibilityAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -68,12 +69,15 @@ public final class VisibilityAsyncClient {
     /**
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -99,13 +103,16 @@ public final class VisibilityAsyncClient {
     /**
      * The query operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)
      *     name: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -131,13 +138,16 @@ public final class VisibilityAsyncClient {
     /**
      * The roundtrip operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
      *     secretName: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

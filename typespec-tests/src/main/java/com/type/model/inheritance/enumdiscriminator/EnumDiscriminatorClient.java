@@ -40,6 +40,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Receive model with extensible enum discriminator type.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(golden) (Required)
@@ -63,6 +64,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Send model with extensible enum discriminator type.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(golden) (Required)
@@ -87,6 +89,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Get a model omitting the discriminator.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(golden) (Required)
@@ -110,6 +113,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Get a model containing discriminator value never defined.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(golden) (Required)
@@ -133,6 +137,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Receive model with fixed enum discriminator type.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(cobra) (Required)
@@ -156,6 +161,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Send model with fixed enum discriminator type.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(cobra) (Required)
@@ -180,6 +186,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Get a model omitting the discriminator.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(cobra) (Required)
@@ -203,6 +210,7 @@ public final class EnumDiscriminatorClient {
     /**
      * Get a model containing discriminator value never defined.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String(cobra) (Required)

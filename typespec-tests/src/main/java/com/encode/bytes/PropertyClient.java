@@ -42,12 +42,15 @@ public final class PropertyClient {
     /**
      * The defaultMethod operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -71,12 +74,15 @@ public final class PropertyClient {
     /**
      * The base64 operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: byte[] (Required)
@@ -100,12 +106,15 @@ public final class PropertyClient {
     /**
      * The base64url operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value: Base64Url (Required)
@@ -129,6 +138,7 @@ public final class PropertyClient {
     /**
      * The base64urlArray operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value (Required): [
@@ -136,7 +146,9 @@ public final class PropertyClient {
      *     ]
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     value (Required): [

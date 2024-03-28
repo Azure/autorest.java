@@ -39,8 +39,9 @@ public final class FixedClient {
     /**
      * getKnownValue.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -59,8 +60,9 @@ public final class FixedClient {
     /**
      * putKnownValue.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body _.
@@ -80,8 +82,9 @@ public final class FixedClient {
     /**
      * putUnknownValue.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body _.

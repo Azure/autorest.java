@@ -39,6 +39,7 @@ public final class VisibilityReadClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)

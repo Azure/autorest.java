@@ -52,7 +52,8 @@ public final class StringOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for FixedClientStringOperations to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for FixedClientStringOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "FixedClientStringOpe")
@@ -115,8 +116,9 @@ public final class StringOperationsImpl {
     /**
      * getKnownValue.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -135,8 +137,9 @@ public final class StringOperationsImpl {
     /**
      * getKnownValue.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -155,8 +158,9 @@ public final class StringOperationsImpl {
     /**
      * putKnownValue.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body _.
@@ -176,8 +180,9 @@ public final class StringOperationsImpl {
     /**
      * putKnownValue.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body _.
@@ -197,8 +202,9 @@ public final class StringOperationsImpl {
     /**
      * putUnknownValue.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body _.
@@ -218,8 +224,9 @@ public final class StringOperationsImpl {
     /**
      * putUnknownValue.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body _.

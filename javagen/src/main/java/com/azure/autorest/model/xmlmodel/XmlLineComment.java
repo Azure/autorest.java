@@ -4,7 +4,7 @@
 package com.azure.autorest.model.xmlmodel;
 
 public class XmlLineComment {
-    private XmlFileContents contents;
+    private final XmlFileContents contents;
 
     public XmlLineComment(XmlFileContents contents) {
         this.contents = contents;

@@ -39,6 +39,7 @@ public final class ReadonlypropertyAsyncClient {
     /**
      * Get complex types that have readonly properties.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Optional)
@@ -51,7 +52,8 @@ public final class ReadonlypropertyAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return complex types that have readonly properties along with {@link Response} on successful completion of {@link Mono}.
+     * @return complex types that have readonly properties along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -62,6 +64,7 @@ public final class ReadonlypropertyAsyncClient {
     /**
      * Put complex types that have readonly properties.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Optional)

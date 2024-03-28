@@ -39,6 +39,7 @@ public final class StringOperationClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String (Required)
@@ -61,6 +62,7 @@ public final class StringOperationClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String (Required)

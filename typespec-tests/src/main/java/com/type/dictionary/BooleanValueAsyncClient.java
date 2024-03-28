@@ -42,6 +42,7 @@ public final class BooleanValueAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: boolean (Required)
@@ -64,6 +65,7 @@ public final class BooleanValueAsyncClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: boolean (Required)

@@ -41,6 +41,7 @@ public final class ExtendsModelArrayAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *      (Optional): {
@@ -69,6 +70,7 @@ public final class ExtendsModelArrayAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *      (Optional): {

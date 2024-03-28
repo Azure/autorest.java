@@ -39,6 +39,7 @@ public final class EnumClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
@@ -61,6 +62,7 @@ public final class EnumClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)

@@ -52,7 +52,8 @@ public final class VisibilityWritesImpl {
     }
 
     /**
-     * The interface defining all the services for VisibilityClientVisibilityWrites to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for VisibilityClientVisibilityWrites to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "VisibilityClientVisi")
@@ -79,12 +80,15 @@ public final class VisibilityWritesImpl {
     /**
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)
@@ -111,12 +115,15 @@ public final class VisibilityWritesImpl {
     /**
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)

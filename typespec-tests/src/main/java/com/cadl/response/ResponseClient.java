@@ -45,6 +45,7 @@ public final class ResponseClient {
     /**
      * The getBinary operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -65,6 +66,7 @@ public final class ResponseClient {
     /**
      * The getArray operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *      (Required){
@@ -92,6 +94,7 @@ public final class ResponseClient {
     /**
      * The getAnotherArray operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *      (Required){
@@ -119,6 +122,7 @@ public final class ResponseClient {
     /**
      * The createWithHeaders operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -160,6 +164,7 @@ public final class ResponseClient {
     /**
      * The most basic operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -179,6 +184,7 @@ public final class ResponseClient {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -206,6 +212,7 @@ public final class ResponseClient {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -233,6 +240,7 @@ public final class ResponseClient {
     /**
      * The listStrings operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -253,6 +261,7 @@ public final class ResponseClient {
     /**
      * The listIntegers operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * int
      * }</pre>
