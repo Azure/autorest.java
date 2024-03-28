@@ -16,22 +16,17 @@ import java.util.stream.Collectors;
 public class JavaFileContents {
     private static final String SINGLE_INDENT = "    ";
 
-    private final StringBuilder contents;
-    private final StringBuilder linePrefix;
+    private final List<String> contents;
 
-    private CurrentLineType currentLineType = CurrentLineType.values()[0];
+    private String currentLine;
+    private String linePrefix;
+
+    private CurrentLineType currentLineType = CurrentLineType.Empty;
 
     public JavaFileContents() {
-        this(null);
-    }
-
-    public JavaFileContents(String fileContents) {
-        contents = new StringBuilder();
-        linePrefix = new StringBuilder();
-
-        if (fileContents != null && !fileContents.isEmpty()) {
-            contents.append(fileContents);
-        }
+        this.currentLine = "";
+        this.linePrefix = "";
+        this.contents = new ArrayList<>();
     }
 
     private static String toString(List<JavaModifier> modifiers) {
@@ -40,23 +35,23 @@ public class JavaFileContents {
 
     @Override
     public String toString() {
-        return contents.toString();
+        return String.join("\n", contents) + currentLine;
     }
 
-    public final String[] getLines() {
-        return toString().split("\n", -1);
+    public boolean contains(String str) {
+        return contents.stream().anyMatch(line -> line.contains(str));
     }
 
     public final void addToPrefix(String toAdd) {
-        linePrefix.append(toAdd);
+        linePrefix += toAdd;
     }
 
     private void removeFromPrefix(String toRemove) {
         int toRemoveLength = toRemove.length();
         if (linePrefix.length() <= toRemoveLength) {
-            linePrefix.setLength(0);
+            linePrefix = "";
         } else {
-            linePrefix.delete(linePrefix.length() - toRemoveLength, linePrefix.length() - toRemoveLength + toRemoveLength);
+            linePrefix = linePrefix.substring(0, linePrefix.length() - toRemoveLength);
         }
     }
 
@@ -74,53 +69,54 @@ public class JavaFileContents {
         removeFromPrefix(SINGLE_INDENT);
     }
 
-    private void text(String text, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<>();
+    private void text(String text, boolean addPrefix, boolean completeLastLine) {
+        String prefix = addPrefix ? linePrefix : null;
 
         if (text == null || text.isEmpty()) {
-            lines.add("");
+            handleLine("", prefix, true, completeLastLine);
         } else {
             int lineStartIndex = 0;
             int textLength = text.length();
             while (lineStartIndex < textLength) {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
-                    String line = text.substring(lineStartIndex);
-                    lines.add(line);
-                    lineStartIndex = textLength;
+                    handleLine(text.substring(lineStartIndex), prefix, true, completeLastLine);
+                    break;
                 } else {
-                    int nextLineStartIndex = newLineCharacterIndex + 1;
-                    String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    lines.add(line);
-                    lineStartIndex = nextLineStartIndex;
+                    handleLine(text.substring(lineStartIndex, newLineCharacterIndex), prefix, false, completeLastLine);
+                    lineStartIndex = newLineCharacterIndex + 1;
                 }
             }
         }
+    }
 
-        String prefix = addPrefix ? linePrefix.toString() : null;
-        for (String line : lines) {
-            if (addPrefix && prefix != null && !prefix.trim().isEmpty() || (prefix != null && !prefix.isEmpty() && line != null && !line.trim().isEmpty())) {
-                contents.append(prefix);
-            }
+    private void handleLine(String line, String prefix, boolean lastLine, boolean completeLastLine) {
+        if (prefix != null
+            && (!prefix.trim().isEmpty() || (!prefix.isEmpty() && line != null && !line.trim().isEmpty()))) {
+            currentLine += prefix;
+        }
 
-            contents.append(line);
+        currentLine += line;
+        if (!lastLine || completeLastLine) {
+            contents.add(currentLine);
+            currentLine = "";
         }
     }
 
     public final void text(String text) {
         if (currentLineType == CurrentLineType.Empty) {
-            text(text, true);
+            text(text, true, false);
         } else if (currentLineType == CurrentLineType.Text) {
-            text(text, false);
+            text(text, false, false);
         } else if (currentLineType == CurrentLineType.AfterIf) {
             line("", false);
-            text(text, true);
+            text(text, true, false);
         }
         currentLineType = CurrentLineType.Text;
     }
 
     private void line(String text, boolean addPrefix) {
-        text(text + "\n", addPrefix);
+        text(text, addPrefix, true);
         currentLineType = CurrentLineType.Empty;
     }
 
@@ -154,8 +150,7 @@ public class JavaFileContents {
 
     public void block(String text, Consumer<JavaBlock> bodyAction) {
         line(text + " {");
-        indent(() ->
-                bodyAction.accept(new JavaBlock(this)));
+        indent(() -> bodyAction.accept(new JavaBlock(this)));
         line("}");
     }
 
