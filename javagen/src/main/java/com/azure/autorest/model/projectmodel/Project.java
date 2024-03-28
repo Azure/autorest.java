@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class Project {
 
@@ -295,7 +294,7 @@ public class Project {
 
     public static Optional<String> checkArtifact(String line, String artifact) {
         if (line.startsWith(artifact + ";")) {
-            String[] segments = line.split(Pattern.quote(";"));
+            String[] segments = line.split(";");
             if (segments.length >= 2) {
                 String version = segments[1];
                 LOGGER.info("Found version '{}' for artifact '{}'", version, artifact);

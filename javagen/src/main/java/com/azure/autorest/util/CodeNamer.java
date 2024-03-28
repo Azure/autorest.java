@@ -5,10 +5,11 @@ package com.azure.autorest.util;
 
 import org.atteo.evo.inflector.English;
 
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
+
+import static com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacter;
 
 public class CodeNamer {
 
@@ -131,14 +132,13 @@ public class CodeNamer {
                 result = sb.toString();
             } else {
                 // all char is '_', then transform some '_' to
+                String basicLatinCharacterReplacement = getBasicLatinCharacter(name.charAt(0));
+                if (result.startsWith("_") && basicLatinCharacterReplacement != null) {
+                    result = basicLatinCharacterReplacement + result.substring(1);
 
-                Map<Character, String> basicLaticCharacters
-                    = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacters();
-                if (result.startsWith("_") && basicLaticCharacters.containsKey(name.charAt(0))) {
-                    result = basicLaticCharacters.get(name.charAt(0)) + result.substring(1);
-                    if (result.endsWith("_") && basicLaticCharacters.containsKey(name.charAt(name.length() - 1))) {
-                        result = result.substring(0, result.length() - 1) + basicLaticCharacters.get(
-                            name.charAt(name.length() - 1));
+                    basicLatinCharacterReplacement = getBasicLatinCharacter(name.charAt(name.length() - 1));
+                    if (result.endsWith("_") && basicLatinCharacterReplacement != null) {
+                        result = result.substring(0, result.length() - 1) + basicLatinCharacterReplacement;
                     }
                 }
             }
@@ -157,5 +157,36 @@ public class CodeNamer {
             name += "Param";
         }
         return name;
+    }
+
+    public static String removeSpaceCharacters(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        StringBuilder sb = null;
+        int prevStart = 0;
+        int strLength = str.length();
+
+        for (int i = 0; i < strLength; i++) {
+            if (Character.isWhitespace(str.charAt(i))) {
+                if (sb == null) {
+                    sb = new StringBuilder(strLength);
+                }
+
+                if (prevStart != i) {
+                    sb.append(str, prevStart, i);
+                }
+
+                prevStart = i + 1;
+            }
+        }
+
+        if (sb == null) {
+            return str;
+        }
+
+        sb.append(str, prevStart, strLength);
+        return sb.toString();
     }
 }

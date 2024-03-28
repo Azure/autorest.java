@@ -64,7 +64,7 @@ public class LiveTestsMapper implements IMapper<TestModel, List<LiveTests>>{
     }
 
     private static String getFilename(String filePath) {
-        String[] split = filePath.replaceAll("\\\\", "/").split("/");
+        String[] split = filePath.replace("\\\\", "/").split("/");
         String filename = split[split.length - 1];
         filename = filename.split("\\.")[0];
         return CodeNamer.toPascalCase(filename);
