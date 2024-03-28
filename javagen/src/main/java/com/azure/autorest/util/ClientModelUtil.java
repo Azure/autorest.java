@@ -54,7 +54,6 @@ public class ClientModelUtil {
     public static final String MULTI_PART_FORM_DATA_HELPER_CLASS_NAME = "MultipartFormDataHelper";
     public static final String GENERIC_MULTI_PART_FORM_DATA_HELPER_CLASS_NAME = "GenericMultipartFormDataHelper";
 
-    private static final Pattern SPACE = Pattern.compile("\\s");
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
     public static final String JSON_MERGE_PATCH_HELPER_CLASS_NAME = "JsonMergePatchHelper";
@@ -183,7 +182,7 @@ public class ClientModelUtil {
             if (!serviceClientInterfaceName.endsWith("Client")) {
                 String serviceName = settings.getServiceName();
                 if (serviceName != null && codeModel instanceof CodeModel) {
-                    serviceName = SPACE.matcher(serviceName).replaceAll("");
+                    serviceName = CodeNamer.removeSpaceCharacters(serviceName);
                     serviceClientInterfaceName = serviceName.endsWith("Client") ? serviceName : (serviceName + "Client");
                 } else {
                     serviceClientInterfaceName += "Client";
@@ -230,7 +229,7 @@ public class ClientModelUtil {
                 serviceName = serviceClientInterfaceName;
             }
         } else {
-            serviceName = SPACE.matcher(settings.getServiceName()).replaceAll("");
+            serviceName = CodeNamer.removeSpaceCharacters(settings.getServiceName());
         }
         return serviceName + (serviceName.endsWith("Service") ? "Version" : "ServiceVersion");
     }
@@ -347,8 +346,8 @@ public class ClientModelUtil {
         if (settings.isDataPlaneClient() && CoreUtils.isNullOrEmpty(artifactId)) {
             // convert package/namespace to artifact
             artifactId = settings.getPackage().toLowerCase(Locale.ROOT)
-                    .replace("com.", "")
-                    .replace(".", "-");
+                .replace("com.", "")
+                .replace(".", "-");
         }
         return artifactId;
     }

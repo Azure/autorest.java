@@ -117,6 +117,36 @@ public class ImplementationDetails {
                 return constant;
             }
         }
+
+        /**
+         * Get the Usage instance from the SchemaContext.
+         *
+         * @param schemaContext the SchemaContext.
+         * @return the Usage instance.
+         * @throws IllegalArgumentException thrown if the SchemaContext doesn't match any Usage.
+         */
+        public static Usage fromSchemaContext(SchemaContext schemaContext) {
+            switch (schemaContext) {
+                case INPUT:
+                    return INPUT;
+                case OUTPUT:
+                    return OUTPUT;
+                case EXCEPTION:
+                    return EXCEPTION;
+                case PUBLIC:
+                    return PUBLIC;
+                case PAGED:
+                    return PAGED;
+                case ANONYMOUS:
+                    return ANONYMOUS;
+                case INTERNAL:
+                    return INTERNAL;
+                case JSON_MERGE_PATCH:
+                    return JSON_MERGE_PATCH;
+                default:
+                    throw new IllegalArgumentException(schemaContext.toString());
+            }
+        }
     }
 
     private final boolean implementationOnly;

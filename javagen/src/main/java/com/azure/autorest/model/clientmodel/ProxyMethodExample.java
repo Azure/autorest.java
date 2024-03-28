@@ -23,7 +23,6 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ProxyMethodExample {
@@ -238,7 +237,7 @@ public class ProxyMethodExample {
                     case "http":
                     case "https":
                     {
-                        String[] segments = url.getPath().split(Pattern.quote("/"));
+                        String[] segments = url.getPath().split("/");
                         if (segments.length > 3) {
                             // first 3 should be owner, name, branch
                             originalFileName = Arrays.stream(segments)
@@ -251,7 +250,7 @@ public class ProxyMethodExample {
 
                     case "file":
                     {
-                        String[] segments = url.getPath().split(Pattern.quote("/"));
+                        String[] segments = url.getPath().split("/");
                         int resourceManagerOrDataPlaneSegmentIndex = -1;
                         for (int i = 0; i < segments.length; ++i) {
                             if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {

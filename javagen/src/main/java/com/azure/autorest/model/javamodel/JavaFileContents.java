@@ -11,12 +11,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class JavaFileContents {
     private static final String SINGLE_INDENT = "    ";
-    private static final Pattern QUOTED_NEW_LINE = Pattern.compile(Pattern.quote("\n"));
 
     private final StringBuilder contents;
     private final StringBuilder linePrefix;
@@ -46,7 +44,7 @@ public class JavaFileContents {
     }
 
     public final String[] getLines() {
-        return QUOTED_NEW_LINE.split(toString(), -1);
+        return toString().split("\n", -1);
     }
 
     public final void addToPrefix(String toAdd) {

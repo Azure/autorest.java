@@ -41,7 +41,6 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,8 +65,6 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                     ClassType.DURATION_DOUBLE),
                     UNIX_TIME_TYPES.stream()).collect(Collectors.toList());
     private static final ProxyMethodMapper INSTANCE = new ProxyMethodMapper();
-
-    private static final Pattern APOSTROPHE = Pattern.compile("'");
 
     private final Map<Request, List<ProxyMethod>> parsed = new ConcurrentHashMap<>();
 
@@ -102,7 +99,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
 
         List<Integer> expectedStatusCodes = operation.getResponses().stream()
                 .flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream())
-                .map(s -> APOSTROPHE.matcher(s).replaceAll(""))
+                .map(s -> s.replace("'", ""))
                 .map(Integer::parseInt)
                 .sorted().collect(Collectors.toList());
         builder.responseExpectedStatusCodes(expectedStatusCodes);
