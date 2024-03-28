@@ -35,7 +35,8 @@ public final class ApplicationPackageReference implements JsonSerializable<Appli
     }
 
     /**
-     * Get the id property: The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.
+     * Get the id property: The ID of the application package to install. This must be inside the same batch account as
+     * the pool. This can either be a reference to a specific version or the default version if one exists.
      * 
      * @return the id value.
      */
@@ -44,7 +45,8 @@ public final class ApplicationPackageReference implements JsonSerializable<Appli
     }
 
     /**
-     * Set the id property: The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.
+     * Set the id property: The ID of the application package to install. This must be inside the same batch account as
+     * the pool. This can either be a reference to a specific version or the default version if one exists.
      * 
      * @param id the id value to set.
      * @return the ApplicationPackageReference object itself.
@@ -57,7 +59,8 @@ public final class ApplicationPackageReference implements JsonSerializable<Appli
     /**
      * Get the version property: The version of the application to deploy. If omitted, the default version is deployed.
      * 
-     * If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
+     * If this is omitted, and no default version is specified for this application, the request fails with the error
+     * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
      * 
      * @return the version value.
      */
@@ -68,7 +71,8 @@ public final class ApplicationPackageReference implements JsonSerializable<Appli
     /**
      * Set the version property: The version of the application to deploy. If omitted, the default version is deployed.
      * 
-     * If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
+     * If this is omitted, and no default version is specified for this application, the request fails with the error
+     * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
      * 
      * @param version the version value to set.
      * @return the ApplicationPackageReference object itself.
@@ -104,7 +108,8 @@ public final class ApplicationPackageReference implements JsonSerializable<Appli
      * Reads an instance of ApplicationPackageReference from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ApplicationPackageReference if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of ApplicationPackageReference if the JsonReader was pointing to an instance of it, or null
+     * if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ApplicationPackageReference.
      */

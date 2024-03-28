@@ -39,11 +39,13 @@ public final class MultipleContentTypesOnRequestClient {
     /**
      * one data type maps to multiple content types.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -64,11 +66,13 @@ public final class MultipleContentTypesOnRequestClient {
     /**
      * multiple data types map to multiple content types using shared route.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/octet-stream", "image/jpeg",
+     * "image/png".
      * @param data Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -89,6 +93,7 @@ public final class MultipleContentTypesOnRequestClient {
     /**
      * multiple data types map to multiple content types using shared route.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -114,11 +119,13 @@ public final class MultipleContentTypesOnRequestClient {
     /**
      * multiple data types map to multiple content types using shared route.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
      * 
-     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream", "image/jpeg", "image/png".
+     * @param contentType The contentType parameter. Allowed values: "application/json", "application/octet-stream",
+     * "image/jpeg", "image/png".
      * @param data The data parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

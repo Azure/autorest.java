@@ -41,6 +41,7 @@ public final class DatetimeValueClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *     OffsetDateTime (Required)
@@ -63,6 +64,7 @@ public final class DatetimeValueClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *     OffsetDateTime (Required)

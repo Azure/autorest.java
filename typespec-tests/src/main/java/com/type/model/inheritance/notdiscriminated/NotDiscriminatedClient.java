@@ -39,6 +39,7 @@ public final class NotDiscriminatedClient {
     /**
      * The postValid operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -64,6 +65,7 @@ public final class NotDiscriminatedClient {
     /**
      * The getValid operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -88,6 +90,7 @@ public final class NotDiscriminatedClient {
     /**
      * The putValid operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -95,7 +98,9 @@ public final class NotDiscriminatedClient {
      *     smart: boolean (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

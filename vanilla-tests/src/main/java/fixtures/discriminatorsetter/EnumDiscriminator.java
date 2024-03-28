@@ -113,7 +113,8 @@ public final class EnumDiscriminator {
     }
 
     /**
-     * The interface defining all the services for EnumDiscriminator to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for EnumDiscriminator to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "EnumDiscriminator")
@@ -130,7 +131,8 @@ public final class EnumDiscriminator {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Dog>> getExtensibleModelWithResponseAsync() {
@@ -148,7 +150,8 @@ public final class EnumDiscriminator {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of {@link Mono}.
+     * @return test extensible enum type for discriminator along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Dog>> getExtensibleModelWithResponseAsync(Context context) {

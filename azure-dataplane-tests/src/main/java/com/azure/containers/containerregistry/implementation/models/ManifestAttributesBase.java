@@ -209,7 +209,8 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
     }
 
     /**
-     * Get the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.
+     * Get the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information
+     * about the platform each supports. This list will be empty if this is a leaf manifest and not a manifest list.
      * 
      * @return the relatedArtifacts value.
      */
@@ -218,7 +219,8 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
     }
 
     /**
-     * Set the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.
+     * Set the relatedArtifacts property: List of artifacts that are referenced by this manifest list, with information
+     * about the platform each supports. This list will be empty if this is a leaf manifest and not a manifest list.
      * 
      * @param relatedArtifacts the relatedArtifacts value to set.
      * @return the ManifestAttributesBase object itself.
@@ -359,7 +361,8 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
      * Reads an instance of ManifestAttributesBase from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ManifestAttributesBase if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of ManifestAttributesBase if the JsonReader was pointing to an instance of it, or null if it
+     * was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ManifestAttributesBase.
      */

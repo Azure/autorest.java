@@ -52,7 +52,8 @@ public final class IsUnknownDiscriminatedsImpl {
     }
 
     /**
-     * The interface defining all the services for AdditionalPropertiesClientIsUnknownDiscriminateds to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AdditionalPropertiesClientIsUnknownDiscriminateds to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "AdditionalProperties")
@@ -97,6 +98,7 @@ public final class IsUnknownDiscriminatedsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -123,6 +125,7 @@ public final class IsUnknownDiscriminatedsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -149,6 +152,7 @@ public final class IsUnknownDiscriminatedsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -176,6 +180,7 @@ public final class IsUnknownDiscriminatedsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)

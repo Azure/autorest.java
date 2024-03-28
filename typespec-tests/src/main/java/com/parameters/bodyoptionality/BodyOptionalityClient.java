@@ -39,6 +39,7 @@ public final class BodyOptionalityClient {
     /**
      * The requiredExplicit operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -62,6 +63,7 @@ public final class BodyOptionalityClient {
     /**
      * The requiredImplicit operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

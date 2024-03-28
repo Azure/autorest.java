@@ -40,9 +40,9 @@ public final class NoApiVersionClient {
      * The action operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -76,8 +76,9 @@ public final class NoApiVersionClient {
         // Generated convenience method for actionWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter param1 is only available in api-version 2022-12-01-preview."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Parameter param1 is only available in api-version 2022-12-01-preview."));
         }
         if (param1 != null) {
             requestOptions.addQueryParam("param1", param1, false);

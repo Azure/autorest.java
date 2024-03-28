@@ -41,6 +41,7 @@ public final class ScalarAsyncClient {
     /**
      * get azureLocation value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -61,6 +62,7 @@ public final class ScalarAsyncClient {
     /**
      * put azureLocation value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -82,12 +84,15 @@ public final class ScalarAsyncClient {
     /**
      * post a model which has azureLocation property.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     location: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     location: String (Required)

@@ -39,6 +39,7 @@ public final class ExtendsFloatClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: double (Required)
@@ -64,6 +65,7 @@ public final class ExtendsFloatClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: double (Required)

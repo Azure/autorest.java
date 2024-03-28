@@ -52,7 +52,8 @@ public final class MixedTypesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientMixedTypes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientMixedTypes to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientMixedType")
@@ -97,6 +98,7 @@ public final class MixedTypesImpl {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop (Required): {
@@ -124,6 +126,7 @@ public final class MixedTypesImpl {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop (Required): {
@@ -151,6 +154,7 @@ public final class MixedTypesImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop (Required): {
@@ -179,6 +183,7 @@ public final class MixedTypesImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop (Required): {

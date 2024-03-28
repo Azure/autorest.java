@@ -25,7 +25,8 @@ public final class VirtualMachineScaleSetVMProfile {
     }
 
     /**
-     * Get the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the scale set.
+     * Get the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the
+     * scale set.
      * 
      * @return the networkProfile value.
      */
@@ -34,7 +35,8 @@ public final class VirtualMachineScaleSetVMProfile {
     }
 
     /**
-     * Set the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the scale set.
+     * Set the networkProfile property: Specifies properties of the network interfaces of the virtual machines in the
+     * scale set.
      * 
      * @param networkProfile the networkProfile value to set.
      * @return the VirtualMachineScaleSetVMProfile object itself.

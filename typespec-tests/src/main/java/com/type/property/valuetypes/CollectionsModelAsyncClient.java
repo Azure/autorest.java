@@ -41,6 +41,7 @@ public final class CollectionsModelAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): [
@@ -67,6 +68,7 @@ public final class CollectionsModelAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): [

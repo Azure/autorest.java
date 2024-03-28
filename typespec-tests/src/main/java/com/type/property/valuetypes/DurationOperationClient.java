@@ -39,6 +39,7 @@ public final class DurationOperationClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Duration (Required)
@@ -61,6 +62,7 @@ public final class DurationOperationClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Duration (Required)

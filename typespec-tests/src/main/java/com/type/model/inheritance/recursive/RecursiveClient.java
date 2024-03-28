@@ -39,6 +39,7 @@ public final class RecursiveClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     extension (Optional): [
@@ -65,6 +66,7 @@ public final class RecursiveClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     extension (Optional): [

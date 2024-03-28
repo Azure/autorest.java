@@ -315,7 +315,8 @@ public final class ArmResourceProviderManager {
     }
 
     /**
-     * Gets wrapped service client ArmResourceProviderClient providing direct access to the underlying auto-generated API implementation, based on Azure REST API.
+     * Gets wrapped service client ArmResourceProviderClient providing direct access to the underlying auto-generated
+     * API implementation, based on Azure REST API.
      * 
      * @return Wrapped service client ArmResourceProviderClient.
      */

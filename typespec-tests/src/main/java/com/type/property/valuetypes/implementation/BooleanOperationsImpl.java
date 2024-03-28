@@ -52,7 +52,8 @@ public final class BooleanOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientBooleanOperations to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientBooleanOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientBool")
@@ -97,6 +98,7 @@ public final class BooleanOperationsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: boolean (Required)
@@ -119,6 +121,7 @@ public final class BooleanOperationsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: boolean (Required)
@@ -141,6 +144,7 @@ public final class BooleanOperationsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: boolean (Required)
@@ -164,6 +168,7 @@ public final class BooleanOperationsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: boolean (Required)

@@ -39,6 +39,7 @@ public final class CollectionsModelClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): [
@@ -65,6 +66,7 @@ public final class CollectionsModelClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): [

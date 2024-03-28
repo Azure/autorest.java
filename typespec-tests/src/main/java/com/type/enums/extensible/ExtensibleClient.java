@@ -39,8 +39,9 @@ public final class ExtensibleClient {
     /**
      * The getKnownValue operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -59,8 +60,9 @@ public final class ExtensibleClient {
     /**
      * The getUnknownValue operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -79,8 +81,9 @@ public final class ExtensibleClient {
     /**
      * The putKnownValue operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body Days of the week.
@@ -100,8 +103,9 @@ public final class ExtensibleClient {
     /**
      * The putUnknownValue operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(Monday/Tuesday/Wednesday/Thursday/Friday/Saturday/Sunday)
+     * String(Monday / Tuesday / Wednesday / Thursday / Friday / Saturday / Sunday)
      * }</pre>
      * 
      * @param body Days of the week.

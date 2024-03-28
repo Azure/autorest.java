@@ -41,6 +41,7 @@ public final class StringLiteralAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String (Required)
@@ -63,6 +64,7 @@ public final class StringLiteralAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String (Required)
