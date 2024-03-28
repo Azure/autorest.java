@@ -27,7 +27,9 @@ Write-Host "Parallelization: $Parallelization"
 $ExitCode = 0
 
 $generateScript = {
+    $timer = [Diagnostics.Stopwatch]::StartNew()
     $generateOutput = Invoke-Expression "autorest $_"
+    $timer.Stop()
     $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
 
     if ($LASTEXITCODE -ne 0) {
@@ -35,6 +37,7 @@ $generateScript = {
 ========================
 autorest $_
 ========================
+FAILED (Time elapsed: $($timer.ToString()))
 $([String]::Join("`n", $generateOutput))
         "
     } else {
@@ -42,7 +45,7 @@ $([String]::Join("`n", $generateOutput))
 ========================
 autorest $_
 ========================
-SUCCEEDED
+SUCCEEDED (Time elapsed: $($timer.ToString()))
         "
     }
 
