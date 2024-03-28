@@ -90,7 +90,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
             JavaIfBlock nullCheck = function.ifBlock(expressionToCheck + " == null", ifBlock -> {
                 if (JavaSettings.getInstance().isSyncStackEnabled()) {
                     if (settings.isUseClientLogger()) {
-                        ifBlock.line("throw LOGGER.logExceptionAsError(%s);", exceptionExpression);
+                        ifBlock.line("throw LOGGER.atError().log(%s);", exceptionExpression);
                     } else {
                         ifBlock.line("throw %s;", exceptionExpression);
                     }
@@ -1010,7 +1010,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
                         if (settings.isUseClientLogger()) {
-                            elseAction.line("throw LOGGER.logExceptionAsError(new NullPointerException());");
+                            elseAction.line("throw LOGGER.atError().log(new NullPointerException());");
                         } else {
                             elseAction.line("throw new NullPointerException();");
                         }
@@ -1088,7 +1088,7 @@ public class ClientMethodTemplate extends ClientMethodTemplateBase {
                         ifAction.methodReturn("value");
                     }).elseBlock(elseAction -> {
                         if (settings.isUseClientLogger()) {
-                            elseAction.line("throw LOGGER.logExceptionAsError(new NullPointerException());");
+                            elseAction.line("throw LOGGER.atError().log(new NullPointerException());");
                         } else {
                             elseAction.line("throw new NullPointerException();");
                         }
