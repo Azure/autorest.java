@@ -40,6 +40,7 @@ public final class SameBodyAsyncClient {
     /**
      * The getAvatarAsPng operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -60,6 +61,7 @@ public final class SameBodyAsyncClient {
     /**
      * The getAvatarAsJpeg operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>

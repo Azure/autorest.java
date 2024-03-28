@@ -138,7 +138,8 @@ public final class NoApiVersionClientImpl {
     }
 
     /**
-     * The interface defining all the services for NoApiVersionClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for NoApiVersionClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "NoApiVersionClient")
@@ -166,9 +167,9 @@ public final class NoApiVersionClientImpl {
      * The action operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -189,9 +190,9 @@ public final class NoApiVersionClientImpl {
      * The action operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 

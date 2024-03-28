@@ -6,7 +6,7 @@ package com.azure.autorest.model.javamodel;
 import java.util.function.Consumer;
 
 public class JavaIfBlock {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
 
     public JavaIfBlock(JavaFileContents contents) {
         this.contents = contents;

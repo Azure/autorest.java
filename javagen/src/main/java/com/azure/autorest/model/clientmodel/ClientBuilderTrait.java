@@ -192,15 +192,15 @@ public class ClientBuilderTrait {
         if (JavaSettings.getInstance().isBranded()) {
             switch (level) {
                 case VERBOSE:
-                    return String.format("LOGGER.verbose(\"%s\");", message);
+                    return String.format("LOGGER.atVerbose().log(\"%s\");", message);
                 case INFORMATIONAL:
-                    return String.format("LOGGER.info(\"%s\");", message);
+                    return String.format("LOGGER.atInfo().log(\"%s\");", message);
                 case WARNING:
-                    return String.format("LOGGER.warning(\"%s\");", message);
+                    return String.format("LOGGER.atWarning().log(\"%s\");", message);
                 case ERROR:
-                    return String.format("LOGGER.error(\"%s\");", message);
+                    return String.format("LOGGER.atError().log(\"%s\");", message);
                 default:
-                    return String.format("LOGGER.info(\"%s\");", message);
+                    return String.format("LOGGER.atInfo().log(\"%s\");", message);
             }
         } else {
             switch (level) {

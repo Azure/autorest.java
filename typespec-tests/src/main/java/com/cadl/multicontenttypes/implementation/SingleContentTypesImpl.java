@@ -53,7 +53,8 @@ public final class SingleContentTypesImpl {
     }
 
     /**
-     * The interface defining all the services for MultiContentTypesClientSingleContentTypes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for MultiContentTypesClientSingleContentTypes to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "MultiContentTypesCli")
@@ -100,6 +101,7 @@ public final class SingleContentTypesImpl {
     /**
      * response is binary.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -122,6 +124,7 @@ public final class SingleContentTypesImpl {
     /**
      * response is binary.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -143,6 +146,7 @@ public final class SingleContentTypesImpl {
     /**
      * request is binary.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -167,6 +171,7 @@ public final class SingleContentTypesImpl {
     /**
      * request is binary.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>

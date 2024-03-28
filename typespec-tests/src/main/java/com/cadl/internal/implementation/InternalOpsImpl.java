@@ -53,7 +53,8 @@ public final class InternalOpsImpl {
     }
 
     /**
-     * The interface defining all the services for InternalClientInternalOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for InternalClientInternalOps to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "InternalClientIntern")
@@ -100,6 +101,7 @@ public final class InternalOpsImpl {
     /**
      * The postInternal operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): {
@@ -107,7 +109,9 @@ public final class InternalOpsImpl {
      *     }
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): {
@@ -135,6 +139,7 @@ public final class InternalOpsImpl {
     /**
      * The postInternal operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): {
@@ -142,7 +147,9 @@ public final class InternalOpsImpl {
      *     }
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): {
@@ -168,6 +175,7 @@ public final class InternalOpsImpl {
     /**
      * The getInternal operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -191,6 +199,7 @@ public final class InternalOpsImpl {
     /**
      * The getInternal operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

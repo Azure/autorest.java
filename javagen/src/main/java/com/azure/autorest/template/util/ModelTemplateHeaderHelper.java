@@ -213,7 +213,7 @@ public final class ModelTemplateHeaderHelper {
             // At this time all try-catching is for IOExceptions.
             javaBlock.decreaseIndent();
             javaBlock.line("} catch (IOException ex) {");
-            javaBlock.indent(() -> javaBlock.line("throw LOGGER.logExceptionAsError(new UncheckedIOException(ex));"));
+            javaBlock.indent(() -> javaBlock.line("throw LOGGER.atError().log(new UncheckedIOException(ex));"));
             javaBlock.line("}");
         }
     }

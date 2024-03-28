@@ -42,6 +42,7 @@ public final class ModelsOnlyAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: BinaryData (Required)
@@ -64,6 +65,7 @@ public final class ModelsOnlyAsyncClient {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: BinaryData (Required)

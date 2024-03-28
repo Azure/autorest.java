@@ -44,6 +44,7 @@ public final class IsModelArrayAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): [
@@ -70,6 +71,7 @@ public final class IsModelArrayAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): [

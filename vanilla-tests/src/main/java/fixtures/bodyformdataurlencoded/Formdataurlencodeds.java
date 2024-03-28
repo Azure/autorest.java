@@ -49,7 +49,8 @@ public final class Formdataurlencodeds {
     }
 
     /**
-     * The interface defining all the services for BodyFormsDataURLEncodedFormdataurlencodeds to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for BodyFormsDataURLEncodedFormdataurlencodeds to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "BodyFormsDataURLEnco")
@@ -255,7 +256,8 @@ public final class Formdataurlencodeds {
     }
 
     /**
-     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test.
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
@@ -282,7 +284,8 @@ public final class Formdataurlencodeds {
     }
 
     /**
-     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test.
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
@@ -310,7 +313,8 @@ public final class Formdataurlencodeds {
     }
 
     /**
-     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test.
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
@@ -325,7 +329,8 @@ public final class Formdataurlencodeds {
     }
 
     /**
-     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test.
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
@@ -342,7 +347,8 @@ public final class Formdataurlencodeds {
     }
 
     /**
-     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test.
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.
@@ -358,7 +364,8 @@ public final class Formdataurlencodeds {
     }
 
     /**
-     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service: 'bar' } to pass the test.
+     * Test a partially constant formdata body. Pass in { grant_type: 'access_token', access_token: 'foo', service:
+     * 'bar' } to pass the test.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
      * @param accessToken AAD access token, mandatory when grant_type is access_token_refresh_token or access_token.

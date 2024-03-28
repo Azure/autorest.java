@@ -41,6 +41,7 @@ public final class RequestBodyAsyncClient {
     /**
      * The defaultMethod operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -62,6 +63,7 @@ public final class RequestBodyAsyncClient {
     /**
      * The octetStream operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -83,6 +85,7 @@ public final class RequestBodyAsyncClient {
     /**
      * The customContentType operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -104,6 +107,7 @@ public final class RequestBodyAsyncClient {
     /**
      * The base64 operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * byte[]
      * }</pre>
@@ -125,6 +129,7 @@ public final class RequestBodyAsyncClient {
     /**
      * The base64url operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * Base64Url
      * }</pre>

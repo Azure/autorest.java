@@ -29,7 +29,8 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties
     }
 
     /**
-     * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1 network interface.
+     * Get the primary property: Specifies the primary network interface in case the virtual machine has more than 1
+     * network interface.
      * 
      * @return the primary value.
      */
@@ -38,7 +39,8 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties
     }
 
     /**
-     * Set the primary property: Specifies the primary network interface in case the virtual machine has more than 1 network interface.
+     * Set the primary property: Specifies the primary network interface in case the virtual machine has more than 1
+     * network interface.
      * 
      * @param primary the primary value to set.
      * @return the VirtualMachineScaleSetNetworkConfigurationProperties object itself.
@@ -70,7 +72,8 @@ public final class VirtualMachineScaleSetNetworkConfigurationProperties
      * Reads an instance of VirtualMachineScaleSetNetworkConfigurationProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of VirtualMachineScaleSetNetworkConfigurationProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of VirtualMachineScaleSetNetworkConfigurationProperties if the JsonReader was pointing to an
+     * instance of it, or null if it was pointing to JSON null.
      * @throws IOException If an error occurs while reading the VirtualMachineScaleSetNetworkConfigurationProperties.
      */
     public static VirtualMachineScaleSetNetworkConfigurationProperties fromJson(JsonReader jsonReader)

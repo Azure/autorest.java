@@ -41,6 +41,7 @@ public final class ExtensibleEnumAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
@@ -63,6 +64,7 @@ public final class ExtensibleEnumAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)

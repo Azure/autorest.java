@@ -51,7 +51,8 @@ public final class EnumsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientEnums to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientEnums to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientEnum")
@@ -96,6 +97,7 @@ public final class EnumsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
@@ -118,6 +120,7 @@ public final class EnumsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
@@ -140,6 +143,7 @@ public final class EnumsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
@@ -163,6 +167,7 @@ public final class EnumsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)

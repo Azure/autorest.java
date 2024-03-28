@@ -39,6 +39,7 @@ public final class UnionIntLiteralClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(42/43) (Required)
@@ -61,6 +62,7 @@ public final class UnionIntLiteralClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(42/43) (Required)

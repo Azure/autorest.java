@@ -43,6 +43,7 @@ public final class StringsOnlyAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: String(a/b/c) (Required)
@@ -65,6 +66,7 @@ public final class StringsOnlyAsyncClient {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: String(a/b/c) (Required)

@@ -42,12 +42,15 @@ public final class VisibilityWriteAsyncClient {
     /**
      * The create operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: int (Required)

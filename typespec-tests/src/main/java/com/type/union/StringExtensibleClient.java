@@ -41,6 +41,7 @@ public final class StringExtensibleClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: String(b/c) (Required)
@@ -63,6 +64,7 @@ public final class StringExtensibleClient {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: String(b/c) (Required)

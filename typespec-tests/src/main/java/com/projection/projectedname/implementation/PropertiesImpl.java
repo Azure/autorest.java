@@ -51,7 +51,8 @@ public final class PropertiesImpl {
     }
 
     /**
-     * The interface defining all the services for ProjectedNameClientProperties to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ProjectedNameClientProperties to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ProjectedNameClientP")
@@ -140,6 +141,7 @@ public final class PropertiesImpl {
     /**
      * The json operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
@@ -164,6 +166,7 @@ public final class PropertiesImpl {
     /**
      * The json operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
@@ -187,6 +190,7 @@ public final class PropertiesImpl {
     /**
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -212,6 +216,7 @@ public final class PropertiesImpl {
     /**
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -235,6 +240,7 @@ public final class PropertiesImpl {
     /**
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -260,6 +266,7 @@ public final class PropertiesImpl {
     /**
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -283,6 +290,7 @@ public final class PropertiesImpl {
     /**
      * The jsonAndClient operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
@@ -308,6 +316,7 @@ public final class PropertiesImpl {
     /**
      * The jsonAndClient operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)

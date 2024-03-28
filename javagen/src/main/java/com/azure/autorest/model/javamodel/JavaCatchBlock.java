@@ -6,7 +6,7 @@ package com.azure.autorest.model.javamodel;
 import java.util.function.Consumer;
 
 public class JavaCatchBlock {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
 
     public JavaCatchBlock(JavaFileContents contents) {
         this.contents = contents;

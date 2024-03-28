@@ -46,13 +46,14 @@ public final class VersioningClient {
      * Long-running resource action operation template.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     *     <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -86,13 +87,15 @@ public final class VersioningClient {
      * Resource list operation template.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the
+     * response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -135,8 +138,9 @@ public final class VersioningClient {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
-                "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
         }
         if (projectFileVersion != null) {
             requestOptions.addQueryParam("projectFileVersion", projectFileVersion, false);
@@ -210,8 +214,9 @@ public final class VersioningClient {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter filter is only available in api-version 2022-12-01-preview."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Parameter filter is only available in api-version 2022-12-01-preview."));
         }
         if (select != null) {
             for (String paramItemValue : select) {

@@ -82,7 +82,7 @@ public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>
     @Override
     public OAuth2ClientBuilder pipeline(HttpPipeline pipeline) {
         if (this.pipeline != null && pipeline == null) {
-            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+            LOGGER.atInfo().log("HttpPipeline is being set to 'null' when it was previously configured.");
         }
         this.pipeline = pipeline;
         return this;

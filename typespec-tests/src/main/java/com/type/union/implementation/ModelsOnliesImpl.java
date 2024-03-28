@@ -52,7 +52,8 @@ public final class ModelsOnliesImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientModelsOnlies to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientModelsOnlies to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "UnionClientModelsOnl")
@@ -97,6 +98,7 @@ public final class ModelsOnliesImpl {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: BinaryData (Required)
@@ -119,6 +121,7 @@ public final class ModelsOnliesImpl {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: BinaryData (Required)
@@ -141,6 +144,7 @@ public final class ModelsOnliesImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: BinaryData (Required)
@@ -164,6 +168,7 @@ public final class ModelsOnliesImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop: BinaryData (Required)

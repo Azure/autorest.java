@@ -40,6 +40,7 @@ public final class SingleDiscriminatorClient {
     /**
      * The getModel operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -52,7 +53,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -63,6 +65,7 @@ public final class SingleDiscriminatorClient {
     /**
      * The putModel operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -87,6 +90,7 @@ public final class SingleDiscriminatorClient {
     /**
      * The getRecursiveModel operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -99,7 +103,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -110,6 +115,7 @@ public final class SingleDiscriminatorClient {
     /**
      * The putRecursiveModel operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -134,6 +140,7 @@ public final class SingleDiscriminatorClient {
     /**
      * The getMissingDiscriminator operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -146,7 +153,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -157,6 +165,7 @@ public final class SingleDiscriminatorClient {
     /**
      * The getWrongDiscriminator operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)
@@ -169,7 +178,8 @@ public final class SingleDiscriminatorClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return this is base model for polymorphic single level inheritance with a discriminator along with {@link Response}.
+     * @return this is base model for polymorphic single level inheritance with a discriminator along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
@@ -180,6 +190,7 @@ public final class SingleDiscriminatorClient {
     /**
      * The getLegacyModel operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     kind: String (Required)

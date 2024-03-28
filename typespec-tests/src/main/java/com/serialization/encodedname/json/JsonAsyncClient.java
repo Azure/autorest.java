@@ -41,6 +41,7 @@ public final class JsonAsyncClient {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)
@@ -64,6 +65,7 @@ public final class JsonAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)

@@ -48,7 +48,8 @@ public final class Flattencomplexes {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceFlattencomplexes to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -76,8 +77,8 @@ public final class Flattencomplexes {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -95,8 +96,8 @@ public final class Flattencomplexes {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<MyBaseType>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -140,8 +141,8 @@ public final class Flattencomplexes {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<MyBaseType> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValidSync(this.client.getHost(), accept, context);

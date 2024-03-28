@@ -162,20 +162,24 @@ public final class TopLevelArmResourceProperties {
      */
     public void validate() {
         if (username() == null) {
-            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
-                "Missing required property username in model TopLevelArmResourceProperties"));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property username in model TopLevelArmResourceProperties"));
         }
         if (userNames() == null) {
-            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
-                "Missing required property userNames in model TopLevelArmResourceProperties"));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property userNames in model TopLevelArmResourceProperties"));
         }
         if (accuserName() == null) {
-            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
-                "Missing required property accuserName in model TopLevelArmResourceProperties"));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property accuserName in model TopLevelArmResourceProperties"));
         }
         if (startTimestamp() == null) {
-            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
-                "Missing required property startTimestamp in model TopLevelArmResourceProperties"));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Missing required property startTimestamp in model TopLevelArmResourceProperties"));
         }
     }
 

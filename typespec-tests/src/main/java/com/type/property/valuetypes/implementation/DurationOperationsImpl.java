@@ -52,7 +52,8 @@ public final class DurationOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientDurationOperations to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientDurationOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientDura")
@@ -97,6 +98,7 @@ public final class DurationOperationsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Duration (Required)
@@ -119,6 +121,7 @@ public final class DurationOperationsImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Duration (Required)
@@ -141,6 +144,7 @@ public final class DurationOperationsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Duration (Required)
@@ -164,6 +168,7 @@ public final class DurationOperationsImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Duration (Required)

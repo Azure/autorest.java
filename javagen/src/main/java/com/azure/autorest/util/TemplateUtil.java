@@ -195,10 +195,11 @@ public class TemplateUtil {
             return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
                     ? type.asNullable() + ".class"
                     : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
+        } else {
+            return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
+                    ? String.format("TypeReference.createInstance(%s.class)", type.asNullable())
+                    : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
         }
-        return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
-            ? String.format("TypeReference.createInstance(%s.class)", type.asNullable())
-            : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
     }
 
     /**
@@ -224,10 +225,10 @@ public class TemplateUtil {
                             + "@Override public Type[] getActualTypeArguments() { return new Type[] { " + sb + " }; }"
                             + "@Override public Type getOwnerType() { return null; } }",
                     CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
-            return;
+        } else {
+            classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {}",
+                    type, CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
         }
-        classBlock.privateStaticFinalVariable(String.format("TypeReference<%1$s> %2$s = new TypeReference<%1$s>() {}",
-            type, CodeNamer.getEnumMemberName("TypeReference" + type.toJavaPropertyString())));
     }
 
     /**

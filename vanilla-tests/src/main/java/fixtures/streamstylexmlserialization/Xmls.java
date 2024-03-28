@@ -67,7 +67,8 @@ public final class Xmls {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATXMLServiceXmls to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestSwaggerBATXMLServiceXmls to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATXM")
@@ -288,7 +289,8 @@ public final class Xmls {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a complex type that has a ref to a complex type with no XML node along with {@link Response} on successful completion of {@link Mono}.
+     * @return a complex type that has a ref to a complex type with no XML node along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<RootWithRefAndNoMeta>> getComplexTypeRefNoMetaWithResponseAsync() {
@@ -307,7 +309,8 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a complex type that has a ref to a complex type with no XML node along with {@link Response} on successful completion of {@link Mono}.
+     * @return a complex type that has a ref to a complex type with no XML node along with {@link Response} on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<RootWithRefAndNoMeta>> getComplexTypeRefNoMetaWithResponseAsync(Context context) {
@@ -324,7 +327,8 @@ public final class Xmls {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a complex type that has a ref to a complex type with no XML node on successful completion of {@link Mono}.
+     * @return a complex type that has a ref to a complex type with no XML node on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RootWithRefAndNoMeta> getComplexTypeRefNoMetaAsync() {
@@ -338,7 +342,8 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a complex type that has a ref to a complex type with no XML node on successful completion of {@link Mono}.
+     * @return a complex type that has a ref to a complex type with no XML node on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<RootWithRefAndNoMeta> getComplexTypeRefNoMetaAsync(Context context) {
@@ -480,7 +485,8 @@ public final class Xmls {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a complex type that has a ref to a complex type with XML node along with {@link Response} on successful completion of {@link Mono}.
+     * @return a complex type that has a ref to a complex type with XML node along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<RootWithRefAndMeta>> getComplexTypeRefWithMetaWithResponseAsync() {
@@ -500,7 +506,8 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a complex type that has a ref to a complex type with XML node along with {@link Response} on successful completion of {@link Mono}.
+     * @return a complex type that has a ref to a complex type with XML node along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<RootWithRefAndMeta>> getComplexTypeRefWithMetaWithResponseAsync(Context context) {
@@ -868,7 +875,8 @@ public final class Xmls {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an XML document with multiple wrapped lists along with {@link Response} on successful completion of {@link Mono}.
+     * @return an XML document with multiple wrapped lists along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<AppleBarrel>> getWrappedListsWithResponseAsync() {
@@ -887,7 +895,8 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an XML document with multiple wrapped lists along with {@link Response} on successful completion of {@link Mono}.
+     * @return an XML document with multiple wrapped lists along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<AppleBarrel>> getWrappedListsWithResponseAsync(Context context) {
@@ -2117,7 +2126,8 @@ public final class Xmls {
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an XML document with an empty child element along with {@link Response} on successful completion of {@link Mono}.
+     * @return an XML document with an empty child element along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Banana>> getEmptyChildElementWithResponseAsync() {
@@ -2136,7 +2146,8 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an XML document with an empty child element along with {@link Response} on successful completion of {@link Mono}.
+     * @return an XML document with an empty child element along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Banana>> getEmptyChildElementWithResponseAsync(Context context) {
@@ -3086,11 +3097,14 @@ public final class Xmls {
     }
 
     /**
-     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'.
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text' along with {@link Response} on successful completion of {@link Mono}.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ObjectWithXMsTextProperty>> getXMsTextWithResponseAsync() {
@@ -3103,13 +3117,16 @@ public final class Xmls {
     }
 
     /**
-     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'.
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text' along with {@link Response} on successful completion of {@link Mono}.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text' along with {@link Response} on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ObjectWithXMsTextProperty>> getXMsTextWithResponseAsync(Context context) {
@@ -3122,11 +3139,13 @@ public final class Xmls {
     }
 
     /**
-     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'.
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text' on successful completion of {@link Mono}.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text' on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ObjectWithXMsTextProperty> getXMsTextAsync() {
@@ -3134,13 +3153,15 @@ public final class Xmls {
     }
 
     /**
-     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'.
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text' on successful completion of {@link Mono}.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text' on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<ObjectWithXMsTextProperty> getXMsTextAsync(Context context) {
@@ -3148,13 +3169,15 @@ public final class Xmls {
     }
 
     /**
-     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'.
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text' along with {@link Response}.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text' along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<ObjectWithXMsTextProperty> getXMsTextWithResponse(Context context) {
@@ -3162,11 +3185,13 @@ public final class Xmls {
     }
 
     /**
-     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'.
+     * Get back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language' property being 'english' and its 'content' property being 'I am text'.
+     * @return back an XML object with an x-ms-text property, which should translate to the returned object's 'language'
+     * property being 'english' and its 'content' property being 'I am text'.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public ObjectWithXMsTextProperty getXMsText() {
@@ -3178,7 +3203,8 @@ public final class Xmls {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an XML document with binary property along with {@link Response} on successful completion of {@link Mono}.
+     * @return an XML document with binary property along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ModelWithByteProperty>> getBytesWithResponseAsync() {
@@ -3197,7 +3223,8 @@ public final class Xmls {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return an XML document with binary property along with {@link Response} on successful completion of {@link Mono}.
+     * @return an XML document with binary property along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ModelWithByteProperty>> getBytesWithResponseAsync(Context context) {

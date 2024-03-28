@@ -41,6 +41,7 @@ public final class InternalClient {
     /**
      * The postInternal operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): {
@@ -48,7 +49,9 @@ public final class InternalClient {
      *     }
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property (Required): {
@@ -74,6 +77,7 @@ public final class InternalClient {
     /**
      * The getInternal operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

@@ -41,6 +41,7 @@ public final class IsFloatAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: double (Required)
@@ -66,6 +67,7 @@ public final class IsFloatAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: double (Required)

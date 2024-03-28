@@ -39,6 +39,7 @@ public final class ModelClient {
     /**
      * The spreadAsRequestBody operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

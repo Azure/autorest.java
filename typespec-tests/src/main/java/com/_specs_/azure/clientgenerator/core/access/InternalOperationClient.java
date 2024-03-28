@@ -41,6 +41,7 @@ public final class InternalOperationClient {
     /**
      * The noDecoratorInInternal operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -64,6 +65,7 @@ public final class InternalOperationClient {
     /**
      * The internalDecoratorInInternal operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -87,6 +89,7 @@ public final class InternalOperationClient {
     /**
      * The publicDecoratorInInternal operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -99,7 +102,8 @@ public final class InternalOperationClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return used in an internal operation but with public decorator, should be generated and exported along with {@link Response}.
+     * @return used in an internal operation but with public decorator, should be generated and exported along with
+     * {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)

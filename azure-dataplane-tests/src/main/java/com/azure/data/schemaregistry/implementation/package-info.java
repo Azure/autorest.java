@@ -4,6 +4,7 @@
 
 /**
  * Package containing the implementations for AzureSchemaRegistry.
- * Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility checking, and RBAC.
+ * Azure Schema Registry is as a central schema repository, with support for versioning, management, compatibility
+ * checking, and RBAC.
  */
 package com.azure.data.schemaregistry.implementation;

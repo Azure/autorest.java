@@ -167,7 +167,7 @@ public class ConvenienceSyncMethodTemplate extends ConvenienceMethodTemplateBase
     @Override
     protected void writeThrowException(ClientMethodType methodType, String exceptionExpression, JavaBlock methodBlock) {
         if (JavaSettings.getInstance().isUseClientLogger()) {
-            methodBlock.line(String.format("throw LOGGER.logExceptionAsError(%s);", exceptionExpression));
+            methodBlock.line(String.format("throw LOGGER.atError().log(%s);", exceptionExpression));
         } else {
             methodBlock.line(String.format("throw %s;", exceptionExpression));
         }

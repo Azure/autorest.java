@@ -50,7 +50,8 @@ public final class Inheritances {
     }
 
     /**
-     * The interface defining all the services for AutoRestComplexTestServiceInheritances to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestComplexTestServiceInheritances to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestComplexTestS")
@@ -90,8 +91,8 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Siamese>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -109,8 +110,8 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Siamese>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -154,8 +155,8 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Siamese> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValidSync(this.client.getHost(), accept, context);
@@ -176,7 +177,9 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -185,12 +188,12 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -201,7 +204,9 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -211,12 +216,12 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Siamese complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -227,7 +232,9 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -241,7 +248,9 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -256,7 +265,9 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -266,12 +277,12 @@ public final class Inheritances {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(Siamese complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -282,7 +293,9 @@ public final class Inheritances {
     /**
      * Put complex types that extend others.
      * 
-     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2 dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and food="french fries".
+     * @param complexBody Please put a siamese with id=2, name="Siameee", color=green, breed=persion, which hates 2
+     * dogs, the 1st one named "Potato" with id=1 and food="tomato", and the 2nd one named "Tomato" with id=-1 and
+     * food="french fries".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

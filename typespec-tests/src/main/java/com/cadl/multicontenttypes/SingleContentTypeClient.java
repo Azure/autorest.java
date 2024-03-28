@@ -38,6 +38,7 @@ public final class SingleContentTypeClient {
     /**
      * response is binary.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -58,6 +59,7 @@ public final class SingleContentTypeClient {
     /**
      * request is binary.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>

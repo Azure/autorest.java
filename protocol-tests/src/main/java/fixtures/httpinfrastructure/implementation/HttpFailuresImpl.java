@@ -61,7 +61,8 @@ public final class HttpFailuresImpl {
     }
 
     /**
-     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpFailures to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestHttpInfrastructureTestServiceHttpFailures to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestHttpInfrastr")
@@ -124,6 +125,7 @@ public final class HttpFailuresImpl {
     /**
      * Get empty error form server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -145,6 +147,7 @@ public final class HttpFailuresImpl {
     /**
      * Get empty error form server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -165,6 +168,7 @@ public final class HttpFailuresImpl {
     /**
      * Get empty error form server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -186,6 +190,7 @@ public final class HttpFailuresImpl {
     /**
      * Get empty error form server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -206,6 +211,7 @@ public final class HttpFailuresImpl {
     /**
      * Get empty response from server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -227,6 +233,7 @@ public final class HttpFailuresImpl {
     /**
      * Get empty response from server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>

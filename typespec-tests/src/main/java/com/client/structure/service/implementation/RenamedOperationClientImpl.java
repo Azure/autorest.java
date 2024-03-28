@@ -151,7 +151,8 @@ public final class RenamedOperationClientImpl {
     }
 
     /**
-     * The interface defining all the services for RenamedOperationClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for RenamedOperationClient to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "RenamedOperationClie")

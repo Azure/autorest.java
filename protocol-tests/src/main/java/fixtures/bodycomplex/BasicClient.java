@@ -38,6 +38,7 @@ public final class BasicClient {
     /**
      * Get complex type {id: 2, name: 'abc', color: 'YELLOW'}.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -62,6 +63,7 @@ public final class BasicClient {
     /**
      * Please put {id: 2, name: 'abc', color: 'Magenta'}.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -87,6 +89,7 @@ public final class BasicClient {
     /**
      * Get a basic complex type that is invalid for the local strong type.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -111,6 +114,7 @@ public final class BasicClient {
     /**
      * Get a basic complex type that is empty.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -135,6 +139,7 @@ public final class BasicClient {
     /**
      * Get a basic complex type whose properties are null.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: Integer (Optional)
@@ -159,6 +164,7 @@ public final class BasicClient {
     /**
      * Get a basic complex type while the server doesn't provide a response payload.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: Integer (Optional)

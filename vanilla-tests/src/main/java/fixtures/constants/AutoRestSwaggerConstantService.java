@@ -21,7 +21,8 @@ public final class AutoRestSwaggerConstantService {
     private final boolean headerConstant;
 
     /**
-     * Gets Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * Gets Constant header property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * 
      * @return the headerConstant value.
      */
@@ -35,7 +36,8 @@ public final class AutoRestSwaggerConstantService {
     private final int queryConstant;
 
     /**
-     * Gets Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * Gets Constant query property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * 
      * @return the queryConstant value.
      */
@@ -49,7 +51,8 @@ public final class AutoRestSwaggerConstantService {
     private final String pathConstant;
 
     /**
-     * Gets Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * Gets Constant path property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * 
      * @return the pathConstant value.
      */
@@ -116,9 +119,12 @@ public final class AutoRestSwaggerConstantService {
     /**
      * Initializes an instance of AutoRestSwaggerConstantService client.
      * 
-     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * @param host server parameter.
      */
     AutoRestSwaggerConstantService(boolean headerConstant, int queryConstant, String pathConstant, String host) {
@@ -130,9 +136,12 @@ public final class AutoRestSwaggerConstantService {
      * Initializes an instance of AutoRestSwaggerConstantService client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * @param host server parameter.
      */
     AutoRestSwaggerConstantService(HttpPipeline httpPipeline, boolean headerConstant, int queryConstant,
@@ -146,9 +155,12 @@ public final class AutoRestSwaggerConstantService {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param headerConstant Constant header property on the client that is a required parameter for operation 'constants_putClientConstants'.
-     * @param queryConstant Constant query property on the client that is a required parameter for operation 'constants_putClientConstants'.
-     * @param pathConstant Constant path property on the client that is a required parameter for operation 'constants_putClientConstants'.
+     * @param headerConstant Constant header property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
+     * @param queryConstant Constant query property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
+     * @param pathConstant Constant path property on the client that is a required parameter for operation
+     * 'constants_putClientConstants'.
      * @param host server parameter.
      */
     AutoRestSwaggerConstantService(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,

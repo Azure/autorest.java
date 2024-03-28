@@ -49,7 +49,8 @@ public final class Headers {
     }
 
     /**
-     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientHeaders to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestAzureSpecialParametersTestClientHeaders to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestAzureSpecial")
@@ -184,7 +185,8 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
      * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -212,7 +214,8 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
      * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @param context The context to associate with this operation.
@@ -241,7 +244,8 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
      * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -257,7 +261,8 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
      * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @param context The context to associate with this operation.
@@ -275,7 +280,8 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
      * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @param context The context to associate with this operation.
@@ -293,7 +299,8 @@ public final class Headers {
     }
 
     /**
-     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter group.
+     * Send foo-client-request-id = 9C4D50EE-2D56-4CD3-8152-34347DC9F2B0 in the header of the request, via a parameter
+     * group.
      * 
      * @param headerCustomNamedRequestIdParamGroupingParameters Parameter group.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

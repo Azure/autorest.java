@@ -40,6 +40,7 @@ public final class UnknownValueClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: Object (Required)
@@ -62,6 +63,7 @@ public final class UnknownValueClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: Object (Required)

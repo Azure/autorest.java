@@ -41,6 +41,7 @@ public final class IntLiteralAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: long (Required)
@@ -63,6 +64,7 @@ public final class IntLiteralAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: long (Required)

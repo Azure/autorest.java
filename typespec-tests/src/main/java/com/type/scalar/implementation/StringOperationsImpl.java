@@ -52,7 +52,8 @@ public final class StringOperationsImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientStringOperations to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ScalarClientStringOperations to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientStringOp")
@@ -97,6 +98,7 @@ public final class StringOperationsImpl {
     /**
      * get string value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -117,6 +119,7 @@ public final class StringOperationsImpl {
     /**
      * get string value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -137,6 +140,7 @@ public final class StringOperationsImpl {
     /**
      * put string value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -158,6 +162,7 @@ public final class StringOperationsImpl {
     /**
      * put string value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>

@@ -57,12 +57,16 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
+     * deployment when the service had only one api version. 'v2' is for the deployment when the service had
+     * api-versions 'v1' and 'v2'.
      */
     private final String serviceDeploymentVersion;
 
     /**
-     * Gets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * Gets Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
+     * deployment when the service had only one api version. 'v2' is for the deployment when the service had
+     * api-versions 'v1' and 'v2'.
      * 
      * @return the serviceDeploymentVersion value.
      */
@@ -116,7 +120,9 @@ public final class ResiliencyServiceDrivenClientImpl {
      * Initializes an instance of ResiliencyServiceDrivenClient client.
      * 
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(String endpoint, String serviceDeploymentVersion,
@@ -130,7 +136,9 @@ public final class ResiliencyServiceDrivenClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, String endpoint,
@@ -145,7 +153,9 @@ public final class ResiliencyServiceDrivenClientImpl {
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
      * @param endpoint Need to be set as 'http://localhost:3000' in client.
-     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * @param serviceDeploymentVersion Pass in either 'v1' or 'v2'. This represents a version of the service deployment
+     * in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when
+     * the service had api-versions 'v1' and 'v2'.
      * @param serviceVersion Service version.
      */
     public ResiliencyServiceDrivenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter,
@@ -160,7 +170,8 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * The interface defining all the services for ResiliencyServiceDrivenClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ResiliencyServiceDrivenClient to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}/resiliency/service-driven/client:v1/service:{serviceDeploymentVersion}/api-version:{apiVersion}")
     @ServiceInterface(name = "ResiliencyServiceDri")
@@ -233,7 +244,8 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as
+     * well.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -250,7 +262,8 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as
+     * well.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -267,7 +280,8 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * 
      * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -286,7 +300,8 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * 
      * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -304,12 +319,13 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -329,12 +345,13 @@ public final class ResiliencyServiceDrivenClientImpl {
     }
 
     /**
-     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 

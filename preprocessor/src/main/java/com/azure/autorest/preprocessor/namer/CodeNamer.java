@@ -5,14 +5,14 @@ package com.azure.autorest.preprocessor.namer;
 
 import org.atteo.evo.inflector.English;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Predicate;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class CodeNamer {
@@ -90,6 +90,8 @@ public class CodeNamer {
         ));
     }
 
+    private static final Pattern CASE_SPLIT = Pattern.compile("[_\\- ]");
+
     private CodeNamer() {
     }
 
@@ -102,22 +104,21 @@ public class CodeNamer {
             return name;
         }
 
-        if (name.charAt(0) == '_')
         // Remove leading underscores.
-        {
+        if (name.charAt(0) == '_') {
             return toCamelCase(name.substring(1));
         }
 
-        List<String> parts = new ArrayList<>();
-        String[] splits = name.split("[_\\- ]");
+        String[] splits = CASE_SPLIT.split(name);
         if (splits.length == 0) {
             return "";
         }
-        parts.add(formatCase(splits[0], true));
+
+        splits[0] = formatCase(splits[0], true);
         for (int i = 1; i != splits.length; i++) {
-            parts.add(formatCase(splits[i], false));
+            splits[i] = formatCase(splits[i], false);
         }
-        return String.join("", parts);
+        return String.join("", splits);
     }
 
     public static String toPascalCase(String name) {
@@ -125,48 +126,101 @@ public class CodeNamer {
             return name;
         }
 
-        if (name.charAt(0) == '_')
         // Preserve leading underscores and treat them like
         // uppercase characters by calling 'CamelCase()' on the rest.
-        {
+        if (name.charAt(0) == '_') {
             return '_' + toCamelCase(name.substring(1));
         }
 
-        return Arrays.stream(name.split("[_\\- ]"))
+        return CASE_SPLIT.splitAsStream(name)
                 .filter(s -> s != null && !s.isEmpty())
                 .map(s -> formatCase(s, false))
                 .collect(Collectors.joining());
     }
 
     public static String escapeXmlComment(String comment) {
-        if (comment == null) {
-            return null;
+        if (comment == null || comment.isEmpty()) {
+            return comment;
         }
 
-        return comment
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;");
+        // Use a linear replacement for the all the characters.
+        // This has a few benefits:
+        // 1. It performs a single loop over the comment string.
+        // 2. It avoids instantiating multiple strings if multiple of the replacement cases are found.
+        // 3. If no replacements are needed, it returns the original string.
+        StringBuilder sb = null;
+        int prevStart = 0;
+        int commentLength = comment.length();
+
+        for (int i = 0; i < commentLength; i++) {
+            String replacement = null;
+            char c = comment.charAt(i);
+            if (c == '&') {
+                replacement = "&amp;";
+            } else if (c == '<') {
+                replacement = "&lt;";
+            } else if (c == '>') {
+                replacement = "&gt;";
+            }
+
+            if (replacement != null) {
+                if (sb == null) {
+                    // Add enough overhead to account for 1/8 of the string to be replaced.
+                    sb = new StringBuilder(commentLength + 3 * (commentLength / 8));
+                }
+
+                if (prevStart != i) {
+                    sb.append(comment, prevStart, i);
+                }
+                sb.append(replacement);
+                prevStart = i + 1;
+            }
+        }
+
+        if (sb == null) {
+            return comment;
+        }
+
+        sb.append(comment, prevStart, commentLength);
+        return sb.toString();
     }
 
     private static String formatCase(String name, boolean toLower) {
         if (name != null && !name.isEmpty()) {
-            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0)) && Character.isUpperCase(name.charAt(1)))) {
+            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0))
+                && Character.isUpperCase(name.charAt(1)))) {
                 name = toLower ? name.toLowerCase() : name.toUpperCase();
             } else {
                 name = (toLower ? Character.toLowerCase(name.charAt(0))
-                        : Character.toUpperCase(name.charAt(0))) + name.substring(1);
+                    : Character.toUpperCase(name.charAt(0))) + name.substring(1);
             }
         }
         return name;
     }
 
     public static String removeInvalidCharacters(String name) {
-        return getValidName(name, '_', '-');
+        return getValidName(name, c -> c == '_' || c == '-');
     }
 
-    public static String getValidName(String name, char... allowedCharacters) {
-        String correctName = removeInvalidCharacters(name, allowedCharacters);
+    /**
+     * Gets a valid name for the given name.
+     *
+     * @param name The name to get a valid name for.
+     * @return The valid name.
+     */
+    public static String getValidName(String name) {
+        return getValidName(name, c -> false);
+    }
+
+    /**
+     * Gets a valid name for the given name.
+     *
+     * @param name The name to get a valid name for.
+     * @param allowedCharacterMatcher A predicate that determines if a character is allowed.
+     * @return The valid name.
+     */
+    public static String getValidName(String name, Predicate<Character> allowedCharacterMatcher) {
+        String correctName = removeInvalidCharacters(name, allowedCharacterMatcher);
 
         // here we have only letters and digits or an empty String
         if (correctName == null || correctName.isEmpty() ||
@@ -179,13 +233,13 @@ public class CodeNamer {
                     sb.append(symbol);
                 }
             }
-            correctName = removeInvalidCharacters(sb.toString(), allowedCharacters);
+            correctName = removeInvalidCharacters(sb.toString(), allowedCharacterMatcher);
         }
 
         // if it is still empty String, throw
         if (correctName == null || correctName.isEmpty()) {
             throw new IllegalArgumentException(
-                    String.format("Property name %s cannot be used as an Identifier, as it contains only invalid characters.", name));
+                String.format("Property name %s cannot be used as an Identifier, as it contains only invalid characters.", name));
         }
 
         return correctName;
@@ -261,23 +315,36 @@ public class CodeNamer {
         return name;
     }
 
-    private static String removeInvalidCharacters(String name, char... allowerCharacters) {
+    private static String removeInvalidCharacters(String name, Predicate<Character> allowedCharacterMatcher) {
         if (name == null || name.isEmpty()) {
             return name;
         }
 
-        StringBuilder builder = new StringBuilder();
-        List<Character> allowed = new ArrayList<>();
-        for (Character c : allowerCharacters) {
-            allowed.add(c);
-        }
-        for (Character c : name.toCharArray()) {
-            if (Character.isLetterOrDigit(c) || allowed.contains(c)) {
-                builder.append(c);
-            } else {
-                builder.append("_");
+        StringBuilder sb = null;
+        int prevStart = 0;
+        int nameLength = name.length();
+
+        for (int i = 0; i < nameLength; i++) {
+            char c = name.charAt(i);
+            if (!Character.isLetterOrDigit(c) && !allowedCharacterMatcher.test(c)) {
+                if (sb == null) {
+                    sb = new StringBuilder(nameLength);
+                }
+
+                if (prevStart != i) {
+                    sb.append(name, prevStart, i);
+                }
+
+                sb.append('_');
+                prevStart = i + 1;
             }
         }
-        return builder.toString();
+
+        if (sb == null) {
+            return name;
+        }
+
+        sb.append(name, prevStart, nameLength);
+        return sb.toString();
     }
 }

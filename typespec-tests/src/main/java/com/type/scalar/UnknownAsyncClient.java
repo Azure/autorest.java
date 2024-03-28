@@ -40,6 +40,7 @@ public final class UnknownAsyncClient {
     /**
      * get unknown value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * Object
      * }</pre>
@@ -60,6 +61,7 @@ public final class UnknownAsyncClient {
     /**
      * put unknown value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * Object
      * }</pre>

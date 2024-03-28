@@ -50,7 +50,8 @@ public final class ModelsImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialWordsClientModels to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for SpecialWordsClientModels to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "SpecialWordsClientMo")
@@ -653,6 +654,7 @@ public final class ModelsImpl {
     /**
      * The withAnd operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -676,6 +678,7 @@ public final class ModelsImpl {
     /**
      * The withAnd operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -699,6 +702,7 @@ public final class ModelsImpl {
     /**
      * The withAs operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -722,6 +726,7 @@ public final class ModelsImpl {
     /**
      * The withAs operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -745,6 +750,7 @@ public final class ModelsImpl {
     /**
      * The withAssert operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -768,6 +774,7 @@ public final class ModelsImpl {
     /**
      * The withAssert operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -791,6 +798,7 @@ public final class ModelsImpl {
     /**
      * The withAsync operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -814,6 +822,7 @@ public final class ModelsImpl {
     /**
      * The withAsync operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -837,6 +846,7 @@ public final class ModelsImpl {
     /**
      * The withAwait operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -860,6 +870,7 @@ public final class ModelsImpl {
     /**
      * The withAwait operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -883,6 +894,7 @@ public final class ModelsImpl {
     /**
      * The withBreak operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -906,6 +918,7 @@ public final class ModelsImpl {
     /**
      * The withBreak operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -929,6 +942,7 @@ public final class ModelsImpl {
     /**
      * The withClass operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -952,6 +966,7 @@ public final class ModelsImpl {
     /**
      * The withClass operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -975,6 +990,7 @@ public final class ModelsImpl {
     /**
      * The withConstructor operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -998,6 +1014,7 @@ public final class ModelsImpl {
     /**
      * The withConstructor operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1021,6 +1038,7 @@ public final class ModelsImpl {
     /**
      * The withContinue operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1044,6 +1062,7 @@ public final class ModelsImpl {
     /**
      * The withContinue operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1067,6 +1086,7 @@ public final class ModelsImpl {
     /**
      * The withDef operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1090,6 +1110,7 @@ public final class ModelsImpl {
     /**
      * The withDef operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1113,6 +1134,7 @@ public final class ModelsImpl {
     /**
      * The withDel operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1136,6 +1158,7 @@ public final class ModelsImpl {
     /**
      * The withDel operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1159,6 +1182,7 @@ public final class ModelsImpl {
     /**
      * The withElif operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1182,6 +1206,7 @@ public final class ModelsImpl {
     /**
      * The withElif operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1205,6 +1230,7 @@ public final class ModelsImpl {
     /**
      * The withElse operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1228,6 +1254,7 @@ public final class ModelsImpl {
     /**
      * The withElse operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1251,6 +1278,7 @@ public final class ModelsImpl {
     /**
      * The withExcept operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1274,6 +1302,7 @@ public final class ModelsImpl {
     /**
      * The withExcept operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1297,6 +1326,7 @@ public final class ModelsImpl {
     /**
      * The withExec operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1320,6 +1350,7 @@ public final class ModelsImpl {
     /**
      * The withExec operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1343,6 +1374,7 @@ public final class ModelsImpl {
     /**
      * The withFinally operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1366,6 +1398,7 @@ public final class ModelsImpl {
     /**
      * The withFinally operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1389,6 +1422,7 @@ public final class ModelsImpl {
     /**
      * The withFor operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1412,6 +1446,7 @@ public final class ModelsImpl {
     /**
      * The withFor operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1435,6 +1470,7 @@ public final class ModelsImpl {
     /**
      * The withFrom operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1458,6 +1494,7 @@ public final class ModelsImpl {
     /**
      * The withFrom operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1481,6 +1518,7 @@ public final class ModelsImpl {
     /**
      * The withGlobal operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1504,6 +1542,7 @@ public final class ModelsImpl {
     /**
      * The withGlobal operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1527,6 +1566,7 @@ public final class ModelsImpl {
     /**
      * The withIf operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1550,6 +1590,7 @@ public final class ModelsImpl {
     /**
      * The withIf operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1573,6 +1614,7 @@ public final class ModelsImpl {
     /**
      * The withImport operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1596,6 +1638,7 @@ public final class ModelsImpl {
     /**
      * The withImport operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1619,6 +1662,7 @@ public final class ModelsImpl {
     /**
      * The withIn operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1642,6 +1686,7 @@ public final class ModelsImpl {
     /**
      * The withIn operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1665,6 +1710,7 @@ public final class ModelsImpl {
     /**
      * The withIs operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1688,6 +1734,7 @@ public final class ModelsImpl {
     /**
      * The withIs operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1711,6 +1758,7 @@ public final class ModelsImpl {
     /**
      * The withLambda operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1734,6 +1782,7 @@ public final class ModelsImpl {
     /**
      * The withLambda operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1757,6 +1806,7 @@ public final class ModelsImpl {
     /**
      * The withNot operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1780,6 +1830,7 @@ public final class ModelsImpl {
     /**
      * The withNot operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1803,6 +1854,7 @@ public final class ModelsImpl {
     /**
      * The withOr operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1826,6 +1878,7 @@ public final class ModelsImpl {
     /**
      * The withOr operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1849,6 +1902,7 @@ public final class ModelsImpl {
     /**
      * The withPass operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1872,6 +1926,7 @@ public final class ModelsImpl {
     /**
      * The withPass operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1895,6 +1950,7 @@ public final class ModelsImpl {
     /**
      * The withRaise operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1918,6 +1974,7 @@ public final class ModelsImpl {
     /**
      * The withRaise operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1941,6 +1998,7 @@ public final class ModelsImpl {
     /**
      * The withReturn operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1964,6 +2022,7 @@ public final class ModelsImpl {
     /**
      * The withReturn operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -1987,6 +2046,7 @@ public final class ModelsImpl {
     /**
      * The withTry operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -2010,6 +2070,7 @@ public final class ModelsImpl {
     /**
      * The withTry operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -2033,6 +2094,7 @@ public final class ModelsImpl {
     /**
      * The withWhile operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -2056,6 +2118,7 @@ public final class ModelsImpl {
     /**
      * The withWhile operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -2079,6 +2142,7 @@ public final class ModelsImpl {
     /**
      * The withWith operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -2102,6 +2166,7 @@ public final class ModelsImpl {
     /**
      * The withWith operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -2125,6 +2190,7 @@ public final class ModelsImpl {
     /**
      * The withYield operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -2148,6 +2214,7 @@ public final class ModelsImpl {
     /**
      * The withYield operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

@@ -39,6 +39,7 @@ public final class UnionStringLiteralClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(hello/world) (Required)
@@ -61,6 +62,7 @@ public final class UnionStringLiteralClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(hello/world) (Required)

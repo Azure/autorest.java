@@ -33,7 +33,8 @@ public final class ApplicationPackageReference {
     }
 
     /**
-     * Get the id property: The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.
+     * Get the id property: The ID of the application package to install. This must be inside the same batch account as
+     * the pool. This can either be a reference to a specific version or the default version if one exists.
      * 
      * @return the id value.
      */
@@ -42,7 +43,8 @@ public final class ApplicationPackageReference {
     }
 
     /**
-     * Set the id property: The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.
+     * Set the id property: The ID of the application package to install. This must be inside the same batch account as
+     * the pool. This can either be a reference to a specific version or the default version if one exists.
      * 
      * @param id the id value to set.
      * @return the ApplicationPackageReference object itself.
@@ -55,7 +57,8 @@ public final class ApplicationPackageReference {
     /**
      * Get the version property: The version of the application to deploy. If omitted, the default version is deployed.
      * 
-     * If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
+     * If this is omitted, and no default version is specified for this application, the request fails with the error
+     * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
      * 
      * @return the version value.
      */
@@ -66,7 +69,8 @@ public final class ApplicationPackageReference {
     /**
      * Set the version property: The version of the application to deploy. If omitted, the default version is deployed.
      * 
-     * If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
+     * If this is omitted, and no default version is specified for this application, the request fails with the error
+     * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
      * 
      * @param version the version value to set.
      * @return the ApplicationPackageReference object itself.

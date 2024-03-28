@@ -39,6 +39,7 @@ public final class FirstClient {
     /**
      * Resource read operation template.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)

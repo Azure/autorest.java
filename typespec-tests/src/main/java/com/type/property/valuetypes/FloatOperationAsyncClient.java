@@ -41,6 +41,7 @@ public final class FloatOperationAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: double (Required)
@@ -63,6 +64,7 @@ public final class FloatOperationAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: double (Required)

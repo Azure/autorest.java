@@ -35,7 +35,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as
+     * well.
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -51,7 +52,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * 
      * @param parameter I am a required parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -68,12 +70,13 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -91,7 +94,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts no parameters, will be updated in next spec to accept a new optional parameter as
+     * well.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -108,7 +112,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one required parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * 
      * @param parameter I am a required parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -127,7 +132,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * 
      * @param parameter I am an optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -149,7 +155,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional parameter as well.
+     * Test that currently accepts one optional parameter, will be updated in next spec to accept a new optional
+     * parameter as well.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

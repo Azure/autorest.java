@@ -8,7 +8,7 @@ import com.azure.autorest.util.CodeNamer;
 import java.util.function.Consumer;
 
 public class XmlBlock {
-    private XmlFileContents contents;
+    private final XmlFileContents contents;
 
     public XmlBlock(XmlFileContents contents) {
         this.contents = contents;

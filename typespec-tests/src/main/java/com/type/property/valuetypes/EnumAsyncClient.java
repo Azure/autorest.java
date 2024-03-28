@@ -41,6 +41,7 @@ public final class EnumAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)
@@ -63,6 +64,7 @@ public final class EnumAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(ValueOne/ValueTwo) (Required)

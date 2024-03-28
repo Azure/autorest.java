@@ -118,7 +118,8 @@ public final class PartialUpdateClientImpl {
     }
 
     /**
-     * The interface defining all the services for PartialUpdateClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for PartialUpdateClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "PartialUpdateClient")
@@ -145,6 +146,7 @@ public final class PartialUpdateClientImpl {
     /**
      * The read operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     boolean: boolean (Required)
@@ -170,6 +172,7 @@ public final class PartialUpdateClientImpl {
     /**
      * The read operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     boolean: boolean (Required)

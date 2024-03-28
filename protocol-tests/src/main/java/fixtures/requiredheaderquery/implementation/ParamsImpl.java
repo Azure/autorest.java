@@ -69,7 +69,8 @@ public final class ParamsImpl {
     }
 
     /**
-     * The interface defining all the services for DpgRequiredHeaderQueryClientParams to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for DpgRequiredHeaderQueryClientParams to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "DpgRequiredHeaderQue")
@@ -153,13 +154,16 @@ public final class ParamsImpl {
      * Get Required Query Parameters.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
-     *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int
+     * array parameter. In the form of "," separated string.</td></tr>
+     * <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer
+     * collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * Object
      * }</pre>
@@ -208,13 +212,16 @@ public final class ParamsImpl {
      * Get Required Query Parameters.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int array parameter. In the form of "," separated string.</td></tr>
-     *     <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>parameter_optional_csv_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>I am a required csv int
+     * array parameter. In the form of "," separated string.</td></tr>
+     * <tr><td>parameter_optional_multi_int_array</td><td>List&lt;Integer&gt;</td><td>No</td><td>The array of integer
+     * collect by multi. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * Object
      * }</pre>
@@ -260,6 +267,7 @@ public final class ParamsImpl {
     /**
      * Get Required Header Parameters.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * Object
      * }</pre>
@@ -296,6 +304,7 @@ public final class ParamsImpl {
     /**
      * Get Required Header Parameters.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * Object
      * }</pre>

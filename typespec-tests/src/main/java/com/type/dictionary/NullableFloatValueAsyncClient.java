@@ -42,6 +42,7 @@ public final class NullableFloatValueAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: Double (Optional)
@@ -64,6 +65,7 @@ public final class NullableFloatValueAsyncClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: Double (Optional)

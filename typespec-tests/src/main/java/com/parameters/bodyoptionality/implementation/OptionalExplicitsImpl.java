@@ -50,7 +50,8 @@ public final class OptionalExplicitsImpl {
     }
 
     /**
-     * The interface defining all the services for BodyOptionalityClientOptionalExplicits to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for BodyOptionalityClientOptionalExplicits to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "BodyOptionalityClien")
@@ -91,6 +92,7 @@ public final class OptionalExplicitsImpl {
     /**
      * The set operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -119,6 +121,7 @@ public final class OptionalExplicitsImpl {
     /**
      * The set operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -147,6 +150,7 @@ public final class OptionalExplicitsImpl {
     /**
      * The omit operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -175,6 +179,7 @@ public final class OptionalExplicitsImpl {
     /**
      * The omit operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

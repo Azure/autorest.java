@@ -40,6 +40,7 @@ public final class Int32ValueClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *     int (Required)
@@ -62,6 +63,7 @@ public final class Int32ValueClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *     int (Required)

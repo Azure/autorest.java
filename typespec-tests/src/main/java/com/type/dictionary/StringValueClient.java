@@ -40,6 +40,7 @@ public final class StringValueClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: String (Required)
@@ -62,6 +63,7 @@ public final class StringValueClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: String (Required)

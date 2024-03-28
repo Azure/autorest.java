@@ -39,6 +39,7 @@ public final class RequiredAndOptionalClient {
     /**
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
@@ -62,6 +63,7 @@ public final class RequiredAndOptionalClient {
     /**
      * Get models that will return only the required properties.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
@@ -85,6 +87,7 @@ public final class RequiredAndOptionalClient {
     /**
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)
@@ -109,6 +112,7 @@ public final class RequiredAndOptionalClient {
     /**
      * Put a body with only required properties.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     optionalProperty: String (Optional)

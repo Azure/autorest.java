@@ -64,7 +64,8 @@ public final class AzureLocationScalarsImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientAzureLocationScalars to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ScalarClientAzureLocationScalars to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientAzureLoc")
@@ -163,6 +164,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * get azureLocation value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -183,6 +185,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * get azureLocation value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -203,6 +206,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * put azureLocation value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -224,6 +228,7 @@ public final class AzureLocationScalarsImpl {
     /**
      * put azureLocation value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -245,12 +250,15 @@ public final class AzureLocationScalarsImpl {
     /**
      * post a model which has azureLocation property.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     location: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     location: String (Required)
@@ -274,12 +282,15 @@ public final class AzureLocationScalarsImpl {
     /**
      * post a model which has azureLocation property.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     location: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     location: String (Required)

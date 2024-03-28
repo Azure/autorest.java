@@ -41,6 +41,7 @@ public final class UnionFloatLiteralAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(43.125/46.875) (Required)
@@ -63,6 +64,7 @@ public final class UnionFloatLiteralAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(43.125/46.875) (Required)

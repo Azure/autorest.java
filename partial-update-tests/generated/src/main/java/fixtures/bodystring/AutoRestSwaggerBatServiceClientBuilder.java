@@ -81,7 +81,7 @@ public final class AutoRestSwaggerBatServiceClientBuilder implements HttpTrait<A
     @Override
     public AutoRestSwaggerBatServiceClientBuilder pipeline(HttpPipeline pipeline) {
         if (this.pipeline != null && pipeline == null) {
-            LOGGER.info("HttpPipeline is being set to 'null' when it was previously configured.");
+            LOGGER.atInfo().log("HttpPipeline is being set to 'null' when it was previously configured.");
         }
         this.pipeline = pipeline;
         return this;

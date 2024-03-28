@@ -41,6 +41,7 @@ public final class ExtendsModelAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *      (Optional): {
@@ -67,6 +68,7 @@ public final class ExtendsModelAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *      (Optional): {

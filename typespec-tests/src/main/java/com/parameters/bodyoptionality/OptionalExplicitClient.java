@@ -39,6 +39,7 @@ public final class OptionalExplicitClient {
     /**
      * The set operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -61,6 +62,7 @@ public final class OptionalExplicitClient {
     /**
      * The omit operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

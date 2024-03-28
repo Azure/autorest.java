@@ -49,7 +49,8 @@ public final class QuxesImpl {
     }
 
     /**
-     * The interface defining all the services for ServiceClientClientQuxes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ServiceClientClientQuxes to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}/client/structure/{client}")
     @ServiceInterface(name = "ServiceClientClientQ")

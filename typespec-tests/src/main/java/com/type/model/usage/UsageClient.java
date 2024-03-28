@@ -41,6 +41,7 @@ public final class UsageClient {
     /**
      * The input operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
@@ -64,6 +65,7 @@ public final class UsageClient {
     /**
      * The output operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
@@ -86,12 +88,15 @@ public final class UsageClient {
     /**
      * The inputAndOutput operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     requiredProp: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     requiredProp: String (Required)

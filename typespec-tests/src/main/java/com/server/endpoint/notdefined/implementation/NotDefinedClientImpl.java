@@ -116,7 +116,8 @@ public final class NotDefinedClientImpl {
     }
 
     /**
-     * The interface defining all the services for NotDefinedClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for NotDefinedClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "NotDefinedClient")

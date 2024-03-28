@@ -39,6 +39,7 @@ public final class PartialUpdateClient {
     /**
      * The read operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     boolean: boolean (Required)

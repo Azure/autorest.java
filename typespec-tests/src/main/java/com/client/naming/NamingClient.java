@@ -74,6 +74,7 @@ public final class NamingClient {
     /**
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -97,6 +98,7 @@ public final class NamingClient {
     /**
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -120,6 +122,7 @@ public final class NamingClient {
     /**
      * The compatibleWithEncodedName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)

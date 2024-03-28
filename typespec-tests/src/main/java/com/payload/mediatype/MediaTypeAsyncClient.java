@@ -40,6 +40,7 @@ public final class MediaTypeAsyncClient {
     /**
      * The sendAsText operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -61,6 +62,7 @@ public final class MediaTypeAsyncClient {
     /**
      * The getAsText operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -81,6 +83,7 @@ public final class MediaTypeAsyncClient {
     /**
      * The sendAsJson operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -102,6 +105,7 @@ public final class MediaTypeAsyncClient {
     /**
      * The getAsJson operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>

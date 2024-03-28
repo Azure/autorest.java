@@ -4,6 +4,7 @@
 package com._specs_.azure.core.basic;
 
 import com._specs_.azure.core.basic.models.ListItemInputBody;
+import com._specs_.azure.core.basic.models.ListItemInputExtensibleEnum;
 import com._specs_.azure.core.basic.models.User;
 import com.azure.core.http.HttpClient;
 import com.azure.core.http.rest.PagedFlux;
@@ -156,10 +157,10 @@ public class CoreTests {
 
     @Test
     public void testMisc() {
-        syncClient.listWithParameters(new ListItemInputBody("Madge"));
+        syncClient.listWithParameters(new ListItemInputBody("Madge"), ListItemInputExtensibleEnum.SECOND).stream().count();
 
         TwoModelsAsPageItemClient client = new BasicClientBuilder().buildTwoModelsAsPageItemClient();
-        client.listFirstItem();
-        client.listSecondItem();
+        client.listFirstItem().stream().count();
+        client.listSecondItem().stream().count();
     }
 }

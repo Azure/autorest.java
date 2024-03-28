@@ -58,7 +58,8 @@ public final class Basic implements JsonSerializable<Basic> {
     }
 
     /**
-     * Get the name property: Name property with a very long description that does not fit on a single line and a line break.
+     * Get the name property: Name property with a very long description that does not fit on a single line and a line
+     * break.
      * 
      * @return the name value.
      */
@@ -67,7 +68,8 @@ public final class Basic implements JsonSerializable<Basic> {
     }
 
     /**
-     * Set the name property: Name property with a very long description that does not fit on a single line and a line break.
+     * Set the name property: Name property with a very long description that does not fit on a single line and a line
+     * break.
      * 
      * @param name the name value to set.
      * @return the Basic object itself.
@@ -113,7 +115,8 @@ public final class Basic implements JsonSerializable<Basic> {
      * Reads an instance of Basic from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Basic if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of Basic if the JsonReader was pointing to an instance of it, or null if it was pointing to
+     * JSON null.
      * @throws IOException If an error occurs while reading the Basic.
      */
     public static Basic fromJson(JsonReader jsonReader) throws IOException {

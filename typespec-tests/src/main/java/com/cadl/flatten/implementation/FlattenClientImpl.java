@@ -103,7 +103,7 @@ public final class FlattenClientImpl {
     /**
      * Initializes an instance of FlattenClient client.
      * 
-     * @param endpoint 
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(String endpoint, FlattenServiceVersion serviceVersion) {
@@ -115,7 +115,7 @@ public final class FlattenClientImpl {
      * Initializes an instance of FlattenClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint 
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(HttpPipeline httpPipeline, String endpoint, FlattenServiceVersion serviceVersion) {
@@ -127,7 +127,7 @@ public final class FlattenClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint 
+     * @param endpoint
      * @param serviceVersion Service version.
      */
     public FlattenClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -231,6 +231,7 @@ public final class FlattenClientImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -261,6 +262,7 @@ public final class FlattenClientImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -291,6 +293,7 @@ public final class FlattenClientImpl {
     /**
      * The sendProjectedName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     file_id: String (Required)
@@ -317,6 +320,7 @@ public final class FlattenClientImpl {
     /**
      * The sendProjectedName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     file_id: String (Required)
@@ -342,12 +346,13 @@ public final class FlattenClientImpl {
      * The sendLong operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -391,12 +396,13 @@ public final class FlattenClientImpl {
      * The sendLong operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -438,6 +444,7 @@ public final class FlattenClientImpl {
     /**
      * The update operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     patch (Optional, Required on create): {
@@ -447,7 +454,9 @@ public final class FlattenClientImpl {
      *     }
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: long (Required)
@@ -461,7 +470,8 @@ public final class FlattenClientImpl {
      * }
      * }</pre>
      * 
-     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53
+     * − 1)` ).
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -482,6 +492,7 @@ public final class FlattenClientImpl {
     /**
      * The update operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     patch (Optional, Required on create): {
@@ -491,7 +502,9 @@ public final class FlattenClientImpl {
      *     }
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: long (Required)
@@ -505,7 +518,8 @@ public final class FlattenClientImpl {
      * }
      * }</pre>
      * 
-     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` ).
+     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53
+     * − 1)` ).
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

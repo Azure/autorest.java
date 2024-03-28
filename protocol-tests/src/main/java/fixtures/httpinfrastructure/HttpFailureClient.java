@@ -38,6 +38,7 @@ public final class HttpFailureClient {
     /**
      * Get empty error form server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -58,6 +59,7 @@ public final class HttpFailureClient {
     /**
      * Get empty error form server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -78,6 +80,7 @@ public final class HttpFailureClient {
     /**
      * Get empty response from server.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>

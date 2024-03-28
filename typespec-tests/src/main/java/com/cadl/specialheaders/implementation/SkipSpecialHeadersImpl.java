@@ -62,7 +62,8 @@ public final class SkipSpecialHeadersImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialHeadersClientSkipSpecialHeaders to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for SpecialHeadersClientSkipSpecialHeaders to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "SpecialHeadersClient")

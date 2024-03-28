@@ -39,6 +39,7 @@ public final class BooleanLiteralClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: boolean (Required)
@@ -61,6 +62,7 @@ public final class BooleanLiteralClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: boolean (Required)

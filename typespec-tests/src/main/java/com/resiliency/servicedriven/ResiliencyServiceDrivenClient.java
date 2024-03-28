@@ -56,9 +56,9 @@ public final class ResiliencyServiceDrivenClient {
      * Test that grew up from accepting no parameters to an optional input parameter.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -76,12 +76,13 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional parameter.
+     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional
+     * parameter.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -100,13 +101,14 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional parameters.
+     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional
+     * parameters.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
-     *     <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>parameter</td><td>String</td><td>No</td><td>I am an optional parameter</td></tr>
+     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>I'm a new input optional parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -157,8 +159,8 @@ public final class ResiliencyServiceDrivenClient {
         // Generated convenience method for fromNoneWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
         }
         if (newParameter != null) {
             requestOptions.addQueryParam("new-parameter", newParameter, false);
@@ -184,7 +186,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional parameter.
+     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional
+     * parameter.
      * 
      * @param parameter I am a required parameter.
      * @param newParameter I'm a new input optional parameter.
@@ -201,8 +204,8 @@ public final class ResiliencyServiceDrivenClient {
         // Generated convenience method for fromOneRequiredWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
         }
         if (newParameter != null) {
             requestOptions.addQueryParam("new-parameter", newParameter, false);
@@ -211,7 +214,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional parameter.
+     * Operation that grew up from accepting one required parameter to accepting a required parameter and an optional
+     * parameter.
      * 
      * @param parameter I am a required parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -230,7 +234,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional parameters.
+     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional
+     * parameters.
      * 
      * @param parameter I am an optional parameter.
      * @param newParameter I'm a new input optional parameter.
@@ -247,8 +252,8 @@ public final class ResiliencyServiceDrivenClient {
         // Generated convenience method for fromOneOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
         }
         if (parameter != null) {
             requestOptions.addQueryParam("parameter", parameter, false);
@@ -260,7 +265,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional parameters.
+     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional
+     * parameters.
      * 
      * @param parameter I am an optional parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -282,7 +288,8 @@ public final class ResiliencyServiceDrivenClient {
     }
 
     /**
-     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional parameters.
+     * Tests that we can grow up an operation from accepting one optional parameter to accepting two optional
+     * parameters.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

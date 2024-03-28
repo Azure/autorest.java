@@ -39,6 +39,7 @@ public final class Decimal128TypeClient {
     /**
      * The responseBody operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BigDecimal
      * }</pre>
@@ -59,6 +60,7 @@ public final class Decimal128TypeClient {
     /**
      * The requestBody operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BigDecimal
      * }</pre>

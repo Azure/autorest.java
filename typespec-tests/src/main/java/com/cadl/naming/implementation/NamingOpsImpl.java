@@ -54,7 +54,8 @@ public final class NamingOpsImpl {
     }
 
     /**
-     * The interface defining all the services for NamingClientNamingOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for NamingClientNamingOps to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "NamingClientNamingOp")
@@ -104,14 +105,15 @@ public final class NamingOpsImpl {
      * description of POST op.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
      * 
      * description of etag header parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     parameters (Optional): {
@@ -119,13 +121,15 @@ public final class NamingOpsImpl {
      *     }
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             @data.kind: String (Required)
+     *             &#64;data.kind: String (Required)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
@@ -160,14 +164,15 @@ public final class NamingOpsImpl {
      * description of POST op.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
      * 
      * description of etag header parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     parameters (Optional): {
@@ -175,13 +180,15 @@ public final class NamingOpsImpl {
      *     }
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
-     *             @data.kind: String (Required)
+     *             &#64;data.kind: String (Required)
      *         }
      *     }
      *     type: String(Blob/File) (Required)
@@ -211,6 +218,7 @@ public final class NamingOpsImpl {
     /**
      * The getAnonymous operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -234,6 +242,7 @@ public final class NamingOpsImpl {
     /**
      * The getAnonymous operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

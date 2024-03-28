@@ -39,6 +39,7 @@ public final class DatetimeOperationClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Required)
@@ -61,6 +62,7 @@ public final class DatetimeOperationClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: OffsetDateTime (Required)

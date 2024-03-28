@@ -51,7 +51,8 @@ public final class NeversImpl {
     }
 
     /**
-     * The interface defining all the services for ValueTypesClientNevers to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ValueTypesClientNevers to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ValueTypesClientNeve")
@@ -96,9 +97,9 @@ public final class NeversImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * {
-     * }
+     * { }
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -117,9 +118,9 @@ public final class NeversImpl {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * {
-     * }
+     * { }
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -138,9 +139,9 @@ public final class NeversImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * {
-     * }
+     * { }
      * }</pre>
      * 
      * @param body body.
@@ -160,9 +161,9 @@ public final class NeversImpl {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * {
-     * }
+     * { }
      * }</pre>
      * 
      * @param body body.

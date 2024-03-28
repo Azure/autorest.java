@@ -39,6 +39,7 @@ public final class UnknownStringClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Object (Required)
@@ -61,6 +62,7 @@ public final class UnknownStringClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Object (Required)

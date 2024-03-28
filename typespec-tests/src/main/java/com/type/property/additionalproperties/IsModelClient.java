@@ -41,6 +41,7 @@ public final class IsModelClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {
@@ -65,6 +66,7 @@ public final class IsModelClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {

@@ -52,7 +52,8 @@ public final class ModelValuesImpl {
     }
 
     /**
-     * The interface defining all the services for DictionaryClientModelValues to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for DictionaryClientModelValues to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "DictionaryClientMode")
@@ -97,6 +98,7 @@ public final class ModelValuesImpl {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {
@@ -124,6 +126,7 @@ public final class ModelValuesImpl {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {
@@ -151,6 +154,7 @@ public final class ModelValuesImpl {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {
@@ -179,6 +183,7 @@ public final class ModelValuesImpl {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {

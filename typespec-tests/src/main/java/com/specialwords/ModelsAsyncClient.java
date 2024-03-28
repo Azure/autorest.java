@@ -73,6 +73,7 @@ public final class ModelsAsyncClient {
     /**
      * The withAnd operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -96,6 +97,7 @@ public final class ModelsAsyncClient {
     /**
      * The withAs operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -119,6 +121,7 @@ public final class ModelsAsyncClient {
     /**
      * The withAssert operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -142,6 +145,7 @@ public final class ModelsAsyncClient {
     /**
      * The withAsync operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -165,6 +169,7 @@ public final class ModelsAsyncClient {
     /**
      * The withAwait operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -188,6 +193,7 @@ public final class ModelsAsyncClient {
     /**
      * The withBreak operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -211,6 +217,7 @@ public final class ModelsAsyncClient {
     /**
      * The withClass operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -234,6 +241,7 @@ public final class ModelsAsyncClient {
     /**
      * The withConstructor operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -257,6 +265,7 @@ public final class ModelsAsyncClient {
     /**
      * The withContinue operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -280,6 +289,7 @@ public final class ModelsAsyncClient {
     /**
      * The withDef operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -303,6 +313,7 @@ public final class ModelsAsyncClient {
     /**
      * The withDel operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -326,6 +337,7 @@ public final class ModelsAsyncClient {
     /**
      * The withElif operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -349,6 +361,7 @@ public final class ModelsAsyncClient {
     /**
      * The withElse operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -372,6 +385,7 @@ public final class ModelsAsyncClient {
     /**
      * The withExcept operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -395,6 +409,7 @@ public final class ModelsAsyncClient {
     /**
      * The withExec operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -418,6 +433,7 @@ public final class ModelsAsyncClient {
     /**
      * The withFinally operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -441,6 +457,7 @@ public final class ModelsAsyncClient {
     /**
      * The withFor operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -464,6 +481,7 @@ public final class ModelsAsyncClient {
     /**
      * The withFrom operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -487,6 +505,7 @@ public final class ModelsAsyncClient {
     /**
      * The withGlobal operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -510,6 +529,7 @@ public final class ModelsAsyncClient {
     /**
      * The withIf operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -533,6 +553,7 @@ public final class ModelsAsyncClient {
     /**
      * The withImport operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -556,6 +577,7 @@ public final class ModelsAsyncClient {
     /**
      * The withIn operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -579,6 +601,7 @@ public final class ModelsAsyncClient {
     /**
      * The withIs operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -602,6 +625,7 @@ public final class ModelsAsyncClient {
     /**
      * The withLambda operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -625,6 +649,7 @@ public final class ModelsAsyncClient {
     /**
      * The withNot operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -648,6 +673,7 @@ public final class ModelsAsyncClient {
     /**
      * The withOr operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -671,6 +697,7 @@ public final class ModelsAsyncClient {
     /**
      * The withPass operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -694,6 +721,7 @@ public final class ModelsAsyncClient {
     /**
      * The withRaise operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -717,6 +745,7 @@ public final class ModelsAsyncClient {
     /**
      * The withReturn operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -740,6 +769,7 @@ public final class ModelsAsyncClient {
     /**
      * The withTry operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -763,6 +793,7 @@ public final class ModelsAsyncClient {
     /**
      * The withWhile operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -786,6 +817,7 @@ public final class ModelsAsyncClient {
     /**
      * The withWith operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)
@@ -809,6 +841,7 @@ public final class ModelsAsyncClient {
     /**
      * The withYield operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     name: String (Required)

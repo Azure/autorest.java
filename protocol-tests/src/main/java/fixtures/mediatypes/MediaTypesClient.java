@@ -38,10 +38,13 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -63,6 +66,7 @@ public final class MediaTypesClient {
     /**
      * Analyze body, that could be different media types. Adds to AnalyzeBody by not having an accept type.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -85,16 +89,20 @@ public final class MediaTypesClient {
      * Pass in contentType 'text/plain; charset=UTF-8' to pass test. Value for input does not matter.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
-     *     <caption>Header Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "text/plain; charset=UTF-8".</td></tr>
+     * <caption>Header Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "text/plain;
+     * charset=UTF-8".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -113,12 +121,16 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a byte stream of 'hello, world!' for application/octet-stream.
+     * Binary body with two content types. Pass in of {'hello': 'world'} for the application/json content type, and a
+     * byte stream of 'hello, world!' for application/octet-stream.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -140,17 +152,22 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Binary body with three content types. Pass in string 'hello, world' with content type 'text/plain', {'hello':
+     * world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
      * 
-     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream", "text/plain".
+     * @param contentType Upload file type. Allowed values: "application/json", "application/octet-stream",
+     * "text/plain".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -167,17 +184,23 @@ public final class MediaTypesClient {
     }
 
     /**
-     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for 'application/octet-stream'.
+     * Body with three types. Can be stream, string, or JSON. Pass in string 'hello, world' with content type
+     * 'text/plain', {'hello': world'} with content type 'application/json' and a byte string for
+     * 'application/octet-stream'.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
      * 
-     * @param contentType The content type. Allowed values: "application/octet-stream", "text/plain", "application/json".
+     * @param contentType The content type. Allowed values: "application/octet-stream", "text/plain",
+     * "application/json".
      * @param message The payload body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -196,10 +219,13 @@ public final class MediaTypesClient {
     /**
      * Body that's either text/plain or application/json.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>

@@ -41,6 +41,7 @@ public final class DifferentBodyAsyncClient {
     /**
      * The getAvatarAsPng operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -61,6 +62,7 @@ public final class DifferentBodyAsyncClient {
     /**
      * The getAvatarAsJson operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     content: byte[] (Required)

@@ -69,7 +69,8 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * The interface defining all the services for AzureContainerRegistryContainerRegistryBlobs to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AzureContainerRegistryContainerRegistryBlobs to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{url}")
     @ServiceInterface(name = "AzureContainerRegist")
@@ -646,9 +647,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.
+     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current
+     * status of a resumable upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -663,9 +666,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.
+     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current
+     * status of a resumable upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -680,9 +685,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.
+     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current
+     * status of a resumable upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -694,9 +701,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.
+     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current
+     * status of a resumable upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -709,9 +718,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.
+     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current
+     * status of a resumable upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -726,9 +737,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.
+     * Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current
+     * status of a resumable upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -741,7 +754,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -760,7 +774,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -779,7 +794,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -795,7 +811,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -812,7 +829,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -831,7 +849,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -850,7 +869,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -866,7 +886,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -883,7 +904,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -902,7 +924,8 @@ public final class ContainerRegistryBlobsImpl {
     /**
      * Upload a stream of data without completing the upload.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -915,10 +938,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -935,10 +960,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -955,10 +982,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -972,10 +1001,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -992,10 +1023,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1012,10 +1045,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1032,10 +1067,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1049,10 +1086,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1069,10 +1108,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @param context The context to associate with this operation.
@@ -1090,10 +1131,12 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.
+     * Complete the upload, providing all the data in the body, if necessary. A request without a body will just
+     * complete the upload with previously uploaded content.
      * 
      * @param digest Digest of a BLOB.
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param value Optional raw data of blob.
      * @param contentLength The Content-Length header for the request.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1106,9 +1149,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.
+     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished
+     * uploads will eventually timeout.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1121,9 +1166,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.
+     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished
+     * uploads will eventually timeout.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1137,9 +1184,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.
+     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished
+     * uploads will eventually timeout.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1151,9 +1200,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.
+     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished
+     * uploads will eventually timeout.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1166,9 +1217,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.
+     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished
+     * uploads will eventually timeout.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1182,9 +1235,11 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.
+     * Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished
+     * uploads will eventually timeout.
      * 
-     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) ).
+     * @param nextLink Link acquired from upload start or previous chunk. Note, do not include initial / (must do
+     * substring(1) ).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1287,11 +1342,13 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.
+     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant
+     * range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is
+     * returned, range requests can be used to fetch partial content.
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1306,11 +1363,13 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.
+     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant
+     * range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is
+     * returned, range requests can be used to fetch partial content.
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1325,11 +1384,13 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.
+     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant
+     * range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is
+     * returned, range requests can be used to fetch partial content.
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1341,11 +1402,13 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.
+     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant
+     * range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is
+     * returned, range requests can be used to fetch partial content.
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1358,11 +1421,13 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.
+     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant
+     * range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is
+     * returned, range requests can be used to fetch partial content.
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1377,11 +1442,13 @@ public final class ContainerRegistryBlobsImpl {
     }
 
     /**
-     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.
+     * Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant
+     * range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is
+     * returned, range requests can be used to fetch partial content.
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1397,7 +1464,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1416,7 +1483,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1435,7 +1502,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1451,7 +1518,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1468,7 +1535,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
@@ -1487,7 +1554,7 @@ public final class ContainerRegistryBlobsImpl {
      * 
      * @param name Name of the image (including the namespace).
      * @param digest Digest of a BLOB.
-     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;,  HTTP Range header specifying blob chunk.
+     * @param range Format : bytes=&lt;start&gt;-&lt;end&gt;, HTTP Range header specifying blob chunk.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws AcrErrorsException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

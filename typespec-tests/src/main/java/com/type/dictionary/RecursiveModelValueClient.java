@@ -41,6 +41,7 @@ public final class RecursiveModelValueClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {
@@ -68,6 +69,7 @@ public final class RecursiveModelValueClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String (Required): {

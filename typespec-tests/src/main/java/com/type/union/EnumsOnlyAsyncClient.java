@@ -43,6 +43,7 @@ public final class EnumsOnlyAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop (Required): {
@@ -68,6 +69,7 @@ public final class EnumsOnlyAsyncClient {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     prop (Required): {
