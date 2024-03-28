@@ -76,8 +76,9 @@ public final class NoApiVersionClient {
         // Generated convenience method for actionWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter param1 is only available in api-version 2022-12-01-preview."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Parameter param1 is only available in api-version 2022-12-01-preview."));
         }
         if (param1 != null) {
             requestOptions.addQueryParam("param1", param1, false);

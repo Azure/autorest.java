@@ -159,8 +159,8 @@ public final class ResiliencyServiceDrivenClient {
         // Generated convenience method for fromNoneWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
         }
         if (newParameter != null) {
             requestOptions.addQueryParam("new-parameter", newParameter, false);
@@ -204,8 +204,8 @@ public final class ResiliencyServiceDrivenClient {
         // Generated convenience method for fromOneRequiredWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
         }
         if (newParameter != null) {
             requestOptions.addQueryParam("new-parameter", newParameter, false);
@@ -252,8 +252,8 @@ public final class ResiliencyServiceDrivenClient {
         // Generated convenience method for fromOneOptionalWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("v2").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter newParameter is only available in api-version v2."));
         }
         if (parameter != null) {
             requestOptions.addQueryParam("parameter", parameter, false);

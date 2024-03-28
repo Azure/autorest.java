@@ -138,8 +138,9 @@ public final class VersioningClient {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(new IllegalArgumentException(
-                "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Parameter projectedFileFormat is only available in api-version 2022-12-01-preview."));
         }
         if (projectFileVersion != null) {
             requestOptions.addQueryParam("projectFileVersion", projectFileVersion, false);
@@ -213,8 +214,9 @@ public final class VersioningClient {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter filter is only available in api-version 2022-12-01-preview."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException(
+                    "Parameter filter is only available in api-version 2022-12-01-preview."));
         }
         if (select != null) {
             for (String paramItemValue : select) {
