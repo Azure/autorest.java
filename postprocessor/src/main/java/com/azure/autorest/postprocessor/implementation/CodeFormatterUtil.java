@@ -52,7 +52,7 @@ public final class CodeFormatterUtil {
 
                 plugin.writeFile(fileEntry.getKey(), file, null);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Failed to format: " + fileEntry.getKey(), e);
             }
         });
     }

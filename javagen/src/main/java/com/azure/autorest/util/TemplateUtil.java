@@ -308,11 +308,8 @@ public class TemplateUtil {
     }
 
     public static void addClientLogger(JavaClass classBlock, String className, JavaFileContents javaFileContents) {
-        String content = javaFileContents.toString();
-        if (content.contains("throw LOGGER")
-                || content.contains("LOGGER.at")
-                || content.contains("LOGGER.log")
-                || content.contains("LOGGER.info")) {
+        // Only need to check for usage of LOGGER as code will generate usages of ClientLogger with LOGGER.
+        if (javaFileContents.contains("LOGGER")) {
             // hack to add LOGGER class variable only if LOGGER is used in code
             classBlock.privateStaticFinalVariable(
                 ClassType.CLIENT_LOGGER + " LOGGER = new ClientLogger(" + className + ".class)");
