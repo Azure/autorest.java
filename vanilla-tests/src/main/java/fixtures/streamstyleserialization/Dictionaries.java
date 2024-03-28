@@ -144,8 +144,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -164,8 +164,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -209,8 +209,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValidSync(this.client.getHost(), accept, context);
@@ -241,12 +241,12 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper complexBody) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -268,12 +268,12 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(DictionaryWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -326,12 +326,12 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(DictionaryWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -364,8 +364,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
@@ -384,8 +384,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getEmpty(this.client.getHost(), accept, context);
@@ -429,8 +429,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getEmptyWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getEmptySync(this.client.getHost(), accept, context);
@@ -460,12 +460,12 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper complexBody) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -486,12 +486,12 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putEmptyWithResponseAsync(DictionaryWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -541,12 +541,12 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putEmptyWithResponse(DictionaryWrapper complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -578,8 +578,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -598,8 +598,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNull(this.client.getHost(), accept, context);
@@ -643,8 +643,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getNullWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNullSync(this.client.getHost(), accept, context);
@@ -673,8 +673,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
@@ -693,8 +693,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<DictionaryWrapper>> getNotProvidedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNotProvided(this.client.getHost(), accept, context);
@@ -741,8 +741,8 @@ public final class Dictionaries {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<DictionaryWrapper> getNotProvidedWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNotProvidedSync(this.client.getHost(), accept, context);

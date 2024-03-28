@@ -140,8 +140,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getValidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getValid(this.client.getHost(), accept, context));
@@ -160,8 +160,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getValidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValid(this.client.getHost(), accept, context);
@@ -205,8 +205,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getValidWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getValidSync(this.client.getHost(), accept, context);
@@ -236,12 +236,12 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -263,12 +263,12 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Void>> putValidWithResponseAsync(Basic complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -318,12 +318,12 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putValidWithResponse(Basic complexBody, Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         if (complexBody == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter complexBody is required and cannot be null."));
         } else {
             complexBody.validate();
         }
@@ -355,8 +355,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getInvalidWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getInvalid(this.client.getHost(), accept, context));
@@ -375,8 +375,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getInvalidWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInvalid(this.client.getHost(), accept, context);
@@ -420,8 +420,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getInvalidWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getInvalidSync(this.client.getHost(), accept, context);
@@ -449,8 +449,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getEmptyWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(this.client.getHost(), accept, context));
@@ -468,8 +468,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getEmptyWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getEmpty(this.client.getHost(), accept, context);
@@ -513,8 +513,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getEmptyWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getEmptySync(this.client.getHost(), accept, context);
@@ -543,8 +543,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNullWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNull(this.client.getHost(), accept, context));
@@ -563,8 +563,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNullWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNull(this.client.getHost(), accept, context);
@@ -608,8 +608,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getNullWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNullSync(this.client.getHost(), accept, context);
@@ -638,8 +638,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNotProvidedWithResponseAsync() {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getNotProvided(this.client.getHost(), accept, context));
@@ -658,8 +658,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<Basic>> getNotProvidedWithResponseAsync(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNotProvided(this.client.getHost(), accept, context);
@@ -705,8 +705,8 @@ public final class Basics {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Basic> getNotProvidedWithResponse(Context context) {
         if (this.client.getHost() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Parameter this.client.getHost() is required and cannot be null."));
         }
         final String accept = "application/json";
         return service.getNotProvidedSync(this.client.getHost(), accept, context);
