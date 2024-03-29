@@ -1,8 +1,10 @@
 Copy-Item -Path node_modules/@azure-tools/cadl-ranch-specs/http -Destination ./ -Recurse -Force
 
+Remove-Item ./tsp-output -Recurse -Force
+
 tsp compile ./http/type/model/inheritance/single-discriminator/main.tsp
 
-Remove-Item -Path ./src/main/java/com/type/model/inheritance/singlediscriminator/ -Recurse -Force
+Remove-Item -Path ./src/main/java/com/type/model/inheritance/singlediscriminator/ -Recurse -Force -ErrorAction SilentlyContinue
 
 Copy-Item -Path ./tsp-output/src/main/java/com/type/model/inheritance/singlediscriminator/ -Destination ./src/main/java/com/type/model/inheritance/singlediscriminator/ -Recurse -Force -Exclude @("ReadmeSamples.java", "module-info.java")
 

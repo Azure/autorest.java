@@ -1845,7 +1845,9 @@ export class CodeModelBuilder {
         } else if (sdkType.kind === "duration") {
           return this.processDurationSchemaFromSdkType(sdkType as SdkDurationType, nameHint, getDurationFormatFromSdkType(sdkType as SdkDurationType));
         } else if (sdkType.kind === "model") {
-          return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, (sdkType as SdkModelType).name);
+          // TODO: get model property
+          // const sdkModelProperty = (sdkType as SdkModelType).properties.filter(p => p.name === nameHint);
+          return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, nameHint);
         } else {
           const schemaNameHint =
             type.type.kind === "Scalar" && this.program.checker.isStdType(type.type)
