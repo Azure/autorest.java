@@ -10,62 +10,72 @@ import com.azure.autorest.extension.base.model.codemodel.ObjectSchema;
 import com.azure.autorest.extension.base.model.codemodel.Relations;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class SchemaUtilTests {
-    private static ObjectSchema pet = new ObjectSchema();
-    private static ObjectSchema dog = new ObjectSchema();
-    private static ObjectSchema cat = new ObjectSchema();
-    private static ObjectSchema corgi = new ObjectSchema();
+    private static final ObjectSchema PET;
+    private static final ObjectSchema DOG;
+    private static final ObjectSchema CAT;
+    private static final ObjectSchema CORGI;
 
-    @BeforeClass
-    public static void setup() {
-        pet.set$key("pet");
-        pet.setChildren(new Relations());
-        pet.getChildren().setAll(Arrays.asList(dog, cat));
-        pet.getChildren().setImmediate(Arrays.asList(dog, cat));
-        cat.set$key("cat");
-        cat.setParents(new Relations());
-        cat.getParents().setImmediate(Arrays.asList(pet));
-        cat.getParents().setAll(Arrays.asList(pet));
-        dog.set$key("dog");
-        dog.setParents(new Relations());
-        dog.getParents().setImmediate(Arrays.asList(pet));
-        dog.getParents().setAll(Arrays.asList(pet));
-        dog.setChildren(new Relations());
-        dog.getChildren().setAll(Arrays.asList(corgi));
-        dog.getChildren().setImmediate(Arrays.asList(corgi));
-        corgi.set$key("corgi");
-        corgi.setParents(new Relations());
-        corgi.getParents().setImmediate(Arrays.asList(dog));
-        corgi.getParents().setAll(Arrays.asList(pet, dog));
+    static {
+        PET = new ObjectSchema();
+        PET.set$key("pet");
+        PET.setChildren(new Relations());
+        
+        CAT = new ObjectSchema();
+        CAT.set$key("cat");
+        CAT.setParents(new Relations());
+        CAT.getParents().setImmediate(List.of(PET));
+        CAT.getParents().setAll(List.of(PET));
+
+        DOG = new ObjectSchema();
+        DOG.set$key("dog");
+        DOG.setParents(new Relations());
+        DOG.getParents().setImmediate(List.of(PET));
+        DOG.getParents().setAll(List.of(PET));
+        DOG.setChildren(new Relations());
+
+        CORGI = new ObjectSchema();
+        CORGI.set$key("corgi");
+        CORGI.setParents(new Relations());
+
+        PET.getChildren().setAll(Arrays.asList(DOG, CAT));
+        PET.getChildren().setImmediate(Arrays.asList(DOG, CAT));
+
+        DOG.getChildren().setAll(List.of(CORGI));
+        DOG.getChildren().setImmediate(List.of(CORGI));
+
+        CORGI.getParents().setImmediate(List.of(DOG));
+        CORGI.getParents().setAll(List.of(PET, DOG));
     }
 
     @Test
     public void testObjectSchemaFindParent() {
-        Assert.assertEquals(null, SchemaUtil.getLowestCommonParent(Arrays.asList()));
-        Assert.assertEquals(pet, SchemaUtil.getLowestCommonParent(Arrays.asList(pet)));
-        Assert.assertEquals(corgi, SchemaUtil.getLowestCommonParent(Arrays.asList(corgi)));
-        Assert.assertEquals(pet, SchemaUtil.getLowestCommonParent(Arrays.asList(pet, dog)));
-        Assert.assertEquals(pet, SchemaUtil.getLowestCommonParent(Arrays.asList(cat, dog)));
-        Assert.assertEquals(dog, SchemaUtil.getLowestCommonParent(Arrays.asList(dog, corgi)));
-        Assert.assertEquals(pet, SchemaUtil.getLowestCommonParent(Arrays.asList(cat, corgi)));
-        Assert.assertEquals(pet, SchemaUtil.getLowestCommonParent(Arrays.asList(pet, corgi)));
-        Assert.assertEquals(pet, SchemaUtil.getLowestCommonParent(Arrays.asList(cat, dog, corgi)));
+        Assert.assertNull(SchemaUtil.getLowestCommonParent(Collections.emptyIterator()));
+        Assert.assertEquals(PET, SchemaUtil.getLowestCommonParent(List.of(PET)));
+        Assert.assertEquals(CORGI, SchemaUtil.getLowestCommonParent(List.of(CORGI)));
+        Assert.assertEquals(PET, SchemaUtil.getLowestCommonParent(List.of(PET, DOG)));
+        Assert.assertEquals(PET, SchemaUtil.getLowestCommonParent(List.of(CAT, DOG)));
+        Assert.assertEquals(DOG, SchemaUtil.getLowestCommonParent(List.of(DOG, CORGI)));
+        Assert.assertEquals(PET, SchemaUtil.getLowestCommonParent(List.of(CAT, CORGI)));
+        Assert.assertEquals(PET, SchemaUtil.getLowestCommonParent(List.of(PET, CORGI)));
+        Assert.assertEquals(PET, SchemaUtil.getLowestCommonParent(List.of(CAT, DOG, CORGI)));
         ObjectSchema dummy = new ObjectSchema();
         dummy.set$key("dummy");
-        Assert.assertTrue(SchemaUtil.getLowestCommonParent(Arrays.asList(dummy, dog)) instanceof AnySchema);
+        Assert.assertTrue(SchemaUtil.getLowestCommonParent(List.of(dummy, DOG)) instanceof AnySchema);
     }
 
     @Test
     public void testAllSchemaFindParent() {
-        Assert.assertTrue(SchemaUtil.getLowestCommonParent(Arrays.asList(new ArraySchema(), pet)) instanceof AnySchema);
-        Assert.assertTrue(SchemaUtil.getLowestCommonParent(Arrays.asList(new DictionarySchema(), pet)) instanceof AnySchema);
+        Assert.assertTrue(SchemaUtil.getLowestCommonParent(List.of(new ArraySchema(), PET)) instanceof AnySchema);
+        Assert.assertTrue(SchemaUtil.getLowestCommonParent(List.of(new DictionarySchema(), PET)) instanceof AnySchema);
         StringSchema stringSchema = new StringSchema();
-        Assert.assertTrue(SchemaUtil.getLowestCommonParent(Arrays.asList(stringSchema)) instanceof StringSchema);
-        Assert.assertTrue(SchemaUtil.getLowestCommonParent(Arrays.asList(stringSchema, stringSchema)) instanceof StringSchema);
+        Assert.assertTrue(SchemaUtil.getLowestCommonParent(List.of(stringSchema)) instanceof StringSchema);
+        Assert.assertTrue(SchemaUtil.getLowestCommonParent(List.of(stringSchema, stringSchema)) instanceof StringSchema);
     }
 }

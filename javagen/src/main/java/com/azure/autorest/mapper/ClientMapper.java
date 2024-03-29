@@ -489,7 +489,7 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
                 Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
                     .map(Response::getSchema)
                     .filter(Objects::nonNull)
-                        .iterator());
+                    .iterator());
 
                 if (responseBodySchema instanceof ArraySchema) {
                     parseXmlSequenceWrappers((ArraySchema) responseBodySchema, xmlSequenceWrappers, settings);
