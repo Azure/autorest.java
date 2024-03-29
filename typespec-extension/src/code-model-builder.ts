@@ -306,6 +306,8 @@ export class CodeModelBuilder {
         if (isApiVersion(this.sdkContext, it)) {
           parameter = this.createApiVersionParameter(it.name, ParameterLocation.Uri);
         } else {
+          // TODO: change to sdkType
+          getClientType(this.sdkContext, it.type);
           const schema = this.processSchema(it.type, it.name);
           this.trackSchemaUsage(schema, {
             usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
@@ -447,6 +449,7 @@ export class CodeModelBuilder {
         //   throw new Error(errorMsg);
         // }
 
+        // change to sdk type
         const schema = this.processSchema(model, "");
 
         this.trackSchemaUsage(schema, {
@@ -491,6 +494,7 @@ export class CodeModelBuilder {
           if (access === "public") {
             modelAsPublic(model);
           } else if (access === "internal") {
+            // TODO change to sdk type
             const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
@@ -500,6 +504,7 @@ export class CodeModelBuilder {
 
           const usage = getUsage(model);
           if (usage) {
+            // TODO: change to sdk type
             const schema = this.processSchema(model, "");
 
             this.trackSchemaUsage(schema, {
@@ -929,6 +934,7 @@ export class CodeModelBuilder {
           pollingSchema = this.pollResultSchema;
         } else {
           const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
+          // change to sdk type
           pollingSchema = this.processSchema(pollType, "pollResult");
         }
       }
@@ -943,6 +949,7 @@ export class CodeModelBuilder {
       ) {
         const finalResult = useNewPollStrategy ? lroMetadata.finalResult : lroMetadata.finalEnvelopeResult;
         const finalType = this.findResponseBody(finalResult);
+        // change to sdk type
         finalSchema = this.processSchema(finalType, "finalResult");
       }
 
@@ -1043,6 +1050,7 @@ export class CodeModelBuilder {
         // utcDateTime in header maps to rfc7231
         schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
       } else {
+        // change to sdk type
         schema = this.processSchema(param.param, param.param.name);
       }
 
@@ -1357,6 +1365,7 @@ export class CodeModelBuilder {
       // handle binary request body
       schema = this.processBinarySchema(body.type);
     } else {
+      // change to sdk type
       schema = this.processSchema(body, body.name);
     }
     const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
@@ -1536,6 +1545,8 @@ export class CodeModelBuilder {
       for (const response of resp.responses.values()) {
         if (response.headers) {
           for (const [key, header] of Object.entries(response.headers)) {
+            // TODO: change to sdk type
+            getClientType(this.sdkContext, header);
             const schema = this.processSchema(header, key);
             headers.push(
               new HttpHeader(key, schema, {
