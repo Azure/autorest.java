@@ -64,7 +64,10 @@ $generateScript = {
   $tspTrace = "--trace import-resolution --trace projection --trace typespec-java"
   $tspCommand = "npx tsp compile $tspFile $tspOptions $tspTrace"
 
+  $timer = [Diagnostics.Stopwatch]::StartNew()
   $generateOutput = Invoke-Expression $tspCommand
+  $timer.Stop()
+
   $global:ExitCode = $global:ExitCode -bor $LASTEXITCODE
 
   if ($LASTEXITCODE -ne 0) {
@@ -72,6 +75,7 @@ $generateScript = {
   ========================
   $tspCommand
   ========================
+  FAILED (Time elapsed: $($timer.ToString()))
   $([String]::Join("`n", $generateOutput))
     "
   } else {
@@ -79,7 +83,7 @@ $generateScript = {
   ========================
   $tspCommand
   ========================
-  SUCCEEDED
+  SUCCEEDED (Time elapsed: $($timer.ToString()))
     "
   }
 

@@ -556,7 +556,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         if (operation.getExtensions() != null && operation.getExtensions().getXmsPageable() != null) {
             // Mono<SimpleResponse<Page>>
             Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
-                .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+                .map(Response::getSchema).filter(Objects::nonNull).iterator());
             if (!(responseBodySchema instanceof ObjectSchema)) {
                 throw new IllegalArgumentException(String.format("[JavaCheck/SchemaError] no common parent found for client models %s",
                     operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull)

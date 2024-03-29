@@ -118,14 +118,10 @@ public class Postprocessor {
             handlePartialUpdate(javaFiles, plugin, logger);
         }
 
-        if (!settings.isSkipFormatting()) {
-            try {
-                CodeFormatterUtil.formatCode(javaFiles, plugin);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        } else {
-            javaFiles.forEach((fileName, content) -> plugin.writeFile(fileName, content, null));
+        try {
+            CodeFormatterUtil.formatCode(javaFiles, plugin);
+        } catch (Exception ex) {
+            throw new RuntimeException(ex);
         }
     }
 

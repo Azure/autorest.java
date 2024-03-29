@@ -2,6 +2,9 @@ variables:
   JavaVersion: '1.11'
   NodeVersion: '18.x'
 
+  # Sets the Maven log level to either the LogLevel passed in the manual pipeline run or the default 'warn'
+  MavenLogLevel: $[coalesce(variables['LogLevel'], 'warn')]
+
   # Maven build/test options
   MAVEN_CACHE_FOLDER: $(Pipeline.Workspace)/.m2/repository
   # See https://github.com/actions/virtual-environments/issues/1499 for more info about the wagon options
