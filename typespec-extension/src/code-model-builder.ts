@@ -1909,99 +1909,6 @@ export class CodeModelBuilder {
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
 
-  private processScalar(type: Scalar, formatFromDerived: string | undefined, nameHint: string): Schema {
-    const scalarName = type.name;
-    if (this.program.checker.isStdType(type)) {
-      nameHint = scalarName;
-      switch (scalarName) {
-        case "string": {
-          const format = formatFromDerived ?? getFormat(this.program, type);
-          if (format) {
-            return this.processFormatString(type, format, nameHint);
-          }
-          return this.processStringSchema(type, nameHint);
-        }
-
-        case "bytes":
-          return this.processByteArraySchema(type, nameHint, false);
-
-        case "boolean":
-          return this.processBooleanSchema(type, nameHint);
-
-        case "plainTime":
-          return this.processTimeSchema(type, nameHint);
-
-        case "plainDate":
-          return this.processDateSchema(type, nameHint);
-
-        case "utcDateTime":
-        case "offsetDateTime":
-          return this.processDateTimeSchema(type, nameHint, false);
-
-        case "duration":
-          return this.processDurationSchema(type, nameHint);
-
-        case "url":
-          return this.processUrlSchema(type, nameHint);
-      }
-
-      if (scalarName.startsWith("decimal")) {
-        // decimal
-        return this.processDecimalSchema(type, nameHint);
-      } else if (scalarName.startsWith("int") || scalarName.startsWith("uint") || scalarName === "safeint") {
-        // integer
-        const integerSize = scalarName === "safeint" || scalarName.includes("int64") ? 64 : 32;
-        return this.processIntegerSchema(type, nameHint, integerSize);
-      } else if (scalarName.startsWith("float")) {
-        // float point
-        return this.processNumberSchema(type, nameHint);
-      } else {
-        throw new Error(`Unrecognized scalar type: '${scalarName}'.`);
-      }
-    } else {
-      const knownValues = getKnownValues(this.program, type as Scalar);
-      if (knownValues) {
-        // use it for extensible enum
-        return this.processChoiceSchema(knownValues, this.getName(type), false);
-      } else {
-        const encode = getEncode(this.program, type);
-        if (encode) {
-          // process as encode
-          if (encode.encoding === "seconds" && hasScalarAsBase(type, "duration")) {
-            return this.processDurationSchema(type, nameHint, getDurationFormat(encode));
-          } else if (
-            (encode.encoding === "rfc3339" || encode.encoding === "rfc7231" || encode.encoding === "unixTimestamp") &&
-            (hasScalarAsBase(type, "utcDateTime") || hasScalarAsBase(type, "offsetDateTime"))
-          ) {
-            if (encode.encoding === "unixTimestamp") {
-              return this.processUnixTimeSchema(type, nameHint);
-            } else {
-              return this.processDateTimeSchema(type, nameHint, encode.encoding === "rfc7231");
-            }
-          } else if (encode.encoding === "base64url" && hasScalarAsBase(type, "bytes")) {
-            return this.processByteArraySchema(type, nameHint, true);
-          }
-        }
-
-        if (type.baseScalar) {
-          // fallback to baseScalar
-          const schema = this.processScalar(type.baseScalar, getFormat(this.program, type), nameHint);
-          const doc = getDoc(this.program, type);
-          const summary = getSummary(this.program, type);
-          if (doc) {
-            schema.language.default.description = doc;
-          }
-          if (summary) {
-            schema.summary = summary;
-          }
-          return schema;
-        } else {
-          throw new Error(`Unrecognized scalar type: '${scalarName}'.`);
-        }
-      }
-    }
-  }
-
   private processBuiltInFromSdkType(type: SdkBuiltInType, nameHint: string): Schema {
     switch (type.kind) {
       case "string": 
@@ -2059,10 +1966,6 @@ export class CodeModelBuilder {
     throw new Error(`Unrecognized builtin type: '${type.kind}'.`);
   }
 
-  private processAnySchema(type: Type, name: string): AnySchema {
-    return this.anySchema;
-  }
-
   private processAnySchemaFromSdkType(type: SdkType, name: string): AnySchema {
     return this.anySchema;
   }
@@ -2102,26 +2005,10 @@ export class CodeModelBuilder {
     );
   }
 
-  private processIntegerSchema(type: Scalar, name: string, precision: number): NumberSchema {
-    return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type), SchemaType.Integer, precision, {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
-
   private processIntegerSchemaFromSdkType(type: SdkBuiltInType, name: string, precision: number): NumberSchema {
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type.__raw as Scalar), SchemaType.Integer, precision, {
         summary: this.getSummary(type.__raw as Scalar),
-      }),
-    );
-  }
-
-  private processNumberSchema(type: Scalar, name: string): NumberSchema {
-    return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type), SchemaType.Number, 64, {
-        summary: this.getSummary(type),
       }),
     );
   }
@@ -2134,28 +2021,12 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDecimalSchema(type: Scalar, name: string): NumberSchema {
-    // "Infinity" maps to "BigDecimal" in Java
-    return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type), SchemaType.Number, Infinity, {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
 
   private processDecimalSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     // "Infinity" maps to "BigDecimal" in Java
     return this.codeModel.schemas.add(
       new NumberSchema(name, this.getDoc(type.__raw as Scalar), SchemaType.Number, Infinity, {
         summary: this.getSummary(type.__raw as Scalar),
-      }),
-    );
-  }
-
-  private processBooleanSchema(type: Scalar, name: string): BooleanSchema {
-    return this.codeModel.schemas.add(
-      new BooleanSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
       }),
     );
   }
@@ -2168,15 +2039,6 @@ export class CodeModelBuilder {
     );
   }
 
-  private processArraySchema(type: ArrayModelType, name: string): ArraySchema {
-    const elementSchema = this.processSchema(type.indexer.value, name);
-    return this.codeModel.schemas.add(
-      new ArraySchema(name, this.getDoc(type), elementSchema, {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
-
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
     const elementSchema = this.processSchema(type.valueType.__raw as Type, name);
     return this.codeModel.schemas.add(
@@ -2184,25 +2046,6 @@ export class CodeModelBuilder {
         summary: this.getSummary(type.__raw as Type),
       }),
     );
-  }
-
-  private processDictionarySchema(type: RecordModelType, name: string): DictionarySchema {
-    const dictSchema = new DictionarySchema<any>(name, this.getDoc(type), null, {
-      summary: this.getSummary(type),
-    });
-
-    // cache this now before we accidentally recurse on this type.
-    this.schemaCache.set(type, dictSchema);
-
-    const elementSchema = this.processSchema(type.indexer.value, name);
-    dictSchema.elementType = elementSchema;
-
-    if (type.indexer.value.kind === "Union") {
-      dictSchema.nullableItems =
-        Array.from(type.indexer.value.variants.values()).findIndex((it) => isNullType(it.type)) >= 0;
-    }
-
-    return this.codeModel.schemas.add(dictSchema);
   }
 
   private processDictionarySchemaFromSdkType(type: SdkDictionaryType, name: string): DictionarySchema {
@@ -2219,41 +2062,6 @@ export class CodeModelBuilder {
     dictSchema.nullableItems = type.valueType.nullable;
 
     return this.codeModel.schemas.add(dictSchema);
-  }
-
-  private processChoiceSchema(
-    type: Enum,
-    name: string,
-    sealed: boolean,
-  ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
-    const namespace = getNamespace(type);
-    const valueType =
-      typeof type.members.values().next().value.value === "number"
-        ? isAllValueInteger(Array.from(type.members.values()).map((it) => it.value as number))
-          ? this.integerSchema
-          : this.doubleSchema
-        : this.stringSchema;
-
-    const choices: ChoiceValue[] = [];
-    type.members.forEach((it) => choices.push(new ChoiceValue(it.name, this.getDoc(it), it.value ?? it.name)));
-
-    const schemaType = sealed ? SealedChoiceSchema : ChoiceSchema;
-
-    const schema = new schemaType(name, this.getDoc(type), {
-      summary: this.getSummary(type),
-      choiceType: valueType as any,
-      choices: choices,
-      language: {
-        default: {
-          namespace: namespace,
-        },
-        java: {
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-    });
-    schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
-    return this.codeModel.schemas.add(schema);
   }
 
   private processChoiceSchemaFromSdkType(
@@ -2289,28 +2097,6 @@ export class CodeModelBuilder {
     });
     schema.crossLanguageDefinitionId = type.crossLanguageDefinitionId;
     return this.codeModel.schemas.add(schema);
-  }
-
-  private processConstantSchemaForLiteral(
-    type: StringLiteral | NumericLiteral | BooleanLiteral,
-    name: string,
-  ): ConstantSchema {
-    const valueType =
-      type.kind === "String"
-        ? this.stringSchema
-        : type.kind === "Boolean"
-          ? this.booleanSchema
-          : isAllValueInteger([type.value])
-            ? this.integerSchema
-            : this.doubleSchema;
-
-    return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        valueType: valueType,
-        value: new ConstantValue(type.value),
-      }),
-    );
   }
 
   private processConstantSchemaFromSdkType(type: SdkConstantType, name: string): ConstantSchema {
@@ -2358,56 +2144,6 @@ export class CodeModelBuilder {
     );
   }
 
-  private processChoiceSchemaForUnion(
-    type: Union,
-    unionEnum: UnionEnum,
-    name: string,
-  ): ChoiceSchema | SealedChoiceSchema {
-    // variants is Literal
-
-    const sealed = !unionEnum.open;
-
-    const variants = [...unionEnum.flattenedMembers.values()];
-    const kindIsString = typeof variants[0].value === "string";
-    const valueType = kindIsString
-      ? this.stringSchema
-      : isAllValueInteger(variants.map((it) => it.value as number))
-        ? this.integerSchema
-        : this.doubleSchema;
-
-    const choices: ChoiceValue[] = [];
-    for (const [name, member] of unionEnum.flattenedMembers.entries()) {
-      // get name from "UnionVariant | EnumMember"
-      let valueName = this.getName(member.type);
-      const valueDoc = this.getDoc(member.type);
-      if (!valueName) {
-        // fallback the name to the dict
-        valueName = typeof name === "string" ? name : `${member.value}`;
-      }
-      // TODO: may need to use getWireName on "member.value"
-      choices.push(new ChoiceValue(valueName, valueDoc, member.value));
-    }
-
-    const namespace = getNamespace(type);
-
-    const schemaType = sealed ? SealedChoiceSchema : ChoiceSchema;
-    const schema = new schemaType(name, this.getDoc(type), {
-      summary: this.getSummary(type),
-      choiceType: valueType as any,
-      choices: choices,
-      language: {
-        default: {
-          namespace: namespace,
-        },
-        java: {
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-    });
-    schema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type as Union & { name: string });
-    return this.codeModel.schemas.add(schema);
-  }
-
   private processUnixTimeSchema(type: Scalar, name: string): UnixTimeSchema {
     return this.codeModel.schemas.add(
       new UnixTimeSchema(name, this.getDoc(type), {
@@ -2442,26 +2178,10 @@ export class CodeModelBuilder {
     );
   }
 
-  private processDateSchema(type: Scalar, name: string): DateSchema {
-    return this.codeModel.schemas.add(
-      new DateSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
-
   private processDateSchemaFromSdkType(type: SdkBuiltInType, name: string): DateSchema {
     return this.codeModel.schemas.add(
       new DateSchema(name, this.getDoc(type.__raw as Scalar), {
         summary: this.getSummary(type.__raw as Scalar),
-      }),
-    );
-  }
-
-  private processTimeSchema(type: Scalar, name: string): TimeSchema {
-    return this.codeModel.schemas.add(
-      new TimeSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
       }),
     );
   }
@@ -2500,192 +2220,12 @@ export class CodeModelBuilder {
     );
   }
 
-  private processUrlSchema(type: Scalar, name: string): UriSchema {
-    return this.codeModel.schemas.add(
-      new UriSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
-
   private processUrlSchemaFromSdkType(type: SdkBuiltInType, name: string): UriSchema {
     return this.codeModel.schemas.add(
       new UriSchema(name, this.getDoc(type.__raw as Scalar), {
         summary: this.getSummary(type.__raw as Scalar),
       }),
     );
-  }
-
-  private processObjectSchema(type: Model, name: string): ObjectSchema {
-    const namespace = getNamespace(type);
-    if (
-      (this.isArm() &&
-        namespace?.startsWith("Azure.ResourceManager") &&
-        // there's ResourceListResult under Azure.ResourceManager namespace,
-        // which shouldn't be considered Resource schema parent
-        (name?.startsWith("TrackedResource") ||
-          name?.startsWith("ExtensionResource") ||
-          name?.startsWith("ProxyResource"))) ||
-      name === "ArmResource"
-    ) {
-      const objectSchema = this.dummyResourceSchema(type, name, namespace);
-      this.codeModel.schemas.add(objectSchema);
-
-      return objectSchema;
-    }
-    const objectSchema = new ObjectScheme(name, this.getDoc(type), {
-      summary: this.getSummary(type),
-      language: {
-        default: {
-          namespace: namespace,
-        },
-        java: {
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-    });
-    objectSchema.crossLanguageDefinitionId = getCrossLanguageDefinitionId(type);
-    this.codeModel.schemas.add(objectSchema);
-
-    // cache this now before we accidentally recurse on this type.
-    this.schemaCache.set(type, objectSchema);
-
-    // discriminator
-    let discriminatorPropertyName: string | undefined = undefined;
-    type discriminatorTypeWithPropertyName = Partial<Discriminator> & { propertyName: string };
-    const discriminator = getDiscriminator(this.program, type);
-    if (discriminator) {
-      discriminatorPropertyName = discriminator.propertyName;
-      // find the discriminator property from model
-      // the property is required for getting its serializedName
-      let discriminatorProperty = Array.from(type.properties.values()).find(
-        (it) => it.name === discriminatorPropertyName,
-      );
-      if (!discriminatorProperty) {
-        // try find the discriminator property from any of its derived models
-        for (const deriveModel of type.derivedModels) {
-          discriminatorProperty = Array.from(deriveModel.properties.values()).find(
-            (it) => it.name === discriminatorPropertyName,
-          );
-          if (discriminatorProperty) {
-            // found
-            break;
-          }
-        }
-      }
-      if (discriminatorProperty) {
-        objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
-        objectSchema.discriminator.property.isDiscriminator = true;
-      } else {
-        // fallback to property name, if cannot find the discriminator property
-        objectSchema.discriminator = new Discriminator(
-          new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
-            isDiscriminator: true,
-            required: true,
-            serializedName: discriminatorPropertyName,
-          }),
-        );
-      }
-      (objectSchema.discriminator as discriminatorTypeWithPropertyName).propertyName = discriminatorPropertyName;
-    }
-
-    // parent
-    if (type.baseModel) {
-      const parentSchema = this.processSchema(type.baseModel, this.getName(type.baseModel));
-      objectSchema.parents = new Relations();
-      objectSchema.parents.immediate.push(parentSchema);
-
-      if (parentSchema instanceof ObjectSchema) {
-        pushDistinct(objectSchema.parents.all, parentSchema);
-
-        parentSchema.children = parentSchema.children || new Relations();
-        pushDistinct(parentSchema.children.immediate, objectSchema);
-        pushDistinct(parentSchema.children.all, objectSchema);
-
-        if (parentSchema.parents) {
-          pushDistinct(objectSchema.parents.all, ...parentSchema.parents.all);
-
-          parentSchema.parents.all.forEach((it) => {
-            if (it instanceof ObjectSchema && it.children) {
-              pushDistinct(it.children.all, objectSchema);
-            }
-          });
-        }
-      } else {
-        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
-        pushDistinct(objectSchema.parents.all, parentSchema);
-      }
-    } else if (isRecordModelType(this.program, type)) {
-      // "pure" Record processed elsewhere
-
-      // "mixed" Record that have properties, treat the model as "additionalProperties"
-      /* type should have sourceModel, as
-      model Type is Record<> {
-        prop1: string
-      }
-      */
-      const parentSchema = type.sourceModel
-        ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
-        : this.processDictionarySchema(type, this.getName(type));
-      objectSchema.parents = new Relations();
-      objectSchema.parents.immediate.push(parentSchema);
-      pushDistinct(objectSchema.parents.all, parentSchema);
-    }
-
-    // value of the discriminator property
-    if (objectSchema.parents) {
-      const parentWithDiscriminator = objectSchema.parents.all.find(
-        (it) => it instanceof ObjectSchema && it.discriminator,
-      );
-      if (parentWithDiscriminator) {
-        discriminatorPropertyName = (
-          (parentWithDiscriminator as ObjectSchema).discriminator as discriminatorTypeWithPropertyName
-        ).propertyName;
-
-        const discriminatorProperty = Array.from(type.properties.values()).find(
-          (it) =>
-            it.name === discriminatorPropertyName &&
-            (it.type.kind === "String" || it.type.kind === "EnumMember" || it.type.kind === "UnionVariant"),
-        );
-        if (discriminatorProperty) {
-          if (discriminatorProperty.type.kind === "String") {
-            // value as StringLiteral
-            objectSchema.discriminatorValue = discriminatorProperty.type.value;
-          } else if (discriminatorProperty.type.kind === "EnumMember") {
-            // value as EnumMember
-            // lint requires value be string
-            objectSchema.discriminatorValue =
-              (discriminatorProperty.type.value as string) ?? discriminatorProperty.type.name;
-          } else if (discriminatorProperty.type.kind === "UnionVariant") {
-            // value as UnionVariant
-            objectSchema.discriminatorValue =
-              ((discriminatorProperty.type.type as StringLiteral).value as string) ?? discriminatorProperty.type.name;
-          }
-        } else {
-          // it is possible that the property is Union, e.g. 'kind: "type1" | "type2"'; but such Type appears not to be a concrete model.
-
-          // fallback to name of the Model
-          objectSchema.discriminatorValue = name;
-        }
-      }
-    }
-
-    // properties
-    for (const prop of type.properties.values()) {
-      if (
-        prop.name === discriminatorPropertyName || // skip the discriminator property
-        isNeverType(prop.type) || // skip property of type "never"
-        !isPayloadProperty(this.program, prop)
-      ) {
-        continue;
-      }
-      objectSchema.addProperty(this.processModelProperty(prop));
-    }
-
-    // process all children
-    type.derivedModels?.filter(modelContainsDerivedModel).forEach((it) => this.processSchema(it, this.getName(it)));
-
-    return objectSchema;
   }
 
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
@@ -2700,7 +2240,7 @@ export class CodeModelBuilder {
           name?.startsWith("ProxyResource"))) ||
       name === "ArmResource"
     ) {
-      const objectSchema = this.dummyResourceSchema(type.__raw as Model, name, namespace);
+      const objectSchema = this.dummyResourceSchemaFromSdkType(type, name, namespace);
       this.codeModel.schemas.add(objectSchema);
 
       return objectSchema;
@@ -2830,12 +2370,12 @@ export class CodeModelBuilder {
     return type;
   }
 
-  private dummyResourceSchema(type: Model, name?: string, namespace?: string): ObjectSchema {
+  private dummyResourceSchemaFromSdkType(type: SdkModelType, name?: string, namespace?: string): ObjectSchema {
     const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
-    const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
-    const declaredProperties = walkPropertiesInherited(type);
+    const resource = this.dummyObjectSchemaFromSdkType(type, resourceModelName, namespace);
+    const declaredProperties = type.properties;
     for (const prop of declaredProperties) {
-      resource.addProperty(this.processModelProperty(prop));
+      resource.addProperty(this.processModelPropertyFromSdkType(prop));
     }
     return resource;
   }
@@ -2843,6 +2383,22 @@ export class CodeModelBuilder {
   private dummyObjectSchema(type: Model, name: string, namespace?: string): ObjectSchema {
     return new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
+      language: {
+        default: {
+          name: name,
+          namespace: namespace,
+        },
+        java: {
+          name: name,
+          namespace: getJavaNamespace(namespace),
+        },
+      },
+    });
+  }
+
+  private dummyObjectSchemaFromSdkType(type: SdkModelType, name: string, namespace?: string): ObjectSchema {
+    return new ObjectScheme(name, this.getDoc(type.__raw as Model), {
+      summary: this.getSummary(type.__raw as Model),
       language: {
         default: {
           name: name,
@@ -2920,33 +2476,6 @@ export class CodeModelBuilder {
     return schema;
   }
 
-  private processModelProperty(prop: ModelProperty): Property {
-    const schema = this.processSchema(prop, prop.name);
-    let nullable = isNullableType(prop.type);
-
-    let extensions: Record<string, any> | undefined = undefined;
-    if (this.isSecret(prop)) {
-      extensions = extensions ?? {};
-      extensions["x-ms-secret"] = true;
-      // if the property does not return in response, it had to be nullable
-      nullable = true;
-    }
-    if (shouldFlattenProperty(this.sdkContext, prop)) {
-      extensions = extensions ?? {};
-      extensions["x-ms-client-flatten"] = true;
-    }
-
-    return new Property(this.getName(prop), this.getDoc(prop), schema, {
-      summary: this.getSummary(prop),
-      required: !prop.optional,
-      nullable: nullable,
-      readOnly: this.isReadOnly(prop),
-      // clientDefaultValue: this.getDefaultValue(prop.default),
-      serializedName: this.getSerializedName(prop),
-      extensions: extensions,
-    });
-  }
-
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
     const schema = this.processSchema(prop.type.__raw as ModelProperty, prop.name);
     let nullable = prop.type.nullable;
@@ -2993,61 +2522,6 @@ export class CodeModelBuilder {
         this.logWarning(`Unrecognized string format: '${format}'.`);
         return this.processStringSchema(type, nameHint);
     }
-  }
-
-  private processUnionSchema(type: Union, name: string): Schema {
-    const nonNullVariants = Array.from(type.variants.values()).filter((it) => !isNullType(it.type));
-    if (nonNullVariants.length === 1) {
-      // nullable
-      return this.processSchema(nonNullVariants[0].type, name);
-    }
-
-    const unionEnum = ignoreDiagnostics(getUnionAsEnum(type));
-    if (unionEnum) {
-      // enum
-      return this.processChoiceSchemaForUnion(type, unionEnum, name);
-    }
-
-    // TODO: name from typespec-client-generator-core
-    const namespace = getNamespace(type);
-    const baseName = pascalCase(name) + "Model";
-    this.logWarning(
-      `Convert TypeSpec Union '${getUnionDescription(type, this.typeNameOptions)}' to Class '${baseName}'`,
-    );
-    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type), {
-      summary: this.getSummary(type),
-    });
-    unionSchema.anyOf = [];
-    nonNullVariants.forEach((it) => {
-      const variantName = this.getUnionVariantName(it.type, { depth: 0 });
-      const modelName = variantName + baseName;
-      const propertyName = "value";
-
-      // these ObjectSchema is not added to codeModel.schemas
-      const objectSchema = new ObjectSchema(modelName, this.getDoc(type), {
-        summary: this.getSummary(type),
-        language: {
-          default: {
-            namespace: namespace,
-          },
-          java: {
-            namespace: getJavaNamespace(namespace),
-          },
-        },
-      });
-
-      const variantSchema = this.processSchema(it.type, variantName);
-      objectSchema.addProperty(
-        new Property(propertyName, this.getDoc(type), variantSchema, {
-          summary: this.getSummary(type),
-          required: true,
-          nullable: true,
-          readOnly: false,
-        }),
-      );
-      unionSchema.anyOf.push(objectSchema);
-    });
-    return this.codeModel.schemas.add(unionSchema);
   }
 
   private processUnionSchemaFromSdkType(type: SdkUnionType, name: string): Schema {
