@@ -40,7 +40,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
      * The status of the todo item
      */
     @Generated
-    private final Status status;
+    private final SendLongRequestStatus status;
 
     /*
      * When the todo item was created.
@@ -73,7 +73,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
      * @param status the status value to set.
      */
     @Generated
-    private TodoItem(String title, Status status) {
+    private TodoItem(String title, SendLongRequestStatus status) {
         this.title = title;
         this.status = status;
     }
@@ -114,7 +114,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
      * @return the status value.
      */
     @Generated
-    public Status getStatus() {
+    public SendLongRequestStatus getStatus() {
         return this.status;
     }
 
@@ -185,7 +185,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
         return jsonReader.readObject(reader -> {
             long id = 0L;
             String title = null;
-            Status status = null;
+            SendLongRequestStatus status = null;
             OffsetDateTime createdAt = null;
             OffsetDateTime updatedAt = null;
             String description = null;
@@ -200,7 +200,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
                 } else if ("title".equals(fieldName)) {
                     title = reader.getString();
                 } else if ("status".equals(fieldName)) {
-                    status = Status.fromString(reader.getString());
+                    status = SendLongRequestStatus.fromString(reader.getString());
                 } else if ("createdAt".equals(fieldName)) {
                     createdAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("updatedAt".equals(fieldName)) {

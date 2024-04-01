@@ -13,15 +13,15 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The model extends from Record&lt;ModelForRecord&gt; type.
+ * The model is from Record&lt;ModelForRecord[]&gt; type.
  */
 @Immutable
-public final class ExtendsModelAdditionalProperties implements JsonSerializable<ExtendsModelAdditionalProperties> {
+public final class IsModelArrayAdditionalProperties implements JsonSerializable<IsModelArrayAdditionalProperties> {
     /**
-     * Creates an instance of ExtendsModelAdditionalProperties class.
+     * Creates an instance of IsModelArrayAdditionalProperties class.
      */
     @Generated
-    public ExtendsModelAdditionalProperties() {
+    public IsModelArrayAdditionalProperties() {
     }
 
     /**
@@ -35,17 +35,17 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Reads an instance of ExtendsModelAdditionalProperties from the JsonReader.
+     * Reads an instance of IsModelArrayAdditionalProperties from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ExtendsModelAdditionalProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the ExtendsModelAdditionalProperties.
+     * @return An instance of IsModelArrayAdditionalProperties if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IOException If an error occurs while reading the IsModelArrayAdditionalProperties.
      */
     @Generated
-    public static ExtendsModelAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
+    public static IsModelArrayAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            ExtendsModelAdditionalProperties deserializedExtendsModelAdditionalProperties
-                = new ExtendsModelAdditionalProperties();
+            IsModelArrayAdditionalProperties deserializedIsModelArrayAdditionalProperties
+                = new IsModelArrayAdditionalProperties();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -53,7 +53,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
                 reader.skipChildren();
             }
 
-            return deserializedExtendsModelAdditionalProperties;
+            return deserializedIsModelArrayAdditionalProperties;
         });
     }
 }

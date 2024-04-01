@@ -42,9 +42,6 @@ public final class ExtendsFloatClient {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -67,9 +64,6 @@ public final class ExtendsFloatClient {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 

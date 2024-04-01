@@ -42,9 +42,6 @@ public final class ExtendsUnknownClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -67,9 +64,6 @@ public final class ExtendsUnknownClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
      * }
      * }</pre>
      * 

@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * The model extends from a type that extends from Record&lt;unknown&gt;.
@@ -84,11 +82,6 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
         jsonWriter.writeStringField("name", getName());
         jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeNumberField("age", this.age);
-        if (getAdditionalProperties() != null) {
-            for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
         return jsonWriter.writeEndObject();
     }
 
@@ -106,7 +99,6 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
             String name = null;
             int index = 0;
             Double age = null;
-            Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -118,17 +110,12 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getDouble);
                 } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.readUntyped());
+                    reader.skipChildren();
                 }
             }
             ExtendsUnknownAdditionalPropertiesDerived deserializedExtendsUnknownAdditionalPropertiesDerived
                 = new ExtendsUnknownAdditionalPropertiesDerived(name, index);
             deserializedExtendsUnknownAdditionalPropertiesDerived.age = age;
-            deserializedExtendsUnknownAdditionalPropertiesDerived.setAdditionalProperties(additionalProperties);
 
             return deserializedExtendsUnknownAdditionalPropertiesDerived;
         });

@@ -13,23 +13,23 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The GetResponse3 model.
+ * The SendRequest8 model.
  */
 @Immutable
-public final class GetResponse3 implements JsonSerializable<GetResponse3> {
+public final class SendRequest8 implements JsonSerializable<SendRequest8> {
     /*
      * The prop property.
      */
     @Generated
-    private final Prop2 prop;
+    private final GetResponseProp5 prop;
 
     /**
-     * Creates an instance of GetResponse3 class.
+     * Creates an instance of SendRequest8 class.
      * 
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse3(Prop2 prop) {
+    public SendRequest8(GetResponseProp5 prop) {
         this.prop = prop;
     }
 
@@ -39,7 +39,7 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
      * @return the prop value.
      */
     @Generated
-    public Prop2 getProp() {
+    public GetResponseProp5 getProp() {
         return this.prop;
     }
 
@@ -50,33 +50,33 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("prop", this.prop == null ? null : this.prop.toLong());
+        jsonWriter.writeStringField("prop", this.prop == null ? null : this.prop.toString());
         return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of GetResponse3 from the JsonReader.
+     * Reads an instance of SendRequest8 from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of GetResponse3 if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of SendRequest8 if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the GetResponse3.
+     * @throws IOException If an error occurs while reading the SendRequest8.
      */
     @Generated
-    public static GetResponse3 fromJson(JsonReader jsonReader) throws IOException {
+    public static SendRequest8 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Prop2 prop = null;
+            GetResponseProp5 prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = Prop2.fromLong(reader.getLong());
+                    prop = GetResponseProp5.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new GetResponse3(prop);
+            return new SendRequest8(prop);
         });
     }
 }

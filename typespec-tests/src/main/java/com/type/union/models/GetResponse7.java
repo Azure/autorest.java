@@ -21,7 +21,7 @@ public final class GetResponse7 implements JsonSerializable<GetResponse7> {
      * The prop property.
      */
     @Generated
-    private final StringAndArrayCases prop;
+    private final StringExtensibleNamedUnion prop;
 
     /**
      * Creates an instance of GetResponse7 class.
@@ -29,7 +29,7 @@ public final class GetResponse7 implements JsonSerializable<GetResponse7> {
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse7(StringAndArrayCases prop) {
+    private GetResponse7(StringExtensibleNamedUnion prop) {
         this.prop = prop;
     }
 
@@ -39,7 +39,7 @@ public final class GetResponse7 implements JsonSerializable<GetResponse7> {
      * @return the prop value.
      */
     @Generated
-    public StringAndArrayCases getProp() {
+    public StringExtensibleNamedUnion getProp() {
         return this.prop;
     }
 
@@ -50,7 +50,7 @@ public final class GetResponse7 implements JsonSerializable<GetResponse7> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeJsonField("prop", this.prop);
+        jsonWriter.writeStringField("prop", this.prop == null ? null : this.prop.toString());
         return jsonWriter.writeEndObject();
     }
 
@@ -65,13 +65,13 @@ public final class GetResponse7 implements JsonSerializable<GetResponse7> {
     @Generated
     public static GetResponse7 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            StringAndArrayCases prop = null;
+            StringExtensibleNamedUnion prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = StringAndArrayCases.fromJson(reader);
+                    prop = StringExtensibleNamedUnion.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

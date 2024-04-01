@@ -19,6 +19,12 @@ import java.io.IOException;
 @Immutable
 public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
     /*
+     * The content-type property.
+     */
+    @Generated
+    private final String contentType = "application/json";
+
+    /*
      * The content property.
      */
     @Generated
@@ -32,6 +38,16 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
     @Generated
     private PngImageAsJson(byte[] content) {
         this.content = content;
+    }
+
+    /**
+     * Get the contentType property: The content-type property.
+     * 
+     * @return the contentType value.
+     */
+    @Generated
+    public String getContentType() {
+        return this.contentType;
     }
 
     /**
@@ -51,6 +67,7 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("content-type", this.contentType);
         jsonWriter.writeBinaryField("content", this.content);
         return jsonWriter.writeEndObject();
     }

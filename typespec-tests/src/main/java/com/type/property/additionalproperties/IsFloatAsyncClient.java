@@ -44,9 +44,6 @@ public final class IsFloatAsyncClient {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -69,9 +66,6 @@ public final class IsFloatAsyncClient {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 

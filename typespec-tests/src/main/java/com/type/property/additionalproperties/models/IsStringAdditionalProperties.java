@@ -4,32 +4,24 @@
 
 package com.type.property.additionalproperties.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * The model is from Record&lt;string&gt; type.
  */
-@Fluent
+@Immutable
 public final class IsStringAdditionalProperties implements JsonSerializable<IsStringAdditionalProperties> {
     /*
      * The name property
      */
     @Generated
     private final String name;
-
-    /*
-     * Additional properties
-     */
-    @Generated
-    private Map<String, String> additionalProperties;
 
     /**
      * Creates an instance of IsStringAdditionalProperties class.
@@ -52,28 +44,6 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     }
 
     /**
-     * Get the additionalProperties property: Additional properties.
-     * 
-     * @return the additionalProperties value.
-     */
-    @Generated
-    public Map<String, String> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    /**
-     * Set the additionalProperties property: Additional properties.
-     * 
-     * @param additionalProperties the additionalProperties value to set.
-     * @return the IsStringAdditionalProperties object itself.
-     */
-    @Generated
-    public IsStringAdditionalProperties setAdditionalProperties(Map<String, String> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated
@@ -81,11 +51,6 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, String> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
         return jsonWriter.writeEndObject();
     }
 
@@ -101,7 +66,6 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     public static IsStringAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
-            Map<String, String> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -109,18 +73,10 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
                 } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.getString());
+                    reader.skipChildren();
                 }
             }
-            IsStringAdditionalProperties deserializedIsStringAdditionalProperties
-                = new IsStringAdditionalProperties(name);
-            deserializedIsStringAdditionalProperties.additionalProperties = additionalProperties;
-
-            return deserializedIsStringAdditionalProperties;
+            return new IsStringAdditionalProperties(name);
         });
     }
 }

@@ -17,7 +17,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.parameters.spread.implementation.AliasImpl;
-import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
 import com.parameters.spread.implementation.models.SpreadAsRequestParameterRequest;
 import com.parameters.spread.implementation.models.SpreadWithMultipleParametersRequest;
 import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
@@ -50,7 +49,7 @@ public final class AliasAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param  The  parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -60,8 +59,8 @@ public final class AliasAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.spreadAsRequestBodyWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.spreadAsRequestBodyWithResponseAsync(requestOptions);
     }
 
     /**
@@ -125,8 +124,6 @@ public final class AliasAsyncClient {
     /**
      * The spreadAsRequestBody operation.
      * 
-     * @param name A sequence of textual characters.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -136,12 +133,10 @@ public final class AliasAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> spreadAsRequestBody(String name) {
+    public Mono<Void> spreadAsRequestBody() {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadAsRequestBodyRequest requestObj = new SpreadAsRequestBodyRequest(name);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return spreadAsRequestBodyWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        return spreadAsRequestBodyWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

@@ -44,9 +44,6 @@ public final class IsUnknownAsyncClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -69,9 +66,6 @@ public final class IsUnknownAsyncClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
      * }
      * }</pre>
      * 

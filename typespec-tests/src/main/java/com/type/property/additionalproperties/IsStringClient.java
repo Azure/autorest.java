@@ -42,9 +42,6 @@ public final class IsStringClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *      (Optional): {
-     *         String: String (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -67,9 +64,6 @@ public final class IsStringClient {
      * <pre>{@code
      * {
      *     name: String (Required)
-     *      (Optional): {
-     *         String: String (Required)
-     *     }
      * }
      * }</pre>
      * 

@@ -20,6 +20,22 @@ import java.io.IOException;
 @Fluent
 public final class DataRequest implements JsonSerializable<DataRequest> {
     /*
+     * summary of name query parameter
+     * 
+     * description of name query parameter
+     */
+    @Generated
+    private final String name;
+
+    /*
+     * summary of etag header parameter
+     * 
+     * description of etag header parameter
+     */
+    @Generated
+    private String etag;
+
+    /*
      * The parameters property.
      */
     @Generated
@@ -27,9 +43,50 @@ public final class DataRequest implements JsonSerializable<DataRequest> {
 
     /**
      * Creates an instance of DataRequest class.
+     * 
+     * @param name the name value to set.
      */
     @Generated
-    public DataRequest() {
+    public DataRequest(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Get the name property: summary of name query parameter
+     * 
+     * description of name query parameter.
+     * 
+     * @return the name value.
+     */
+    @Generated
+    public String getName() {
+        return this.name;
+    }
+
+    /**
+     * Get the etag property: summary of etag header parameter
+     * 
+     * description of etag header parameter.
+     * 
+     * @return the etag value.
+     */
+    @Generated
+    public String getEtag() {
+        return this.etag;
+    }
+
+    /**
+     * Set the etag property: summary of etag header parameter
+     * 
+     * description of etag header parameter.
+     * 
+     * @param etag the etag value to set.
+     * @return the DataRequest object itself.
+     */
+    @Generated
+    public DataRequest setEtag(String etag) {
+        this.etag = etag;
+        return this;
     }
 
     /**
@@ -61,6 +118,8 @@ public final class DataRequest implements JsonSerializable<DataRequest> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", this.name);
+        jsonWriter.writeStringField("etag", this.etag);
         jsonWriter.writeJsonField("parameters", this.parameters);
         return jsonWriter.writeEndObject();
     }
@@ -70,22 +129,32 @@ public final class DataRequest implements JsonSerializable<DataRequest> {
      * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of DataRequest if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the DataRequest.
      */
     @Generated
     public static DataRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            DataRequest deserializedDataRequest = new DataRequest();
+            String name = null;
+            String etag = null;
+            RequestParameters parameters = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("parameters".equals(fieldName)) {
-                    deserializedDataRequest.parameters = RequestParameters.fromJson(reader);
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else if ("etag".equals(fieldName)) {
+                    etag = reader.getString();
+                } else if ("parameters".equals(fieldName)) {
+                    parameters = RequestParameters.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
+            DataRequest deserializedDataRequest = new DataRequest(name);
+            deserializedDataRequest.etag = etag;
+            deserializedDataRequest.parameters = parameters;
 
             return deserializedDataRequest;
         });

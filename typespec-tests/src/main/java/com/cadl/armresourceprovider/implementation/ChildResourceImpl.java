@@ -5,7 +5,6 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.management.Region;
-import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.ChildResourceInner;
 import com.cadl.armresourceprovider.models.ChildResource;
@@ -21,10 +20,6 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
 
     public String id() {
         return this.innerModel().id();
-    }
-
-    public String name() {
-        return this.innerModel().name();
     }
 
     public String type() {
@@ -48,8 +43,8 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
         return this.innerModel().properties();
     }
 
-    public SystemData systemData() {
-        return this.innerModel().systemData();
+    public String name() {
+        return this.innerModel().name();
     }
 
     public Region region() {

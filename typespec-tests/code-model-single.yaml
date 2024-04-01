@@ -1,0 +1,767 @@
+language:
+  default:
+    name: SingleDiscriminator
+    description: Illustrates inheritance with single discriminator.
+    namespace: Type.Model.Inheritance.SingleDiscriminator
+  java:
+    namespace: com.type.model.inheritance.singlediscriminator
+protocol: {}
+info:
+  title: SingleDiscriminator
+  description: Illustrates inheritance with single discriminator.
+schemas:
+  strings:
+    - &ref_0
+      language:
+        default:
+          name: string
+          description: simple string
+      protocol: {}
+      type: string
+    - &ref_1
+      language:
+        default:
+          name: string
+          description: A sequence of textual characters.
+      protocol: {}
+      type: string
+  constants:
+    - &ref_13
+      language:
+        default:
+          name: accept
+          description: 'Accept: application/json'
+      protocol: {}
+      type: constant
+      valueType: *ref_0
+      value:
+        value: application/json
+    - &ref_7
+      language:
+        default:
+          name: TRexKind
+          description: ''
+      protocol: {}
+      type: constant
+      valueType: *ref_0
+      value:
+        value: t-rex
+      usage:
+        - output
+        - public
+  objects:
+    - &ref_2
+      language:
+        default:
+          name: Bird
+          description: >-
+            This is base model for polymorphic single level inheritance with a
+            discriminator.
+          namespace: Type.Model.Inheritance.SingleDiscriminator
+        java:
+          namespace: com.type.model.inheritance.singlediscriminator
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.Bird
+      discriminator:
+        property:
+          language:
+            default:
+              name: kind
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: kind
+          required: true
+          nullable: false
+          readOnly: false
+          isDiscriminator: true
+        immediate: {}
+        all: {}
+        propertyName: kind
+      properties:
+        - language:
+            default:
+              name: wingspan
+              description: ''
+          protocol: {}
+          schema: &ref_8
+            language:
+              default:
+                name: int32
+                description: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+            protocol: {}
+            type: integer
+            precision: 32
+          serializedName: wingspan
+          required: true
+          nullable: false
+          readOnly: false
+      children:
+        immediate:
+          - &ref_3
+            language:
+              default:
+                name: SeaGull
+                description: >-
+                  The second level model in polymorphic single level
+                  inheritance.
+                namespace: Type.Model.Inheritance.SingleDiscriminator
+              java:
+                namespace: com.type.model.inheritance.singlediscriminator
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.SeaGull
+            parents:
+              immediate:
+                - *ref_2
+              all:
+                - *ref_2
+            discriminatorValue: seagull
+            usage:
+              - output
+              - public
+              - input
+          - &ref_4
+            language:
+              default:
+                name: Sparrow
+                description: >-
+                  The second level model in polymorphic single level
+                  inheritance.
+                namespace: Type.Model.Inheritance.SingleDiscriminator
+              java:
+                namespace: com.type.model.inheritance.singlediscriminator
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.Sparrow
+            parents:
+              immediate:
+                - *ref_2
+              all:
+                - *ref_2
+            discriminatorValue: sparrow
+            usage:
+              - output
+              - public
+              - input
+          - &ref_5
+            language:
+              default:
+                name: Goose
+                description: >-
+                  The second level model in polymorphic single level
+                  inheritance.
+                namespace: Type.Model.Inheritance.SingleDiscriminator
+              java:
+                namespace: com.type.model.inheritance.singlediscriminator
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.Goose
+            parents:
+              immediate:
+                - *ref_2
+              all:
+                - *ref_2
+            discriminatorValue: goose
+            usage:
+              - output
+              - public
+              - input
+          - &ref_6
+            language:
+              default:
+                name: Eagle
+                description: >-
+                  The second level model in polymorphic single levels
+                  inheritance which contains references to other polymorphic
+                  instances.
+                namespace: Type.Model.Inheritance.SingleDiscriminator
+              java:
+                namespace: com.type.model.inheritance.singlediscriminator
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.Eagle
+            parents:
+              immediate:
+                - *ref_2
+              all:
+                - *ref_2
+            discriminatorValue: eagle
+            properties:
+              - language:
+                  default:
+                    name: friends
+                    description: ''
+                protocol: {}
+                schema: &ref_11
+                  language:
+                    default:
+                      name: EagleFriends
+                      description: ''
+                  protocol: {}
+                  type: array
+                  elementType: *ref_2
+                serializedName: friends
+                required: false
+                nullable: false
+                readOnly: false
+              - language:
+                  default:
+                    name: hate
+                    description: ''
+                protocol: {}
+                schema: &ref_12
+                  language:
+                    default:
+                      name: EagleHate
+                      description: ''
+                  protocol: {}
+                  type: dictionary
+                  elementType: *ref_2
+                serializedName: hate
+                required: false
+                nullable: false
+                readOnly: false
+              - language:
+                  default:
+                    name: partner
+                    description: ''
+                protocol: {}
+                schema: *ref_2
+                serializedName: partner
+                required: false
+                nullable: false
+                readOnly: false
+            usage:
+              - output
+              - public
+              - input
+        all:
+          - *ref_3
+          - *ref_4
+          - *ref_5
+          - *ref_6
+      usage:
+        - output
+        - public
+        - input
+    - *ref_3
+    - *ref_4
+    - *ref_5
+    - *ref_6
+    - &ref_9
+      language:
+        default:
+          name: Dinosaur
+          description: >-
+            Define a base class in the legacy way. Discriminator property is not
+            explicitly defined in the model.
+          namespace: Type.Model.Inheritance.SingleDiscriminator
+        java:
+          namespace: com.type.model.inheritance.singlediscriminator
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.Dinosaur
+      discriminator:
+        property:
+          language:
+            default:
+              name: kind
+              description: ''
+          protocol: {}
+          schema: *ref_7
+          serializedName: kind
+          required: true
+          nullable: false
+          readOnly: false
+          isDiscriminator: true
+        immediate: {}
+        all: {}
+        propertyName: kind
+      properties:
+        - language:
+            default:
+              name: size
+              description: ''
+          protocol: {}
+          schema: *ref_8
+          serializedName: size
+          required: true
+          nullable: false
+          readOnly: false
+      children:
+        immediate:
+          - &ref_10
+            language:
+              default:
+                name: TRex
+                description: >-
+                  The second level legacy model in polymorphic single level
+                  inheritance.
+                namespace: Type.Model.Inheritance.SingleDiscriminator
+              java:
+                namespace: com.type.model.inheritance.singlediscriminator
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.TRex
+            parents:
+              immediate:
+                - *ref_9
+              all:
+                - *ref_9
+            discriminatorValue: t-rex
+            usage:
+              - output
+              - public
+        all:
+          - *ref_10
+      usage:
+        - output
+        - public
+    - *ref_10
+  numbers:
+    - *ref_8
+  arrays:
+    - *ref_11
+  dictionaries:
+    - *ref_12
+operationGroups:
+  - language:
+      default:
+        name: ''
+        description: ''
+    protocol: {}
+    $key: ''
+    operations:
+      - &ref_16
+        language:
+          default:
+            name: getModel
+            description: ''
+        protocol: {}
+        operationId: getModel
+        extensions: {}
+        crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.getModel
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: getModel
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/model/inheritance/single-discriminator/model
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_13
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getModelResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_2
+      - &ref_17
+        language:
+          default:
+            name: putModel
+            description: ''
+        protocol: {}
+        operationId: putModel
+        extensions: {}
+        crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.putModel
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: putModel
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/model/inheritance/single-discriminator/model
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_13
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_14
+            language:
+              default:
+                name: input
+                description: ''
+            protocol:
+              http:
+                in: body
+            schema: *ref_2
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_14
+        responses:
+          - language:
+              default:
+                name: putModelResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful.
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+      - &ref_18
+        language:
+          default:
+            name: getRecursiveModel
+            description: ''
+        protocol: {}
+        operationId: getRecursiveModel
+        extensions: {}
+        crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.getRecursiveModel
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: getRecursiveModel
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/model/inheritance/single-discriminator/recursivemodel
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_13
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getRecursiveModelResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_2
+      - &ref_19
+        language:
+          default:
+            name: putRecursiveModel
+            description: ''
+        protocol: {}
+        operationId: putRecursiveModel
+        extensions: {}
+        crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.putRecursiveModel
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: putRecursiveModel
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/model/inheritance/single-discriminator/recursivemodel
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_13
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_15
+            language:
+              default:
+                name: input
+                description: ''
+            protocol:
+              http:
+                in: body
+            schema: *ref_2
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_15
+        responses:
+          - language:
+              default:
+                name: putRecursiveModelResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful.
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+      - &ref_20
+        language:
+          default:
+            name: getMissingDiscriminator
+            description: ''
+        protocol: {}
+        operationId: getMissingDiscriminator
+        extensions: {}
+        crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.getMissingDiscriminator
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: getMissingDiscriminator
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: >-
+                  /type/model/inheritance/single-discriminator/missingdiscriminator
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_13
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getMissingDiscriminatorResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_2
+      - &ref_21
+        language:
+          default:
+            name: getWrongDiscriminator
+            description: ''
+        protocol: {}
+        operationId: getWrongDiscriminator
+        extensions: {}
+        crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.getWrongDiscriminator
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: getWrongDiscriminator
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: >-
+                  /type/model/inheritance/single-discriminator/wrongdiscriminator
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_13
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getWrongDiscriminatorResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_2
+      - &ref_22
+        language:
+          default:
+            name: getLegacyModel
+            description: ''
+        protocol: {}
+        operationId: getLegacyModel
+        extensions: {}
+        crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.getLegacyModel
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: getLegacyModel
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/model/inheritance/single-discriminator/legacy-model
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_13
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getLegacyModelResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_9
+security:
+  authenticationRequired: false
+  schemes: []
+clients:
+  - language:
+      default:
+        name: SingleDiscriminatorClient
+        description: Illustrates inheritance with single discriminator.
+    protocol: {}
+    security:
+      authenticationRequired: false
+      schemes: []
+    operationGroups:
+      - language:
+          default:
+            name: ''
+            description: ''
+        protocol: {}
+        $key: ''
+        operations:
+          - *ref_16
+          - *ref_17
+          - *ref_18
+          - *ref_19
+          - *ref_20
+          - *ref_21
+          - *ref_22
+    crossLanguageDefinitionId: Type.Model.Inheritance.SingleDiscriminator.SingleDiscriminatorClient
+    globalParameters: []

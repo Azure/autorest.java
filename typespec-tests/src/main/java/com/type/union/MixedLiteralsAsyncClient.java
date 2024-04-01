@@ -17,9 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.MixedLiteralsImpl;
-import com.type.union.implementation.models.SendRequest8;
-import com.type.union.models.GetResponse8;
-import com.type.union.models.MixedLiteralsCases;
+import com.type.union.models.GetResponse1;
 import reactor.core.publisher.Mono;
 
 /**
@@ -81,7 +79,7 @@ public final class MixedLiteralsAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param  The  parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -91,8 +89,8 @@ public final class MixedLiteralsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(requestOptions);
     }
 
     /**
@@ -107,18 +105,16 @@ public final class MixedLiteralsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse8> get() {
+    public Mono<GetResponse1> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse8.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse1.class));
     }
 
     /**
      * The send operation.
      * 
-     * @param prop The prop parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -128,11 +124,9 @@ public final class MixedLiteralsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(MixedLiteralsCases prop) {
+    public Mono<Void> send() {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest8 requestObj = new SendRequest8(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        return sendWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

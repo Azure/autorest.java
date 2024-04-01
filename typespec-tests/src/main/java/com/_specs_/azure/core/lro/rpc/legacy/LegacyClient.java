@@ -60,6 +60,7 @@ public final class LegacyClient {
      *                     innererror (Optional): (recursive schema, see innererror above)
      *                 }
      *             }
+     *             x-ms-error-code: String (Optional)
      *         }
      *     ]
      *     results (Optional): [

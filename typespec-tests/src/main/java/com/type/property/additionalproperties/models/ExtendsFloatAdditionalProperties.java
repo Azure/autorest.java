@@ -4,32 +4,24 @@
 
 package com.type.property.additionalproperties.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * The model extends from Record&lt;float32&gt; type.
  */
-@Fluent
+@Immutable
 public final class ExtendsFloatAdditionalProperties implements JsonSerializable<ExtendsFloatAdditionalProperties> {
     /*
      * The id property
      */
     @Generated
     private final double id;
-
-    /*
-     * Additional properties
-     */
-    @Generated
-    private Map<String, Double> additionalProperties;
 
     /**
      * Creates an instance of ExtendsFloatAdditionalProperties class.
@@ -52,28 +44,6 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the additionalProperties property: Additional properties.
-     * 
-     * @return the additionalProperties value.
-     */
-    @Generated
-    public Map<String, Double> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    /**
-     * Set the additionalProperties property: Additional properties.
-     * 
-     * @param additionalProperties the additionalProperties value to set.
-     * @return the ExtendsFloatAdditionalProperties object itself.
-     */
-    @Generated
-    public ExtendsFloatAdditionalProperties setAdditionalProperties(Map<String, Double> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated
@@ -81,11 +51,6 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeDoubleField("id", this.id);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, Double> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
         return jsonWriter.writeEndObject();
     }
 
@@ -101,7 +66,6 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     public static ExtendsFloatAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             double id = 0.0;
-            Map<String, Double> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -109,18 +73,10 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
                 if ("id".equals(fieldName)) {
                     id = reader.getDouble();
                 } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.getDouble());
+                    reader.skipChildren();
                 }
             }
-            ExtendsFloatAdditionalProperties deserializedExtendsFloatAdditionalProperties
-                = new ExtendsFloatAdditionalProperties(id);
-            deserializedExtendsFloatAdditionalProperties.additionalProperties = additionalProperties;
-
-            return deserializedExtendsFloatAdditionalProperties;
+            return new ExtendsFloatAdditionalProperties(id);
         });
     }
 }

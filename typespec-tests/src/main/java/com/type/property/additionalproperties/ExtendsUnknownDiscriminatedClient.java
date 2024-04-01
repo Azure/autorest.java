@@ -43,9 +43,6 @@ public final class ExtendsUnknownDiscriminatedClient {
      * {
      *     kind: String (Required)
      *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -69,9 +66,6 @@ public final class ExtendsUnknownDiscriminatedClient {
      * {
      *     kind: String (Required)
      *     name: String (Required)
-     *      (Optional): {
-     *         String: Object (Required)
-     *     }
      * }
      * }</pre>
      * 

@@ -18,17 +18,36 @@ import java.io.IOException;
 @Immutable
 public class Data implements JsonSerializable<Data> {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind;
+
+    /*
      * The @data.kind property.
      */
     @Generated
-    private String type;
+    private final String type;
 
     /**
      * Creates an instance of Data class.
+     * 
+     * @param type the type value to set.
      */
     @Generated
-    protected Data() {
-        this.type = "Data";
+    protected Data(String type) {
+        this.kind = "Data";
+        this.type = type;
+    }
+
+    /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    public String getKind() {
+        return this.kind;
     }
 
     /**
@@ -49,6 +68,7 @@ public class Data implements JsonSerializable<Data> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("@data.kind", this.type);
+        jsonWriter.writeStringField("kind", this.kind);
         return jsonWriter.writeEndObject();
     }
 
@@ -57,6 +77,7 @@ public class Data implements JsonSerializable<Data> {
      * 
      * @param jsonReader The JsonReader being read.
      * @return An instance of Data if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Data.
      */
     @Generated
@@ -68,7 +89,7 @@ public class Data implements JsonSerializable<Data> {
                 while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
                     String fieldName = readerToUse.getFieldName();
                     readerToUse.nextToken();
-                    if ("@data.kind".equals(fieldName)) {
+                    if ("kind".equals(fieldName)) {
                         discriminatorValue = readerToUse.getString();
                         break;
                     } else {
@@ -88,17 +109,22 @@ public class Data implements JsonSerializable<Data> {
     @Generated
     static Data fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Data deserializedData = new Data();
+            String type = null;
+            String kind = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("@data.kind".equals(fieldName)) {
-                    deserializedData.type = reader.getString();
+                    type = reader.getString();
+                } else if ("kind".equals(fieldName)) {
+                    kind = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
+            Data deserializedData = new Data(type);
+            deserializedData.kind = kind;
 
             return deserializedData;
         });

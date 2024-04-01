@@ -99,9 +99,6 @@ public final class IsFloatsImpl {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -124,9 +121,6 @@ public final class IsFloatsImpl {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -149,9 +143,6 @@ public final class IsFloatsImpl {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 
@@ -175,9 +166,6 @@ public final class IsFloatsImpl {
      * <pre>{@code
      * {
      *     id: double (Required)
-     *      (Optional): {
-     *         String: double (Required)
-     *     }
      * }
      * }</pre>
      * 

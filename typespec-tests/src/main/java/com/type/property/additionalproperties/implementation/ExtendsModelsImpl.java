@@ -99,11 +99,6 @@ public final class ExtendsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
      * }
      * }</pre>
      * 
@@ -125,11 +120,6 @@ public final class ExtendsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
      * }
      * }</pre>
      * 
@@ -151,11 +141,6 @@ public final class ExtendsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
      * }
      * }</pre>
      * 
@@ -178,11 +163,6 @@ public final class ExtendsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
-     *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
-     *     }
      * }
      * }</pre>
      * 

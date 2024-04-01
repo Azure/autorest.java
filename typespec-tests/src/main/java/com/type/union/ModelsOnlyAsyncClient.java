@@ -17,8 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.ModelsOnliesImpl;
-import com.type.union.implementation.models.SendRequest5;
-import com.type.union.models.GetResponse5;
+import com.type.union.models.GetResponse4;
 import reactor.core.publisher.Mono;
 
 /**
@@ -70,7 +69,7 @@ public final class ModelsOnlyAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param  The  parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -80,8 +79,8 @@ public final class ModelsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(requestOptions);
     }
 
     /**
@@ -96,18 +95,16 @@ public final class ModelsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse5> get() {
+    public Mono<GetResponse4> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse5.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse4.class));
     }
 
     /**
      * The send operation.
      * 
-     * @param prop The prop parameter.
-     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -117,11 +114,9 @@ public final class ModelsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(BinaryData prop) {
+    public Mono<Void> send() {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest5 requestObj = new SendRequest5(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        return sendWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

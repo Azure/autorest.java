@@ -10,8 +10,6 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * The derived discriminated type.
@@ -103,11 +101,6 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
         jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeNumberField("age", this.age);
-        if (getAdditionalProperties() != null) {
-            for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
-            }
-        }
         return jsonWriter.writeEndObject();
     }
 
@@ -126,7 +119,6 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
             int index = 0;
             String kind = "derived";
             Double age = null;
-            Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -140,18 +132,13 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getDouble);
                 } else {
-                    if (additionalProperties == null) {
-                        additionalProperties = new LinkedHashMap<>();
-                    }
-
-                    additionalProperties.put(fieldName, reader.readUntyped());
+                    reader.skipChildren();
                 }
             }
             IsUnknownAdditionalPropertiesDiscriminatedDerived deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived
                 = new IsUnknownAdditionalPropertiesDiscriminatedDerived(name, index);
             deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.kind = kind;
             deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.age = age;
-            deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.setAdditionalProperties(additionalProperties);
 
             return deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived;
         });

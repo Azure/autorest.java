@@ -57,6 +57,8 @@ public final class NamingAsyncClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     name: String (Required)
+     *     etag: String (Optional)
      *     parameters (Optional): {
      *         type: String(Type1/Type2) (Required)
      *     }
@@ -68,6 +70,7 @@ public final class NamingAsyncClient {
      *     name: String (Required)
      *     data (Required): {
      *         data (Required): {
+     *             kind: String (Required)
      *             @data.kind: String (Required)
      *         }
      *     }
