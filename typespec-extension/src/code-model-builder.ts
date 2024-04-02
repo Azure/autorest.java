@@ -684,7 +684,7 @@ export class CodeModelBuilder {
     if (
       !availabilityMap ||
       !this.apiVersion ||
-      this.supportsNonBreakingVersioning() // if supports non-breaking versioning, then it always exists
+      this.supportsAdvancedVersioning() // if supports non-breaking versioning, then it always exists
     ) {
       return true;
     }
@@ -693,10 +693,10 @@ export class CodeModelBuilder {
   }
 
   /**
-   * Whether we support versioning in non-breaking fashion.
+   * Whether we support advanced versioning in non-breaking fashion.
    */
-  private supportsNonBreakingVersioning(): boolean {
-    return Boolean(this.options["dev-options"]?.["support-versioning"]);
+  private supportsAdvancedVersioning(): boolean {
+    return Boolean(this.options["advanced-versioning"]);
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
@@ -1032,8 +1032,7 @@ export class CodeModelBuilder {
         extensions = { "x-ms-skip-url-encoding": true };
       }
 
-      // currently under dev-options.support-versioning
-      if (this.supportsNonBreakingVersioning()) {
+      if (this.supportsAdvancedVersioning()) {
         // versioning
         const addedOn = getAddedOnVersions(this.program, param.param);
         if (addedOn) {
