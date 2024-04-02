@@ -39,10 +39,10 @@ $generateScript = {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
     # enable advanced versioning for resiliency test
-    $tspOptions += " --option ""@azure-tools/typespec-java.dev-options.advanced-versioning=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]main.tsp") {
     # enable advanced versioning for resiliency test
-    $tspOptions += " --option ""@azure-tools/typespec-java.dev-options.advanced-versioning=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
   } elseif ($tspFile -match "arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
