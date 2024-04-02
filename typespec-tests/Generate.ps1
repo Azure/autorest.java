@@ -44,9 +44,9 @@ $generateScript = {
     # also don't generate with stream-style-serialization as azure-core-management hasn't migrated to azure-json yet
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
     # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
-    tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
     # also, mgmt only supports basic versioning for now
-    tspOptions += " --option ""@azure-tools/typespec-java.dev-options.supports-versioning=false"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.dev-options.supports-versioning=false"""
   } elseif ($tspFile -match "versioning.tsp") {
     # basic versioning
     $tspOptions += " --option ""@azure-tools/typespec-java.dev-options.supports-versioning=false"""
