@@ -666,13 +666,16 @@ export class CodeModelBuilder {
   }
 
   private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
+    if (!this.existsAtCurrentVersion(operation)) {
+      return true;
+    }
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
     if (getOverloadedOperation(this.program, operation)) {
       this.trace(`Operation '${operation.name}' is temporary skipped, as it is an overloaded operation`);
       return true;
     }
-    return !this.existsAtCurrentVersion(operation) || false;
+    return false;
   }
 
   private existsAtCurrentVersion(type: Type): boolean {
