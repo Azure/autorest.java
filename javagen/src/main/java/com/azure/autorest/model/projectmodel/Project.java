@@ -63,7 +63,7 @@ public class Project {
         AZURE_CORE_MANAGEMENT("com.azure", "azure-core-management", "1.12.0"),
         AZURE_CORE_HTTP_NETTY("com.azure", "azure-core-http-netty", "1.14.1"),
         AZURE_CORE_TEST("com.azure", "azure-core-test", "1.24.0"),
-        AZURE_IDENTITY("com.azure", "azure-identity", "1.11.3"),
+        AZURE_IDENTITY("com.azure", "azure-identity", "1.11.4"),
         AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.48"),
 
         GENERIC_CORE("com.generic", "generic-core", "1.0.0-beta.1"),
@@ -73,8 +73,8 @@ public class Project {
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),
         JUNIT_JUPITER_ENGINE("org.junit.jupiter", "junit-jupiter-engine", "5.9.3"),
         MOCKITO_CORE("org.mockito", "mockito-core", "4.11.0"),
-        BYTE_BUDDY("net.bytebuddy", "byte-buddy", "1.14.8"),
-        BYTE_BUDDY_AGENT("net.bytebuddy", "byte-buddy-agent", "1.14.8"),
+        BYTE_BUDDY("net.bytebuddy", "byte-buddy", "1.14.12"),
+        BYTE_BUDDY_AGENT("net.bytebuddy", "byte-buddy-agent", "1.14.12"),
         SLF4J_SIMPLE("org.slf4j", "slf4j-simple", "1.7.36");
 
         private final String groupId;
