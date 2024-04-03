@@ -5,6 +5,7 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import java.util.Map;
@@ -19,6 +20,13 @@ public interface CustomTemplateResource {
      * @return the id value.
      */
     String id();
+
+    /**
+     * Gets the name property: The name of the resource.
+     * 
+     * @return the name value.
+     */
+    String name();
 
     /**
      * Gets the type property: The type of the resource.
@@ -49,11 +57,11 @@ public interface CustomTemplateResource {
     CustomTemplateResourceProperties properties();
 
     /**
-     * Gets the name property: arm resource name for path.
+     * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
      * 
-     * @return the name value.
+     * @return the systemData value.
      */
-    String name();
+    SystemData systemData();
 
     /**
      * Gets the region of the resource.

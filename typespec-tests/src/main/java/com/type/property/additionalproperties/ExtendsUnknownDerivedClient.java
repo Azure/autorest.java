@@ -42,6 +42,9 @@ public final class ExtendsUnknownDerivedClient {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      *     index: int (Required)
      *     age: Double (Optional)
      * }
@@ -66,6 +69,9 @@ public final class ExtendsUnknownDerivedClient {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      *     index: int (Required)
      *     age: Double (Optional)
      * }

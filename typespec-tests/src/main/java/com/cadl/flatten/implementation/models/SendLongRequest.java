@@ -10,7 +10,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.flatten.models.SendLongRequestStatus;
+import com.cadl.flatten.models.Status;
 import com.cadl.flatten.models.User;
 import java.io.IOException;
 import java.time.OffsetDateTime;
@@ -78,7 +78,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * The status of the todo item
      */
     @Generated
-    private final SendLongRequestStatus status;
+    private final Status status;
 
     /*
      * When the todo item was created.
@@ -119,7 +119,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * @param status the status value to set.
      */
     @Generated
-    public SendLongRequest(String input, int dataInt, String title, SendLongRequestStatus status) {
+    public SendLongRequest(String input, int dataInt, String title, Status status) {
         this.input = input;
         this.dataInt = dataInt;
         this.title = title;
@@ -282,7 +282,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * @return the status value.
      */
     @Generated
-    public SendLongRequestStatus getStatus() {
+    public Status getStatus() {
         return this.status;
     }
 
@@ -384,7 +384,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
             int dataInt = 0;
             long id = 0L;
             String title = null;
-            SendLongRequestStatus status = null;
+            Status status = null;
             OffsetDateTime createdAt = null;
             OffsetDateTime updatedAt = null;
             User user = null;
@@ -407,7 +407,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
                 } else if ("title".equals(fieldName)) {
                     title = reader.getString();
                 } else if ("status".equals(fieldName)) {
-                    status = SendLongRequestStatus.fromString(reader.getString());
+                    status = Status.fromString(reader.getString());
                 } else if ("createdAt".equals(fieldName)) {
                     createdAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("updatedAt".equals(fieldName)) {

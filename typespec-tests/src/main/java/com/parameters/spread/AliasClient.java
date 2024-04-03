@@ -16,6 +16,7 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.spread.implementation.AliasImpl;
+import com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest;
 import com.parameters.spread.implementation.models.SpreadAsRequestParameterRequest;
 import com.parameters.spread.implementation.models.SpreadWithMultipleParametersRequest;
 import com.parameters.spread.models.SpreadWithMultipleParametersOptions;
@@ -47,7 +48,7 @@ public final class AliasClient {
      * }
      * }</pre>
      * 
-     * @param  The  parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -57,8 +58,8 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadAsRequestBodyWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.spreadAsRequestBodyWithResponse(requestOptions);
+    public Response<Void> spreadAsRequestBodyWithResponse(BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.spreadAsRequestBodyWithResponse(request, requestOptions);
     }
 
     /**
@@ -121,6 +122,8 @@ public final class AliasClient {
     /**
      * The spreadAsRequestBody operation.
      * 
+     * @param name A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
@@ -129,10 +132,12 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void spreadAsRequestBody() {
+    public void spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        spreadAsRequestBodyWithResponse(requestOptions).getValue();
+        SpreadAsRequestBodyRequest requestObj = new SpreadAsRequestBodyRequest(name);
+        BinaryData request = BinaryData.fromObject(requestObj);
+        spreadAsRequestBodyWithResponse(request, requestOptions).getValue();
     }
 
     /**

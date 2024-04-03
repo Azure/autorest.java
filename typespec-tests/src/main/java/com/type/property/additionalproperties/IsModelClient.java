@@ -15,8 +15,10 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.TypeReference;
 import com.type.property.additionalproperties.implementation.IsModelsImpl;
-import com.type.property.additionalproperties.models.IsModelAdditionalProperties;
+import com.type.property.additionalproperties.models.ModelForRecord;
+import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous AdditionalPropertiesClient type.
@@ -41,6 +43,9 @@ public final class IsModelClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): {
+     *         state: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -62,6 +67,9 @@ public final class IsModelClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): {
+     *         state: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -91,10 +99,10 @@ public final class IsModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public IsModelAdditionalProperties get() {
+    public Map<String, ModelForRecord> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(IsModelAdditionalProperties.class);
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_MODEL_FOR_RECORD);
     }
 
     /**
@@ -110,9 +118,14 @@ public final class IsModelClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put(IsModelAdditionalProperties body) {
+    public void put(Map<String, ModelForRecord> body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    @Generated
+    private static final TypeReference<Map<String, ModelForRecord>> TYPE_REFERENCE_MAP_STRING_MODEL_FOR_RECORD
+        = new TypeReference<Map<String, ModelForRecord>>() {
+        };
 }

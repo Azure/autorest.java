@@ -24,12 +24,6 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
     @Generated
     private final ResponseError error;
 
-    /*
-     * String error code indicating what went wrong.
-     */
-    @Generated
-    private String errorCode;
-
     /**
      * Creates an instance of ErrorResponse class.
      * 
@@ -51,16 +45,6 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
     }
 
     /**
-     * Get the errorCode property: String error code indicating what went wrong.
-     * 
-     * @return the errorCode value.
-     */
-    @Generated
-    public String getErrorCode() {
-        return this.errorCode;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated
@@ -68,7 +52,6 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeJsonField("error", this.error);
-        jsonWriter.writeStringField("x-ms-error-code", this.errorCode);
         return jsonWriter.writeEndObject();
     }
 
@@ -84,23 +67,17 @@ public final class ErrorResponse implements JsonSerializable<ErrorResponse> {
     public static ErrorResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             ResponseError error = null;
-            String errorCode = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("error".equals(fieldName)) {
                     error = ResponseError.fromJson(reader);
-                } else if ("x-ms-error-code".equals(fieldName)) {
-                    errorCode = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            ErrorResponse deserializedErrorResponse = new ErrorResponse(error);
-            deserializedErrorResponse.errorCode = errorCode;
-
-            return deserializedErrorResponse;
+            return new ErrorResponse(error);
         });
     }
 }

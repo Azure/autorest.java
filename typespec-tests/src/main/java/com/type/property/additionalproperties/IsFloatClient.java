@@ -42,6 +42,9 @@ public final class IsFloatClient {
      * <pre>{@code
      * {
      *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -64,6 +67,9 @@ public final class IsFloatClient {
      * <pre>{@code
      * {
      *     id: double (Required)
+     *      (Optional): {
+     *         String: double (Required)
+     *     }
      * }
      * }</pre>
      * 

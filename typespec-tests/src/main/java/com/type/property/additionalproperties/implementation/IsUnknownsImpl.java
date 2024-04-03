@@ -100,6 +100,9 @@ public final class IsUnknownsImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -122,6 +125,9 @@ public final class IsUnknownsImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -144,6 +150,9 @@ public final class IsUnknownsImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -167,6 +176,9 @@ public final class IsUnknownsImpl {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      * }
      * }</pre>
      * 

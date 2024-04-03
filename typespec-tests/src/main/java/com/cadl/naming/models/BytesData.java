@@ -18,10 +18,10 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
-     * The kind property.
+     * The @data.kind property.
      */
     @Generated
-    private String kind = "bytes";
+    private String type = "bytes";
 
     /*
      * Data as {@code byte[]}
@@ -32,24 +32,22 @@ public final class BytesData extends Data {
     /**
      * Creates an instance of BytesData class.
      * 
-     * @param type the type value to set.
      * @param dataAsBytes the dataAsBytes value to set.
      */
     @Generated
-    private BytesData(String type, byte[] dataAsBytes) {
-        super(type);
+    private BytesData(byte[] dataAsBytes) {
         this.dataAsBytes = dataAsBytes;
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the type property: The &#064;data.kind property.
      * 
-     * @return the kind value.
+     * @return the type value.
      */
     @Generated
     @Override
-    public String getKind() {
-        return this.kind;
+    public String getType() {
+        return this.type;
     }
 
     /**
@@ -69,9 +67,8 @@ public final class BytesData extends Data {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("@data.kind", getType());
         jsonWriter.writeBinaryField("data_bytes", this.dataAsBytes);
-        jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeStringField("@data.kind", this.type);
         return jsonWriter.writeEndObject();
     }
 
@@ -86,25 +83,22 @@ public final class BytesData extends Data {
     @Generated
     public static BytesData fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String type = null;
             byte[] dataAsBytes = null;
-            String kind = "bytes";
+            String type = "bytes";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("@data.kind".equals(fieldName)) {
-                    type = reader.getString();
-                } else if ("data_bytes".equals(fieldName)) {
+                if ("data_bytes".equals(fieldName)) {
                     dataAsBytes = reader.getBinary();
-                } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                } else if ("@data.kind".equals(fieldName)) {
+                    type = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            BytesData deserializedBytesData = new BytesData(type, dataAsBytes);
-            deserializedBytesData.kind = kind;
+            BytesData deserializedBytesData = new BytesData(dataAsBytes);
+            deserializedBytesData.type = type;
 
             return deserializedBytesData;
         });

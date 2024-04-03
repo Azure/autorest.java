@@ -42,6 +42,9 @@ public final class ExtendsStringClient {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -64,6 +67,9 @@ public final class ExtendsStringClient {
      * <pre>{@code
      * {
      *     name: String (Required)
+     *      (Optional): {
+     *         String: String (Required)
+     *     }
      * }
      * }</pre>
      * 

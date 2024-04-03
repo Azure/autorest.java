@@ -62,7 +62,6 @@ public final class LegacyAsyncClient {
      *                     innererror (Optional): (recursive schema, see innererror above)
      *                 }
      *             }
-     *             x-ms-error-code: String (Optional)
      *         }
      *     ]
      *     results (Optional): [

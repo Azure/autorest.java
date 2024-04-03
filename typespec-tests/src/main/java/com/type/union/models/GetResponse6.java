@@ -21,7 +21,7 @@ public final class GetResponse6 implements JsonSerializable<GetResponse6> {
      * The prop property.
      */
     @Generated
-    private final GetResponseProp4 prop;
+    private final EnumsOnlyCases prop;
 
     /**
      * Creates an instance of GetResponse6 class.
@@ -29,7 +29,7 @@ public final class GetResponse6 implements JsonSerializable<GetResponse6> {
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse6(GetResponseProp4 prop) {
+    private GetResponse6(EnumsOnlyCases prop) {
         this.prop = prop;
     }
 
@@ -39,7 +39,7 @@ public final class GetResponse6 implements JsonSerializable<GetResponse6> {
      * @return the prop value.
      */
     @Generated
-    public GetResponseProp4 getProp() {
+    public EnumsOnlyCases getProp() {
         return this.prop;
     }
 
@@ -50,7 +50,7 @@ public final class GetResponse6 implements JsonSerializable<GetResponse6> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("prop", this.prop == null ? null : this.prop.toLong());
+        jsonWriter.writeJsonField("prop", this.prop);
         return jsonWriter.writeEndObject();
     }
 
@@ -65,13 +65,13 @@ public final class GetResponse6 implements JsonSerializable<GetResponse6> {
     @Generated
     public static GetResponse6 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            GetResponseProp4 prop = null;
+            EnumsOnlyCases prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = GetResponseProp4.fromLong(reader.getLong());
+                    prop = EnumsOnlyCases.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }

@@ -20,15 +20,16 @@ public final class GoblinShark extends Shark {
      * The sharktype property.
      */
     @Generated
-    private String sharktype = "goblin";
+    private final String sharktype;
 
     /**
      * Creates an instance of GoblinShark class.
      * 
      * @param age the age value to set.
+     * @param sharktype the sharktype value to set.
      */
     @Generated
-    public GoblinShark(int age) {
+    public GoblinShark(int age, String sharktype) {
         super(age, sharktype);
         this.sharktype = "goblin";
     }
@@ -81,10 +82,7 @@ public final class GoblinShark extends Shark {
                     reader.skipChildren();
                 }
             }
-            GoblinShark deserializedGoblinShark = new GoblinShark(age);
-            deserializedGoblinShark.sharktype = sharktype;
-
-            return deserializedGoblinShark;
+            return new GoblinShark(age, sharktype);
         });
     }
 }

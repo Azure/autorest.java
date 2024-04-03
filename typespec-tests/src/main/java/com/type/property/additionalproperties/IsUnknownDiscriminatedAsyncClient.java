@@ -45,6 +45,9 @@ public final class IsUnknownDiscriminatedAsyncClient {
      * {
      *     kind: String (Required)
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -68,6 +71,9 @@ public final class IsUnknownDiscriminatedAsyncClient {
      * {
      *     kind: String (Required)
      *     name: String (Required)
+     *      (Optional): {
+     *         String: Object (Required)
+     *     }
      * }
      * }</pre>
      * 

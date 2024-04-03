@@ -81,7 +81,7 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
      * The status of the todo item
      */
     @Generated
-    private final SendLongRequestStatus status;
+    private final Status status;
 
     /*
      * The _dummy property.
@@ -99,7 +99,7 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
      * @param status the status value to set.
      */
     @Generated
-    public SendLongOptions(String name, String input, int dataInt, String title, SendLongRequestStatus status) {
+    public SendLongOptions(String name, String input, int dataInt, String title, Status status) {
         this.name = name;
         this.input = input;
         this.dataInt = dataInt;
@@ -285,7 +285,7 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
      * @return the status value.
      */
     @Generated
-    public SendLongRequestStatus getStatus() {
+    public Status getStatus() {
         return this.status;
     }
 
@@ -348,7 +348,7 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
             String input = null;
             int dataInt = 0;
             String title = null;
-            SendLongRequestStatus status = null;
+            Status status = null;
             String filter = null;
             User user = null;
             Integer dataIntOptional = null;
@@ -369,7 +369,7 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
                 } else if ("title".equals(fieldName)) {
                     title = reader.getString();
                 } else if ("status".equals(fieldName)) {
-                    status = SendLongRequestStatus.fromString(reader.getString());
+                    status = Status.fromString(reader.getString());
                 } else if ("filter".equals(fieldName)) {
                     filter = reader.getString();
                 } else if ("user".equals(fieldName)) {

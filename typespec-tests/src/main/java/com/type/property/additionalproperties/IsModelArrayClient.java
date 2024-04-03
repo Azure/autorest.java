@@ -15,8 +15,11 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.serializer.TypeReference;
 import com.type.property.additionalproperties.implementation.IsModelArraysImpl;
-import com.type.property.additionalproperties.models.IsModelArrayAdditionalProperties;
+import com.type.property.additionalproperties.models.ModelForRecord;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Initializes a new instance of the synchronous AdditionalPropertiesClient type.
@@ -41,6 +44,11 @@ public final class IsModelArrayClient {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): [
+     *          (Required){
+     *             state: String (Required)
+     *         }
+     *     ]
      * }
      * }</pre>
      * 
@@ -62,6 +70,11 @@ public final class IsModelArrayClient {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): [
+     *          (Required){
+     *             state: String (Required)
+     *         }
+     *     ]
      * }
      * }</pre>
      * 
@@ -91,10 +104,10 @@ public final class IsModelArrayClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public IsModelArrayAdditionalProperties get() {
+    public Map<String, List<ModelForRecord>> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(IsModelArrayAdditionalProperties.class);
+        return getWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_MAP_STRING_LIST_MODEL_FOR_RECORD);
     }
 
     /**
@@ -110,9 +123,14 @@ public final class IsModelArrayClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void put(IsModelArrayAdditionalProperties body) {
+    public void put(Map<String, List<ModelForRecord>> body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         putWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
     }
+
+    @Generated
+    private static final TypeReference<Map<String, List<ModelForRecord>>> TYPE_REFERENCE_MAP_STRING_LIST_MODEL_FOR_RECORD
+        = new TypeReference<Map<String, List<ModelForRecord>>>() {
+        };
 }

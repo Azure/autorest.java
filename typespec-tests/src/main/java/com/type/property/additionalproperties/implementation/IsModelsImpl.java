@@ -98,6 +98,9 @@ public final class IsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): {
+     *         state: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -119,6 +122,9 @@ public final class IsModelsImpl {
      * <p><strong>Response Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): {
+     *         state: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -140,6 +146,9 @@ public final class IsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): {
+     *         state: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -162,6 +171,9 @@ public final class IsModelsImpl {
      * <p><strong>Request Body Schema</strong></p>
      * <pre>{@code
      * {
+     *     String (Required): {
+     *         state: String (Required)
+     *     }
      * }
      * }</pre>
      * 
