@@ -259,6 +259,12 @@ export class CodeModelBuilder {
   public async build(): Promise<CodeModel> {
     this.operationExamples = await loadExamples(this.program, this.options);
 
+    if (this.sdkContext.arm) {
+      // ARM
+      this.codeModel.arm = true;
+      this.options["group-etag-headers"] = false;
+    }
+
     const clients = this.processClients();
 
     this.processModels(clients);
@@ -528,12 +534,6 @@ export class CodeModelBuilder {
 
   private processClients(): SdkClient[] {
     const clients = listClients(this.sdkContext);
-    for (const client of clients) {
-      if (client.arm) {
-        this.codeModel.arm = true;
-        this.options["group-etag-headers"] = false;
-      }
-    }
     // preprocess group-etag-headers
     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
