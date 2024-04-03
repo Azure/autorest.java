@@ -42,12 +42,12 @@ public final class NotVersionedClientImpl {
     private final NotVersionedClientService service;
 
     /**
-     * Server parameter.
+     * Need to be set as 'http://localhost:3000' in client.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Need to be set as 'http://localhost:3000' in client.
      * 
      * @return the endpoint value.
      */
@@ -86,7 +86,7 @@ public final class NotVersionedClientImpl {
     /**
      * Initializes an instance of NotVersionedClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      */
     public NotVersionedClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -97,7 +97,7 @@ public final class NotVersionedClientImpl {
      * Initializes an instance of NotVersionedClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      */
     public NotVersionedClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -108,7 +108,7 @@ public final class NotVersionedClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      */
     public NotVersionedClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
