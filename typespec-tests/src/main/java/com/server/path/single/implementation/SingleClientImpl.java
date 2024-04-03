@@ -40,12 +40,12 @@ public final class SingleClientImpl {
     private final SingleClientService service;
 
     /**
-     * Server parameter.
+     * Need to be set as 'http://localhost:3000' in client.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Need to be set as 'http://localhost:3000' in client.
      * 
      * @return the endpoint value.
      */
@@ -84,7 +84,7 @@ public final class SingleClientImpl {
     /**
      * Initializes an instance of SingleClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      */
     public SingleClientImpl(String endpoint) {
         this(new HttpPipelineBuilder().policies(new UserAgentPolicy(), new RetryPolicy()).build(),
@@ -95,7 +95,7 @@ public final class SingleClientImpl {
      * Initializes an instance of SingleClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      */
     public SingleClientImpl(HttpPipeline httpPipeline, String endpoint) {
         this(httpPipeline, JacksonAdapter.createDefaultSerializerAdapter(), endpoint);
@@ -106,7 +106,7 @@ public final class SingleClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      */
     public SingleClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint) {
         this.httpPipeline = httpPipeline;
