@@ -66,10 +66,8 @@ model BytesData extends Data {
   data: bytes;
 }
 
-#suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @summary("summary of Types")
 @doc("description of Types")
-@fixed
 enum TypesModel {
   Blob,
   File,

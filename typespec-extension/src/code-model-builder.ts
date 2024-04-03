@@ -62,7 +62,6 @@ import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersi
 import {
   isPollingLocation,
   getPagedResult,
-  isFixed,
   getLroMetadata,
   getUnionAsEnum,
   UnionEnum,
@@ -1707,7 +1706,7 @@ export class CodeModelBuilder {
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Enum":
-        return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
+        return this.processChoiceSchema(type, this.getName(type), true);
 
       case "Union":
         return this.processUnionSchema(type, this.getName(type, nameHint));
