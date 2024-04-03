@@ -437,7 +437,7 @@ export class CodeModelBuilder {
       Array.from(client.service.unions.values()).forEach((it) => models.push(it));
 
       // lambda to mark model as public
-      const modelAsPublic = (model: Model | Enum | Union) => {
+      const modelAsPublic = (model: SdkModelType | SdkEnumType) => {
         // check it does not contain Union
         // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
         // if (union) {
@@ -449,8 +449,8 @@ export class CodeModelBuilder {
         // }
 
         // change to sdk type
-        const sdkType = getClientType(this.sdkContext, model);
-        const schema = this.processSchemaFromSdkType(sdkType, "");
+        // const sdkType = getClientType(this.sdkContext, model);
+        const schema = this.processSchemaFromSdkType(model, "");
 
         this.trackSchemaUsage(schema, {
           usage: [SchemaContext.Public],
@@ -460,62 +460,62 @@ export class CodeModelBuilder {
       const sdkModels: (SdkModelType | SdkEnumType)[] = getAllModels(this.sdkContext);
       
 
-      // // process sdk models
-      // for (const model of sdkModels) {
-      //   if (!processedSdkModels.has(model)) {
-      //     const access = model.access;
-      //     if (access === "public") {
-      //       modelAsPublic(model);
-      //     } else if (access === "internal") {
-      //       const schema = this.processSchema(model, "");
-
-      //       this.trackSchemaUsage(schema, {
-      //         usage: [SchemaContext.Internal],
-      //       });
-      //     }
-
-      //     const usage = getUsage(model.__raw as Model | Enum | Union);
-      //     if (usage) {
-      //       const schema = this.processSchema(model, "");
-
-      //       this.trackSchemaUsage(schema, {
-      //         usage: usage,
-      //       });
-      //     }
-
-      //     processedSdkModels.add(model);
-      //   }
-      // }
-
-      // process tsp compiler models
-      for (const model of models) {
-        if (!processedModels.has(model)) {
-          const access = getAccess(model);
+      // process sdk models
+      for (const model of sdkModels) {
+        if (!processedSdkModels.has(model)) {
+          const access = model.access;
           if (access === "public") {
             modelAsPublic(model);
           } else if (access === "internal") {
-            const sdkType = getClientType(this.sdkContext, model);
-            const schema = this.processSchemaFromSdkType(sdkType, "");
+            const schema = this.processSchemaFromSdkType(model, model.name);
 
             this.trackSchemaUsage(schema, {
               usage: [SchemaContext.Internal],
             });
           }
 
-          const usage = getUsage(model);
+          const usage = getUsage(model.__raw as Model | Enum | Union);
           if (usage) {
-            // TODO: change to sdk type
-            const sdkType = getClientType(this.sdkContext, model);
-            const schema = this.processSchemaFromSdkType(sdkType, "");
+            const schema = this.processSchemaFromSdkType(model, "");
 
             this.trackSchemaUsage(schema, {
               usage: usage,
             });
           }
 
-          processedModels.add(model);
+          processedSdkModels.add(model);
         }
       }
+
+      // process tsp compiler models
+      // for (const model of models) {
+      //   if (!processedModels.has(model)) {
+      //     const access = getAccess(model);
+      //     if (access === "public") {
+      //       modelAsPublic(model);
+      //     } else if (access === "internal") {
+      //       const sdkType = getClientType(this.sdkContext, model);
+      //       const schema = this.processSchemaFromSdkType(sdkType, "");
+
+      //       this.trackSchemaUsage(schema, {
+      //         usage: [SchemaContext.Internal],
+      //       });
+      //     }
+
+      //     const usage = getUsage(model);
+      //     if (usage) {
+      //       // TODO: change to sdk type
+      //       const sdkType = getClientType(this.sdkContext, model);
+      //       const schema = this.processSchemaFromSdkType(sdkType, "");
+
+      //       this.trackSchemaUsage(schema, {
+      //         usage: usage,
+      //       });
+      //     }
+
+      //     processedModels.add(model);
+      //   }
+      // }
     }
   }
 
@@ -1932,7 +1932,7 @@ export class CodeModelBuilder {
       case "eTag":
       case "armId":
       case "azureLocation":
-        return this.processStringSchemaFromSdkType(type, nameHint);
+        return this.processStringSchemaFromSdkType(type, type.kind);
       
       case "numeric":
       case "integer":
@@ -2478,7 +2478,7 @@ export class CodeModelBuilder {
     // TODO: question: why the schema name is like this?
     const schemaNameHint = pascalCase(getModelNameForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name);
     const schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
-    let nullable = prop.type.nullable;
+    let nullable = prop.optional;
 
     let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop.__raw as ModelProperty)) {
@@ -2683,6 +2683,10 @@ export class CodeModelBuilder {
     if (!target) {
       return nameHint || "";
     }
+    // const sdkType = getClientType(this.sdkContext, target);
+    // if (sdkType.kind === "model") {
+    //   return sdkType.name;
+    // }
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
     if (emitterClientName) {
