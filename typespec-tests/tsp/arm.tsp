@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
+using TypeSpec.OpenAPI;
 
 @armProviderNamespace
 @service({
@@ -22,8 +23,23 @@ namespace Cadl.ArmResourceProvider;
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Preview API version 2022-06-01-preview.")
+  v2022_06_01_preview: "2022-06-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Preview API version 2022-09-01-preview.")
+  v2022_09_01_preview: "2022-09-01-preview",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Public API version.")
   v2023_11_01: "2023-11-01",
+
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @doc("Preview API version 2023-12-01-preview.")
+  v2023_12_01_preview: "2023-12-01-preview",
 }
 
 //----------------------- Child Resources -----------------------
@@ -82,6 +98,11 @@ model CustomTemplateResource is TrackedResource<CustomTemplateResourceProperties
   @doc("arm resource name for path")
   @pattern("^[A-Za-z0-9]([A-Za-z0-9-_.]{0,62}[A-Za-z0-9])?$")
   name: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
+  @added(Versions.v2023_11_01)
+  @doc("Managed identity.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
 }
 
 @doc("Top Level Arm Resource Properties.")
@@ -89,6 +110,23 @@ model CustomTemplateResourceProperties {
   @visibility("read")
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  @added(Versions.v2022_06_01_preview)
+  @removed(Versions.v2023_11_01)
+  @added(Versions.v2023_12_01_preview)
+  propertyRemovedInStable: string;
+}
+
+model CustomTemplateResourcePatch {
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
+  @added(Versions.v2023_11_01)
+  @doc("Managed identity.")
+  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+
+  @added(Versions.v2022_06_01_preview)
+  @removed(Versions.v2023_11_01)
+  @added(Versions.v2023_12_01_preview)
+  propertyRemovedInStable: string;
 }
 
 @lroStatus
@@ -139,7 +177,16 @@ interface CustomTemplateResourceInterface
         IfMatchParameters<CustomTemplateResource> &
         IfNoneMatchParameters<CustomTemplateResource>
     > {
+  @sharedRoute
+  @added(Versions.v2022_09_01_preview)
+  @removed(Versions.v2023_11_01)
   update is ArmResourceUpdateSync<CustomTemplateResource>;
+
+  #suppress "@azure-tools/typespec-azure-core/no-operation-id" "Use operationId to keep same name as deprecated update operation"
+  @sharedRoute
+  @added(Versions.v2023_11_01)
+  @operationId("CustomTemplateResourceInterfaces_Update")
+  updateLongRunning is ArmCustomPatchAsync<CustomTemplateResource, CustomTemplateResourcePatch>;
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

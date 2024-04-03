@@ -38,11 +38,18 @@ $generateScript = {
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]old.tsp") {
     # override namespace for "resiliency/srv-driven/old.tsp" (make it different to that from "main.tsp")
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
+    # enable advanced versioning for resiliency test
+    $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
+  } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]main.tsp") {
+    # enable advanced versioning for resiliency test
+    $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
   } elseif ($tspFile -match "arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
-    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"" --option ""@azure-tools/typespec-java.group-etag-headers=false"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
     # also don't generate with stream-style-serialization as azure-core-management hasn't migrated to azure-json yet
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
+    # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
+    $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp

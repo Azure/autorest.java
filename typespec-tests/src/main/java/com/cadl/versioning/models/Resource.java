@@ -41,7 +41,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * @param type the type value to set.
      */
     @Generated
-    private Resource(String type) {
+    public Resource(String type) {
         this.type = type;
     }
 

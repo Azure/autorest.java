@@ -58,7 +58,7 @@ import {
   isPathParam,
   HttpOperationBody,
 } from "@typespec/http";
-import { getAddedOnVersions, getVersion } from "@typespec/versioning";
+import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersion } from "@typespec/versioning";
 import {
   isPollingLocation,
   getPagedResult,
@@ -82,6 +82,7 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
+  getDefaultApiVersion,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -195,6 +196,8 @@ export class CodeModelBuilder {
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, nndefined means type visited but not completed
 
   private operationExamples: Map<Operation, any> = new Map<Operation, any>();
+  // current apiVersion name to generate code
+  private apiVersion: Version | undefined;
 
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
@@ -556,6 +559,8 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
+
+        this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
       }
 
       // server
@@ -661,6 +666,9 @@ export class CodeModelBuilder {
   }
 
   private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
+    if (!this.existsAtCurrentVersion(operation)) {
+      return true;
+    }
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
     if (getOverloadedOperation(this.program, operation)) {
@@ -668,6 +676,27 @@ export class CodeModelBuilder {
       return true;
     }
     return false;
+  }
+
+  private existsAtCurrentVersion(type: Type): boolean {
+    const availabilityMap = getAvailabilityMap(this.program, type);
+    // if unversioned then everything exists
+    if (
+      !availabilityMap ||
+      !this.apiVersion ||
+      this.supportsAdvancedVersioning() // if supports non-breaking versioning, then it always exists
+    ) {
+      return true;
+    }
+    const availability = availabilityMap.get(this.apiVersion?.name);
+    return availability === Availability.Added || availability === Availability.Available;
+  }
+
+  /**
+   * Whether we support advanced versioning in non-breaking fashion.
+   */
+  private supportsAdvancedVersioning(): boolean {
+    return Boolean(this.options["advanced-versioning"]);
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
@@ -759,7 +788,9 @@ export class CodeModelBuilder {
     // host
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
-    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it, clientContext));
+    op.parameters.parameters
+      .filter((param) => this.existsAtCurrentVersion(param.param))
+      .map((it) => this.processParameter(codeModelOperation, it, clientContext));
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
@@ -950,7 +981,7 @@ export class CodeModelBuilder {
       if (this.isArm()) {
         // Currently we assume ARM tsp only have one client and one api-version.
         // TODO: How will service define mixed api-versions(like those in Compute RP)?
-        const apiVersion = clientContext.apiVersions[0];
+        const apiVersion = this.apiVersion?.value;
         if (!this._armApiVersionParameter) {
           this._armApiVersionParameter = this.createApiVersionParameter(
             "api-version",
@@ -1001,8 +1032,7 @@ export class CodeModelBuilder {
         extensions = { "x-ms-skip-url-encoding": true };
       }
 
-      // currently under dev-options.support-versioning
-      if (this.options["dev-options"] && this.options["dev-options"]["support-versioning"]) {
+      if (this.supportsAdvancedVersioning()) {
         // versioning
         const addedOn = getAddedOnVersions(this.program, param.param);
         if (addedOn) {
@@ -2247,7 +2277,8 @@ export class CodeModelBuilder {
       if (
         prop.name === discriminatorPropertyName || // skip the discriminator property
         isNeverType(prop.type) || // skip property of type "never"
-        !isPayloadProperty(this.program, prop)
+        !isPayloadProperty(this.program, prop) ||
+        !this.existsAtCurrentVersion(prop)
       ) {
         continue;
       }
@@ -2283,7 +2314,9 @@ export class CodeModelBuilder {
     const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
     const declaredProperties = walkPropertiesInherited(type);
     for (const prop of declaredProperties) {
-      resource.addProperty(this.processModelProperty(prop));
+      if (this.existsAtCurrentVersion(type)) {
+        resource.addProperty(this.processModelProperty(prop));
+      }
     }
     return resource;
   }
