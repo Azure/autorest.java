@@ -72,7 +72,8 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     }
 
     /**
-     * The interface defining all the services for LegacyClientCreateResourcePollViaOperationLocations to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for LegacyClientCreateResourcePollViaOperationLocations to be used by the
+     * proxy service to perform REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "LegacyClientCreateRe")
@@ -119,6 +120,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Poll a Job.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -165,6 +167,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Poll a Job.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     jobId: String (Required)
@@ -211,6 +214,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -235,6 +239,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -259,6 +264,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -288,6 +294,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -317,6 +324,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     comment: String (Required)
@@ -346,6 +354,7 @@ public final class CreateResourcePollViaOperationLocationsImpl {
     /**
      * Creates a Job.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     comment: String (Required)

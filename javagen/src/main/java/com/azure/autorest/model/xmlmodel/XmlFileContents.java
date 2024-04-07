@@ -48,7 +48,7 @@ public class XmlFileContents {
     }
 
     public final String[] getLines() {
-        return toString().split(java.util.regex.Pattern.quote("\n"), -1);
+        return toString().split("\n", -1);
     }
 
     public final void addToPrefix(String toAdd) {
@@ -79,7 +79,7 @@ public class XmlFileContents {
     }
 
     private void text(String text, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<String>();
+        ArrayList<String> lines = new ArrayList<>();
 
         if (text == null || text.isEmpty()) {
             lines.add("");
@@ -124,15 +124,11 @@ public class XmlFileContents {
     }
 
     private void line(String text, boolean addPrefix) {
-        text(String.format("%1$s%2$s", text, System.lineSeparator()), addPrefix);
+        text(text + "\n", addPrefix);
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void line(String text, Object... formattedArguments) {
-        if (formattedArguments != null && formattedArguments.length > 0) {
-            text = String.format(text, formattedArguments);
-        }
-
+    public void line(String text) {
         if (currentLineType == CurrentLineType.Empty) {
             line(text, true);
         } else if (currentLineType == CurrentLineType.Text) {
@@ -144,33 +140,41 @@ public class XmlFileContents {
         currentLineType = CurrentLineType.Empty;
     }
 
+    public void line(String text, Object... formattedArguments) {
+        if (formattedArguments != null && formattedArguments.length > 0) {
+            text = String.format(text, formattedArguments);
+        }
+
+        line(text);
+    }
+
     public void line() {
         line("");
     }
 
     public void tag(String tag, String value) {
-        line("<%s>%s</%s>", tag, value, tag);
+        line("<" + tag + ">" + value + "</" + tag + ">");
     }
 
     public void block(String text, Consumer<XmlBlock> bodyAction) {
-        line("<%s>", text);
+        line("<" + text + ">");
         indent(() ->
                 bodyAction.accept(new XmlBlock(this)));
-        line("</%s>", text);
+        line("</" + text + ">");
     }
 
     public void block(String text, Map<String, String> annotations, Consumer<XmlBlock> bodyAction) {
         if (annotations != null && !annotations.isEmpty()) {
             String append = annotations.entrySet().stream()
-                    .map(entry -> String.format("%s=\"%s\"", entry.getKey(), entry.getValue()))
-                    .collect(Collectors.joining(" "));
-            line("<%s %s>", text, append);
+                .map(entry -> entry.getKey() + "=\"" + entry.getValue() + "\"")
+                .collect(Collectors.joining(" "));
+            line("<" + text + " " + append + ">");
         } else {
-            line("<%s>", text);
+            line("<" + text + ">");
         }
         indent(() ->
                 bodyAction.accept(new XmlBlock(this)));
-        line("</%s>", text);
+        line("</" + text + ">");
     }
 
     public void blockComment(String text) {

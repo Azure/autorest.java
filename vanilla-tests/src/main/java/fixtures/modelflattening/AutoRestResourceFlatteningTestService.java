@@ -127,7 +127,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * The interface defining all the services for AutoRestResourceFlatteningTestService to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestResourceFlatteningTestService to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestResourceFlat")
@@ -418,7 +419,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -439,7 +441,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param resourceArray External Resource as an Array to put.
      * @param context The context to associate with this operation.
@@ -461,7 +464,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -475,7 +479,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -488,7 +493,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param resourceArray External Resource as an Array to put.
      * @param context The context to associate with this operation.
@@ -503,7 +509,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param resourceArray External Resource as an Array to put.
      * @param context The context to associate with this operation.
@@ -518,7 +525,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param resourceArray External Resource as an Array to put.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -531,7 +539,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -543,7 +552,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -559,7 +569,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -577,7 +588,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -589,7 +601,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -603,7 +616,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -617,7 +631,8 @@ public final class AutoRestResourceFlatteningTestService {
     }
 
     /**
-     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if it's referenced in an array.
+     * No need to have a route in Express server for this operation. Used to verify the type flattened is not removed if
+     * it's referenced in an array.
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -981,7 +996,8 @@ public final class AutoRestResourceFlatteningTestService {
      * 
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return external Resource as a ResourceCollection along with {@link Response} on successful completion of {@link Mono}.
+     * @return external Resource as a ResourceCollection along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceCollection>> getResourceCollectionWithResponseAsync() {
@@ -999,7 +1015,8 @@ public final class AutoRestResourceFlatteningTestService {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return external Resource as a ResourceCollection along with {@link Response} on successful completion of {@link Mono}.
+     * @return external Resource as a ResourceCollection along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<ResourceCollection>> getResourceCollectionWithResponseAsync(Context context) {
@@ -1195,7 +1212,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param capacity Capacity of product. For example, 4 people.
@@ -1239,7 +1257,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param capacity Capacity of product. For example, 4 people.
@@ -1283,7 +1302,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param capacity Capacity of product. For example, 4 people.
@@ -1305,7 +1325,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1325,7 +1346,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param capacity Capacity of product. For example, 4 people.
@@ -1348,7 +1370,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param capacity Capacity of product. For example, 4 people.
@@ -1371,7 +1394,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @param description Description of product.
      * @param maxProductDisplayName Display name of product.
      * @param capacity Capacity of product. For example, 4 people.
@@ -1392,7 +1416,8 @@ public final class AutoRestResourceFlatteningTestService {
     /**
      * Put Flattened Simple Product with client flattening true on the parameter.
      * 
-     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
+     * @param productId Unique identifier representing a specific product for a given latitude &amp; longitude. For
+     * example, uberX in San Francisco will have a different product_id than uberX in Los Angeles.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

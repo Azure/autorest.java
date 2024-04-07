@@ -14,7 +14,6 @@ import com.azure.autorest.model.clientmodel.MapType;
 import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 
-import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
@@ -122,13 +121,7 @@ public class ModelTestCaseUtil {
         } else if (type == ClassType.UUID) {
             return UUID.randomUUID().toString();
         } else if (type == ClassType.URL) {
-            String url = "http://example.org/";
-            try {
-                url += URLEncoder.encode(randomString(), StandardCharsets.UTF_8.name());
-            } catch (UnsupportedEncodingException e) {
-                // NOOP
-            }
-            return url;
+            return  "http://example.org/" + URLEncoder.encode(randomString(), StandardCharsets.UTF_8);
         } else if (type == ClassType.OBJECT) {
             // unknown type, use a simple string
             return "data" + randomString();
@@ -296,9 +289,9 @@ public class ModelTestCaseUtil {
                 .toString();
     }
 
+
+    private static final OffsetDateTime TIME = OffsetDateTime.parse("2020-12-20T00:00:00.000Z");
     private static OffsetDateTime randomDateTime() {
-        OffsetDateTime time = OffsetDateTime.parse("2020-12-20T00:00:00.000Z");
-        time = time.plusSeconds(RANDOM.nextInt(356 * 24 * 60 * 60));
-        return time;
+        return TIME.plusSeconds(RANDOM.nextInt(356 * 24 * 60 * 60));
     }
 }

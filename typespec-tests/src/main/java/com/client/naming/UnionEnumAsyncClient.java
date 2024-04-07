@@ -42,6 +42,7 @@ public final class UnionEnumAsyncClient {
     /**
      * The unionEnumName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String(value1)
      * }</pre>
@@ -63,8 +64,9 @@ public final class UnionEnumAsyncClient {
     /**
      * The unionEnumMemberName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * String(value1/value2)
+     * String(value1 / value2)
      * }</pre>
      * 
      * @param body The body parameter.

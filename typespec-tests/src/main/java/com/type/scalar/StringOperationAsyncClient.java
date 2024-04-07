@@ -40,6 +40,7 @@ public final class StringOperationAsyncClient {
     /**
      * get string value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -60,6 +61,7 @@ public final class StringOperationAsyncClient {
     /**
      * put string value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>

@@ -52,7 +52,8 @@ public final class BuiltinOpsImpl {
     }
 
     /**
-     * The interface defining all the services for SpecialCharsClientBuiltinOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for SpecialCharsClientBuiltinOps to be used by the proxy service to
+     * perform REST calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "SpecialCharsClientBu")
@@ -79,12 +80,15 @@ public final class BuiltinOpsImpl {
     /**
      * The read operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -113,12 +117,15 @@ public final class BuiltinOpsImpl {
     /**
      * The read operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
      * }
      * }</pre>
+     * 
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)

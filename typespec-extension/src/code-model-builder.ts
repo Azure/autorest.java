@@ -60,7 +60,7 @@ import {
   HttpOperationBody,
   Visibility,
 } from "@typespec/http";
-import { getAddedOnVersions, getVersion } from "@typespec/versioning";
+import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersion } from "@typespec/versioning";
 import {
   isPollingLocation,
   getPagedResult,
@@ -84,6 +84,7 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
+<<<<<<< HEAD
   getAllModels,
   getClientType,
   SdkModelType,
@@ -102,6 +103,9 @@ import {
   isSdkBuiltInKind,
   SdkArrayType,
   SdkDictionaryType,
+=======
+  getDefaultApiVersion,
+>>>>>>> remote/main
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -218,6 +222,8 @@ export class CodeModelBuilder {
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, undefined means type visited but not completed
 
   private operationExamples: Map<Operation, any> = new Map<Operation, any>();
+  // current apiVersion name to generate code
+  private apiVersion: Version | undefined;
 
   public constructor(program1: Program, context: EmitContext<EmitterOptions>) {
     this.options = context.options;
@@ -281,6 +287,12 @@ export class CodeModelBuilder {
 
   public async build(): Promise<CodeModel> {
     this.operationExamples = await loadExamples(this.program, this.options);
+
+    if (this.sdkContext.arm) {
+      // ARM
+      this.codeModel.arm = true;
+      this.options["group-etag-headers"] = false;
+    }
 
     const clients = this.processClients();
 
@@ -589,12 +601,6 @@ export class CodeModelBuilder {
 
   private processClients(): SdkClient[] {
     const clients = listClients(this.sdkContext);
-    for (const client of clients) {
-      if (client.arm) {
-        this.codeModel.arm = true;
-        this.options["group-etag-headers"] = false;
-      }
-    }
     // preprocess group-etag-headers
     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
 
@@ -617,6 +623,8 @@ export class CodeModelBuilder {
           apiVersion.version = version.value;
           codeModelClient.apiVersions.push(apiVersion);
         }
+
+        this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
       }
 
       // server
@@ -722,6 +730,9 @@ export class CodeModelBuilder {
   }
 
   private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
+    if (!this.existsAtCurrentVersion(operation)) {
+      return true;
+    }
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
     if (getOverloadedOperation(this.program, operation)) {
@@ -729,6 +740,27 @@ export class CodeModelBuilder {
       return true;
     }
     return false;
+  }
+
+  private existsAtCurrentVersion(type: Type): boolean {
+    const availabilityMap = getAvailabilityMap(this.program, type);
+    // if unversioned then everything exists
+    if (
+      !availabilityMap ||
+      !this.apiVersion ||
+      this.supportsAdvancedVersioning() // if supports non-breaking versioning, then it always exists
+    ) {
+      return true;
+    }
+    const availability = availabilityMap.get(this.apiVersion?.name);
+    return availability === Availability.Added || availability === Availability.Available;
+  }
+
+  /**
+   * Whether we support advanced versioning in non-breaking fashion.
+   */
+  private supportsAdvancedVersioning(): boolean {
+    return Boolean(this.options["advanced-versioning"]);
   }
 
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
@@ -820,7 +852,9 @@ export class CodeModelBuilder {
     // host
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
-    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it, clientContext));
+    op.parameters.parameters
+      .filter((param) => this.existsAtCurrentVersion(param.param))
+      .map((it) => this.processParameter(codeModelOperation, it, clientContext));
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
@@ -1014,7 +1048,7 @@ export class CodeModelBuilder {
       if (this.isArm()) {
         // Currently we assume ARM tsp only have one client and one api-version.
         // TODO: How will service define mixed api-versions(like those in Compute RP)?
-        const apiVersion = clientContext.apiVersions[0];
+        const apiVersion = this.apiVersion?.value;
         if (!this._armApiVersionParameter) {
           this._armApiVersionParameter = this.createApiVersionParameter(
             "api-version",
@@ -1067,8 +1101,7 @@ export class CodeModelBuilder {
         extensions = { "x-ms-skip-url-encoding": true };
       }
 
-      // currently under dev-options.support-versioning
-      if (this.options["dev-options"] && this.options["dev-options"]["support-versioning"]) {
+      if (this.supportsAdvancedVersioning()) {
         // versioning
         const addedOn = getAddedOnVersions(this.program, param.param);
         if (addedOn) {
@@ -2337,7 +2370,10 @@ export class CodeModelBuilder {
     // properties
     for (const prop of type.properties) {
       // TODO: skip discriminator property
-      if (prop.name === type.discriminatorProperty?.name || prop.name === type.baseModel?.discriminatorProperty?.name) {
+      if (prop.name === type.discriminatorProperty?.name || 
+        // prop.name === type.baseModel?.discriminatorProperty?.name ||
+        !isPayloadProperty(this.program, prop.__raw as ModelProperty) ||
+        !this.existsAtCurrentVersion(prop.__raw as ModelProperty)) {
         continue;
       } else {
         objectSchema.addProperty(this.processModelPropertyFromSdkType(prop));
@@ -2373,7 +2409,9 @@ export class CodeModelBuilder {
     const resource = this.dummyObjectSchemaFromSdkType(type, resourceModelName, namespace);
     const declaredProperties = type.properties;
     for (const prop of declaredProperties) {
-      resource.addProperty(this.processModelPropertyFromSdkType(prop));
+      if (this.existsAtCurrentVersion(type.__raw as Type)) {      
+        resource.addProperty(this.processModelPropertyFromSdkType(prop));
+      }
     }
     return resource;
   }

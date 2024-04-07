@@ -76,6 +76,7 @@ public final class NamingAsyncClient {
     /**
      * The client operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -99,6 +100,7 @@ public final class NamingAsyncClient {
     /**
      * The language operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     defaultName: boolean (Required)
@@ -123,6 +125,7 @@ public final class NamingAsyncClient {
     /**
      * The compatibleWithEncodedName operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     wireName: boolean (Required)

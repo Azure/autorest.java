@@ -54,7 +54,8 @@ public final class DecimalTypesImpl {
     }
 
     /**
-     * The interface defining all the services for ScalarClientDecimalTypes to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for ScalarClientDecimalTypes to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("http://localhost:3000")
     @ServiceInterface(name = "ScalarClientDecimalT")
@@ -117,6 +118,7 @@ public final class DecimalTypesImpl {
     /**
      * The responseBody operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BigDecimal
      * }</pre>
@@ -126,7 +128,8 @@ public final class DecimalTypesImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return a decimal number with any length and precision along with {@link Response} on successful completion of {@link Mono}.
+     * @return a decimal number with any length and precision along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Response<BinaryData>> responseBodyWithResponseAsync(RequestOptions requestOptions) {
@@ -137,6 +140,7 @@ public final class DecimalTypesImpl {
     /**
      * The responseBody operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BigDecimal
      * }</pre>
@@ -157,6 +161,7 @@ public final class DecimalTypesImpl {
     /**
      * The requestBody operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BigDecimal
      * }</pre>
@@ -179,6 +184,7 @@ public final class DecimalTypesImpl {
     /**
      * The requestBody operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BigDecimal
      * }</pre>

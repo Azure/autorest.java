@@ -109,6 +109,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
 
     /**
      * javadoc
+     *
      * @param aggregate javadoc
      */
     public void setAggregate(String aggregate) {
@@ -117,6 +118,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
 
     /**
      * javadoc
+     *
      * @return javadoc
      */
     public String getTestProperty() {
@@ -125,6 +127,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
 
     /**
      * javadoc
+     *
      * @param testProperty javadoc
      */
     public void setTestProperty(String testProperty) {

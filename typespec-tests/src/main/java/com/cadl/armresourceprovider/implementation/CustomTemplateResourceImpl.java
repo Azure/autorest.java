@@ -9,7 +9,9 @@ import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResource;
+import com.cadl.armresourceprovider.models.CustomTemplateResourcePatch;
 import com.cadl.armresourceprovider.models.CustomTemplateResourceProperties;
+import com.cadl.armresourceprovider.models.ManagedIdentityProperties;
 import java.util.Collections;
 import java.util.Map;
 
@@ -48,6 +50,10 @@ public final class CustomTemplateResourceImpl
         return this.innerModel().properties();
     }
 
+    public ManagedIdentityProperties identity() {
+        return this.innerModel().identity();
+    }
+
     public SystemData systemData() {
         return this.innerModel().systemData();
     }
@@ -80,6 +86,8 @@ public final class CustomTemplateResourceImpl
 
     private String createIfNoneMatch;
 
+    private CustomTemplateResourcePatch updateProperties;
+
     public CustomTemplateResourceImpl withExistingResourceGroup(String resourceGroupName) {
         this.resourceGroupName = resourceGroupName;
         return this;
@@ -110,22 +118,21 @@ public final class CustomTemplateResourceImpl
     }
 
     public CustomTemplateResourceImpl update() {
+        this.updateProperties = new CustomTemplateResourcePatch();
         return this;
     }
 
     public CustomTemplateResource apply() {
         this.innerObject = serviceManager.serviceClient()
             .getCustomTemplateResourceInterfaces()
-            .updateWithResponse(resourceGroupName, customTemplateResourceName, this.innerModel(), Context.NONE)
-            .getValue();
+            .updateLongRunning(resourceGroupName, customTemplateResourceName, updateProperties, Context.NONE);
         return this;
     }
 
     public CustomTemplateResource apply(Context context) {
         this.innerObject = serviceManager.serviceClient()
             .getCustomTemplateResourceInterfaces()
-            .updateWithResponse(resourceGroupName, customTemplateResourceName, this.innerModel(), context)
-            .getValue();
+            .updateLongRunning(resourceGroupName, customTemplateResourceName, updateProperties, context);
         return this;
     }
 
@@ -158,6 +165,16 @@ public final class CustomTemplateResourceImpl
         return this;
     }
 
+    public CustomTemplateResourceImpl withIdentity(ManagedIdentityProperties identity) {
+        if (isInCreateMode()) {
+            this.innerModel().withIdentity(identity);
+            return this;
+        } else {
+            this.updateProperties.withIdentity(identity);
+            return this;
+        }
+    }
+
     public CustomTemplateResourceImpl withIfMatch(String ifMatch) {
         this.createIfMatch = ifMatch;
         return this;
@@ -166,5 +183,14 @@ public final class CustomTemplateResourceImpl
     public CustomTemplateResourceImpl withIfNoneMatch(String ifNoneMatch) {
         this.createIfNoneMatch = ifNoneMatch;
         return this;
+    }
+
+    public CustomTemplateResourceImpl withPropertyRemovedInStable(String propertyRemovedInStable) {
+        this.updateProperties.withPropertyRemovedInStable(propertyRemovedInStable);
+        return this;
+    }
+
+    private boolean isInCreateMode() {
+        return this.innerModel().id() == null;
     }
 }

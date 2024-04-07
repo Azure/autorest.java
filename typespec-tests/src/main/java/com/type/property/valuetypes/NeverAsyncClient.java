@@ -41,9 +41,9 @@ public final class NeverAsyncClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * {
-     * }
+     * { }
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -62,9 +62,9 @@ public final class NeverAsyncClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
-     * {
-     * }
+     * { }
      * }</pre>
      * 
      * @param body body.

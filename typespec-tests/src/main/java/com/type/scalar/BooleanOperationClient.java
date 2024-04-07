@@ -38,6 +38,7 @@ public final class BooleanOperationClient {
     /**
      * get boolean value.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -58,6 +59,7 @@ public final class BooleanOperationClient {
     /**
      * put boolean value.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>

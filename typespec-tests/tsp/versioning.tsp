@@ -19,6 +19,7 @@ enum ApiVersions {
   @useDependency(global.Azure.Core.Versions.v1_0_Preview_2)
   v2022_06_01_preview: "2022-06-01-preview",
 
+  v2022_09_01: "2022-09-01",
   v2022_12_01_preview: "2022-12-01-preview",
 }
 
@@ -37,6 +38,13 @@ model Resource {
 model ExportedResource {
   id: string;
   resourceUri: string;
+
+  @removed(ApiVersions.v2022_09_01)
+  name: string;
+
+  @removed(ApiVersions.v2022_09_01)
+  @added(ApiVersions.v2022_12_01_preview)
+  type: string;
 }
 
 model ExportParams {
@@ -46,6 +54,15 @@ model ExportParams {
   @added(ApiVersions.v2022_12_01_preview)
   @query
   projectedFileFormat?: string;
+
+  @removed(ApiVersions.v2022_09_01)
+  @query
+  removedQueryParam?: string;
+
+  @removed(ApiVersions.v2022_09_01)
+  @added(ApiVersions.v2022_12_01_preview)
+  @query
+  maxLines?: int32;
 }
 
 model ListQueryParams {
@@ -55,6 +72,10 @@ model ListQueryParams {
   @query
   @doc("Filter the result list using the given expression.")
   filter?: string;
+
+  @removed(ApiVersions.v2022_12_01_preview)
+  @query
+  expand?: string;
 }
 
 interface ResourceOperations
@@ -68,4 +89,12 @@ interface VersioningOp {
   export is ResourceOperations.LongRunningResourceAction<Resource, ExportParams, ExportedResource>;
 
   list is ResourceOperations.ResourceList<Resource, ListQueryParametersTrait<ListQueryParams>>;
+
+  @removed(ApiVersions.v2022_12_01_preview)
+  @sharedRoute
+  create is ResourceOperations.ResourceCreateOrReplace<Resource>;
+
+  @added(ApiVersions.v2022_12_01_preview)
+  @sharedRoute
+  createLongRunning is ResourceOperations.LongRunningResourceCreateOrReplace<Resource>;
 }

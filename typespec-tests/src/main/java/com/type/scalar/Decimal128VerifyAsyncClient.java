@@ -43,6 +43,7 @@ public final class Decimal128VerifyAsyncClient {
     /**
      * The prepareVerify operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *     BigDecimal (Required)
@@ -65,6 +66,7 @@ public final class Decimal128VerifyAsyncClient {
     /**
      * The verify operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BigDecimal
      * }</pre>

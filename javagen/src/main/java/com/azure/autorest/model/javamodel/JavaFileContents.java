@@ -11,29 +11,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.function.Consumer;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class JavaFileContents {
     private static final String SINGLE_INDENT = "    ";
-    private static final Pattern QUOTED_NEW_LINE = Pattern.compile(Pattern.quote("\n"));
 
-    private final StringBuilder contents;
-    private final StringBuilder linePrefix;
+    private final List<String> contents;
 
-    private CurrentLineType currentLineType = CurrentLineType.values()[0];
+    private String currentLine;
+    private String linePrefix;
+
+    private CurrentLineType currentLineType = CurrentLineType.Empty;
 
     public JavaFileContents() {
-        this(null);
-    }
-
-    public JavaFileContents(String fileContents) {
-        contents = new StringBuilder();
-        linePrefix = new StringBuilder();
-
-        if (fileContents != null && !fileContents.isEmpty()) {
-            contents.append(fileContents);
-        }
+        this.currentLine = "";
+        this.linePrefix = "";
+        this.contents = new ArrayList<>();
     }
 
     private static String toString(List<JavaModifier> modifiers) {
@@ -42,23 +35,23 @@ public class JavaFileContents {
 
     @Override
     public String toString() {
-        return contents.toString();
+        return String.join("\n", contents) + currentLine;
     }
 
-    public final String[] getLines() {
-        return QUOTED_NEW_LINE.split(toString(), -1);
+    public boolean contains(String str) {
+        return contents.stream().anyMatch(line -> line.contains(str));
     }
 
     public final void addToPrefix(String toAdd) {
-        linePrefix.append(toAdd);
+        linePrefix += toAdd;
     }
 
     private void removeFromPrefix(String toRemove) {
         int toRemoveLength = toRemove.length();
         if (linePrefix.length() <= toRemoveLength) {
-            linePrefix.setLength(0);
+            linePrefix = "";
         } else {
-            linePrefix.delete(linePrefix.length() - toRemoveLength, linePrefix.length() - toRemoveLength + toRemoveLength);
+            linePrefix = linePrefix.substring(0, linePrefix.length() - toRemoveLength);
         }
     }
 
@@ -76,61 +69,58 @@ public class JavaFileContents {
         removeFromPrefix(SINGLE_INDENT);
     }
 
-    private void text(String text, boolean addPrefix) {
-        ArrayList<String> lines = new ArrayList<String>();
+    private void text(String text, boolean addPrefix, boolean completeLastLine) {
+        String prefix = addPrefix ? linePrefix : null;
 
         if (text == null || text.isEmpty()) {
-            lines.add("");
+            handleLine("", prefix, true, completeLastLine);
         } else {
             int lineStartIndex = 0;
             int textLength = text.length();
             while (lineStartIndex < textLength) {
                 int newLineCharacterIndex = text.indexOf('\n', lineStartIndex);
                 if (newLineCharacterIndex == -1) {
-                    String line = text.substring(lineStartIndex);
-                    lines.add(line);
-                    lineStartIndex = textLength;
+                    handleLine(text.substring(lineStartIndex), prefix, true, completeLastLine);
+                    break;
                 } else {
-                    int nextLineStartIndex = newLineCharacterIndex + 1;
-                    String line = text.substring(lineStartIndex, nextLineStartIndex);
-                    lines.add(line);
-                    lineStartIndex = nextLineStartIndex;
+                    handleLine(text.substring(lineStartIndex, newLineCharacterIndex), prefix, false, completeLastLine);
+                    lineStartIndex = newLineCharacterIndex + 1;
                 }
             }
         }
+    }
 
-        String prefix = addPrefix ? linePrefix.toString() : null;
-        for (String line : lines) {
-            if (addPrefix && prefix != null && !prefix.trim().isEmpty() || (prefix != null && !prefix.isEmpty() && line != null && !line.trim().isEmpty())) {
-                contents.append(prefix);
-            }
+    private void handleLine(String line, String prefix, boolean lastLine, boolean completeLastLine) {
+        if (prefix != null
+            && (!prefix.trim().isEmpty() || (!prefix.isEmpty() && line != null && !line.trim().isEmpty()))) {
+            currentLine += prefix;
+        }
 
-            contents.append(line);
+        currentLine += line;
+        if (!lastLine || completeLastLine) {
+            contents.add(currentLine);
+            currentLine = "";
         }
     }
 
     public final void text(String text) {
         if (currentLineType == CurrentLineType.Empty) {
-            text(text, true);
+            text(text, true, false);
         } else if (currentLineType == CurrentLineType.Text) {
-            text(text, false);
+            text(text, false, false);
         } else if (currentLineType == CurrentLineType.AfterIf) {
             line("", false);
-            text(text, true);
+            text(text, true, false);
         }
         currentLineType = CurrentLineType.Text;
     }
 
     private void line(String text, boolean addPrefix) {
-        text(String.format("%s%s", text, System.lineSeparator()), addPrefix);
+        text(text, addPrefix, true);
         currentLineType = CurrentLineType.Empty;
     }
 
-    public void line(String text, Object... formattedArguments) {
-        if (formattedArguments != null && formattedArguments.length > 0) {
-            text = String.format(text, formattedArguments);
-        }
-
+    public void line(String text) {
         if (currentLineType == CurrentLineType.Empty) {
             line(text, true);
         } else if (currentLineType == CurrentLineType.Text) {
@@ -142,18 +132,25 @@ public class JavaFileContents {
         currentLineType = CurrentLineType.Empty;
     }
 
+    public void line(String text, Object... formattedArguments) {
+        if (formattedArguments != null && formattedArguments.length > 0) {
+            text = String.format(text, formattedArguments);
+        }
+
+        line(text);
+    }
+
     public void line() {
         line("");
     }
 
     public void declarePackage(String pkg) {
-        line("package %s;", pkg);
+        line("package " + pkg + ";");
     }
 
     public void block(String text, Consumer<JavaBlock> bodyAction) {
-        line("%s {", text);
-        indent(() ->
-                bodyAction.accept(new JavaBlock(this)));
+        line(text + " {");
+        indent(() -> bodyAction.accept(new JavaBlock(this)));
         line("}");
     }
 
@@ -167,7 +164,7 @@ public class JavaFileContents {
             importSet.addAll(imports);
             for (String toImport : importSet) {
                 if (toImport != null && !toImport.isEmpty()) {
-                    line("import %s;", toImport);
+                    line("import " + toImport + ";");
                 }
             }
             line();
@@ -209,11 +206,11 @@ public class JavaFileContents {
     }
 
     public void methodReturn(String text) {
-        line("return %s;", text);
+        line("return " + text + ";");
     }
 
     public void returnAnonymousClass(String anonymousClassDeclaration, Consumer<JavaClass> anonymousClassBlock) {
-        line("return %s {", anonymousClassDeclaration);
+        line("return " + anonymousClassDeclaration + " {");
         indent(() -> {
             JavaClass javaClass = new JavaClass(this);
             anonymousClassBlock.accept(javaClass);
@@ -222,7 +219,7 @@ public class JavaFileContents {
     }
 
     public void anonymousClass(String anonymousClassDeclaration, String instanceName, Consumer<JavaClass> anonymousClassBlock) {
-        line("%1$s %2$s = new %1$s() {", anonymousClassDeclaration, instanceName);
+        line(anonymousClassDeclaration + " " + instanceName + " = new " + anonymousClassDeclaration + "() {");
         indent(() -> {
             JavaClass javaClass = new JavaClass(this);
             anonymousClassBlock.accept(javaClass);
@@ -238,7 +235,7 @@ public class JavaFileContents {
         if (annotations != null && !annotations.isEmpty()) {
             for (String annotation : annotations) {
                 if (annotation != null && !annotation.isEmpty()) {
-                    line("@%s", annotation);
+                    line("@" + annotation);
                 }
             }
         }
@@ -267,11 +264,11 @@ public class JavaFileContents {
     }
 
     public void constructor(JavaVisibility visibility, String constructorSignature, Consumer<JavaBlock> constructor) {
-        block(String.format("%s %s", visibility, constructorSignature), constructor);
+        block(visibility + " " + constructorSignature, constructor);
     }
 
     public void enumBlock(JavaVisibility visibility, String enumName, Consumer<JavaEnum> enumAction) {
-        block(String.format("%s enum %s", visibility, enumName), block -> {
+        block(visibility + " enum " + enumName, block -> {
             if (enumAction != null) {
                 JavaEnum javaEnum = new JavaEnum(this);
                 enumAction.accept(javaEnum);
@@ -281,20 +278,20 @@ public class JavaFileContents {
     }
 
     public void interfaceBlock(JavaVisibility visibility, String interfaceSignature, Consumer<JavaInterface> interfaceAction) {
-        line("%s interface %s {", visibility, interfaceSignature);
+        line(visibility + " interface " + interfaceSignature + " {");
         indent(() -> interfaceAction.accept(new JavaInterface(this)));
         line("}");
     }
 
     public void ifBlock(String condition, Consumer<JavaBlock> ifAction) {
-        line("if (%s) {", condition);
+        line("if (" + condition + ") {");
         indent(() -> ifAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
     public void elseIfBlock(String condition, Consumer<JavaBlock> ifAction) {
-        line(String.format(" else if (%s) {", condition), false);
+        line(" else if (" + condition + ") {", false);
         indent(() -> ifAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
@@ -314,14 +311,14 @@ public class JavaFileContents {
     }
 
     public void tryBlock(String resource, Consumer<JavaBlock> tryAction) {
-        line("try (%s) {", resource);
+        line("try (" + resource + ") {");
         indent(() -> tryAction.accept(new JavaBlock(this)));
         text("}");
         currentLineType = CurrentLineType.AfterIf;
     }
 
     public void catchBlock(String exception, Consumer<JavaBlock> catchAction) {
-        line(String.format(" catch (%s) {", exception), false);
+        line(" catch (" + exception + ") {", false);
         indent(() -> catchAction.accept(new JavaBlock(this)));
         line("}");
         currentLineType = CurrentLineType.AfterIf;
@@ -334,7 +331,7 @@ public class JavaFileContents {
     }
 
     public void lambda(String parameterType, String parameterName, Consumer<JavaLambda> body) {
-        text(String.format("(%s %s) -> ", parameterType, parameterName));
+        text("(" + parameterType + " " + parameterName + ") -> ");
         try (JavaLambda lambda = new JavaLambda(this)) {
             body.accept(lambda);
         }

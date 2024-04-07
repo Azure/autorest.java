@@ -39,6 +39,7 @@ public final class UnknownArrayClient {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Object (Required)
@@ -61,6 +62,7 @@ public final class UnknownArrayClient {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: Object (Required)

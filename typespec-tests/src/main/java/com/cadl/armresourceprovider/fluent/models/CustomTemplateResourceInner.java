@@ -8,6 +8,7 @@ import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
 import com.cadl.armresourceprovider.models.CustomTemplateResourceProperties;
+import com.cadl.armresourceprovider.models.ManagedIdentityProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -21,6 +22,12 @@ public final class CustomTemplateResourceInner extends Resource {
      */
     @JsonProperty(value = "properties")
     private CustomTemplateResourceProperties properties;
+
+    /*
+     * Managed identity.
+     */
+    @JsonProperty(value = "identity")
+    private ManagedIdentityProperties identity;
 
     /*
      * Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -51,6 +58,26 @@ public final class CustomTemplateResourceInner extends Resource {
      */
     public CustomTemplateResourceInner withProperties(CustomTemplateResourceProperties properties) {
         this.properties = properties;
+        return this;
+    }
+
+    /**
+     * Get the identity property: Managed identity.
+     * 
+     * @return the identity value.
+     */
+    public ManagedIdentityProperties identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: Managed identity.
+     * 
+     * @param identity the identity value to set.
+     * @return the CustomTemplateResourceInner object itself.
+     */
+    public CustomTemplateResourceInner withIdentity(ManagedIdentityProperties identity) {
+        this.identity = identity;
         return this;
     }
 
@@ -89,6 +116,9 @@ public final class CustomTemplateResourceInner extends Resource {
     public void validate() {
         if (properties() != null) {
             properties().validate();
+        }
+        if (identity() != null) {
+            identity().validate();
         }
     }
 }

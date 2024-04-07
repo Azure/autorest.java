@@ -71,7 +71,8 @@ public final class UnionFlattenOpsImpl {
     }
 
     /**
-     * The interface defining all the services for UnionClientUnionFlattenOps to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for UnionClientUnionFlattenOps to be used by the proxy service to perform
+     * REST calls.
      */
     @Host("{endpoint}/openai")
     @ServiceInterface(name = "UnionClientUnionFlat")
@@ -158,6 +159,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -186,6 +188,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * The send operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -215,12 +218,13 @@ public final class UnionFlattenOpsImpl {
      * The sendLong operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -255,12 +259,13 @@ public final class UnionFlattenOpsImpl {
      * The sendLong operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     user (Optional): {
@@ -294,9 +299,9 @@ public final class UnionFlattenOpsImpl {
      * The get operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>data</td><td>BinaryData</td><td>No</td><td>The data parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>data</td><td>BinaryData</td><td>No</td><td>The data parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -317,9 +322,9 @@ public final class UnionFlattenOpsImpl {
      * The get operation.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
-     *     <caption>Query Parameters</caption>
-     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     *     <tr><td>data</td><td>BinaryData</td><td>No</td><td>The data parameter</td></tr>
+     * <caption>Query Parameters</caption>
+     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     * <tr><td>data</td><td>BinaryData</td><td>No</td><td>The data parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -339,6 +344,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * A long-running remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -359,7 +365,8 @@ public final class UnionFlattenOpsImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of {@link Mono}.
+     * @return status details for long running operations along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> generateWithResponseAsync(RequestOptions requestOptions) {
@@ -371,6 +378,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * A long-running remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -403,6 +411,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * A long-running remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -441,6 +450,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * A long-running remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -479,6 +489,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * A long-running remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -517,6 +528,7 @@ public final class UnionFlattenOpsImpl {
     /**
      * A long-running remote procedure call (RPC) operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)

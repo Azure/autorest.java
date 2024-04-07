@@ -29,16 +29,24 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
     @Generated
     private final String resourceUri;
 
+    /*
+     * The type property.
+     */
+    @Generated
+    private final String type;
+
     /**
      * Creates an instance of ExportedResource class.
      * 
      * @param id the id value to set.
      * @param resourceUri the resourceUri value to set.
+     * @param type the type value to set.
      */
     @Generated
-    private ExportedResource(String id, String resourceUri) {
+    private ExportedResource(String id, String resourceUri, String type) {
         this.id = id;
         this.resourceUri = resourceUri;
+        this.type = type;
     }
 
     /**
@@ -62,6 +70,16 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
     }
 
     /**
+     * Get the type property: The type property.
+     * 
+     * @return the type value.
+     */
+    @Generated
+    public String getType() {
+        return this.type;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -70,6 +88,7 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("id", this.id);
         jsonWriter.writeStringField("resourceUri", this.resourceUri);
+        jsonWriter.writeStringField("type", this.type);
         return jsonWriter.writeEndObject();
     }
 
@@ -77,7 +96,8 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
      * Reads an instance of ExportedResource from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of ExportedResource if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of ExportedResource if the JsonReader was pointing to an instance of it, or null if it was
+     * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ExportedResource.
      */
@@ -86,6 +106,7 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
         return jsonReader.readObject(reader -> {
             String id = null;
             String resourceUri = null;
+            String type = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -94,11 +115,13 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
                     id = reader.getString();
                 } else if ("resourceUri".equals(fieldName)) {
                     resourceUri = reader.getString();
+                } else if ("type".equals(fieldName)) {
+                    type = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new ExportedResource(id, resourceUri);
+            return new ExportedResource(id, resourceUri, type);
         });
     }
 }

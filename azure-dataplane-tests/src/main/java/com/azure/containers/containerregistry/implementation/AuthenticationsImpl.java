@@ -52,7 +52,8 @@ public final class AuthenticationsImpl {
     }
 
     /**
-     * The interface defining all the services for AzureContainerRegistryAuthentications to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AzureContainerRegistryAuthentications to be used by the proxy service
+     * to perform REST calls.
      */
     @Host("{url}")
     @ServiceInterface(name = "AzureContainerRegist")
@@ -229,7 +230,8 @@ public final class AuthenticationsImpl {
      * Exchange ACR Refresh token for an ACR Access Token.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
-     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope
+     * requests. You obtained this from the Www-Authenticate response header from the challenge.
      * @param refreshToken Must be a valid ACR refresh token.
      * @param grantType Grant type is expected to be refresh_token.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -249,7 +251,8 @@ public final class AuthenticationsImpl {
      * Exchange ACR Refresh token for an ACR Access Token.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
-     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope
+     * requests. You obtained this from the Www-Authenticate response header from the challenge.
      * @param refreshToken Must be a valid ACR refresh token.
      * @param grantType Grant type is expected to be refresh_token.
      * @param context The context to associate with this operation.
@@ -270,7 +273,8 @@ public final class AuthenticationsImpl {
      * Exchange ACR Refresh token for an ACR Access Token.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
-     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope
+     * requests. You obtained this from the Www-Authenticate response header from the challenge.
      * @param refreshToken Must be a valid ACR refresh token.
      * @param grantType Grant type is expected to be refresh_token.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -289,7 +293,8 @@ public final class AuthenticationsImpl {
      * Exchange ACR Refresh token for an ACR Access Token.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
-     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope
+     * requests. You obtained this from the Www-Authenticate response header from the challenge.
      * @param refreshToken Must be a valid ACR refresh token.
      * @param grantType Grant type is expected to be refresh_token.
      * @param context The context to associate with this operation.
@@ -309,7 +314,8 @@ public final class AuthenticationsImpl {
      * Exchange ACR Refresh token for an ACR Access Token.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
-     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope
+     * requests. You obtained this from the Www-Authenticate response header from the challenge.
      * @param refreshToken Must be a valid ACR refresh token.
      * @param grantType Grant type is expected to be refresh_token.
      * @param context The context to associate with this operation.
@@ -330,7 +336,8 @@ public final class AuthenticationsImpl {
      * Exchange ACR Refresh token for an ACR Access Token.
      * 
      * @param serviceParam Indicates the name of your Azure container registry.
-     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * @param scope Which is expected to be a valid scope, and can be specified more than once for multiple scope
+     * requests. You obtained this from the Www-Authenticate response header from the challenge.
      * @param refreshToken Must be a valid ACR refresh token.
      * @param grantType Grant type is expected to be refresh_token.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

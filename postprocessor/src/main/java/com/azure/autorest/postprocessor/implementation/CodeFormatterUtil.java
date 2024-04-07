@@ -52,7 +52,7 @@ public final class CodeFormatterUtil {
 
                 plugin.writeFile(fileEntry.getKey(), file, null);
             } catch (Exception e) {
-                throw new RuntimeException(e);
+                throw new RuntimeException("Failed to format: " + fileEntry.getKey(), e);
             }
         });
     }
@@ -105,7 +105,7 @@ public final class CodeFormatterUtil {
      * @param file The file to remove unused imports from.
      * @return The file with unused imports removed.
      */
-    private static String removeUnusedImports(String file) throws Exception {
+    private static String removeUnusedImports(String file) {
         CompilationUnit compilationUnit = StaticJavaParser.parse(file);
         com.github.javaparser.ast.NodeList<ImportDeclaration> imports = compilationUnit.getImports();
 

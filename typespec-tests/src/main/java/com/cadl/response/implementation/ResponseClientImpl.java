@@ -393,6 +393,7 @@ public final class ResponseClientImpl {
     /**
      * The getBinary operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -413,6 +414,7 @@ public final class ResponseClientImpl {
     /**
      * The getBinary operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * BinaryData
      * }</pre>
@@ -433,6 +435,7 @@ public final class ResponseClientImpl {
     /**
      * The getArray operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *      (Required){
@@ -460,6 +463,7 @@ public final class ResponseClientImpl {
     /**
      * The getArray operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *      (Required){
@@ -487,6 +491,7 @@ public final class ResponseClientImpl {
     /**
      * The getAnotherArray operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *      (Required){
@@ -515,6 +520,7 @@ public final class ResponseClientImpl {
     /**
      * The getAnotherArray operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *      (Required){
@@ -542,6 +548,7 @@ public final class ResponseClientImpl {
     /**
      * The createWithHeaders operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -568,6 +575,7 @@ public final class ResponseClientImpl {
     /**
      * The createWithHeaders operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -626,6 +634,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -646,6 +655,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * boolean
      * }</pre>
@@ -666,6 +676,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -694,6 +705,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -721,6 +733,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -755,6 +768,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -789,6 +803,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -824,6 +839,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -859,6 +875,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -886,6 +903,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -913,6 +931,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -947,6 +966,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -981,6 +1001,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1016,6 +1037,7 @@ public final class ResponseClientImpl {
     /**
      * The most basic operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     id: String (Required)
@@ -1051,6 +1073,7 @@ public final class ResponseClientImpl {
     /**
      * The listStrings operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -1073,6 +1096,7 @@ public final class ResponseClientImpl {
     /**
      * The listStrings operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -1096,6 +1120,7 @@ public final class ResponseClientImpl {
     /**
      * The listStrings operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -1118,6 +1143,7 @@ public final class ResponseClientImpl {
     /**
      * The listStrings operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -1141,6 +1167,7 @@ public final class ResponseClientImpl {
     /**
      * The listIntegers operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * int
      * }</pre>
@@ -1164,6 +1191,7 @@ public final class ResponseClientImpl {
     /**
      * The listIntegers operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * int
      * }</pre>
@@ -1187,6 +1215,7 @@ public final class ResponseClientImpl {
     /**
      * The listIntegers operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * int
      * }</pre>
@@ -1209,6 +1238,7 @@ public final class ResponseClientImpl {
     /**
      * The listIntegers operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * int
      * }</pre>
@@ -1232,6 +1262,7 @@ public final class ResponseClientImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -1260,6 +1291,7 @@ public final class ResponseClientImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * String
      * }</pre>
@@ -1286,6 +1318,7 @@ public final class ResponseClientImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * int
      * }</pre>
@@ -1314,6 +1347,7 @@ public final class ResponseClientImpl {
     /**
      * Get the next page of items.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * int
      * }</pre>

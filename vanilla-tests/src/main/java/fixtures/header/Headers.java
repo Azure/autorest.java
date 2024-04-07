@@ -65,7 +65,8 @@ public final class Headers {
     }
 
     /**
-     * The interface defining all the services for AutoRestSwaggerBATHeaderServiceHeaders to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for AutoRestSwaggerBATHeaderServiceHeaders to be used by the proxy
+     * service to perform REST calls.
      */
     @Host("{$host}")
     @ServiceInterface(name = "AutoRestSwaggerBATHe")
@@ -839,7 +840,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
+     * -2.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
@@ -863,7 +865,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
+     * -2.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
@@ -887,7 +890,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
+     * -2.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
@@ -902,7 +906,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
+     * -2.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
@@ -918,7 +923,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
+     * -2.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
@@ -934,7 +940,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value": -2.
+     * Send a post request with header values "scenario": "positive", "value": 105 or "scenario": "negative", "value":
+     * -2.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 105 or -2.
@@ -1050,7 +1057,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
@@ -1074,7 +1082,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
@@ -1098,7 +1107,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
@@ -1113,7 +1123,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
@@ -1129,7 +1140,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
@@ -1145,7 +1157,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 0.07 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 0.07 or -3.0.
@@ -1261,7 +1274,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -1285,7 +1299,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -1309,7 +1324,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -1324,7 +1340,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -1340,7 +1357,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -1356,7 +1374,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value": -3.0.
+     * Send a post request with header values "scenario": "positive", "value": 7e120 or "scenario": "negative", "value":
+     * -3.0.
      * 
      * @param scenario Send a post request with header values "scenario": "positive" or "negative".
      * @param value Send a post request with header values 7e120 or -3.0.
@@ -1684,7 +1703,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -1708,7 +1728,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -1732,7 +1753,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -1747,7 +1769,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1762,7 +1785,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -1778,7 +1802,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -1794,7 +1819,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @param value Send a post request with header values "The quick brown fox jumps over the lazy dog" or null or "".
@@ -1808,7 +1834,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
+     * Send a post request with header values "scenario": "valid", "value": "The quick brown fox jumps over the lazy
+     * dog" or "scenario": "null", "value": null or "scenario": "empty", "value": "".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "null" or "empty".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -1828,7 +1855,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful completion of {@link Mono}.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseStringResponse> responseStringWithResponseAsync(String scenario) {
@@ -1852,7 +1880,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful completion of {@link Mono}.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseStringResponse> responseStringWithResponseAsync(String scenario, Context context) {
@@ -1874,7 +1903,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful completion of {@link Mono}.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseStringAsync(String scenario) {
@@ -1889,7 +1919,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful completion of {@link Mono}.
+     * @return a response with header values "The quick brown fox jumps over the lazy dog" or null or "" on successful
+     * completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseStringAsync(String scenario, Context context) {
@@ -1925,7 +1956,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
+     * "0001-01-01".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
@@ -1952,7 +1984,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
+     * "0001-01-01".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
@@ -1979,7 +2012,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
+     * "0001-01-01".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
@@ -1994,7 +2028,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
+     * "0001-01-01".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
@@ -2010,7 +2045,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
+     * "0001-01-01".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
@@ -2026,7 +2062,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value": "0001-01-01".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01" or "scenario": "min", "value":
+     * "0001-01-01".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01" or "0001-01-01".
@@ -2142,7 +2179,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -2169,7 +2207,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -2196,7 +2235,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -2211,7 +2251,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -2227,7 +2268,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -2243,7 +2285,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min", "value": "0001-01-01T00:00:00Z".
+     * Send a post request with header values "scenario": "valid", "value": "2010-01-01T12:34:56Z" or "scenario": "min",
+     * "value": "0001-01-01T00:00:00Z".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @param value Send a post request with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z".
@@ -2263,7 +2306,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion of {@link Mono}.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDatetimeResponse> responseDatetimeWithResponseAsync(String scenario) {
@@ -2287,7 +2331,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion of {@link Mono}.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDatetimeResponse> responseDatetimeWithResponseAsync(String scenario, Context context) {
@@ -2309,7 +2354,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion of {@link Mono}.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeAsync(String scenario) {
@@ -2324,7 +2370,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion of {@link Mono}.
+     * @return a response with header values "2010-01-01T12:34:56Z" or "0001-01-01T00:00:00Z" on successful completion
+     * of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeAsync(String scenario, Context context) {
@@ -2360,10 +2407,12 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2385,10 +2434,12 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2411,10 +2462,12 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2426,7 +2479,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2441,10 +2495,12 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2457,10 +2513,12 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT".
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2473,10 +2531,12 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
-     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT".
+     * @param value Send a post request with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00
+     * GMT".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2487,7 +2547,8 @@ public final class Headers {
     }
 
     /**
-     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
+     * Send a post request with header values "scenario": "valid", "value": "Wed, 01 Jan 2010 12:34:56 GMT" or
+     * "scenario": "min", "value": "Mon, 01 Jan 0001 00:00:00 GMT".
      * 
      * @param scenario Send a post request with header values "scenario": "valid" or "min".
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -2507,7 +2568,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on successful completion of {@link Mono}.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithResponseAsync(String scenario) {
@@ -2531,7 +2593,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on successful completion of {@link Mono}.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<HeadersResponseDatetimeRfc1123Response> responseDatetimeRfc1123WithResponseAsync(String scenario,
@@ -2554,7 +2617,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on successful completion of {@link Mono}.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeRfc1123Async(String scenario) {
@@ -2569,7 +2633,8 @@ public final class Headers {
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on successful completion of {@link Mono}.
+     * @return a response with header values "Wed, 01 Jan 2010 12:34:56 GMT" or "Mon, 01 Jan 0001 00:00:00 GMT" on
+     * successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Mono<Void> responseDatetimeRfc1123Async(String scenario, Context context) {

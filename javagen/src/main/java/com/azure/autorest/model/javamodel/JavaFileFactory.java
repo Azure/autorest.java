@@ -9,7 +9,7 @@ import java.io.File;
 import java.nio.file.Paths;
 
 public class JavaFileFactory {
-    private JavaSettings settings;
+    private final JavaSettings settings;
 
     public JavaFileFactory(JavaSettings settings) {
         this.settings = settings;

@@ -43,12 +43,12 @@ public final class VersionedClientImpl {
     private final VersionedClientService service;
 
     /**
-     * Server parameter.
+     * Need to be set as 'http://localhost:3000' in client.
      */
     private final String endpoint;
 
     /**
-     * Gets Server parameter.
+     * Gets Need to be set as 'http://localhost:3000' in client.
      * 
      * @return the endpoint value.
      */
@@ -101,7 +101,7 @@ public final class VersionedClientImpl {
     /**
      * Initializes an instance of VersionedClient client.
      * 
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceVersion Service version.
      */
     public VersionedClientImpl(String endpoint, VersionedServiceVersion serviceVersion) {
@@ -113,7 +113,7 @@ public final class VersionedClientImpl {
      * Initializes an instance of VersionedClient client.
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceVersion Service version.
      */
     public VersionedClientImpl(HttpPipeline httpPipeline, String endpoint, VersionedServiceVersion serviceVersion) {
@@ -125,7 +125,7 @@ public final class VersionedClientImpl {
      * 
      * @param httpPipeline The HTTP pipeline to send requests through.
      * @param serializerAdapter The serializer to serialize an object into a string.
-     * @param endpoint Server parameter.
+     * @param endpoint Need to be set as 'http://localhost:3000' in client.
      * @param serviceVersion Service version.
      */
     public VersionedClientImpl(HttpPipeline httpPipeline, SerializerAdapter serializerAdapter, String endpoint,
@@ -138,7 +138,8 @@ public final class VersionedClientImpl {
     }
 
     /**
-     * The interface defining all the services for VersionedClient to be used by the proxy service to perform REST calls.
+     * The interface defining all the services for VersionedClient to be used by the proxy service to perform REST
+     * calls.
      */
     @Host("{endpoint}")
     @ServiceInterface(name = "VersionedClient")

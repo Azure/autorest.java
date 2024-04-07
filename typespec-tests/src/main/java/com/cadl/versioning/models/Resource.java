@@ -41,7 +41,7 @@ public final class Resource implements JsonSerializable<Resource> {
      * @param type the type value to set.
      */
     @Generated
-    private Resource(String type) {
+    public Resource(String type) {
         this.type = type;
     }
 
@@ -90,7 +90,8 @@ public final class Resource implements JsonSerializable<Resource> {
      * Reads an instance of Resource from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing to JSON null.
+     * @return An instance of Resource if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Resource.
      */

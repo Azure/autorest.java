@@ -42,6 +42,7 @@ public final class Float32ValueAsyncClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: double (Required)
@@ -64,6 +65,7 @@ public final class Float32ValueAsyncClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     String: double (Required)

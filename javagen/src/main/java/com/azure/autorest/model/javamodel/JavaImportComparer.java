@@ -4,7 +4,6 @@
 package com.azure.autorest.model.javamodel;
 
 import java.util.Comparator;
-import java.util.Locale;
 import java.util.Objects;
 
 public class JavaImportComparer implements Comparator<String> {
@@ -33,18 +32,16 @@ public class JavaImportComparer implements Comparator<String> {
 
             int minimumImportPartCount = Math.min(lhsImportParts.length, rhsImportParts.length);
             for (int i = 0; i < minimumImportPartCount; ++i) {
-                String lhsImportPart = lhsImportParts[i].toLowerCase(Locale.ROOT);
-                String rhsImportPart = rhsImportParts[i].toLowerCase(Locale.ROOT);
+                int caseInsensitiveCompareTo = lhsImportParts[i].compareToIgnoreCase(rhsImportParts[i]);
 
-                if (!lhsImportPart.equals(rhsImportPart)) {
+                if (caseInsensitiveCompareTo != 0) {
                     boolean isLastLhsPart = isLastPart(i, lhsImportParts);
                     boolean isLastRhsPart = isLastPart(i, rhsImportParts);
                     if (isLastLhsPart != isLastRhsPart) {
-                        result = isLastLhsPart ? -1 : 1;
+                        return isLastLhsPart ? -1 : 1;
                     } else {
-                        result = lhsImportPart.compareTo(rhsImportPart);
+                        return caseInsensitiveCompareTo;
                     }
-                    break;
                 }
             }
         }

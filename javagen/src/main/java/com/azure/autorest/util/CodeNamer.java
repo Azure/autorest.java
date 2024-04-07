@@ -5,22 +5,16 @@ package com.azure.autorest.util;
 
 import org.atteo.evo.inflector.English;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+
+import static com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacter;
 
 public class CodeNamer {
 
     private static NamerFactory factory = new DefaultNamerFactory();
 
-    private static final Pattern CAMEL_CASE_SPLIT = Pattern.compile("[_\\- ]");
-    private static final Pattern ESCAPE_COMMENT = Pattern.compile(Pattern.quote("*/"));
     private static final Pattern MERGE_UNDERSCORES = Pattern.compile("_{2,}");
     private static final Pattern CHARACTERS_TO_REPLACE_WITH_UNDERSCORE = Pattern.compile("[\\\\/.+ -]+");
 
@@ -36,86 +30,56 @@ public class CodeNamer {
     }
 
     public static String toCamelCase(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return name;
-        }
-
-        if (name.charAt(0) == '_')
-        // Remove leading underscores.
-        {
-            return toCamelCase(name.substring(1));
-        }
-
-        List<String> parts = new ArrayList<>();
-        String[] splits = CAMEL_CASE_SPLIT.split(name);
-        if (splits.length == 0) {
-            return "";
-        }
-        parts.add(formatCase(splits[0], true));
-        for (int i = 1; i != splits.length; i++) {
-            parts.add(formatCase(splits[i], false));
-        }
-        return String.join("", parts);
+        return com.azure.autorest.preprocessor.namer.CodeNamer.toCamelCase(name);
     }
 
     public static String toPascalCase(String name) {
-        if (name == null || name.trim().isEmpty()) {
-            return name;
-        }
-
-        if (name.charAt(0) == '_')
-        // Preserve leading underscores and treat them like
-        // uppercase characters by calling 'CamelCase()' on the rest.
-        {
-            return '_' + toCamelCase(name.substring(1));
-        }
-
-        return CAMEL_CASE_SPLIT.splitAsStream(name)
-                .filter(s -> s != null && !s.isEmpty())
-                .map(s -> formatCase(s, false))
-                .collect(Collectors.joining());
+        return com.azure.autorest.preprocessor.namer.CodeNamer.toPascalCase(name);
     }
 
     public static String escapeXmlComment(String comment) {
-        if (comment == null) {
-            return null;
-        }
-
-        return comment
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;");
+        return com.azure.autorest.preprocessor.namer.CodeNamer.escapeXmlComment(comment);
     }
 
     public static String escapeComment(String comment) {
-        if (comment == null) {
-            return null;
+        if (comment == null || comment.isEmpty()) {
+            return comment;
         }
 
-        return ESCAPE_COMMENT.matcher(comment).replaceAll("*&#47;");
-    }
+        StringBuilder sb = null;
+        int prevStart = 0;
+        int commentLength = comment.length();
+        int replacementIndex;
 
-    private static String formatCase(String name, boolean toLower) {
-        if (name != null && !name.isEmpty()) {
-            if ((name.length() < 2) || ((name.length() == 2) && Character.isUpperCase(name.charAt(0)) && Character.isUpperCase(name.charAt(1)))) {
-                name = toLower ? name.toLowerCase() : name.toUpperCase();
-            } else {
-                name = (toLower ? Character.toLowerCase(name.charAt(0))
-                        : Character.toUpperCase(name.charAt(0))) + name.substring(1);
+        while ((replacementIndex = comment.indexOf("*/", prevStart)) != -1) {
+            if (sb == null) {
+                // Add enough overhead to account for 1/8 of the string to be replaced.
+                sb = new StringBuilder(commentLength + 3 * (commentLength / 8));
             }
+
+            sb.append(comment, prevStart, replacementIndex);
+            sb.append("*&#47;");
+            prevStart = replacementIndex + 2;
         }
-        return name;
+
+        if (sb == null) {
+            return comment;
+        }
+
+        sb.append(comment, prevStart, commentLength);
+        return sb.toString();
     }
 
     public static String removeInvalidCharacters(String name) {
-        return com.azure.autorest.preprocessor.namer.CodeNamer.getValidName(name, '_', '-');
+        return com.azure.autorest.preprocessor.namer.CodeNamer.getValidName(name, c -> c == '_' || c == '-');
     }
 
     public static String getPropertyName(String name) {
         if (name == null || name.trim().isEmpty()) {
             return name;
         }
-        return com.azure.autorest.preprocessor.namer.CodeNamer.getEscapedReservedName(toCamelCase(removeInvalidCharacters(name)), "Property");
+        return com.azure.autorest.preprocessor.namer.CodeNamer.getEscapedReservedName(
+            toCamelCase(removeInvalidCharacters(name)), "Property");
     }
 
     public static String getPlural(String name) {
@@ -168,12 +132,13 @@ public class CodeNamer {
                 result = sb.toString();
             } else {
                 // all char is '_', then transform some '_' to
+                String basicLatinCharacterReplacement = getBasicLatinCharacter(name.charAt(0));
+                if (result.startsWith("_") && basicLatinCharacterReplacement != null) {
+                    result = basicLatinCharacterReplacement + result.substring(1);
 
-                Map<Character, String> basicLaticCharacters = com.azure.autorest.preprocessor.namer.CodeNamer.getBasicLatinCharacters();
-                if (result.startsWith("_") && basicLaticCharacters.containsKey(name.charAt(0))) {
-                    result = basicLaticCharacters.get(name.charAt(0)) + result.substring(1);
-                    if (result.endsWith("_") && basicLaticCharacters.containsKey(name.charAt(name.length() - 1))) {
-                        result = result.substring(0, result.length() - 1) + basicLaticCharacters.get(name.charAt(name.length() - 1));
+                    basicLatinCharacterReplacement = getBasicLatinCharacter(name.charAt(name.length() - 1));
+                    if (result.endsWith("_") && basicLatinCharacterReplacement != null) {
+                        result = result.substring(0, result.length() - 1) + basicLatinCharacterReplacement;
                     }
                 }
             }
@@ -182,15 +147,46 @@ public class CodeNamer {
         return result.toUpperCase();
     }
 
-    private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = new HashSet<>(Arrays.asList(
-            "service",      // the ServiceInterface local variable
-            "client"        // the ManagementClient local variable
-    ));
+    private static final Set<String> RESERVED_CLIENT_METHOD_PARAMETER_NAME = Set.of(
+        "service",      // the ServiceInterface local variable
+        "client"        // the ManagementClient local variable
+    );
 
     public static String getEscapedReservedClientMethodParameterName(String name) {
         if (RESERVED_CLIENT_METHOD_PARAMETER_NAME.contains(name)) {
             name += "Param";
         }
         return name;
+    }
+
+    public static String removeSpaceCharacters(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        StringBuilder sb = null;
+        int prevStart = 0;
+        int strLength = str.length();
+
+        for (int i = 0; i < strLength; i++) {
+            if (Character.isWhitespace(str.charAt(i))) {
+                if (sb == null) {
+                    sb = new StringBuilder(strLength);
+                }
+
+                if (prevStart != i) {
+                    sb.append(str, prevStart, i);
+                }
+
+                prevStart = i + 1;
+            }
+        }
+
+        if (sb == null) {
+            return str;
+        }
+
+        sb.append(str, prevStart, strLength);
+        return sb.toString();
     }
 }

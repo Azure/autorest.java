@@ -6,7 +6,7 @@ package com.azure.autorest.model.javamodel;
 import java.util.function.Consumer;
 
 public class JavaInterface implements JavaType {
-    private JavaFileContents contents;
+    private final JavaFileContents contents;
     private boolean addNewLine;
 
     public JavaInterface(JavaFileContents contents) {

@@ -57,6 +57,13 @@ public interface CustomTemplateResource {
     CustomTemplateResourceProperties properties();
 
     /**
+     * Gets the identity property: Managed identity.
+     * 
+     * @return the identity value.
+     */
+    ManagedIdentityProperties identity();
+
+    /**
      * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
      * 
      * @return the systemData value.
@@ -143,10 +150,11 @@ public interface CustomTemplateResource {
         }
 
         /**
-         * The stage of the CustomTemplateResource definition which contains all the minimum required properties for the resource to be created, but also allows for any other optional properties to be specified.
+         * The stage of the CustomTemplateResource definition which contains all the minimum required properties for the
+         * resource to be created, but also allows for any other optional properties to be specified.
          */
         interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithProperties,
-            DefinitionStages.WithIfMatch, DefinitionStages.WithIfNoneMatch {
+            DefinitionStages.WithIdentity, DefinitionStages.WithIfMatch, DefinitionStages.WithIfNoneMatch {
             /**
              * Executes the create request.
              * 
@@ -190,6 +198,19 @@ public interface CustomTemplateResource {
         }
 
         /**
+         * The stage of the CustomTemplateResource definition allowing to specify identity.
+         */
+        interface WithIdentity {
+            /**
+             * Specifies the identity property: Managed identity..
+             * 
+             * @param identity Managed identity.
+             * @return the next definition stage.
+             */
+            WithCreate withIdentity(ManagedIdentityProperties identity);
+        }
+
+        /**
          * The stage of the CustomTemplateResource definition allowing to specify ifMatch.
          */
         interface WithIfMatch {
@@ -226,7 +247,7 @@ public interface CustomTemplateResource {
     /**
      * The template for CustomTemplateResource update.
      */
-    interface Update extends UpdateStages.WithTags, UpdateStages.WithProperties {
+    interface Update extends UpdateStages.WithIdentity, UpdateStages.WithPropertyRemovedInStable {
         /**
          * Executes the update request.
          * 
@@ -248,29 +269,29 @@ public interface CustomTemplateResource {
      */
     interface UpdateStages {
         /**
-         * The stage of the CustomTemplateResource update allowing to specify tags.
+         * The stage of the CustomTemplateResource update allowing to specify identity.
          */
-        interface WithTags {
+        interface WithIdentity {
             /**
-             * Specifies the tags property: Resource tags..
+             * Specifies the identity property: Managed identity..
              * 
-             * @param tags Resource tags.
+             * @param identity Managed identity.
              * @return the next definition stage.
              */
-            Update withTags(Map<String, String> tags);
+            Update withIdentity(ManagedIdentityProperties identity);
         }
 
         /**
-         * The stage of the CustomTemplateResource update allowing to specify properties.
+         * The stage of the CustomTemplateResource update allowing to specify propertyRemovedInStable.
          */
-        interface WithProperties {
+        interface WithPropertyRemovedInStable {
             /**
-             * Specifies the properties property: The resource-specific properties for this resource..
+             * Specifies the propertyRemovedInStable property: The propertyRemovedInStable property..
              * 
-             * @param properties The resource-specific properties for this resource.
+             * @param propertyRemovedInStable The propertyRemovedInStable property.
              * @return the next definition stage.
              */
-            Update withProperties(CustomTemplateResourceProperties properties);
+            Update withPropertyRemovedInStable(String propertyRemovedInStable);
         }
     }
 }

@@ -1040,7 +1040,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
                             if (settings.isUseClientLogger()) {
                                 ifBlock.line(String.format(
-                                    "throw LOGGER.logExceptionAsError(new IllegalArgumentException(%s));",
+                                    "throw LOGGER.atError().log(new IllegalArgumentException(%s));",
                                     errorMessage));
                             } else {
                                 ifBlock.line(String.format(

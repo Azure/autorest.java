@@ -11,7 +11,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
- * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.
+ * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of
+ * results.
  */
 @Fluent
 public final class PagedOperation {
@@ -24,7 +25,7 @@ public final class PagedOperation {
     /*
      * The link to the next page of items
      */
-    @JsonProperty(value = "nextLink", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /**
@@ -63,14 +64,25 @@ public final class PagedOperation {
     }
 
     /**
+     * Set the nextLink property: The link to the next page of items.
+     * 
+     * @param nextLink the nextLink value to set.
+     * @return the PagedOperation object itself.
+     */
+    public PagedOperation withNextLink(String nextLink) {
+        this.nextLink = nextLink;
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
         if (value() == null) {
-            throw LOGGER.logExceptionAsError(
-                new IllegalArgumentException("Missing required property value in model PagedOperation"));
+            throw LOGGER.atError()
+                .log(new IllegalArgumentException("Missing required property value in model PagedOperation"));
         } else {
             value().forEach(e -> e.validate());
         }

@@ -40,6 +40,7 @@ public final class Int64ValueClient {
     /**
      * The get operation.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *     long (Required)
@@ -62,6 +63,7 @@ public final class Int64ValueClient {
     /**
      * The put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * [
      *     long (Required)

@@ -39,6 +39,7 @@ public final class UnionFloatLiteralClient {
     /**
      * Get models that will return all properties in the model.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(1.25/2.375) (Optional)
@@ -61,6 +62,7 @@ public final class UnionFloatLiteralClient {
     /**
      * Get models that will return the default object.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(1.25/2.375) (Optional)
@@ -83,6 +85,7 @@ public final class UnionFloatLiteralClient {
     /**
      * Put a body with all properties present.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(1.25/2.375) (Optional)
@@ -106,6 +109,7 @@ public final class UnionFloatLiteralClient {
     /**
      * Put a body with default properties.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: String(1.25/2.375) (Optional)

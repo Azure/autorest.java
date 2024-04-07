@@ -39,6 +39,7 @@ public final class Decimal128Client {
     /**
      * Get call.
      * <p><strong>Response Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: BigDecimal (Required)
@@ -61,6 +62,7 @@ public final class Decimal128Client {
     /**
      * Put operation.
      * <p><strong>Request Body Schema</strong></p>
+     * 
      * <pre>{@code
      * {
      *     property: BigDecimal (Required)
