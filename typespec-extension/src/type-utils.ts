@@ -26,7 +26,7 @@ import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
-import { SdkContext, SdkDurationType, SdkModelPropertyType, SdkType, getAllModels } from "@azure-tools/typespec-client-generator-core";
+import { SdkDurationType, SdkType } from "@azure-tools/typespec-client-generator-core";
 
 /** Acts as a cache for processing inputs.
  *
