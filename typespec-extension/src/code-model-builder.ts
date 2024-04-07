@@ -103,6 +103,7 @@ import {
   SdkArrayType,
   SdkDictionaryType,
   getDefaultApiVersion,
+  getSdkModelPropertyType,
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
@@ -1388,6 +1389,8 @@ export class CodeModelBuilder {
       op.requests![0].protocol.http!.mediaTypes.length > 0 &&
       !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
 
+    const sdkType: SdkType = getClientType(this.sdkContext, body);
+    
     let schema: Schema;
     if (
       unknownRequestBody &&
@@ -1398,10 +1401,11 @@ export class CodeModelBuilder {
       // handle binary request body
       schema = this.processBinarySchema(body.type);
     } else {
-      const sdkType = getClientType(this.sdkContext, body);
       schema = this.processSchemaFromSdkType(sdkType, body.name);
     }
-    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
+
+    const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
+    const parameter = new Parameter(this.getName(body) , this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
@@ -1430,7 +1434,7 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
-    if (schema instanceof ObjectSchema && !schema.language.default.name) {
+    if (schema instanceof ObjectSchema && isAnonymousModel) {
       // anonymous model
 
       // name the schema for documentation
