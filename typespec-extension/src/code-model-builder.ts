@@ -84,7 +84,6 @@ import {
   getClientNameOverride,
   shouldFlattenProperty,
   getWireName,
-<<<<<<< HEAD
   getAllModels,
   getClientType,
   SdkModelType,
@@ -103,9 +102,7 @@ import {
   isSdkBuiltInKind,
   SdkArrayType,
   SdkDictionaryType,
-=======
   getDefaultApiVersion,
->>>>>>> remote/main
 } from "@azure-tools/typespec-client-generator-core";
 import { fail } from "assert";
 import {
