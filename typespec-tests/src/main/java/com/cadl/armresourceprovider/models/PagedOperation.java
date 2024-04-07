@@ -25,7 +25,7 @@ public final class PagedOperation {
     /*
      * The link to the next page of items
      */
-    @JsonProperty(value = "nextLink", access = JsonProperty.Access.WRITE_ONLY)
+    @JsonProperty(value = "nextLink")
     private String nextLink;
 
     /**
@@ -61,6 +61,17 @@ public final class PagedOperation {
      */
     public String nextLink() {
         return this.nextLink;
+    }
+
+    /**
+     * Set the nextLink property: The link to the next page of items.
+     * 
+     * @param nextLink the nextLink value to set.
+     * @return the PagedOperation object itself.
+     */
+    public PagedOperation withNextLink(String nextLink) {
+        this.nextLink = nextLink;
+        return this;
     }
 
     /**

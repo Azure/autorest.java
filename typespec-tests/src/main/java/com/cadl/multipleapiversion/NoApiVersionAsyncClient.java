@@ -16,7 +16,6 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.FluxUtil;
 import com.cadl.multipleapiversion.implementation.NoApiVersionClientImpl;
-import java.util.Arrays;
 import reactor.core.publisher.Mono;
 
 /**
@@ -77,10 +76,6 @@ public final class NoApiVersionAsyncClient {
     public Mono<Void> action(String param1) {
         // Generated convenience method for actionWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        if (!Arrays.asList("2022-12-01-preview").contains(serviceClient.getServiceVersion().getVersion())) {
-            return Mono.error(
-                new IllegalArgumentException("Parameter param1 is only available in api-version 2022-12-01-preview."));
-        }
         if (param1 != null) {
             requestOptions.addQueryParam("param1", param1, false);
         }

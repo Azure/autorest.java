@@ -23,7 +23,6 @@ import com.azure.core.util.CoreUtils;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Contains utility methods to help map from modelerfour to Java Autorest.
@@ -92,7 +91,7 @@ final class MapperUtils {
 
     static IType handleResponseSchema(Operation operation, JavaSettings settings) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(operation.getResponses().stream()
-            .map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+            .map(Response::getSchema).filter(Objects::nonNull).iterator());
         boolean xmlWrapperResponse = responseBodySchema != null && responseBodySchema.getSerialization() != null
             && responseBodySchema.getSerialization().getXml() != null
             && responseBodySchema.getSerialization().getXml().isWrapped();

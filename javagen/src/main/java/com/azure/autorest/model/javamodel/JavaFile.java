@@ -18,12 +18,8 @@ public class JavaFile implements JavaContext {
     private final JavaFileContents contents;
 
     public JavaFile(String filePath) {
-        this(filePath, null);
-    }
-
-    public JavaFile(String filePath, String fileContents) {
         this.filePath = filePath;
-        contents = new JavaFileContents(fileContents);
+        this.contents = new JavaFileContents();
     }
 
     public final String getFilePath() {

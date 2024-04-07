@@ -48,7 +48,7 @@ public class XmlFileContents {
     }
 
     public final String[] getLines() {
-        return toString().split(java.util.regex.Pattern.quote("\n"), -1);
+        return toString().split("\n", -1);
     }
 
     public final void addToPrefix(String toAdd) {

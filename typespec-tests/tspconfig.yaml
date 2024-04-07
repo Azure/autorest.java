@@ -10,5 +10,4 @@ options:
     flavor: "Azure"
     dev-options:
       generate-code-model: true
-      support-versioning: true
       loglevel: info

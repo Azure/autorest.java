@@ -41,7 +41,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ProtocolExampleWriter {
@@ -358,20 +357,20 @@ public class ProtocolExampleWriter {
             String value = (String) parameterValue;
             switch (collectionFormat) {
                 case CSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    elements = Arrays.asList(value.split(",", -1));
                     break;
                 case SSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(" "), -1));
+                    elements = Arrays.asList(value.split(" ", -1));
                     break;
                 case PIPES:
-                    elements = Arrays.asList(value.split(Pattern.quote("|"), -1));
+                    elements = Arrays.asList(value.split("\\|", -1));
                     break;
                 case TSV:
-                    elements = Arrays.asList(value.split(Pattern.quote("\t"), -1));
+                    elements = Arrays.asList(value.split("\t", -1));
                     break;
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
-                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    elements = Arrays.asList(value.split(",", -1));
                     break;
             }
         } else if (parameterValue instanceof List) {

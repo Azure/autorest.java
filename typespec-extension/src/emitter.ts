@@ -43,12 +43,13 @@ export interface EmitterOptions {
 
   "group-etag-headers"?: boolean;
 
+  "advanced-versioning"?: boolean;
+
   "dev-options"?: DevOptions;
 }
 
 export interface DevOptions {
   "generate-code-model"?: boolean;
-  "support-versioning"?: boolean;
   "debug"?: boolean;
   "loglevel"?: "off" | "debug" | "info" | "warn" | "error";
   "java-temp-dir"?: string; // working directory for java codegen, e.g. transformed code-model file
@@ -91,6 +92,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
     "polling": { type: "object", additionalProperties: true, nullable: true },
 
     "group-etag-headers": { type: "boolean", nullable: true },
+    "advanced-versioning": { type: "boolean", nullable: true, default: false },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },

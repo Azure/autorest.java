@@ -26,12 +26,11 @@ import com.azure.autorest.model.clientmodel.PrimitiveType;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.util.CoreUtils;
 
-import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.Set;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -42,11 +41,17 @@ public class SchemaUtil {
     }
 
     public static Schema getLowestCommonParent(List<Schema> schemas) {
-        if (schemas == null || schemas.isEmpty()) {
+        return getLowestCommonParent(schemas.iterator());
+    }
+
+    public static Schema getLowestCommonParent(Iterator<Schema> schemas) {
+        if (schemas == null || !schemas.hasNext()) {
             return null;
         }
+
         LinkedList<Schema> chain = null;
-        for (Schema schema : schemas) {
+        while (schemas.hasNext()) {
+            Schema schema = schemas.next();
             if (chain == null) {
                 chain = new LinkedList<>();
                 chain.addFirst(schema);
@@ -83,6 +88,7 @@ public class SchemaUtil {
                 }
             }
         }
+
         return chain.isEmpty() ? new AnySchema() : chain.getLast();
     }
 
@@ -94,7 +100,7 @@ public class SchemaUtil {
      */
     public static IType getOperationResponseType(Operation operation, JavaSettings settings) {
         Schema responseBodySchema = SchemaUtil.getLowestCommonParent(
-            operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).collect(Collectors.toList()));
+            operation.getResponses().stream().map(Response::getSchema).filter(Objects::nonNull).iterator());
 
         return getOperationResponseType(responseBodySchema, operation, settings);
     }
@@ -197,14 +203,15 @@ public class SchemaUtil {
             summary = null;
         }
 
-        List<String> parts = new ArrayList<>();
-        if (!CoreUtils.isNullOrEmpty(summary)) {
-            parts.add(summary);
+        if (!CoreUtils.isNullOrEmpty(summary) && !CoreUtils.isNullOrEmpty(description)) {
+            return summary + "\n\n" + description;
+        } else if (!CoreUtils.isNullOrEmpty(summary)) {
+            return summary;
+        } else if (!CoreUtils.isNullOrEmpty(description)) {
+            return description;
+        } else {
+            return "";
         }
-        if (!CoreUtils.isNullOrEmpty(description)) {
-            parts.add(description);
-        }
-        return String.join("\n\n", parts);
     }
 
     public static IType removeModelFromParameter(RequestParameterLocation parameterRequestLocation, IType type) {
@@ -236,7 +243,7 @@ public class SchemaUtil {
 
     private static boolean operationIsHeadAsBoolean(Operation operation) {
         return operation.getRequests().stream().anyMatch(req -> HttpMethod.HEAD.name().equalsIgnoreCase(req.getProtocol().getHttp().getMethod()))
-                && operation.getResponses().stream().flatMap(r -> r.getProtocol().getHttp().getStatusCodes().stream()).anyMatch(c -> c.equals("404"));
+            && operation.getResponses().stream().anyMatch(r -> r.getProtocol().getHttp().getStatusCodes().contains("404"));
     }
 
     /**
@@ -245,7 +252,7 @@ public class SchemaUtil {
      * @param compositeType the CADL model.
      * @return the model from external packages, if available.
      */
-    public static Optional<ClassType> mapExternalModel(ObjectSchema compositeType) {
+    public static ClassType mapExternalModel(ObjectSchema compositeType) {
         // For now, the external packages is the azure-core
 
         ClassType classType = null;
@@ -282,7 +289,7 @@ public class SchemaUtil {
                 }
             }
         }
-        return Optional.ofNullable(classType);
+        return classType;
     }
 
     /**
@@ -296,7 +303,7 @@ public class SchemaUtil {
             return Collections.emptySet();
         }
         return schemaContexts.stream()
-            .map(c -> ImplementationDetails.Usage.fromValue(c.value()))
+            .map(ImplementationDetails.Usage::fromSchemaContext)
             .collect(Collectors.toSet());
     }
 

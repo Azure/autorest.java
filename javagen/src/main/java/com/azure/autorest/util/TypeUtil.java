@@ -35,12 +35,12 @@ public class TypeUtil {
     }
 
     private static Class<?> getGenericClass(GenericType type) {
-        String className = String.format("%s.%s", type.getPackage(), type.getName());
+        String className = type.getPackage() + "." + type.getName();
         return TYPE_CLASS_MAP.computeIfAbsent(className, key -> {
             try {
                 return Optional.of(Class.forName(key));
             } catch (ClassNotFoundException e) {
-                LOGGER.warn(String.format("class %s not found!", key), e);
+                LOGGER.warn("class " + key + " not found!", e);
                 return Optional.empty();
             }
         }).orElse(null);

@@ -32,13 +32,11 @@ import org.slf4j.Logger;
 import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ModelExampleUtil {
@@ -350,23 +348,23 @@ public class ModelExampleUtil {
             String value = (String) objectValue;
 
             CollectionFormat collectionFormat = methodParameter.getProxyMethodParameter().getCollectionFormat();
-            List<String> elements;
+            String[] elements;
             switch (collectionFormat) {
                 case CSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    elements = value.split(",", -1);
                     break;
                 case SSV:
-                    elements = Arrays.asList(value.split(Pattern.quote(" "), -1));
+                    elements = value.split(" ", -1);
                     break;
                 case PIPES:
-                    elements = Arrays.asList(value.split(Pattern.quote("|"), -1));
+                    elements = value.split("\\|", -1);
                     break;
                 case TSV:
-                    elements = Arrays.asList(value.split(Pattern.quote("\t"), -1));
+                    elements = value.split("\t", -1);
                     break;
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
-                    elements = Arrays.asList(value.split(Pattern.quote(","), -1));
+                    elements = value.split(",", -1);
                     LOGGER.error("Parameter style '{}' is not supported, fallback to CSV", collectionFormat);
                     break;
             }

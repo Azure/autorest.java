@@ -62,7 +62,7 @@ public class TemplateUtil {
     private static final String[] ESCAPE_REPLACEMENT;
 
     static {
-        ESCAPE_REPLACEMENT = new String[256];
+        ESCAPE_REPLACEMENT = new String[128];
         ESCAPE_REPLACEMENT['\\'] = "\\\\";
         ESCAPE_REPLACEMENT['\t'] = "\\t";
         ESCAPE_REPLACEMENT['\b'] = "\\b";
@@ -173,10 +173,8 @@ public class TemplateUtil {
      */
     public static String getLongRunningOperationTypeReferenceExpression(MethodPollingDetails details) {
         // see writeTypeReferenceStaticClass
-
-        return String.format("%s, %s",
-            getTypeReferenceCreation(details.getIntermediateType()),
-            getTypeReferenceCreation(details.getFinalType()));
+        return getTypeReferenceCreation(details.getIntermediateType()) + ", "
+            + getTypeReferenceCreation(details.getFinalType());
     }
 
     /**
@@ -197,7 +195,7 @@ public class TemplateUtil {
                     : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
         } else {
             return (type instanceof ArrayType || type instanceof ClassType || type instanceof EnumType || type instanceof PrimitiveType)
-                    ? String.format("TypeReference.createInstance(%s.class)", type.asNullable())
+                    ? "TypeReference.createInstance(" + type.asNullable() + ".class)"
                     : CodeNamer.getEnumMemberName("TypeReference" + ((GenericType) type).toJavaPropertyString());
         }
     }
@@ -310,14 +308,11 @@ public class TemplateUtil {
     }
 
     public static void addClientLogger(JavaClass classBlock, String className, JavaFileContents javaFileContents) {
-        String content = javaFileContents.toString();
-        if (content.contains("throw LOGGER")
-                || content.contains("LOGGER.at")
-                || content.contains("LOGGER.log")
-                || content.contains("LOGGER.info")) {
+        // Only need to check for usage of LOGGER as code will generate usages of ClientLogger with LOGGER.
+        if (javaFileContents.contains("LOGGER")) {
             // hack to add LOGGER class variable only if LOGGER is used in code
-            classBlock.privateStaticFinalVariable(String.format("%1$s LOGGER = new ClientLogger(%2$s.class)",
-                    ClassType.CLIENT_LOGGER.toString(), className));
+            classBlock.privateStaticFinalVariable(
+                ClassType.CLIENT_LOGGER + " LOGGER = new ClientLogger(" + className + ".class)");
         }
     }
 
@@ -337,7 +332,7 @@ public class TemplateUtil {
         int last = 0;
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
-            String replacement = c < 256 ? ESCAPE_REPLACEMENT[c] : null;
+            String replacement = c < 128 ? ESCAPE_REPLACEMENT[c] : null;
 
             if (replacement == null) {
                 continue;

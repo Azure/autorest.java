@@ -81,7 +81,6 @@ Settings can be provided on the command line through `--name:value` or in a READ
 |`--service-interface-as-public`|Indicates whether to generate service interfaces as public. This resolves `SecurityManager` issues to prevent reflectively access non-public APIs. Default is true.|
 |`--client-flattened-annotation-target=TYPE,FIELD,NONE,DISABLED`|Indicates the target of `@JsonFlatten` annotation for `x-ms-client-flatten`. Default is `TYPE`.|
 |`--disable-client-builder`|Indicates whether to disable generating the `ClientBuilder` class. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.|
-|`--skip-formatting`|Indicates whether to skip formatting Java file. Default is false.|
 |`--polling`|Configures how to generate long running operations. See [Polling Configuration](#polling-configuration) to see more details on how to use this flag.|
 |`--service-name`|Service name used in Client class and other documentations. If not provided, service name is deduced from `title` configure (from swagger or readme).|
 |`--partial-update`|Indicates whether to support partial update for `Client`/`AsyncClient` classes and `ClientBuilder` class.|
@@ -377,9 +376,6 @@ help-content:
       - key: disable-client-builder
         type: bool
         description: Indicates whether to disable generating the `ClientBuilder` class. This is for SDK that already contains a hand-written `ClientBuilder` class. Default is false.
-      - key: skip-formatting
-        type: bool
-        description: Indicates whether to skip formatting Java file. Default is false.
       - key: polling
         type: string
         description: Configures how to generate long running operations. See [Polling Configuration](https://github.com/Azure/autorest.java#polling-configuration) to see more details on how to use this flag.

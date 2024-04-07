@@ -92,7 +92,7 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
      * @return The predefined type.
      */
     protected ClassType mapPredefinedModel(ObjectSchema compositeType) {
-        return SchemaUtil.mapExternalModel(compositeType).orElse(null);
+        return SchemaUtil.mapExternalModel(compositeType);
     }
 
     /**

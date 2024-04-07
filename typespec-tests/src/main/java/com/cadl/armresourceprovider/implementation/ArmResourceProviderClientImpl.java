@@ -199,7 +199,7 @@ public final class ArmResourceProviderClientImpl implements ArmResourceProviderC
         this.defaultPollInterval = defaultPollInterval;
         this.endpoint = endpoint;
         this.subscriptionId = subscriptionId;
-        this.apiVersion = "2023-11-01";
+        this.apiVersion = "2023-12-01-preview";
         this.childResourcesInterfaces = new ChildResourcesInterfacesClientImpl(this);
         this.topLevelArmResourceInterfaces = new TopLevelArmResourceInterfacesClientImpl(this);
         this.customTemplateResourceInterfaces = new CustomTemplateResourceInterfacesClientImpl(this);

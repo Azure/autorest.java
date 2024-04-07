@@ -9,15 +9,15 @@ import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * Top Level Arm Resource Properties.
+ * The CustomTemplateResourcePatch model.
  */
 @Fluent
-public final class CustomTemplateResourceProperties {
+public final class CustomTemplateResourcePatch {
     /*
-     * The status of the last operation.
+     * Managed identity.
      */
-    @JsonProperty(value = "provisioningState", access = JsonProperty.Access.WRITE_ONLY)
-    private ProvisioningState provisioningState;
+    @JsonProperty(value = "identity")
+    private ManagedIdentityProperties identity;
 
     /*
      * The propertyRemovedInStable property.
@@ -26,18 +26,29 @@ public final class CustomTemplateResourceProperties {
     private String propertyRemovedInStable;
 
     /**
-     * Creates an instance of CustomTemplateResourceProperties class.
+     * Creates an instance of CustomTemplateResourcePatch class.
      */
-    public CustomTemplateResourceProperties() {
+    public CustomTemplateResourcePatch() {
     }
 
     /**
-     * Get the provisioningState property: The status of the last operation.
+     * Get the identity property: Managed identity.
      * 
-     * @return the provisioningState value.
+     * @return the identity value.
      */
-    public ProvisioningState provisioningState() {
-        return this.provisioningState;
+    public ManagedIdentityProperties identity() {
+        return this.identity;
+    }
+
+    /**
+     * Set the identity property: Managed identity.
+     * 
+     * @param identity the identity value to set.
+     * @return the CustomTemplateResourcePatch object itself.
+     */
+    public CustomTemplateResourcePatch withIdentity(ManagedIdentityProperties identity) {
+        this.identity = identity;
+        return this;
     }
 
     /**
@@ -53,9 +64,9 @@ public final class CustomTemplateResourceProperties {
      * Set the propertyRemovedInStable property: The propertyRemovedInStable property.
      * 
      * @param propertyRemovedInStable the propertyRemovedInStable value to set.
-     * @return the CustomTemplateResourceProperties object itself.
+     * @return the CustomTemplateResourcePatch object itself.
      */
-    public CustomTemplateResourceProperties withPropertyRemovedInStable(String propertyRemovedInStable) {
+    public CustomTemplateResourcePatch withPropertyRemovedInStable(String propertyRemovedInStable) {
         this.propertyRemovedInStable = propertyRemovedInStable;
         return this;
     }
@@ -66,12 +77,15 @@ public final class CustomTemplateResourceProperties {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
+        if (identity() != null) {
+            identity().validate();
+        }
         if (propertyRemovedInStable() == null) {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException(
-                    "Missing required property propertyRemovedInStable in model CustomTemplateResourceProperties"));
+                    "Missing required property propertyRemovedInStable in model CustomTemplateResourcePatch"));
         }
     }
 
-    private static final ClientLogger LOGGER = new ClientLogger(CustomTemplateResourceProperties.class);
+    private static final ClientLogger LOGGER = new ClientLogger(CustomTemplateResourcePatch.class);
 }
