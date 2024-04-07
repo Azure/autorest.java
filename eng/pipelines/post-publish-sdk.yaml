@@ -14,7 +14,7 @@ resources:
     type: github
     name: Azure/azure-sdk-for-java
     endpoint: azure
-    ref: dpg_sync-0.15.3
+    ref: main
 
 jobs:
 - job: Generate_SDK
