@@ -16,10 +16,8 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.serializer.TypeReference;
 import com.type.property.additionalproperties.implementation.IsModelsImpl;
-import com.type.property.additionalproperties.models.ModelForRecord;
-import java.util.Map;
+import com.type.property.additionalproperties.models.IsModelAdditionalProperties;
 import reactor.core.publisher.Mono;
 
 /**
@@ -46,8 +44,10 @@ public final class IsModelAsyncClient {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
      * }
      * }</pre>
@@ -71,8 +71,10 @@ public final class IsModelAsyncClient {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
      * }
      * }</pre>
@@ -103,11 +105,11 @@ public final class IsModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Map<String, ModelForRecord>> get() {
+    public Mono<IsModelAdditionalProperties> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(TYPE_REFERENCE_MAP_STRING_MODEL_FOR_RECORD));
+            .map(protocolMethodData -> protocolMethodData.toObject(IsModelAdditionalProperties.class));
     }
 
     /**
@@ -124,14 +126,9 @@ public final class IsModelAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> put(Map<String, ModelForRecord> body) {
+    public Mono<Void> put(IsModelAdditionalProperties body) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return putWithResponse(BinaryData.fromObject(body), requestOptions).flatMap(FluxUtil::toMono);
     }
-
-    @Generated
-    private static final TypeReference<Map<String, ModelForRecord>> TYPE_REFERENCE_MAP_STRING_MODEL_FOR_RECORD
-        = new TypeReference<Map<String, ModelForRecord>>() {
-        };
 }

@@ -23,7 +23,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
      * The discriminator
      */
     @Generated
-    private String kind = "derived";
+    private final String kind;
 
     /*
      * The index property
@@ -41,11 +41,13 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
      * Creates an instance of IsUnknownAdditionalPropertiesDiscriminatedDerived class.
      * 
      * @param name the name value to set.
+     * @param kind the kind value to set.
      * @param index the index value to set.
      */
     @Generated
-    public IsUnknownAdditionalPropertiesDiscriminatedDerived(String name, int index) {
+    public IsUnknownAdditionalPropertiesDiscriminatedDerived(String name, String kind, int index) {
         super(name);
+        this.kind = kind;
         this.index = index;
     }
 
@@ -100,8 +102,8 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", getName());
-        jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeNumberField("age", this.age);
         if (getAdditionalProperties() != null) {
             for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
@@ -124,8 +126,8 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
     public static IsUnknownAdditionalPropertiesDiscriminatedDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
-            int index = 0;
             String kind = "derived";
+            int index = 0;
             Double age = null;
             Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -134,10 +136,10 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("index".equals(fieldName)) {
-                    index = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
                     kind = reader.getString();
+                } else if ("index".equals(fieldName)) {
+                    index = reader.getInt();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getDouble);
                 } else {
@@ -149,8 +151,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
                 }
             }
             IsUnknownAdditionalPropertiesDiscriminatedDerived deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived
-                = new IsUnknownAdditionalPropertiesDiscriminatedDerived(name, index);
-            deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.kind = kind;
+                = new IsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, index);
             deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.age = age;
             deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived.setAdditionalProperties(additionalProperties);
 

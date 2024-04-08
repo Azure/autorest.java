@@ -101,11 +101,13 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *              (Required){
+     *                 state: String (Required)
+     *             }
+     *         ]
+     *     }
      * }
      * }</pre>
      * 
@@ -128,11 +130,13 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *              (Required){
+     *                 state: String (Required)
+     *             }
+     *         ]
+     *     }
      * }
      * }</pre>
      * 
@@ -155,11 +159,13 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *              (Required){
+     *                 state: String (Required)
+     *             }
+     *         ]
+     *     }
      * }
      * }</pre>
      * 
@@ -183,11 +189,13 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *              (Required){
+     *                 state: String (Required)
+     *             }
+     *         ]
+     *     }
      * }
      * }</pre>
      * 

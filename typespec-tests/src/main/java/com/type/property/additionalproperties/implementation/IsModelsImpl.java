@@ -100,8 +100,10 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
      * }
      * }</pre>
@@ -125,8 +127,10 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
      * }
      * }</pre>
@@ -150,8 +154,10 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
      * }
      * }</pre>
@@ -176,8 +182,10 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
-     *         state: String (Required)
+     *      (Optional): {
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
      * }
      * }</pre>

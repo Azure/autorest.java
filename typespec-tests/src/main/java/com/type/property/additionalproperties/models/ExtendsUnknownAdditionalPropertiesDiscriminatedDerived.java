@@ -23,7 +23,7 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
      * The discriminator
      */
     @Generated
-    private String kind = "derived";
+    private final String kind;
 
     /*
      * The index property
@@ -41,11 +41,13 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
      * Creates an instance of ExtendsUnknownAdditionalPropertiesDiscriminatedDerived class.
      * 
      * @param name the name value to set.
+     * @param kind the kind value to set.
      * @param index the index value to set.
      */
     @Generated
-    public ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(String name, int index) {
+    public ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(String name, String kind, int index) {
         super(name);
+        this.kind = kind;
         this.index = index;
     }
 
@@ -100,8 +102,8 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", getName());
-        jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeStringField("kind", this.kind);
+        jsonWriter.writeIntField("index", this.index);
         jsonWriter.writeNumberField("age", this.age);
         if (getAdditionalProperties() != null) {
             for (Map.Entry<String, Object> additionalProperty : getAdditionalProperties().entrySet()) {
@@ -125,8 +127,8 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
         throws IOException {
         return jsonReader.readObject(reader -> {
             String name = null;
-            int index = 0;
             String kind = "derived";
+            int index = 0;
             Double age = null;
             Map<String, Object> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
@@ -135,10 +137,10 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
 
                 if ("name".equals(fieldName)) {
                     name = reader.getString();
-                } else if ("index".equals(fieldName)) {
-                    index = reader.getInt();
                 } else if ("kind".equals(fieldName)) {
                     kind = reader.getString();
+                } else if ("index".equals(fieldName)) {
+                    index = reader.getInt();
                 } else if ("age".equals(fieldName)) {
                     age = reader.getNullable(JsonReader::getDouble);
                 } else {
@@ -150,8 +152,7 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
                 }
             }
             ExtendsUnknownAdditionalPropertiesDiscriminatedDerived deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived
-                = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, index);
-            deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived.kind = kind;
+                = new ExtendsUnknownAdditionalPropertiesDiscriminatedDerived(name, kind, index);
             deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived.age = age;
             deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived
                 .setAdditionalProperties(additionalProperties);
