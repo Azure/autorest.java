@@ -473,7 +473,8 @@ export class CodeModelBuilder {
       // process sdk models
       for (const model of sdkModels) {
         if (!processedSdkModels.has(model)) {
-          const access = model.access;
+          const access = getAccess(model.__raw as Model | Enum | Union);
+          // const access = model.access;
           if (access === "public") {
             modelAsPublic(model);
           } else if (access === "internal") {
@@ -2025,8 +2026,8 @@ export class CodeModelBuilder {
 
   private processStringSchemaFromSdkType(type: SdkBuiltInType, name: string): StringSchema {
     return this.codeModel.schemas.add(
-      new StringSchema(name, this.getDoc(type.__raw as Scalar), {
-        summary: this.getSummary(type.__raw as Scalar),
+      new StringSchema(name, this.getDoc(type.__raw as Type), {
+        summary: this.getSummary(type.__raw as Type),
       }),
     );
   }
@@ -2360,11 +2361,24 @@ export class CodeModelBuilder {
               pushDistinct(it.children.all, objectSchema);
             }
           });
-        }
-      } else {
-        // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
-        pushDistinct(objectSchema.parents.all, parentSchema);
+        }   
+      } 
+      objectSchema.discriminatorValue = type.discriminatorValue;
+    }
+    else if (type.additionalProperties) {
+      // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
+            // "pure" Record processed elsewhere
+
+      // "mixed" Record that have properties, treat the model as "additionalProperties"
+      /* type should have sourceModel, as
+      model Type is Record<> {
+        prop1: string
       }
+      */
+      const parentSchema = this.processSchemaFromSdkType(type.additionalProperties, this.getName(type.additionalProperties.__raw as Model));
+      objectSchema.parents = new Relations();
+      objectSchema.parents.immediate.push(parentSchema);
+      pushDistinct(objectSchema.parents.all, parentSchema);
       objectSchema.discriminatorValue = type.discriminatorValue;
     }
 
