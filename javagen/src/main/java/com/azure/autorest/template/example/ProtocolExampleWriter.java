@@ -33,7 +33,7 @@ import com.azure.core.util.serializer.CollectionFormat;
 import org.slf4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -357,20 +357,20 @@ public class ProtocolExampleWriter {
             String value = (String) parameterValue;
             switch (collectionFormat) {
                 case CSV:
-                    elements = Collections.singletonList(value.split(",", -1));
+                    elements = Arrays.stream(value.split(",", -1)).collect(Collectors.toList());
                     break;
                 case SSV:
-                    elements = Collections.singletonList(value.split(" ", -1));
+                    elements = Arrays.stream(value.split(" ", -1)).collect(Collectors.toList());
                     break;
                 case PIPES:
-                    elements = Collections.singletonList(value.split("\\|", -1));
+                    elements = Arrays.stream(value.split("\\|", -1)).collect(Collectors.toList());
                     break;
                 case TSV:
-                    elements = Collections.singletonList(value.split("\t", -1));
+                    elements = Arrays.stream(value.split("\t", -1)).collect(Collectors.toList());
                     break;
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
-                    elements = Collections.singletonList(value.split(",", -1));
+                    elements = Arrays.stream(value.split(",", -1)).collect(Collectors.toList());
                     break;
             }
         } else if (parameterValue instanceof List) {
