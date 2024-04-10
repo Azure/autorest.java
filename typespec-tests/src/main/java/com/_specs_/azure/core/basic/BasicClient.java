@@ -421,10 +421,13 @@ public final class BasicClient {
     public User createOrUpdate(int id, User resource) {
         // Generated convenience method for createOrUpdateWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
-        JsonMergePatchHelper.getUserAccessor().prepareModelForJsonMergePatch(resource, false);
-        return createOrUpdateWithResponse(id, resourceInBinaryData, requestOptions).getValue().toObject(User.class);
+        return createOrUpdateWithResponse(id,
+                JsonMergePatchHelper.getUserAccessor().asJsonMergePatch(resource, () -> {
+                    BinaryData resourceAsBinaryData = BinaryData.fromObject(resource);
+                    resourceAsBinaryData.toBytes();
+                    return resourceAsBinaryData;
+                }),
+                requestOptions).getValue().toObject(User.class);
     }
 
     /**

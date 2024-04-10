@@ -7,6 +7,7 @@ package com._specs_.azure.core.basic.models;
 import com._specs_.azure.core.basic.implementation.JsonMergePatchHelper;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.BinaryData;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -60,9 +61,11 @@ public final class User implements JsonSerializable<User> {
     }
 
     static {
-        JsonMergePatchHelper.setUserAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setUserAccessor((model, supplier) -> {
+            model.jsonMergePatch = true;
+            BinaryData result = supplier.get();
+            model.jsonMergePatch = false;
+            return result;
         });
     }
 
