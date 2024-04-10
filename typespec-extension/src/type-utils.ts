@@ -23,7 +23,7 @@ import {
 } from "@typespec/compiler";
 import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
-import { getNamespace } from "./utils.js";
+import { getNamespace, pascalCase } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
 
 /** Acts as a cache for processing inputs.
@@ -203,7 +203,7 @@ export function getUnionDescription(union: Union, typeNameOptions: TypeNameOptio
   return name;
 }
 
-export function getModelNameForProperty(property: ModelProperty): string {
+export function getNamePrefixForProperty(property: ModelProperty): string {
   if (property.model) {
     if (property.model.name) {
       return property.model.name;
@@ -216,7 +216,12 @@ export function getModelNameForProperty(property: ModelProperty): string {
             candidateModel.kind === "Model" &&
             (candidateModel === property.model || candidateModel.indexer?.value === property.model)
           ) {
-            return getModelNameForProperty(prop);
+            return getNamePrefixForProperty(prop) + pascalCase(prop.name);
+          } else if (
+            candidateModel.kind === "Union" &&
+            Array.from(candidateModel.variants.values()).find((it) => it.type === property.model)
+          ) {
+            return getNamePrefixForProperty(prop) + pascalCase(prop.name);
           }
         }
       }
