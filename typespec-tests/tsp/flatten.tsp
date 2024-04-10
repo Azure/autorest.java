@@ -124,9 +124,34 @@ interface FlattenOp {
     ...ApiVersionParameter,
   ): OkResponse;
 
-  @patch update(
+  @route("patch/{id}")
+  @patch
+  update(
     @header contentType: "application/merge-patch+json",
     @path id: TodoItem.id,
     patch: TodoItemPatch,
   ): TodoItem;
+
+  @route("upload/{name}")
+  @post
+  uploadFile(
+    @path name: string,
+    @header contentType: "multipart/form-data",
+    file_data: bytes,
+  
+    // this field should not be serialized to form-data
+    @visibility("read") readOnly: string,
+  
+    constant: "constant",
+  ): OkResponse;
+
+  @route("upload-todo")
+  @post
+  uploadTodo(
+    @header contentType: "multipart/form-data",
+    ...TodoItem,
+    prop1?: string,
+    prop2?: string,
+    prop3?: string,
+  ): OkResponse;
 }
