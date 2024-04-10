@@ -256,7 +256,7 @@ public class PartialUpdateHandler {
             if (v instanceof DefaultPrettyPrinterVisitor) {
                 new LineComment(FORMATTER_OFF_COMMENT).accept(v, arg);
                 wrapped.accept(v, arg);
-                new LineComment("\r\n" + FORMATTER_ON_COMMENT).accept(v, arg);
+                new LineComment(FORMATTER_ON_COMMENT).accept(v, arg);
             } else {
                 wrapped.accept(v, arg);
             }
