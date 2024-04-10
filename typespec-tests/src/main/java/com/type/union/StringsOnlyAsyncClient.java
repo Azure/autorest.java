@@ -18,8 +18,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringsOnliesImpl;
 import com.type.union.implementation.models.SendRequest;
-import com.type.union.models.GetResponse;
-import com.type.union.models.Prop1;
+import com.type.union.models.GetResponse9;
+import com.type.union.models.GetResponseProp4;
 import reactor.core.publisher.Mono;
 
 /**
@@ -99,11 +99,11 @@ public final class StringsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse> get() {
+    public Mono<GetResponse9> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse9.class));
     }
 
     /**
@@ -120,7 +120,7 @@ public final class StringsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(Prop1 prop) {
+    public Mono<Void> send(GetResponseProp4 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SendRequest requestObj = new SendRequest(prop);

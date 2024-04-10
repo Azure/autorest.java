@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.FloatsOnliesImpl;
 import com.type.union.implementation.models.SendRequest4;
-import com.type.union.models.GetResponse4;
-import com.type.union.models.Prop3;
+import com.type.union.models.GetResponse5;
+import com.type.union.models.GetResponseProp1;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -97,10 +97,10 @@ public final class FloatsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse4 get() {
+    public GetResponse5 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse4.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse5.class);
     }
 
     /**
@@ -116,7 +116,7 @@ public final class FloatsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(Prop3 prop) {
+    public void send(GetResponseProp1 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SendRequest4 requestObj = new SendRequest4(prop);

@@ -18,8 +18,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringExtensiblesImpl;
 import com.type.union.implementation.models.SendRequest1;
-import com.type.union.models.GetResponse1;
-import com.type.union.models.Prop;
+import com.type.union.models.GetResponse8;
+import com.type.union.models.GetResponseProp3;
 import reactor.core.publisher.Mono;
 
 /**
@@ -99,11 +99,11 @@ public final class StringExtensibleAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse1> get() {
+    public Mono<GetResponse8> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse1.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse8.class));
     }
 
     /**
@@ -120,7 +120,7 @@ public final class StringExtensibleAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(Prop prop) {
+    public Mono<Void> send(GetResponseProp3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SendRequest1 requestObj = new SendRequest1(prop);

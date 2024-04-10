@@ -10,7 +10,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.type.union.models.Prop2;
+import com.type.union.models.GetResponseProp2;
 import java.io.IOException;
 
 /**
@@ -22,7 +22,7 @@ public final class SendRequest3 implements JsonSerializable<SendRequest3> {
      * The prop property.
      */
     @Generated
-    private final Prop2 prop;
+    private final GetResponseProp2 prop;
 
     /**
      * Creates an instance of SendRequest3 class.
@@ -30,7 +30,7 @@ public final class SendRequest3 implements JsonSerializable<SendRequest3> {
      * @param prop the prop value to set.
      */
     @Generated
-    public SendRequest3(Prop2 prop) {
+    public SendRequest3(GetResponseProp2 prop) {
         this.prop = prop;
     }
 
@@ -40,7 +40,7 @@ public final class SendRequest3 implements JsonSerializable<SendRequest3> {
      * @return the prop value.
      */
     @Generated
-    public Prop2 getProp() {
+    public GetResponseProp2 getProp() {
         return this.prop;
     }
 
@@ -67,13 +67,13 @@ public final class SendRequest3 implements JsonSerializable<SendRequest3> {
     @Generated
     public static SendRequest3 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Prop2 prop = null;
+            GetResponseProp2 prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = Prop2.fromLong(reader.getLong());
+                    prop = GetResponseProp2.fromLong(reader.getLong());
                 } else {
                     reader.skipChildren();
                 }

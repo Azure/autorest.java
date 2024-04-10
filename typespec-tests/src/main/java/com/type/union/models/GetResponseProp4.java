@@ -5,9 +5,9 @@
 package com.type.union.models;
 
 /**
- * Defines values for Prop1.
+ * Defines values for GetResponseProp4.
  */
-public enum Prop1 {
+public enum GetResponseProp4 {
     /**
      * Enum value a.
      */
@@ -24,26 +24,26 @@ public enum Prop1 {
     C("c");
 
     /**
-     * The actual serialized value for a Prop1 instance.
+     * The actual serialized value for a GetResponseProp4 instance.
      */
     private final String value;
 
-    Prop1(String value) {
+    GetResponseProp4(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a Prop1 instance.
+     * Parses a serialized value to a GetResponseProp4 instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed Prop1 object, or null if unable to parse.
+     * @return the parsed GetResponseProp4 object, or null if unable to parse.
      */
-    public static Prop1 fromString(String value) {
+    public static GetResponseProp4 fromString(String value) {
         if (value == null) {
             return null;
         }
-        Prop1[] items = Prop1.values();
-        for (Prop1 item : items) {
+        GetResponseProp4[] items = GetResponseProp4.values();
+        for (GetResponseProp4 item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

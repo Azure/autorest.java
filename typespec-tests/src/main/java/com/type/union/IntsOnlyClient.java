@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.IntsOnliesImpl;
 import com.type.union.implementation.models.SendRequest3;
-import com.type.union.models.GetResponse3;
-import com.type.union.models.Prop2;
+import com.type.union.models.GetResponse6;
+import com.type.union.models.GetResponseProp2;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -97,10 +97,10 @@ public final class IntsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse3 get() {
+    public GetResponse6 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse3.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse6.class);
     }
 
     /**
@@ -116,7 +116,7 @@ public final class IntsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(Prop2 prop) {
+    public void send(GetResponseProp2 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SendRequest3 requestObj = new SendRequest3(prop);

@@ -17,8 +17,8 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringExtensiblesImpl;
 import com.type.union.implementation.models.SendRequest1;
-import com.type.union.models.GetResponse1;
-import com.type.union.models.Prop;
+import com.type.union.models.GetResponse8;
+import com.type.union.models.GetResponseProp3;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -97,10 +97,10 @@ public final class StringExtensibleClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse1 get() {
+    public GetResponse8 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse1.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse8.class);
     }
 
     /**
@@ -116,7 +116,7 @@ public final class StringExtensibleClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public void send(Prop prop) {
+    public void send(GetResponseProp3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SendRequest1 requestObj = new SendRequest1(prop);

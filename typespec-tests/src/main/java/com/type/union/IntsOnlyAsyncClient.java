@@ -18,8 +18,8 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.IntsOnliesImpl;
 import com.type.union.implementation.models.SendRequest3;
-import com.type.union.models.GetResponse3;
-import com.type.union.models.Prop2;
+import com.type.union.models.GetResponse6;
+import com.type.union.models.GetResponseProp2;
 import reactor.core.publisher.Mono;
 
 /**
@@ -99,11 +99,11 @@ public final class IntsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse3> get() {
+    public Mono<GetResponse6> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse3.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse6.class));
     }
 
     /**
@@ -120,7 +120,7 @@ public final class IntsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Void> send(Prop2 prop) {
+    public Mono<Void> send(GetResponseProp2 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
         SendRequest3 requestObj = new SendRequest3(prop);

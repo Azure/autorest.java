@@ -5,9 +5,9 @@
 package com.type.union.models;
 
 /**
- * Defines values for Prop2.
+ * Defines values for GetResponseProp2.
  */
-public enum Prop2 {
+public enum GetResponseProp2 {
     /**
      * Enum value 1.
      */
@@ -24,23 +24,23 @@ public enum Prop2 {
     THREE(3L);
 
     /**
-     * The actual serialized value for a Prop2 instance.
+     * The actual serialized value for a GetResponseProp2 instance.
      */
     private final long value;
 
-    Prop2(long value) {
+    GetResponseProp2(long value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a Prop2 instance.
+     * Parses a serialized value to a GetResponseProp2 instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed Prop2 object, or null if unable to parse.
+     * @return the parsed GetResponseProp2 object, or null if unable to parse.
      */
-    public static Prop2 fromLong(long value) {
-        Prop2[] items = Prop2.values();
-        for (Prop2 item : items) {
+    public static GetResponseProp2 fromLong(long value) {
+        GetResponseProp2[] items = GetResponseProp2.values();
+        for (GetResponseProp2 item : items) {
             if (item.toLong() == value) {
                 return item;
             }
