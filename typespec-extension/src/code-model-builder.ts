@@ -162,7 +162,7 @@ import {
   getUsage,
   getUnionDescription,
   modelIs,
-  getModelNameForProperty,
+  getNamePrefixForProperty,
   isAllValueInteger,
 } from "./type-utils.js";
 import {
@@ -1722,7 +1722,7 @@ export class CodeModelBuilder {
           const schemaNameHint =
             type.type.kind === "Scalar" && this.program.checker.isStdType(type.type)
               ? nameHint // std scalar won't need a nameHint
-              : pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
+              : pascalCase(getNamePrefixForProperty(type)) + pascalCase(nameHint);
           schema = this.processSchema(type.type, schemaNameHint);
         }
         return this.applyModelPropertyDecorators(type, nameHint, schema);
