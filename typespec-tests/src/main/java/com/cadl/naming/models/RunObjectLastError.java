@@ -21,7 +21,7 @@ public final class RunObjectLastError implements JsonSerializable<RunObjectLastE
      * The code property.
      */
     @Generated
-    private final RunObjectCode code;
+    private final RunObjectLastErrorCode code;
 
     /**
      * Creates an instance of RunObjectLastError class.
@@ -29,7 +29,7 @@ public final class RunObjectLastError implements JsonSerializable<RunObjectLastE
      * @param code the code value to set.
      */
     @Generated
-    private RunObjectLastError(RunObjectCode code) {
+    private RunObjectLastError(RunObjectLastErrorCode code) {
         this.code = code;
     }
 
@@ -39,7 +39,7 @@ public final class RunObjectLastError implements JsonSerializable<RunObjectLastE
      * @return the code value.
      */
     @Generated
-    public RunObjectCode getCode() {
+    public RunObjectLastErrorCode getCode() {
         return this.code;
     }
 
@@ -66,13 +66,13 @@ public final class RunObjectLastError implements JsonSerializable<RunObjectLastE
     @Generated
     public static RunObjectLastError fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            RunObjectCode code = null;
+            RunObjectLastErrorCode code = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("code".equals(fieldName)) {
-                    code = RunObjectCode.fromString(reader.getString());
+                    code = RunObjectLastErrorCode.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }

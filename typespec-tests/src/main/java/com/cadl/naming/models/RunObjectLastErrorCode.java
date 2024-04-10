@@ -5,9 +5,9 @@
 package com.cadl.naming.models;
 
 /**
- * Defines values for RunObjectCode.
+ * Defines values for RunObjectLastErrorCode.
  */
-public enum RunObjectCode {
+public enum RunObjectLastErrorCode {
     /**
      * Enum value server_error.
      */
@@ -24,26 +24,26 @@ public enum RunObjectCode {
     INVALID_PROMPT("invalid_prompt");
 
     /**
-     * The actual serialized value for a RunObjectCode instance.
+     * The actual serialized value for a RunObjectLastErrorCode instance.
      */
     private final String value;
 
-    RunObjectCode(String value) {
+    RunObjectLastErrorCode(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a RunObjectCode instance.
+     * Parses a serialized value to a RunObjectLastErrorCode instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed RunObjectCode object, or null if unable to parse.
+     * @return the parsed RunObjectLastErrorCode object, or null if unable to parse.
      */
-    public static RunObjectCode fromString(String value) {
+    public static RunObjectLastErrorCode fromString(String value) {
         if (value == null) {
             return null;
         }
-        RunObjectCode[] items = RunObjectCode.values();
-        for (RunObjectCode item : items) {
+        RunObjectLastErrorCode[] items = RunObjectLastErrorCode.values();
+        for (RunObjectLastErrorCode item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

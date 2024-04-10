@@ -21,7 +21,7 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
      * The type property.
      */
     @Generated
-    private final RequestType type;
+    private final RequestParametersType type;
 
     /**
      * Creates an instance of RequestParameters class.
@@ -29,7 +29,7 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
      * @param type the type value to set.
      */
     @Generated
-    public RequestParameters(RequestType type) {
+    public RequestParameters(RequestParametersType type) {
         this.type = type;
     }
 
@@ -39,7 +39,7 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
      * @return the type value.
      */
     @Generated
-    public RequestType getType() {
+    public RequestParametersType getType() {
         return this.type;
     }
 
@@ -66,13 +66,13 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
     @Generated
     public static RequestParameters fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            RequestType type = null;
+            RequestParametersType type = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("type".equals(fieldName)) {
-                    type = RequestType.fromString(reader.getString());
+                    type = RequestParametersType.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }
