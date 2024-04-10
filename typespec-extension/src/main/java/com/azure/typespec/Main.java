@@ -157,7 +157,8 @@ public class Main {
 
         boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null && emitterOptions.includeApiViewProperties();
         if (includeApiViewProperties && !CoreUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
-            StringBuilder sb = new StringBuilder("{\n  \"CrossLanguageDefinitionId\": {\n");
+            String flavor = emitterOptions.getFlavor() == null ? "azure" : emitterOptions.getFlavor();
+            StringBuilder sb = new StringBuilder("{\n  \"flavor\": \"" + flavor + "\", \n  \"CrossLanguageDefinitionId\": {\n");
             AtomicBoolean first = new AtomicBoolean(true);
             typeSpecPlugin.getCrossLanguageDefinitionMap().forEach((key, value) -> {
                 if(first.get()) {

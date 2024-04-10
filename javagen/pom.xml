@@ -76,8 +76,8 @@
       <scope>test</scope>
     </dependency>
     <dependency>
-      <groupId>com.generic</groupId>
-      <artifactId>generic-core</artifactId>
+      <groupId>io.clientcore</groupId>
+      <artifactId>core</artifactId>
       <version>1.0.0-beta.1</version>
     </dependency>
   </dependencies>
