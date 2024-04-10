@@ -217,6 +217,11 @@ export function getModelNameForProperty(property: ModelProperty): string {
             (candidateModel === property.model || candidateModel.indexer?.value === property.model)
           ) {
             return getModelNameForProperty(prop);
+          } else if (
+            candidateModel.kind === "Union" &&
+            Array.from(candidateModel.variants.values()).find((it) => it.type === property.model)
+          ) {
+            return getModelNameForProperty(prop);
           }
         }
       }
