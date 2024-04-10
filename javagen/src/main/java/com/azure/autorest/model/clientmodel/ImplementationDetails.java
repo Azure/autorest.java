@@ -77,7 +77,14 @@ public class ImplementationDetails {
          * <p>
          * Codegen should handle serialization and deserialization specially for json-merge-patch model
          */
-        JSON_MERGE_PATCH("json-merge-patch");
+        JSON_MERGE_PATCH("json-merge-patch"),
+
+        /**
+         * Model used in options group
+         * <p>
+         * Serialization code will not be generated
+         */
+        OPTIONS_GROUP("options-group");
 
         private final static Map<String, Usage> CONSTANTS = new HashMap<>();
 
@@ -143,6 +150,8 @@ public class ImplementationDetails {
                     return INTERNAL;
                 case JSON_MERGE_PATCH:
                     return JSON_MERGE_PATCH;
+                case OPTIONS_GROUP:
+                    return OPTIONS_GROUP;
                 default:
                     throw new IllegalArgumentException(schemaContext.toString());
             }

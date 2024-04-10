@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -1166,7 +1167,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private static boolean modelRequireSerialization(ClientModel model) {
         // TODO (weidxu): any other case? "binary"?
-        return !ClientModelUtil.isMultipartModel(model);
+        return !ClientModelUtil.isMultipartModel(model)
+                // not GroupSchema
+                && !(model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.OPTIONS_GROUP));
     }
 
     /**
