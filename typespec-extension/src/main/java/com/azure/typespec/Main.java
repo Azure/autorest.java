@@ -147,8 +147,8 @@ public class Main {
         // Others
         javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
+        String artifactId = ClientModelUtil.getArtifactId();
         if (settings.isBranded()) {
-            String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project.version}\n", null);
@@ -170,7 +170,7 @@ public class Main {
             });
             sb.append("\n  }\n}");
 
-            typeSpecPlugin.writeFile("src/main/resources/META-INF/apiview_properties.json", sb.toString(), null);
+            typeSpecPlugin.writeFile("src/main/resources/META-INF/" + artifactId + "_apiview_properties.json", sb.toString(), null);
         }
         System.exit(0);
     }

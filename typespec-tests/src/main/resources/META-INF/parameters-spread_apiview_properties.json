@@ -1,0 +1,31 @@
+{
+  "flavor": "Azure", 
+  "CrossLanguageDefinitionId": {
+    "com.parameters.spread.AliasAsyncClient": "null",
+    "com.parameters.spread.AliasAsyncClient.spreadAsRequestBody": "Parameters.Spread.Alias.spreadAsRequestBody",
+    "com.parameters.spread.AliasAsyncClient.spreadAsRequestBodyWithResponse": "Parameters.Spread.Alias.spreadAsRequestBody",
+    "com.parameters.spread.AliasAsyncClient.spreadAsRequestParameter": "Parameters.Spread.Alias.spreadAsRequestParameter",
+    "com.parameters.spread.AliasAsyncClient.spreadAsRequestParameterWithResponse": "Parameters.Spread.Alias.spreadAsRequestParameter",
+    "com.parameters.spread.AliasAsyncClient.spreadWithMultipleParameters": "Parameters.Spread.Alias.spreadWithMultipleParameters",
+    "com.parameters.spread.AliasAsyncClient.spreadWithMultipleParametersWithResponse": "Parameters.Spread.Alias.spreadWithMultipleParameters",
+    "com.parameters.spread.AliasClient": "null",
+    "com.parameters.spread.AliasClient.spreadAsRequestBody": "Parameters.Spread.Alias.spreadAsRequestBody",
+    "com.parameters.spread.AliasClient.spreadAsRequestBodyWithResponse": "Parameters.Spread.Alias.spreadAsRequestBody",
+    "com.parameters.spread.AliasClient.spreadAsRequestParameter": "Parameters.Spread.Alias.spreadAsRequestParameter",
+    "com.parameters.spread.AliasClient.spreadAsRequestParameterWithResponse": "Parameters.Spread.Alias.spreadAsRequestParameter",
+    "com.parameters.spread.AliasClient.spreadWithMultipleParameters": "Parameters.Spread.Alias.spreadWithMultipleParameters",
+    "com.parameters.spread.AliasClient.spreadWithMultipleParametersWithResponse": "Parameters.Spread.Alias.spreadWithMultipleParameters",
+    "com.parameters.spread.ModelAsyncClient": "null",
+    "com.parameters.spread.ModelAsyncClient.spreadAsRequestBody": "Parameters.Spread.Model.spreadAsRequestBody",
+    "com.parameters.spread.ModelAsyncClient.spreadAsRequestBodyWithResponse": "Parameters.Spread.Model.spreadAsRequestBody",
+    "com.parameters.spread.ModelClient": "null",
+    "com.parameters.spread.ModelClient.spreadAsRequestBody": "Parameters.Spread.Model.spreadAsRequestBody",
+    "com.parameters.spread.ModelClient.spreadAsRequestBodyWithResponse": "Parameters.Spread.Model.spreadAsRequestBody",
+    "com.parameters.spread.SpreadClientBuilder": "Parameters.Spread.SpreadClient",
+    "com.parameters.spread.implementation.models.SpreadAsRequestBodyRequest": "Parameters.Spread.Alias.",
+    "com.parameters.spread.implementation.models.SpreadAsRequestParameterRequest": "",
+    "com.parameters.spread.implementation.models.SpreadWithMultipleParametersRequest": "",
+    "com.parameters.spread.models.BodyParameter": "Parameters.Spread.Model.BodyParameter",
+    "com.parameters.spread.models.SpreadWithMultipleParametersOptions": "null"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "flavor": "Azure", 
+  "CrossLanguageDefinitionId": {
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyAsyncClient": "null",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyAsyncClient.beginCreateJob": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.createJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyAsyncClient.beginCreateJobWithModel": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.createJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyAsyncClient.getJob": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.getJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyAsyncClient.getJobWithResponse": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.getJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyClient": "null",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyClient.beginCreateJob": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.createJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyClient.beginCreateJobWithModel": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.createJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyClient.getJob": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.getJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyClient.getJobWithResponse": "_Specs_.Azure.Core.Lro.Rpc.Legacy.CreateResourcePollViaOperationLocation.getJob",
+    "com._specs_.azure.core.lro.rpc.legacy.LegacyClientBuilder": "_Specs_.Azure.Core.Lro.Rpc.Legacy.LegacyClient",
+    "com._specs_.azure.core.lro.rpc.legacy.models.ErrorResponse": "Azure.Core.Foundations.ErrorResponse",
+    "com._specs_.azure.core.lro.rpc.legacy.models.JobData": "_Specs_.Azure.Core.Lro.Rpc.Legacy.JobData",
+    "com._specs_.azure.core.lro.rpc.legacy.models.JobResult": "_Specs_.Azure.Core.Lro.Rpc.Legacy.JobResult",
+    "com._specs_.azure.core.lro.rpc.legacy.models.JobStatus": "_Specs_.Azure.Core.Lro.Rpc.Legacy.JobStatus"
+  }
+}

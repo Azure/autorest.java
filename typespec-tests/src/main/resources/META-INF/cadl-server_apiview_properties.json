@@ -1,0 +1,19 @@
+{
+  "flavor": "Azure", 
+  "CrossLanguageDefinitionId": {
+    "com.cadl.server.ContosoAsyncClient": "Cadl.ContosoServer.ContosoClient",
+    "com.cadl.server.ContosoAsyncClient.get": "Cadl.ContosoServer.ServerOp.get",
+    "com.cadl.server.ContosoAsyncClient.getWithResponse": "Cadl.ContosoServer.ServerOp.get",
+    "com.cadl.server.ContosoClient": "Cadl.ContosoServer.ContosoClient",
+    "com.cadl.server.ContosoClient.get": "Cadl.ContosoServer.ServerOp.get",
+    "com.cadl.server.ContosoClient.getWithResponse": "Cadl.ContosoServer.ServerOp.get",
+    "com.cadl.server.ContosoClientBuilder": "Cadl.ContosoServer.ContosoClient",
+    "com.cadl.server.HttpbinAsyncClient": "Cadl.Server.HttpbinClient",
+    "com.cadl.server.HttpbinAsyncClient.status": "Cadl.Server.ServerOp.status",
+    "com.cadl.server.HttpbinAsyncClient.statusWithResponse": "Cadl.Server.ServerOp.status",
+    "com.cadl.server.HttpbinClient": "Cadl.Server.HttpbinClient",
+    "com.cadl.server.HttpbinClient.status": "Cadl.Server.ServerOp.status",
+    "com.cadl.server.HttpbinClient.statusWithResponse": "Cadl.Server.ServerOp.status",
+    "com.cadl.server.HttpbinClientBuilder": "Cadl.Server.HttpbinClient"
+  }
+}
