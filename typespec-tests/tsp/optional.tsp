@@ -25,8 +25,10 @@ model Optional {
   dateTime?: utcDateTime;
   stringList?: string[];
   bytesDict?: Record<bytes>;
+
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   epochDateTimeRequiredNullable: utcDateTime | null;
+
   @encode(DateTimeKnownEncoding.unixTimestamp, int64)
   epochDateTimeNullable?: utcDateTime;
 }
