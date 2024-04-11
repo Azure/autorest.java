@@ -131,7 +131,7 @@ public final class Optional implements JsonSerializable<Optional> {
      * The epochDateTimeRequiredNullable property.
      */
     @Generated
-    private final OffsetDateTime epochDateTimeRequiredNullable;
+    private final Long epochDateTimeRequiredNullable;
 
     /*
      * The epochDateTimeNullable property.
@@ -155,7 +155,7 @@ public final class Optional implements JsonSerializable<Optional> {
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;
         this.stringRequiredNullable = stringRequiredNullable;
-        this.epochDateTimeRequiredNullable = epochDateTimeRequiredNullable;
+        this.epochDateTimeRequiredNullable = epochDateTimeRequiredNullable.toEpochSecond();
     }
 
     /**
@@ -491,7 +491,10 @@ public final class Optional implements JsonSerializable<Optional> {
      */
     @Generated
     public OffsetDateTime getEpochDateTimeRequiredNullable() {
-        return this.epochDateTimeRequiredNullable;
+        if (this.epochDateTimeRequiredNullable == null) {
+            return null;
+        }
+        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.epochDateTimeRequiredNullable), ZoneOffset.UTC);
     }
 
     /**
@@ -534,10 +537,7 @@ public final class Optional implements JsonSerializable<Optional> {
         jsonWriter.writeBooleanField("booleanRequiredNullable", this.booleanRequiredNullable);
         jsonWriter.writeStringField("stringRequired", this.stringRequired);
         jsonWriter.writeStringField("stringRequiredNullable", this.stringRequiredNullable);
-        jsonWriter.writeStringField("epochDateTimeRequiredNullable",
-            this.epochDateTimeRequiredNullable == null
-                ? null
-                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.epochDateTimeRequiredNullable));
+        jsonWriter.writeNumberField("epochDateTimeRequiredNullable", this.epochDateTimeRequiredNullable);
         jsonWriter.writeBooleanField("boolean", this.booleanProperty);
         jsonWriter.writeBooleanField("booleanNullable", this.booleanNullable);
         jsonWriter.writeStringField("string", this.string);
@@ -600,8 +600,11 @@ public final class Optional implements JsonSerializable<Optional> {
                 } else if ("stringRequiredNullable".equals(fieldName)) {
                     stringRequiredNullable = reader.getString();
                 } else if ("epochDateTimeRequiredNullable".equals(fieldName)) {
-                    epochDateTimeRequiredNullable
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    Long epochDateTimeRequiredNullableHolder = reader.getNullable(JsonReader::getLong);
+                    if (epochDateTimeRequiredNullableHolder != null) {
+                        epochDateTimeRequiredNullable = OffsetDateTime
+                            .ofInstant(Instant.ofEpochSecond(epochDateTimeRequiredNullableHolder), ZoneOffset.UTC);
+                    }
                 } else if ("boolean".equals(fieldName)) {
                     booleanProperty = reader.getNullable(JsonReader::getBoolean);
                 } else if ("booleanNullable".equals(fieldName)) {

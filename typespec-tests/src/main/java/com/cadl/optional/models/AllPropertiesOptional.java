@@ -131,7 +131,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
      * The epochDateTimeRequiredNullable property.
      */
     @Generated
-    private OffsetDateTime epochDateTimeRequiredNullable;
+    private Long epochDateTimeRequiredNullable;
 
     /*
      * The epochDateTimeNullable property.
@@ -329,7 +329,10 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
      */
     @Generated
     public OffsetDateTime getEpochDateTimeRequiredNullable() {
-        return this.epochDateTimeRequiredNullable;
+        if (this.epochDateTimeRequiredNullable == null) {
+            return null;
+        }
+        return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.epochDateTimeRequiredNullable), ZoneOffset.UTC);
     }
 
     /**
@@ -380,10 +383,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
             this.dateTime == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.dateTime));
         jsonWriter.writeArrayField("stringList", this.stringList, (writer, element) -> writer.writeString(element));
         jsonWriter.writeMapField("bytesDict", this.bytesDict, (writer, element) -> writer.writeBinary(element));
-        jsonWriter.writeStringField("epochDateTimeRequiredNullable",
-            this.epochDateTimeRequiredNullable == null
-                ? null
-                : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(this.epochDateTimeRequiredNullable));
+        jsonWriter.writeNumberField("epochDateTimeRequiredNullable", this.epochDateTimeRequiredNullable);
         jsonWriter.writeNumberField("epochDateTimeNullable", this.epochDateTimeNullable);
         jsonWriter.writeJsonField("immutable", this.immutable);
         return jsonWriter.writeEndObject();
@@ -446,7 +446,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
                     deserializedAllPropertiesOptional.bytesDict = bytesDict;
                 } else if ("epochDateTimeRequiredNullable".equals(fieldName)) {
                     deserializedAllPropertiesOptional.epochDateTimeRequiredNullable
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                        = reader.getNullable(JsonReader::getLong);
                 } else if ("epochDateTimeNullable".equals(fieldName)) {
                     deserializedAllPropertiesOptional.epochDateTimeNullable = reader.getNullable(JsonReader::getLong);
                 } else if ("immutable".equals(fieldName)) {
