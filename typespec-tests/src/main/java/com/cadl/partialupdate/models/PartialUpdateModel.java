@@ -46,11 +46,9 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     private String aggregate;
 
     // @formatter:off
-    // @formatter:off
     /**
      * customized property
      */
-    // @formatter:on
     private String testProperty;// @formatter:on
 
     /**
@@ -111,7 +109,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     // @formatter:off
-    // @formatter:off
     /**
      * javadoc
      *
@@ -121,8 +118,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
         this.aggregate = aggregate;
     }// @formatter:on
 
-    // @formatter:off
-    // @formatter:on
     // @formatter:off
     /**
      * javadoc
@@ -134,8 +129,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }// @formatter:on
 
     // @formatter:off
-    // @formatter:on
-    // @formatter:off
     /**
      * javadoc
      *
@@ -145,8 +138,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
         this.testProperty = testProperty;
     }// @formatter:on
 
-    // @formatter:off
-    // @formatter:on
     // @formatter:off
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
@@ -158,8 +149,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
         return jsonWriter.writeEndObject();
     }// @formatter:on
 
-    // @formatter:off
-    // @formatter:on
     // @formatter:off
     /**
      * Reads an instance of PartialUpdateModel from the JsonReader.

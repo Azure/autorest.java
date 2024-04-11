@@ -81,7 +81,6 @@ public final class PartialUpdateClient {
     }
 
     // @formatter:off
-    // @formatter:off
     /**
      * customized method to test partial-update
      */

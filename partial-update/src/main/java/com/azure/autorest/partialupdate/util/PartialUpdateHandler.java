@@ -7,6 +7,7 @@ import com.github.javaparser.JavaToken;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.BodyDeclaration;
@@ -23,6 +24,7 @@ import com.github.javaparser.ast.modules.ModuleDirective;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.printer.DefaultPrettyPrinterVisitor;
 
 import java.io.BufferedReader;
@@ -180,6 +182,21 @@ public class PartialUpdateHandler {
             return generatedFileContent;
         }
 
+        // Remove all orphan comments from the declaration to prevent them being added multiple times when code is
+        // regenerated.
+        // Create a new List for the orphaned comments as Java Parser returns the same list instance, wrapped by
+        // Collections.unmodifiableList, for each call to getOrphanComments. Without the new ArrayList, the orphan
+        // comments would be removed from the list returned during iteration, causing a ConcurrentModificationException.
+        List<Comment> orphanComments = new ArrayList<>(existingClazz.getOrphanComments());
+        orphanComments.stream().filter(PartialUpdateHandler::isFormatterComment).forEach(Node::remove);
+        existingClazz.accept(new VoidVisitorAdapter<>() {
+            @Override
+            public void visit(LineComment n, Object arg) {
+                if (isFormatterComment(n)) {
+                    n.remove();
+                }
+            }
+        }, null);
         NodeList<BodyDeclaration<?>> updatedMembersList = new NodeList<>();
         // 5. Iterate existingFileMembers, keep manual written members, and replace generated members with the
         // corresponding newly generated one
@@ -239,6 +256,30 @@ public class PartialUpdateHandler {
         return new NonGeneratedBodyDeclaration<>(declaration);
     }
 
+    private static boolean isFormatterComment(Comment comment) {
+        // Formatter comments are always line comments
+        if (!(comment instanceof LineComment)) {
+            return false;
+        }
+
+        String lineComment = comment.getContent();
+
+        // Check for the comment starting with <at>formatter:
+        if (!FORMATTER_OFF_COMMENT.regionMatches(0, lineComment, 0, 12)) {
+            return false;
+        }
+
+        return lineComment.endsWith("off") || lineComment.endsWith("on");
+    }
+
+    /**
+     * Custom implementation of {@link BodyDeclaration} that wraps a non-generated {@link BodyDeclaration}.
+     * <p>
+     * This is necessary as Java Parser doesn't write trailing orphan comments when printing the AST. So, this class
+     * overrides the method that is called during printing to explicitly add the code formatter off comments.
+     *
+     * @param <T> the type of the wrapped {@link BodyDeclaration}
+     */
     private static final class NonGeneratedBodyDeclaration<T extends BodyDeclaration<?>> extends BodyDeclaration<T> {
         private final BodyDeclaration<?> wrapped;
 
@@ -419,6 +460,9 @@ public class PartialUpdateHandler {
             return compilationUnitForGeneratedFile.toString();
         }
 
+        // Use JavadocComment.parse and get the description text as this doesn't contain the leading '*' character.
+        // This makes it easier to find if there is leading and trailing custom Javadoc.
+        // Downside is that it requires us to add back the leading '*' character when we add the custom Javadoc back.
         String existingJavadocDescription = existingJavadoc.parse().getDescription().toText();
         int existingGeneratedDocStartPosition = existingJavadocDescription.indexOf(START_GENERATED_JAVA_DOC);
         int existingGeneratedDocEndPosition = existingJavadocDescription.indexOf(END_GENERATED_JAVA_DOC);
@@ -443,7 +487,10 @@ public class PartialUpdateHandler {
         // tags to disable formatting.
         String leadingCustomJavadoc;
         if (existingGeneratedDocStartPosition > 0) {
-            String existing = existingJavadocDescription.substring(0, existingGeneratedDocStartPosition);
+            String existing = existingJavadocDescription.substring(0, existingGeneratedDocStartPosition)
+                .replace(JAVADOC_FORMATTER_OFF + "\r\n", "")
+                .replace(JAVADOC_FORMATTER_ON + "\r\n", "");
+
             leadingCustomJavadoc = JAVADOC_FORMATTER_OFF + "\r\n";
 
             if (!existing.endsWith("\r\n")) {
@@ -468,7 +515,10 @@ public class PartialUpdateHandler {
             }
 
             String existing = existingJavadocDescription.substring(
-                existingGeneratedDocEndPosition + END_GENERATED_JAVA_DOC.length());
+                existingGeneratedDocEndPosition + END_GENERATED_JAVA_DOC.length())
+                .replace(JAVADOC_FORMATTER_OFF + "\r\n", "")
+                .replace(JAVADOC_FORMATTER_ON + "\r\n", "")
+                .replace(JAVADOC_FORMATTER_ON, "");
 
             if (!existing.startsWith("\r\n")) {
                 trailingCustomJavadoc += "\r\n" + existing;

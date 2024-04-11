@@ -279,8 +279,6 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
     }
 
     // @formatter:off
-    // @formatter:off
-    // @formatter:on
     private static final ClientLogger LOGGER = new ClientLogger(PartialUpdateClientBuilder.class);// @formatter:on
 
 }
