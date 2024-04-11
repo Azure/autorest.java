@@ -2376,25 +2376,34 @@ export class CodeModelBuilder {
     // }
     const format = getFormat(this.program, prop);
     if (format) {
+      // TODO: deprecate format
       if (prop.type.kind === "Scalar" && schema instanceof StringSchema) {
         schema = this.processFormatString(prop.type, format, nameHint);
       }
-    } else if (prop.type.kind === "Scalar") {
+    } else {
+      // encode
       const encode = getEncode(this.program, prop);
       if (encode) {
-        if (encode.encoding === "seconds" && hasScalarAsBase(prop.type, "duration")) {
-          schema = this.processDurationSchema(prop.type, nameHint, getDurationFormat(encode));
-        } else if (
-          (encode.encoding === "rfc3339" || encode.encoding === "rfc7231" || encode.encoding === "unixTimestamp") &&
-          (hasScalarAsBase(prop.type, "utcDateTime") || hasScalarAsBase(prop.type, "offsetDateTime"))
-        ) {
-          if (encode.encoding === "unixTimestamp") {
-            return this.processUnixTimeSchema(prop.type, nameHint);
-          } else {
-            return this.processDateTimeSchema(prop.type, nameHint, encode.encoding === "rfc7231");
+        let type = prop.type;
+        if (prop.type.kind === "Union" && isNullableType(prop.type)) {
+          const nonNullVariants = Array.from(prop.type.variants.values()).filter((it) => !isNullType(it.type));
+          type = nonNullVariants[0].type;
+        }
+        if (type && type.kind === "Scalar") {
+          if (encode.encoding === "seconds" && hasScalarAsBase(type, "duration")) {
+            schema = this.processDurationSchema(type, nameHint, getDurationFormat(encode));
+          } else if (
+            (encode.encoding === "rfc3339" || encode.encoding === "rfc7231" || encode.encoding === "unixTimestamp") &&
+            (hasScalarAsBase(type, "utcDateTime") || hasScalarAsBase(type, "offsetDateTime"))
+          ) {
+            if (encode.encoding === "unixTimestamp") {
+              return this.processUnixTimeSchema(type, nameHint);
+            } else {
+              return this.processDateTimeSchema(type, nameHint, encode.encoding === "rfc7231");
+            }
+          } else if (encode.encoding === "base64url" && hasScalarAsBase(type, "bytes")) {
+            return this.processByteArraySchema(type, nameHint, true);
           }
-        } else if (encode.encoding === "base64url" && hasScalarAsBase(prop.type, "bytes")) {
-          return this.processByteArraySchema(prop.type, nameHint, true);
         }
       }
     }
