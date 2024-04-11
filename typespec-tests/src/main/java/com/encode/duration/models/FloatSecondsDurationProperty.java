@@ -31,7 +31,11 @@ public final class FloatSecondsDurationProperty implements JsonSerializable<Floa
      */
     @Generated
     public FloatSecondsDurationProperty(Duration value) {
-        this.value = (double) value.toNanos() / 1000_000_000L;
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = (double) value.toNanos() / 1000_000_000L;
+        }
     }
 
     /**

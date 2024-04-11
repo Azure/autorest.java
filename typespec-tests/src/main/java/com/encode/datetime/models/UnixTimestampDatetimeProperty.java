@@ -33,7 +33,11 @@ public final class UnixTimestampDatetimeProperty implements JsonSerializable<Uni
      */
     @Generated
     public UnixTimestampDatetimeProperty(OffsetDateTime value) {
-        this.value = value.toEpochSecond();
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = value.toEpochSecond();
+        }
     }
 
     /**
