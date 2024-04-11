@@ -33,7 +33,11 @@ public class SuperClassMismatch implements JsonSerializable<SuperClassMismatch> 
      */
     @Generated
     public SuperClassMismatch(OffsetDateTime dateTimeRfc7231) {
-        this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+        if (dateTimeRfc7231 == null) {
+            this.dateTimeRfc7231 = null;
+        } else {
+            this.dateTimeRfc7231 = new DateTimeRfc1123(dateTimeRfc7231);
+        }
     }
 
     /**

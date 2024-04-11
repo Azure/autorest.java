@@ -32,7 +32,11 @@ public final class Base64urlBytesProperty implements JsonSerializable<Base64urlB
      */
     @Generated
     public Base64urlBytesProperty(byte[] value) {
-        this.value = Base64Url.encode(value);
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = Base64Url.encode(value);
+        }
     }
 
     /**

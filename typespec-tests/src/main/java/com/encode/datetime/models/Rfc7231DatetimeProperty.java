@@ -33,7 +33,11 @@ public final class Rfc7231DatetimeProperty implements JsonSerializable<Rfc7231Da
      */
     @Generated
     public Rfc7231DatetimeProperty(OffsetDateTime value) {
-        this.value = new DateTimeRfc1123(value);
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = new DateTimeRfc1123(value);
+        }
     }
 
     /**
