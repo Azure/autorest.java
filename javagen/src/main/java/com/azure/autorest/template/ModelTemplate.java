@@ -840,7 +840,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         // converter will likely throw a NullPointerException.
                         // Otherwise, just convert the value.
                         constructor.ifBlock(property.getName() + " == null",
-                                ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), property.getClientType().defaultValueExpression()))
+                                ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), property.getWireType().defaultValueExpression()))
                             .elseBlock(elseBlock -> elseBlock.line("this.%s = %s;",
                                 property.getName(), property.getWireType().convertFromClientType(property.getName())));
                     } else {
@@ -1003,7 +1003,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // converter will likely throw a NullPointerException.
             // Otherwise, just convert the value.
             methodBlock.ifBlock(property.getName() + " == null",
-                    ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), property.getClientType().defaultValueExpression()))
+                    ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), property.getWireType().defaultValueExpression()))
                 .elseBlock(elseBlock ->
                     elseBlock.line("this.%s = %s;", property.getName(), propertyWireType.convertFromClientType(expression)));
         } else {
