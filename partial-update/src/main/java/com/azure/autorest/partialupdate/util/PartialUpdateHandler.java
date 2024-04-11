@@ -481,6 +481,7 @@ public class PartialUpdateHandler {
                 + "no start generated doc ('" + START_GENERATED_JAVA_DOC + "').");
         }
 
+        String lineEnding = existingJavadoc.getLineEndingStyle().asRawString();
         String generatedJavadocDescription = generatedJavadoc.parse().getDescription().toText();
 
         // Existing Javadoc doesn't start with the generated Javadoc, surround the custom Javadoc with Eclipse formatter
@@ -488,18 +489,18 @@ public class PartialUpdateHandler {
         String leadingCustomJavadoc;
         if (existingGeneratedDocStartPosition > 0) {
             String existing = existingJavadocDescription.substring(0, existingGeneratedDocStartPosition)
-                .replace(JAVADOC_FORMATTER_OFF + "\r\n", "")
-                .replace(JAVADOC_FORMATTER_ON + "\r\n", "");
+                .replace(JAVADOC_FORMATTER_OFF + lineEnding, "")
+                .replace(JAVADOC_FORMATTER_ON + lineEnding, "");
 
-            leadingCustomJavadoc = JAVADOC_FORMATTER_OFF + "\r\n";
+            leadingCustomJavadoc = JAVADOC_FORMATTER_OFF + lineEnding;
 
-            if (!existing.endsWith("\r\n")) {
-                leadingCustomJavadoc += existing + "\r\n";
+            if (!existing.endsWith(lineEnding)) {
+                leadingCustomJavadoc += existing + lineEnding;
             } else {
                 leadingCustomJavadoc += existing;
             }
 
-            leadingCustomJavadoc += JAVADOC_FORMATTER_ON + "\r\n";
+            leadingCustomJavadoc += JAVADOC_FORMATTER_ON + lineEnding;
         } else {
             leadingCustomJavadoc = "";
         }
@@ -508,28 +509,28 @@ public class PartialUpdateHandler {
         // tags to disable formatting.
         String trailingCustomJavadoc;
         if (existingGeneratedDocEndPosition < existingJavadocDescription.length() - END_GENERATED_JAVA_DOC.length()) {
-            if (!generatedJavadocDescription.endsWith("\r\n")) {
-                trailingCustomJavadoc = "\r\n" + JAVADOC_FORMATTER_OFF;
+            if (!generatedJavadocDescription.endsWith(lineEnding)) {
+                trailingCustomJavadoc = lineEnding + JAVADOC_FORMATTER_OFF;
             } else {
                 trailingCustomJavadoc = JAVADOC_FORMATTER_OFF;
             }
 
             String existing = existingJavadocDescription.substring(
                 existingGeneratedDocEndPosition + END_GENERATED_JAVA_DOC.length())
-                .replace(JAVADOC_FORMATTER_OFF + "\r\n", "")
-                .replace(JAVADOC_FORMATTER_ON + "\r\n", "")
+                .replace(JAVADOC_FORMATTER_OFF + lineEnding, "")
+                .replace(JAVADOC_FORMATTER_ON + lineEnding, "")
                 .replace(JAVADOC_FORMATTER_ON, "");
 
-            if (!existing.startsWith("\r\n")) {
-                trailingCustomJavadoc += "\r\n" + existing;
+            if (!existing.startsWith(lineEnding)) {
+                trailingCustomJavadoc += lineEnding + existing;
             } else {
                 trailingCustomJavadoc += existing;
             }
 
-            if (!trailingCustomJavadoc.endsWith("\r\n")) {
-                trailingCustomJavadoc += "\r\n" + JAVADOC_FORMATTER_ON + "\r\n";
+            if (!trailingCustomJavadoc.endsWith(lineEnding)) {
+                trailingCustomJavadoc += lineEnding + JAVADOC_FORMATTER_ON + lineEnding;
             } else {
-                trailingCustomJavadoc += JAVADOC_FORMATTER_ON + "\r\n";
+                trailingCustomJavadoc += JAVADOC_FORMATTER_ON + lineEnding;
             }
         } else {
             trailingCustomJavadoc = "";
@@ -548,7 +549,7 @@ public class PartialUpdateHandler {
         } else {
             compilationUnitForGeneratedFile.getPackageDeclaration()
                 .get()
-                .setComment(new JavadocComment(String.join("\r\n", lines)));
+                .setComment(new JavadocComment(String.join(lineEnding, lines)));
         }
 
         return compilationUnitForGeneratedFile.toString();
