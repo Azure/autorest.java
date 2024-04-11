@@ -83,7 +83,7 @@ public final class OptionalAsyncClient {
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
      *     }
-     *     epochDateTimeRequiredNullable: Long (Required)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Required)
      *     epochDateTimeNullable: Long (Optional)
      * }
      * }</pre>
@@ -113,7 +113,7 @@ public final class OptionalAsyncClient {
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
      *     }
-     *     epochDateTimeRequiredNullable: Long (Optional)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Optional)
      *     epochDateTimeNullable: Long (Optional)
      *     immutable (Optional): {
      *         stringReadWriteRequired: String (Required)

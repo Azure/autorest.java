@@ -6,9 +6,6 @@ package com._specs_.azure.core.basic.implementation;
 
 import com._specs_.azure.core.basic.models.User;
 import com._specs_.azure.core.basic.models.UserOrder;
-import com.azure.core.util.BinaryData;
-
-import java.util.function.Supplier;
 
 /**
  * This is the Helper class to enable json merge patch serialization for a model.
@@ -19,7 +16,7 @@ public class JsonMergePatchHelper {
     private static UserOrderAccessor userOrderAccessor;
 
     public interface UserAccessor {
-        BinaryData asJsonMergePatch(User user, Supplier<BinaryData> supplier);
+        User prepareModelForJsonMergePatch(User user, boolean jsonMergePatchEnabled);
     }
 
     public interface UserOrderAccessor {

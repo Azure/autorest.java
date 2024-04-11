@@ -131,7 +131,7 @@ public final class OptionalOpsImpl {
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
      *     }
-     *     epochDateTimeRequiredNullable: Long (Required)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Required)
      *     epochDateTimeNullable: Long (Optional)
      * }
      * }</pre>
@@ -161,7 +161,7 @@ public final class OptionalOpsImpl {
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
      *     }
-     *     epochDateTimeRequiredNullable: Long (Optional)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Optional)
      *     epochDateTimeNullable: Long (Optional)
      *     immutable (Optional): {
      *         stringReadWriteRequired: String (Required)
@@ -241,7 +241,7 @@ public final class OptionalOpsImpl {
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
      *     }
-     *     epochDateTimeRequiredNullable: Long (Required)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Required)
      *     epochDateTimeNullable: Long (Optional)
      * }
      * }</pre>
@@ -271,7 +271,7 @@ public final class OptionalOpsImpl {
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
      *     }
-     *     epochDateTimeRequiredNullable: Long (Optional)
+     *     epochDateTimeRequiredNullable: OffsetDateTime (Optional)
      *     epochDateTimeNullable: Long (Optional)
      *     immutable (Optional): {
      *         stringReadWriteRequired: String (Required)
