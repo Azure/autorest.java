@@ -75,12 +75,12 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
         }
         this.nameRequired = nameRequired;
         if (urlBase64EncodedRequired == null) {
-            this.urlBase64EncodedRequired = EMPTY_BYTE_ARRAY;
+            this.urlBase64EncodedRequired = null;
         } else {
             this.urlBase64EncodedRequired = Base64Url.encode(urlBase64EncodedRequired);
         }
         if (unixTimeLongRequired == null) {
-            this.unixTimeLongRequired = null;
+            this.unixTimeLongRequired = 0L;
         } else {
             this.unixTimeLongRequired = unixTimeLongRequired.toEpochSecond();
         }

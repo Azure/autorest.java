@@ -32,7 +32,7 @@ public final class Int32SecondsDurationProperty implements JsonSerializable<Int3
     @Generated
     public Int32SecondsDurationProperty(Duration value) {
         if (value == null) {
-            this.value = null;
+            this.value = 0L;
         } else {
             this.value = value.getSeconds();
         }
