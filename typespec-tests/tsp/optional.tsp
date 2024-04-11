@@ -7,9 +7,6 @@ using TypeSpec.Http;
 })
 namespace Cadl.Optional;
 
-@encode(DateTimeKnownEncoding.unixTimestamp, int64)
-scalar epochDateTime extends utcDateTime;
-
 model Optional {
   boolean?: boolean = true;
   booleanNullable?: boolean | null;
@@ -28,8 +25,10 @@ model Optional {
   dateTime?: utcDateTime;
   stringList?: string[];
   bytesDict?: Record<bytes>;
-  epochDateTimeRequiredNullable: epochDateTime | null;
-  epochDateTimeNullable?: epochDateTime;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  epochDateTimeRequiredNullable: utcDateTime | null;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  epochDateTimeNullable?: utcDateTime;
 }
 
 model Immutable {
