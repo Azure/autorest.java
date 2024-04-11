@@ -7,8 +7,8 @@ package com.cadl.armresourceprovider.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
-import com.cadl.armresourceprovider.models.CustomTemplateResourceProperties;
 import com.cadl.armresourceprovider.models.ManagedIdentityProperties;
+import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -21,7 +21,7 @@ public final class CustomTemplateResourceInner extends Resource {
      * The resource-specific properties for this resource.
      */
     @JsonProperty(value = "properties")
-    private CustomTemplateResourceProperties properties;
+    private CustomTemplateResourceProperties innerProperties;
 
     /*
      * Managed identity.
@@ -42,23 +42,12 @@ public final class CustomTemplateResourceInner extends Resource {
     }
 
     /**
-     * Get the properties property: The resource-specific properties for this resource.
+     * Get the innerProperties property: The resource-specific properties for this resource.
      * 
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    public CustomTemplateResourceProperties properties() {
-        return this.properties;
-    }
-
-    /**
-     * Set the properties property: The resource-specific properties for this resource.
-     * 
-     * @param properties the properties value to set.
-     * @return the CustomTemplateResourceInner object itself.
-     */
-    public CustomTemplateResourceInner withProperties(CustomTemplateResourceProperties properties) {
-        this.properties = properties;
-        return this;
+    private CustomTemplateResourceProperties innerProperties() {
+        return this.innerProperties;
     }
 
     /**
@@ -109,13 +98,45 @@ public final class CustomTemplateResourceInner extends Resource {
     }
 
     /**
+     * Get the provisioningState property: The status of the last operation.
+     * 
+     * @return the provisioningState value.
+     */
+    public ProvisioningState provisioningState() {
+        return this.innerProperties() == null ? null : this.innerProperties().provisioningState();
+    }
+
+    /**
+     * Get the propertyRemovedInStable property: The propertyRemovedInStable property.
+     * 
+     * @return the propertyRemovedInStable value.
+     */
+    public String propertyRemovedInStable() {
+        return this.innerProperties() == null ? null : this.innerProperties().propertyRemovedInStable();
+    }
+
+    /**
+     * Set the propertyRemovedInStable property: The propertyRemovedInStable property.
+     * 
+     * @param propertyRemovedInStable the propertyRemovedInStable value to set.
+     * @return the CustomTemplateResourceInner object itself.
+     */
+    public CustomTemplateResourceInner withPropertyRemovedInStable(String propertyRemovedInStable) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CustomTemplateResourceProperties();
+        }
+        this.innerProperties().withPropertyRemovedInStable(propertyRemovedInStable);
+        return this;
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (properties() != null) {
-            properties().validate();
+        if (innerProperties() != null) {
+            innerProperties().validate();
         }
         if (identity() != null) {
             identity().validate();

@@ -24,6 +24,7 @@ import com.azure.autorest.extension.base.model.codemodel.Protocols;
 import com.azure.autorest.extension.base.model.codemodel.Request;
 import com.azure.autorest.extension.base.model.codemodel.RequestParameterLocation;
 import com.azure.autorest.extension.base.model.codemodel.Schema;
+import com.azure.autorest.extension.base.model.codemodel.SchemaContext;
 import com.azure.autorest.extension.base.model.codemodel.Schemas;
 import com.azure.autorest.extension.base.model.codemodel.SealedChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.StringSchema;
@@ -53,7 +54,7 @@ public class Transformer {
       markFlattenedSchemas(codeModel);
     }
     transformOperationGroups(codeModel.getOperationGroups(), codeModel);
-    // multi-clients for Cadl
+    // multi-clients for TypeSpec
     if (codeModel.getClients() != null) {
       transformClients(codeModel.getClients(), codeModel);
     }
@@ -61,8 +62,18 @@ public class Transformer {
   }
 
   private void transformSchemas(Schemas schemas) {
+    // merge GroupSchema into ObjectSchema
+    if (schemas.getGroups() != null) {
+      schemas.getGroups().forEach(group -> {
+        if (group.getUsage() == null) {
+          group.setUsage(new HashSet<>());
+        }
+        group.getUsage().add(SchemaContext.OPTIONS_GROUP);
+      });
+    }
     schemas.getObjects().addAll(schemas.getGroups());
     schemas.setGroups(new ArrayList<>());
+
     for (ObjectSchema objectSchema : schemas.getObjects()) {
       renameType(objectSchema);
       for (Property property : objectSchema.getProperties()) {

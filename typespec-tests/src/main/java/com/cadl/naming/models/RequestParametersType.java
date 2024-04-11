@@ -5,9 +5,9 @@
 package com.cadl.naming.models;
 
 /**
- * Defines values for RequestType.
+ * Defines values for RequestParametersType.
  */
-public enum RequestType {
+public enum RequestParametersType {
     /**
      * Enum value Type1.
      */
@@ -19,26 +19,26 @@ public enum RequestType {
     TYPE2("Type2");
 
     /**
-     * The actual serialized value for a RequestType instance.
+     * The actual serialized value for a RequestParametersType instance.
      */
     private final String value;
 
-    RequestType(String value) {
+    RequestParametersType(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a RequestType instance.
+     * Parses a serialized value to a RequestParametersType instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed RequestType object, or null if unable to parse.
+     * @return the parsed RequestParametersType object, or null if unable to parse.
      */
-    public static RequestType fromString(String value) {
+    public static RequestParametersType fromString(String value) {
         if (value == null) {
             return null;
         }
-        RequestType[] items = RequestType.values();
-        for (RequestType item : items) {
+        RequestParametersType[] items = RequestParametersType.values();
+        for (RequestParametersType item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

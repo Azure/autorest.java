@@ -68,10 +68,22 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
      */
     protected TransformationAsRequiredFields(OffsetDateTime rfc1123Required, String nameRequired,
         byte[] urlBase64EncodedRequired, OffsetDateTime unixTimeLongRequired, OffsetDateTime unixTimeDateTimeRequired) {
-        this.rfc1123Required = new DateTimeRfc1123(rfc1123Required);
+        if (rfc1123Required == null) {
+            this.rfc1123Required = null;
+        } else {
+            this.rfc1123Required = new DateTimeRfc1123(rfc1123Required);
+        }
         this.nameRequired = nameRequired;
-        this.urlBase64EncodedRequired = Base64Url.encode(urlBase64EncodedRequired);
-        this.unixTimeLongRequired = unixTimeLongRequired.toEpochSecond();
+        if (urlBase64EncodedRequired == null) {
+            this.urlBase64EncodedRequired = null;
+        } else {
+            this.urlBase64EncodedRequired = Base64Url.encode(urlBase64EncodedRequired);
+        }
+        if (unixTimeLongRequired == null) {
+            this.unixTimeLongRequired = 0L;
+        } else {
+            this.unixTimeLongRequired = unixTimeLongRequired.toEpochSecond();
+        }
         this.unixTimeDateTimeRequired = unixTimeDateTimeRequired;
     }
 

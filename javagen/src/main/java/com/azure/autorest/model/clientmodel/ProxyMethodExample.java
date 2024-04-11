@@ -5,6 +5,7 @@ package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.Javagen;
 import com.azure.autorest.extension.base.plugin.PluginLogger;
+import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 import com.azure.core.util.CoreUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -105,7 +106,7 @@ public class ProxyMethodExample {
                 if (responseMap.containsKey("headers") && responseMap.get("headers") instanceof Map) {
                     Map<String, Object> headersMap = (Map<String, Object>) responseMap.get("headers");
                     headersMap.forEach((header, value) -> {
-                        httpHeaders.add(header, value.toString());
+                        httpHeaders.add(HttpHeaderName.fromString(header), value.toString());
                     });
                 }
                 this.body = responseMap.getOrDefault("body", null);

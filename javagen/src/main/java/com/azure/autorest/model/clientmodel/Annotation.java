@@ -69,18 +69,13 @@ public class Annotation {
             .knownClass(com.azure.core.annotation.HeaderCollection.class)
             .build();
 
-    public static final Annotation METADATA = new Annotation.Builder()
-            .knownClass(com.generic.core.annotation.Metadata.class)
-            .build();
-    public static final Annotation HTTP_REQUEST_INFORMATION = new Annotation.Builder()
-            .knownClass(com.generic.core.http.annotation.HttpRequestInformation.class)
-            .build();
-    public static final Annotation UNEXPECTED_RESPONSE_EXCEPTION_INFORMATION = new Annotation.Builder()
-            .knownClass(com.generic.core.http.annotation.UnexpectedResponseExceptionInformation.class)
-            .build();
-    public static final Annotation TYPE_CONDITIONS = new Annotation.Builder()
-            .knownClass(com.generic.core.annotation.TypeConditions.class)
-            .build();
+    // clientcore
+    public static final Annotation METADATA = new Annotation("com.generic.core.annotation", "Metadata");
+    public static final Annotation HTTP_REQUEST_INFORMATION
+            = new Annotation("com.generic.core.http.annotation", "HttpRequestInformation");
+    public static final Annotation UNEXPECTED_RESPONSE_EXCEPTION_INFORMATION
+            = new Annotation("com.generic.core.http.annotation", "UnexpectedResponseExceptionInformation");
+    public static final Annotation TYPE_CONDITIONS = new Annotation("com.generic.core.annotation", "TypeConditions");
 
     private final String fullName;
     private final String packageName;

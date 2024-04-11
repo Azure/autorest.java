@@ -33,7 +33,11 @@ public final class Base64urlArrayBytesProperty implements JsonSerializable<Base6
      */
     @Generated
     public Base64urlArrayBytesProperty(List<byte[]> value) {
-        this.value = value.stream().map(el -> Base64Url.encode(el)).collect(java.util.stream.Collectors.toList());
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = value.stream().map(el -> Base64Url.encode(el)).collect(java.util.stream.Collectors.toList());
+        }
     }
 
     /**

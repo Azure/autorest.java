@@ -357,20 +357,20 @@ public class ProtocolExampleWriter {
             String value = (String) parameterValue;
             switch (collectionFormat) {
                 case CSV:
-                    elements = Arrays.asList(value.split(",", -1));
+                    elements = Arrays.stream(value.split(",", -1)).collect(Collectors.toList());
                     break;
                 case SSV:
-                    elements = Arrays.asList(value.split(" ", -1));
+                    elements = Arrays.stream(value.split(" ", -1)).collect(Collectors.toList());
                     break;
                 case PIPES:
-                    elements = Arrays.asList(value.split("\\|", -1));
+                    elements = Arrays.stream(value.split("\\|", -1)).collect(Collectors.toList());
                     break;
                 case TSV:
-                    elements = Arrays.asList(value.split("\t", -1));
+                    elements = Arrays.stream(value.split("\t", -1)).collect(Collectors.toList());
                     break;
                 default:
                     // TODO (weidxu): CollectionFormat.MULTI
-                    elements = Arrays.asList(value.split(",", -1));
+                    elements = Arrays.stream(value.split(",", -1)).collect(Collectors.toList());
                     break;
             }
         } else if (parameterValue instanceof List) {

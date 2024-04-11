@@ -6,18 +6,12 @@ package com.parameters.spread.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 
 /**
  * Options for spreadWithMultipleParameters API.
  */
 @Immutable
-public final class SpreadWithMultipleParametersOptions
-    implements JsonSerializable<SpreadWithMultipleParametersOptions> {
+public final class SpreadWithMultipleParametersOptions {
     /*
      * The id property.
      */
@@ -169,71 +163,5 @@ public final class SpreadWithMultipleParametersOptions
     @Generated
     public String getProp6() {
         return this.prop6;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("id", this.id);
-        jsonWriter.writeStringField("x-ms-test-header", this.xMsTestHeader);
-        jsonWriter.writeStringField("prop1", this.prop1);
-        jsonWriter.writeStringField("prop2", this.prop2);
-        jsonWriter.writeStringField("prop3", this.prop3);
-        jsonWriter.writeStringField("prop4", this.prop4);
-        jsonWriter.writeStringField("prop5", this.prop5);
-        jsonWriter.writeStringField("prop6", this.prop6);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of SpreadWithMultipleParametersOptions from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of SpreadWithMultipleParametersOptions if the JsonReader was pointing to an instance of it,
-     * or null if it was pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the SpreadWithMultipleParametersOptions.
-     */
-    @Generated
-    public static SpreadWithMultipleParametersOptions fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String id = null;
-            String xMsTestHeader = null;
-            String prop1 = null;
-            String prop2 = null;
-            String prop3 = null;
-            String prop4 = null;
-            String prop5 = null;
-            String prop6 = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("id".equals(fieldName)) {
-                    id = reader.getString();
-                } else if ("x-ms-test-header".equals(fieldName)) {
-                    xMsTestHeader = reader.getString();
-                } else if ("prop1".equals(fieldName)) {
-                    prop1 = reader.getString();
-                } else if ("prop2".equals(fieldName)) {
-                    prop2 = reader.getString();
-                } else if ("prop3".equals(fieldName)) {
-                    prop3 = reader.getString();
-                } else if ("prop4".equals(fieldName)) {
-                    prop4 = reader.getString();
-                } else if ("prop5".equals(fieldName)) {
-                    prop5 = reader.getString();
-                } else if ("prop6".equals(fieldName)) {
-                    prop6 = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            return new SpreadWithMultipleParametersOptions(id, xMsTestHeader, prop1, prop2, prop3, prop4, prop5, prop6);
-        });
     }
 }

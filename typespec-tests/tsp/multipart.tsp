@@ -35,16 +35,3 @@ op upload(
   @header contentType: "multipart/form-data",
   @body data: FormData,
 ): OkResponse;
-
-@route("/upload/files/{name}")
-@post
-op uploadFile(
-  @path name: string,
-  @header contentType: "multipart/form-data",
-  file_data: bytes,
-
-  // this field should not be serialized to form-data
-  @visibility("read") readOnly: string,
-
-  constant: "constant",
-): OkResponse;

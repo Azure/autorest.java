@@ -35,7 +35,11 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
     @Generated
     public SubClassBothMismatch(OffsetDateTime dateTimeRfc7231, byte[] base64url) {
         super(dateTimeRfc7231);
-        this.base64url = Base64Url.encode(base64url);
+        if (base64url == null) {
+            this.base64url = null;
+        } else {
+            this.base64url = Base64Url.encode(base64url);
+        }
     }
 
     /**

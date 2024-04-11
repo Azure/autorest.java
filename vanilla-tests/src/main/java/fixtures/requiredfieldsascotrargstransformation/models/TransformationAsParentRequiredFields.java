@@ -50,7 +50,11 @@ public final class TransformationAsParentRequiredFields extends TransformationAs
         byte[] urlBase64EncodedRequired, OffsetDateTime unixTimeLongRequired, OffsetDateTime unixTimeDateTimeRequired,
         OffsetDateTime rfc1123RequiredChild) {
         super(rfc1123Required, nameRequired, urlBase64EncodedRequired, unixTimeLongRequired, unixTimeDateTimeRequired);
-        this.rfc1123RequiredChild = new DateTimeRfc1123(rfc1123RequiredChild);
+        if (rfc1123RequiredChild == null) {
+            this.rfc1123RequiredChild = null;
+        } else {
+            this.rfc1123RequiredChild = new DateTimeRfc1123(rfc1123RequiredChild);
+        }
     }
 
     /**

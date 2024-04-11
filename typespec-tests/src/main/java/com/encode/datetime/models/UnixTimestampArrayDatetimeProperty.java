@@ -34,7 +34,11 @@ public final class UnixTimestampArrayDatetimeProperty implements JsonSerializabl
      */
     @Generated
     public UnixTimestampArrayDatetimeProperty(List<OffsetDateTime> value) {
-        this.value = value.stream().map(el -> el.toEpochSecond()).collect(java.util.stream.Collectors.toList());
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = value.stream().map(el -> el.toEpochSecond()).collect(java.util.stream.Collectors.toList());
+        }
     }
 
     /**

@@ -48,7 +48,12 @@ public enum SchemaContext {
     /**
      * The schema is used as a JSON merge patch.
      */
-    JSON_MERGE_PATCH("json-merge-patch");
+    JSON_MERGE_PATCH("json-merge-patch"),
+
+    /**
+     * The schema is used as options group.
+     */
+    OPTIONS_GROUP("options-group");
 
     private final String value;
     private final static Map<String, SchemaContext> CONSTANTS = new HashMap<>();

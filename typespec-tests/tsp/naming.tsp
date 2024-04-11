@@ -34,6 +34,14 @@ model Response {
   @summary("summary of status property")
   @doc("description of status property")
   status: StatusModel;
+
+  anonymous: RunObject;
+}
+
+model RunObject {
+  last_error: {
+    code: "server_error" | "rate_limit_exceeded" | "invalid_prompt";
+  } | null;
 }
 
 @summary("summary of Data")

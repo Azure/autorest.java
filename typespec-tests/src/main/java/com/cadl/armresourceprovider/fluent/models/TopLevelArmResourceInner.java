@@ -7,8 +7,10 @@ package com.cadl.armresourceprovider.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
-import com.cadl.armresourceprovider.models.TopLevelArmResourceProperties;
+import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,7 +22,7 @@ public final class TopLevelArmResourceInner extends Resource {
      * The resource-specific properties for this resource.
      */
     @JsonProperty(value = "properties")
-    private TopLevelArmResourceProperties properties;
+    private TopLevelArmResourceProperties innerProperties;
 
     /*
      * Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -35,23 +37,12 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Get the properties property: The resource-specific properties for this resource.
+     * Get the innerProperties property: The resource-specific properties for this resource.
      * 
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    public TopLevelArmResourceProperties properties() {
-        return this.properties;
-    }
-
-    /**
-     * Set the properties property: The resource-specific properties for this resource.
-     * 
-     * @param properties the properties value to set.
-     * @return the TopLevelArmResourceInner object itself.
-     */
-    public TopLevelArmResourceInner withProperties(TopLevelArmResourceProperties properties) {
-        this.properties = properties;
-        return this;
+    private TopLevelArmResourceProperties innerProperties() {
+        return this.innerProperties;
     }
 
     /**
@@ -82,13 +73,123 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
+     * Get the configurationEndpoints property: Configuration Endpoints.
+     * 
+     * @return the configurationEndpoints value.
+     */
+    public List<String> configurationEndpoints() {
+        return this.innerProperties() == null ? null : this.innerProperties().configurationEndpoints();
+    }
+
+    /**
+     * Get the username property: The userName property.
+     * 
+     * @return the username value.
+     */
+    public String username() {
+        return this.innerProperties() == null ? null : this.innerProperties().username();
+    }
+
+    /**
+     * Set the username property: The userName property.
+     * 
+     * @param username the username value to set.
+     * @return the TopLevelArmResourceInner object itself.
+     */
+    public TopLevelArmResourceInner withUsername(String username) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new TopLevelArmResourceProperties();
+        }
+        this.innerProperties().withUsername(username);
+        return this;
+    }
+
+    /**
+     * Get the userNames property: The userNames property.
+     * 
+     * @return the userNames value.
+     */
+    public String userNames() {
+        return this.innerProperties() == null ? null : this.innerProperties().userNames();
+    }
+
+    /**
+     * Set the userNames property: The userNames property.
+     * 
+     * @param userNames the userNames value to set.
+     * @return the TopLevelArmResourceInner object itself.
+     */
+    public TopLevelArmResourceInner withUserNames(String userNames) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new TopLevelArmResourceProperties();
+        }
+        this.innerProperties().withUserNames(userNames);
+        return this;
+    }
+
+    /**
+     * Get the accuserName property: The accuserName property.
+     * 
+     * @return the accuserName value.
+     */
+    public String accuserName() {
+        return this.innerProperties() == null ? null : this.innerProperties().accuserName();
+    }
+
+    /**
+     * Set the accuserName property: The accuserName property.
+     * 
+     * @param accuserName the accuserName value to set.
+     * @return the TopLevelArmResourceInner object itself.
+     */
+    public TopLevelArmResourceInner withAccuserName(String accuserName) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new TopLevelArmResourceProperties();
+        }
+        this.innerProperties().withAccuserName(accuserName);
+        return this;
+    }
+
+    /**
+     * Get the startTimestamp property: The startTimeStamp property.
+     * 
+     * @return the startTimestamp value.
+     */
+    public OffsetDateTime startTimestamp() {
+        return this.innerProperties() == null ? null : this.innerProperties().startTimestamp();
+    }
+
+    /**
+     * Set the startTimestamp property: The startTimeStamp property.
+     * 
+     * @param startTimestamp the startTimestamp value to set.
+     * @return the TopLevelArmResourceInner object itself.
+     */
+    public TopLevelArmResourceInner withStartTimestamp(OffsetDateTime startTimestamp) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new TopLevelArmResourceProperties();
+        }
+        this.innerProperties().withStartTimestamp(startTimestamp);
+        return this;
+    }
+
+    /**
+     * Get the provisioningState property: The status of the last operation.
+     * 
+     * @return the provisioningState value.
+     */
+    public ProvisioningState provisioningState() {
+        return this.innerProperties() == null ? null : this.innerProperties().provisioningState();
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (properties() != null) {
-            properties().validate();
+        if (innerProperties() != null) {
+            innerProperties().validate();
         }
     }
 }

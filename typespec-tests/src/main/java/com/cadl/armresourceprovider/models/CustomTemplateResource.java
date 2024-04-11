@@ -50,13 +50,6 @@ public interface CustomTemplateResource {
     Map<String, String> tags();
 
     /**
-     * Gets the properties property: The resource-specific properties for this resource.
-     * 
-     * @return the properties value.
-     */
-    CustomTemplateResourceProperties properties();
-
-    /**
      * Gets the identity property: Managed identity.
      * 
      * @return the identity value.
@@ -69,6 +62,20 @@ public interface CustomTemplateResource {
      * @return the systemData value.
      */
     SystemData systemData();
+
+    /**
+     * Gets the provisioningState property: The status of the last operation.
+     * 
+     * @return the provisioningState value.
+     */
+    ProvisioningState provisioningState();
+
+    /**
+     * Gets the propertyRemovedInStable property: The propertyRemovedInStable property.
+     * 
+     * @return the propertyRemovedInStable value.
+     */
+    String propertyRemovedInStable();
 
     /**
      * Gets the region of the resource.
@@ -153,8 +160,9 @@ public interface CustomTemplateResource {
          * The stage of the CustomTemplateResource definition which contains all the minimum required properties for the
          * resource to be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithProperties,
-            DefinitionStages.WithIdentity, DefinitionStages.WithIfMatch, DefinitionStages.WithIfNoneMatch {
+        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithIdentity,
+            DefinitionStages.WithPropertyRemovedInStable, DefinitionStages.WithIfMatch,
+            DefinitionStages.WithIfNoneMatch {
             /**
              * Executes the create request.
              * 
@@ -185,19 +193,6 @@ public interface CustomTemplateResource {
         }
 
         /**
-         * The stage of the CustomTemplateResource definition allowing to specify properties.
-         */
-        interface WithProperties {
-            /**
-             * Specifies the properties property: The resource-specific properties for this resource..
-             * 
-             * @param properties The resource-specific properties for this resource.
-             * @return the next definition stage.
-             */
-            WithCreate withProperties(CustomTemplateResourceProperties properties);
-        }
-
-        /**
          * The stage of the CustomTemplateResource definition allowing to specify identity.
          */
         interface WithIdentity {
@@ -208,6 +203,19 @@ public interface CustomTemplateResource {
              * @return the next definition stage.
              */
             WithCreate withIdentity(ManagedIdentityProperties identity);
+        }
+
+        /**
+         * The stage of the CustomTemplateResource definition allowing to specify propertyRemovedInStable.
+         */
+        interface WithPropertyRemovedInStable {
+            /**
+             * Specifies the propertyRemovedInStable property: The propertyRemovedInStable property..
+             * 
+             * @param propertyRemovedInStable The propertyRemovedInStable property.
+             * @return the next definition stage.
+             */
+            WithCreate withPropertyRemovedInStable(String propertyRemovedInStable);
         }
 
         /**

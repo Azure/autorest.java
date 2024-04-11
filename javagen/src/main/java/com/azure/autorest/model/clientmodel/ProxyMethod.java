@@ -4,11 +4,11 @@
 package com.azure.autorest.model.clientmodel;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
+import com.azure.autorest.extension.base.util.HttpExceptionType;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.MethodNamer;
 import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
-import com.generic.core.http.exception.HttpExceptionType;
 
 import java.util.HashMap;
 import java.util.List;

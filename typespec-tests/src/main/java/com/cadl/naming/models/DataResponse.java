@@ -51,6 +51,12 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
     @Generated
     private final DataStatus status;
 
+    /*
+     * The anonymous property.
+     */
+    @Generated
+    private final RunObject anonymous;
+
     /**
      * Creates an instance of DataResponse class.
      * 
@@ -58,13 +64,15 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
      * @param data the data value to set.
      * @param dataType the dataType value to set.
      * @param status the status value to set.
+     * @param anonymous the anonymous value to set.
      */
     @Generated
-    private DataResponse(String name, BinaryData data, TypesModel dataType, DataStatus status) {
+    private DataResponse(String name, BinaryData data, TypesModel dataType, DataStatus status, RunObject anonymous) {
         this.name = name;
         this.data = data;
         this.dataType = dataType;
         this.status = status;
+        this.anonymous = anonymous;
     }
 
     /**
@@ -116,6 +124,16 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
     }
 
     /**
+     * Get the anonymous property: The anonymous property.
+     * 
+     * @return the anonymous value.
+     */
+    @Generated
+    public RunObject getAnonymous() {
+        return this.anonymous;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -126,6 +144,7 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
         jsonWriter.writeJsonField("data", this.data);
         jsonWriter.writeStringField("type", this.dataType == null ? null : this.dataType.toString());
         jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
+        jsonWriter.writeJsonField("anonymous", this.anonymous);
         return jsonWriter.writeEndObject();
     }
 
@@ -145,6 +164,7 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
             BinaryData data = null;
             TypesModel dataType = null;
             DataStatus status = null;
+            RunObject anonymous = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -157,11 +177,13 @@ public final class DataResponse implements JsonSerializable<DataResponse> {
                     dataType = TypesModel.fromString(reader.getString());
                 } else if ("status".equals(fieldName)) {
                     status = DataStatus.fromString(reader.getString());
+                } else if ("anonymous".equals(fieldName)) {
+                    anonymous = RunObject.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new DataResponse(name, data, dataType, status);
+            return new DataResponse(name, data, dataType, status, anonymous);
         });
     }
 }

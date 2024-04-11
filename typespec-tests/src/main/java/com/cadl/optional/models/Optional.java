@@ -155,7 +155,11 @@ public final class Optional implements JsonSerializable<Optional> {
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;
         this.stringRequiredNullable = stringRequiredNullable;
-        this.epochDateTimeRequiredNullable = epochDateTimeRequiredNullable.toEpochSecond();
+        if (epochDateTimeRequiredNullable == null) {
+            this.epochDateTimeRequiredNullable = null;
+        } else {
+            this.epochDateTimeRequiredNullable = epochDateTimeRequiredNullable.toEpochSecond();
+        }
     }
 
     /**
