@@ -32,9 +32,13 @@ public final class FloatSecondsDurationArrayProperty implements JsonSerializable
      */
     @Generated
     public FloatSecondsDurationArrayProperty(List<Duration> value) {
-        this.value = value.stream()
-            .map(el -> (double) el.toNanos() / 1000_000_000L)
-            .collect(java.util.stream.Collectors.toList());
+        if (value == null) {
+            this.value = null;
+        } else {
+            this.value = value.stream()
+                .map(el -> (double) el.toNanos() / 1000_000_000L)
+                .collect(java.util.stream.Collectors.toList());
+        }
     }
 
     /**

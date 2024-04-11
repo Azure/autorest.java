@@ -5,18 +5,12 @@
 package fixtures.azureparametergrouping.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 
 /**
  * Parameter group.
  */
 @Fluent
-public final class ParameterGroupingPostReservedWordsParameters
-    implements JsonSerializable<ParameterGroupingPostReservedWordsParameters> {
+public final class ParameterGroupingPostReservedWordsParameters {
     /*
      * 'from' is a reserved word. Pass in 'bob' to pass.
      */
@@ -79,45 +73,5 @@ public final class ParameterGroupingPostReservedWordsParameters
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("from", this.from);
-        jsonWriter.writeStringField("accept", this.accept);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of ParameterGroupingPostReservedWordsParameters from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of ParameterGroupingPostReservedWordsParameters if the JsonReader was pointing to an instance
-     * of it, or null if it was pointing to JSON null.
-     * @throws IOException If an error occurs while reading the ParameterGroupingPostReservedWordsParameters.
-     */
-    public static ParameterGroupingPostReservedWordsParameters fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            ParameterGroupingPostReservedWordsParameters deserializedParameterGroupingPostReservedWordsParameters
-                = new ParameterGroupingPostReservedWordsParameters();
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("from".equals(fieldName)) {
-                    deserializedParameterGroupingPostReservedWordsParameters.from = reader.getString();
-                } else if ("accept".equals(fieldName)) {
-                    deserializedParameterGroupingPostReservedWordsParameters.accept = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-
-            return deserializedParameterGroupingPostReservedWordsParameters;
-        });
     }
 }

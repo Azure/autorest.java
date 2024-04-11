@@ -13,6 +13,7 @@ import com.azure.autorest.model.clientmodel.ClientModelPropertyAccess;
 import com.azure.autorest.model.clientmodel.ClientModelPropertyReference;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
+import com.azure.autorest.model.clientmodel.ImplementationDetails;
 import com.azure.autorest.model.clientmodel.IterableType;
 import com.azure.autorest.model.clientmodel.ListType;
 import com.azure.autorest.model.clientmodel.MapType;
@@ -834,7 +835,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // Finally, add all required properties.
             if (settings.isRequiredFieldsAsConstructorArgs()) {
                 for (ClientModelProperty property : requiredProperties) {
-                    constructor.line("this." + property.getName() + " = " + property.getWireType().convertFromClientType(property.getName()) + ";");
+                    if (property.getClientType() != property.getWireType()) {
+                        // If the property needs to be converted and the passed value is null, set the field to null as the
+                        // converter will likely throw a NullPointerException.
+                        // Otherwise, just convert the value.
+                        constructor.ifBlock(property.getName() + " == null",
+                                ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), property.getWireType().defaultValueExpression()))
+                            .elseBlock(elseBlock -> elseBlock.line("this.%s = %s;",
+                                property.getName(), property.getWireType().convertFromClientType(property.getName())));
+                    } else {
+                        constructor.line("this." + property.getName() + " = " + property.getWireType().convertFromClientType(property.getName()) + ";");
+                    }
                 }
             }
         });
@@ -992,7 +1003,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // converter will likely throw a NullPointerException.
             // Otherwise, just convert the value.
             methodBlock.ifBlock(property.getName() + " == null",
-                    ifBlock -> ifBlock.line("this.%s = null;", property.getName()))
+                    ifBlock -> ifBlock.line("this.%s = %s;", property.getName(), property.getWireType().defaultValueExpression()))
                 .elseBlock(elseBlock ->
                     elseBlock.line("this.%s = %s;", property.getName(), propertyWireType.convertFromClientType(expression)));
         } else {
@@ -1166,7 +1177,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      */
     private static boolean modelRequireSerialization(ClientModel model) {
         // TODO (weidxu): any other case? "binary"?
-        return !ClientModelUtil.isMultipartModel(model);
+        return !ClientModelUtil.isMultipartModel(model)
+                // not GroupSchema
+                && !(model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.OPTIONS_GROUP));
     }
 
     /**

@@ -6,17 +6,12 @@ package com.cadl.flatten.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
-import com.azure.json.JsonToken;
-import com.azure.json.JsonWriter;
-import java.io.IOException;
 
 /**
  * Options for sendLong API.
  */
 @Fluent
-public final class SendLongOptions implements JsonSerializable<SendLongOptions> {
+public final class SendLongOptions {
     /*
      * The name property.
      */
@@ -309,96 +304,5 @@ public final class SendLongOptions implements JsonSerializable<SendLongOptions> 
     public SendLongOptions setDummy(String dummy) {
         this.dummy = dummy;
         return this;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Generated
-    @Override
-    public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("name", this.name);
-        jsonWriter.writeStringField("input", this.input);
-        jsonWriter.writeIntField("dataInt", this.dataInt);
-        jsonWriter.writeStringField("title", this.title);
-        jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
-        jsonWriter.writeStringField("filter", this.filter);
-        jsonWriter.writeJsonField("user", this.user);
-        jsonWriter.writeNumberField("dataIntOptional", this.dataIntOptional);
-        jsonWriter.writeNumberField("dataLong", this.dataLong);
-        jsonWriter.writeNumberField("data_float", this.dataFloat);
-        jsonWriter.writeStringField("description", this.description);
-        jsonWriter.writeStringField("_dummy", this.dummy);
-        return jsonWriter.writeEndObject();
-    }
-
-    /**
-     * Reads an instance of SendLongOptions from the JsonReader.
-     * 
-     * @param jsonReader The JsonReader being read.
-     * @return An instance of SendLongOptions if the JsonReader was pointing to an instance of it, or null if it was
-     * pointing to JSON null.
-     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the SendLongOptions.
-     */
-    @Generated
-    public static SendLongOptions fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String name = null;
-            String input = null;
-            int dataInt = 0;
-            String title = null;
-            Status status = null;
-            String filter = null;
-            User user = null;
-            Integer dataIntOptional = null;
-            Long dataLong = null;
-            Double dataFloat = null;
-            String description = null;
-            String dummy = null;
-            while (reader.nextToken() != JsonToken.END_OBJECT) {
-                String fieldName = reader.getFieldName();
-                reader.nextToken();
-
-                if ("name".equals(fieldName)) {
-                    name = reader.getString();
-                } else if ("input".equals(fieldName)) {
-                    input = reader.getString();
-                } else if ("dataInt".equals(fieldName)) {
-                    dataInt = reader.getInt();
-                } else if ("title".equals(fieldName)) {
-                    title = reader.getString();
-                } else if ("status".equals(fieldName)) {
-                    status = Status.fromString(reader.getString());
-                } else if ("filter".equals(fieldName)) {
-                    filter = reader.getString();
-                } else if ("user".equals(fieldName)) {
-                    user = User.fromJson(reader);
-                } else if ("dataIntOptional".equals(fieldName)) {
-                    dataIntOptional = reader.getNullable(JsonReader::getInt);
-                } else if ("dataLong".equals(fieldName)) {
-                    dataLong = reader.getNullable(JsonReader::getLong);
-                } else if ("data_float".equals(fieldName)) {
-                    dataFloat = reader.getNullable(JsonReader::getDouble);
-                } else if ("description".equals(fieldName)) {
-                    description = reader.getString();
-                } else if ("_dummy".equals(fieldName)) {
-                    dummy = reader.getString();
-                } else {
-                    reader.skipChildren();
-                }
-            }
-            SendLongOptions deserializedSendLongOptions = new SendLongOptions(name, input, dataInt, title, status);
-            deserializedSendLongOptions.filter = filter;
-            deserializedSendLongOptions.user = user;
-            deserializedSendLongOptions.dataIntOptional = dataIntOptional;
-            deserializedSendLongOptions.dataLong = dataLong;
-            deserializedSendLongOptions.dataFloat = dataFloat;
-            deserializedSendLongOptions.description = description;
-            deserializedSendLongOptions.dummy = dummy;
-
-            return deserializedSendLongOptions;
-        });
     }
 }
