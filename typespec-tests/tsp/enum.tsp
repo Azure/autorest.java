@@ -31,6 +31,7 @@ union ColorModelBase {
 }
 
 @access(Access.public)
+@usage(Usage.input | Usage.output)
 union PriorityModel {
   int32,
   High: 100,
