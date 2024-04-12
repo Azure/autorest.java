@@ -13,34 +13,34 @@ import com.azure.json.JsonWriter;
 import java.io.IOException;
 
 /**
- * The RequestParameters model.
+ * The RunObjectLastError model.
  */
 @Immutable
-public final class RequestParameters implements JsonSerializable<RequestParameters> {
+public final class RunObjectLastError implements JsonSerializable<RunObjectLastError> {
     /*
-     * The type property.
+     * The code property.
      */
     @Generated
-    private final RequestParametersType type;
+    private final RunObjectLastErrorCode code;
 
     /**
-     * Creates an instance of RequestParameters class.
+     * Creates an instance of RunObjectLastError class.
      * 
-     * @param type the type value to set.
+     * @param code the code value to set.
      */
     @Generated
-    public RequestParameters(RequestParametersType type) {
-        this.type = type;
+    private RunObjectLastError(RunObjectLastErrorCode code) {
+        this.code = code;
     }
 
     /**
-     * Get the type property: The type property.
+     * Get the code property: The code property.
      * 
-     * @return the type value.
+     * @return the code value.
      */
     @Generated
-    public RequestParametersType getType() {
-        return this.type;
+    public RunObjectLastErrorCode getCode() {
+        return this.code;
     }
 
     /**
@@ -50,34 +50,34 @@ public final class RequestParameters implements JsonSerializable<RequestParamete
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("type", this.type == null ? null : this.type.toString());
+        jsonWriter.writeStringField("code", this.code == null ? null : this.code.toString());
         return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of RequestParameters from the JsonReader.
+     * Reads an instance of RunObjectLastError from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of RequestParameters if the JsonReader was pointing to an instance of it, or null if it was
+     * @return An instance of RunObjectLastError if the JsonReader was pointing to an instance of it, or null if it was
      * pointing to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the RequestParameters.
+     * @throws IOException If an error occurs while reading the RunObjectLastError.
      */
     @Generated
-    public static RequestParameters fromJson(JsonReader jsonReader) throws IOException {
+    public static RunObjectLastError fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            RequestParametersType type = null;
+            RunObjectLastErrorCode code = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("type".equals(fieldName)) {
-                    type = RequestParametersType.fromString(reader.getString());
+                if ("code".equals(fieldName)) {
+                    code = RunObjectLastErrorCode.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new RequestParameters(type);
+            return new RunObjectLastError(code);
         });
     }
 }

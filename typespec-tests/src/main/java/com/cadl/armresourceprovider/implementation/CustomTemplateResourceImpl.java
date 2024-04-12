@@ -10,8 +10,8 @@ import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResource;
 import com.cadl.armresourceprovider.models.CustomTemplateResourcePatch;
-import com.cadl.armresourceprovider.models.CustomTemplateResourceProperties;
 import com.cadl.armresourceprovider.models.ManagedIdentityProperties;
+import com.cadl.armresourceprovider.models.ProvisioningState;
 import java.util.Collections;
 import java.util.Map;
 
@@ -46,16 +46,20 @@ public final class CustomTemplateResourceImpl
         }
     }
 
-    public CustomTemplateResourceProperties properties() {
-        return this.innerModel().properties();
-    }
-
     public ManagedIdentityProperties identity() {
         return this.innerModel().identity();
     }
 
     public SystemData systemData() {
         return this.innerModel().systemData();
+    }
+
+    public ProvisioningState provisioningState() {
+        return this.innerModel().provisioningState();
+    }
+
+    public String propertyRemovedInStable() {
+        return this.innerModel().propertyRemovedInStable();
     }
 
     public Region region() {
@@ -160,17 +164,22 @@ public final class CustomTemplateResourceImpl
         return this;
     }
 
-    public CustomTemplateResourceImpl withProperties(CustomTemplateResourceProperties properties) {
-        this.innerModel().withProperties(properties);
-        return this;
-    }
-
     public CustomTemplateResourceImpl withIdentity(ManagedIdentityProperties identity) {
         if (isInCreateMode()) {
             this.innerModel().withIdentity(identity);
             return this;
         } else {
             this.updateProperties.withIdentity(identity);
+            return this;
+        }
+    }
+
+    public CustomTemplateResourceImpl withPropertyRemovedInStable(String propertyRemovedInStable) {
+        if (isInCreateMode()) {
+            this.innerModel().withPropertyRemovedInStable(propertyRemovedInStable);
+            return this;
+        } else {
+            this.updateProperties.withPropertyRemovedInStable(propertyRemovedInStable);
             return this;
         }
     }
@@ -182,11 +191,6 @@ public final class CustomTemplateResourceImpl
 
     public CustomTemplateResourceImpl withIfNoneMatch(String ifNoneMatch) {
         this.createIfNoneMatch = ifNoneMatch;
-        return this;
-    }
-
-    public CustomTemplateResourceImpl withPropertyRemovedInStable(String propertyRemovedInStable) {
-        this.updateProperties.withPropertyRemovedInStable(propertyRemovedInStable);
         return this;
     }
 

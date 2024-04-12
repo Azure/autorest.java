@@ -7,7 +7,7 @@ package com.cadl.armresourceprovider.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
-import com.cadl.armresourceprovider.models.ChildResourceProperties;
+import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -20,7 +20,7 @@ public final class ChildResourceInner extends Resource {
      * The resource-specific properties for this resource.
      */
     @JsonProperty(value = "properties")
-    private ChildResourceProperties properties;
+    private ChildResourceProperties innerProperties;
 
     /*
      * Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -35,23 +35,12 @@ public final class ChildResourceInner extends Resource {
     }
 
     /**
-     * Get the properties property: The resource-specific properties for this resource.
+     * Get the innerProperties property: The resource-specific properties for this resource.
      * 
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    public ChildResourceProperties properties() {
-        return this.properties;
-    }
-
-    /**
-     * Set the properties property: The resource-specific properties for this resource.
-     * 
-     * @param properties the properties value to set.
-     * @return the ChildResourceInner object itself.
-     */
-    public ChildResourceInner withProperties(ChildResourceProperties properties) {
-        this.properties = properties;
-        return this;
+    private ChildResourceProperties innerProperties() {
+        return this.innerProperties;
     }
 
     /**
@@ -82,13 +71,22 @@ public final class ChildResourceInner extends Resource {
     }
 
     /**
+     * Get the provisioningState property: Provisioning State of Top Level Arm Resource.
+     * 
+     * @return the provisioningState value.
+     */
+    public ProvisioningState provisioningState() {
+        return this.innerProperties() == null ? null : this.innerProperties().provisioningState();
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (properties() != null) {
-            properties().validate();
+        if (innerProperties() != null) {
+            innerProperties().validate();
         }
     }
 }

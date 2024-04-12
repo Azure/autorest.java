@@ -8,11 +8,13 @@ import com.azure.core.management.Region;
 import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
+import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.cadl.armresourceprovider.models.TopLevelArmResource;
-import com.cadl.armresourceprovider.models.TopLevelArmResourceProperties;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdateProperties;
+import java.time.OffsetDateTime;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 public final class TopLevelArmResourceImpl
@@ -46,12 +48,37 @@ public final class TopLevelArmResourceImpl
         }
     }
 
-    public TopLevelArmResourceProperties properties() {
-        return this.innerModel().properties();
-    }
-
     public SystemData systemData() {
         return this.innerModel().systemData();
+    }
+
+    public List<String> configurationEndpoints() {
+        List<String> inner = this.innerModel().configurationEndpoints();
+        if (inner != null) {
+            return Collections.unmodifiableList(inner);
+        } else {
+            return Collections.emptyList();
+        }
+    }
+
+    public String username() {
+        return this.innerModel().username();
+    }
+
+    public String userNames() {
+        return this.innerModel().userNames();
+    }
+
+    public String accuserName() {
+        return this.innerModel().accuserName();
+    }
+
+    public OffsetDateTime startTimestamp() {
+        return this.innerModel().startTimestamp();
+    }
+
+    public ProvisioningState provisioningState() {
+        return this.innerModel().provisioningState();
     }
 
     public Region region() {
@@ -171,8 +198,23 @@ public final class TopLevelArmResourceImpl
         }
     }
 
-    public TopLevelArmResourceImpl withProperties(TopLevelArmResourceProperties properties) {
-        this.innerModel().withProperties(properties);
+    public TopLevelArmResourceImpl withUsername(String username) {
+        this.innerModel().withUsername(username);
+        return this;
+    }
+
+    public TopLevelArmResourceImpl withUserNames(String userNames) {
+        this.innerModel().withUserNames(userNames);
+        return this;
+    }
+
+    public TopLevelArmResourceImpl withAccuserName(String accuserName) {
+        this.innerModel().withAccuserName(accuserName);
+        return this;
+    }
+
+    public TopLevelArmResourceImpl withStartTimestamp(OffsetDateTime startTimestamp) {
+        this.innerModel().withStartTimestamp(startTimestamp);
         return this;
     }
 
