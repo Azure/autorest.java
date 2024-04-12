@@ -7,8 +7,8 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 
 public class ExternalPackage {
 
-    public static final String GENERIC_CORE_PACKAGE_NAME = "com.generic.core";
-    public static final String GENERIC_JSON_PACKAGE_NAME = "com.generic.json";
+    public static final String GENERIC_CORE_PACKAGE_NAME = "io.clientcore.core";
+    public static final String GENERIC_JSON_PACKAGE_NAME = "io.clientcore.core.json";
 
     public static final String AZURE_CORE_PACKAGE_NAME = "com.azure.core";
     public static final String AZURE_JSON_PACKAGE_NAME = "com.azure.json";
@@ -16,14 +16,14 @@ public class ExternalPackage {
 
     public static final ExternalPackage CORE = new Builder()
             .packageName(GENERIC_CORE_PACKAGE_NAME)
-            .groupId("com.generic")
-            .artifactId("generic-core")
+            .groupId("io.clientcore")
+            .artifactId("core")
             .build();
 
     public static final ExternalPackage JSON = new Builder()
             .packageName(GENERIC_JSON_PACKAGE_NAME)
-            .groupId("com.generic")
-            .artifactId("generic-json")
+            .groupId("io.clientcore")
+            .artifactId("core-json")
             .build();
 
     private final String packageName;

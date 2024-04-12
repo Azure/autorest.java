@@ -588,7 +588,7 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         }
 
         IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
-        if (isProtocolMethod) {
+        if (isProtocolMethod && JavaSettings.getInstance().isBranded()) {
             responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType, operation);
         }
 
@@ -1461,11 +1461,13 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
         List<ClientMethodParameter> parameters, ClientMethodType clientMethodType, String proxyMethodName,
         ReturnValue returnValue, MethodPageDetails details, ClientMethodParameter contextParameter) {
 
-        List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
-        withContextParameters.add(contextParameter);
+        List<ClientMethodParameter> updatedParams = new ArrayList<>(parameters);
+        if (JavaSettings.getInstance().isBranded() || contextParameter.getClientType().equals(ClassType.REQUEST_OPTIONS)) {
+            updatedParams.add(contextParameter);
+        }
 
         methods.add(builder
-            .parameters(withContextParameters) // update builder parameters to include context
+            .parameters(updatedParams) // update builder parameters to include context
             .returnValue(returnValue)
             .name(proxyMethodName)
             .onlyRequiredParameters(false)
@@ -1498,15 +1500,16 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
      * @param contextParameter The Context parameter.
      */
     protected static void addClientMethodWithContext(List<ClientMethod> methods, Builder builder,
-        List<ClientMethodParameter> parameters, ClientMethodParameter contextParameter) {
-
-        List<ClientMethodParameter> withContextParameters = new ArrayList<>(parameters);
-        withContextParameters.add(contextParameter);
+                                                     List<ClientMethodParameter> parameters, ClientMethodParameter contextParameter) {
+        List<ClientMethodParameter> updatedParams = new ArrayList<>(parameters);
+        if (JavaSettings.getInstance().isBranded() || contextParameter.getClientType().equals(ClassType.REQUEST_OPTIONS)) {
+            updatedParams.add(contextParameter);
+        }
 
         methods.add(builder
-            .parameters(withContextParameters) // update builder parameters to include context
-            .onlyRequiredParameters(false)
-            .build());
+                .parameters(updatedParams) // update builder parameters to include context
+                .onlyRequiredParameters(false)
+                .build());
         // reset the parameters to original params
         builder.parameters(parameters);
     }

@@ -66,8 +66,8 @@ public class Project {
         AZURE_IDENTITY("com.azure", "azure-identity", "1.11.4"),
         AZURE_CORE_EXPERIMENTAL("com.azure", "azure-core-experimental", "1.0.0-beta.48"),
 
-        GENERIC_CORE("com.generic", "generic-core", "1.0.0-beta.1"),
-        GENERIC_JSON("com.generic", "generic-json", "1.0.0-beta.1"),
+        GENERIC_CORE("io.clientcore", "core", "1.0.0-beta.1"),
+        GENERIC_JSON("io.clientcore", "core-json", "1.0.0-beta.1"),
 
         // external
         JUNIT_JUPITER_API("org.junit.jupiter", "junit-jupiter-api", "5.9.3"),

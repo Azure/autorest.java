@@ -65,13 +65,13 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
         javaFile.javadocComment(comment -> comment.description(enumType.getDescription()));
 
         String enumName = enumType.getName();
-        String declaration = enumName + " implements ExpandableStringEnum<" + enumName + ">";
+        IType elementType = enumType.getElementType();
+        String typeName = elementType.getClientType().toString();
+        String pascalTypeName = CodeNamer.toPascalCase(typeName);
+        String declaration = enumName + " implements ExpandableEnum<" + pascalTypeName + ">";
 
         javaFile.publicFinalClass(declaration, classBlock -> {
-            IType elementType = enumType.getElementType();
-            String typeName = elementType.getClientType().toString();
-            String pascalTypeName = CodeNamer.toPascalCase(typeName);
-            classBlock.publicStaticFinalVariable("Map<String, " + enumName + "> VALUES = new ConcurrentHashMap<>()");
+            classBlock.privateStaticFinalVariable("Map<String, " + enumName + "> VALUES = new ConcurrentHashMap<>()");
 
             for (ClientEnumValue enumValue : enumType.getValues()) {
                 String value = enumValue.getValue();
@@ -90,7 +90,7 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
 
             // fromString(typeName)
             classBlock.javadocComment(comment -> {
-                comment.description("Creates or finds a " + enumName + " from its string representation.");
+                comment.description("Creates or finds a " + enumName);
                 comment.param("name", "a name to look for");
                 comment.methodReturns("the corresponding " + enumName);
             });
@@ -110,16 +110,18 @@ public class EnumTemplate implements IJavaTemplate<EnumType, JavaFile> {
                         function.methodReturn("VALUES.computeIfAbsent(name, key -> new " + enumName + "(key))");
                     });
 
-            // values()
+            // getValue
             classBlock.javadocComment(comment -> {
-                comment.description("Gets known " + enumName + " values.");
-                comment.methodReturns("known " + enumName + " values");
+                comment.description("Gets the value of the " + enumName + " instance.");
+                comment.methodReturns("the value of the " + enumName + " instance.");
             });
 
             addGeneratedAnnotation(classBlock);
-            classBlock.publicStaticMethod("Collection<" + enumName + "> values()",
-                    function -> function.methodReturn("VALUES.values()"));
+            classBlock.annotation("Override");
+            classBlock.publicMethod(pascalTypeName + " getValue()",
+                    function -> function.methodReturn("this.name"));
 
+            addGeneratedAnnotation(classBlock);
             classBlock.annotation("Override");
             classBlock.method(JavaVisibility.Public, null, "String toString()", function -> function.methodReturn("name"));
         });

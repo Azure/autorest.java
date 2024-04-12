@@ -1,6 +1,6 @@
-import com.generic.core.models.HeaderName;
-import com.generic.core.http.models.RequestOptions;
-import com.generic.core.models.BinaryData;
+import io.clientcore.core.http.models.HttpHeaderName;
+import io.clientcore.core.http.models.RequestOptions;
+import io.clientcore.core.util.binarydata.BinaryData;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -175,8 +175,8 @@ public final class MultipartFormDataHelper {
         requestBody = BinaryData.fromStream(requestDataStream, requestLength);
 
         requestOptions
-                .setHeader(HeaderName.CONTENT_TYPE, "multipart/form-data; boundary=" + this.boundary)
-                .setHeader(HeaderName.CONTENT_LENGTH, String.valueOf(requestLength));
+                .setHeader(HttpHeaderName.CONTENT_TYPE, "multipart/form-data; boundary=" + this.boundary)
+                .setHeader(HttpHeaderName.CONTENT_LENGTH, String.valueOf(requestLength));
 
         return this;
     }
