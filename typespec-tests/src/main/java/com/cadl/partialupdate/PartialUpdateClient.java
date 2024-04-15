@@ -80,12 +80,10 @@ public final class PartialUpdateClient {
         return readWithResponse(requestOptions).getValue().toObject(PartialUpdateModel.class);
     }
 
-    // @formatter:off
     /**
      * customized method to test partial-update
      */
     public void testMethod() {
         System.out.println("testMethod");
-    }// @formatter:on
-
+    }
 }
