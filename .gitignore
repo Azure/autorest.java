@@ -102,4 +102,7 @@ javagen/*.yaml
 # package-lock.json in test module
 typespec-tests/package-lock.json
 
+# ApiView properties files
+/typespec-tests/src/main/resources/META-INF/*apiview_properties.json
+
 typespec-tests/http/
