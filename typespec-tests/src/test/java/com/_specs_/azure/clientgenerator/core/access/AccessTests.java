@@ -4,10 +4,6 @@
 package com._specs_.azure.clientgenerator.core.access;
 
 import com._specs_.azure.clientgenerator.core.access.implementation.models.AbstractModel;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.InternalDecoratorModelInInternal;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.NoDecoratorModelInInternal;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.OuterModel;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.PublicDecoratorModelInInternal;
 import com._specs_.azure.clientgenerator.core.access.implementation.models.RealModel;
 import com._specs_.azure.clientgenerator.core.access.models.SharedModel;
 import org.junit.jupiter.api.Assertions;

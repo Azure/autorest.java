@@ -3,6 +3,7 @@
 
 package com.type.property.additionalproperties;
 
+import com.type.property.additionalproperties.models.IsModelArrayAdditionalProperties;
 import com.type.property.additionalproperties.models.ModelForRecord;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -17,13 +18,16 @@ public class IsModelArrayClientTest {
 
     @Test
     public void testPullAndGet() {
+        IsModelArrayAdditionalProperties request = new IsModelArrayAdditionalProperties();
         Map<String, List<ModelForRecord>> properties = new LinkedHashMap<>();
         properties.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
-        client.put(properties);
+        request.setAdditionalProperties(properties);
+        client.put(request);
 
-        properties = client.get();
-        Assertions.assertNotNull(properties);
-        Assertions.assertNotNull(properties.get("prop"));
+        IsModelArrayAdditionalProperties response = client.get();
+        Assertions.assertNotNull(response);
+        Assertions.assertNotNull(response.getAdditionalProperties());
+        Assertions.assertNotNull(response.getAdditionalProperties().get("prop"));
         properties.get("prop").forEach(modelForRecord ->
                 Assertions.assertEquals("ok", modelForRecord.getState()));
     }

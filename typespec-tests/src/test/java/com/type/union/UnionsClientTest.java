@@ -11,10 +11,10 @@ import com.type.union.models.EnumsOnlyCasesLr;
 import com.type.union.models.EnumsOnlyCasesUd;
 import com.type.union.models.MixedLiteralsCases;
 import com.type.union.models.MixedTypesCases;
-import com.type.union.models.Prop;
-import com.type.union.models.Prop1;
-import com.type.union.models.Prop2;
-import com.type.union.models.Prop3;
+import com.type.union.models.GetResponseProp1;
+import com.type.union.models.GetResponseProp2;
+import com.type.union.models.GetResponseProp3;
+import com.type.union.models.GetResponseProp4;
 import com.type.union.models.StringAndArrayCases;
 import com.type.union.models.StringExtensibleNamedUnion;
 import org.junit.jupiter.api.Assertions;
@@ -38,14 +38,14 @@ public class UnionsClientTest {
 
     @Test
     public void testStringsOnlyClient() {
-        Prop1 prop = client1.get().getProp();
-        Assertions.assertEquals(Prop1.B, prop);
+        GetResponseProp4 prop = client1.get().getProp();
+        Assertions.assertEquals(GetResponseProp4.B, prop);
         client1.send(prop);
     }
 
     @Test
     public void testStringExtensibleClient() {
-        Prop prop = client2.get().getProp();
+        GetResponseProp3 prop = client2.get().getProp();
         Assertions.assertEquals("custom", prop.toString());
         client2.send(prop);
     }
@@ -59,14 +59,14 @@ public class UnionsClientTest {
 
     @Test
     public void testIntsOnlyClient() {
-        Prop2 prop = client4.get().getProp();
+        GetResponseProp2 prop = client4.get().getProp();
         Assertions.assertEquals(2L, prop.toLong());
         client4.send(prop);
     }
 
     @Test
     public void testFloatsOnlyClient() {
-        Prop3 prop = client5.get().getProp();
+        GetResponseProp1 prop = client5.get().getProp();
         Assertions.assertEquals(2.2, prop.toDouble());
         client5.send(prop);
     }
