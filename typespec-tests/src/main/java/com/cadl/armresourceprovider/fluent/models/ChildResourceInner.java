@@ -6,7 +6,8 @@ package com.cadl.armresourceprovider.fluent.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
-import com.cadl.armresourceprovider.models.ChildResourceProperties;
+import com.azure.core.management.SystemData;
+import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
 
@@ -19,7 +20,13 @@ public final class ChildResourceInner extends Resource {
      * The resource-specific properties for this resource.
      */
     @JsonProperty(value = "properties")
-    private ChildResourceProperties properties;
+    private ChildResourceProperties innerProperties;
+
+    /*
+     * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+     */
+    @JsonProperty(value = "systemData", access = JsonProperty.Access.WRITE_ONLY)
+    private SystemData systemData;
 
     /**
      * Creates an instance of ChildResourceInner class.
@@ -28,23 +35,21 @@ public final class ChildResourceInner extends Resource {
     }
 
     /**
-     * Get the properties property: The resource-specific properties for this resource.
+     * Get the innerProperties property: The resource-specific properties for this resource.
      * 
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    public ChildResourceProperties properties() {
-        return this.properties;
+    private ChildResourceProperties innerProperties() {
+        return this.innerProperties;
     }
 
     /**
-     * Set the properties property: The resource-specific properties for this resource.
+     * Get the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
      * 
-     * @param properties the properties value to set.
-     * @return the ChildResourceInner object itself.
+     * @return the systemData value.
      */
-    public ChildResourceInner withProperties(ChildResourceProperties properties) {
-        this.properties = properties;
-        return this;
+    public SystemData systemData() {
+        return this.systemData;
     }
 
     /**
@@ -66,13 +71,22 @@ public final class ChildResourceInner extends Resource {
     }
 
     /**
+     * Get the provisioningState property: Provisioning State of Top Level Arm Resource.
+     * 
+     * @return the provisioningState value.
+     */
+    public ProvisioningState provisioningState() {
+        return this.innerProperties() == null ? null : this.innerProperties().provisioningState();
+    }
+
+    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (properties() != null) {
-            properties().validate();
+        if (innerProperties() != null) {
+            innerProperties().validate();
         }
     }
 }

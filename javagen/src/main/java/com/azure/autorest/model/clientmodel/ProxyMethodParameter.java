@@ -196,7 +196,7 @@ public class ProxyMethodParameter extends MethodParameter {
 //        }
 
         if (!settings.isBranded()) {
-            imports.add("com.generic.core.http.models.HttpMethod");
+            imports.add("io.clientcore.core.http.models.HttpMethod");
         }
 
         getWireType().addImportsTo(imports, includeImplementationImports);

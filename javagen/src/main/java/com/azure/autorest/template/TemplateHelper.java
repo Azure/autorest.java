@@ -49,9 +49,17 @@ public final class TemplateHelper {
     }
 
     private static void createGenericHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
+        function.line("Configuration buildConfiguration = (configuration == null) ? Configuration"
+                + ".getGlobalConfiguration() : configuration;");
+        String localHttpLogOptionsName = "local" + CodeNamer.toPascalCase("httpLogOptions");
+        function.line(String.format("HttpLogOptions %s = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;", localHttpLogOptionsName));
+
         function.line("HttpPipelineBuilder httpPipelineBuilder = new HttpPipelineBuilder();");
+        function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
+        function.line("policies.add(redirectOptions == null ? new HttpRedirectPolicy() : new HttpRedirectPolicy(redirectOptions));");
+        function.line("policies.add(retryOptions == null ? new HttpRetryPolicy() : new HttpRetryPolicy(retryOptions));");
+        function.line("this.pipelinePolicies.stream().forEach(p -> policies.add(p));");
         if (securityInfo.getSecurityTypes().contains(Scheme.SecuritySchemeType.KEY)) {
-            function.line("List<HttpPipelinePolicy> policies = new ArrayList<>();");
             function.ifBlock("keyCredential != null", action -> {
                 final String prefixExpr = CoreUtils.isNullOrEmpty(securityInfo.getHeaderValuePrefix())
                         ? "null"
@@ -62,8 +70,8 @@ public final class TemplateHelper {
                         + prefixExpr
                         + "));");
             });
-            function.line("httpPipelineBuilder.policies(policies.toArray(new HttpPipelinePolicy[0]));");
         }
+        function.line("httpPipelineBuilder.policies(policies.toArray(new HttpPipelinePolicy[0]));");
         function.methodReturn("httpPipelineBuilder.build()");
     }
 

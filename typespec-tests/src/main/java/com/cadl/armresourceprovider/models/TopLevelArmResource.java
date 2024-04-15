@@ -5,8 +5,11 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
+import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -49,11 +52,53 @@ public interface TopLevelArmResource {
     Map<String, String> tags();
 
     /**
-     * Gets the properties property: The resource-specific properties for this resource.
+     * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
      * 
-     * @return the properties value.
+     * @return the systemData value.
      */
-    TopLevelArmResourceProperties properties();
+    SystemData systemData();
+
+    /**
+     * Gets the configurationEndpoints property: Configuration Endpoints.
+     * 
+     * @return the configurationEndpoints value.
+     */
+    List<String> configurationEndpoints();
+
+    /**
+     * Gets the username property: The userName property.
+     * 
+     * @return the username value.
+     */
+    String username();
+
+    /**
+     * Gets the userNames property: The userNames property.
+     * 
+     * @return the userNames value.
+     */
+    String userNames();
+
+    /**
+     * Gets the accuserName property: The accuserName property.
+     * 
+     * @return the accuserName value.
+     */
+    String accuserName();
+
+    /**
+     * Gets the startTimestamp property: The startTimeStamp property.
+     * 
+     * @return the startTimestamp value.
+     */
+    OffsetDateTime startTimestamp();
+
+    /**
+     * Gets the provisioningState property: The status of the last operation.
+     * 
+     * @return the provisioningState value.
+     */
+    ProvisioningState provisioningState();
 
     /**
      * Gets the region of the resource.
@@ -138,7 +183,8 @@ public interface TopLevelArmResource {
          * The stage of the TopLevelArmResource definition which contains all the minimum required properties for the
          * resource to be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithProperties {
+        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithUsername,
+            DefinitionStages.WithUserNames, DefinitionStages.WithAccuserName, DefinitionStages.WithStartTimestamp {
             /**
              * Executes the create request.
              * 
@@ -169,16 +215,55 @@ public interface TopLevelArmResource {
         }
 
         /**
-         * The stage of the TopLevelArmResource definition allowing to specify properties.
+         * The stage of the TopLevelArmResource definition allowing to specify username.
          */
-        interface WithProperties {
+        interface WithUsername {
             /**
-             * Specifies the properties property: The resource-specific properties for this resource..
+             * Specifies the username property: The userName property..
              * 
-             * @param properties The resource-specific properties for this resource.
+             * @param username The userName property.
              * @return the next definition stage.
              */
-            WithCreate withProperties(TopLevelArmResourceProperties properties);
+            WithCreate withUsername(String username);
+        }
+
+        /**
+         * The stage of the TopLevelArmResource definition allowing to specify userNames.
+         */
+        interface WithUserNames {
+            /**
+             * Specifies the userNames property: The userNames property..
+             * 
+             * @param userNames The userNames property.
+             * @return the next definition stage.
+             */
+            WithCreate withUserNames(String userNames);
+        }
+
+        /**
+         * The stage of the TopLevelArmResource definition allowing to specify accuserName.
+         */
+        interface WithAccuserName {
+            /**
+             * Specifies the accuserName property: The accuserName property..
+             * 
+             * @param accuserName The accuserName property.
+             * @return the next definition stage.
+             */
+            WithCreate withAccuserName(String accuserName);
+        }
+
+        /**
+         * The stage of the TopLevelArmResource definition allowing to specify startTimestamp.
+         */
+        interface WithStartTimestamp {
+            /**
+             * Specifies the startTimestamp property: The startTimeStamp property..
+             * 
+             * @param startTimestamp The startTimeStamp property.
+             * @return the next definition stage.
+             */
+            WithCreate withStartTimestamp(OffsetDateTime startTimestamp);
         }
     }
 

@@ -147,8 +147,8 @@ public class Main {
         // Others
         javaPackage.getTextFiles().forEach(textFile -> typeSpecPlugin.writeFile(textFile.getFilePath(), textFile.getContents(), null));
         // resources
+        String artifactId = ClientModelUtil.getArtifactId();
         if (settings.isBranded()) {
-            String artifactId = ClientModelUtil.getArtifactId();
             if (!CoreUtils.isNullOrEmpty(artifactId)) {
                 typeSpecPlugin.writeFile("src/main/resources/" + artifactId + ".properties",
                         "name=${project.artifactId}\nversion=${project.version}\n", null);
@@ -157,7 +157,8 @@ public class Main {
 
         boolean includeApiViewProperties = emitterOptions.includeApiViewProperties() != null && emitterOptions.includeApiViewProperties();
         if (includeApiViewProperties && !CoreUtils.isNullOrEmpty(typeSpecPlugin.getCrossLanguageDefinitionMap())) {
-            StringBuilder sb = new StringBuilder("{\n  \"CrossLanguageDefinitionId\": {\n");
+            String flavor = emitterOptions.getFlavor() == null ? "azure" : emitterOptions.getFlavor();
+            StringBuilder sb = new StringBuilder("{\n  \"flavor\": \"" + flavor + "\", \n  \"CrossLanguageDefinitionId\": {\n");
             AtomicBoolean first = new AtomicBoolean(true);
             typeSpecPlugin.getCrossLanguageDefinitionMap().forEach((key, value) -> {
                 if(first.get()) {
@@ -169,7 +170,7 @@ public class Main {
             });
             sb.append("\n  }\n}");
 
-            typeSpecPlugin.writeFile("src/main/resources/META-INF/apiview_properties.json", sb.toString(), null);
+            typeSpecPlugin.writeFile("src/main/resources/META-INF/" + artifactId + "_apiview_properties.json", sb.toString(), null);
         }
         System.exit(0);
     }

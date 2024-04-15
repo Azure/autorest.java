@@ -168,7 +168,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
             }
         } else {
             for (Map.Entry<ClassType, List<Integer>> exception : restAPIMethod.getUnexpectedResponseExceptionTypes().entrySet()) {
-                interfaceBlock.annotation("UnexpectedResponseExceptionInformation(exceptionTypeName = \""
+                interfaceBlock.annotation("UnexpectedResponseExceptionDetail(exceptionTypeName = \""
                         + restAPIMethod.getHttpExceptionType(exception.getKey()).toString()
                         + "\", statusCode = {" + exception.getValue().stream().map(String::valueOf).collect(Collectors.joining(",")) + " })");
             }
@@ -179,7 +179,7 @@ public class ProxyTemplate implements IJavaTemplate<Proxy, JavaClass> {
         if(JavaSettings.getInstance().isBranded()) {
             interfaceBlock.annotation(String.format("UnexpectedResponseExceptionType(%1$s.class)", restAPIMethod.getUnexpectedResponseExceptionType()));
         } else {
-            interfaceBlock.annotation("UnexpectedResponseExceptionInformation");
+            interfaceBlock.annotation("UnexpectedResponseExceptionDetail");
         }
     }
 

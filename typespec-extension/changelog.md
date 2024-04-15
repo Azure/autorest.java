@@ -1,5 +1,12 @@
 # Release History
 
+## 0.15.8 (2024-04-11)
+
+Compatible with compiler 0.55.
+
+- Bug fix on `@encode`.
+- Bug fix on required property of nullable type.
+
 ## 0.15.7 (2024-04-03)
 
 Compatible with compiler 0.55.

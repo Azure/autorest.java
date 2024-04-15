@@ -5,6 +5,7 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.ChildResourceInner;
 import java.util.Map;
@@ -49,11 +50,18 @@ public interface ChildResource {
     Map<String, String> tags();
 
     /**
-     * Gets the properties property: The resource-specific properties for this resource.
+     * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
      * 
-     * @return the properties value.
+     * @return the systemData value.
      */
-    ChildResourceProperties properties();
+    SystemData systemData();
+
+    /**
+     * Gets the provisioningState property: Provisioning State of Top Level Arm Resource.
+     * 
+     * @return the provisioningState value.
+     */
+    ProvisioningState provisioningState();
 
     /**
      * Gets the region of the resource.
@@ -139,7 +147,7 @@ public interface ChildResource {
          * The stage of the ChildResource definition which contains all the minimum required properties for the resource
          * to be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithProperties {
+        interface WithCreate extends DefinitionStages.WithTags {
             /**
              * Executes the create request.
              * 
@@ -167,19 +175,6 @@ public interface ChildResource {
              * @return the next definition stage.
              */
             WithCreate withTags(Map<String, String> tags);
-        }
-
-        /**
-         * The stage of the ChildResource definition allowing to specify properties.
-         */
-        interface WithProperties {
-            /**
-             * Specifies the properties property: The resource-specific properties for this resource..
-             * 
-             * @param properties The resource-specific properties for this resource.
-             * @return the next definition stage.
-             */
-            WithCreate withProperties(ChildResourceProperties properties);
         }
     }
 

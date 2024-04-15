@@ -58,8 +58,9 @@ public class EmitterOptions {
     @JsonProperty(value="customization-class")
     private String customizationClass;
 
-    @JsonProperty(value="include-api-view-properties")
-    private Boolean includeApiViewProperties;
+    @JsonProperty(value = "include-api-view-properties")
+    private Boolean includeApiViewProperties = true;
+
     @JsonProperty(value = "polling")
     private Map<String, JavaSettings.PollingDetails> polling = new HashMap<>();
 

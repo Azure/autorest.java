@@ -7,6 +7,7 @@ import com.github.javaparser.JavaToken;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
+import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.BodyDeclaration;
@@ -16,10 +17,15 @@ import com.github.javaparser.ast.body.InitializerDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
 import com.github.javaparser.ast.comments.Comment;
 import com.github.javaparser.ast.comments.JavadocComment;
+import com.github.javaparser.ast.comments.LineComment;
 import com.github.javaparser.ast.expr.SimpleName;
 import com.github.javaparser.ast.modules.ModuleDeclaration;
 import com.github.javaparser.ast.modules.ModuleDirective;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
+import com.github.javaparser.ast.visitor.GenericVisitor;
+import com.github.javaparser.ast.visitor.VoidVisitor;
+import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
+import com.github.javaparser.printer.DefaultPrettyPrinterVisitor;
 
 import java.io.BufferedReader;
 import java.io.StringReader;
@@ -28,7 +34,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 
 /**
  * Partial update handler. It can handle partial update for .java class files.
@@ -49,6 +54,23 @@ import java.util.stream.Collectors;
  * </ul>
  */
 public class PartialUpdateHandler {
+    /**
+     * Javadoc comment that denotes the start of the generated content.
+     */
+    public static final String START_GENERATED_JAVA_DOC = "<!-- start generated doc -->";
+
+    /**
+     * Javadoc comment that denotes the end of the generated content.
+     */
+    public static final String END_GENERATED_JAVA_DOC = "<!-- end generated doc -->";
+
+    // The following constant MUST be in the order of off - on to make sure code formatting remains enabled for this
+    // class.
+    private static final String JAVADOC_FORMATTER_OFF = "<!-- @formatter:off -->";
+    private static final String JAVADOC_FORMATTER_ON = "<!-- @formatter:on -->";
+
+    private static final String FORMATTER_OFF_COMMENT = " @formatter:off";
+    private static final String FORMATTER_ON_COMMENT = " @formatter:on";
 
     /**
      * Handle partial update by comparing generatedFileContent and existingFileContent. It supports handling partial
@@ -78,7 +100,7 @@ public class PartialUpdateHandler {
      * </ul>
      *
      * @param generatedFileContent the newly generated file content
-     * @param existingFileContent  the existing file content that contains user's manual update code
+     * @param existingFileContent the existing file content that contains user's manual update code
      * @return the file content after handling partial update
      */
     public static String handlePartialUpdateForFile(String generatedFileContent, String existingFileContent) {
@@ -87,24 +109,23 @@ public class PartialUpdateHandler {
         CompilationUnit compilationUnitForExistingFile = StaticJavaParser.parse(existingFileContent);
 
         // 2. If it's module-info.java file, then go to handlePartialUpdateForModuleInfoFile
-        if (compilationUnitForExistingFile.getModule().isPresent() &&
-                compilationUnitForGeneratedFile.getModule().isPresent()) {
+        if (compilationUnitForExistingFile.getModule().isPresent() && compilationUnitForGeneratedFile.getModule()
+            .isPresent()) {
             return handlePartialUpdateForModuleInfoFile(compilationUnitForGeneratedFile,
-                    compilationUnitForExistingFile);
+                compilationUnitForExistingFile);
         }
 
         // 3. If it's package-info.java file, then go to handlePartialUpdateForPackageInfoFile
-        if (isPackageInfoFile(compilationUnitForExistingFile)
-            && isPackageInfoFile(compilationUnitForGeneratedFile)) {
+        if (isPackageInfoFile(compilationUnitForExistingFile) && isPackageInfoFile(compilationUnitForGeneratedFile)) {
             return handlePartialUpdateForPackageInfoFile(compilationUnitForGeneratedFile,
-                    compilationUnitForExistingFile);
+                compilationUnitForExistingFile);
         }
 
         // 4. If it's class or interface file, handle partial update for class or interface file
-        if (isClassOrInterfaceFile(compilationUnitForExistingFile) &&
-                isClassOrInterfaceFile(compilationUnitForGeneratedFile)) {
+        if (isClassOrInterfaceFile(compilationUnitForExistingFile) && isClassOrInterfaceFile(
+            compilationUnitForGeneratedFile)) {
             return handlePartialUpdateForClassOrInterfaceFile(compilationUnitForGeneratedFile, generatedFileContent,
-                    compilationUnitForExistingFile);
+                compilationUnitForExistingFile);
         }
 
         return generatedFileContent;
@@ -129,12 +150,11 @@ public class PartialUpdateHandler {
      *
      * @param compilationUnitForGeneratedFile the newly generated file content
      * @param generatedFileContent the newly generated file content
-     * @param compilationUnitForExistingFile  the existing file content that contains user's manual update code
+     * @param compilationUnitForExistingFile the existing file content that contains user's manual update code
      * @return the file content after handling partial update
      */
     private static String handlePartialUpdateForClassOrInterfaceFile(CompilationUnit compilationUnitForGeneratedFile,
-                                                                     String generatedFileContent,
-                                                                     CompilationUnit compilationUnitForExistingFile) {
+        String generatedFileContent, CompilationUnit compilationUnitForExistingFile) {
         // 1. Parse existing file content and generated file content using JavaParser
         ClassOrInterfaceDeclaration generatedClazz = getClassOrInterfaceDeclaration(compilationUnitForGeneratedFile);
         ClassOrInterfaceDeclaration existingClazz = getClassOrInterfaceDeclaration(compilationUnitForExistingFile);
@@ -156,19 +176,34 @@ public class PartialUpdateHandler {
         // if there is a method has @Generated annotation, then the file is in scope of partial update, otherwise return
         // directly
         boolean hasGeneratedAnnotations = generatedFileMembers.stream()
-                .anyMatch(PartialUpdateHandler::hasGeneratedAnnotation);
+            .anyMatch(PartialUpdateHandler::hasGeneratedAnnotation);
 
         if (!hasGeneratedAnnotations) {
             return generatedFileContent;
         }
 
+        // Remove all orphan comments from the declaration to prevent them being added multiple times when code is
+        // regenerated.
+        // Create a new List for the orphaned comments as Java Parser returns the same list instance, wrapped by
+        // Collections.unmodifiableList, for each call to getOrphanComments. Without the new ArrayList, the orphan
+        // comments would be removed from the list returned during iteration, causing a ConcurrentModificationException.
+        List<Comment> orphanComments = new ArrayList<>(existingClazz.getOrphanComments());
+        orphanComments.stream().filter(PartialUpdateHandler::isFormatterComment).forEach(Node::remove);
+        existingClazz.accept(new VoidVisitorAdapter<>() {
+            @Override
+            public void visit(LineComment n, Object arg) {
+                if (isFormatterComment(n)) {
+                    n.remove();
+                }
+            }
+        }, null);
         NodeList<BodyDeclaration<?>> updatedMembersList = new NodeList<>();
         // 5. Iterate existingFileMembers, keep manual written members, and replace generated members with the
         // corresponding newly generated one
         for (BodyDeclaration<?> existingMember : existingFileMembers) {
             boolean isGeneratedMethod = isMemberGenerated(existingMember);
             if (!isGeneratedMethod) { // manual written member
-                updatedMembersList.add(existingMember);
+                updatedMembersList.add(surroundCustomCodeWithFormatterOff(existingMember));
             } else {
                 // find the corresponding newly generated member
                 for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
@@ -184,10 +219,15 @@ public class PartialUpdateHandler {
         for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
             boolean needToAddToUpdateMembersList = true;
             for (BodyDeclaration<?> existingMember : updatedMembersList) {
+                if (existingMember instanceof NonGeneratedBodyDeclaration) {
+                    existingMember = ((NonGeneratedBodyDeclaration<?>) existingMember).wrapped;
+                }
+
                 // If the generated member and the existing member is corresponding,
                 // or if there is an existing member who has the same name as the generated member and is manually written,
                 // Then we don't put the generated member to the updatedMembersList.
-                if (isMembersCorresponding(existingMember, generatedMember) || (isMembersWithSameName(existingMember, generatedMember) && !isMemberGenerated(existingMember))) {
+                if (isMembersCorresponding(existingMember, generatedMember) || (
+                    isMembersWithSameName(existingMember, generatedMember) && !isMemberGenerated(existingMember))) {
                     needToAddToUpdateMembersList = false;
                     break;
                 }
@@ -207,7 +247,66 @@ public class PartialUpdateHandler {
     }
 
     /**
+     * Surrounds the non-generated BodyDeclaration with Eclipse formatter disable tags.
+     *
+     * @param declaration the BodyDeclaration to surround with formatter disable tags
+     * @return the BodyDeclaration surrounded with formatter disable tags
+     */
+    private static BodyDeclaration<?> surroundCustomCodeWithFormatterOff(BodyDeclaration<?> declaration) {
+        return new NonGeneratedBodyDeclaration<>(declaration);
+    }
+
+    private static boolean isFormatterComment(Comment comment) {
+        // Formatter comments are always line comments
+        if (!(comment instanceof LineComment)) {
+            return false;
+        }
+
+        String lineComment = comment.getContent();
+
+        // Check for the comment starting with <at>formatter:
+        if (!FORMATTER_OFF_COMMENT.regionMatches(0, lineComment, 0, 12)) {
+            return false;
+        }
+
+        return lineComment.endsWith("off") || lineComment.endsWith("on");
+    }
+
+    /**
+     * Custom implementation of {@link BodyDeclaration} that wraps a non-generated {@link BodyDeclaration}.
+     * <p>
+     * This is necessary as Java Parser doesn't write trailing orphan comments when printing the AST. So, this class
+     * overrides the method that is called during printing to explicitly add the code formatter off comments.
+     *
+     * @param <T> the type of the wrapped {@link BodyDeclaration}
+     */
+    private static final class NonGeneratedBodyDeclaration<T extends BodyDeclaration<?>> extends BodyDeclaration<T> {
+        private final BodyDeclaration<?> wrapped;
+
+        NonGeneratedBodyDeclaration(BodyDeclaration<?> wrapped) {
+            this.wrapped = wrapped;
+        }
+
+        @Override
+        public <R, A> R accept(GenericVisitor<R, A> v, A arg) {
+            return wrapped.accept(v, arg);
+        }
+
+        @Override
+        public <A> void accept(VoidVisitor<A> v, A arg) {
+            if (v instanceof DefaultPrettyPrinterVisitor) {
+                new LineComment(FORMATTER_OFF_COMMENT).accept(v, arg);
+                wrapped.accept(v, arg);
+                new LineComment(FORMATTER_ON_COMMENT).accept(v, arg);
+            } else {
+                wrapped.accept(v, arg);
+            }
+        }
+    }
+
+    /**
      * Verify if the generated class or interface is valid
+     *
      * @param generatedFileMembers, members in the generated file
      * @return true if the generated class or interface is valid, otherwise return false
      */
@@ -217,7 +316,9 @@ public class PartialUpdateHandler {
         for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
             if (generatedMember.isCallableDeclaration()) {
                 if (methodSignatureSet.contains(generatedMember.asCallableDeclaration().getSignature())) {
-                    throw new RuntimeException(String.format("Found duplicate methods in the generated file. Signature: %s", generatedMember.asCallableDeclaration().getSignature()));
+                    throw new RuntimeException(
+                        String.format("Found duplicate methods in the generated file. Signature: %s",
+                            generatedMember.asCallableDeclaration().getSignature()));
                 }
                 methodSignatureSet.add(generatedMember.asCallableDeclaration().getSignature());
             }
@@ -225,49 +326,55 @@ public class PartialUpdateHandler {
 
         // 2. Verify there is no more than 1 static initializer declaration
         List<InitializerDeclaration> staticInitializerDeclaration = generatedFileMembers.stream()
-                .filter(m -> m instanceof InitializerDeclaration)
-                .map(m -> (InitializerDeclaration) m)
-                .filter(InitializerDeclaration::isStatic)
-                .collect(Collectors.toList());
+            .filter(m -> m instanceof InitializerDeclaration)
+            .map(m -> (InitializerDeclaration) m)
+            .filter(InitializerDeclaration::isStatic)
+            .collect(Collectors.toList());
         if (staticInitializerDeclaration.size() > 1) {
-            throw new RuntimeException(String.format("Found more than 1 static initializer declaration in the generated file. Code:\n%s",
-                    staticInitializerDeclaration.stream().map(m -> m.getBody().toString()).collect(Collectors.joining("\n\n"))));
+            throw new RuntimeException(
+                String.format("Found more than 1 static initializer declaration in the generated file. Code:\n%s",
+                    staticInitializerDeclaration.stream()
+                        .map(m -> m.getBody().toString())
+                        .collect(Collectors.joining("\n\n"))));
         }
     }
 
     /**
-     * Handle partial update for module-info.java file.
-     * We will merge module-info.java file contents.
+     * Handle partial update for module-info.java file. We will merge module-info.java file contents.
      *
      * @param compilationUnitForGeneratedFile the newly generated file content
      * @param compilationUnitForExistingFile the existing file content that contains user's manual update code
      * @return the content after handling partial update
      */
     private static String handlePartialUpdateForModuleInfoFile(CompilationUnit compilationUnitForGeneratedFile,
-                                                               CompilationUnit compilationUnitForExistingFile) {
+        CompilationUnit compilationUnitForExistingFile) {
         return mergeModuleFileContent(compilationUnitForGeneratedFile, compilationUnitForExistingFile);
     }
 
     /**
+     * The basic logic is as below: 1. Parse the directives from the two files 2. Create requires, exports, opens, uses,
+     * provides directive lists from the generated file and existing file 3. Merge the requires, exports, opens, uses,
+     * provides directive lists one by one 4. Add the directive lists to ModuleDeclaration in generated file, then use
+     * generated file as return value
      *
-     * The basic logic is as below:
-     * 1. Parse the directives from the two files
-     * 2. Create requires, exports, opens, uses, provides directive lists from the generated file and existing file
-     * 3. Merge the requires, exports, opens, uses, provides directive lists one by one
-     * 4. Add the directive lists to ModuleDeclaration in generated file, then use generated file as return value
      * @param compilationUnitForGeneratedFile the newly generated file content
      * @param compilationUnitForExistingFile the existing file content that contains user's manual update code
      * @return merged module-info.java file content
      */
     private static String mergeModuleFileContent(CompilationUnit compilationUnitForGeneratedFile,
-                                                 CompilationUnit compilationUnitForExistingFile) {
-        if (!compilationUnitForExistingFile.getModule().isPresent() || !compilationUnitForGeneratedFile.getModule().isPresent()) {
+        CompilationUnit compilationUnitForExistingFile) {
+        if (!compilationUnitForExistingFile.getModule().isPresent() || !compilationUnitForGeneratedFile.getModule()
+            .isPresent()) {
             throw new RuntimeException("Generated file or existing file is not module-info file");
         }
 
-        NodeList<ModuleDirective> directivesForGeneratedFile = compilationUnitForGeneratedFile.getModule().get().getDirectives();
+        NodeList<ModuleDirective> directivesForGeneratedFile = compilationUnitForGeneratedFile.getModule()
+            .get()
+            .getDirectives();
 
-        NodeList<ModuleDirective> directivesForExistingFile = compilationUnitForExistingFile.getModule().get().getDirectives();
+        NodeList<ModuleDirective> directivesForExistingFile = compilationUnitForExistingFile.getModule()
+            .get()
+            .getDirectives();
 
         // generated file directives
         NodeList<ModuleDirective> requiresDirectivesForGeneratedFile = new NodeList<>();
@@ -276,8 +383,8 @@ public class PartialUpdateHandler {
         NodeList<ModuleDirective> usesDirectivesForGeneratedFile = new NodeList<>();
         NodeList<ModuleDirective> providesDirectivesForGeneratedFile = new NodeList<>();
         addToEachTypeOfDirectiveList(directivesForGeneratedFile, requiresDirectivesForGeneratedFile,
-                exportsDirectivesForGeneratedFile, opensDirectivesForGeneratedFile, usesDirectivesForGeneratedFile,
-                providesDirectivesForGeneratedFile);
+            exportsDirectivesForGeneratedFile, opensDirectivesForGeneratedFile, usesDirectivesForGeneratedFile,
+            providesDirectivesForGeneratedFile);
 
         // existing file directives
         NodeList<ModuleDirective> requiresDirectivesForExistingFile = new NodeList<>();
@@ -286,18 +393,23 @@ public class PartialUpdateHandler {
         NodeList<ModuleDirective> usesDirectivesForExistingFile = new NodeList<>();
         NodeList<ModuleDirective> providesDirectivesForExistingFile = new NodeList<>();
         addToEachTypeOfDirectiveList(directivesForExistingFile, requiresDirectivesForExistingFile,
-                exportsDirectivesForExistingFile, opensDirectivesForExistingFile, usesDirectivesForExistingFile,
-                providesDirectivesForExistingFile);
+            exportsDirectivesForExistingFile, opensDirectivesForExistingFile, usesDirectivesForExistingFile,
+            providesDirectivesForExistingFile);
 
         // generated file directives
-        NodeList<ModuleDirective> requiresDirectiveNodeList = mergeDirectiveNodeList(requiresDirectivesForGeneratedFile, requiresDirectivesForExistingFile);
-        NodeList<ModuleDirective> exportsDirectiveNodeList = mergeDirectiveNodeList(exportsDirectivesForGeneratedFile, exportsDirectivesForExistingFile);
-        NodeList<ModuleDirective> opensDirectiveNodeList = mergeDirectiveNodeList(opensDirectivesForGeneratedFile, opensDirectivesForExistingFile);
-        NodeList<ModuleDirective> usesDirectiveNodeList = mergeDirectiveNodeList(usesDirectivesForGeneratedFile, usesDirectivesForExistingFile);
-        NodeList<ModuleDirective> providesDirectiveNodeList = mergeDirectiveNodeList(providesDirectivesForGeneratedFile, providesDirectivesForExistingFile);
+        NodeList<ModuleDirective> requiresDirectiveNodeList = mergeDirectiveNodeList(requiresDirectivesForGeneratedFile,
+            requiresDirectivesForExistingFile);
+        NodeList<ModuleDirective> exportsDirectiveNodeList = mergeDirectiveNodeList(exportsDirectivesForGeneratedFile,
+            exportsDirectivesForExistingFile);
+        NodeList<ModuleDirective> opensDirectiveNodeList = mergeDirectiveNodeList(opensDirectivesForGeneratedFile,
+            opensDirectivesForExistingFile);
+        NodeList<ModuleDirective> usesDirectiveNodeList = mergeDirectiveNodeList(usesDirectivesForGeneratedFile,
+            usesDirectivesForExistingFile);
+        NodeList<ModuleDirective> providesDirectiveNodeList = mergeDirectiveNodeList(providesDirectivesForGeneratedFile,
+            providesDirectivesForExistingFile);
         addToEachTypeOfDirectiveList(directivesForGeneratedFile, requiresDirectivesForExistingFile,
-                exportsDirectivesForExistingFile, opensDirectivesForExistingFile, usesDirectivesForExistingFile,
-                providesDirectivesForExistingFile);
+            exportsDirectivesForExistingFile, opensDirectivesForExistingFile, usesDirectivesForExistingFile,
+            providesDirectivesForExistingFile);
 
         NodeList<ModuleDirective> moduleDirectives = new NodeList<>();
         moduleDirectives.addAll(requiresDirectiveNodeList);
@@ -321,37 +433,39 @@ public class PartialUpdateHandler {
     }
 
     /**
-     * Handle partial update for package-info.java file.
-     * We will merge package-info.java file contents.
+     * Handle partial update for package-info.java file. We will merge package-info.java file contents.
      *
      * @param compilationUnitForGeneratedFile the newly generated file content
      * @param compilationUnitForExistingFile the existing file content that contains user's manual update code
      * @return the content after handling partial update
      */
     private static String handlePartialUpdateForPackageInfoFile(CompilationUnit compilationUnitForGeneratedFile,
-                                                               CompilationUnit compilationUnitForExistingFile) {
+        CompilationUnit compilationUnitForExistingFile) {
         if (!isPackageInfoFile(compilationUnitForExistingFile) || !isPackageInfoFile(compilationUnitForGeneratedFile)) {
             throw new RuntimeException("Generated file or existing file is not package-info file");
         }
 
         JavadocComment generatedJavadoc = compilationUnitForGeneratedFile.getPackageDeclaration()
-                .flatMap(PackageDeclaration::getComment)
-                .map(Comment::asJavadocComment)
-                .orElse(null);
+            .flatMap(PackageDeclaration::getComment)
+            .map(Comment::asJavadocComment)
+            .orElse(null);
 
         JavadocComment existingJavadoc = compilationUnitForExistingFile.getPackageDeclaration()
-                .flatMap(PackageDeclaration::getComment)
-                .map(Comment::asJavadocComment)
-                .orElse(null);
+            .flatMap(PackageDeclaration::getComment)
+            .map(Comment::asJavadocComment)
+            .orElse(null);
 
         // If the existing file has no Javadocs just return the generated file.
         if (existingJavadoc == null) {
             return compilationUnitForGeneratedFile.toString();
         }
 
-        String existingJavadocString = existingJavadoc.toString();
-        int existingGeneratedDocStartPosition = existingJavadocString.indexOf("<!-- start generated doc -->");
-        int existingGeneratedDocEndPosition = existingJavadocString.indexOf("<!-- end generated doc -->");
+        // Use JavadocComment.parse and get the description text as this doesn't contain the leading '*' character.
+        // This makes it easier to find if there is leading and trailing custom Javadoc.
+        // Downside is that it requires us to add back the leading '*' character when we add the custom Javadoc back.
+        String existingJavadocDescription = existingJavadoc.parse().getDescription().toText();
+        int existingGeneratedDocStartPosition = existingJavadocDescription.indexOf(START_GENERATED_JAVA_DOC);
+        int existingGeneratedDocEndPosition = existingJavadocDescription.indexOf(END_GENERATED_JAVA_DOC);
 
         if (existingGeneratedDocStartPosition == -1 && existingGeneratedDocEndPosition == -1) {
             // If the existing file has no generated doc, just return the existing file.
@@ -360,51 +474,100 @@ public class PartialUpdateHandler {
         }
 
         if (existingGeneratedDocEndPosition == -1) {
-            throw new RuntimeException("Existing file has a start generated doc ('<!-- start generated doc -->') but "
-                    + "no end generated doc ('<!-- end generated doc -->').");
+            throw new RuntimeException("Existing file has a start generated doc ('" + START_GENERATED_JAVA_DOC + "') "
+                + "but no end generated doc ('" + END_GENERATED_JAVA_DOC + "').");
         } else if (existingGeneratedDocStartPosition == -1) {
-            throw new RuntimeException("Existing file has an end generated doc ('<!-- end generated doc -->') but "
-                    + "no start generated doc ('<!-- start generated doc -->').");
+            throw new RuntimeException("Existing file has an end generated doc ('" + END_GENERATED_JAVA_DOC + "') but "
+                + "no start generated doc ('" + START_GENERATED_JAVA_DOC + "').");
         }
 
-        String generatedJavadocString = generatedJavadoc.toString();
-        int startGenerateDocPosition = generatedJavadocString.indexOf("<!-- start generated doc -->");
-        int endGenerateDocPosition = generatedJavadocString.indexOf("<!-- end generated doc -->");
+        String lineEnding = existingJavadoc.getLineEndingStyle().asRawString();
+        String generatedJavadocDescription = generatedJavadoc.parse().getDescription().toText();
 
+        // Existing Javadoc doesn't start with the generated Javadoc, surround the custom Javadoc with Eclipse formatter
+        // tags to disable formatting.
+        String leadingCustomJavadoc;
+        if (existingGeneratedDocStartPosition > 0) {
+            String existing = existingJavadocDescription.substring(0, existingGeneratedDocStartPosition)
+                .replace(JAVADOC_FORMATTER_OFF + lineEnding, "")
+                .replace(JAVADOC_FORMATTER_ON + lineEnding, "");
 
-        String mergedJavadoc = existingJavadocString.substring(0, existingGeneratedDocStartPosition) +
-                generatedJavadocString.substring(startGenerateDocPosition, endGenerateDocPosition + 26) +
-                existingJavadocString.substring(existingGeneratedDocEndPosition + 26);
+            leadingCustomJavadoc = JAVADOC_FORMATTER_OFF + lineEnding;
 
-        List<String> lines = new BufferedReader(new StringReader(mergedJavadoc)).lines().collect(Collectors.toList());
+            if (!existing.endsWith(lineEnding)) {
+                leadingCustomJavadoc += existing + lineEnding;
+            } else {
+                leadingCustomJavadoc += existing;
+            }
+
+            leadingCustomJavadoc += JAVADOC_FORMATTER_ON + lineEnding;
+        } else {
+            leadingCustomJavadoc = "";
+        }
+
+        // Existing Javadoc doesn't end with the generated Javadoc, surround the custom Javadoc with Eclipse formatter
+        // tags to disable formatting.
+        String trailingCustomJavadoc;
+        if (existingGeneratedDocEndPosition < existingJavadocDescription.length() - END_GENERATED_JAVA_DOC.length()) {
+            if (!generatedJavadocDescription.endsWith(lineEnding)) {
+                trailingCustomJavadoc = lineEnding + JAVADOC_FORMATTER_OFF;
+            } else {
+                trailingCustomJavadoc = JAVADOC_FORMATTER_OFF;
+            }
+
+            String existing = existingJavadocDescription.substring(
+                existingGeneratedDocEndPosition + END_GENERATED_JAVA_DOC.length())
+                .replace(JAVADOC_FORMATTER_OFF + lineEnding, "")
+                .replace(JAVADOC_FORMATTER_ON + lineEnding, "")
+                .replace(JAVADOC_FORMATTER_ON, "");
+
+            if (!existing.startsWith(lineEnding)) {
+                trailingCustomJavadoc += lineEnding + existing;
+            } else {
+                trailingCustomJavadoc += existing;
+            }
+
+            if (!trailingCustomJavadoc.endsWith(lineEnding)) {
+                trailingCustomJavadoc += lineEnding + JAVADOC_FORMATTER_ON + lineEnding;
+            } else {
+                trailingCustomJavadoc += JAVADOC_FORMATTER_ON + lineEnding;
+            }
+        } else {
+            trailingCustomJavadoc = "";
+        }
+
+        String mergedJavadoc = leadingCustomJavadoc + generatedJavadocDescription + trailingCustomJavadoc;
+
+        List<String> lines = new BufferedReader(new StringReader(mergedJavadoc)).lines()
+            .map(line -> "* " + line)
+            .collect(Collectors.toList());
 
         if (lines.isEmpty()) {
             compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment());
         } else if (lines.size() == 1) {
             compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(new JavadocComment(lines.get(0)));
         } else {
-            compilationUnitForGeneratedFile.getPackageDeclaration().get().setComment(
-                    new JavadocComment(String.join("\r\n", lines.subList(1, lines.size() - 1))));
+            compilationUnitForGeneratedFile.getPackageDeclaration()
+                .get()
+                .setComment(new JavadocComment(String.join(lineEnding, lines)));
         }
 
         return compilationUnitForGeneratedFile.toString();
     }
 
-
     /**
-     *
      * Merge two directive list. The logic is as below:
      *
-     * 1. Add all the directives in list1 to the returned list.
-     * 2. For each directive in list2, check if it is in list1, if it is in list1, then we don't need to add it to
-     * returned list, otherwise, we need to add it to the returned list
+     * 1. Add all the directives in list1 to the returned list. 2. For each directive in list2, check if it is in list1,
+     * if it is in list1, then we don't need to add it to returned list, otherwise, we need to add it to the returned
+     * list
      *
      * @param list1 first directive list
      * @param list2 second directive list
      * @return the merged directive list
      */
     private static NodeList<ModuleDirective> mergeDirectiveNodeList(NodeList<ModuleDirective> list1,
-                                                                    NodeList<ModuleDirective> list2) {
+        NodeList<ModuleDirective> list2) {
         NodeList<ModuleDirective> res = new NodeList<>();
         res.addAll(list1);
         for (ModuleDirective directive2 : list2) {
@@ -428,7 +591,7 @@ public class PartialUpdateHandler {
                             tokenList2.add(trimmedToken2);
                         }
                     }
-                    if(tokenList1.equals(tokenList2)) {
+                    if (tokenList1.equals(tokenList2)) {
                         isInList1 = true;
                     }
                 }
@@ -441,11 +604,9 @@ public class PartialUpdateHandler {
     }
 
     private static void addToEachTypeOfDirectiveList(NodeList<ModuleDirective> allDirectives,
-                                                     NodeList<ModuleDirective> requiresDirectiveNodeList,
-                                                     NodeList<ModuleDirective> exportsDirectiveNodeList,
-                                                     NodeList<ModuleDirective> opensDirectiveNodeList,
-                                                     NodeList<ModuleDirective> usesDirectiveNodeList,
-                                                     NodeList<ModuleDirective> providesDirectiveNodeList) {
+        NodeList<ModuleDirective> requiresDirectiveNodeList, NodeList<ModuleDirective> exportsDirectiveNodeList,
+        NodeList<ModuleDirective> opensDirectiveNodeList, NodeList<ModuleDirective> usesDirectiveNodeList,
+        NodeList<ModuleDirective> providesDirectiveNodeList) {
         for (ModuleDirective directive : allDirectives) {
             if (directive.isModuleRequiresDirective()) {
                 requiresDirectiveNodeList.add(directive);
@@ -474,7 +635,9 @@ public class PartialUpdateHandler {
      */
     private static boolean hasGeneratedAnnotation(BodyDeclaration<?> member) {
         if (member.getAnnotations() != null && !member.getAnnotations().isEmpty()) {
-            return member.getAnnotations().stream().anyMatch(annotationExpr -> annotationExpr.getName().toString().equals("Generated"));
+            return member.getAnnotations()
+                .stream()
+                .anyMatch(annotationExpr -> annotationExpr.getName().toString().equals("Generated"));
         } else {
             return false;
         }
@@ -502,9 +665,8 @@ public class PartialUpdateHandler {
      * method, we will compare the signature, otherwise, we will compare the name.
      *
      * In the case of static initializer declaration, since they do not have a name, we would always treat them as
-     * corresponding.
-     * Given the assumption that user should not add such customization, and generated code cannot have more than 1
-     * such block.
+     * corresponding. Given the assumption that user should not add such customization, and generated code cannot have
+     * more than 1 such block.
      *
      * @param member1
      * @param member2
@@ -513,9 +675,11 @@ public class PartialUpdateHandler {
     private static boolean isMembersCorresponding(BodyDeclaration<?> member1, BodyDeclaration<?> member2) {
         if (member1.isCallableDeclaration() && member2.isCallableDeclaration()) {
             // compare signature
-            return member1.asCallableDeclaration().getSignature().equals(member2.asCallableDeclaration().getSignature());
+            return member1.asCallableDeclaration()
+                .getSignature()
+                .equals(member2.asCallableDeclaration().getSignature());
         } else if (member1 instanceof InitializerDeclaration && member2 instanceof InitializerDeclaration
-                && ((InitializerDeclaration) member1).isStatic() && ((InitializerDeclaration) member2).isStatic()) {
+            && ((InitializerDeclaration) member1).isStatic() && ((InitializerDeclaration) member2).isStatic()) {
             // the assumption here is that there is at most 1 static initializer declaration
             // and the static initializer declaration is generated member; see "hasGeneratedAnnotation"
             return true;
@@ -527,8 +691,8 @@ public class PartialUpdateHandler {
     private static boolean isMembersWithSameName(BodyDeclaration<?> member1, BodyDeclaration<?> member2) {
         if (member1.isFieldDeclaration() && member2.isFieldDeclaration()) {
             return isFieldDeclarationWithSameName(member1, member2);
-        } else if (member1.getMetaModel().equals(member2.getMetaModel()) &&
-                member1 instanceof NodeWithSimpleName && member2 instanceof NodeWithSimpleName) {
+        } else if (member1.getMetaModel().equals(member2.getMetaModel()) && member1 instanceof NodeWithSimpleName
+            && member2 instanceof NodeWithSimpleName) {
             // compare name
             return ((NodeWithSimpleName<?>) member2).getName().equals(((NodeWithSimpleName<?>) member1).getName());
         }
@@ -536,14 +700,18 @@ public class PartialUpdateHandler {
     }
 
     private static boolean isFieldDeclarationWithSameName(BodyDeclaration<?> member1, BodyDeclaration<?> member2) {
-        if (member1.asFieldDeclaration().getVariables() != null &&
-                !member1.asFieldDeclaration().getVariables().isEmpty() &&
-                member2.asFieldDeclaration().getVariables() != null &&
-                !member2.asFieldDeclaration().getVariables().isEmpty()) {
+        if (member1.asFieldDeclaration().getVariables() != null && !member1.asFieldDeclaration()
+            .getVariables()
+            .isEmpty() && member2.asFieldDeclaration().getVariables() != null && !member2.asFieldDeclaration()
+            .getVariables()
+            .isEmpty()) {
             // for FieldDeclaration, currently make it simple, we only compare the first variable, if the first variable
             // has the same name, then we consider they are field declarations with same name
-            return member1.asFieldDeclaration().getVariables().get(0).getName()
-                    .equals(member2.asFieldDeclaration().getVariables().get(0).getName());
+            return member1.asFieldDeclaration()
+                .getVariables()
+                .get(0)
+                .getName()
+                .equals(member2.asFieldDeclaration().getVariables().get(0).getName());
         }
         return false;
     }
@@ -562,9 +730,9 @@ public class PartialUpdateHandler {
     // A package-info.java file has no types and should only be comprised of comments, imports, and a package
     // declaration.
     private static boolean isPackageInfoFile(CompilationUnit cu) {
-        return (cu.getTypes() == null || cu.getTypes().isEmpty())
-            && cu.getChildNodes().stream().allMatch(node -> node instanceof Comment
-                || node instanceof ImportDeclaration
+        return (cu.getTypes() == null || cu.getTypes().isEmpty()) && cu.getChildNodes()
+            .stream()
+            .allMatch(node -> node instanceof Comment || node instanceof ImportDeclaration
                 || node instanceof PackageDeclaration);
     }
 

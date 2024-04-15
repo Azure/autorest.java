@@ -5,11 +5,12 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.ChildResourceInner;
 import com.cadl.armresourceprovider.models.ChildResource;
-import com.cadl.armresourceprovider.models.ChildResourceProperties;
 import com.cadl.armresourceprovider.models.ChildResourceUpdate;
+import com.cadl.armresourceprovider.models.ProvisioningState;
 import java.util.Collections;
 import java.util.Map;
 
@@ -43,8 +44,12 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
         }
     }
 
-    public ChildResourceProperties properties() {
-        return this.innerModel().properties();
+    public SystemData systemData() {
+        return this.innerModel().systemData();
+    }
+
+    public ProvisioningState provisioningState() {
+        return this.innerModel().provisioningState();
     }
 
     public Region region() {
@@ -179,11 +184,6 @@ public final class ChildResourceImpl implements ChildResource, ChildResource.Def
             this.updateProperties.withTags(tags);
             return this;
         }
-    }
-
-    public ChildResourceImpl withProperties(ChildResourceProperties properties) {
-        this.innerModel().withProperties(properties);
-        return this;
     }
 
     private boolean isInCreateMode() {

@@ -23,9 +23,11 @@ import fixtures.bodystring.implementation.EnumsImpl;
 @ServiceClient(builder = AutoRestSwaggerBatServiceClientBuilder.class)
 public final class StringOperationClient {
 
+    // @formatter:off
     // 1. manually add one field
-    private EnumsImpl enumClient;
+    private EnumsImpl enumClient;// @formatter:on
 
+    // @formatter:off
     /**
      * 1. manually add one constructor
      *
@@ -34,7 +36,7 @@ public final class StringOperationClient {
      */
     StringOperationClient(StringOperationsImpl serviceClient, String test) {
         this.serviceClient = serviceClient;
-    }
+    }// @formatter:on
 
     @Generated
     private final StringOperationsImpl serviceClient;
@@ -70,16 +72,16 @@ public final class StringOperationClient {
         return this.serviceClient.getNullWithResponse(requestOptions);
     }
 
+    // @formatter:off
     /**
      * 2. manually update method signature
      *
      * <p><strong>Header Parameters</strong>
      *
      * <table border="1">
-     * <caption>Header Parameters</caption>
-     * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values:
-     * "application/json".</td></tr>
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
      * </table>
      *
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -101,8 +103,9 @@ public final class StringOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     public Response<Void> putNullWithResponse(RequestOptions requestOptions, String test) {
         return this.serviceClient.putNullWithResponse(requestOptions);
-    }
+    }// @formatter:on
 
+    // @formatter:off
     /**
      * 3. manually update method access from public to private
      *
@@ -122,7 +125,7 @@ public final class StringOperationClient {
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponse(requestOptions);
-    }
+    }// @formatter:on
 
     /**
      * Set string value empty ''.
@@ -340,6 +343,7 @@ public final class StringOperationClient {
         return this.serviceClient.getNullBase64UrlEncodedWithResponse(requestOptions);
     }
 
+    // @formatter:off
     /**
      * 4. manually added method to test partial update
      *
@@ -347,7 +351,7 @@ public final class StringOperationClient {
      */
     public String manuallyAddedMethod() {
         return "manuallyAddedMethod";
-    }
+    }// @formatter:on
 
     /**
      * This is an added method.
