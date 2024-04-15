@@ -47,7 +47,7 @@ public final class Optional implements JsonSerializable<Optional> {
      * The booleanRequiredNullable property.
      */
     @Generated
-    private final boolean booleanRequiredNullable;
+    private final Boolean booleanRequiredNullable;
 
     /*
      * The string property.
@@ -131,7 +131,7 @@ public final class Optional implements JsonSerializable<Optional> {
      * The epochDateTimeRequiredNullable property.
      */
     @Generated
-    private final long epochDateTimeRequiredNullable;
+    private final Long epochDateTimeRequiredNullable;
 
     /*
      * The epochDateTimeNullable property.
@@ -149,17 +149,13 @@ public final class Optional implements JsonSerializable<Optional> {
      * @param epochDateTimeRequiredNullable the epochDateTimeRequiredNullable value to set.
      */
     @Generated
-    public Optional(boolean booleanRequired, boolean booleanRequiredNullable, String stringRequired,
+    public Optional(boolean booleanRequired, Boolean booleanRequiredNullable, String stringRequired,
         String stringRequiredNullable, OffsetDateTime epochDateTimeRequiredNullable) {
         this.booleanRequired = booleanRequired;
         this.booleanRequiredNullable = booleanRequiredNullable;
         this.stringRequired = stringRequired;
         this.stringRequiredNullable = stringRequiredNullable;
-        if (epochDateTimeRequiredNullable == null) {
-            this.epochDateTimeRequiredNullable = null;
-        } else {
-            this.epochDateTimeRequiredNullable = epochDateTimeRequiredNullable.toEpochSecond();
-        }
+        this.epochDateTimeRequiredNullable = epochDateTimeRequiredNullable.toEpochSecond();
     }
 
     /**
@@ -222,7 +218,7 @@ public final class Optional implements JsonSerializable<Optional> {
      * @return the booleanRequiredNullable value.
      */
     @Generated
-    public boolean isBooleanRequiredNullable() {
+    public Boolean isBooleanRequiredNullable() {
         return this.booleanRequiredNullable;
     }
 
@@ -495,6 +491,9 @@ public final class Optional implements JsonSerializable<Optional> {
      */
     @Generated
     public OffsetDateTime getEpochDateTimeRequiredNullable() {
+        if (this.epochDateTimeRequiredNullable == null) {
+            return null;
+        }
         return OffsetDateTime.ofInstant(Instant.ofEpochSecond(this.epochDateTimeRequiredNullable), ZoneOffset.UTC);
     }
 
@@ -538,7 +537,7 @@ public final class Optional implements JsonSerializable<Optional> {
         jsonWriter.writeBooleanField("booleanRequiredNullable", this.booleanRequiredNullable);
         jsonWriter.writeStringField("stringRequired", this.stringRequired);
         jsonWriter.writeStringField("stringRequiredNullable", this.stringRequiredNullable);
-        jsonWriter.writeLongField("epochDateTimeRequiredNullable", this.epochDateTimeRequiredNullable);
+        jsonWriter.writeNumberField("epochDateTimeRequiredNullable", this.epochDateTimeRequiredNullable);
         jsonWriter.writeBooleanField("boolean", this.booleanProperty);
         jsonWriter.writeBooleanField("booleanNullable", this.booleanNullable);
         jsonWriter.writeStringField("string", this.string);
@@ -570,7 +569,7 @@ public final class Optional implements JsonSerializable<Optional> {
     public static Optional fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             boolean booleanRequired = false;
-            boolean booleanRequiredNullable = false;
+            Boolean booleanRequiredNullable = null;
             String stringRequired = null;
             String stringRequiredNullable = null;
             OffsetDateTime epochDateTimeRequiredNullable = null;
@@ -595,14 +594,17 @@ public final class Optional implements JsonSerializable<Optional> {
                 if ("booleanRequired".equals(fieldName)) {
                     booleanRequired = reader.getBoolean();
                 } else if ("booleanRequiredNullable".equals(fieldName)) {
-                    booleanRequiredNullable = reader.getBoolean();
+                    booleanRequiredNullable = reader.getNullable(JsonReader::getBoolean);
                 } else if ("stringRequired".equals(fieldName)) {
                     stringRequired = reader.getString();
                 } else if ("stringRequiredNullable".equals(fieldName)) {
                     stringRequiredNullable = reader.getString();
                 } else if ("epochDateTimeRequiredNullable".equals(fieldName)) {
-                    epochDateTimeRequiredNullable
-                        = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
+                    Long epochDateTimeRequiredNullableHolder = reader.getNullable(JsonReader::getLong);
+                    if (epochDateTimeRequiredNullableHolder != null) {
+                        epochDateTimeRequiredNullable = OffsetDateTime
+                            .ofInstant(Instant.ofEpochSecond(epochDateTimeRequiredNullableHolder), ZoneOffset.UTC);
+                    }
                 } else if ("boolean".equals(fieldName)) {
                     booleanProperty = reader.getNullable(JsonReader::getBoolean);
                 } else if ("booleanNullable".equals(fieldName)) {

@@ -63,7 +63,7 @@ public final class OptionalClient {
      *     boolean: Boolean (Optional)
      *     booleanNullable: Boolean (Optional)
      *     booleanRequired: boolean (Required)
-     *     booleanRequiredNullable: boolean (Required)
+     *     booleanRequiredNullable: Boolean (Required)
      *     string: String (Optional)
      *     stringNullable: String (Optional)
      *     stringRequired: String (Required)
@@ -81,7 +81,7 @@ public final class OptionalClient {
      *     bytesDict (Optional): {
      *         String: byte[] (Required)
      *     }
-     *     epochDateTimeRequiredNullable: long (Required)
+     *     epochDateTimeRequiredNullable: Long (Required)
      *     epochDateTimeNullable: Long (Optional)
      * }
      * }</pre>
