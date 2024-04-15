@@ -203,7 +203,9 @@ public class PartialUpdateHandler {
         for (BodyDeclaration<?> existingMember : existingFileMembers) {
             boolean isGeneratedMethod = isMemberGenerated(existingMember);
             if (!isGeneratedMethod) { // manual written member
-                updatedMembersList.add(surroundCustomCodeWithFormatterOff(existingMember));
+                // TODO: for now, do not add formatter:on/off automatically
+//                updatedMembersList.add(surroundCustomCodeWithFormatterOff(existingMember));
+                updatedMembersList.add(existingMember);
             } else {
                 // find the corresponding newly generated member
                 for (BodyDeclaration<?> generatedMember : generatedFileMembers) {
