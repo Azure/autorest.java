@@ -415,10 +415,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                     }
                     classBlock.javadocComment(comment -> comment.description(traitMethod.getDocumentation()));
                     addGeneratedAnnotation(classBlock);
-                    if (settings.isBranded()) {
-                        // TODO: generic not having Trait
-                        addOverrideAnnotation(classBlock);
-                    }
+                    addOverrideAnnotation(classBlock);
                     classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", serviceClientBuilderName,
                             traitMethod.getMethodName(), traitMethod.getMethodParamType(),
                             traitMethod.getMethodParamName()), traitMethod.getMethodImpl());
@@ -498,6 +495,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         imports.add(AddDatePolicy.class.getName());
         imports.add(HttpPipelinePosition.class.getName());
         imports.add(Collectors.class.getName());
+        ClassType.RETRY_POLICY.addImportsTo(imports, false);
+        ClassType.REDIRECT_POLICY.addImportsTo(imports, false);
     }
 
     protected void addTraitsImports(ClientBuilder clientBuilder, Set<String> imports) {

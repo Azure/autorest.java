@@ -42,7 +42,7 @@ public class GenericType implements IType {
     public GenericType(String packageKeyword, String name, String jsonToken, IType... typeArguments) {
         if (!JavaSettings.getInstance().isBranded()) {
             if (Objects.equals(packageKeyword + "." + name, com.azure.core.http.rest.Response.class.getName())) {
-                packageKeyword = "com.generic.core.http";
+                packageKeyword = "io.clientcore.core.http";
             } else {
                 packageKeyword = packageKeyword
                         .replace(ExternalPackage.AZURE_CORE_PACKAGE_NAME, ExternalPackage.GENERIC_CORE_PACKAGE_NAME);

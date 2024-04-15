@@ -105,7 +105,7 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
         builder.responseExpectedStatusCodes(expectedStatusCodes);
 
         IType responseBodyType = MapperUtils.handleResponseSchema(operation, settings);
-        if (settings.isDataPlaneClient()) {
+        if (settings.isDataPlaneClient() && settings.isBranded()) {
             builder.rawResponseBodyType(responseBodyType);
             responseBodyType = SchemaUtil.removeModelFromResponse(responseBodyType, operation);
         }
@@ -213,9 +213,11 @@ public class ProxyMethodMapper implements IMapper<Operation, Map<Request, List<P
                 parameters.add(requestOptions);
             }
 
-            ProxyMethodParameter contextParameter = getContextParameter();
-            allParameters.add(contextParameter);
-            parameters.add(contextParameter);
+            if (JavaSettings.getInstance().isBranded()) {
+                ProxyMethodParameter contextParameter = getContextParameter();
+                allParameters.add(contextParameter);
+                parameters.add(contextParameter);
+            }
 
             appendCallbackParameter(parameters, responseBodyType);
             builder.allParameters(allParameters);

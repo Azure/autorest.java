@@ -6,7 +6,9 @@
  * Package containing the classes for AutoRestSwaggerBatService.
  * Test Infrastructure for AutoRest Swagger BAT.
  * <!-- end generated doc -->
+ * <!-- @formatter:off -->
  * <p>
- * Some other custom Javadocs which shouldn't be overwritten as they aren't contained in the generated Javadoc block.
+ * Some other custom Javadocs which shouldn't be overwritten as they aren't contained in the generated Javadoc block. And it shouldn't be formatted.
+ * <!-- @formatter:on -->
  */
 package fixtures.bodystring;

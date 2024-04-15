@@ -26,10 +26,12 @@ import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.HttpRequest;
 import com.azure.core.http.MatchConditions;
+import com.azure.core.http.ProxyOptions;
 import com.azure.core.http.RequestConditions;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.http.policy.HttpPipelinePolicy;
 import com.azure.core.http.policy.KeyCredentialPolicy;
+import com.azure.core.http.policy.RedirectPolicy;
 import com.azure.core.http.policy.RetryOptions;
 import com.azure.core.http.policy.RetryPolicy;
 import com.azure.core.http.rest.RequestOptions;
@@ -101,32 +103,35 @@ public class ClassType implements IType {
     }
 
     private static final Map<Class<?>, ClassDetails> CLASS_TYPE_MAPPING = new HashMap<Class<?>, ClassDetails>() {{
-        put(RestProxy.class, new ClassDetails(RestProxy.class, "com.generic.core.http.RestProxy"));
-        put(HttpPipeline.class, new ClassDetails(HttpPipeline.class, "com.generic.core.http.pipeline.HttpPipeline"));
-        put(HttpPipelineBuilder.class, new ClassDetails(HttpPipelineBuilder.class, "com.generic.core.http.pipeline.HttpPipelineBuilder"));
-        put(Context.class, new ClassDetails(Context.class, "com.generic.core.models.Context"));
-        put(HttpClient.class, new ClassDetails(HttpClient.class, "com.generic.core.http.client.HttpClient"));
-        put(HttpLogOptions.class, new ClassDetails(HttpLogOptions.class, "com.generic.core.http.models.HttpLogOptions"));
-        put(HttpPipelinePolicy.class, new ClassDetails(HttpPipelinePolicy.class, "com.generic.core.http.pipeline.HttpPipelinePolicy"));
-        put(KeyCredentialPolicy.class, new ClassDetails(KeyCredentialPolicy.class, "com.generic.core.http.policy.KeyCredentialPolicy"));
-        put(Configuration.class, new ClassDetails(Configuration.class, "com.generic.core.util.configuration.Configuration"));
-        put(HttpHeaders.class, new ClassDetails(HttpHeaders.class, "com.generic.core.models.Headers"));
-        put(HttpHeaderName.class, new ClassDetails(HttpHeaderName.class, "com.generic.core.http.models.HttpHeaderName"));
-        put(HttpRequest.class, new ClassDetails(HttpRequest.class, "com.generic.core.http.models.HttpRequest"));
-        put(RequestOptions.class, new ClassDetails(RequestOptions.class, "com.generic.core.http.models.RequestOptions"));
-        put(BinaryData.class, new ClassDetails(BinaryData.class, "com.generic.core.models.BinaryData"));
-        put(RetryOptions.class, new ClassDetails(RetryOptions.class, "com.generic.core.http.models.HttpRetryOptions"));
-        put(Response.class, new ClassDetails(Response.class, "com.generic.core.http.Response"));
-        put(SimpleResponse.class, new ClassDetails(SimpleResponse.class, "com.generic.core.http.SimpleResponse"));
-        put(ExpandableStringEnum.class, new ClassDetails(ExpandableStringEnum.class, "com.generic.core.models.ExpandableStringEnum"));
-        put(HttpResponseException.class, new ClassDetails(HttpResponseException.class, "com.generic.core.http.exception.HttpResponseException"));
-        put(HttpTrait.class, new ClassDetails(HttpTrait.class, "com.generic.core.models.traits.HttpTrait"));
-        put(ConfigurationTrait.class, new ClassDetails(ConfigurationTrait.class, "com.generic.core.models.traits.ConfigurationTrait"));
-        put(EndpointTrait.class, new ClassDetails(EndpointTrait.class, "com.generic.core.models.traits.EndpointTrait"));
-        put(KeyCredentialTrait.class, new ClassDetails(KeyCredentialTrait.class, "com.generic.core.models.traits.KeyCredentialTrait"));
-        put(TypeReference.class, new ClassDetails(TypeReference.class, "com.generic.core.models.TypeReference"));
-        put(ClientLogger.class, new ClassDetails(ClientLogger.class, "com.generic.core.util.ClientLogger"));
-        put(LogLevel.class, new ClassDetails(LogLevel.class, "com.generic.core.util.ClientLogger.LogLevel"));
+        put(RestProxy.class, new ClassDetails(RestProxy.class, "io.clientcore.core.http.RestProxy"));
+        put(HttpPipeline.class, new ClassDetails(HttpPipeline.class, "io.clientcore.core.http.pipeline.HttpPipeline"));
+        put(HttpPipelineBuilder.class, new ClassDetails(HttpPipelineBuilder.class, "io.clientcore.core.http.pipeline.HttpPipelineBuilder"));
+        put(Context.class, new ClassDetails(Context.class, "io.clientcore.core.util.Context"));
+        put(HttpClient.class, new ClassDetails(HttpClient.class, "io.clientcore.core.http.client.HttpClient"));
+        put(HttpLogOptions.class, new ClassDetails(HttpLogOptions.class, "io.clientcore.core.http.models.HttpLogOptions"));
+        put(HttpPipelinePolicy.class, new ClassDetails(HttpPipelinePolicy.class, "io.clientcore.core.http.pipeline.HttpPipelinePolicy"));
+        put(KeyCredentialPolicy.class, new ClassDetails(KeyCredentialPolicy.class, "io.clientcore.core.http.pipeline.KeyCredentialPolicy"));
+        put(RetryPolicy.class, new ClassDetails(RetryPolicy.class, "io.clientcore.core.http.pipeline.HttpRetryPolicy"));
+        put(RedirectPolicy.class, new ClassDetails(RedirectPolicy.class, "io.clientcore.core.http.pipeline.HttpRedirectPolicy"));
+        put(Configuration.class, new ClassDetails(Configuration.class, "io.clientcore.core.util.configuration.Configuration"));
+        put(HttpHeaders.class, new ClassDetails(HttpHeaders.class, "io.clientcore.core.models.Headers"));
+        put(HttpHeaderName.class, new ClassDetails(HttpHeaderName.class, "io.clientcore.core.http.models.HttpHeaderName"));
+        put(HttpRequest.class, new ClassDetails(HttpRequest.class, "io.clientcore.core.http.models.HttpRequest"));
+        put(RequestOptions.class, new ClassDetails(RequestOptions.class, "io.clientcore.core.http.models.RequestOptions"));
+        put(BinaryData.class, new ClassDetails(BinaryData.class, "io.clientcore.core.util.binarydata.BinaryData"));
+        put(RetryOptions.class, new ClassDetails(RetryOptions.class, "io.clientcore.core.http.models.HttpRetryOptions"));
+        put(ProxyOptions.class, new ClassDetails(ProxyOptions.class, "io.clientcore.core.http.models.ProxyOptions"));
+        put(Response.class, new ClassDetails(Response.class, "io.clientcore.core.http.models.Response"));
+        put(SimpleResponse.class, new ClassDetails(SimpleResponse.class, "io.clientcore.core.http.SimpleResponse"));
+        put(ExpandableStringEnum.class, new ClassDetails(ExpandableStringEnum.class, "io.clientcore.core.util.ExpandableEnum"));
+        put(HttpResponseException.class, new ClassDetails(HttpResponseException.class, "io.clientcore.core.http.exception.HttpResponseException"));
+        put(HttpTrait.class, new ClassDetails(HttpTrait.class, "io.clientcore.core.models.traits.HttpTrait"));
+        put(ConfigurationTrait.class, new ClassDetails(ConfigurationTrait.class, "io.clientcore.core.models.traits.ConfigurationTrait"));
+        put(EndpointTrait.class, new ClassDetails(EndpointTrait.class, "io.clientcore.core.models.traits.EndpointTrait"));
+        put(KeyCredentialTrait.class, new ClassDetails(KeyCredentialTrait.class, "io.clientcore.core.models.traits.KeyCredentialTrait"));
+        put(TypeReference.class, new ClassDetails(TypeReference.class, "io.clientcore.core.models.TypeReference"));
+        put(ClientLogger.class, new ClassDetails(ClientLogger.class, "io.clientcore.core.util.ClientLogger"));
+        put(LogLevel.class, new ClassDetails(LogLevel.class, "io.clientcore.core.util.ClientLogger.LogLevel"));
     }};
 
     private static ClassType.Builder getClassTypeBuilder(Class<?> classKey) {
@@ -160,6 +165,9 @@ public class ClassType implements IType {
     public static final ClassType ENDPOINT_TRAIT = getClassTypeBuilder(EndpointTrait.class).build();
     public static final ClassType HTTP_TRAIT = getClassTypeBuilder(HttpTrait.class).build();
     public static final ClassType CONFIGURATION_TRAIT = getClassTypeBuilder(ConfigurationTrait.class).build();
+    public static final ClassType PROXY_TRAIT = new ClassType.Builder(false)
+        .packageName("io.clientcore.core.models.traits").name("ProxyTrait")
+        .build();
     public static final ClassType POLL_OPERATION_DETAILS = getClassTypeBuilder(PollOperationDetails.class).build();
     public static final ClassType JSON_SERIALIZABLE = getClassTypeBuilder(JsonSerializable.class).build();
     public static final ClassType JSON_WRITER = getClassTypeBuilder(JsonWriter.class).build();
@@ -438,9 +446,14 @@ public class ClassType implements IType {
 
     public static final ClassType KEY_CREDENTIAL = getClassTypeBuilder(KeyCredential.class).build();
 
-    public static final ClassType RETRY_POLICY = new ClassType.Builder(false).knownClass(RetryPolicy.class).build();
+    public static final ClassType RETRY_POLICY = getClassTypeBuilder(RetryPolicy.class).build();
+    public static final ClassType REDIRECT_POLICY = getClassTypeBuilder(RedirectPolicy.class).build();
 
     public static final ClassType RETRY_OPTIONS = getClassTypeBuilder(RetryOptions.class).build();
+
+    public static final ClassType REDIRECT_OPTIONS = new ClassType.Builder(false)
+        .packageName("io.clientcore.core.http.models").name("HttpRedirectOptions")
+        .build();
 
     public static final ClassType ANDROID_RETRY_POLICY = new ClassType.Builder(false)
         .packageName("com.azure.android.core.http.policy").name("RetryPolicy")
@@ -461,6 +474,7 @@ public class ClassType implements IType {
         .build();
 
     public static final ClassType REQUEST_OPTIONS = getClassTypeBuilder(RequestOptions.class).build();
+    public static final ClassType PROXY_OPTIONS = getClassTypeBuilder(ProxyOptions.class).build();
     public static final ClassType CLIENT_OPTIONS = getClassTypeBuilder(ClientOptions.class).build();
     public static final ClassType HTTP_REQUEST = getClassTypeBuilder(HttpRequest.class).build();
     public static final ClassType HTTP_HEADERS = getClassTypeBuilder(HttpHeaders.class).build();

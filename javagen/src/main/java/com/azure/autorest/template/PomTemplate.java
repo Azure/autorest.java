@@ -214,6 +214,22 @@ public class PomTemplate implements IXmlTemplate<Pom, XmlFile> {
                 configurationBlock.tag("release", "11");
             });
         });
+
+        // maven-source-plugin
+        pluginsBlock.block("plugin", pluginBlock -> {
+            pluginBlock.tag("groupId", "org.apache.maven.plugins");
+            pluginBlock.tag("artifactId", "maven-source-plugin");
+            pluginBlock.tag("version", "3.3.0");
+            pluginBlock.block("executions", executionsBlock -> {
+                executionsBlock.block("execution", executionBlock -> {
+                    executionBlock.tag("id", "attach-sources");
+                    executionBlock.block("goals", goalsBlock -> {
+                        goalsBlock.tag("goal", "jar");
+                    });
+                });
+            });
+        });
+
         // build-helper-maven-plugin: allow samples to be compiled
         pluginsBlock.block("plugin", pluginBlock -> {
             pluginBlock.tag("groupId", "org.codehaus.mojo");

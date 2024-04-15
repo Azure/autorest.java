@@ -7,6 +7,7 @@ package com.azure.autorest.template;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.PackageInfo;
 import com.azure.autorest.model.javamodel.JavaFile;
+import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 
 import java.util.regex.Pattern;
 
@@ -35,7 +36,7 @@ public class PackageInfoTemplate implements IJavaTemplate<PackageInfo, JavaFile>
 
         javaFile.javadocComment((comment) -> {
             if (settings.isHandlePartialUpdate()) {
-                comment.line("<!-- start generated doc -->");
+                comment.line(PartialUpdateHandler.START_GENERATED_JAVA_DOC);
             }
 
             for (String desc : NEW_LINE.split(packageInfo.getDescription(), -1)) {
@@ -43,7 +44,7 @@ public class PackageInfoTemplate implements IJavaTemplate<PackageInfo, JavaFile>
             }
 
             if (settings.isHandlePartialUpdate()) {
-                comment.line("<!-- end generated doc -->");
+                comment.line(PartialUpdateHandler.END_GENERATED_JAVA_DOC);
             }
         });
 
