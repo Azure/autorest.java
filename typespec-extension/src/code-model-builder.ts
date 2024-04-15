@@ -1406,7 +1406,7 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameter = new Parameter(this.getName(body) , this.getDoc(body), schema, {
+    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
@@ -1782,7 +1782,23 @@ export class CodeModelBuilder {
         return this.processUnionSchemaFromSdkType(type, type.name);
 
       case "model":
-        return this.processObjectSchemaFromSdkType(type, type.name);
+        // pure dictionary that does not have properties in the model. e.g. model IsModelAdditionalProperties is Record<ModelForRecord>;
+        // if (type.additionalProperties && type.properties.length === 0) {
+        //   const sdkDictType: SdkDictionaryType = {
+        //     kind: "dict",
+        //     keyType: {
+        //       kind: "string",
+        //       encode: "string",
+        //       nullable: false,
+        //     },
+        //     nullableValues: type.additionalProperties.nullable,
+        //     nullable: type.nullable,
+        //     valueType: type.additionalProperties
+        //   };
+        //   return this.processDictionarySchemaFromSdkType(sdkDictType, type.name);
+        // } else {
+          return this.processObjectSchemaFromSdkType(type, type.name);
+        // }
         
       case "dict":
         return this.processDictionarySchemaFromSdkType(type, nameHint);
@@ -1956,6 +1972,7 @@ export class CodeModelBuilder {
   // }
 
   private processBuiltInFromSdkType(type: SdkBuiltInType, nameHint: string): Schema {
+    nameHint = nameHint || type.kind;
     switch (type.kind) {
       case "string": 
       case "password":
@@ -2102,7 +2119,7 @@ export class CodeModelBuilder {
     // cache this now before we accidentally recurse on this type.
     this.schemaCache.set(type, dictSchema);
 
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
+    const elementSchema = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
     dictSchema.elementType = elementSchema;
 
     dictSchema.nullableItems = type.valueType.nullable;
@@ -2303,42 +2320,6 @@ export class CodeModelBuilder {
         this.processSchemaFromSdkType(subType, subType.name);
       }
     }
-    // let discriminatorPropertyName: string | undefined = undefined;
-    // type discriminatorTypeWithPropertyName = Partial<Discriminator> & { propertyName: string };
-    // const discriminatorPropertyName = type.discriminatedSubtypes
-    // const discriminator = getDiscriminator(this.program, type);
-    // if (discriminator) {
-    //   discriminatorPropertyName = discriminator.propertyName;
-    //   // find the discriminator property from model
-    //   // the property is required for getting its serializedName
-    //   let discriminatorProperty = Array.from(type.properties.values()).find(
-    //     (it) => it.name === discriminatorPropertyName,
-    //   );
-    //   if (!discriminatorProperty) {
-    //     // try find the discriminator property from any of its derived models
-    //     for (const deriveModel of type.derivedModels) {
-    //       discriminatorProperty = Array.from(deriveModel.properties.values()).find(
-    //         (it) => it.name === discriminatorPropertyName,
-    //       );
-    //       if (discriminatorProperty) {
-    //         // found
-    //         break;
-    //       }
-    //     }
-    //   }
-    //   if (discriminatorProperty) {
-    //     objectSchema.discriminator = new Discriminator(this.processModelProperty(discriminatorProperty));
-    //   } else {
-    //     // fallback to property name, if cannot find the discriminator property
-    //     objectSchema.discriminator = new Discriminator(
-    //       new Property(discriminatorPropertyName, discriminatorPropertyName, this.stringSchema, {
-    //         required: true,
-    //         serializedName: discriminatorPropertyName,
-    //       }),
-    //     );
-    //   }
-    //   (objectSchema.discriminator as discriminatorTypeWithPropertyName).propertyName = discriminatorPropertyName;
-    // }
 
     // type is a subtype
     if (type.baseModel) {
@@ -2366,16 +2347,19 @@ export class CodeModelBuilder {
       objectSchema.discriminatorValue = type.discriminatorValue;
     }
     else if (type.additionalProperties) {
-      // parentSchema could be DictionarySchema, which means the model is "additionalProperties"
-            // "pure" Record processed elsewhere
-
-      // "mixed" Record that have properties, treat the model as "additionalProperties"
-      /* type should have sourceModel, as
-      model Type is Record<> {
-        prop1: string
-      }
-      */
-      const parentSchema = this.processSchemaFromSdkType(type.additionalProperties, this.getName(type.additionalProperties.__raw as Model));
+      // dictionary
+      const sdkDictType: SdkDictionaryType = {
+        kind: "dict",
+        keyType: {
+          kind: "string",
+          encode: "string",
+          nullable: false,
+        },
+        nullableValues: false,
+        nullable: false,
+        valueType: type.additionalProperties
+      };
+      const parentSchema = this.processDictionarySchemaFromSdkType(sdkDictType, "Record");
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
       pushDistinct(objectSchema.parents.all, parentSchema);
@@ -2384,9 +2368,9 @@ export class CodeModelBuilder {
 
     // properties
     for (const prop of type.properties) {
-      // TODO: skip discriminator property
+      // skip discriminator property
       if (prop.name === type.discriminatorProperty?.name || 
-        // prop.name === type.baseModel?.discriminatorProperty?.name ||
+        prop.name === type.baseModel?.discriminatorProperty?.name ||
         !isPayloadProperty(this.program, prop.__raw as ModelProperty) ||
         !this.existsAtCurrentVersion(prop.__raw as ModelProperty)) {
         continue;
@@ -2463,6 +2447,12 @@ export class CodeModelBuilder {
     });
   }
 
+  private dummyRecordSchema(elementType: Schema): DictionarySchema {
+    return new DictionarySchema("Record", "",  elementType, {
+      summary: "",
+    });
+  }
+
   private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
     // if (schema instanceof StringSchema) {
     //   const decorators = {
@@ -2528,8 +2518,8 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
-    // TODO: question: why the schema name is like this?
-    const schemaNameHint = pascalCase(getModelNameForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name);
+    // TODO: question: why the schema name is like this? This case is related with literal.tsp
+    const schemaNameHint = pascalCase(getModelNameForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name); 
     const schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
     let nullable = prop.optional;
 

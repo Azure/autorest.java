@@ -4,45 +4,53 @@
 
 package com.cadl.armresourceprovider.models;
 
-import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
  */
-public final class ActionType extends ExpandableStringEnum<ActionType> {
+public enum ActionType {
     /**
-     * Static value Internal for ActionType.
+     * Enum value Internal.
      */
-    public static final ActionType INTERNAL = fromString("Internal");
+    INTERNAL("Internal");
 
     /**
-     * Creates a new instance of ActionType value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a ActionType instance.
      */
-    @Deprecated
-    public ActionType() {
+    private final String value;
+
+    ActionType(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a ActionType from its string representation.
+     * Parses a serialized value to a ActionType instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding ActionType.
+     * @param value the serialized value to parse.
+     * @return the parsed ActionType object, or null if unable to parse.
      */
     @JsonCreator
-    public static ActionType fromString(String name) {
-        return fromString(name, ActionType.class);
+    public static ActionType fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        ActionType[] items = ActionType.values();
+        for (ActionType item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known ActionType values.
-     * 
-     * @return known ActionType values.
+     * {@inheritDoc}
      */
-    public static Collection<ActionType> values() {
-        return values(ActionType.class);
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

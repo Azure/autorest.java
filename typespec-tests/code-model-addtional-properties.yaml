@@ -1,0 +1,2586 @@
+language:
+  default:
+    name: AdditionalProperties
+    description: Tests for additional properties of models
+    namespace: Type.Property.AdditionalProperties
+  java:
+    namespace: com.type.property.additionalproperties
+protocol: {}
+info:
+  title: AdditionalProperties
+  description: Tests for additional properties of models
+schemas:
+  strings:
+    - &ref_0
+      language:
+        default:
+          name: string
+          description: simple string
+      protocol: {}
+      type: string
+    - &ref_2
+      language:
+        default:
+          name: string
+          description: A sequence of textual characters.
+      protocol: {}
+      type: string
+  constants:
+    - &ref_20
+      language:
+        default:
+          name: accept
+          description: 'Accept: application/json'
+      protocol: {}
+      type: constant
+      valueType: *ref_0
+      value:
+        value: application/json
+  objects:
+    - &ref_3
+      language:
+        default:
+          name: ExtendsUnknownAdditionalProperties
+          description: The model extends from Record<unknown> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsUnknownAdditionalProperties
+      parents:
+        immediate:
+          - &ref_1
+            language:
+              default:
+                name: Record
+                description: ''
+            protocol: {}
+            type: dictionary
+            elementType: &ref_18
+              language:
+                default:
+                  name: any
+                  description: Anything
+              protocol: {}
+              type: any
+        all:
+          - *ref_1
+      properties:
+        - language:
+            default:
+              name: name
+              description: The name property
+          protocol: {}
+          schema: *ref_2
+          serializedName: name
+          required: true
+          nullable: false
+          readOnly: false
+      children:
+        immediate:
+          - &ref_4
+            language:
+              default:
+                name: ExtendsUnknownAdditionalPropertiesDerived
+                description: >-
+                  The model extends from a type that extends from
+                  Record<unknown>.
+                namespace: Type.Property.AdditionalProperties
+              java:
+                namespace: com.type.property.additionalproperties
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: >-
+              Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDerived
+            parents:
+              immediate:
+                - *ref_3
+              all:
+                - *ref_3
+                - *ref_1
+            properties:
+              - language:
+                  default:
+                    name: index
+                    description: The index property
+                protocol: {}
+                schema: &ref_6
+                  language:
+                    default:
+                      name: int32
+                      description: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+                  protocol: {}
+                  type: integer
+                  precision: 32
+                serializedName: index
+                required: true
+                nullable: false
+                readOnly: false
+              - language:
+                  default:
+                    name: age
+                    description: The age property
+                protocol: {}
+                schema: &ref_7
+                  language:
+                    default:
+                      name: float32
+                      description: >-
+                        A 32 bit floating point number. (`±5.0 × 10^−324` to
+                        `±1.7 × 10^308`)
+                  protocol: {}
+                  type: number
+                  precision: 64
+                serializedName: age
+                required: false
+                nullable: false
+                readOnly: false
+            usage:
+              - output
+              - public
+              - input
+        all:
+          - *ref_4
+      usage:
+        - output
+        - public
+        - input
+    - *ref_4
+    - &ref_5
+      language:
+        default:
+          name: ExtendsUnknownAdditionalPropertiesDiscriminated
+          description: The model extends from Record<unknown> with a discriminator.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: >-
+        Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDiscriminated
+      discriminator:
+        property:
+          language:
+            default:
+              name: kind
+              description: The discriminator
+          protocol: {}
+          schema: *ref_2
+          serializedName: kind
+          required: true
+          nullable: false
+          readOnly: false
+          isDiscriminator: true
+        immediate: {}
+        all: {}
+        propertyName: kind
+      parents:
+        immediate:
+          - *ref_1
+        all:
+          - *ref_1
+      properties:
+        - language:
+            default:
+              name: name
+              description: The name property
+          protocol: {}
+          schema: *ref_2
+          serializedName: name
+          required: true
+          nullable: false
+          readOnly: false
+      children:
+        immediate:
+          - &ref_8
+            language:
+              default:
+                name: ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
+                description: The derived discriminated type
+                namespace: Type.Property.AdditionalProperties
+              java:
+                namespace: com.type.property.additionalproperties
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: >-
+              Type.Property.AdditionalProperties.ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
+            parents:
+              immediate:
+                - *ref_5
+              all:
+                - *ref_5
+                - *ref_1
+            discriminatorValue: derived
+            properties:
+              - language:
+                  default:
+                    name: index
+                    description: The index property
+                protocol: {}
+                schema: *ref_6
+                serializedName: index
+                required: true
+                nullable: false
+                readOnly: false
+              - language:
+                  default:
+                    name: age
+                    description: The age property
+                protocol: {}
+                schema: *ref_7
+                serializedName: age
+                required: false
+                nullable: false
+                readOnly: false
+            usage:
+              - output
+              - public
+              - input
+        all:
+          - *ref_8
+      usage:
+        - output
+        - public
+        - input
+    - *ref_8
+    - &ref_9
+      language:
+        default:
+          name: IsUnknownAdditionalProperties
+          description: The model is from Record<unknown> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsUnknownAdditionalProperties
+      parents:
+        immediate:
+          - *ref_1
+        all:
+          - *ref_1
+      properties:
+        - language:
+            default:
+              name: name
+              description: The name property
+          protocol: {}
+          schema: *ref_2
+          serializedName: name
+          required: true
+          nullable: false
+          readOnly: false
+      children:
+        immediate:
+          - &ref_10
+            language:
+              default:
+                name: IsUnknownAdditionalPropertiesDerived
+                description: The model extends from a type that is Record<unknown> type
+                namespace: Type.Property.AdditionalProperties
+              java:
+                namespace: com.type.property.additionalproperties
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: >-
+              Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDerived
+            parents:
+              immediate:
+                - *ref_9
+              all:
+                - *ref_9
+                - *ref_1
+            properties:
+              - language:
+                  default:
+                    name: index
+                    description: The index property
+                protocol: {}
+                schema: *ref_6
+                serializedName: index
+                required: true
+                nullable: false
+                readOnly: false
+              - language:
+                  default:
+                    name: age
+                    description: The age property
+                protocol: {}
+                schema: *ref_7
+                serializedName: age
+                required: false
+                nullable: false
+                readOnly: false
+            usage:
+              - output
+              - public
+              - input
+        all:
+          - *ref_10
+      usage:
+        - output
+        - public
+        - input
+    - *ref_10
+    - &ref_11
+      language:
+        default:
+          name: IsUnknownAdditionalPropertiesDiscriminated
+          description: The model is Record<unknown> with a discriminator.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: >-
+        Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDiscriminated
+      discriminator:
+        property:
+          language:
+            default:
+              name: kind
+              description: The discriminator
+          protocol: {}
+          schema: *ref_2
+          serializedName: kind
+          required: true
+          nullable: false
+          readOnly: false
+          isDiscriminator: true
+        immediate: {}
+        all: {}
+        propertyName: kind
+      parents:
+        immediate:
+          - *ref_1
+        all:
+          - *ref_1
+      properties:
+        - language:
+            default:
+              name: name
+              description: The name property
+          protocol: {}
+          schema: *ref_2
+          serializedName: name
+          required: true
+          nullable: false
+          readOnly: false
+      children:
+        immediate:
+          - &ref_12
+            language:
+              default:
+                name: IsUnknownAdditionalPropertiesDiscriminatedDerived
+                description: The derived discriminated type
+                namespace: Type.Property.AdditionalProperties
+              java:
+                namespace: com.type.property.additionalproperties
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: >-
+              Type.Property.AdditionalProperties.IsUnknownAdditionalPropertiesDiscriminatedDerived
+            parents:
+              immediate:
+                - *ref_11
+              all:
+                - *ref_11
+                - *ref_1
+            discriminatorValue: derived
+            properties:
+              - language:
+                  default:
+                    name: index
+                    description: The index property
+                protocol: {}
+                schema: *ref_6
+                serializedName: index
+                required: true
+                nullable: false
+                readOnly: false
+              - language:
+                  default:
+                    name: age
+                    description: The age property
+                protocol: {}
+                schema: *ref_7
+                serializedName: age
+                required: false
+                nullable: false
+                readOnly: false
+            usage:
+              - output
+              - public
+              - input
+        all:
+          - *ref_12
+      usage:
+        - output
+        - public
+        - input
+    - *ref_12
+    - &ref_27
+      language:
+        default:
+          name: ExtendsStringAdditionalProperties
+          description: The model extends from Record<string> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsStringAdditionalProperties
+      parents:
+        immediate:
+          - &ref_13
+            language:
+              default:
+                name: Record
+                description: ''
+            protocol: {}
+            type: dictionary
+            elementType: *ref_2
+        all:
+          - *ref_13
+      properties:
+        - language:
+            default:
+              name: name
+              description: The name property
+          protocol: {}
+          schema: *ref_2
+          serializedName: name
+          required: true
+          nullable: false
+          readOnly: false
+      usage:
+        - output
+        - public
+        - input
+    - &ref_29
+      language:
+        default:
+          name: IsStringAdditionalProperties
+          description: The model is from Record<string> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsStringAdditionalProperties
+      parents:
+        immediate:
+          - *ref_13
+        all:
+          - *ref_13
+      properties:
+        - language:
+            default:
+              name: name
+              description: The name property
+          protocol: {}
+          schema: *ref_2
+          serializedName: name
+          required: true
+          nullable: false
+          readOnly: false
+      usage:
+        - output
+        - public
+        - input
+    - &ref_31
+      language:
+        default:
+          name: ExtendsFloatAdditionalProperties
+          description: The model extends from Record<float32> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsFloatAdditionalProperties
+      parents:
+        immediate:
+          - &ref_14
+            language:
+              default:
+                name: Record
+                description: ''
+            protocol: {}
+            type: dictionary
+            elementType: *ref_7
+        all:
+          - *ref_14
+      properties:
+        - language:
+            default:
+              name: id
+              description: The id property
+          protocol: {}
+          schema: *ref_7
+          serializedName: id
+          required: true
+          nullable: false
+          readOnly: false
+      usage:
+        - output
+        - public
+        - input
+    - &ref_33
+      language:
+        default:
+          name: IsFloatAdditionalProperties
+          description: The model is from Record<float32> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsFloatAdditionalProperties
+      parents:
+        immediate:
+          - *ref_14
+        all:
+          - *ref_14
+      properties:
+        - language:
+            default:
+              name: id
+              description: The id property
+          protocol: {}
+          schema: *ref_7
+          serializedName: id
+          required: true
+          nullable: false
+          readOnly: false
+      usage:
+        - output
+        - public
+        - input
+    - &ref_35
+      language:
+        default:
+          name: ExtendsModelAdditionalProperties
+          description: The model extends from Record<ModelForRecord> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsModelAdditionalProperties
+      parents:
+        immediate:
+          - &ref_15
+            language:
+              default:
+                name: RecordModelForRecord
+                description: ''
+            protocol: {}
+            type: dictionary
+            elementType: &ref_16
+              language:
+                default:
+                  name: ModelForRecord
+                  description: model for record
+                  namespace: Type.Property.AdditionalProperties
+                java:
+                  namespace: com.type.property.additionalproperties
+              protocol: {}
+              type: object
+              crossLanguageDefinitionId: Type.Property.AdditionalProperties.ModelForRecord
+              properties:
+                - language:
+                    default:
+                      name: state
+                      description: The state property
+                  protocol: {}
+                  schema: *ref_2
+                  serializedName: state
+                  required: true
+                  nullable: false
+                  readOnly: false
+              usage:
+                - output
+                - public
+                - input
+        all:
+          - *ref_15
+      usage:
+        - output
+        - public
+        - input
+    - *ref_16
+    - &ref_39
+      language:
+        default:
+          name: ExtendsModelArrayAdditionalProperties
+          description: The model extends from Record<ModelForRecord[]> type.
+          namespace: Type.Property.AdditionalProperties
+        java:
+          namespace: com.type.property.additionalproperties
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsModelArrayAdditionalProperties
+      parents:
+        immediate:
+          - &ref_17
+            language:
+              default:
+                name: RecordArrayModelForRecord
+                description: ''
+            protocol: {}
+            type: dictionary
+            elementType: &ref_19
+              language:
+                default:
+                  name: RecordArrayModelForRecord
+                  description: ''
+              protocol: {}
+              type: array
+              elementType: *ref_16
+        all:
+          - *ref_17
+      usage:
+        - output
+        - public
+        - input
+  any:
+    - *ref_18
+  dictionaries:
+    - *ref_1
+    - *ref_13
+    - *ref_14
+    - *ref_15
+    - &ref_37
+      language:
+        default:
+          name: getResponse
+          description: The model is from Record<ModelForRecord> type.
+      protocol: {}
+      type: dictionary
+      elementType: *ref_16
+    - *ref_17
+    - &ref_41
+      language:
+        default:
+          name: getResponse
+          description: The model is from Record<ModelForRecord[]> type.
+      protocol: {}
+      type: dictionary
+      elementType: *ref_19
+  numbers:
+    - *ref_6
+    - *ref_7
+  arrays:
+    - *ref_19
+operationGroups:
+  - language:
+      default:
+        name: ExtendsUnknown
+        description: ''
+    protocol: {}
+    $key: ExtendsUnknown
+    operations:
+      - &ref_43
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: ExtendsUnknown_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsUnknown.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordUnknown
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_3
+      - &ref_44
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: ExtendsUnknown_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsUnknown.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordUnknown
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_21
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_3
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_21
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: ExtendsUnknownDerived
+        description: ''
+    protocol: {}
+    $key: ExtendsUnknownDerived
+    operations:
+      - &ref_45
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: ExtendsUnknownDerived_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsUnknownDerived.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: >-
+                  /type/property/additionalProperties/extendsRecordUnknownDerived
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_4
+      - &ref_46
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: ExtendsUnknownDerived_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsUnknownDerived.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: >-
+                  /type/property/additionalProperties/extendsRecordUnknownDerived
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_22
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_4
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_22
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: ExtendsUnknownDiscriminated
+        description: ''
+    protocol: {}
+    $key: ExtendsUnknownDiscriminated
+    operations:
+      - &ref_47
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: ExtendsUnknownDiscriminated_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsUnknownDiscriminated.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: >-
+                  /type/property/additionalProperties/extendsUnknownDiscriminated
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_5
+      - &ref_48
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: ExtendsUnknownDiscriminated_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsUnknownDiscriminated.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: >-
+                  /type/property/additionalProperties/extendsUnknownDiscriminated
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_23
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_5
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_23
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: IsUnknown
+        description: ''
+    protocol: {}
+    $key: IsUnknown
+    operations:
+      - &ref_49
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: IsUnknown_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsUnknown.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordUnknown
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_9
+      - &ref_50
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: IsUnknown_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsUnknown.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordUnknown
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_24
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_9
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_24
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: IsUnknownDerived
+        description: ''
+    protocol: {}
+    $key: IsUnknownDerived
+    operations:
+      - &ref_51
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: IsUnknownDerived_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsUnknownDerived.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordUnknownDerived
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_10
+      - &ref_52
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: IsUnknownDerived_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsUnknownDerived.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordUnknownDerived
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_25
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_10
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_25
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: IsUnknownDiscriminated
+        description: ''
+    protocol: {}
+    $key: IsUnknownDiscriminated
+    operations:
+      - &ref_53
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: IsUnknownDiscriminated_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsUnknownDiscriminated.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isUnknownDiscriminated
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_11
+      - &ref_54
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: IsUnknownDiscriminated_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsUnknownDiscriminated.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isUnknownDiscriminated
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_26
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_11
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_26
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: ExtendsString
+        description: ''
+    protocol: {}
+    $key: ExtendsString
+    operations:
+      - &ref_55
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: ExtendsString_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsString.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordString
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_27
+      - &ref_56
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: ExtendsString_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsString.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordString
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_28
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_27
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_28
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: IsString
+        description: ''
+    protocol: {}
+    $key: IsString
+    operations:
+      - &ref_57
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: IsString_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsString.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordstring
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_29
+      - &ref_58
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: IsString_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsString.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordstring
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_30
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_29
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_30
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: ExtendsFloat
+        description: ''
+    protocol: {}
+    $key: ExtendsFloat
+    operations:
+      - &ref_59
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: ExtendsFloat_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsFloat.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordFloat
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_31
+      - &ref_60
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: ExtendsFloat_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsFloat.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordFloat
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_32
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_31
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_32
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: IsFloat
+        description: ''
+    protocol: {}
+    $key: IsFloat
+    operations:
+      - &ref_61
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: IsFloat_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsFloat.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordFloat
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_33
+      - &ref_62
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: IsFloat_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsFloat.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordFloat
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_34
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_33
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_34
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: ExtendsModel
+        description: ''
+    protocol: {}
+    $key: ExtendsModel
+    operations:
+      - &ref_63
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: ExtendsModel_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsModel.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordModel
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_35
+      - &ref_64
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: ExtendsModel_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsModel.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordModel
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_36
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_35
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_36
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: IsModel
+        description: ''
+    protocol: {}
+    $key: IsModel
+    operations:
+      - &ref_65
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: IsModel_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsModel.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordModel
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_37
+      - &ref_66
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: IsModel_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsModel.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordModel
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_38
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_37
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_38
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: ExtendsModelArray
+        description: ''
+    protocol: {}
+    $key: ExtendsModelArray
+    operations:
+      - &ref_67
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: ExtendsModelArray_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsModelArray.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordModelArray
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_39
+      - &ref_68
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: ExtendsModelArray_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.ExtendsModelArray.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/extendsRecordModelArray
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_40
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_39
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_40
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+  - language:
+      default:
+        name: IsModelArray
+        description: ''
+    protocol: {}
+    $key: IsModelArray
+    operations:
+      - &ref_69
+        language:
+          default:
+            name: get
+            description: Get call
+        protocol: {}
+        operationId: IsModelArray_get
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsModelArray.get
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: get
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordModelArray
+                method: get
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+        signatureParameters: []
+        responses:
+          - language:
+              default:
+                name: getResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers: []
+                mediaTypes:
+                  - application/json
+            schema: *ref_41
+      - &ref_70
+        language:
+          default:
+            name: put
+            description: Put operation
+        protocol: {}
+        operationId: IsModelArray_put
+        extensions: {}
+        crossLanguageDefinitionId: Type.Property.AdditionalProperties.IsModelArray.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /type/property/additionalProperties/isRecordModelArray
+                method: put
+                uri: http://localhost:3000
+        parameters:
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_20
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_42
+            language:
+              default:
+                name: body
+                description: body
+            protocol:
+              http:
+                in: body
+            schema: *ref_41
+            implementation: Method
+            required: true
+        signatureParameters:
+          - *ref_42
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: >-
+                  There is no content to send for this request, but the headers
+                  may be useful. 
+            protocol:
+              http:
+                statusCodes:
+                  - '204'
+                headers: []
+security:
+  authenticationRequired: false
+  schemes: []
+clients:
+  - language:
+      default:
+        name: AdditionalPropertiesClient
+        description: Tests for additional properties of models
+    protocol: {}
+    security:
+      authenticationRequired: false
+      schemes: []
+    operationGroups:
+      - language:
+          default:
+            name: ExtendsUnknown
+            description: ''
+        protocol: {}
+        $key: ExtendsUnknown
+        operations:
+          - *ref_43
+          - *ref_44
+      - language:
+          default:
+            name: ExtendsUnknownDerived
+            description: ''
+        protocol: {}
+        $key: ExtendsUnknownDerived
+        operations:
+          - *ref_45
+          - *ref_46
+      - language:
+          default:
+            name: ExtendsUnknownDiscriminated
+            description: ''
+        protocol: {}
+        $key: ExtendsUnknownDiscriminated
+        operations:
+          - *ref_47
+          - *ref_48
+      - language:
+          default:
+            name: IsUnknown
+            description: ''
+        protocol: {}
+        $key: IsUnknown
+        operations:
+          - *ref_49
+          - *ref_50
+      - language:
+          default:
+            name: IsUnknownDerived
+            description: ''
+        protocol: {}
+        $key: IsUnknownDerived
+        operations:
+          - *ref_51
+          - *ref_52
+      - language:
+          default:
+            name: IsUnknownDiscriminated
+            description: ''
+        protocol: {}
+        $key: IsUnknownDiscriminated
+        operations:
+          - *ref_53
+          - *ref_54
+      - language:
+          default:
+            name: ExtendsString
+            description: ''
+        protocol: {}
+        $key: ExtendsString
+        operations:
+          - *ref_55
+          - *ref_56
+      - language:
+          default:
+            name: IsString
+            description: ''
+        protocol: {}
+        $key: IsString
+        operations:
+          - *ref_57
+          - *ref_58
+      - language:
+          default:
+            name: ExtendsFloat
+            description: ''
+        protocol: {}
+        $key: ExtendsFloat
+        operations:
+          - *ref_59
+          - *ref_60
+      - language:
+          default:
+            name: IsFloat
+            description: ''
+        protocol: {}
+        $key: IsFloat
+        operations:
+          - *ref_61
+          - *ref_62
+      - language:
+          default:
+            name: ExtendsModel
+            description: ''
+        protocol: {}
+        $key: ExtendsModel
+        operations:
+          - *ref_63
+          - *ref_64
+      - language:
+          default:
+            name: IsModel
+            description: ''
+        protocol: {}
+        $key: IsModel
+        operations:
+          - *ref_65
+          - *ref_66
+      - language:
+          default:
+            name: ExtendsModelArray
+            description: ''
+        protocol: {}
+        $key: ExtendsModelArray
+        operations:
+          - *ref_67
+          - *ref_68
+      - language:
+          default:
+            name: IsModelArray
+            description: ''
+        protocol: {}
+        $key: IsModelArray
+        operations:
+          - *ref_69
+          - *ref_70
+    crossLanguageDefinitionId: Type.Property.AdditionalProperties.AdditionalPropertiesClient
+    globalParameters: []

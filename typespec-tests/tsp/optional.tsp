@@ -28,8 +28,10 @@ model Optional {
   dateTime?: utcDateTime;
   stringList?: string[];
   bytesDict?: Record<bytes>;
-  epochDateTimeRequiredNullable: epochDateTime | null;
-  epochDateTimeNullable?: epochDateTime;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  epochDateTimeRequiredNullable: utcDateTime | null;
+  @encode(DateTimeKnownEncoding.unixTimestamp, int64)
+  epochDateTimeNullable?: utcDateTime;
 }
 
 model Immutable {

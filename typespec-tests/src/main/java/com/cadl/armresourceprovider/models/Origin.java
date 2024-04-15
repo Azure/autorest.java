@@ -4,56 +4,64 @@
 
 package com.cadl.armresourceprovider.models;
 
-import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * The intended executor of the operation; as in Resource Based Access Control (RBAC) and audit logs UX. Default value
  * is "user,system".
  */
-public final class Origin extends ExpandableStringEnum<Origin> {
+public enum Origin {
     /**
-     * Static value user for Origin.
+     * Enum value user.
      */
-    public static final Origin USER = fromString("user");
+    USER("user"),
 
     /**
-     * Static value system for Origin.
+     * Enum value system.
      */
-    public static final Origin SYSTEM = fromString("system");
+    SYSTEM("system"),
 
     /**
-     * Static value user,system for Origin.
+     * Enum value user,system.
      */
-    public static final Origin USER_SYSTEM = fromString("user,system");
+    USER_SYSTEM("user,system");
 
     /**
-     * Creates a new instance of Origin value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a Origin instance.
      */
-    @Deprecated
-    public Origin() {
+    private final String value;
+
+    Origin(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a Origin from its string representation.
+     * Parses a serialized value to a Origin instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding Origin.
+     * @param value the serialized value to parse.
+     * @return the parsed Origin object, or null if unable to parse.
      */
     @JsonCreator
-    public static Origin fromString(String name) {
-        return fromString(name, Origin.class);
+    public static Origin fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        Origin[] items = Origin.values();
+        for (Origin item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known Origin values.
-     * 
-     * @return known Origin values.
+     * {@inheritDoc}
      */
-    public static Collection<Origin> values() {
-        return values(Origin.class);
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

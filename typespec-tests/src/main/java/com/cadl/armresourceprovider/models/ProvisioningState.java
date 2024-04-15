@@ -4,75 +4,83 @@
 
 package com.cadl.armresourceprovider.models;
 
-import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import java.util.Collection;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * Defines values for ProvisioningState.
  */
-public final class ProvisioningState extends ExpandableStringEnum<ProvisioningState> {
+public enum ProvisioningState {
     /**
-     * Static value Succeeded for ProvisioningState.
+     * Enum value Succeeded.
      */
-    public static final ProvisioningState SUCCEEDED = fromString("Succeeded");
+    SUCCEEDED("Succeeded"),
 
     /**
-     * Static value Failed for ProvisioningState.
+     * Enum value Failed.
      */
-    public static final ProvisioningState FAILED = fromString("Failed");
+    FAILED("Failed"),
 
     /**
-     * Static value Canceled for ProvisioningState.
+     * Enum value Canceled.
      */
-    public static final ProvisioningState CANCELED = fromString("Canceled");
+    CANCELED("Canceled"),
 
     /**
-     * Static value Provisioning for ProvisioningState.
+     * Enum value Provisioning.
      */
-    public static final ProvisioningState PROVISIONING = fromString("Provisioning");
+    PROVISIONING("Provisioning"),
 
     /**
-     * Static value Updating for ProvisioningState.
+     * Enum value Updating.
      */
-    public static final ProvisioningState UPDATING = fromString("Updating");
+    UPDATING("Updating"),
 
     /**
-     * Static value Deleting for ProvisioningState.
+     * Enum value Deleting.
      */
-    public static final ProvisioningState DELETING = fromString("Deleting");
+    DELETING("Deleting"),
 
     /**
-     * Static value Accepted for ProvisioningState.
+     * Enum value Accepted.
      */
-    public static final ProvisioningState ACCEPTED = fromString("Accepted");
+    ACCEPTED("Accepted");
 
     /**
-     * Creates a new instance of ProvisioningState value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a ProvisioningState instance.
      */
-    @Deprecated
-    public ProvisioningState() {
+    private final String value;
+
+    ProvisioningState(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a ProvisioningState from its string representation.
+     * Parses a serialized value to a ProvisioningState instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding ProvisioningState.
+     * @param value the serialized value to parse.
+     * @return the parsed ProvisioningState object, or null if unable to parse.
      */
     @JsonCreator
-    public static ProvisioningState fromString(String name) {
-        return fromString(name, ProvisioningState.class);
+    public static ProvisioningState fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        ProvisioningState[] items = ProvisioningState.values();
+        for (ProvisioningState item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known ProvisioningState values.
-     * 
-     * @return known ProvisioningState values.
+     * {@inheritDoc}
      */
-    public static Collection<ProvisioningState> values() {
-        return values(ProvisioningState.class);
+    @JsonValue
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

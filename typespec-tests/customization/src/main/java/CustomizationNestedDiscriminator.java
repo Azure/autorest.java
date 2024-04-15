@@ -20,12 +20,12 @@ public class CustomizationNestedDiscriminator extends Customization {
         PackageCustomization packageCustomization = customization.getPackage("com.type.model.inheritance.nesteddiscriminator.models");
         ClassCustomization classCustomization = packageCustomization.getClass("GoblinShark");
 
-        ConstructorCustomization constructorCustomization = classCustomization.getConstructor("GoblinShark");
-        constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"goblin\";");
+        // ConstructorCustomization constructorCustomization = classCustomization.getConstructor("GoblinShark");
+        // constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"goblin\";");
 
-        classCustomization = packageCustomization.getClass("SawShark");
+        // classCustomization = packageCustomization.getClass("SawShark");
 
-        constructorCustomization = classCustomization.getConstructor("SawShark");
-        constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"saw\";");
+        // constructorCustomization = classCustomization.getConstructor("SawShark");
+        // constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"saw\";");
     }
 }

@@ -5,7 +5,6 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.management.Region;
-import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import com.cadl.armresourceprovider.models.TopLevelArmResource;
@@ -48,10 +47,6 @@ public final class TopLevelArmResourceImpl
 
     public TopLevelArmResourceProperties properties() {
         return this.innerModel().properties();
-    }
-
-    public SystemData systemData() {
-        return this.innerModel().systemData();
     }
 
     public Region region() {

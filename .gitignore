@@ -101,3 +101,5 @@ javagen/*.yaml
 
 # package-lock.json in test module
 typespec-tests/package-lock.json
+
+typespec-tests/http/
