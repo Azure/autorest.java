@@ -24,12 +24,6 @@ public final class BytesData extends Data {
     private String type = "bytes";
 
     /*
-     * The kind property.
-     */
-    @Generated
-    private final String kind = "bytes";
-
-    /*
      * Data as {@code byte[]}
      */
     @Generated
@@ -57,16 +51,6 @@ public final class BytesData extends Data {
     }
 
     /**
-     * Get the kind property: The kind property.
-     * 
-     * @return the kind value.
-     */
-    @Generated
-    public String getKind() {
-        return this.kind;
-    }
-
-    /**
      * Get the dataAsBytes property: Data as {@code byte[]}.
      * 
      * @return the dataAsBytes value.
@@ -83,7 +67,6 @@ public final class BytesData extends Data {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeBinaryField("data_bytes", this.dataAsBytes);
         jsonWriter.writeStringField("@data.kind", this.type);
         return jsonWriter.writeEndObject();
