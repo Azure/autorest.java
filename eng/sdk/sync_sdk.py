@@ -18,8 +18,7 @@ skip_artifacts: List[str] = [
     'azure-ai-anomalydetector',         # deprecated
     'azure-ai-vision-imageanalysis',    # temporary disabled for modification on Javadoc
     'azure-analytics-defender-easm',
-    'azure-ai-openai',
-    'azure-ai-openai-assistants'
+    'azure-ai-openai'
 ]
 
 
