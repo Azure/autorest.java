@@ -2530,7 +2530,7 @@ export class CodeModelBuilder {
     // TODO: question: why the schema name is like this? This case is related with literal.tsp
     const schemaNameHint = pascalCase(getNamePrefixForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name); 
     const schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
-    let nullable = prop.optional;
+    let nullable = prop.nullable;
 
     let extensions: Record<string, any> | undefined = undefined;
     if (this.isSecret(prop.__raw as ModelProperty)) {
