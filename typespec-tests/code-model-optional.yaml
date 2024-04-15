@@ -1,0 +1,854 @@
+language:
+  default:
+    name: Optional
+    description: ''
+    namespace: Cadl.Optional
+  java:
+    namespace: com.cadl.optional
+protocol: {}
+info:
+  title: Optional
+  description: ''
+schemas:
+  strings:
+    - &ref_0
+      language:
+        default:
+          name: string
+          description: simple string
+      protocol: {}
+      type: string
+    - &ref_2
+      language:
+        default:
+          name: string
+          description: A sequence of textual characters.
+      protocol: {}
+      type: string
+  booleans:
+    - &ref_1
+      language:
+        default:
+          name: boolean
+          description: Boolean with `true` and `false` values.
+      protocol: {}
+      type: boolean
+  constants:
+    - &ref_15
+      language:
+        default:
+          name: accept
+          description: 'Accept: application/json'
+      protocol: {}
+      type: constant
+      valueType: *ref_0
+      value:
+        value: application/json
+  objects:
+    - &ref_16
+      language:
+        default:
+          name: Optional
+          description: ''
+          namespace: Cadl.Optional
+        java:
+          namespace: com.cadl.optional
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Cadl.Optional.Optional
+      properties:
+        - language:
+            default:
+              name: boolean
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: boolean
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: booleanNullable
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: booleanNullable
+          required: false
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: booleanRequired
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: booleanRequired
+          required: true
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: booleanRequiredNullable
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: booleanRequiredNullable
+          required: true
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: string
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: string
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: stringNullable
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: stringNullable
+          required: false
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: stringRequired
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: stringRequired
+          required: true
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: stringRequiredNullable
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: stringRequiredNullable
+          required: true
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: bytes
+              description: ''
+          protocol: {}
+          schema: &ref_3
+            language:
+              default:
+                name: bytes
+                description: Represent a byte array
+            protocol: {}
+            type: byte-array
+            format: byte
+          serializedName: bytes
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: int
+              description: ''
+          protocol: {}
+          schema: &ref_4
+            language:
+              default:
+                name: int32
+                description: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+            protocol: {}
+            type: integer
+            precision: 32
+          serializedName: int
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: long
+              description: ''
+          protocol: {}
+          schema: &ref_5
+            language:
+              default:
+                name: int64
+                description: >-
+                  A 64-bit integer. (`-9,223,372,036,854,775,808` to
+                  `9,223,372,036,854,775,807`)
+            protocol: {}
+            type: integer
+            precision: 64
+          serializedName: long
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: float
+              description: ''
+          protocol: {}
+          schema: &ref_6
+            language:
+              default:
+                name: float32
+                description: >-
+                  A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 ×
+                  10^308`)
+            protocol: {}
+            type: number
+            precision: 64
+          serializedName: float
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: double
+              description: ''
+          protocol: {}
+          schema: &ref_7
+            language:
+              default:
+                name: float64
+                description: >-
+                  A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x
+                  10^38`)
+            protocol: {}
+            type: number
+            precision: 64
+          serializedName: double
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: duration
+              description: ''
+          protocol: {}
+          schema: &ref_8
+            language:
+              default:
+                name: duration
+                description: A duration/time period. e.g 5s, 10h
+            protocol: {}
+            type: duration
+            format: duration-rfc3339
+          serializedName: duration
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: dateTime
+              description: ''
+          protocol: {}
+          schema: &ref_9
+            language:
+              default:
+                name: utcDateTime
+                description: An instant in coordinated universal time (UTC)"
+            protocol: {}
+            type: date-time
+            format: date-time
+          serializedName: dateTime
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: stringList
+              description: ''
+          protocol: {}
+          schema: &ref_10
+            language:
+              default:
+                name: OptionalStringList
+                description: ''
+            protocol: {}
+            type: array
+            elementType: *ref_2
+          serializedName: stringList
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: bytesDict
+              description: ''
+          protocol: {}
+          schema: &ref_11
+            language:
+              default:
+                name: OptionalBytesDict
+                description: ''
+            protocol: {}
+            type: dictionary
+            elementType: *ref_3
+          serializedName: bytesDict
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: epochDateTimeRequiredNullable
+              description: ''
+          protocol: {}
+          schema: &ref_12
+            language:
+              default:
+                name: epochDateTimeRequiredNullable
+                description: An instant in coordinated universal time (UTC)"
+            protocol: {}
+            type: unixtime
+          serializedName: epochDateTimeRequiredNullable
+          required: true
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: epochDateTimeNullable
+              description: ''
+          protocol: {}
+          schema: &ref_13
+            language:
+              default:
+                name: epochDateTimeNullable
+                description: An instant in coordinated universal time (UTC)"
+            protocol: {}
+            type: unixtime
+          serializedName: epochDateTimeNullable
+          required: false
+          nullable: false
+          readOnly: false
+      usage:
+        - input
+        - public
+    - &ref_27
+      language:
+        default:
+          name: AllPropertiesOptional
+          description: ''
+          namespace: Cadl.Optional
+        java:
+          namespace: com.cadl.optional
+      protocol: {}
+      type: object
+      crossLanguageDefinitionId: Cadl.Optional.AllPropertiesOptional
+      properties:
+        - language:
+            default:
+              name: boolean
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: boolean
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: booleanNullable
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: booleanNullable
+          required: false
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: booleanRequired
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: booleanRequired
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: booleanRequiredNullable
+              description: ''
+          protocol: {}
+          schema: *ref_1
+          serializedName: booleanRequiredNullable
+          required: false
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: string
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: string
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: stringNullable
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: stringNullable
+          required: false
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: stringRequired
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: stringRequired
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: stringRequiredNullable
+              description: ''
+          protocol: {}
+          schema: *ref_2
+          serializedName: stringRequiredNullable
+          required: false
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: bytes
+              description: ''
+          protocol: {}
+          schema: *ref_3
+          serializedName: bytes
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: int
+              description: ''
+          protocol: {}
+          schema: *ref_4
+          serializedName: int
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: long
+              description: ''
+          protocol: {}
+          schema: *ref_5
+          serializedName: long
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: float
+              description: ''
+          protocol: {}
+          schema: *ref_6
+          serializedName: float
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: double
+              description: ''
+          protocol: {}
+          schema: *ref_7
+          serializedName: double
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: duration
+              description: ''
+          protocol: {}
+          schema: *ref_8
+          serializedName: duration
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: dateTime
+              description: ''
+          protocol: {}
+          schema: *ref_9
+          serializedName: dateTime
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: stringList
+              description: ''
+          protocol: {}
+          schema: *ref_10
+          serializedName: stringList
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: bytesDict
+              description: ''
+          protocol: {}
+          schema: *ref_11
+          serializedName: bytesDict
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: epochDateTimeRequiredNullable
+              description: ''
+          protocol: {}
+          schema: *ref_12
+          serializedName: epochDateTimeRequiredNullable
+          required: false
+          nullable: true
+          readOnly: false
+        - language:
+            default:
+              name: epochDateTimeNullable
+              description: ''
+          protocol: {}
+          schema: *ref_13
+          serializedName: epochDateTimeNullable
+          required: false
+          nullable: false
+          readOnly: false
+        - language:
+            default:
+              name: immutable
+              description: ''
+          protocol: {}
+          schema: &ref_14
+            language:
+              default:
+                name: Immutable
+                description: ''
+                namespace: Cadl.Optional
+              java:
+                namespace: com.cadl.optional
+            protocol: {}
+            type: object
+            crossLanguageDefinitionId: Cadl.Optional.Immutable
+            properties:
+              - language:
+                  default:
+                    name: stringReadWriteRequired
+                    description: ''
+                protocol: {}
+                schema: *ref_2
+                serializedName: stringReadWriteRequired
+                required: true
+                nullable: false
+                readOnly: false
+              - language:
+                  default:
+                    name: stringReadOnlyOptional
+                    description: ''
+                protocol: {}
+                schema: *ref_2
+                serializedName: stringReadOnlyOptional
+                required: false
+                nullable: false
+                readOnly: true
+            usage:
+              - output
+              - public
+          serializedName: immutable
+          required: false
+          nullable: false
+          readOnly: false
+      usage:
+        - output
+        - public
+    - *ref_14
+  byteArrays:
+    - *ref_3
+  numbers:
+    - *ref_4
+    - *ref_5
+    - *ref_6
+    - *ref_7
+  durations:
+    - *ref_8
+  dateTimes:
+    - *ref_9
+  arrays:
+    - *ref_10
+  dictionaries:
+    - *ref_11
+  unixtimes:
+    - *ref_12
+    - *ref_13
+operationGroups:
+  - language:
+      default:
+        name: OptionalOp
+        description: ''
+    protocol: {}
+    $key: OptionalOp
+    operations:
+      - &ref_28
+        language:
+          default:
+            name: put
+            description: ''
+        protocol: {}
+        operationId: OptionalOp_put
+        extensions: {}
+        crossLanguageDefinitionId: Cadl.Optional.OptionalOp.put
+        internalApi: false
+        convenienceApi:
+          language:
+            default:
+              name: put
+              description: ''
+          protocol: {}
+        generateProtocolApi: true
+        requests:
+          - language:
+              default:
+                name: ''
+                description: ''
+            protocol:
+              http:
+                path: /optional/put
+                method: put
+                uri: '{endpoint}'
+        parameters:
+          - &ref_29
+            language:
+              default:
+                name: endpoint
+                description: Server parameter
+                serializedName: endpoint
+            protocol:
+              http:
+                in: uri
+            schema: *ref_0
+            implementation: Client
+            origin: modelerfour:synthesized/host
+            required: true
+            extensions:
+              x-ms-skip-url-encoding: true
+          - &ref_17
+            language:
+              default:
+                name: requestHeaderRequired
+                description: ''
+                serializedName: request-header-required
+            protocol:
+              http:
+                in: header
+            schema: *ref_2
+            implementation: Method
+            required: true
+            nullable: false
+          - &ref_18
+            language:
+              default:
+                name: requestHeaderOptional
+                description: ''
+                serializedName: request-header-optional
+            protocol:
+              http:
+                in: header
+            schema: *ref_2
+            implementation: Method
+            required: false
+            nullable: false
+          - &ref_19
+            language:
+              default:
+                name: booleanRequired
+                description: ''
+                serializedName: booleanRequired
+            protocol:
+              http:
+                in: query
+            schema: *ref_1
+            implementation: Method
+            required: true
+            nullable: false
+          - &ref_20
+            language:
+              default:
+                name: booleanNullable
+                description: ''
+                serializedName: booleanNullable
+            protocol:
+              http:
+                in: query
+            schema: *ref_1
+            implementation: Method
+            required: false
+            nullable: true
+          - &ref_21
+            language:
+              default:
+                name: booleanRequiredNullable
+                description: ''
+                serializedName: booleanRequiredNullable
+            protocol:
+              http:
+                in: query
+            schema: *ref_1
+            implementation: Method
+            required: true
+            nullable: true
+          - &ref_22
+            language:
+              default:
+                name: string
+                description: ''
+                serializedName: string
+            protocol:
+              http:
+                in: query
+            schema: *ref_2
+            implementation: Method
+            required: false
+            nullable: false
+          - &ref_23
+            language:
+              default:
+                name: stringNullable
+                description: ''
+                serializedName: stringNullable
+            protocol:
+              http:
+                in: query
+            schema: *ref_2
+            implementation: Method
+            required: false
+            nullable: true
+          - &ref_24
+            language:
+              default:
+                name: stringRequired
+                description: ''
+                serializedName: stringRequired
+            protocol:
+              http:
+                in: query
+            schema: *ref_2
+            implementation: Method
+            required: true
+            nullable: false
+          - &ref_25
+            language:
+              default:
+                name: stringRequiredNullable
+                description: ''
+                serializedName: stringRequiredNullable
+            protocol:
+              http:
+                in: query
+            schema: *ref_2
+            implementation: Method
+            required: true
+            nullable: true
+          - language:
+              default:
+                name: accept
+                description: Accept header
+                serializedName: accept
+            protocol:
+              http:
+                in: header
+            schema: *ref_15
+            implementation: Method
+            origin: modelerfour:synthesized/accept
+            required: true
+          - &ref_26
+            language:
+              default:
+                name: Optional
+                description: ''
+            protocol:
+              http:
+                in: body
+            schema: *ref_16
+            implementation: Method
+            required: false
+        signatureParameters:
+          - *ref_17
+          - *ref_18
+          - *ref_19
+          - *ref_20
+          - *ref_21
+          - *ref_22
+          - *ref_23
+          - *ref_24
+          - *ref_25
+          - *ref_26
+        responses:
+          - language:
+              default:
+                name: putResponse
+                description: The request has succeeded.
+            protocol:
+              http:
+                statusCodes:
+                  - '200'
+                headers:
+                  - header: header-required
+                    schema: *ref_2
+                    language:
+                      default:
+                        name: header-required
+                        description: ''
+                  - header: header-optional
+                    schema: *ref_2
+                    language:
+                      default:
+                        name: header-optional
+                        description: ''
+                mediaTypes:
+                  - application/json
+            schema: *ref_27
+security:
+  authenticationRequired: false
+  schemes: []
+clients:
+  - language:
+      default:
+        name: OptionalClient
+        description: ''
+    protocol: {}
+    security:
+      authenticationRequired: false
+      schemes: []
+    operationGroups:
+      - language:
+          default:
+            name: OptionalOp
+            description: ''
+        protocol: {}
+        $key: OptionalOp
+        operations:
+          - *ref_28
+    crossLanguageDefinitionId: Cadl.Optional.OptionalClient
+    globalParameters:
+      - *ref_29
+globalParameters:
+  - *ref_29

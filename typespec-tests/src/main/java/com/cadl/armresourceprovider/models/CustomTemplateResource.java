@@ -5,7 +5,6 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.management.Region;
-import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import java.util.Map;
@@ -55,13 +54,6 @@ public interface CustomTemplateResource {
      * @return the identity value.
      */
     ManagedIdentityProperties identity();
-
-    /**
-     * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
-     * 
-     * @return the systemData value.
-     */
-    SystemData systemData();
 
     /**
      * Gets the provisioningState property: The status of the last operation.
