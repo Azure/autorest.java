@@ -156,6 +156,20 @@ public final class AdditionalPropertiesClientImpl {
     }
 
     /**
+     * The SpreadStringsImpl object to access its operations.
+     */
+    private final SpreadStringsImpl spreadStrings;
+
+    /**
+     * Gets the SpreadStringsImpl object to access its operations.
+     * 
+     * @return the SpreadStringsImpl object.
+     */
+    public SpreadStringsImpl getSpreadStrings() {
+        return this.spreadStrings;
+    }
+
+    /**
      * The ExtendsFloatsImpl object to access its operations.
      */
     private final ExtendsFloatsImpl extendsFloats;
@@ -181,6 +195,20 @@ public final class AdditionalPropertiesClientImpl {
      */
     public IsFloatsImpl getIsFloats() {
         return this.isFloats;
+    }
+
+    /**
+     * The SpreadFloatsImpl object to access its operations.
+     */
+    private final SpreadFloatsImpl spreadFloats;
+
+    /**
+     * Gets the SpreadFloatsImpl object to access its operations.
+     * 
+     * @return the SpreadFloatsImpl object.
+     */
+    public SpreadFloatsImpl getSpreadFloats() {
+        return this.spreadFloats;
     }
 
     /**
@@ -212,6 +240,20 @@ public final class AdditionalPropertiesClientImpl {
     }
 
     /**
+     * The SpreadModelsImpl object to access its operations.
+     */
+    private final SpreadModelsImpl spreadModels;
+
+    /**
+     * Gets the SpreadModelsImpl object to access its operations.
+     * 
+     * @return the SpreadModelsImpl object.
+     */
+    public SpreadModelsImpl getSpreadModels() {
+        return this.spreadModels;
+    }
+
+    /**
      * The ExtendsModelArraysImpl object to access its operations.
      */
     private final ExtendsModelArraysImpl extendsModelArrays;
@@ -237,6 +279,216 @@ public final class AdditionalPropertiesClientImpl {
      */
     public IsModelArraysImpl getIsModelArrays() {
         return this.isModelArrays;
+    }
+
+    /**
+     * The SpreadModelArraysImpl object to access its operations.
+     */
+    private final SpreadModelArraysImpl spreadModelArrays;
+
+    /**
+     * Gets the SpreadModelArraysImpl object to access its operations.
+     * 
+     * @return the SpreadModelArraysImpl object.
+     */
+    public SpreadModelArraysImpl getSpreadModelArrays() {
+        return this.spreadModelArrays;
+    }
+
+    /**
+     * The SpreadDifferentStringsImpl object to access its operations.
+     */
+    private final SpreadDifferentStringsImpl spreadDifferentStrings;
+
+    /**
+     * Gets the SpreadDifferentStringsImpl object to access its operations.
+     * 
+     * @return the SpreadDifferentStringsImpl object.
+     */
+    public SpreadDifferentStringsImpl getSpreadDifferentStrings() {
+        return this.spreadDifferentStrings;
+    }
+
+    /**
+     * The SpreadDifferentFloatsImpl object to access its operations.
+     */
+    private final SpreadDifferentFloatsImpl spreadDifferentFloats;
+
+    /**
+     * Gets the SpreadDifferentFloatsImpl object to access its operations.
+     * 
+     * @return the SpreadDifferentFloatsImpl object.
+     */
+    public SpreadDifferentFloatsImpl getSpreadDifferentFloats() {
+        return this.spreadDifferentFloats;
+    }
+
+    /**
+     * The SpreadDifferentModelsImpl object to access its operations.
+     */
+    private final SpreadDifferentModelsImpl spreadDifferentModels;
+
+    /**
+     * Gets the SpreadDifferentModelsImpl object to access its operations.
+     * 
+     * @return the SpreadDifferentModelsImpl object.
+     */
+    public SpreadDifferentModelsImpl getSpreadDifferentModels() {
+        return this.spreadDifferentModels;
+    }
+
+    /**
+     * The SpreadDifferentModelArraysImpl object to access its operations.
+     */
+    private final SpreadDifferentModelArraysImpl spreadDifferentModelArrays;
+
+    /**
+     * Gets the SpreadDifferentModelArraysImpl object to access its operations.
+     * 
+     * @return the SpreadDifferentModelArraysImpl object.
+     */
+    public SpreadDifferentModelArraysImpl getSpreadDifferentModelArrays() {
+        return this.spreadDifferentModelArrays;
+    }
+
+    /**
+     * The ExtendsDifferentSpreadStringsImpl object to access its operations.
+     */
+    private final ExtendsDifferentSpreadStringsImpl extendsDifferentSpreadStrings;
+
+    /**
+     * Gets the ExtendsDifferentSpreadStringsImpl object to access its operations.
+     * 
+     * @return the ExtendsDifferentSpreadStringsImpl object.
+     */
+    public ExtendsDifferentSpreadStringsImpl getExtendsDifferentSpreadStrings() {
+        return this.extendsDifferentSpreadStrings;
+    }
+
+    /**
+     * The ExtendsDifferentSpreadFloatsImpl object to access its operations.
+     */
+    private final ExtendsDifferentSpreadFloatsImpl extendsDifferentSpreadFloats;
+
+    /**
+     * Gets the ExtendsDifferentSpreadFloatsImpl object to access its operations.
+     * 
+     * @return the ExtendsDifferentSpreadFloatsImpl object.
+     */
+    public ExtendsDifferentSpreadFloatsImpl getExtendsDifferentSpreadFloats() {
+        return this.extendsDifferentSpreadFloats;
+    }
+
+    /**
+     * The ExtendsDifferentSpreadModelsImpl object to access its operations.
+     */
+    private final ExtendsDifferentSpreadModelsImpl extendsDifferentSpreadModels;
+
+    /**
+     * Gets the ExtendsDifferentSpreadModelsImpl object to access its operations.
+     * 
+     * @return the ExtendsDifferentSpreadModelsImpl object.
+     */
+    public ExtendsDifferentSpreadModelsImpl getExtendsDifferentSpreadModels() {
+        return this.extendsDifferentSpreadModels;
+    }
+
+    /**
+     * The ExtendsDifferentSpreadModelArraysImpl object to access its operations.
+     */
+    private final ExtendsDifferentSpreadModelArraysImpl extendsDifferentSpreadModelArrays;
+
+    /**
+     * Gets the ExtendsDifferentSpreadModelArraysImpl object to access its operations.
+     * 
+     * @return the ExtendsDifferentSpreadModelArraysImpl object.
+     */
+    public ExtendsDifferentSpreadModelArraysImpl getExtendsDifferentSpreadModelArrays() {
+        return this.extendsDifferentSpreadModelArrays;
+    }
+
+    /**
+     * The MultipleSpreadsImpl object to access its operations.
+     */
+    private final MultipleSpreadsImpl multipleSpreads;
+
+    /**
+     * Gets the MultipleSpreadsImpl object to access its operations.
+     * 
+     * @return the MultipleSpreadsImpl object.
+     */
+    public MultipleSpreadsImpl getMultipleSpreads() {
+        return this.multipleSpreads;
+    }
+
+    /**
+     * The SpreadRecordUnionsImpl object to access its operations.
+     */
+    private final SpreadRecordUnionsImpl spreadRecordUnions;
+
+    /**
+     * Gets the SpreadRecordUnionsImpl object to access its operations.
+     * 
+     * @return the SpreadRecordUnionsImpl object.
+     */
+    public SpreadRecordUnionsImpl getSpreadRecordUnions() {
+        return this.spreadRecordUnions;
+    }
+
+    /**
+     * The SpreadRecordDiscriminatedUnionsImpl object to access its operations.
+     */
+    private final SpreadRecordDiscriminatedUnionsImpl spreadRecordDiscriminatedUnions;
+
+    /**
+     * Gets the SpreadRecordDiscriminatedUnionsImpl object to access its operations.
+     * 
+     * @return the SpreadRecordDiscriminatedUnionsImpl object.
+     */
+    public SpreadRecordDiscriminatedUnionsImpl getSpreadRecordDiscriminatedUnions() {
+        return this.spreadRecordDiscriminatedUnions;
+    }
+
+    /**
+     * The SpreadRecordNonDiscriminatedUnionsImpl object to access its operations.
+     */
+    private final SpreadRecordNonDiscriminatedUnionsImpl spreadRecordNonDiscriminatedUnions;
+
+    /**
+     * Gets the SpreadRecordNonDiscriminatedUnionsImpl object to access its operations.
+     * 
+     * @return the SpreadRecordNonDiscriminatedUnionsImpl object.
+     */
+    public SpreadRecordNonDiscriminatedUnionsImpl getSpreadRecordNonDiscriminatedUnions() {
+        return this.spreadRecordNonDiscriminatedUnions;
+    }
+
+    /**
+     * The SpreadRecordNonDiscriminatedUnion2sImpl object to access its operations.
+     */
+    private final SpreadRecordNonDiscriminatedUnion2sImpl spreadRecordNonDiscriminatedUnion2s;
+
+    /**
+     * Gets the SpreadRecordNonDiscriminatedUnion2sImpl object to access its operations.
+     * 
+     * @return the SpreadRecordNonDiscriminatedUnion2sImpl object.
+     */
+    public SpreadRecordNonDiscriminatedUnion2sImpl getSpreadRecordNonDiscriminatedUnion2s() {
+        return this.spreadRecordNonDiscriminatedUnion2s;
+    }
+
+    /**
+     * The SpreadRecordNonDiscriminatedUnion3sImpl object to access its operations.
+     */
+    private final SpreadRecordNonDiscriminatedUnion3sImpl spreadRecordNonDiscriminatedUnion3s;
+
+    /**
+     * Gets the SpreadRecordNonDiscriminatedUnion3sImpl object to access its operations.
+     * 
+     * @return the SpreadRecordNonDiscriminatedUnion3sImpl object.
+     */
+    public SpreadRecordNonDiscriminatedUnion3sImpl getSpreadRecordNonDiscriminatedUnion3s() {
+        return this.spreadRecordNonDiscriminatedUnion3s;
     }
 
     /**
@@ -273,11 +525,29 @@ public final class AdditionalPropertiesClientImpl {
         this.isUnknownDiscriminateds = new IsUnknownDiscriminatedsImpl(this);
         this.extendsStrings = new ExtendsStringsImpl(this);
         this.isStrings = new IsStringsImpl(this);
+        this.spreadStrings = new SpreadStringsImpl(this);
         this.extendsFloats = new ExtendsFloatsImpl(this);
         this.isFloats = new IsFloatsImpl(this);
+        this.spreadFloats = new SpreadFloatsImpl(this);
         this.extendsModels = new ExtendsModelsImpl(this);
         this.isModels = new IsModelsImpl(this);
+        this.spreadModels = new SpreadModelsImpl(this);
         this.extendsModelArrays = new ExtendsModelArraysImpl(this);
         this.isModelArrays = new IsModelArraysImpl(this);
+        this.spreadModelArrays = new SpreadModelArraysImpl(this);
+        this.spreadDifferentStrings = new SpreadDifferentStringsImpl(this);
+        this.spreadDifferentFloats = new SpreadDifferentFloatsImpl(this);
+        this.spreadDifferentModels = new SpreadDifferentModelsImpl(this);
+        this.spreadDifferentModelArrays = new SpreadDifferentModelArraysImpl(this);
+        this.extendsDifferentSpreadStrings = new ExtendsDifferentSpreadStringsImpl(this);
+        this.extendsDifferentSpreadFloats = new ExtendsDifferentSpreadFloatsImpl(this);
+        this.extendsDifferentSpreadModels = new ExtendsDifferentSpreadModelsImpl(this);
+        this.extendsDifferentSpreadModelArrays = new ExtendsDifferentSpreadModelArraysImpl(this);
+        this.multipleSpreads = new MultipleSpreadsImpl(this);
+        this.spreadRecordUnions = new SpreadRecordUnionsImpl(this);
+        this.spreadRecordDiscriminatedUnions = new SpreadRecordDiscriminatedUnionsImpl(this);
+        this.spreadRecordNonDiscriminatedUnions = new SpreadRecordNonDiscriminatedUnionsImpl(this);
+        this.spreadRecordNonDiscriminatedUnion2s = new SpreadRecordNonDiscriminatedUnion2sImpl(this);
+        this.spreadRecordNonDiscriminatedUnion3s = new SpreadRecordNonDiscriminatedUnion3sImpl(this);
     }
 }
