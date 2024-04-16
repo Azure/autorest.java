@@ -29,7 +29,7 @@ public final class OutputModel implements JsonSerializable<OutputModel> {
      * @param name the name value to set.
      */
     @Generated
-    private OutputModel(String name) {
+    public OutputModel(String name) {
         this.name = name;
     }
 
