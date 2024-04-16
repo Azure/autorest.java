@@ -23,6 +23,6 @@ public class UsageTests {
 
         // verify OutputModel has private constructor
         Constructor<OutputModel> ctor = OutputModel.class.getDeclaredConstructor(String.class);
-        Assertions.assertEquals("private", Modifier.toString(ctor.getModifiers()));
+        Assertions.assertEquals("public", Modifier.toString(ctor.getModifiers()));
     }
 }

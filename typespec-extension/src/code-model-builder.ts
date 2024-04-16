@@ -419,6 +419,11 @@ export class CodeModelBuilder {
       const models: (Model | Enum | Union)[] = Array.from(client.service.models.values());
       Array.from(client.service.enums.values()).forEach((it) => models.push(it));
       Array.from(client.service.unions.values()).forEach((it) => models.push(it));
+      client.service.namespaces?.forEach((it) => {
+        Array.from(it.models.values()).forEach((it) => models.push(it));
+        Array.from(it.enums.values()).forEach((it) => models.push(it));
+        Array.from(it.unions.values()).forEach((it) => models.push(it));
+      });
 
       // lambda to mark model as public
       const modelAsPublic = (model: Model | Enum | Union) => {

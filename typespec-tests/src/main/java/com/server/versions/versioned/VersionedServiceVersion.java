@@ -11,6 +11,11 @@ import com.azure.core.util.ServiceVersion;
  */
 public enum VersionedServiceVersion implements ServiceVersion {
     /**
+     * Enum value 2021-01-01-preview.
+     */
+    V2021_01_01_PREVIEW("2021-01-01-preview"),
+
+    /**
      * Enum value 2022-12-01-preview.
      */
     V2022_12_01_PREVIEW("2022-12-01-preview");

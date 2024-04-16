@@ -3,6 +3,7 @@
 
 package com.type.property.additionalproperties;
 
+import com.type.property.additionalproperties.models.IsModelAdditionalProperties;
 import com.type.property.additionalproperties.models.ModelForRecord;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,13 +16,18 @@ public class IsModelClientTest {
 
     @Test
     public void testPullAndGet() {
-        Map<String, ModelForRecord> properties = new LinkedHashMap<>();
-        properties.put("prop", new ModelForRecord("ok"));
-        client.put(properties);
+        Map<String, ModelForRecord> propertyMap = new LinkedHashMap<>();
+        propertyMap.put("prop", new ModelForRecord("ok"));
+        IsModelAdditionalProperties body = new IsModelAdditionalProperties(new ModelForRecord("ok"));
+        body.setAdditionalProperties(propertyMap);
+        client.put(body);
 
-        properties = client.get();
+        IsModelAdditionalProperties properties = client.get();
         Assertions.assertNotNull(properties);
-        Assertions.assertNotNull(properties.get("prop"));
-        Assertions.assertEquals("ok", properties.get("prop").getState());
+        Assertions.assertNotNull(properties.getKnownProp());
+        Assertions.assertEquals("ok", properties.getKnownProp().getState());
+        Assertions.assertNotNull(properties.getAdditionalProperties());
+        Assertions.assertNotNull(properties.getAdditionalProperties().get("prop"));
+        Assertions.assertEquals("ok", properties.getAdditionalProperties().get("prop").getState());
     }
 }

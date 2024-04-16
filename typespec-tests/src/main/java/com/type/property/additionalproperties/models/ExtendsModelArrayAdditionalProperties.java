@@ -22,6 +22,12 @@ import java.util.Map;
 public final class ExtendsModelArrayAdditionalProperties
     implements JsonSerializable<ExtendsModelArrayAdditionalProperties> {
     /*
+     * The knownProp property.
+     */
+    @Generated
+    private final List<ModelForRecord> knownProp;
+
+    /*
      * Additional properties
      */
     @Generated
@@ -29,9 +35,22 @@ public final class ExtendsModelArrayAdditionalProperties
 
     /**
      * Creates an instance of ExtendsModelArrayAdditionalProperties class.
+     * 
+     * @param knownProp the knownProp value to set.
      */
     @Generated
-    public ExtendsModelArrayAdditionalProperties() {
+    public ExtendsModelArrayAdditionalProperties(List<ModelForRecord> knownProp) {
+        this.knownProp = knownProp;
+    }
+
+    /**
+     * Get the knownProp property: The knownProp property.
+     * 
+     * @return the knownProp value.
+     */
+    @Generated
+    public List<ModelForRecord> getKnownProp() {
+        return this.knownProp;
     }
 
     /**
@@ -64,6 +83,7 @@ public final class ExtendsModelArrayAdditionalProperties
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeArrayField("knownProp", this.knownProp, (writer, element) -> writer.writeJson(element));
         if (additionalProperties != null) {
             for (Map.Entry<String, List<ModelForRecord>> additionalProperty : additionalProperties.entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
@@ -78,24 +98,30 @@ public final class ExtendsModelArrayAdditionalProperties
      * @param jsonReader The JsonReader being read.
      * @return An instance of ExtendsModelArrayAdditionalProperties if the JsonReader was pointing to an instance of it,
      * or null if it was pointing to JSON null.
+     * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the ExtendsModelArrayAdditionalProperties.
      */
     @Generated
     public static ExtendsModelArrayAdditionalProperties fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            ExtendsModelArrayAdditionalProperties deserializedExtendsModelArrayAdditionalProperties
-                = new ExtendsModelArrayAdditionalProperties();
+            List<ModelForRecord> knownProp = null;
             Map<String, List<ModelForRecord>> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if (additionalProperties == null) {
-                    additionalProperties = new LinkedHashMap<>();
-                }
+                if ("knownProp".equals(fieldName)) {
+                    knownProp = reader.readArray(reader1 -> ModelForRecord.fromJson(reader1));
+                } else {
+                    if (additionalProperties == null) {
+                        additionalProperties = new LinkedHashMap<>();
+                    }
 
-                additionalProperties.put(fieldName, null);
+                    additionalProperties.put(fieldName, null);
+                }
             }
+            ExtendsModelArrayAdditionalProperties deserializedExtendsModelArrayAdditionalProperties
+                = new ExtendsModelArrayAdditionalProperties(knownProp);
             deserializedExtendsModelArrayAdditionalProperties.additionalProperties = additionalProperties;
 
             return deserializedExtendsModelArrayAdditionalProperties;
