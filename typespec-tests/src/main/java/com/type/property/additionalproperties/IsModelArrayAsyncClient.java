@@ -44,11 +44,14 @@ public final class IsModelArrayAsyncClient {
      * 
      * <pre>{@code
      * {
+     *     knownProp (Required): [
+     *          (Required){
+     *             state: String (Required)
+     *         }
+     *     ]
      *      (Optional): {
      *         String (Required): [
-     *              (Required){
-     *                 state: String (Required)
-     *             }
+     *             (recursive schema, see above)
      *         ]
      *     }
      * }
@@ -73,11 +76,14 @@ public final class IsModelArrayAsyncClient {
      * 
      * <pre>{@code
      * {
+     *     knownProp (Required): [
+     *          (Required){
+     *             state: String (Required)
+     *         }
+     *     ]
      *      (Optional): {
      *         String (Required): [
-     *              (Required){
-     *                 state: String (Required)
-     *             }
+     *             (recursive schema, see above)
      *         ]
      *     }
      * }

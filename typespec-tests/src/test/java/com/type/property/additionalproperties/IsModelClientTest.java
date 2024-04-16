@@ -16,16 +16,18 @@ public class IsModelClientTest {
 
     @Test
     public void testPullAndGet() {
-        IsModelAdditionalProperties request = new IsModelAdditionalProperties();
-        Map<String, ModelForRecord> properties = new LinkedHashMap<>();
-        properties.put("prop", new ModelForRecord("ok"));
-        request.setAdditionalProperties(properties);
-        client.put(request);
+        Map<String, ModelForRecord> propertyMap = new LinkedHashMap<>();
+        propertyMap.put("prop", new ModelForRecord("ok"));
+        IsModelAdditionalProperties body = new IsModelAdditionalProperties(new ModelForRecord("ok"));
+        body.setAdditionalProperties(propertyMap);
+        client.put(body);
 
-        IsModelAdditionalProperties response = client.get();
-        Assertions.assertNotNull(response);
-        Assertions.assertNotNull(response.getAdditionalProperties());
-        Assertions.assertNotNull(response.getAdditionalProperties().get("prop"));
-        Assertions.assertEquals("ok", properties.get("prop").getState());
+        IsModelAdditionalProperties properties = client.get();
+        Assertions.assertNotNull(properties);
+        Assertions.assertNotNull(properties.getKnownProp());
+        Assertions.assertEquals("ok", properties.getKnownProp().getState());
+        Assertions.assertNotNull(properties.getAdditionalProperties());
+        Assertions.assertNotNull(properties.getAdditionalProperties().get("prop"));
+        Assertions.assertEquals("ok", properties.getAdditionalProperties().get("prop").getState());
     }
 }

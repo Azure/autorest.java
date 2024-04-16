@@ -21,9 +21,6 @@ public class AccessTests {
         publicClient.publicDecoratorInPublic("");
         publicClient.noDecoratorInPublic("");
 
-//        internalClient.internalDecoratorInInternalWithResponse("", null);
-//        internalClient.noDecoratorInInternalWithResponse("", null);
-//        internalClient.publicDecoratorInInternalWithResponse("", null);
         internalClient.internalDecoratorInInternal("");
         internalClient.noDecoratorInInternal("");
         internalClient.publicDecoratorInInternal("");
@@ -31,8 +28,6 @@ public class AccessTests {
         sharedClient.publicMethod("");
         sharedClient.internalWithResponse("", null).getValue().toObject(SharedModel.class);
 
-//        relativeClient.operationWithResponse("", null);
-//        relativeClient.discriminatorWithResponse("real", null).getValue();
         relativeClient.operation("");
         AbstractModel abstractModel = relativeClient.discriminator("real");
         Assertions.assertTrue(abstractModel instanceof RealModel);

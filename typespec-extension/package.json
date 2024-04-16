@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.15.8",
+  "version": "0.15.9",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -45,13 +45,13 @@
     "target/emitter.jar"
   ],
   "peerDependencies": {
-    "@typespec/compiler": ">=0.53.1 <1.0.0",
-    "@typespec/http": ">=0.53.0 <1.0.0",
-    "@typespec/rest": ">=0.53.0 <1.0.0",
-    "@typespec/openapi": ">=0.53.0 <1.0.0",
-    "@typespec/versioning": ">=0.53.0 <1.0.0",
-    "@azure-tools/typespec-azure-core": ">=0.40.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.40.0 <1.0.0"
+    "@typespec/compiler": ">=0.55.0 <1.0.0",
+    "@typespec/http": ">=0.55.0 <1.0.0",
+    "@typespec/rest": ">=0.55.0 <1.0.0",
+    "@typespec/openapi": ">=0.55.0 <1.0.0",
+    "@typespec/versioning": ">=0.55.0 <1.0.0",
+    "@azure-tools/typespec-azure-core": ">=0.41.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.41.2 <1.0.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.20.0",
@@ -63,17 +63,17 @@
     "@types/lodash": "~4.17.0",
     "@types/js-yaml": "~4.0.9",
     "@types/mocha": "~10.0.6",
-    "@types/node": "~20.12.3",
+    "@types/node": "~20.12.7",
     "c8": "~9.1.0",
     "eslint": "~8.57.0",
     "mocha": "~10.4.0",
     "rimraf": "~5.0.5",
-    "typescript": "~5.4.3",
-    "@typescript-eslint/parser": "~7.5.0",
-    "@typescript-eslint/eslint-plugin": "~7.5.0",
+    "typescript": "~5.4.5",
+    "@typescript-eslint/parser": "~7.6.0",
+    "@typescript-eslint/eslint-plugin": "~7.6.0",
     "eslint-plugin-deprecation": "~2.0.0",
     "@azure-tools/typespec-azure-core": "0.41.0",
-    "@azure-tools/typespec-client-generator-core": "0.42.0-dev.11",
+    "@azure-tools/typespec-client-generator-core": "0.41.2",
     "@typespec/compiler": "0.55.0",
     "@typespec/http": "0.55.0",
     "@typespec/openapi": "0.55.0",
