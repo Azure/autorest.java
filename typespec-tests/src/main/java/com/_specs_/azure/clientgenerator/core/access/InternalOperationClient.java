@@ -7,7 +7,7 @@ package com._specs_.azure.clientgenerator.core.access;
 import com._specs_.azure.clientgenerator.core.access.implementation.InternalOperationsImpl;
 import com._specs_.azure.clientgenerator.core.access.implementation.models.InternalDecoratorModelInInternal;
 import com._specs_.azure.clientgenerator.core.access.implementation.models.NoDecoratorModelInInternal;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.PublicDecoratorModelInInternal;
+import com._specs_.azure.clientgenerator.core.access.models.PublicDecoratorModelInInternal;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
