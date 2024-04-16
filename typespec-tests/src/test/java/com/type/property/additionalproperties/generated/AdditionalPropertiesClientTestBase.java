@@ -14,6 +14,10 @@ import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
 import com.type.property.additionalproperties.AdditionalPropertiesClientBuilder;
+import com.type.property.additionalproperties.ExtendsDifferentSpreadFloatClient;
+import com.type.property.additionalproperties.ExtendsDifferentSpreadModelArrayClient;
+import com.type.property.additionalproperties.ExtendsDifferentSpreadModelClient;
+import com.type.property.additionalproperties.ExtendsDifferentSpreadStringClient;
 import com.type.property.additionalproperties.ExtendsFloatClient;
 import com.type.property.additionalproperties.ExtendsModelArrayClient;
 import com.type.property.additionalproperties.ExtendsModelClient;
@@ -28,6 +32,20 @@ import com.type.property.additionalproperties.IsStringClient;
 import com.type.property.additionalproperties.IsUnknownClient;
 import com.type.property.additionalproperties.IsUnknownDerivedClient;
 import com.type.property.additionalproperties.IsUnknownDiscriminatedClient;
+import com.type.property.additionalproperties.MultipleSpreadClient;
+import com.type.property.additionalproperties.SpreadDifferentFloatClient;
+import com.type.property.additionalproperties.SpreadDifferentModelArrayClient;
+import com.type.property.additionalproperties.SpreadDifferentModelClient;
+import com.type.property.additionalproperties.SpreadDifferentStringClient;
+import com.type.property.additionalproperties.SpreadFloatClient;
+import com.type.property.additionalproperties.SpreadModelArrayClient;
+import com.type.property.additionalproperties.SpreadModelClient;
+import com.type.property.additionalproperties.SpreadRecordDiscriminatedUnionClient;
+import com.type.property.additionalproperties.SpreadRecordNonDiscriminatedUnion2Client;
+import com.type.property.additionalproperties.SpreadRecordNonDiscriminatedUnion3Client;
+import com.type.property.additionalproperties.SpreadRecordNonDiscriminatedUnionClient;
+import com.type.property.additionalproperties.SpreadRecordUnionClient;
+import com.type.property.additionalproperties.SpreadStringClient;
 
 class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
     protected ExtendsUnknownClient extendsUnknownClient;
@@ -46,17 +64,53 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
 
     protected IsStringClient isStringClient;
 
+    protected SpreadStringClient spreadStringClient;
+
     protected ExtendsFloatClient extendsFloatClient;
 
     protected IsFloatClient isFloatClient;
+
+    protected SpreadFloatClient spreadFloatClient;
 
     protected ExtendsModelClient extendsModelClient;
 
     protected IsModelClient isModelClient;
 
+    protected SpreadModelClient spreadModelClient;
+
     protected ExtendsModelArrayClient extendsModelArrayClient;
 
     protected IsModelArrayClient isModelArrayClient;
+
+    protected SpreadModelArrayClient spreadModelArrayClient;
+
+    protected SpreadDifferentStringClient spreadDifferentStringClient;
+
+    protected SpreadDifferentFloatClient spreadDifferentFloatClient;
+
+    protected SpreadDifferentModelClient spreadDifferentModelClient;
+
+    protected SpreadDifferentModelArrayClient spreadDifferentModelArrayClient;
+
+    protected ExtendsDifferentSpreadStringClient extendsDifferentSpreadStringClient;
+
+    protected ExtendsDifferentSpreadFloatClient extendsDifferentSpreadFloatClient;
+
+    protected ExtendsDifferentSpreadModelClient extendsDifferentSpreadModelClient;
+
+    protected ExtendsDifferentSpreadModelArrayClient extendsDifferentSpreadModelArrayClient;
+
+    protected MultipleSpreadClient multipleSpreadClient;
+
+    protected SpreadRecordUnionClient spreadRecordUnionClient;
+
+    protected SpreadRecordDiscriminatedUnionClient spreadRecordDiscriminatedUnionClient;
+
+    protected SpreadRecordNonDiscriminatedUnionClient spreadRecordNonDiscriminatedUnionClient;
+
+    protected SpreadRecordNonDiscriminatedUnion2Client spreadRecordNonDiscriminatedUnion2Client;
+
+    protected SpreadRecordNonDiscriminatedUnion3Client spreadRecordNonDiscriminatedUnion3Client;
 
     @Override
     protected void beforeTest() {
@@ -141,6 +195,16 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isStringClient = isStringClientbuilder.buildIsStringClient();
 
+        AdditionalPropertiesClientBuilder spreadStringClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadStringClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadStringClient = spreadStringClientbuilder.buildSpreadStringClient();
+
         AdditionalPropertiesClientBuilder extendsFloatClientbuilder
             = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
@@ -160,6 +224,16 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             isFloatClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         isFloatClient = isFloatClientbuilder.buildIsFloatClient();
+
+        AdditionalPropertiesClientBuilder spreadFloatClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadFloatClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadFloatClient = spreadFloatClientbuilder.buildSpreadFloatClient();
 
         AdditionalPropertiesClientBuilder extendsModelClientbuilder
             = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
@@ -181,6 +255,16 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
         }
         isModelClient = isModelClientbuilder.buildIsModelClient();
 
+        AdditionalPropertiesClientBuilder spreadModelClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadModelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadModelClient = spreadModelClientbuilder.buildSpreadModelClient();
+
         AdditionalPropertiesClientBuilder extendsModelArrayClientbuilder
             = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
@@ -200,6 +284,164 @@ class AdditionalPropertiesClientTestBase extends TestProxyTestBase {
             isModelArrayClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
         }
         isModelArrayClient = isModelArrayClientbuilder.buildIsModelArrayClient();
+
+        AdditionalPropertiesClientBuilder spreadModelArrayClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadModelArrayClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadModelArrayClient = spreadModelArrayClientbuilder.buildSpreadModelArrayClient();
+
+        AdditionalPropertiesClientBuilder spreadDifferentStringClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadDifferentStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadDifferentStringClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadDifferentStringClient = spreadDifferentStringClientbuilder.buildSpreadDifferentStringClient();
+
+        AdditionalPropertiesClientBuilder spreadDifferentFloatClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadDifferentFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadDifferentFloatClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadDifferentFloatClient = spreadDifferentFloatClientbuilder.buildSpreadDifferentFloatClient();
+
+        AdditionalPropertiesClientBuilder spreadDifferentModelClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadDifferentModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadDifferentModelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadDifferentModelClient = spreadDifferentModelClientbuilder.buildSpreadDifferentModelClient();
+
+        AdditionalPropertiesClientBuilder spreadDifferentModelArrayClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadDifferentModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadDifferentModelArrayClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadDifferentModelArrayClient = spreadDifferentModelArrayClientbuilder.buildSpreadDifferentModelArrayClient();
+
+        AdditionalPropertiesClientBuilder extendsDifferentSpreadStringClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            extendsDifferentSpreadStringClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            extendsDifferentSpreadStringClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        extendsDifferentSpreadStringClient
+            = extendsDifferentSpreadStringClientbuilder.buildExtendsDifferentSpreadStringClient();
+
+        AdditionalPropertiesClientBuilder extendsDifferentSpreadFloatClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            extendsDifferentSpreadFloatClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            extendsDifferentSpreadFloatClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        extendsDifferentSpreadFloatClient
+            = extendsDifferentSpreadFloatClientbuilder.buildExtendsDifferentSpreadFloatClient();
+
+        AdditionalPropertiesClientBuilder extendsDifferentSpreadModelClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            extendsDifferentSpreadModelClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            extendsDifferentSpreadModelClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        extendsDifferentSpreadModelClient
+            = extendsDifferentSpreadModelClientbuilder.buildExtendsDifferentSpreadModelClient();
+
+        AdditionalPropertiesClientBuilder extendsDifferentSpreadModelArrayClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            extendsDifferentSpreadModelArrayClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            extendsDifferentSpreadModelArrayClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        extendsDifferentSpreadModelArrayClient
+            = extendsDifferentSpreadModelArrayClientbuilder.buildExtendsDifferentSpreadModelArrayClient();
+
+        AdditionalPropertiesClientBuilder multipleSpreadClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            multipleSpreadClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            multipleSpreadClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        multipleSpreadClient = multipleSpreadClientbuilder.buildMultipleSpreadClient();
+
+        AdditionalPropertiesClientBuilder spreadRecordUnionClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadRecordUnionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadRecordUnionClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadRecordUnionClient = spreadRecordUnionClientbuilder.buildSpreadRecordUnionClient();
+
+        AdditionalPropertiesClientBuilder spreadRecordDiscriminatedUnionClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadRecordDiscriminatedUnionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadRecordDiscriminatedUnionClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadRecordDiscriminatedUnionClient
+            = spreadRecordDiscriminatedUnionClientbuilder.buildSpreadRecordDiscriminatedUnionClient();
+
+        AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnionClientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadRecordNonDiscriminatedUnionClientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadRecordNonDiscriminatedUnionClientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadRecordNonDiscriminatedUnionClient
+            = spreadRecordNonDiscriminatedUnionClientbuilder.buildSpreadRecordNonDiscriminatedUnionClient();
+
+        AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnion2Clientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadRecordNonDiscriminatedUnion2Clientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadRecordNonDiscriminatedUnion2Clientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadRecordNonDiscriminatedUnion2Client
+            = spreadRecordNonDiscriminatedUnion2Clientbuilder.buildSpreadRecordNonDiscriminatedUnion2Client();
+
+        AdditionalPropertiesClientBuilder spreadRecordNonDiscriminatedUnion3Clientbuilder
+            = new AdditionalPropertiesClientBuilder().httpClient(HttpClient.createDefault())
+                .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
+        if (getTestMode() == TestMode.PLAYBACK) {
+            spreadRecordNonDiscriminatedUnion3Clientbuilder.httpClient(interceptorManager.getPlaybackClient());
+        } else if (getTestMode() == TestMode.RECORD) {
+            spreadRecordNonDiscriminatedUnion3Clientbuilder.addPolicy(interceptorManager.getRecordPolicy());
+        }
+        spreadRecordNonDiscriminatedUnion3Client
+            = spreadRecordNonDiscriminatedUnion3Clientbuilder.buildSpreadRecordNonDiscriminatedUnion3Client();
 
     }
 }
