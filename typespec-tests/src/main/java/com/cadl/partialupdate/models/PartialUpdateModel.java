@@ -45,6 +45,9 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     @Generated
     private String aggregate;
 
+    /*
+     * customized property
+     */
     private String testProperty;
 
     /**
