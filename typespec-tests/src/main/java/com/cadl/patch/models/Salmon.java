@@ -228,9 +228,9 @@ public final class Salmon extends Fish {
             } else {
                 jsonWriter.writeMapField("hate", this.hate, (writer, element) -> {
                     if (element != null) {
-                        element.serializeAsJsonMergePatch(true);
+                        JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(element, true);
                         writer.writeJson(element);
-                        element.serializeAsJsonMergePatch(false);
+                        JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(element, false);
                     } else {
                         writer.writeNull();
                     }
@@ -241,9 +241,9 @@ public final class Salmon extends Fish {
             if (this.partner == null) {
                 jsonWriter.writeNullField("partner");
             } else {
-                this.partner.serializeAsJsonMergePatch(true);
+                JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(this.partner, true);
                 jsonWriter.writeJsonField("partner", this.partner);
-                this.partner.serializeAsJsonMergePatch(false);
+                JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(this.partner, false);
             }
         }
         return jsonWriter.writeEndObject();
