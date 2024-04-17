@@ -4,7 +4,7 @@
 
 package com.cadl.armresourceprovider.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * The response of a TopLevelArmResource list operation.
  */
-@Fluent
+@Immutable
 public final class TopLevelArmResourceListResult {
     /*
      * The TopLevelArmResource items on this page
@@ -30,7 +30,7 @@ public final class TopLevelArmResourceListResult {
     /**
      * Creates an instance of TopLevelArmResourceListResult class.
      */
-    public TopLevelArmResourceListResult() {
+    private TopLevelArmResourceListResult() {
     }
 
     /**
@@ -43,34 +43,12 @@ public final class TopLevelArmResourceListResult {
     }
 
     /**
-     * Set the value property: The TopLevelArmResource items on this page.
-     * 
-     * @param value the value value to set.
-     * @return the TopLevelArmResourceListResult object itself.
-     */
-    public TopLevelArmResourceListResult withValue(List<TopLevelArmResourceInner> value) {
-        this.value = value;
-        return this;
-    }
-
-    /**
      * Get the nextLink property: The link to the next page of items.
      * 
      * @return the nextLink value.
      */
     public String nextLink() {
         return this.nextLink;
-    }
-
-    /**
-     * Set the nextLink property: The link to the next page of items.
-     * 
-     * @param nextLink the nextLink value to set.
-     * @return the TopLevelArmResourceListResult object itself.
-     */
-    public TopLevelArmResourceListResult withNextLink(String nextLink) {
-        this.nextLink = nextLink;
-        return this;
     }
 
     /**
