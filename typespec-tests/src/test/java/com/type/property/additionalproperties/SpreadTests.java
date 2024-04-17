@@ -18,12 +18,16 @@ import com.type.property.additionalproperties.models.SpreadRecordForNonDiscrimin
 import com.type.property.additionalproperties.models.SpreadRecordForNonDiscriminatedUnion3;
 import com.type.property.additionalproperties.models.SpreadRecordForUnion;
 import com.type.property.additionalproperties.models.SpreadStringRecord;
+import com.type.property.additionalproperties.models.WidgetData0;
+import com.type.property.additionalproperties.models.WidgetData1;
+import com.type.property.additionalproperties.models.WidgetData2;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -199,11 +203,12 @@ public class SpreadTests {
     @Test
     @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordDiscriminatedUnion() {
-        String strProp1 = "{\"kind\":\"kind0\",\"fooProp\":\"abc\"}";
-        String strProp2 = "{\"kind\":\"kind1\",\"start\":\"2021-01-01T00:00:00Z\",\"end\":\"2021-01-02T00:00:00Z\"}";
+        BinaryData binaryDataProp1 = BinaryData.fromObject(new WidgetData0("abc"));
+        BinaryData binaryDataProp2 = BinaryData.fromObject(new WidgetData1(OffsetDateTime.parse("2021-01-01T00:00:00Z"))
+                .setEnd(OffsetDateTime.parse("2021-01-02T00:00:00Z")));
         Map<String, BinaryData> propertyMap = new LinkedHashMap<>();
-        propertyMap.put("prop1", BinaryData.fromString(strProp1));
-        propertyMap.put("prop2", BinaryData.fromString(strProp2));
+        propertyMap.put("prop1", binaryDataProp1);
+        propertyMap.put("prop2", binaryDataProp2);
         SpreadRecordForDiscriminatedUnion body = new SpreadRecordForDiscriminatedUnion("abc");
         body.setAdditionalProperties(propertyMap);
         spreadRecordDiscriminatedUnionClient.put(body);
@@ -213,19 +218,22 @@ public class SpreadTests {
         Assertions.assertEquals("abc", record.getName());
         Assertions.assertNotNull(record.getAdditionalProperties());
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop1"));
-        Assertions.assertEquals(strProp1, record.getAdditionalProperties().get("prop1").toString());
+        Assertions.assertEquals(binaryDataProp1.toObject(Map.class),
+                record.getAdditionalProperties().get("prop1").toObject(Map.class));
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop2"));
-        Assertions.assertEquals(strProp2, record.getAdditionalProperties().get("prop2").toString());
+        Assertions.assertEquals(binaryDataProp2.toObject(Map.class),
+                record.getAdditionalProperties().get("prop2").toObject(Map.class));
     }
 
     @Test
     @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordNonDiscriminatedUnion() {
-        String strProp1 = "{\"kind\":\"kind0\",\"fooProp\":\"abc\"}";
-        String strProp2 = "{\"kind\":\"kind1\",\"start\":\"2021-01-01T00:00:00Z\",\"end\":\"2021-01-02T00:00:00Z\"}";
+        BinaryData binaryDataProp1 = BinaryData.fromObject(new WidgetData0("abc"));
+        BinaryData binaryDataProp2 = BinaryData.fromObject(new WidgetData1(OffsetDateTime.parse("2021-01-01T00:00:00Z"))
+                .setEnd(OffsetDateTime.parse("2021-01-02T00:00:00Z")));
         Map<String, BinaryData> propertyMap = new LinkedHashMap<>();
-        propertyMap.put("prop1", BinaryData.fromString(strProp1));
-        propertyMap.put("prop2", BinaryData.fromString(strProp2));
+        propertyMap.put("prop1", binaryDataProp1);
+        propertyMap.put("prop2", binaryDataProp2);
         SpreadRecordForNonDiscriminatedUnion body = new SpreadRecordForNonDiscriminatedUnion("abc");
         body.setAdditionalProperties(propertyMap);
         spreadRecordNonDiscriminatedUnionClient.put(body);
@@ -235,19 +243,22 @@ public class SpreadTests {
         Assertions.assertEquals("abc", record.getName());
         Assertions.assertNotNull(record.getAdditionalProperties());
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop1"));
-        Assertions.assertEquals(strProp1, record.getAdditionalProperties().get("prop1").toString());
+        Assertions.assertEquals(binaryDataProp1.toObject(Map.class),
+                record.getAdditionalProperties().get("prop1").toObject(Map.class));
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop2"));
-        Assertions.assertEquals(strProp2, record.getAdditionalProperties().get("prop2").toString());
+        Assertions.assertEquals(binaryDataProp2.toObject(Map.class),
+                record.getAdditionalProperties().get("prop2").toObject(Map.class));
     }
 
     @Test
     @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordNonDiscriminatedUnion2() {
-        String strProp1 = "{\"kind\":\"kind1\",\"start\":\"2021-01-01T00:00:00Z\"}";
-        String strProp2 = "{\"kind\":\"kind1\",\"start\":\"2021-01-01T00:00:00Z\",\"end\":\"2021-01-02T00:00:00Z\"}";
+        BinaryData binaryDataProp1 = BinaryData.fromObject(new WidgetData2("2021-01-01T00:00:00Z"));
+        BinaryData binaryDataProp2 = BinaryData.fromObject(new WidgetData1(OffsetDateTime.parse("2021-01-01T00:00:00Z"))
+                .setEnd(OffsetDateTime.parse("2021-01-02T00:00:00Z")));
         Map<String, BinaryData> propertyMap = new LinkedHashMap<>();
-        propertyMap.put("prop1", BinaryData.fromString(strProp1));
-        propertyMap.put("prop2", BinaryData.fromString(strProp2));
+        propertyMap.put("prop1", binaryDataProp1);
+        propertyMap.put("prop2", binaryDataProp2);
         SpreadRecordForNonDiscriminatedUnion2 body = new SpreadRecordForNonDiscriminatedUnion2("abc");
         body.setAdditionalProperties(propertyMap);
         spreadRecordNonDiscriminatedUnion2Client.put(body);
@@ -257,19 +268,25 @@ public class SpreadTests {
         Assertions.assertEquals("abc", record.getName());
         Assertions.assertNotNull(record.getAdditionalProperties());
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop1"));
-        Assertions.assertEquals(strProp1, record.getAdditionalProperties().get("prop1").toString());
+        Assertions.assertEquals(binaryDataProp1.toObject(Map.class),
+                record.getAdditionalProperties().get("prop1").toObject(Map.class));
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop2"));
-        Assertions.assertEquals(strProp2, record.getAdditionalProperties().get("prop2").toString());
+        Assertions.assertEquals(binaryDataProp2.toObject(Map.class),
+                record.getAdditionalProperties().get("prop2").toObject(Map.class));
     }
 
     @Test
     @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordNonDiscriminatedUnion3() {
-        String strProp1 = "[{\"kind\":\"kind1\",\"start\":\"2021-01-01T00:00:00Z\"},{\"kind\":\"kind1\",\"start\":\"2021-01-01T00:00:00Z\"}]";
-        String strProp2 = "{\"kind\":\"kind1\",\"start\":\"2021-01-01T00:00:00Z\",\"end\":\"2021-01-02T00:00:00Z\"}";
+        BinaryData binaryDataProp1 = BinaryData.fromObject(Arrays.asList(
+                new WidgetData2("2021-01-01T00:00:00Z"),
+                new WidgetData2("2021-01-01T00:00:00Z")));
+        BinaryData binaryDataProp2 = BinaryData.fromObject(
+                new WidgetData1(OffsetDateTime.parse("2021-01-01T00:00:00Z"))
+                        .setEnd(OffsetDateTime.parse("2021-01-02T00:00:00Z")));
         Map<String, BinaryData> propertyMap = new LinkedHashMap<>();
-        propertyMap.put("prop1", BinaryData.fromString(strProp1));
-        propertyMap.put("prop2", BinaryData.fromString(strProp2));
+        propertyMap.put("prop1", binaryDataProp1);
+        propertyMap.put("prop2", binaryDataProp2);
         SpreadRecordForNonDiscriminatedUnion3 body = new SpreadRecordForNonDiscriminatedUnion3("abc");
         body.setAdditionalProperties(propertyMap);
         spreadRecordNonDiscriminatedUnion3Client.put(body);
@@ -279,8 +296,10 @@ public class SpreadTests {
         Assertions.assertEquals("abc", record.getName());
         Assertions.assertNotNull(record.getAdditionalProperties());
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop1"));
-        Assertions.assertEquals(strProp1, record.getAdditionalProperties().get("prop1").toString());
+        Assertions.assertIterableEquals(binaryDataProp1.toObject(List.class),
+                record.getAdditionalProperties().get("prop1").toObject(List.class));
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop2"));
-        Assertions.assertEquals(strProp2, record.getAdditionalProperties().get("prop2").toString());
+        Assertions.assertEquals(binaryDataProp2.toObject(Map.class),
+                record.getAdditionalProperties().get("prop2").toObject(Map.class));
     }
 }
