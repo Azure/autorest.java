@@ -2237,7 +2237,8 @@ export class CodeModelBuilder {
       */
       const parentSchema = type.sourceModel
         ? this.processSchema(type.sourceModel, this.getName(type.sourceModel))
-        : this.processDictionarySchema(type, this.getName(type));
+        : // process self as pure Record (instead of Model = Record + properties), do not use cache
+          this.processDictionarySchema(type, this.getName(type));
       objectSchema.parents = new Relations();
       objectSchema.parents.immediate.push(parentSchema);
       pushDistinct(objectSchema.parents.all, parentSchema);
