@@ -55,11 +55,13 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
         } else if (settings.isFluent() && compositeType.isFlattenedSchema()) {
             // put class of flattened type to implementation package
             classPackage = settings.getPackage(settings.getFluentModelsSubpackage());
-        } else if (settings.isDataPlaneClient() && (isPageModel(compositeType) || isInternalModel(compositeType))) {
+        } else if (settings.isDataPlaneClient() && isInternalModel(compositeType)) {
+            // internal type is not exposed to user
+            classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
+        } else if (isPageModel(compositeType)) {
             // put class of Page<> type to implementation package
-            // For TypeSpec, these are not generated to class
+            // for DPG from TypeSpec, these are not generated to class
 
-            // same for internal type, which is not exposed to user
             classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
         } else {
             classPackage = settings.getPackage(settings.getModelsSubpackage());
