@@ -101,10 +101,11 @@ public final class ExtendsDifferentSpreadFloatsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: double (Required)
+     *     name: String (Required)
      *      (Optional): {
      *         String: double (Required)
      *     }
+     *     derivedProp: double (Required)
      * }
      * }</pre>
      * 
@@ -127,10 +128,11 @@ public final class ExtendsDifferentSpreadFloatsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: double (Required)
+     *     name: String (Required)
      *      (Optional): {
      *         String: double (Required)
      *     }
+     *     derivedProp: double (Required)
      * }
      * }</pre>
      * 
@@ -153,10 +155,11 @@ public final class ExtendsDifferentSpreadFloatsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: double (Required)
+     *     name: String (Required)
      *      (Optional): {
      *         String: double (Required)
      *     }
+     *     derivedProp: double (Required)
      * }
      * }</pre>
      * 
@@ -180,10 +183,11 @@ public final class ExtendsDifferentSpreadFloatsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: double (Required)
+     *     name: String (Required)
      *      (Optional): {
      *         String: double (Required)
      *     }
+     *     derivedProp: double (Required)
      * }
      * }</pre>
      * 

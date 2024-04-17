@@ -4,10 +4,9 @@
 
 package com.type.property.additionalproperties.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
@@ -17,27 +16,23 @@ import java.util.Map;
 /**
  * The model extends from a model that spread Record&lt;string&gt; with the different known property type.
  */
-@Fluent
-public final class DifferentSpreadStringDerived implements JsonSerializable<DifferentSpreadStringDerived> {
+@Immutable
+public final class DifferentSpreadStringDerived extends DifferentSpreadStringRecord {
     /*
      * The index property
      */
     @Generated
     private final String derivedProp;
 
-    /*
-     * The model spread Record<string> with the different known property type
-     */
-    @Generated
-    private Map<String, String> additionalProperties;
-
     /**
      * Creates an instance of DifferentSpreadStringDerived class.
      * 
+     * @param id the id value to set.
      * @param derivedProp the derivedProp value to set.
      */
     @Generated
-    public DifferentSpreadStringDerived(String derivedProp) {
+    public DifferentSpreadStringDerived(double id, String derivedProp) {
+        super(id);
         this.derivedProp = derivedProp;
     }
 
@@ -52,39 +47,16 @@ public final class DifferentSpreadStringDerived implements JsonSerializable<Diff
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;string&gt; with the different known property
-     * type.
-     * 
-     * @return the additionalProperties value.
-     */
-    @Generated
-    public Map<String, String> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    /**
-     * Set the additionalProperties property: The model spread Record&lt;string&gt; with the different known property
-     * type.
-     * 
-     * @param additionalProperties the additionalProperties value to set.
-     * @return the DifferentSpreadStringDerived object itself.
-     */
-    @Generated
-    public DifferentSpreadStringDerived setAdditionalProperties(Map<String, String> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeDoubleField("id", getId());
         jsonWriter.writeStringField("derivedProp", this.derivedProp);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, String> additionalProperty : additionalProperties.entrySet()) {
+        if (getAdditionalProperties() != null) {
+            for (Map.Entry<String, String> additionalProperty : getAdditionalProperties().entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
@@ -103,13 +75,16 @@ public final class DifferentSpreadStringDerived implements JsonSerializable<Diff
     @Generated
     public static DifferentSpreadStringDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            double id = 0.0;
             String derivedProp = null;
             Map<String, String> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("derivedProp".equals(fieldName)) {
+                if ("id".equals(fieldName)) {
+                    id = reader.getDouble();
+                } else if ("derivedProp".equals(fieldName)) {
                     derivedProp = reader.getString();
                 } else {
                     if (additionalProperties == null) {
@@ -119,11 +94,7 @@ public final class DifferentSpreadStringDerived implements JsonSerializable<Diff
                     additionalProperties.put(fieldName, reader.getString());
                 }
             }
-            DifferentSpreadStringDerived deserializedDifferentSpreadStringDerived
-                = new DifferentSpreadStringDerived(derivedProp);
-            deserializedDifferentSpreadStringDerived.additionalProperties = additionalProperties;
-
-            return deserializedDifferentSpreadStringDerived;
+            return new DifferentSpreadStringDerived(id, derivedProp);
         });
     }
 }

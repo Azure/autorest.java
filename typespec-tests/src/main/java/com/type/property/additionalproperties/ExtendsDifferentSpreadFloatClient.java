@@ -42,10 +42,11 @@ public final class ExtendsDifferentSpreadFloatClient {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: double (Required)
+     *     name: String (Required)
      *      (Optional): {
      *         String: double (Required)
      *     }
+     *     derivedProp: double (Required)
      * }
      * }</pre>
      * 
@@ -68,10 +69,11 @@ public final class ExtendsDifferentSpreadFloatClient {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: double (Required)
+     *     name: String (Required)
      *      (Optional): {
      *         String: double (Required)
      *     }
+     *     derivedProp: double (Required)
      * }
      * }</pre>
      * 

@@ -42,10 +42,11 @@ public final class ExtendsDifferentSpreadStringClient {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: String (Required)
+     *     id: double (Required)
      *      (Optional): {
      *         String: String (Required)
      *     }
+     *     derivedProp: String (Required)
      * }
      * }</pre>
      * 
@@ -68,10 +69,11 @@ public final class ExtendsDifferentSpreadStringClient {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: String (Required)
+     *     id: double (Required)
      *      (Optional): {
      *         String: String (Required)
      *     }
+     *     derivedProp: String (Required)
      * }
      * }</pre>
      * 
