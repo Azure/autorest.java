@@ -6,16 +6,18 @@ package com.azure.autorest.partialupdate.util;
 
 import com.github.javaparser.ast.AccessSpecifier;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
 import com.github.javaparser.ast.body.InitializerDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -471,5 +473,22 @@ public class PartialUpdateHandlerTest {
                 .collect(Collectors.toList());
         // verify 0 block
         Assertions.assertEquals(0, staticInitializerDeclaration.size());
+    }
+
+    @Test
+    public void testCodeFormatterOff() throws Exception {
+        String existingFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/ModelWithCodeFormatterOff.java").toURI()));
+        String generatedFileContent = Files.readString(Paths.get(getClass().getClassLoader().getResource("partialupdate/GeneratedModel.java").toURI()));
+
+        String output = PartialUpdateHandler.handlePartialUpdateForFile(generatedFileContent, existingFileContent);
+
+        CompilationUnit compilationUnit = parse(output);
+        ConstructorDeclaration constructorDeclaration = compilationUnit.getTypes().get(0).getConstructors().get(1);
+        Assertions.assertTrue(constructorDeclaration.getJavadoc().get().getDescription().toText().contains("<!-- @formatter:off -->"));
+        Assertions.assertTrue(constructorDeclaration.getJavadoc().get().getDescription().toText().contains("<!-- @formatter:on -->"));
+        BlockStmt constructorCodeBlock = (BlockStmt) constructorDeclaration.getChildNodes().stream().filter(node -> node instanceof BlockStmt).findFirst().get();
+        List<String> lines = Arrays.stream(constructorCodeBlock.toString().split("\n")).map(String::trim).collect(Collectors.toList());
+        Assertions.assertTrue(lines.contains("// @formatter:off"));
+        Assertions.assertTrue(lines.contains("// @formatter:on"));
     }
 }
