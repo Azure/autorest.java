@@ -181,11 +181,10 @@ public class SpreadTests {
     }
 
     @Test
-    @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordUnion() {
         Map<String, BinaryData> propertyMap = new LinkedHashMap<>();
-        propertyMap.put("prop1", BinaryData.fromString("abc"));
-        propertyMap.put("prop2", BinaryData.fromObject(43.125));
+        propertyMap.put("prop1", BinaryData.fromObject("abc"));
+        propertyMap.put("prop2", BinaryData.fromObject(43.125f));
         SpreadRecordForUnion body = new SpreadRecordForUnion(true);
         body.setAdditionalProperties(propertyMap);
         spreadRecordUnionClient.put(body);
@@ -195,9 +194,9 @@ public class SpreadTests {
         Assertions.assertTrue(record.isFlag());
         Assertions.assertNotNull(record.getAdditionalProperties());
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop1"));
-        Assertions.assertEquals("\"abc\"", record.getAdditionalProperties().get("prop1").toString());
+        Assertions.assertEquals("abc", record.getAdditionalProperties().get("prop1").toObject(String.class));
         Assertions.assertNotNull(record.getAdditionalProperties().get("prop2"));
-        Assertions.assertEquals(43.125, Double.parseDouble(record.getAdditionalProperties().get("prop2").toString()));
+        Assertions.assertEquals(43.125f, record.getAdditionalProperties().get("prop2").toObject(Float.class));
     }
 
     @Test
