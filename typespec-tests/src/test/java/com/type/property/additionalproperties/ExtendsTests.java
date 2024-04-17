@@ -1,3 +1,6 @@
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 package com.type.property.additionalproperties;
 
 import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalPropertiesDiscriminated;
@@ -5,6 +8,10 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import com.type.property.additionalproperties.models.DifferentSpreadFloatDerived;
+import com.type.property.additionalproperties.models.DifferentSpreadModelArrayDerived;
+import com.type.property.additionalproperties.models.DifferentSpreadModelDerived;
+import com.type.property.additionalproperties.models.DifferentSpreadStringDerived;
 import com.type.property.additionalproperties.models.ExtendsFloatAdditionalProperties;
 import com.type.property.additionalproperties.models.ExtendsModelAdditionalProperties;
 import com.type.property.additionalproperties.models.ExtendsModelArrayAdditionalProperties;
@@ -27,6 +34,10 @@ public class ExtendsTests {
     private final ExtendsUnknownClient extendsUnknownClient = new AdditionalPropertiesClientBuilder().buildExtendsUnknownClient();
     private final ExtendsUnknownDerivedClient extendsUnknownDerivedClient = new AdditionalPropertiesClientBuilder().buildExtendsUnknownDerivedClient();
     private final ExtendsUnknownDiscriminatedClient extendsUnknownDiscriminatedClient = new AdditionalPropertiesClientBuilder().buildExtendsUnknownDiscriminatedClient();
+    private final ExtendsDifferentSpreadStringClient extendsDifferentSpreadStringClient = new AdditionalPropertiesClientBuilder().buildExtendsDifferentSpreadStringClient();
+    private final ExtendsDifferentSpreadFloatClient extendsDifferentSpreadFloatClient = new AdditionalPropertiesClientBuilder().buildExtendsDifferentSpreadFloatClient();
+    private final ExtendsDifferentSpreadModelClient extendsDifferentSpreadModelClient = new AdditionalPropertiesClientBuilder().buildExtendsDifferentSpreadModelClient();
+    private final ExtendsDifferentSpreadModelArrayClient extendsDifferentSpreadModelArrayClient = new AdditionalPropertiesClientBuilder().buildExtendsDifferentSpreadModelArrayClient();
 
     @Test
     public void testExtendsFloat() {
@@ -149,5 +160,74 @@ public class ExtendsTests {
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertEquals("Derived", properties.getName());
         Assertions.assertEquals(additionalProperty, properties.getAdditionalProperties());
+    }
+
+    @Test
+    @Disabled("The body provided of 'put' request doesn't match expected body")
+    public void testExtendsDifferentSpreadString() {
+        Map<String, String> propertyMap = new LinkedHashMap<>();
+        propertyMap.put("prop", "abc");
+        DifferentSpreadStringDerived body = new DifferentSpreadStringDerived("abc");
+        body.setAdditionalProperties(propertyMap);
+        extendsDifferentSpreadStringClient.put(body);
+
+        DifferentSpreadStringDerived record = extendsDifferentSpreadStringClient.get();
+        Assertions.assertNotNull(record);
+        Assertions.assertEquals("abc", record.getDerivedProp());
+        Assertions.assertNotNull(record.getAdditionalProperties());
+        Assertions.assertEquals("abc", record.getAdditionalProperties().get("prop"));
+    }
+
+    @Test
+    @Disabled("The body provided of 'put' request doesn't match expected body and the 'get' request can not use numeric value accessors")
+    public void testExtendsDifferentSpreadFloat() {
+        Map<String, Double> propertyMap = new LinkedHashMap<>();
+        propertyMap.put("prop", 43.125);
+        DifferentSpreadFloatDerived body = new DifferentSpreadFloatDerived(43.125);
+        body.setAdditionalProperties(propertyMap);
+        extendsDifferentSpreadFloatClient.put(body);
+
+        DifferentSpreadFloatDerived record = extendsDifferentSpreadFloatClient.get();
+        Assertions.assertNotNull(record);
+        Assertions.assertEquals(43.125, record.getDerivedProp());
+        Assertions.assertNotNull(record.getAdditionalProperties());
+        Assertions.assertEquals(43.125, record.getAdditionalProperties().get("prop"));
+    }
+
+    @Test
+    @Disabled("The body provided of 'put' request doesn't match expected body and the 'get' request deserialization exception")
+    public void testExtendsDifferentSpreadModel() {
+        Map<String, ModelForRecord> propertyMap = new LinkedHashMap<>();
+        propertyMap.put("prop", new ModelForRecord("ok"));
+        DifferentSpreadModelDerived body = new DifferentSpreadModelDerived(new ModelForRecord("ok"));
+        body.setAdditionalProperties(propertyMap);
+        extendsDifferentSpreadModelClient.put(body);
+
+        DifferentSpreadModelDerived record = extendsDifferentSpreadModelClient.get();
+        Assertions.assertNotNull(record);
+        Assertions.assertEquals("ok", record.getDerivedProp().getState());
+        Assertions.assertNotNull(record.getAdditionalProperties());
+        Assertions.assertNotNull(record.getAdditionalProperties().get("prop"));
+        Assertions.assertEquals("ok", record.getAdditionalProperties().get("prop").getState());
+    }
+
+    @Test
+    @Disabled("The body provided of 'put' request doesn't match expected body and the 'get' request deserialization exception")
+    public void testExtendsDifferentSpreadModelArray() {
+        Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
+        propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
+        DifferentSpreadModelArrayDerived body = new DifferentSpreadModelArrayDerived(Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
+        body.setAdditionalProperties(propertyMap);
+        extendsDifferentSpreadModelArrayClient.put(body);
+
+        DifferentSpreadModelArrayDerived record = extendsDifferentSpreadModelArrayClient.get();
+        Assertions.assertNotNull(record);
+        Assertions.assertNotNull(record.getDerivedProp());
+        record.getDerivedProp().forEach(modelForRecord ->
+                Assertions.assertEquals("ok", modelForRecord.getState()));
+        Assertions.assertNotNull(record.getAdditionalProperties());
+        Assertions.assertNotNull(record.getAdditionalProperties().get("prop"));
+        record.getAdditionalProperties().get("prop").forEach(modelForRecord ->
+                Assertions.assertEquals("ok", modelForRecord.getState()));
     }
 }
