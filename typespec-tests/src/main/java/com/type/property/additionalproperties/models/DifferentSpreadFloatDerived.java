@@ -94,7 +94,11 @@ public final class DifferentSpreadFloatDerived extends DifferentSpreadFloatRecor
                     additionalProperties.put(fieldName, reader.getDouble());
                 }
             }
-            return new DifferentSpreadFloatDerived(name, derivedProp);
+            DifferentSpreadFloatDerived deserializedDifferentSpreadFloatDerived
+                = new DifferentSpreadFloatDerived(name, derivedProp);
+            deserializedDifferentSpreadFloatDerived.setAdditionalProperties(additionalProperties);
+
+            return deserializedDifferentSpreadFloatDerived;
         });
     }
 }

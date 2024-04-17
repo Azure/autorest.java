@@ -94,7 +94,11 @@ public final class DifferentSpreadModelDerived extends DifferentSpreadModelRecor
                     additionalProperties.put(fieldName, ModelForRecord.fromJson(reader));
                 }
             }
-            return new DifferentSpreadModelDerived(knownProp, derivedProp);
+            DifferentSpreadModelDerived deserializedDifferentSpreadModelDerived
+                = new DifferentSpreadModelDerived(knownProp, derivedProp);
+            deserializedDifferentSpreadModelDerived.setAdditionalProperties(additionalProperties);
+
+            return deserializedDifferentSpreadModelDerived;
         });
     }
 }

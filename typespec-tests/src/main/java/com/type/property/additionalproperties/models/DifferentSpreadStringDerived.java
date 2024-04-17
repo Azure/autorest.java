@@ -94,7 +94,11 @@ public final class DifferentSpreadStringDerived extends DifferentSpreadStringRec
                     additionalProperties.put(fieldName, reader.getString());
                 }
             }
-            return new DifferentSpreadStringDerived(id, derivedProp);
+            DifferentSpreadStringDerived deserializedDifferentSpreadStringDerived
+                = new DifferentSpreadStringDerived(id, derivedProp);
+            deserializedDifferentSpreadStringDerived.setAdditionalProperties(additionalProperties);
+
+            return deserializedDifferentSpreadStringDerived;
         });
     }
 }

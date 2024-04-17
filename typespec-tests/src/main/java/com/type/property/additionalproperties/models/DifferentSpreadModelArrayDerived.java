@@ -95,7 +95,11 @@ public final class DifferentSpreadModelArrayDerived extends DifferentSpreadModel
                     additionalProperties.put(fieldName, null);
                 }
             }
-            return new DifferentSpreadModelArrayDerived(knownProp, derivedProp);
+            DifferentSpreadModelArrayDerived deserializedDifferentSpreadModelArrayDerived
+                = new DifferentSpreadModelArrayDerived(knownProp, derivedProp);
+            deserializedDifferentSpreadModelArrayDerived.setAdditionalProperties(additionalProperties);
+
+            return deserializedDifferentSpreadModelArrayDerived;
         });
     }
 }
