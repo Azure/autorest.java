@@ -62,6 +62,8 @@ public class ObjectMapper implements IMapper<ObjectSchema, IType> {
             // put class of Page<> type to implementation package
             // for DPG from TypeSpec, these are not generated to class
 
+            // this would not affect mgmt from Swagger, as the "usage" from m4 does not have this information.
+
             classPackage = settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage());
         } else {
             classPackage = settings.getPackage(settings.getModelsSubpackage());
