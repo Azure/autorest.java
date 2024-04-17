@@ -821,6 +821,9 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 if (modelDefinesProperty(model, polymorphicProperty)) {
                     constructor.line("this." + polymorphicProperty.getName() + " = " + discriminatorValue + ";");
                 }
+                if (ClientModelUtil.isJsonMergePatchModel(model)) {
+                    constructor.line(String.format("this.updatedProperties.add(\"%s\");", polymorphicProperty.getName()));
+                }
 //                else {
 //                    constructor.line(polymorphicProperty.getSetterName() + "(" + discriminatorValue + ");");
 //                }
