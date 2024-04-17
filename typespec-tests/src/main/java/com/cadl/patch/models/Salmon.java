@@ -72,6 +72,7 @@ public final class Salmon extends Fish {
      */
     @Generated
     public Salmon() {
+        this.updatedProperties.add("kind");
     }
 
     /**
