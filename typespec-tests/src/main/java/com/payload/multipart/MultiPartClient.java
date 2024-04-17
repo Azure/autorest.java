@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.payload.multipart.implementation.FormDatasImpl;
 import com.payload.multipart.implementation.MultipartFormDataHelper;
+import com.payload.multipart.implementation.models.AnonymousModelRequest;
 import com.payload.multipart.models.BinaryArrayPartsRequest;
 import com.payload.multipart.models.ComplexPartsRequest;
 import com.payload.multipart.models.JsonArrayPartsRequest;
@@ -24,6 +25,7 @@ import com.payload.multipart.models.JsonPartRequest;
 import com.payload.multipart.models.MultiBinaryPartsRequest;
 import com.payload.multipart.models.MultiPartRequest;
 import com.payload.multipart.models.PicturesFileDetails;
+import com.payload.multipart.models.ProfileImageFileDetails;
 import java.util.stream.Collectors;
 
 /**
@@ -168,6 +170,24 @@ public final class MultiPartClient {
     Response<Void> checkFileNameAndContentTypeWithResponse(BinaryData body, RequestOptions requestOptions) {
         // Protocol API requires serialization of parts with content-disposition and data, as operation 'checkFileNameAndContentType' is 'multipart/form-data'
         return this.serviceClient.checkFileNameAndContentTypeWithResponse(body, requestOptions);
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param request The request parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Response<Void> anonymousModelWithResponse(BinaryData request, RequestOptions requestOptions) {
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'anonymousModel' is 'multipart/form-data'
+        return this.serviceClient.anonymousModelWithResponse(request, requestOptions);
     }
 
     /**
@@ -345,5 +365,30 @@ public final class MultiPartClient {
                 .end()
                 .getRequestBody(),
             requestOptions).getValue();
+    }
+
+    /**
+     * Test content-type: multipart/form-data.
+     * 
+     * @param profileImage The file details for the "profileImage" field.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void anonymousModel(ProfileImageFileDetails profileImage) {
+        // Generated convenience method for anonymousModelWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        AnonymousModelRequest requestObj = new AnonymousModelRequest(profileImage);
+        BinaryData request = new MultipartFormDataHelper(requestOptions)
+            .serializeFileField("profileImage", requestObj.getProfileImage().getContent(),
+                requestObj.getProfileImage().getContentType(), requestObj.getProfileImage().getFilename())
+            .end()
+            .getRequestBody();
+        anonymousModelWithResponse(request, requestOptions).getValue();
     }
 }

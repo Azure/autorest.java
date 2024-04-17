@@ -231,4 +231,9 @@ public class MultipartTests {
 
         validationPolicy.validateFilenames("image.jpg", "image1.png", "image2.png");
     }
+
+    @Test
+    public void testAnonymousModel() {
+        client.anonymousModel(new ProfileImageFileDetails(BinaryData.fromFile(FILE)).setFilename("image.jpg"));
+    }
 }

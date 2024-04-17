@@ -22,5 +22,11 @@ public class VersionedTests {
         client.withPathApiVersion();
 
         client.withQueryApiVersion();
+
+        VersionedClient oldClient = new VersionedClientBuilder()
+                .endpoint("http://localhost:3000")
+                .serviceVersion(VersionedServiceVersion.V2021_01_01_PREVIEW)
+                .buildClient();
+        oldClient.withQueryOldApiVersion();
     }
 }

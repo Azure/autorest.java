@@ -48,13 +48,16 @@ public class ExtendsTests {
     public void testExtendsModelArrayClient() {
         Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
-
-        ExtendsModelArrayAdditionalProperties body = new ExtendsModelArrayAdditionalProperties();
+        ExtendsModelArrayAdditionalProperties body =
+                new ExtendsModelArrayAdditionalProperties(Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
         body.setAdditionalProperties(propertyMap);
         extendsModelArrayClient.put(body);
 
         ExtendsModelArrayAdditionalProperties properties = extendsModelArrayClient.get();
         Assertions.assertNotNull(properties);
+        Assertions.assertNotNull(properties.getKnownProp());
+        properties.getKnownProp().forEach(modelForRecord ->
+                Assertions.assertEquals("ok", modelForRecord.getState()));
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertNotNull(properties.getAdditionalProperties().get("prop"));
         properties.getAdditionalProperties().get("prop").forEach(modelForRecord ->
@@ -63,17 +66,19 @@ public class ExtendsTests {
 
     @Test
     public void testExtendsModelClient() {
-        ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties();
         Map<String, ModelForRecord> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", new ModelForRecord("ok"));
+        ExtendsModelAdditionalProperties body = new ExtendsModelAdditionalProperties(new ModelForRecord("ok"));
         body.setAdditionalProperties(propertyMap);
         extendsModelClient.put(body);
 
         ExtendsModelAdditionalProperties properties = extendsModelClient.get();
         Assertions.assertNotNull(properties);
+        Assertions.assertNotNull(properties.getKnownProp());
+        Assertions.assertEquals("ok", properties.getKnownProp().getState());
         Assertions.assertNotNull(properties.getAdditionalProperties());
         Assertions.assertNotNull(properties.getAdditionalProperties().get("prop"));
-        Assertions.assertEquals("ok", extendsModelClient.get().getAdditionalProperties().get("prop").getState());
+        Assertions.assertEquals("ok", properties.getAdditionalProperties().get("prop").getState());
     }
 
     @Test

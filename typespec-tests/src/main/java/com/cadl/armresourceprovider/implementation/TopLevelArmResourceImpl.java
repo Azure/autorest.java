@@ -61,8 +61,8 @@ public final class TopLevelArmResourceImpl
         }
     }
 
-    public String username() {
-        return this.innerModel().username();
+    public String userName() {
+        return this.innerModel().userName();
     }
 
     public String userNames() {
@@ -73,8 +73,8 @@ public final class TopLevelArmResourceImpl
         return this.innerModel().accuserName();
     }
 
-    public OffsetDateTime startTimestamp() {
-        return this.innerModel().startTimestamp();
+    public OffsetDateTime startTimeStamp() {
+        return this.innerModel().startTimeStamp();
     }
 
     public ProvisioningState provisioningState() {
@@ -198,8 +198,8 @@ public final class TopLevelArmResourceImpl
         }
     }
 
-    public TopLevelArmResourceImpl withUsername(String username) {
-        this.innerModel().withUsername(username);
+    public TopLevelArmResourceImpl withUserName(String userName) {
+        this.innerModel().withUserName(userName);
         return this;
     }
 
@@ -213,8 +213,8 @@ public final class TopLevelArmResourceImpl
         return this;
     }
 
-    public TopLevelArmResourceImpl withStartTimestamp(OffsetDateTime startTimestamp) {
-        this.innerModel().withStartTimestamp(startTimestamp);
+    public TopLevelArmResourceImpl withStartTimeStamp(OffsetDateTime startTimeStamp) {
+        this.innerModel().withStartTimeStamp(startTimeStamp);
         return this;
     }
 

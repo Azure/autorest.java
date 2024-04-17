@@ -7,7 +7,6 @@ import com.github.javaparser.JavaToken;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.ImportDeclaration;
-import com.github.javaparser.ast.Node;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.BodyDeclaration;
@@ -24,7 +23,6 @@ import com.github.javaparser.ast.modules.ModuleDirective;
 import com.github.javaparser.ast.nodeTypes.NodeWithSimpleName;
 import com.github.javaparser.ast.visitor.GenericVisitor;
 import com.github.javaparser.ast.visitor.VoidVisitor;
-import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 import com.github.javaparser.printer.DefaultPrettyPrinterVisitor;
 
 import java.io.BufferedReader;
@@ -182,28 +180,32 @@ public class PartialUpdateHandler {
             return generatedFileContent;
         }
 
-        // Remove all orphan comments from the declaration to prevent them being added multiple times when code is
-        // regenerated.
-        // Create a new List for the orphaned comments as Java Parser returns the same list instance, wrapped by
-        // Collections.unmodifiableList, for each call to getOrphanComments. Without the new ArrayList, the orphan
-        // comments would be removed from the list returned during iteration, causing a ConcurrentModificationException.
-        List<Comment> orphanComments = new ArrayList<>(existingClazz.getOrphanComments());
-        orphanComments.stream().filter(PartialUpdateHandler::isFormatterComment).forEach(Node::remove);
-        existingClazz.accept(new VoidVisitorAdapter<>() {
-            @Override
-            public void visit(LineComment n, Object arg) {
-                if (isFormatterComment(n)) {
-                    n.remove();
-                }
-            }
-        }, null);
+        // TODO (weidxu): for now, formatter:on/off is not added by codegen -- hence the commented out block
+//        // Remove all orphan comments from the declaration to prevent them being added multiple times when code is
+//        // regenerated.
+//        // Create a new List for the orphaned comments as Java Parser returns the same list instance, wrapped by
+//        // Collections.unmodifiableList, for each call to getOrphanComments. Without the new ArrayList, the orphan
+//        // comments would be removed from the list returned during iteration, causing a ConcurrentModificationException.
+//        List<Comment> orphanComments = new ArrayList<>(existingClazz.getOrphanComments());
+//        orphanComments.stream().filter(PartialUpdateHandler::isFormatterComment).forEach(Node::remove);
+//        existingClazz.accept(new VoidVisitorAdapter<>() {
+//            @Override
+//            public void visit(LineComment n, Object arg) {
+//                if (isFormatterComment(n)) {
+//                    n.remove();
+//                }
+//            }
+//        }, null);
+
         NodeList<BodyDeclaration<?>> updatedMembersList = new NodeList<>();
         // 5. Iterate existingFileMembers, keep manual written members, and replace generated members with the
         // corresponding newly generated one
         for (BodyDeclaration<?> existingMember : existingFileMembers) {
             boolean isGeneratedMethod = isMemberGenerated(existingMember);
             if (!isGeneratedMethod) { // manual written member
-                updatedMembersList.add(surroundCustomCodeWithFormatterOff(existingMember));
+                // TODO (weidxu): for now, formatter:on/off is not added by codegen -- hence the commented out block
+//                updatedMembersList.add(surroundCustomCodeWithFormatterOff(existingMember));
+                updatedMembersList.add(existingMember);
             } else {
                 // find the corresponding newly generated member
                 for (BodyDeclaration<?> generatedMember : generatedFileMembers) {

@@ -50,6 +50,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
             SETTINGS_MAP.put("fluent", "lite");
         }
         SETTINGS_MAP.put("sdk-integration", sdkIntegration);
+        SETTINGS_MAP.put("output-model-immutable", true);
         // SETTINGS_MAP.put("stream-style-serialization", emitterOptions.getStreamStyleSerialization());
 
         JavaSettingsAccessor.setHost(this);
@@ -111,7 +112,7 @@ public class TypeSpecFluentPlugin extends FluentGen {
         SETTINGS_MAP.put("sync-methods", "all");
         SETTINGS_MAP.put("client-side-validations", true);
         SETTINGS_MAP.put("stream-style-serialization", false);
-        SETTINGS_MAP.put("pipeline.fluentgen.naming.override", getNamingOverrides());
+//        SETTINGS_MAP.put("pipeline.fluentgen.naming.override", getNamingOverrides());
     }
 
     private static Map<String, String> getNamingOverrides() {

@@ -26,7 +26,7 @@ public final class TopLevelArmResourceProperties {
      * The userName property.
      */
     @JsonProperty(value = "userName", required = true)
-    private String username;
+    private String userName;
 
     /*
      * The userNames property.
@@ -44,7 +44,7 @@ public final class TopLevelArmResourceProperties {
      * The startTimeStamp property.
      */
     @JsonProperty(value = "startTimeStamp", required = true)
-    private OffsetDateTime startTimestamp;
+    private OffsetDateTime startTimeStamp;
 
     /*
      * The status of the last operation.
@@ -68,22 +68,22 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Get the username property: The userName property.
+     * Get the userName property: The userName property.
      * 
-     * @return the username value.
+     * @return the userName value.
      */
-    public String username() {
-        return this.username;
+    public String userName() {
+        return this.userName;
     }
 
     /**
-     * Set the username property: The userName property.
+     * Set the userName property: The userName property.
      * 
-     * @param username the username value to set.
+     * @param userName the userName value to set.
      * @return the TopLevelArmResourceProperties object itself.
      */
-    public TopLevelArmResourceProperties withUsername(String username) {
-        this.username = username;
+    public TopLevelArmResourceProperties withUserName(String userName) {
+        this.userName = userName;
         return this;
     }
 
@@ -128,22 +128,22 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Get the startTimestamp property: The startTimeStamp property.
+     * Get the startTimeStamp property: The startTimeStamp property.
      * 
-     * @return the startTimestamp value.
+     * @return the startTimeStamp value.
      */
-    public OffsetDateTime startTimestamp() {
-        return this.startTimestamp;
+    public OffsetDateTime startTimeStamp() {
+        return this.startTimeStamp;
     }
 
     /**
-     * Set the startTimestamp property: The startTimeStamp property.
+     * Set the startTimeStamp property: The startTimeStamp property.
      * 
-     * @param startTimestamp the startTimestamp value to set.
+     * @param startTimeStamp the startTimeStamp value to set.
      * @return the TopLevelArmResourceProperties object itself.
      */
-    public TopLevelArmResourceProperties withStartTimestamp(OffsetDateTime startTimestamp) {
-        this.startTimestamp = startTimestamp;
+    public TopLevelArmResourceProperties withStartTimeStamp(OffsetDateTime startTimeStamp) {
+        this.startTimeStamp = startTimeStamp;
         return this;
     }
 
@@ -162,10 +162,10 @@ public final class TopLevelArmResourceProperties {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (username() == null) {
+        if (userName() == null) {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException(
-                    "Missing required property username in model TopLevelArmResourceProperties"));
+                    "Missing required property userName in model TopLevelArmResourceProperties"));
         }
         if (userNames() == null) {
             throw LOGGER.atError()
@@ -177,10 +177,10 @@ public final class TopLevelArmResourceProperties {
                 .log(new IllegalArgumentException(
                     "Missing required property accuserName in model TopLevelArmResourceProperties"));
         }
-        if (startTimestamp() == null) {
+        if (startTimeStamp() == null) {
             throw LOGGER.atError()
                 .log(new IllegalArgumentException(
-                    "Missing required property startTimestamp in model TopLevelArmResourceProperties"));
+                    "Missing required property startTimeStamp in model TopLevelArmResourceProperties"));
         }
     }
 

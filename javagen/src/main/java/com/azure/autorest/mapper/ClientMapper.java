@@ -611,9 +611,6 @@ public class ClientMapper implements IMapper<CodeModel, Client> {
 
         List<ModuleInfo.RequireModule> requireModules = moduleInfo.getRequireModules();
         requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.CORE.getPackageName(), true));
-        if (settings.isStreamStyleSerialization()) {
-            requireModules.add(new ModuleInfo.RequireModule(ExternalPackage.JSON.getPackageName(), true));
-        }
 
         List<ModuleInfo.ExportModule> exportModules = moduleInfo.getExportModules();
         exportModules.add(new ModuleInfo.ExportModule(settings.getPackage()));

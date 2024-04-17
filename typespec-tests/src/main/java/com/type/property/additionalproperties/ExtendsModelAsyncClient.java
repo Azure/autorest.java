@@ -44,10 +44,11 @@ public final class ExtendsModelAsyncClient {
      * 
      * <pre>{@code
      * {
+     *     knownProp (Required): {
+     *         state: String (Required)
+     *     }
      *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
+     *         String (Required): (recursive schema, see String above)
      *     }
      * }
      * }</pre>
@@ -71,10 +72,11 @@ public final class ExtendsModelAsyncClient {
      * 
      * <pre>{@code
      * {
+     *     knownProp (Required): {
+     *         state: String (Required)
+     *     }
      *      (Optional): {
-     *         String (Required): {
-     *             state: String (Required)
-     *         }
+     *         String (Required): (recursive schema, see String above)
      *     }
      * }
      * }</pre>

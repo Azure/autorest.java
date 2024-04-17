@@ -50,12 +50,30 @@ import java.util.Objects;
         IsUnknownDiscriminatedClient.class,
         ExtendsStringClient.class,
         IsStringClient.class,
+        SpreadStringClient.class,
         ExtendsFloatClient.class,
         IsFloatClient.class,
+        SpreadFloatClient.class,
         ExtendsModelClient.class,
         IsModelClient.class,
+        SpreadModelClient.class,
         ExtendsModelArrayClient.class,
         IsModelArrayClient.class,
+        SpreadModelArrayClient.class,
+        SpreadDifferentStringClient.class,
+        SpreadDifferentFloatClient.class,
+        SpreadDifferentModelClient.class,
+        SpreadDifferentModelArrayClient.class,
+        ExtendsDifferentSpreadStringClient.class,
+        ExtendsDifferentSpreadFloatClient.class,
+        ExtendsDifferentSpreadModelClient.class,
+        ExtendsDifferentSpreadModelArrayClient.class,
+        MultipleSpreadClient.class,
+        SpreadRecordUnionClient.class,
+        SpreadRecordDiscriminatedUnionClient.class,
+        SpreadRecordNonDiscriminatedUnionClient.class,
+        SpreadRecordNonDiscriminatedUnion2Client.class,
+        SpreadRecordNonDiscriminatedUnion3Client.class,
         ExtendsUnknownAsyncClient.class,
         ExtendsUnknownDerivedAsyncClient.class,
         ExtendsUnknownDiscriminatedAsyncClient.class,
@@ -64,12 +82,30 @@ import java.util.Objects;
         IsUnknownDiscriminatedAsyncClient.class,
         ExtendsStringAsyncClient.class,
         IsStringAsyncClient.class,
+        SpreadStringAsyncClient.class,
         ExtendsFloatAsyncClient.class,
         IsFloatAsyncClient.class,
+        SpreadFloatAsyncClient.class,
         ExtendsModelAsyncClient.class,
         IsModelAsyncClient.class,
+        SpreadModelAsyncClient.class,
         ExtendsModelArrayAsyncClient.class,
-        IsModelArrayAsyncClient.class })
+        IsModelArrayAsyncClient.class,
+        SpreadModelArrayAsyncClient.class,
+        SpreadDifferentStringAsyncClient.class,
+        SpreadDifferentFloatAsyncClient.class,
+        SpreadDifferentModelAsyncClient.class,
+        SpreadDifferentModelArrayAsyncClient.class,
+        ExtendsDifferentSpreadStringAsyncClient.class,
+        ExtendsDifferentSpreadFloatAsyncClient.class,
+        ExtendsDifferentSpreadModelAsyncClient.class,
+        ExtendsDifferentSpreadModelArrayAsyncClient.class,
+        MultipleSpreadAsyncClient.class,
+        SpreadRecordUnionAsyncClient.class,
+        SpreadRecordDiscriminatedUnionAsyncClient.class,
+        SpreadRecordNonDiscriminatedUnionAsyncClient.class,
+        SpreadRecordNonDiscriminatedUnion2AsyncClient.class,
+        SpreadRecordNonDiscriminatedUnion3AsyncClient.class })
 public final class AdditionalPropertiesClientBuilder
     implements HttpTrait<AdditionalPropertiesClientBuilder>, ConfigurationTrait<AdditionalPropertiesClientBuilder> {
     @Generated
@@ -352,6 +388,16 @@ public final class AdditionalPropertiesClientBuilder
     }
 
     /**
+     * Builds an instance of SpreadStringAsyncClient class.
+     * 
+     * @return an instance of SpreadStringAsyncClient.
+     */
+    @Generated
+    public SpreadStringAsyncClient buildSpreadStringAsyncClient() {
+        return new SpreadStringAsyncClient(buildInnerClient().getSpreadStrings());
+    }
+
+    /**
      * Builds an instance of ExtendsFloatAsyncClient class.
      * 
      * @return an instance of ExtendsFloatAsyncClient.
@@ -369,6 +415,16 @@ public final class AdditionalPropertiesClientBuilder
     @Generated
     public IsFloatAsyncClient buildIsFloatAsyncClient() {
         return new IsFloatAsyncClient(buildInnerClient().getIsFloats());
+    }
+
+    /**
+     * Builds an instance of SpreadFloatAsyncClient class.
+     * 
+     * @return an instance of SpreadFloatAsyncClient.
+     */
+    @Generated
+    public SpreadFloatAsyncClient buildSpreadFloatAsyncClient() {
+        return new SpreadFloatAsyncClient(buildInnerClient().getSpreadFloats());
     }
 
     /**
@@ -392,6 +448,16 @@ public final class AdditionalPropertiesClientBuilder
     }
 
     /**
+     * Builds an instance of SpreadModelAsyncClient class.
+     * 
+     * @return an instance of SpreadModelAsyncClient.
+     */
+    @Generated
+    public SpreadModelAsyncClient buildSpreadModelAsyncClient() {
+        return new SpreadModelAsyncClient(buildInnerClient().getSpreadModels());
+    }
+
+    /**
      * Builds an instance of ExtendsModelArrayAsyncClient class.
      * 
      * @return an instance of ExtendsModelArrayAsyncClient.
@@ -409,6 +475,160 @@ public final class AdditionalPropertiesClientBuilder
     @Generated
     public IsModelArrayAsyncClient buildIsModelArrayAsyncClient() {
         return new IsModelArrayAsyncClient(buildInnerClient().getIsModelArrays());
+    }
+
+    /**
+     * Builds an instance of SpreadModelArrayAsyncClient class.
+     * 
+     * @return an instance of SpreadModelArrayAsyncClient.
+     */
+    @Generated
+    public SpreadModelArrayAsyncClient buildSpreadModelArrayAsyncClient() {
+        return new SpreadModelArrayAsyncClient(buildInnerClient().getSpreadModelArrays());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentStringAsyncClient class.
+     * 
+     * @return an instance of SpreadDifferentStringAsyncClient.
+     */
+    @Generated
+    public SpreadDifferentStringAsyncClient buildSpreadDifferentStringAsyncClient() {
+        return new SpreadDifferentStringAsyncClient(buildInnerClient().getSpreadDifferentStrings());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentFloatAsyncClient class.
+     * 
+     * @return an instance of SpreadDifferentFloatAsyncClient.
+     */
+    @Generated
+    public SpreadDifferentFloatAsyncClient buildSpreadDifferentFloatAsyncClient() {
+        return new SpreadDifferentFloatAsyncClient(buildInnerClient().getSpreadDifferentFloats());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentModelAsyncClient class.
+     * 
+     * @return an instance of SpreadDifferentModelAsyncClient.
+     */
+    @Generated
+    public SpreadDifferentModelAsyncClient buildSpreadDifferentModelAsyncClient() {
+        return new SpreadDifferentModelAsyncClient(buildInnerClient().getSpreadDifferentModels());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentModelArrayAsyncClient class.
+     * 
+     * @return an instance of SpreadDifferentModelArrayAsyncClient.
+     */
+    @Generated
+    public SpreadDifferentModelArrayAsyncClient buildSpreadDifferentModelArrayAsyncClient() {
+        return new SpreadDifferentModelArrayAsyncClient(buildInnerClient().getSpreadDifferentModelArrays());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadStringAsyncClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadStringAsyncClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadStringAsyncClient buildExtendsDifferentSpreadStringAsyncClient() {
+        return new ExtendsDifferentSpreadStringAsyncClient(buildInnerClient().getExtendsDifferentSpreadStrings());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadFloatAsyncClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadFloatAsyncClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadFloatAsyncClient buildExtendsDifferentSpreadFloatAsyncClient() {
+        return new ExtendsDifferentSpreadFloatAsyncClient(buildInnerClient().getExtendsDifferentSpreadFloats());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadModelAsyncClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadModelAsyncClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadModelAsyncClient buildExtendsDifferentSpreadModelAsyncClient() {
+        return new ExtendsDifferentSpreadModelAsyncClient(buildInnerClient().getExtendsDifferentSpreadModels());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadModelArrayAsyncClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadModelArrayAsyncClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadModelArrayAsyncClient buildExtendsDifferentSpreadModelArrayAsyncClient() {
+        return new ExtendsDifferentSpreadModelArrayAsyncClient(
+            buildInnerClient().getExtendsDifferentSpreadModelArrays());
+    }
+
+    /**
+     * Builds an instance of MultipleSpreadAsyncClient class.
+     * 
+     * @return an instance of MultipleSpreadAsyncClient.
+     */
+    @Generated
+    public MultipleSpreadAsyncClient buildMultipleSpreadAsyncClient() {
+        return new MultipleSpreadAsyncClient(buildInnerClient().getMultipleSpreads());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordUnionAsyncClient class.
+     * 
+     * @return an instance of SpreadRecordUnionAsyncClient.
+     */
+    @Generated
+    public SpreadRecordUnionAsyncClient buildSpreadRecordUnionAsyncClient() {
+        return new SpreadRecordUnionAsyncClient(buildInnerClient().getSpreadRecordUnions());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordDiscriminatedUnionAsyncClient class.
+     * 
+     * @return an instance of SpreadRecordDiscriminatedUnionAsyncClient.
+     */
+    @Generated
+    public SpreadRecordDiscriminatedUnionAsyncClient buildSpreadRecordDiscriminatedUnionAsyncClient() {
+        return new SpreadRecordDiscriminatedUnionAsyncClient(buildInnerClient().getSpreadRecordDiscriminatedUnions());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordNonDiscriminatedUnionAsyncClient class.
+     * 
+     * @return an instance of SpreadRecordNonDiscriminatedUnionAsyncClient.
+     */
+    @Generated
+    public SpreadRecordNonDiscriminatedUnionAsyncClient buildSpreadRecordNonDiscriminatedUnionAsyncClient() {
+        return new SpreadRecordNonDiscriminatedUnionAsyncClient(
+            buildInnerClient().getSpreadRecordNonDiscriminatedUnions());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordNonDiscriminatedUnion2AsyncClient class.
+     * 
+     * @return an instance of SpreadRecordNonDiscriminatedUnion2AsyncClient.
+     */
+    @Generated
+    public SpreadRecordNonDiscriminatedUnion2AsyncClient buildSpreadRecordNonDiscriminatedUnion2AsyncClient() {
+        return new SpreadRecordNonDiscriminatedUnion2AsyncClient(
+            buildInnerClient().getSpreadRecordNonDiscriminatedUnion2s());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordNonDiscriminatedUnion3AsyncClient class.
+     * 
+     * @return an instance of SpreadRecordNonDiscriminatedUnion3AsyncClient.
+     */
+    @Generated
+    public SpreadRecordNonDiscriminatedUnion3AsyncClient buildSpreadRecordNonDiscriminatedUnion3AsyncClient() {
+        return new SpreadRecordNonDiscriminatedUnion3AsyncClient(
+            buildInnerClient().getSpreadRecordNonDiscriminatedUnion3s());
     }
 
     /**
@@ -492,6 +712,16 @@ public final class AdditionalPropertiesClientBuilder
     }
 
     /**
+     * Builds an instance of SpreadStringClient class.
+     * 
+     * @return an instance of SpreadStringClient.
+     */
+    @Generated
+    public SpreadStringClient buildSpreadStringClient() {
+        return new SpreadStringClient(buildInnerClient().getSpreadStrings());
+    }
+
+    /**
      * Builds an instance of ExtendsFloatClient class.
      * 
      * @return an instance of ExtendsFloatClient.
@@ -509,6 +739,16 @@ public final class AdditionalPropertiesClientBuilder
     @Generated
     public IsFloatClient buildIsFloatClient() {
         return new IsFloatClient(buildInnerClient().getIsFloats());
+    }
+
+    /**
+     * Builds an instance of SpreadFloatClient class.
+     * 
+     * @return an instance of SpreadFloatClient.
+     */
+    @Generated
+    public SpreadFloatClient buildSpreadFloatClient() {
+        return new SpreadFloatClient(buildInnerClient().getSpreadFloats());
     }
 
     /**
@@ -532,6 +772,16 @@ public final class AdditionalPropertiesClientBuilder
     }
 
     /**
+     * Builds an instance of SpreadModelClient class.
+     * 
+     * @return an instance of SpreadModelClient.
+     */
+    @Generated
+    public SpreadModelClient buildSpreadModelClient() {
+        return new SpreadModelClient(buildInnerClient().getSpreadModels());
+    }
+
+    /**
      * Builds an instance of ExtendsModelArrayClient class.
      * 
      * @return an instance of ExtendsModelArrayClient.
@@ -549,6 +799,158 @@ public final class AdditionalPropertiesClientBuilder
     @Generated
     public IsModelArrayClient buildIsModelArrayClient() {
         return new IsModelArrayClient(buildInnerClient().getIsModelArrays());
+    }
+
+    /**
+     * Builds an instance of SpreadModelArrayClient class.
+     * 
+     * @return an instance of SpreadModelArrayClient.
+     */
+    @Generated
+    public SpreadModelArrayClient buildSpreadModelArrayClient() {
+        return new SpreadModelArrayClient(buildInnerClient().getSpreadModelArrays());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentStringClient class.
+     * 
+     * @return an instance of SpreadDifferentStringClient.
+     */
+    @Generated
+    public SpreadDifferentStringClient buildSpreadDifferentStringClient() {
+        return new SpreadDifferentStringClient(buildInnerClient().getSpreadDifferentStrings());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentFloatClient class.
+     * 
+     * @return an instance of SpreadDifferentFloatClient.
+     */
+    @Generated
+    public SpreadDifferentFloatClient buildSpreadDifferentFloatClient() {
+        return new SpreadDifferentFloatClient(buildInnerClient().getSpreadDifferentFloats());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentModelClient class.
+     * 
+     * @return an instance of SpreadDifferentModelClient.
+     */
+    @Generated
+    public SpreadDifferentModelClient buildSpreadDifferentModelClient() {
+        return new SpreadDifferentModelClient(buildInnerClient().getSpreadDifferentModels());
+    }
+
+    /**
+     * Builds an instance of SpreadDifferentModelArrayClient class.
+     * 
+     * @return an instance of SpreadDifferentModelArrayClient.
+     */
+    @Generated
+    public SpreadDifferentModelArrayClient buildSpreadDifferentModelArrayClient() {
+        return new SpreadDifferentModelArrayClient(buildInnerClient().getSpreadDifferentModelArrays());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadStringClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadStringClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadStringClient buildExtendsDifferentSpreadStringClient() {
+        return new ExtendsDifferentSpreadStringClient(buildInnerClient().getExtendsDifferentSpreadStrings());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadFloatClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadFloatClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadFloatClient buildExtendsDifferentSpreadFloatClient() {
+        return new ExtendsDifferentSpreadFloatClient(buildInnerClient().getExtendsDifferentSpreadFloats());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadModelClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadModelClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadModelClient buildExtendsDifferentSpreadModelClient() {
+        return new ExtendsDifferentSpreadModelClient(buildInnerClient().getExtendsDifferentSpreadModels());
+    }
+
+    /**
+     * Builds an instance of ExtendsDifferentSpreadModelArrayClient class.
+     * 
+     * @return an instance of ExtendsDifferentSpreadModelArrayClient.
+     */
+    @Generated
+    public ExtendsDifferentSpreadModelArrayClient buildExtendsDifferentSpreadModelArrayClient() {
+        return new ExtendsDifferentSpreadModelArrayClient(buildInnerClient().getExtendsDifferentSpreadModelArrays());
+    }
+
+    /**
+     * Builds an instance of MultipleSpreadClient class.
+     * 
+     * @return an instance of MultipleSpreadClient.
+     */
+    @Generated
+    public MultipleSpreadClient buildMultipleSpreadClient() {
+        return new MultipleSpreadClient(buildInnerClient().getMultipleSpreads());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordUnionClient class.
+     * 
+     * @return an instance of SpreadRecordUnionClient.
+     */
+    @Generated
+    public SpreadRecordUnionClient buildSpreadRecordUnionClient() {
+        return new SpreadRecordUnionClient(buildInnerClient().getSpreadRecordUnions());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordDiscriminatedUnionClient class.
+     * 
+     * @return an instance of SpreadRecordDiscriminatedUnionClient.
+     */
+    @Generated
+    public SpreadRecordDiscriminatedUnionClient buildSpreadRecordDiscriminatedUnionClient() {
+        return new SpreadRecordDiscriminatedUnionClient(buildInnerClient().getSpreadRecordDiscriminatedUnions());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordNonDiscriminatedUnionClient class.
+     * 
+     * @return an instance of SpreadRecordNonDiscriminatedUnionClient.
+     */
+    @Generated
+    public SpreadRecordNonDiscriminatedUnionClient buildSpreadRecordNonDiscriminatedUnionClient() {
+        return new SpreadRecordNonDiscriminatedUnionClient(buildInnerClient().getSpreadRecordNonDiscriminatedUnions());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordNonDiscriminatedUnion2Client class.
+     * 
+     * @return an instance of SpreadRecordNonDiscriminatedUnion2Client.
+     */
+    @Generated
+    public SpreadRecordNonDiscriminatedUnion2Client buildSpreadRecordNonDiscriminatedUnion2Client() {
+        return new SpreadRecordNonDiscriminatedUnion2Client(
+            buildInnerClient().getSpreadRecordNonDiscriminatedUnion2s());
+    }
+
+    /**
+     * Builds an instance of SpreadRecordNonDiscriminatedUnion3Client class.
+     * 
+     * @return an instance of SpreadRecordNonDiscriminatedUnion3Client.
+     */
+    @Generated
+    public SpreadRecordNonDiscriminatedUnion3Client buildSpreadRecordNonDiscriminatedUnion3Client() {
+        return new SpreadRecordNonDiscriminatedUnion3Client(
+            buildInnerClient().getSpreadRecordNonDiscriminatedUnion3s());
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(AdditionalPropertiesClientBuilder.class);

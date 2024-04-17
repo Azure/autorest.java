@@ -26,6 +26,7 @@ import com.azure.autorest.fluent.util.FluentJavaSettings;
 import com.azure.autorest.fluent.util.Utils;
 import com.azure.autorest.mapper.Mappers;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ClientModels;
 import com.azure.autorest.model.clientmodel.ModuleInfo;
 import org.slf4j.Logger;
 
@@ -123,7 +124,10 @@ public class FluentMapper {
     FluentClient basicMap(CodeModel codeModel, Client client) {
         FluentClient fluentClient = new FluentClient(client);
 
-        fluentClient.setModuleInfo(moduleInfo());
+        final String implementationModelsPackage = JavaSettings.getInstance().getImplementationSubpackage() + "." + JavaSettings.getInstance().getModelsSubpackage();
+        final boolean hasImplementationModels = ClientModels.getInstance().getModels().stream()
+                        .anyMatch(m -> m.getPackage().endsWith(implementationModelsPackage));
+        fluentClient.setModuleInfo(getModuleInfo(hasImplementationModels));
 
         FluentStatic.setFluentClient(fluentClient);
 
@@ -153,7 +157,7 @@ public class FluentMapper {
         return fluentClient;
     }
 
-    private static ModuleInfo moduleInfo() {
+    private static ModuleInfo getModuleInfo(boolean hasImplementationModels) {
         JavaSettings settings = JavaSettings.getInstance();
         ModuleInfo moduleInfo = new ModuleInfo(settings.getPackage());
 
@@ -170,6 +174,9 @@ public class FluentMapper {
         List<ModuleInfo.OpenModule> openModules = moduleInfo.getOpenModules();
         openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getFluentModelsSubpackage()), openToModules));
         openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getModelsSubpackage()), openToModules));
+        if (hasImplementationModels) {
+            openModules.add(new ModuleInfo.OpenModule(settings.getPackage(settings.getImplementationSubpackage(), settings.getModelsSubpackage()), openToModules));
+        }
 
         return moduleInfo;
     }

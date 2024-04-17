@@ -85,6 +85,22 @@ public final class VersionedAsyncClient {
     }
 
     /**
+     * The withQueryOldApiVersion operation.
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> withQueryOldApiVersionWithResponse(RequestOptions requestOptions) {
+        return this.serviceClient.withQueryOldApiVersionWithResponseAsync(requestOptions);
+    }
+
+    /**
      * The withoutApiVersion operation.
      * 
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -136,5 +152,23 @@ public final class VersionedAsyncClient {
         // Generated convenience method for withPathApiVersionWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return withPathApiVersionWithResponse(requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The withQueryOldApiVersion operation.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> withQueryOldApiVersion() {
+        // Generated convenience method for withQueryOldApiVersionWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return withQueryOldApiVersionWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 }

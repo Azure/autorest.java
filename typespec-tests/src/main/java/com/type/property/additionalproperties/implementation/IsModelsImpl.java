@@ -100,8 +100,11 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
+     *     knownProp (Required): {
      *         state: String (Required)
+     *     }
+     *      (Optional): {
+     *         String (Required): (recursive schema, see String above)
      *     }
      * }
      * }</pre>
@@ -125,8 +128,11 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
+     *     knownProp (Required): {
      *         state: String (Required)
+     *     }
+     *      (Optional): {
+     *         String (Required): (recursive schema, see String above)
      *     }
      * }
      * }</pre>
@@ -150,8 +156,11 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
+     *     knownProp (Required): {
      *         state: String (Required)
+     *     }
+     *      (Optional): {
+     *         String (Required): (recursive schema, see String above)
      *     }
      * }
      * }</pre>
@@ -176,8 +185,11 @@ public final class IsModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): {
+     *     knownProp (Required): {
      *         state: String (Required)
+     *     }
+     *      (Optional): {
+     *         String (Required): (recursive schema, see String above)
      *     }
      * }
      * }</pre>

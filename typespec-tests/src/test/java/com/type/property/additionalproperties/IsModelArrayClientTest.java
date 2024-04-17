@@ -3,8 +3,10 @@
 
 package com.type.property.additionalproperties;
 
+import com.type.property.additionalproperties.models.IsModelArrayAdditionalProperties;
 import com.type.property.additionalproperties.models.ModelForRecord;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -16,15 +18,23 @@ public class IsModelArrayClientTest {
     private final IsModelArrayClient client = new AdditionalPropertiesClientBuilder().buildIsModelArrayClient();
 
     @Test
+    @Disabled("The 'Get' request did not respond for a long time.")
     public void testPullAndGet() {
-        Map<String, List<ModelForRecord>> properties = new LinkedHashMap<>();
-        properties.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
-        client.put(properties);
+        Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
+        propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
+        IsModelArrayAdditionalProperties body =
+                new IsModelArrayAdditionalProperties(Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
+        body.setAdditionalProperties(propertyMap);
+        client.put(body);
 
-        properties = client.get();
+        IsModelArrayAdditionalProperties properties = client.get();
         Assertions.assertNotNull(properties);
-        Assertions.assertNotNull(properties.get("prop"));
-        properties.get("prop").forEach(modelForRecord ->
+        Assertions.assertNotNull(properties.getKnownProp());
+        properties.getKnownProp().forEach(modelForRecord ->
+                Assertions.assertEquals("ok", modelForRecord.getState()));
+        Assertions.assertNotNull(properties.getAdditionalProperties());
+        Assertions.assertNotNull(properties.getAdditionalProperties().get("prop"));
+        properties.getAdditionalProperties().get("prop").forEach(modelForRecord ->
                 Assertions.assertEquals("ok", modelForRecord.getState()));
     }
 }

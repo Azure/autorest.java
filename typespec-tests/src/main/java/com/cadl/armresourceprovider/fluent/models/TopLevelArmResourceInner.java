@@ -82,25 +82,25 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Get the username property: The userName property.
+     * Get the userName property: The userName property.
      * 
-     * @return the username value.
+     * @return the userName value.
      */
-    public String username() {
-        return this.innerProperties() == null ? null : this.innerProperties().username();
+    public String userName() {
+        return this.innerProperties() == null ? null : this.innerProperties().userName();
     }
 
     /**
-     * Set the username property: The userName property.
+     * Set the userName property: The userName property.
      * 
-     * @param username the username value to set.
+     * @param userName the userName value to set.
      * @return the TopLevelArmResourceInner object itself.
      */
-    public TopLevelArmResourceInner withUsername(String username) {
+    public TopLevelArmResourceInner withUserName(String userName) {
         if (this.innerProperties() == null) {
             this.innerProperties = new TopLevelArmResourceProperties();
         }
-        this.innerProperties().withUsername(username);
+        this.innerProperties().withUserName(userName);
         return this;
     }
 
@@ -151,25 +151,25 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Get the startTimestamp property: The startTimeStamp property.
+     * Get the startTimeStamp property: The startTimeStamp property.
      * 
-     * @return the startTimestamp value.
+     * @return the startTimeStamp value.
      */
-    public OffsetDateTime startTimestamp() {
-        return this.innerProperties() == null ? null : this.innerProperties().startTimestamp();
+    public OffsetDateTime startTimeStamp() {
+        return this.innerProperties() == null ? null : this.innerProperties().startTimeStamp();
     }
 
     /**
-     * Set the startTimestamp property: The startTimeStamp property.
+     * Set the startTimeStamp property: The startTimeStamp property.
      * 
-     * @param startTimestamp the startTimestamp value to set.
+     * @param startTimeStamp the startTimeStamp value to set.
      * @return the TopLevelArmResourceInner object itself.
      */
-    public TopLevelArmResourceInner withStartTimestamp(OffsetDateTime startTimestamp) {
+    public TopLevelArmResourceInner withStartTimeStamp(OffsetDateTime startTimeStamp) {
         if (this.innerProperties() == null) {
             this.innerProperties = new TopLevelArmResourceProperties();
         }
-        this.innerProperties().withStartTimestamp(startTimestamp);
+        this.innerProperties().withStartTimeStamp(startTimeStamp);
         return this;
     }
 

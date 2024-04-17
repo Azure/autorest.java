@@ -80,12 +80,19 @@ public final class PartialUpdateClient {
         return readWithResponse(requestOptions).getValue().toObject(PartialUpdateModel.class);
     }
 
-    // @formatter:off
     /**
      * customized method to test partial-update
+     * <!-- @formatter:off -->
+     * <table border="1">
+     *     <caption>Header Parameters</caption>
+     *     <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
+     *     <tr><td>Content-Type</td><td>String</td><td>No</td><td>The content type. Allowed values: "application/json".</td></tr>
+     * </table>
+     * <!-- @formatter:on -->
      */
     public void testMethod() {
+        // @formatter:off
         System.out.println("testMethod");
-    }// @formatter:on
-
+        // @formatter:on
+    }
 }

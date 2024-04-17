@@ -27,7 +27,7 @@ import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
 import com.cadl.armresourceprovider.fluent.OperationsClient;
 import com.cadl.armresourceprovider.fluent.models.OperationInner;
-import com.cadl.armresourceprovider.models.PagedOperation;
+import com.cadl.armresourceprovider.implementation.models.PagedOperation;
 import reactor.core.publisher.Mono;
 
 /**

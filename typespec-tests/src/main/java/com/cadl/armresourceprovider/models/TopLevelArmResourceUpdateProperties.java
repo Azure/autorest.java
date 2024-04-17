@@ -17,7 +17,7 @@ public final class TopLevelArmResourceUpdateProperties {
      * The userName property.
      */
     @JsonProperty(value = "userName")
-    private String username;
+    private String userName;
 
     /*
      * The userNames property.
@@ -35,7 +35,7 @@ public final class TopLevelArmResourceUpdateProperties {
      * The startTimeStamp property.
      */
     @JsonProperty(value = "startTimeStamp")
-    private OffsetDateTime startTimestamp;
+    private OffsetDateTime startTimeStamp;
 
     /**
      * Creates an instance of TopLevelArmResourceUpdateProperties class.
@@ -44,22 +44,22 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Get the username property: The userName property.
+     * Get the userName property: The userName property.
      * 
-     * @return the username value.
+     * @return the userName value.
      */
-    public String username() {
-        return this.username;
+    public String userName() {
+        return this.userName;
     }
 
     /**
-     * Set the username property: The userName property.
+     * Set the userName property: The userName property.
      * 
-     * @param username the username value to set.
+     * @param userName the userName value to set.
      * @return the TopLevelArmResourceUpdateProperties object itself.
      */
-    public TopLevelArmResourceUpdateProperties withUsername(String username) {
-        this.username = username;
+    public TopLevelArmResourceUpdateProperties withUserName(String userName) {
+        this.userName = userName;
         return this;
     }
 
@@ -104,22 +104,22 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Get the startTimestamp property: The startTimeStamp property.
+     * Get the startTimeStamp property: The startTimeStamp property.
      * 
-     * @return the startTimestamp value.
+     * @return the startTimeStamp value.
      */
-    public OffsetDateTime startTimestamp() {
-        return this.startTimestamp;
+    public OffsetDateTime startTimeStamp() {
+        return this.startTimeStamp;
     }
 
     /**
-     * Set the startTimestamp property: The startTimeStamp property.
+     * Set the startTimeStamp property: The startTimeStamp property.
      * 
-     * @param startTimestamp the startTimestamp value to set.
+     * @param startTimeStamp the startTimeStamp value to set.
      * @return the TopLevelArmResourceUpdateProperties object itself.
      */
-    public TopLevelArmResourceUpdateProperties withStartTimestamp(OffsetDateTime startTimestamp) {
-        this.startTimestamp = startTimestamp;
+    public TopLevelArmResourceUpdateProperties withStartTimeStamp(OffsetDateTime startTimeStamp) {
+        this.startTimeStamp = startTimeStamp;
         return this;
     }
 

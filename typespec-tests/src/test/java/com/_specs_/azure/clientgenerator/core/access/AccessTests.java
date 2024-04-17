@@ -4,10 +4,6 @@
 package com._specs_.azure.clientgenerator.core.access;
 
 import com._specs_.azure.clientgenerator.core.access.implementation.models.AbstractModel;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.InternalDecoratorModelInInternal;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.NoDecoratorModelInInternal;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.OuterModel;
-import com._specs_.azure.clientgenerator.core.access.implementation.models.PublicDecoratorModelInInternal;
 import com._specs_.azure.clientgenerator.core.access.implementation.models.RealModel;
 import com._specs_.azure.clientgenerator.core.access.models.SharedModel;
 import org.junit.jupiter.api.Assertions;
@@ -25,9 +21,6 @@ public class AccessTests {
         publicClient.publicDecoratorInPublic("");
         publicClient.noDecoratorInPublic("");
 
-//        internalClient.internalDecoratorInInternalWithResponse("", null);
-//        internalClient.noDecoratorInInternalWithResponse("", null);
-//        internalClient.publicDecoratorInInternalWithResponse("", null);
         internalClient.internalDecoratorInInternal("");
         internalClient.noDecoratorInInternal("");
         internalClient.publicDecoratorInInternal("");
@@ -35,8 +28,6 @@ public class AccessTests {
         sharedClient.publicMethod("");
         sharedClient.internalWithResponse("", null).getValue().toObject(SharedModel.class);
 
-//        relativeClient.operationWithResponse("", null);
-//        relativeClient.discriminatorWithResponse("real", null).getValue();
         relativeClient.operation("");
         AbstractModel abstractModel = relativeClient.discriminator("real");
         Assertions.assertTrue(abstractModel instanceof RealModel);

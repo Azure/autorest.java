@@ -101,11 +101,16 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
+     *     knownProp (Required): [
      *          (Required){
      *             state: String (Required)
      *         }
      *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      * 
@@ -128,11 +133,16 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
+     *     knownProp (Required): [
      *          (Required){
      *             state: String (Required)
      *         }
      *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      * 
@@ -155,11 +165,16 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
+     *     knownProp (Required): [
      *          (Required){
      *             state: String (Required)
      *         }
      *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      * 
@@ -183,11 +198,16 @@ public final class IsModelArraysImpl {
      * 
      * <pre>{@code
      * {
-     *     String (Required): [
+     *     knownProp (Required): [
      *          (Required){
      *             state: String (Required)
      *         }
      *     ]
+     *      (Optional): {
+     *         String (Required): [
+     *             (recursive schema, see above)
+     *         ]
+     *     }
      * }
      * }</pre>
      * 

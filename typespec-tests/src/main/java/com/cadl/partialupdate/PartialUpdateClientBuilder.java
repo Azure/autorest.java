@@ -278,7 +278,5 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
         return new PartialUpdateClient(buildInnerClient());
     }
 
-    // @formatter:off
-    private static final ClientLogger LOGGER = new ClientLogger(PartialUpdateClientBuilder.class);// @formatter:on
-
+    private static final ClientLogger LOGGER = new ClientLogger(PartialUpdateClientBuilder.class);
 }
