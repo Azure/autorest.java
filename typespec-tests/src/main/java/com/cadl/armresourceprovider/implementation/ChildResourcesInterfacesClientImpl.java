@@ -35,7 +35,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.armresourceprovider.fluent.ChildResourcesInterfacesClient;
 import com.cadl.armresourceprovider.fluent.models.ChildResourceInner;
-import com.cadl.armresourceprovider.models.ChildResourceListResult;
+import com.cadl.armresourceprovider.implementation.models.ChildResourceListResult;
 import com.cadl.armresourceprovider.models.ChildResourceUpdate;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;

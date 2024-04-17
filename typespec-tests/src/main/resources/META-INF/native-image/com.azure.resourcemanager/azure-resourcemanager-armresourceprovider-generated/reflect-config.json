@@ -14,7 +14,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.models.ChildResourceListResult",
+  "name" : "com.cadl.armresourceprovider.implementation.models.ChildResourceListResult",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
@@ -39,7 +39,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.models.TopLevelArmResourceListResult",
+  "name" : "com.cadl.armresourceprovider.implementation.models.TopLevelArmResourceListResult",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
@@ -69,7 +69,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.models.PagedOperation",
+  "name" : "com.cadl.armresourceprovider.implementation.models.PagedOperation",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
