@@ -201,7 +201,6 @@ public class SpreadTests {
     }
 
     @Test
-    @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordDiscriminatedUnion() {
         BinaryData binaryDataProp1 = BinaryData.fromObject(new WidgetData0("abc"));
         BinaryData binaryDataProp2 = BinaryData.fromObject(new WidgetData1(OffsetDateTime.parse("2021-01-01T00:00:00Z"))
@@ -226,7 +225,6 @@ public class SpreadTests {
     }
 
     @Test
-    @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordNonDiscriminatedUnion() {
         BinaryData binaryDataProp1 = BinaryData.fromObject(new WidgetData0("abc"));
         BinaryData binaryDataProp2 = BinaryData.fromObject(new WidgetData1(OffsetDateTime.parse("2021-01-01T00:00:00Z"))
@@ -251,7 +249,6 @@ public class SpreadTests {
     }
 
     @Test
-    @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordNonDiscriminatedUnion2() {
         BinaryData binaryDataProp1 = BinaryData.fromObject(new WidgetData2("2021-01-01T00:00:00Z"));
         BinaryData binaryDataProp2 = BinaryData.fromObject(new WidgetData1(OffsetDateTime.parse("2021-01-01T00:00:00Z"))
@@ -276,7 +273,6 @@ public class SpreadTests {
     }
 
     @Test
-    @Disabled("The body provided of 'put' request doesn't match expected body")
     public void testSpreadRecordNonDiscriminatedUnion3() {
         BinaryData binaryDataProp1 = BinaryData.fromObject(Arrays.asList(
                 new WidgetData2("2021-01-01T00:00:00Z"),
