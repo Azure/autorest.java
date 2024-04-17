@@ -4,7 +4,7 @@
 
 package com.cadl.armresourceprovider.implementation.models;
 
-import com.azure.core.annotation.Fluent;
+import com.azure.core.annotation.Immutable;
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.models.OperationInner;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -14,7 +14,7 @@ import java.util.List;
  * A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of
  * results.
  */
-@Fluent
+@Immutable
 public final class PagedOperation {
     /*
      * The Operation items on this page
@@ -31,7 +31,7 @@ public final class PagedOperation {
     /**
      * Creates an instance of PagedOperation class.
      */
-    public PagedOperation() {
+    private PagedOperation() {
     }
 
     /**
@@ -44,34 +44,12 @@ public final class PagedOperation {
     }
 
     /**
-     * Set the value property: The Operation items on this page.
-     * 
-     * @param value the value value to set.
-     * @return the PagedOperation object itself.
-     */
-    public PagedOperation withValue(List<OperationInner> value) {
-        this.value = value;
-        return this;
-    }
-
-    /**
      * Get the nextLink property: The link to the next page of items.
      * 
      * @return the nextLink value.
      */
     public String nextLink() {
         return this.nextLink;
-    }
-
-    /**
-     * Set the nextLink property: The link to the next page of items.
-     * 
-     * @param nextLink the nextLink value to set.
-     * @return the PagedOperation object itself.
-     */
-    public PagedOperation withNextLink(String nextLink) {
-        this.nextLink = nextLink;
-        return this;
     }
 
     /**
