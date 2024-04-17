@@ -1923,7 +1923,9 @@ export class CodeModelBuilder {
     });
 
     // cache this now before we accidentally recurse on this type.
-    this.schemaCache.set(type, dictSchema);
+    if (!this.schemaCache.has(type)) {
+      this.schemaCache.set(type, dictSchema);
+    }
 
     const elementSchema = this.processSchema(type.indexer.value, name);
     dictSchema.elementType = elementSchema;
@@ -2155,7 +2157,9 @@ export class CodeModelBuilder {
     this.codeModel.schemas.add(objectSchema);
 
     // cache this now before we accidentally recurse on this type.
-    this.schemaCache.set(type, objectSchema);
+    if (!this.schemaCache.has(type)) {
+      this.schemaCache.set(type, objectSchema);
+    }
 
     // discriminator
     let discriminatorPropertyName: string | undefined = undefined;
