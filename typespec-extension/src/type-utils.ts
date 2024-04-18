@@ -1,7 +1,6 @@
 import {
   DecoratedType,
   DecoratorApplication,
-  DurationKnownEncoding,
   EncodeData,
   Enum,
   EnumMember,
@@ -26,7 +25,7 @@ import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace, pascalCase } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
-import { SdkDurationType, SdkType } from "@azure-tools/typespec-client-generator-core";
+import { SdkDurationType } from "@azure-tools/typespec-client-generator-core";
 
 /** Acts as a cache for processing inputs.
  *
@@ -357,7 +356,6 @@ function getDecoratorScopedValue<T>(
   }
   return undefined;
 }
-
 
 export function isSdkIntKind(kind: string): boolean {
   return [

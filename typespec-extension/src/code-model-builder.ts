@@ -41,11 +41,7 @@ import {
   VirtualParameter,
 } from "@autorest/codemodel";
 import { KnownMediaType } from "@azure-tools/codegen";
-import {
-  getLroMetadata,
-  getPagedResult,
-  isPollingLocation
-} from "@azure-tools/typespec-azure-core";
+import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
   SdkBodyModelPropertyType,
@@ -75,7 +71,7 @@ import {
   listOperationGroups,
   listOperationsInOperationGroup,
   shouldGenerateConvenient,
-  shouldGenerateProtocol
+  shouldGenerateProtocol,
 } from "@azure-tools/typespec-client-generator-core";
 import {
   BooleanLiteral,
@@ -108,7 +104,7 @@ import {
   isErrorModel,
   isRecordModelType,
   isVoidType,
-  listServices
+  listServices,
 } from "@typespec/compiler";
 import {
   Authentication,
@@ -124,7 +120,7 @@ import {
   getQueryParamOptions,
   getServers,
   getStatusCodeDescription,
-  isPathParam
+  isPathParam,
 } from "@typespec/http";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersion } from "@typespec/versioning";
@@ -172,7 +168,7 @@ import {
   isSdkFloatKind,
   isSdkIntKind,
   modelIs,
-  pushDistinct
+  pushDistinct,
 } from "./type-utils.js";
 import {
   getJavaNamespace,
@@ -193,7 +189,9 @@ export class CodeModelBuilder {
   private codeModel: CodeModel;
   private loggingEnabled: boolean = false;
 
-  readonly schemaCache = new ProcessingCache((type: SdkType, name: string) => this.processSchemaFromSdkTypeImpl(type, name));
+  readonly schemaCache = new ProcessingCache((type: SdkType, name: string) =>
+    this.processSchemaFromSdkTypeImpl(type, name),
+  );
   readonly typeUnionRefCache = new Map<Type, Union | null | undefined>(); // Union means it ref a Union type, null means it does not ref any Union, undefined means type visited but not completed
 
   private operationExamples: Map<Operation, any> = new Map<Operation, any>();
@@ -416,7 +414,6 @@ export class CodeModelBuilder {
   }
 
   private processModels(clients: SdkClient[]) {
-    const processedModels: Set<Type> = new Set();
     const processedSdkModels: Set<SdkModelType | SdkEnumType> = new Set();
     for (const client of clients) {
       const models: (Model | Enum | Union)[] = Array.from(client.service.models.values());
@@ -450,7 +447,6 @@ export class CodeModelBuilder {
       };
 
       const sdkModels: (SdkModelType | SdkEnumType)[] = getAllModels(this.sdkContext);
-      
 
       // process sdk models
       for (const model of sdkModels) {
@@ -1343,7 +1339,7 @@ export class CodeModelBuilder {
       !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
 
     const sdkType: SdkType = getClientType(this.sdkContext, body);
-    
+
     let schema: Schema;
     if (
       unknownRequestBody &&
@@ -1722,7 +1718,7 @@ export class CodeModelBuilder {
 
       case "enum":
         return this.processChoiceSchemaFromSdkType(type, type.name);
-      
+
       case "enumvalue":
         return this.processConstantSchemaFromEnumValueFromSdkType(type as SdkEnumValueType, nameHint);
 
@@ -1730,17 +1726,21 @@ export class CodeModelBuilder {
         return this.processUnionSchemaFromSdkType(type, type.name);
 
       case "model":
-          return this.processObjectSchemaFromSdkType(type, type.name);
-        
+        return this.processObjectSchemaFromSdkType(type, type.name);
+
       case "dict":
         return this.processDictionarySchemaFromSdkType(type, nameHint);
-        
+
       case "array":
         return this.processArraySchemaFromSdkType(type, nameHint);
 
       case "duration":
-        return this.processDurationSchemaFromSdkType(type as SdkDurationType, nameHint, getDurationFormatFromSdkType(type as SdkDurationType));
-      
+        return this.processDurationSchemaFromSdkType(
+          type as SdkDurationType,
+          nameHint,
+          getDurationFormatFromSdkType(type as SdkDurationType),
+        );
+
       case "constant":
         return this.processConstantSchemaFromSdkType(type as SdkConstantType, nameHint);
 
@@ -1780,7 +1780,11 @@ export class CodeModelBuilder {
         if ((type as SdkDatetimeType).encode === "unixTimestamp") {
           return this.processUnixTimeSchemaFromSdkType(type as SdkDatetimeType, nameHint);
         } else {
-          return this.processDateTimeSchemaFromSdkType(type as SdkDatetimeType, nameHint, (type as SdkDatetimeType).encode === "rfc7231");
+          return this.processDateTimeSchemaFromSdkType(
+            type as SdkDatetimeType,
+            nameHint,
+            (type as SdkDatetimeType).encode === "rfc7231",
+          );
         }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
@@ -1789,7 +1793,7 @@ export class CodeModelBuilder {
   private processBuiltInFromSdkType(type: SdkBuiltInType, nameHint: string): Schema {
     nameHint = nameHint || type.kind;
     switch (type.kind) {
-      case "string": 
+      case "string":
       case "password":
       case "guid":
       case "ipAddress":
@@ -1800,7 +1804,7 @@ export class CodeModelBuilder {
       case "armId":
       case "azureLocation":
         return this.processStringSchemaFromSdkType(type, type.kind);
-      
+
       case "numeric":
       case "integer":
       case "safeint":
@@ -1811,10 +1815,11 @@ export class CodeModelBuilder {
       case "int32":
       case "uint32":
       case "int64":
-      case "uint64":
+      case "uint64": {
         // integer
         const integerSize = type.kind === "safeint" || type.kind.includes("int64") ? 64 : 32;
         return this.processIntegerSchemaFromSdkType(type, nameHint, integerSize);
+      }
 
       case "float":
       case "float32":
@@ -1823,8 +1828,8 @@ export class CodeModelBuilder {
 
       case "decimal":
       case "decimal128":
-        return this.processDecimalSchemaFromSdkType(type, nameHint)
-        
+        return this.processDecimalSchemaFromSdkType(type, nameHint);
+
       case "bytes":
         return this.processByteArraySchemaFromSdkType(type, nameHint);
 
@@ -1881,7 +1886,6 @@ export class CodeModelBuilder {
       }),
     );
   }
-
 
   private processDecimalSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     // "Infinity" maps to "BigDecimal" in Java
@@ -1964,16 +1968,16 @@ export class CodeModelBuilder {
 
   private processConstantSchemaFromSdkType(type: SdkConstantType, name: string): ConstantSchema {
     const valueType =
-    type.valueType.kind === "string"
-      ? this.stringSchema
-      : type.valueType.kind === "boolean"
-        ? this.booleanSchema
-        : isSdkIntKind(type.valueType.kind)
-          ? this.integerSchema
-          : this.doubleSchema;
+      type.valueType.kind === "string"
+        ? this.stringSchema
+        : type.valueType.kind === "boolean"
+          ? this.booleanSchema
+          : isSdkIntKind(type.valueType.kind)
+            ? this.integerSchema
+            : this.doubleSchema;
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type.__raw as (StringLiteral | NumericLiteral | BooleanLiteral)), {
+      new ConstantSchema(name, this.getDoc(type.__raw as StringLiteral | NumericLiteral | BooleanLiteral), {
         summary: this.getSummary(type.__raw),
         valueType: valueType,
         value: new ConstantValue(type.value),
@@ -2113,8 +2117,8 @@ export class CodeModelBuilder {
               pushDistinct(it.children.all, objectSchema);
             }
           });
-        }   
-      } 
+        }
+      }
       objectSchema.discriminatorValue = type.discriminatorValue;
     }
     if (type.additionalProperties) {
@@ -2129,7 +2133,7 @@ export class CodeModelBuilder {
         description: type.description,
         nullableValues: false,
         nullable: false,
-        valueType: type.additionalProperties
+        valueType: type.additionalProperties,
       };
       const parentSchema = this.processDictionarySchemaFromSdkType(sdkDictType, "Record");
       objectSchema.parents = new Relations();
@@ -2141,10 +2145,12 @@ export class CodeModelBuilder {
     // properties
     for (const prop of type.properties) {
       // skip discriminator property
-      if (prop.name === type.discriminatorProperty?.name || 
+      if (
+        prop.name === type.discriminatorProperty?.name ||
         prop.name === type.baseModel?.discriminatorProperty?.name ||
         !isPayloadProperty(this.program, prop.__raw as ModelProperty) ||
-        !this.existsAtCurrentVersion(prop.__raw as ModelProperty)) {
+        !this.existsAtCurrentVersion(prop.__raw as ModelProperty)
+      ) {
         continue;
       } else {
         objectSchema.addProperty(this.processModelPropertyFromSdkType(prop));
@@ -2180,7 +2186,7 @@ export class CodeModelBuilder {
     const resource = this.dummyObjectSchemaFromSdkType(type, resourceModelName, namespace);
     const declaredProperties = type.properties;
     for (const prop of declaredProperties) {
-      if (this.existsAtCurrentVersion(type.__raw as Type)) {      
+      if (this.existsAtCurrentVersion(type.__raw as Type)) {
         resource.addProperty(this.processModelPropertyFromSdkType(prop));
       }
     }
@@ -2205,7 +2211,7 @@ export class CodeModelBuilder {
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
     // TODO: question: why the schema name is like this? This case is related with literal.tsp
-    const schemaNameHint = pascalCase(getNamePrefixForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name); 
+    const schemaNameHint = pascalCase(getNamePrefixForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name);
     const schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
     let nullable = prop.nullable;
 
