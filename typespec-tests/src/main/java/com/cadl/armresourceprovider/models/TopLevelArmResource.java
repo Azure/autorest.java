@@ -58,11 +58,11 @@ public interface TopLevelArmResource {
     List<String> configurationEndpoints();
 
     /**
-     * Gets the username property: The userName property.
+     * Gets the userName property: The userName property.
      * 
-     * @return the username value.
+     * @return the userName value.
      */
-    String username();
+    String userName();
 
     /**
      * Gets the userNames property: The userNames property.
@@ -79,11 +79,11 @@ public interface TopLevelArmResource {
     String accuserName();
 
     /**
-     * Gets the startTimestamp property: The startTimeStamp property.
+     * Gets the startTimeStamp property: The startTimeStamp property.
      * 
-     * @return the startTimestamp value.
+     * @return the startTimeStamp value.
      */
-    OffsetDateTime startTimestamp();
+    OffsetDateTime startTimeStamp();
 
     /**
      * Gets the provisioningState property: The status of the last operation.
@@ -175,8 +175,8 @@ public interface TopLevelArmResource {
          * The stage of the TopLevelArmResource definition which contains all the minimum required properties for the
          * resource to be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithUsername,
-            DefinitionStages.WithUserNames, DefinitionStages.WithAccuserName, DefinitionStages.WithStartTimestamp {
+        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithUserName,
+            DefinitionStages.WithUserNames, DefinitionStages.WithAccuserName, DefinitionStages.WithStartTimeStamp {
             /**
              * Executes the create request.
              * 
@@ -207,16 +207,16 @@ public interface TopLevelArmResource {
         }
 
         /**
-         * The stage of the TopLevelArmResource definition allowing to specify username.
+         * The stage of the TopLevelArmResource definition allowing to specify userName.
          */
-        interface WithUsername {
+        interface WithUserName {
             /**
-             * Specifies the username property: The userName property..
+             * Specifies the userName property: The userName property..
              * 
-             * @param username The userName property.
+             * @param userName The userName property.
              * @return the next definition stage.
              */
-            WithCreate withUsername(String username);
+            WithCreate withUserName(String userName);
         }
 
         /**
@@ -246,16 +246,16 @@ public interface TopLevelArmResource {
         }
 
         /**
-         * The stage of the TopLevelArmResource definition allowing to specify startTimestamp.
+         * The stage of the TopLevelArmResource definition allowing to specify startTimeStamp.
          */
-        interface WithStartTimestamp {
+        interface WithStartTimeStamp {
             /**
-             * Specifies the startTimestamp property: The startTimeStamp property..
+             * Specifies the startTimeStamp property: The startTimeStamp property..
              * 
-             * @param startTimestamp The startTimeStamp property.
+             * @param startTimeStamp The startTimeStamp property.
              * @return the next definition stage.
              */
-            WithCreate withStartTimestamp(OffsetDateTime startTimestamp);
+            WithCreate withStartTimeStamp(OffsetDateTime startTimeStamp);
         }
     }
 

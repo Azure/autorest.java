@@ -290,9 +290,9 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
             } else {
                 jsonWriter.writeMapField("map", this.map, (writer, element) -> {
                     if (element != null) {
-                        element.serializeAsJsonMergePatch(true);
+                        JsonMergePatchHelper.getInnerModelAccessor().prepareModelForJsonMergePatch(element, true);
                         writer.writeJson(element);
-                        element.serializeAsJsonMergePatch(false);
+                        JsonMergePatchHelper.getInnerModelAccessor().prepareModelForJsonMergePatch(element, false);
                     } else {
                         writer.writeNull();
                     }
@@ -324,9 +324,9 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
             if (this.innerModel == null) {
                 jsonWriter.writeNullField("innerModel");
             } else {
-                this.innerModel.serializeAsJsonMergePatch(true);
+                JsonMergePatchHelper.getInnerModelAccessor().prepareModelForJsonMergePatch(this.innerModel, true);
                 jsonWriter.writeJsonField("innerModel", this.innerModel);
-                this.innerModel.serializeAsJsonMergePatch(false);
+                JsonMergePatchHelper.getInnerModelAccessor().prepareModelForJsonMergePatch(this.innerModel, false);
             }
         }
         if (updatedProperties.contains("intArray")) {

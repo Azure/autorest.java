@@ -84,7 +84,10 @@ public final class SpreadRecordForUnion implements JsonSerializable<SpreadRecord
         jsonWriter.writeBooleanField("flag", this.flag);
         if (additionalProperties != null) {
             for (Map.Entry<String, BinaryData> additionalProperty : additionalProperties.entrySet()) {
-                jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
+                jsonWriter.writeUntypedField(additionalProperty.getKey(),
+                    additionalProperty.getValue() == null
+                        ? null
+                        : additionalProperty.getValue().toObject(Object.class));
             }
         }
         return jsonWriter.writeEndObject();

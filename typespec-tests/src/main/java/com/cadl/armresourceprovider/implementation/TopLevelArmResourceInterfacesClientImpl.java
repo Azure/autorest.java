@@ -34,7 +34,7 @@ import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 import com.cadl.armresourceprovider.fluent.TopLevelArmResourceInterfacesClient;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
-import com.cadl.armresourceprovider.models.TopLevelArmResourceListResult;
+import com.cadl.armresourceprovider.implementation.models.TopLevelArmResourceListResult;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate;
 import java.nio.ByteBuffer;
 import reactor.core.publisher.Flux;

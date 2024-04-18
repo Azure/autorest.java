@@ -45,8 +45,10 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     @Generated
     private String aggregate;
 
-    // @formatter:off
-    private String testProperty;// @formatter:on
+    /*
+     * customized property
+     */
+    private String testProperty;
 
     /**
      * Creates an instance of PartialUpdateModel class.
@@ -105,7 +107,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
         return this.aggregate;
     }
 
-    // @formatter:off
     /**
      * javadoc
      *
@@ -113,9 +114,8 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
      */
     public void setAggregate(String aggregate) {
         this.aggregate = aggregate;
-    }// @formatter:on
+    }
 
-    // @formatter:off
     /**
      * javadoc
      *
@@ -123,9 +123,8 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
      */
     public String getTestProperty() {
         return testProperty;
-    }// @formatter:on
+    }
 
-    // @formatter:off
     /**
      * javadoc
      *
@@ -133,9 +132,8 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
      */
     public void setTestProperty(String testProperty) {
         this.testProperty = testProperty;
-    }// @formatter:on
+    }
 
-    // @formatter:off
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
@@ -144,9 +142,8 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
         jsonWriter.writeBinaryField("bytes", this.bytes);
         jsonWriter.writeStringField("aggregate", this.aggregate);
         return jsonWriter.writeEndObject();
-    }// @formatter:on
+    }
 
-    // @formatter:off
     /**
      * Reads an instance of PartialUpdateModel from the JsonReader.
      *
@@ -181,6 +178,5 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
             deserializedPartialUpdateModel.aggregate = aggregate;
             return deserializedPartialUpdateModel;
         });
-    }// @formatter:on
-
+    }
 }
