@@ -28,6 +28,8 @@ public final class MultipleSpreadRecord implements JsonSerializable<MultipleSpre
 
     /*
      * The model spread Record<string> and Record<float32>
+     * 
+     * Additional properties
      */
     @Generated
     private Map<String, BinaryData> additionalProperties;
@@ -53,7 +55,9 @@ public final class MultipleSpreadRecord implements JsonSerializable<MultipleSpre
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;string&gt; and Record&lt;float32&gt;.
+     * Get the additionalProperties property: The model spread Record&lt;string&gt; and Record&lt;float32&gt;
+     * 
+     * Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -63,7 +67,9 @@ public final class MultipleSpreadRecord implements JsonSerializable<MultipleSpre
     }
 
     /**
-     * Set the additionalProperties property: The model spread Record&lt;string&gt; and Record&lt;float32&gt;.
+     * Set the additionalProperties property: The model spread Record&lt;string&gt; and Record&lt;float32&gt;
+     * 
+     * Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the MultipleSpreadRecord object itself.

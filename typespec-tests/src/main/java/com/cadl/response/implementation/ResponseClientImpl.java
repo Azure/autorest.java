@@ -437,14 +437,16 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * 
      * <pre>{@code
-     * [
-     *      (Required){
-     *         id: String (Required)
-     *         name: String (Required)
-     *         description: String (Optional)
-     *         type: String (Required)
+     * {
+     *      (Optional): {
+     *         String (Required): {
+     *             id: String (Required)
+     *             name: String (Required)
+     *             description: String (Optional)
+     *             type: String (Required)
+     *         }
      *     }
-     * ]
+     * }
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -465,14 +467,16 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * 
      * <pre>{@code
-     * [
-     *      (Required){
-     *         id: String (Required)
-     *         name: String (Required)
-     *         description: String (Optional)
-     *         type: String (Required)
+     * {
+     *      (Optional): {
+     *         String (Required): {
+     *             id: String (Required)
+     *             name: String (Required)
+     *             description: String (Optional)
+     *             type: String (Required)
+     *         }
      *     }
-     * ]
+     * }
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -493,14 +497,16 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * 
      * <pre>{@code
-     * [
-     *      (Required){
-     *         id: String (Required)
-     *         name: String (Required)
-     *         description: String (Optional)
-     *         type: String (Required)
+     * {
+     *      (Optional): {
+     *         String (Required): {
+     *             id: String (Required)
+     *             name: String (Required)
+     *             description: String (Optional)
+     *             type: String (Required)
+     *         }
      *     }
-     * ]
+     * }
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -522,14 +528,16 @@ public final class ResponseClientImpl {
      * <p><strong>Response Body Schema</strong></p>
      * 
      * <pre>{@code
-     * [
-     *      (Required){
-     *         id: String (Required)
-     *         name: String (Required)
-     *         description: String (Optional)
-     *         type: String (Required)
+     * {
+     *      (Optional): {
+     *         String (Required): {
+     *             id: String (Required)
+     *             name: String (Required)
+     *             description: String (Optional)
+     *             type: String (Required)
+     *         }
      *     }
-     * ]
+     * }
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
