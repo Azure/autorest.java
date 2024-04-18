@@ -51,6 +51,7 @@ public final class Shark extends Fish {
      */
     @Generated
     public Shark() {
+        this.updatedProperties.add("kind");
     }
 
     /**

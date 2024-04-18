@@ -101,12 +101,13 @@ public final class ExtendsDifferentSpreadModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp (Required): {
-     *         state: String (Required)
-     *     }
+     *     knownProp: String (Required)
      *      (Optional): {
-     *         String (Required): (recursive schema, see String above)
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
+     *     derivedProp (Required): (recursive schema, see derivedProp above)
      * }
      * }</pre>
      * 
@@ -129,12 +130,13 @@ public final class ExtendsDifferentSpreadModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp (Required): {
-     *         state: String (Required)
-     *     }
+     *     knownProp: String (Required)
      *      (Optional): {
-     *         String (Required): (recursive schema, see String above)
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
+     *     derivedProp (Required): (recursive schema, see derivedProp above)
      * }
      * }</pre>
      * 
@@ -157,12 +159,13 @@ public final class ExtendsDifferentSpreadModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp (Required): {
-     *         state: String (Required)
-     *     }
+     *     knownProp: String (Required)
      *      (Optional): {
-     *         String (Required): (recursive schema, see String above)
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
+     *     derivedProp (Required): (recursive schema, see derivedProp above)
      * }
      * }</pre>
      * 
@@ -186,12 +189,13 @@ public final class ExtendsDifferentSpreadModelsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp (Required): {
-     *         state: String (Required)
-     *     }
+     *     knownProp: String (Required)
      *      (Optional): {
-     *         String (Required): (recursive schema, see String above)
+     *         String (Required): {
+     *             state: String (Required)
+     *         }
      *     }
+     *     derivedProp (Required): (recursive schema, see derivedProp above)
      * }
      * }</pre>
      * 

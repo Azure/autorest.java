@@ -100,9 +100,9 @@ public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchReq
             if (this.patch == null) {
                 jsonWriter.writeNullField("patch");
             } else {
-                this.patch.serializeAsJsonMergePatch(true);
+                JsonMergePatchHelper.getTodoItemPatchAccessor().prepareModelForJsonMergePatch(this.patch, true);
                 jsonWriter.writeJsonField("patch", this.patch);
-                this.patch.serializeAsJsonMergePatch(false);
+                JsonMergePatchHelper.getTodoItemPatchAccessor().prepareModelForJsonMergePatch(this.patch, false);
             }
         }
         return jsonWriter.writeEndObject();

@@ -18,7 +18,7 @@ import java.util.Map;
  * The model spread Record&lt;string&gt; with the different known property type.
  */
 @Fluent
-public final class DifferentSpreadStringRecord implements JsonSerializable<DifferentSpreadStringRecord> {
+public class DifferentSpreadStringRecord implements JsonSerializable<DifferentSpreadStringRecord> {
     /*
      * The name property
      */

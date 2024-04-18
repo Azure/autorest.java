@@ -353,9 +353,9 @@ public final class Resource implements JsonSerializable<Resource> {
             } else {
                 jsonWriter.writeMapField("map", this.map, (writer, element) -> {
                     if (element != null) {
-                        element.serializeAsJsonMergePatch(true);
+                        JsonMergePatchHelper.getInnerModelAccessor().prepareModelForJsonMergePatch(element, true);
                         writer.writeJson(element);
-                        element.serializeAsJsonMergePatch(false);
+                        JsonMergePatchHelper.getInnerModelAccessor().prepareModelForJsonMergePatch(element, false);
                     } else {
                         writer.writeNull();
                     }
@@ -387,9 +387,11 @@ public final class Resource implements JsonSerializable<Resource> {
             if (this.innerModelProperty == null) {
                 jsonWriter.writeNullField("wireNameForInnerModelProperty");
             } else {
-                this.innerModelProperty.serializeAsJsonMergePatch(true);
+                JsonMergePatchHelper.getInnerModelAccessor()
+                    .prepareModelForJsonMergePatch(this.innerModelProperty, true);
                 jsonWriter.writeJsonField("wireNameForInnerModelProperty", this.innerModelProperty);
-                this.innerModelProperty.serializeAsJsonMergePatch(false);
+                JsonMergePatchHelper.getInnerModelAccessor()
+                    .prepareModelForJsonMergePatch(this.innerModelProperty, false);
             }
         }
         if (updatedProperties.contains("array")) {
@@ -403,9 +405,9 @@ public final class Resource implements JsonSerializable<Resource> {
             if (this.fish == null) {
                 jsonWriter.writeNullField("fish");
             } else {
-                this.fish.serializeAsJsonMergePatch(true);
+                JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(this.fish, true);
                 jsonWriter.writeJsonField("fish", this.fish);
-                this.fish.serializeAsJsonMergePatch(false);
+                JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(this.fish, false);
             }
         }
         return jsonWriter.writeEndObject();

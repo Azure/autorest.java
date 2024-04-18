@@ -42,16 +42,17 @@ public final class ExtendsDifferentSpreadModelArrayClient {
      * 
      * <pre>{@code
      * {
-     *     derivedProp (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     *     knownProp: String (Required)
      *      (Optional): {
      *         String (Required): [
-     *             (recursive schema, see above)
+     *              (Required){
+     *                 state: String (Required)
+     *             }
      *         ]
      *     }
+     *     derivedProp (Required): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 
@@ -74,16 +75,17 @@ public final class ExtendsDifferentSpreadModelArrayClient {
      * 
      * <pre>{@code
      * {
-     *     derivedProp (Required): [
-     *          (Required){
-     *             state: String (Required)
-     *         }
-     *     ]
+     *     knownProp: String (Required)
      *      (Optional): {
      *         String (Required): [
-     *             (recursive schema, see above)
+     *              (Required){
+     *                 state: String (Required)
+     *             }
      *         ]
      *     }
+     *     derivedProp (Required): [
+     *         (recursive schema, see above)
+     *     ]
      * }
      * }</pre>
      * 

@@ -132,8 +132,8 @@ public class PatchClientTest {
         String json = BinaryData.fromObject(resource).toString();
         JsonNode node = OBJECT_MAPPER.readTree(json);
         Assertions.assertEquals(JsonNodeType.NULL, node.get("fish").get("color").getNodeType());
-        // TODO: once supported, we should uncomment this validation.
-//        Assertions.assertEquals("shark", node.get("fish").get("kind"));
+        Assertions.assertEquals("shark", node.get("fish").get("kind").asText());
+        Assertions.assertEquals(2, node.get("fish").get("age").asInt());
     }
 
     @Test
