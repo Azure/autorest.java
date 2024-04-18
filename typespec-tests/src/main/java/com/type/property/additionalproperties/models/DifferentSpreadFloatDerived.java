@@ -4,10 +4,9 @@
 
 package com.type.property.additionalproperties.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
@@ -17,27 +16,23 @@ import java.util.Map;
 /**
  * The model extends from a model that spread Record&lt;float32&gt; with the different known property type.
  */
-@Fluent
-public final class DifferentSpreadFloatDerived implements JsonSerializable<DifferentSpreadFloatDerived> {
+@Immutable
+public final class DifferentSpreadFloatDerived extends DifferentSpreadFloatRecord {
     /*
      * The index property
      */
     @Generated
     private final double derivedProp;
 
-    /*
-     * The model spread Record<float32> with the different known property type
-     */
-    @Generated
-    private Map<String, Double> additionalProperties;
-
     /**
      * Creates an instance of DifferentSpreadFloatDerived class.
      * 
+     * @param name the name value to set.
      * @param derivedProp the derivedProp value to set.
      */
     @Generated
-    public DifferentSpreadFloatDerived(double derivedProp) {
+    public DifferentSpreadFloatDerived(String name, double derivedProp) {
+        super(name);
         this.derivedProp = derivedProp;
     }
 
@@ -52,39 +47,16 @@ public final class DifferentSpreadFloatDerived implements JsonSerializable<Diffe
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;float32&gt; with the different known property
-     * type.
-     * 
-     * @return the additionalProperties value.
-     */
-    @Generated
-    public Map<String, Double> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    /**
-     * Set the additionalProperties property: The model spread Record&lt;float32&gt; with the different known property
-     * type.
-     * 
-     * @param additionalProperties the additionalProperties value to set.
-     * @return the DifferentSpreadFloatDerived object itself.
-     */
-    @Generated
-    public DifferentSpreadFloatDerived setAdditionalProperties(Map<String, Double> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("name", getName());
         jsonWriter.writeDoubleField("derivedProp", this.derivedProp);
-        if (additionalProperties != null) {
-            for (Map.Entry<String, Double> additionalProperty : additionalProperties.entrySet()) {
+        if (getAdditionalProperties() != null) {
+            for (Map.Entry<String, Double> additionalProperty : getAdditionalProperties().entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
@@ -103,13 +75,16 @@ public final class DifferentSpreadFloatDerived implements JsonSerializable<Diffe
     @Generated
     public static DifferentSpreadFloatDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            String name = null;
             double derivedProp = 0.0;
             Map<String, Double> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("derivedProp".equals(fieldName)) {
+                if ("name".equals(fieldName)) {
+                    name = reader.getString();
+                } else if ("derivedProp".equals(fieldName)) {
                     derivedProp = reader.getDouble();
                 } else {
                     if (additionalProperties == null) {
@@ -120,8 +95,8 @@ public final class DifferentSpreadFloatDerived implements JsonSerializable<Diffe
                 }
             }
             DifferentSpreadFloatDerived deserializedDifferentSpreadFloatDerived
-                = new DifferentSpreadFloatDerived(derivedProp);
-            deserializedDifferentSpreadFloatDerived.additionalProperties = additionalProperties;
+                = new DifferentSpreadFloatDerived(name, derivedProp);
+            deserializedDifferentSpreadFloatDerived.setAdditionalProperties(additionalProperties);
 
             return deserializedDifferentSpreadFloatDerived;
         });

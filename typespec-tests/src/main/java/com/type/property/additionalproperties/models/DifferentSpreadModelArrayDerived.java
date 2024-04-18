@@ -4,10 +4,9 @@
 
 package com.type.property.additionalproperties.models;
 
-import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
-import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
@@ -18,27 +17,23 @@ import java.util.Map;
 /**
  * The model extends from a model that spread Record&lt;ModelForRecord[]&gt; with the different known property type.
  */
-@Fluent
-public final class DifferentSpreadModelArrayDerived implements JsonSerializable<DifferentSpreadModelArrayDerived> {
+@Immutable
+public final class DifferentSpreadModelArrayDerived extends DifferentSpreadModelArrayRecord {
     /*
      * The index property
      */
     @Generated
     private final List<ModelForRecord> derivedProp;
 
-    /*
-     * The model spread Record<ModelForRecord[]> with the different known property type
-     */
-    @Generated
-    private Map<String, List<ModelForRecord>> additionalProperties;
-
     /**
      * Creates an instance of DifferentSpreadModelArrayDerived class.
      * 
+     * @param knownProp the knownProp value to set.
      * @param derivedProp the derivedProp value to set.
      */
     @Generated
-    public DifferentSpreadModelArrayDerived(List<ModelForRecord> derivedProp) {
+    public DifferentSpreadModelArrayDerived(String knownProp, List<ModelForRecord> derivedProp) {
+        super(knownProp);
         this.derivedProp = derivedProp;
     }
 
@@ -53,40 +48,16 @@ public final class DifferentSpreadModelArrayDerived implements JsonSerializable<
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;ModelForRecord[]&gt; with the different known
-     * property type.
-     * 
-     * @return the additionalProperties value.
-     */
-    @Generated
-    public Map<String, List<ModelForRecord>> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    /**
-     * Set the additionalProperties property: The model spread Record&lt;ModelForRecord[]&gt; with the different known
-     * property type.
-     * 
-     * @param additionalProperties the additionalProperties value to set.
-     * @return the DifferentSpreadModelArrayDerived object itself.
-     */
-    @Generated
-    public DifferentSpreadModelArrayDerived
-        setAdditionalProperties(Map<String, List<ModelForRecord>> additionalProperties) {
-        this.additionalProperties = additionalProperties;
-        return this;
-    }
-
-    /**
      * {@inheritDoc}
      */
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("knownProp", getKnownProp());
         jsonWriter.writeArrayField("derivedProp", this.derivedProp, (writer, element) -> writer.writeJson(element));
-        if (additionalProperties != null) {
-            for (Map.Entry<String, List<ModelForRecord>> additionalProperty : additionalProperties.entrySet()) {
+        if (getAdditionalProperties() != null) {
+            for (Map.Entry<String, List<ModelForRecord>> additionalProperty : getAdditionalProperties().entrySet()) {
                 jsonWriter.writeUntypedField(additionalProperty.getKey(), additionalProperty.getValue());
             }
         }
@@ -105,13 +76,16 @@ public final class DifferentSpreadModelArrayDerived implements JsonSerializable<
     @Generated
     public static DifferentSpreadModelArrayDerived fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            String knownProp = null;
             List<ModelForRecord> derivedProp = null;
             Map<String, List<ModelForRecord>> additionalProperties = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("derivedProp".equals(fieldName)) {
+                if ("knownProp".equals(fieldName)) {
+                    knownProp = reader.getString();
+                } else if ("derivedProp".equals(fieldName)) {
                     derivedProp = reader.readArray(reader1 -> ModelForRecord.fromJson(reader1));
                 } else {
                     if (additionalProperties == null) {
@@ -122,8 +96,8 @@ public final class DifferentSpreadModelArrayDerived implements JsonSerializable<
                 }
             }
             DifferentSpreadModelArrayDerived deserializedDifferentSpreadModelArrayDerived
-                = new DifferentSpreadModelArrayDerived(derivedProp);
-            deserializedDifferentSpreadModelArrayDerived.additionalProperties = additionalProperties;
+                = new DifferentSpreadModelArrayDerived(knownProp, derivedProp);
+            deserializedDifferentSpreadModelArrayDerived.setAdditionalProperties(additionalProperties);
 
             return deserializedDifferentSpreadModelArrayDerived;
         });
