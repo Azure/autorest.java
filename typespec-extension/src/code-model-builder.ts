@@ -1,128 +1,28 @@
 import {
-  ArrayModelType,
-  BooleanLiteral,
-  Enum,
-  getDoc,
-  getEffectiveModelType,
-  getFormat,
-  getFriendlyName,
-  getKnownValues,
-  getSummary,
-  getVisibility,
-  ignoreDiagnostics,
-  IntrinsicType,
-  isArrayModelType,
-  isRecordModelType,
-  isUnknownType,
-  Model,
-  ModelProperty,
-  NumericLiteral,
-  Operation,
-  Program,
-  RecordModelType,
-  StringLiteral,
-  Type,
-  TypeNameOptions,
-  Union,
-  UnionVariant,
-  getDiscriminator,
-  isNeverType,
-  Scalar,
-  listServices,
-  getNamespaceFullName,
-  isNullType,
-  getTypeName,
-  EmitContext,
-  getProjectedName,
-  getEncode,
-  getOverloadedOperation,
-  EnumMember,
-  walkPropertiesInherited,
-  isVoidType,
-  isErrorModel,
-  UsageFlags,
-} from "@typespec/compiler";
-import { getResourceOperation, getSegment } from "@typespec/rest";
-import {
-  getAuthentication,
-  getServers,
-  getStatusCodeDescription,
-  HttpOperation,
-  HttpOperationParameter,
-  HttpOperationResponse,
-  HttpServer,
-  Authentication,
-  HttpStatusCodesEntry,
-  getHttpOperation,
-  getQueryParamOptions,
-  getHeaderFieldOptions,
-  isPathParam,
-  HttpOperationBody,
-  Visibility,
-} from "@typespec/http";
-import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersion } from "@typespec/versioning";
-import {
-  isPollingLocation,
-  getPagedResult,
-  isFixed,
-  getLroMetadata,
-  getUnionAsEnum,
-  UnionEnum,
-} from "@azure-tools/typespec-azure-core";
-import {
-  SdkContext,
-  listClients,
-  listOperationGroups,
-  listOperationsInOperationGroup,
-  isApiVersion,
-  shouldGenerateConvenient,
-  createSdkContext,
-  shouldGenerateProtocol,
-  isInternal,
-  SdkClient,
-  getCrossLanguageDefinitionId,
-  getClientNameOverride,
-  shouldFlattenProperty,
-  getWireName,
-  getAllModels,
-  getClientType,
-  SdkModelType,
-  SdkEnumType,
-  SdkType,
-  AccessFlags,
-  SdkEnumValueType,
-  SdkUnionType,
-  SdkModelPropertyType,
-  SdkBodyModelPropertyType,
-  SdkBuiltInKinds,
-  SdkBuiltInType,
-  SdkConstantType,
-  SdkDurationType,
-  SdkDatetimeType,
-  isSdkBuiltInKind,
-  SdkArrayType,
-  SdkDictionaryType,
-  getDefaultApiVersion,
-  getSdkModelPropertyType,
-} from "@azure-tools/typespec-client-generator-core";
-import { fail } from "assert";
-import {
   AnySchema,
+  ApiVersion,
   ArraySchema,
   BinaryResponse,
   BinarySchema,
   BooleanSchema,
   ByteArraySchema,
   ChoiceValue,
-  DateTimeSchema,
   DateSchema,
+  DateTimeSchema,
   DictionarySchema,
   Discriminator,
+  GroupProperty,
+  GroupSchema,
   HttpHeader,
   HttpParameter,
   ImplementationLocation,
+  KeySecurityScheme,
+  Language,
+  Metadata,
   NumberSchema,
+  OAuth2SecurityScheme,
   ObjectSchema,
+  OperationGroup,
   Parameter,
   ParameterLocation,
   Property,
@@ -131,80 +31,157 @@ import {
   Schema,
   SchemaResponse,
   SchemaType,
+  Security,
   SecurityScheme,
+  SerializationStyle,
   StringSchema,
   TimeSchema,
-  Security,
-  OAuth2SecurityScheme,
-  KeySecurityScheme,
-  OperationGroup,
+  UnixTimeSchema,
   UriSchema,
   VirtualParameter,
-  GroupSchema,
-  GroupProperty,
-  ApiVersion,
-  SerializationStyle,
-  Metadata,
-  UnixTimeSchema,
-  Language,
 } from "@autorest/codemodel";
 import { KnownMediaType } from "@azure-tools/codegen";
-import { CodeModel } from "./common/code-model.js";
+import {
+  getLroMetadata,
+  getPagedResult,
+  isPollingLocation
+} from "@azure-tools/typespec-azure-core";
+import {
+  SdkArrayType,
+  SdkBodyModelPropertyType,
+  SdkBuiltInType,
+  SdkClient,
+  SdkConstantType,
+  SdkContext,
+  SdkDatetimeType,
+  SdkDictionaryType,
+  SdkDurationType,
+  SdkEnumType,
+  SdkEnumValueType,
+  SdkModelPropertyType,
+  SdkModelType,
+  SdkType,
+  SdkUnionType,
+  createSdkContext,
+  getAllModels,
+  getClientNameOverride,
+  getClientType,
+  getCrossLanguageDefinitionId,
+  getDefaultApiVersion,
+  getWireName,
+  isApiVersion,
+  isInternal,
+  listClients,
+  listOperationGroups,
+  listOperationsInOperationGroup,
+  shouldGenerateConvenient,
+  shouldGenerateProtocol
+} from "@azure-tools/typespec-client-generator-core";
+import {
+  BooleanLiteral,
+  EmitContext,
+  Enum,
+  EnumMember,
+  Model,
+  ModelProperty,
+  NumericLiteral,
+  Operation,
+  Program,
+  Scalar,
+  StringLiteral,
+  Type,
+  TypeNameOptions,
+  Union,
+  UnionVariant,
+  getDoc,
+  getEffectiveModelType,
+  getEncode,
+  getFriendlyName,
+  getNamespaceFullName,
+  getOverloadedOperation,
+  getProjectedName,
+  getSummary,
+  getTypeName,
+  getVisibility,
+  ignoreDiagnostics,
+  isArrayModelType,
+  isErrorModel,
+  isRecordModelType,
+  isVoidType,
+  listServices
+} from "@typespec/compiler";
+import {
+  Authentication,
+  HttpOperation,
+  HttpOperationBody,
+  HttpOperationParameter,
+  HttpOperationResponse,
+  HttpServer,
+  HttpStatusCodesEntry,
+  getAuthentication,
+  getHeaderFieldOptions,
+  getHttpOperation,
+  getQueryParamOptions,
+  getServers,
+  getStatusCodeDescription,
+  isPathParam
+} from "@typespec/http";
+import { getResourceOperation, getSegment } from "@typespec/rest";
+import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersion } from "@typespec/versioning";
+import { fail } from "assert";
+import pkg from "lodash";
 import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
-import { ConvenienceApi, Operation as CodeModelOperation, Request } from "./common/operation.js";
-import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
+import { CodeModel } from "./common/code-model.js";
+import { LongRunningMetadata } from "./common/long-running-metadata.js";
+import { Operation as CodeModelOperation, ConvenienceApi, Request } from "./common/operation.js";
 import { ChoiceSchema, SealedChoiceSchema } from "./common/schemas/choice.js";
 import { ConstantSchema, ConstantValue } from "./common/schemas/constant.js";
 import { OrSchema } from "./common/schemas/relationship.js";
-import { LongRunningMetadata } from "./common/long-running-metadata.js";
 import { DurationSchema } from "./common/schemas/time.js";
-import { PreNamer } from "./prenamer/prenamer.js";
+import { SchemaContext, SchemaUsage } from "./common/schemas/usage.js";
 import { EmitterOptions } from "./emitter.js";
 import { createPollOperationDetailsSchema, getFileDetailsSchema } from "./external-schemas.js";
 import { ClientContext } from "./models.js";
 import {
-  stringArrayContainsIgnoreCase,
-  getJavaNamespace,
-  getNamespace,
-  pascalCase,
-  logWarning,
-  trace,
-} from "./utils.js";
-import {
-  ProcessingCache,
-  isModelReferredInTemplate,
-  pushDistinct,
-  modelContainsDerivedModel,
-  getNameForTemplate,
-  getDurationFormat,
-  hasScalarAsBase,
-  isNullableType,
-  getAccess,
-  getUsage,
-  getUnionDescription,
-  modelIs,
-  getNamePrefixForProperty,
-  isAllValueInteger,
-  getDurationFormatFromSdkType,
-  isSdkIntKind,
-  isSdkFloatKind,
-} from "./type-utils.js";
-import {
-  getServiceVersion,
-  operationIsJsonMergePatch,
-  isPayloadProperty,
+  CONTENT_TYPE_KEY,
   ORIGIN_API_VERSION,
   SPECIAL_HEADER_NAMES,
-  loadExamples,
-  isLroNewPollingStrategy,
-  operationIsMultipleContentTypes,
   cloneOperationParameter,
-  operationIsMultipart,
+  getServiceVersion,
   isKnownContentType,
-  CONTENT_TYPE_KEY,
+  isLroNewPollingStrategy,
+  isPayloadProperty,
+  loadExamples,
+  operationIsJsonMergePatch,
+  operationIsMultipart,
+  operationIsMultipleContentTypes,
 } from "./operation-utils.js";
-import { isArmCommonType } from "./type-utils.js";
-import pkg, { get } from "lodash";
+import { PreNamer } from "./prenamer/prenamer.js";
+import {
+  ProcessingCache,
+  getAccess,
+  getDurationFormatFromSdkType,
+  getNameForTemplate,
+  getNamePrefixForProperty,
+  getUnionDescription,
+  getUsage,
+  hasScalarAsBase,
+  isArmCommonType,
+  isModelReferredInTemplate,
+  isNullableType,
+  isSdkFloatKind,
+  isSdkIntKind,
+  modelIs,
+  pushDistinct
+} from "./type-utils.js";
+import {
+  getJavaNamespace,
+  getNamespace,
+  logWarning,
+  pascalCase,
+  stringArrayContainsIgnoreCase,
+  trace,
+} from "./utils.js";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -502,36 +479,6 @@ export class CodeModelBuilder {
           processedSdkModels.add(model);
         }
       }
-
-      // process tsp compiler models
-      // for (const model of models) {
-      //   if (!processedModels.has(model)) {
-      //     const access = getAccess(model);
-      //     if (access === "public") {
-      //       modelAsPublic(model);
-      //     } else if (access === "internal") {
-      //       const sdkType = getClientType(this.sdkContext, model);
-      //       const schema = this.processSchemaFromSdkType(sdkType, "");
-
-      //       this.trackSchemaUsage(schema, {
-      //         usage: [SchemaContext.Internal],
-      //       });
-      //     }
-
-      //     const usage = getUsage(model);
-      //     if (usage) {
-      //       // TODO: change to sdk type
-      //       const sdkType = getClientType(this.sdkContext, model);
-      //       const schema = this.processSchemaFromSdkType(sdkType, "");
-
-      //       this.trackSchemaUsage(schema, {
-      //         usage: usage,
-      //       });
-      //     }
-
-      //     processedModels.add(model);
-      //   }
-      // }
     }
   }
 
@@ -1080,6 +1027,7 @@ export class CodeModelBuilder {
     } else {
       // schema
       let schema;
+      const sdkType = getClientType(this.sdkContext, param.param);
       if (
         param.type === "header" &&
         param.param.type.kind === "Scalar" &&
@@ -1088,10 +1036,9 @@ export class CodeModelBuilder {
         (hasScalarAsBase(param.param.type, "utcDateTime") || hasScalarAsBase(param.param.type, "offsetDateTime"))
       ) {
         // utcDateTime in header maps to rfc7231
-        schema = this.processDateTimeSchema(param.param.type, param.param.name, true);
+        schema = this.processDateTimeSchemaFromSdkType(sdkType as SdkDatetimeType, param.param.name, true);
       } else {
         // change to sdk type
-        const sdkType = getClientType(this.sdkContext, param.param);
         schema = this.processSchemaFromSdkType(sdkType, param.param.name);
       }
 
@@ -1764,10 +1711,6 @@ export class CodeModelBuilder {
     );
   }
 
-  // private processSchema(type: Type, nameHint: string): Schema {
-  //   return this.schemaCache.process(type, nameHint) || fail("Unable to process schema.");
-  // }
-
   private processSchemaFromSdkType(type: SdkType, nameHint: string): Schema {
     return this.schemaCache.process(type, nameHint) || fail("Unable to process schema.");
   }
@@ -1843,123 +1786,6 @@ export class CodeModelBuilder {
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
 
-
-  // private processSchemaImpl(type: Type, nameHint: string): Schema {
-  //   const sdkType: SdkType = getClientType(this.sdkContext, type);
-  //   // const schemaFromSdkType = this.processSchemaFromSdkTypeImpl(sdkType, nameHint);                                                                                                                             
-  //   // if (schemaFromSdkType) {
-  //   //   return schemaFromSdkType;
-  //   // }
-  //   switch (type.kind) {
-  //     case "Intrinsic":
-  //       if (isUnknownType(type)) {
-  //         const sdkType: SdkType = getClientType(this.sdkContext, type) as SdkType;
-  //         return this.processAnySchemaFromSdkType(sdkType, nameHint);
-  //       } else {
-  //         throw new Error(`Unrecognized intrinsic type: '${type.name}'.`);
-  //       }
-
-  //     case "String":
-  //       return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
-
-  //     case "Number":
-  //       return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
-
-  //     case "Boolean":
-  //       return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
-
-  //     case "Enum":
-  //       return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, nameHint);
-
-  //     case "Union":
-  //       if (sdkType.kind === "enum") {
-  //         return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, nameHint);
-  //       }
-  //       if (sdkType.kind === "model") {
-  //         return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, nameHint);
-  //       }
-  //       if (isSdkBuiltInKind(sdkType.kind)) {
-  //         return this.processBuiltInFromSdkType(sdkType as SdkBuiltInType, nameHint);
-  //       }
-  //       return this.processUnionSchemaFromSdkType(
-  //         getClientType(this.sdkContext, type) as SdkUnionType,
-  //         this.getName(type, nameHint),
-  //       );
-
-  //     case "ModelProperty": {
-  //       // let schema = undefined;
-  //       // const sdkSchema = this.processSchemaFromSdkTypeImpl(sdkType, nameHint);
-  //       // if (sdkSchema) {
-  //       //   return sdkSchema;
-  //       // } else {
-  //       //   const schemaNameHint =
-  //       //     type.type.kind === "Scalar" && this.program.checker.isStdType(type.type)
-  //       //       ? nameHint // std scalar won't need a nameHint
-  //       //       : pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
-  //       //   schema = this.processSchema(type.type, schemaNameHint);
-  //       //   return this.applyModelPropertyDecorators(type, nameHint, schema);
-  //       // }
-  //       let schema = undefined;
-  //       if (sdkType.kind === "enum") {
-  //         return this.processChoiceSchemaFromSdkType(sdkType as SdkEnumType, (sdkType as SdkEnumType).name);
-  //       } else if (sdkType.kind === "constant") {
-  //         return this.processConstantSchemaFromSdkType(sdkType as SdkConstantType, nameHint);
-  //       } else if (sdkType.kind === "duration") {
-  //         return this.processDurationSchemaFromSdkType(sdkType as SdkDurationType, nameHint, getDurationFormatFromSdkType(sdkType as SdkDurationType));
-  //       } else if (sdkType.kind === "model") {
-  //         // TODO: get model property
-  //         // const sdkModelProperty = (sdkType as SdkModelType).properties.filter(p => p.name === nameHint);
-  //         return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, nameHint);
-  //       } else {
-  //         const schemaNameHint =
-  //           type.type.kind === "Scalar" && this.program.checker.isStdType(type.type)
-  //             ? nameHint // std scalar won't need a nameHint
-  //             : pascalCase(getModelNameForProperty(type)) + pascalCase(nameHint);
-  //         schema = this.processSchema(type.type, schemaNameHint);
-  //       }
-  //       return this.applyModelPropertyDecorators(type, nameHint, schema);
-  //     }
-
-  //     case "Scalar":
-  //       switch (sdkType.kind) {
-  //         case "utcDateTime":
-  //         case "offsetDateTime":
-  //           if ((sdkType as SdkDatetimeType).encode === "unixTimestamp") {
-  //             return this.processUnixTimeSchemaFromSdkType(sdkType as SdkDatetimeType, nameHint);
-  //           } else {
-  //             return this.processDateTimeSchemaFromSdkType(sdkType as SdkDatetimeType, nameHint, (sdkType as SdkDatetimeType).encode === "rfc7231");
-  //           }
-  //         case "duration":
-  //           return this.processDurationSchemaFromSdkType(sdkType as SdkDurationType, nameHint, getDurationFormatFromSdkType(sdkType as SdkDurationType));
-  //         }
-  //       return this.processBuiltInFromSdkType(sdkType as SdkBuiltInType, nameHint);
-
-  //     case "Model":
-  //       if (sdkType.kind === "array") {
-  //         return this.processArraySchemaFromSdkType(sdkType as SdkArrayType, nameHint);
-  //       } else if (sdkType.kind === "dict") {
-  //         // "pure" Record that does not have properties in it
-  //         return this.processDictionarySchemaFromSdkType(sdkType as SdkDictionaryType, nameHint);
-  //       } else {
-  //         return this.processObjectSchemaFromSdkType(sdkType as SdkModelType, (sdkType as SdkModelType).name);
-  //       }
-
-  //     case "EnumMember":
-  //       // e.g. "type: TypeEnum.EnumValue1"
-        // return this.processConstantSchemaForEnumMember(type, this.getName(type));
-
-  //     case "UnionVariant":
-  //       // e.g. "type: Union.Variant1"
-  //       if (type.type.kind === "String" || type.type.kind === "Number" || type.type.kind === "Boolean") {
-  //         return this.processConstantSchemaForUnionVariant(type, this.getName(type));
-  //       } else {
-  //         throw new Error(`Unsupported type reference to UnionVariant.`);
-  //       }
-  //   }
-
-  //   throw new Error(`Unrecognized type: '${type.kind}'.`);
-  // }
-
   private processBuiltInFromSdkType(type: SdkBuiltInType, nameHint: string): Schema {
     nameHint = nameHint || type.kind;
     switch (type.kind) {
@@ -2022,27 +1848,10 @@ export class CodeModelBuilder {
     return this.anySchema;
   }
 
-  private processStringSchema(type: Scalar, name: string): StringSchema {
-    return this.codeModel.schemas.add(
-      new StringSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
-
   private processStringSchemaFromSdkType(type: SdkBuiltInType, name: string): StringSchema {
     return this.codeModel.schemas.add(
       new StringSchema(name, this.getDoc(type.__raw as Type), {
         summary: this.getSummary(type.__raw as Type),
-      }),
-    );
-  }
-
-  private processByteArraySchema(type: Scalar, name: string, base64Encoded: boolean): ByteArraySchema {
-    return this.codeModel.schemas.add(
-      new ByteArraySchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        format: base64Encoded ? "base64url" : "byte",
       }),
     );
   }
@@ -2101,8 +1910,8 @@ export class CodeModelBuilder {
   }
 
   private processDictionarySchemaFromSdkType(type: SdkDictionaryType, name: string): DictionarySchema {
-    const dictSchema = new DictionarySchema<any>(name, this.getDoc(type.__raw as Type), null, {
-      summary: this.getSummary(type.__raw as Type),
+    const dictSchema = new DictionarySchema<any>(name, type.details ? type.details : "", null, {
+      summary: type.description ? type.description : "",
     });
 
     // cache this now before we accidentally recurse on this type.
@@ -2184,28 +1993,10 @@ export class CodeModelBuilder {
     );
   }
 
-
-  private processUnixTimeSchema(type: Scalar, name: string): UnixTimeSchema {
-    return this.codeModel.schemas.add(
-      new UnixTimeSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-      }),
-    );
-  }
-
   private processUnixTimeSchemaFromSdkType(type: SdkDatetimeType, name: string): UnixTimeSchema {
     return this.codeModel.schemas.add(
       new UnixTimeSchema(name, this.getDoc(type.__raw as Type), {
         summary: this.getSummary(type.__raw as Type),
-      }),
-    );
-  }
-
-  private processDateTimeSchema(type: Scalar, name: string, rfc1123: boolean): DateTimeSchema {
-    return this.codeModel.schemas.add(
-      new DateTimeSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        format: rfc1123 ? "date-time-rfc1123" : "date-time",
       }),
     );
   }
@@ -2231,19 +2022,6 @@ export class CodeModelBuilder {
     return this.codeModel.schemas.add(
       new TimeSchema(name, this.getDoc(type.__raw as Scalar), {
         summary: this.getSummary(type.__raw as Scalar),
-      }),
-    );
-  }
-
-  private processDurationSchema(
-    type: Scalar,
-    name: string,
-    format: DurationSchema["format"] = "duration-rfc3339",
-  ): DurationSchema {
-    return this.codeModel.schemas.add(
-      new DurationSchema(name, this.getDoc(type), {
-        summary: this.getSummary(type),
-        format: format,
       }),
     );
   }
@@ -2339,8 +2117,8 @@ export class CodeModelBuilder {
       } 
       objectSchema.discriminatorValue = type.discriminatorValue;
     }
-    else if (type.additionalProperties) {
-      // dictionary
+    if (type.additionalProperties) {
+      // model has additional property
       const sdkDictType: SdkDictionaryType = {
         kind: "dict",
         keyType: {
@@ -2348,6 +2126,7 @@ export class CodeModelBuilder {
           encode: "string",
           nullable: false,
         },
+        description: type.description,
         nullableValues: false,
         nullable: false,
         valueType: type.additionalProperties
@@ -2408,22 +2187,6 @@ export class CodeModelBuilder {
     return resource;
   }
 
-  private dummyObjectSchema(type: Model, name: string, namespace?: string): ObjectSchema {
-    return new ObjectScheme(name, this.getDoc(type), {
-      summary: this.getSummary(type),
-      language: {
-        default: {
-          name: name,
-          namespace: namespace,
-        },
-        java: {
-          name: name,
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-    });
-  }
-
   private dummyObjectSchemaFromSdkType(type: SdkModelType, name: string, namespace?: string): ObjectSchema {
     return new ObjectScheme(name, this.getDoc(type.__raw as Model), {
       summary: this.getSummary(type.__raw as Model),
@@ -2438,85 +2201,6 @@ export class CodeModelBuilder {
         },
       },
     });
-  }
-
-  private dummyRecordSchema(elementType: Schema): DictionarySchema {
-    return new DictionarySchema("Record", "",  elementType, {
-      summary: "",
-    });
-  }
-
-  private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
-    // if (schema instanceof StringSchema) {
-    //   const decorators = {
-    //     minLength: getMinLength(this.program, prop),
-    //     maxLength: getMaxLength(this.program, prop),
-    //     pattern: getPattern(this.program, prop),
-    //   };
-
-    //   if (Object.values(decorators).some((it) => it !== undefined)) {
-    //     schema = new StringSchema(schema.language.default.name, schema.language.default.description, {
-    //       language: schema.language,
-    //       summary: schema.summary,
-    //       extensions: schema.extensions,
-    //       ...decorators,
-    //     });
-    //   }
-    // } else if (schema instanceof NumberSchema) {
-    //   const decorators = {
-    //     minimum: getMinValue(this.program, prop),
-    //     maximum: getMaxValue(this.program, prop),
-    //   };
-
-    //   if (Object.values(decorators).some((it) => it !== undefined)) {
-    //     schema = new NumberSchema(
-    //       schema.language.default.name,
-    //       schema.language.default.description,
-    //       schema.type,
-    //       schema.precision,
-    //       {
-    //         language: schema.language,
-    //         summary: schema.summary,
-    //         extensions: schema.extensions,
-    //         ...decorators,
-    //       },
-    //     );
-    //   }
-    // }
-    const format = getFormat(this.program, prop);
-    if (format) {
-      // TODO: deprecate format
-      if (prop.type.kind === "Scalar" && schema instanceof StringSchema) {
-        schema = this.processFormatString(prop.type, format, nameHint);
-      }
-    } else {
-      // encode
-      const encode = getEncode(this.program, prop);
-      if (encode) {
-        let type = prop.type;
-        if (prop.type.kind === "Union" && isNullableType(prop.type)) {
-          const nonNullVariants = Array.from(prop.type.variants.values()).filter((it) => !isNullType(it.type));
-          type = nonNullVariants[0].type;
-        }
-        if (type && type.kind === "Scalar") {
-          if (encode.encoding === "seconds" && hasScalarAsBase(type, "duration")) {
-            schema = this.processDurationSchema(type, nameHint, getDurationFormat(encode));
-          } else if (
-            (encode.encoding === "rfc3339" || encode.encoding === "rfc7231" || encode.encoding === "unixTimestamp") &&
-            (hasScalarAsBase(type, "utcDateTime") || hasScalarAsBase(type, "offsetDateTime"))
-          ) {
-            if (encode.encoding === "unixTimestamp") {
-              return this.processUnixTimeSchema(type, nameHint);
-            } else {
-              return this.processDateTimeSchema(type, nameHint, encode.encoding === "rfc7231");
-            }
-          } else if (encode.encoding === "base64url" && hasScalarAsBase(type, "bytes")) {
-            return this.processByteArraySchema(type, nameHint, true);
-          }
-        }
-      }
-    }
-    return schema;
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
@@ -2546,27 +2230,6 @@ export class CodeModelBuilder {
       serializedName: (prop as SdkBodyModelPropertyType).serializedName,
       extensions: extensions,
     });
-  }
-
-  private processFormatString(type: Scalar, format: string, nameHint: string): Schema {
-    switch (format) {
-      case "byte":
-        return this.processByteArraySchema(type, nameHint, true);
-      case "binary":
-        return this.processByteArraySchema(type, nameHint, false);
-      case "date-time":
-        return this.processDateTimeSchema(type, nameHint, false);
-      case "date-time-rfc1123":
-        return this.processDateTimeSchema(type, nameHint, true);
-      case "password":
-      case "url":
-      case "uuid":
-      case "eTag":
-        return this.processStringSchema(type, nameHint);
-      default:
-        this.logWarning(`Unrecognized string format: '${format}'.`);
-        return this.processStringSchema(type, nameHint);
-    }
   }
 
   private processUnionSchemaFromSdkType(type: SdkUnionType, name: string): Schema {
@@ -2782,17 +2445,6 @@ export class CodeModelBuilder {
     return getWireName(this.sdkContext, target);
   }
 
-  // private isReadOnly(target: SdkModelPropertyType): boolean {
-  //   // const key = isKey(this.program, target);
-  //   const segment = getSegment(this.program, target.__raw as Type) !== undefined;
-  //   // if (segment) {
-  //   //   return true;
-  //   // } else {
-  //   const visibility = target.kind === "property" ? (target as SdkBodyModelPropertyType).visibility : undefined;
-  //   return visibility?.length == 1 && visibility[0] === Visibility.Read;
-  //   // }
-  // }
-
   private isReadOnly(target: ModelProperty): boolean {
     // const key = isKey(this.program, target);
     const segment = getSegment(this.program, target) !== undefined;
@@ -2813,16 +2465,6 @@ export class CodeModelBuilder {
       }
     }
   }
-
-  // private isSecret(target: SdkModelPropertyType): boolean {
-  //   if (target.kind === "property") {
-  //     const visibility = (target as SdkBodyModelPropertyType).visibility;
-  //     if (visibility) {
-  //       return !visibility.includes(Visibility.Read);
-  //     }
-  //   }
-  //   return false;
-  // }
 
   private isSecret(target: ModelProperty): boolean {
     const visibility = getVisibility(this.program, target);
@@ -3087,23 +2729,5 @@ export class CodeModelBuilder {
 
   private isArm(): boolean {
     return Boolean(this.codeModel.arm);
-  }
-
-  private isSchemaUsageEmpty(schema: Schema): boolean {
-    if (
-      schema instanceof ObjectSchema ||
-      schema instanceof GroupSchema ||
-      schema instanceof ChoiceSchema ||
-      schema instanceof SealedChoiceSchema ||
-      schema instanceof OrSchema ||
-      schema instanceof ConstantSchema
-    ) {
-      return !(schema.usage && schema.usage.length > 0);
-    } else if (schema instanceof DictionarySchema) {
-      return this.isSchemaUsageEmpty(schema.elementType);
-    } else if (schema instanceof ArraySchema) {
-      return this.isSchemaUsageEmpty(schema.elementType);
-    }
-    return false;
   }
 }
