@@ -1787,23 +1787,7 @@ export class CodeModelBuilder {
         return this.processUnionSchemaFromSdkType(type, type.name);
 
       case "model":
-        // pure dictionary that does not have properties in the model. e.g. model IsModelAdditionalProperties is Record<ModelForRecord>;
-        // if (type.additionalProperties && type.properties.length === 0) {
-        //   const sdkDictType: SdkDictionaryType = {
-        //     kind: "dict",
-        //     keyType: {
-        //       kind: "string",
-        //       encode: "string",
-        //       nullable: false,
-        //     },
-        //     nullableValues: type.additionalProperties.nullable,
-        //     nullable: type.nullable,
-        //     valueType: type.additionalProperties
-        //   };
-        //   return this.processDictionarySchemaFromSdkType(sdkDictType, type.name);
-        // } else {
           return this.processObjectSchemaFromSdkType(type, type.name);
-        // }
         
       case "dict":
         return this.processDictionarySchemaFromSdkType(type, nameHint);
