@@ -101,10 +101,11 @@ public final class ExtendsDifferentSpreadStringsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: String (Required)
+     *     id: double (Required)
      *      (Optional): {
      *         String: String (Required)
      *     }
+     *     derivedProp: String (Required)
      * }
      * }</pre>
      * 
@@ -127,10 +128,11 @@ public final class ExtendsDifferentSpreadStringsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: String (Required)
+     *     id: double (Required)
      *      (Optional): {
      *         String: String (Required)
      *     }
+     *     derivedProp: String (Required)
      * }
      * }</pre>
      * 
@@ -153,10 +155,11 @@ public final class ExtendsDifferentSpreadStringsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: String (Required)
+     *     id: double (Required)
      *      (Optional): {
      *         String: String (Required)
      *     }
+     *     derivedProp: String (Required)
      * }
      * }</pre>
      * 
@@ -180,10 +183,11 @@ public final class ExtendsDifferentSpreadStringsImpl {
      * 
      * <pre>{@code
      * {
-     *     derivedProp: String (Required)
+     *     id: double (Required)
      *      (Optional): {
      *         String: String (Required)
      *     }
+     *     derivedProp: String (Required)
      * }
      * }</pre>
      * 

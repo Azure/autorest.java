@@ -1290,7 +1290,8 @@ hasConstructorArguments, settings));
         if (propertiesManager.hasConstructorArguments()) {
             if (propertiesManager.getSetterPropertiesCount() == 0
                 && propertiesManager.getReadOnlyPropertiesCount() == 0
-                && propertiesManager.getAdditionalProperties() == null) {
+                && propertiesManager.getAdditionalProperties() == null
+                && propertiesManager.getSuperAdditionalPropertiesProperty() == null) {
                 methodBlock.methodReturn("new " + modelName + "(" + constructorArgs + ")");
                 return;
             }
