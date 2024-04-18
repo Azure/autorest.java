@@ -383,7 +383,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             propertyValueGetter);
         if (fieldSerializationMethod != null) {
             if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
-                methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", clientType.toString(), propertyValueGetter));
+                methodBlock.line("JsonMergePatchHelper.get" + clientType.toString() + "Accessor().prepareModelForJsonMergePatch(" + propertyValueGetter + ", true);");
             }
             if (fromSuperType && clientType != wireType && clientType.isNullable()) {
                 // If the property is from a super type and the client type is different from the wire type then a null
@@ -394,7 +394,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 methodBlock.line(fieldSerializationMethod + ";");
             }
             if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
-                methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", clientType.toString(), propertyValueGetter));
+                methodBlock.line("JsonMergePatchHelper.get" + clientType.toString() + "Accessor().prepareModelForJsonMergePatch(" + propertyValueGetter + ", false);");
             }
         } else if (wireType == ClassType.OBJECT) {
             methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");
@@ -482,11 +482,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                     methodBlock.block("", codeBlock -> {
                         codeBlock.ifBlock(elementName + "!=null", ifBlock -> {
                             if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
-                                methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", ((ClassType) elementType).getName(), elementName));
+                                methodBlock.line("JsonMergePatchHelper.get" + ((ClassType) elementType).getName() + "Accessor().prepareModelForJsonMergePatch(" + elementName + ", true);");
                             }
                             ifBlock.line(valueSerializationMethod + ";");
                             if (elementType instanceof ClassType && ((ClassType) elementType).isSwaggerType()) {
-                                methodBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", ((ClassType) elementType).getName(), elementName));
+                                methodBlock.line("JsonMergePatchHelper.get" + ((ClassType) elementType).getName() + "Accessor().prepareModelForJsonMergePatch(" + elementName + ", false);");
                             }
                         }).elseBlock(elseBlock -> elseBlock.line(lambdaWriterName + ".writeNull();"));
                     });
