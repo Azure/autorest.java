@@ -1,5 +1,11 @@
 # Release History
 
+## 0.15.12 (2024-04-19)
+
+Compatible with compiler 0.55.
+
+- Bug fix on supporting `application/merge-patch+json`.
+
 ## 0.15.10 (2024-04-17)
 
 Compatible with compiler 0.55.
