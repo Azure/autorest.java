@@ -168,7 +168,7 @@ public class Main {
                 }
                 sb.append("    \"").append(key).append("\": \"").append(value).append("\"");
             });
-            sb.append("\n  }\n}");
+            sb.append("\n  }\n}\n");
 
             typeSpecPlugin.writeFile("src/main/resources/META-INF/" + artifactId + "_apiview_properties.json", sb.toString(), null);
         }
