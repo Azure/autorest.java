@@ -1926,8 +1926,8 @@ export class CodeModelBuilder {
     const elementSchema = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
     dictSchema.elementType = elementSchema;
 
-    dictSchema.nullableItems = type.valueType.nullable;
-
+    dictSchema.nullableItems = type.nullableValues;
+  
     return this.codeModel.schemas.add(dictSchema);
   }
 
@@ -2272,7 +2272,6 @@ export class CodeModelBuilder {
         new Property(propertyName, this.getDoc(type.__raw as Union), variantSchema, {
           summary: this.getSummary(type.__raw as Union),
           required: true,
-          nullable: it.nullable,
           readOnly: false,
         }),
       );
