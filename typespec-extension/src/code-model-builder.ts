@@ -1927,7 +1927,7 @@ export class CodeModelBuilder {
     dictSchema.elementType = elementSchema;
 
     dictSchema.nullableItems = type.nullableValues;
-  
+
     return this.codeModel.schemas.add(dictSchema);
   }
 
