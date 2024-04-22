@@ -166,8 +166,6 @@ import {
   isArmCommonType,
   isModelReferredInTemplate,
   isNullableType,
-  isSdkFloatKind,
-  isSdkIntKind,
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
@@ -1610,7 +1608,8 @@ export class CodeModelBuilder {
               if (match) {
                 schema = candidateResponseSchema;
                 this.trace(
-                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${candidateResponseSchema.language.default.name
+                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
+                    candidateResponseSchema.language.default.name
                   }'`,
                 );
               }
@@ -1735,11 +1734,7 @@ export class CodeModelBuilder {
           return this.processArraySchemaFromSdkType(type, nameHint);
 
         case "duration":
-          return this.processDurationSchemaFromSdkType(
-            type,
-            nameHint,
-            getDurationFormatFromSdkType(type),
-          );
+          return this.processDurationSchemaFromSdkType(type, nameHint, getDurationFormatFromSdkType(type));
 
         case "constant":
           return this.processConstantSchemaFromSdkType(type, nameHint);
@@ -1749,11 +1744,7 @@ export class CodeModelBuilder {
           if (type.encode === "unixTimestamp") {
             return this.processUnixTimeSchemaFromSdkType(type, nameHint);
           } else {
-            return this.processDateTimeSchemaFromSdkType(
-              type,
-              nameHint,
-              type.encode === "rfc7231",
-            );
+            return this.processDateTimeSchemaFromSdkType(type, nameHint, type.encode === "rfc7231");
           }
       }
     }
@@ -1765,7 +1756,7 @@ export class CodeModelBuilder {
     switch (type.kind) {
       case "any":
         return this.processAnySchemaFromSdkType();
-      
+
       case "string":
       case "password":
       case "guid":
@@ -1941,13 +1932,6 @@ export class CodeModelBuilder {
 
   private processConstantSchemaFromSdkType(type: SdkConstantType, name: string): ConstantSchema {
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
-      // type.valueType.kind === "string"
-      //   ? this.stringSchema
-      //   : type.valueType.kind === "boolean"
-      //     ? this.booleanSchema
-      //     : isSdkIntKind(type.valueType.kind)
-      //       ? this.integerSchema
-      //       : this.doubleSchema;
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type.__raw as StringLiteral | NumericLiteral | BooleanLiteral), {
