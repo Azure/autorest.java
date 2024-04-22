@@ -67,6 +67,7 @@ import {
   getWireName,
   isApiVersion,
   isInternal,
+  isSdkBuiltInKind,
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
@@ -1609,8 +1610,7 @@ export class CodeModelBuilder {
               if (match) {
                 schema = candidateResponseSchema;
                 this.trace(
-                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
-                    candidateResponseSchema.language.default.name
+                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${candidateResponseSchema.language.default.name
                   }'`,
                 );
               }
@@ -1712,80 +1712,50 @@ export class CodeModelBuilder {
   }
 
   private processSchemaFromSdkTypeImpl(type: SdkType, nameHint: string): Schema {
-    switch (type.kind) {
-      case "any":
-        return this.processAnySchemaFromSdkType(type, nameHint);
+    if (isSdkBuiltInKind(type.kind)) {
+      return this.processBuiltInFromSdkType(type as SdkBuiltInType, nameHint);
+    } else {
+      switch (type.kind) {
+        case "enum":
+          return this.processChoiceSchemaFromSdkType(type, type.name);
 
-      case "enum":
-        return this.processChoiceSchemaFromSdkType(type, type.name);
+        case "enumvalue":
+          return this.processConstantSchemaFromEnumValueFromSdkType(type, nameHint);
 
-      case "enumvalue":
-        return this.processConstantSchemaFromEnumValueFromSdkType(type as SdkEnumValueType, nameHint);
+        case "union":
+          return this.processUnionSchemaFromSdkType(type, type.name);
 
-      case "union":
-        return this.processUnionSchemaFromSdkType(type, type.name);
+        case "model":
+          return this.processObjectSchemaFromSdkType(type, type.name);
 
-      case "model":
-        return this.processObjectSchemaFromSdkType(type, type.name);
+        case "dict":
+          return this.processDictionarySchemaFromSdkType(type, nameHint);
 
-      case "dict":
-        return this.processDictionarySchemaFromSdkType(type, nameHint);
+        case "array":
+          return this.processArraySchemaFromSdkType(type, nameHint);
 
-      case "array":
-        return this.processArraySchemaFromSdkType(type, nameHint);
-
-      case "duration":
-        return this.processDurationSchemaFromSdkType(
-          type as SdkDurationType,
-          nameHint,
-          getDurationFormatFromSdkType(type as SdkDurationType),
-        );
-
-      case "constant":
-        return this.processConstantSchemaFromSdkType(type as SdkConstantType, nameHint);
-
-      case "bytes":
-      case "boolean":
-      case "plainDate":
-      case "plainTime":
-      case "numeric":
-      case "integer":
-      case "safeint":
-      case "int8":
-      case "uint8":
-      case "int16":
-      case "uint16":
-      case "int32":
-      case "uint32":
-      case "int64":
-      case "uint64":
-      case "float":
-      case "float32":
-      case "float64":
-      case "decimal":
-      case "decimal128":
-      case "string":
-      case "password":
-      case "guid":
-      case "url":
-      case "uuid":
-      case "eTag":
-      case "armId":
-      case "ipAddress":
-      case "azureLocation":
-        return this.processBuiltInFromSdkType(type, nameHint);
-
-      case "utcDateTime":
-      case "offsetDateTime":
-        if ((type as SdkDatetimeType).encode === "unixTimestamp") {
-          return this.processUnixTimeSchemaFromSdkType(type as SdkDatetimeType, nameHint);
-        } else {
-          return this.processDateTimeSchemaFromSdkType(
-            type as SdkDatetimeType,
+        case "duration":
+          return this.processDurationSchemaFromSdkType(
+            type,
             nameHint,
-            (type as SdkDatetimeType).encode === "rfc7231",
+            getDurationFormatFromSdkType(type),
           );
-        }
+
+        case "constant":
+          return this.processConstantSchemaFromSdkType(type, nameHint);
+
+        case "utcDateTime":
+        case "offsetDateTime":
+          if (type.encode === "unixTimestamp") {
+            return this.processUnixTimeSchemaFromSdkType(type, nameHint);
+          } else {
+            return this.processDateTimeSchemaFromSdkType(
+              type,
+              nameHint,
+              type.encode === "rfc7231",
+            );
+          }
+      }
     }
     throw new Error(`Unrecognized type: '${type.kind}'.`);
   }
@@ -1793,6 +1763,9 @@ export class CodeModelBuilder {
   private processBuiltInFromSdkType(type: SdkBuiltInType, nameHint: string): Schema {
     nameHint = nameHint || type.kind;
     switch (type.kind) {
+      case "any":
+        return this.processAnySchemaFromSdkType();
+      
       case "string":
       case "password":
       case "guid":
@@ -1846,10 +1819,9 @@ export class CodeModelBuilder {
       case "uri":
         return this.processUrlSchemaFromSdkType(type, nameHint);
     }
-    throw new Error(`Unrecognized builtin type: '${type.kind}'.`);
   }
 
-  private processAnySchemaFromSdkType(type: SdkType, name: string): AnySchema {
+  private processAnySchemaFromSdkType(): AnySchema {
     return this.anySchema;
   }
 
@@ -1936,11 +1908,12 @@ export class CodeModelBuilder {
     name: string,
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type.__raw as Enum);
-    const valueType = isSdkIntKind(type.valueType.kind)
-      ? this.integerSchema
-      : isSdkFloatKind(type.valueType.kind)
-        ? this.doubleSchema
-        : this.stringSchema;
+    const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
+    // isSdkIntKind(type.valueType.kind)
+    //   ? this.integerSchema
+    //   : isSdkFloatKind(type.valueType.kind)
+    //     ? this.doubleSchema
+    //     : this.stringSchema;
 
     const choices: ChoiceValue[] = [];
     type.values.forEach((it: SdkEnumValueType) =>
@@ -1967,14 +1940,14 @@ export class CodeModelBuilder {
   }
 
   private processConstantSchemaFromSdkType(type: SdkConstantType, name: string): ConstantSchema {
-    const valueType =
-      type.valueType.kind === "string"
-        ? this.stringSchema
-        : type.valueType.kind === "boolean"
-          ? this.booleanSchema
-          : isSdkIntKind(type.valueType.kind)
-            ? this.integerSchema
-            : this.doubleSchema;
+    const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
+      // type.valueType.kind === "string"
+      //   ? this.stringSchema
+      //   : type.valueType.kind === "boolean"
+      //     ? this.booleanSchema
+      //     : isSdkIntKind(type.valueType.kind)
+      //       ? this.integerSchema
+      //       : this.doubleSchema;
 
     return this.codeModel.schemas.add(
       new ConstantSchema(name, this.getDoc(type.__raw as StringLiteral | NumericLiteral | BooleanLiteral), {
@@ -2396,10 +2369,7 @@ export class CodeModelBuilder {
     if (!target) {
       return nameHint || "";
     }
-    // const sdkType = getClientType(this.sdkContext, target);
-    // if (sdkType.kind === "model") {
-    //   return sdkType.name;
-    // }
+
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
     if (emitterClientName) {
