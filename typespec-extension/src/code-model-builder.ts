@@ -166,6 +166,8 @@ import {
   isArmCommonType,
   isModelReferredInTemplate,
   isNullableType,
+  isSdkIntKind,
+  isSdkStringKind,
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
@@ -1753,63 +1755,44 @@ export class CodeModelBuilder {
 
   private processBuiltInFromSdkType(type: SdkBuiltInType, nameHint: string): Schema {
     nameHint = nameHint || type.kind;
-    switch (type.kind) {
-      case "any":
-        return this.processAnySchemaFromSdkType();
 
-      case "string":
-      case "password":
-      case "guid":
-      case "ipAddress":
-      case "uuid":
-      case "ipV4Address":
-      case "ipV6Address":
-      case "eTag":
-      case "armId":
-      case "azureLocation":
-        return this.processStringSchemaFromSdkType(type, type.kind);
+    if (isSdkIntKind(type.kind)) {
+      const integerSize = type.kind === "safeint" || type.kind.includes("int64") ? 64 : 32;
+      return this.processIntegerSchemaFromSdkType(type, nameHint, integerSize);
+    } else if (isSdkStringKind(type.kind)) {
+      return this.processStringSchemaFromSdkType(type, type.kind);
+    } else {
+      switch (type.kind) {
+        case "any":
+          return this.processAnySchemaFromSdkType();
 
-      case "numeric":
-      case "integer":
-      case "safeint":
-      case "int8":
-      case "uint8":
-      case "int16":
-      case "uint16":
-      case "int32":
-      case "uint32":
-      case "int64":
-      case "uint64": {
-        // integer
-        const integerSize = type.kind === "safeint" || type.kind.includes("int64") ? 64 : 32;
-        return this.processIntegerSchemaFromSdkType(type, nameHint, integerSize);
+        case "float":
+        case "float32":
+        case "float64":
+          return this.processNumberSchemaFromSdkType(type, nameHint);
+
+        case "decimal":
+        case "decimal128":
+          return this.processDecimalSchemaFromSdkType(type, nameHint);
+
+        case "bytes":
+          return this.processByteArraySchemaFromSdkType(type, nameHint);
+
+        case "boolean":
+          return this.processBooleanSchemaFromSdkType(type, nameHint);
+
+        case "plainTime":
+          return this.processTimeSchemaFromSdkType(type, nameHint);
+
+        case "plainDate":
+          return this.processDateSchemaFromSdkType(type, nameHint);
+
+        case "url":
+        case "uri":
+          return this.processUrlSchemaFromSdkType(type, nameHint);
       }
-
-      case "float":
-      case "float32":
-      case "float64":
-        return this.processNumberSchemaFromSdkType(type, nameHint);
-
-      case "decimal":
-      case "decimal128":
-        return this.processDecimalSchemaFromSdkType(type, nameHint);
-
-      case "bytes":
-        return this.processByteArraySchemaFromSdkType(type, nameHint);
-
-      case "boolean":
-        return this.processBooleanSchemaFromSdkType(type, nameHint);
-
-      case "plainTime":
-        return this.processTimeSchemaFromSdkType(type, nameHint);
-
-      case "plainDate":
-        return this.processDateSchemaFromSdkType(type, nameHint);
-
-      case "url":
-      case "uri":
-        return this.processUrlSchemaFromSdkType(type, nameHint);
     }
+    throw new Error(`Unrecognized type for builtin: '${type.kind}'.`);
   }
 
   private processAnySchemaFromSdkType(): AnySchema {
@@ -1900,11 +1883,6 @@ export class CodeModelBuilder {
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
     const namespace = getNamespace(type.__raw as Enum);
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
-    // isSdkIntKind(type.valueType.kind)
-    //   ? this.integerSchema
-    //   : isSdkFloatKind(type.valueType.kind)
-    //     ? this.doubleSchema
-    //     : this.stringSchema;
 
     const choices: ChoiceValue[] = [];
     type.values.forEach((it: SdkEnumValueType) =>

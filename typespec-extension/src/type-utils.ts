@@ -357,26 +357,26 @@ function getDecoratorScopedValue<T>(
   return undefined;
 }
 
-// export function isSdkIntKind(kind: string): boolean {
-//   return [
-//     "numeric",
-//     "integer",
-//     "safeint",
-//     "int8",
-//     "int16",
-//     "int32",
-//     "int64",
-//     "uint8",
-//     "uint16",
-//     "uint32",
-//     "uint64",
-//   ].includes(kind);
-// }
+export function isSdkIntKind(kind: string): boolean {
+  return [
+    "numeric",
+    "integer",
+    "safeint",
+    "int8",
+    "int16",
+    "int32",
+    "int64",
+    "uint8",
+    "uint16",
+    "uint32",
+    "uint64",
+  ].includes(kind);
+}
 
-// export function isSdkFloatKind(kind: string): boolean {
-//   return ["float", "float32", "float64", "decimal", "decimal128"].includes(kind);
-// }
+export function isSdkFloatKind(kind: string): boolean {
+  return ["float", "float32", "float64", "decimal", "decimal128"].includes(kind);
+}
 
-// export function isSdkStringKind(kind: string): boolean {
-//   return ["string", "password", "guid", "url", "uuid", "eTag", "armId", "ipAddress", "azureLocation"].includes(kind);
-// }
+export function isSdkStringKind(kind: string): boolean {
+  return ["string", "password", "guid", "url", "uuid", "eTag", "armId", "ipAddress", "azureLocation"].includes(kind);
+}
