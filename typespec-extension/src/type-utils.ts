@@ -378,5 +378,5 @@ export function isSdkFloatKind(kind: string): boolean {
 }
 
 export function isSdkStringKind(kind: string): boolean {
-  return ["string", "password", "guid", "url", "uuid", "eTag", "armId", "ipAddress", "azureLocation"].includes(kind);
+  return ["string", "password", "guid", "ipAddress", "uuid", "ipV4Address", "ipV6Address", "eTag", "armId", "azureLocation"].includes(kind);
 }
