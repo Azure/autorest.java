@@ -11,19 +11,19 @@ public enum Priority {
     /**
      * Enum value 100.
      */
-    HIGH(100L),
+    HIGH(100),
 
     /**
      * Enum value 0.
      */
-    LOW(0L);
+    LOW(0);
 
     /**
      * The actual serialized value for a Priority instance.
      */
-    private final long value;
+    private final int value;
 
-    Priority(long value) {
+    Priority(int value) {
         this.value = value;
     }
 
@@ -33,10 +33,10 @@ public enum Priority {
      * @param value the serialized value to parse.
      * @return the parsed Priority object, or null if unable to parse.
      */
-    public static Priority fromLong(long value) {
+    public static Priority fromInt(int value) {
         Priority[] items = Priority.values();
         for (Priority item : items) {
-            if (item.toLong() == value) {
+            if (item.toInt() == value) {
                 return item;
             }
         }
@@ -44,11 +44,11 @@ public enum Priority {
     }
 
     /**
-     * De-serializes the instance to long value.
+     * De-serializes the instance to int value.
      * 
-     * @return the long value.
+     * @return the int value.
      */
-    public long toLong() {
+    public int toInt() {
         return this.value;
     }
 }

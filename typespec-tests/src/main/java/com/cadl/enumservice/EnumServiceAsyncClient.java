@@ -98,7 +98,7 @@ public final class EnumServiceAsyncClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -131,7 +131,7 @@ public final class EnumServiceAsyncClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -164,7 +164,7 @@ public final class EnumServiceAsyncClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -196,7 +196,7 @@ public final class EnumServiceAsyncClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -573,7 +573,7 @@ public final class EnumServiceAsyncClient {
     public Mono<Operation> setPriority(Priority priority) {
         // Generated convenience method for setPriorityWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions).flatMap(FluxUtil::toMono)
+        return setPriorityWithResponse(String.valueOf(priority.toInt()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Operation.class));
     }
 
@@ -692,13 +692,12 @@ public final class EnumServiceAsyncClient {
         if (priorityArrayOpt != null) {
             requestOptions.addQueryParam("priorityArrayOpt",
                 priorityArrayOpt.stream()
-                    .map(
-                        paramItemValue -> Objects.toString(paramItemValue == null ? null : paramItemValue.toLong(), ""))
+                    .map(paramItemValue -> Objects.toString(paramItemValue == null ? null : paramItemValue.toInt(), ""))
                     .collect(Collectors.joining(",")),
                 false);
         }
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -721,7 +720,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -899,12 +898,12 @@ public final class EnumServiceAsyncClient {
         if (priorityArrayOpt != null) {
             for (Priority paramItemValue : priorityArrayOpt) {
                 if (paramItemValue != null) {
-                    requestOptions.addQueryParam("priorityArrayOpt", String.valueOf(paramItemValue.toLong()), false);
+                    requestOptions.addQueryParam("priorityArrayOpt", String.valueOf(paramItemValue.toInt()), false);
                 }
             }
         }
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -927,7 +926,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setIntEnumMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }

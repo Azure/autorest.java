@@ -11,24 +11,24 @@ public enum GetResponseProp2 {
     /**
      * Enum value 1.
      */
-    ONE(1L),
+    ONE(1),
 
     /**
      * Enum value 2.
      */
-    TWO(2L),
+    TWO(2),
 
     /**
      * Enum value 3.
      */
-    THREE(3L);
+    THREE(3);
 
     /**
      * The actual serialized value for a GetResponseProp2 instance.
      */
-    private final long value;
+    private final int value;
 
-    GetResponseProp2(long value) {
+    GetResponseProp2(int value) {
         this.value = value;
     }
 
@@ -38,10 +38,10 @@ public enum GetResponseProp2 {
      * @param value the serialized value to parse.
      * @return the parsed GetResponseProp2 object, or null if unable to parse.
      */
-    public static GetResponseProp2 fromLong(long value) {
+    public static GetResponseProp2 fromInt(int value) {
         GetResponseProp2[] items = GetResponseProp2.values();
         for (GetResponseProp2 item : items) {
-            if (item.toLong() == value) {
+            if (item.toInt() == value) {
                 return item;
             }
         }
@@ -49,11 +49,11 @@ public enum GetResponseProp2 {
     }
 
     /**
-     * De-serializes the instance to long value.
+     * De-serializes the instance to int value.
      * 
-     * @return the long value.
+     * @return the int value.
      */
-    public long toLong() {
+    public int toInt() {
         return this.value;
     }
 }

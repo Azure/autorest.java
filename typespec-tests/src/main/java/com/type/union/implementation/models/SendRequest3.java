@@ -51,7 +51,7 @@ public final class SendRequest3 implements JsonSerializable<SendRequest3> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("prop", this.prop == null ? null : this.prop.toLong());
+        jsonWriter.writeNumberField("prop", this.prop == null ? null : this.prop.toInt());
         return jsonWriter.writeEndObject();
     }
 
@@ -73,7 +73,7 @@ public final class SendRequest3 implements JsonSerializable<SendRequest3> {
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = GetResponseProp2.fromLong(reader.getLong());
+                    prop = GetResponseProp2.fromInt(reader.getInt());
                 } else {
                     reader.skipChildren();
                 }

@@ -11,19 +11,19 @@ public enum UnionIntLiteralPropertyProperty {
     /**
      * Enum value 1.
      */
-    ONE(1L),
+    ONE(1),
 
     /**
      * Enum value 2.
      */
-    TWO(2L);
+    TWO(2);
 
     /**
      * The actual serialized value for a UnionIntLiteralPropertyProperty instance.
      */
-    private final long value;
+    private final int value;
 
-    UnionIntLiteralPropertyProperty(long value) {
+    UnionIntLiteralPropertyProperty(int value) {
         this.value = value;
     }
 
@@ -33,10 +33,10 @@ public enum UnionIntLiteralPropertyProperty {
      * @param value the serialized value to parse.
      * @return the parsed UnionIntLiteralPropertyProperty object, or null if unable to parse.
      */
-    public static UnionIntLiteralPropertyProperty fromLong(long value) {
+    public static UnionIntLiteralPropertyProperty fromInt(int value) {
         UnionIntLiteralPropertyProperty[] items = UnionIntLiteralPropertyProperty.values();
         for (UnionIntLiteralPropertyProperty item : items) {
-            if (item.toLong() == value) {
+            if (item.toInt() == value) {
                 return item;
             }
         }
@@ -44,11 +44,11 @@ public enum UnionIntLiteralPropertyProperty {
     }
 
     /**
-     * De-serializes the instance to long value.
+     * De-serializes the instance to int value.
      * 
-     * @return the long value.
+     * @return the int value.
      */
-    public long toLong() {
+    public int toInt() {
         return this.value;
     }
 }
