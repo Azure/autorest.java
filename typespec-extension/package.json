@@ -1,6 +1,6 @@
 {
   "name": "@azure-tools/typespec-java",
-  "version": "0.15.10",
+  "version": "0.15.12",
   "description": "TypeSpec library for emitting Java client from the TypeSpec REST protocol binding",
   "keywords": [
     "TypeSpec"
@@ -51,7 +51,7 @@
     "@typespec/openapi": ">=0.55.0 <1.0.0",
     "@typespec/versioning": ">=0.55.0 <1.0.0",
     "@azure-tools/typespec-azure-core": ">=0.41.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.41.2 <1.0.0"
+    "@azure-tools/typespec-client-generator-core": ">=0.41.3 <1.0.0"
   },
   "dependencies": {
     "@autorest/codemodel": "~4.20.0",
@@ -69,8 +69,8 @@
     "mocha": "~10.4.0",
     "rimraf": "~5.0.5",
     "typescript": "~5.4.5",
-    "@typescript-eslint/parser": "~7.6.0",
-    "@typescript-eslint/eslint-plugin": "~7.6.0",
+    "@typescript-eslint/parser": "~7.7.0",
+    "@typescript-eslint/eslint-plugin": "~7.7.0",
     "eslint-plugin-deprecation": "~2.0.0",
     "@azure-tools/typespec-azure-core": "0.41.0",
     "@azure-tools/typespec-client-generator-core": "0.41.3",

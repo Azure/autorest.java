@@ -2334,7 +2334,7 @@ export class CodeModelBuilder {
 
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
-    if (emitterClientName) {
+    if (emitterClientName && typeof emitterClientName === "string") {
       return emitterClientName;
     }
     // TODO: deprecate getProjectedName

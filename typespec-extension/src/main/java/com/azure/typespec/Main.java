@@ -73,14 +73,19 @@ public class Main {
         String outputDir = emitterOptions.getOutputDir();
         Path outputDirPath = Paths.get(outputDir);
         if (Files.exists(outputDirPath)) {
-            try (Stream<Path> filestream = Files.list(outputDirPath)) {
-                Set<String> filenames = filestream
-                    .map(p -> p.getFileName().toString())
-                    .map(name -> name.toLowerCase(Locale.ROOT))
-                    .collect(Collectors.toSet());
+            if (emitterOptions.getArm()) {
+                // check ../../parents/azure-client-sdk-parent
+                sdkIntegration = Files.exists(Paths.get(outputDir, "../../parents/azure-client-sdk-parent"));
+            } else {
+                try (Stream<Path> filestream = Files.list(outputDirPath)) {
+                    Set<String> filenames = filestream
+                            .map(p -> p.getFileName().toString())
+                            .map(name -> name.toLowerCase(Locale.ROOT))
+                            .collect(Collectors.toSet());
 
-                // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
-                sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
+                    // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
+                    sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
+                }
             }
         }
 
@@ -168,7 +173,7 @@ public class Main {
                 }
                 sb.append("    \"").append(key).append("\": \"").append(value).append("\"");
             });
-            sb.append("\n  }\n}");
+            sb.append("\n  }\n}\n");
 
             typeSpecPlugin.writeFile("src/main/resources/META-INF/" + artifactId + "_apiview_properties.json", sb.toString(), null);
         }
