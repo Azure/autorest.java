@@ -211,6 +211,11 @@ export class CodeModelBuilder {
     }
 
     this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
+    if (this.supportsAdvancedVersioning()) {
+      this.sdkContext.apiVersion = "all";
+    } else {
+      this.sdkContext.apiVersion = "latest";
+    }
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
