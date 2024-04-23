@@ -115,7 +115,6 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
                     }
 
                     additionalProperties.put(fieldName, reader.readUntyped());
-                    additionalProperties.put(fieldName, null);
                 }
             }
             IsUnknownAdditionalProperties deserializedIsUnknownAdditionalProperties

@@ -147,7 +147,6 @@ public final class ExtendsUnknownAdditionalPropertiesDiscriminatedDerived
                     }
 
                     additionalProperties.put(fieldName, reader.readUntyped());
-                    additionalProperties.put(fieldName, null);
                 }
             }
             ExtendsUnknownAdditionalPropertiesDiscriminatedDerived deserializedExtendsUnknownAdditionalPropertiesDiscriminatedDerived
