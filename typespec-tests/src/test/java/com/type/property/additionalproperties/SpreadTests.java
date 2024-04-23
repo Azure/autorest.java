@@ -23,7 +23,6 @@ import com.type.property.additionalproperties.models.WidgetData1;
 import com.type.property.additionalproperties.models.WidgetData2;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -97,7 +96,6 @@ public class SpreadTests {
     }
 
     @Test
-    @Disabled("The 'Get' request did not respond for a long time.")
     public void testSpreadModelArray() {
         Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
@@ -163,7 +161,6 @@ public class SpreadTests {
     }
 
     @Test
-    @Disabled("The 'Get' request did not respond for a long time.")
     public void testSpreadDifferentModelArray() {
         Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));

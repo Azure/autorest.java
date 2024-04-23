@@ -5,7 +5,6 @@ package com.type.property.additionalproperties;
 
 import com.type.property.additionalproperties.models.ExtendsUnknownAdditionalPropertiesDiscriminated;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import com.type.property.additionalproperties.models.DifferentSpreadFloatDerived;
@@ -55,7 +54,6 @@ public class ExtendsTests {
     }
 
     @Test
-    @Disabled("The 'Get' request did not respond for a long time.")
     public void testExtendsModelArrayClient() {
         Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
@@ -212,7 +210,6 @@ public class ExtendsTests {
     }
 
     @Test
-    @Disabled("The 'Get' request did not respond for a long time.")
     public void testExtendsDifferentSpreadModelArray() {
         Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
