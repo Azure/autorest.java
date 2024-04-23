@@ -1220,7 +1220,7 @@ hasConstructorArguments, settings));
                 if (valueType == ClassType.OBJECT) {
                     // String fieldName should be a local variable accessible in this spot of code.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", reader.readUntyped());");
-                } if (valueType instanceof IterableType) {
+                } else if (valueType instanceof IterableType) {
                     // The case that element is a List
                     String varName = additionalProperties.getName() + "ArrayItem";
                     javaBlock.text(valueType + " " + varName + " = ");
