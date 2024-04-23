@@ -124,6 +124,7 @@ public final class IsUnknownAdditionalPropertiesDerived extends IsUnknownAdditio
                     }
 
                     additionalProperties.put(fieldName, reader.readUntyped());
+                    additionalProperties.put(fieldName, null);
                 }
             }
             IsUnknownAdditionalPropertiesDerived deserializedIsUnknownAdditionalPropertiesDerived

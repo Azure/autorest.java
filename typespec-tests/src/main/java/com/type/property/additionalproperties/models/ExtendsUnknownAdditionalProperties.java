@@ -115,6 +115,7 @@ public class ExtendsUnknownAdditionalProperties implements JsonSerializable<Exte
                     }
 
                     additionalProperties.put(fieldName, reader.readUntyped());
+                    additionalProperties.put(fieldName, null);
                 }
             }
             ExtendsUnknownAdditionalProperties deserializedExtendsUnknownAdditionalProperties

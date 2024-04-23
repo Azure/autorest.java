@@ -124,6 +124,7 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
                     }
 
                     additionalProperties.put(fieldName, reader.readUntyped());
+                    additionalProperties.put(fieldName, null);
                 }
             }
             ExtendsUnknownAdditionalPropertiesDerived deserializedExtendsUnknownAdditionalPropertiesDerived

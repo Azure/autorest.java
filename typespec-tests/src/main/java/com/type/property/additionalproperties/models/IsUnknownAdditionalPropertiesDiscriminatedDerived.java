@@ -146,6 +146,7 @@ public final class IsUnknownAdditionalPropertiesDiscriminatedDerived
                     }
 
                     additionalProperties.put(fieldName, reader.readUntyped());
+                    additionalProperties.put(fieldName, null);
                 }
             }
             IsUnknownAdditionalPropertiesDiscriminatedDerived deserializedIsUnknownAdditionalPropertiesDiscriminatedDerived
