@@ -1220,6 +1220,13 @@ hasConstructorArguments, settings));
                 if (valueType == ClassType.OBJECT) {
                     // String fieldName should be a local variable accessible in this spot of code.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", reader.readUntyped());");
+                } else if (valueType instanceof IterableType) {
+                    // The case that element is a List
+                    String varName = additionalProperties.getName() + "ArrayItem";
+                    javaBlock.text(valueType + " " + varName + " = ");
+                    deserializeJsonContainerProperty(javaBlock, "readArray", valueType,
+                        ((IterableType) valueType).getElementType(), ((IterableType) valueType).getElementType(), 0);
+                    javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", " + varName + ");");
                 } else {
                     // Another assumption, the additional properties value type is simple.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", "
