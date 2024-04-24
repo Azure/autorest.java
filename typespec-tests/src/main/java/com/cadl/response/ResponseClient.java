@@ -17,11 +17,12 @@ import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.polling.SyncPoller;
+import com.azure.core.util.serializer.TypeReference;
 import com.cadl.response.implementation.ResponseClientImpl;
 import com.cadl.response.models.OperationDetails1;
 import com.cadl.response.models.OperationDetails2;
 import com.cadl.response.models.Resource;
-import com.cadl.response.models.ResourceArray;
+import java.util.List;
 
 /**
  * Initializes a new instance of the synchronous ResponseClient type.
@@ -67,16 +68,14 @@ public final class ResponseClient {
      * <p><strong>Response Body Schema</strong></p>
      * 
      * <pre>{@code
-     * {
-     *      (Optional): {
-     *         String (Required): {
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
+     * [
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
      *     }
-     * }
+     * ]
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -97,16 +96,14 @@ public final class ResponseClient {
      * <p><strong>Response Body Schema</strong></p>
      * 
      * <pre>{@code
-     * {
-     *      (Optional): {
-     *         String (Required): {
-     *             id: String (Required)
-     *             name: String (Required)
-     *             description: String (Optional)
-     *             type: String (Required)
-     *         }
+     * [
+     *      (Required){
+     *         id: String (Required)
+     *         name: String (Required)
+     *         description: String (Optional)
+     *         type: String (Required)
      *     }
-     * }
+     * ]
      * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
@@ -312,10 +309,10 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResourceArray getArray() {
+    public List<Resource> getArray() {
         // Generated convenience method for getArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getArrayWithResponse(requestOptions).getValue().toObject(ResourceArray.class);
+        return getArrayWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_RESOURCE);
     }
 
     /**
@@ -330,10 +327,10 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public ResourceArray getAnotherArray() {
+    public List<Resource> getAnotherArray() {
         // Generated convenience method for getAnotherArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getAnotherArrayWithResponse(requestOptions).getValue().toObject(ResourceArray.class);
+        return getAnotherArrayWithResponse(requestOptions).getValue().toObject(TYPE_REFERENCE_LIST_RESOURCE);
     }
 
     /**
@@ -464,4 +461,9 @@ public final class ResponseClient {
         return serviceClient.listIntegers(requestOptions)
             .mapPage(bodyItemValue -> bodyItemValue.toObject(Integer.class));
     }
+
+    @Generated
+    private static final TypeReference<List<Resource>> TYPE_REFERENCE_LIST_RESOURCE
+        = new TypeReference<List<Resource>>() {
+        };
 }
