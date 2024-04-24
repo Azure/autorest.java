@@ -2129,6 +2129,11 @@ export class CodeModelBuilder {
     const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
     const resource = this.dummyObjectSchemaFromSdkType(type, resourceModelName, namespace);
     const declaredProperties = type.properties;
+    let currentModel: SdkModelType | undefined = type;
+    while (currentModel) {
+      declaredProperties.push(...currentModel.properties);
+      currentModel = currentModel.baseModel;
+    }
     for (const prop of declaredProperties) {
       if (this.existsAtCurrentVersion(type.__raw as Type)) {
         resource.addProperty(this.processModelPropertyFromSdkType(prop));
