@@ -167,7 +167,6 @@ import {
   isModelReferredInTemplate,
   isNullableType,
   isSdkIntKind,
-  isSdkStringKind,
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
@@ -1759,12 +1758,22 @@ export class CodeModelBuilder {
     if (isSdkIntKind(type.kind)) {
       const integerSize = type.kind === "safeint" || type.kind.includes("int64") ? 64 : 32;
       return this.processIntegerSchemaFromSdkType(type, nameHint, integerSize);
-    } else if (isSdkStringKind(type.kind)) {
-      return this.processStringSchemaFromSdkType(type, type.kind);
     } else {
       switch (type.kind) {
         case "any":
           return this.processAnySchemaFromSdkType();
+        
+        case "string":
+        case "password":
+        case "guid":
+        case "ipAddress":
+        case "uuid":
+        case "ipV4Address":
+        case "ipV6Address":
+        case "eTag":
+        case "armId":
+        case "azureLocation":
+          return this.processStringSchemaFromSdkType(type, type.kind);
 
         case "float":
         case "float32":

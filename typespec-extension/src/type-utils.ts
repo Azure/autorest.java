@@ -376,7 +376,3 @@ export function isSdkIntKind(kind: string): boolean {
 export function isSdkFloatKind(kind: string): boolean {
   return ["float", "float32", "float64", "decimal", "decimal128"].includes(kind);
 }
-
-export function isSdkStringKind(kind: string): boolean {
-  return ["string", "password", "guid", "ipAddress", "uuid", "ipV4Address", "ipV6Address", "eTag", "armId", "azureLocation"].includes(kind);
-}
