@@ -646,8 +646,8 @@ abstract class ConvenienceMethodTemplateBase {
                             name);
                 } else {
                     return String.format(
-                            "%1$s.stream().map(paramItemValue -> paramItemValue == null ? \"\" : String.valueOf(paramItemValue.to%2$s())).collect(Collectors.toList())",
-                            name, enumValueType);
+                            "%1$s.stream().map(paramItemValue -> paramItemValue == null ? \"\" : String.valueOf(paramItemValue.%2$s())).collect(Collectors.toList())",
+                            name, ((EnumType) enumType).getToMethodName());
                 }
             } else {
                 return name;

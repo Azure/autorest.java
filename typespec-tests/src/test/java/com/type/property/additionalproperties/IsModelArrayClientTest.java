@@ -6,7 +6,6 @@ package com.type.property.additionalproperties;
 import com.type.property.additionalproperties.models.IsModelArrayAdditionalProperties;
 import com.type.property.additionalproperties.models.ModelForRecord;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -18,7 +17,6 @@ public class IsModelArrayClientTest {
     private final IsModelArrayClient client = new AdditionalPropertiesClientBuilder().buildIsModelArrayClient();
 
     @Test
-    @Disabled("The 'Get' request did not respond for a long time.")
     public void testPullAndGet() {
         Map<String, List<ModelForRecord>> propertyMap = new LinkedHashMap<>();
         propertyMap.put("prop", Arrays.asList(new ModelForRecord("ok"), new ModelForRecord("ok")));
