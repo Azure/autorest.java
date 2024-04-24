@@ -682,7 +682,7 @@ public final class EnumServiceClient {
                 false);
         }
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
@@ -704,7 +704,7 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
@@ -880,7 +880,7 @@ public final class EnumServiceClient {
             }
         }
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
@@ -902,7 +902,7 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntEnumMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 

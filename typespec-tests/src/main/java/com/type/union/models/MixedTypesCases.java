@@ -12,6 +12,7 @@ import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * The MixedTypesCases model.
@@ -42,6 +43,12 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
     @Generated
     private final BinaryData booleanProperty;
 
+    /*
+     * This should be receive/send 4 element with Cat, "a", int, and boolean
+     */
+    @Generated
+    private final List<BinaryData> array;
+
     /**
      * Creates an instance of MixedTypesCases class.
      * 
@@ -49,13 +56,16 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
      * @param literal the literal value to set.
      * @param intProperty the intProperty value to set.
      * @param booleanProperty the booleanProperty value to set.
+     * @param array the array value to set.
      */
     @Generated
-    public MixedTypesCases(BinaryData model, BinaryData literal, BinaryData intProperty, BinaryData booleanProperty) {
+    public MixedTypesCases(BinaryData model, BinaryData literal, BinaryData intProperty, BinaryData booleanProperty,
+        List<BinaryData> array) {
         this.model = model;
         this.literal = literal;
         this.intProperty = intProperty;
         this.booleanProperty = booleanProperty;
+        this.array = array;
     }
 
     /**
@@ -99,6 +109,16 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
     }
 
     /**
+     * Get the array property: This should be receive/send 4 element with Cat, "a", int, and boolean.
+     * 
+     * @return the array value.
+     */
+    @Generated
+    public List<BinaryData> getArray() {
+        return this.array;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -109,6 +129,8 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
         jsonWriter.writeUntypedField("literal", this.literal.toObject(Object.class));
         jsonWriter.writeUntypedField("int", this.intProperty.toObject(Object.class));
         jsonWriter.writeUntypedField("boolean", this.booleanProperty.toObject(Object.class));
+        jsonWriter.writeArrayField("array", this.array,
+            (writer, element) -> writer.writeUntyped(element == null ? null : element.toObject(Object.class)));
         return jsonWriter.writeEndObject();
     }
 
@@ -128,6 +150,7 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
             BinaryData literal = null;
             BinaryData intProperty = null;
             BinaryData booleanProperty = null;
+            List<BinaryData> array = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -142,11 +165,14 @@ public final class MixedTypesCases implements JsonSerializable<MixedTypesCases> 
                 } else if ("boolean".equals(fieldName)) {
                     booleanProperty
                         = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
+                } else if ("array".equals(fieldName)) {
+                    array = reader.readArray(reader1 -> reader1
+                        .getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped())));
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new MixedTypesCases(model, literal, intProperty, booleanProperty);
+            return new MixedTypesCases(model, literal, intProperty, booleanProperty, array);
         });
     }
 }

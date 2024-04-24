@@ -92,7 +92,9 @@ public final class DifferentSpreadModelArrayDerived extends DifferentSpreadModel
                         additionalProperties = new LinkedHashMap<>();
                     }
 
-                    additionalProperties.put(fieldName, null);
+                    List<ModelForRecord> additionalPropertiesArrayItem
+                        = reader.readArray(reader1 -> ModelForRecord.fromJson(reader1));
+                    additionalProperties.put(fieldName, additionalPropertiesArrayItem);
                 }
             }
             DifferentSpreadModelArrayDerived deserializedDifferentSpreadModelArrayDerived
