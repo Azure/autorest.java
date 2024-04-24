@@ -5,6 +5,7 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResource;
@@ -47,6 +48,10 @@ public final class CustomTemplateResourceImpl
 
     public ManagedIdentityProperties identity() {
         return this.innerModel().identity();
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public ProvisioningState provisioningState() {

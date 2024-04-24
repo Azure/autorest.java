@@ -5,6 +5,7 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import java.time.OffsetDateTime;
@@ -49,6 +50,13 @@ public interface TopLevelArmResource {
      * @return the tags value.
      */
     Map<String, String> tags();
+
+    /**
+     * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
+     * 
+     * @return the systemData value.
+     */
+    SystemData systemData();
 
     /**
      * Gets the configurationEndpoints property: Configuration Endpoints.

@@ -5,6 +5,7 @@
 package com.cadl.armresourceprovider.implementation;
 
 import com.azure.core.management.Region;
+import com.azure.core.management.SystemData;
 import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import com.cadl.armresourceprovider.models.ProvisioningState;
@@ -45,6 +46,10 @@ public final class TopLevelArmResourceImpl
         } else {
             return Collections.emptyMap();
         }
+    }
+
+    public SystemData systemData() {
+        return this.innerModel().systemData();
     }
 
     public List<String> configurationEndpoints() {
