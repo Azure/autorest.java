@@ -1762,7 +1762,7 @@ export class CodeModelBuilder {
       switch (type.kind) {
         case "any":
           return this.processAnySchemaFromSdkType();
-        
+
         case "string":
         case "password":
         case "guid":
