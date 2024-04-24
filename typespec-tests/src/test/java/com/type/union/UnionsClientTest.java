@@ -60,7 +60,7 @@ public class UnionsClientTest {
     @Test
     public void testIntsOnlyClient() {
         GetResponseProp2 prop = client4.get().getProp();
-        Assertions.assertEquals(2L, prop.toLong());
+        Assertions.assertEquals(2L, prop.toInt());
         client4.send(prop);
     }
 
