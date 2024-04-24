@@ -697,7 +697,7 @@ public final class EnumServiceAsyncClient {
                 false);
         }
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -720,7 +720,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -903,7 +903,7 @@ public final class EnumServiceAsyncClient {
             }
         }
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
@@ -926,7 +926,7 @@ public final class EnumServiceAsyncClient {
         // Generated convenience method for setIntEnumMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInteger()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(String.class));
     }
