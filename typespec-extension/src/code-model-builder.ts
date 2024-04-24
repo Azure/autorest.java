@@ -1029,10 +1029,11 @@ export class CodeModelBuilder {
         param.param.type.kind === "Scalar" &&
         getEncode(this.program, param.param) === undefined &&
         getEncode(this.program, param.param.type) === undefined &&
-        (hasScalarAsBase(param.param.type, "utcDateTime") || hasScalarAsBase(param.param.type, "offsetDateTime"))
+        (hasScalarAsBase(param.param.type, "utcDateTime") || hasScalarAsBase(param.param.type, "offsetDateTime")) &&
+        (sdkType.kind === "utcDateTime" || sdkType.kind === "offsetDateTime")
       ) {
         // utcDateTime in header maps to rfc7231
-        schema = this.processDateTimeSchemaFromSdkType(sdkType as SdkDatetimeType, param.param.name, true);
+        schema = this.processDateTimeSchemaFromSdkType(sdkType, param.param.name, true);
       } else {
         // change to sdk type
         schema = this.processSchemaFromSdkType(sdkType, param.param.name);
