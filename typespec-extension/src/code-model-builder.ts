@@ -2753,7 +2753,7 @@ export class CodeModelBuilder {
     return (
       this._integerSchema ||
       (this._integerSchema = this.codeModel.schemas.add(
-        new NumberSchema("integer", "simple integer", SchemaType.Integer, 32),
+        new NumberSchema("integer", "simple integer", SchemaType.Integer, 64),
       ))
     );
   }
