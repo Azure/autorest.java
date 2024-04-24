@@ -60,11 +60,6 @@
       <artifactId>ant</artifactId>
       <version>1.10.14</version>
     </dependency>
-    <dependency>
-      <groupId>org.eclipse.lsp4j</groupId>
-      <artifactId>org.eclipse.lsp4j</artifactId>
-      <version>0.21.1</version>
-    </dependency>
 
     <dependency>
       <groupId>org.junit.jupiter</groupId>

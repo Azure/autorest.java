@@ -4,7 +4,7 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.github.javaparser.utils.SourceRoot;
 import org.eclipse.lsp4j.SymbolInformation;
 
 import java.util.List;
@@ -15,13 +15,11 @@ import java.util.stream.Collectors;
  * The package level customization for an AutoRest generated client library.
  */
 public final class PackageCustomization {
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
+    private final SourceRoot source;
     private final String packageName;
 
-    PackageCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName) {
-        this.editor = editor;
-        this.languageClient = languageClient;
+    PackageCustomization(SourceRoot source, String packageName) {
+        this.source = source;
         this.packageName = packageName;
     }
 
@@ -52,6 +50,7 @@ public final class PackageCustomization {
      * @return A list of classes that are in this package.
      */
     public List<ClassCustomization> listClasses() {
+        source.getCompilationUnits()
         return languageClient.findWorkspaceSymbol("*")
                 .stream()
                 .filter(si -> si.getContainerName().equals(packageName))

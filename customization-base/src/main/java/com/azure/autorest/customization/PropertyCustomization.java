@@ -4,19 +4,11 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import com.azure.autorest.customization.implementation.ls.models.JavaCodeActionKind;
-import org.eclipse.lsp4j.CodeAction;
-import org.eclipse.lsp4j.SymbolInformation;
-import org.eclipse.lsp4j.SymbolKind;
-import org.eclipse.lsp4j.WorkspaceEdit;
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 
 /**
@@ -24,19 +16,26 @@ import java.util.stream.Collectors;
  * <p>
  * For constant property customizations use {@link ConstantCustomization}.
  */
-public final class PropertyCustomization extends CodeCustomization {
-    private static final Pattern METHOD_PARAMS_CAPTURE = Pattern.compile("\\(.*\\)");
-
+public final class PropertyCustomization {
+    private final FieldDeclaration property;
     private final String packageName;
     private final String className;
     private final String propertyName;
 
-    PropertyCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
-        SymbolInformation symbol, String propertyName) {
-        super(editor, languageClient, symbol);
+    PropertyCustomization(FieldDeclaration property, String packageName, String className, String propertyName) {
+        this.property = property;
         this.packageName = packageName;
         this.className = className;
         this.propertyName = propertyName;
+    }
+
+    /**
+     * Gets the name of the package that contains this property.
+     *
+     * @return The name of the package that contains this property.
+     */
+    public String getPackageName() {
+        return packageName;
     }
 
     /**
@@ -65,26 +64,9 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current class customization for chaining
      */
     public PropertyCustomization rename(String newName) {
-        List<SymbolInformation> symbols = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getName().toLowerCase().contains(propertyName.toLowerCase()))
-            .collect(Collectors.toList());
-        String propertyPascalName = propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
-        String newPascalName = newName.substring(0, 1).toUpperCase() + newName.substring(1);
+        property.getVariable(0).setName(newName);
 
-        List<WorkspaceEdit> edits = new ArrayList<>();
-        for (SymbolInformation symbol : symbols) {
-            if (symbol.getKind() == SymbolKind.Field) {
-                edits.add(languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), newName));
-            } else if (symbol.getKind() == SymbolKind.Method) {
-                String methodName = symbol.getName().replace(propertyPascalName, newPascalName)
-                    .replace(propertyName, newName);
-                methodName = METHOD_PARAMS_CAPTURE.matcher(methodName).replaceFirst("");
-                edits.add(languageClient.renameSymbol(fileUri, symbol.getLocation().getRange().getStart(), methodName));
-            }
-        }
-
-        Utils.applyWorkspaceEdits(edits, editor, languageClient);
-        return refreshCustomization(newName);
+        return this;
     }
 
     /**
@@ -94,7 +76,8 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization addAnnotation(String annotation) {
-        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(propertyName));
+        property.addAnnotation(annotation);
+        return this;
     }
 
     /**
@@ -104,9 +87,11 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
-            .getFieldByName(propertyName).get()
-            .getAnnotationByName(Utils.cleanAnnotationName(annotation)), () -> refreshCustomization(propertyName));
+        NodeList<AnnotationExpr> annotations = property.getAnnotations();
+        annotations.removeIf(a -> a.getNameAsString().equals(annotation));
+        property.setAnnotations(annotations);
+
+        return this;
     }
 
     /**
@@ -116,18 +101,8 @@ public final class PropertyCustomization extends CodeCustomization {
      * @return the current class customization for chaining
      */
     public PropertyCustomization generateGetterAndSetter() {
-        Optional<CodeAction> generateAccessors = languageClient.listCodeActions(fileUri, symbol.getLocation().getRange(),
-                JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString())
-            .stream().filter(ca -> ca.getKind().equals(JavaCodeActionKind.SOURCE_GENERATE_ACCESSORS.toString()))
-            .findFirst();
-        if (generateAccessors.isPresent()) {
-            Utils.applyWorkspaceEdit(generateAccessors.get().getEdit(), editor, languageClient);
-
-            String setterMethod = "set" + propertyName.substring(0, 1).toUpperCase() + propertyName.substring(1);
-            new PackageCustomization(editor, languageClient, packageName)
-                .getClass(className)
-                .getMethod(setterMethod).setReturnType(className, "this");
-        }
+        property.createGetter();
+        property.createSetter();
 
         return this;
     }
@@ -146,19 +121,8 @@ public final class PropertyCustomization extends CodeCustomization {
      * in the bitwise OR isn't a valid property {@link Modifier}.
      */
     public PropertyCustomization setModifier(int modifiers) {
-        String target = " *(?:(?:public|protected|private|static|final|transient|volatile) ?)*(.* )";
-        languageClient.listDocumentSymbols(symbol.getLocation().getUri())
-            .stream().filter(si -> si.getKind() == SymbolKind.Field && si.getName().equals(propertyName))
-            .findFirst()
-            .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
-                target + propertyName, "$1" + propertyName, Modifier.fieldModifiers(), modifiers));
+        property.setModifiers(Utils.toAstKeywords(modifiers, Modifier.fieldModifiers()));
 
-        return refreshCustomization(propertyName);
-    }
-
-    private PropertyCustomization refreshCustomization(String propertyName) {
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getProperty(propertyName);
+        return this;
     }
 }

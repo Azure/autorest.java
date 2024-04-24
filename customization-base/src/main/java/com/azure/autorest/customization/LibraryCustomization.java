@@ -4,21 +4,22 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.github.javaparser.ParserConfiguration;
+import com.github.javaparser.utils.ParserCollectionStrategy;
+import com.github.javaparser.utils.ProjectRoot;
 import org.eclipse.lsp4j.SymbolInformation;
 
+import java.nio.file.Path;
 import java.util.Optional;
 
 /**
  * The top level customization for an AutoRest generated client library.
  */
 public final class LibraryCustomization {
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
+    private final ProjectRoot project;
 
-    LibraryCustomization(Editor editor, EclipseLanguageClient languageClient) {
-        this.editor = editor;
-        this.languageClient = languageClient;
+    LibraryCustomization(Path root) {
+        this.project = new ParserCollectionStrategy().collect(root);
     }
 
     /**
@@ -28,7 +29,9 @@ public final class LibraryCustomization {
      * @return the package level customization.
      */
     public PackageCustomization getPackage(String packageName) {
-        return new PackageCustomization(editor, languageClient, packageName);
+        Path root = project.getRoot();
+        return new PackageCustomization(project.getSourceRoot(root.resolve(packageName.replace('.', '/')))
+            .orElseThrow(() -> new IllegalArgumentException("Package does not exist: " + packageName)));
     }
 
     /**
@@ -52,14 +55,5 @@ public final class LibraryCustomization {
         return Utils.returnIfPresentOrThrow(classSymbol,
             symbol -> new ClassCustomization(editor, languageClient, packageName, className, symbol),
             () -> new IllegalArgumentException(className + " does not exist in package " + packageName));
-    }
-
-    /**
-     * Gets the raw editor containing the current files being edited and eventually emitted to the disk.
-     *
-     * @return the raw editor
-     */
-    public Editor getRawEditor() {
-        return editor;
     }
 }

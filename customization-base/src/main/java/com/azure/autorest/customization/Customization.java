@@ -4,7 +4,6 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.azure.autorest.extension.base.util.FileUtils;
 import org.slf4j.Logger;
 

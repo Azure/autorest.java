@@ -4,7 +4,6 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import org.eclipse.lsp4j.FileChangeType;
@@ -30,39 +29,15 @@ import java.util.stream.Collectors;
 /**
  * The class level customization for an AutoRest generated class.
  */
-public final class ClassCustomization extends CodeCustomization {
-    private static final int INDENT_LENGTH = 4;
-
-    /*
-     * This pattern attempts to find the first line of a method string that doesn't have a first non-space character of
-     * '*' or '/'. From there it captures all word and space characters before and inside '( )' ignoring any trailing
-     * spaces and an opening '{'.
-     */
-    private static final Pattern METHOD_SIGNATURE_PATTERN =
-        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
-
-    /*
-     * This pattern attempts to find the first line of a constructor string that doesn't have a first non-space
-     * character of '*' or '/', effectively the first non-Javadoc line. From there it captures all word and space
-     * characters before and inside '( )' ignoring any trailing spaces and an opening '{'.
-     */
-    private static final Pattern CONSTRUCTOR_SIGNATURE_PATTERN =
-        Pattern.compile("^\\s*([^/*][\\w\\s]+\\([\\w\\s<>,\\.]*\\))\\s*\\{?$", Pattern.MULTILINE);
-
-    private static final Pattern BLOCK_OPEN = Pattern.compile("\\) *\\{");
-    private static final Pattern PUBLIC_MODIFIER = Pattern.compile(" *public ");
-    private static final Pattern PRIVATE_MODIFIER = Pattern.compile(" *private ");
-    private static final Pattern MEMBER_PARAMS = Pattern.compile("\\(.*\\)");
-
-    private final String packageName;
+public final class ClassCustomization {
+    private final CompilationUnit ast;
     private final String className;
+    private final String packageName;
 
-    ClassCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
-        SymbolInformation classSymbol) {
-        super(editor, languageClient, classSymbol);
-
-        this.packageName = packageName;
-        this.className = className;
+    ClassCustomization(CompilationUnit ast) {
+        this.ast = ast;
+        this.packageName = ast.getPackageDeclaration().map(pd -> pd.getName().asString()).orElse("");
+        this.className = ast.get();
     }
 
     /**

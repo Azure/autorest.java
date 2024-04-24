@@ -4,7 +4,6 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import org.eclipse.lsp4j.SymbolInformation;
 
 import java.lang.reflect.Modifier;

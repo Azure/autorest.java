@@ -597,7 +597,7 @@ public class ReadmeSamples {
             PackageCustomization models = customization.getPackage("com.azure.myservice.models");
             ClassCustomization foo = models.getClass("Foo");
             JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-            setActiveJavadoc.addThrows("RuntimeException", "An unsuccessful response is received");
+            setActiveJavadoc.setsThrows("RuntimeException", "An unsuccessful response is received");
         }
         // END: readme-sample-change-javadoc-throws-customization
 

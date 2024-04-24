@@ -4,9 +4,7 @@
 package com.azure.autorest.customization.implementation;
 
 import com.azure.autorest.customization.ClassCustomization;
-import com.azure.autorest.customization.CodeCustomization;
 import com.azure.autorest.customization.Editor;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.expr.AnnotationExpr;
@@ -35,6 +33,44 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Utils {
+    public static com.github.javaparser.ast.Modifier.Keyword[] toAstKeywords(int newModifiers, int validModifiers) {
+        List<com.github.javaparser.ast.Modifier.Keyword> keywords = new ArrayList<>();
+        if (Modifier.isPublic(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.PUBLIC);
+        }
+        if (Modifier.isProtected(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.PROTECTED);
+        }
+        if (Modifier.isPrivate(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.PRIVATE);
+        }
+        if (Modifier.isAbstract(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.ABSTRACT);
+        }
+        if (Modifier.isStatic(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.STATIC);
+        }
+        if (Modifier.isFinal(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.FINAL);
+        }
+        if (Modifier.isTransient(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.TRANSIENT);
+        }
+        if (Modifier.isVolatile(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.VOLATILE);
+        }
+        if (Modifier.isSynchronized(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.SYNCHRONIZED);
+        }
+        if (Modifier.isNative(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.NATIVE);
+        }
+        if (Modifier.isStrict(newModifiers)) {
+            keywords.add(com.github.javaparser.ast.Modifier.Keyword.STRICTFP);
+        }
+        return keywords.toArray(new com.github.javaparser.ast.Modifier.Keyword[0]);
+    }
+
     /**
      * This pattern determines the indentation of the passed string. Effectively it creates a group containing all
      * spaces before the first word character.
@@ -150,10 +186,10 @@ public class Utils {
         return (iterable == null || !iterable.iterator().hasNext());
     }
 
-    static void validateModifiers(int validTypeModifiers, int newModifiers) {
+    static int validateModifiers(int validTypeModifiers, int newModifiers) {
         // 0 indicates no modifiers.
         if (newModifiers == 0) {
-            return;
+            return newModifiers;
         }
 
         if (newModifiers < 0) {
@@ -163,6 +199,8 @@ public class Utils {
         if (validTypeModifiers != (validTypeModifiers | newModifiers)) {
             throw new IllegalArgumentException("Modifiers contain illegal modifiers for the type.");
         }
+
+        return newModifiers;
     }
 
     /**

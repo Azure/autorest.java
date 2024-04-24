@@ -4,7 +4,7 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
+import com.github.javaparser.ast.body.MethodDeclaration;
 import org.eclipse.lsp4j.FileChangeType;
 import org.eclipse.lsp4j.FileEvent;
 import org.eclipse.lsp4j.Position;
@@ -24,7 +24,8 @@ import static com.azure.autorest.customization.implementation.Utils.replaceModif
 /**
  * The method level customization for an AutoRest generated method.
  */
-public final class MethodCustomization extends CodeCustomization {
+public final class MethodCustomization {
+    private final MethodDeclaration method;
     private final String packageName;
     private final String className;
     private final String methodName;
