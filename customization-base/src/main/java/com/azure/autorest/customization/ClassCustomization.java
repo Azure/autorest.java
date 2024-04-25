@@ -4,40 +4,61 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
+import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
-import org.eclipse.lsp4j.FileChangeType;
-import org.eclipse.lsp4j.FileEvent;
-import org.eclipse.lsp4j.Position;
-import org.eclipse.lsp4j.SymbolInformation;
-import org.eclipse.lsp4j.SymbolKind;
-import org.eclipse.lsp4j.TextEdit;
-import org.eclipse.lsp4j.WorkspaceEdit;
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.BodyDeclaration;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
+import com.github.javaparser.ast.body.EnumDeclaration;
+import com.github.javaparser.ast.body.FieldDeclaration;
+import com.github.javaparser.ast.body.InitializerDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.body.TypeDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.Statement;
 
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.function.Consumer;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.stream.Collectors;
 
 /**
  * The class level customization for an AutoRest generated class.
  */
 public final class ClassCustomization {
-    private final CompilationUnit ast;
-    private final String className;
+    private final CompilationUnit compilationUnit;
+    private final TypeDeclaration<?> type;
     private final String packageName;
+    private final String className;
 
-    ClassCustomization(CompilationUnit ast) {
-        this.ast = ast;
-        this.packageName = ast.getPackageDeclaration().map(pd -> pd.getName().asString()).orElse("");
-        this.className = ast.get();
+    ClassCustomization(CompilationUnit compilationUnit, String packageName, String className) {
+        this.compilationUnit = compilationUnit;
+        Optional<ClassOrInterfaceDeclaration> clazz = compilationUnit.getClassByName(className);
+        Optional<EnumDeclaration> enumDeclaration = compilationUnit.getEnumByName(className);
+
+        if (clazz.isEmpty() && enumDeclaration.isEmpty()) {
+            throw new IllegalArgumentException("Class " + className + " does not exist in package " + packageName);
+        } else if (clazz.isPresent()) {
+            this.type = clazz.get();
+        } else {
+            this.type = enumDeclaration.get();
+        }
+
+        this.className = className;
+        this.packageName = packageName;
+    }
+
+    /**
+     * Gets the name of the package that contains this class.
+     *
+     * @return The name of the package that contains this class.
+     */
+    public String getPackageName() {
+        return packageName;
     }
 
     /**
@@ -56,10 +77,7 @@ public final class ClassCustomization {
      * @return A new {@link ClassCustomization} updated with the new imports for chaining.
      */
     public ClassCustomization addImports(String... imports) {
-        if (imports != null) {
-            return Utils.addImports(Arrays.asList(imports), this, this::refreshSymbol);
-        }
-
+        Utils.addImports(compilationUnit, (imports != null) ? Arrays.asList(imports) : Collections.emptyList());
         return this;
     }
 
@@ -82,40 +100,45 @@ public final class ClassCustomization {
      * @return The updated {@link ClassCustomization}.
      */
     public ClassCustomization addStaticBlock(String staticCodeBlock, List<String> importsToAdd) {
-
-        if (Utils.isNullOrEmpty(staticCodeBlock)) {
+        if (staticCodeBlock == null || staticCodeBlock.isEmpty()) {
             return this;
         }
 
-        // the class declaration line
-        int lastSymbolLine = symbol.getLocation().getRange().getStart().getLine();
+        Utils.addImports(compilationUnit, importsToAdd);
+        InitializerDeclaration staticInitializer = type.getMembers().stream()
+            .filter(BodyDeclaration::isInitializerDeclaration)
+            .map(BodyDeclaration::asInitializerDeclaration)
+            .filter(InitializerDeclaration::isStatic)
+            .findFirst().orElse(null);
 
-        // Find the last field symbol.
-        Optional<SymbolInformation> lastSymbol = languageClient.listDocumentSymbols(fileUri).stream()
-                .filter(symbol -> symbol.getKind() == SymbolKind.Field)
-                .reduce((first, second) -> second);
-
-        int indentAmount = INDENT_LENGTH;
-        if (lastSymbol.isPresent()) {
-            // the line number of the last field declaration
-            lastSymbolLine = lastSymbol.get().getLocation().getRange().getStart().getLine();
-            indentAmount = Utils.getIndent(editor.getFileLine(fileName, lastSymbolLine)).length();
+        NodeList<Statement> statements;
+        if (staticCodeBlock.startsWith("static")) {
+            staticCodeBlock = staticCodeBlock.substring("static".length()).trim();
         }
-//        System.out.println("indent amount " + indentAmount);
-
-        // start the static block from the next line of the last field or the line after class declaration
-        int staticBlockStartLine = lastSymbolLine + 1;
-        editor.insertBlankLine(fileName, staticBlockStartLine, false);
-        Position staticBlockPosition = editor.insertBlankLineWithIndent(fileName, staticBlockStartLine, indentAmount);
-        if(!staticCodeBlock.trim().startsWith("static")) {
-            staticCodeBlock = "static { " + System.lineSeparator() + staticCodeBlock + System.lineSeparator() +  "}";
+        try {
+            // First try parsing the static code block as a block statement ("{ ... }").
+            statements = StaticJavaParser.parseBlock(staticCodeBlock).getStatements();
+        } catch (ParseProblemException ignored2) {
+            // Then try parsing the static code block as a single statement.
+            statements = new NodeList<>(StaticJavaParser.parseStatement(staticCodeBlock));
         }
 
-        editor.replaceWithIndentedContent(fileName, staticBlockPosition, staticBlockPosition, staticCodeBlock,
-                staticBlockPosition.getCharacter());
-        if (importsToAdd != null) {
-            return Utils.addImports(importsToAdd, this, this::refreshSymbol);
+        if (staticInitializer != null) {
+            staticInitializer.getBody().getStatements().addAll(statements);
+            return this;
         }
+
+        // If adding a static initializer, add it after fields but before constructors or methods.
+        int index = Utils.indexOfTypeDeclaration(type.getMembers(),
+            declaration -> declaration.isConstructorDeclaration() || declaration.isMethodDeclaration());
+
+        staticInitializer = new InitializerDeclaration(true, new BlockStmt(statements));
+        if (index == -1) {
+            type.getMembers().add(staticInitializer);
+        } else {
+            type.getMembers().add(index, staticInitializer);
+        }
+
         return this;
     }
 
@@ -126,38 +149,27 @@ public final class ClassCustomization {
      * @return the method level customization
      */
     public MethodCustomization getMethod(String methodNameOrSignature) {
-        String methodName;
-        String methodSignature = null;
-        if (methodNameOrSignature.contains("(")) {
-            // method signature
-            methodSignature = BLOCK_OPEN.matcher(methodNameOrSignature).replaceFirst("");
-            methodSignature = PUBLIC_MODIFIER.matcher(methodSignature).replaceFirst("");
-            methodSignature = PRIVATE_MODIFIER.matcher(methodSignature).replaceFirst("");
+        List<MethodDeclaration> methods;
+        int parameterStart = methodNameOrSignature.indexOf("(");
+        if (parameterStart != -1) {
+            String methodName = methodNameOrSignature.substring(0, parameterStart).trim();
 
-            String returnTypeAndMethodName = methodNameOrSignature.split("\\(")[0];
-            if (returnTypeAndMethodName.contains(" ")) {
-                methodName = Utils.ANYTHING_THEN_SPACE_PATTERN.matcher(returnTypeAndMethodName).replaceAll("");
-            } else {
-                methodName = returnTypeAndMethodName;
-            }
+            // Don't need to worry about a trailing ')' as only the parameter types matter
+            String[] methodParams = methodNameOrSignature.substring(parameterStart + 1).split(",");
+            String[] methodParamTypes = Arrays.stream(methodParams)
+                .map(String::trim)
+                .map(param -> param.substring(0, param.indexOf(" ")))
+                .toArray(String[]::new);
+
+            methods = type.getMethodsBySignature(methodName, methodParamTypes);
         } else {
-            methodName = methodNameOrSignature;
+            methods = type.getMethodsByName(methodNameOrSignature.trim());
         }
-        Optional<SymbolInformation> methodSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getKind() == SymbolKind.Method
-                && MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(methodName))
-            .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine()).contains(methodNameOrSignature))
-            .findFirst();
-        if (methodSymbol.isEmpty()) {
-            throw new IllegalArgumentException("Method " + methodNameOrSignature + " does not exist in class " + className);
-        }
-        if (methodSignature == null) {
-            methodSignature = editor.getFileLine(fileName, methodSymbol.get().getLocation().getRange().getStart().getLine());
-            methodSignature = BLOCK_OPEN.matcher(methodSignature).replaceFirst("");
-            methodSignature = PUBLIC_MODIFIER.matcher(methodSignature).replaceFirst("");
-            methodSignature = PRIVATE_MODIFIER.matcher(methodSignature).replaceFirst("");
-        }
-        return new MethodCustomization(editor, languageClient, packageName, className, methodName, methodSignature, methodSymbol.get());
+
+        MethodDeclaration method = methods.stream().findFirst().orElseThrow(() -> new IllegalArgumentException(
+                "Method " + methodNameOrSignature + " does not exist in class " + className));
+
+        return new MethodCustomization(compilationUnit, method, packageName, className);
     }
 
     /**
@@ -171,48 +183,29 @@ public final class ClassCustomization {
      * @throws IllegalStateException If only the constructor name is passed and the class has multiple constructors.
      */
     public ConstructorCustomization getConstructor(String constructorNameOrSignature) {
-        String constructorName;
-        String constructorSignature = null;
-        if (constructorNameOrSignature.contains("(")) {
-            // method signature
-            constructorSignature = BLOCK_OPEN.matcher(constructorNameOrSignature).replaceFirst("");
-            constructorSignature = PUBLIC_MODIFIER.matcher(constructorSignature).replaceFirst("");
-            constructorSignature = PRIVATE_MODIFIER.matcher(constructorSignature).replaceFirst("");
-            String returnTypeAndMethodName = constructorNameOrSignature.split("\\(")[0];
-            if (returnTypeAndMethodName.contains(" ")) {
-                constructorName = Utils.ANYTHING_THEN_SPACE_PATTERN.matcher(returnTypeAndMethodName).replaceAll("");
-            } else {
-                constructorName = returnTypeAndMethodName;
-            }
+        ConstructorDeclaration constructor;
+        int parameterStart = constructorNameOrSignature.indexOf("(");
+        if (parameterStart != -1) {
+            // Don't need to worry about a trailing ')' as only the parameter types matter
+            String[] constructorParams = constructorNameOrSignature.substring(parameterStart + 1).split(",");
+            String[] constructorParamTypes = Arrays.stream(constructorParams)
+                .map(String::trim)
+                .map(param -> param.substring(0, param.indexOf(" ")))
+                .toArray(String[]::new);
+
+            constructor = type.getConstructorByParameterTypes(constructorParamTypes).orElseThrow(() ->
+                new IllegalArgumentException("Constructor " + constructorNameOrSignature + " does not exist in class "
+                    + className));
         } else {
-            constructorName = constructorNameOrSignature;
+            if (type.getConstructors().size() > 1) {
+                throw new IllegalStateException("Class " + className + " has multiple constructors. Please provide the "
+                    + "constructor signature to avoid ambiguous behavior.");
+            }
+
+            constructor = type.getConstructors().get(0);
         }
 
-        List<SymbolInformation> constructorSymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getKind() == SymbolKind.Constructor
-                && MEMBER_PARAMS.matcher(si.getName()).replaceFirst("").equals(constructorName))
-            .filter(si -> editor.getFileLine(fileName, si.getLocation().getRange().getStart().getLine())
-                .contains(constructorNameOrSignature))
-            .collect(Collectors.toList());
-
-        if (constructorSymbol.size() > 1) {
-            throw new IllegalStateException("Multiple instances of " + constructorNameOrSignature + " exist in the "
-                + "class. Use a more specific constructor signature.");
-        }
-
-        if (constructorSymbol.isEmpty()) {
-            throw new IllegalArgumentException("Constructor " + constructorNameOrSignature + " does not exist in class "
-                + className);
-        }
-
-        if (constructorSignature == null) {
-            constructorSignature = editor.getFileLine(fileName, constructorSymbol.get(0).getLocation().getRange().getStart().getLine());
-            constructorSignature = BLOCK_OPEN.matcher(constructorSignature).replaceFirst("");
-            constructorSignature = PUBLIC_MODIFIER.matcher(constructorSignature).replaceFirst("");
-            constructorSignature = PRIVATE_MODIFIER.matcher(constructorSignature).replaceFirst("");
-        }
-        return new ConstructorCustomization(editor, languageClient, packageName, className, constructorSignature,
-            constructorSymbol.get(0));
+        return new ConstructorCustomization(compilationUnit, constructor, packageName, className);
     }
 
     /**
@@ -224,16 +217,13 @@ public final class ClassCustomization {
      * @return the property level customization
      */
     public PropertyCustomization getProperty(String propertyName) {
-        Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getKind() == SymbolKind.Field && si.getName().equals(propertyName))
-            .findFirst();
+        FieldDeclaration property = type.getMembers().stream().filter(BodyDeclaration::isFieldDeclaration)
+            .map(BodyDeclaration::asFieldDeclaration)
+            .filter(fieldDeclaration -> fieldDeclaration.getVariable(0).getNameAsString().equals(propertyName))
+            .findFirst().orElseThrow(() -> new IllegalArgumentException(
+                "Property " + propertyName + " does not exist in " + "class " + className));
 
-        if (propertySymbol.isEmpty()) {
-            throw new IllegalArgumentException("Property " + propertyName + " does not exist in class " + className);
-        }
-
-        return new PropertyCustomization(editor, languageClient, packageName, className, propertySymbol.get(),
-            propertyName);
+        return new PropertyCustomization(property, packageName, className, propertyName);
     }
 
     /**
@@ -245,16 +235,14 @@ public final class ClassCustomization {
      * @return The constant level customization.
      */
     public ConstantCustomization getConstant(String constantName) {
-        Optional<SymbolInformation> propertySymbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getKind() == SymbolKind.Constant && si.getName().equals(constantName))
-            .findFirst();
+        FieldDeclaration constant = type.getMembers().stream().filter(BodyDeclaration::isFieldDeclaration)
+            .map(BodyDeclaration::asFieldDeclaration)
+            .filter(fieldDeclaration -> fieldDeclaration.getVariable(0).getNameAsString().equals(constantName))
+            .filter(field -> field.isStatic() && field.isFinal())
+            .findFirst().orElseThrow(() -> new IllegalArgumentException(
+                "Constant " + constantName + " does not exist in " + "class " + className));
 
-        if (propertySymbol.isEmpty()) {
-            throw new IllegalArgumentException("Constant " + constantName + " does not exist in class " + className);
-        }
-
-        return new ConstantCustomization(editor, languageClient, packageName, className, propertySymbol.get(),
-            constantName);
+        return new ConstantCustomization(constant, packageName, className, constantName);
     }
 
     /**
@@ -263,8 +251,7 @@ public final class ClassCustomization {
      * @return the Javadoc customization
      */
     public JavadocCustomization getJavadoc() {
-        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
-            symbol.getLocation().getRange().getStart().getLine());
+        return new JavadocCustomization(type);
     }
 
     /**
@@ -286,56 +273,12 @@ public final class ClassCustomization {
      * @return The constructor level customization for the added constructor.
      */
     public ConstructorCustomization addConstructor(String constructor, List<String> importsToAdd) {
-        // Get the signature of the constructor.
-        Matcher constructorSignatureMatcher = CONSTRUCTOR_SIGNATURE_PATTERN.matcher(constructor);
-        String constructorSignature = null;
-        if (constructorSignatureMatcher.find()) {
-            constructorSignature = constructorSignatureMatcher.group(1);
-        }
+        Utils.addImports(compilationUnit, importsToAdd);
+        ConstructorDeclaration constructorDeclaration
+            = (ConstructorDeclaration) StaticJavaParser.parseAnnotationBodyDeclaration(constructor);
+        type.addMember(constructorDeclaration);
 
-        // Find all constructor and field symbols.
-        List<SymbolInformation> constructorLocationFinder = languageClient.listDocumentSymbols(fileUri).stream()
-            .filter(symbol -> symbol.getKind() == SymbolKind.Field || symbol.getKind() == SymbolKind.Constructor)
-            .collect(Collectors.toList());
-
-        // If no constructors or fields exist in the class place the constructor after the class declaration line.
-        // Otherwise place the constructor after the last constructor or field.
-        int constructorStartLine;
-        if (Utils.isNullOrEmpty(constructorLocationFinder)) {
-            constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
-        } else {
-            SymbolInformation symbol = constructorLocationFinder.get(constructorLocationFinder.size() - 1);
-
-            // If the last symbol before the new constructor is a field only a new line needs to be inserted.
-            // Otherwise if the last symbol is a constructor its closing '}' needs to be found and then a new line
-            // needs to be inserted.
-            if (symbol.getKind() == SymbolKind.Field) {
-                constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
-            } else {
-                constructorStartLine = symbol.getLocation().getRange().getStart().getLine();
-
-                List<String> fileLines = editor.getFileLines(fileName);
-                String currentLine = fileLines.get(constructorStartLine);
-                String constructorIdent = Utils.getIndent(currentLine);
-                while (!currentLine.endsWith("}") || !currentLine.equals(constructorIdent + "}")) {
-                    currentLine = fileLines.get(++constructorStartLine);
-                }
-            }
-        }
-
-        int indentAmount = Utils.getIndent(editor.getFileLine(fileName, constructorStartLine)).length();
-
-        editor.insertBlankLine(fileName, ++constructorStartLine, false);
-        Position constructorPosition = editor.insertBlankLineWithIndent(fileName, ++constructorStartLine, indentAmount);
-
-        editor.replaceWithIndentedContent(fileName, constructorPosition, constructorPosition, constructor,
-            constructorPosition.getCharacter());
-
-        final String ctorSignature = (constructorSignature == null)
-            ? editor.getFileLine(fileName, constructorStartLine)
-            : constructorSignature;
-
-        return Utils.addImports(importsToAdd, this, () -> getConstructor(ctorSignature));
+        return new ConstructorCustomization(compilationUnit, constructorDeclaration, packageName, className);
     }
 
     /**
@@ -357,32 +300,11 @@ public final class ClassCustomization {
      * @return The method level customization for the added method.
      */
     public MethodCustomization addMethod(String method, List<String> importsToAdd) {
-        // Get the signature of the method.
-        Matcher methodSignatureMatcher = METHOD_SIGNATURE_PATTERN.matcher(method);
-        String methodSignature = null;
-        if (methodSignatureMatcher.find()) {
-            methodSignature = methodSignatureMatcher.group(1);
-        }
+        Utils.addImports(compilationUnit, importsToAdd);
+        MethodDeclaration methodDeclaration = StaticJavaParser.parseMethodDeclaration(method);
+        type.addMember(methodDeclaration);
 
-        // find position
-        List<String> fileLines = editor.getFileLines(fileName);
-        int lineNum = fileLines.size();
-        String currentLine = fileLines.get(--lineNum);
-        while (!currentLine.endsWith("}") || currentLine.startsWith("}")) {
-            currentLine = fileLines.get(--lineNum);
-        }
-
-        int indentAmount = Utils.getIndent(currentLine).length();
-
-        editor.insertBlankLine(fileName, ++lineNum, false);
-        Position newMethod = editor.insertBlankLineWithIndent(fileName, ++lineNum, indentAmount);
-
-        // replace
-        editor.replaceWithIndentedContent(fileName, newMethod, newMethod, method, newMethod.getCharacter());
-
-        final String mSig = (methodSignature == null) ? editor.getFileLine(fileName, lineNum) : methodSignature;
-
-        return Utils.addImports(importsToAdd, this, () -> getMethod(mSig));
+        return new MethodCustomization(compilationUnit, methodDeclaration, packageName, className);
     }
 
     /**
@@ -399,77 +321,8 @@ public final class ClassCustomization {
      * @return The current ClassCustomization.
      */
     public ClassCustomization removeMethod(String methodNameOrSignature) {
-        MethodCustomization methodCustomization = getMethod(methodNameOrSignature);
-
-        int methodSignatureLine = methodCustomization.getSymbol().getLocation().getRange().getStart().getLine();
-
-        // Begin by getting the method's Javadoc to determine where to begin removal of the method.
-        Position start = methodCustomization.getJavadoc().getJavadocRange().getStart();
-
-        // Find the ending location of the method being removed.
-        String bodyPositionFinder = editor.getFileLine(fileName, methodSignatureLine);
-        String methodBlockIndent = Utils.getIndent(bodyPositionFinder);
-
-        // Go until the beginning of the next method is found.
-        int endLine = Utils.walkDownFileUntilLineMatches(editor, fileName, methodSignatureLine,
-            lineContent -> lineContent.matches(methodBlockIndent + "."));
-        Position end = new Position(endLine, editor.getFileLine(fileName, endLine).length());
-
-        // Remove the method.
-        editor.replace(fileName, start, end, "");
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.Changed);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
+        getMethod(methodNameOrSignature).method.remove();
         return this;
-    }
-
-    /**
-     * Renames a class in the package.
-     *
-     * @param newName the new simple name for this class
-     * @return The current ClassCustomization.
-     */
-    public ClassCustomization rename(String newName) {
-        WorkspaceEdit workspaceEdit = languageClient.renameSymbol(fileUri,
-            symbol.getLocation().getRange().getStart(), newName);
-        List<FileEvent> changes = new ArrayList<>();
-        for (Map.Entry<String, List<TextEdit>> edit : workspaceEdit.getChanges().entrySet()) {
-            int i = edit.getKey().indexOf("src/main/java/");
-            String oldEntry = edit.getKey().substring(i);
-            if (editor.getContents().containsKey(oldEntry)) {
-                for (TextEdit textEdit : edit.getValue()) {
-                    editor.replace(oldEntry, textEdit.getRange().getStart(), textEdit.getRange().getEnd(), textEdit.getNewText());
-                }
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(edit.getKey());
-                if (oldEntry.endsWith("/" + className + ".java")) {
-                    String newEntry = oldEntry.replace(className + ".java", newName + ".java");
-                    editor.renameFile(oldEntry, newEntry);
-                    String newUri = edit.getKey().replace(className + ".java", newName + ".java");
-                    fileEvent.setType(FileChangeType.Deleted);
-                    changes.add(fileEvent);
-                    FileEvent newFile = new FileEvent();
-                    newFile.setUri(newUri);
-                    newFile.setType(FileChangeType.Created);
-                    changes.add(newFile);
-                } else {
-                    fileEvent.setType(FileChangeType.Changed);
-                    changes.add(fileEvent);
-                }
-            }
-        }
-        languageClient.notifyWatchedFilesChanged(changes);
-
-        String packagePath = packageName.replace(".", "/");
-        Optional<SymbolInformation> newClassSymbol = languageClient.findWorkspaceSymbol(newName)
-            .stream().filter(si -> si.getLocation().getUri().endsWith(packagePath + "/" + newName + ".java"))
-            .findFirst();
-        if (newClassSymbol.isEmpty()) {
-            throw new IllegalArgumentException("Renamed failed with new class " + newName + " not found.");
-        }
-        return new ClassCustomization(editor, languageClient, packageName, newName, newClassSymbol.get());
     }
 
     /**
@@ -486,13 +339,8 @@ public final class ClassCustomization {
      * in the bitwise OR isn't a valid class {@link Modifier}.
      */
     public ClassCustomization setModifier(int modifiers) {
-        languageClient.listDocumentSymbols(symbol.getLocation().getUri())
-            .stream().filter(si -> si.getKind() == SymbolKind.Class && si.getName().equals(className))
-            .findFirst()
-            .ifPresent(symbolInformation -> Utils.replaceModifier(symbolInformation, editor, languageClient,
-                "(?:.+ )?class " + className, "class " + className, Modifier.classModifiers(), modifiers));
-
-        return refreshSymbol();
+        Utils.setModifiers(type, modifiers, Modifier.classModifiers());
+        return this;
     }
 
     /**
@@ -502,29 +350,8 @@ public final class ClassCustomization {
      * @return the current class customization for chaining
      */
     public ClassCustomization addAnnotation(String annotation) {
-        if (!annotation.startsWith("@")) {
-            annotation = "@" + annotation;
-        }
-
-        Optional<SymbolInformation> symbol = languageClient.listDocumentSymbols(fileUri)
-            .stream().filter(si -> si.getKind() == SymbolKind.Class)
-            .findFirst();
-        if (symbol.isPresent()) {
-            if (editor.getContents().containsKey(fileName)) {
-                int line = symbol.get().getLocation().getRange().getStart().getLine();
-                Position position = editor.insertBlankLine(fileName, line, true);
-                editor.replace(fileName, position, position, annotation);
-
-                FileEvent fileEvent = new FileEvent();
-                fileEvent.setUri(fileUri);
-                fileEvent.setType(FileChangeType.Changed);
-                languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-                Utils.organizeImportsOnRange(languageClient, editor, fileUri, symbol.get().getLocation().getRange());
-            }
-        }
-
-        return refreshSymbol();
+        Utils.addAnnotation(type, annotation);
+        return this;
     }
 
     /**
@@ -534,8 +361,8 @@ public final class ClassCustomization {
      * @return the current class customization for chaining
      */
     public ClassCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
-            .getAnnotationByName(Utils.cleanAnnotationName(annotation)), this::refreshSymbol);
+        Utils.removeAnnotation(type, annotation);
+        return this;
     }
 
     /**
@@ -546,18 +373,14 @@ public final class ClassCustomization {
      * @return the current class customization for chaining
      */
     public ClassCustomization renameEnumMember(String enumMemberName, String newName) {
-        String fileUri = symbol.getLocation().getUri();
-        String lowercaseEnumMemberName = enumMemberName.toLowerCase();
-
-        List<WorkspaceEdit> edits = new ArrayList<>();
-        for (SymbolInformation si : languageClient.listDocumentSymbols(fileUri)) {
-            if (!si.getName().toLowerCase().contains(lowercaseEnumMemberName)) {
-                continue;
-            }
-
-            edits.add(languageClient.renameSymbol(fileUri, si.getLocation().getRange().getStart(), newName));
+        if (type instanceof EnumDeclaration) {
+            EnumDeclaration enumDeclaration = (EnumDeclaration) type;
+            enumDeclaration.getEntries().stream()
+                .filter(enumConstantDeclaration -> enumConstantDeclaration.getNameAsString().equals(enumMemberName))
+                .findFirst()
+                .ifPresent(enumConstantDeclaration -> enumConstantDeclaration.setName(newName));
         }
-        Utils.applyWorkspaceEdits(edits, editor, languageClient);
+
         return this;
     }
 
@@ -568,19 +391,8 @@ public final class ClassCustomization {
      * @return A new ClassCustomization for this class with the abstract syntax tree changes applied.
      */
     public ClassCustomization customizeAst(Consumer<CompilationUnit> astCustomization) {
-        CompilationUnit astToEdit = StaticJavaParser.parse(editor.getFileContent(fileName));
-        astCustomization.accept(astToEdit);
-        editor.replaceFile(fileName, astToEdit.toString());
+        astCustomization.accept(compilationUnit);
 
-        FileEvent fileEvent = new FileEvent();
-        fileEvent.setUri(fileUri);
-        fileEvent.setType(FileChangeType.Changed);
-        languageClient.notifyWatchedFilesChanged(Collections.singletonList(fileEvent));
-
-        return refreshSymbol();
-    }
-
-    ClassCustomization refreshSymbol() {
-        return new PackageCustomization(editor, languageClient, packageName).getClass(className);
+        return new ClassCustomization(compilationUnit, packageName, className);
     }
 }

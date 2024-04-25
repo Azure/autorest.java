@@ -4,9 +4,7 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.FieldDeclaration;
-import com.github.javaparser.ast.expr.AnnotationExpr;
 
 import java.lang.reflect.Modifier;
 
@@ -76,7 +74,7 @@ public final class PropertyCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization addAnnotation(String annotation) {
-        property.addAnnotation(annotation);
+        Utils.addAnnotation(property, annotation);
         return this;
     }
 
@@ -87,10 +85,7 @@ public final class PropertyCustomization {
      * @return the current property customization for chaining
      */
     public PropertyCustomization removeAnnotation(String annotation) {
-        NodeList<AnnotationExpr> annotations = property.getAnnotations();
-        annotations.removeIf(a -> a.getNameAsString().equals(annotation));
-        property.setAnnotations(annotations);
-
+        Utils.removeAnnotation(property, annotation);
         return this;
     }
 
@@ -121,8 +116,7 @@ public final class PropertyCustomization {
      * in the bitwise OR isn't a valid property {@link Modifier}.
      */
     public PropertyCustomization setModifier(int modifiers) {
-        property.setModifiers(Utils.toAstKeywords(modifiers, Modifier.fieldModifiers()));
-
+        Utils.setModifiers(property, modifiers, Modifier.fieldModifiers());
         return this;
     }
 }

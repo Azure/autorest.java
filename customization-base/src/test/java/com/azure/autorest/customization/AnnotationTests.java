@@ -81,8 +81,8 @@ public class AnnotationTests {
                 methodCustomization.removeAnnotation("@JsonTypeInfo");
 
                 assertEquals(standardizeFileForComparison(expectedFileContent),
-                    standardizeFileForComparison(libraryCustomization.getRawEditor()
-                        .getFileContent(methodCustomization.getFileName())));
+                    standardizeFileForComparison(libraryCustomization.getPackage("AnnotationTests")
+                        .getParsedFiles().get("RemoveComplexAnnotation").toString()));
             }
         };
 

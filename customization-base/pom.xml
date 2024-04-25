@@ -31,21 +31,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-json</artifactId>
-      <version>1.1.0</version>
-    </dependency>
-    <dependency>
-      <groupId>com.azure</groupId>
-      <artifactId>azure-xml</artifactId>
-      <version>1.0.0-beta.2</version>
-    </dependency>
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>2.13.5</version>
-    </dependency>
-    <dependency>
       <groupId>com.azure.tools</groupId>
       <artifactId>azure-autorest-extension</artifactId>
       <version>1.0.0-beta.5</version>
@@ -54,11 +39,6 @@
       <groupId>com.github.javaparser</groupId>
       <artifactId>javaparser-core</artifactId>
       <version>3.25.10</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.ant</groupId>
-      <artifactId>ant</artifactId>
-      <version>1.10.14</version>
     </dependency>
 
     <dependency>

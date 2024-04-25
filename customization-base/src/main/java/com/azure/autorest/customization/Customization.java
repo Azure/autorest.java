@@ -3,14 +3,8 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.extension.base.util.FileUtils;
 import org.slf4j.Logger;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
 import java.util.Map;
 
 /**
@@ -25,33 +19,10 @@ public abstract class Customization {
      * @return the map of files after customization
      */
     public final Map<String, String> run(Map<String, String> files, Logger logger) {
-        Path tempDirWithPrefix;
+        LibraryCustomization libraryCustomization = new LibraryCustomization(files);
+        customize(libraryCustomization, logger);
 
-        // Populate editor
-        Editor editor;
-        try {
-            tempDirWithPrefix = FileUtils.createTempDirectory("temp");
-            editor = new Editor(files, tempDirWithPrefix);
-            InputStream pomStream = Customization.class.getResourceAsStream("/pom.xml");
-            byte[] buffer = new byte[pomStream.available()];
-            pomStream.read(buffer);
-            editor.addFile("pom.xml", new String(buffer, StandardCharsets.UTF_8));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        // Start language client
-        try (EclipseLanguageClient languageClient
-            = new EclipseLanguageClient(null, tempDirWithPrefix.toString(), logger)) {
-            languageClient.initialize();
-            customize(new LibraryCustomization(editor, languageClient), logger);
-            editor.removeFile("pom.xml");
-            return editor.getContents();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            Utils.deleteDirectory(tempDirWithPrefix.toFile());
-        }
+        return libraryCustomization.getContents();
     }
 
     /**

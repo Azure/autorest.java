@@ -218,31 +218,6 @@ public class ReadmeSamples {
         }
     }
 
-    static class RenameClass extends Customization {
-        static class Initial {
-            // BEGIN: readme-sample-rename-class-initial
-            public class Foo {
-            }
-            // END: readme-sample-rename-class-initial
-        }
-
-        // BEGIN: readme-sample-rename-class-customization
-        @Override
-        public void customize(LibraryCustomization customization, Logger logger) {
-            PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-            ClassCustomization foo = models.getClass("Foo");
-            foo.rename("FooInfo");
-        }
-        // END: readme-sample-rename-class-customization
-
-        static class Result {
-            // BEGIN: readme-sample-rename-class-result
-            public class FooInfo {
-            }
-            // END: readme-sample-rename-class-result
-        }
-    }
-
     static class RenameMethod extends Customization {
         static class Initial {
             // BEGIN: readme-sample-rename-method-initial

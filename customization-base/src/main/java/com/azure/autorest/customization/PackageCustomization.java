@@ -3,24 +3,45 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.Utils;
-import com.github.javaparser.utils.SourceRoot;
-import org.eclipse.lsp4j.SymbolInformation;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.CompilationUnit;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * The package level customization for an AutoRest generated client library.
  */
 public final class PackageCustomization {
-    private final SourceRoot source;
     private final String packageName;
 
-    PackageCustomization(SourceRoot source, String packageName) {
-        this.source = source;
+    private final Map<String, String> rawFiles;
+    private final Map<String, CompilationUnit> parsedFiles;
+
+    PackageCustomization(String packageName) {
         this.packageName = packageName;
+
+        this.rawFiles = new HashMap<>();
+        this.parsedFiles = new HashMap<>();
+    }
+
+    void addFile(String className, String content) {
+        rawFiles.put(className, content);
+    }
+
+    Map<String, CompilationUnit> getParsedFiles() {
+        return parsedFiles;
+    }
+
+    /**
+     * Gets the name of the package.
+     *
+     * @return the name of the package
+     */
+    public String getPackageName() {
+        return packageName;
     }
 
     /**
@@ -30,32 +51,37 @@ public final class PackageCustomization {
      * @return the class level customization
      */
     public ClassCustomization getClass(String className) {
-        String packagePath = packageName.replace(".", "/");
-        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className).stream()
-             // findWorkspace symbol finds all classes that contain the classname term
-             // The filter that checks the filename only works if there are no nested classes
-             // So, when customizing client classes that contain service interface, this can incorrectly return
-             // the service interface instead of the client class. So, we should add another check for exact name match
-            .filter(si -> si.getName().equals(className))
-            .filter(si -> si.getLocation().getUri().endsWith(packagePath + "/" + className + ".java"))
-            .findFirst();
+        CompilationUnit parsedClass = parsedFiles.get(className);
 
-        return Utils.returnIfPresentOrThrow(classSymbol,
-            symbol -> new ClassCustomization(editor, languageClient, packageName, className, symbol),
-            () -> new IllegalArgumentException(className + " does not exist in package " + packageName));
+        if (parsedClass != null) {
+            // Class has already been parsed.
+            return new ClassCustomization(parsedClass, packageName, className);
+        }
+
+        String rawClass = rawFiles.get(className);
+        if (rawClass == null) {
+            throw new IllegalArgumentException(className + " does not exist in package " + packageName);
+        }
+
+        // TODO (alzimmer): If performance needs improving, CompilationUnit allows for an observer to be set. This could
+        //  allow for determine whether or not a class has actually been customized.
+        parsedClass = StaticJavaParser.parse(rawClass);
+        parsedFiles.put(className, parsedClass);
+
+        return new ClassCustomization(parsedClass, packageName, className);
     }
 
     /**
      * This method lists all the classes in this package.
+     *
      * @return A list of classes that are in this package.
      */
     public List<ClassCustomization> listClasses() {
-        source.getCompilationUnits()
-        return languageClient.findWorkspaceSymbol("*")
-                .stream()
-                .filter(si -> si.getContainerName().equals(packageName))
-                .map(classSymbol -> new ClassCustomization(editor, languageClient, packageName,
-                        classSymbol.getName(), classSymbol))
-                .collect(Collectors.toList());
+        // Calling this will force all raw files to be parsed.
+        rawFiles.forEach((key, value) -> parsedFiles.computeIfAbsent(key, ignored -> StaticJavaParser.parse(value)));
+
+        return parsedFiles.entrySet().stream()
+            .map(entry -> new ClassCustomization(entry.getValue(), packageName, entry.getKey()))
+            .collect(Collectors.toList());
     }
 }

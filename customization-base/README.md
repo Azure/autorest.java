@@ -264,36 +264,6 @@ public class Foo {
 }
 ```
 
-## Refactor: Rename a class
-
-A class `Foo`
-
-```java readme-sample-rename-class-initial
-public class Foo {
-}
-```
-
-with customization
-
-```java readme-sample-rename-class-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    foo.rename("FooInfo");
-}
-```
-
-will generate
-
-```java readme-sample-rename-class-result
-public class FooInfo {
-}
-```
-
-All references of `Foo` will be modified to `FooInfo`. When a valid value is provided, this customization is guaranteed 
-to not break the build.
-
 ## Refactor: Rename a method
 
 A method `isSupportsUnicode` in the `Foo` class
@@ -675,7 +645,7 @@ public void customize(LibraryCustomization customization, Logger logger) {
     PackageCustomization models = customization.getPackage("com.azure.myservice.models");
     ClassCustomization foo = models.getClass("Foo");
     JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-    setActiveJavadoc.addThrows("RuntimeException", "An unsuccessful response is received");
+    setActiveJavadoc.setsThrows("RuntimeException", "An unsuccessful response is received");
 }
 ```
 

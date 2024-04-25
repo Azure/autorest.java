@@ -4,9 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -16,7 +15,7 @@ public class ClassCustomizationTests {
     private static final Logger LOGGER = LoggerFactory.getLogger(AnnotationTests.class);
 
     @Test
-    public void testStaticCodeBlock() throws URISyntaxException {
+    public void testStaticCodeBlock() {
 
         final String fileName = "src/main/java/foo/Foo.java";
         final String fileContent = String.join(System.lineSeparator(),
@@ -32,13 +31,13 @@ public class ClassCustomizationTests {
             @Override
             public void customize(LibraryCustomization libraryCustomization, Logger logger) {
                 ClassCustomization classCustomization = libraryCustomization.getPackage("foo")
-                        .getClass("Foo");
+                    .getClass("Foo");
 
                 classCustomization.addStaticBlock("static { String a = \"foo\"; }");
 
                 assertEquals(standardizeFileForComparison(expectedFileContent),
-                        standardizeFileForComparison(libraryCustomization.getRawEditor()
-                                .getFileContent(classCustomization.getFileName())));
+                    standardizeFileForComparison(libraryCustomization.getPackage("foo").getParsedFiles().get("Foo")
+                        .toString()));
             }
         };
 
@@ -46,7 +45,7 @@ public class ClassCustomizationTests {
     }
 
     @Test
-    public void testStaticCodeBlockWithImports() throws URISyntaxException {
+    public void testStaticCodeBlockWithImports() {
 
         final String fileName = "src/main/java/foo/Foo.java";
         final String fileContent = String.join(System.lineSeparator(),
@@ -73,12 +72,11 @@ public class ClassCustomizationTests {
                 ClassCustomization classCustomization = libraryCustomization.getPackage("foo")
                         .getClass("Foo");
 
-                classCustomization.addStaticBlock("String a = \"foo\";", Arrays.asList("com.azure.core" +
-                        ".util.BinaryData"));
+                classCustomization.addStaticBlock("String a = \"foo\";", List.of("com.azure.core.util.BinaryData"));
 
                 assertEquals(standardizeFileForComparison(expectedFileContent),
-                        standardizeFileForComparison(libraryCustomization.getRawEditor()
-                                .getFileContent(classCustomization.getFileName())));
+                    standardizeFileForComparison(libraryCustomization.getPackage("foo").getParsedFiles()
+                        .get("Foo").toString()));
             }
         };
 

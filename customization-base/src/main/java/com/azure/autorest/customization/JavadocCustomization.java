@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+import static com.github.javaparser.javadoc.JavadocBlockTag.Type.DEPRECATED;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.EXCEPTION;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.PARAM;
 import static com.github.javaparser.javadoc.JavadocBlockTag.Type.RETURN;
@@ -78,14 +79,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setParam(String parameterName, String description) {
-        int index = indexOf(javadoc.getBlockTags(), PARAM, parameterName);
-        if (index == -1) {
-            javadoc.getBlockTags().add(JavadocBlockTag.createParamBlockTag(parameterName, description));
-        } else {
-            javadoc.getBlockTags().set(index, JavadocBlockTag.createParamBlockTag(parameterName, description));
-        }
-
-        return this;
+        return setHelper(PARAM, parameterName, description);
     }
 
     /**
@@ -95,12 +89,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization removeParam(String parameterName) {
-        int index = indexOf(javadoc.getBlockTags(), PARAM, parameterName);
-        if (index != -1) {
-            javadoc.getBlockTags().remove(index);
-        }
-
-        return this;
+        return removeHelper(PARAM, parameterName);
     }
 
     /**
@@ -109,9 +98,7 @@ public final class JavadocCustomization {
      * @return The Javadoc return.
      */
     public String getReturn() {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.RETURN);
-
-        return (index == -1) ? null : javadoc.getBlockTags().get(index).getContent().toText();
+        return getHelper(RETURN);
     }
 
     /**
@@ -121,15 +108,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setReturn(String description) {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.RETURN);
-
-        if (index == -1) {
-            javadoc.getBlockTags().add(new JavadocBlockTag(RETURN, description));
-        } else {
-            javadoc.getBlockTags().set(index, new JavadocBlockTag(RETURN, description));
-        }
-
-        return this;
+        return setHelper(RETURN, null, description);
     }
 
     /**
@@ -138,12 +117,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization removeReturn() {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.RETURN);
-        if (index != -1) {
-            javadoc.getBlockTags().remove(index);
-        }
-
-        return this;
+        return removeHelper(RETURN, null);
     }
 
     /**
@@ -164,13 +138,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setsThrows(String exceptionType, String description) {
-        int index = indexOf(javadoc.getBlockTags(), PARAM, exceptionType);
-        if (index == -1) {
-            javadoc.getBlockTags().add(new JavadocBlockTag(THROWS, exceptionType + " " + description));
-        } else {
-            javadoc.getBlockTags().set(index, new JavadocBlockTag(THROWS, exceptionType + " " + description));
-        }
-        return this;
+        return setHelper(THROWS, exceptionType, description);
     }
 
     /**
@@ -180,13 +148,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization removeThrows(String exceptionType) {
-        int index = indexOf(javadoc.getBlockTags(), THROWS, exceptionType);
-
-        if (index != -1) {
-            javadoc.getBlockTags().remove(index);
-        }
-
-        return this;
+        return removeHelper(THROWS, exceptionType);
     }
 
     /**
@@ -218,9 +180,7 @@ public final class JavadocCustomization {
      * @return The Javadoc since.
      */
     public String getSince() {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.DEPRECATED);
-
-        return (index == -1) ? null : javadoc.getBlockTags().get(index).getContent().toText();
+        return getHelper(JavadocBlockTag.Type.SINCE);
     }
 
     /**
@@ -230,15 +190,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setSince(String sinceDoc) {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.SINCE);
-
-        if (index == -1) {
-            javadoc.getBlockTags().add(new JavadocBlockTag(JavadocBlockTag.Type.SINCE, sinceDoc));
-        } else {
-            javadoc.getBlockTags().set(index, new JavadocBlockTag(JavadocBlockTag.Type.SINCE, sinceDoc));
-        }
-
-        return this;
+        return setHelper(JavadocBlockTag.Type.SINCE, null, sinceDoc);
     }
 
     /**
@@ -247,13 +199,7 @@ public final class JavadocCustomization {
      * @return The updated JavadocCustomization object.
      */
     public JavadocCustomization removeSince() {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.SINCE);
-
-        if (index != -1) {
-            javadoc.getBlockTags().remove(index);
-        }
-
-        return this;
+        return removeHelper(JavadocBlockTag.Type.SINCE, null);
     }
 
     /**
@@ -262,9 +208,7 @@ public final class JavadocCustomization {
      * @return The Javadoc deprecated.
      */
     public String getDeprecated() {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.DEPRECATED);
-
-        return (index == -1) ? null : javadoc.getBlockTags().get(index).getContent().toText();
+        return getHelper(DEPRECATED);
     }
 
     /**
@@ -274,15 +218,7 @@ public final class JavadocCustomization {
      * @return the Javadoc customization object for chaining
      */
     public JavadocCustomization setDeprecated(String deprecatedDoc) {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.DEPRECATED);
-
-        if (index == -1) {
-            javadoc.getBlockTags().add(new JavadocBlockTag(JavadocBlockTag.Type.DEPRECATED, deprecatedDoc));
-        } else {
-            javadoc.getBlockTags().set(index, new JavadocBlockTag(JavadocBlockTag.Type.DEPRECATED, deprecatedDoc));
-        }
-
-        return this;
+        return setHelper(JavadocBlockTag.Type.DEPRECATED, null, deprecatedDoc);
     }
 
     /**
@@ -291,7 +227,30 @@ public final class JavadocCustomization {
      * @return The updated JavadocCustomization object.
      */
     public JavadocCustomization removeDeprecated() {
-        int index = indexOf(javadoc.getBlockTags(), JavadocBlockTag.Type.DEPRECATED);
+        return removeHelper(JavadocBlockTag.Type.DEPRECATED, null);
+    }
+
+    private String getHelper(JavadocBlockTag.Type type) {
+        int index = indexOf(javadoc.getBlockTags(), type);
+
+        return (index == -1) ? null : javadoc.getBlockTags().get(index).getContent().toText();
+    }
+
+    private JavadocCustomization setHelper(JavadocBlockTag.Type type, String tagName, String tagValue) {
+        int index = indexOf(javadoc.getBlockTags(), type, tagName);
+
+        String tagValueWithTagName = (tagName == null) ? tagValue : tagName + " " + tagValue;
+        if (index == -1) {
+            javadoc.getBlockTags().add(new JavadocBlockTag(type, tagValue));
+        } else {
+            javadoc.getBlockTags().set(index, new JavadocBlockTag(type, tagValue));
+        }
+
+        return this;
+    }
+
+    private JavadocCustomization removeHelper(JavadocBlockTag.Type type, String tagName) {
+        int index = indexOf(javadoc.getBlockTags(), type, tagName);
 
         if (index != -1) {
             javadoc.getBlockTags().remove(index);
