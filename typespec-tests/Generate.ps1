@@ -40,9 +40,11 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.namespace=com.resiliency.servicedriven.v1"""
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]main.tsp") {
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
+    $tspOptions += " --option ""@azure-tools/typespec-java.api-version=all"
   } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
     # test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""

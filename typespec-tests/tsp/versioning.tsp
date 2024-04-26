@@ -37,6 +37,7 @@ model Resource {
 
 model ExportedResource {
   id: string;
+
   @added(ApiVersions.v2022_09_01)
   resourceUri: string;
 

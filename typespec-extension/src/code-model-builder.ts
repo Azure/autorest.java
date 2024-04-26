@@ -181,7 +181,6 @@ import {
 } from "./operation-utils.js";
 import { isArmCommonType } from "./type-utils.js";
 import pkg from "lodash";
-import { log } from "console";
 const { isEqual } = pkg;
 
 export class CodeModelBuilder {
@@ -212,11 +211,6 @@ export class CodeModelBuilder {
     }
 
     this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
-    if (this.supportsAdvancedVersioning()) {
-      this.sdkContext.apiVersion = "all";
-    } else if (this.options["api-version"]) {
-      this.sdkContext.apiVersion = this.options["api-version"];
-    }
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
