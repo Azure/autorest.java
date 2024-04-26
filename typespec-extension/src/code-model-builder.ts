@@ -211,11 +211,6 @@ export class CodeModelBuilder {
     }
 
     this.sdkContext = createSdkContext(context, "@azure-tools/typespec-java");
-    if (this.supportsAdvancedVersioning()) {
-      this.sdkContext.apiVersion = "all";
-    } else {
-      this.sdkContext.apiVersion = "latest";
-    }
     const service = listServices(this.program)[0];
     const serviceNamespace = service.type;
     if (serviceNamespace === undefined) {
@@ -570,7 +565,14 @@ export class CodeModelBuilder {
           codeModelClient.apiVersions.push(apiVersion);
         }
 
-        this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
+        if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
+          this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
+        } else {
+          this.apiVersion = versioning.getVersions().find((it: Version) => it.value === this.sdkContext.apiVersion);
+          if (!this.apiVersion) {
+            throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
+          }
+        }
       }
 
       // server

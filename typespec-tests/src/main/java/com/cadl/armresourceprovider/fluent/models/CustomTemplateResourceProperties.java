@@ -4,27 +4,20 @@
 
 package com.cadl.armresourceprovider.fluent.models;
 
-import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
+import com.azure.core.annotation.Immutable;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Top Level Arm Resource Properties.
  */
-@Fluent
+@Immutable
 public final class CustomTemplateResourceProperties {
     /*
      * The status of the last operation.
      */
     @JsonProperty(value = "provisioningState", access = JsonProperty.Access.WRITE_ONLY)
     private ProvisioningState provisioningState;
-
-    /*
-     * The propertyRemovedInStable property.
-     */
-    @JsonProperty(value = "propertyRemovedInStable", required = true)
-    private String propertyRemovedInStable;
 
     /**
      * Creates an instance of CustomTemplateResourceProperties class.
@@ -42,37 +35,10 @@ public final class CustomTemplateResourceProperties {
     }
 
     /**
-     * Get the propertyRemovedInStable property: The propertyRemovedInStable property.
-     * 
-     * @return the propertyRemovedInStable value.
-     */
-    public String propertyRemovedInStable() {
-        return this.propertyRemovedInStable;
-    }
-
-    /**
-     * Set the propertyRemovedInStable property: The propertyRemovedInStable property.
-     * 
-     * @param propertyRemovedInStable the propertyRemovedInStable value to set.
-     * @return the CustomTemplateResourceProperties object itself.
-     */
-    public CustomTemplateResourceProperties withPropertyRemovedInStable(String propertyRemovedInStable) {
-        this.propertyRemovedInStable = propertyRemovedInStable;
-        return this;
-    }
-
-    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (propertyRemovedInStable() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException(
-                    "Missing required property propertyRemovedInStable in model CustomTemplateResourceProperties"));
-        }
     }
-
-    private static final ClientLogger LOGGER = new ClientLogger(CustomTemplateResourceProperties.class);
 }
