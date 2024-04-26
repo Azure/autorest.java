@@ -51,9 +51,6 @@ public final class VersioningAsyncClient {
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     * <tr><td>projectedFileFormat</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
-     * <tr><td>maxLines</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to
-     * `2,147,483,647`)</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -95,7 +92,7 @@ public final class VersioningAsyncClient {
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the
      * response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <tr><td>expand</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -164,8 +161,6 @@ public final class VersioningAsyncClient {
      * 
      * @param name A sequence of textual characters.
      * @param projectFileVersion A sequence of textual characters.
-     * @param projectedFileFormat A sequence of textual characters.
-     * @param maxLines A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -176,18 +171,11 @@ public final class VersioningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, ExportedResource> beginExport(String name, String projectFileVersion,
-        String projectedFileFormat, Integer maxLines) {
+    public PollerFlux<PollOperationDetails, ExportedResource> beginExport(String name, String projectFileVersion) {
         // Generated convenience method for beginExportWithModel
         RequestOptions requestOptions = new RequestOptions();
         if (projectFileVersion != null) {
             requestOptions.addQueryParam("projectFileVersion", projectFileVersion, false);
-        }
-        if (projectedFileFormat != null) {
-            requestOptions.addQueryParam("projectedFileFormat", projectedFileFormat, false);
-        }
-        if (maxLines != null) {
-            requestOptions.addQueryParam("maxLines", String.valueOf(maxLines), false);
         }
         return serviceClient.beginExportWithModelAsync(name, requestOptions);
     }
@@ -216,7 +204,7 @@ public final class VersioningAsyncClient {
      * Resource list operation template.
      * 
      * @param select Select the specified fields to be included in the response.
-     * @param filter Filter the result list using the given expression.
+     * @param expand A sequence of textual characters.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -227,7 +215,7 @@ public final class VersioningAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedFlux<Resource> list(List<String> select, String filter) {
+    public PagedFlux<Resource> list(List<String> select, String expand) {
         // Generated convenience method for list
         RequestOptions requestOptions = new RequestOptions();
         if (select != null) {
@@ -237,8 +225,8 @@ public final class VersioningAsyncClient {
                 }
             }
         }
-        if (filter != null) {
-            requestOptions.addQueryParam("filter", filter, false);
+        if (expand != null) {
+            requestOptions.addQueryParam("expand", expand, false);
         }
         PagedFlux<BinaryData> pagedFluxResponse = list(requestOptions);
         return PagedFlux.create(() -> (continuationToken, pageSize) -> {
