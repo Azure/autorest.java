@@ -51,6 +51,9 @@ public final class MixedTypesAsyncClient {
      *         literal: BinaryData (Required)
      *         int: BinaryData (Required)
      *         boolean: BinaryData (Required)
+     *         array (Required): [
+     *             BinaryData (Required)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -79,6 +82,9 @@ public final class MixedTypesAsyncClient {
      *         literal: BinaryData (Required)
      *         int: BinaryData (Required)
      *         boolean: BinaryData (Required)
+     *         array (Required): [
+     *             BinaryData (Required)
+     *         ]
      *     }
      * }
      * }</pre>

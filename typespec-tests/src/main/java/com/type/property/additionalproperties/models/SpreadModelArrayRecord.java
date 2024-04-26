@@ -115,7 +115,9 @@ public final class SpreadModelArrayRecord implements JsonSerializable<SpreadMode
                         additionalProperties = new LinkedHashMap<>();
                     }
 
-                    additionalProperties.put(fieldName, null);
+                    List<ModelForRecord> additionalPropertiesArrayItem
+                        = reader.readArray(reader1 -> ModelForRecord.fromJson(reader1));
+                    additionalProperties.put(fieldName, additionalPropertiesArrayItem);
                 }
             }
             SpreadModelArrayRecord deserializedSpreadModelArrayRecord = new SpreadModelArrayRecord(knownProp);

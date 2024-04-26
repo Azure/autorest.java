@@ -44,6 +44,7 @@ export interface EmitterOptions {
   "group-etag-headers"?: boolean;
 
   "advanced-versioning"?: boolean;
+  "api-version"?: string;
 
   "dev-options"?: DevOptions;
 }
@@ -93,6 +94,7 @@ const EmitterOptionsSchema: JSONSchemaType<EmitterOptions> = {
 
     "group-etag-headers": { type: "boolean", nullable: true },
     "advanced-versioning": { type: "boolean", nullable: true, default: false },
+    "api-version": { type: "string", nullable: true },
 
     "dev-options": { type: "object", additionalProperties: true, nullable: true },
   },

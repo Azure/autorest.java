@@ -1,5 +1,12 @@
 # Release History
 
+## 0.15.13 (2024-04-26)
+
+Compatible with compiler 0.55.
+
+- Supported `api-version` from typespec config.
+- Update dependency of "typespec-client-generator-core" for bug fix.
+
 ## 0.15.12 (2024-04-20)
 
 Compatible with compiler 0.55.

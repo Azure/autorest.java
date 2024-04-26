@@ -106,6 +106,9 @@ public final class MixedTypesImpl {
      *         literal: BinaryData (Required)
      *         int: BinaryData (Required)
      *         boolean: BinaryData (Required)
+     *         array (Required): [
+     *             BinaryData (Required)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -134,6 +137,9 @@ public final class MixedTypesImpl {
      *         literal: BinaryData (Required)
      *         int: BinaryData (Required)
      *         boolean: BinaryData (Required)
+     *         array (Required): [
+     *             BinaryData (Required)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -162,6 +168,9 @@ public final class MixedTypesImpl {
      *         literal: BinaryData (Required)
      *         int: BinaryData (Required)
      *         boolean: BinaryData (Required)
+     *         array (Required): [
+     *             BinaryData (Required)
+     *         ]
      *     }
      * }
      * }</pre>
@@ -191,6 +200,9 @@ public final class MixedTypesImpl {
      *         literal: BinaryData (Required)
      *         int: BinaryData (Required)
      *         boolean: BinaryData (Required)
+     *         array (Required): [
+     *             BinaryData (Required)
+     *         ]
      *     }
      * }
      * }</pre>

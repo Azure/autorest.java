@@ -71,13 +71,6 @@ public interface CustomTemplateResource {
     ProvisioningState provisioningState();
 
     /**
-     * Gets the propertyRemovedInStable property: The propertyRemovedInStable property.
-     * 
-     * @return the propertyRemovedInStable value.
-     */
-    String propertyRemovedInStable();
-
-    /**
      * Gets the region of the resource.
      * 
      * @return the region of the resource.
@@ -161,8 +154,7 @@ public interface CustomTemplateResource {
          * resource to be created, but also allows for any other optional properties to be specified.
          */
         interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithIdentity,
-            DefinitionStages.WithPropertyRemovedInStable, DefinitionStages.WithIfMatch,
-            DefinitionStages.WithIfNoneMatch {
+            DefinitionStages.WithIfMatch, DefinitionStages.WithIfNoneMatch {
             /**
              * Executes the create request.
              * 
@@ -206,19 +198,6 @@ public interface CustomTemplateResource {
         }
 
         /**
-         * The stage of the CustomTemplateResource definition allowing to specify propertyRemovedInStable.
-         */
-        interface WithPropertyRemovedInStable {
-            /**
-             * Specifies the propertyRemovedInStable property: The propertyRemovedInStable property..
-             * 
-             * @param propertyRemovedInStable The propertyRemovedInStable property.
-             * @return the next definition stage.
-             */
-            WithCreate withPropertyRemovedInStable(String propertyRemovedInStable);
-        }
-
-        /**
          * The stage of the CustomTemplateResource definition allowing to specify ifMatch.
          */
         interface WithIfMatch {
@@ -255,7 +234,7 @@ public interface CustomTemplateResource {
     /**
      * The template for CustomTemplateResource update.
      */
-    interface Update extends UpdateStages.WithIdentity, UpdateStages.WithPropertyRemovedInStable {
+    interface Update extends UpdateStages.WithIdentity {
         /**
          * Executes the update request.
          * 
@@ -287,19 +266,6 @@ public interface CustomTemplateResource {
              * @return the next definition stage.
              */
             Update withIdentity(ManagedIdentityProperties identity);
-        }
-
-        /**
-         * The stage of the CustomTemplateResource update allowing to specify propertyRemovedInStable.
-         */
-        interface WithPropertyRemovedInStable {
-            /**
-             * Specifies the propertyRemovedInStable property: The propertyRemovedInStable property..
-             * 
-             * @param propertyRemovedInStable The propertyRemovedInStable property.
-             * @return the next definition stage.
-             */
-            Update withPropertyRemovedInStable(String propertyRemovedInStable);
         }
     }
 }

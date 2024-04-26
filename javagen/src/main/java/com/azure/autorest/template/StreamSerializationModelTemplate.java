@@ -381,7 +381,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
             propertyValueGetter);
-        if (fieldSerializationMethod != null) {
+        if (wireType == ClassType.BINARY_DATA) {
+            // Special handling for BinaryData (instead of using "serializationMethodBase" and "serializationValueGetterModifier")
+            // The reason is that some backend would fail the request on "null" value (e.g. OpenAI)
+            String writeBinaryDataExpr = "jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));";
+            if (!property.isRequired()) {
+                methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> ifAction.line(writeBinaryDataExpr));
+            } else {
+                methodBlock.line(writeBinaryDataExpr);
+            }
+        } else if (fieldSerializationMethod != null) {
             if (isJsonMergePatch && wireType instanceof ClassType && ((ClassType) wireType).isSwaggerType()) {
                 methodBlock.line("JsonMergePatchHelper.get" + clientType.toString() + "Accessor().prepareModelForJsonMergePatch(" + propertyValueGetter + ", true);");
             }
@@ -398,15 +407,6 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             }
         } else if (wireType == ClassType.OBJECT) {
             methodBlock.line("jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ");");
-        } else if (wireType == ClassType.BINARY_DATA) {
-            // Special handling for BinaryData (instead of using "serializationMethodBase" and "serializationValueGetterModifier")
-            // The reason is that some backend would fail the request on "null" value (e.g. OpenAI)
-            String writeBinaryDataExpr = "jsonWriter.writeUntypedField(\"" + serializedName + "\", " + propertyValueGetter + ".toObject(Object.class));";
-            if (!property.isRequired()) {
-                methodBlock.ifBlock(propertyValueGetter + " != null", ifAction -> ifAction.line(writeBinaryDataExpr));
-            } else {
-                methodBlock.line(writeBinaryDataExpr);
-            }
         } else if (wireType instanceof IterableType) {
             serializeJsonContainerProperty(methodBlock, "writeArrayField", wireType, ((IterableType) wireType).getElementType(),
                 serializedName, propertyValueGetter, 0, isJsonMergePatch);
@@ -1220,6 +1220,13 @@ hasConstructorArguments, settings));
                 if (valueType == ClassType.OBJECT) {
                     // String fieldName should be a local variable accessible in this spot of code.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", reader.readUntyped());");
+                } else if (valueType instanceof IterableType) {
+                    // The case that element is a List
+                    String varName = additionalProperties.getName() + "ArrayItem";
+                    javaBlock.text(valueType + " " + varName + " = ");
+                    deserializeJsonContainerProperty(javaBlock, "readArray", valueType,
+                        ((IterableType) valueType).getElementType(), ((IterableType) valueType).getElementType(), 0);
+                    javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", " + varName + ");");
                 } else {
                     // Another assumption, the additional properties value type is simple.
                     javaBlock.line(additionalProperties.getName() + ".put(" + fieldNameVariableName + ", "

@@ -107,29 +107,6 @@ public final class CustomTemplateResourceInner extends Resource {
     }
 
     /**
-     * Get the propertyRemovedInStable property: The propertyRemovedInStable property.
-     * 
-     * @return the propertyRemovedInStable value.
-     */
-    public String propertyRemovedInStable() {
-        return this.innerProperties() == null ? null : this.innerProperties().propertyRemovedInStable();
-    }
-
-    /**
-     * Set the propertyRemovedInStable property: The propertyRemovedInStable property.
-     * 
-     * @param propertyRemovedInStable the propertyRemovedInStable value to set.
-     * @return the CustomTemplateResourceInner object itself.
-     */
-    public CustomTemplateResourceInner withPropertyRemovedInStable(String propertyRemovedInStable) {
-        if (this.innerProperties() == null) {
-            this.innerProperties = new CustomTemplateResourceProperties();
-        }
-        this.innerProperties().withPropertyRemovedInStable(propertyRemovedInStable);
-        return this;
-    }
-
-    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.

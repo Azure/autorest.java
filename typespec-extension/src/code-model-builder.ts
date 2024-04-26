@@ -565,7 +565,14 @@ export class CodeModelBuilder {
           codeModelClient.apiVersions.push(apiVersion);
         }
 
-        this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
+        if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
+          this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
+        } else {
+          this.apiVersion = versioning.getVersions().find((it: Version) => it.value === this.sdkContext.apiVersion);
+          if (!this.apiVersion) {
+            throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
+          }
+        }
       }
 
       // server
@@ -2638,7 +2645,7 @@ export class CodeModelBuilder {
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
-    if (emitterClientName) {
+    if (emitterClientName && typeof emitterClientName === "string") {
       return emitterClientName;
     }
     // TODO: deprecate getProjectedName

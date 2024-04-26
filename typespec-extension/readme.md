@@ -65,6 +65,7 @@ options:
     models-subpackage: "models"
     custom-types-subpackage: "implementation.models"
     custom-types: InternalModel1,InternalModel2
+    api-version: "2023-11-01"
 ```
 
 ## Convenience API

@@ -58,10 +58,6 @@ public final class CustomTemplateResourceImpl
         return this.innerModel().provisioningState();
     }
 
-    public String propertyRemovedInStable() {
-        return this.innerModel().propertyRemovedInStable();
-    }
-
     public Region region() {
         return Region.fromName(this.regionName());
     }
@@ -170,16 +166,6 @@ public final class CustomTemplateResourceImpl
             return this;
         } else {
             this.updateProperties.withIdentity(identity);
-            return this;
-        }
-    }
-
-    public CustomTemplateResourceImpl withPropertyRemovedInStable(String propertyRemovedInStable) {
-        if (isInCreateMode()) {
-            this.innerModel().withPropertyRemovedInStable(propertyRemovedInStable);
-            return this;
-        } else {
-            this.updateProperties.withPropertyRemovedInStable(propertyRemovedInStable);
             return this;
         }
     }
