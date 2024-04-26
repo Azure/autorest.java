@@ -43,6 +43,9 @@ $generateScript = {
   } elseif ($tspFile -match "resiliency[\\/]srv-driven[\\/]main.tsp") {
     # enable advanced versioning for resiliency test
     $tspOptions += " --option ""@azure-tools/typespec-java.advanced-versioning=true"""
+  } elseif ($tspFile -match "tsp[\\/]versioning.tsp") {
+    # test generating from specific api-version
+    $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2022-09-01"""
   } elseif ($tspFile -match "arm.tsp") {
     # for mgmt, do not generate tests due to random mock values
     $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
@@ -50,6 +53,8 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=false"""
     # also generate with group-etag-headers=false since mgmt doesn't support etag grouping yet
     $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
+    # also test generating from specific api-version
+    $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp

@@ -37,6 +37,7 @@ model Resource {
 
 model ExportedResource {
   id: string;
+  @added(ApiVersions.v2022_09_01)
   resourceUri: string;
 
   @removed(ApiVersions.v2022_09_01)
@@ -90,11 +91,12 @@ interface VersioningOp {
 
   list is ResourceOperations.ResourceList<Resource, ListQueryParametersTrait<ListQueryParams>>;
 
-  @removed(ApiVersions.v2022_12_01_preview)
+  @added(ApiVersions.v2022_12_01_preview)
   @sharedRoute
   create is ResourceOperations.ResourceCreateOrReplace<Resource>;
 
-  @added(ApiVersions.v2022_12_01_preview)
+  @added(ApiVersions.v2022_09_01)
+  @removed(ApiVersions.v2022_12_01_preview)
   @sharedRoute
   createLongRunning is ResourceOperations.LongRunningResourceCreateOrReplace<Resource>;
 }
