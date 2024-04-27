@@ -164,6 +164,7 @@ import {
   modelIs,
   getNamePrefixForProperty,
   isAllValueInteger,
+  ComparableApiVersion,
 } from "./type-utils.js";
 import {
   getServiceVersion,
@@ -558,13 +559,6 @@ export class CodeModelBuilder {
       const versioning = getVersion(this.program, client.service);
       if (versioning && versioning.getVersions()) {
         // @versioned in versioning
-        codeModelClient.apiVersions = [];
-        for (const version of versioning.getVersions()) {
-          const apiVersion = new ApiVersion();
-          apiVersion.version = version.value;
-          codeModelClient.apiVersions.push(apiVersion);
-        }
-
         if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
           this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
         } else {
@@ -572,6 +566,13 @@ export class CodeModelBuilder {
           if (!this.apiVersion) {
             throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
           }
+        }
+
+        codeModelClient.apiVersions = [];
+        for (const version of this.getFilteredApiVersions(this.apiVersion, versioning.getVersions())) {
+          const apiVersion = new ApiVersion();
+          apiVersion.version = version.value;
+          codeModelClient.apiVersions.push(apiVersion);
         }
       }
 
@@ -665,6 +666,21 @@ export class CodeModelBuilder {
     return clients;
   }
 
+  private getFilteredApiVersions(pinnedApiVersion: Version | undefined, versions: Version[]): Version[] {
+    if (!pinnedApiVersion) {
+      return versions;
+    }
+    const pinnedVersion: ComparableApiVersion = new ComparableApiVersion(pinnedApiVersion);
+    return versions.map((it: Version) => new ComparableApiVersion(it))
+    .filter((it: ComparableApiVersion) => {
+      if (pinnedVersion.isStable() && !it.isStable()) {
+        return false;
+      }
+      return it.noLaterThan(pinnedVersion);
+    })
+    .map((it: ComparableApiVersion) => it.version);
+  }
+
   /**
    * `@armProviderNamespace` currently will add a default server if not defined globally:
    * https://github.com/Azure/typespec-azure/blob/8b8d7c05f168d9305a09691c4fedcb88f4a57652/packages/typespec-azure-resource-manager/src/namespace.ts#L121-L128
@@ -678,9 +694,6 @@ export class CodeModelBuilder {
   }
 
   private needToSkipProcessingOperation(operation: Operation, clientContext: ClientContext): boolean {
-    if (!this.existsAtCurrentVersion(operation)) {
-      return true;
-    }
     // don't generate protocol and convenience method for overloaded operations
     // issue link: https://github.com/Azure/autorest.java/issues/1958#issuecomment-1562558219 we will support generate overload methods for non-union type in future (TODO issue: https://github.com/Azure/autorest.java/issues/2160)
     if (getOverloadedOperation(this.program, operation)) {
@@ -688,20 +701,6 @@ export class CodeModelBuilder {
       return true;
     }
     return false;
-  }
-
-  private existsAtCurrentVersion(type: Type): boolean {
-    const availabilityMap = getAvailabilityMap(this.program, type);
-    // if unversioned then everything exists
-    if (
-      !availabilityMap ||
-      !this.apiVersion ||
-      this.supportsAdvancedVersioning() // if supports non-breaking versioning, then it always exists
-    ) {
-      return true;
-    }
-    const availability = availabilityMap.get(this.apiVersion?.name);
-    return availability === Availability.Added || availability === Availability.Available;
   }
 
   /**
@@ -801,7 +800,6 @@ export class CodeModelBuilder {
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
     op.parameters.parameters
-      .filter((param) => this.existsAtCurrentVersion(param.param))
       .map((it) => this.processParameter(codeModelOperation, it, clientContext));
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
@@ -2294,8 +2292,7 @@ export class CodeModelBuilder {
       if (
         prop.name === discriminatorPropertyName || // skip the discriminator property
         isNeverType(prop.type) || // skip property of type "never"
-        !isPayloadProperty(this.program, prop) ||
-        !this.existsAtCurrentVersion(prop)
+        !isPayloadProperty(this.program, prop)
       ) {
         continue;
       }
@@ -2331,9 +2328,7 @@ export class CodeModelBuilder {
     const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
     const declaredProperties = walkPropertiesInherited(type);
     for (const prop of declaredProperties) {
-      if (this.existsAtCurrentVersion(type)) {
-        resource.addProperty(this.processModelProperty(prop));
-      }
+      resource.addProperty(this.processModelProperty(prop));
     }
     return resource;
   }

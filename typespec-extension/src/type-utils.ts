@@ -25,6 +25,7 @@ import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace, pascalCase } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
+import { Version } from "@typespec/versioning";
 
 /** Acts as a cache for processing inputs.
  *
@@ -48,6 +49,24 @@ export class ProcessingCache<In, Out> {
       return result;
     }
     return undefined;
+  }
+}
+
+/**
+ * Expose `isStable` and comparison capability of an Api Version.
+ */
+export class ComparableApiVersion {
+  version: Version;
+  constructor(version: Version) {
+    this.version = version;
+  }
+
+  isStable(): boolean {
+    return !this.version.value.includes('preview');
+  }
+
+  noLaterThan(anotherVersion: ComparableApiVersion): boolean {
+    return this.version.value <= anotherVersion.version.value;
   }
 }
 
