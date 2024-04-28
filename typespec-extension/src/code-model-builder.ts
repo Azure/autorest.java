@@ -915,7 +915,6 @@ export class CodeModelBuilder {
       ) {
         const finalResult = useNewPollStrategy ? lroMetadata.finalResult : lroMetadata.finalEnvelopeResult;
         const finalType = this.findResponseBody(finalResult);
-        // change to sdk type
         const sdkType = getClientType(this.sdkContext, finalType);
         finalSchema = this.processSchemaFromSdkType(sdkType, "finalResult");
       }
@@ -1019,7 +1018,6 @@ export class CodeModelBuilder {
         // utcDateTime in header maps to rfc7231
         schema = this.processDateTimeSchemaFromSdkType(sdkType, param.param.name, true);
       } else {
-        // change to sdk type
         schema = this.processSchemaFromSdkType(sdkType, param.param.name);
       }
 
@@ -1362,9 +1360,6 @@ export class CodeModelBuilder {
       this.trackSchemaUsage(schema, { usage: [SchemaContext.JsonMergePatch] });
     }
     if (op.convenienceApi && operationIsMultipart(httpOperation)) {
-      if (schema instanceof ObjectSchema) {
-        this.processMultipartFormDataSchema(schema);
-      }
       this.trackSchemaUsage(schema, { serializationFormats: [KnownMediaType.Multipart] });
     }
 
@@ -1516,7 +1511,6 @@ export class CodeModelBuilder {
       for (const response of resp.responses.values()) {
         if (response.headers) {
           for (const [key, header] of Object.entries(response.headers)) {
-            // TODO: change to sdk type
             const sdkType = getClientType(this.sdkContext, header);
             const schema = this.processSchemaFromSdkType(sdkType, key);
             headers.push(
@@ -2142,7 +2136,7 @@ export class CodeModelBuilder {
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
     // TODO: This case is related with literal.tsp, once TCGC supports giving a name, we can use TCGC generatedName
     const schemaNameHint = pascalCase(getNamePrefixForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name);
-    const schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
+    let schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
     let nullable = prop.nullable;
 
     let extensions: Record<string, any> | undefined = undefined;
@@ -2157,6 +2151,12 @@ export class CodeModelBuilder {
       extensions["x-ms-client-flatten"] = true;
     }
 
+    // handle multipart/form-data property
+    if (prop.kind === "property" && (prop as SdkBodyModelPropertyType).isMultipartFileInput && prop.type.kind === "model") {
+      const namespace = getNamespace(prop.type.__raw as Model);
+      schema = this.processMultipartFormDataSchemaFromSdkType(prop, namespace ?? "");
+    }
+
     return new Property(prop.name, this.getDoc(prop.__raw as ModelProperty), schema, {
       summary: this.getSummary(prop.__raw as ModelProperty),
       required: !prop.optional,
@@ -2169,14 +2169,15 @@ export class CodeModelBuilder {
   }
 
   private processUnionSchemaFromSdkType(type: SdkUnionType, name: string): Schema {
+    let rawUnionType: Union = type.__raw as Union;
     // TODO: name from typespec-client-generator-core
-    const namespace = getNamespace(type.__raw as Union);
+    const namespace = getNamespace(rawUnionType);
     const baseName = type.name ?? pascalCase(name) + "Model";
     this.logWarning(
-      `Convert TypeSpec Union '${getUnionDescription(type.__raw as Union, this.typeNameOptions)}' to Class '${baseName}'`,
+      `Convert TypeSpec Union '${getUnionDescription(rawUnionType, this.typeNameOptions)}' to Class '${baseName}'`,
     );
-    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(type.__raw as Union), {
-      summary: this.getSummary(type.__raw as Union),
+    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(rawUnionType), {
+      summary: this.getSummary(rawUnionType),
     });
     unionSchema.anyOf = [];
     type.values.forEach((it) => {
@@ -2185,8 +2186,8 @@ export class CodeModelBuilder {
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
-      const objectSchema = new ObjectSchema(modelName, this.getDoc(type.__raw as Union), {
-        summary: this.getSummary(type.__raw as Union),
+      const objectSchema = new ObjectSchema(modelName, this.getDoc(rawUnionType), {
+        summary: this.getSummary(rawUnionType),
         language: {
           default: {
             namespace: namespace,
@@ -2199,8 +2200,8 @@ export class CodeModelBuilder {
 
       const variantSchema = this.processSchemaFromSdkType(it, variantName);
       objectSchema.addProperty(
-        new Property(propertyName, this.getDoc(type.__raw as Union), variantSchema, {
-          summary: this.getSummary(type.__raw as Union),
+        new Property(propertyName, this.getDoc(rawUnionType), variantSchema, {
+          summary: this.getSummary(rawUnionType),
           required: true,
           readOnly: false,
         }),
@@ -2265,6 +2266,31 @@ export class CodeModelBuilder {
       default:
         throw new Error(`Unrecognized type for union variable: '${type.kind}'.`);
     }
+  }
+
+  private processMultipartFormDataSchemaFromSdkType(property: SdkModelPropertyType, namespace: string): Schema {
+    if (property.type.kind === "bytes") {
+      return getFileDetailsSchema(
+        property.name,
+        namespace,
+        this.codeModel.schemas,
+        this.binarySchema,
+        this.stringSchema,
+      );
+    } else if(property.type.kind === "array" && property.type.valueType.kind === "bytes") {
+      return new ArraySchema(
+        property.name,
+        property.description ?? "",
+        getFileDetailsSchema(
+          property.name, 
+          namespace,
+          this.codeModel.schemas,
+          this.binarySchema,
+          this.stringSchema,
+        ),
+      );
+    }
+    throw new Error(`Unrecognized type for multipart/form-data property: '${property.type.kind}'.`);
   }
 
   private processMultipartFormDataSchema(schema: ObjectSchema) {
