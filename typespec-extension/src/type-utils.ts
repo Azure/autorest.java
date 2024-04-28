@@ -25,7 +25,11 @@ import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace, pascalCase } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
+<<<<<<< HEAD
 import { SdkDurationType, isSdkFloatKind, isSdkIntKind } from "@azure-tools/typespec-client-generator-core";
+=======
+import { Version } from "@typespec/versioning";
+>>>>>>> remote/main
 
 /** Acts as a cache for processing inputs.
  *
@@ -50,6 +54,10 @@ export class ProcessingCache<In, Out> {
     }
     return undefined;
   }
+}
+
+export function isStable(version: Version): boolean {
+  return !version.value.toLowerCase().includes("preview");
 }
 
 /** adds only if the item is not in the collection already
