@@ -11,19 +11,9 @@ import com.azure.core.util.ServiceVersion;
  */
 public enum VersioningServiceVersion implements ServiceVersion {
     /**
-     * Enum value 2022-06-01-preview.
-     */
-    V2022_06_01_PREVIEW("2022-06-01-preview"),
-
-    /**
      * Enum value 2022-09-01.
      */
-    V2022_09_01("2022-09-01"),
-
-    /**
-     * Enum value 2022-12-01-preview.
-     */
-    V2022_12_01_PREVIEW("2022-12-01-preview");
+    V2022_09_01("2022-09-01");
 
     private final String version;
 
@@ -45,6 +35,6 @@ public enum VersioningServiceVersion implements ServiceVersion {
      * @return The latest {@link VersioningServiceVersion}.
      */
     public static VersioningServiceVersion getLatest() {
-        return V2022_12_01_PREVIEW;
+        return V2022_09_01;
     }
 }

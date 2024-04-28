@@ -1,5 +1,11 @@
 # Release History
 
+## 0.15.14 (2024-04-27)
+
+Compatible with compiler 0.55.
+
+- Added `ServiceVersion` filter for pinned api-version.
+
 ## 0.15.13 (2024-04-26)
 
 Compatible with compiler 0.55.
