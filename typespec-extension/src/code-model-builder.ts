@@ -415,65 +415,42 @@ export class CodeModelBuilder {
 
   private processModels(clients: SdkClient[]) {
     const processedSdkModels: Set<SdkModelType | SdkEnumType> = new Set();
-    for (const client of clients) {
-      const models: (Model | Enum | Union)[] = Array.from(client.service.models.values());
-      Array.from(client.service.enums.values()).forEach((it) => models.push(it));
-      Array.from(client.service.unions.values()).forEach((it) => models.push(it));
-      client.service.namespaces?.forEach((it) => {
-        Array.from(it.models.values()).forEach((it) => models.push(it));
-        Array.from(it.enums.values()).forEach((it) => models.push(it));
-        Array.from(it.unions.values()).forEach((it) => models.push(it));
+
+    // lambda to mark model as public
+    const modelAsPublic = (model: SdkModelType | SdkEnumType) => {
+      const schema = this.processSchemaFromSdkType(model, "");
+
+      this.trackSchemaUsage(schema, {
+        usage: [SchemaContext.Public],
       });
+    };
 
-      // lambda to mark model as public
-      const modelAsPublic = (model: SdkModelType | SdkEnumType) => {
-        // check it does not contain Union
-        // const union = unionReferredByType(this.program, model, this.typeUnionRefCache);
-        // if (union) {
-        //   const errorMsg = `Model '${getTypeName(
-        //     model,
-        //     this.typeNameOptions,
-        //   )}' cannot be set as access=public, as it refers Union '${getUnionDescription(union, this.typeNameOptions)}'`;
-        //   throw new Error(errorMsg);
-        // }
+    const sdkModels: (SdkModelType | SdkEnumType)[] = getAllModels(this.sdkContext);
 
-        // change to sdk type
-        // const sdkType = getClientType(this.sdkContext, model);
-        const schema = this.processSchemaFromSdkType(model, "");
+    // process sdk models
+    for (const model of sdkModels) {
+      if (!processedSdkModels.has(model)) {
+        const access = getAccess(model.__raw as Model | Enum | Union);
+        if (access === "public") {
+          modelAsPublic(model);
+        } else if (access === "internal") {
+          const schema = this.processSchemaFromSdkType(model, model.name);
 
-        this.trackSchemaUsage(schema, {
-          usage: [SchemaContext.Public],
-        });
-      };
-
-      const sdkModels: (SdkModelType | SdkEnumType)[] = getAllModels(this.sdkContext);
-
-      // process sdk models
-      for (const model of sdkModels) {
-        if (!processedSdkModels.has(model)) {
-          const access = getAccess(model.__raw as Model | Enum | Union);
-          // const access = model.access;
-          if (access === "public") {
-            modelAsPublic(model);
-          } else if (access === "internal") {
-            const schema = this.processSchemaFromSdkType(model, model.name);
-
-            this.trackSchemaUsage(schema, {
-              usage: [SchemaContext.Internal],
-            });
-          }
-
-          const usage = getUsage(model.__raw as Model | Enum | Union);
-          if (usage) {
-            const schema = this.processSchemaFromSdkType(model, "");
-
-            this.trackSchemaUsage(schema, {
-              usage: usage,
-            });
-          }
-
-          processedSdkModels.add(model);
+          this.trackSchemaUsage(schema, {
+            usage: [SchemaContext.Internal],
+          });
         }
+
+        const usage = getUsage(model.__raw as Model | Enum | Union);
+        if (usage) {
+          const schema = this.processSchemaFromSdkType(model, "");
+
+          this.trackSchemaUsage(schema, {
+            usage: usage,
+          });
+        }
+
+        processedSdkModels.add(model);
       }
     }
   }
