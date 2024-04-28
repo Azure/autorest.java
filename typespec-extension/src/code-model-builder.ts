@@ -2152,9 +2152,8 @@ export class CodeModelBuilder {
     }
 
     // handle multipart/form-data property
-    if (prop.kind === "property" && (prop as SdkBodyModelPropertyType).isMultipartFileInput && prop.type.kind === "model") {
-      const namespace = getNamespace(prop.type.__raw as Model);
-      schema = this.processMultipartFormDataSchemaFromSdkType(prop, namespace ?? "");
+    if (prop.kind === "property" && (prop as SdkBodyModelPropertyType).isMultipartFileInput && schema instanceof ObjectSchema) {
+      this.processMultipartFormDataSchema(schema);
     }
 
     return new Property(prop.name, this.getDoc(prop.__raw as ModelProperty), schema, {
