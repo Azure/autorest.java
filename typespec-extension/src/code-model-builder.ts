@@ -1809,7 +1809,6 @@ export class CodeModelBuilder {
           return this.processUrlSchemaFromSdkType(type, nameHint);
       }
     }
-    throw new Error(`Unrecognized type for builtin: '${type.kind}'.`);
   }
 
   private processAnySchemaFromSdkType(): AnySchema {
@@ -2109,9 +2108,6 @@ export class CodeModelBuilder {
       }
     }
 
-    // process all children
-    // type.discriminatedSubtypes?.forEach((it) => this.processSchema(it, this.getName(it)));
-
     return objectSchema;
   }
 
@@ -2167,7 +2163,7 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
-    // TODO: question: why the schema name is like this? This case is related with literal.tsp
+    // TODO: This case is related with literal.tsp, once TCGC supports giving a name, we can use TCGC generatedName
     const schemaNameHint = pascalCase(getNamePrefixForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name);
     const schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
     let nullable = prop.nullable;
