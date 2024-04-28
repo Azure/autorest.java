@@ -164,7 +164,7 @@ import {
   modelIs,
   getNamePrefixForProperty,
   isAllValueInteger,
-  ComparableApiVersion,
+  isStable,
 } from "./type-utils.js";
 import {
   getServiceVersion,
@@ -678,16 +678,9 @@ export class CodeModelBuilder {
     if (!pinnedApiVersion) {
       return versions;
     }
-    const pinnedVersion: ComparableApiVersion = new ComparableApiVersion(pinnedApiVersion);
     return versions
-      .map((it: Version) => new ComparableApiVersion(it))
-      .filter((it: ComparableApiVersion) => {
-        if (pinnedVersion.isStable() && !it.isStable()) {
-          return false;
-        }
-        return it.noLaterThan(pinnedVersion);
-      })
-      .map((it: ComparableApiVersion) => it.version);
+      .slice(0, versions.indexOf(pinnedApiVersion) + 1)
+      .filter((version) => !isStable(pinnedApiVersion) || isStable(version));
   }
 
   /**

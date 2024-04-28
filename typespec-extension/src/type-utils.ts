@@ -52,22 +52,8 @@ export class ProcessingCache<In, Out> {
   }
 }
 
-/**
- * Expose `isStable` and comparison capability of an Api Version.
- */
-export class ComparableApiVersion {
-  version: Version;
-  constructor(version: Version) {
-    this.version = version;
-  }
-
-  isStable(): boolean {
-    return !this.version.value.includes("preview");
-  }
-
-  noLaterThan(anotherVersion: ComparableApiVersion): boolean {
-    return this.version.value <= anotherVersion.version.value;
-  }
+export function isStable(version: Version): boolean {
+  return !version.value.toLowerCase().includes("preview");
 }
 
 /** adds only if the item is not in the collection already
