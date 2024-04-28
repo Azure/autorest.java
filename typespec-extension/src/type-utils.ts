@@ -62,7 +62,7 @@ export class ComparableApiVersion {
   }
 
   isStable(): boolean {
-    return !this.version.value.includes('preview');
+    return !this.version.value.includes("preview");
   }
 
   noLaterThan(anotherVersion: ComparableApiVersion): boolean {

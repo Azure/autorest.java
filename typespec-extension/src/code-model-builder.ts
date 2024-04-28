@@ -58,7 +58,7 @@ import {
   isPathParam,
   HttpOperationBody,
 } from "@typespec/http";
-import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersion } from "@typespec/versioning";
+import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import {
   isPollingLocation,
   getPagedResult,
@@ -666,19 +666,28 @@ export class CodeModelBuilder {
     return clients;
   }
 
+  /**
+   * Filter api-versions for "ServiceVersion".
+   * TODO(xiaofei) pending TCGC design: https://github.com/Azure/typespec-azure/issues/746
+   *
+   * @param pinnedApiVersion the api-version to use as filter base
+   * @param versions api-versions to filter
+   * @returns filtered api-versions
+   */
   private getFilteredApiVersions(pinnedApiVersion: Version | undefined, versions: Version[]): Version[] {
     if (!pinnedApiVersion) {
       return versions;
     }
     const pinnedVersion: ComparableApiVersion = new ComparableApiVersion(pinnedApiVersion);
-    return versions.map((it: Version) => new ComparableApiVersion(it))
-    .filter((it: ComparableApiVersion) => {
-      if (pinnedVersion.isStable() && !it.isStable()) {
-        return false;
-      }
-      return it.noLaterThan(pinnedVersion);
-    })
-    .map((it: ComparableApiVersion) => it.version);
+    return versions
+      .map((it: Version) => new ComparableApiVersion(it))
+      .filter((it: ComparableApiVersion) => {
+        if (pinnedVersion.isStable() && !it.isStable()) {
+          return false;
+        }
+        return it.noLaterThan(pinnedVersion);
+      })
+      .map((it: ComparableApiVersion) => it.version);
   }
 
   /**
@@ -799,8 +808,7 @@ export class CodeModelBuilder {
     // host
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
-    op.parameters.parameters
-      .map((it) => this.processParameter(codeModelOperation, it, clientContext));
+    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it, clientContext));
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
