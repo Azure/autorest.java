@@ -5,7 +5,6 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.annotation.Fluent;
-import com.azure.core.util.logging.ClientLogger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -18,12 +17,6 @@ public final class CustomTemplateResourcePatch {
      */
     @JsonProperty(value = "identity")
     private ManagedIdentityProperties identity;
-
-    /*
-     * The propertyRemovedInStable property.
-     */
-    @JsonProperty(value = "propertyRemovedInStable", required = true)
-    private String propertyRemovedInStable;
 
     /**
      * Creates an instance of CustomTemplateResourcePatch class.
@@ -52,26 +45,6 @@ public final class CustomTemplateResourcePatch {
     }
 
     /**
-     * Get the propertyRemovedInStable property: The propertyRemovedInStable property.
-     * 
-     * @return the propertyRemovedInStable value.
-     */
-    public String propertyRemovedInStable() {
-        return this.propertyRemovedInStable;
-    }
-
-    /**
-     * Set the propertyRemovedInStable property: The propertyRemovedInStable property.
-     * 
-     * @param propertyRemovedInStable the propertyRemovedInStable value to set.
-     * @return the CustomTemplateResourcePatch object itself.
-     */
-    public CustomTemplateResourcePatch withPropertyRemovedInStable(String propertyRemovedInStable) {
-        this.propertyRemovedInStable = propertyRemovedInStable;
-        return this;
-    }
-
-    /**
      * Validates the instance.
      * 
      * @throws IllegalArgumentException thrown if the instance is not valid.
@@ -80,12 +53,5 @@ public final class CustomTemplateResourcePatch {
         if (identity() != null) {
             identity().validate();
         }
-        if (propertyRemovedInStable() == null) {
-            throw LOGGER.atError()
-                .log(new IllegalArgumentException(
-                    "Missing required property propertyRemovedInStable in model CustomTemplateResourcePatch"));
-        }
     }
-
-    private static final ClientLogger LOGGER = new ClientLogger(CustomTemplateResourcePatch.class);
 }
