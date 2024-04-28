@@ -25,7 +25,7 @@ import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace, pascalCase } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
-import { SdkDurationType } from "@azure-tools/typespec-client-generator-core";
+import { SdkDurationType, isSdkFloatKind, isSdkIntKind } from "@azure-tools/typespec-client-generator-core";
 
 /** Acts as a cache for processing inputs.
  *
@@ -355,24 +355,4 @@ function getDecoratorScopedValue<T>(
     return value;
   }
   return undefined;
-}
-
-export function isSdkIntKind(kind: string): boolean {
-  return [
-    "numeric",
-    "integer",
-    "safeint",
-    "int8",
-    "int16",
-    "int32",
-    "int64",
-    "uint8",
-    "uint16",
-    "uint32",
-    "uint64",
-  ].includes(kind);
-}
-
-export function isSdkFloatKind(kind: string): boolean {
-  return ["float", "float32", "float64", "decimal", "decimal128"].includes(kind);
 }

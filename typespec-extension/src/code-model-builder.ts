@@ -68,6 +68,7 @@ import {
   isApiVersion,
   isInternal,
   isSdkBuiltInKind,
+  isSdkIntKind,
   listClients,
   listOperationGroups,
   listOperationsInOperationGroup,
@@ -166,7 +167,6 @@ import {
   isArmCommonType,
   isModelReferredInTemplate,
   isNullableType,
-  isSdkIntKind,
   modelIs,
   pushDistinct,
 } from "./type-utils.js";
