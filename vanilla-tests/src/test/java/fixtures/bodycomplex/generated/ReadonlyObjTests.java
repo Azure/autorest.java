@@ -11,15 +11,14 @@ import org.junit.jupiter.api.Assertions;
 public final class ReadonlyObjTests {
     @org.junit.jupiter.api.Test
     public void testDeserialize() throws Exception {
-        ReadonlyObj model
-            = BinaryData.fromString("{\"id\":\"uvfqawrlyxwj\",\"size\":1138788956}").toObject(ReadonlyObj.class);
-        Assertions.assertEquals(1138788956, model.getSize());
+        ReadonlyObj model = BinaryData.fromString("{\"id\":\"qvkoc\",\"size\":1066142513}").toObject(ReadonlyObj.class);
+        Assertions.assertEquals(1066142513, model.getSize());
     }
 
     @org.junit.jupiter.api.Test
     public void testSerialize() throws Exception {
-        ReadonlyObj model = new ReadonlyObj().setSize(1138788956);
+        ReadonlyObj model = new ReadonlyObj().setSize(1066142513);
         model = BinaryData.fromObject(model).toObject(ReadonlyObj.class);
-        Assertions.assertEquals(1138788956, model.getSize());
+        Assertions.assertEquals(1066142513, model.getSize());
     }
 }
