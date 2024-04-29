@@ -76,17 +76,14 @@ import {
   shouldGenerateProtocol,
 } from "@azure-tools/typespec-client-generator-core";
 import {
-  BooleanLiteral,
   EmitContext,
   Enum,
   EnumMember,
   Model,
   ModelProperty,
-  NumericLiteral,
   Operation,
   Program,
   Scalar,
-  StringLiteral,
   Type,
   TypeNameOptions,
   Union,
@@ -125,7 +122,7 @@ import {
   isPathParam,
 } from "@typespec/http";
 import { getResourceOperation, getSegment } from "@typespec/rest";
-import { Availability, Version, getAddedOnVersions, getAvailabilityMap, getVersion } from "@typespec/versioning";
+import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
 import { Client as CodeModelClient, ObjectScheme } from "./common/client.js";
@@ -431,7 +428,7 @@ export class CodeModelBuilder {
     // process sdk models
     for (const model of sdkModels) {
       if (!processedSdkModels.has(model)) {
-        const access = getAccess(model.__raw as Model | Enum | Union);
+        const access = getAccess(model.__raw);
         if (access === "public") {
           modelAsPublic(model);
         } else if (access === "internal") {
@@ -442,7 +439,7 @@ export class CodeModelBuilder {
           });
         }
 
-        const usage = getUsage(model.__raw as Model | Enum | Union);
+        const usage = getUsage(model.__raw);
         if (usage) {
           const schema = this.processSchemaFromSdkType(model, "");
 
@@ -1320,7 +1317,7 @@ export class CodeModelBuilder {
       op.requests![0].protocol.http!.mediaTypes.length > 0 &&
       !isKnownContentType(op.requests![0].protocol.http!.mediaTypes);
 
-    const sdkType: SdkType = getClientType(this.sdkContext, body);
+    const sdkType: SdkType = getClientType(this.sdkContext, body, httpOperation.operation);
 
     let schema: Schema;
     if (
@@ -1787,8 +1784,8 @@ export class CodeModelBuilder {
 
   private processStringSchemaFromSdkType(type: SdkBuiltInType, name: string): StringSchema {
     return this.codeModel.schemas.add(
-      new StringSchema(name, this.getDoc(type.__raw as Type), {
-        summary: this.getSummary(type.__raw as Type),
+      new StringSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
@@ -1796,8 +1793,8 @@ export class CodeModelBuilder {
   private processByteArraySchemaFromSdkType(type: SdkBuiltInType, name: string): ByteArraySchema {
     const base64Encoded: boolean = type.encode === "base64url";
     return this.codeModel.schemas.add(
-      new ByteArraySchema(name, this.getDoc(type.__raw as Scalar), {
-        summary: this.getSummary(type.__raw as Scalar),
+      new ByteArraySchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
         format: base64Encoded ? "base64url" : "byte",
       }),
     );
@@ -1805,16 +1802,16 @@ export class CodeModelBuilder {
 
   private processIntegerSchemaFromSdkType(type: SdkBuiltInType, name: string, precision: number): NumberSchema {
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw as Scalar), SchemaType.Integer, precision, {
-        summary: this.getSummary(type.__raw as Scalar),
+      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Integer, precision, {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
 
   private processNumberSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw as Scalar), SchemaType.Number, 64, {
-        summary: this.getSummary(type.__raw as Scalar),
+      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Number, 64, {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
@@ -1822,16 +1819,16 @@ export class CodeModelBuilder {
   private processDecimalSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     // "Infinity" maps to "BigDecimal" in Java
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw as Scalar), SchemaType.Number, Infinity, {
-        summary: this.getSummary(type.__raw as Scalar),
+      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Number, Infinity, {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
 
   private processBooleanSchemaFromSdkType(type: SdkBuiltInType, name: string): BooleanSchema {
     return this.codeModel.schemas.add(
-      new BooleanSchema(name, this.getDoc(type.__raw as Scalar), {
-        summary: this.getSummary(type.__raw as Scalar),
+      new BooleanSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
@@ -1839,8 +1836,8 @@ export class CodeModelBuilder {
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
     const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
     return this.codeModel.schemas.add(
-      new ArraySchema(name, this.getDoc(type.__raw as Type), elementSchema, {
-        summary: this.getSummary(type.__raw as Type),
+      new ArraySchema(name, this.getDoc(type.__raw), elementSchema, {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
@@ -1867,7 +1864,8 @@ export class CodeModelBuilder {
     type: SdkEnumType,
     name: string,
   ): ChoiceSchema | SealedChoiceSchema | ConstantSchema {
-    const namespace = getNamespace(type.__raw as Enum);
+    const rawEnumType = type.__raw;
+    const namespace = getNamespace(rawEnumType);
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
 
     const choices: ChoiceValue[] = [];
@@ -1878,7 +1876,7 @@ export class CodeModelBuilder {
     const schemaType = type.isFixed ? SealedChoiceSchema : ChoiceSchema;
 
     const schema = new schemaType(type.name ? type.name : name, type.description ?? "", {
-      summary: this.getSummary(type.__raw),
+      summary: this.getSummary(rawEnumType),
       choiceType: valueType as any,
       choices: choices,
       language: {
@@ -1898,7 +1896,7 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type.__raw as StringLiteral | NumericLiteral | BooleanLiteral), {
+      new ConstantSchema(name, this.getDoc(type.__raw), {
         summary: this.getSummary(type.__raw),
         valueType: valueType,
         value: new ConstantValue(type.value),
@@ -1910,8 +1908,8 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.enumType, type.enumType.name);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type.__raw as Type), {
-        summary: this.getSummary(type.__raw as Type),
+      new ConstantSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
         valueType: valueType,
         value: new ConstantValue(type.value ?? type.name),
       }),
@@ -1920,16 +1918,16 @@ export class CodeModelBuilder {
 
   private processUnixTimeSchemaFromSdkType(type: SdkDatetimeType, name: string): UnixTimeSchema {
     return this.codeModel.schemas.add(
-      new UnixTimeSchema(name, this.getDoc(type.__raw as Type), {
-        summary: this.getSummary(type.__raw as Type),
+      new UnixTimeSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
 
   private processDateTimeSchemaFromSdkType(type: SdkDatetimeType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
-      new DateTimeSchema(name, this.getDoc(type.__raw as Type), {
-        summary: this.getSummary(type.__raw as Type),
+      new DateTimeSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
         format: rfc1123 ? "date-time-rfc1123" : "date-time",
       }),
     );
@@ -1937,16 +1935,16 @@ export class CodeModelBuilder {
 
   private processDateSchemaFromSdkType(type: SdkBuiltInType, name: string): DateSchema {
     return this.codeModel.schemas.add(
-      new DateSchema(name, this.getDoc(type.__raw as Scalar), {
-        summary: this.getSummary(type.__raw as Scalar),
+      new DateSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
 
   private processTimeSchemaFromSdkType(type: SdkBuiltInType, name: string): TimeSchema {
     return this.codeModel.schemas.add(
-      new TimeSchema(name, this.getDoc(type.__raw as Scalar), {
-        summary: this.getSummary(type.__raw as Scalar),
+      new TimeSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
@@ -1957,8 +1955,8 @@ export class CodeModelBuilder {
     format: DurationSchema["format"] = "duration-rfc3339",
   ): DurationSchema {
     return this.codeModel.schemas.add(
-      new DurationSchema(name, this.getDoc(type.__raw as Scalar), {
-        summary: this.getSummary(type.__raw as Scalar),
+      new DurationSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
         format: format,
       }),
     );
@@ -1966,14 +1964,15 @@ export class CodeModelBuilder {
 
   private processUrlSchemaFromSdkType(type: SdkBuiltInType, name: string): UriSchema {
     return this.codeModel.schemas.add(
-      new UriSchema(name, this.getDoc(type.__raw as Scalar), {
-        summary: this.getSummary(type.__raw as Scalar),
+      new UriSchema(name, this.getDoc(type.__raw), {
+        summary: this.getSummary(type.__raw),
       }),
     );
   }
 
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
-    const namespace = getNamespace(type.__raw as Model);
+    const rawModelType = type.__raw;
+    const namespace = getNamespace(rawModelType);
     if (
       (this.isArm() &&
         namespace?.startsWith("Azure.ResourceManager") &&
@@ -1989,8 +1988,8 @@ export class CodeModelBuilder {
 
       return objectSchema;
     }
-    const objectSchema = new ObjectScheme(name, this.getDoc(type.__raw as Model), {
-      summary: this.getSummary(type.__raw as Model),
+    const objectSchema = new ObjectScheme(name, this.getDoc(rawModelType), {
+      summary: this.getSummary(rawModelType),
       language: {
         default: {
           namespace: namespace,
@@ -2069,7 +2068,7 @@ export class CodeModelBuilder {
       if (
         prop.name === type.discriminatorProperty?.name ||
         prop.name === type.baseModel?.discriminatorProperty?.name ||
-        !isPayloadProperty(this.program, prop.__raw as ModelProperty)
+        !isPayloadProperty(this.program, prop.__raw) // why have this check?
       ) {
         continue;
       } else {
@@ -2114,8 +2113,8 @@ export class CodeModelBuilder {
   }
 
   private dummyObjectSchemaFromSdkType(type: SdkModelType, name: string, namespace?: string): ObjectSchema {
-    return new ObjectScheme(name, this.getDoc(type.__raw as Model), {
-      summary: this.getSummary(type.__raw as Model),
+    return new ObjectScheme(name, this.getDoc(type.__raw), {
+      summary: this.getSummary(type.__raw),
       language: {
         default: {
           name: name,
@@ -2130,41 +2129,44 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
+    const rawModelPropertyType = prop.__raw as ModelProperty | undefined;
     // TODO: This case is related with literal.tsp, once TCGC supports giving a name, we can use TCGC generatedName
-    const schemaNameHint = pascalCase(getNamePrefixForProperty(prop.__raw as ModelProperty)) + pascalCase(prop.name);
+    const schemaNameHint = pascalCase(getNamePrefixForProperty(rawModelPropertyType)) + pascalCase(prop.name);
     let schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
     let nullable = prop.nullable;
 
     let extensions: Record<string, any> | undefined = undefined;
-    if (this.isSecret(prop.__raw as ModelProperty)) {
+    if (this.isSecret(rawModelPropertyType)) {
       extensions = extensions ?? {};
       extensions["x-ms-secret"] = true;
       // if the property does not return in response, it had to be nullable
       nullable = true;
     }
-    if (prop.kind === "property" && (prop as SdkBodyModelPropertyType).flatten) {
+    if (prop.kind === "property" && prop.flatten) {
       extensions = extensions ?? {};
       extensions["x-ms-client-flatten"] = true;
     }
 
-    // handle multipart/form-data property
-    if (prop.kind === "property" && (prop as SdkBodyModelPropertyType).isMultipartFileInput && schema instanceof ObjectSchema) {
-      this.processMultipartFormDataSchema(schema);
+    if (prop.kind === "property" && prop.isMultipartFileInput) {
+      schema = this.processMultipartFormDataPropertySchemaFromSdkType(prop, this.namespace);
     }
 
-    return new Property(prop.name, this.getDoc(prop.__raw as ModelProperty), schema, {
-      summary: this.getSummary(prop.__raw as ModelProperty),
+    return new Property(prop.name, this.getDoc(rawModelPropertyType), schema, {
+      summary: this.getSummary(rawModelPropertyType),
       required: !prop.optional,
       nullable: nullable,
-      readOnly: this.isReadOnly(prop.__raw as ModelProperty),
+      readOnly: this.isReadOnly(rawModelPropertyType),
       // clientDefaultValue: this.getDefaultValue(prop.default),
-      serializedName: (prop as SdkBodyModelPropertyType).serializedName,
+      serializedName: prop.kind === "property" ? prop.serializedName : undefined,
       extensions: extensions,
     });
   }
 
   private processUnionSchemaFromSdkType(type: SdkUnionType, name: string): Schema {
-    let rawUnionType: Union = type.__raw as Union;
+    if (!(type.__raw && type.__raw.kind === "Union")) {
+      throw new Error(`Invalid type for union: '${type.kind}'.`);
+    }
+    const rawUnionType: Union = type.__raw as Union;
     // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(rawUnionType);
     const baseName = type.name ?? pascalCase(name) + "Model";
@@ -2176,7 +2178,7 @@ export class CodeModelBuilder {
     });
     unionSchema.anyOf = [];
     type.values.forEach((it) => {
-      const variantName = this.getUnionVariantName(it.__raw as Type, { depth: 0 });
+      const variantName = this.getUnionVariantName(it.__raw, { depth: 0 });
       const modelName = variantName + baseName;
       const propertyName = "value";
 
@@ -2214,7 +2216,10 @@ export class CodeModelBuilder {
     );
   }
 
-  private getUnionVariantName(type: Type, option: any): string {
+  private getUnionVariantName(type: Type | undefined, option: any): string {
+    if (type === undefined) {
+      throw new Error("type is undefined.")
+    }
     switch (type.kind) {
       case "Scalar": {
         const scalarName = type.name;
@@ -2263,57 +2268,23 @@ export class CodeModelBuilder {
     }
   }
 
-  // private processMultipartFormDataSchemaFromSdkType(property: SdkModelPropertyType, namespace: string): Schema {
-  //   if (property.type.kind === "bytes") {
-  //     return getFileDetailsSchema(
-  //       property.name,
-  //       namespace,
-  //       this.codeModel.schemas,
-  //       this.binarySchema,
-  //       this.stringSchema,
-  //     );
-  //   } else if(property.type.kind === "array" && property.type.valueType.kind === "bytes") {
-  //     return new ArraySchema(
-  //       property.name,
-  //       property.description ?? "",
-  //       getFileDetailsSchema(
-  //         property.name, 
-  //         namespace,
-  //         this.codeModel.schemas,
-  //         this.binarySchema,
-  //         this.stringSchema,
-  //       ),
-  //     );
-  //   }
-  //   throw new Error(`Unrecognized type for multipart/form-data property: '${property.type.kind}'.`);
-  // }
-
-  private processMultipartFormDataSchema(schema: ObjectSchema) {
-    if (schema.properties) {
-      for (const property of schema.properties) {
-        if (property.schema instanceof ByteArraySchema) {
-          property.schema = getFileDetailsSchema(
-            property.language.default.name,
-            schema.language.default.namespace,
-            this.codeModel.schemas,
-            this.binarySchema,
-            this.stringSchema,
-          );
-        } else if (property.schema instanceof ArraySchema && property.schema.elementType instanceof ByteArraySchema) {
-          property.schema = new ArraySchema(
-            property.language.default.name,
-            property.language.default.description,
-            getFileDetailsSchema(
-              property.language.default.name,
-              schema.language.default.namespace,
-              this.codeModel.schemas,
-              this.binarySchema,
-              this.stringSchema,
-            ),
-          );
-        }
-      }
+  private processMultipartFormDataPropertySchemaFromSdkType(property: SdkModelPropertyType, namespace: string): Schema {
+    if (property.type.kind === "bytes") {
+      return getFileDetailsSchema(
+        property.name,
+        namespace,
+        this.codeModel.schemas,
+        this.binarySchema,
+        this.stringSchema,
+      );
+    } else if (property.type.kind === "array" && property.type.valueType.kind === "bytes") {
+      return new ArraySchema(
+        property.name,
+        property.description ?? "",
+        getFileDetailsSchema(property.name, namespace, this.codeModel.schemas, this.binarySchema, this.stringSchema),
+      );
     }
+    throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
   }
 
   private getDefaultValue(type: Type | undefined): any {
@@ -2332,8 +2303,8 @@ export class CodeModelBuilder {
     return undefined;
   }
 
-  private getDoc(target: Type): string {
-    return getDoc(this.program, target) || "";
+  private getDoc(target: Type | undefined): string {
+    return target ? getDoc(this.program, target) || "" : "";
   }
 
   private getSummary(target: Type | undefined): string | undefined {
@@ -2398,13 +2369,13 @@ export class CodeModelBuilder {
     return getWireName(this.sdkContext, target);
   }
 
-  private isReadOnly(target: ModelProperty): boolean {
+  private isReadOnly(target: ModelProperty | undefined): boolean {
     // const key = isKey(this.program, target);
-    const segment = getSegment(this.program, target) !== undefined;
+    const segment = target ? getSegment(this.program, target) !== undefined : false;
     if (segment) {
       return true;
     } else {
-      const visibility = getVisibility(this.program, target);
+      const visibility = target ? getVisibility(this.program, target) : undefined;
       if (visibility) {
         return (
           !visibility.includes("write") &&
@@ -2419,8 +2390,8 @@ export class CodeModelBuilder {
     }
   }
 
-  private isSecret(target: ModelProperty): boolean {
-    const visibility = getVisibility(this.program, target);
+  private isSecret(target: ModelProperty | undefined): boolean {
+    const visibility = target ? getVisibility(this.program, target) : undefined;
     if (visibility) {
       return !visibility.includes("read");
     } else {

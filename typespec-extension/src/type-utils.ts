@@ -2,12 +2,10 @@ import {
   DecoratedType,
   DecoratorApplication,
   EncodeData,
-  Enum,
   EnumMember,
   IntrinsicScalarName,
   Model,
   ModelProperty,
-  Operation,
   Program,
   Scalar,
   StringLiteral,
@@ -25,11 +23,8 @@ import { SchemaContext } from "@autorest/codemodel";
 import { DurationSchema } from "./common/schemas/time.js";
 import { getNamespace, pascalCase } from "./utils.js";
 import { getUnionAsEnum } from "@azure-tools/typespec-azure-core";
-<<<<<<< HEAD
 import { SdkDurationType, isSdkFloatKind, isSdkIntKind } from "@azure-tools/typespec-client-generator-core";
-=======
 import { Version } from "@typespec/versioning";
->>>>>>> remote/main
 
 /** Acts as a cache for processing inputs.
  *
@@ -227,7 +222,7 @@ export function getUnionDescription(union: Union, typeNameOptions: TypeNameOptio
   return name;
 }
 
-export function getNamePrefixForProperty(property: ModelProperty): string {
+export function getNamePrefixForProperty(property: ModelProperty | undefined): string {
   if (property && property.model) {
     if (property.model.name) {
       return property.model.name;
@@ -265,50 +260,58 @@ export function modelIs(model: Model, name: string, namespace: string): boolean 
   return false;
 }
 
-export function getAccess(type: Model | Operation | Enum | Union): string | undefined {
-  return getDecoratorScopedValue(type, "$access", (it) => {
-    const value = it.args[0].value;
-    if (value.kind === "EnumMember") {
-      return value.name;
-    } else {
-      return undefined;
-    }
-  });
+export function getAccess(type: Type | undefined): string | undefined {
+  if (type && (type.kind === "Model" || type.kind === "Operation" || type.kind === "Enum"  || type.kind === "Union")) {
+    return getDecoratorScopedValue(type, "$access", (it) => {
+      const value = it.args[0].value;
+      if (value.kind === "EnumMember") {
+        return value.name;
+      } else {
+        return undefined;
+      }
+    });
+  } else {
+    return undefined;
+  }
 }
 
 export function isAllValueInteger(values: number[]): boolean {
   return values.every((it) => Number.isInteger(it));
 }
 
-export function getUsage(type: Model | Operation | Enum | Union): SchemaContext[] | undefined {
-  return getDecoratorScopedValue(type, "$usage", (it) => {
-    const value = it.args[0].value;
-    const values: EnumMember[] = [];
-    const ret: SchemaContext[] = [];
-    if (value.kind === "EnumMember") {
-      values.push(value);
-    } else if (value.kind === "Union") {
-      for (const v of value.variants.values()) {
-        values.push(v.type as EnumMember);
+export function getUsage(type: Type | undefined): SchemaContext[] | undefined {
+  if (type && (type.kind === "Model" || type.kind === "Operation" || type.kind === "Enum"  || type.kind === "Union")) {
+    return getDecoratorScopedValue(type, "$usage", (it) => {
+      const value = it.args[0].value;
+      const values: EnumMember[] = [];
+      const ret: SchemaContext[] = [];
+      if (value.kind === "EnumMember") {
+        values.push(value);
+      } else if (value.kind === "Union") {
+        for (const v of value.variants.values()) {
+          values.push(v.type as EnumMember);
+        }
+      } else {
+        return undefined;
       }
-    } else {
-      return undefined;
-    }
-    for (const v of values) {
-      switch (v.name) {
-        case "input":
-          ret.push(SchemaContext.Input);
-          break;
-        case "output":
-          ret.push(SchemaContext.Output);
-          break;
+      for (const v of values) {
+        switch (v.name) {
+          case "input":
+            ret.push(SchemaContext.Input);
+            break;
+          case "output":
+            ret.push(SchemaContext.Output);
+            break;
+        }
       }
-    }
-    if (ret.length === 0) {
-      return undefined;
-    }
-    return ret;
-  });
+      if (ret.length === 0) {
+        return undefined;
+      }
+      return ret;
+    });
+  } else {
+    return undefined;
+  }
 }
 
 /**
