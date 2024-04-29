@@ -1,4 +1,4 @@
-import { Enum, Model, NoTarget, Operation, Program, Type, Union } from "@typespec/compiler";
+import { NoTarget, Program, Type } from "@typespec/compiler";
 
 export function logWarning(program: Program, msg: string) {
   trace(program, msg);

@@ -44,7 +44,6 @@ import { KnownMediaType } from "@azure-tools/codegen";
 import { getLroMetadata, getPagedResult, isPollingLocation } from "@azure-tools/typespec-azure-core";
 import {
   SdkArrayType,
-  SdkBodyModelPropertyType,
   SdkBuiltInType,
   SdkClient,
   SdkConstantType,
