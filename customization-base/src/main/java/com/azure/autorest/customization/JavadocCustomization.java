@@ -170,6 +170,7 @@ public final class JavadocCustomization {
      */
     public JavadocCustomization addSee(String seeDoc) {
         javadoc.getBlockTags().add(new JavadocBlockTag(JavadocBlockTag.Type.SEE, seeDoc));
+        node.setJavadocComment(javadoc);
 
         return this;
     }
@@ -241,11 +242,12 @@ public final class JavadocCustomization {
 
         String tagValueWithTagName = (tagName == null) ? tagValue : tagName + " " + tagValue;
         if (index == -1) {
-            javadoc.getBlockTags().add(new JavadocBlockTag(type, tagValue));
+            javadoc.getBlockTags().add(new JavadocBlockTag(type, tagValueWithTagName));
         } else {
-            javadoc.getBlockTags().set(index, new JavadocBlockTag(type, tagValue));
+            javadoc.getBlockTags().set(index, new JavadocBlockTag(type, tagValueWithTagName));
         }
 
+        node.setJavadocComment(javadoc);
         return this;
     }
 
@@ -256,6 +258,7 @@ public final class JavadocCustomization {
             javadoc.getBlockTags().remove(index);
         }
 
+        node.setJavadocComment(javadoc);
         return this;
     }
 

@@ -23,6 +23,16 @@ public final class LibraryCustomization {
         for (Map.Entry<String, String> entry : contents.entrySet()) {
             String key = entry.getKey();
             if (key.startsWith(MAIN_JAVA) && key.endsWith(".java")) {
+                int index = key.lastIndexOf('/');
+                if (index == -1) {
+                    throw new IllegalArgumentException("Invalid file path: " + key);
+                }
+
+                // Don't allow customizations for module-info.java
+                if (key.endsWith("module-info.java")) {
+                    continue;
+                }
+
                 String packageName = key.substring(MAIN_JAVA.length(), key.lastIndexOf('/')).replace("/", ".");
                 PackageCustomization packageCustomization = packages.computeIfAbsent(packageName,
                     ignored -> new PackageCustomization(packageName));
@@ -39,8 +49,7 @@ public final class LibraryCustomization {
      * @return the package level customization.
      */
     public PackageCustomization getPackage(String packageName) {
-        String resolvedPackageName = packageName.replace(".", "/");
-        PackageCustomization packageCustomization = packages.get(resolvedPackageName);
+        PackageCustomization packageCustomization = packages.get(packageName);
         if (packageCustomization == null) {
             throw new IllegalArgumentException("Package not found: " + packageName);
         }

@@ -4,9 +4,11 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.body.ConstructorDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.Statement;
 
 import java.lang.reflect.Modifier;
 import java.util.List;
@@ -121,6 +123,9 @@ public final class ConstructorCustomization {
 
     /**
      * Replace the body of the constructor.
+     * <p>
+     * If the new body contains {@code this()} or {@code super()} constructor calls, use
+     * {@link #replaceBody(NodeList, List)} instead.
      *
      * @param newBody New constructor body.
      * @return A new ConstructorCustomization representing the updated constructor.
@@ -131,6 +136,9 @@ public final class ConstructorCustomization {
 
     /**
      * Replaces the body of the constructor and adds any additional imports required by the new body.
+     * <p>
+     * If the new body contains {@code this()} or {@code super()} constructor calls, use
+     * {@link #replaceBody(NodeList, List)} instead.
      *
      * @param newBody New constructor body.
      * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
@@ -139,7 +147,24 @@ public final class ConstructorCustomization {
      */
     public ConstructorCustomization replaceBody(String newBody, List<String> importsToAdd) {
         Utils.addImports(compilationUnit, importsToAdd);
-        constructor.setBody(StaticJavaParser.parseBlock(newBody));
+        constructor.setBody(new BlockStmt(Utils.parseCodeBlockOrStatement(newBody)));
+        return this;
+    }
+
+    /**
+     * Replaces the body of the constructor and adds any additional imports required by the new body.
+     * <p>
+     * This method should be used if the new body contains {@code this()} or {@code super()} constructor calls as this
+     * is special syntax that cannot be handled by {@link #replaceBody(String, List)}.
+     *
+     * @param newBody New constructor body.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return The updated ConstructorCustomization.
+     */
+    public ConstructorCustomization replaceBody(NodeList<Statement> newBody, List<String> importsToAdd) {
+        Utils.addImports(compilationUnit, importsToAdd);
+        constructor.setBody(new BlockStmt(newBody));
         return this;
     }
 }

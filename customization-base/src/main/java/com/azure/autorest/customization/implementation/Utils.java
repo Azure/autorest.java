@@ -3,6 +3,7 @@
 
 package com.azure.autorest.customization.implementation;
 
+import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
@@ -12,6 +13,7 @@ import com.github.javaparser.ast.expr.AnnotationExpr;
 import com.github.javaparser.ast.nodeTypes.NodeWithAnnotations;
 import com.github.javaparser.ast.nodeTypes.NodeWithModifiers;
 import com.github.javaparser.ast.nodeTypes.NodeWithParameters;
+import com.github.javaparser.ast.stmt.Statement;
 
 import java.io.File;
 import java.lang.reflect.Modifier;
@@ -31,7 +33,7 @@ public class Utils {
      * @return The JavaParser {@link com.github.javaparser.ast.Modifier.Keyword keywords}.
      */
     static com.github.javaparser.ast.Modifier.Keyword[] toAstKeywords(int newModifiers, int validModifiers) {
-        validateModifiers(newModifiers, validModifiers);
+        validateModifiers(validModifiers, newModifiers);
 
         List<com.github.javaparser.ast.Modifier.Keyword> keywords = new ArrayList<>();
         if (Modifier.isPublic(newModifiers)) {
@@ -132,7 +134,7 @@ public class Utils {
      * @param annotation The annotation to add.
      */
     public static void addAnnotation(NodeWithAnnotations<?> node, String annotation) {
-        node.addAnnotation(StaticJavaParser.parseAnnotation(annotation));
+        node.addAnnotation(parseAnnotation(annotation));
     }
 
     /**
@@ -142,8 +144,16 @@ public class Utils {
      * @param annotation The annotation to remove.
      */
     public static void removeAnnotation(NodeWithAnnotations<?> node, String annotation) {
-        AnnotationExpr annotationExpr = StaticJavaParser.parseAnnotation(annotation);
+        AnnotationExpr annotationExpr = parseAnnotation(annotation);
         node.getAnnotationByName(annotationExpr.getNameAsString()).ifPresent(AnnotationExpr::remove);
+    }
+
+    private static AnnotationExpr parseAnnotation(String annotation) {
+        if (annotation.startsWith("@")) {
+            return StaticJavaParser.parseAnnotation(annotation);
+        } else {
+            return StaticJavaParser.parseAnnotation("@" + annotation);
+        }
     }
 
     public static void deleteDirectory(File directoryToBeDeleted) {
@@ -187,6 +197,33 @@ public class Utils {
         }
 
         return -1;
+    }
+
+    /**
+     * Helper method to parse Java code as either a code block ("{ code }") or a single statement.
+     * <p>
+     * The parsing options are tried in order until one is successful. If none are successful, an exception is thrown
+     * with all the parsing exceptions as suppressed exceptions.
+     *
+     * @param code The body to parse.
+     * @return The parsed NodeList of Statements.
+     * @throws IllegalStateException If none of the parsing options are successful.
+     */
+    public static NodeList<Statement> parseCodeBlockOrStatement(String code) {
+        try {
+            return StaticJavaParser.parseBlock(code).getStatements();
+        } catch (ParseProblemException ex) {
+            try {
+                return new NodeList<>(StaticJavaParser.parseStatement(code));
+            } catch (ParseProblemException ex2) {
+                IllegalStateException exception = new IllegalStateException(
+                    "Expected either a block statement ('{ code }') or a single statement, but got: " + code);
+                exception.addSuppressed(ex);
+                exception.addSuppressed(ex2);
+
+                throw exception;
+            }
+        }
     }
 
     /**

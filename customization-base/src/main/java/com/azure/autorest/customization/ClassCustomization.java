@@ -4,7 +4,6 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.github.javaparser.ParseProblemException;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
@@ -111,17 +110,11 @@ public final class ClassCustomization {
             .filter(InitializerDeclaration::isStatic)
             .findFirst().orElse(null);
 
-        NodeList<Statement> statements;
         if (staticCodeBlock.startsWith("static")) {
             staticCodeBlock = staticCodeBlock.substring("static".length()).trim();
         }
-        try {
-            // First try parsing the static code block as a block statement ("{ ... }").
-            statements = StaticJavaParser.parseBlock(staticCodeBlock).getStatements();
-        } catch (ParseProblemException ignored2) {
-            // Then try parsing the static code block as a single statement.
-            statements = new NodeList<>(StaticJavaParser.parseStatement(staticCodeBlock));
-        }
+
+        NodeList<Statement> statements = Utils.parseCodeBlockOrStatement(staticCodeBlock);
 
         if (staticInitializer != null) {
             staticInitializer.getBody().getStatements().addAll(statements);
@@ -379,6 +372,13 @@ public final class ClassCustomization {
                 .filter(enumConstantDeclaration -> enumConstantDeclaration.getNameAsString().equals(enumMemberName))
                 .findFirst()
                 .ifPresent(enumConstantDeclaration -> enumConstantDeclaration.setName(newName));
+        } else {
+            type.getMembers().stream().filter(BodyDeclaration::isFieldDeclaration)
+                .map(BodyDeclaration::asFieldDeclaration)
+                .filter(field -> field.isPublic() && field.isStatic() && field.isFinal())
+                .filter(field -> field.getVariable(0).getNameAsString().equals(enumMemberName))
+                .findFirst()
+                .ifPresent(field -> field.getVariable(0).setName(newName));
         }
 
         return this;

@@ -55,19 +55,6 @@ public final class PropertyCustomization {
     }
 
     /**
-     * Rename a property in the class. This is a refactor operation. All references of the property will be renamed and
-     * the getter and setter method(s) for this property will be renamed accordingly as well.
-     *
-     * @param newName the new name for the property
-     * @return the current class customization for chaining
-     */
-    public PropertyCustomization rename(String newName) {
-        property.getVariable(0).setName(newName);
-
-        return this;
-    }
-
-    /**
      * Add an annotation to a property in the class.
      *
      * @param annotation the annotation to add. The leading @ can be omitted.
@@ -86,19 +73,6 @@ public final class PropertyCustomization {
      */
     public PropertyCustomization removeAnnotation(String annotation) {
         Utils.removeAnnotation(property, annotation);
-        return this;
-    }
-
-    /**
-     * Generates a getter and a setter method(s) for a property in the class. This is a refactor operation. If a getter
-     * or a setter is already available on the class, the current getter or setter will be kept.
-     *
-     * @return the current class customization for chaining
-     */
-    public PropertyCustomization generateGetterAndSetter() {
-        property.createGetter();
-        property.createSetter();
-
         return this;
     }
 

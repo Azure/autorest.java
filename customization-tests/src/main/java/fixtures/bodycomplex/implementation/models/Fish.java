@@ -160,7 +160,7 @@ public class Fish implements JsonSerializable<Fish> {
                 } else if ("sawshark".equals(discriminatorValue)) {
                     return Sawshark.fromJson(readerToUse.reset());
                 } else if ("goblin".equals(discriminatorValue)) {
-                    return GoblinShark.fromJson(readerToUse.reset());
+                    return Goblinshark.fromJson(readerToUse.reset());
                 } else if ("cookiecuttershark".equals(discriminatorValue)) {
                     return Cookiecuttershark.fromJson(readerToUse.reset());
                 } else {

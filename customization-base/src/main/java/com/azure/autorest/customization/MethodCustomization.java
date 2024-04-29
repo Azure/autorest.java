@@ -7,6 +7,7 @@ import com.azure.autorest.customization.implementation.Utils;
 import com.github.javaparser.StaticJavaParser;
 import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
 import com.github.javaparser.ast.stmt.ReturnStmt;
 import com.github.javaparser.ast.stmt.Statement;
 
@@ -164,7 +165,7 @@ public final class MethodCustomization {
      */
     public MethodCustomization replaceBody(String newBody, List<String> importsToAdd) {
         Utils.addImports(compilationUnit, importsToAdd);
-        method.setBody(StaticJavaParser.parseBlock(newBody));
+        method.setBody(new BlockStmt(Utils.parseCodeBlockOrStatement(newBody)));
         return this;
     }
 
