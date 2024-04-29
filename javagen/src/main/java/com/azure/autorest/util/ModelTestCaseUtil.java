@@ -66,7 +66,9 @@ public class ModelTestCaseUtil {
 
         // class
         for (ClientModelProperty property : model.getProperties()) {
-            addForProperty(depth, jsonObject, property, model.getNeedsFlatten());
+            if (!property.isPolymorphicDiscriminator()) {
+                addForProperty(depth, jsonObject, property, model.getNeedsFlatten());
+            }
         }
 
         // superclasses
@@ -75,7 +77,9 @@ public class ModelTestCaseUtil {
             ClientModel parentModel = ClientModelUtil.getClientModel(parentModelName);
             if (parentModel != null) {
                 for (ClientModelProperty property : parentModel.getProperties()) {
-                    addForProperty(depth, jsonObject, property, parentModel.getNeedsFlatten());
+                    if (!property.isPolymorphicDiscriminator()) {
+                        addForProperty(depth, jsonObject, property, parentModel.getNeedsFlatten());
+                    }
                 }
             }
             parentModelName = parentModel == null ? null : parentModel.getParentModelName();
