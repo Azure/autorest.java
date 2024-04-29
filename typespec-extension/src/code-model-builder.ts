@@ -2218,7 +2218,7 @@ export class CodeModelBuilder {
 
   private getUnionVariantName(type: Type | undefined, option: any): string {
     if (type === undefined) {
-      throw new Error("type is undefined.")
+      throw new Error("type is undefined.");
     }
     switch (type.kind) {
       case "Scalar": {

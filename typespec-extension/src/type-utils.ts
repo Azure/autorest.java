@@ -261,7 +261,7 @@ export function modelIs(model: Model, name: string, namespace: string): boolean 
 }
 
 export function getAccess(type: Type | undefined): string | undefined {
-  if (type && (type.kind === "Model" || type.kind === "Operation" || type.kind === "Enum"  || type.kind === "Union")) {
+  if (type && (type.kind === "Model" || type.kind === "Operation" || type.kind === "Enum" || type.kind === "Union")) {
     return getDecoratorScopedValue(type, "$access", (it) => {
       const value = it.args[0].value;
       if (value.kind === "EnumMember") {
@@ -280,7 +280,7 @@ export function isAllValueInteger(values: number[]): boolean {
 }
 
 export function getUsage(type: Type | undefined): SchemaContext[] | undefined {
-  if (type && (type.kind === "Model" || type.kind === "Operation" || type.kind === "Enum"  || type.kind === "Union")) {
+  if (type && (type.kind === "Model" || type.kind === "Operation" || type.kind === "Enum" || type.kind === "Union")) {
     return getDecoratorScopedValue(type, "$usage", (it) => {
       const value = it.args[0].value;
       const values: EnumMember[] = [];
