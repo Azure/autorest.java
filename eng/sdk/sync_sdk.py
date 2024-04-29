@@ -47,14 +47,7 @@ def update_emitter(package_json_path: str):
         cwd=sdk_root)
 
     logging.info('Update emitter-package-lock.json')
-    subprocess.check_call([
-        'pwsh', 
-        './eng/common/scripts/typespec/New-EmitterPackageLock.ps1',
-        '-EmitterPackageJsonPath', 
-        'eng/emitter-package.json',
-        '-OutputDirectory',
-        'eng'], 
-        cwd=sdk_root)
+    subprocess.check_call(['tsp-client', '--generate-lock-file'], cwd=sdk_root)
 
 
 def get_generated_folder_from_artifact(module_path: str, artifact: str, type: str) -> str:

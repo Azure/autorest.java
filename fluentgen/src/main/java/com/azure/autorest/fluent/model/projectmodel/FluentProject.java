@@ -40,7 +40,7 @@ public class FluentProject extends Project {
             return String.format("%1$s %2$s %3$s",
                     simpleDescription,
                     clientDescription,
-                    tagDescription);
+                    tagDescription).trim();
         }
 
         public String getServiceDescriptionForPom() {
@@ -48,7 +48,7 @@ public class FluentProject extends Project {
                     simpleDescription,
                     "For documentation on how to use this package, please see https://aka.ms/azsdk/java/mgmt.",
                     clientDescription,
-                    tagDescription);
+                    tagDescription).trim();
         }
 
         public String getServiceDescriptionForMarkdown() {
@@ -81,7 +81,11 @@ public class FluentProject extends Project {
 
         this.serviceDescription.simpleDescription = String.format(simpleDescriptionTemplate, serviceName);
         this.serviceDescription.clientDescription = clientDescription;
-        this.serviceDescription.tagDescription = String.format(tagDescriptionTemplate, JavaSettings.getInstance().getAutorestSettings().getTag());
+        String autorestTag = JavaSettings.getInstance().getAutorestSettings().getTag();
+        // SDK from TypeSpec does not contain autorest tag.
+        this.serviceDescription.tagDescription = autorestTag == null
+                ? ""
+                : String.format(tagDescriptionTemplate, autorestTag);
 
         this.changelog = new Changelog(this);
     }
