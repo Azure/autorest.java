@@ -200,7 +200,10 @@ export function operationRefersUnion(
   return null;
 }
 
-export function isPayloadProperty(program: Program, property: ModelProperty) {
+export function isPayloadProperty(program: Program, property: ModelProperty | undefined): boolean {
+  if (property === undefined) {
+    return false;
+  }
   const headerInfo = getHeaderFieldName(program, property);
   const queryInfo = getQueryParamName(program, property);
   const pathInfo = getPathParamName(program, property);
