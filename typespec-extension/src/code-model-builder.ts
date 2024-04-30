@@ -1851,7 +1851,7 @@ export class CodeModelBuilder {
       this.schemaCache.set(type, dictSchema);
     }
 
-    const elementSchema = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
+    const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
     dictSchema.elementType = elementSchema;
 
     dictSchema.nullableItems = type.nullableValues;
