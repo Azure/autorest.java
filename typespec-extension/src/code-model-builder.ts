@@ -2054,7 +2054,7 @@ export class CodeModelBuilder {
         nullable: false,
         valueType: type.additionalProperties,
       };
-      const parentSchema = this.processDictionarySchemaFromSdkType(sdkDictType, "Record");
+      const parentSchema = this.processSchemaFromSdkType(sdkDictType, "Record");
       objectSchema.parents = objectSchema.parents ?? new Relations();
       objectSchema.parents.immediate.push(parentSchema);
       pushDistinct(objectSchema.parents.all, parentSchema);
