@@ -2063,7 +2063,7 @@ export class CodeModelBuilder {
 
     // properties
     for (const prop of type.properties) {
-      if (prop.kind === "property" && prop.discriminator === false) {
+      if (prop.kind === "property" && !prop.discriminator) {
         objectSchema.addProperty(this.processModelPropertyFromSdkType(prop));
       }
     }
