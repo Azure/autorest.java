@@ -1843,7 +1843,7 @@ export class CodeModelBuilder {
 
   private processDictionarySchemaFromSdkType(type: SdkDictionaryType, name: string): DictionarySchema {
     const dictSchema = new DictionarySchema<any>(name, type.details ? type.details : "", null, {
-      summary: type.description ? type.description : "",
+      summary: type.description,
     });
 
     // cache this now before we accidentally recurse on this type.
