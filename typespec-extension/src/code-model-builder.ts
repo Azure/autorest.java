@@ -96,7 +96,6 @@ import {
   getProjectedName,
   getSummary,
   getTypeName,
-  getVisibility,
   ignoreDiagnostics,
   isArrayModelType,
   isErrorModel,
@@ -121,7 +120,7 @@ import {
   getStatusCodeDescription,
   isPathParam,
 } from "@typespec/http";
-import { getResourceOperation, getSegment } from "@typespec/rest";
+import { getResourceOperation } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
@@ -2261,7 +2260,10 @@ export class CodeModelBuilder {
     }
   }
 
-  private processMultipartFormDataFilePropertySchemaFromSdkType(property: SdkModelPropertyType, namespace: string): Schema {
+  private processMultipartFormDataFilePropertySchemaFromSdkType(
+    property: SdkModelPropertyType,
+    namespace: string,
+  ): Schema {
     if (property.type.kind === "bytes") {
       return getFileDetailsSchema(
         property.name,
