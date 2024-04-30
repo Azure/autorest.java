@@ -112,6 +112,7 @@ import {
   HttpOperationResponse,
   HttpServer,
   HttpStatusCodesEntry,
+  Visibility,
   getAuthentication,
   getHeaderFieldOptions,
   getHttpOperation,
@@ -2055,7 +2056,7 @@ export class CodeModelBuilder {
         valueType: type.additionalProperties,
       };
       const parentSchema = this.processDictionarySchemaFromSdkType(sdkDictType, "Record");
-      objectSchema.parents = new Relations();
+      objectSchema.parents = objectSchema.parents ? objectSchema.parents : new Relations();
       objectSchema.parents.immediate.push(parentSchema);
       pushDistinct(objectSchema.parents.all, parentSchema);
       objectSchema.discriminatorValue = type.discriminatorValue;
@@ -2063,14 +2064,7 @@ export class CodeModelBuilder {
 
     // properties
     for (const prop of type.properties) {
-      // skip discriminator property
-      if (
-        prop.name === type.discriminatorProperty?.name ||
-        prop.name === type.baseModel?.discriminatorProperty?.name ||
-        !isPayloadProperty(this.program, prop.__raw) // why have this check?
-      ) {
-        continue;
-      } else {
+      if (prop.kind === "property" && prop.discriminator === false) {
         objectSchema.addProperty(this.processModelPropertyFromSdkType(prop));
       }
     }
@@ -2135,7 +2129,7 @@ export class CodeModelBuilder {
     let nullable = prop.nullable;
 
     let extensions: Record<string, any> | undefined = undefined;
-    if (this.isSecret(rawModelPropertyType)) {
+    if (this.isSecret(prop)) {
       extensions = extensions ?? {};
       extensions["x-ms-secret"] = true;
       // if the property does not return in response, it had to be nullable
@@ -2147,14 +2141,14 @@ export class CodeModelBuilder {
     }
 
     if (prop.kind === "property" && prop.isMultipartFileInput) {
-      schema = this.processMultipartFormDataPropertySchemaFromSdkType(prop, this.namespace);
+      schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
     }
 
     return new Property(prop.name, this.getDoc(rawModelPropertyType), schema, {
       summary: this.getSummary(rawModelPropertyType),
       required: !prop.optional,
       nullable: nullable,
-      readOnly: this.isReadOnly(rawModelPropertyType),
+      readOnly: this.isReadOnly(prop),
       // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.kind === "property" ? prop.serializedName : undefined,
       extensions: extensions,
@@ -2267,7 +2261,7 @@ export class CodeModelBuilder {
     }
   }
 
-  private processMultipartFormDataPropertySchemaFromSdkType(property: SdkModelPropertyType, namespace: string): Schema {
+  private processMultipartFormDataFilePropertySchemaFromSdkType(property: SdkModelPropertyType, namespace: string): Schema {
     if (property.type.kind === "bytes") {
       return getFileDetailsSchema(
         property.name,
@@ -2311,7 +2305,7 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation,
+    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation | undefined,
     nameHint: string | undefined = undefined,
   ): string {
     if (!target) {
@@ -2368,31 +2362,22 @@ export class CodeModelBuilder {
     return getWireName(this.sdkContext, target);
   }
 
-  private isReadOnly(target: ModelProperty | undefined): boolean {
-    // const key = isKey(this.program, target);
-    const segment = target ? getSegment(this.program, target) !== undefined : false;
-    if (segment) {
-      return true;
+  private isReadOnly(target: SdkModelPropertyType): boolean {
+    if (target.kind === "property" && target.visibility) {
+      return (
+        !target.visibility.includes(Visibility.Create) &&
+        !target.visibility.includes(Visibility.Update) &&
+        !target.visibility.includes(Visibility.Delete) &&
+        !target.visibility.includes(Visibility.Query)
+      );
     } else {
-      const visibility = target ? getVisibility(this.program, target) : undefined;
-      if (visibility) {
-        return (
-          !visibility.includes("write") &&
-          !visibility.includes("create") &&
-          !visibility.includes("update") &&
-          !visibility.includes("delete") &&
-          !visibility.includes("query")
-        );
-      } else {
-        return false;
-      }
+      return false;
     }
   }
 
-  private isSecret(target: ModelProperty | undefined): boolean {
-    const visibility = target ? getVisibility(this.program, target) : undefined;
-    if (visibility) {
-      return !visibility.includes("read");
+  private isSecret(target: SdkModelPropertyType): boolean {
+    if (target.kind === "property" && target.visibility) {
+      return !target.visibility.includes(Visibility.Read);
     } else {
       return false;
     }
