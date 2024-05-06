@@ -20,12 +20,13 @@ import {
 import { resolveOperationId } from "@typespec/openapi";
 import { Parameter } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
-import { buildVersionProjections, getVersion } from "@typespec/versioning";
+import { buildVersionProjections } from "@typespec/versioning";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getNamespace, logWarning, pascalCase } from "./utils.js";
 import { modelIs, unionReferredByType } from "./type-utils.js";
+import { SdkContext, getDefaultApiVersion } from "@azure-tools/typespec-client-generator-core";
 
 export const SPECIAL_HEADER_NAMES = new Set([
   "repeatability-request-id",
@@ -66,14 +67,17 @@ export function isKnownContentType(contentTypes: string[]): boolean {
  *
  * @param program the program.
  * @param options the emitter options.
- * @param sdkContextApiVersion the apiVersion from SdkContext, for projection. It could contain "all" or "latest".
+ * @param sdkContext the SdkContext.
  * @returns the Map of Operation to JSON. The Operation would be operation.projectionSource if available.
  */
 export async function loadExamples(
   program: Program,
   options: EmitterOptions,
-  sdkContextApiVersion?: string,
+  sdkContext: SdkContext,
 ): Promise<Map<Operation, any>> {
+  // sdkContextApiVersion could contain "all" or "latest"
+  const sdkContextApiVersion = sdkContext.apiVersion;
+
   const operationExamplesMap = new Map<Operation, any>();
   const operationExamplesDirectory = options["examples-directory"];
   if (operationExamplesDirectory) {
@@ -84,11 +88,7 @@ export async function loadExamples(
     if (sdkContextApiVersion && !["all", "latest"].includes(sdkContextApiVersion)) {
       version = sdkContextApiVersion;
     } else {
-      const versioning = getVersion(program, service.namespace);
-      if (versioning && versioning.getVersions()) {
-        const versions = versioning.getVersions();
-        version = versions[versions.length - 1].value;
-      }
+      version = getDefaultApiVersion(sdkContext, service.namespace)?.value;
     }
     if (version) {
       // projection
