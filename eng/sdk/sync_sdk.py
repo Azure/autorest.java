@@ -16,7 +16,8 @@ sdk_root: str
 
 skip_artifacts: List[str] = [
     'azure-ai-anomalydetector',         # deprecated
-    'azure-ai-vision-imageanalysis'     # temporary disabled for modification on Javadoc
+    'azure-ai-vision-imageanalysis',    # temporary disabled for modification on Javadoc
+    'azure-analytics-defender-easm'     # https://github.com/Azure/azure-sdk-for-java/issues/39862
 ]
 
 
