@@ -61,6 +61,14 @@ export function isKnownContentType(contentTypes: string[]): boolean {
     });
 }
 
+/**
+ * Load examples from the examples directory.
+ *
+ * @param program the program.
+ * @param options the emitter options.
+ * @param sdkContextApiVersion the apiVersion from SdkContext, for projection. It could contain "all" or "latest".
+ * @returns the Map of Operation to JSON. The Operation would be operation.projectionSource if available.
+ */
 export async function loadExamples(
   program: Program,
   options: EmitterOptions,
@@ -132,7 +140,11 @@ export async function loadExamples(
       routes.forEach((it) => {
         const operationId = pascalCaseForOperationId(resolveOperationId(program, it.operation));
         if (operationIdExamplesMap.has(operationId)) {
-          operationExamplesMap.set(it.operation, operationIdExamplesMap.get(operationId));
+          let operation = it.operation;
+          if (operation.projectionSource?.kind === "Operation") {
+            operation = operation.projectionSource;
+          }
+          operationExamplesMap.set(operation, operationIdExamplesMap.get(operationId));
         }
       });
     }

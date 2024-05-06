@@ -712,6 +712,24 @@ export class CodeModelBuilder {
     return Boolean(this.options["advanced-versioning"]);
   }
 
+  private getOperationExample(operation: Operation): any | undefined {
+    if (operation.projectionSource?.kind === "Operation") {
+      // always use the projectionSource, if available
+      operation = operation.projectionSource;
+    }
+    let operationExample = this.operationExamples.get(operation);
+    if (!operationExample && operation.sourceOperation) {
+      // if the operation is customized in client.tsp, the operation would be different from that of main.tsp
+      // try the operation.sourceOperation
+      operation = operation.sourceOperation;
+      if (operation.projectionSource?.kind === "Operation") {
+        operation = operation.projectionSource;
+      }
+      operationExample = this.operationExamples.get(operation);
+    }
+    return operationExample;
+  }
+
   private processOperation(groupName: string, operation: Operation, clientContext: ClientContext): CodeModelOperation {
     const op = ignoreDiagnostics(getHttpOperation(this.program, operation));
 
@@ -719,12 +737,7 @@ export class CodeModelBuilder {
     const operationName = this.getName(operation);
     const opId = groupName ? `${groupName}_${operationName}` : `${operationName}`;
 
-    let operationExample = this.operationExamples.get(operation);
-    if (!operationExample && operation.sourceOperation) {
-      // if the operation is customized in client.tsp, the operation would be different from that of main.tsp
-      // try the operation.sourceOperation
-      operationExample = this.operationExamples.get(operation.sourceOperation);
-    }
+    const operationExample = this.getOperationExample(operation);
 
     const codeModelOperation = new CodeModelOperation(operationName, this.getDoc(operation), {
       operationId: opId,
