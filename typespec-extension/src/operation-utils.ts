@@ -1,4 +1,13 @@
-import { ModelProperty, Operation, Program, Type, Union, ignoreDiagnostics, resolvePath } from "@typespec/compiler";
+import {
+  ModelProperty,
+  Operation,
+  Program,
+  Type,
+  Union,
+  ignoreDiagnostics,
+  projectProgram,
+  resolvePath,
+} from "@typespec/compiler";
 import {
   HttpOperation,
   getHeaderFieldName,
@@ -6,11 +15,12 @@ import {
   getPathParamName,
   isStatusCode,
   getAllHttpServices,
+  getHttpService,
 } from "@typespec/http";
 import { resolveOperationId } from "@typespec/openapi";
 import { Parameter } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
-import { getVersion } from "@typespec/versioning";
+import { buildVersionProjections, getVersion } from "@typespec/versioning";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
@@ -51,18 +61,37 @@ export function isKnownContentType(contentTypes: string[]): boolean {
     });
 }
 
-export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
+export async function loadExamples(
+  program: Program,
+  options: EmitterOptions,
+  sdkContextApiVersion?: string,
+): Promise<Map<Operation, any>> {
   const operationExamplesMap = new Map<Operation, any>();
   const operationExamplesDirectory = options["examples-directory"];
   if (operationExamplesDirectory) {
     const operationIdExamplesMap = new Map<string, any>();
 
-    const service = ignoreDiagnostics(getAllHttpServices(program))[0];
+    let service = ignoreDiagnostics(getAllHttpServices(program))[0];
     let version = undefined;
-    const versioning = getVersion(program, service.namespace);
-    if (versioning && versioning.getVersions()) {
-      const versions = versioning.getVersions();
-      version = versions[versions.length - 1].value;
+    if (sdkContextApiVersion && !["all", "latest"].includes(sdkContextApiVersion)) {
+      version = sdkContextApiVersion;
+    } else {
+      const versioning = getVersion(program, service.namespace);
+      if (versioning && versioning.getVersions()) {
+        const versions = versioning.getVersions();
+        version = versions[versions.length - 1].value;
+      }
+    }
+    if (version) {
+      // projection
+      const versionProjections = buildVersionProjections(program, service.namespace).filter(
+        (it) => it.version === version,
+      );
+      const projectedProgram = projectProgram(program, versionProjections[0].projections);
+      const projectedService = projectedProgram.projector.projectedTypes.get(service.namespace);
+      if (projectedService?.kind === "Namespace") {
+        service = ignoreDiagnostics(getHttpService(program, projectedService));
+      }
     }
 
     let exampleDir = version

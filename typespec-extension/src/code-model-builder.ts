@@ -261,7 +261,7 @@ export class CodeModelBuilder {
   }
 
   public async build(): Promise<CodeModel> {
-    this.operationExamples = await loadExamples(this.program, this.options);
+    this.operationExamples = await loadExamples(this.program, this.options, this.sdkContext.apiVersion);
 
     if (this.sdkContext.arm) {
       // ARM
