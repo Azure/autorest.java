@@ -160,7 +160,7 @@ public class Preprocessor extends NewPlugin {
                             p.setSchema(constantSchema.getValueType());
                         } else {
                             SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                                    Preprocessor::convertToChoiceSchema);
+                                Preprocessor::convertToChoiceSchema);
                             p.setSchema(sealedChoiceSchema);
                         }
 
@@ -175,7 +175,7 @@ public class Preprocessor extends NewPlugin {
                                 p.setSchema(constantSchema.getValueType());
                             } else {
                                 SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(
-                                        constantSchema, Preprocessor::convertToChoiceSchema);
+                                    constantSchema, Preprocessor::convertToChoiceSchema);
                                 p.setSchema(sealedChoiceSchema);
                             }
 
@@ -192,7 +192,7 @@ public class Preprocessor extends NewPlugin {
                         p.setSchema(constantSchema.getValueType());
                     } else {
                         SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                                Preprocessor::convertToChoiceSchema);
+                            Preprocessor::convertToChoiceSchema);
                         p.setSchema(sealedChoiceSchema);
                     }
                 });
