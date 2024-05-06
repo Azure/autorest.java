@@ -15,11 +15,13 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.MatchConditions;
 import com.azure.core.http.RequestConditions;
+import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
 import com.cadl.specialheaders.implementation.EtagHeadersImpl;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.models.Resource;
 import java.time.OffsetDateTime;
 
@@ -96,7 +98,7 @@ public final class EtagHeadersClient {
     }
 
     /**
-     * Create or replace operation template.
+     * Create or update operation template.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -143,6 +145,32 @@ public final class EtagHeadersClient {
     public Response<BinaryData> patchWithMatchHeadersWithResponse(String name, BinaryData resource,
         RequestOptions requestOptions) {
         return this.serviceClient.patchWithMatchHeadersWithResponse(name, resource, requestOptions);
+    }
+
+    /**
+     * Resource list operation template.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<BinaryData> listWithEtag(RequestOptions requestOptions) {
+        return this.serviceClient.listWithEtag(requestOptions);
     }
 
     /**
@@ -209,7 +237,7 @@ public final class EtagHeadersClient {
     }
 
     /**
-     * Create or replace operation template.
+     * Create or update operation template.
      * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
@@ -235,12 +263,15 @@ public final class EtagHeadersClient {
         if (ifNoneMatch != null) {
             requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
-        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
     }
 
     /**
-     * Create or replace operation template.
+     * Create or update operation template.
      * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
@@ -257,7 +288,29 @@ public final class EtagHeadersClient {
     public Resource patchWithMatchHeaders(String name, Resource resource) {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions).getValue()
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
+    }
+
+    /**
+     * Resource list operation template.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of Resource items as paginated response with {@link PagedIterable}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedIterable<Resource> listWithEtag() {
+        // Generated convenience method for listWithEtag
+        RequestOptions requestOptions = new RequestOptions();
+        return serviceClient.listWithEtag(requestOptions)
+            .mapPage(bodyItemValue -> bodyItemValue.toObject(Resource.class));
     }
 }

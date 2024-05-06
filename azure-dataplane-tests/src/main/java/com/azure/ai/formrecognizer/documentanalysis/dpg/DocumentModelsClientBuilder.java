@@ -42,12 +42,12 @@ import java.util.Map;
 import java.util.Objects;
 
 /**
- * A builder for creating a new instance of the FormRecognizerClient type.
+ * A builder for creating a new instance of the DocumentModelsClient type.
  */
-@ServiceClientBuilder(serviceClients = { FormRecognizerClient.class, FormRecognizerAsyncClient.class })
-public final class FormRecognizerClientBuilder
-    implements HttpTrait<FormRecognizerClientBuilder>, ConfigurationTrait<FormRecognizerClientBuilder>,
-    KeyCredentialTrait<FormRecognizerClientBuilder>, EndpointTrait<FormRecognizerClientBuilder> {
+@ServiceClientBuilder(serviceClients = { DocumentModelsClient.class, DocumentModelsAsyncClient.class })
+public final class DocumentModelsClientBuilder
+    implements HttpTrait<DocumentModelsClientBuilder>, ConfigurationTrait<DocumentModelsClientBuilder>,
+    KeyCredentialTrait<DocumentModelsClientBuilder>, EndpointTrait<DocumentModelsClientBuilder> {
     @Generated
     private static final String SDK_NAME = "name";
 
@@ -62,10 +62,10 @@ public final class FormRecognizerClientBuilder
     private final List<HttpPipelinePolicy> pipelinePolicies;
 
     /**
-     * Create an instance of the FormRecognizerClientBuilder.
+     * Create an instance of the DocumentModelsClientBuilder.
      */
     @Generated
-    public FormRecognizerClientBuilder() {
+    public DocumentModelsClientBuilder() {
         this.pipelinePolicies = new ArrayList<>();
     }
 
@@ -80,7 +80,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder pipeline(HttpPipeline pipeline) {
+    public DocumentModelsClientBuilder pipeline(HttpPipeline pipeline) {
         if (this.pipeline != null && pipeline == null) {
             LOGGER.atInfo().log("HttpPipeline is being set to 'null' when it was previously configured.");
         }
@@ -99,7 +99,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder httpClient(HttpClient httpClient) {
+    public DocumentModelsClientBuilder httpClient(HttpClient httpClient) {
         this.httpClient = httpClient;
         return this;
     }
@@ -115,7 +115,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
+    public DocumentModelsClientBuilder httpLogOptions(HttpLogOptions httpLogOptions) {
         this.httpLogOptions = httpLogOptions;
         return this;
     }
@@ -131,7 +131,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder clientOptions(ClientOptions clientOptions) {
+    public DocumentModelsClientBuilder clientOptions(ClientOptions clientOptions) {
         this.clientOptions = clientOptions;
         return this;
     }
@@ -147,7 +147,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder retryOptions(RetryOptions retryOptions) {
+    public DocumentModelsClientBuilder retryOptions(RetryOptions retryOptions) {
         this.retryOptions = retryOptions;
         return this;
     }
@@ -157,7 +157,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
+    public DocumentModelsClientBuilder addPolicy(HttpPipelinePolicy customPolicy) {
         Objects.requireNonNull(customPolicy, "'customPolicy' cannot be null.");
         pipelinePolicies.add(customPolicy);
         return this;
@@ -174,7 +174,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder configuration(Configuration configuration) {
+    public DocumentModelsClientBuilder configuration(Configuration configuration) {
         this.configuration = configuration;
         return this;
     }
@@ -190,7 +190,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder credential(KeyCredential keyCredential) {
+    public DocumentModelsClientBuilder credential(KeyCredential keyCredential) {
         this.keyCredential = keyCredential;
         return this;
     }
@@ -206,7 +206,7 @@ public final class FormRecognizerClientBuilder
      */
     @Generated
     @Override
-    public FormRecognizerClientBuilder endpoint(String endpoint) {
+    public DocumentModelsClientBuilder endpoint(String endpoint) {
         this.endpoint = endpoint;
         return this;
     }
@@ -221,10 +221,10 @@ public final class FormRecognizerClientBuilder
      * Sets Service version.
      * 
      * @param serviceVersion the serviceVersion value.
-     * @return the FormRecognizerClientBuilder.
+     * @return the DocumentModelsClientBuilder.
      */
     @Generated
-    public FormRecognizerClientBuilder serviceVersion(FormRecognizerServiceVersion serviceVersion) {
+    public DocumentModelsClientBuilder serviceVersion(FormRecognizerServiceVersion serviceVersion) {
         this.serviceVersion = serviceVersion;
         return this;
     }
@@ -239,10 +239,10 @@ public final class FormRecognizerClientBuilder
      * Sets The retry policy that will attempt to retry failed requests, if applicable.
      * 
      * @param retryPolicy the retryPolicy value.
-     * @return the FormRecognizerClientBuilder.
+     * @return the DocumentModelsClientBuilder.
      */
     @Generated
-    public FormRecognizerClientBuilder retryPolicy(RetryPolicy retryPolicy) {
+    public DocumentModelsClientBuilder retryPolicy(RetryPolicy retryPolicy) {
         this.retryPolicy = retryPolicy;
         return this;
     }
@@ -303,24 +303,24 @@ public final class FormRecognizerClientBuilder
     }
 
     /**
-     * Builds an instance of FormRecognizerAsyncClient class.
+     * Builds an instance of DocumentModelsAsyncClient class.
      * 
-     * @return an instance of FormRecognizerAsyncClient.
+     * @return an instance of DocumentModelsAsyncClient.
      */
     @Generated
-    public FormRecognizerAsyncClient buildAsyncClient() {
-        return new FormRecognizerAsyncClient(buildInnerClient());
+    public DocumentModelsAsyncClient buildAsyncClient() {
+        return new DocumentModelsAsyncClient(buildInnerClient().getDocumentModels());
     }
 
     /**
-     * Builds an instance of FormRecognizerClient class.
+     * Builds an instance of DocumentModelsClient class.
      * 
-     * @return an instance of FormRecognizerClient.
+     * @return an instance of DocumentModelsClient.
      */
     @Generated
-    public FormRecognizerClient buildClient() {
-        return new FormRecognizerClient(buildInnerClient());
+    public DocumentModelsClient buildClient() {
+        return new DocumentModelsClient(buildInnerClient().getDocumentModels());
     }
 
-    private static final ClientLogger LOGGER = new ClientLogger(FormRecognizerClientBuilder.class);
+    private static final ClientLogger LOGGER = new ClientLogger(DocumentModelsClientBuilder.class);
 }

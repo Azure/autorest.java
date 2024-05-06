@@ -9,10 +9,10 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
- * The BuildDocumentModelHeaders model.
+ * The DocumentModelsComposeModelHeaders model.
  */
 @Fluent
-public final class BuildDocumentModelHeaders {
+public final class DocumentModelsComposeModelHeaders {
     /*
      * The Operation-Location property.
      */
@@ -22,11 +22,11 @@ public final class BuildDocumentModelHeaders {
 
     // HttpHeaders containing the raw property values.
     /**
-     * Creates an instance of BuildDocumentModelHeaders class.
+     * Creates an instance of DocumentModelsComposeModelHeaders class.
      * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
-    public BuildDocumentModelHeaders(HttpHeaders rawHeaders) {
+    public DocumentModelsComposeModelHeaders(HttpHeaders rawHeaders) {
         this.operationLocation = rawHeaders.getValue(OPERATION_LOCATION);
     }
 
@@ -43,9 +43,9 @@ public final class BuildDocumentModelHeaders {
      * Set the operationLocation property: The Operation-Location property.
      * 
      * @param operationLocation the operationLocation value to set.
-     * @return the BuildDocumentModelHeaders object itself.
+     * @return the DocumentModelsComposeModelHeaders object itself.
      */
-    public BuildDocumentModelHeaders setOperationLocation(String operationLocation) {
+    public DocumentModelsComposeModelHeaders setOperationLocation(String operationLocation) {
         this.operationLocation = operationLocation;
         return this;
     }

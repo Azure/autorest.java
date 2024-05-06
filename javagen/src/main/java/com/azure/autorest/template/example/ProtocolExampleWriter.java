@@ -24,7 +24,6 @@ import com.azure.autorest.model.javamodel.JavaBlock;
 import com.azure.autorest.util.CodeNamer;
 import com.azure.autorest.util.ModelExampleUtil;
 import com.azure.core.http.ContentType;
-import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.polling.LongRunningOperationStatus;
@@ -81,7 +80,7 @@ public class ProtocolExampleWriter {
         // assertion
         imports.add("org.junit.jupiter.api.Assertions");
         imports.add(LongRunningOperationStatus.class.getName());
-        imports.add(HttpHeaderName.class.getName());
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
 
         // method invocation
         // parameter values and required invocation on RequestOptions

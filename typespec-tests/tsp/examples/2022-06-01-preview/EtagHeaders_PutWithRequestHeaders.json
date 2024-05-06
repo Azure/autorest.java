@@ -4,7 +4,7 @@
   "parameters": {
     "api-version": "2022-06-01-preview",
     "name":  "name",
-    "If-Match": "64e005",
+    "If-Match": "\"64e005\"",
     "resource": {
       "type": "myType",
       "description": "This is sample for Etag headers"
@@ -12,15 +12,14 @@
   },
   "responses": {
     "200": {
+      "headers": {
+        "ETag": "\"64e005\""
+      },
       "body": {
-        "value": [
-          {
-            "id": "myId",
-            "name": "name",
-            "type": "myType",
-            "description": "This is sample for Etag headers"
-          }
-        ]
+        "id": "myId",
+        "name": "name",
+        "type": "myType",
+        "description": "This is sample for Etag headers"
       }
     },
     "default": {

@@ -9,10 +9,10 @@ import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.HttpHeaders;
 
 /**
- * The CopyDocumentModelToHeaders model.
+ * The DocumentModelsAnalyzeDocumentHeaders model.
  */
 @Fluent
-public final class CopyDocumentModelToHeaders {
+public final class DocumentModelsAnalyzeDocumentHeaders {
     /*
      * The Operation-Location property.
      */
@@ -22,11 +22,11 @@ public final class CopyDocumentModelToHeaders {
 
     // HttpHeaders containing the raw property values.
     /**
-     * Creates an instance of CopyDocumentModelToHeaders class.
+     * Creates an instance of DocumentModelsAnalyzeDocumentHeaders class.
      * 
      * @param rawHeaders The raw HttpHeaders that will be used to create the property values.
      */
-    public CopyDocumentModelToHeaders(HttpHeaders rawHeaders) {
+    public DocumentModelsAnalyzeDocumentHeaders(HttpHeaders rawHeaders) {
         this.operationLocation = rawHeaders.getValue(OPERATION_LOCATION);
     }
 
@@ -43,9 +43,9 @@ public final class CopyDocumentModelToHeaders {
      * Set the operationLocation property: The Operation-Location property.
      * 
      * @param operationLocation the operationLocation value to set.
-     * @return the CopyDocumentModelToHeaders object itself.
+     * @return the DocumentModelsAnalyzeDocumentHeaders object itself.
      */
-    public CopyDocumentModelToHeaders setOperationLocation(String operationLocation) {
+    public DocumentModelsAnalyzeDocumentHeaders setOperationLocation(String operationLocation) {
         this.operationLocation = operationLocation;
         return this;
     }
