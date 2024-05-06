@@ -15,14 +15,20 @@ import com.azure.core.exception.ResourceNotFoundException;
 import com.azure.core.http.HttpHeaderName;
 import com.azure.core.http.MatchConditions;
 import com.azure.core.http.RequestConditions;
+import com.azure.core.http.rest.PagedFlux;
+import com.azure.core.http.rest.PagedResponse;
+import com.azure.core.http.rest.PagedResponseBase;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.core.util.FluxUtil;
 import com.cadl.specialheaders.implementation.EtagHeadersImpl;
+import com.cadl.specialheaders.implementation.JsonMergePatchHelper;
 import com.cadl.specialheaders.models.Resource;
 import java.time.OffsetDateTime;
+import java.util.stream.Collectors;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 /**
@@ -98,7 +104,7 @@ public final class EtagHeadersAsyncClient {
     }
 
     /**
-     * Create or replace operation template.
+     * Create or update operation template.
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
@@ -145,6 +151,32 @@ public final class EtagHeadersAsyncClient {
     public Mono<Response<BinaryData>> patchWithMatchHeadersWithResponse(String name, BinaryData resource,
         RequestOptions requestOptions) {
         return this.serviceClient.patchWithMatchHeadersWithResponseAsync(name, resource, requestOptions);
+    }
+
+    /**
+     * Resource list operation template.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     id: String (Required)
+     *     name: String (Required)
+     *     description: String (Optional)
+     *     type: String (Optional, Required on create)
+     * }
+     * }</pre>
+     * 
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return paged collection of Resource items as paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<BinaryData> listWithEtag(RequestOptions requestOptions) {
+        return this.serviceClient.listWithEtagAsync(requestOptions);
     }
 
     /**
@@ -213,7 +245,7 @@ public final class EtagHeadersAsyncClient {
     }
 
     /**
-     * Create or replace operation template.
+     * Create or update operation template.
      * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
@@ -239,13 +271,15 @@ public final class EtagHeadersAsyncClient {
         if (ifNoneMatch != null) {
             requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
-        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
-            .flatMap(FluxUtil::toMono)
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 
     /**
-     * Create or replace operation template.
+     * Create or update operation template.
      * 
      * @param name A sequence of textual characters.
      * @param resource The resource instance.
@@ -262,8 +296,40 @@ public final class EtagHeadersAsyncClient {
     public Mono<Resource> patchWithMatchHeaders(String name, Resource resource) {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return patchWithMatchHeadersWithResponse(name, BinaryData.fromObject(resource), requestOptions)
-            .flatMap(FluxUtil::toMono)
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
+        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
+        return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
+    }
+
+    /**
+     * Resource list operation template.
+     * 
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return paged collection of Resource items as paginated response with {@link PagedFlux}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.COLLECTION)
+    public PagedFlux<Resource> listWithEtag() {
+        // Generated convenience method for listWithEtag
+        RequestOptions requestOptions = new RequestOptions();
+        PagedFlux<BinaryData> pagedFluxResponse = listWithEtag(requestOptions);
+        return PagedFlux.create(() -> (continuationToken, pageSize) -> {
+            Flux<PagedResponse<BinaryData>> flux = (continuationToken == null)
+                ? pagedFluxResponse.byPage().take(1)
+                : pagedFluxResponse.byPage(continuationToken).take(1);
+            return flux.map(pagedResponse -> new PagedResponseBase<Void, Resource>(pagedResponse.getRequest(),
+                pagedResponse.getStatusCode(), pagedResponse.getHeaders(),
+                pagedResponse.getValue()
+                    .stream()
+                    .map(protocolMethodData -> protocolMethodData.toObject(Resource.class))
+                    .collect(Collectors.toList()),
+                pagedResponse.getContinuationToken(), null));
+        });
     }
 }
