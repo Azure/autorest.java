@@ -4,7 +4,7 @@
 
 package com.azure.ai.formrecognizer.documentanalysis.dpg;
 
-import com.azure.ai.formrecognizer.documentanalysis.dpg.implementation.FormRecognizerClientImpl;
+import com.azure.ai.formrecognizer.documentanalysis.dpg.implementation.DocumentModelsImpl;
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.ReturnType;
 import com.azure.core.annotation.ServiceClient;
@@ -13,33 +13,32 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.http.rest.PagedIterable;
+import com.azure.core.http.rest.PagedFlux;
 import com.azure.core.http.rest.RequestOptions;
 import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
-import com.azure.core.util.polling.SyncPoller;
+import com.azure.core.util.polling.PollerFlux;
+import reactor.core.publisher.Mono;
 
 /**
- * Initializes a new instance of the synchronous FormRecognizerClient type.
+ * Initializes a new instance of the asynchronous FormRecognizerClient type.
  */
-@ServiceClient(builder = FormRecognizerClientBuilder.class)
-public final class FormRecognizerClient {
+@ServiceClient(builder = DocumentModelsClientBuilder.class, isAsync = true)
+public final class DocumentModelsAsyncClient {
     @Generated
-    private final FormRecognizerClientImpl serviceClient;
+    private final DocumentModelsImpl serviceClient;
 
     /**
-     * Initializes an instance of FormRecognizerClient class.
+     * Initializes an instance of DocumentModelsAsyncClient class.
      * 
      * @param serviceClient the service client implementation.
      */
     @Generated
-    FormRecognizerClient(FormRecognizerClientImpl serviceClient) {
+    DocumentModelsAsyncClient(DocumentModelsImpl serviceClient) {
         this.serviceClient = serviceClient;
     }
 
     /**
-     * Analyze document
-     * 
      * Analyzes document with document model.
      * <p><strong>Query Parameters</strong></p>
      * <table border="1">
@@ -67,18 +66,16 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, String contentType,
+    public PollerFlux<BinaryData, BinaryData> beginAnalyzeDocument(String modelId, String contentType,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginAnalyzeDocument(modelId, contentType, requestOptions);
+        return this.serviceClient.beginAnalyzeDocumentAsync(modelId, contentType, requestOptions);
     }
 
     /**
-     * Get analyze result
-     * 
      * Gets the result of document analysis.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -294,18 +291,16 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the result of document analysis along with {@link Response}.
+     * @return the result of document analysis along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getAnalyzeDocumentResultWithResponse(String modelId, String resultId,
+    public Mono<Response<BinaryData>> getAnalyzeResultWithResponse(String modelId, String resultId,
         RequestOptions requestOptions) {
-        return this.serviceClient.getAnalyzeDocumentResultWithResponse(modelId, resultId, requestOptions);
+        return this.serviceClient.getAnalyzeResultWithResponseAsync(modelId, resultId, requestOptions);
     }
 
     /**
-     * Build document model
-     * 
      * Builds a custom document analysis model.
      * <p><strong>Request Body Schema</strong></p>
      * 
@@ -330,18 +325,15 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginBuildDocumentModel(BinaryData buildRequest,
-        RequestOptions requestOptions) {
-        return this.serviceClient.beginBuildDocumentModel(buildRequest, requestOptions);
+    public PollerFlux<BinaryData, BinaryData> beginBuildModel(BinaryData buildRequest, RequestOptions requestOptions) {
+        return this.serviceClient.beginBuildModelAsync(buildRequest, requestOptions);
     }
 
     /**
-     * Compose document model
-     * 
      * Creates a new document model from document types of existing document models.
      * <p><strong>Request Body Schema</strong></p>
      * 
@@ -366,18 +358,16 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginComposeDocumentModel(BinaryData composeRequest,
+    public PollerFlux<BinaryData, BinaryData> beginComposeModel(BinaryData composeRequest,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginComposeDocumentModel(composeRequest, requestOptions);
+        return this.serviceClient.beginComposeModelAsync(composeRequest, requestOptions);
     }
 
     /**
-     * Generate copy authorization
-     * 
      * Generates authorization to copy a document model to this location with specified modelId and optional
      * description.
      * <p><strong>Request Body Schema</strong></p>
@@ -412,18 +402,16 @@ public final class FormRecognizerClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @return authorization to copy a document model to the specified target resource and modelId along with
-     * {@link Response}.
+     * {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> authorizeCopyDocumentModelWithResponse(BinaryData authorizeCopyRequest,
+    public Mono<Response<BinaryData>> authorizeModelCopyWithResponse(BinaryData authorizeCopyRequest,
         RequestOptions requestOptions) {
-        return this.serviceClient.authorizeCopyDocumentModelWithResponse(authorizeCopyRequest, requestOptions);
+        return this.serviceClient.authorizeModelCopyWithResponseAsync(authorizeCopyRequest, requestOptions);
     }
 
     /**
-     * Copy document model
-     * 
      * Copies document model to the target resource, region, and modelId.
      * <p><strong>Request Body Schema</strong></p>
      * 
@@ -445,102 +433,16 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of long-running operation.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginCopyDocumentModelTo(String modelId, BinaryData copyToRequest,
+    public PollerFlux<BinaryData, BinaryData> beginCopyModelTo(String modelId, BinaryData copyToRequest,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginCopyDocumentModelTo(modelId, copyToRequest, requestOptions);
+        return this.serviceClient.beginCopyModelToAsync(modelId, copyToRequest, requestOptions);
     }
 
     /**
-     * List operations
-     * 
-     * Lists all operations.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     operationId: String (Required)
-     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     *     percentCompleted: Integer (Optional)
-     *     createdDateTime: OffsetDateTime (Required)
-     *     lastUpdatedDateTime: OffsetDateTime (Required)
-     *     kind: String(documentModelBuild/documentModelCompose/documentModelCopyTo) (Required)
-     *     resourceLocation: String (Required)
-     *     apiVersion: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return list Operations response object as paginated response with {@link PagedIterable}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getOperations(RequestOptions requestOptions) {
-        return this.serviceClient.getOperations(requestOptions);
-    }
-
-    /**
-     * Get operation
-     * 
-     * Gets operation info.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     kind: String (Required)
-     *     operationId: String (Required)
-     *     status: String(notStarted/running/failed/succeeded/canceled) (Required)
-     *     percentCompleted: Integer (Optional)
-     *     createdDateTime: OffsetDateTime (Required)
-     *     lastUpdatedDateTime: OffsetDateTime (Required)
-     *     resourceLocation: String (Required)
-     *     apiVersion: String (Optional)
-     *     tags (Optional): {
-     *         String: String (Required)
-     *     }
-     *     error (Optional): {
-     *         code: String (Required)
-     *         message: String (Required)
-     *         target: String (Optional)
-     *         details (Optional): [
-     *             (recursive schema, see above)
-     *         ]
-     *         innererror (Optional): {
-     *             code: String (Required)
-     *             message: String (Optional)
-     *             innererror (Optional): (recursive schema, see innererror above)
-     *         }
-     *     }
-     * }
-     * }</pre>
-     * 
-     * @param operationId Unique operation ID.
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return operation info along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getOperationWithResponse(String operationId, RequestOptions requestOptions) {
-        return this.serviceClient.getOperationWithResponse(operationId, requestOptions);
-    }
-
-    /**
-     * List document models
-     * 
      * List all document models.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -561,17 +463,15 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return list document models response object as paginated response with {@link PagedIterable}.
+     * @return list document models response object as paginated response with {@link PagedFlux}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.COLLECTION)
-    public PagedIterable<BinaryData> getDocumentModels(RequestOptions requestOptions) {
-        return this.serviceClient.getDocumentModels(requestOptions);
+    public PagedFlux<BinaryData> listModels(RequestOptions requestOptions) {
+        return this.serviceClient.listModelsAsync(requestOptions);
     }
 
     /**
-     * Get document model
-     * 
      * Gets detailed document model information.
      * <p><strong>Response Body Schema</strong></p>
      * 
@@ -613,17 +513,15 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return detailed document model information along with {@link Response}.
+     * @return detailed document model information along with {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getDocumentModelWithResponse(String modelId, RequestOptions requestOptions) {
-        return this.serviceClient.getDocumentModelWithResponse(modelId, requestOptions);
+    public Mono<Response<BinaryData>> getModelWithResponse(String modelId, RequestOptions requestOptions) {
+        return this.serviceClient.getModelWithResponseAsync(modelId, requestOptions);
     }
 
     /**
-     * Delete document model
-     * 
      * Deletes document model.
      * 
      * @param modelId Unique document model name.
@@ -632,39 +530,11 @@ public final class FormRecognizerClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> deleteDocumentModelWithResponse(String modelId, RequestOptions requestOptions) {
-        return this.serviceClient.deleteDocumentModelWithResponse(modelId, requestOptions);
-    }
-
-    /**
-     * Get resource info
-     * 
-     * Return information about the current resource.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * {
-     *     customDocumentModels (Required): {
-     *         count: int (Required)
-     *         limit: int (Required)
-     *     }
-     * }
-     * }</pre>
-     * 
-     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
-     * @throws HttpResponseException thrown if the request is rejected by server.
-     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
-     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
-     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return general information regarding the current resource along with {@link Response}.
-     */
-    @Generated
-    @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getResourceDetailsWithResponse(RequestOptions requestOptions) {
-        return this.serviceClient.getResourceDetailsWithResponse(requestOptions);
+    public Mono<Response<Void>> deleteModelWithResponse(String modelId, RequestOptions requestOptions) {
+        return this.serviceClient.deleteModelWithResponseAsync(modelId, requestOptions);
     }
 }

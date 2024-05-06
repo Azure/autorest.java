@@ -29,6 +29,7 @@ import com.azure.core.http.ContentType;
 import com.azure.core.http.HttpMethod;
 import com.azure.core.http.rest.PagedIterable;
 import com.azure.core.util.CoreUtils;
+import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.SyncPoller;
 
 import java.util.HashMap;
@@ -60,7 +61,11 @@ public class ClientMethodExampleWriter {
                 .map(nodeVisitor::accept)
                 .collect(Collectors.joining(", "));
 
+        // assertion
         this.imports.add("org.junit.jupiter.api.Assertions");
+        imports.add(LongRunningOperationStatus.class.getName());
+        ClassType.HTTP_HEADER_NAME.addImportsTo(imports, false);
+
         method.getReturnValue().getType().addImportsTo(imports, false);
 
         StringBuilder methodInvocation = new StringBuilder();
@@ -95,7 +100,6 @@ public class ClientMethodExampleWriter {
                             // it should have a 202 leading to SUCCESSFULLY_COMPLETED
                             // but x-ms-examples usually does not include the final result
                             methodBlock.line("Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.waitForCompletion().getStatus());");
-                            this.imports.add("com.azure.core.util.polling.LongRunningOperationStatus");
                         }
                     } else if (PagedIterable.class.getSimpleName().equals(responseType.getName())) {
                         // PagedIterable<>
