@@ -13,16 +13,16 @@ import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.test.TestMode;
 import com.azure.core.test.TestProxyTestBase;
-import com.specialheaders.clientrequestid.ClientRequestIdClient;
-import com.specialheaders.clientrequestid.ClientRequestIdClientBuilder;
+import com.azure.specialheaders.xmsclientrequestid.XmsClientRequestIdClient;
+import com.azure.specialheaders.xmsclientrequestid.XmsClientRequestIdClientBuilder;
 
 class ClientRequestIdClientTestBase extends TestProxyTestBase {
-    protected ClientRequestIdClient clientRequestIdClient;
+    protected XmsClientRequestIdClient clientRequestIdClient;
 
     @Override
     protected void beforeTest() {
-        ClientRequestIdClientBuilder clientRequestIdClientbuilder
-            = new ClientRequestIdClientBuilder().httpClient(HttpClient.createDefault())
+        XmsClientRequestIdClientBuilder clientRequestIdClientbuilder
+            = new XmsClientRequestIdClientBuilder().httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {
             clientRequestIdClientbuilder.httpClient(interceptorManager.getPlaybackClient());

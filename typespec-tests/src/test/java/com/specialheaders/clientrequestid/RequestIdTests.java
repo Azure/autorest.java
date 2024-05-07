@@ -3,11 +3,13 @@
 
 package com.specialheaders.clientrequestid;
 
+import com.azure.specialheaders.xmsclientrequestid.XmsClientRequestIdClient;
+import com.azure.specialheaders.xmsclientrequestid.XmsClientRequestIdClientBuilder;
 import org.junit.jupiter.api.Test;
 
 public class RequestIdTests {
 
-    private final ClientRequestIdClient client = new ClientRequestIdClientBuilder().buildClient();
+    private final XmsClientRequestIdClient client = new XmsClientRequestIdClientBuilder().buildClient();
 
     @Test
     public void testRequestId() {

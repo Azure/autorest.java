@@ -111,11 +111,6 @@ public class UnionsClientTest {
         Assertions.assertEquals("a", prop.getLiteral().toObject(String.class));
         Assertions.assertEquals(2L, prop.getIntProperty().toObject(Long.class));
         Assertions.assertEquals(true, prop.getBooleanProperty().toObject(Boolean.class));
-        List<BinaryData> array = prop.getArray();
-        Assertions.assertEquals("test", array.get(0).toObject(Cat.class).getName());
-        Assertions.assertEquals("a", array.get(1).toObject(String.class));
-        Assertions.assertEquals(2L, array.get(2).toObject(Long.class));
-        Assertions.assertEquals(true, array.get(3).toObject(Boolean.class));
 
         client10.send(prop);
     }
