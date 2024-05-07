@@ -122,6 +122,23 @@ public final class HeaderClient {
     }
 
     /**
+     * The float64Seconds operation.
+     * 
+     * @param duration A duration/time period. e.g 5s, 10h.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> float64SecondsWithResponse(Duration duration, RequestOptions requestOptions) {
+        return this.serviceClient.float64SecondsWithResponse(duration, requestOptions);
+    }
+
+    /**
      * The defaultMethod operation.
      * 
      * @param duration A duration/time period. e.g 5s, 10h.
@@ -214,5 +231,24 @@ public final class HeaderClient {
         // Generated convenience method for floatSecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         floatSecondsWithResponse(duration, requestOptions).getValue();
+    }
+
+    /**
+     * The float64Seconds operation.
+     * 
+     * @param duration A duration/time period. e.g 5s, 10h.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void float64Seconds(Duration duration) {
+        // Generated convenience method for float64SecondsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        float64SecondsWithResponse(duration, requestOptions).getValue();
     }
 }
