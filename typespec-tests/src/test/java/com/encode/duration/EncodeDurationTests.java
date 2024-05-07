@@ -6,6 +6,7 @@ package com.encode.duration;
 import com.encode.duration.models.DefaultDurationProperty;
 import com.encode.duration.models.FloatSecondsDurationArrayProperty;
 import com.encode.duration.models.FloatSecondsDurationProperty;
+import com.encode.duration.models.Float64SecondsDurationProperty;
 import com.encode.duration.models.Int32SecondsDurationProperty;
 import com.encode.duration.models.ISO8601DurationProperty;
 import org.junit.jupiter.api.Assertions;
@@ -31,6 +32,8 @@ public class EncodeDurationTests {
 
         queryClient.floatSeconds(SECOND35);
 
+        queryClient.float64Seconds(SECOND35);
+
         queryClient.int32Seconds(SECOND36);
 
         queryClient.iso8601(DAY40);
@@ -43,6 +46,8 @@ public class EncodeDurationTests {
         headerClient.defaultMethod(DAY40);
 
         headerClient.floatSeconds(SECOND35);
+
+        headerClient.float64Seconds(SECOND35);
 
         headerClient.int32Seconds(SECOND36);
 
@@ -58,6 +63,9 @@ public class EncodeDurationTests {
 
         Assertions.assertEquals(SECOND35,
                 propertyClient.floatSeconds(new FloatSecondsDurationProperty(SECOND35)).getValue());
+
+        Assertions.assertEquals(SECOND35,
+                propertyClient.float64Seconds(new Float64SecondsDurationProperty(SECOND35)).getValue());
 
         Assertions.assertEquals(SECOND36,
                 propertyClient.int32Seconds(new Int32SecondsDurationProperty(SECOND36)).getValue());
