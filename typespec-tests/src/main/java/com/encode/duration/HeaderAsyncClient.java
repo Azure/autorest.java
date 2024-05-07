@@ -124,6 +124,23 @@ public final class HeaderAsyncClient {
     }
 
     /**
+     * The float64Seconds operation.
+     * 
+     * @param duration A duration/time period. e.g 5s, 10h.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> float64SecondsWithResponse(Duration duration, RequestOptions requestOptions) {
+        return this.serviceClient.float64SecondsWithResponseAsync(duration, requestOptions);
+    }
+
+    /**
      * The defaultMethod operation.
      * 
      * @param duration A duration/time period. e.g 5s, 10h.
@@ -221,5 +238,25 @@ public final class HeaderAsyncClient {
         // Generated convenience method for floatSecondsWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return floatSecondsWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The float64Seconds operation.
+     * 
+     * @param duration A duration/time period. e.g 5s, 10h.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> float64Seconds(Duration duration) {
+        // Generated convenience method for float64SecondsWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return float64SecondsWithResponse(duration, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
