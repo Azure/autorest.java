@@ -17,6 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.parameters.spread.implementation.ModelsImpl;
 import com.parameters.spread.models.BodyParameter;
+import com.parameters.spread.models.CompositeRequestMix;
 
 /**
  * Initializes a new instance of the synchronous SpreadClient type.
@@ -61,6 +62,105 @@ public final class ModelClient {
     }
 
     /**
+     * The spreadCompositeRequestOnlyWithBody operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param body This is a simple model.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData body,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestOnlyWithBodyWithResponse(body, requestOptions);
+    }
+
+    /**
+     * The spreadCompositeRequestWithoutBody operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> spreadCompositeRequestWithoutBodyWithResponse(String name, String testHeader,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestWithoutBodyWithResponse(name, testHeader, requestOptions);
+    }
+
+    /**
+     * The spreadCompositeRequest operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param body This is a simple model.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> spreadCompositeRequestWithResponse(String name, String testHeader, BinaryData body,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestWithResponse(name, testHeader, body, requestOptions);
+    }
+
+    /**
+     * The spreadCompositeRequestMix operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     prop: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Response<Void> spreadCompositeRequestMixWithResponse(String name, String testHeader,
+        BinaryData compositeRequestMix, RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestMixWithResponse(name, testHeader, compositeRequestMix,
+            requestOptions);
+    }
+
+    /**
      * The spreadAsRequestBody operation.
      * 
      * @param bodyParameter This is a simple model.
@@ -77,5 +177,87 @@ public final class ModelClient {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
         spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions).getValue();
+    }
+
+    /**
+     * The spreadCompositeRequestOnlyWithBody operation.
+     * 
+     * @param body This is a simple model.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void spreadCompositeRequestOnlyWithBody(BodyParameter body) {
+        // Generated convenience method for spreadCompositeRequestOnlyWithBodyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData.fromObject(body), requestOptions).getValue();
+    }
+
+    /**
+     * The spreadCompositeRequestWithoutBody operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void spreadCompositeRequestWithoutBody(String name, String testHeader) {
+        // Generated convenience method for spreadCompositeRequestWithoutBodyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        spreadCompositeRequestWithoutBodyWithResponse(name, testHeader, requestOptions).getValue();
+    }
+
+    /**
+     * The spreadCompositeRequest operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param body This is a simple model.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void spreadCompositeRequest(String name, String testHeader, BodyParameter body) {
+        // Generated convenience method for spreadCompositeRequestWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        spreadCompositeRequestWithResponse(name, testHeader, BinaryData.fromObject(body), requestOptions).getValue();
+    }
+
+    /**
+     * The spreadCompositeRequestMix operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public void spreadCompositeRequestMix(String name, String testHeader, CompositeRequestMix compositeRequestMix) {
+        // Generated convenience method for spreadCompositeRequestMixWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        spreadCompositeRequestMixWithResponse(name, testHeader, BinaryData.fromObject(compositeRequestMix),
+            requestOptions).getValue();
     }
 }
