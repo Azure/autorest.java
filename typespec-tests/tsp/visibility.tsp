@@ -40,23 +40,31 @@ model WriteDog {
 interface VisibilityRead {
   @get
   @route("/read")
-  get(): Dog;
+  get(): {
+    @body body: Dog;
+  };
 }
 
 @operationGroup
 interface VisibilityWrite {
   @put
   @route("/write")
-  create(@body dog: WriteDog): Dog;
+  create(@body dog: WriteDog): {
+    @body body: Dog;
+  };
 }
 
 @route("/visibility")
 interface VisibilityOp extends VisibilityRead, VisibilityWrite {
   @post
   @route("/query")
-  query(@body dog: ReadDog): Dog;
+  query(@body dog: ReadDog): {
+    @body body: Dog;
+  };
 
   @put
   @route("/roundtrip")
-  roundtrip(@body body: RoundTripModel): RoundTripModel;
+  roundtrip(@body body: RoundTripModel): {
+    @body body: RoundTripModel;
+  };
 }

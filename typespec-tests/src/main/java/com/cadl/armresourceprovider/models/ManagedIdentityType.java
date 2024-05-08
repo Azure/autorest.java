@@ -4,68 +4,60 @@
 
 package com.cadl.armresourceprovider.models;
 
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /**
  * The kind of managed identity assigned to this resource.
  */
-public enum ManagedIdentityType {
+public final class ManagedIdentityType extends ExpandableStringEnum<ManagedIdentityType> {
     /**
-     * Enum value None.
+     * Static value None for ManagedIdentityType.
      */
-    NONE("None"),
+    public static final ManagedIdentityType NONE = fromString("None");
 
     /**
-     * Enum value SystemAssigned.
+     * Static value SystemAssigned for ManagedIdentityType.
      */
-    SYSTEM_ASSIGNED("SystemAssigned"),
+    public static final ManagedIdentityType SYSTEM_ASSIGNED = fromString("SystemAssigned");
 
     /**
-     * Enum value UserAssigned.
+     * Static value UserAssigned for ManagedIdentityType.
      */
-    USER_ASSIGNED("UserAssigned"),
+    public static final ManagedIdentityType USER_ASSIGNED = fromString("UserAssigned");
 
     /**
-     * Enum value SystemAssigned, UserAssigned.
+     * Static value SystemAssigned, UserAssigned for ManagedIdentityType.
      */
-    SYSTEM_ASSIGNED_USER_ASSIGNED("SystemAssigned, UserAssigned");
+    public static final ManagedIdentityType SYSTEM_ASSIGNED_USER_ASSIGNED = fromString("SystemAssigned, UserAssigned");
 
     /**
-     * The actual serialized value for a ManagedIdentityType instance.
+     * Creates a new instance of ManagedIdentityType value.
+     * 
+     * @deprecated Use the {@link #fromString(String)} factory method.
      */
-    private final String value;
-
-    ManagedIdentityType(String value) {
-        this.value = value;
+    @Deprecated
+    public ManagedIdentityType() {
     }
 
     /**
-     * Parses a serialized value to a ManagedIdentityType instance.
+     * Creates or finds a ManagedIdentityType from its string representation.
      * 
-     * @param value the serialized value to parse.
-     * @return the parsed ManagedIdentityType object, or null if unable to parse.
+     * @param name a name to look for.
+     * @return the corresponding ManagedIdentityType.
      */
     @JsonCreator
-    public static ManagedIdentityType fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        ManagedIdentityType[] items = ManagedIdentityType.values();
-        for (ManagedIdentityType item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
+    public static ManagedIdentityType fromString(String name) {
+        return fromString(name, ManagedIdentityType.class);
     }
 
     /**
-     * {@inheritDoc}
+     * Gets known ManagedIdentityType values.
+     * 
+     * @return known ManagedIdentityType values.
      */
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    public static Collection<ManagedIdentityType> values() {
+        return values(ManagedIdentityType.class);
     }
 }

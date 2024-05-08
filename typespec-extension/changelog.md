@@ -6,6 +6,10 @@ Compatible with compiler 0.55.
 
 - Adopt TCGC model types.
 
+## 0.15.16 (2024-05-08)
+
+Compatible with compiler 0.56.
+
 ## 0.15.15 (2024-05-06)
 
 Compatible with compiler 0.55.

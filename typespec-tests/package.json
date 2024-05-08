@@ -13,19 +13,20 @@
     "@azure-tools/typespec-java": "file:/../typespec-extension/azure-tools-typespec-java-0.16.0.tgz"
   },
   "devDependencies": {
-    "@typespec/prettier-plugin-typespec": "~0.55.0",
-    "@azure-tools/typespec-azure-resource-manager": "~0.41.0",
+    "@typespec/prettier-plugin-typespec": "~0.56.0",
     "prettier-plugin-organize-imports": "3.2.4",
     "prettier": "~3.2.5"
   },
   "overrides": {
-    "@typespec/compiler": ">=0.55.0 <1.0.0",
-    "@typespec/http": ">=0.55.0 <1.0.0",
-    "@typespec/rest": ">=0.55.0 <1.0.0",
-    "@typespec/versioning": ">=0.55.0 <1.0.0",
-    "@typespec/openapi": ">=0.55.0 <1.0.0",
-    "@azure-tools/typespec-azure-core": ">=0.41.0 <1.0.0",
-    "@azure-tools/typespec-client-generator-core": ">=0.41.8 <1.0.0"
+    "@typespec/compiler": ">=0.56.0 <1.0.0",
+    "@typespec/http": ">=0.56.0 <1.0.0",
+    "@typespec/rest": ">=0.56.0 <1.0.0",
+    "@typespec/versioning": ">=0.56.0 <1.0.0",
+    "@typespec/openapi": ">=0.56.0 <1.0.0",
+    "@azure-tools/typespec-azure-core": ">=0.42.0 <1.0.0",
+    "@azure-tools/typespec-client-generator-core": ">=0.42.0 <1.0.0",
+    "@azure-tools/typespec-azure-resource-manager": ">=0.42.0 <1.0.0",
+    "@azure-tools/typespec-autorest": ">=0.42.0 <1.0.0"
   },
   "private": true
 }

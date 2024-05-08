@@ -6,20 +6,13 @@ package com.cadl.flatten.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.cadl.flatten.models.SendLongRequestStatus;
-import java.time.OffsetDateTime;
+import com.cadl.flatten.models.Status;
 
 /**
  * The UploadTodoRequest model.
  */
 @Fluent
 public final class UploadTodoRequest {
-    /*
-     * The item's unique id
-     */
-    @Generated
-    private long id;
-
     /*
      * The item's title
      */
@@ -36,25 +29,7 @@ public final class UploadTodoRequest {
      * The status of the todo item
      */
     @Generated
-    private final SendLongRequestStatus status;
-
-    /*
-     * When the todo item was created.
-     */
-    @Generated
-    private OffsetDateTime createdAt;
-
-    /*
-     * When the todo item was last updated
-     */
-    @Generated
-    private OffsetDateTime updatedAt;
-
-    /*
-     * When the todo item was makred as completed
-     */
-    @Generated
-    private OffsetDateTime completedAt;
+    private final Status status;
 
     /*
      * The _dummy property.
@@ -87,19 +62,9 @@ public final class UploadTodoRequest {
      * @param status the status value to set.
      */
     @Generated
-    public UploadTodoRequest(String title, SendLongRequestStatus status) {
+    public UploadTodoRequest(String title, Status status) {
         this.title = title;
         this.status = status;
-    }
-
-    /**
-     * Get the id property: The item's unique id.
-     * 
-     * @return the id value.
-     */
-    @Generated
-    public long getId() {
-        return this.id;
     }
 
     /**
@@ -140,38 +105,8 @@ public final class UploadTodoRequest {
      * @return the status value.
      */
     @Generated
-    public SendLongRequestStatus getStatus() {
+    public Status getStatus() {
         return this.status;
-    }
-
-    /**
-     * Get the createdAt property: When the todo item was created.
-     * 
-     * @return the createdAt value.
-     */
-    @Generated
-    public OffsetDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    /**
-     * Get the updatedAt property: When the todo item was last updated.
-     * 
-     * @return the updatedAt value.
-     */
-    @Generated
-    public OffsetDateTime getUpdatedAt() {
-        return this.updatedAt;
-    }
-
-    /**
-     * Get the completedAt property: When the todo item was makred as completed.
-     * 
-     * @return the completedAt value.
-     */
-    @Generated
-    public OffsetDateTime getCompletedAt() {
-        return this.completedAt;
     }
 
     /**

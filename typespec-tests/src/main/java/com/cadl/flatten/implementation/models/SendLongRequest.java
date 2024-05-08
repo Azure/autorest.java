@@ -10,10 +10,9 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.flatten.models.SendLongRequestStatus;
+import com.cadl.flatten.models.Status;
 import com.cadl.flatten.models.User;
 import java.io.IOException;
-import java.time.OffsetDateTime;
 
 /**
  * The SendLongRequest model.
@@ -57,12 +56,6 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     private Double dataFloat;
 
     /*
-     * The item's unique id
-     */
-    @Generated
-    private long id;
-
-    /*
      * The item's title
      */
     @Generated
@@ -78,25 +71,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * The status of the todo item
      */
     @Generated
-    private final SendLongRequestStatus status;
-
-    /*
-     * When the todo item was created.
-     */
-    @Generated
-    private OffsetDateTime createdAt;
-
-    /*
-     * When the todo item was last updated
-     */
-    @Generated
-    private OffsetDateTime updatedAt;
-
-    /*
-     * When the todo item was makred as completed
-     */
-    @Generated
-    private OffsetDateTime completedAt;
+    private final Status status;
 
     /*
      * The _dummy property.
@@ -119,7 +94,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * @param status the status value to set.
      */
     @Generated
-    public SendLongRequest(String input, int dataInt, String title, SendLongRequestStatus status) {
+    public SendLongRequest(String input, int dataInt, String title, Status status) {
         this.input = input;
         this.dataInt = dataInt;
         this.title = title;
@@ -235,16 +210,6 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     }
 
     /**
-     * Get the id property: The item's unique id.
-     * 
-     * @return the id value.
-     */
-    @Generated
-    public long getId() {
-        return this.id;
-    }
-
-    /**
      * Get the title property: The item's title.
      * 
      * @return the title value.
@@ -282,38 +247,8 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * @return the status value.
      */
     @Generated
-    public SendLongRequestStatus getStatus() {
+    public Status getStatus() {
         return this.status;
-    }
-
-    /**
-     * Get the createdAt property: When the todo item was created.
-     * 
-     * @return the createdAt value.
-     */
-    @Generated
-    public OffsetDateTime getCreatedAt() {
-        return this.createdAt;
-    }
-
-    /**
-     * Get the updatedAt property: When the todo item was last updated.
-     * 
-     * @return the updatedAt value.
-     */
-    @Generated
-    public OffsetDateTime getUpdatedAt() {
-        return this.updatedAt;
-    }
-
-    /**
-     * Get the completedAt property: When the todo item was makred as completed.
-     * 
-     * @return the completedAt value.
-     */
-    @Generated
-    public OffsetDateTime getCompletedAt() {
-        return this.completedAt;
     }
 
     /**
@@ -383,17 +318,13 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
         return jsonReader.readObject(reader -> {
             String input = null;
             int dataInt = 0;
-            long id = 0L;
             String title = null;
-            SendLongRequestStatus status = null;
-            OffsetDateTime createdAt = null;
-            OffsetDateTime updatedAt = null;
+            Status status = null;
             User user = null;
             Integer dataIntOptional = null;
             Long dataLong = null;
             Double dataFloat = null;
             String description = null;
-            OffsetDateTime completedAt = null;
             String dummy = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
@@ -403,16 +334,10 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
                     input = reader.getString();
                 } else if ("dataInt".equals(fieldName)) {
                     dataInt = reader.getInt();
-                } else if ("id".equals(fieldName)) {
-                    id = reader.getLong();
                 } else if ("title".equals(fieldName)) {
                     title = reader.getString();
                 } else if ("status".equals(fieldName)) {
-                    status = SendLongRequestStatus.fromString(reader.getString());
-                } else if ("createdAt".equals(fieldName)) {
-                    createdAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
-                } else if ("updatedAt".equals(fieldName)) {
-                    updatedAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    status = Status.fromString(reader.getString());
                 } else if ("user".equals(fieldName)) {
                     user = User.fromJson(reader);
                 } else if ("dataIntOptional".equals(fieldName)) {
@@ -423,8 +348,6 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
                     dataFloat = reader.getNullable(JsonReader::getDouble);
                 } else if ("description".equals(fieldName)) {
                     description = reader.getString();
-                } else if ("completedAt".equals(fieldName)) {
-                    completedAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("_dummy".equals(fieldName)) {
                     dummy = reader.getString();
                 } else {
@@ -432,15 +355,11 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
                 }
             }
             SendLongRequest deserializedSendLongRequest = new SendLongRequest(input, dataInt, title, status);
-            deserializedSendLongRequest.id = id;
-            deserializedSendLongRequest.createdAt = createdAt;
-            deserializedSendLongRequest.updatedAt = updatedAt;
             deserializedSendLongRequest.user = user;
             deserializedSendLongRequest.dataIntOptional = dataIntOptional;
             deserializedSendLongRequest.dataLong = dataLong;
             deserializedSendLongRequest.dataFloat = dataFloat;
             deserializedSendLongRequest.description = description;
-            deserializedSendLongRequest.completedAt = completedAt;
             deserializedSendLongRequest.dummy = dummy;
 
             return deserializedSendLongRequest;

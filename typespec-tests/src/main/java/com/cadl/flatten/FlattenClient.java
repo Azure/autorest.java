@@ -55,7 +55,6 @@ public final class FlattenClient {
      * 
      * <pre>{@code
      * {
-     *     name: String (Required)
      *     user (Optional): {
      *         user: String (Required)
      *     }
@@ -125,13 +124,9 @@ public final class FlattenClient {
      *     dataIntOptional: Integer (Optional)
      *     dataLong: Long (Optional)
      *     data_float: Double (Optional)
-     *     id: long (Required)
      *     title: String (Required)
      *     description: String (Optional)
      *     status: String(NotStarted/InProgress/Completed) (Required)
-     *     createdAt: OffsetDateTime (Required)
-     *     updatedAt: OffsetDateTime (Required)
-     *     completedAt: OffsetDateTime (Optional)
      *     _dummy: String (Optional)
      *     constant: String (Required)
      * }

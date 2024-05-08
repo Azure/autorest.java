@@ -130,7 +130,9 @@ interface FlattenOp {
     @header contentType: "application/merge-patch+json",
     @path id: TodoItem.id,
     patch: TodoItemPatch,
-  ): TodoItem;
+  ): {
+    @body response: TodoItem;
+  };
 
   @route("upload/{name}")
   @post

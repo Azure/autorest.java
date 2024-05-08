@@ -19,12 +19,6 @@ import java.io.IOException;
 @Fluent
 public final class SendRequest implements JsonSerializable<SendRequest> {
     /*
-     * The name property.
-     */
-    @Generated
-    private String name;
-
-    /*
      * The user property.
      */
     @Generated
@@ -50,16 +44,6 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     @Generated
     public SendRequest(String input) {
         this.input = input;
-    }
-
-    /**
-     * Get the name property: The name property.
-     * 
-     * @return the name value.
-     */
-    @Generated
-    public String getName() {
-        return this.name;
     }
 
     /**
@@ -129,16 +113,13 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     @Generated
     public static SendRequest fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String name = null;
             String input = null;
             User user = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
-                if ("name".equals(fieldName)) {
-                    name = reader.getString();
-                } else if ("input".equals(fieldName)) {
+                if ("input".equals(fieldName)) {
                     input = reader.getString();
                 } else if ("user".equals(fieldName)) {
                     user = User.fromJson(reader);
@@ -147,7 +128,6 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
                 }
             }
             SendRequest deserializedSendRequest = new SendRequest(input);
-            deserializedSendRequest.name = name;
             deserializedSendRequest.user = user;
 
             return deserializedSendRequest;
