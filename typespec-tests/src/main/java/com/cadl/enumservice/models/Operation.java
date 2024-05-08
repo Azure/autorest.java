@@ -4,8 +4,8 @@
 
 package com.cadl.enumservice.models;
 
+import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.azure.core.annotation.Immutable;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -15,7 +15,7 @@ import java.io.IOException;
 /**
  * The Operation model.
  */
-@Immutable
+@Fluent
 public final class Operation implements JsonSerializable<Operation> {
     /*
      * The name property.
@@ -75,7 +75,7 @@ public final class Operation implements JsonSerializable<Operation> {
      * The unitValue property.
      */
     @Generated
-    private final Unit unitValue = Unit.MILLIGRAM;
+    private Unit unitValue;
 
     /**
      * Creates an instance of Operation class.
@@ -86,7 +86,7 @@ public final class Operation implements JsonSerializable<Operation> {
      * @param unit the unit value to set.
      */
     @Generated
-    private Operation(OperationName name, Priority priority, ColorModel color, Unit unit) {
+    public Operation(OperationName name, Priority priority, ColorModel color, Unit unit) {
         this.name = name;
         this.priority = priority;
         this.color = color;
@@ -194,6 +194,18 @@ public final class Operation implements JsonSerializable<Operation> {
     }
 
     /**
+     * Set the unitValue property: The unitValue property.
+     * 
+     * @param unitValue the unitValue value to set.
+     * @return the Operation object itself.
+     */
+    @Generated
+    public Operation setUnitValue(Unit unitValue) {
+        this.unitValue = unitValue;
+        return this;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Generated
@@ -230,6 +242,7 @@ public final class Operation implements JsonSerializable<Operation> {
             Priority priority = null;
             ColorModel color = null;
             Unit unit = null;
+            Unit unitValue = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -242,11 +255,16 @@ public final class Operation implements JsonSerializable<Operation> {
                     color = ColorModel.fromString(reader.getString());
                 } else if ("unit".equals(fieldName)) {
                     unit = Unit.fromDouble(reader.getDouble());
+                } else if ("unitValue".equals(fieldName)) {
+                    unitValue = Unit.fromDouble(reader.getDouble());
                 } else {
                     reader.skipChildren();
                 }
             }
-            return new Operation(name, priority, color, unit);
+            Operation deserializedOperation = new Operation(name, priority, color, unit);
+            deserializedOperation.unitValue = unitValue;
+
+            return deserializedOperation;
         });
     }
 }

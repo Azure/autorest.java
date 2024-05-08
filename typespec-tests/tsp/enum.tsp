@@ -61,6 +61,7 @@ enum OperationStateValues {
   Failed,
 }
 
+@usage(Usage.input)
 model Operation {
   name: "Read" | "Write";
   best: true;
@@ -71,7 +72,7 @@ model Operation {
   priorityValue: Priority.Low;
   colorValue: Color.Green;
   colorModelValue: ColorModel.Blue;
-  unitValue: Unit.Milligram;
+  unitValue?: Unit.Milligram;
 }
 
 @client({
