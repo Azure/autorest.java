@@ -7,7 +7,7 @@ package com.cadl.armresourceprovider.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
-import com.cadl.armresourceprovider.models.ManagedIdentityProperties;
+import com.cadl.armresourceprovider.models.ManagedServiceIdentity;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -27,7 +27,7 @@ public final class CustomTemplateResourceInner extends Resource {
      * Managed identity.
      */
     @JsonProperty(value = "identity")
-    private ManagedIdentityProperties identity;
+    private ManagedServiceIdentity identity;
 
     /*
      * Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -55,7 +55,7 @@ public final class CustomTemplateResourceInner extends Resource {
      * 
      * @return the identity value.
      */
-    public ManagedIdentityProperties identity() {
+    public ManagedServiceIdentity identity() {
         return this.identity;
     }
 
@@ -65,7 +65,7 @@ public final class CustomTemplateResourceInner extends Resource {
      * @param identity the identity value to set.
      * @return the CustomTemplateResourceInner object itself.
      */
-    public CustomTemplateResourceInner withIdentity(ManagedIdentityProperties identity) {
+    public CustomTemplateResourceInner withIdentity(ManagedServiceIdentity identity) {
         this.identity = identity;
         return this;
     }

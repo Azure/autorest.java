@@ -19,7 +19,6 @@ import com.azure.core.util.FluxUtil;
 import com.type.model.empty.implementation.EmptyClientImpl;
 import com.type.model.empty.models.EmptyInput;
 import com.type.model.empty.models.EmptyInputOutput;
-import com.type.model.empty.models.EmptyOutput;
 import reactor.core.publisher.Mono;
 
 /**
@@ -64,23 +63,17 @@ public final class EmptyAsyncClient {
 
     /**
      * The getEmpty operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * { }
-     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return empty model used in operation return type along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> getEmptyWithResponse(RequestOptions requestOptions) {
+    public Mono<Response<Void>> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponseAsync(requestOptions);
     }
 
@@ -141,15 +134,14 @@ public final class EmptyAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty model used in operation return type on successful completion of {@link Mono}.
+     * @return A {@link Mono} that completes when a successful response is received.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<EmptyOutput> getEmpty() {
+    public Mono<Void> getEmpty() {
         // Generated convenience method for getEmptyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getEmptyWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(EmptyOutput.class));
+        return getEmptyWithResponse(requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**
