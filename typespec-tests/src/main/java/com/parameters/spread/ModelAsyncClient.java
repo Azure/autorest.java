@@ -18,6 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.parameters.spread.implementation.ModelsImpl;
 import com.parameters.spread.models.BodyParameter;
+import com.parameters.spread.models.CompositeRequestMix;
 import reactor.core.publisher.Mono;
 
 /**
@@ -64,6 +65,105 @@ public final class ModelAsyncClient {
     }
 
     /**
+     * The spreadCompositeRequestOnlyWithBody operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param body This is a simple model.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData body,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestOnlyWithBodyWithResponseAsync(body, requestOptions);
+    }
+
+    /**
+     * The spreadCompositeRequestWithoutBody operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadCompositeRequestWithoutBodyWithResponse(String name, String testHeader,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestWithoutBodyWithResponseAsync(name, testHeader, requestOptions);
+    }
+
+    /**
+     * The spreadCompositeRequest operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param body This is a simple model.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadCompositeRequestWithResponse(String name, String testHeader, BinaryData body,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestWithResponseAsync(name, testHeader, body, requestOptions);
+    }
+
+    /**
+     * The spreadCompositeRequestMix operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     prop: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Response<Void>> spreadCompositeRequestMixWithResponse(String name, String testHeader,
+        BinaryData compositeRequestMix, RequestOptions requestOptions) {
+        return this.serviceClient.spreadCompositeRequestMixWithResponseAsync(name, testHeader, compositeRequestMix,
+            requestOptions);
+    }
+
+    /**
      * The spreadAsRequestBody operation.
      * 
      * @param bodyParameter This is a simple model.
@@ -82,5 +182,95 @@ public final class ModelAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         return spreadAsRequestBodyWithResponse(BinaryData.fromObject(bodyParameter), requestOptions)
             .flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The spreadCompositeRequestOnlyWithBody operation.
+     * 
+     * @param body This is a simple model.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> spreadCompositeRequestOnlyWithBody(BodyParameter body) {
+        // Generated convenience method for spreadCompositeRequestOnlyWithBodyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return spreadCompositeRequestOnlyWithBodyWithResponse(BinaryData.fromObject(body), requestOptions)
+            .flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The spreadCompositeRequestWithoutBody operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> spreadCompositeRequestWithoutBody(String name, String testHeader) {
+        // Generated convenience method for spreadCompositeRequestWithoutBodyWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return spreadCompositeRequestWithoutBodyWithResponse(name, testHeader, requestOptions)
+            .flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The spreadCompositeRequest operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param body This is a simple model.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> spreadCompositeRequest(String name, String testHeader, BodyParameter body) {
+        // Generated convenience method for spreadCompositeRequestWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return spreadCompositeRequestWithResponse(name, testHeader, BinaryData.fromObject(body), requestOptions)
+            .flatMap(FluxUtil::toMono);
+    }
+
+    /**
+     * The spreadCompositeRequestMix operation.
+     * 
+     * @param name A sequence of textual characters.
+     * @param testHeader A sequence of textual characters.
+     * @param compositeRequestMix This is a model with non-body http request decorator.
+     * @throws IllegalArgumentException thrown if parameters fail the validation.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
+     * @return A {@link Mono} that completes when a successful response is received.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    public Mono<Void> spreadCompositeRequestMix(String name, String testHeader,
+        CompositeRequestMix compositeRequestMix) {
+        // Generated convenience method for spreadCompositeRequestMixWithResponse
+        RequestOptions requestOptions = new RequestOptions();
+        return spreadCompositeRequestMixWithResponse(name, testHeader, BinaryData.fromObject(compositeRequestMix),
+            requestOptions).flatMap(FluxUtil::toMono);
     }
 }

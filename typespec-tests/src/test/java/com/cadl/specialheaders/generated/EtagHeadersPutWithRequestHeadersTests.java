@@ -18,9 +18,17 @@ public final class EtagHeadersPutWithRequestHeadersTests extends SpecialHeadersC
         // method invocation
         Resource response = etagHeadersClient.putWithRequestHeaders("name",
             new Resource().setDescription("This is sample for Etag headers").setType("myType"),
-            new RequestConditions().setIfMatch("64e005"));
+            new RequestConditions().setIfMatch("\"64e005\""));
 
         // response assertion
         Assertions.assertNotNull(response);
+        // verify property "id"
+        Assertions.assertEquals("myId", response.getId());
+        // verify property "name"
+        Assertions.assertEquals("name", response.getName());
+        // verify property "description"
+        Assertions.assertEquals("This is sample for Etag headers", response.getDescription());
+        // verify property "type"
+        Assertions.assertEquals("myType", response.getType());
     }
 }

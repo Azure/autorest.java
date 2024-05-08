@@ -18,7 +18,7 @@ public class EtagHeadersPutWithRequestHeaders {
         // BEGIN:com.cadl.specialheaders.generated.etagheadersputwithrequestheaders.etagheadersputwithrequestheaders
         Resource response = etagHeadersClient.putWithRequestHeaders("name",
             new Resource().setDescription("This is sample for Etag headers").setType("myType"),
-            new RequestConditions().setIfMatch("64e005"));
+            new RequestConditions().setIfMatch("\"64e005\""));
         // END:com.cadl.specialheaders.generated.etagheadersputwithrequestheaders.etagheadersputwithrequestheaders
     }
 }

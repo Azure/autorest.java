@@ -1,4 +1,13 @@
-import { ModelProperty, Operation, Program, Type, Union, ignoreDiagnostics, resolvePath } from "@typespec/compiler";
+import {
+  ModelProperty,
+  Operation,
+  Program,
+  Type,
+  Union,
+  ignoreDiagnostics,
+  projectProgram,
+  resolvePath,
+} from "@typespec/compiler";
 import {
   HttpOperation,
   getHeaderFieldName,
@@ -6,16 +15,18 @@ import {
   getPathParamName,
   isStatusCode,
   getAllHttpServices,
+  getHttpService,
 } from "@typespec/http";
 import { resolveOperationId } from "@typespec/openapi";
 import { Parameter } from "@autorest/codemodel";
 import { LroMetadata } from "@azure-tools/typespec-azure-core";
-import { getVersion } from "@typespec/versioning";
+import { buildVersionProjections } from "@typespec/versioning";
 import { Client as CodeModelClient, ServiceVersion } from "./common/client.js";
 import { CodeModel } from "./common/code-model.js";
 import { EmitterOptions } from "./emitter.js";
 import { getNamespace, logWarning, pascalCase } from "./utils.js";
 import { modelIs, unionReferredByType } from "./type-utils.js";
+import { SdkContext, getDefaultApiVersion } from "@azure-tools/typespec-client-generator-core";
 
 export const SPECIAL_HEADER_NAMES = new Set([
   "repeatability-request-id",
@@ -51,18 +62,44 @@ export function isKnownContentType(contentTypes: string[]): boolean {
     });
 }
 
-export async function loadExamples(program: Program, options: EmitterOptions): Promise<Map<Operation, any>> {
+/**
+ * Load examples from the examples directory.
+ *
+ * @param program the program.
+ * @param options the emitter options.
+ * @param sdkContext the SdkContext.
+ * @returns the Map of Operation to JSON. The Operation would be operation.projectionSource if available.
+ */
+export async function loadExamples(
+  program: Program,
+  options: EmitterOptions,
+  sdkContext: SdkContext,
+): Promise<Map<Operation, any>> {
+  // sdkContextApiVersion could contain "all" or "latest"
+  const sdkContextApiVersion = sdkContext.apiVersion;
+
   const operationExamplesMap = new Map<Operation, any>();
   const operationExamplesDirectory = options["examples-directory"];
   if (operationExamplesDirectory) {
     const operationIdExamplesMap = new Map<string, any>();
 
-    const service = ignoreDiagnostics(getAllHttpServices(program))[0];
+    let service = ignoreDiagnostics(getAllHttpServices(program))[0];
     let version = undefined;
-    const versioning = getVersion(program, service.namespace);
-    if (versioning && versioning.getVersions()) {
-      const versions = versioning.getVersions();
-      version = versions[versions.length - 1].value;
+    if (sdkContextApiVersion && !["all", "latest"].includes(sdkContextApiVersion)) {
+      version = sdkContextApiVersion;
+    } else {
+      version = getDefaultApiVersion(sdkContext, service.namespace)?.value;
+    }
+    if (version) {
+      // projection
+      const versionProjections = buildVersionProjections(program, service.namespace).filter(
+        (it) => it.version === version,
+      );
+      const projectedProgram = projectProgram(program, versionProjections[0].projections);
+      const projectedService = projectedProgram.projector.projectedTypes.get(service.namespace);
+      if (projectedService?.kind === "Namespace") {
+        service = ignoreDiagnostics(getHttpService(program, projectedService));
+      }
     }
 
     let exampleDir = version
@@ -103,7 +140,11 @@ export async function loadExamples(program: Program, options: EmitterOptions): P
       routes.forEach((it) => {
         const operationId = pascalCaseForOperationId(resolveOperationId(program, it.operation));
         if (operationIdExamplesMap.has(operationId)) {
-          operationExamplesMap.set(it.operation, operationIdExamplesMap.get(operationId));
+          let operation = it.operation;
+          if (operation.projectionSource?.kind === "Operation") {
+            operation = operation.projectionSource;
+          }
+          operationExamplesMap.set(operation, operationIdExamplesMap.get(operationId));
         }
       });
     }

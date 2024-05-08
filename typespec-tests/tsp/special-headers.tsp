@@ -63,11 +63,11 @@ interface EtagHeaders {
   @put
   putWithRequestHeaders is StandardResourceOperations.ResourceCreateOrReplace<
     Resource,
-    RequestHeadersTrait<ConditionalRequestHeaders>
+    RequestHeadersTrait<ConditionalRequestHeaders> & ResponseHeadersTrait<EtagResponseEnvelope>
   >;
 
   @patch
-  patchWithMatchHeaders is StandardResourceOperations.ResourceCreateOrReplace<
+  patchWithMatchHeaders is StandardResourceOperations.ResourceCreateOrUpdate<
     Resource,
     RequestHeadersTrait<{
       @header("If-Match")
@@ -77,7 +77,14 @@ interface EtagHeaders {
       @header("If-None-Match")
       @doc("The request should only proceed if no entity matches this string.")
       ifNoneMatch?: string;
-    }>
+    }> &
+      ResponseHeadersTrait<EtagResponseEnvelope>
+  >;
+
+  @get
+  listWithEtag is StandardResourceOperations.ResourceList<
+    Resource,
+    ResponseHeadersTrait<EtagResponseEnvelope>
   >;
 }
 
