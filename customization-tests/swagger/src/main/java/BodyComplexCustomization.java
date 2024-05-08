@@ -2,22 +2,28 @@ import com.azure.autorest.customization.ClassCustomization;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.body.ClassOrInterfaceDeclaration;
+import com.github.javaparser.ast.body.MethodDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
 import org.slf4j.Logger;
+
+import java.util.UUID;
 
 public class BodyComplexCustomization extends Customization {
     @Override
     public void customize(LibraryCustomization customization, Logger logger) {
         PackageCustomization implementationModels = customization.getPackage("fixtures.bodycomplex.implementation.models");
-        implementationModels.getClass("Goblinshark").rename("GoblinShark");
 
         ClassCustomization dotSalmon = implementationModels.getClass("DotSalmon");
-        dotSalmon.getProperty("iswild").rename("isWild").removeAnnotation("JsonProperty").addAnnotation("@JsonProperty(value = \"isWild\")");
-        dotSalmon.getMethod("setIsWild")
+        dotSalmon.addImports("com.fasterxml.jackson.annotation.JsonProperty");
+        dotSalmon.getProperty("iswild").removeAnnotation("JsonProperty").addAnnotation("@JsonProperty(value = \"isWild\")");
+        dotSalmon.getMethod("setIswild")
             .rename("setWild")
             .setReturnType("void", null)
             .getJavadoc()
             .removeReturn();
-        dotSalmon.getMethod("isWild")
+        dotSalmon.getMethod("iswild")
             .setReturnType("boolean", "%s");
         dotSalmon.addMethod("public boolean isDomestic() {\n" +
                 "    return \"US\".equalsIgnoreCase(getLocation());\n" +
@@ -32,13 +38,22 @@ public class BodyComplexCustomization extends Customization {
             .renameEnumMember("CYAN", "TEAL");
 
         ClassCustomization readonlyObj = implementationModels.getClass("ReadonlyObj");
-        readonlyObj.getProperty("id").generateGetterAndSetter();
-        readonlyObj.getMethod("getId").setReturnType("UUID", "UUID.fromString(%s)");
-        readonlyObj.getMethod("setId").setModifier(0);
-        readonlyObj.getMethod("getId").getJavadoc().setDescription("Get the ID of the object.");
-        readonlyObj.getMethod("setId").getJavadoc().setDescription("Set the ID of the object.")
-            .setReturn("The current ReadonlyObj instance")
-            .setParam("id", "The ID value");
+        readonlyObj.customizeAst(ast -> {
+            ast.addImport(UUID.class);
+
+            ClassOrInterfaceDeclaration clazz = ast.getClassByName("ReadonlyObj").get();
+            MethodDeclaration getter = clazz.getMethodsByName("getId").get(0);
+            getter.setType(UUID.class).setBody(new BlockStmt().addStatement("return UUID.fromString(id);"));
+            getter.setJavadocComment(StaticJavaParser.parseJavadoc("/**\n * Get the ID of the object.\n *\n"
+                + " * @return The ID value\n */"));
+
+
+            MethodDeclaration setter = clazz.addMethod("setId").setType("ReadonlyObj")
+                .addParameter(String.class, "id");
+            setter.setBody(new BlockStmt().addStatement("this.id = id;").addStatement("return this;"));
+            setter.setJavadocComment(StaticJavaParser.parseJavadoc("/**\n * Set the ID of the object.\n *\n"
+                + " * @param id The ID value\n * @return The current ReadonlyObj instance\n */"));
+        });
 
         PackageCustomization root = customization.getPackage("fixtures.bodycomplex");
         ClassCustomization arrayClient = root.getClass("ArrayClient");

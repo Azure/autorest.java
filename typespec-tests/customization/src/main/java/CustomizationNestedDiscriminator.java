@@ -6,6 +6,8 @@ import com.azure.autorest.customization.ConstructorCustomization;
 import com.azure.autorest.customization.Customization;
 import com.azure.autorest.customization.LibraryCustomization;
 import com.azure.autorest.customization.PackageCustomization;
+import com.github.javaparser.StaticJavaParser;
+import com.github.javaparser.ast.NodeList;
 import org.slf4j.Logger;
 
 /**
@@ -21,11 +23,13 @@ public class CustomizationNestedDiscriminator extends Customization {
         ClassCustomization classCustomization = packageCustomization.getClass("GoblinShark");
 
         ConstructorCustomization constructorCustomization = classCustomization.getConstructor("GoblinShark");
-        constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"goblin\";");
+        constructorCustomization.replaceBody(new NodeList<>(StaticJavaParser.parseStatement("super(age, sharktype);"),
+            StaticJavaParser.parseStatement("this.sharktype = \"goblin\";")), null);
 
         classCustomization = packageCustomization.getClass("SawShark");
 
         constructorCustomization = classCustomization.getConstructor("SawShark");
-        constructorCustomization.replaceBody("super(age, sharktype); this.sharktype = \"saw\";");
+        constructorCustomization.replaceBody(new NodeList<>(StaticJavaParser.parseStatement("super(age, sharktype);"),
+            StaticJavaParser.parseStatement("this.sharktype = \"saw\";")), null);
     }
 }

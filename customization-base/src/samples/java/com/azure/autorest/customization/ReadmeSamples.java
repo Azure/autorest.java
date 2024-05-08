@@ -7,7 +7,6 @@ import com.fasterxml.jackson.annotation.JsonClassDescription;
 import org.slf4j.Logger;
 
 import java.lang.reflect.Modifier;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -218,31 +217,6 @@ public class ReadmeSamples {
         }
     }
 
-    static class RenameClass extends Customization {
-        static class Initial {
-            // BEGIN: readme-sample-rename-class-initial
-            public class Foo {
-            }
-            // END: readme-sample-rename-class-initial
-        }
-
-        // BEGIN: readme-sample-rename-class-customization
-        @Override
-        public void customize(LibraryCustomization customization, Logger logger) {
-            PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-            ClassCustomization foo = models.getClass("Foo");
-            foo.rename("FooInfo");
-        }
-        // END: readme-sample-rename-class-customization
-
-        static class Result {
-            // BEGIN: readme-sample-rename-class-result
-            public class FooInfo {
-            }
-            // END: readme-sample-rename-class-result
-        }
-    }
-
     static class RenameMethod extends Customization {
         static class Initial {
             // BEGIN: readme-sample-rename-method-initial
@@ -276,89 +250,6 @@ public class ReadmeSamples {
                 }
             }
             // END: readme-sample-rename-method-result
-        }
-    }
-
-    static class GenerateGetterAndSetter extends Customization {
-        static class Initial {
-            // BEGIN: readme-sample-generate-getter-and-setter-initial
-            public class Foo {
-                private boolean active;
-            }
-            // END: readme-sample-generate-getter-and-setter-initial
-        }
-
-        // BEGIN: readme-sample-generate-getter-and-setter-customization
-        @Override
-        public void customize(LibraryCustomization customization, Logger logger) {
-            PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-            ClassCustomization foo = models.getClass("Foo");
-            PropertyCustomization active = foo.getProperty("active");
-            active.generateGetterAndSetter();
-        }
-        // END: readme-sample-generate-getter-and-setter-customization
-
-        static class Result {
-            // BEGIN: readme-sample-generate-getter-and-setter-result
-            public class Foo {
-                private boolean active;
-
-                public boolean isActive() {
-                    return this.active;
-                }
-
-                public Foo setActive(boolean active) {
-                    this.active = active;
-                    return this;
-                }
-            }
-            // END: readme-sample-generate-getter-and-setter-result
-        }
-    }
-
-    static class RenameProperty extends Customization {
-        static class Initial {
-            // BEGIN: readme-sample-rename-property-initial
-            public class Foo {
-                private List<String> whiteList;
-
-                public List<String> getWhiteList() {
-                    return this.whiteList;
-                }
-
-                public Foo setWhiteList(List<String> whiteList) {
-                    this.whiteList = whiteList;
-                    return this;
-                }
-            }
-            // END: readme-sample-rename-property-initial
-        }
-
-        // BEGIN: readme-sample-rename-property-customization
-        @Override
-        public void customize(LibraryCustomization customization, Logger logger) {
-            PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-            ClassCustomization foo = models.getClass("Foo");
-            PropertyCustomization active = foo.getProperty("active");
-            active.rename("allowList");
-        }
-        // END: readme-sample-rename-property-customization
-
-        static class Result {
-            // BEGIN: readme-sample-rename-property-result
-            public class Foo {
-                private List<String> allowList;
-
-                public List<String> getAllowList() {
-                    return this.allowList;
-                }
-
-                public Foo setAllowList(List<String> allowList) {
-                    this.allowList = allowList;
-                    return this;
-                }
-            }
-            // END: readme-sample-rename-property-result
         }
     }
 
@@ -597,7 +488,7 @@ public class ReadmeSamples {
             PackageCustomization models = customization.getPackage("com.azure.myservice.models");
             ClassCustomization foo = models.getClass("Foo");
             JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-            setActiveJavadoc.addThrows("RuntimeException", "An unsuccessful response is received");
+            setActiveJavadoc.setsThrows("RuntimeException", "An unsuccessful response is received");
         }
         // END: readme-sample-change-javadoc-throws-customization
 

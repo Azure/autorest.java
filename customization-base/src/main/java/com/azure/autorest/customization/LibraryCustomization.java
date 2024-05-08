@@ -3,22 +3,43 @@
 
 package com.azure.autorest.customization;
 
-import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import org.eclipse.lsp4j.SymbolInformation;
-
-import java.util.Optional;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * The top level customization for an AutoRest generated client library.
  */
 public final class LibraryCustomization {
-    private final EclipseLanguageClient languageClient;
-    private final Editor editor;
+    private final Map<String, String> contents;
+    private final Map<String, PackageCustomization> packages;
 
-    LibraryCustomization(Editor editor, EclipseLanguageClient languageClient) {
-        this.editor = editor;
-        this.languageClient = languageClient;
+    private static final String MAIN_JAVA = "src/main/java/";
+
+    LibraryCustomization(Map<String, String> contents) {
+        this.contents = new HashMap<>(contents);
+        this.packages = new HashMap<>();
+
+        // Code customizations only care about source files. Ignore sample and test files, if they exist.
+        for (Map.Entry<String, String> entry : contents.entrySet()) {
+            String key = entry.getKey();
+            if (key.startsWith(MAIN_JAVA) && key.endsWith(".java")) {
+                int index = key.lastIndexOf('/');
+                if (index == -1) {
+                    throw new IllegalArgumentException("Invalid file path: " + key);
+                }
+
+                // Don't allow customizations for module-info.java
+                if (key.endsWith("module-info.java")) {
+                    continue;
+                }
+
+                String packageName = key.substring(MAIN_JAVA.length(), key.lastIndexOf('/')).replace("/", ".");
+                PackageCustomization packageCustomization = packages.computeIfAbsent(packageName,
+                    ignored -> new PackageCustomization(packageName));
+                packageCustomization.addFile(key.substring(key.lastIndexOf('/') + 1, key.length() - 5),
+                    entry.getValue());
+            }
+        }
     }
 
     /**
@@ -28,7 +49,12 @@ public final class LibraryCustomization {
      * @return the package level customization.
      */
     public PackageCustomization getPackage(String packageName) {
-        return new PackageCustomization(editor, languageClient, packageName);
+        PackageCustomization packageCustomization = packages.get(packageName);
+        if (packageCustomization == null) {
+            throw new IllegalArgumentException("Package not found: " + packageName);
+        }
+
+        return packageCustomization;
     }
 
     /**
@@ -39,27 +65,17 @@ public final class LibraryCustomization {
      * @return the class level customization
      */
     public ClassCustomization getClass(String packageName, String className) {
-        String packagePath = packageName.replace(".", "/");
-        Optional<SymbolInformation> classSymbol = languageClient.findWorkspaceSymbol(className).stream()
-            // findWorkspace symbol finds all classes that contain the classname term
-            // The filter that checks the filename only works if there are no nested classes
-            // So, when customizing client classes that contain service interface, this can incorrectly return
-            // the service interface instead of the client class. So, we should add another check for exact name match
-            .filter(si -> si.getName().equals(className))
-            .filter(si -> si.getLocation().getUri().toString().endsWith(packagePath + "/" + className + ".java"))
-            .findFirst();
-
-        return Utils.returnIfPresentOrThrow(classSymbol,
-            symbol -> new ClassCustomization(editor, languageClient, packageName, className, symbol),
-            () -> new IllegalArgumentException(className + " does not exist in package " + packageName));
+        return getPackage(packageName).getClass(className);
     }
 
-    /**
-     * Gets the raw editor containing the current files being edited and eventually emitted to the disk.
-     *
-     * @return the raw editor
-     */
-    public Editor getRawEditor() {
-        return editor;
+    Map<String, String> getContents() {
+        // Only the parsed files matter, as that indicates the files that have been modified.
+        for (PackageCustomization packageCustomization : packages.values()) {
+            packageCustomization.getParsedFiles().forEach((key, value) ->
+                contents.put(MAIN_JAVA + packageCustomization.getPackageName().replace(".", "/") + "/" + key + ".java",
+                    value.toString()));
+        }
+
+        return contents;
     }
 }

@@ -25,10 +25,7 @@ customizations are supported:
 - [Add an annotation to a class](#add-an-annotation-to-a-class)
 - [Add an annotation to a method](#add-an-annotation-to-a-method)
 - [Remove an annotation from a class](#remove-an-annotation-from-a-class)
-- [Refactor: Rename a class](#refactor-rename-a-class)
 - [Refactor: Rename a method](#refactor-rename-a-method)
-- [Refactor: Generate the getter and setter methods for a property](#refactor-generate-the-getter-and-setter-methods-for-a-property)
-- [Refactor: Rename a property and its corresponding getter and setter methods](#refactor-rename-a-property-and-its-corresponding-getter-and-setter-methods)
 - [Refactor: Rename an enum member name](#refactor-rename-an-enum-member-name)
 - [Javadoc: Set the description for a class / method](#javadoc-set-the-description-for-a-class--method)
 - [Javadoc: Set / remove a parameter's javadoc on a method](#javadoc-set--remove-a-parameters-javadoc-on-a-method)
@@ -264,36 +261,6 @@ public class Foo {
 }
 ```
 
-## Refactor: Rename a class
-
-A class `Foo`
-
-```java readme-sample-rename-class-initial
-public class Foo {
-}
-```
-
-with customization
-
-```java readme-sample-rename-class-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    foo.rename("FooInfo");
-}
-```
-
-will generate
-
-```java readme-sample-rename-class-result
-public class FooInfo {
-}
-```
-
-All references of `Foo` will be modified to `FooInfo`. When a valid value is provided, this customization is guaranteed 
-to not break the build.
-
 ## Refactor: Rename a method
 
 A method `isSupportsUnicode` in the `Foo` class
@@ -334,98 +301,6 @@ public class Foo {
 
 All references of `isSupportsUnicode()` will be modified to `isUnicodeSupported()`. When a valid value is provided, this 
 customization is guaranteed to not break the build.
-
-## Refactor: Generate the getter and setter methods for a property
-
-A property `active` in the `Foo` class
-
-```java readme-sample-generate-getter-and-setter-initial
-public class Foo {
-    private boolean active;
-}
-```
-
-with customization
-
-```java readme-sample-generate-getter-and-setter-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    PropertyCustomization active = foo.getProperty("active");
-    active.generateGetterAndSetter();
-}
-```
-
-will generate
-
-```java readme-sample-generate-getter-and-setter-result
-public class Foo {
-    private boolean active;
-
-    public boolean isActive() {
-        return this.active;
-    }
-
-    public Foo setActive(boolean active) {
-        this.active = active;
-        return this;
-    }
-}
-```
-
-If the class already contains a getter or a setter method, the current method will be kept. This customization is 
-guaranteed to not break the build.
-
-## Refactor: Rename a property and its corresponding getter and setter methods
-
-A property `whitelist` in the `Foo` class
-
-```java readme-sample-rename-property-initial
-public class Foo {
-    private List<String> whiteList;
-
-    public List<String> getWhiteList() {
-        return this.whiteList;
-    }
-
-    public Foo setWhiteList(List<String> whiteList) {
-        this.whiteList = whiteList;
-        return this;
-    }
-}
-```
-
-with customization
-
-```java readme-sample-rename-property-customization
-@Override
-public void customize(LibraryCustomization customization, Logger logger) {
-    PackageCustomization models = customization.getPackage("com.azure.myservice.models");
-    ClassCustomization foo = models.getClass("Foo");
-    PropertyCustomization active = foo.getProperty("active");
-    active.rename("allowList");
-}
-```
-
-will generate
-
-```java readme-sample-rename-property-result
-public class Foo {
-    private List<String> allowList;
-
-    public List<String> getAllowList() {
-        return this.allowList;
-    }
-
-    public Foo setAllowList(List<String> allowList) {
-        this.allowList = allowList;
-        return this;
-    }
-}
-```
-
-This customization is guaranteed to not break the build.
 
 ## Refactor: Rename an enum member name
 
@@ -675,7 +550,7 @@ public void customize(LibraryCustomization customization, Logger logger) {
     PackageCustomization models = customization.getPackage("com.azure.myservice.models");
     ClassCustomization foo = models.getClass("Foo");
     JavadocCustomization setActiveJavadoc = foo.getMethod("setActive").getJavadoc();
-    setActiveJavadoc.addThrows("RuntimeException", "An unsuccessful response is received");
+    setActiveJavadoc.setsThrows("RuntimeException", "An unsuccessful response is received");
 }
 ```
 

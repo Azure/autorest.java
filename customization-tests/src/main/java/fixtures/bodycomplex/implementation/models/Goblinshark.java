@@ -17,7 +17,7 @@ import java.util.List;
  * The Goblinshark model.
  */
 @Fluent
-public final class GoblinShark extends Shark {
+public final class Goblinshark extends Shark {
     /*
      * The fishtype property.
      */
@@ -36,7 +36,7 @@ public final class GoblinShark extends Shark {
     /**
      * Creates an instance of Goblinshark class.
      */
-    public GoblinShark() {
+    public Goblinshark() {
     }
 
     /**
@@ -64,7 +64,7 @@ public final class GoblinShark extends Shark {
      * @param jawsize the jawsize value to set.
      * @return the Goblinshark object itself.
      */
-    public GoblinShark setJawsize(Integer jawsize) {
+    public Goblinshark setJawsize(Integer jawsize) {
         this.jawsize = jawsize;
         return this;
     }
@@ -84,7 +84,7 @@ public final class GoblinShark extends Shark {
      * @param color the color value to set.
      * @return the Goblinshark object itself.
      */
-    public GoblinShark setColor(GoblinSharkColor color) {
+    public Goblinshark setColor(GoblinSharkColor color) {
         this.color = color;
         return this;
     }
@@ -93,7 +93,7 @@ public final class GoblinShark extends Shark {
      * {@inheritDoc}
      */
     @Override
-    public GoblinShark setAge(Integer age) {
+    public Goblinshark setAge(Integer age) {
         super.setAge(age);
         return this;
     }
@@ -102,7 +102,7 @@ public final class GoblinShark extends Shark {
      * {@inheritDoc}
      */
     @Override
-    public GoblinShark setBirthday(OffsetDateTime birthday) {
+    public Goblinshark setBirthday(OffsetDateTime birthday) {
         super.setBirthday(birthday);
         return this;
     }
@@ -111,7 +111,7 @@ public final class GoblinShark extends Shark {
      * {@inheritDoc}
      */
     @Override
-    public GoblinShark setSpecies(String species) {
+    public Goblinshark setSpecies(String species) {
         super.setSpecies(species);
         return this;
     }
@@ -120,7 +120,7 @@ public final class GoblinShark extends Shark {
      * {@inheritDoc}
      */
     @Override
-    public GoblinShark setLength(float length) {
+    public Goblinshark setLength(float length) {
         super.setLength(length);
         return this;
     }
@@ -129,7 +129,7 @@ public final class GoblinShark extends Shark {
      * {@inheritDoc}
      */
     @Override
-    public GoblinShark setSiblings(List<Fish> siblings) {
+    public Goblinshark setSiblings(List<Fish> siblings) {
         super.setSiblings(siblings);
         return this;
     }
@@ -161,9 +161,9 @@ public final class GoblinShark extends Shark {
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
      * @throws IOException If an error occurs while reading the Goblinshark.
      */
-    public static GoblinShark fromJson(JsonReader jsonReader) throws IOException {
+    public static Goblinshark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            GoblinShark deserializedGoblinshark = new GoblinShark();
+            Goblinshark deserializedGoblinshark = new Goblinshark();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();

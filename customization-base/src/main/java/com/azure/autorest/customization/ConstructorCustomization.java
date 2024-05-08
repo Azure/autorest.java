@@ -4,8 +4,11 @@
 package com.azure.autorest.customization;
 
 import com.azure.autorest.customization.implementation.Utils;
-import com.azure.autorest.customization.implementation.ls.EclipseLanguageClient;
-import org.eclipse.lsp4j.SymbolInformation;
+import com.github.javaparser.ast.CompilationUnit;
+import com.github.javaparser.ast.NodeList;
+import com.github.javaparser.ast.body.ConstructorDeclaration;
+import com.github.javaparser.ast.stmt.BlockStmt;
+import com.github.javaparser.ast.stmt.Statement;
 
 import java.lang.reflect.Modifier;
 import java.util.List;
@@ -13,17 +16,27 @@ import java.util.List;
 /**
  * The constructor level customization for an AutoRest generated constructor.
  */
-public final class ConstructorCustomization extends CodeCustomization {
+public final class ConstructorCustomization {
+    private final CompilationUnit compilationUnit;
+    final ConstructorDeclaration constructor;
     private final String packageName;
     private final String className;
-    private final String constructorSignature;
 
-    ConstructorCustomization(Editor editor, EclipseLanguageClient languageClient, String packageName, String className,
-        String constructorSignature, SymbolInformation symbol) {
-        super(editor, languageClient, symbol);
+    ConstructorCustomization(CompilationUnit compilationUnit, ConstructorDeclaration constructor, String packageName,
+        String className) {
+        this.compilationUnit = compilationUnit;
+        this.constructor = constructor;
         this.packageName = packageName;
         this.className = className;
-        this.constructorSignature = constructorSignature;
+    }
+
+    /**
+     * Gets the name of the package containing the constructor.
+     *
+     * @return The name of the package containing the constructor.
+     */
+    public String getPackageName() {
+        return packageName;
     }
 
     /**
@@ -41,8 +54,7 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return The Javadoc customization for this constructor.
      */
     public JavadocCustomization getJavadoc() {
-        return new JavadocCustomization(editor, languageClient, fileUri, fileName,
-            symbol.getLocation().getRange().getStart().getLine());
+        return new JavadocCustomization(constructor);
     }
 
     /**
@@ -52,7 +64,8 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization addAnnotation(String annotation) {
-        return Utils.addAnnotation(annotation, this, () -> refreshCustomization(constructorSignature));
+        Utils.addAnnotation(constructor, annotation);
+        return this;
     }
 
     /**
@@ -62,13 +75,8 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization removeAnnotation(String annotation) {
-        return Utils.removeAnnotation(this, compilationUnit -> compilationUnit.getClassByName(className).get()
-                .getConstructors()
-                .stream()
-                .filter(ctor -> Utils.declarationContainsSymbol(ctor.getRange().get(), symbol.getLocation().getRange()))
-                .findFirst().get()
-                .getAnnotationByName(Utils.cleanAnnotationName(annotation)),
-            () -> refreshCustomization(constructorSignature));
+        Utils.removeAnnotation(constructor, annotation);
+        return this;
     }
 
     /**
@@ -85,10 +93,8 @@ public final class ConstructorCustomization extends CodeCustomization {
      * included in the bitwise OR isn't a valid constructor {@link Modifier}.
      */
     public ConstructorCustomization setModifier(int modifiers) {
-        Utils.replaceModifier(symbol, editor, languageClient, "(?:.+ )?" + className + "\\(", className + "(",
-            Modifier.constructorModifiers(), modifiers);
-
-        return refreshCustomization(constructorSignature);
+        Utils.setModifiers(constructor, modifiers, Modifier.constructorModifiers());
+        return this;
     }
 
     /**
@@ -110,20 +116,16 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization replaceParameters(String newParameters, List<String> importsToAdd) {
-        String newSignature = className + "(" + newParameters + ")";
-
-        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className);
-
-        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
-            classCustomization::refreshSymbol);
-
-        return Utils.replaceParameters(newParameters, updatedClassCustomization.getConstructor(constructorSignature),
-            () -> updatedClassCustomization.getConstructor(newSignature));
+        Utils.addImports(compilationUnit, importsToAdd);
+        Utils.replaceParameters(constructor, newParameters);
+        return this;
     }
 
     /**
      * Replace the body of the constructor.
+     * <p>
+     * If the new body contains {@code this()} or {@code super()} constructor calls, use
+     * {@link #replaceBody(NodeList, List)} instead.
      *
      * @param newBody New constructor body.
      * @return A new ConstructorCustomization representing the updated constructor.
@@ -134,6 +136,9 @@ public final class ConstructorCustomization extends CodeCustomization {
 
     /**
      * Replaces the body of the constructor and adds any additional imports required by the new body.
+     * <p>
+     * If the new body contains {@code this()} or {@code super()} constructor calls, use
+     * {@link #replaceBody(NodeList, List)} instead.
      *
      * @param newBody New constructor body.
      * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
@@ -141,19 +146,25 @@ public final class ConstructorCustomization extends CodeCustomization {
      * @return A new ConstructorCustomization representing the updated constructor.
      */
     public ConstructorCustomization replaceBody(String newBody, List<String> importsToAdd) {
-        ClassCustomization classCustomization = new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className);
-
-        ClassCustomization updatedClassCustomization = Utils.addImports(importsToAdd, classCustomization,
-            classCustomization::refreshSymbol);
-
-        return Utils.replaceBody(newBody, updatedClassCustomization.getConstructor(constructorSignature),
-            () -> updatedClassCustomization.getConstructor(constructorSignature));
+        Utils.addImports(compilationUnit, importsToAdd);
+        constructor.setBody(new BlockStmt(Utils.parseCodeBlockOrStatement(newBody)));
+        return this;
     }
 
-    private ConstructorCustomization refreshCustomization(String constructorSignature) {
-        return new PackageCustomization(editor, languageClient, packageName)
-            .getClass(className)
-            .getConstructor(constructorSignature);
+    /**
+     * Replaces the body of the constructor and adds any additional imports required by the new body.
+     * <p>
+     * This method should be used if the new body contains {@code this()} or {@code super()} constructor calls as this
+     * is special syntax that cannot be handled by {@link #replaceBody(String, List)}.
+     *
+     * @param newBody New constructor body.
+     * @param importsToAdd Any additional imports required by the constructor. These will be custom types or types that
+     * are ambiguous on which to use such as {@code List} or the utility class {@code Arrays}.
+     * @return The updated ConstructorCustomization.
+     */
+    public ConstructorCustomization replaceBody(NodeList<Statement> newBody, List<String> importsToAdd) {
+        Utils.addImports(compilationUnit, importsToAdd);
+        constructor.setBody(new BlockStmt(newBody));
+        return this;
     }
 }
