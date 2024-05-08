@@ -16,7 +16,7 @@ public final class CustomTemplateResourcePatch {
      * Managed identity.
      */
     @JsonProperty(value = "identity")
-    private ManagedIdentityProperties identity;
+    private ManagedServiceIdentity identity;
 
     /**
      * Creates an instance of CustomTemplateResourcePatch class.
@@ -29,7 +29,7 @@ public final class CustomTemplateResourcePatch {
      * 
      * @return the identity value.
      */
-    public ManagedIdentityProperties identity() {
+    public ManagedServiceIdentity identity() {
         return this.identity;
     }
 
@@ -39,7 +39,7 @@ public final class CustomTemplateResourcePatch {
      * @param identity the identity value to set.
      * @return the CustomTemplateResourcePatch object itself.
      */
-    public CustomTemplateResourcePatch withIdentity(ManagedIdentityProperties identity) {
+    public CustomTemplateResourcePatch withIdentity(ManagedServiceIdentity identity) {
         this.identity = identity;
         return this;
     }

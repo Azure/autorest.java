@@ -18,7 +18,6 @@ import com.azure.core.util.BinaryData;
 import com.type.model.empty.implementation.EmptyClientImpl;
 import com.type.model.empty.models.EmptyInput;
 import com.type.model.empty.models.EmptyInputOutput;
-import com.type.model.empty.models.EmptyOutput;
 
 /**
  * Initializes a new instance of the synchronous EmptyClient type.
@@ -62,22 +61,17 @@ public final class EmptyClient {
 
     /**
      * The getEmpty operation.
-     * <p><strong>Response Body Schema</strong></p>
-     * 
-     * <pre>{@code
-     * { }
-     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return empty model used in operation return type along with {@link Response}.
+     * @return the {@link Response}.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
+    public Response<Void> getEmptyWithResponse(RequestOptions requestOptions) {
         return this.serviceClient.getEmptyWithResponse(requestOptions);
     }
 
@@ -136,14 +130,13 @@ public final class EmptyClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return empty model used in operation return type.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public EmptyOutput getEmpty() {
+    public void getEmpty() {
         // Generated convenience method for getEmptyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getEmptyWithResponse(requestOptions).getValue().toObject(EmptyOutput.class);
+        getEmptyWithResponse(requestOptions).getValue();
     }
 
     /**

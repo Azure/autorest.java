@@ -54,7 +54,7 @@ public interface CustomTemplateResource {
      * 
      * @return the identity value.
      */
-    ManagedIdentityProperties identity();
+    ManagedServiceIdentity identity();
 
     /**
      * Gets the systemData property: Azure Resource Manager metadata containing createdBy and modifiedBy information.
@@ -194,7 +194,7 @@ public interface CustomTemplateResource {
              * @param identity Managed identity.
              * @return the next definition stage.
              */
-            WithCreate withIdentity(ManagedIdentityProperties identity);
+            WithCreate withIdentity(ManagedServiceIdentity identity);
         }
 
         /**
@@ -265,7 +265,7 @@ public interface CustomTemplateResource {
              * @param identity Managed identity.
              * @return the next definition stage.
              */
-            Update withIdentity(ManagedIdentityProperties identity);
+            Update withIdentity(ManagedServiceIdentity identity);
         }
     }
 }

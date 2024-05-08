@@ -14,7 +14,7 @@ import java.util.Map;
  * The properties of the managed service identities assigned to this resource.
  */
 @Fluent
-public final class ManagedIdentityProperties {
+public final class ManagedServiceIdentity {
     /*
      * The Active Directory tenant id of the principal.
      */
@@ -31,7 +31,7 @@ public final class ManagedIdentityProperties {
      * The type of managed identity assigned to this resource.
      */
     @JsonProperty(value = "type", required = true)
-    private ManagedIdentityType type;
+    private ManagedServiceIdentityType type;
 
     /*
      * The identities assigned to this resource by the user.
@@ -41,9 +41,9 @@ public final class ManagedIdentityProperties {
     private Map<String, UserAssignedIdentity> userAssignedIdentities;
 
     /**
-     * Creates an instance of ManagedIdentityProperties class.
+     * Creates an instance of ManagedServiceIdentity class.
      */
-    public ManagedIdentityProperties() {
+    public ManagedServiceIdentity() {
     }
 
     /**
@@ -69,7 +69,7 @@ public final class ManagedIdentityProperties {
      * 
      * @return the type value.
      */
-    public ManagedIdentityType type() {
+    public ManagedServiceIdentityType type() {
         return this.type;
     }
 
@@ -77,9 +77,9 @@ public final class ManagedIdentityProperties {
      * Set the type property: The type of managed identity assigned to this resource.
      * 
      * @param type the type value to set.
-     * @return the ManagedIdentityProperties object itself.
+     * @return the ManagedServiceIdentity object itself.
      */
-    public ManagedIdentityProperties withType(ManagedIdentityType type) {
+    public ManagedServiceIdentity withType(ManagedServiceIdentityType type) {
         this.type = type;
         return this;
     }
@@ -97,10 +97,9 @@ public final class ManagedIdentityProperties {
      * Set the userAssignedIdentities property: The identities assigned to this resource by the user.
      * 
      * @param userAssignedIdentities the userAssignedIdentities value to set.
-     * @return the ManagedIdentityProperties object itself.
+     * @return the ManagedServiceIdentity object itself.
      */
-    public ManagedIdentityProperties
-        withUserAssignedIdentities(Map<String, UserAssignedIdentity> userAssignedIdentities) {
+    public ManagedServiceIdentity withUserAssignedIdentities(Map<String, UserAssignedIdentity> userAssignedIdentities) {
         this.userAssignedIdentities = userAssignedIdentities;
         return this;
     }
@@ -113,7 +112,7 @@ public final class ManagedIdentityProperties {
     public void validate() {
         if (type() == null) {
             throw LOGGER.atError()
-                .log(new IllegalArgumentException("Missing required property type in model ManagedIdentityProperties"));
+                .log(new IllegalArgumentException("Missing required property type in model ManagedServiceIdentity"));
         }
         if (userAssignedIdentities() != null) {
             userAssignedIdentities().values().forEach(e -> {
@@ -124,5 +123,5 @@ public final class ManagedIdentityProperties {
         }
     }
 
-    private static final ClientLogger LOGGER = new ClientLogger(ManagedIdentityProperties.class);
+    private static final ClientLogger LOGGER = new ClientLogger(ManagedServiceIdentity.class);
 }
