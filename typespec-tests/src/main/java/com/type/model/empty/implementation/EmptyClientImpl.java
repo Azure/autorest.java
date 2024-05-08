@@ -129,7 +129,7 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Mono<Response<Void>> getEmpty(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Mono<Response<BinaryData>> getEmpty(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Get("/type/model/empty/alone")
@@ -138,7 +138,7 @@ public final class EmptyClientImpl {
         @UnexpectedResponseExceptionType(value = ResourceNotFoundException.class, code = { 404 })
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
-        Response<Void> getEmptySync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
+        Response<BinaryData> getEmptySync(@HeaderParam("accept") String accept, RequestOptions requestOptions,
             Context context);
 
         @Post("/type/model/empty/round-trip")
@@ -206,32 +206,43 @@ public final class EmptyClientImpl {
 
     /**
      * The getEmpty operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * { }
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response} on successful completion of {@link Mono}.
+     * @return empty model used in operation return type along with {@link Response} on successful completion of
+     * {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> getEmptyWithResponseAsync(RequestOptions requestOptions) {
         final String accept = "application/json";
         return FluxUtil.withContext(context -> service.getEmpty(accept, requestOptions, context));
     }
 
     /**
      * The getEmpty operation.
+     * <p><strong>Response Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * { }
+     * }</pre>
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link Response}.
+     * @return empty model used in operation return type along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> getEmptyWithResponse(RequestOptions requestOptions) {
+    public Response<BinaryData> getEmptyWithResponse(RequestOptions requestOptions) {
         final String accept = "application/json";
         return service.getEmptySync(accept, requestOptions, Context.NONE);
     }
