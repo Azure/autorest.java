@@ -6,6 +6,7 @@ package com.azure.autorest.preprocessor;
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
 import com.azure.autorest.extension.base.model.MessageChannel;
+import com.azure.autorest.extension.base.model.codemodel.ChoiceSchema;
 import com.azure.autorest.extension.base.model.codemodel.ChoiceValue;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
@@ -39,6 +40,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Preprocessor extends NewPlugin {
@@ -144,6 +146,8 @@ public class Preprocessor extends NewPlugin {
     }
 
     public static CodeModel convertOptionalConstantsToEnum(CodeModel codeModel) {
+        Function<ConstantSchema, Boolean> schemaIsConstantWithChoice = schema -> schema.getValueType() instanceof ChoiceSchema;
+
         Set<ConstantSchema> constantSchemas = new HashSet<>(codeModel.getSchemas().getConstants());
         if (!constantSchemas.isEmpty()) {
             Map<ConstantSchema, SealedChoiceSchema> convertedChoiceSchemas = new HashMap<>();
@@ -152,9 +156,13 @@ public class Preprocessor extends NewPlugin {
                 o.getParameters().stream().filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema)
                     .forEach(p -> {
                         ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
-                        SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                            Preprocessor::convertToChoiceSchema);
-                        p.setSchema(sealedChoiceSchema);
+                        if (schemaIsConstantWithChoice.apply(constantSchema)) {
+                            p.setSchema(constantSchema.getValueType());
+                        } else {
+                            SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                                Preprocessor::convertToChoiceSchema);
+                            p.setSchema(sealedChoiceSchema);
+                        }
 
                         o.getSignatureParameters().add(p);
                     });
@@ -163,9 +171,13 @@ public class Preprocessor extends NewPlugin {
                     r.getParameters().stream().filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema)
                         .forEach(p -> {
                             ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
-                            SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(
-                                constantSchema, Preprocessor::convertToChoiceSchema);
-                            p.setSchema(sealedChoiceSchema);
+                            if (schemaIsConstantWithChoice.apply(constantSchema)) {
+                                p.setSchema(constantSchema.getValueType());
+                            } else {
+                                SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(
+                                    constantSchema, Preprocessor::convertToChoiceSchema);
+                                p.setSchema(sealedChoiceSchema);
+                            }
 
                             r.getSignatureParameters().add(p);
                         });
@@ -173,11 +185,16 @@ public class Preprocessor extends NewPlugin {
             });
 
             codeModel.getSchemas().getObjects().stream().flatMap(s -> s.getProperties().stream())
-                .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema).forEach(p -> {
+                .filter(p -> !p.isRequired() && p.getSchema() instanceof ConstantSchema)
+                .forEach(p -> {
                     ConstantSchema constantSchema = (ConstantSchema) p.getSchema();
-                    SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
-                        Preprocessor::convertToChoiceSchema);
-                    p.setSchema(sealedChoiceSchema);
+                    if (schemaIsConstantWithChoice.apply(constantSchema)) {
+                        p.setSchema(constantSchema.getValueType());
+                    } else {
+                        SealedChoiceSchema sealedChoiceSchema = convertedChoiceSchemas.computeIfAbsent(constantSchema,
+                            Preprocessor::convertToChoiceSchema);
+                        p.setSchema(sealedChoiceSchema);
+                    }
                 });
 
             if (JavaSettings.getInstance().getClientFlattenAnnotationTarget()
