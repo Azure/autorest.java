@@ -10,7 +10,7 @@ import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResource;
 import com.cadl.armresourceprovider.models.CustomTemplateResourcePatch;
-import com.cadl.armresourceprovider.models.ManagedIdentityProperties;
+import com.cadl.armresourceprovider.models.ManagedServiceIdentity;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import java.util.Collections;
 import java.util.Map;
@@ -46,7 +46,7 @@ public final class CustomTemplateResourceImpl
         }
     }
 
-    public ManagedIdentityProperties identity() {
+    public ManagedServiceIdentity identity() {
         return this.innerModel().identity();
     }
 
@@ -160,7 +160,7 @@ public final class CustomTemplateResourceImpl
         return this;
     }
 
-    public CustomTemplateResourceImpl withIdentity(ManagedIdentityProperties identity) {
+    public CustomTemplateResourceImpl withIdentity(ManagedServiceIdentity identity) {
         if (isInCreateMode()) {
             this.innerModel().withIdentity(identity);
             return this;

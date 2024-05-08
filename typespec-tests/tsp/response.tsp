@@ -179,11 +179,21 @@ interface ResponseOp {
 
   // OperationDetails does not have "id" property
   @route("/lro-invalid-poll-response")
-  lroInvalidPollResponse is CustomLongRunningOperation<Resource, OperationDetails1>;
+  lroInvalidPollResponse is CustomLongRunningOperation<
+    {
+      @body request: Resource;
+    },
+    OperationDetails1
+  >;
 
   // OperationDetails does not have "result" property
   @route("/lro-invalid-result")
-  lroInvalidResult is CustomLongRunningOperation<Resource, OperationDetails2>;
+  lroInvalidResult is CustomLongRunningOperation<
+    {
+      @body request: Resource;
+    },
+    OperationDetails2
+  >;
 
   @route("/paged-string")
   listStrings(): StringsList;

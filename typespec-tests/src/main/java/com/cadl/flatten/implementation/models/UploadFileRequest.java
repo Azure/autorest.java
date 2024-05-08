@@ -20,12 +20,6 @@ public final class UploadFileRequest {
     private final FileDataFileDetails fileData;
 
     /*
-     * The readOnly property.
-     */
-    @Generated
-    private String readOnly;
-
-    /*
      * The constant property.
      */
     @Generated
@@ -49,16 +43,6 @@ public final class UploadFileRequest {
     @Generated
     public FileDataFileDetails getFileData() {
         return this.fileData;
-    }
-
-    /**
-     * Get the readOnly property: The readOnly property.
-     * 
-     * @return the readOnly value.
-     */
-    @Generated
-    public String getReadOnly() {
-        return this.readOnly;
     }
 
     /**

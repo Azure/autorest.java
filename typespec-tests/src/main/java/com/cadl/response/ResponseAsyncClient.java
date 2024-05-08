@@ -200,7 +200,7 @@ public final class ResponseAsyncClient {
      * }
      * }</pre>
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -210,9 +210,9 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData request,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidPollResponseAsync(resource, requestOptions);
+        return this.serviceClient.beginLroInvalidPollResponseAsync(request, requestOptions);
     }
 
     /**
@@ -228,7 +228,7 @@ public final class ResponseAsyncClient {
      * }
      * }</pre>
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -238,9 +238,8 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
-        RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidResultAsync(resource, requestOptions);
+    public PollerFlux<BinaryData, BinaryData> beginLroInvalidResult(BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.beginLroInvalidResultAsync(request, requestOptions);
     }
 
     /**
@@ -398,7 +397,7 @@ public final class ResponseAsyncClient {
     /**
      * The most basic operation.
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -409,16 +408,16 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource resource) {
+    public PollerFlux<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource request) {
         // Generated convenience method for beginLroInvalidPollResponseWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidPollResponseWithModelAsync(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidPollResponseWithModelAsync(BinaryData.fromObject(request), requestOptions);
     }
 
     /**
      * The most basic operation.
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -429,10 +428,10 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource resource) {
+    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource request) {
         // Generated convenience method for beginLroInvalidResultWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidResultWithModelAsync(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidResultWithModelAsync(BinaryData.fromObject(request), requestOptions);
     }
 
     /**

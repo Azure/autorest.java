@@ -194,7 +194,7 @@ public final class ResponseClient {
      * }
      * }</pre>
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -204,9 +204,9 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData resource,
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidPollResponse(BinaryData request,
         RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidPollResponse(resource, requestOptions);
+        return this.serviceClient.beginLroInvalidPollResponse(request, requestOptions);
     }
 
     /**
@@ -222,7 +222,7 @@ public final class ResponseClient {
      * }
      * }</pre>
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -232,9 +232,8 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(BinaryData resource,
-        RequestOptions requestOptions) {
-        return this.serviceClient.beginLroInvalidResult(resource, requestOptions);
+    public SyncPoller<BinaryData, BinaryData> beginLroInvalidResult(BinaryData request, RequestOptions requestOptions) {
+        return this.serviceClient.beginLroInvalidResult(request, requestOptions);
     }
 
     /**
@@ -388,7 +387,7 @@ public final class ResponseClient {
     /**
      * The most basic operation.
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -399,16 +398,16 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource resource) {
+    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource request) {
         // Generated convenience method for beginLroInvalidPollResponseWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidPollResponseWithModel(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidPollResponseWithModel(BinaryData.fromObject(request), requestOptions);
     }
 
     /**
      * The most basic operation.
      * 
-     * @param resource The resource parameter.
+     * @param request The request parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -419,10 +418,10 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource resource) {
+    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource request) {
         // Generated convenience method for beginLroInvalidResultWithModel
         RequestOptions requestOptions = new RequestOptions();
-        return serviceClient.beginLroInvalidResultWithModel(BinaryData.fromObject(resource), requestOptions);
+        return serviceClient.beginLroInvalidResultWithModel(BinaryData.fromObject(request), requestOptions);
     }
 
     /**

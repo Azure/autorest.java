@@ -54,7 +54,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.models.ManagedIdentityProperties",
+  "name" : "com.cadl.armresourceprovider.models.ManagedServiceIdentity",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
@@ -89,7 +89,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.models.ManagedIdentityType",
+  "name" : "com.cadl.armresourceprovider.models.ManagedServiceIdentityType",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true

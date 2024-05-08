@@ -104,7 +104,7 @@ model CustomTemplateResource is TrackedResource<CustomTemplateResourceProperties
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_11_01)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
 @doc("Top Level Arm Resource Properties.")
@@ -123,7 +123,7 @@ model CustomTemplateResourcePatch {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "https://github.com/Azure/typespec-azure/issues/2840"
   @added(Versions.v2023_11_01)
   @doc("Managed identity.")
-  identity?: Azure.ResourceManager.Foundations.ManagedIdentityProperties;
+  identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
   @added(Versions.v2022_06_01_preview)
   @removed(Versions.v2023_11_01)
@@ -132,12 +132,12 @@ model CustomTemplateResourcePatch {
 }
 
 @lroStatus
-enum ProvisioningState {
-  ...ResourceProvisioningState,
-  Provisioning,
-  Updating,
-  Deleting,
-  Accepted,
+union ProvisioningState {
+  ResourceProvisioningState,
+  Provisioning: "Provisioning",
+  Updating: "Updating",
+  Deleting: "Deleting",
+  Accepted: "Accepted",
 }
 
 model ResponseWithHeader<T> {
@@ -147,13 +147,13 @@ model ResponseWithHeader<T> {
 }
 
 // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "built-in conditional request includes time based conditional headers"
-alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.ArmResource> = {
+alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   @header("If-Match")
   @doc("The request should only proceed if an entity matches this string.")
   ifMatch?: string;
 };
 
-alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.ArmResource> = {
+alias IfNoneMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   @header("If-None-Match")
   @doc("The request should only proceed if no entity matches this string.")
   ifNoneMatch?: string;
@@ -199,7 +199,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceCreateOrUpdate(TResource)
 @patch
 op ArmResourceUpdateSync<
-  TResource extends Azure.ResourceManager.Foundations.ArmResource,
+  TResource extends Azure.ResourceManager.Foundations.Resource,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
