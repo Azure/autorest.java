@@ -1,8 +1,8 @@
 # Release History
 
-## 0.16.0 (2024-05-09)
+## 0.16.0 (2024-05-13)
 
-Compatible with compiler 0.55.
+Compatible with compiler 0.56.
 
 - Adopt TCGC model types.
 
