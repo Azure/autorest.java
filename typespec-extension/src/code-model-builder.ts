@@ -2146,21 +2146,6 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    if (
-      (this.isArm() &&
-        namespace?.startsWith("Azure.ResourceManager") &&
-        // there's ResourceListResult under Azure.ResourceManager namespace,
-        // which shouldn't be considered Resource schema parent
-        (name?.startsWith("TrackedResource") ||
-          name?.startsWith("ExtensionResource") ||
-          name?.startsWith("ProxyResource"))) ||
-      name === "ArmResource"
-    ) {
-      const objectSchema = this.dummyResourceSchema(type, name, namespace);
-      this.codeModel.schemas.add(objectSchema);
-
-      return objectSchema;
-    }
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
@@ -2335,32 +2320,6 @@ export class CodeModelBuilder {
       }
     }
     return type;
-  }
-
-  private dummyResourceSchema(type: Model, name?: string, namespace?: string): ObjectSchema {
-    const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
-    const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
-    const declaredProperties = walkPropertiesInherited(type);
-    for (const prop of declaredProperties) {
-      resource.addProperty(this.processModelProperty(prop));
-    }
-    return resource;
-  }
-
-  private dummyObjectSchema(type: Model, name: string, namespace?: string): ObjectSchema {
-    return new ObjectScheme(name, this.getDoc(type), {
-      summary: this.getSummary(type),
-      language: {
-        default: {
-          name: name,
-          namespace: namespace,
-        },
-        java: {
-          name: name,
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-    });
   }
 
   private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
