@@ -489,10 +489,6 @@ export class CodeModelBuilder {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
-      // skip models under "Azure.ResourceManager"
-      if (this.isArm() && schema.language.default?.namespace?.startsWith("Azure.ResourceManager")) {
-        return;
-      }
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
       if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
