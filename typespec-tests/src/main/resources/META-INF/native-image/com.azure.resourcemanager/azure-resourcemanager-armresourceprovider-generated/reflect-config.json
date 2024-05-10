@@ -59,7 +59,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.models.UserAssignedIdentity",
+  "name" : "com.cadl.armresourceprovider.models.UserAssignedIdentities",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true

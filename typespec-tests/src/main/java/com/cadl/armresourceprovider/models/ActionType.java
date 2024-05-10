@@ -4,53 +4,45 @@
 
 package com.cadl.armresourceprovider.models;
 
+import com.azure.core.util.ExpandableStringEnum;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Collection;
 
 /**
  * Extensible enum. Indicates the action type. "Internal" refers to actions that are for internal only APIs.
  */
-public enum ActionType {
+public final class ActionType extends ExpandableStringEnum<ActionType> {
     /**
-     * Enum value Internal.
+     * Static value Internal for ActionType.
      */
-    INTERNAL("Internal");
+    public static final ActionType INTERNAL = fromString("Internal");
 
     /**
-     * The actual serialized value for a ActionType instance.
+     * Creates a new instance of ActionType value.
+     * 
+     * @deprecated Use the {@link #fromString(String)} factory method.
      */
-    private final String value;
-
-    ActionType(String value) {
-        this.value = value;
+    @Deprecated
+    public ActionType() {
     }
 
     /**
-     * Parses a serialized value to a ActionType instance.
+     * Creates or finds a ActionType from its string representation.
      * 
-     * @param value the serialized value to parse.
-     * @return the parsed ActionType object, or null if unable to parse.
+     * @param name a name to look for.
+     * @return the corresponding ActionType.
      */
     @JsonCreator
-    public static ActionType fromString(String value) {
-        if (value == null) {
-            return null;
-        }
-        ActionType[] items = ActionType.values();
-        for (ActionType item : items) {
-            if (item.toString().equalsIgnoreCase(value)) {
-                return item;
-            }
-        }
-        return null;
+    public static ActionType fromString(String name) {
+        return fromString(name, ActionType.class);
     }
 
     /**
-     * {@inheritDoc}
+     * Gets known ActionType values.
+     * 
+     * @return known ActionType values.
      */
-    @JsonValue
-    @Override
-    public String toString() {
-        return this.value;
+    public static Collection<ActionType> values() {
+        return values(ActionType.class);
     }
 }
