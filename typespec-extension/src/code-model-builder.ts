@@ -37,7 +37,6 @@ import {
   getEncode,
   getOverloadedOperation,
   EnumMember,
-  walkPropertiesInherited,
   isVoidType,
   isErrorModel,
 } from "@typespec/compiler";

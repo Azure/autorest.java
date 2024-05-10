@@ -199,7 +199,7 @@ interface Operations extends Azure.ResourceManager.Operations {}
 @armResourceCreateOrUpdate(TResource)
 @patch
 op ArmResourceUpdateSync<
-  TResource extends Azure.ResourceManager.Foundations.Resource,
+  TResource extends Azure.ResourceManager.Foundations.ArmResource,
   TBaseParameters = Azure.ResourceManager.Foundations.BaseParameters<TResource>
 >(
   ...ResourceInstanceParameters<TResource, TBaseParameters>,
