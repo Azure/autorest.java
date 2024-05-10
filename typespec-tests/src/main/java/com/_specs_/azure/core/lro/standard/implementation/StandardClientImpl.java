@@ -24,6 +24,7 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
+import com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -34,9 +35,11 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
+import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.PollOperationDetails;
+import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -355,7 +358,7 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new SyncDefaultPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -401,7 +404,7 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new DefaultPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -447,7 +450,7 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new SyncDefaultPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
