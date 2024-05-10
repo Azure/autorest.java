@@ -24,7 +24,6 @@ import com.azure.core.exception.ClientAuthenticationException;
 import com.azure.core.exception.HttpResponseException;
 import com.azure.core.exception.ResourceModifiedException;
 import com.azure.core.exception.ResourceNotFoundException;
-import com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy;
 import com.azure.core.http.HttpPipeline;
 import com.azure.core.http.HttpPipelineBuilder;
 import com.azure.core.http.policy.RetryPolicy;
@@ -312,13 +311,12 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -358,13 +356,12 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new SyncDefaultPollingStrategy<>(
+            new SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -404,13 +401,12 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new DefaultPollingStrategy<>(
+            new OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
 
@@ -450,13 +446,12 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new SyncDefaultPollingStrategy<>(
+            new SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
-
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
 
