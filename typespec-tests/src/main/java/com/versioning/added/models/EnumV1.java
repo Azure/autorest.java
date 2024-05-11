@@ -4,54 +4,53 @@
 
 package com.versioning.added.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import java.util.Collection;
-
 /**
  * Defines values for EnumV1.
  */
-public final class EnumV1 extends ExpandableStringEnum<EnumV1> {
+public enum EnumV1 {
     /**
-     * Static value enumMemberV1 for EnumV1.
+     * Enum value enumMemberV1.
      */
-    @Generated
-    public static final EnumV1 ENUM_MEMBER_V1 = fromString("enumMemberV1");
+    ENUM_MEMBER_V1("enumMemberV1"),
 
     /**
-     * Static value enumMemberV2 for EnumV1.
+     * Enum value enumMemberV2.
      */
-    @Generated
-    public static final EnumV1 ENUM_MEMBER_V2 = fromString("enumMemberV2");
+    ENUM_MEMBER_V2("enumMemberV2");
 
     /**
-     * Creates a new instance of EnumV1 value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a EnumV1 instance.
      */
-    @Generated
-    @Deprecated
-    public EnumV1() {
+    private final String value;
+
+    EnumV1(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a EnumV1 from its string representation.
+     * Parses a serialized value to a EnumV1 instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding EnumV1.
+     * @param value the serialized value to parse.
+     * @return the parsed EnumV1 object, or null if unable to parse.
      */
-    @Generated
-    public static EnumV1 fromString(String name) {
-        return fromString(name, EnumV1.class);
+    public static EnumV1 fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        EnumV1[] items = EnumV1.values();
+        for (EnumV1 item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known EnumV1 values.
-     * 
-     * @return known EnumV1 values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<EnumV1> values() {
-        return values(EnumV1.class);
+    @Override
+    public String toString() {
+        return this.value;
     }
 }
