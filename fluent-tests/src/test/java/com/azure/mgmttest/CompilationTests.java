@@ -8,6 +8,7 @@ import com.azure.core.management.SystemData;
 import com.azure.core.management.exception.ManagementError;
 import com.azure.core.management.exception.ManagementException;
 import com.azure.mgmtlitetest.consumption.models.LegacyReservationRecommendation;
+import com.azure.mgmtlitetest.schemacleanup.models.UserAssignedIdentity;
 import com.azure.mgmttest.appservice.fluent.WebSiteManagementClient;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseErrorException;
 import com.azure.mgmttest.authorization.models.GraphError;
@@ -164,5 +165,9 @@ public class CompilationTests {
 
     public void testPolymophicSubClass() {
         LegacyReservationRecommendation legacyReservationRecommendation = new LegacyReservationRecommendation();
+    }
+
+    public void testSchemaCleanup() {
+        UserAssignedIdentity userAssignedIdentity = new UserAssignedIdentity();
     }
 }

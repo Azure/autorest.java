@@ -86,6 +86,11 @@
     },
     "UserAssignedIdentities": {
       "allOf": [{
+        "$ref": "#/definitions/UserAssignedIdentitiesIntermediate"
+      }]
+    },
+    "UserAssignedIdentitiesIntermediate": {
+      "allOf": [{
         "$ref": "#/definitions/Record"
       }]
     },

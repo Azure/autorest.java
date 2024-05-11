@@ -20,11 +20,11 @@ import com.azure.autorest.fluentnamer.FluentNamer;
 import org.slf4j.Logger;
 
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Cleans up unused flattened types.
@@ -76,13 +76,16 @@ public class SchemaCleanup {
                         String name = Utils.getJavaName(o);
                         return FluentType.nonSystemData(name) && FluentType.nonManagementError(name);
                     })
-                    .flatMap(s -> s.getProperties().stream()
+                    .flatMap(s -> Stream.concat(
+                            Stream.of(s),
+                            s.getProperties()
+                                    .stream()
 //                                    .filter(Utils::nonFlattenedProperty)
-                                    .map(Property::getSchema)
-                                    .map(SchemaCleanup::schemaOrElementInCollection)
-                                    .filter(Objects::nonNull)
-                                    .filter(s1 -> !Objects.equals(s, s1))   // schema of property is not the same of itself, solve the simplest recursive reference case
-                    )
+                                    .map(Property::getSchema)))
+                    .flatMap(s -> itselfAndAllParents(s)
+                            .map(SchemaCleanup::schemaOrElementInCollection)
+                            .filter(Objects::nonNull)
+                            .filter(s1 -> !Objects.equals(s, s1))) // schema of property is not the same of itself, solve the simplest recursive reference case
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
             choicesSchemasNotInUse.removeAll(schemasInUse);
@@ -94,11 +97,11 @@ public class SchemaCleanup {
                     .flatMap(o -> o.getRequests().stream())
                     .flatMap(r -> r.getParameters().stream())
                     .map(Parameter::getSchema)
+                    .flatMap(SchemaCleanup::itselfAndAllParents)
                     .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(schemasInUse);
-            List<Schema> schemas = schemasInUse.stream().collect(Collectors.toList());
             choicesSchemasNotInUse.removeAll(schemasInUse);
         }
         if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
@@ -107,6 +110,7 @@ public class SchemaCleanup {
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getResponses().stream())
                     .map(Response::getSchema)
+                    .flatMap(SchemaCleanup::itselfAndAllParents)
                     .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
@@ -119,6 +123,7 @@ public class SchemaCleanup {
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getExceptions().stream())
                     .map(Response::getSchema)
+                    .flatMap(SchemaCleanup::itselfAndAllParents)
                     .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
@@ -156,6 +161,15 @@ public class SchemaCleanup {
         });
 
         return codeModelModified.get();
+    }
+
+    private static Stream<Schema> itselfAndAllParents(Schema schema) {
+        return Stream.concat(
+                Stream.of(schema),
+                schema instanceof ObjectSchema && ((ObjectSchema) schema).getParents() != null && ((ObjectSchema) schema).getParents().getAll() != null
+                        ? ((ObjectSchema) schema).getParents().getAll().stream()
+                        : Stream.empty()
+        );
     }
 
     private static Schema schemaOrElementInCollection(Schema schema) {
