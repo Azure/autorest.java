@@ -73,6 +73,7 @@ model Query {
   data?: url | bytes;
 }
 
+@access(Access.internal)
 @usage(Usage.input | Usage.output)
 model SubResult extends Result {
   text?: string;

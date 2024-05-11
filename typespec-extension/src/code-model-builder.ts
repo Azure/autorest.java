@@ -2874,20 +2874,17 @@ export class CodeModelBuilder {
             schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
             schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
 
-            schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
-            schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            if (schema.discriminator) {
+              // propagate access/usage to immediate children, if the schema is a discriminated model
+              // if the schema is not a discriminated model, its children likely not valid for the mode/API
+              // TODO: it does not handle the case that concrete model (kind: "type1") for the discriminated model have depth larger than 1 (e.g. kind: "type1" | "type2" in middle)
+              schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            }
 
             if (schema.discriminator?.property?.schema) {
               innerApplySchemaUsage(schema.discriminator?.property?.schema, schemaUsage);
             }
           }
-
-          // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
-          //   innerApplySchemaUsage(d, schemaUsage);
-          // });
-          // Object.values(schema.discriminator?.immediate ?? {}).forEach((d) => {
-          //   innerApplySchemaUsage(d, schemaUsage);
-          // });
         }
       } else if (schema instanceof DictionarySchema) {
         innerApplySchemaUsage(schema.elementType, schemaUsage);
