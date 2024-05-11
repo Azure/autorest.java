@@ -64,6 +64,8 @@ def update_sdks():
         module_path = os.path.dirname(tsp_location_file)
         artifact = os.path.basename(module_path)
 
+        arm_module = '-resourcemanager-' in artifact
+
         if artifact in skip_artifacts:
             continue
 
@@ -74,12 +76,17 @@ def update_sdks():
         generated_samples_exists = os.path.isdir(generated_samples_path)
         generated_test_exists = os.path.isdir(generated_test_path)
 
-        if '-resourcemanager-' in artifact:
+        if arm_module:
             logging.info('Delete source code of resourcemanager module %s', artifact)
             shutil.rmtree(os.path.join(module_path, 'src', 'main'))
 
         logging.info('Generate for module %s', artifact)
         subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
+
+        if arm_module:
+            # revert mock test code
+            cmd = ['git', 'checkout', 'src/test']
+            subprocess.check_call(cmd, cwd=module_path)
 
         if not generated_samples_exists:
             shutil.rmtree(generated_samples_path, ignore_errors=True)
