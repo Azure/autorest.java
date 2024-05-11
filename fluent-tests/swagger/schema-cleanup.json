@@ -33,7 +33,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Retrieved entities"
+            "description": "Retrieved entities",
+            "schema": {
+              "$ref": "#/definitions/Application"
+            }
           }
         }
       }
@@ -63,6 +66,42 @@
         }
       },
       "required": ["type", "referenceName"]
+    },
+    "Application": {
+      "description": "Application.",
+      "type": "object",
+      "properties": {
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentities",
+          "description": "The identities assigned to this resource by the user."
+        }
+      }
+    },
+    "Record": {
+      "type": "object",
+      "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.\",",
+      "additionalProperties": {
+        "$ref": "#/definitions/UserAssignedIdentity"
+      }
+    },
+    "UserAssignedIdentities": {
+      "allOf": [{
+        "$ref": "#/definitions/Record"
+      }]
+    },
+    "UserAssignedIdentity": {
+      "type": "object",
+      "description": "A managed identity assigned by the user.",
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "The active directory client identifier for this principal."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The active directory identifier for this principal."
+        }
+      }
     },
     "CloudError": {
       "x-ms-external": true,
