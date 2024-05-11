@@ -12,7 +12,6 @@ using Azure.ClientGenerator.Core;
 namespace Cadl.EnumService;
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
-@fixed
 enum Color {
   Red,
   Blue,
@@ -39,14 +38,12 @@ union PriorityModel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
-@fixed
 enum Priority {
   High: 100,
   Low: 0,
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
-@fixed
 enum Unit {
   Grams: 1,
   KiloGrams: 0.001,
@@ -54,7 +51,6 @@ enum Unit {
 }
 
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
-@fixed
 enum OperationStateValues {
   Running,
   Completed,

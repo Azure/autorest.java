@@ -61,7 +61,6 @@ model StandAloneUnion {
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @access(Access.internal)
 @usage(Usage.input | Usage.output)
-@fixed
 enum Color {
   Red,
   Blue,
