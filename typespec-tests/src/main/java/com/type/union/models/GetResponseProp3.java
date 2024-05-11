@@ -4,54 +4,56 @@
 
 package com.type.union.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import java.util.Collection;
-
 /**
  * Defines values for GetResponseProp3.
  */
-public final class GetResponseProp3 extends ExpandableStringEnum<GetResponseProp3> {
+public enum GetResponseProp3 {
     /**
-     * Static value b for GetResponseProp3.
+     * Enum value 1.
      */
-    @Generated
-    public static final GetResponseProp3 B = fromString("b");
+    ONE(1),
 
     /**
-     * Static value c for GetResponseProp3.
+     * Enum value 2.
      */
-    @Generated
-    public static final GetResponseProp3 C = fromString("c");
+    TWO(2),
 
     /**
-     * Creates a new instance of GetResponseProp3 value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * Enum value 3.
      */
-    @Generated
-    @Deprecated
-    public GetResponseProp3() {
+    THREE(3);
+
+    /**
+     * The actual serialized value for a GetResponseProp3 instance.
+     */
+    private final int value;
+
+    GetResponseProp3(int value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a GetResponseProp3 from its string representation.
+     * Parses a serialized value to a GetResponseProp3 instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding GetResponseProp3.
+     * @param value the serialized value to parse.
+     * @return the parsed GetResponseProp3 object, or null if unable to parse.
      */
-    @Generated
-    public static GetResponseProp3 fromString(String name) {
-        return fromString(name, GetResponseProp3.class);
+    public static GetResponseProp3 fromInt(int value) {
+        GetResponseProp3[] items = GetResponseProp3.values();
+        for (GetResponseProp3 item : items) {
+            if (item.toInt() == value) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known GetResponseProp3 values.
+     * De-serializes the instance to int value.
      * 
-     * @return known GetResponseProp3 values.
+     * @return the int value.
      */
-    @Generated
-    public static Collection<GetResponseProp3> values() {
-        return values(GetResponseProp3.class);
+    public int toInt() {
+        return this.value;
     }
 }
