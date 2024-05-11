@@ -2875,8 +2875,8 @@ export class CodeModelBuilder {
             schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
 
             if (schema.discriminator) {
-              // propagate access/usage to immediate children, if the schema is a discriminatored model
-              // if the schema is not a discriminatored model, its children likely not valid for the mode/API
+              // propagate access/usage to immediate children, if the schema is a discriminated model
+              // if the schema is not a discriminated model, its children likely not valid for the mode/API
               schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
             }
 
