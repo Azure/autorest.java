@@ -74,6 +74,10 @@ def update_sdks():
         generated_samples_exists = os.path.isdir(generated_samples_path)
         generated_test_exists = os.path.isdir(generated_test_path)
 
+        if '-resourcemanager-' in artifact:
+            logging.info('Delete source code of resourcemanager module %s', artifact)
+            shutil.rmtree(os.path.join(module_path, 'src', 'main'))
+
         logging.info('Generate for module %s', artifact)
         subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
 
@@ -81,6 +85,12 @@ def update_sdks():
             shutil.rmtree(generated_samples_path, ignore_errors=True)
         if not generated_test_exists:
             shutil.rmtree(generated_test_path, ignore_errors=True)
+
+    # revert change on pom.xml, readme.md, changelog.md, etc.
+    cmd = ['git', 'checkout', '**/pom.xml']
+    subprocess.check_call(cmd, cwd=sdk_root)
+    cmd = ['git', 'checkout', '**/*.md']
+    subprocess.check_call(cmd, cwd=sdk_root)
 
     cmd = ['git', 'add', '.']
     subprocess.check_call(cmd, cwd=sdk_root)
