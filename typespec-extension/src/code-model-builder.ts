@@ -468,10 +468,6 @@ export class CodeModelBuilder {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
-      // skip models under "Azure.ResourceManager"
-      if (this.isArm() && schema.language.default?.namespace?.startsWith("Azure.ResourceManager")) {
-        return;
-      }
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
       if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
@@ -1985,21 +1981,6 @@ export class CodeModelBuilder {
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
     const rawModelType = type.__raw;
     const namespace = getNamespace(rawModelType);
-    if (
-      (this.isArm() &&
-        namespace?.startsWith("Azure.ResourceManager") &&
-        // there's ResourceListResult under Azure.ResourceManager namespace,
-        // which shouldn't be considered Resource schema parent
-        (name?.startsWith("TrackedResource") ||
-          name?.startsWith("ExtensionResource") ||
-          name?.startsWith("ProxyResource"))) ||
-      name === "ArmResource"
-    ) {
-      const objectSchema = this.dummyResourceSchemaFromSdkType(type, name, namespace);
-      this.codeModel.schemas.add(objectSchema);
-
-      return objectSchema;
-    }
     const objectSchema = new ObjectScheme(name, this.getDoc(rawModelType), {
       summary: this.getSummary(rawModelType),
       language: {
@@ -2100,37 +2081,6 @@ export class CodeModelBuilder {
       }
     }
     return type;
-  }
-
-  private dummyResourceSchemaFromSdkType(type: SdkModelType, name?: string, namespace?: string): ObjectSchema {
-    const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
-    const resource = this.dummyObjectSchemaFromSdkType(type, resourceModelName, namespace);
-    const declaredProperties = type.properties;
-    let currentModel: SdkModelType | undefined = type;
-    while (currentModel) {
-      declaredProperties.push(...currentModel.properties);
-      currentModel = currentModel.baseModel;
-    }
-    for (const prop of declaredProperties) {
-      resource.addProperty(this.processModelPropertyFromSdkType(prop));
-    }
-    return resource;
-  }
-
-  private dummyObjectSchemaFromSdkType(type: SdkModelType, name: string, namespace?: string): ObjectSchema {
-    return new ObjectScheme(name, this.getDoc(type.__raw), {
-      summary: this.getSummary(type.__raw),
-      language: {
-        default: {
-          name: name,
-          namespace: namespace,
-        },
-        java: {
-          name: name,
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-    });
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
