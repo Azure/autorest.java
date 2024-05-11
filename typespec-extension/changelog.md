@@ -1,5 +1,11 @@
 # Release History
 
+## 0.15.18 (2024-05-13)
+
+Compatible with compiler 0.56.
+
+- `enum` is closed enum.
+
 ## 0.15.16 (2024-05-08)
 
 Compatible with compiler 0.56.
