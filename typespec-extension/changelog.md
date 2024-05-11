@@ -1,5 +1,11 @@
 # Release History
 
+## 0.15.17 (2024-05-11)
+
+Compatible with compiler 0.56.
+
+- Behavior change on access/usage of non-polymorphic subclass.
+
 ## 0.15.16 (2024-05-08)
 
 Compatible with compiler 0.56.
