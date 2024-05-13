@@ -78,14 +78,14 @@ public class ClientMethodExampleWriter {
                 methodInvocation.append(assignment);
             }
 
-            String methodCall = String.format("%s.%s(%s);",
+            String methodCall = String.format("%s.%s(%s)",
                     clientVarName,
                     method.getName(),
                     parameterInvocations);
-            if (method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync) {
+            if (isTestCode && method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync) {
                 methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
             }
-            methodInvocation.append(methodCall);
+            methodInvocation.append(methodCall).append(";");
 
             methodBlock.line(methodInvocation.toString());
         };

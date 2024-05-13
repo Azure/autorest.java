@@ -224,14 +224,14 @@ public class ProtocolExampleWriter {
                     params.set(i, "Context.NONE");
                 }
             }
-            String methodCall = String.format("%s.%s(%s);",
+            String methodCall = String.format("%s.%s(%s)",
                     clientVarName,
                     method.getName(),
                     String.join(", ", params));
-            if (method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync) {
+            if (isTestCode && method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync) {
                 methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
             }
-            methodBlock.line(method.getReturnValue().getType() + " response = " + methodCall);
+            methodBlock.line(method.getReturnValue().getType() + " response = " + methodCall + ";");
         };
 
         this.assertionWriter = methodBlock -> {
