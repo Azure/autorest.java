@@ -81,7 +81,7 @@ public class SchemaCleanup {
                                     .map(Property::getSchema)
                                     .map(SchemaCleanup::schemaOrElementInCollection)
                                     .filter(Objects::nonNull)
-                                    .filter(s1 -> !Objects.equals(s, s1))  // schema of property is not the same of itself, solve the simplest recursive reference case
+                                    .filter(s1 -> !Objects.equals(s, s1))   // schema of property is not the same of itself, solve the simplest recursive reference case
                     )
                     .collect(Collectors.toSet());
             schemasNotInUse.removeAll(propertiesOfObject);
