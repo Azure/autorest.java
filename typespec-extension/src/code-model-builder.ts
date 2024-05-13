@@ -909,7 +909,7 @@ export class CodeModelBuilder {
           language: {
             java: {
               name: "OperationLocationPollingStrategy",
-              namespace: this.namespace + ".implementation",
+              namespace: getJavaNamespace(this.namespace) + ".implementation",
             },
           },
         });
