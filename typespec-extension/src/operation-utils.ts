@@ -278,26 +278,17 @@ export function isLroNewPollingStrategy(httpOperation: HttpOperation, lroMetadat
   }
 
   if (!useNewStrategy) {
-    // LroMetadata: following 2 pattern in LroMetadata requires new polling strategy
+    // LroMetadata: following 2 pattern in LroMetadata requires new polling strategy, regardless whether they uses Azure.Core template
     if (httpOperation.verb === "put" && !lroMetadata.finalStep) {
       // PUT without last GET on resource
       useNewStrategy = true;
     } else if (
-      httpOperation.verb === "post" &&
       lroMetadata.finalStep &&
       lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
-      lroMetadata.finalStep.target.name === "result"
+      lroMetadata.finalStep.target
     ) {
-      // POST with final result in "result" property
+      // final result is the value in lroMetadata.finalStep.target
       useNewStrategy = true;
-    }
-
-    // OperationStatus: check if the required property "id" and "status" is present
-    // If they are not present, azure-core cannot de-serialize the response to PollOperationDetailsSchema
-    if (useNewStrategy) {
-      const idProperty = lroMetadata.envelopeResult.properties.get("id");
-      const statusProperty = lroMetadata.envelopeResult.properties.get("status");
-      useNewStrategy = Boolean(idProperty && statusProperty && !idProperty.optional && !statusProperty.optional);
     }
   }
 
