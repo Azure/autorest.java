@@ -18,6 +18,8 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+// DO NOT modify this helper class
+
 final class PollingUtils {
 
     public static final TypeReference<Map<String, Object>> POST_POLL_RESULT_TYPE_REFERENCE

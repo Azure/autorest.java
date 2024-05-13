@@ -17,6 +17,8 @@ import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Map;
 
+// DO NOT modify this helper class
+
 /**
  * Implements a synchronous operation location polling strategy, from Operation-Location.
  *

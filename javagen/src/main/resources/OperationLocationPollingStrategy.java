@@ -16,6 +16,8 @@ import reactor.core.publisher.Mono;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 
+// DO NOT modify this helper class
+
 /**
  * Implements an operation location polling strategy, from Operation-Location.
  *
