@@ -82,7 +82,7 @@ public class ClientMethodExampleWriter {
                     clientVarName,
                     method.getName(),
                     parameterInvocations);
-            if (isTestCode && method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync) {
+            if (isTestCode && (method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync)) {
                 methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
             }
             methodInvocation.append(methodCall).append(";");

@@ -228,7 +228,7 @@ public class ProtocolExampleWriter {
                     clientVarName,
                     method.getName(),
                     String.join(", ", params));
-            if (isTestCode && method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync) {
+            if (isTestCode && (method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync)) {
                 methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
             }
             methodBlock.line(method.getReturnValue().getType() + " response = " + methodCall + ";");
