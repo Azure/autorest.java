@@ -9,12 +9,17 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.models.ChildResourceUpdate",
+  "name" : "com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.implementation.models.ChildResourceListResult",
+  "name" : "com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.fluent.models.OperationInner",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
@@ -29,6 +34,61 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.implementation.models.ChildResourceListResult",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.implementation.models.PagedOperation",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.implementation.models.TopLevelArmResourceListResult",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.ActionType",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.ChildResourceUpdate",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.CustomTemplateResourcePatch",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.ManagedServiceIdentity",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.ManagedServiceIdentityType",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.OperationDisplay",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.Origin",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.ProvisioningState",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
@@ -39,67 +99,7 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
-  "name" : "com.cadl.armresourceprovider.implementation.models.TopLevelArmResourceListResult",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceProperties",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.ManagedServiceIdentity",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.UserAssignedIdentities",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.CustomTemplateResourcePatch",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.implementation.models.PagedOperation",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.fluent.models.OperationInner",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.OperationDisplay",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.ProvisioningState",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.ManagedServiceIdentityType",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.Origin",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.ActionType",
+  "name" : "com.cadl.armresourceprovider.models.UserAssignedIdentity",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
