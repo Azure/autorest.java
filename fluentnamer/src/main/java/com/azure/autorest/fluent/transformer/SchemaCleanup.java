@@ -68,67 +68,86 @@ public class SchemaCleanup {
         Set<Schema> choicesSchemasNotInUse = new HashSet<>(codeModel.getSchemas().getSealedChoices());
         choicesSchemasNotInUse.addAll(codeModel.getSchemas().getChoices());
 
-        Set<Schema> schemasInUse;
+        Set<Schema> schemasInUse = new HashSet<>();
         if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // properties of object
-            schemasInUse = codeModel.getSchemas().getObjects().stream()
+            Set<Schema> propertiesOfObject = codeModel.getSchemas().getObjects().stream()
                     .filter(o -> {
                         String name = Utils.getJavaName(o);
                         return FluentType.nonSystemData(name) && FluentType.nonManagementError(name);
                     })
-                    .flatMap(s -> Stream.concat(
-                            Stream.of(s),
-                            s.getProperties()
+                    .flatMap(s -> s.getProperties()
                                     .stream()
 //                                    .filter(Utils::nonFlattenedProperty)
-                                    .map(Property::getSchema)))
-                    .flatMap(s -> itselfAndAllParents(s)
-                            .map(SchemaCleanup::schemaOrElementInCollection)
-                            .filter(Objects::nonNull)
-                            .filter(s1 -> !Objects.equals(s, s1))) // schema of property is not the same of itself, solve the simplest recursive reference case
+                                    .map(Property::getSchema)
+                                    .map(SchemaCleanup::schemaOrElementInCollection)
+                                    .filter(Objects::nonNull)
+                                    .filter(s1 -> !Objects.equals(s, s1)) // schema of property is not the same of itself, solve the simplest recursive reference case
+                    )
                     .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-            choicesSchemasNotInUse.removeAll(schemasInUse);
+            schemasNotInUse.removeAll(propertiesOfObject);
+            choicesSchemasNotInUse.removeAll(propertiesOfObject);
+            schemasInUse.addAll(propertiesOfObject);
         }
         if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // operation requests
-            schemasInUse = codeModel.getOperationGroups().stream()
+            Set<Schema> requests = codeModel.getOperationGroups().stream()
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getRequests().stream())
                     .flatMap(r -> r.getParameters().stream())
                     .map(Parameter::getSchema)
-                    .flatMap(SchemaCleanup::itselfAndAllParents)
                     .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-            choicesSchemasNotInUse.removeAll(schemasInUse);
+            schemasNotInUse.removeAll(requests);
+            choicesSchemasNotInUse.removeAll(requests);
+            schemasInUse.addAll(requests);
         }
         if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // operation responses
-            schemasInUse = codeModel.getOperationGroups().stream()
+            Set<Schema> responses = codeModel.getOperationGroups().stream()
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getResponses().stream())
                     .map(Response::getSchema)
-                    .flatMap(SchemaCleanup::itselfAndAllParents)
                     .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-            choicesSchemasNotInUse.removeAll(schemasInUse);
+            schemasNotInUse.removeAll(responses);
+            choicesSchemasNotInUse.removeAll(responses);
+            schemasInUse.addAll(responses);
         }
         if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
             // operation exception
-            schemasInUse = codeModel.getOperationGroups().stream()
+            Set<Schema> exceptions = codeModel.getOperationGroups().stream()
                     .flatMap(og -> og.getOperations().stream())
                     .flatMap(o -> o.getExceptions().stream())
                     .map(Response::getSchema)
-                    .flatMap(SchemaCleanup::itselfAndAllParents)
                     .map(SchemaCleanup::schemaOrElementInCollection)
                     .filter(Objects::nonNull)
                     .collect(Collectors.toSet());
-            schemasNotInUse.removeAll(schemasInUse);
-            choicesSchemasNotInUse.removeAll(schemasInUse);
+            schemasNotInUse.removeAll(exceptions);
+            choicesSchemasNotInUse.removeAll(exceptions);
+            schemasInUse.addAll(exceptions);
+        }
+        if (!schemasNotInUse.isEmpty() || !choicesSchemasNotInUse.isEmpty()) {
+            // parent schema as Dictionary or Array
+            Set<Schema> elementsInParentCollection = schemasInUse.stream()
+                .flatMap(s -> {
+                    if (s instanceof ObjectSchema) {
+                        ObjectSchema objectSchema = (ObjectSchema) s;
+                        if (objectSchema.getParents() == null || objectSchema.getParents().getAll() == null) {
+                            return Stream.empty();
+                        }
+                        return objectSchema.getParents().getAll()
+                            .stream()
+                            .filter(p -> p instanceof DictionarySchema || p instanceof ArraySchema)
+                            .map(SchemaCleanup::schemaOrElementInCollection);
+                    }
+                    return Stream.empty();
+                })
+                .collect(Collectors.toSet());
+            schemasNotInUse.removeAll(elementsInParentCollection);
+            choicesSchemasNotInUse.removeAll(elementsInParentCollection);
         }
 
         AtomicBoolean codeModelModified = new AtomicBoolean(false);
@@ -161,15 +180,6 @@ public class SchemaCleanup {
         });
 
         return codeModelModified.get();
-    }
-
-    private static Stream<Schema> itselfAndAllParents(Schema schema) {
-        return Stream.concat(
-                Stream.of(schema),
-                schema instanceof ObjectSchema && ((ObjectSchema) schema).getParents() != null && ((ObjectSchema) schema).getParents().getAll() != null
-                        ? ((ObjectSchema) schema).getParents().getAll().stream()
-                        : Stream.empty()
-        );
     }
 
     private static Schema schemaOrElementInCollection(Schema schema) {
