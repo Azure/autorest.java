@@ -5,19 +5,19 @@ export class LongRunningMetadata {
   pollResultType?: Schema;
   finalResultType?: Schema;
   pollingStrategy?: Metadata;
-  finalResultPropertyWireName?: string;
+  finalResultPropertySerializedName?: string;
 
   constructor(
     longRunning: boolean,
     pollResultType?: Schema,
     finalResultType?: Schema,
     pollingStrategy?: Metadata,
-    finalResultPropertyWireName?: string,
+    finalResultPropertySerializedName?: string,
   ) {
     this.longRunning = longRunning;
     this.pollResultType = pollResultType;
     this.finalResultType = finalResultType;
     this.pollingStrategy = pollingStrategy;
-    this.finalResultPropertyWireName = finalResultPropertyWireName;
+    this.finalResultPropertySerializedName = finalResultPropertySerializedName;
   }
 }

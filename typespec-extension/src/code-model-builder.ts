@@ -899,7 +899,7 @@ export class CodeModelBuilder {
       let finalSchema = undefined;
 
       let pollingStrategy: Metadata | undefined = undefined;
-      let finalResultPropertyWireName: string | undefined = undefined;
+      let finalResultPropertySerializedName: string | undefined = undefined;
 
       const verb = httpOperation.verb;
       const useNewPollStrategy = isLroNewPollingStrategy(httpOperation, lroMetadata);
@@ -942,7 +942,7 @@ export class CodeModelBuilder {
           lroMetadata.finalStep.target
         ) {
           // final result is the value in lroMetadata.finalStep.target
-          finalResultPropertyWireName = this.getSerializedName(lroMetadata.finalStep.target);
+          finalResultPropertySerializedName = this.getSerializedName(lroMetadata.finalStep.target);
         }
       }
 
@@ -969,7 +969,7 @@ export class CodeModelBuilder {
         pollingSchema,
         finalSchema,
         pollingStrategy,
-        finalResultPropertyWireName,
+        finalResultPropertySerializedName,
       );
       return op.lroMetadata;
     }
