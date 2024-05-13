@@ -34,11 +34,9 @@ import com.azure.core.http.rest.RestProxy;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.Context;
 import com.azure.core.util.FluxUtil;
-import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
 import com.azure.core.util.polling.PollOperationDetails;
-import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
@@ -311,12 +309,13 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new OperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
+
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -356,12 +355,13 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new SyncOperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
+
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -401,12 +401,13 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new OperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
+
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
 
@@ -446,12 +447,13 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new SyncOperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
+
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion()), null),
+                    .setServiceVersion(this.getServiceVersion().getVersion())),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(User.class));
     }
 
@@ -559,7 +561,7 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, Void> beginDeleteAsync(String name, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteWithResponseAsync(name, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -601,7 +603,7 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, Void> beginDelete(String name, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteWithResponse(name, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -644,7 +646,7 @@ public final class StandardClientImpl {
     public PollerFlux<PollOperationDetails, Void> beginDeleteWithModelAsync(String name,
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.deleteWithResponseAsync(name, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -686,7 +688,7 @@ public final class StandardClientImpl {
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<PollOperationDetails, Void> beginDeleteWithModel(String name, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.deleteWithResponse(name, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -807,13 +809,14 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.exportWithResponseAsync(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -851,13 +854,14 @@ public final class StandardClientImpl {
     public SyncPoller<BinaryData, BinaryData> beginExport(String name, String format, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.exportWithResponse(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -896,13 +900,14 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.exportWithResponseAsync(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ExportedUser.class));
     }
 
@@ -941,13 +946,14 @@ public final class StandardClientImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.exportWithResponse(name, format, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com._specs_.azure.core.lro.standard.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
 
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
             TypeReference.createInstance(PollOperationDetails.class), TypeReference.createInstance(ExportedUser.class));
     }
 }

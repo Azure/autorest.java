@@ -408,7 +408,7 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource request) {
+    public PollerFlux<OperationDetails1, Resource> beginLroInvalidPollResponse(Resource request) {
         // Generated convenience method for beginLroInvalidPollResponseWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLroInvalidPollResponseWithModelAsync(BinaryData.fromObject(request), requestOptions);
@@ -428,7 +428,7 @@ public final class ResponseAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource request) {
+    public PollerFlux<OperationDetails2, Resource> beginLroInvalidResult(Resource request) {
         // Generated convenience method for beginLroInvalidResultWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLroInvalidResultWithModelAsync(BinaryData.fromObject(request), requestOptions);

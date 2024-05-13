@@ -36,13 +36,13 @@ import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.DefaultPollingStrategy;
 import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.PollingStrategyOptions;
-import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.SyncDefaultPollingStrategy;
 import com.azure.core.util.polling.SyncPoller;
 import com.azure.core.util.serializer.JacksonAdapter;
 import com.azure.core.util.serializer.SerializerAdapter;
 import com.azure.core.util.serializer.TypeReference;
 import com.cadl.longrunning.LongRunningServiceVersion;
+import com.cadl.longrunning.models.JobResult;
 import com.cadl.longrunning.models.JobResultResult;
 import com.cadl.longrunning.models.PollResponse;
 import java.time.Duration;
@@ -452,7 +452,10 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -465,6 +468,9 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -474,8 +480,7 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response} on successful completion of
-     * {@link Mono}.
+     * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Mono<Response<BinaryData>> createJobWithResponseAsync(BinaryData jobData, RequestOptions requestOptions) {
@@ -526,7 +531,10 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -539,6 +547,9 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -548,7 +559,7 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return status details for long running operations along with {@link Response}.
+     * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
     private Response<BinaryData> createJobWithResponse(BinaryData jobData, RequestOptions requestOptions) {
@@ -599,7 +610,10 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -612,6 +626,9 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -621,18 +638,19 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public PollerFlux<BinaryData, BinaryData> beginCreateJobAsync(BinaryData jobData, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com.cadl.longrunning.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -663,7 +681,10 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -676,6 +697,9 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -685,18 +709,19 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
     public SyncPoller<BinaryData, BinaryData> beginCreateJob(BinaryData jobData, RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com.cadl.longrunning.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
             TypeReference.createInstance(BinaryData.class), TypeReference.createInstance(BinaryData.class));
     }
 
@@ -727,7 +752,10 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -740,6 +768,9 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -749,21 +780,21 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, JobResultResult> beginCreateJobWithModelAsync(BinaryData jobData,
+    public PollerFlux<JobResult, JobResultResult> beginCreateJobWithModelAsync(BinaryData jobData,
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1), () -> this.createJobWithResponseAsync(jobData, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com.cadl.longrunning.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollOperationDetails.class),
-            TypeReference.createInstance(JobResultResult.class));
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
+            TypeReference.createInstance(JobResult.class), TypeReference.createInstance(JobResultResult.class));
     }
 
     /**
@@ -793,7 +824,10 @@ public final class LongRunningClientImpl {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -806,6 +840,9 @@ public final class LongRunningClientImpl {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -815,20 +852,20 @@ public final class LongRunningClientImpl {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     * @return the {@link SyncPoller} for polling of long-running operation.
      */
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<PollOperationDetails, JobResultResult> beginCreateJobWithModel(BinaryData jobData,
+    public SyncPoller<JobResult, JobResultResult> beginCreateJobWithModel(BinaryData jobData,
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1), () -> this.createJobWithResponse(jobData, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com.cadl.longrunning.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
                         ? requestOptions.getContext()
                         : Context.NONE)
-                    .setServiceVersion(this.getServiceVersion().getVersion())),
-            TypeReference.createInstance(PollOperationDetails.class),
-            TypeReference.createInstance(JobResultResult.class));
+                    .setServiceVersion(this.getServiceVersion().getVersion()),
+                "result"),
+            TypeReference.createInstance(JobResult.class), TypeReference.createInstance(JobResultResult.class));
     }
 }

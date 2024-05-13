@@ -17,7 +17,6 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.azure.core.util.polling.PollerFlux;
-import com.azure.core.util.polling.PollOperationDetails;
 import com.cadl.longrunning.implementation.LongRunningClientImpl;
 import com.cadl.longrunning.models.JobData;
 import com.cadl.longrunning.models.JobResult;
@@ -129,7 +128,10 @@ public final class LongRunningAsyncClient {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(notStarted/running/Succeeded/Failed/canceled) (Required)
+     *     createdDateTime: OffsetDateTime (Optional)
+     *     expirationDateTime: OffsetDateTime (Optional)
+     *     lastUpdateDateTime: OffsetDateTime (Optional)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -142,6 +144,9 @@ public final class LongRunningAsyncClient {
      *             innererror (Optional): (recursive schema, see innererror above)
      *         }
      *     }
+     *     result (Optional): {
+     *         data: String (Required)
+     *     }
      * }
      * }</pre>
      * 
@@ -151,7 +156,7 @@ public final class LongRunningAsyncClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -208,11 +213,11 @@ public final class LongRunningAsyncClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link PollerFlux} for polling of status details for long running operations.
+     * @return the {@link PollerFlux} for polling of long-running operation.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public PollerFlux<PollOperationDetails, JobResultResult> beginCreateJob(JobData jobData) {
+    public PollerFlux<JobResult, JobResultResult> beginCreateJob(JobData jobData) {
         // Generated convenience method for beginCreateJobWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginCreateJobWithModelAsync(BinaryData.fromObject(jobData), requestOptions);
