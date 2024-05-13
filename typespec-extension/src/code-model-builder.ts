@@ -37,7 +37,6 @@ import {
   getEncode,
   getOverloadedOperation,
   EnumMember,
-  walkPropertiesInherited,
   isVoidType,
   isErrorModel,
 } from "@typespec/compiler";
@@ -62,7 +61,6 @@ import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import {
   isPollingLocation,
   getPagedResult,
-  isFixed,
   getLroMetadata,
   getUnionAsEnum,
   UnionEnum,
@@ -489,10 +487,6 @@ export class CodeModelBuilder {
     // deduplicate model name
     const nameCount = new Map<string, number>();
     const deduplicateName = (schema: Schema) => {
-      // skip models under "Azure.ResourceManager"
-      if (this.isArm() && schema.language.default?.namespace?.startsWith("Azure.ResourceManager")) {
-        return;
-      }
       const name = schema.language.default.name;
       // skip models under "com.azure.core."
       if (name && !schema.language.java?.namespace?.startsWith("com.azure.core.")) {
@@ -1731,7 +1725,7 @@ export class CodeModelBuilder {
         return this.processConstantSchemaForLiteral(type, nameHint);
 
       case "Enum":
-        return this.processChoiceSchema(type, this.getName(type), isFixed(this.program, type));
+        return this.processChoiceSchema(type, this.getName(type), true);
 
       case "Union":
         return this.processUnionSchema(type, this.getName(type, nameHint));
@@ -2146,21 +2140,6 @@ export class CodeModelBuilder {
 
   private processObjectSchema(type: Model, name: string): ObjectSchema {
     const namespace = getNamespace(type);
-    if (
-      (this.isArm() &&
-        namespace?.startsWith("Azure.ResourceManager") &&
-        // there's ResourceListResult under Azure.ResourceManager namespace,
-        // which shouldn't be considered Resource schema parent
-        (name?.startsWith("TrackedResource") ||
-          name?.startsWith("ExtensionResource") ||
-          name?.startsWith("ProxyResource"))) ||
-      name === "ArmResource"
-    ) {
-      const objectSchema = this.dummyResourceSchema(type, name, namespace);
-      this.codeModel.schemas.add(objectSchema);
-
-      return objectSchema;
-    }
     const objectSchema = new ObjectScheme(name, this.getDoc(type), {
       summary: this.getSummary(type),
       language: {
@@ -2335,32 +2314,6 @@ export class CodeModelBuilder {
       }
     }
     return type;
-  }
-
-  private dummyResourceSchema(type: Model, name?: string, namespace?: string): ObjectSchema {
-    const resourceModelName = name?.startsWith("TrackedResource") ? "Resource" : "ProxyResource";
-    const resource = this.dummyObjectSchema(type, resourceModelName, namespace);
-    const declaredProperties = walkPropertiesInherited(type);
-    for (const prop of declaredProperties) {
-      resource.addProperty(this.processModelProperty(prop));
-    }
-    return resource;
-  }
-
-  private dummyObjectSchema(type: Model, name: string, namespace?: string): ObjectSchema {
-    return new ObjectScheme(name, this.getDoc(type), {
-      summary: this.getSummary(type),
-      language: {
-        default: {
-          name: name,
-          namespace: namespace,
-        },
-        java: {
-          name: name,
-          namespace: getJavaNamespace(namespace),
-        },
-      },
-    });
   }
 
   private applyModelPropertyDecorators(prop: ModelProperty, nameHint: string, schema: Schema): Schema {
@@ -2920,20 +2873,17 @@ export class CodeModelBuilder {
             schema.parents?.all?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
             schema.parents?.immediate?.forEach((p) => innerApplySchemaUsage(p, schemaUsage));
 
-            schema.children?.all?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
-            schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            if (schema.discriminator) {
+              // propagate access/usage to immediate children, if the schema is a discriminated model
+              // if the schema is not a discriminated model, its children likely not valid for the mode/API
+              // TODO: it does not handle the case that concrete model (kind: "type1") for the discriminated model have depth larger than 1 (e.g. kind: "type1" | "type2" in middle)
+              schema.children?.immediate?.forEach((c) => innerApplySchemaUsage(c, schemaUsage));
+            }
 
             if (schema.discriminator?.property?.schema) {
               innerApplySchemaUsage(schema.discriminator?.property?.schema, schemaUsage);
             }
           }
-
-          // Object.values(schema.discriminator?.all ?? {}).forEach((d) => {
-          //   innerApplySchemaUsage(d, schemaUsage);
-          // });
-          // Object.values(schema.discriminator?.immediate ?? {}).forEach((d) => {
-          //   innerApplySchemaUsage(d, schemaUsage);
-          // });
         }
       } else if (schema instanceof DictionarySchema) {
         innerApplySchemaUsage(schema.elementType, schemaUsage);

@@ -4,48 +4,48 @@
 
 package com.versioning.removed.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import java.util.Collection;
-
 /**
  * Defines values for EnumV2.
  */
-public final class EnumV2 extends ExpandableStringEnum<EnumV2> {
+public enum EnumV2 {
     /**
-     * Static value enumMemberV2 for EnumV2.
+     * Enum value enumMemberV2.
      */
-    @Generated
-    public static final EnumV2 ENUM_MEMBER_V2 = fromString("enumMemberV2");
+    ENUM_MEMBER_V2("enumMemberV2");
 
     /**
-     * Creates a new instance of EnumV2 value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a EnumV2 instance.
      */
-    @Generated
-    @Deprecated
-    public EnumV2() {
+    private final String value;
+
+    EnumV2(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a EnumV2 from its string representation.
+     * Parses a serialized value to a EnumV2 instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding EnumV2.
+     * @param value the serialized value to parse.
+     * @return the parsed EnumV2 object, or null if unable to parse.
      */
-    @Generated
-    public static EnumV2 fromString(String name) {
-        return fromString(name, EnumV2.class);
+    public static EnumV2 fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        EnumV2[] items = EnumV2.values();
+        for (EnumV2 item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known EnumV2 values.
-     * 
-     * @return known EnumV2 values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<EnumV2> values() {
-        return values(EnumV2.class);
+    @Override
+    public String toString() {
+        return this.value;
     }
 }

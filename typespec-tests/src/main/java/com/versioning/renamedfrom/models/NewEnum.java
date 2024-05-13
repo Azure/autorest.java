@@ -4,48 +4,48 @@
 
 package com.versioning.renamedfrom.models;
 
-import com.azure.core.annotation.Generated;
-import com.azure.core.util.ExpandableStringEnum;
-import java.util.Collection;
-
 /**
  * Defines values for NewEnum.
  */
-public final class NewEnum extends ExpandableStringEnum<NewEnum> {
+public enum NewEnum {
     /**
-     * Static value newEnumMember for NewEnum.
+     * Enum value newEnumMember.
      */
-    @Generated
-    public static final NewEnum NEW_ENUM_MEMBER = fromString("newEnumMember");
+    NEW_ENUM_MEMBER("newEnumMember");
 
     /**
-     * Creates a new instance of NewEnum value.
-     * 
-     * @deprecated Use the {@link #fromString(String)} factory method.
+     * The actual serialized value for a NewEnum instance.
      */
-    @Generated
-    @Deprecated
-    public NewEnum() {
+    private final String value;
+
+    NewEnum(String value) {
+        this.value = value;
     }
 
     /**
-     * Creates or finds a NewEnum from its string representation.
+     * Parses a serialized value to a NewEnum instance.
      * 
-     * @param name a name to look for.
-     * @return the corresponding NewEnum.
+     * @param value the serialized value to parse.
+     * @return the parsed NewEnum object, or null if unable to parse.
      */
-    @Generated
-    public static NewEnum fromString(String name) {
-        return fromString(name, NewEnum.class);
+    public static NewEnum fromString(String value) {
+        if (value == null) {
+            return null;
+        }
+        NewEnum[] items = NewEnum.values();
+        for (NewEnum item : items) {
+            if (item.toString().equalsIgnoreCase(value)) {
+                return item;
+            }
+        }
+        return null;
     }
 
     /**
-     * Gets known NewEnum values.
-     * 
-     * @return known NewEnum values.
+     * {@inheritDoc}
      */
-    @Generated
-    public static Collection<NewEnum> values() {
-        return values(NewEnum.class);
+    @Override
+    public String toString() {
+        return this.value;
     }
 }
