@@ -21,6 +21,7 @@ import {
   Program,
   RecordModelType,
   StringLiteral,
+  Value,
   Type,
   TypeNameOptions,
   Union,
@@ -39,6 +40,7 @@ import {
   EnumMember,
   isVoidType,
   isErrorModel,
+  isValue,
 } from "@typespec/compiler";
 import { getResourceOperation, getSegment } from "@typespec/rest";
 import {
@@ -302,7 +304,7 @@ export class CodeModelBuilder {
             protocol: {
               http: new HttpParameter(ParameterLocation.Uri),
             },
-            clientDefaultValue: this.getDefaultValue(it.default),
+            clientDefaultValue: this.getDefaultValue(it.defaultValue),
             language: {
               default: {
                 serializedName: it.name,
@@ -2577,8 +2579,19 @@ export class CodeModelBuilder {
     }
   }
 
-  private getDefaultValue(type: Type | undefined): any {
-    if (type) {
+  private getDefaultValue(type: Type | Value | undefined): any {
+    if (type === undefined) {
+      return undefined;
+    } else if (isValue(type)) {
+      switch (type.valueKind) {
+        case "StringValue":
+          return type.value;
+        case "NumericValue":
+          return type.value;
+        case "BooleanValue":
+          return type.value;
+      }
+    } else {
       switch (type.kind) {
         case "String":
           return type.value;
