@@ -1434,23 +1434,22 @@ hasConstructorArguments, settings));
             propertiesManager.forEachXmlNamespaceWithPrefix((prefix, namespace) ->
                 methodBlock.line("xmlWriter.writeNamespace(\"" + prefix + "\", " + propertiesManager.getXmlNamespaceConstant(namespace) + ");"));
 
-            String modelName = propertiesManager.getModel().getName();
             // Assumption for XML is polymorphic discriminators are attributes.
             if (propertiesManager.getDiscriminatorProperty() != null) {
-                serializeXml(methodBlock, propertiesManager.getDiscriminatorProperty().getProperty(), false, modelName,
+                serializeXml(methodBlock, propertiesManager.getDiscriminatorProperty().getProperty(), false,
                     propertiesManager);
             }
 
-            propertiesManager.forEachSuperXmlAttribute(property -> serializeXml(methodBlock, property, true, modelName, propertiesManager));
-            propertiesManager.forEachXmlAttribute(property -> serializeXml(methodBlock, property, false, modelName, propertiesManager));
+            propertiesManager.forEachSuperXmlAttribute(property -> serializeXml(methodBlock, property, true, propertiesManager));
+            propertiesManager.forEachXmlAttribute(property -> serializeXml(methodBlock, property, false, propertiesManager));
 
             // Valid XML should only either have elements or text.
             if (propertiesManager.hasXmlElements()) {
-                propertiesManager.forEachSuperXmlElement(property -> serializeXml(methodBlock, property, true, modelName, propertiesManager));
-                propertiesManager.forEachXmlElement(property -> serializeXml(methodBlock, property, false, modelName, propertiesManager));
+                propertiesManager.forEachSuperXmlElement(property -> serializeXml(methodBlock, property, true, propertiesManager));
+                propertiesManager.forEachXmlElement(property -> serializeXml(methodBlock, property, false, propertiesManager));
             } else {
-                propertiesManager.forEachSuperXmlText(property -> serializeXml(methodBlock, property, true, modelName, propertiesManager));
-                propertiesManager.forEachXmlText(property -> serializeXml(methodBlock, property, false, modelName, propertiesManager));
+                propertiesManager.forEachSuperXmlText(property -> serializeXml(methodBlock, property, true, propertiesManager));
+                propertiesManager.forEachXmlText(property -> serializeXml(methodBlock, property, false, propertiesManager));
             }
 
             methodBlock.methodReturn("xmlWriter.writeEndElement()");
@@ -1465,18 +1464,11 @@ hasConstructorArguments, settings));
      * @param fromSuperType Whether the property is defined in the super type.
      */
     private static void serializeXml(JavaBlock methodBlock, ClientModelProperty element, boolean fromSuperType,
-        String modelName, ClientModelPropertiesManager propertiesManager) {
+        ClientModelPropertiesManager propertiesManager) {
         IType clientType = element.getClientType();
         IType wireType = element.getWireType();
         String propertyValueGetter;
-        if (element.isPolymorphicDiscriminator()) {
-            // The most super type won't have a value for the polymorphic discriminator, use the model name.
-            if (CoreUtils.isNullOrEmpty(element.getDefaultValue())) {
-                propertyValueGetter = "\"" + modelName + "\"";
-            } else {
-                propertyValueGetter = element.getDefaultValue();
-            }
-        } else if (fromSuperType) {
+        if (fromSuperType) {
             propertyValueGetter = (clientType != wireType)
                     ? wireType.convertFromClientType(element.getGetterName() + "()")
                     : element.getGetterName() + "()";
