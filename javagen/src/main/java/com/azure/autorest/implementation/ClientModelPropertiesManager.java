@@ -150,7 +150,9 @@ public final class ClientModelPropertiesManager {
             possibleXmlNameVariableNames.remove(property.getName());
 
             if (property.isXmlAttribute()) {
-                superXmlAttributes.add(property);
+                if (!property.isPolymorphicDiscriminator()) {
+                    superXmlAttributes.add(property);
+                }
             } else if (property.isXmlText()) {
                 hasXmlTexts = true;
                 superXmlTexts.add(property);
@@ -209,7 +211,9 @@ public final class ClientModelPropertiesManager {
             possibleXmlNameVariableNames.remove(property.getName());
 
             if (property.isXmlAttribute()) {
-                xmlAttributes.add(property);
+                if (!property.isPolymorphicDiscriminator()) {
+                    xmlAttributes.add(property);
+                }
             } else if (property.isXmlText()) {
                 hasXmlTexts = true;
                 xmlTexts.add(property);
@@ -260,10 +264,10 @@ public final class ClientModelPropertiesManager {
     }
 
     private static void superPropertyConsumer(ClientModelProperty property,
-        LinkedHashMap<String, ClientModelProperty> superRequiredProperties,
-        LinkedHashMap<String, ClientModelProperty> superConstructorProperties,
-        LinkedHashMap<String, ClientModelProperty> superReadOnlyProperties,
-        LinkedHashMap<String, ClientModelProperty> superSetterProperties, JavaSettings settings) {
+        Map<String, ClientModelProperty> superRequiredProperties,
+        Map<String, ClientModelProperty> superConstructorProperties,
+        Map<String, ClientModelProperty> superReadOnlyProperties,
+        Map<String, ClientModelProperty> superSetterProperties, JavaSettings settings) {
         if (property.isRequired()) {
             superRequiredProperties.put(property.getSerializedName(), property);
 

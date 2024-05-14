@@ -1435,6 +1435,12 @@ hasConstructorArguments, settings));
                 methodBlock.line("xmlWriter.writeNamespace(\"" + prefix + "\", " + propertiesManager.getXmlNamespaceConstant(namespace) + ");"));
 
             String modelName = propertiesManager.getModel().getName();
+            // Assumption for XML is polymorphic discriminators are attributes.
+            if (propertiesManager.getDiscriminatorProperty() != null) {
+                serializeXml(methodBlock, propertiesManager.getDiscriminatorProperty().getProperty(), false, modelName,
+                    propertiesManager);
+            }
+
             propertiesManager.forEachSuperXmlAttribute(property -> serializeXml(methodBlock, property, true, modelName, propertiesManager));
             propertiesManager.forEachXmlAttribute(property -> serializeXml(methodBlock, property, false, modelName, propertiesManager));
 
@@ -1615,23 +1621,20 @@ hasConstructorArguments, settings));
             for (ClientModel childType : childTypes) {
                 ifBlock = ifOrElseIf(methodBlock, ifBlock, "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
                     ifStatement -> ifStatement.methodReturn(childType.getName() + (isSuperTypeWithDiscriminator(childType)
-                        ? ".fromXmlKnownDiscriminator(reader, finalRootElementName)"
+                        ? ".fromXmlInternal(reader, finalRootElementName)"
                         : ".fromXml(reader, finalRootElementName)")));
             }
 
             if (ifBlock == null) {
-                methodBlock.methodReturn("fromXmlKnownDiscriminator(reader, finalRootElementName)");
+                methodBlock.methodReturn("fromXmlInternal(reader, finalRootElementName)");
             } else {
-                ifBlock.elseBlock(
-                    elseBlock -> elseBlock.methodReturn("fromXmlKnownDiscriminator(reader, finalRootElementName)"));
+                ifBlock.elseBlock(elseBlock -> elseBlock.methodReturn("fromXmlInternal(reader, finalRootElementName)"));
             }
         }, addGeneratedAnnotation);
 
-        if (!CoreUtils.isNullOrEmpty(discriminatorProperty.getDefaultValue())) {
-            readXmlObject(classBlock, propertiesManager, true,
-                methodBlock -> writeFromXmlDeserialization(methodBlock, propertiesManager, settings),
-                addGeneratedAnnotation);
-        }
+        readXmlObject(classBlock, propertiesManager, true,
+            methodBlock -> writeFromXmlDeserialization(methodBlock, propertiesManager, settings),
+            addGeneratedAnnotation);
     }
 
     /**
@@ -1655,11 +1658,12 @@ hasConstructorArguments, settings));
         boolean superTypeReading, Consumer<JavaBlock> deserializationBlock,
         Consumer<JavaClass> addGeneratedAnnotation) {
         JavaVisibility visibility = superTypeReading ? JavaVisibility.PackagePrivate : JavaVisibility.Public;
-        String methodName = superTypeReading ? "fromXmlKnownDiscriminator" : "fromXml";
+        String methodName = superTypeReading ? "fromXmlInternal" : "fromXml";
 
         String modelName = propertiesManager.getModel().getName();
-        boolean hasRequiredProperties = propertiesManager.hasRequiredProperties();
-        boolean isPolymorphic = propertiesManager.getDiscriminatorProperty() != null;
+        boolean hasRequiredProperties = propertiesManager.hasConstructorArguments();
+        boolean isPolymorphic = propertiesManager.getDiscriminatorProperty() != null
+            && CoreUtils.isNullOrEmpty(propertiesManager.getModel().getDerivedModels());
 
         if (!superTypeReading) {
             fromXmlJavadoc(classBlock, modelName, false, hasRequiredProperties, isPolymorphic);
@@ -1668,10 +1672,6 @@ hasConstructorArguments, settings));
                 methodBlock -> methodBlock.methodReturn("fromXml(xmlReader, null)"));
 
             fromXmlJavadoc(classBlock, modelName, true, hasRequiredProperties, isPolymorphic);
-        } else {
-            addGeneratedAnnotation.accept(classBlock);
-            classBlock.publicStaticMethod(modelName + " fromXmlKnownDiscriminator(XmlReader xmlReader) throws XMLStreamException",
-                methodBlock -> methodBlock.methodReturn("fromXmlKnownDiscriminator(xmlReader, null)"));
         }
 
         addGeneratedAnnotation.accept(classBlock);
@@ -1715,11 +1715,11 @@ hasConstructorArguments, settings));
             String throwsStatement = null;
             if (hasRequiredProperties && isPolymorphic) {
                 throwsStatement = "If the deserialized XML object was missing any required properties or the "
-                    + "polymorphic discriminator.";
+                    + "polymorphic discriminator value is invalid.";
             } else if (hasRequiredProperties) {
                 throwsStatement = "If the deserialized XML object was missing any required properties.";
             } else if (isPolymorphic) {
-                throwsStatement = "If the deserialized XML object was missing the polymorphic discriminator.";
+                throwsStatement = "If the deserialized XML object has an invalid polymorphic discriminator value.";
             }
 
             if (throwsStatement != null) {
@@ -1754,6 +1754,12 @@ hasConstructorArguments, settings));
         methodBlock.indent(() -> {
             // Initialize local variables to track what has been deserialized.
             initializeLocalVariables(methodBlock, propertiesManager, true, settings);
+
+            // Assumption for XML is polymorphic discriminators are attributes.
+            if (propertiesManager.getDiscriminatorProperty() != null) {
+                deserializeXmlAttribute(methodBlock, propertiesManager.getDiscriminatorProperty().getProperty(),
+                    propertiesManager, false);
+            }
 
             // Read the XML attribute properties first.
             propertiesManager.forEachSuperXmlAttribute(attribute -> deserializeXmlAttribute(methodBlock, attribute,
@@ -1826,7 +1832,10 @@ hasConstructorArguments, settings));
         String xmlAttributeDeserialization = getSimpleXmlDeserialization(attribute.getWireType(), "reader", null,
                 attribute.getXmlName(), propertiesManager.getXmlNamespaceConstant(attribute.getXmlNamespace()), true);
 
-        if (attribute.isPolymorphicDiscriminator()) {
+        if (attribute.isPolymorphicDiscriminator()
+            && CoreUtils.isNullOrEmpty(propertiesManager.getModel().getDerivedModels())) {
+            // Only validate the discriminator if the model has no derived models.
+            // Super types will deserialize as themselves if the discriminator doesn't match what's expected.
             methodBlock.line("String discriminatorValue = " + xmlAttributeDeserialization + ";");
             String ifStatement = String.format("!%s.equals(discriminatorValue)", attribute.getDefaultValue());
             methodBlock.ifBlock(ifStatement, ifAction2 -> ifAction2.line(
@@ -1834,7 +1843,8 @@ hasConstructorArguments, settings));
                     + "The found '%s' was '\" + discriminatorValue + \"'.\");",
                 attribute.getSerializedName(), propertiesManager.getExpectedDiscriminator(),
                 attribute.getSerializedName()));
-            return;
+
+            xmlAttributeDeserialization = "discriminatorValue";
         }
 
         if (propertiesManager.hasConstructorArguments()) {
