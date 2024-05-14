@@ -2583,6 +2583,7 @@ export class CodeModelBuilder {
     if (type === undefined) {
       return undefined;
     } else if (isValue(type)) {
+      // Value
       switch (type.valueKind) {
         case "StringValue":
           return type.value;
@@ -2592,6 +2593,7 @@ export class CodeModelBuilder {
           return type.value;
       }
     } else {
+      // Type
       switch (type.kind) {
         case "String":
           return type.value;
