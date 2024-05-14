@@ -737,7 +737,7 @@ public class ClientModelUtil {
                         if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
                             for (Operation operation : og.getOperations()) {
                                 if (operation.getLroMetadata() != null && operation.getLroMetadata().getPollingStrategy() != null) {
-                                    if ("OperationLocationPollingStrategy".equals(operation.getLroMetadata().getPollingStrategy().getLanguage().getJava().getName())) {
+                                    if (OPERATION_LOCATION_POLLING_STRATEGY.equals(operation.getLroMetadata().getPollingStrategy().getLanguage().getJava().getName())) {
                                         return true;
                                     }
                                 }
