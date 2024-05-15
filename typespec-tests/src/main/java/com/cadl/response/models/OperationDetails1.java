@@ -19,6 +19,8 @@ import java.io.IOException;
 @Immutable
 public final class OperationDetails1 implements JsonSerializable<OperationDetails1> {
     /*
+     * Universally Unique Identifier
+     * 
      * Operation ID
      */
     @Generated
@@ -55,7 +57,9 @@ public final class OperationDetails1 implements JsonSerializable<OperationDetail
     }
 
     /**
-     * Get the operationId property: Operation ID.
+     * Get the operationId property: Universally Unique Identifier
+     * 
+     * Operation ID.
      * 
      * @return the operationId value.
      */

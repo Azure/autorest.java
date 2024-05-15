@@ -20,7 +20,7 @@ import java.util.Map;
 @Fluent
 public final class Eagle extends Bird {
     /*
-     * The kind property.
+     * A sequence of textual characters.
      */
     @Generated
     private String kind = "eagle";
@@ -54,7 +54,7 @@ public final class Eagle extends Bird {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: A sequence of textual characters.
      * 
      * @return the kind value.
      */

@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class TestModel implements JsonSerializable<TestModel> {
     /*
-     * The prop property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String prop;
 
     /*
-     * The changedProp property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String changedProp;
@@ -42,7 +42,7 @@ public final class TestModel implements JsonSerializable<TestModel> {
     }
 
     /**
-     * Get the prop property: The prop property.
+     * Get the prop property: A sequence of textual characters.
      * 
      * @return the prop value.
      */
@@ -52,7 +52,7 @@ public final class TestModel implements JsonSerializable<TestModel> {
     }
 
     /**
-     * Get the changedProp property: The changedProp property.
+     * Get the changedProp property: A sequence of textual characters.
      * 
      * @return the changedProp value.
      */

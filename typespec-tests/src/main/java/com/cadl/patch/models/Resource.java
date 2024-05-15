@@ -23,19 +23,19 @@ import java.util.Set;
 @Fluent
 public final class Resource implements JsonSerializable<Resource> {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private String id;
 
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private String name;
 
     /*
-     * The description property.
+     * A sequence of textual characters.
      */
     @Generated
     private String description;
@@ -47,13 +47,13 @@ public final class Resource implements JsonSerializable<Resource> {
     private Map<String, InnerModel> map;
 
     /*
-     * The longValue property.
+     * A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`)
      */
     @Generated
     private Long longValue;
 
     /*
-     * The intValue property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private Integer intValue;
@@ -111,7 +111,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */
@@ -121,7 +121,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */
@@ -131,7 +131,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the description property: The description property.
+     * Get the description property: A sequence of textual characters.
      * 
      * @return the description value.
      */
@@ -141,7 +141,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the description property: The description property.
+     * Set the description property: A sequence of textual characters.
      * 
      * @param description the description value to set.
      * @return the Resource object itself.
@@ -178,7 +178,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the longValue property: The longValue property.
+     * Get the longValue property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
      * 
      * @return the longValue value.
      */
@@ -188,7 +188,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the longValue property: The longValue property.
+     * Set the longValue property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
      * 
      * @param longValue the longValue value to set.
      * @return the Resource object itself.
@@ -201,7 +201,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the intValue property: The intValue property.
+     * Get the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the intValue value.
      */
@@ -211,7 +211,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the intValue property: The intValue property.
+     * Set the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @param intValue the intValue value to set.
      * @return the Resource object itself.

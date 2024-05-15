@@ -22,6 +22,8 @@ import java.util.Set;
 @Fluent
 public final class CollectionsModelProperty implements JsonSerializable<CollectionsModelProperty> {
     /*
+     * A sequence of textual characters.
+     * 
      * Required property
      */
     @Generated
@@ -62,7 +64,9 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
     }
 
     /**
-     * Get the requiredProperty property: Required property.
+     * Get the requiredProperty property: A sequence of textual characters.
+     * 
+     * Required property.
      * 
      * @return the requiredProperty value.
      */
@@ -72,7 +76,9 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
     }
 
     /**
-     * Set the requiredProperty property: Required property.
+     * Set the requiredProperty property: A sequence of textual characters.
+     * 
+     * Required property.
      * <p>Required when create the resource.</p>
      * 
      * @param requiredProperty the requiredProperty value to set.

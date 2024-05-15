@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class GenerationOptions implements JsonSerializable<GenerationOptions> {
     /*
+     * A sequence of textual characters.
+     * 
      * Prompt.
      */
     @Generated
@@ -34,7 +36,9 @@ public final class GenerationOptions implements JsonSerializable<GenerationOptio
     }
 
     /**
-     * Get the prompt property: Prompt.
+     * Get the prompt property: A sequence of textual characters.
+     * 
+     * Prompt.
      * 
      * @return the prompt value.
      */

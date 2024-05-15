@@ -14,7 +14,7 @@ import java.util.List;
 @Immutable
 public final class BinaryArrayPartsRequest {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String id;
@@ -38,7 +38,7 @@ public final class BinaryArrayPartsRequest {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */

@@ -14,7 +14,7 @@ import java.util.List;
 @Immutable
 public final class ComplexPartsRequest {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String id;
@@ -63,7 +63,7 @@ public final class ComplexPartsRequest {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */

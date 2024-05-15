@@ -21,7 +21,7 @@ import java.util.Objects;
 @Immutable
 public final class SubClassBothMismatch extends SuperClassMismatch {
     /*
-     * The base64url property.
+     * Represent a byte array
      */
     @Generated
     private final Base64Url base64url;
@@ -43,7 +43,7 @@ public final class SubClassBothMismatch extends SuperClassMismatch {
     }
 
     /**
-     * Get the base64url property: The base64url property.
+     * Get the base64url property: Represent a byte array.
      * 
      * @return the base64url value.
      */

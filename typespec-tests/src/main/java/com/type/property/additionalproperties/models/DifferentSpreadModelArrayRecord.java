@@ -21,7 +21,7 @@ import java.util.Map;
 @Fluent
 public class DifferentSpreadModelArrayRecord implements JsonSerializable<DifferentSpreadModelArrayRecord> {
     /*
-     * The knownProp property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String knownProp;
@@ -45,7 +45,7 @@ public class DifferentSpreadModelArrayRecord implements JsonSerializable<Differe
     }
 
     /**
-     * Get the knownProp property: The knownProp property.
+     * Get the knownProp property: A sequence of textual characters.
      * 
      * @return the knownProp value.
      */

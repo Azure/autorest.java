@@ -19,6 +19,8 @@ import java.util.Map;
 @Immutable
 public final class DifferentSpreadFloatDerived extends DifferentSpreadFloatRecord {
     /*
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
      * The index property
      */
     @Generated
@@ -37,7 +39,9 @@ public final class DifferentSpreadFloatDerived extends DifferentSpreadFloatRecor
     }
 
     /**
-     * Get the derivedProp property: The index property.
+     * Get the derivedProp property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
+     * The index property.
      * 
      * @return the derivedProp value.
      */

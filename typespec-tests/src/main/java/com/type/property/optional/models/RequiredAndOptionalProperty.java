@@ -18,12 +18,16 @@ import java.io.IOException;
 @Fluent
 public final class RequiredAndOptionalProperty implements JsonSerializable<RequiredAndOptionalProperty> {
     /*
+     * A sequence of textual characters.
+     * 
      * optional string property
      */
     @Generated
     private String optionalProperty;
 
     /*
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
      * required int property
      */
     @Generated
@@ -40,7 +44,9 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
     }
 
     /**
-     * Get the optionalProperty property: optional string property.
+     * Get the optionalProperty property: A sequence of textual characters.
+     * 
+     * optional string property.
      * 
      * @return the optionalProperty value.
      */
@@ -50,7 +56,9 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
     }
 
     /**
-     * Set the optionalProperty property: optional string property.
+     * Set the optionalProperty property: A sequence of textual characters.
+     * 
+     * optional string property.
      * 
      * @param optionalProperty the optionalProperty value to set.
      * @return the RequiredAndOptionalProperty object itself.
@@ -62,7 +70,9 @@ public final class RequiredAndOptionalProperty implements JsonSerializable<Requi
     }
 
     /**
-     * Get the requiredProperty property: required int property.
+     * Get the requiredProperty property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
+     * required int property.
      * 
      * @return the requiredProperty value.
      */

@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class ClientNameModel implements JsonSerializable<ClientNameModel> {
     /*
+     * Boolean with `true` and `false` values.
+     * 
      * Pass in true
      */
     @Generated
@@ -34,7 +36,9 @@ public final class ClientNameModel implements JsonSerializable<ClientNameModel> 
     }
 
     /**
-     * Get the clientName property: Pass in true.
+     * Get the clientName property: Boolean with `true` and `false` values.
+     * 
+     * Pass in true.
      * 
      * @return the clientName value.
      */

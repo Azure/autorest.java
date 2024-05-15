@@ -24,7 +24,7 @@ public class Fish implements JsonSerializable<Fish> {
     private String kind;
 
     /*
-     * The age property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private final int age;
@@ -51,7 +51,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Get the age property: The age property.
+     * Get the age property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the age value.
      */

@@ -19,12 +19,16 @@ import java.util.List;
 @Immutable
 public final class VisibilityModel implements JsonSerializable<VisibilityModel> {
     /*
+     * A sequence of textual characters.
+     * 
      * Required string, illustrating a readonly property.
      */
     @Generated
     private String readProp;
 
     /*
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
      * Required int32, illustrating a query property.
      */
     @Generated
@@ -43,6 +47,8 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
     private final List<Integer> updateProp;
 
     /*
+     * Boolean with `true` and `false` values.
+     * 
      * Required bool, illustrating a delete property.
      */
     @Generated
@@ -65,7 +71,9 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
     }
 
     /**
-     * Get the readProp property: Required string, illustrating a readonly property.
+     * Get the readProp property: A sequence of textual characters.
+     * 
+     * Required string, illustrating a readonly property.
      * 
      * @return the readProp value.
      */
@@ -75,7 +83,9 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
     }
 
     /**
-     * Get the queryProp property: Required int32, illustrating a query property.
+     * Get the queryProp property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
+     * Required int32, illustrating a query property.
      * 
      * @return the queryProp value.
      */
@@ -105,7 +115,9 @@ public final class VisibilityModel implements JsonSerializable<VisibilityModel> 
     }
 
     /**
-     * Get the deleteProp property: Required bool, illustrating a delete property.
+     * Get the deleteProp property: Boolean with `true` and `false` values.
+     * 
+     * Required bool, illustrating a delete property.
      * 
      * @return the deleteProp value.
      */

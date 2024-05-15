@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class InputOutputData2 implements JsonSerializable<InputOutputData2> {
     /*
-     * The data property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String data;
@@ -34,7 +34,7 @@ public final class InputOutputData2 implements JsonSerializable<InputOutputData2
     }
 
     /**
-     * Get the data property: The data property.
+     * Get the data property: A sequence of textual characters.
      * 
      * @return the data value.
      */

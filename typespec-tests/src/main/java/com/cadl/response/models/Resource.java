@@ -18,25 +18,25 @@ import java.io.IOException;
 @Fluent
 public final class Resource implements JsonSerializable<Resource> {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private String id;
 
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private String name;
 
     /*
-     * The description property.
+     * A sequence of textual characters.
      */
     @Generated
     private String description;
 
     /*
-     * The type property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String type;
@@ -52,7 +52,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */
@@ -62,7 +62,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */
@@ -72,7 +72,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the description property: The description property.
+     * Get the description property: A sequence of textual characters.
      * 
      * @return the description value.
      */
@@ -82,7 +82,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the description property: The description property.
+     * Set the description property: A sequence of textual characters.
      * 
      * @param description the description value to set.
      * @return the Resource object itself.
@@ -94,7 +94,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the type property: The type property.
+     * Get the type property: A sequence of textual characters.
      * 
      * @return the type value.
      */

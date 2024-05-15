@@ -24,7 +24,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
     private String kind;
 
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
@@ -51,7 +51,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */

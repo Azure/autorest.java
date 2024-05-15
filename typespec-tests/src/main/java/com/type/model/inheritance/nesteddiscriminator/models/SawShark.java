@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class SawShark extends Shark {
     /*
-     * The sharktype property.
+     * A sequence of textual characters.
      */
     @Generated
     private String sharktype = "saw";
@@ -33,7 +33,7 @@ public final class SawShark extends Shark {
     }
 
     /**
-     * Get the sharktype property: The sharktype property.
+     * Get the sharktype property: A sequence of textual characters.
      * 
      * @return the sharktype value.
      */

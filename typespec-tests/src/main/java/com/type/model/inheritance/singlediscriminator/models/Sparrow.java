@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class Sparrow extends Bird {
     /*
-     * The kind property.
+     * A sequence of textual characters.
      */
     @Generated
     private String kind = "sparrow";
@@ -33,7 +33,7 @@ public final class Sparrow extends Bird {
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the kind property: A sequence of textual characters.
      * 
      * @return the kind value.
      */

@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class PollResponse implements JsonSerializable<PollResponse> {
     /*
-     * The operationId property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String operationId;
@@ -42,7 +42,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
     }
 
     /**
-     * Get the operationId property: The operationId property.
+     * Get the operationId property: A sequence of textual characters.
      * 
      * @return the operationId value.
      */

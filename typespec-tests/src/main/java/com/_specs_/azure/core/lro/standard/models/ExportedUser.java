@@ -18,12 +18,16 @@ import java.io.IOException;
 @Immutable
 public final class ExportedUser implements JsonSerializable<ExportedUser> {
     /*
+     * A sequence of textual characters.
+     * 
      * The name of user.
      */
     @Generated
     private final String name;
 
     /*
+     * A sequence of textual characters.
+     * 
      * The exported URI.
      */
     @Generated
@@ -42,7 +46,9 @@ public final class ExportedUser implements JsonSerializable<ExportedUser> {
     }
 
     /**
-     * Get the name property: The name of user.
+     * Get the name property: A sequence of textual characters.
+     * 
+     * The name of user.
      * 
      * @return the name value.
      */
@@ -52,7 +58,9 @@ public final class ExportedUser implements JsonSerializable<ExportedUser> {
     }
 
     /**
-     * Get the resourceUri property: The exported URI.
+     * Get the resourceUri property: A sequence of textual characters.
+     * 
+     * The exported URI.
      * 
      * @return the resourceUri value.
      */

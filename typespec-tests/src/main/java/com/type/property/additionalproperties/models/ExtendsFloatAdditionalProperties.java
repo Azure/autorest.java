@@ -20,6 +20,8 @@ import java.util.Map;
 @Fluent
 public final class ExtendsFloatAdditionalProperties implements JsonSerializable<ExtendsFloatAdditionalProperties> {
     /*
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
      * The id property
      */
     @Generated
@@ -44,7 +46,9 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
+     * The id property.
      * 
      * @return the id value.
      */

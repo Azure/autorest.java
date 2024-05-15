@@ -260,8 +260,8 @@ public final class ModelsImpl {
     /**
      * The spreadCompositeRequestWithoutBody operation.
      * 
-     * @param name A sequence of textual characters.
-     * @param testHeader A sequence of textual characters.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -280,8 +280,8 @@ public final class ModelsImpl {
     /**
      * The spreadCompositeRequestWithoutBody operation.
      * 
-     * @param name A sequence of textual characters.
-     * @param testHeader A sequence of textual characters.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -306,8 +306,8 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param testHeader A sequence of textual characters.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param body This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -334,8 +334,8 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param testHeader A sequence of textual characters.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param body This is a simple model.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -361,8 +361,8 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param testHeader A sequence of textual characters.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param compositeRequestMix This is a model with non-body http request decorator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -389,8 +389,8 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * @param testHeader A sequence of textual characters.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param compositeRequestMix This is a model with non-body http request decorator.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

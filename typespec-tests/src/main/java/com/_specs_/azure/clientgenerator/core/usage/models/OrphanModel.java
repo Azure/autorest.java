@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class OrphanModel implements JsonSerializable<OrphanModel> {
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
@@ -34,7 +34,7 @@ public final class OrphanModel implements JsonSerializable<OrphanModel> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */

@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class ExportedResource implements JsonSerializable<ExportedResource> {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String id;
 
     /*
-     * The resourceUri property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String resourceUri;
@@ -42,7 +42,7 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */
@@ -52,7 +52,7 @@ public final class ExportedResource implements JsonSerializable<ExportedResource
     }
 
     /**
-     * Get the resourceUri property: The resourceUri property.
+     * Get the resourceUri property: A sequence of textual characters.
      * 
      * @return the resourceUri value.
      */

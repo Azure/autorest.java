@@ -19,12 +19,16 @@ import java.util.Map;
 @Fluent
 public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnknownAdditionalProperties {
     /*
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
      * The index property
      */
     @Generated
     private final int index;
 
     /*
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
      * The age property
      */
     @Generated
@@ -43,7 +47,9 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
     }
 
     /**
-     * Get the index property: The index property.
+     * Get the index property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
+     * The index property.
      * 
      * @return the index value.
      */
@@ -53,7 +59,9 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
     }
 
     /**
-     * Get the age property: The age property.
+     * Get the age property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
+     * The age property.
      * 
      * @return the age value.
      */
@@ -63,7 +71,9 @@ public final class ExtendsUnknownAdditionalPropertiesDerived extends ExtendsUnkn
     }
 
     /**
-     * Set the age property: The age property.
+     * Set the age property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
+     * The age property.
      * 
      * @param age the age value to set.
      * @return the ExtendsUnknownAdditionalPropertiesDerived object itself.

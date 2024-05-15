@@ -20,13 +20,13 @@ import java.util.Map;
 @Fluent
 public final class Resource implements JsonSerializable<Resource> {
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
 
     /*
-     * The description property.
+     * A sequence of textual characters.
      */
     @Generated
     private String description;
@@ -44,13 +44,13 @@ public final class Resource implements JsonSerializable<Resource> {
     private List<InnerModel> array;
 
     /*
-     * The intValue property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private Integer intValue;
 
     /*
-     * The floatValue property.
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
      */
     @Generated
     private Double floatValue;
@@ -78,7 +78,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */
@@ -88,7 +88,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the description property: The description property.
+     * Get the description property: A sequence of textual characters.
      * 
      * @return the description value.
      */
@@ -98,7 +98,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the description property: The description property.
+     * Set the description property: A sequence of textual characters.
      * 
      * @param description the description value to set.
      * @return the Resource object itself.
@@ -154,7 +154,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the intValue property: The intValue property.
+     * Get the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the intValue value.
      */
@@ -164,7 +164,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the intValue property: The intValue property.
+     * Set the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @param intValue the intValue value to set.
      * @return the Resource object itself.
@@ -176,7 +176,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the floatValue property: The floatValue property.
+     * Get the floatValue property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
      * 
      * @return the floatValue value.
      */
@@ -186,7 +186,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the floatValue property: The floatValue property.
+     * Set the floatValue property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
      * 
      * @param floatValue the floatValue value to set.
      * @return the Resource object itself.

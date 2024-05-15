@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
     /*
-     * The stringReadWriteRequired property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String stringReadWriteRequired;
 
     /*
-     * The stringReadOnlyOptional property.
+     * A sequence of textual characters.
      */
     @Generated
     private String stringReadOnlyOptional;
@@ -40,7 +40,7 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
     }
 
     /**
-     * Get the stringReadWriteRequired property: The stringReadWriteRequired property.
+     * Get the stringReadWriteRequired property: A sequence of textual characters.
      * 
      * @return the stringReadWriteRequired value.
      */
@@ -50,7 +50,7 @@ public final class ImmutableModel implements JsonSerializable<ImmutableModel> {
     }
 
     /**
-     * Get the stringReadOnlyOptional property: The stringReadOnlyOptional property.
+     * Get the stringReadOnlyOptional property: A sequence of textual characters.
      * 
      * @return the stringReadOnlyOptional value.
      */

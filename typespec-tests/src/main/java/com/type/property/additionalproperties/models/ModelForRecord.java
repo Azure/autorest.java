@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class ModelForRecord implements JsonSerializable<ModelForRecord> {
     /*
+     * A sequence of textual characters.
+     * 
      * The state property
      */
     @Generated
@@ -34,7 +36,9 @@ public final class ModelForRecord implements JsonSerializable<ModelForRecord> {
     }
 
     /**
-     * Get the state property: The state property.
+     * Get the state property: A sequence of textual characters.
+     * 
+     * The state property.
      * 
      * @return the state value.
      */

@@ -20,6 +20,8 @@ import java.util.Map;
 @Fluent
 public class DifferentSpreadFloatRecord implements JsonSerializable<DifferentSpreadFloatRecord> {
     /*
+     * A sequence of textual characters.
+     * 
      * The id property
      */
     @Generated
@@ -44,7 +46,9 @@ public class DifferentSpreadFloatRecord implements JsonSerializable<DifferentSpr
     }
 
     /**
-     * Get the name property: The id property.
+     * Get the name property: A sequence of textual characters.
+     * 
+     * The id property.
      * 
      * @return the name value.
      */

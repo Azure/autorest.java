@@ -26,79 +26,79 @@ import java.util.Map;
 @Immutable
 public final class AllPropertiesOptional implements JsonSerializable<AllPropertiesOptional> {
     /*
-     * The boolean property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private Boolean booleanProperty;
 
     /*
-     * The booleanNullable property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private Boolean booleanNullable;
 
     /*
-     * The booleanRequired property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private Boolean booleanRequired;
 
     /*
-     * The booleanRequiredNullable property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private Boolean booleanRequiredNullable;
 
     /*
-     * The string property.
+     * A sequence of textual characters.
      */
     @Generated
     private String string;
 
     /*
-     * The stringNullable property.
+     * A sequence of textual characters.
      */
     @Generated
     private String stringNullable;
 
     /*
-     * The stringRequired property.
+     * A sequence of textual characters.
      */
     @Generated
     private String stringRequired;
 
     /*
-     * The stringRequiredNullable property.
+     * A sequence of textual characters.
      */
     @Generated
     private String stringRequiredNullable;
 
     /*
-     * The bytes property.
+     * Represent a byte array
      */
     @Generated
     private byte[] bytes;
 
     /*
-     * The int property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private Integer intProperty;
 
     /*
-     * The long property.
+     * A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`)
      */
     @Generated
     private Long longProperty;
 
     /*
-     * The float property.
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
      */
     @Generated
     private Double floatProperty;
 
     /*
-     * The double property.
+     * A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`)
      */
     @Generated
     private Double doubleProperty;
@@ -153,7 +153,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the booleanProperty property: The boolean property.
+     * Get the booleanProperty property: Boolean with `true` and `false` values.
      * 
      * @return the booleanProperty value.
      */
@@ -163,7 +163,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the booleanNullable property: The booleanNullable property.
+     * Get the booleanNullable property: Boolean with `true` and `false` values.
      * 
      * @return the booleanNullable value.
      */
@@ -173,7 +173,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the booleanRequired property: The booleanRequired property.
+     * Get the booleanRequired property: Boolean with `true` and `false` values.
      * 
      * @return the booleanRequired value.
      */
@@ -183,7 +183,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the booleanRequiredNullable property: The booleanRequiredNullable property.
+     * Get the booleanRequiredNullable property: Boolean with `true` and `false` values.
      * 
      * @return the booleanRequiredNullable value.
      */
@@ -193,7 +193,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the string property: The string property.
+     * Get the string property: A sequence of textual characters.
      * 
      * @return the string value.
      */
@@ -203,7 +203,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the stringNullable property: The stringNullable property.
+     * Get the stringNullable property: A sequence of textual characters.
      * 
      * @return the stringNullable value.
      */
@@ -213,7 +213,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the stringRequired property: The stringRequired property.
+     * Get the stringRequired property: A sequence of textual characters.
      * 
      * @return the stringRequired value.
      */
@@ -223,7 +223,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the stringRequiredNullable property: The stringRequiredNullable property.
+     * Get the stringRequiredNullable property: A sequence of textual characters.
      * 
      * @return the stringRequiredNullable value.
      */
@@ -233,7 +233,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the bytes property: The bytes property.
+     * Get the bytes property: Represent a byte array.
      * 
      * @return the bytes value.
      */
@@ -243,7 +243,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the intProperty property: The int property.
+     * Get the intProperty property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the intProperty value.
      */
@@ -253,7 +253,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the longProperty property: The long property.
+     * Get the longProperty property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
      * 
      * @return the longProperty value.
      */
@@ -263,7 +263,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the floatProperty property: The float property.
+     * Get the floatProperty property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
      * 
      * @return the floatProperty value.
      */
@@ -273,7 +273,7 @@ public final class AllPropertiesOptional implements JsonSerializable<AllProperti
     }
 
     /**
-     * Get the doubleProperty property: The double property.
+     * Get the doubleProperty property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
      * 
      * @return the doubleProperty value.
      */

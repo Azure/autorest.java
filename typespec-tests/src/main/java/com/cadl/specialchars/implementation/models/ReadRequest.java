@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class ReadRequest implements JsonSerializable<ReadRequest> {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String id;
@@ -34,7 +34,7 @@ public final class ReadRequest implements JsonSerializable<ReadRequest> {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */

@@ -66,21 +66,21 @@ public interface TopLevelArmResource {
     List<String> configurationEndpoints();
 
     /**
-     * Gets the userName property: The userName property.
+     * Gets the userName property: A sequence of textual characters.
      * 
      * @return the userName value.
      */
     String userName();
 
     /**
-     * Gets the userNames property: The userNames property.
+     * Gets the userNames property: A sequence of textual characters.
      * 
      * @return the userNames value.
      */
     String userNames();
 
     /**
-     * Gets the accuserName property: The accuserName property.
+     * Gets the accuserName property: A sequence of textual characters.
      * 
      * @return the accuserName value.
      */
@@ -219,9 +219,9 @@ public interface TopLevelArmResource {
          */
         interface WithUserName {
             /**
-             * Specifies the userName property: The userName property..
+             * Specifies the userName property: A sequence of textual characters..
              * 
-             * @param userName The userName property.
+             * @param userName A sequence of textual characters.
              * @return the next definition stage.
              */
             WithCreate withUserName(String userName);
@@ -232,9 +232,9 @@ public interface TopLevelArmResource {
          */
         interface WithUserNames {
             /**
-             * Specifies the userNames property: The userNames property..
+             * Specifies the userNames property: A sequence of textual characters..
              * 
-             * @param userNames The userNames property.
+             * @param userNames A sequence of textual characters.
              * @return the next definition stage.
              */
             WithCreate withUserNames(String userNames);
@@ -245,9 +245,9 @@ public interface TopLevelArmResource {
          */
         interface WithAccuserName {
             /**
-             * Specifies the accuserName property: The accuserName property..
+             * Specifies the accuserName property: A sequence of textual characters..
              * 
-             * @param accuserName The accuserName property.
+             * @param accuserName A sequence of textual characters.
              * @return the next definition stage.
              */
             WithCreate withAccuserName(String accuserName);

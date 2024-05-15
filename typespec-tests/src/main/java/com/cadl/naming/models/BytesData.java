@@ -18,12 +18,14 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
-     * The @data.kind property.
+     * A sequence of textual characters.
      */
     @Generated
     private String type = "bytes";
 
     /*
+     * Represent a byte array
+     * 
      * Data as {@code byte[]}
      */
     @Generated
@@ -40,7 +42,7 @@ public final class BytesData extends Data {
     }
 
     /**
-     * Get the type property: The &#064;data.kind property.
+     * Get the type property: A sequence of textual characters.
      * 
      * @return the type value.
      */
@@ -51,7 +53,9 @@ public final class BytesData extends Data {
     }
 
     /**
-     * Get the dataAsBytes property: Data as {@code byte[]}.
+     * Get the dataAsBytes property: Represent a byte array
+     * 
+     * Data as {@code byte[]}.
      * 
      * @return the dataAsBytes value.
      */

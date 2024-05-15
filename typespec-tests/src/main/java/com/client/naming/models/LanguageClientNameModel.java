@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class LanguageClientNameModel implements JsonSerializable<LanguageClientNameModel> {
     /*
+     * Boolean with `true` and `false` values.
+     * 
      * Pass in true
      */
     @Generated
@@ -34,7 +36,9 @@ public final class LanguageClientNameModel implements JsonSerializable<LanguageC
     }
 
     /**
-     * Get the javaName property: Pass in true.
+     * Get the javaName property: Boolean with `true` and `false` values.
+     * 
+     * Pass in true.
      * 
      * @return the javaName value.
      */

@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class ChildModel implements JsonSerializable<ChildModel> {
     /*
-     * The description property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String description;
 
     /*
-     * The age property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private final int age;
@@ -42,7 +42,7 @@ public final class ChildModel implements JsonSerializable<ChildModel> {
     }
 
     /**
-     * Get the description property: The description property.
+     * Get the description property: A sequence of textual characters.
      * 
      * @return the description value.
      */
@@ -52,7 +52,7 @@ public final class ChildModel implements JsonSerializable<ChildModel> {
     }
 
     /**
-     * Get the age property: The age property.
+     * Get the age property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the age value.
      */

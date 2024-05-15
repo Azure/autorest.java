@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class JobResultResult implements JsonSerializable<JobResultResult> {
     /*
-     * The data property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String data;
@@ -34,7 +34,7 @@ public final class JobResultResult implements JsonSerializable<JobResultResult> 
     }
 
     /**
-     * Get the data property: The data property.
+     * Get the data property: A sequence of textual characters.
      * 
      * @return the data value.
      */

@@ -19,6 +19,8 @@ import java.io.IOException;
 @Fluent
 public final class BytesProperty implements JsonSerializable<BytesProperty> {
     /*
+     * Represent a byte array
+     * 
      * Property
      */
     @Generated
@@ -32,7 +34,9 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     }
 
     /**
-     * Get the property property: Property.
+     * Get the property property: Represent a byte array
+     * 
+     * Property.
      * 
      * @return the property value.
      */
@@ -42,7 +46,9 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     }
 
     /**
-     * Set the property property: Property.
+     * Set the property property: Represent a byte array
+     * 
+     * Property.
      * 
      * @param property the property value to set.
      * @return the BytesProperty object itself.

@@ -19,24 +19,26 @@ import java.io.IOException;
 public final class PartialUpdateModel implements JsonSerializable<PartialUpdateModel> {
 
     /*
-     * The boolean property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private final boolean booleanProperty;
 
     /*
-     * The string property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String string;
 
     /*
-     * The bytes property.
+     * Represent a byte array
      */
     @Generated
     private final byte[] bytes;
 
     /*
+     * A sequence of textual characters.
+     * 
      * The aggregation function to be applied on the client metric. Allowed functions
      * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
@@ -65,7 +67,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the booleanProperty property: The boolean property.
+     * Get the booleanProperty property: Boolean with `true` and `false` values.
      *
      * @return the booleanProperty value.
      */
@@ -75,7 +77,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the string property: The string property.
+     * Get the string property: A sequence of textual characters.
      *
      * @return the string value.
      */
@@ -85,7 +87,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the bytes property: The bytes property.
+     * Get the bytes property: Represent a byte array.
      *
      * @return the bytes value.
      */
@@ -95,7 +97,9 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the aggregate property: The aggregation function to be applied on the client metric. Allowed functions
+     * Get the aggregate property: A sequence of textual characters.
+     *
+     * The aggregation function to be applied on the client metric. Allowed functions
      * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
      * ‘count’ - for requests.

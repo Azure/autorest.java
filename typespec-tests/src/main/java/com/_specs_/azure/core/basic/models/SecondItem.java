@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class SecondItem implements JsonSerializable<SecondItem> {
     /*
+     * A sequence of textual characters.
+     * 
      * The name of the item.
      */
     @Generated
@@ -31,7 +33,9 @@ public final class SecondItem implements JsonSerializable<SecondItem> {
     }
 
     /**
-     * Get the name property: The name of the item.
+     * Get the name property: A sequence of textual characters.
+     * 
+     * The name of the item.
      * 
      * @return the name value.
      */

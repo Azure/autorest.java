@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class InnerModel implements JsonSerializable<InnerModel> {
     /*
+     * A sequence of textual characters.
+     * 
      * Required string property
      */
     @Generated
@@ -34,7 +36,9 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     /**
-     * Get the property property: Required string property.
+     * Get the property property: A sequence of textual characters.
+     * 
+     * Required string property.
      * 
      * @return the property value.
      */

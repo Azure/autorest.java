@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class FirstItem implements JsonSerializable<FirstItem> {
     /*
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
      * The id of the item.
      */
     @Generated
@@ -31,7 +33,9 @@ public final class FirstItem implements JsonSerializable<FirstItem> {
     }
 
     /**
-     * Get the id property: The id of the item.
+     * Get the id property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
+     * The id of the item.
      * 
      * @return the id value.
      */

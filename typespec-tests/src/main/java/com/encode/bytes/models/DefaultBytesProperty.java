@@ -19,7 +19,7 @@ import java.io.IOException;
 @Immutable
 public final class DefaultBytesProperty implements JsonSerializable<DefaultBytesProperty> {
     /*
-     * The value property.
+     * Represent a byte array
      */
     @Generated
     private final byte[] value;
@@ -35,7 +35,7 @@ public final class DefaultBytesProperty implements JsonSerializable<DefaultBytes
     }
 
     /**
-     * Get the value property: The value property.
+     * Get the value property: Represent a byte array.
      * 
      * @return the value value.
      */

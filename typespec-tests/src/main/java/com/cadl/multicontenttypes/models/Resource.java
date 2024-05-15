@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class Resource implements JsonSerializable<Resource> {
     /*
-     * The id property.
+     * A sequence of textual characters.
      */
     @Generated
     private String id;
 
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private String name;
@@ -37,7 +37,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A sequence of textual characters.
      * 
      * @return the id value.
      */
@@ -47,7 +47,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */

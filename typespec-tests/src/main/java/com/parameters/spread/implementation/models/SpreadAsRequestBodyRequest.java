@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class SpreadAsRequestBodyRequest implements JsonSerializable<SpreadAsRequestBodyRequest> {
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
@@ -34,7 +34,7 @@ public final class SpreadAsRequestBodyRequest implements JsonSerializable<Spread
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */

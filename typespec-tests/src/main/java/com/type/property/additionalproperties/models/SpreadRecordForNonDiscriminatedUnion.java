@@ -22,6 +22,8 @@ import java.util.Map;
 public final class SpreadRecordForNonDiscriminatedUnion
     implements JsonSerializable<SpreadRecordForNonDiscriminatedUnion> {
     /*
+     * A sequence of textual characters.
+     * 
      * The name property
      */
     @Generated
@@ -46,7 +48,9 @@ public final class SpreadRecordForNonDiscriminatedUnion
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
+     * 
+     * The name property.
      * 
      * @return the name value.
      */

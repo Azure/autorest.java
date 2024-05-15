@@ -19,6 +19,8 @@ import java.util.Map;
 @Immutable
 public final class DifferentSpreadStringDerived extends DifferentSpreadStringRecord {
     /*
+     * A sequence of textual characters.
+     * 
      * The index property
      */
     @Generated
@@ -37,7 +39,9 @@ public final class DifferentSpreadStringDerived extends DifferentSpreadStringRec
     }
 
     /**
-     * Get the derivedProp property: The index property.
+     * Get the derivedProp property: A sequence of textual characters.
+     * 
+     * The index property.
      * 
      * @return the derivedProp value.
      */

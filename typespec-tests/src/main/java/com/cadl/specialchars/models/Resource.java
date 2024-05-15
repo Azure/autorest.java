@@ -18,12 +18,16 @@ import java.io.IOException;
 @Immutable
 public final class Resource implements JsonSerializable<Resource> {
     /*
+     * A sequence of textual characters.
+     * 
      * id
      */
     @Generated
     private final String id;
 
     /*
+     * A sequence of textual characters.
+     * 
      * The aggregation function to be applied on the client metric. Allowed functions
      * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
@@ -33,18 +37,24 @@ public final class Resource implements JsonSerializable<Resource> {
     private String aggregate;
 
     /*
+     * A sequence of textual characters.
+     * 
      * The comparison operator. Supported types ‘>’, ‘<’ 
      */
     @Generated
     private String condition;
 
     /*
+     * A sequence of textual characters.
+     * 
      * Request name for which the Pass fail criteria has to be applied 
      */
     @Generated
     private String requestName;
 
     /*
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
      * The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
      * 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
      */
@@ -62,7 +72,9 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the id property: id.
+     * Get the id property: A sequence of textual characters.
+     * 
+     * id.
      * 
      * @return the id value.
      */
@@ -72,7 +84,9 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the aggregate property: The aggregation function to be applied on the client metric. Allowed functions
+     * Get the aggregate property: A sequence of textual characters.
+     * 
+     * The aggregation function to be applied on the client metric. Allowed functions
      * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
      * ‘count’ - for requests.
@@ -85,7 +99,9 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the condition property: The comparison operator. Supported types ‘&gt;’, ‘&lt;’.
+     * Get the condition property: A sequence of textual characters.
+     * 
+     * The comparison operator. Supported types ‘&gt;’, ‘&lt;’.
      * 
      * @return the condition value.
      */
@@ -95,7 +111,9 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the requestName property: Request name for which the Pass fail criteria has to be applied.
+     * Get the requestName property: A sequence of textual characters.
+     * 
+     * Request name for which the Pass fail criteria has to be applied.
      * 
      * @return the requestName value.
      */
@@ -105,7 +123,9 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the value property: The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
+     * Get the value property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * 
+     * The value to compare with the client metric. Allowed values - ‘error : [0.0 ,
      * 100.0] unit- % ’, response_time_ms and latency : any integer value unit- ms.
      * 
      * @return the value value.

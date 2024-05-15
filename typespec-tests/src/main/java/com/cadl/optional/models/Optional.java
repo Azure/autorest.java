@@ -26,79 +26,79 @@ import java.util.Map;
 @Fluent
 public final class Optional implements JsonSerializable<Optional> {
     /*
-     * The boolean property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private Boolean booleanProperty;
 
     /*
-     * The booleanNullable property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private Boolean booleanNullable;
 
     /*
-     * The booleanRequired property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private final boolean booleanRequired;
 
     /*
-     * The booleanRequiredNullable property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private final Boolean booleanRequiredNullable;
 
     /*
-     * The string property.
+     * A sequence of textual characters.
      */
     @Generated
     private String string;
 
     /*
-     * The stringNullable property.
+     * A sequence of textual characters.
      */
     @Generated
     private String stringNullable;
 
     /*
-     * The stringRequired property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String stringRequired;
 
     /*
-     * The stringRequiredNullable property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String stringRequiredNullable;
 
     /*
-     * The bytes property.
+     * Represent a byte array
      */
     @Generated
     private byte[] bytes;
 
     /*
-     * The int property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private Integer intProperty;
 
     /*
-     * The long property.
+     * A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`)
      */
     @Generated
     private Long longProperty;
 
     /*
-     * The float property.
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
      */
     @Generated
     private Double floatProperty;
 
     /*
-     * The double property.
+     * A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`)
      */
     @Generated
     private Double doubleProperty;
@@ -163,7 +163,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the booleanProperty property: The boolean property.
+     * Get the booleanProperty property: Boolean with `true` and `false` values.
      * 
      * @return the booleanProperty value.
      */
@@ -173,7 +173,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the booleanProperty property: The boolean property.
+     * Set the booleanProperty property: Boolean with `true` and `false` values.
      * 
      * @param booleanProperty the booleanProperty value to set.
      * @return the Optional object itself.
@@ -185,7 +185,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the booleanNullable property: The booleanNullable property.
+     * Get the booleanNullable property: Boolean with `true` and `false` values.
      * 
      * @return the booleanNullable value.
      */
@@ -195,7 +195,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the booleanNullable property: The booleanNullable property.
+     * Set the booleanNullable property: Boolean with `true` and `false` values.
      * 
      * @param booleanNullable the booleanNullable value to set.
      * @return the Optional object itself.
@@ -207,7 +207,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the booleanRequired property: The booleanRequired property.
+     * Get the booleanRequired property: Boolean with `true` and `false` values.
      * 
      * @return the booleanRequired value.
      */
@@ -217,7 +217,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the booleanRequiredNullable property: The booleanRequiredNullable property.
+     * Get the booleanRequiredNullable property: Boolean with `true` and `false` values.
      * 
      * @return the booleanRequiredNullable value.
      */
@@ -227,7 +227,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the string property: The string property.
+     * Get the string property: A sequence of textual characters.
      * 
      * @return the string value.
      */
@@ -237,7 +237,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the string property: The string property.
+     * Set the string property: A sequence of textual characters.
      * 
      * @param string the string value to set.
      * @return the Optional object itself.
@@ -249,7 +249,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the stringNullable property: The stringNullable property.
+     * Get the stringNullable property: A sequence of textual characters.
      * 
      * @return the stringNullable value.
      */
@@ -259,7 +259,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the stringNullable property: The stringNullable property.
+     * Set the stringNullable property: A sequence of textual characters.
      * 
      * @param stringNullable the stringNullable value to set.
      * @return the Optional object itself.
@@ -271,7 +271,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the stringRequired property: The stringRequired property.
+     * Get the stringRequired property: A sequence of textual characters.
      * 
      * @return the stringRequired value.
      */
@@ -281,7 +281,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the stringRequiredNullable property: The stringRequiredNullable property.
+     * Get the stringRequiredNullable property: A sequence of textual characters.
      * 
      * @return the stringRequiredNullable value.
      */
@@ -291,7 +291,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the bytes property: The bytes property.
+     * Get the bytes property: Represent a byte array.
      * 
      * @return the bytes value.
      */
@@ -301,7 +301,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the bytes property: The bytes property.
+     * Set the bytes property: Represent a byte array.
      * 
      * @param bytes the bytes value to set.
      * @return the Optional object itself.
@@ -313,7 +313,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the intProperty property: The int property.
+     * Get the intProperty property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the intProperty value.
      */
@@ -323,7 +323,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the intProperty property: The int property.
+     * Set the intProperty property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @param intProperty the intProperty value to set.
      * @return the Optional object itself.
@@ -335,7 +335,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the longProperty property: The long property.
+     * Get the longProperty property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
      * 
      * @return the longProperty value.
      */
@@ -345,7 +345,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the longProperty property: The long property.
+     * Set the longProperty property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
      * 
      * @param longProperty the longProperty value to set.
      * @return the Optional object itself.
@@ -357,7 +357,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the floatProperty property: The float property.
+     * Get the floatProperty property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
      * 
      * @return the floatProperty value.
      */
@@ -367,7 +367,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the floatProperty property: The float property.
+     * Set the floatProperty property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
      * 
      * @param floatProperty the floatProperty value to set.
      * @return the Optional object itself.
@@ -379,7 +379,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Get the doubleProperty property: The double property.
+     * Get the doubleProperty property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
      * 
      * @return the doubleProperty value.
      */
@@ -389,7 +389,7 @@ public final class Optional implements JsonSerializable<Optional> {
     }
 
     /**
-     * Set the doubleProperty property: The double property.
+     * Set the doubleProperty property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
      * 
      * @param doubleProperty the doubleProperty value to set.
      * @return the Optional object itself.

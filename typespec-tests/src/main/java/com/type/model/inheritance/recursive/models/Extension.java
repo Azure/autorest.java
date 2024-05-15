@@ -18,7 +18,7 @@ import java.util.List;
 @Fluent
 public final class Extension extends Element {
     /*
-     * The level property.
+     * A 8-bit integer. (`-128` to `127`)
      */
     @Generated
     private final int level;
@@ -34,7 +34,7 @@ public final class Extension extends Element {
     }
 
     /**
-     * Get the level property: The level property.
+     * Get the level property: A 8-bit integer. (`-128` to `127`).
      * 
      * @return the level value.
      */

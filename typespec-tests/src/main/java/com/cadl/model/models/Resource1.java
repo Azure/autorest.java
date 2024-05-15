@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class Resource1 implements JsonSerializable<Resource1> {
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
@@ -46,7 +46,7 @@ public final class Resource1 implements JsonSerializable<Resource1> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */

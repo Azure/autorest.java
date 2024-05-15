@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class GenerationResult implements JsonSerializable<GenerationResult> {
     /*
+     * A sequence of textual characters.
+     * 
      * The data.
      */
     @Generated
@@ -34,7 +36,9 @@ public final class GenerationResult implements JsonSerializable<GenerationResult
     }
 
     /**
-     * Get the data property: The data.
+     * Get the data property: A sequence of textual characters.
+     * 
+     * The data.
      * 
      * @return the data value.
      */

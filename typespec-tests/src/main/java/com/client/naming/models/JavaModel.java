@@ -18,6 +18,8 @@ import java.io.IOException;
 @Immutable
 public final class JavaModel implements JsonSerializable<JavaModel> {
     /*
+     * Boolean with `true` and `false` values.
+     * 
      * Pass in true
      */
     @Generated
@@ -34,7 +36,9 @@ public final class JavaModel implements JsonSerializable<JavaModel> {
     }
 
     /**
-     * Get the defaultName property: Pass in true.
+     * Get the defaultName property: Boolean with `true` and `false` values.
+     * 
+     * Pass in true.
      * 
      * @return the defaultName value.
      */

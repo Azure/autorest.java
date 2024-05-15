@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
 
     /*
-     * The secretName property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String secretName;
@@ -42,7 +42,7 @@ public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */
@@ -52,7 +52,7 @@ public final class RoundTripModel implements JsonSerializable<RoundTripModel> {
     }
 
     /**
-     * Get the secretName property: The secretName property.
+     * Get the secretName property: A sequence of textual characters.
      * 
      * @return the secretName value.
      */

@@ -19,6 +19,8 @@ import java.math.BigDecimal;
 @Immutable
 public final class Decimal128Property implements JsonSerializable<Decimal128Property> {
     /*
+     * A 128-bit decimal number.
+     * 
      * Property
      */
     @Generated
@@ -35,7 +37,9 @@ public final class Decimal128Property implements JsonSerializable<Decimal128Prop
     }
 
     /**
-     * Get the property property: Property.
+     * Get the property property: A 128-bit decimal number.
+     * 
+     * Property.
      * 
      * @return the property value.
      */

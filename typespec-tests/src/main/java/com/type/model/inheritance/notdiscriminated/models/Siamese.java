@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class Siamese extends Cat {
     /*
-     * The smart property.
+     * Boolean with `true` and `false` values.
      */
     @Generated
     private final boolean smart;
@@ -36,7 +36,7 @@ public final class Siamese extends Cat {
     }
 
     /**
-     * Get the smart property: The smart property.
+     * Get the smart property: Boolean with `true` and `false` values.
      * 
      * @return the smart value.
      */

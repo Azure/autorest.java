@@ -21,6 +21,8 @@ import java.util.Map;
 @Fluent
 public final class SpreadRecordForUnion implements JsonSerializable<SpreadRecordForUnion> {
     /*
+     * Boolean with `true` and `false` values.
+     * 
      * The name property
      */
     @Generated
@@ -45,7 +47,9 @@ public final class SpreadRecordForUnion implements JsonSerializable<SpreadRecord
     }
 
     /**
-     * Get the flag property: The name property.
+     * Get the flag property: Boolean with `true` and `false` values.
+     * 
+     * The name property.
      * 
      * @return the flag value.
      */

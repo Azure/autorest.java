@@ -24,6 +24,8 @@ public class Snake implements JsonSerializable<Snake> {
     private SnakeKind kind;
 
     /*
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
      * Length of the snake
      */
     @Generated
@@ -51,7 +53,9 @@ public class Snake implements JsonSerializable<Snake> {
     }
 
     /**
-     * Get the length property: Length of the snake.
+     * Get the length property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * 
+     * Length of the snake.
      * 
      * @return the length value.
      */

@@ -204,7 +204,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -259,7 +259,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -310,7 +310,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -363,7 +363,7 @@ public final class EtagHeadersImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

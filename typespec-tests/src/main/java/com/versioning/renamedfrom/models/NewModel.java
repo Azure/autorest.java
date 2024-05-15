@@ -19,7 +19,7 @@ import java.io.IOException;
 @Immutable
 public final class NewModel implements JsonSerializable<NewModel> {
     /*
-     * The newProp property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String newProp;
@@ -51,7 +51,7 @@ public final class NewModel implements JsonSerializable<NewModel> {
     }
 
     /**
-     * Get the newProp property: The newProp property.
+     * Get the newProp property: A sequence of textual characters.
      * 
      * @return the newProp value.
      */

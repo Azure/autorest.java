@@ -57,13 +57,13 @@ public final class Encoded implements JsonSerializable<Encoded> {
     private Long unixTimestamp;
 
     /*
-     * The base64 property.
+     * Represent a byte array
      */
     @Generated
     private byte[] base64;
 
     /*
-     * The base64url property.
+     * Represent a byte array
      */
     @Generated
     private Base64Url base64url;
@@ -214,7 +214,7 @@ public final class Encoded implements JsonSerializable<Encoded> {
     }
 
     /**
-     * Get the base64 property: The base64 property.
+     * Get the base64 property: Represent a byte array.
      * 
      * @return the base64 value.
      */
@@ -224,7 +224,7 @@ public final class Encoded implements JsonSerializable<Encoded> {
     }
 
     /**
-     * Set the base64 property: The base64 property.
+     * Set the base64 property: Represent a byte array.
      * 
      * @param base64 the base64 value to set.
      * @return the Encoded object itself.
@@ -236,7 +236,7 @@ public final class Encoded implements JsonSerializable<Encoded> {
     }
 
     /**
-     * Get the base64url property: The base64url property.
+     * Get the base64url property: Represent a byte array.
      * 
      * @return the base64url value.
      */
@@ -249,7 +249,7 @@ public final class Encoded implements JsonSerializable<Encoded> {
     }
 
     /**
-     * Set the base64url property: The base64url property.
+     * Set the base64url property: Represent a byte array.
      * 
      * @param base64url the base64url value to set.
      * @return the Encoded object itself.

@@ -23,7 +23,7 @@ import java.util.Set;
 @Fluent
 public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     /*
-     * The description property.
+     * A sequence of textual characters.
      */
     @Generated
     private String description;
@@ -41,13 +41,13 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     private List<InnerModel> array;
 
     /*
-     * The intValue property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private Integer intValue;
 
     /*
-     * The floatValue property.
+     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
      */
     @Generated
     private Double floatValue;
@@ -93,7 +93,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Get the description property: The description property.
+     * Get the description property: A sequence of textual characters.
      * 
      * @return the description value.
      */
@@ -103,7 +103,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Set the description property: The description property.
+     * Set the description property: A sequence of textual characters.
      * 
      * @param description the description value to set.
      * @return the ResourcePatch object itself.
@@ -162,7 +162,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Get the intValue property: The intValue property.
+     * Get the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the intValue value.
      */
@@ -172,7 +172,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Set the intValue property: The intValue property.
+     * Set the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @param intValue the intValue value to set.
      * @return the ResourcePatch object itself.
@@ -185,7 +185,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Get the floatValue property: The floatValue property.
+     * Get the floatValue property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
      * 
      * @return the floatValue value.
      */
@@ -195,7 +195,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Set the floatValue property: The floatValue property.
+     * Set the floatValue property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
      * 
      * @param floatValue the floatValue value to set.
      * @return the ResourcePatch object itself.

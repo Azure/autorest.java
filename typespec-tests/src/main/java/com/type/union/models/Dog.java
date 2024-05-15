@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class Dog implements JsonSerializable<Dog> {
     /*
-     * The bark property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String bark;
@@ -34,7 +34,7 @@ public final class Dog implements JsonSerializable<Dog> {
     }
 
     /**
-     * Get the bark property: The bark property.
+     * Get the bark property: A sequence of textual characters.
      * 
      * @return the bark value.
      */

@@ -23,19 +23,19 @@ public final class TopLevelArmResourceProperties {
     private List<String> configurationEndpoints;
 
     /*
-     * The userName property.
+     * A sequence of textual characters.
      */
     @JsonProperty(value = "userName", required = true)
     private String userName;
 
     /*
-     * The userNames property.
+     * A sequence of textual characters.
      */
     @JsonProperty(value = "userNames", required = true)
     private String userNames;
 
     /*
-     * The accuserName property.
+     * A sequence of textual characters.
      */
     @JsonProperty(value = "accuserName", required = true)
     private String accuserName;
@@ -68,7 +68,7 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Get the userName property: The userName property.
+     * Get the userName property: A sequence of textual characters.
      * 
      * @return the userName value.
      */
@@ -77,7 +77,7 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Set the userName property: The userName property.
+     * Set the userName property: A sequence of textual characters.
      * 
      * @param userName the userName value to set.
      * @return the TopLevelArmResourceProperties object itself.
@@ -88,7 +88,7 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Get the userNames property: The userNames property.
+     * Get the userNames property: A sequence of textual characters.
      * 
      * @return the userNames value.
      */
@@ -97,7 +97,7 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Set the userNames property: The userNames property.
+     * Set the userNames property: A sequence of textual characters.
      * 
      * @param userNames the userNames value to set.
      * @return the TopLevelArmResourceProperties object itself.
@@ -108,7 +108,7 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Get the accuserName property: The accuserName property.
+     * Get the accuserName property: A sequence of textual characters.
      * 
      * @return the accuserName value.
      */
@@ -117,7 +117,7 @@ public final class TopLevelArmResourceProperties {
     }
 
     /**
-     * Set the accuserName property: The accuserName property.
+     * Set the accuserName property: A sequence of textual characters.
      * 
      * @param accuserName the accuserName value to set.
      * @return the TopLevelArmResourceProperties object itself.

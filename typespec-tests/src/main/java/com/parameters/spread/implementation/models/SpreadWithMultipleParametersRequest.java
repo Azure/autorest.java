@@ -19,37 +19,37 @@ import java.io.IOException;
 public final class SpreadWithMultipleParametersRequest
     implements JsonSerializable<SpreadWithMultipleParametersRequest> {
     /*
-     * The prop1 property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String prop1;
 
     /*
-     * The prop2 property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String prop2;
 
     /*
-     * The prop3 property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String prop3;
 
     /*
-     * The prop4 property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String prop4;
 
     /*
-     * The prop5 property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String prop5;
 
     /*
-     * The prop6 property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String prop6;
@@ -76,7 +76,7 @@ public final class SpreadWithMultipleParametersRequest
     }
 
     /**
-     * Get the prop1 property: The prop1 property.
+     * Get the prop1 property: A sequence of textual characters.
      * 
      * @return the prop1 value.
      */
@@ -86,7 +86,7 @@ public final class SpreadWithMultipleParametersRequest
     }
 
     /**
-     * Get the prop2 property: The prop2 property.
+     * Get the prop2 property: A sequence of textual characters.
      * 
      * @return the prop2 value.
      */
@@ -96,7 +96,7 @@ public final class SpreadWithMultipleParametersRequest
     }
 
     /**
-     * Get the prop3 property: The prop3 property.
+     * Get the prop3 property: A sequence of textual characters.
      * 
      * @return the prop3 value.
      */
@@ -106,7 +106,7 @@ public final class SpreadWithMultipleParametersRequest
     }
 
     /**
-     * Get the prop4 property: The prop4 property.
+     * Get the prop4 property: A sequence of textual characters.
      * 
      * @return the prop4 value.
      */
@@ -116,7 +116,7 @@ public final class SpreadWithMultipleParametersRequest
     }
 
     /**
-     * Get the prop5 property: The prop5 property.
+     * Get the prop5 property: A sequence of textual characters.
      * 
      * @return the prop5 value.
      */
@@ -126,7 +126,7 @@ public final class SpreadWithMultipleParametersRequest
     }
 
     /**
-     * Get the prop6 property: The prop6 property.
+     * Get the prop6 property: A sequence of textual characters.
      * 
      * @return the prop6 value.
      */

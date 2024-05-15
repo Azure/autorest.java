@@ -22,12 +22,16 @@ import java.util.Set;
 @Fluent
 public final class BytesProperty implements JsonSerializable<BytesProperty> {
     /*
+     * A sequence of textual characters.
+     * 
      * Required property
      */
     @Generated
     private String requiredProperty;
 
     /*
+     * Represent a byte array
+     * 
      * Property
      */
     @Generated
@@ -62,7 +66,9 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     }
 
     /**
-     * Get the requiredProperty property: Required property.
+     * Get the requiredProperty property: A sequence of textual characters.
+     * 
+     * Required property.
      * 
      * @return the requiredProperty value.
      */
@@ -72,7 +78,9 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     }
 
     /**
-     * Set the requiredProperty property: Required property.
+     * Set the requiredProperty property: A sequence of textual characters.
+     * 
+     * Required property.
      * <p>Required when create the resource.</p>
      * 
      * @param requiredProperty the requiredProperty value to set.
@@ -86,7 +94,9 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     }
 
     /**
-     * Get the nullableProperty property: Property.
+     * Get the nullableProperty property: Represent a byte array
+     * 
+     * Property.
      * 
      * @return the nullableProperty value.
      */
@@ -96,7 +106,9 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     }
 
     /**
-     * Set the nullableProperty property: Property.
+     * Set the nullableProperty property: Represent a byte array
+     * 
+     * Property.
      * <p>Required when create the resource.</p>
      * 
      * @param nullableProperty the nullableProperty value to set.

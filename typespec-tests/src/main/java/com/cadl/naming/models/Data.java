@@ -19,7 +19,7 @@ import java.io.IOException;
 @Immutable
 public class Data implements JsonSerializable<Data> {
     /*
-     * The @data.kind property.
+     * A sequence of textual characters.
      */
     @Generated
     private String type;
@@ -33,7 +33,7 @@ public class Data implements JsonSerializable<Data> {
     }
 
     /**
-     * Get the type property: The &#064;data.kind property.
+     * Get the type property: A sequence of textual characters.
      * 
      * @return the type value.
      */

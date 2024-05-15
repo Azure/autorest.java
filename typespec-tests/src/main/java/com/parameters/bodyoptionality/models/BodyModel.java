@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class BodyModel implements JsonSerializable<BodyModel> {
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
@@ -34,7 +34,7 @@ public final class BodyModel implements JsonSerializable<BodyModel> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */

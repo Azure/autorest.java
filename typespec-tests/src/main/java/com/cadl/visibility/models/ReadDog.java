@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class ReadDog implements JsonSerializable<ReadDog> {
     /*
-     * The id property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private final int id;
 
     /*
-     * The name property.
+     * A sequence of textual characters.
      */
     @Generated
     private final String name;
@@ -42,7 +42,7 @@ public final class ReadDog implements JsonSerializable<ReadDog> {
     }
 
     /**
-     * Get the id property: The id property.
+     * Get the id property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the id value.
      */
@@ -52,7 +52,7 @@ public final class ReadDog implements JsonSerializable<ReadDog> {
     }
 
     /**
-     * Get the name property: The name property.
+     * Get the name property: A sequence of textual characters.
      * 
      * @return the name value.
      */

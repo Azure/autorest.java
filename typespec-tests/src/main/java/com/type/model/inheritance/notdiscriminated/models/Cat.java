@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public class Cat extends Pet {
     /*
-     * The age property.
+     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
      */
     @Generated
     private final int age;
@@ -35,7 +35,7 @@ public class Cat extends Pet {
     }
 
     /**
-     * Get the age property: The age property.
+     * Get the age property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
      * 
      * @return the age value.
      */

@@ -21,12 +21,16 @@ import java.util.Set;
 @Fluent
 public final class StringProperty implements JsonSerializable<StringProperty> {
     /*
+     * A sequence of textual characters.
+     * 
      * Required property
      */
     @Generated
     private String requiredProperty;
 
     /*
+     * A sequence of textual characters.
+     * 
      * Property
      */
     @Generated
@@ -61,7 +65,9 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
     }
 
     /**
-     * Get the requiredProperty property: Required property.
+     * Get the requiredProperty property: A sequence of textual characters.
+     * 
+     * Required property.
      * 
      * @return the requiredProperty value.
      */
@@ -71,7 +77,9 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
     }
 
     /**
-     * Set the requiredProperty property: Required property.
+     * Set the requiredProperty property: A sequence of textual characters.
+     * 
+     * Required property.
      * <p>Required when create the resource.</p>
      * 
      * @param requiredProperty the requiredProperty value to set.
@@ -85,7 +93,9 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
     }
 
     /**
-     * Get the nullableProperty property: Property.
+     * Get the nullableProperty property: A sequence of textual characters.
+     * 
+     * Property.
      * 
      * @return the nullableProperty value.
      */
@@ -95,7 +105,9 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
     }
 
     /**
-     * Set the nullableProperty property: Property.
+     * Set the nullableProperty property: A sequence of textual characters.
+     * 
+     * Property.
      * <p>Required when create the resource.</p>
      * 
      * @param nullableProperty the nullableProperty value to set.
