@@ -26,6 +26,8 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
     private final String name;
 
     /*
+     * The model is from Record<unknown> type.
+     * 
      * Additional properties
      */
     @Generated
@@ -52,7 +54,9 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
     }
 
     /**
-     * Get the additionalProperties property: Additional properties.
+     * Get the additionalProperties property: The model is from Record&lt;unknown&gt; type.
+     * 
+     * Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +66,9 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
     }
 
     /**
-     * Set the additionalProperties property: Additional properties.
+     * Set the additionalProperties property: The model is from Record&lt;unknown&gt; type.
+     * 
+     * Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsUnknownAdditionalProperties object itself.

@@ -21,7 +21,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
      * Property
      */
     @Generated
-    private final long property = 42L;
+    private final int property = 42;
 
     /**
      * Creates an instance of IntLiteralProperty class.
@@ -36,7 +36,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
      * @return the property value.
      */
     @Generated
-    public long getProperty() {
+    public int getProperty() {
         return this.property;
     }
 
@@ -47,7 +47,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeLongField("property", this.property);
+        jsonWriter.writeIntField("property", this.property);
         return jsonWriter.writeEndObject();
     }
 

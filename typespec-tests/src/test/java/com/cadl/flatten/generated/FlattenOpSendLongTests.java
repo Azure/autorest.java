@@ -5,7 +5,7 @@
 package com.cadl.flatten.generated;
 
 import com.cadl.flatten.models.SendLongOptions;
-import com.cadl.flatten.models.Status;
+import com.cadl.flatten.models.SendLongRequestStatus;
 import com.cadl.flatten.models.User;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -16,12 +16,13 @@ public final class FlattenOpSendLongTests extends FlattenClientTestBase {
     @Disabled
     public void testFlattenOpSendLongTests() {
         // method invocation
-        flattenClient.sendLong(new SendLongOptions("myRequiredId", "myRequiredInput", 11, "title", Status.NOT_STARTED)
-            .setFilter("name=myName")
-            .setUser(new User("myOptionalUser"))
-            .setDataIntOptional(12)
-            .setDataLong(13L)
-            .setDataFloat(14.0D)
-            .setDescription("description"));
+        flattenClient.sendLong(
+            new SendLongOptions("myRequiredId", "myRequiredInput", 11, "title", SendLongRequestStatus.NOT_STARTED)
+                .setFilter("name=myName")
+                .setUser(new User("myOptionalUser"))
+                .setDataIntOptional(12)
+                .setDataLong(13L)
+                .setDataFloat(14.0D)
+                .setDescription("description"));
     }
 }

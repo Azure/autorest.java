@@ -59,7 +59,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("property", this.property == null ? null : this.property.toLong());
+        jsonWriter.writeNumberField("property", this.property == null ? null : this.property.toInt());
         return jsonWriter.writeEndObject();
     }
 
@@ -80,7 +80,7 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    deserializedIntLiteralProperty.property = IntLiteralPropertyProperty.fromLong(reader.getLong());
+                    deserializedIntLiteralProperty.property = IntLiteralPropertyProperty.fromInt(reader.getInt());
                 } else {
                     reader.skipChildren();
                 }

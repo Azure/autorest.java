@@ -13,7 +13,7 @@ using Azure.ClientGenerator.Core;
 namespace Cadl.Internal;
 
 // ApiRequest and RequestInner will be generated
-@access(Access.public, "client")
+@access(Access.public)
 model ApiRequest {
   property: RequestInner;
 }
@@ -46,7 +46,7 @@ model StandAloneData {
 }
 
 // StandAloneDataInner will be generated as intput + output
-@usage(Usage.input | Usage.output, "client")
+@usage(Usage.input | Usage.output)
 model StandAloneDataInner {
   name: string;
 }
@@ -60,13 +60,15 @@ model StandAloneUnion {
 // Color and ColorModel will be generated in implementation.models package
 #suppress "@azure-tools/typespec-azure-core/use-extensible-enum" "For testing"
 @access(Access.internal)
+@usage(Usage.input | Usage.output)
 enum Color {
   Red,
   Blue,
   Green,
 }
 
-@access(Access.internal, "client")
+@access(Access.internal)
+@usage(Usage.input | Usage.output)
 union ColorModel {
   string,
   "Red",
@@ -76,6 +78,7 @@ union ColorModel {
 
 // UnusedEnum will be generated
 @access(Access.public)
+@usage(Usage.input | Usage.output)
 union UnusedEnum {
   string,
   "Weekday",

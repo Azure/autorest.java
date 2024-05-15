@@ -5,9 +5,7 @@
 package com.cadl.naming.models;
 
 /**
- * summary of Types
- * 
- * description of Types.
+ * summary of Types.
  */
 public enum TypesModel {
     /**

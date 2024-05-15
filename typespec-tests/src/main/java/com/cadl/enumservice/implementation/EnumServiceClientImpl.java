@@ -518,7 +518,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -552,7 +552,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -585,7 +585,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -619,7 +619,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -652,7 +652,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -686,7 +686,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -719,7 +719,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -753,7 +753,7 @@ public final class EnumServiceClientImpl {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
