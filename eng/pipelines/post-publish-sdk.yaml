@@ -23,6 +23,11 @@ jobs:
 
   variables:
   - template: /eng/pipelines/variables/globals.yml
+  - name: PullRequestTitleSuffix
+    ${{ if eq(variables['DEV_PACKAGE'], 'true') }}:
+      value: " DEV"
+    ${{ else }}:
+      value: ""
 
   steps:
   - checkout: self
@@ -66,7 +71,7 @@ jobs:
       RepoName: azure-sdk-for-java
       BaseBranchName: 'refs/heads/main'
       PRBranchName: typespec-java-generation-$(Build.BuildId)
-      CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
-      PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
+      CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)$(PullRequestTitleSuffix)'
+      PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)$(PullRequestTitleSuffix)'
       PRLabels: 'DPG'
       OpenAsDraft: 'true'
