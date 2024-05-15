@@ -1,6 +1,13 @@
 trigger: none
 pr: none
 
+parameters:
+- name: DevPackage
+  default: false
+  values:
+  - false
+  - true
+
 pool:
   name: "azsdk-pool-mms-ubuntu-2004-general"
   vmImage: "MMSUbuntu20.04"
@@ -24,7 +31,7 @@ jobs:
   variables:
   - template: /eng/pipelines/variables/globals.yml
   - name: PullRequestTitleSuffix
-    ${{ if eq(variables['DEV_PACKAGE'], 'true') }}:
+    ${{ if eq(parameters.DevPackage, 'true') }}:
       value: " DEV"
     ${{ else }}:
       value: ""
@@ -41,7 +48,7 @@ jobs:
 
   - task: PowerShell@2
     displayName: 'Build typespec-java'
-    condition: eq(variables['DEV_PACKAGE'], 'true')
+    condition: and(succeeded(), eq(parameters.DevPackage, 'true'))
     inputs:
       pwsh: true
       filePath: $(Build.SourcesDirectory)/autorest.java/Build-TypeSpec.ps1
@@ -60,7 +67,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json --dev-package=$(DEV_PACKAGE)
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json --dev-package=$(parameters.DevPackage)
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
