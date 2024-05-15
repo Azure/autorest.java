@@ -96,7 +96,7 @@ public final class EnumServiceClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -129,7 +129,7 @@ public final class EnumServiceClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -162,7 +162,7 @@ public final class EnumServiceClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -194,7 +194,7 @@ public final class EnumServiceClient {
      * {
      *     name: String(Read/Write) (Required)
      *     best: boolean (Required)
-     *     age: long (Required)
+     *     age: int (Required)
      *     priority: String(100/0) (Required)
      *     color: String(Red/Blue/Green) (Required)
      *     unit: String(1/0.001/1000) (Required)
@@ -562,7 +562,7 @@ public final class EnumServiceClient {
     public Operation setPriority(Priority priority) {
         // Generated convenience method for setPriorityWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return setPriorityWithResponse(String.valueOf(priority.toLong()), requestOptions).getValue()
+        return setPriorityWithResponse(String.valueOf(priority.toInt()), requestOptions).getValue()
             .toObject(Operation.class);
     }
 
@@ -677,13 +677,12 @@ public final class EnumServiceClient {
         if (priorityArrayOpt != null) {
             requestOptions.addQueryParam("priorityArrayOpt",
                 priorityArrayOpt.stream()
-                    .map(
-                        paramItemValue -> Objects.toString(paramItemValue == null ? null : paramItemValue.toLong(), ""))
+                    .map(paramItemValue -> Objects.toString(paramItemValue == null ? null : paramItemValue.toInt(), ""))
                     .collect(Collectors.joining(",")),
                 false);
         }
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
@@ -705,7 +704,7 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntEnumArrayWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumArrayWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
@@ -876,12 +875,12 @@ public final class EnumServiceClient {
         if (priorityArrayOpt != null) {
             for (Priority paramItemValue : priorityArrayOpt) {
                 if (paramItemValue != null) {
-                    requestOptions.addQueryParam("priorityArrayOpt", String.valueOf(paramItemValue.toLong()), false);
+                    requestOptions.addQueryParam("priorityArrayOpt", String.valueOf(paramItemValue.toInt()), false);
                 }
             }
         }
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 
@@ -903,7 +902,7 @@ public final class EnumServiceClient {
         // Generated convenience method for setIntEnumMultiWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return setIntEnumMultiWithResponse(priorityArray.stream()
-            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toLong()))
+            .map(paramItemValue -> paramItemValue == null ? "" : String.valueOf(paramItemValue.toInt()))
             .collect(Collectors.toList()), requestOptions).getValue().toObject(String.class);
     }
 

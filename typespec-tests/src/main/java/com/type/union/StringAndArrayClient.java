@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringAndArraysImpl;
 import com.type.union.implementation.models.SendRequest7;
-import com.type.union.models.GetResponse7;
+import com.type.union.models.GetResponse2;
 import com.type.union.models.StringAndArrayCases;
 
 /**
@@ -103,10 +103,10 @@ public final class StringAndArrayClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse7 get() {
+    public GetResponse2 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse7.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse2.class);
     }
 
     /**

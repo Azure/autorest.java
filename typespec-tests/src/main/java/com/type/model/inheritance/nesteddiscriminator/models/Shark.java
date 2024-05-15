@@ -20,18 +20,17 @@ public class Shark extends Fish {
      * The sharktype property.
      */
     @Generated
-    private final String sharktype;
+    private String sharktype = "shark";
 
     /**
      * Creates an instance of Shark class.
      * 
      * @param age the age value to set.
-     * @param sharktype the sharktype value to set.
      */
     @Generated
-    public Shark(int age, String sharktype) {
+    public Shark(int age) {
         super(age);
-        this.sharktype = sharktype;
+        this.sharktype = "shark";
     }
 
     /**
@@ -110,7 +109,10 @@ public class Shark extends Fish {
                     reader.skipChildren();
                 }
             }
-            return new Shark(age, sharktype);
+            Shark deserializedShark = new Shark(age);
+            deserializedShark.sharktype = sharktype;
+
+            return deserializedShark;
         });
     }
 }
