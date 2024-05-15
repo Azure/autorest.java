@@ -6,7 +6,7 @@ package com.cadl.flatten.implementation.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
-import com.cadl.flatten.models.Status;
+import com.cadl.flatten.models.SendLongRequestStatus;
 
 /**
  * The UploadTodoRequest model.
@@ -29,7 +29,7 @@ public final class UploadTodoRequest {
      * The status of the todo item
      */
     @Generated
-    private final Status status;
+    private final SendLongRequestStatus status;
 
     /*
      * The _dummy property.
@@ -62,7 +62,7 @@ public final class UploadTodoRequest {
      * @param status the status value to set.
      */
     @Generated
-    public UploadTodoRequest(String title, Status status) {
+    public UploadTodoRequest(String title, SendLongRequestStatus status) {
         this.title = title;
         this.status = status;
     }
@@ -105,7 +105,7 @@ public final class UploadTodoRequest {
      * @return the status value.
      */
     @Generated
-    public Status getStatus() {
+    public SendLongRequestStatus getStatus() {
         return this.status;
     }
 

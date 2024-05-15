@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.StringAndArraysImpl;
 import com.type.union.implementation.models.SendRequest7;
-import com.type.union.models.GetResponse7;
+import com.type.union.models.GetResponse2;
 import com.type.union.models.StringAndArrayCases;
 import reactor.core.publisher.Mono;
 
@@ -105,11 +105,11 @@ public final class StringAndArrayAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse7> get() {
+    public Mono<GetResponse2> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse7.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse2.class));
     }
 
     /**

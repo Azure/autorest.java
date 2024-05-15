@@ -64,6 +64,8 @@ model Data {
 }
 
 model BytesData extends Data {
+  @clientName("type")
+  @encodedName("application/json", "@data.kind")
   kind: "bytes";
 
   // "{@code}" should not be escaped

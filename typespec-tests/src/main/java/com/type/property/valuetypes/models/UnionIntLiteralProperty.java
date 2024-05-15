@@ -50,7 +50,7 @@ public final class UnionIntLiteralProperty implements JsonSerializable<UnionIntL
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("property", this.property == null ? null : this.property.toLong());
+        jsonWriter.writeNumberField("property", this.property == null ? null : this.property.toInt());
         return jsonWriter.writeEndObject();
     }
 
@@ -72,7 +72,7 @@ public final class UnionIntLiteralProperty implements JsonSerializable<UnionIntL
                 reader.nextToken();
 
                 if ("property".equals(fieldName)) {
-                    property = UnionIntLiteralPropertyProperty.fromLong(reader.getLong());
+                    property = UnionIntLiteralPropertyProperty.fromInt(reader.getInt());
                 } else {
                     reader.skipChildren();
                 }

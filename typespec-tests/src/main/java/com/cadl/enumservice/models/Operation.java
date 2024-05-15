@@ -33,7 +33,7 @@ public final class Operation implements JsonSerializable<Operation> {
      * The age property.
      */
     @Generated
-    private final long age = 50L;
+    private final int age = 50;
 
     /*
      * The priority property.
@@ -119,7 +119,7 @@ public final class Operation implements JsonSerializable<Operation> {
      * @return the age value.
      */
     @Generated
-    public long getAge() {
+    public int getAge() {
         return this.age;
     }
 
@@ -214,11 +214,11 @@ public final class Operation implements JsonSerializable<Operation> {
         jsonWriter.writeStartObject();
         jsonWriter.writeStringField("name", this.name == null ? null : this.name.toString());
         jsonWriter.writeBooleanField("best", this.best);
-        jsonWriter.writeLongField("age", this.age);
-        jsonWriter.writeNumberField("priority", this.priority == null ? null : this.priority.toLong());
+        jsonWriter.writeIntField("age", this.age);
+        jsonWriter.writeNumberField("priority", this.priority == null ? null : this.priority.toInt());
         jsonWriter.writeStringField("color", this.color == null ? null : this.color.toString());
         jsonWriter.writeNumberField("unit", this.unit == null ? null : this.unit.toDouble());
-        jsonWriter.writeNumberField("priorityValue", this.priorityValue == null ? null : this.priorityValue.toLong());
+        jsonWriter.writeNumberField("priorityValue", this.priorityValue == null ? null : this.priorityValue.toInt());
         jsonWriter.writeStringField("colorValue", this.colorValue == null ? null : this.colorValue.toString());
         jsonWriter.writeStringField("colorModelValue",
             this.colorModelValue == null ? null : this.colorModelValue.toString());
@@ -250,7 +250,7 @@ public final class Operation implements JsonSerializable<Operation> {
                 if ("name".equals(fieldName)) {
                     name = OperationName.fromString(reader.getString());
                 } else if ("priority".equals(fieldName)) {
-                    priority = Priority.fromLong(reader.getLong());
+                    priority = Priority.fromInt(reader.getInt());
                 } else if ("color".equals(fieldName)) {
                     color = ColorModel.fromString(reader.getString());
                 } else if ("unit".equals(fieldName)) {

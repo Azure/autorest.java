@@ -16,18 +16,18 @@ public final class PriorityModel extends ExpandableStringEnum<PriorityModel> {
      * Static value 100 for PriorityModel.
      */
     @Generated
-    public static final PriorityModel HIGH = fromLong(100L);
+    public static final PriorityModel HIGH = fromInt(100);
 
     /**
      * Static value 0 for PriorityModel.
      */
     @Generated
-    public static final PriorityModel LOW = fromLong(0L);
+    public static final PriorityModel LOW = fromInt(0);
 
     /**
      * Creates a new instance of PriorityModel value.
      * 
-     * @deprecated Use the {@link #fromLong(long)} factory method.
+     * @deprecated Use the {@link #fromInt(int)} factory method.
      */
     @Generated
     @Deprecated
@@ -41,7 +41,7 @@ public final class PriorityModel extends ExpandableStringEnum<PriorityModel> {
      * @return the corresponding PriorityModel.
      */
     @Generated
-    public static PriorityModel fromLong(long name) {
+    public static PriorityModel fromInt(int name) {
         return fromString(String.valueOf(name), PriorityModel.class);
     }
 

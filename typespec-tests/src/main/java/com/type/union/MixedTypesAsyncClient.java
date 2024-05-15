@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.MixedTypesImpl;
 import com.type.union.implementation.models.SendRequest9;
-import com.type.union.models.GetResponse9;
+import com.type.union.models.GetResponse;
 import com.type.union.models.MixedTypesCases;
 import reactor.core.publisher.Mono;
 
@@ -115,11 +115,11 @@ public final class MixedTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse9> get() {
+    public Mono<GetResponse> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse9.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse.class));
     }
 
     /**

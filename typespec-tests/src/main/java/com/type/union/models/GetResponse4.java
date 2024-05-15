@@ -6,6 +6,7 @@ package com.type.union.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.BinaryData;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -21,7 +22,7 @@ public final class GetResponse4 implements JsonSerializable<GetResponse4> {
      * The prop property.
      */
     @Generated
-    private final Prop3 prop;
+    private final BinaryData prop;
 
     /**
      * Creates an instance of GetResponse4 class.
@@ -29,7 +30,7 @@ public final class GetResponse4 implements JsonSerializable<GetResponse4> {
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse4(Prop3 prop) {
+    private GetResponse4(BinaryData prop) {
         this.prop = prop;
     }
 
@@ -39,7 +40,7 @@ public final class GetResponse4 implements JsonSerializable<GetResponse4> {
      * @return the prop value.
      */
     @Generated
-    public Prop3 getProp() {
+    public BinaryData getProp() {
         return this.prop;
     }
 
@@ -50,7 +51,7 @@ public final class GetResponse4 implements JsonSerializable<GetResponse4> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("prop", this.prop == null ? null : this.prop.toDouble());
+        jsonWriter.writeUntypedField("prop", this.prop.toObject(Object.class));
         return jsonWriter.writeEndObject();
     }
 
@@ -66,13 +67,13 @@ public final class GetResponse4 implements JsonSerializable<GetResponse4> {
     @Generated
     public static GetResponse4 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Prop3 prop = null;
+            BinaryData prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = Prop3.fromDouble(reader.getDouble());
+                    prop = reader.getNullable(nonNullReader -> BinaryData.fromObject(nonNullReader.readUntyped()));
                 } else {
                     reader.skipChildren();
                 }

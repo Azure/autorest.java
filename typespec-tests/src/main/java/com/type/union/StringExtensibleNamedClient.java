@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.type.union.implementation.StringExtensibleNamedsImpl;
 import com.type.union.implementation.models.SendRequest2;
-import com.type.union.models.GetResponse2;
+import com.type.union.models.GetResponse7;
 import com.type.union.models.StringExtensibleNamedUnion;
 
 /**
@@ -97,10 +97,10 @@ public final class StringExtensibleNamedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse2 get() {
+    public GetResponse7 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse2.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse7.class);
     }
 
     /**

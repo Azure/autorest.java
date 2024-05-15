@@ -11,14 +11,14 @@ public enum IntLiteralPropertyProperty {
     /**
      * Enum value 1.
      */
-    ONE(1L);
+    ONE(1);
 
     /**
      * The actual serialized value for a IntLiteralPropertyProperty instance.
      */
-    private final long value;
+    private final int value;
 
-    IntLiteralPropertyProperty(long value) {
+    IntLiteralPropertyProperty(int value) {
         this.value = value;
     }
 
@@ -28,10 +28,10 @@ public enum IntLiteralPropertyProperty {
      * @param value the serialized value to parse.
      * @return the parsed IntLiteralPropertyProperty object, or null if unable to parse.
      */
-    public static IntLiteralPropertyProperty fromLong(long value) {
+    public static IntLiteralPropertyProperty fromInt(int value) {
         IntLiteralPropertyProperty[] items = IntLiteralPropertyProperty.values();
         for (IntLiteralPropertyProperty item : items) {
-            if (item.toLong() == value) {
+            if (item.toInt() == value) {
                 return item;
             }
         }
@@ -39,11 +39,11 @@ public enum IntLiteralPropertyProperty {
     }
 
     /**
-     * De-serializes the instance to long value.
+     * De-serializes the instance to int value.
      * 
-     * @return the long value.
+     * @return the int value.
      */
-    public long toLong() {
+    public int toInt() {
         return this.value;
     }
 }
