@@ -10,6 +10,7 @@ import argparse
 import subprocess
 import glob
 import shutil
+import json
 from typing import List
 
 sdk_root: str
@@ -62,14 +63,19 @@ def update_emitter(package_json_path: str, use_dev_package: bool):
         typespec_extension_path = os.path.dirname(package_json_path)
         for file in os.listdir(typespec_extension_path):
             if file.endswith('.tgz'):
-                dev_package_path = os.path.join(typespec_extension_path, file)
+                dev_package_path = os.path.abspath(os.path.join(typespec_extension_path, file))
+                logging.info(f'Found dev package at "{dev_package_path}"')
+                break
         if dev_package_path:
-            eng_package_path = os.path.join(sdk_root, 'eng', 'emitter-package.json')
-            with open(eng_package_path, 'r') as json_file:
+            emitter_package_path = os.path.join(sdk_root, 'eng', 'emitter-package.json')
+            with open(emitter_package_path, 'r') as json_file:
                 package_json = json.load(json_file)
             package_json['dependencies']['@azure-tools/typespec-java'] = dev_package_path
-            with open(eng_package_path, 'w') as json_file:
-                json.dump(package_json, json_file)
+            with open(emitter_package_path, 'w') as json_file:
+                logging.info(f'Update emitter-package.json to use typespec-java from "{dev_package_path}"')
+                json.dump(package_json, json_file, indent=2)
+        else:
+            logging.error('Failed to locate the dev package.')
 
     logging.info('Update emitter-package-lock.json')
     subprocess.check_call(['tsp-client', '--generate-lock-file'], cwd=sdk_root)
