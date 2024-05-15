@@ -20,6 +20,9 @@ public class GraalVmConfig {
         this.proxies = proxies;
         this.reflects = reflects;
         this.fluent = fluent;
+
+        Collections.sort(this.proxies);
+        Collections.sort(this.reflects);
     }
 
     private static class ReflectConfig {

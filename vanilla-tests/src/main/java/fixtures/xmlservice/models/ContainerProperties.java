@@ -223,7 +223,6 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * @param xmlReader The XmlReader being read.
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
      * pointing to XML null.
-     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
      */
     public static ContainerProperties fromXml(XmlReader xmlReader) throws XMLStreamException {
@@ -238,7 +237,6 @@ public final class ContainerProperties implements XmlSerializable<ContainerPrope
      * cases where the model can deserialize from different root element names.
      * @return An instance of ContainerProperties if the XmlReader was pointing to an instance of it, or null if it was
      * pointing to XML null.
-     * @throws IllegalStateException If the deserialized XML object was missing any required properties.
      * @throws XMLStreamException If an error occurs while reading the ContainerProperties.
      */
     public static ContainerProperties fromXml(XmlReader xmlReader, String rootElementName) throws XMLStreamException {
