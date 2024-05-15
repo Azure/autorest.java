@@ -25,18 +25,27 @@ def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser()
     parser.add_argument(
         '--sdk-root',
+        type=str,
         required=True,
         help='azure-sdk-for-java repository root.',
     )
     parser.add_argument(
         '--package-json-path',
+        type=str,
         required=True,
         help='path to package.json of typespec-java.',
+    )
+    parser.add_argument(
+        '--dev-package',
+        type=str,
+        required=False,
+        default='false',
+        help='use build from the branch, instead of published typespec-java.',
     )
     return parser.parse_args()
 
 
-def update_emitter(package_json_path: str):
+def update_emitter(package_json_path: str, use_dev_package: bool):
     logging.info('Update emitter-package.json')
     subprocess.check_call([
         'pwsh',
@@ -46,6 +55,21 @@ def update_emitter(package_json_path: str):
         '-OutputDirectory',
         'eng'],
         cwd=sdk_root)
+
+    if use_dev_package:
+        # replace version with path to dev package
+        dev_package_path = None
+        typespec_extension_path = os.path.dirname(package_json_path)
+        for file in os.listdir(typespec_extension_path):
+            if file.endswith('.tgz'):
+                dev_package_path = os.path.join(typespec_extension_path, file)
+        if dev_package_path:
+            eng_package_path = os.path.join(sdk_root, 'eng', 'emitter-package.json')
+            with open(eng_package_path, 'r') as json_file:
+                package_json = json.load(json_file)
+            package_json['dependencies']['@azure-tools/typespec-java'] = dev_package_path
+            with open(eng_package_path, 'w') as json_file:
+                json.dump(package_json, json_file)
 
     logging.info('Update emitter-package-lock.json')
     subprocess.check_call(['tsp-client', '--generate-lock-file'], cwd=sdk_root)
@@ -109,7 +133,7 @@ def main():
     args = vars(parse_args())
     sdk_root = args['sdk_root']
 
-    update_emitter(args['package_json_path'])
+    update_emitter(args['package_json_path'], args['dev_package'].lower() == 'true')
 
     update_sdks()
 

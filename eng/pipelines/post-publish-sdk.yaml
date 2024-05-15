@@ -34,6 +34,12 @@ jobs:
     inputs:
       versionSpec: '$(NodeVersion)'
 
+  - task: PowerShell@2
+    displayName: 'Build typespec-java'
+    inputs:
+      pwsh: true
+      filePath: Build-TypeSpec.ps1
+
   - script: npm install -g @azure-tools/typespec-client-generator-cli
     displayName: 'Install tsp-client'
 
@@ -47,7 +53,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json --dev-package=$(DevPackage)
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
