@@ -36,9 +36,11 @@ jobs:
 
   - task: PowerShell@2
     displayName: 'Build typespec-java'
+    condition: eq(variables['DEV_PACKAGE'], 'true')
     inputs:
       pwsh: true
       filePath: Build-TypeSpec.ps1
+      workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: npm install -g @azure-tools/typespec-client-generator-cli
     displayName: 'Install tsp-client'
