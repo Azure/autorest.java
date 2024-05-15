@@ -39,7 +39,7 @@ jobs:
     condition: eq(variables['DEV_PACKAGE'], 'true')
     inputs:
       pwsh: true
-      filePath: Build-TypeSpec.ps1
+      filePath: $(Build.SourcesDirectory)/autorest.java/Build-TypeSpec.ps1
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: npm install -g @azure-tools/typespec-client-generator-cli
