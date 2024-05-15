@@ -1,6 +1,13 @@
 trigger: none
 pr: none
 
+parameters:
+- name: DevPackage
+  default: false
+  values:
+  - false
+  - true
+
 pool:
   name: "azsdk-pool-mms-ubuntu-2004-general"
   vmImage: "MMSUbuntu20.04"
@@ -23,6 +30,11 @@ jobs:
 
   variables:
   - template: /eng/pipelines/variables/globals.yml
+  - name: PullRequestTitleSuffix
+    ${{ if eq(parameters.DevPackage, 'true') }}:
+      value: " DEV"
+    ${{ else }}:
+      value: ""
 
   steps:
   - checkout: self
@@ -33,6 +45,14 @@ jobs:
     displayName: 'Install Node.js $(NodeVersion)'
     inputs:
       versionSpec: '$(NodeVersion)'
+
+  - task: PowerShell@2
+    displayName: 'Build typespec-java'
+    condition: and(succeeded(), eq('${{ parameters.DevPackage }}', 'true'))
+    inputs:
+      pwsh: true
+      filePath: $(Build.SourcesDirectory)/autorest.java/Build-TypeSpec.ps1
+      workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: npm install -g @azure-tools/typespec-client-generator-cli
     displayName: 'Install tsp-client'
@@ -47,7 +67,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json --dev-package=${{ parameters.DevPackage }}
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
@@ -58,7 +78,7 @@ jobs:
       RepoName: azure-sdk-for-java
       BaseBranchName: 'refs/heads/main'
       PRBranchName: typespec-java-generation-$(Build.BuildId)
-      CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
-      PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)'
+      CommitMsg: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)$(PullRequestTitleSuffix)'
+      PRTitle: '[Automation] Generate SDK based on TypeSpec $(PackageVersion)$(PullRequestTitleSuffix)'
       PRLabels: 'DPG'
       OpenAsDraft: 'true'
