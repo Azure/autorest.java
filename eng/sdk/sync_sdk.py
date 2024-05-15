@@ -110,8 +110,14 @@ def update_sdks():
             logging.info('Delete source code of resourcemanager module %s', artifact)
             shutil.rmtree(os.path.join(module_path, 'src', 'main'))
 
-        logging.info('Generate for module %s', artifact)
-        subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
+        logging.info(f'Generate for module {artifact}')
+        try:
+            subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
+        except subprocess.CalledProcessError:
+            # one retry
+            # sometimes customization have intermittent failure
+            logging.warning(f'Retry generate for module {artifact}')
+            subprocess.check_call(['tsp-client', 'update'], cwd=module_path)
 
         if arm_module:
             # revert mock test code
