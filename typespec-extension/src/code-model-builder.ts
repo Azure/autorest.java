@@ -2577,22 +2577,6 @@ export class CodeModelBuilder {
     }
   }
 
-  // private getDefaultValue(type: Type | undefined): any {
-  //   if (type) {
-  //     switch (type.kind) {
-  //       case "String":
-  //         return type.value;
-  //       case "Number":
-  //         return type.value;
-  //       case "Boolean":
-  //         return type.value;
-  //       // case "Tuple":
-  //       //   return type.values.map(getDefaultValue);
-  //     }
-  //   }
-  //   return undefined;
-  // }
-
   private getDoc(target: Type): string {
     return getDoc(this.program, target) || "";
   }
