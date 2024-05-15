@@ -96,6 +96,7 @@ import {
   getProjectedName,
   getSummary,
   getTypeName,
+  getVisibility,
   ignoreDiagnostics,
   isArrayModelType,
   isErrorModel,
@@ -120,7 +121,7 @@ import {
   getStatusCodeDescription,
   isPathParam,
 } from "@typespec/http";
-import { getResourceOperation } from "@typespec/rest";
+import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
@@ -1792,8 +1793,8 @@ export class CodeModelBuilder {
 
   private processStringSchemaFromSdkType(type: SdkBuiltInType, name: string): StringSchema {
     return this.codeModel.schemas.add(
-      new StringSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new StringSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
@@ -1801,8 +1802,8 @@ export class CodeModelBuilder {
   private processByteArraySchemaFromSdkType(type: SdkBuiltInType, name: string): ByteArraySchema {
     const base64Encoded: boolean = type.encode === "base64url";
     return this.codeModel.schemas.add(
-      new ByteArraySchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new ByteArraySchema(name, type.details ?? "", {
+        summary: type.description,
         format: base64Encoded ? "base64url" : "byte",
       }),
     );
@@ -1810,16 +1811,16 @@ export class CodeModelBuilder {
 
   private processIntegerSchemaFromSdkType(type: SdkBuiltInType, name: string, precision: number): NumberSchema {
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Integer, precision, {
-        summary: this.getSummary(type.__raw),
+      new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
+        summary: type.description,
       }),
     );
   }
 
   private processNumberSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Number, 64, {
-        summary: this.getSummary(type.__raw),
+      new NumberSchema(name, type.details ?? "", SchemaType.Number, 64, {
+        summary: type.description,
       }),
     );
   }
@@ -1827,16 +1828,16 @@ export class CodeModelBuilder {
   private processDecimalSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     // "Infinity" maps to "BigDecimal" in Java
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Number, Infinity, {
-        summary: this.getSummary(type.__raw),
+      new NumberSchema(name, type.details ?? "", SchemaType.Number, Infinity, {
+        summary: type.description,
       }),
     );
   }
 
   private processBooleanSchemaFromSdkType(type: SdkBuiltInType, name: string): BooleanSchema {
     return this.codeModel.schemas.add(
-      new BooleanSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new BooleanSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
@@ -1844,14 +1845,14 @@ export class CodeModelBuilder {
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
     const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
     return this.codeModel.schemas.add(
-      new ArraySchema(name, this.getDoc(type.__raw), elementSchema, {
-        summary: this.getSummary(type.__raw),
+      new ArraySchema(name, type.details ?? "", elementSchema, {
+        summary: type.description,
       }),
     );
   }
 
   private processDictionarySchemaFromSdkType(type: SdkDictionaryType, name: string): DictionarySchema {
-    const dictSchema = new DictionarySchema<any>(name, type.details ? type.details : "", null, {
+    const dictSchema = new DictionarySchema<any>(name, type.details ?? "", null, {
       summary: type.description,
     });
 
@@ -1904,8 +1905,8 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new ConstantSchema(name, type.details ?? "", {
+        summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value),
       }),
@@ -1916,8 +1917,8 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.enumType, type.enumType.name);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new ConstantSchema(name, type.details ?? "", {
+        summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value ?? type.name),
       }),
@@ -1926,16 +1927,16 @@ export class CodeModelBuilder {
 
   private processUnixTimeSchemaFromSdkType(type: SdkDatetimeType, name: string): UnixTimeSchema {
     return this.codeModel.schemas.add(
-      new UnixTimeSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new UnixTimeSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
 
   private processDateTimeSchemaFromSdkType(type: SdkDatetimeType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
-      new DateTimeSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new DateTimeSchema(name, type.details ?? "", {
+        summary: type.description,
         format: rfc1123 ? "date-time-rfc1123" : "date-time",
       }),
     );
@@ -1943,16 +1944,16 @@ export class CodeModelBuilder {
 
   private processDateSchemaFromSdkType(type: SdkBuiltInType, name: string): DateSchema {
     return this.codeModel.schemas.add(
-      new DateSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new DateSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
 
   private processTimeSchemaFromSdkType(type: SdkBuiltInType, name: string): TimeSchema {
     return this.codeModel.schemas.add(
-      new TimeSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new TimeSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
@@ -1963,8 +1964,8 @@ export class CodeModelBuilder {
     format: DurationSchema["format"] = "duration-rfc3339",
   ): DurationSchema {
     return this.codeModel.schemas.add(
-      new DurationSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new DurationSchema(name, type.details ?? "", {
+        summary: type.description,
         format: format,
       }),
     );
@@ -1972,8 +1973,8 @@ export class CodeModelBuilder {
 
   private processUrlSchemaFromSdkType(type: SdkBuiltInType, name: string): UriSchema {
     return this.codeModel.schemas.add(
-      new UriSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new UriSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
