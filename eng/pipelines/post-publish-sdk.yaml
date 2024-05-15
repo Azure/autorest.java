@@ -48,7 +48,7 @@ jobs:
 
   - task: PowerShell@2
     displayName: 'Build typespec-java'
-    condition: and(succeeded(), eq(parameters.DevPackage, 'true'))
+    condition: and(succeeded(), eq('${{ parameters.DevPackage }}', 'true'))
     inputs:
       pwsh: true
       filePath: $(Build.SourcesDirectory)/autorest.java/Build-TypeSpec.ps1
@@ -67,7 +67,7 @@ jobs:
       workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
   - script: |
-      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json --dev-package=$(parameters.DevPackage)
+      python3 ./eng/sdk/sync_sdk.py --sdk-root=$(Build.SourcesDirectory)/azure-sdk-for-java --package-json-path=$(Build.SourcesDirectory)/autorest.java/typespec-extension/package.json --dev-package=${{ parameters.DevPackage }}
     displayName: 'Generate SDK'
     workingDirectory: $(Build.SourcesDirectory)/autorest.java
 
