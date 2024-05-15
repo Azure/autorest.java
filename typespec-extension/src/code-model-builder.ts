@@ -300,7 +300,6 @@ export class CodeModelBuilder {
             protocol: {
               http: new HttpParameter(ParameterLocation.Uri),
             },
-            // clientDefaultValue: this.getDefaultValue(it.default),
             language: {
               default: {
                 serializedName: it.name,
@@ -1106,7 +1105,6 @@ export class CodeModelBuilder {
             explode: explode,
           }),
         },
-        // clientDefaultValue: this.getDefaultValue(param.param.default),
         language: {
           default: {
             serializedName: param.name,
@@ -1348,7 +1346,6 @@ export class CodeModelBuilder {
       protocol: {
         http: new HttpParameter(ParameterLocation.Body),
       },
-      // clientDefaultValue: this.getDefaultValue(body.default),
     });
     op.addParameter(parameter);
 
@@ -2111,7 +2108,6 @@ export class CodeModelBuilder {
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
-      // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.kind === "property" ? prop.serializedName : undefined,
       extensions: extensions,
     });
