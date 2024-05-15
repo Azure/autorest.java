@@ -1,4 +1,4 @@
-import { Enum, Model, NoTarget, Operation, Program, Union } from "@typespec/compiler";
+import { NoTarget, Program, Type } from "@typespec/compiler";
 
 export function logWarning(program: Program, msg: string) {
   trace(program, msg);
@@ -22,14 +22,18 @@ export function pascalCase(name: string): string {
   }
 }
 
-export function getNamespace(type: Model | Enum | Union | Operation): string | undefined {
-  let namespaceRef = type.namespace;
-  let namespaceStr: string | undefined = undefined;
-  while (namespaceRef && namespaceRef.name.length !== 0) {
-    namespaceStr = namespaceRef.name + (namespaceStr ? "." + namespaceStr : "");
-    namespaceRef = namespaceRef.namespace;
+export function getNamespace(type: Type | undefined): string | undefined {
+  if (type && (type.kind === "Model" || type.kind === "Enum" || type.kind === "Union" || type.kind === "Operation")) {
+    let namespaceRef = type.namespace;
+    let namespaceStr: string | undefined = undefined;
+    while (namespaceRef && namespaceRef.name.length !== 0) {
+      namespaceStr = namespaceRef.name + (namespaceStr ? "." + namespaceStr : "");
+      namespaceRef = namespaceRef.namespace;
+    }
+    return namespaceStr;
+  } else {
+    return undefined;
   }
-  return namespaceStr;
 }
 
 export function getJavaNamespace(namespace: string | undefined): string | undefined {

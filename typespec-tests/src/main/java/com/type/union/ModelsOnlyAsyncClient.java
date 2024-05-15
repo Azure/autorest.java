@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.ModelsOnliesImpl;
 import com.type.union.implementation.models.SendRequest5;
-import com.type.union.models.GetResponse5;
+import com.type.union.models.GetResponse4;
 import reactor.core.publisher.Mono;
 
 /**
@@ -98,11 +98,11 @@ public final class ModelsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse5> get() {
+    public Mono<GetResponse4> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse5.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse4.class));
     }
 
     /**

@@ -20,18 +20,16 @@ public final class SawShark extends Shark {
      * The sharktype property.
      */
     @Generated
-    private final String sharktype;
+    private String sharktype = "saw";
 
     /**
      * Creates an instance of SawShark class.
      * 
      * @param age the age value to set.
-     * @param sharktype the sharktype value to set.
      */
     @Generated
-    public SawShark(int age, String sharktype) {
-        super(age, sharktype);
-        this.sharktype = "saw";
+    public SawShark(int age) {
+        super(age);
     }
 
     /**
@@ -83,7 +81,10 @@ public final class SawShark extends Shark {
                     reader.skipChildren();
                 }
             }
-            return new SawShark(age, sharktype);
+            SawShark deserializedSawShark = new SawShark(age);
+            deserializedSawShark.sharktype = sharktype;
+
+            return deserializedSawShark;
         });
     }
 }

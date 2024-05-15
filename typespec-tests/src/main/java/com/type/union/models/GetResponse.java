@@ -21,7 +21,7 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
      * The prop property.
      */
     @Generated
-    private final Prop1 prop;
+    private final MixedTypesCases prop;
 
     /**
      * Creates an instance of GetResponse class.
@@ -29,7 +29,7 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse(Prop1 prop) {
+    private GetResponse(MixedTypesCases prop) {
         this.prop = prop;
     }
 
@@ -39,7 +39,7 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
      * @return the prop value.
      */
     @Generated
-    public Prop1 getProp() {
+    public MixedTypesCases getProp() {
         return this.prop;
     }
 
@@ -50,7 +50,7 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeStringField("prop", this.prop == null ? null : this.prop.toString());
+        jsonWriter.writeJsonField("prop", this.prop);
         return jsonWriter.writeEndObject();
     }
 
@@ -66,13 +66,13 @@ public final class GetResponse implements JsonSerializable<GetResponse> {
     @Generated
     public static GetResponse fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Prop1 prop = null;
+            MixedTypesCases prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = Prop1.fromString(reader.getString());
+                    prop = MixedTypesCases.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
