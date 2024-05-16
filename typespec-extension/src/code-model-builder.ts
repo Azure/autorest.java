@@ -301,7 +301,6 @@ export class CodeModelBuilder {
             protocol: {
               http: new HttpParameter(ParameterLocation.Uri),
             },
-            clientDefaultValue: this.getDefaultValue(it.default),
             language: {
               default: {
                 serializedName: it.name,
@@ -1107,7 +1106,6 @@ export class CodeModelBuilder {
             explode: explode,
           }),
         },
-        // clientDefaultValue: this.getDefaultValue(param.param.default),
         language: {
           default: {
             serializedName: param.name,
@@ -1349,7 +1347,6 @@ export class CodeModelBuilder {
       protocol: {
         http: new HttpParameter(ParameterLocation.Body),
       },
-      // clientDefaultValue: this.getDefaultValue(body.default),
     });
     op.addParameter(parameter);
 
@@ -2112,7 +2109,6 @@ export class CodeModelBuilder {
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
-      // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.kind === "property" ? prop.serializedName : undefined,
       extensions: extensions,
     });
@@ -2244,22 +2240,6 @@ export class CodeModelBuilder {
       );
     }
     throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
-  }
-
-  private getDefaultValue(type: Type | undefined): any {
-    if (type) {
-      switch (type.kind) {
-        case "String":
-          return type.value;
-        case "Number":
-          return type.value;
-        case "Boolean":
-          return type.value;
-        // case "Tuple":
-        //   return type.values.map(getDefaultValue);
-      }
-    }
-    return undefined;
   }
 
   private getDoc(target: Type | undefined): string {

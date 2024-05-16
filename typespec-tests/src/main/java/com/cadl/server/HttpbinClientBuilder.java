@@ -235,10 +235,8 @@ public final class HttpbinClientBuilder
     @Generated
     private HttpbinClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
-        String localDomain = (domain != null) ? domain : "httpbin";
-        String localTld = (tld != null) ? tld : "org";
         HttpbinClientImpl client = new HttpbinClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
-            localDomain, localTld);
+            this.domain, this.tld);
         return client;
     }
 
