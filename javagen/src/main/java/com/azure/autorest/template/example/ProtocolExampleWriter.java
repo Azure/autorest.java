@@ -228,8 +228,12 @@ public class ProtocolExampleWriter {
                     clientVarName,
                     method.getName(),
                     String.join(", ", params));
-            if (isTestCode && (method.getType() == ClientMethodType.LongRunningBeginSync || method.getType() == ClientMethodType.LongRunningBeginAsync)) {
-                methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
+            if (isTestCode) {
+                if (method.getType() == ClientMethodType.LongRunningBeginSync) {
+                    methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
+                } else if (method.getType() == ClientMethodType.LongRunningBeginAsync) {
+                    methodCall = "setPlaybackPollerFluxPollInterval(" + methodCall + ")";
+                }
             }
             methodBlock.line(method.getReturnValue().getType() + " response = " + methodCall + ";");
         };
