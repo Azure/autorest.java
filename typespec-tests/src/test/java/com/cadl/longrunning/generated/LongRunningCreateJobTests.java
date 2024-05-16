@@ -21,7 +21,7 @@ public final class LongRunningCreateJobTests extends LongRunningClientTestBase {
     @Disabled
     public void testLongRunningCreateJobTests() {
         // method invocation
-        SyncPoller<PollOperationDetails, JobResultResult> response = setPlaybackSyncPollerPollInterval(longRunningClient
+        SyncPoller<JobResult, JobResultResult> response = setPlaybackSyncPollerPollInterval(longRunningClient
             .beginCreateJob(new JobData(mapOf("max", 15.0D, "min", 14.0D, "average", 14.3D)).setConfiguration("{}")));
 
         // response assertion
