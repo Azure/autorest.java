@@ -37,7 +37,7 @@ public class ProtocolTestTemplate implements IJavaTemplate<TestContext<ProtocolE
         context.publicFinalClass(String.format("%1$s extends %2$s", className, testContext.getTestBaseClassName()), classBlock -> {
             classBlock.annotation("Test", "Disabled");  // "DoNotRecord(skipInPlayback = true)" not added
             classBlock.publicMethod(String.format("void test%1$s()", className), methodBlock -> {
-                caseWriter.writeClientMethodInvocation(methodBlock);
+                caseWriter.writeClientMethodInvocation(methodBlock, true);
                 caseWriter.writeAssertion(methodBlock);
             });
         });

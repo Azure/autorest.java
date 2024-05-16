@@ -54,8 +54,8 @@ public class ClientMethodTestTemplate implements IJavaTemplate<TestContext<Clien
             }
             classBlock.publicMethod(methodSignature, methodBlock -> {
                 methodBlock.line("// method invocation");
-                caseWriter.writeMethodInvocation(methodBlock);
-                caseWriter.writeResponseAssertion(methodBlock);
+                caseWriter.writeClientMethodInvocation(methodBlock, true);
+                caseWriter.writeAssertion(methodBlock);
             });
             if (helperFeatures.contains(ExampleHelperFeature.MapOfMethod)) {
                 ModelExampleWriter.writeMapOfMethod(classBlock);
