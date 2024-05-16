@@ -96,6 +96,7 @@ import {
   getProjectedName,
   getSummary,
   getTypeName,
+  getVisibility,
   ignoreDiagnostics,
   isArrayModelType,
   isErrorModel,
@@ -120,7 +121,7 @@ import {
   getStatusCodeDescription,
   isPathParam,
 } from "@typespec/http";
-import { getResourceOperation } from "@typespec/rest";
+import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
@@ -2308,15 +2309,22 @@ export class CodeModelBuilder {
   }
 
   private isReadOnly(target: SdkModelPropertyType): boolean {
-    if (target.kind === "property" && target.visibility) {
-      return (
-        !target.visibility.includes(Visibility.Create) &&
-        !target.visibility.includes(Visibility.Update) &&
-        !target.visibility.includes(Visibility.Delete) &&
-        !target.visibility.includes(Visibility.Query)
-      );
+    const segment = target.__raw ? getSegment(this.program, target.__raw) !== undefined : false;
+    if (segment) {
+      return true;
     } else {
-      return false;
+      const visibility = target.__raw ? getVisibility(this.program, target.__raw) : undefined;
+      if (visibility) {
+        return (
+          !visibility.includes("write") &&
+          !visibility.includes("create") &&
+          !visibility.includes("update") &&
+          !visibility.includes("delete") &&
+          !visibility.includes("query")
+        );
+      } else {
+        return false;
+      }
     }
   }
 
