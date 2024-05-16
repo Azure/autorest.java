@@ -13,12 +13,7 @@ public class ServerTests {
     @Disabled("test calls httpbin.org")
     @Test
     public void serverTests() {
-        // use default server
-        HttpbinClient client = new HttpbinClientBuilder().buildClient();
-        Assertions.assertEquals(200, client.statusWithResponse(200, new RequestOptions()).getStatusCode());
-
-        // use specified server
-        client = new HttpbinClientBuilder()
+        HttpbinClient client = new HttpbinClientBuilder()
                 .domain("httpbin")
                 .tld("org")
                 .buildClient();
