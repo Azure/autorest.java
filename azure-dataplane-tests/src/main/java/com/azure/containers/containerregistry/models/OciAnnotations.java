@@ -21,7 +21,8 @@ import java.util.Map;
 @Fluent
 public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     /*
-     * Date and time on which the image was built (string, date-time as defined by https://tools.ietf.org/html/rfc3339#section-5.6)
+     * Date and time on which the image was built (string, date-time as defined by
+     * https://tools.ietf.org/html/rfc3339#section-5.6)
      */
     private OffsetDateTime createdOn;
 
@@ -46,7 +47,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
     private String source;
 
     /*
-     * Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be Semantic versioning-compatible
+     * Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be
+     * Semantic versioning-compatible
      */
     private String version;
 

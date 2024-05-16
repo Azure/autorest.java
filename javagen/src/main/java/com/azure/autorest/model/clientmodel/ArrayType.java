@@ -108,7 +108,8 @@ public class ArrayType implements IType {
     }
 
     @Override
-    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter,
+        boolean jsonMergePatch) {
         return fieldName == null
             ? String.format("%s.writeBinary(%s)", jsonWriterName, valueGetter)
             : String.format("%s.writeBinaryField(\"%s\", %s)", jsonWriterName, fieldName, valueGetter);

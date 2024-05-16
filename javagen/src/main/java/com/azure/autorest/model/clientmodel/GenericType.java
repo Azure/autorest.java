@@ -298,7 +298,8 @@ public class GenericType implements IType {
     }
 
     @Override
-    public final String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+    public final String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter,
+        boolean jsonMergePatch) {
         return null;
     }
 

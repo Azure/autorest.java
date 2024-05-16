@@ -718,7 +718,8 @@ public class ClassType implements IType {
     }
 
     @Override
-    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter,
+        boolean jsonMergePatch) {
         if (!isSwaggerType && CoreUtils.isNullOrEmpty(serializationMethodBase)) {
             return null;
         }

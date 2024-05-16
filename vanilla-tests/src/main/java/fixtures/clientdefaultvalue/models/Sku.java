@@ -27,7 +27,8 @@ public final class Sku implements JsonSerializable<Sku> {
     private SkuName name = SkuName.STANDARD;
 
     /*
-     * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault.
+     * Property to specify whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from
+     * the key vault.
      */
     private Boolean enabledForDeployment = true;
 

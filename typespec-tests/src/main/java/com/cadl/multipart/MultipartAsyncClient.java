@@ -64,7 +64,8 @@ public final class MultipartAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> uploadWithResponse(String name, BinaryData data, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'upload' is
+        // 'multipart/form-data'
         return this.serviceClient.uploadWithResponseAsync(name, data, requestOptions);
     }
 

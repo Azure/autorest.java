@@ -23,7 +23,8 @@ public final class PathsV3R3RxOauth2TokenPostRequestbodyContentApplicationXWwwFo
     private String service;
 
     /*
-     * Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You obtained this from the Www-Authenticate response header from the challenge.
+     * Which is expected to be a valid scope, and can be specified more than once for multiple scope requests. You
+     * obtained this from the Www-Authenticate response header from the challenge.
      */
     private String scope;
 
