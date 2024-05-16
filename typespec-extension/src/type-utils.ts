@@ -77,7 +77,7 @@ export function isModelReferredInTemplate(template: TemplatedTypeBase, target: M
   return (
     template === target ||
     (template?.templateMapper?.args?.some((it) =>
-      it.kind === "Model" || it.kind === "Union" ? isModelReferredInTemplate(it, target) : false,
+      "kind" in it && (it.kind === "Model" || it.kind === "Union") ? isModelReferredInTemplate(it, target) : false,
     ) ??
       false)
   );
@@ -88,7 +88,7 @@ export function getNameForTemplate(target: Type): string {
     case "Model": {
       let name = target.name;
       if (target.templateMapper && target.templateMapper.args) {
-        name = name + target.templateMapper.args.map((it) => getNameForTemplate(it)).join("");
+        name = name + target.templateMapper.args.map((it) => ("kind" in it ? getNameForTemplate(it) : "")).join("");
       }
       return name;
     }
@@ -264,7 +264,7 @@ export function getAccess(type: Type | undefined): string | undefined {
   if (type && (type.kind === "Model" || type.kind === "Operation" || type.kind === "Enum" || type.kind === "Union")) {
     return getDecoratorScopedValue(type, "$access", (it) => {
       const value = it.args[0].value;
-      if (value.kind === "EnumMember") {
+      if ("kind" in value && value.kind === "EnumMember") {
         return value.name;
       } else {
         return undefined;
@@ -285,9 +285,9 @@ export function getUsage(type: Type | undefined): SchemaContext[] | undefined {
       const value = it.args[0].value;
       const values: EnumMember[] = [];
       const ret: SchemaContext[] = [];
-      if (value.kind === "EnumMember") {
+      if ("kind" in value && value.kind === "EnumMember") {
         values.push(value);
-      } else if (value.kind === "Union") {
+      } else if ("kind" in value && value.kind === "Union") {
         for (const v of value.variants.values()) {
           values.push(v.type as EnumMember);
         }

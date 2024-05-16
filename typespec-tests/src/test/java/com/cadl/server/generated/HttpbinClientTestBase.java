@@ -27,8 +27,8 @@ class HttpbinClientTestBase extends TestProxyTestBase {
     @Override
     protected void beforeTest() {
         HttpbinClientBuilder httpbinClientbuilder
-            = new HttpbinClientBuilder().domain(Configuration.getGlobalConfiguration().get("DOMAIN", "httpbin"))
-                .tld(Configuration.getGlobalConfiguration().get("TLD", "org"))
+            = new HttpbinClientBuilder().domain(Configuration.getGlobalConfiguration().get("DOMAIN", "domain"))
+                .tld(Configuration.getGlobalConfiguration().get("TLD", "tld"))
                 .httpClient(HttpClient.createDefault())
                 .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BASIC));
         if (getTestMode() == TestMode.PLAYBACK) {

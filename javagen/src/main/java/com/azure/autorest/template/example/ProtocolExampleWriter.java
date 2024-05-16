@@ -11,6 +11,7 @@ import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.GenericType;
 import com.azure.autorest.model.clientmodel.IType;
 import com.azure.autorest.model.clientmodel.IterableType;
@@ -38,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -48,7 +50,7 @@ public class ProtocolExampleWriter {
 
     private final Set<String> imports;
     private final ClientInitializationExampleWriter clientInitializationExampleWriter;
-    private final Consumer<JavaBlock> clientMethodInvocationWriter;
+    private final BiConsumer<JavaBlock, Boolean> clientMethodInvocationWriter;
     private final Consumer<JavaBlock> assertionWriter;
 
     @SuppressWarnings("unchecked")
@@ -200,7 +202,7 @@ public class ProtocolExampleWriter {
             }
         });
 
-        this.clientMethodInvocationWriter = methodBlock -> {
+        this.clientMethodInvocationWriter = (methodBlock, isTestCode) -> {
             // binaryData
             if (binaryDataStmt.length() > 0) {
                 methodBlock.line(binaryDataStmt.toString());
@@ -222,12 +224,18 @@ public class ProtocolExampleWriter {
                     params.set(i, "Context.NONE");
                 }
             }
-            methodBlock.line(String.format(
-                    "%1$s response = %2$s.%3$s(%4$s);",
-                    method.getReturnValue().getType(),
+            String methodCall = String.format("%s.%s(%s)",
                     clientVarName,
                     method.getName(),
-                    String.join(", ", params)));
+                    String.join(", ", params));
+            if (isTestCode) {
+                if (method.getType() == ClientMethodType.LongRunningBeginSync) {
+                    methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
+                } else if (method.getType() == ClientMethodType.LongRunningBeginAsync) {
+                    methodCall = "setPlaybackPollerFluxPollInterval(" + methodCall + ")";
+                }
+            }
+            methodBlock.line(method.getReturnValue().getType() + " response = " + methodCall + ";");
         };
 
         this.assertionWriter = methodBlock -> {
@@ -313,8 +321,8 @@ public class ProtocolExampleWriter {
         clientInitializationExampleWriter.write(methodBlock);
     }
 
-    public void writeClientMethodInvocation(JavaBlock methodBlock) {
-        clientMethodInvocationWriter.accept(methodBlock);
+    public void writeClientMethodInvocation(JavaBlock methodBlock, boolean isTestCode) {
+        clientMethodInvocationWriter.accept(methodBlock, isTestCode);
     }
 
     public void writeAssertion(JavaBlock methodBlock) {

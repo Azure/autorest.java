@@ -34,7 +34,7 @@ public class ProtocolSampleTemplate implements IJavaTemplate<ProtocolExample, Ja
                     methodBlock.line(String.format("// BEGIN:%s", protocolExample.getProxyMethodExample().getCodeSnippetIdentifier()));
                 }
 
-                writer.writeClientMethodInvocation(methodBlock);
+                writer.writeClientMethodInvocation(methodBlock, false);
 
                 // codesnippet end
                 if (protocolExample.getProxyMethodExample().getCodeSnippetIdentifier() != null) {

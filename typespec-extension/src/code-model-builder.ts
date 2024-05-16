@@ -96,6 +96,7 @@ import {
   getProjectedName,
   getSummary,
   getTypeName,
+  getVisibility,
   ignoreDiagnostics,
   isArrayModelType,
   isErrorModel,
@@ -120,7 +121,7 @@ import {
   getStatusCodeDescription,
   isPathParam,
 } from "@typespec/http";
-import { getResourceOperation } from "@typespec/rest";
+import { getResourceOperation, getSegment } from "@typespec/rest";
 import { Version, getAddedOnVersions, getVersion } from "@typespec/versioning";
 import { fail } from "assert";
 import pkg from "lodash";
@@ -300,7 +301,6 @@ export class CodeModelBuilder {
             protocol: {
               http: new HttpParameter(ParameterLocation.Uri),
             },
-            clientDefaultValue: this.getDefaultValue(it.default),
             language: {
               default: {
                 serializedName: it.name,
@@ -1118,7 +1118,6 @@ export class CodeModelBuilder {
             explode: explode,
           }),
         },
-        // clientDefaultValue: this.getDefaultValue(param.param.default),
         language: {
           default: {
             serializedName: param.name,
@@ -1360,7 +1359,6 @@ export class CodeModelBuilder {
       protocol: {
         http: new HttpParameter(ParameterLocation.Body),
       },
-      // clientDefaultValue: this.getDefaultValue(body.default),
     });
     op.addParameter(parameter);
 
@@ -2123,7 +2121,6 @@ export class CodeModelBuilder {
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
-      // clientDefaultValue: this.getDefaultValue(prop.default),
       serializedName: prop.kind === "property" ? prop.serializedName : undefined,
       extensions: extensions,
     });
@@ -2257,22 +2254,6 @@ export class CodeModelBuilder {
     throw new Error(`Invalid type for multipart form data: '${property.type.kind}'.`);
   }
 
-  private getDefaultValue(type: Type | undefined): any {
-    if (type) {
-      switch (type.kind) {
-        case "String":
-          return type.value;
-        case "Number":
-          return type.value;
-        case "Boolean":
-          return type.value;
-        // case "Tuple":
-        //   return type.values.map(getDefaultValue);
-      }
-    }
-    return undefined;
-  }
-
   private getDoc(target: Type | undefined): string {
     return target ? getDoc(this.program, target) || "" : "";
   }
@@ -2340,15 +2321,22 @@ export class CodeModelBuilder {
   }
 
   private isReadOnly(target: SdkModelPropertyType): boolean {
-    if (target.kind === "property" && target.visibility) {
-      return (
-        !target.visibility.includes(Visibility.Create) &&
-        !target.visibility.includes(Visibility.Update) &&
-        !target.visibility.includes(Visibility.Delete) &&
-        !target.visibility.includes(Visibility.Query)
-      );
+    const segment = target.__raw ? getSegment(this.program, target.__raw) !== undefined : false;
+    if (segment) {
+      return true;
     } else {
-      return false;
+      const visibility = target.__raw ? getVisibility(this.program, target.__raw) : undefined;
+      if (visibility) {
+        return (
+          !visibility.includes("write") &&
+          !visibility.includes("create") &&
+          !visibility.includes("update") &&
+          !visibility.includes("delete") &&
+          !visibility.includes("query")
+        );
+      } else {
+        return false;
+      }
     }
   }
 
