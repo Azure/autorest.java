@@ -1255,28 +1255,39 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * Add json-merge-patch related flag and accessors.
      */
     private void addJsonMergePatchRelatedPropertyAndAccessors(JavaClass classBlock, ClientModel model) {
-        // properties
-        addGeneratedAnnotation(classBlock);
-        classBlock.privateMemberVariable("boolean jsonMergePatch");
+        if (!model.getImplementationDetails().isInput()) {
+            // Model doesn't get used in serialization, no need to add json merge patch related properties and
+            // accessors.
+            return;
+        }
 
-        classBlock.javadocComment(comment -> {
-            comment.description("Stores updated model property, the value is property name, not serialized name");
-        });
+        // Only the root model needs to have the jsonMergePatch property and accessors.
+        boolean rootParent = model.getParentModelName() == null || model.getParentModelName().isEmpty();
+        if (rootParent) {
+            // properties
+            addGeneratedAnnotation(classBlock);
+            classBlock.privateMemberVariable("boolean jsonMergePatch");
+            classBlock.method(JavaVisibility.PackagePrivate, null, "boolean isJsonMergePatch()",
+                method -> method.line("return this.jsonMergePatch;"));
+        }
+
+        classBlock.javadocComment(comment ->
+            comment.description("Stores updated model property, the value is property name, not serialized name"));
         addGeneratedAnnotation(classBlock);
         classBlock.privateFinalMemberVariable("Set<String> updatedProperties = new HashSet<>()");
 
-        // setter
-        addGeneratedAnnotation(classBlock);
-        classBlock.packagePrivateMethod("void serializeAsJsonMergePatch(boolean jsonMergePatch)", method -> {
-            method.line("this.jsonMergePatch = jsonMergePatch;");
-        });
+        if (rootParent) {
+            // setter
+            addGeneratedAnnotation(classBlock);
+            classBlock.privateMethod("void serializeAsJsonMergePatch(boolean jsonMergePatch)",
+                method -> method.line("this.jsonMergePatch = jsonMergePatch;"));
 
-        // static code block to access jsonMergePatch setter
-        classBlock.staticBlock(staticBlock -> {
-            staticBlock.text(String.format("JsonMergePatchHelper.set%sAccessor((model, jsonMergePatchEnabled) -> {\n" +
-                    "model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" +
-                    "return model;\n" + "});", model.getName()));
-        });
+            // static code block to access jsonMergePatch setter
+            classBlock.staticBlock(staticBlock -> staticBlock.text(String.format(
+                "JsonMergePatchHelper.set%sAccessor((model, jsonMergePatchEnabled) -> {\n"
+                    + "model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" + "return model;\n" + "});",
+                model.getName())));
+        }
     }
 
     private static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {

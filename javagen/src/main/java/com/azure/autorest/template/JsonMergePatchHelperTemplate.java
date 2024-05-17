@@ -38,76 +38,68 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
         javaFile.javadocComment(comment ->
             comment.description("This is the Helper class to enable json merge patch serialization for a model"));
         // class code
-        javaFile.publicClass(null, ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME, javaClass -> {
-            addAccessorProperties(models, javaClass);
-            addAccessorInterfaces(models, javaClass);
-            addGettersAndSetters(models, javaClass);
-        });
+        javaFile.publicClass(null, ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME,
+            javaClass -> createJsonMergePatchAccessHelpers(models, javaClass));
     }
 
     /**
      * Add imports for JsonMergePatchHelper.
-     * @param imports
-     * @param models
-     * @param settings
+     *
+     * @param imports Set of imports to add to.
+     * @param models List of models in the service that are used in json-merge-patch.
+     * @param settings JavaSettings to use.
      */
     private static void addImports(Set<String> imports, List<ClientModel> models, JavaSettings settings) {
         if (models != null && !models.isEmpty()) {
-            models.forEach(model -> {
-                model.addImportsTo(imports, settings);
-            });
+            models.forEach(model -> model.addImportsTo(imports, settings));
         }
     }
 
     /**
-     * Add accessor properties for each model that is used in json-merge-patch.
+     * Creates the access helpers for the json-merge-patch models in a service.
+     * <p>
+     * This will create the accessor property, interface, and method for each model that is used in json-merge-patch.
+     * Instead of following standard patterns where all fields are declared together, the field, interface, and static
+     * methods for each model are declared together.
      *
-     * @param models
-     * @param javaClass
+     * @param models List of models in the service that are used in json-merge-patch.
+     * @param javaClass JavaClass to add accessor properties.
      */
-    private static void addAccessorProperties(List<ClientModel> models, JavaClass javaClass) {
-        if (models != null && !models.isEmpty()) {
-            models.forEach(model -> {
-                javaClass.privateMemberVariable(String.format("static %sAccessor %sAccessor", model.getName(), CodeNamer.toCamelCase(model.getName())));
-            });
+    private static void createJsonMergePatchAccessHelpers(List<ClientModel> models, JavaClass javaClass) {
+        if (models == null || models.isEmpty()) {
+            return;
         }
-    }
 
-    /**
-     * Add accessor interfaces for each model that is used in json-merge-patch.
-     *
-     * @param models
-     * @param javaClass
-     */
-    private static void addAccessorInterfaces(List<ClientModel> models, JavaClass javaClass) {
-        if (models != null && !models.isEmpty()) {
-            models.forEach(model -> {
-                javaClass.interfaceBlock(JavaVisibility.Public, String.format("%sAccessor", model.getName()), interfaceBlock -> {
-                    interfaceBlock.publicMethod(String.format("%1$s prepareModelForJsonMergePatch(%1$s %2$s, boolean jsonMergePatchEnabled)", model.getName(), CodeNamer.toCamelCase(model.getName())));
-                });
-            });
-        }
-    }
+        for (ClientModel model : models) {
+            if (model.getParentModelName() != null && !model.getParentModelName().isEmpty()) {
+                // Only polymorphic parent models generate an accessor.
+                continue;
+            }
 
+            if (!model.getImplementationDetails().isInput()) {
+                // Model is only used as output and doesn't need to support json-merge-patch.
+                continue;
+            }
 
-    /**
-     * Add getter and setter for each model that is used in json-merge-patch.
-     *
-     * @param models
-     * @param javaClass
-     */
-    private static void addGettersAndSetters(List<ClientModel> models, JavaClass javaClass) {
-        if (models != null && !models.isEmpty()) {
-            models.forEach(model -> {
-                // setters
-                javaClass.publicStaticMethod(String.format("void set%1$sAccessor(%1$sAccessor accessor)", model.getName()),methodBlock -> {
-                    methodBlock.line(String.format("%sAccessor = accessor;", CodeNamer.toCamelCase(model.getName())));
-                });
-                // getters
-                javaClass.publicStaticMethod(String.format("%1$sAccessor get%1$sAccessor()", model.getName()), methodBlock -> {
-                    methodBlock.methodReturn(String.format("%sAccessor",CodeNamer.toCamelCase(model.getName())));
-                });
-            });
+            String modelName = model.getName();
+            String camelModelName = CodeNamer.toCamelCase(modelName);
+
+            // Accessor field declaration.
+            javaClass.privateMemberVariable(String.format("static %sAccessor %sAccessor", modelName, camelModelName));
+
+            // Accessor interface declaration.
+            javaClass.interfaceBlock(JavaVisibility.Public, String.format("%sAccessor", modelName),
+                interfaceBlock -> interfaceBlock.publicMethod(
+                    String.format("%1$s prepareModelForJsonMergePatch(%1$s %2$s, boolean jsonMergePatchEnabled)",
+                        modelName, camelModelName)));
+
+            // Accessor field setter.
+            javaClass.publicStaticMethod(String.format("void set%1$sAccessor(%1$sAccessor accessor)", modelName),
+                methodBlock -> methodBlock.line(camelModelName + "Accessor = accessor;"));
+
+            // Accessor field getter.
+            javaClass.publicStaticMethod(String.format("%1$sAccessor get%1$sAccessor()", modelName),
+                methodBlock -> methodBlock.methodReturn(camelModelName + "Accessor"));
         }
     }
 }

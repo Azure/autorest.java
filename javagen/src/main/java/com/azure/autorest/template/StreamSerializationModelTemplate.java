@@ -242,8 +242,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         classBlock.annotation("Override");
         classBlock.publicMethod("JsonWriter toJson(JsonWriter jsonWriter) throws IOException", methodBlock -> {
             if (isJsonMergePatch) {
-                methodBlock.ifBlock("jsonMergePatch", ifBlock -> ifBlock.methodReturn("toJsonMergePatch(jsonWriter)"))
-                        .elseBlock(elseBlock -> serializeJsonProperties(methodBlock, propertiesManager, false));
+                methodBlock.ifBlock("isJsonMergePatch()", ifBlock -> ifBlock.methodReturn("toJsonMergePatch(jsonWriter)"))
+                    .elseBlock(elseBlock -> serializeJsonProperties(methodBlock, propertiesManager, false));
             } else {
                 serializeJsonProperties(methodBlock, propertiesManager, false);
             }
