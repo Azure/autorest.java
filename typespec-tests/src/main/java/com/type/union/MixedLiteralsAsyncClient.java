@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.MixedLiteralsImpl;
 import com.type.union.implementation.models.SendRequest8;
-import com.type.union.models.GetResponse8;
+import com.type.union.models.GetResponse1;
 import com.type.union.models.MixedLiteralsCases;
 import reactor.core.publisher.Mono;
 
@@ -109,11 +109,11 @@ public final class MixedLiteralsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse8> get() {
+    public Mono<GetResponse1> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse8.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse1.class));
     }
 
     /**

@@ -147,6 +147,20 @@ public class SchemaCleanup {
                 .collect(Collectors.toSet());
             schemasNotInUse.removeAll(elementsInParentCollection);
             choicesSchemasNotInUse.removeAll(elementsInParentCollection);
+
+            // discriminators
+            Set<Schema> discriminators = schemasInUse.stream()
+                    .map(s -> {
+                        if (s instanceof ObjectSchema && ((ObjectSchema) s).getDiscriminator() != null) {
+                            return ((ObjectSchema) s).getDiscriminator().getProperty().getSchema();
+                        } else {
+                            return null;
+                        }
+                    })
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+            schemasNotInUse.removeAll(discriminators);
+            choicesSchemasNotInUse.removeAll(discriminators);
         }
 
         AtomicBoolean codeModelModified = new AtomicBoolean(false);

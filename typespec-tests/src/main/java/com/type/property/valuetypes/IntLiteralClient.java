@@ -42,7 +42,7 @@ public final class IntLiteralClient {
      * 
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 
@@ -65,7 +65,7 @@ public final class IntLiteralClient {
      * 
      * <pre>{@code
      * {
-     *     property: long (Required)
+     *     property: int (Required)
      * }
      * }</pre>
      * 

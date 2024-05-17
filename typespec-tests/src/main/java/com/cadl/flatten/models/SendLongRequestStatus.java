@@ -5,9 +5,9 @@
 package com.cadl.flatten.models;
 
 /**
- * Defines values for Status.
+ * Defines values for SendLongRequestStatus.
  */
-public enum Status {
+public enum SendLongRequestStatus {
     /**
      * Enum value NotStarted.
      */
@@ -24,26 +24,26 @@ public enum Status {
     COMPLETED("Completed");
 
     /**
-     * The actual serialized value for a Status instance.
+     * The actual serialized value for a SendLongRequestStatus instance.
      */
     private final String value;
 
-    Status(String value) {
+    SendLongRequestStatus(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a Status instance.
+     * Parses a serialized value to a SendLongRequestStatus instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed Status object, or null if unable to parse.
+     * @return the parsed SendLongRequestStatus object, or null if unable to parse.
      */
-    public static Status fromString(String value) {
+    public static SendLongRequestStatus fromString(String value) {
         if (value == null) {
             return null;
         }
-        Status[] items = Status.values();
-        for (Status item : items) {
+        SendLongRequestStatus[] items = SendLongRequestStatus.values();
+        for (SendLongRequestStatus item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }

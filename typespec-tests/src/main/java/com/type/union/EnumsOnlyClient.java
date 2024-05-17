@@ -18,7 +18,7 @@ import com.azure.core.util.BinaryData;
 import com.type.union.implementation.EnumsOnliesImpl;
 import com.type.union.implementation.models.SendRequest6;
 import com.type.union.models.EnumsOnlyCases;
-import com.type.union.models.GetResponse6;
+import com.type.union.models.GetResponse3;
 
 /**
  * Initializes a new instance of the synchronous UnionClient type.
@@ -103,10 +103,10 @@ public final class EnumsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public GetResponse6 get() {
+    public GetResponse3 get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        return getWithResponse(requestOptions).getValue().toObject(GetResponse6.class);
+        return getWithResponse(requestOptions).getValue().toObject(GetResponse3.class);
     }
 
     /**

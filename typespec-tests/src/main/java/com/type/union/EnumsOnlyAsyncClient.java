@@ -19,7 +19,7 @@ import com.azure.core.util.FluxUtil;
 import com.type.union.implementation.EnumsOnliesImpl;
 import com.type.union.implementation.models.SendRequest6;
 import com.type.union.models.EnumsOnlyCases;
-import com.type.union.models.GetResponse6;
+import com.type.union.models.GetResponse3;
 import reactor.core.publisher.Mono;
 
 /**
@@ -105,11 +105,11 @@ public final class EnumsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<GetResponse6> get() {
+    public Mono<GetResponse3> get() {
         // Generated convenience method for getWithResponse
         RequestOptions requestOptions = new RequestOptions();
         return getWithResponse(requestOptions).flatMap(FluxUtil::toMono)
-            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse6.class));
+            .map(protocolMethodData -> protocolMethodData.toObject(GetResponse3.class));
     }
 
     /**

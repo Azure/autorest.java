@@ -10,7 +10,7 @@ import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.flatten.models.Status;
+import com.cadl.flatten.models.SendLongRequestStatus;
 import com.cadl.flatten.models.User;
 import java.io.IOException;
 
@@ -71,7 +71,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * The status of the todo item
      */
     @Generated
-    private final Status status;
+    private final SendLongRequestStatus status;
 
     /*
      * The _dummy property.
@@ -94,7 +94,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * @param status the status value to set.
      */
     @Generated
-    public SendLongRequest(String input, int dataInt, String title, Status status) {
+    public SendLongRequest(String input, int dataInt, String title, SendLongRequestStatus status) {
         this.input = input;
         this.dataInt = dataInt;
         this.title = title;
@@ -247,7 +247,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
      * @return the status value.
      */
     @Generated
-    public Status getStatus() {
+    public SendLongRequestStatus getStatus() {
         return this.status;
     }
 
@@ -319,7 +319,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
             String input = null;
             int dataInt = 0;
             String title = null;
-            Status status = null;
+            SendLongRequestStatus status = null;
             User user = null;
             Integer dataIntOptional = null;
             Long dataLong = null;
@@ -337,7 +337,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
                 } else if ("title".equals(fieldName)) {
                     title = reader.getString();
                 } else if ("status".equals(fieldName)) {
-                    status = Status.fromString(reader.getString());
+                    status = SendLongRequestStatus.fromString(reader.getString());
                 } else if ("user".equals(fieldName)) {
                     user = User.fromJson(reader);
                 } else if ("dataIntOptional".equals(fieldName)) {

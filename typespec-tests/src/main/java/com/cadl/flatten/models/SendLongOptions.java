@@ -76,7 +76,7 @@ public final class SendLongOptions {
      * The status of the todo item
      */
     @Generated
-    private final Status status;
+    private final SendLongRequestStatus status;
 
     /*
      * The _dummy property.
@@ -94,7 +94,7 @@ public final class SendLongOptions {
      * @param status the status value to set.
      */
     @Generated
-    public SendLongOptions(String name, String input, int dataInt, String title, Status status) {
+    public SendLongOptions(String name, String input, int dataInt, String title, SendLongRequestStatus status) {
         this.name = name;
         this.input = input;
         this.dataInt = dataInt;
@@ -280,7 +280,7 @@ public final class SendLongOptions {
      * @return the status value.
      */
     @Generated
-    public Status getStatus() {
+    public SendLongRequestStatus getStatus() {
         return this.status;
     }
 

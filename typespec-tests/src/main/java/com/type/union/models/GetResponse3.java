@@ -21,7 +21,7 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
      * The prop property.
      */
     @Generated
-    private final Prop2 prop;
+    private final EnumsOnlyCases prop;
 
     /**
      * Creates an instance of GetResponse3 class.
@@ -29,7 +29,7 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
      * @param prop the prop value to set.
      */
     @Generated
-    private GetResponse3(Prop2 prop) {
+    private GetResponse3(EnumsOnlyCases prop) {
         this.prop = prop;
     }
 
@@ -39,7 +39,7 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
      * @return the prop value.
      */
     @Generated
-    public Prop2 getProp() {
+    public EnumsOnlyCases getProp() {
         return this.prop;
     }
 
@@ -50,7 +50,7 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeNumberField("prop", this.prop == null ? null : this.prop.toLong());
+        jsonWriter.writeJsonField("prop", this.prop);
         return jsonWriter.writeEndObject();
     }
 
@@ -66,13 +66,13 @@ public final class GetResponse3 implements JsonSerializable<GetResponse3> {
     @Generated
     public static GetResponse3 fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            Prop2 prop = null;
+            EnumsOnlyCases prop = null;
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("prop".equals(fieldName)) {
-                    prop = Prop2.fromLong(reader.getLong());
+                    prop = EnumsOnlyCases.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }

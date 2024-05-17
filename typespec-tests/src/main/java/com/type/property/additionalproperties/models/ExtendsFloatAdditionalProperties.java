@@ -26,6 +26,8 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     private final double id;
 
     /*
+     * The model extends from Record<float32> type.
+     * 
      * Additional properties
      */
     @Generated
@@ -52,7 +54,9 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the additionalProperties property: Additional properties.
+     * Get the additionalProperties property: The model extends from Record&lt;float32&gt; type.
+     * 
+     * Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -62,7 +66,9 @@ public final class ExtendsFloatAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Set the additionalProperties property: Additional properties.
+     * Set the additionalProperties property: The model extends from Record&lt;float32&gt; type.
+     * 
+     * Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsFloatAdditionalProperties object itself.

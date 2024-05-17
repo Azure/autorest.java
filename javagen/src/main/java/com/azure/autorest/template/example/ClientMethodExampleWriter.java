@@ -6,6 +6,7 @@ package com.azure.autorest.template.example;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethod;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
+import com.azure.autorest.model.clientmodel.ClientMethodType;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.clientmodel.EnumType;
@@ -39,13 +40,14 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class ClientMethodExampleWriter {
 
     private final Set<String> imports = new HashSet<>();
-    private final Consumer<JavaBlock> methodBodyWriter;
+    private final BiConsumer<JavaBlock, Boolean> methodBodyWriter;
     private final Consumer<JavaBlock> responseAssertionWriter;
     private final ModelExampleWriter.ExampleNodeModelInitializationVisitor nodeVisitor = new ModelExampleWriter.ExampleNodeModelInitializationVisitor();
 
@@ -68,20 +70,27 @@ public class ClientMethodExampleWriter {
 
         method.getReturnValue().getType().addImportsTo(imports, false);
 
-        StringBuilder methodInvocation = new StringBuilder();
+        methodBodyWriter = (methodBlock, isTestCode) -> {
+            StringBuilder methodInvocation = new StringBuilder();
 
-        if (method.getReturnValue().getType().asNullable() != ClassType.VOID) {
-            String assignment = String.format("%s %s = ", method.getReturnValue().getType(), "response");
-            methodInvocation.append(assignment);
-        }
+            if (method.getReturnValue().getType().asNullable() != ClassType.VOID) {
+                String assignment = String.format("%s %s = ", method.getReturnValue().getType(), "response");
+                methodInvocation.append(assignment);
+            }
 
-        methodInvocation.append(
-                String.format("%s.%s(%s);",
-                        clientVarName,
-                        method.getName(),
-                        parameterInvocations));
+            String methodCall = String.format("%s.%s(%s)",
+                    clientVarName,
+                    method.getName(),
+                    parameterInvocations);
+            if (isTestCode) {
+                if (method.getType() == ClientMethodType.LongRunningBeginSync) {
+                    methodCall = "setPlaybackSyncPollerPollInterval(" + methodCall + ")";
+                } else if (method.getType() == ClientMethodType.LongRunningBeginAsync) {
+                    methodCall = "setPlaybackPollerFluxPollInterval(" + methodCall + ")";
+                }
+            }
+            methodInvocation.append(methodCall).append(";");
 
-        methodBodyWriter = methodBlock -> {
             methodBlock.line(methodInvocation.toString());
         };
         responseAssertionWriter = methodBlock -> {
@@ -376,15 +385,15 @@ public class ClientMethodExampleWriter {
         return new HashSet<>(this.imports);
     }
 
-    public void writeMethodInvocation(JavaBlock javaBlock) {
-        methodBodyWriter.accept(javaBlock);
+    public void writeClientMethodInvocation(JavaBlock javaBlock, boolean isTestCode) {
+        methodBodyWriter.accept(javaBlock, isTestCode);
     }
 
     public Set<ExampleHelperFeature> getHelperFeatures() {
         return new HashSet<>(nodeVisitor.getHelperFeatures());
     }
 
-    public void writeResponseAssertion(JavaBlock methodBlock) {
+    public void writeAssertion(JavaBlock methodBlock) {
         responseAssertionWriter.accept(methodBlock);
     }
 }
