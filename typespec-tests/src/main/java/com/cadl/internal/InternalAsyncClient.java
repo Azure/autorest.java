@@ -100,6 +100,30 @@ public final class InternalAsyncClient {
     }
 
     /**
+     * The postProtocalInternal operation.
+     * <p><strong>Request Body Schema</strong></p>
+     * 
+     * <pre>{@code
+     * {
+     *     name: String (Required)
+     * }
+     * }</pre>
+     * 
+     * @param body The body parameter.
+     * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
+     * @throws HttpResponseException thrown if the request is rejected by server.
+     * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
+     * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
+     * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
+     * @return the {@link Response} on successful completion of {@link Mono}.
+     */
+    @Generated
+    @ServiceMethod(returns = ReturnType.SINGLE)
+    Mono<Response<Void>> postProtocalInternalWithResponse(BinaryData body, RequestOptions requestOptions) {
+        return this.serviceClient.postProtocalInternalWithResponseAsync(body, requestOptions);
+    }
+
+    /**
      * The postInternal operation.
      * 
      * @param apiRequest The apiRequest parameter.
