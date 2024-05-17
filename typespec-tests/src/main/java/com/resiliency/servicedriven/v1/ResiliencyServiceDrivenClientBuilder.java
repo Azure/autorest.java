@@ -193,7 +193,9 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
     }
 
     /*
-     * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the deployment when the service had only one api version. 'v2' is for the deployment when the service had api-versions 'v1' and 'v2'.
+     * Pass in either 'v1' or 'v2'. This represents a version of the service deployment in history. 'v1' is for the
+     * deployment when the service had only one api version. 'v2' is for the deployment when the service had
+     * api-versions 'v1' and 'v2'.
      */
     @Generated
     private String serviceDeploymentVersion;

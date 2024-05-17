@@ -33,13 +33,13 @@ public final class Resource implements JsonSerializable<Resource> {
     private String aggregate;
 
     /*
-     * The comparison operator. Supported types ‘>’, ‘<’ 
+     * The comparison operator. Supported types ‘>’, ‘<’
      */
     @Generated
     private String condition;
 
     /*
-     * Request name for which the Pass fail criteria has to be applied 
+     * Request name for which the Pass fail criteria has to be applied
      */
     @Generated
     private String requestName;

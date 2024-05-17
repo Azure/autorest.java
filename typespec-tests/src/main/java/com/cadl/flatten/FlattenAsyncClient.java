@@ -210,7 +210,8 @@ public final class FlattenAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> uploadFileWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is
+        // 'multipart/form-data'
         return this.serviceClient.uploadFileWithResponseAsync(name, request, requestOptions);
     }
 
@@ -228,7 +229,8 @@ public final class FlattenAsyncClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Mono<Response<Void>> uploadTodoWithResponse(BinaryData request, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadTodo' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadTodo' is
+        // 'multipart/form-data'
         return this.serviceClient.uploadTodoWithResponseAsync(request, requestOptions);
     }
 

@@ -17,14 +17,16 @@ import java.io.IOException;
 @Fluent
 public final class ApplicationPackageReference implements JsonSerializable<ApplicationPackageReference> {
     /*
-     * The ID of the application package to install. This must be inside the same batch account as the pool. This can either be a reference to a specific version or the default version if one exists.
+     * The ID of the application package to install. This must be inside the same batch account as the pool. This can
+     * either be a reference to a specific version or the default version if one exists.
      */
     private String id;
 
     /*
      * The version of the application to deploy. If omitted, the default version is deployed.
      * 
-     * If this is omitted, and no default version is specified for this application, the request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
+     * If this is omitted, and no default version is specified for this application, the request fails with the error
+     * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
      */
     private String version;
 
