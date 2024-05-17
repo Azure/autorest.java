@@ -74,6 +74,10 @@
         "userAssignedIdentities": {
           "$ref": "#/definitions/UserAssignedIdentities",
           "description": "The identities assigned to this resource by the user."
+        },
+        "Dog": {
+          "$ref": "#/definitions/Dog",
+          "description": "A beautiful dog."
         }
       }
     },
@@ -107,6 +111,54 @@
           "description": "The active directory identifier for this principal."
         }
       }
+    },
+    "Dog": {
+      "type": "object",
+      "description": "Test extensible enum type for discriminator",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DogKind",
+          "description": "discriminator property"
+        },
+        "weight": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Weight of the dog"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "kind",
+        "weight"
+      ]
+    },
+    "DogKind": {
+      "type": "string",
+      "description": "extensible enum type for discriminator",
+      "enum": [
+        "golden"
+      ],
+      "x-ms-enum": {
+        "name": "DogKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Golden",
+            "value": "golden",
+            "description": "Species golden"
+          }
+        ]
+      }
+    },
+    "Golden": {
+      "type": "object",
+      "description": "Golden dog model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dog"
+        }
+      ],
+      "x-ms-discriminator-value": "golden"
     },
     "CloudError": {
       "x-ms-external": true,
