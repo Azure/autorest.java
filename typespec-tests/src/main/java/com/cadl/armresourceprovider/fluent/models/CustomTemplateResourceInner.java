@@ -7,6 +7,7 @@ package com.cadl.armresourceprovider.fluent.models;
 import com.azure.core.annotation.Fluent;
 import com.azure.core.management.Resource;
 import com.azure.core.management.SystemData;
+import com.cadl.armresourceprovider.models.Dog;
 import com.cadl.armresourceprovider.models.ManagedServiceIdentity;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -104,6 +105,29 @@ public final class CustomTemplateResourceInner extends Resource {
      */
     public ProvisioningState provisioningState() {
         return this.innerProperties() == null ? null : this.innerProperties().provisioningState();
+    }
+
+    /**
+     * Get the dog property: The dog property.
+     * 
+     * @return the dog value.
+     */
+    public Dog dog() {
+        return this.innerProperties() == null ? null : this.innerProperties().dog();
+    }
+
+    /**
+     * Set the dog property: The dog property.
+     * 
+     * @param dog the dog value to set.
+     * @return the CustomTemplateResourceInner object itself.
+     */
+    public CustomTemplateResourceInner withDog(Dog dog) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new CustomTemplateResourceProperties();
+        }
+        this.innerProperties().withDog(dog);
+        return this;
     }
 
     /**
