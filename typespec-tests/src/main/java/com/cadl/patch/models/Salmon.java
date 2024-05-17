@@ -46,26 +46,11 @@ public final class Salmon extends Fish {
     @Generated
     private Fish partner;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setSalmonAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of Salmon class.
@@ -183,7 +168,7 @@ public final class Salmon extends Fish {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
+        if (isJsonMergePatch()) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();

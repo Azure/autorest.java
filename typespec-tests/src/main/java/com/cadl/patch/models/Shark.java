@@ -9,7 +9,6 @@ import com.azure.core.annotation.Generated;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
-import com.cadl.patch.implementation.JsonMergePatchHelper;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,26 +24,11 @@ public final class Shark extends Fish {
     @Generated
     private String kind = "shark";
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setSharkAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of Shark class.
@@ -93,7 +77,7 @@ public final class Shark extends Fish {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
+        if (isJsonMergePatch()) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();

@@ -1267,6 +1267,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // properties
             addGeneratedAnnotation(classBlock);
             classBlock.privateMemberVariable("boolean jsonMergePatch");
+
+            addGeneratedAnnotation(classBlock);
             classBlock.method(JavaVisibility.PackagePrivate, null, "boolean isJsonMergePatch()",
                 method -> method.line("return this.jsonMergePatch;"));
         }

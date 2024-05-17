@@ -358,7 +358,9 @@ public final class FlattenAsyncClient {
         // Generated convenience method for updateWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, true);
-        BinaryData requestInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(request).toBytes());
+        BinaryData requestInBinaryData = BinaryData.fromObject(request);
+        // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+        requestInBinaryData.getLength();
         JsonMergePatchHelper.getUpdatePatchRequestAccessor().prepareModelForJsonMergePatch(request, false);
         return updateWithResponse(id, requestInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(TodoItem.class));

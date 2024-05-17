@@ -53,6 +53,11 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     private boolean jsonMergePatch;
 
+    @Generated
+    boolean isJsonMergePatch() {
+        return this.jsonMergePatch;
+    }
+
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -60,7 +65,7 @@ public class Fish implements JsonSerializable<Fish> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+    private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
@@ -189,7 +194,7 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
+        if (isJsonMergePatch()) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();

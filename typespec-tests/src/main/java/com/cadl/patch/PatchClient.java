@@ -248,7 +248,9 @@ public final class PatchClient {
         // Generated convenience method for createOrUpdateResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+        resourceInBinaryData.getLength();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
         return createOrUpdateResourceWithResponse(resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
@@ -273,7 +275,9 @@ public final class PatchClient {
         RequestOptions requestOptions = new RequestOptions();
         if (resource != null) {
             JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-            BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+            BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+            // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+            resourceInBinaryData.getLength();
             JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
             requestOptions.setBody(resourceInBinaryData);
         }
@@ -316,7 +320,9 @@ public final class PatchClient {
         // Generated convenience method for createOrUpdateFishWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, true);
-        BinaryData fishInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(fish).toBytes());
+        BinaryData fishInBinaryData = BinaryData.fromObject(fish);
+        // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+        fishInBinaryData.getLength();
         JsonMergePatchHelper.getFishAccessor().prepareModelForJsonMergePatch(fish, false);
         return createOrUpdateFishWithResponse(fishInBinaryData, requestOptions).getValue().toObject(Fish.class);
     }

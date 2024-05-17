@@ -264,7 +264,9 @@ public final class EtagHeadersClient {
             requestOptions.setHeader(HttpHeaderName.IF_NONE_MATCH, ifNoneMatch);
         }
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+        resourceInBinaryData.getLength();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
         return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
@@ -289,7 +291,9 @@ public final class EtagHeadersClient {
         // Generated convenience method for patchWithMatchHeadersWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, true);
-        BinaryData resourceInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(resource).toBytes());
+        BinaryData resourceInBinaryData = BinaryData.fromObject(resource);
+        // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+        resourceInBinaryData.getLength();
         JsonMergePatchHelper.getResourceAccessor().prepareModelForJsonMergePatch(resource, false);
         return patchWithMatchHeadersWithResponse(name, resourceInBinaryData, requestOptions).getValue()
             .toObject(Resource.class);
