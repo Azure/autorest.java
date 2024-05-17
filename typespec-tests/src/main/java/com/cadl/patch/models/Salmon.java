@@ -279,10 +279,10 @@ public final class Salmon extends Fish {
                 }
             }
             Salmon deserializedSalmon = new Salmon();
-            deserializedSalmon.setId(id);
-            deserializedSalmon.setName(name);
-            deserializedSalmon.setAge(age);
-            deserializedSalmon.setColor(color);
+            deserializedSalmon.id = id;
+            deserializedSalmon.name = name;
+            deserializedSalmon.age = age;
+            deserializedSalmon.color = color;
             deserializedSalmon.kind = kind;
             deserializedSalmon.friends = friends;
             deserializedSalmon.hate = hate;

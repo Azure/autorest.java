@@ -24,31 +24,31 @@ public class Fish implements JsonSerializable<Fish> {
      * The kind property.
      */
     @Generated
-    private String kind;
+    String kind;
 
     /*
      * The id property.
      */
     @Generated
-    private String id;
+    String id;
 
     /*
      * The name property.
      */
     @Generated
-    private String name;
+    String name;
 
     /*
      * The age property.
      */
     @Generated
-    private int age;
+    int age;
 
     /*
      * The color property.
      */
     @Generated
-    private String color;
+    String color;
 
     @Generated
     private boolean jsonMergePatch;

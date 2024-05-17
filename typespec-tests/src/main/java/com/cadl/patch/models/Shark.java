@@ -145,10 +145,10 @@ public final class Shark extends Fish {
                 }
             }
             Shark deserializedShark = new Shark();
-            deserializedShark.setId(id);
-            deserializedShark.setName(name);
-            deserializedShark.setAge(age);
-            deserializedShark.setColor(color);
+            deserializedShark.id = id;
+            deserializedShark.name = name;
+            deserializedShark.age = age;
+            deserializedShark.color = color;
             deserializedShark.kind = kind;
 
             return deserializedShark;
