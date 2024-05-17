@@ -85,6 +85,11 @@ union UnusedEnum {
   "Weekend",
 }
 
+// ProtocolInternalModel will not be generated, as the model is not used in convenient API
+model ProtocolInternalModel {
+  name: string;
+}
+
 @route("/internal")
 interface InternalOp {
   // test ApiRequest with Access.public
@@ -97,4 +102,10 @@ interface InternalOp {
   @get
   @access(Access.internal, "java")
   getInternal(): ApiResponse;
+
+  @route("/protocal-internal")
+  @post
+  @access(Access.internal)
+  @convenientAPI(false)
+  postProtocalInternal(@body body: ProtocolInternalModel): void;
 }
