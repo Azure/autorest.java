@@ -108,7 +108,7 @@ public final class CustomTemplateResourceInner extends Resource {
     }
 
     /**
-     * Get the dog property: The dog property.
+     * Get the dog property: Test extensible enum type for discriminator.
      * 
      * @return the dog value.
      */
@@ -117,7 +117,7 @@ public final class CustomTemplateResourceInner extends Resource {
     }
 
     /**
-     * Set the dog property: The dog property.
+     * Set the dog property: Test extensible enum type for discriminator.
      * 
      * @param dog the dog value to set.
      * @return the CustomTemplateResourceInner object itself.
