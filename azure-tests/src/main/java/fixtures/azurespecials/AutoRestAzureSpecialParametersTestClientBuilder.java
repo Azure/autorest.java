@@ -172,7 +172,8 @@ public final class AutoRestAzureSpecialParametersTestClientBuilder
     }
 
     /*
-     * The subscription id, which appears in the path, always modeled in credentials. The value is always '1234-5678-9012-3456'
+     * The subscription id, which appears in the path, always modeled in credentials. The value is always
+     * '1234-5678-9012-3456'
      */
     @Generated
     private String subscriptionId;

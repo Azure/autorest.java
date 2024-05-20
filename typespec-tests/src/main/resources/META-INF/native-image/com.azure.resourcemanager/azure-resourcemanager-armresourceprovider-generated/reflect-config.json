@@ -64,6 +64,21 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.models.Dog",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.DogKind",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
+  "name" : "com.cadl.armresourceprovider.models.Golden",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.models.ManagedServiceIdentity",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,

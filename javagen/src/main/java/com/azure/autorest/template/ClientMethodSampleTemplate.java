@@ -67,7 +67,7 @@ public class ClientMethodSampleTemplate implements IJavaTemplate<ClientMethodExa
                     methodBlock.line(String.format("// BEGIN:%s", proxyMethodExample.getCodeSnippetIdentifier()));
                 }
 
-                clientMethodExampleWriter.writeMethodInvocation(methodBlock);
+                clientMethodExampleWriter.writeClientMethodInvocation(methodBlock, false);
 
                 // codesnippet end
                 if (proxyMethodExample.getCodeSnippetIdentifier() != null) {

@@ -926,18 +926,18 @@ export class CodeModelBuilder {
       // track usage
       if (pollingSchema) {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
-        if (op.internalApi) {
-          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
-        } else if (op.convenienceApi) {
-          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Public] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(pollingSchema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
         }
       }
       if (finalSchema) {
         this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
-        if (op.internalApi) {
-          this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Internal] });
-        } else if (op.convenienceApi) {
-          this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Public] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(finalSchema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
         }
       }
 
@@ -1117,10 +1117,8 @@ export class CodeModelBuilder {
 
       this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-      if (op.internalApi) {
-        this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
-      } else if (op.convenienceApi) {
-        this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
+      if (op.convenienceApi) {
+        this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
       }
 
       if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
@@ -1276,10 +1274,10 @@ export class CodeModelBuilder {
         );
 
         this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Input] });
-        if (op.internalApi) {
-          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Internal] });
-        } else if (op.convenienceApi) {
-          this.trackSchemaUsage(requestConditionsSchema, { usage: [SchemaContext.Public] });
+        if (op.convenienceApi) {
+          this.trackSchemaUsage(requestConditionsSchema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
         }
 
         // update group schema for properties
@@ -1352,10 +1350,9 @@ export class CodeModelBuilder {
 
     this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
 
-    if (op.internalApi) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.Internal] });
-    } else if (op.convenienceApi) {
-      this.trackSchemaUsage(schema, { usage: [SchemaContext.Public] });
+    if (op.convenienceApi) {
+      // model/schema does not need to be Public or Internal, if it is not to be used in convenience API
+      this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
     }
 
     if (operationIsJsonMergePatch(httpOperation)) {
@@ -1467,10 +1464,10 @@ export class CodeModelBuilder {
           });
 
           this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Input] });
-          if (op.internalApi) {
-            this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Internal] });
-          } else if (op.convenienceApi) {
-            this.trackSchemaUsage(optionBagSchema, { usage: [SchemaContext.Public] });
+          if (op.convenienceApi) {
+            this.trackSchemaUsage(optionBagSchema, {
+              usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+            });
           }
 
           // option bag parameter
@@ -1656,10 +1653,10 @@ export class CodeModelBuilder {
       if (response instanceof SchemaResponse) {
         this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Output] });
 
-        if (op.internalApi) {
-          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Internal] });
-        } else if (trackConvenienceApi) {
-          this.trackSchemaUsage(response.schema, { usage: [SchemaContext.Public] });
+        if (trackConvenienceApi) {
+          this.trackSchemaUsage(response.schema, {
+            usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
+          });
         }
       }
     }

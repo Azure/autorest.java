@@ -137,9 +137,11 @@ public interface IType {
      * @param jsonWriterName The name of the {@link JsonWriter} performing serialization.
      * @param fieldName The name of the JSON field, optional.
      * @param valueGetter The value getter.
+     * @param jsonMergePatch Flag indicating if the serialization call is for a JSON merge patch operation.
      * @return The method call that will handle JSON serialization, or null if it isn't supported directly.
      */
-    String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter);
+    String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter,
+        boolean jsonMergePatch);
 
     /**
      * Gets the method that handles XML deserialization for the type.

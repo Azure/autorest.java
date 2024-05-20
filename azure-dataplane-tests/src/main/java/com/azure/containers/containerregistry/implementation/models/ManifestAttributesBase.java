@@ -53,7 +53,8 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
     private ArtifactOperatingSystem operatingSystem;
 
     /*
-     * List of artifacts that are referenced by this manifest list, with information about the platform each supports.  This list will be empty if this is a leaf manifest and not a manifest list.
+     * List of artifacts that are referenced by this manifest list, with information about the platform each supports.
+     * This list will be empty if this is a leaf manifest and not a manifest list.
      */
     private List<ArtifactManifestPlatform> relatedArtifacts;
 
