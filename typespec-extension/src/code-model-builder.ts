@@ -1095,8 +1095,8 @@ export class CodeModelBuilder {
       }
 
       const nullable = isNullableType(param.param.type);
-      const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
-        summary: this.getSummary(param.param),
+      const parameter = new Parameter(this.getName(param.param), sdkType.details ?? "", schema, {
+        summary: sdkType.description,
         implementation: ImplementationLocation.Method,
         required: !param.param.optional,
         nullable: nullable,
@@ -1340,8 +1340,8 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
-      summary: this.getSummary(body),
+    const parameter = new Parameter(this.getName(body), sdkType.details ?? "", schema, {
+      summary: sdkType.description,
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
       protocol: {
@@ -1881,8 +1881,8 @@ export class CodeModelBuilder {
 
     const schemaType = type.isFixed ? SealedChoiceSchema : ChoiceSchema;
 
-    const schema = new schemaType(type.name ? type.name : name, type.description ?? "", {
-      summary: this.getSummary(rawEnumType),
+    const schema = new schemaType(type.name ? type.name : name, type.details ?? "", {
+      summary: type.description,
       choiceType: valueType as any,
       choices: choices,
       language: {
@@ -1979,8 +1979,8 @@ export class CodeModelBuilder {
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
     const rawModelType = type.__raw;
     const namespace = getNamespace(rawModelType);
-    const objectSchema = new ObjectScheme(name, this.getDoc(rawModelType), {
-      summary: this.getSummary(rawModelType),
+    const objectSchema = new ObjectScheme(name, type.details ?? "", {
+      summary: type.description,
       language: {
         default: {
           namespace: namespace,
@@ -2104,8 +2104,8 @@ export class CodeModelBuilder {
       schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
     }
 
-    return new Property(prop.name, this.getDoc(rawModelPropertyType), schema, {
-      summary: this.getSummary(rawModelPropertyType),
+    return new Property(prop.name, prop.details ?? "", schema, {
+      summary: prop.description,
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
@@ -2125,8 +2125,8 @@ export class CodeModelBuilder {
     this.logWarning(
       `Convert TypeSpec Union '${getUnionDescription(rawUnionType, this.typeNameOptions)}' to Class '${baseName}'`,
     );
-    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(rawUnionType), {
-      summary: this.getSummary(rawUnionType),
+    const unionSchema = new OrSchema(baseName + "Base", type.details ?? "", {
+      summary: type.description,
     });
     unionSchema.anyOf = [];
     type.values.forEach((it) => {
@@ -2135,8 +2135,8 @@ export class CodeModelBuilder {
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
-      const objectSchema = new ObjectSchema(modelName, this.getDoc(rawUnionType), {
-        summary: this.getSummary(rawUnionType),
+      const objectSchema = new ObjectSchema(modelName, it.details ?? "", {
+        summary: it.description,
         language: {
           default: {
             namespace: namespace,
@@ -2149,8 +2149,8 @@ export class CodeModelBuilder {
 
       const variantSchema = this.processSchemaFromSdkType(it, variantName);
       objectSchema.addProperty(
-        new Property(propertyName, this.getDoc(rawUnionType), variantSchema, {
-          summary: this.getSummary(rawUnionType),
+        new Property(propertyName, type.details ?? "", variantSchema, {
+          summary: type.description,
           required: true,
           readOnly: false,
         }),
