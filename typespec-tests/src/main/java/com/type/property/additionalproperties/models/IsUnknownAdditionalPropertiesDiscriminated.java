@@ -21,16 +21,12 @@ import java.util.Map;
 public class IsUnknownAdditionalPropertiesDiscriminated
     implements JsonSerializable<IsUnknownAdditionalPropertiesDiscriminated> {
     /*
-     * A sequence of textual characters.
-     * 
      * The discriminator
      */
     @Generated
     private String kind;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The name property
      */
     @Generated
@@ -56,9 +52,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Get the kind property: A sequence of textual characters.
-     * 
-     * The discriminator.
+     * Get the kind property: The discriminator.
      * 
      * @return the kind value.
      */
@@ -68,9 +62,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
-     * 
-     * The name property.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */

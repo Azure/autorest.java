@@ -22,16 +22,12 @@ import java.util.Set;
 @Fluent
 public final class User implements JsonSerializable<User> {
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
      * The user's id.
      */
     @Generated
     private int id;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The user's name.
      */
     @Generated
@@ -44,11 +40,6 @@ public final class User implements JsonSerializable<User> {
     private List<UserOrder> orders;
 
     /*
-     * The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.
-     * It lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.
-     * 
-     * It is a string of ASCII characters placed between double quotes, like "675af34563dc-tr34".
-     * 
      * The entity tag for this resource.
      */
     @Generated
@@ -83,9 +74,7 @@ public final class User implements JsonSerializable<User> {
     }
 
     /**
-     * Get the id property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The user's id.
+     * Get the id property: The user's id.
      * 
      * @return the id value.
      */
@@ -95,9 +84,7 @@ public final class User implements JsonSerializable<User> {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
-     * 
-     * The user's name.
+     * Get the name property: The user's name.
      * 
      * @return the name value.
      */
@@ -107,9 +94,7 @@ public final class User implements JsonSerializable<User> {
     }
 
     /**
-     * Set the name property: A sequence of textual characters.
-     * 
-     * The user's name.
+     * Set the name property: The user's name.
      * <p>Required when create the resource.</p>
      * 
      * @param name the name value to set.
@@ -146,14 +131,7 @@ public final class User implements JsonSerializable<User> {
     }
 
     /**
-     * Get the etag property: The ETag (or entity tag) HTTP response header is an identifier for a specific version of a
-     * resource.
-     * It lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if
-     * the content was not changed.
-     * 
-     * It is a string of ASCII characters placed between double quotes, like "675af34563dc-tr34".
-     * 
-     * The entity tag for this resource.
+     * Get the etag property: The entity tag for this resource.
      * 
      * @return the etag value.
      */

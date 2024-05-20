@@ -175,8 +175,12 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
+     * @param xMsTestHeader A sequence of textual characters.
+     * 
+     * The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -203,8 +207,12 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
+     * @param xMsTestHeader A sequence of textual characters.
+     * 
+     * The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -235,8 +243,12 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
+     * @param xMsTestHeader A sequence of textual characters.
+     * 
+     * The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -268,8 +280,12 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
-     * @param xMsTestHeader The xMsTestHeader parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
+     * @param xMsTestHeader A sequence of textual characters.
+     * 
+     * The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

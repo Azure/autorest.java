@@ -16,16 +16,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Immutable
 public final class OperationInner {
     /*
-     * A sequence of textual characters.
-     * 
      * The name of the operation, as per Resource-Based Access Control (RBAC). Examples: "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action"
      */
     @JsonProperty(value = "name", access = JsonProperty.Access.WRITE_ONLY)
     private String name;
 
     /*
-     * Boolean with `true` and `false` values.
-     * 
      * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure Resource Manager/control-plane operations.
      */
     @JsonProperty(value = "isDataAction", access = JsonProperty.Access.WRITE_ONLY)
@@ -56,9 +52,7 @@ public final class OperationInner {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
-     * 
-     * The name of the operation, as per Resource-Based Access Control (RBAC). Examples:
+     * Get the name property: The name of the operation, as per Resource-Based Access Control (RBAC). Examples:
      * "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action".
      * 
      * @return the name value.
@@ -68,10 +62,8 @@ public final class OperationInner {
     }
 
     /**
-     * Get the isDataAction property: Boolean with `true` and `false` values.
-     * 
-     * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure
-     * Resource Manager/control-plane operations.
+     * Get the isDataAction property: Whether the operation applies to data-plane. This is "true" for data-plane
+     * operations and "false" for Azure Resource Manager/control-plane operations.
      * 
      * @return the isDataAction value.
      */

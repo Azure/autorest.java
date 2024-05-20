@@ -18,8 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class UserActionResponse implements JsonSerializable<UserActionResponse> {
     /*
-     * A sequence of textual characters.
-     * 
      * User action result.
      */
     @Generated
@@ -36,9 +34,7 @@ public final class UserActionResponse implements JsonSerializable<UserActionResp
     }
 
     /**
-     * Get the userActionResult property: A sequence of textual characters.
-     * 
-     * User action result.
+     * Get the userActionResult property: User action result.
      * 
      * @return the userActionResult value.
      */

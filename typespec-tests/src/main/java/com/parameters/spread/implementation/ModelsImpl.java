@@ -167,6 +167,8 @@ public final class ModelsImpl {
      * }</pre>
      * 
      * @param bodyParameter This is a simple model.
+     * 
+     * The bodyParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -193,6 +195,8 @@ public final class ModelsImpl {
      * }</pre>
      * 
      * @param bodyParameter This is a simple model.
+     * 
+     * The bodyParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -217,6 +221,8 @@ public final class ModelsImpl {
      * }</pre>
      * 
      * @param body This is a simple model.
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -243,6 +249,8 @@ public final class ModelsImpl {
      * }</pre>
      * 
      * @param body This is a simple model.
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -260,8 +268,12 @@ public final class ModelsImpl {
     /**
      * The spreadCompositeRequestWithoutBody operation.
      * 
-     * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param testHeader A sequence of textual characters.
+     * 
+     * The testHeader parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -280,8 +292,12 @@ public final class ModelsImpl {
     /**
      * The spreadCompositeRequestWithoutBody operation.
      * 
-     * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param testHeader A sequence of textual characters.
+     * 
+     * The testHeader parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -306,9 +322,15 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param testHeader A sequence of textual characters.
+     * 
+     * The testHeader parameter.
      * @param body This is a simple model.
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -334,9 +356,15 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param testHeader A sequence of textual characters.
+     * 
+     * The testHeader parameter.
      * @param body This is a simple model.
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -361,9 +389,15 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param testHeader A sequence of textual characters.
+     * 
+     * The testHeader parameter.
      * @param compositeRequestMix This is a model with non-body http request decorator.
+     * 
+     * The compositeRequestMix parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -389,9 +423,15 @@ public final class ModelsImpl {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param testHeader The testHeader parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param testHeader A sequence of textual characters.
+     * 
+     * The testHeader parameter.
      * @param compositeRequestMix This is a model with non-body http request decorator.
+     * 
+     * The compositeRequestMix parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

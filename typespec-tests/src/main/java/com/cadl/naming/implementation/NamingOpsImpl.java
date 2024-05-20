@@ -107,9 +107,9 @@ public final class NamingOpsImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
+     * <tr><td>etag</td><td>String</td><td>No</td><td>A sequence of textual characters.
      * 
-     * description of etag header parameter</td></tr>
+     * The etag parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
@@ -142,9 +142,9 @@ public final class NamingOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name summary of name query parameter
+     * @param name A sequence of textual characters.
      * 
-     * description of name query parameter.
+     * The name parameter.
      * @param dataRequest summary of Request
      * 
      * description of Request.
@@ -171,9 +171,9 @@ public final class NamingOpsImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>etag</td><td>String</td><td>No</td><td>summary of etag header parameter
+     * <tr><td>etag</td><td>String</td><td>No</td><td>A sequence of textual characters.
      * 
-     * description of etag header parameter</td></tr>
+     * The etag parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
@@ -206,9 +206,9 @@ public final class NamingOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name summary of name query parameter
+     * @param name A sequence of textual characters.
      * 
-     * description of name query parameter.
+     * The name parameter.
      * @param dataRequest summary of Request
      * 
      * description of Request.

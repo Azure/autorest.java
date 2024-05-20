@@ -65,7 +65,9 @@ public final class Decimal128TypeClient {
      * BigDecimal
      * }</pre>
      * 
-     * @param body The body parameter.
+     * @param body A 128-bit decimal number.
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -82,7 +84,9 @@ public final class Decimal128TypeClient {
     /**
      * The requestParameter operation.
      * 
-     * @param value The value parameter.
+     * @param value A 128-bit decimal number.
+     * 
+     * The value parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -117,7 +121,9 @@ public final class Decimal128TypeClient {
     /**
      * The requestBody operation.
      * 
-     * @param body The body parameter.
+     * @param body A 128-bit decimal number.
+     * 
+     * The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -136,7 +142,9 @@ public final class Decimal128TypeClient {
     /**
      * The requestParameter operation.
      * 
-     * @param value The value parameter.
+     * @param value A 128-bit decimal number.
+     * 
+     * The value parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -18,8 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class ListItemInputBody implements JsonSerializable<ListItemInputBody> {
     /*
-     * A sequence of textual characters.
-     * 
      * The name of the input.
      */
     @Generated
@@ -36,9 +34,7 @@ public final class ListItemInputBody implements JsonSerializable<ListItemInputBo
     }
 
     /**
-     * Get the inputName property: A sequence of textual characters.
-     * 
-     * The name of the input.
+     * Get the inputName property: The name of the input.
      * 
      * @return the inputName value.
      */

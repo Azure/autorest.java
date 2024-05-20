@@ -11,9 +11,7 @@ import com.cadl.armresourceprovider.fluent.models.OperationInner;
  */
 public interface Operation {
     /**
-     * Gets the name property: A sequence of textual characters.
-     * 
-     * The name of the operation, as per Resource-Based Access Control (RBAC). Examples:
+     * Gets the name property: The name of the operation, as per Resource-Based Access Control (RBAC). Examples:
      * "Microsoft.Compute/virtualMachines/write", "Microsoft.Compute/virtualMachines/capture/action".
      * 
      * @return the name value.
@@ -21,10 +19,8 @@ public interface Operation {
     String name();
 
     /**
-     * Gets the isDataAction property: Boolean with `true` and `false` values.
-     * 
-     * Whether the operation applies to data-plane. This is "true" for data-plane operations and "false" for Azure
-     * Resource Manager/control-plane operations.
+     * Gets the isDataAction property: Whether the operation applies to data-plane. This is "true" for data-plane
+     * operations and "false" for Azure Resource Manager/control-plane operations.
      * 
      * @return the isDataAction value.
      */

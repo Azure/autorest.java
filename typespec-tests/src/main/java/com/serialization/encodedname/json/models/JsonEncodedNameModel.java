@@ -18,8 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class JsonEncodedNameModel implements JsonSerializable<JsonEncodedNameModel> {
     /*
-     * Boolean with `true` and `false` values.
-     * 
      * Pass in true
      */
     @Generated
@@ -36,9 +34,7 @@ public final class JsonEncodedNameModel implements JsonSerializable<JsonEncodedN
     }
 
     /**
-     * Get the defaultName property: Boolean with `true` and `false` values.
-     * 
-     * Pass in true.
+     * Get the defaultName property: Pass in true.
      * 
      * @return the defaultName value.
      */

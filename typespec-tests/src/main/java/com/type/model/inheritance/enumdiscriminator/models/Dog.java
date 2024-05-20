@@ -24,8 +24,6 @@ public class Dog implements JsonSerializable<Dog> {
     private DogKind kind;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
      * Weight of the dog
      */
     @Generated
@@ -53,9 +51,7 @@ public class Dog implements JsonSerializable<Dog> {
     }
 
     /**
-     * Get the weight property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * Weight of the dog.
+     * Get the weight property: Weight of the dog.
      * 
      * @return the weight value.
      */

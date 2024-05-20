@@ -18,8 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class StringProperty implements JsonSerializable<StringProperty> {
     /*
-     * A sequence of textual characters.
-     * 
      * Property
      */
     @Generated
@@ -36,9 +34,7 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
     }
 
     /**
-     * Get the property property: A sequence of textual characters.
-     * 
-     * Property.
+     * Get the property property: Property.
      * 
      * @return the property value.
      */

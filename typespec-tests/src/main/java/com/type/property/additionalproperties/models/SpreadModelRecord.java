@@ -20,7 +20,7 @@ import java.util.Map;
 @Fluent
 public final class SpreadModelRecord implements JsonSerializable<SpreadModelRecord> {
     /*
-     * The knownProp property.
+     * model for record
      */
     @Generated
     private final ModelForRecord knownProp;
@@ -44,7 +44,7 @@ public final class SpreadModelRecord implements JsonSerializable<SpreadModelReco
     }
 
     /**
-     * Get the knownProp property: The knownProp property.
+     * Get the knownProp property: model for record.
      * 
      * @return the knownProp value.
      */

@@ -52,7 +52,9 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,8 +101,10 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -136,7 +140,9 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -183,8 +189,10 @@ public final class RepeatabilityHeadersClient {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -202,7 +210,9 @@ public final class RepeatabilityHeadersClient {
     /**
      * Resource read operation template.
      * 
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -222,8 +232,10 @@ public final class RepeatabilityHeadersClient {
     /**
      * Send a put request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -244,7 +256,9 @@ public final class RepeatabilityHeadersClient {
     /**
      * Send a post request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param name The name parameter.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -264,8 +278,10 @@ public final class RepeatabilityHeadersClient {
     /**
      * Send a LRO request with header Repeatability-Request-ID and Repeatability-First-Sent.
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -48,7 +48,9 @@ public final class EmptyAsyncClient {
      * { }
      * }</pre>
      * 
-     * @param input Empty model used in operation parameters.
+     * @param input Empty model used in operation parameters
+     * 
+     * The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -98,7 +100,9 @@ public final class EmptyAsyncClient {
      * { }
      * }</pre>
      * 
-     * @param body Empty model used in both parameter and return type.
+     * @param body Empty model used in both parameter and return type
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -116,7 +120,9 @@ public final class EmptyAsyncClient {
     /**
      * The putEmpty operation.
      * 
-     * @param input Empty model used in operation parameters.
+     * @param input Empty model used in operation parameters
+     * 
+     * The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -155,7 +161,9 @@ public final class EmptyAsyncClient {
     /**
      * The postRoundTripEmpty operation.
      * 
-     * @param body Empty model used in both parameter and return type.
+     * @param body Empty model used in both parameter and return type
+     * 
+     * The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

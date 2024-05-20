@@ -20,8 +20,6 @@ import java.util.Map;
 @Fluent
 public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknownAdditionalProperties> {
     /*
-     * A sequence of textual characters.
-     * 
      * The name property
      */
     @Generated
@@ -46,9 +44,7 @@ public class IsUnknownAdditionalProperties implements JsonSerializable<IsUnknown
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
-     * 
-     * The name property.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */

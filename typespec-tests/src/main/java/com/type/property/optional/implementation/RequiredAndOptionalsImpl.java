@@ -240,7 +240,9 @@ public final class RequiredAndOptionalsImpl {
      * }
      * }</pre>
      * 
-     * @param body Model with required and optional properties.
+     * @param body Model with required and optional properties
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -265,7 +267,9 @@ public final class RequiredAndOptionalsImpl {
      * }
      * }</pre>
      * 
-     * @param body Model with required and optional properties.
+     * @param body Model with required and optional properties
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -290,7 +294,9 @@ public final class RequiredAndOptionalsImpl {
      * }
      * }</pre>
      * 
-     * @param body Model with required and optional properties.
+     * @param body Model with required and optional properties
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -315,7 +321,9 @@ public final class RequiredAndOptionalsImpl {
      * }
      * }</pre>
      * 
-     * @param body Model with required and optional properties.
+     * @param body Model with required and optional properties
+     * 
+     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -23,8 +23,6 @@ public final class PagedOperation {
     private List<OperationInner> value;
 
     /*
-     * The location of an instance of Operation
-     * 
      * The link to the next page of items
      */
     @JsonProperty(value = "nextLink")
@@ -46,9 +44,7 @@ public final class PagedOperation {
     }
 
     /**
-     * Get the nextLink property: The location of an instance of Operation
-     * 
-     * The link to the next page of items.
+     * Get the nextLink property: The link to the next page of items.
      * 
      * @return the nextLink value.
      */

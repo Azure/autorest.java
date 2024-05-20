@@ -169,7 +169,9 @@ public final class UnionFlattenOpsImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -198,7 +200,9 @@ public final class UnionFlattenOpsImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -220,7 +224,9 @@ public final class UnionFlattenOpsImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The filter parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -238,7 +244,9 @@ public final class UnionFlattenOpsImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -261,7 +269,9 @@ public final class UnionFlattenOpsImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The filter parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -279,7 +289,9 @@ public final class UnionFlattenOpsImpl {
      * }
      * }</pre>
      * 
-     * @param id The id parameter.
+     * @param id A sequence of textual characters.
+     * 
+     * The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

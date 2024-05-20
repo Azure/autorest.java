@@ -60,8 +60,12 @@ public final class StandardClient {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource Details about a user.
+     * 
+     * The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -97,7 +101,9 @@ public final class StandardClient {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -132,8 +138,12 @@ public final class StandardClient {
      * }
      * }</pre>
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param format A sequence of textual characters.
+     * 
+     * The format parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -152,8 +162,12 @@ public final class StandardClient {
      * 
      * Creates or replaces a User.
      * 
-     * @param name The name of user.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource Details about a user.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -175,7 +189,9 @@ public final class StandardClient {
      * 
      * Deletes a User.
      * 
-     * @param name The name of user.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -197,8 +213,12 @@ public final class StandardClient {
      * 
      * Exports a User.
      * 
-     * @param name The name of user.
-     * @param format The format of the data.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param format A sequence of textual characters.
+     * 
+     * The format parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

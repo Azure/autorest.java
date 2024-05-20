@@ -24,7 +24,7 @@ public final class FlattenModel implements JsonSerializable<FlattenModel> {
     private final String name;
 
     /*
-     * The properties property.
+     * This is the child model to be flattened.
      */
     @Generated
     private final ChildModel properties;
@@ -52,7 +52,7 @@ public final class FlattenModel implements JsonSerializable<FlattenModel> {
     }
 
     /**
-     * Get the properties property: The properties property.
+     * Get the properties property: This is the child model to be flattened.
      * 
      * @return the properties value.
      */

@@ -19,9 +19,16 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Create a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -35,11 +42,22 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Create a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param resource Resource create parameters.
-     * @param ifMatch The request should only proceed if an entity matches this string.
-     * @param ifNoneMatch The request should only proceed if no entity matches this string.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
+     * 
+     * The resource parameter.
+     * @param ifMatch A sequence of textual characters.
+     * 
+     * The ifMatch parameter.
+     * @param ifNoneMatch A sequence of textual characters.
+     * 
+     * The ifNoneMatch parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -55,9 +73,16 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Create a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -70,11 +95,22 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Create a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param resource Resource create parameters.
-     * @param ifMatch The request should only proceed if an entity matches this string.
-     * @param ifNoneMatch The request should only proceed if no entity matches this string.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
+     * type.
+     * 
+     * The resource parameter.
+     * @param ifMatch A sequence of textual characters.
+     * 
+     * The ifMatch parameter.
+     * @param ifNoneMatch A sequence of textual characters.
+     * 
+     * The ifNoneMatch parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -88,9 +124,13 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Update a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -104,9 +144,13 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Update a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -122,9 +166,13 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Update a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -137,9 +185,13 @@ public interface CustomTemplateResourceInterfacesClient {
     /**
      * Update a CustomTemplateResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param customTemplateResourceName arm resource name for path.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param customTemplateResourceName A sequence of textual characters.
+     * 
+     * The customTemplateResourceName parameter.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.

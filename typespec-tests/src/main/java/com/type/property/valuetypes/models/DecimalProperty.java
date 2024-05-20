@@ -19,9 +19,6 @@ import java.math.BigDecimal;
 @Immutable
 public final class DecimalProperty implements JsonSerializable<DecimalProperty> {
     /*
-     * A decimal number with any length and precision. This represent any `decimal` value possible.
-     * It is commonly represented as `BigDecimal` in some languages.
-     * 
      * Property
      */
     @Generated
@@ -38,11 +35,7 @@ public final class DecimalProperty implements JsonSerializable<DecimalProperty> 
     }
 
     /**
-     * Get the property property: A decimal number with any length and precision. This represent any `decimal` value
-     * possible.
-     * It is commonly represented as `BigDecimal` in some languages.
-     * 
-     * Property.
+     * Get the property property: Property.
      * 
      * @return the property value.
      */

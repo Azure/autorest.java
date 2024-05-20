@@ -150,9 +150,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Get a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -192,9 +198,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Get a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -233,9 +245,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Get a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -251,9 +269,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Get a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -269,9 +293,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Get a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -285,10 +315,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -334,10 +372,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -383,10 +429,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -405,10 +459,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -429,10 +491,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -448,10 +518,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -469,10 +547,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -488,10 +574,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -508,10 +602,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -526,10 +628,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Create a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param resource Resource create parameters.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param resource Subresource of Top Level Arm Resource.
+     * 
+     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -546,10 +656,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Update a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param properties The type used for update operations of the ChildResource.
+     * 
+     * The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -595,10 +713,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Update a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param properties The type used for update operations of the ChildResource.
+     * 
+     * The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -643,10 +769,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Update a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param properties The type used for update operations of the ChildResource.
+     * 
+     * The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -662,10 +796,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Update a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param properties The type used for update operations of the ChildResource.
+     * 
+     * The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -682,10 +824,18 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Update a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
-     * @param properties The resource properties to be updated.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
+     * @param properties The type used for update operations of the ChildResource.
+     * 
+     * The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -701,9 +851,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -743,9 +899,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -784,9 +946,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -804,9 +972,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -826,9 +1000,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -843,9 +1023,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -862,9 +1048,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -879,9 +1071,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -898,9 +1096,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -913,9 +1117,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * Delete a ChildResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -930,8 +1140,12 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * List ChildResource resources by TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -970,8 +1184,12 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * List ChildResource resources by TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1010,8 +1228,12 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * List ChildResource resources by TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1028,8 +1250,12 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * List ChildResource resources by TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1047,8 +1273,12 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * List ChildResource resources by TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1063,8 +1293,12 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * List ChildResource resources by TopLevelArmResource.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1080,9 +1314,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1122,9 +1362,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1164,9 +1410,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1184,9 +1436,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1206,9 +1464,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1224,9 +1488,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1243,9 +1513,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1261,9 +1537,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1281,9 +1563,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1296,9 +1584,15 @@ public final class ChildResourcesInterfacesClientImpl implements ChildResourcesI
     /**
      * A long-running resource action.
      * 
-     * @param resourceGroupName The name of the resource group. The name is case insensitive.
-     * @param topLevelArmResourceName arm resource name for path.
-     * @param childResourceName ChildResources.
+     * @param resourceGroupName A sequence of textual characters.
+     * 
+     * The resourceGroupName parameter.
+     * @param topLevelArmResourceName A sequence of textual characters.
+     * 
+     * The topLevelArmResourceName parameter.
+     * @param childResourceName A sequence of textual characters.
+     * 
+     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.

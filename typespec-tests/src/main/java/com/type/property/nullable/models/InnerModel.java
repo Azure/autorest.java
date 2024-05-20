@@ -21,8 +21,6 @@ import java.util.Set;
 @Fluent
 public final class InnerModel implements JsonSerializable<InnerModel> {
     /*
-     * A sequence of textual characters.
-     * 
      * Inner model property
      */
     @Generated
@@ -57,9 +55,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     /**
-     * Get the property property: A sequence of textual characters.
-     * 
-     * Inner model property.
+     * Get the property property: Inner model property.
      * 
      * @return the property value.
      */
@@ -69,9 +65,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     /**
-     * Set the property property: A sequence of textual characters.
-     * 
-     * Inner model property.
+     * Set the property property: Inner model property.
      * <p>Required when create the resource.</p>
      * 
      * @param property the property value to set.

@@ -53,7 +53,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     private Double floatValue;
 
     /*
-     * The innerModel property.
+     * It is the model used by Resource model
      */
     @Generated
     private InnerModel innerModel;
@@ -208,7 +208,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Get the innerModel property: The innerModel property.
+     * Get the innerModel property: It is the model used by Resource model.
      * 
      * @return the innerModel value.
      */
@@ -218,7 +218,7 @@ public final class ResourcePatch implements JsonSerializable<ResourcePatch> {
     }
 
     /**
-     * Set the innerModel property: The innerModel property.
+     * Set the innerModel property: It is the model used by Resource model.
      * 
      * @param innerModel the innerModel value to set.
      * @return the ResourcePatch object itself.

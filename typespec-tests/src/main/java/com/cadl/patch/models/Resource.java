@@ -77,7 +77,7 @@ public final class Resource implements JsonSerializable<Resource> {
     private List<InnerModel> array;
 
     /*
-     * The fish property.
+     * This is base model for polymorphic multiple levels inheritance with a discriminator.
      */
     @Generated
     private Fish fish;
@@ -293,7 +293,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the fish property: The fish property.
+     * Get the fish property: This is base model for polymorphic multiple levels inheritance with a discriminator.
      * 
      * @return the fish value.
      */
@@ -303,7 +303,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the fish property: The fish property.
+     * Set the fish property: This is base model for polymorphic multiple levels inheritance with a discriminator.
      * 
      * @param fish the fish value to set.
      * @return the Resource object itself.

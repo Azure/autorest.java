@@ -24,8 +24,6 @@ public final class BytesData extends Data {
     private String type = "bytes";
 
     /*
-     * Represent a byte array
-     * 
      * Data as {@code byte[]}
      */
     @Generated
@@ -53,9 +51,7 @@ public final class BytesData extends Data {
     }
 
     /**
-     * Get the dataAsBytes property: Represent a byte array
-     * 
-     * Data as {@code byte[]}.
+     * Get the dataAsBytes property: Data as {@code byte[]}.
      * 
      * @return the dataAsBytes value.
      */

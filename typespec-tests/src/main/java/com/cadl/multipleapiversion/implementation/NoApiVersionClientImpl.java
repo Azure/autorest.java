@@ -169,7 +169,9 @@ public final class NoApiVersionClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>param1</td><td>String</td><td>No</td><td>The param1 parameter</td></tr>
+     * <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The param1 parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -192,7 +194,9 @@ public final class NoApiVersionClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>param1</td><td>String</td><td>No</td><td>The param1 parameter</td></tr>
+     * <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The param1 parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 

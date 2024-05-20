@@ -24,7 +24,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
     private final String operationId;
 
     /*
-     * The status property.
+     * Enum describing allowed operation states.
      */
     @Generated
     private final OperationState status;
@@ -52,7 +52,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
     }
 
     /**
-     * Get the status property: The status property.
+     * Get the status property: Enum describing allowed operation states.
      * 
      * @return the status value.
      */

@@ -206,7 +206,9 @@ public final class TypeChangedFromClientImpl {
      * }
      * }</pre>
      * 
-     * @param param The param parameter.
+     * @param param A sequence of textual characters.
+     * 
+     * The param parameter.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -243,7 +245,9 @@ public final class TypeChangedFromClientImpl {
      * }
      * }</pre>
      * 
-     * @param param The param parameter.
+     * @param param A sequence of textual characters.
+     * 
+     * The param parameter.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

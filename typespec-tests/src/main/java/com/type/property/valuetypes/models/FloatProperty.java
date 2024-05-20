@@ -18,8 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class FloatProperty implements JsonSerializable<FloatProperty> {
     /*
-     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
-     * 
      * Property
      */
     @Generated
@@ -36,9 +34,7 @@ public final class FloatProperty implements JsonSerializable<FloatProperty> {
     }
 
     /**
-     * Get the property property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
-     * 
-     * Property.
+     * Get the property property: Property.
      * 
      * @return the property value.
      */

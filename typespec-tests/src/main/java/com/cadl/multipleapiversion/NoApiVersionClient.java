@@ -40,7 +40,9 @@ public final class NoApiVersionClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>param1</td><td>String</td><td>No</td><td>The param1 parameter</td></tr>
+     * <tr><td>param1</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The param1 parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -60,7 +62,9 @@ public final class NoApiVersionClient {
     /**
      * The action operation.
      * 
-     * @param param1 The param1 parameter.
+     * @param param1 A sequence of textual characters.
+     * 
+     * The param1 parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

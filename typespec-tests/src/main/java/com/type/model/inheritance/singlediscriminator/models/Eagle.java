@@ -38,7 +38,7 @@ public final class Eagle extends Bird {
     private Map<String, Bird> hate;
 
     /*
-     * The partner property.
+     * This is base model for polymorphic single level inheritance with a discriminator.
      */
     @Generated
     private Bird partner;
@@ -109,7 +109,7 @@ public final class Eagle extends Bird {
     }
 
     /**
-     * Get the partner property: The partner property.
+     * Get the partner property: This is base model for polymorphic single level inheritance with a discriminator.
      * 
      * @return the partner value.
      */
@@ -119,7 +119,7 @@ public final class Eagle extends Bird {
     }
 
     /**
-     * Set the partner property: The partner property.
+     * Set the partner property: This is base model for polymorphic single level inheritance with a discriminator.
      * 
      * @param partner the partner value to set.
      * @return the Eagle object itself.

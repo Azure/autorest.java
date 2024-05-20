@@ -50,7 +50,7 @@ public final class JobResult implements JsonSerializable<JobResult> {
     private OffsetDateTime lastUpdateDateTime;
 
     /*
-     * The error property.
+     * The error object.
      */
     @Generated
     private ResponseError error;
@@ -119,7 +119,7 @@ public final class JobResult implements JsonSerializable<JobResult> {
     }
 
     /**
-     * Get the error property: The error property.
+     * Get the error property: The error object.
      * 
      * @return the error value.
      */

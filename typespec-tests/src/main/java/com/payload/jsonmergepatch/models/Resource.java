@@ -56,7 +56,7 @@ public final class Resource implements JsonSerializable<Resource> {
     private Double floatValue;
 
     /*
-     * The innerModel property.
+     * It is the model used by Resource model
      */
     @Generated
     private InnerModel innerModel;
@@ -198,7 +198,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the innerModel property: The innerModel property.
+     * Get the innerModel property: It is the model used by Resource model.
      * 
      * @return the innerModel value.
      */
@@ -208,7 +208,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the innerModel property: The innerModel property.
+     * Set the innerModel property: It is the model used by Resource model.
      * 
      * @param innerModel the innerModel value to set.
      * @return the Resource object itself.

@@ -24,7 +24,7 @@ public final class NestedFlattenModel implements JsonSerializable<NestedFlattenM
     private final String name;
 
     /*
-     * The properties property.
+     * This is the child model to be flattened. And it has flattened property as well.
      */
     @Generated
     private final ChildFlattenModel properties;
@@ -52,7 +52,7 @@ public final class NestedFlattenModel implements JsonSerializable<NestedFlattenM
     }
 
     /**
-     * Get the properties property: The properties property.
+     * Get the properties property: This is the child model to be flattened. And it has flattened property as well.
      * 
      * @return the properties value.
      */

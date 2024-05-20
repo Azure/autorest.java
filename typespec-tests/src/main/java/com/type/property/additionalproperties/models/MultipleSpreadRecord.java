@@ -21,8 +21,6 @@ import java.util.Map;
 @Fluent
 public final class MultipleSpreadRecord implements JsonSerializable<MultipleSpreadRecord> {
     /*
-     * Boolean with `true` and `false` values.
-     * 
      * The name property
      */
     @Generated
@@ -47,9 +45,7 @@ public final class MultipleSpreadRecord implements JsonSerializable<MultipleSpre
     }
 
     /**
-     * Get the flag property: Boolean with `true` and `false` values.
-     * 
-     * The name property.
+     * Get the flag property: The name property.
      * 
      * @return the flag value.
      */

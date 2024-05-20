@@ -20,8 +20,6 @@ import java.util.Map;
 @Fluent
 public class DifferentSpreadStringRecord implements JsonSerializable<DifferentSpreadStringRecord> {
     /*
-     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
-     * 
      * The name property
      */
     @Generated
@@ -46,9 +44,7 @@ public class DifferentSpreadStringRecord implements JsonSerializable<DifferentSp
     }
 
     /**
-     * Get the id property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
-     * 
-     * The name property.
+     * Get the id property: The name property.
      * 
      * @return the id value.
      */

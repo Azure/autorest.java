@@ -48,21 +48,23 @@ public final class EtagHeadersOptionalBodyAsyncClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The filter parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Header Parameters</strong></p>
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
-     * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
-     * string.</td></tr>
-     * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the
-     * entity was not modified after this time.</td></tr>
-     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity
-     * was modified after this time.</td></tr>
+     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifMatch parameter</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifNoneMatch parameter</td></tr>
+     * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The ifUnmodifiedSince parameter</td></tr>
+     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The ifModifiedSince parameter</td></tr>
      * <tr><td>timestamp</td><td>OffsetDateTime</td><td>No</td><td>The timestamp parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
@@ -88,7 +90,9 @@ public final class EtagHeadersOptionalBodyAsyncClient {
      * }
      * }</pre>
      * 
-     * @param format The format parameter.
+     * @param format A sequence of textual characters.
+     * 
+     * The format parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -105,8 +109,12 @@ public final class EtagHeadersOptionalBodyAsyncClient {
     /**
      * etag headers among other optional query/header/body parameters.
      * 
-     * @param format The format parameter.
-     * @param filter The filter parameter.
+     * @param format A sequence of textual characters.
+     * 
+     * The format parameter.
+     * @param filter A sequence of textual characters.
+     * 
+     * The filter parameter.
      * @param timestamp The timestamp parameter.
      * @param body The body parameter.
      * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
@@ -158,7 +166,9 @@ public final class EtagHeadersOptionalBodyAsyncClient {
     /**
      * etag headers among other optional query/header/body parameters.
      * 
-     * @param format The format parameter.
+     * @param format A sequence of textual characters.
+     * 
+     * The format parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

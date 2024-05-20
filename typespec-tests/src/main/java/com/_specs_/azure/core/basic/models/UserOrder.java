@@ -21,24 +21,18 @@ import java.util.Set;
 @Fluent
 public final class UserOrder implements JsonSerializable<UserOrder> {
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
      * The user's id.
      */
     @Generated
     private int id;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
      * The user's id.
      */
     @Generated
     private int userId;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The user's order detail
      */
     @Generated
@@ -73,9 +67,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     }
 
     /**
-     * Get the id property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The user's id.
+     * Get the id property: The user's id.
      * 
      * @return the id value.
      */
@@ -85,9 +77,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     }
 
     /**
-     * Get the userId property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The user's id.
+     * Get the userId property: The user's id.
      * 
      * @return the userId value.
      */
@@ -97,9 +87,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     }
 
     /**
-     * Set the userId property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The user's id.
+     * Set the userId property: The user's id.
      * <p>Required when create the resource.</p>
      * 
      * @param userId the userId value to set.
@@ -113,9 +101,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     }
 
     /**
-     * Get the detail property: A sequence of textual characters.
-     * 
-     * The user's order detail.
+     * Get the detail property: The user's order detail.
      * 
      * @return the detail value.
      */
@@ -125,9 +111,7 @@ public final class UserOrder implements JsonSerializable<UserOrder> {
     }
 
     /**
-     * Set the detail property: A sequence of textual characters.
-     * 
-     * The user's order detail.
+     * Set the detail property: The user's order detail.
      * <p>Required when create the resource.</p>
      * 
      * @param detail the detail value to set.

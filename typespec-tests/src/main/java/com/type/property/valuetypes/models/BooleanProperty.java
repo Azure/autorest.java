@@ -18,8 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class BooleanProperty implements JsonSerializable<BooleanProperty> {
     /*
-     * Boolean with `true` and `false` values.
-     * 
      * Property
      */
     @Generated
@@ -36,9 +34,7 @@ public final class BooleanProperty implements JsonSerializable<BooleanProperty> 
     }
 
     /**
-     * Get the property property: Boolean with `true` and `false` values.
-     * 
-     * Property.
+     * Get the property property: Property.
      * 
      * @return the property value.
      */

@@ -37,8 +37,6 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     private final byte[] bytes;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The aggregation function to be applied on the client metric. Allowed functions
      * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
@@ -97,9 +95,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the aggregate property: A sequence of textual characters.
-     *
-     * The aggregation function to be applied on the client metric. Allowed functions
+     * Get the aggregate property: The aggregation function to be applied on the client metric. Allowed functions
      * - ‘percentage’ - for error metric , ‘avg’, ‘p50’, ‘p90’, ‘p95’, ‘p99’, ‘min’,
      * ‘max’ - for response_time_ms and latency metric, ‘avg’ - for requests_per_sec,
      * ‘count’ - for requests.

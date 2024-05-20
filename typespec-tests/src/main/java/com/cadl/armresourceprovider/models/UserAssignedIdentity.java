@@ -13,16 +13,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class UserAssignedIdentity {
     /*
-     * A sequence of textual characters.
-     * 
      * The active directory client identifier for this principal.
      */
     @JsonProperty(value = "clientId")
     private String clientId;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The active directory identifier for this principal.
      */
     @JsonProperty(value = "principalId")
@@ -35,9 +31,7 @@ public final class UserAssignedIdentity {
     }
 
     /**
-     * Get the clientId property: A sequence of textual characters.
-     * 
-     * The active directory client identifier for this principal.
+     * Get the clientId property: The active directory client identifier for this principal.
      * 
      * @return the clientId value.
      */
@@ -46,9 +40,7 @@ public final class UserAssignedIdentity {
     }
 
     /**
-     * Set the clientId property: A sequence of textual characters.
-     * 
-     * The active directory client identifier for this principal.
+     * Set the clientId property: The active directory client identifier for this principal.
      * 
      * @param clientId the clientId value to set.
      * @return the UserAssignedIdentity object itself.
@@ -59,9 +51,7 @@ public final class UserAssignedIdentity {
     }
 
     /**
-     * Get the principalId property: A sequence of textual characters.
-     * 
-     * The active directory identifier for this principal.
+     * Get the principalId property: The active directory identifier for this principal.
      * 
      * @return the principalId value.
      */
@@ -70,9 +60,7 @@ public final class UserAssignedIdentity {
     }
 
     /**
-     * Set the principalId property: A sequence of textual characters.
-     * 
-     * The active directory identifier for this principal.
+     * Set the principalId property: The active directory identifier for this principal.
      * 
      * @param principalId the principalId value to set.
      * @return the UserAssignedIdentity object itself.

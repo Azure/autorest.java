@@ -55,14 +55,14 @@ public final class EtagHeadersAsyncClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
-     * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
-     * string.</td></tr>
-     * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the
-     * entity was not modified after this time.</td></tr>
-     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The request should only proceed if the entity
-     * was modified after this time.</td></tr>
+     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifMatch parameter</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifNoneMatch parameter</td></tr>
+     * <tr><td>If-Unmodified-Since</td><td>OffsetDateTime</td><td>No</td><td>The ifUnmodifiedSince parameter</td></tr>
+     * <tr><td>If-Modified-Since</td><td>OffsetDateTime</td><td>No</td><td>The ifModifiedSince parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
@@ -87,8 +87,10 @@ public final class EtagHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -109,10 +111,12 @@ public final class EtagHeadersAsyncClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
-     * string.</td></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
-     * string.</td></tr>
+     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifMatch parameter</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifNoneMatch parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * <p><strong>Request Body Schema</strong></p>
@@ -137,8 +141,10 @@ public final class EtagHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -182,8 +188,10 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or replace operation template.
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -224,8 +232,10 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or replace operation template.
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -247,8 +257,10 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or update operation template.
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @param matchConditions Specifies HTTP options for conditional requests.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -281,8 +293,10 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or update operation template.
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

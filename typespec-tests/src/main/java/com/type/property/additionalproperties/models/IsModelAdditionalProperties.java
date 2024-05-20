@@ -20,7 +20,7 @@ import java.util.Map;
 @Fluent
 public final class IsModelAdditionalProperties implements JsonSerializable<IsModelAdditionalProperties> {
     /*
-     * The knownProp property.
+     * model for record
      */
     @Generated
     private final ModelForRecord knownProp;
@@ -44,7 +44,7 @@ public final class IsModelAdditionalProperties implements JsonSerializable<IsMod
     }
 
     /**
-     * Get the knownProp property: The knownProp property.
+     * Get the knownProp property: model for record.
      * 
      * @return the knownProp value.
      */

@@ -13,32 +13,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Immutable
 public final class OperationDisplay {
     /*
-     * A sequence of textual characters.
-     * 
      * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft Compute".
      */
     @JsonProperty(value = "provider")
     private String provider;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job Schedule Collections".
      */
     @JsonProperty(value = "resource")
     private String resource;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual Machine", "Restart Virtual Machine".
      */
     @JsonProperty(value = "operation")
     private String operation;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
      */
     @JsonProperty(value = "description")
@@ -51,10 +43,8 @@ public final class OperationDisplay {
     }
 
     /**
-     * Get the provider property: A sequence of textual characters.
-     * 
-     * The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring Insights" or "Microsoft
-     * Compute".
+     * Get the provider property: The localized friendly form of the resource provider name, e.g. "Microsoft Monitoring
+     * Insights" or "Microsoft Compute".
      * 
      * @return the provider value.
      */
@@ -63,10 +53,8 @@ public final class OperationDisplay {
     }
 
     /**
-     * Get the resource property: A sequence of textual characters.
-     * 
-     * The localized friendly name of the resource type related to this operation. E.g. "Virtual Machines" or "Job
-     * Schedule Collections".
+     * Get the resource property: The localized friendly name of the resource type related to this operation. E.g.
+     * "Virtual Machines" or "Job Schedule Collections".
      * 
      * @return the resource value.
      */
@@ -75,10 +63,8 @@ public final class OperationDisplay {
     }
 
     /**
-     * Get the operation property: A sequence of textual characters.
-     * 
-     * The concise, localized friendly name for the operation; suitable for dropdowns. E.g. "Create or Update Virtual
-     * Machine", "Restart Virtual Machine".
+     * Get the operation property: The concise, localized friendly name for the operation; suitable for dropdowns. E.g.
+     * "Create or Update Virtual Machine", "Restart Virtual Machine".
      * 
      * @return the operation value.
      */
@@ -87,9 +73,8 @@ public final class OperationDisplay {
     }
 
     /**
-     * Get the description property: A sequence of textual characters.
-     * 
-     * The short, localized friendly description of the operation; suitable for tool tips and detailed views.
+     * Get the description property: The short, localized friendly description of the operation; suitable for tool tips
+     * and detailed views.
      * 
      * @return the description value.
      */

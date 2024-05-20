@@ -14,16 +14,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Fluent
 public final class ManagedServiceIdentity {
     /*
-     * A sequence of textual characters.
-     * 
      * The Active Directory tenant id of the principal.
      */
     @JsonProperty(value = "tenantId", access = JsonProperty.Access.WRITE_ONLY)
     private String tenantId;
 
     /*
-     * A sequence of textual characters.
-     * 
      * The active directory identifier of this principal.
      */
     @JsonProperty(value = "principalId", access = JsonProperty.Access.WRITE_ONLY)
@@ -48,9 +44,7 @@ public final class ManagedServiceIdentity {
     }
 
     /**
-     * Get the tenantId property: A sequence of textual characters.
-     * 
-     * The Active Directory tenant id of the principal.
+     * Get the tenantId property: The Active Directory tenant id of the principal.
      * 
      * @return the tenantId value.
      */
@@ -59,9 +53,7 @@ public final class ManagedServiceIdentity {
     }
 
     /**
-     * Get the principalId property: A sequence of textual characters.
-     * 
-     * The active directory identifier of this principal.
+     * Get the principalId property: The active directory identifier of this principal.
      * 
      * @return the principalId value.
      */

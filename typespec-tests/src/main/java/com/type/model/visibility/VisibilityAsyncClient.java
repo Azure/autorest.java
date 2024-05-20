@@ -73,6 +73,8 @@ public final class VisibilityAsyncClient {
      * }</pre>
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -106,6 +108,8 @@ public final class VisibilityAsyncClient {
      * }</pre>
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -138,6 +142,8 @@ public final class VisibilityAsyncClient {
      * }</pre>
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -170,6 +176,8 @@ public final class VisibilityAsyncClient {
      * }</pre>
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -202,6 +210,8 @@ public final class VisibilityAsyncClient {
      * }</pre>
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -234,6 +244,8 @@ public final class VisibilityAsyncClient {
      * }</pre>
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -251,6 +263,8 @@ public final class VisibilityAsyncClient {
      * The getModel operation.
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -272,6 +286,8 @@ public final class VisibilityAsyncClient {
      * The headModel operation.
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -292,6 +308,8 @@ public final class VisibilityAsyncClient {
      * The putModel operation.
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -312,6 +330,8 @@ public final class VisibilityAsyncClient {
      * The patchModel operation.
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -332,6 +352,8 @@ public final class VisibilityAsyncClient {
      * The postModel operation.
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -352,6 +374,8 @@ public final class VisibilityAsyncClient {
      * The deleteModel operation.
      * 
      * @param input Output model with visibility properties.
+     * 
+     * The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

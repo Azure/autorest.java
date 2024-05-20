@@ -18,8 +18,6 @@ import java.io.IOException;
 @Immutable
 public final class IntProperty implements JsonSerializable<IntProperty> {
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
      * Property
      */
     @Generated
@@ -36,9 +34,7 @@ public final class IntProperty implements JsonSerializable<IntProperty> {
     }
 
     /**
-     * Get the property property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * Property.
+     * Get the property property: Property.
      * 
      * @return the property value.
      */

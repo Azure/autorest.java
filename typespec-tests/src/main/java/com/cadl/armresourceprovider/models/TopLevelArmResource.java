@@ -173,7 +173,9 @@ public interface TopLevelArmResource {
             /**
              * Specifies resourceGroupName.
              * 
-             * @param resourceGroupName The name of the resource group. The name is case insensitive.
+             * @param resourceGroupName A sequence of textual characters.
+             * 
+             * The resourceGroupName parameter.
              * @return the next definition stage.
              */
             WithCreate withExistingResourceGroup(String resourceGroupName);
@@ -316,9 +318,9 @@ public interface TopLevelArmResource {
          */
         interface WithProperties {
             /**
-             * Specifies the properties property: The properties property..
+             * Specifies the properties property: The updatable properties of the TopLevelArmResource..
              * 
-             * @param properties The properties property.
+             * @param properties The updatable properties of the TopLevelArmResource.
              * @return the next definition stage.
              */
             Update withProperties(TopLevelArmResourceUpdateProperties properties);

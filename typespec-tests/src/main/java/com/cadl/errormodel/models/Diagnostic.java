@@ -25,7 +25,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
     private final String name;
 
     /*
-     * The error property.
+     * The error object.
      */
     @Generated
     private final ResponseError error;
@@ -53,7 +53,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
     }
 
     /**
-     * Get the error property: The error property.
+     * Get the error property: The error object.
      * 
      * @return the error value.
      */

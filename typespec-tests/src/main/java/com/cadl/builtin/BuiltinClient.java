@@ -45,9 +45,16 @@ public final class BuiltinClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
-     * <tr><td>query-opt</td><td>String</td><td>No</td><td>The queryParamOptional parameter</td></tr>
-     * <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>The queryParamOptionalEncoded parameter</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The filter parameter</td></tr>
+     * <tr><td>query-opt</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The queryParamOptional parameter</td></tr>
+     * <tr><td>query-opt-encoded</td><td>String</td><td>No</td><td>Represent a URL string as described by
+     * https://url.spec.whatwg.org/
+     * 
+     * The queryParamOptionalEncoded parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Header Parameters</strong></p>
@@ -95,8 +102,12 @@ public final class BuiltinClient {
      * }
      * }</pre>
      * 
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * 
+     * The queryParam parameter.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/
+     * 
+     * The queryParamEncoded parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -168,12 +179,22 @@ public final class BuiltinClient {
     /**
      * The read operation.
      * 
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * 
+     * The queryParam parameter.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/
+     * 
+     * The queryParamEncoded parameter.
      * @param dateTime The dateTime parameter.
-     * @param filter The filter parameter.
-     * @param queryParamOptional The queryParamOptional parameter.
-     * @param queryParamOptionalEncoded The queryParamOptionalEncoded parameter.
+     * @param filter A sequence of textual characters.
+     * 
+     * The filter parameter.
+     * @param queryParamOptional A sequence of textual characters.
+     * 
+     * The queryParamOptional parameter.
+     * @param queryParamOptionalEncoded Represent a URL string as described by https://url.spec.whatwg.org/
+     * 
+     * The queryParamOptionalEncoded parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -207,8 +228,12 @@ public final class BuiltinClient {
     /**
      * The read operation.
      * 
-     * @param queryParam The queryParam parameter.
-     * @param queryParamEncoded The queryParamEncoded parameter.
+     * @param queryParam A sequence of textual characters.
+     * 
+     * The queryParam parameter.
+     * @param queryParamEncoded Represent a URL string as described by https://url.spec.whatwg.org/
+     * 
+     * The queryParamEncoded parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

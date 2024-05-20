@@ -19,21 +19,19 @@ import java.io.IOException;
 @Immutable
 public final class OperationDetails2 implements JsonSerializable<OperationDetails2> {
     /*
-     * Universally Unique Identifier
-     * 
      * Operation ID
      */
     @Generated
     private final String id;
 
     /*
-     * The status property.
+     * Enum describing allowed operation states.
      */
     @Generated
     private final OperationState status;
 
     /*
-     * The error property.
+     * The error object.
      */
     @Generated
     private ResponseError error;
@@ -57,9 +55,7 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
     }
 
     /**
-     * Get the id property: Universally Unique Identifier
-     * 
-     * Operation ID.
+     * Get the id property: Operation ID.
      * 
      * @return the id value.
      */
@@ -69,7 +65,7 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
     }
 
     /**
-     * Get the status property: The status property.
+     * Get the status property: Enum describing allowed operation states.
      * 
      * @return the status value.
      */
@@ -79,7 +75,7 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
     }
 
     /**
-     * Get the error property: The error property.
+     * Get the error property: The error object.
      * 
      * @return the error value.
      */

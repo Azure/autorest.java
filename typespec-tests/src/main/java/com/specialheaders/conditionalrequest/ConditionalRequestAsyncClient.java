@@ -43,8 +43,9 @@ public final class ConditionalRequestAsyncClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-Match</td><td>String</td><td>No</td><td>The request should only proceed if an entity matches this
-     * string.</td></tr>
+     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifMatch parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
@@ -67,8 +68,9 @@ public final class ConditionalRequestAsyncClient {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>The request should only proceed if no entity matches this
-     * string.</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
+     * 
+     * The ifNoneMatch parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
@@ -88,7 +90,9 @@ public final class ConditionalRequestAsyncClient {
     /**
      * Check when only If-Match in header is defined.
      * 
-     * @param ifMatch The request should only proceed if an entity matches this string.
+     * @param ifMatch A sequence of textual characters.
+     * 
+     * The ifMatch parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -129,7 +133,9 @@ public final class ConditionalRequestAsyncClient {
     /**
      * Check when only If-None-Match in header is defined.
      * 
-     * @param ifNoneMatch The request should only proceed if no entity matches this string.
+     * @param ifNoneMatch A sequence of textual characters.
+     * 
+     * The ifNoneMatch parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

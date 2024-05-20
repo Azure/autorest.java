@@ -210,8 +210,10 @@ public final class ProtocolAndConvenientAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -232,7 +234,10 @@ public final class ProtocolAndConvenientAsyncClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
+     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )
+     * 
+     * The maxPageSize parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -304,8 +309,10 @@ public final class ProtocolAndConvenientAsyncClient {
     /**
      * Long running operation.
      * 
-     * @param name The name parameter.
-     * @param resource The resource instance.
+     * @param name A sequence of textual characters.
+     * 
+     * The name parameter.
+     * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

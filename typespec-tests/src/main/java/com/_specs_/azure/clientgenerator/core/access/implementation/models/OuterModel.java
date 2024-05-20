@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class OuterModel extends BaseModel {
     /*
-     * The inner property.
+     * Used in internal operations, should be generated but not exported.
      */
     @Generated
     private final InnerModel inner;
@@ -35,7 +35,7 @@ public final class OuterModel extends BaseModel {
     }
 
     /**
-     * Get the inner property: The inner property.
+     * Get the inner property: Used in internal operations, should be generated but not exported.
      * 
      * @return the inner value.
      */
