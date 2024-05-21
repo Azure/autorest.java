@@ -25,13 +25,13 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
     private final String id;
 
     /*
-     * Enum describing allowed operation states.
+     * The status property.
      */
     @Generated
     private final OperationState status;
 
     /*
-     * The error object.
+     * The error property.
      */
     @Generated
     private ResponseError error;
@@ -65,7 +65,7 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
     }
 
     /**
-     * Get the status property: Enum describing allowed operation states.
+     * Get the status property: The status property.
      * 
      * @return the status value.
      */
@@ -75,7 +75,7 @@ public final class OperationDetails2 implements JsonSerializable<OperationDetail
     }
 
     /**
-     * Get the error property: The error object.
+     * Get the error property: The error property.
      * 
      * @return the error value.
      */

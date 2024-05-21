@@ -61,7 +61,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
     private OffsetDateTime completedAt;
 
     /*
-     * A sequence of textual characters.
+     * The _dummy property.
      */
     @Generated
     private String dummy;
@@ -149,7 +149,7 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
     }
 
     /**
-     * Get the dummy property: A sequence of textual characters.
+     * Get the dummy property: The _dummy property.
      * 
      * @return the dummy value.
      */

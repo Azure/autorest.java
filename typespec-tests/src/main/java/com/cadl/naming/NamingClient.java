@@ -89,14 +89,10 @@ public final class NamingClient {
      * description of POST op.
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param dataRequest summary of Request
      * 
      * description of Request.
      * @param etag A sequence of textual characters.
-     * 
-     * The etag parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -123,8 +119,6 @@ public final class NamingClient {
      * description of POST op.
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param dataRequest summary of Request
      * 
      * description of Request.

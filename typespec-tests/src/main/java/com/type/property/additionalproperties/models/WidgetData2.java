@@ -24,7 +24,7 @@ public final class WidgetData2 implements JsonSerializable<WidgetData2> {
     private final String kind = "kind1";
 
     /*
-     * A sequence of textual characters.
+     * The start property.
      */
     @Generated
     private final String start;
@@ -50,7 +50,7 @@ public final class WidgetData2 implements JsonSerializable<WidgetData2> {
     }
 
     /**
-     * Get the start property: A sequence of textual characters.
+     * Get the start property: The start property.
      * 
      * @return the start value.
      */

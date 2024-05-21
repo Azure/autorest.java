@@ -33,8 +33,6 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     private final String name;
 
     /*
-     * The model is Record<unknown> with a discriminator.
-     * 
      * Additional properties
      */
     @Generated
@@ -72,9 +70,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Get the additionalProperties property: The model is Record&lt;unknown&gt; with a discriminator.
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -84,9 +80,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
     }
 
     /**
-     * Set the additionalProperties property: The model is Record&lt;unknown&gt; with a discriminator.
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsUnknownAdditionalPropertiesDiscriminated object itself.

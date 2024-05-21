@@ -19,19 +19,19 @@ import java.io.IOException;
 public final class PartialUpdateModel implements JsonSerializable<PartialUpdateModel> {
 
     /*
-     * Boolean with `true` and `false` values.
+     * The boolean property.
      */
     @Generated
     private final boolean booleanProperty;
 
     /*
-     * A sequence of textual characters.
+     * The string property.
      */
     @Generated
     private final String string;
 
     /*
-     * Represent a byte array
+     * The bytes property.
      */
     @Generated
     private final byte[] bytes;
@@ -65,7 +65,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the booleanProperty property: Boolean with `true` and `false` values.
+     * Get the booleanProperty property: The boolean property.
      *
      * @return the booleanProperty value.
      */
@@ -75,7 +75,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the string property: A sequence of textual characters.
+     * Get the string property: The string property.
      *
      * @return the string value.
      */
@@ -85,7 +85,7 @@ public final class PartialUpdateModel implements JsonSerializable<PartialUpdateM
     }
 
     /**
-     * Get the bytes property: Represent a byte array.
+     * Get the bytes property: The bytes property.
      *
      * @return the bytes value.
      */

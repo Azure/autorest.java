@@ -27,25 +27,25 @@ public class Fish implements JsonSerializable<Fish> {
     private String kind;
 
     /*
-     * A sequence of textual characters.
+     * The id property.
      */
     @Generated
     private String id;
 
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private String name;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The age property.
      */
     @Generated
     private int age;
 
     /*
-     * A sequence of textual characters.
+     * The color property.
      */
     @Generated
     private String color;
@@ -91,7 +91,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Get the id property: A sequence of textual characters.
+     * Get the id property: The id property.
      * 
      * @return the id value.
      */
@@ -101,7 +101,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Set the id property: A sequence of textual characters.
+     * Set the id property: The id property.
      * 
      * @param id the id value to set.
      * @return the Fish object itself.
@@ -114,7 +114,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -124,7 +124,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Set the name property: A sequence of textual characters.
+     * Set the name property: The name property.
      * 
      * @param name the name value to set.
      * @return the Fish object itself.
@@ -137,7 +137,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Get the age property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the age property: The age property.
      * 
      * @return the age value.
      */
@@ -147,7 +147,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Set the age property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Set the age property: The age property.
      * <p>Required when create the resource.</p>
      * 
      * @param age the age value to set.
@@ -161,7 +161,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Get the color property: A sequence of textual characters.
+     * Get the color property: The color property.
      * 
      * @return the color value.
      */
@@ -171,7 +171,7 @@ public class Fish implements JsonSerializable<Fish> {
     }
 
     /**
-     * Set the color property: A sequence of textual characters.
+     * Set the color property: The color property.
      * 
      * @param color the color value to set.
      * @return the Fish object itself.

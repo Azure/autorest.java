@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class SendProjectedNameRequest implements JsonSerializable<SendProjectedNameRequest> {
     /*
-     * A sequence of textual characters.
+     * The file_id property.
      */
     @Generated
     private final String fileIdentifier;
@@ -34,7 +34,7 @@ public final class SendProjectedNameRequest implements JsonSerializable<SendProj
     }
 
     /**
-     * Get the fileIdentifier property: A sequence of textual characters.
+     * Get the fileIdentifier property: The file_id property.
      * 
      * @return the fileIdentifier value.
      */

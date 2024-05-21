@@ -49,8 +49,6 @@ public final class ExplicitBodyAsyncClient {
      * }</pre>
      * 
      * @param body This is a simple model.
-     * 
-     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -68,8 +66,6 @@ public final class ExplicitBodyAsyncClient {
      * The simple operation.
      * 
      * @param body This is a simple model.
-     * 
-     * The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

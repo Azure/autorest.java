@@ -379,7 +379,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with no XML node.
      * 
-     * @param model I am root, and I ref a model with no meta.
+     * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -402,7 +402,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with no XML node.
      * 
-     * @param model I am root, and I ref a model with no meta.
+     * @param model The model parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -426,7 +426,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with no XML node.
      * 
-     * @param model I am root, and I ref a model with no meta.
+     * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -440,7 +440,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with no XML node.
      * 
-     * @param model I am root, and I ref a model with no meta.
+     * @param model The model parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -455,7 +455,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with no XML node.
      * 
-     * @param model I am root, and I ref a model with no meta.
+     * @param model The model parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -470,7 +470,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with no XML node.
      * 
-     * @param model I am root, and I ref a model with no meta.
+     * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -574,7 +574,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with XML node.
      * 
-     * @param model I am root, and I ref a model WITH meta.
+     * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -598,7 +598,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with XML node.
      * 
-     * @param model I am root, and I ref a model WITH meta.
+     * @param model The model parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -622,7 +622,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with XML node.
      * 
-     * @param model I am root, and I ref a model WITH meta.
+     * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -636,7 +636,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with XML node.
      * 
-     * @param model I am root, and I ref a model WITH meta.
+     * @param model The model parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -651,7 +651,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with XML node.
      * 
-     * @param model I am root, and I ref a model WITH meta.
+     * @param model The model parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -666,7 +666,7 @@ public final class Xmls {
     /**
      * Puts a complex type that has a ref to a complex type with XML node.
      * 
-     * @param model I am root, and I ref a model WITH meta.
+     * @param model The model parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -767,7 +767,7 @@ public final class Xmls {
     /**
      * Put a simple XML document.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -791,7 +791,7 @@ public final class Xmls {
     /**
      * Put a simple XML document.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -816,7 +816,7 @@ public final class Xmls {
     /**
      * Put a simple XML document.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -830,7 +830,7 @@ public final class Xmls {
     /**
      * Put a simple XML document.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -845,7 +845,7 @@ public final class Xmls {
     /**
      * Put a simple XML document.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -860,7 +860,7 @@ public final class Xmls {
     /**
      * Put a simple XML document.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -963,7 +963,7 @@ public final class Xmls {
     /**
      * Put an XML document with multiple wrapped lists.
      * 
-     * @param wrappedLists A barrel of apples.
+     * @param wrappedLists The wrappedLists parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -988,7 +988,7 @@ public final class Xmls {
     /**
      * Put an XML document with multiple wrapped lists.
      * 
-     * @param wrappedLists A barrel of apples.
+     * @param wrappedLists The wrappedLists parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1013,7 +1013,7 @@ public final class Xmls {
     /**
      * Put an XML document with multiple wrapped lists.
      * 
-     * @param wrappedLists A barrel of apples.
+     * @param wrappedLists The wrappedLists parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1027,7 +1027,7 @@ public final class Xmls {
     /**
      * Put an XML document with multiple wrapped lists.
      * 
-     * @param wrappedLists A barrel of apples.
+     * @param wrappedLists The wrappedLists parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1042,7 +1042,7 @@ public final class Xmls {
     /**
      * Put an XML document with multiple wrapped lists.
      * 
-     * @param wrappedLists A barrel of apples.
+     * @param wrappedLists The wrappedLists parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -1057,7 +1057,7 @@ public final class Xmls {
     /**
      * Put an XML document with multiple wrapped lists.
      * 
-     * @param wrappedLists A barrel of apples.
+     * @param wrappedLists The wrappedLists parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1243,7 +1243,7 @@ public final class Xmls {
     /**
      * Puts an empty list.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1266,7 +1266,7 @@ public final class Xmls {
     /**
      * Puts an empty list.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1290,7 +1290,7 @@ public final class Xmls {
     /**
      * Puts an empty list.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1304,7 +1304,7 @@ public final class Xmls {
     /**
      * Puts an empty list.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1319,7 +1319,7 @@ public final class Xmls {
     /**
      * Puts an empty list.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1334,7 +1334,7 @@ public final class Xmls {
     /**
      * Puts an empty list.
      * 
-     * @param slideshow Data about a slideshow.
+     * @param slideshow The slideshow parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1435,7 +1435,7 @@ public final class Xmls {
     /**
      * Puts some empty wrapped lists.
      * 
-     * @param appleBarrel A barrel of apples.
+     * @param appleBarrel The appleBarrel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1459,7 +1459,7 @@ public final class Xmls {
     /**
      * Puts some empty wrapped lists.
      * 
-     * @param appleBarrel A barrel of apples.
+     * @param appleBarrel The appleBarrel parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1483,7 +1483,7 @@ public final class Xmls {
     /**
      * Puts some empty wrapped lists.
      * 
-     * @param appleBarrel A barrel of apples.
+     * @param appleBarrel The appleBarrel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1497,7 +1497,7 @@ public final class Xmls {
     /**
      * Puts some empty wrapped lists.
      * 
-     * @param appleBarrel A barrel of apples.
+     * @param appleBarrel The appleBarrel parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1512,7 +1512,7 @@ public final class Xmls {
     /**
      * Puts some empty wrapped lists.
      * 
-     * @param appleBarrel A barrel of apples.
+     * @param appleBarrel The appleBarrel parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1527,7 +1527,7 @@ public final class Xmls {
     /**
      * Puts some empty wrapped lists.
      * 
-     * @param appleBarrel A barrel of apples.
+     * @param appleBarrel The appleBarrel parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1628,7 +1628,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1652,7 +1652,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1677,7 +1677,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1691,7 +1691,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1706,7 +1706,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1721,7 +1721,7 @@ public final class Xmls {
     /**
      * Puts a list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1822,7 +1822,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1847,7 +1847,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1872,7 +1872,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1886,7 +1886,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1901,7 +1901,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -1916,7 +1916,7 @@ public final class Xmls {
     /**
      * Puts a list with a single item.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2017,7 +2017,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2042,7 +2042,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2067,7 +2067,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2081,7 +2081,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2096,7 +2096,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2111,7 +2111,7 @@ public final class Xmls {
     /**
      * Puts an empty list as the root element.
      * 
-     * @param bananas Array of Banana.
+     * @param bananas The bananas parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2214,7 +2214,7 @@ public final class Xmls {
     /**
      * Puts a value with an empty child element.
      * 
-     * @param banana A banana.
+     * @param banana The banana parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2237,7 +2237,7 @@ public final class Xmls {
     /**
      * Puts a value with an empty child element.
      * 
-     * @param banana A banana.
+     * @param banana The banana parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2261,7 +2261,7 @@ public final class Xmls {
     /**
      * Puts a value with an empty child element.
      * 
-     * @param banana A banana.
+     * @param banana The banana parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2275,7 +2275,7 @@ public final class Xmls {
     /**
      * Puts a value with an empty child element.
      * 
-     * @param banana A banana.
+     * @param banana The banana parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2290,7 +2290,7 @@ public final class Xmls {
     /**
      * Puts a value with an empty child element.
      * 
-     * @param banana A banana.
+     * @param banana The banana parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2305,7 +2305,7 @@ public final class Xmls {
     /**
      * Puts a value with an empty child element.
      * 
-     * @param banana A banana.
+     * @param banana The banana parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2501,7 +2501,7 @@ public final class Xmls {
     /**
      * Puts storage service properties.
      * 
-     * @param properties Storage Service Properties.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2527,7 +2527,7 @@ public final class Xmls {
     /**
      * Puts storage service properties.
      * 
-     * @param properties Storage Service Properties.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2554,7 +2554,7 @@ public final class Xmls {
     /**
      * Puts storage service properties.
      * 
-     * @param properties Storage Service Properties.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2568,7 +2568,7 @@ public final class Xmls {
     /**
      * Puts storage service properties.
      * 
-     * @param properties Storage Service Properties.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2583,7 +2583,7 @@ public final class Xmls {
     /**
      * Puts storage service properties.
      * 
-     * @param properties Storage Service Properties.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2598,7 +2598,7 @@ public final class Xmls {
     /**
      * Puts storage service properties.
      * 
-     * @param properties Storage Service Properties.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2703,7 +2703,7 @@ public final class Xmls {
     /**
      * Puts storage ACLs for a container.
      * 
-     * @param properties a collection of signed identifiers.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2730,7 +2730,7 @@ public final class Xmls {
     /**
      * Puts storage ACLs for a container.
      * 
-     * @param properties a collection of signed identifiers.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2757,7 +2757,7 @@ public final class Xmls {
     /**
      * Puts storage ACLs for a container.
      * 
-     * @param properties a collection of signed identifiers.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2771,7 +2771,7 @@ public final class Xmls {
     /**
      * Puts storage ACLs for a container.
      * 
-     * @param properties a collection of signed identifiers.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2786,7 +2786,7 @@ public final class Xmls {
     /**
      * Puts storage ACLs for a container.
      * 
-     * @param properties a collection of signed identifiers.
+     * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -2801,7 +2801,7 @@ public final class Xmls {
     /**
      * Puts storage ACLs for a container.
      * 
-     * @param properties a collection of signed identifiers.
+     * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

@@ -66,21 +66,21 @@ public interface TopLevelArmResource {
     List<String> configurationEndpoints();
 
     /**
-     * Gets the userName property: A sequence of textual characters.
+     * Gets the userName property: The userName property.
      * 
      * @return the userName value.
      */
     String userName();
 
     /**
-     * Gets the userNames property: A sequence of textual characters.
+     * Gets the userNames property: The userNames property.
      * 
      * @return the userNames value.
      */
     String userNames();
 
     /**
-     * Gets the accuserName property: A sequence of textual characters.
+     * Gets the accuserName property: The accuserName property.
      * 
      * @return the accuserName value.
      */
@@ -174,8 +174,6 @@ public interface TopLevelArmResource {
              * Specifies resourceGroupName.
              * 
              * @param resourceGroupName A sequence of textual characters.
-             * 
-             * The resourceGroupName parameter.
              * @return the next definition stage.
              */
             WithCreate withExistingResourceGroup(String resourceGroupName);
@@ -221,9 +219,9 @@ public interface TopLevelArmResource {
          */
         interface WithUserName {
             /**
-             * Specifies the userName property: A sequence of textual characters..
+             * Specifies the userName property: The userName property..
              * 
-             * @param userName A sequence of textual characters.
+             * @param userName The userName property.
              * @return the next definition stage.
              */
             WithCreate withUserName(String userName);
@@ -234,9 +232,9 @@ public interface TopLevelArmResource {
          */
         interface WithUserNames {
             /**
-             * Specifies the userNames property: A sequence of textual characters..
+             * Specifies the userNames property: The userNames property..
              * 
-             * @param userNames A sequence of textual characters.
+             * @param userNames The userNames property.
              * @return the next definition stage.
              */
             WithCreate withUserNames(String userNames);
@@ -247,9 +245,9 @@ public interface TopLevelArmResource {
          */
         interface WithAccuserName {
             /**
-             * Specifies the accuserName property: A sequence of textual characters..
+             * Specifies the accuserName property: The accuserName property..
              * 
-             * @param accuserName A sequence of textual characters.
+             * @param accuserName The accuserName property.
              * @return the next definition stage.
              */
             WithCreate withAccuserName(String accuserName);
@@ -318,9 +316,9 @@ public interface TopLevelArmResource {
          */
         interface WithProperties {
             /**
-             * Specifies the properties property: The updatable properties of the TopLevelArmResource..
+             * Specifies the properties property: The properties property..
              * 
-             * @param properties The updatable properties of the TopLevelArmResource.
+             * @param properties The properties property.
              * @return the next definition stage.
              */
             Update withProperties(TopLevelArmResourceUpdateProperties properties);

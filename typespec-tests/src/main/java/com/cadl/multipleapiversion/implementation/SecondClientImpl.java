@@ -178,8 +178,6 @@ public final class SecondClientImpl {
      * }</pre>
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -207,8 +205,6 @@ public final class SecondClientImpl {
      * }</pre>
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -40,8 +40,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1",
-     * "value2".</td></tr>
+     * <tr><td>input</td><td>String</td><td>No</td><td>. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -64,8 +63,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1",
-     * "value2".</td></tr>
+     * <tr><td>input</td><td>String</td><td>No</td><td>. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -117,7 +115,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     /**
      * Puts constants to the testserver.
      * 
-     * @param input The input parameter. Allowed values: "value1", "value2".
+     * @param input . Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -135,7 +133,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     /**
      * Puts constants to the testserver.
      * 
-     * @param input The input parameter. Allowed values: "value1", "value2".
+     * @param input . Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -188,8 +186,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1",
-     * "value2".</td></tr>
+     * <tr><td>input</td><td>String</td><td>No</td><td>. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -212,8 +209,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1",
-     * "value2".</td></tr>
+     * <tr><td>input</td><td>String</td><td>No</td><td>. Allowed values: "value1", "value2".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -236,7 +232,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <tr><td>input</td><td>String</td><td>No</td><td>. Allowed values: "value1".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -259,7 +255,7 @@ public final class AutoRestSwaggerConstantServiceClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>input</td><td>String</td><td>No</td><td>The input parameter. Allowed values: "value1".</td></tr>
+     * <tr><td>input</td><td>String</td><td>No</td><td>. Allowed values: "value1".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -279,7 +275,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     /**
      * Puts constants to the testserver.
      * 
-     * @param input The input parameter. Allowed values: "value1", "value2".
+     * @param input . Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -297,7 +293,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     /**
      * Puts constants to the testserver.
      * 
-     * @param input The input parameter. Allowed values: "value1", "value2".
+     * @param input . Allowed values: "value1", "value2".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -315,7 +311,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     /**
      * Puts constants to the testserver.
      * 
-     * @param input The input parameter. Allowed values: "value1".
+     * @param input . Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -333,7 +329,7 @@ public final class AutoRestSwaggerConstantServiceClient {
     /**
      * Puts constants to the testserver.
      * 
-     * @param input The input parameter. Allowed values: "value1".
+     * @param input . Allowed values: "value1".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

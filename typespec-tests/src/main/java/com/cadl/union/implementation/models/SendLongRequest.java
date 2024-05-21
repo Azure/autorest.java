@@ -26,13 +26,13 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     private User user;
 
     /*
-     * A sequence of textual characters.
+     * The input property.
      */
     @Generated
     private final String input;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The dataInt property.
      */
     @Generated
     private final int dataInt;
@@ -44,13 +44,13 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     private BinaryData dataUnion;
 
     /*
-     * A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`)
+     * The dataLong property.
      */
     @Generated
     private Long dataLong;
 
     /*
-     * A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`)
+     * The data_float property.
      */
     @Generated
     private Double dataFloat;
@@ -90,7 +90,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     }
 
     /**
-     * Get the input property: A sequence of textual characters.
+     * Get the input property: The input property.
      * 
      * @return the input value.
      */
@@ -100,7 +100,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     }
 
     /**
-     * Get the dataInt property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the dataInt property: The dataInt property.
      * 
      * @return the dataInt value.
      */
@@ -132,7 +132,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     }
 
     /**
-     * Get the dataLong property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
+     * Get the dataLong property: The dataLong property.
      * 
      * @return the dataLong value.
      */
@@ -142,7 +142,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     }
 
     /**
-     * Set the dataLong property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
+     * Set the dataLong property: The dataLong property.
      * 
      * @param dataLong the dataLong value to set.
      * @return the SendLongRequest object itself.
@@ -154,7 +154,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     }
 
     /**
-     * Get the dataFloat property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
+     * Get the dataFloat property: The data_float property.
      * 
      * @return the dataFloat value.
      */
@@ -164,7 +164,7 @@ public final class SendLongRequest implements JsonSerializable<SendLongRequest> 
     }
 
     /**
-     * Set the dataFloat property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
+     * Set the dataFloat property: The data_float property.
      * 
      * @param dataFloat the dataFloat value to set.
      * @return the SendLongRequest object itself.

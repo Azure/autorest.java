@@ -19,7 +19,7 @@ import java.io.IOException;
 @Immutable
 public final class Base64BytesProperty implements JsonSerializable<Base64BytesProperty> {
     /*
-     * Represent a byte array
+     * The value property.
      */
     @Generated
     private final byte[] value;
@@ -35,7 +35,7 @@ public final class Base64BytesProperty implements JsonSerializable<Base64BytesPr
     }
 
     /**
-     * Get the value property: Represent a byte array.
+     * Get the value property: The value property.
      * 
      * @return the value value.
      */

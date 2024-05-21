@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class Size implements JsonSerializable<Size> {
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The width property.
      */
     @Generated
     private final int width;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The height property.
      */
     @Generated
     private final int height;
@@ -42,7 +42,7 @@ public final class Size implements JsonSerializable<Size> {
     }
 
     /**
-     * Get the width property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the width property: The width property.
      * 
      * @return the width value.
      */
@@ -52,7 +52,7 @@ public final class Size implements JsonSerializable<Size> {
     }
 
     /**
-     * Get the height property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the height property: The height property.
      * 
      * @return the height value.
      */

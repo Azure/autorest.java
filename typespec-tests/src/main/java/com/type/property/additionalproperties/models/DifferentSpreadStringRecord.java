@@ -26,8 +26,6 @@ public class DifferentSpreadStringRecord implements JsonSerializable<DifferentSp
     private final double id;
 
     /*
-     * The model spread Record<string> with the different known property type
-     * 
      * Additional properties
      */
     @Generated
@@ -54,10 +52,7 @@ public class DifferentSpreadStringRecord implements JsonSerializable<DifferentSp
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;string&gt; with the different known property
-     * type
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -67,10 +62,7 @@ public class DifferentSpreadStringRecord implements JsonSerializable<DifferentSp
     }
 
     /**
-     * Set the additionalProperties property: The model spread Record&lt;string&gt; with the different known property
-     * type
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the DifferentSpreadStringRecord object itself.

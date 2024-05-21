@@ -20,14 +20,12 @@ import java.util.Map;
 @Fluent
 public final class ExtendsModelAdditionalProperties implements JsonSerializable<ExtendsModelAdditionalProperties> {
     /*
-     * model for record
+     * The knownProp property.
      */
     @Generated
     private final ModelForRecord knownProp;
 
     /*
-     * The model extends from Record<ModelForRecord> type.
-     * 
      * Additional properties
      */
     @Generated
@@ -44,7 +42,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the knownProp property: model for record.
+     * Get the knownProp property: The knownProp property.
      * 
      * @return the knownProp value.
      */
@@ -54,9 +52,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Get the additionalProperties property: The model extends from Record&lt;ModelForRecord&gt; type.
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -66,9 +62,7 @@ public final class ExtendsModelAdditionalProperties implements JsonSerializable<
     }
 
     /**
-     * Set the additionalProperties property: The model extends from Record&lt;ModelForRecord&gt; type.
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the ExtendsModelAdditionalProperties object itself.

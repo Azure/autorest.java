@@ -24,7 +24,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     private String kind;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The size property.
      */
     @Generated
     private final int size;
@@ -51,7 +51,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
     }
 
     /**
-     * Get the size property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the size property: The size property.
      * 
      * @return the size value.
      */

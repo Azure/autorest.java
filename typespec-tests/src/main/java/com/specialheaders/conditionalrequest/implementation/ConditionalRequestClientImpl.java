@@ -146,9 +146,7 @@ public final class ConditionalRequestClientImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The ifMatch parameter</td></tr>
+     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
@@ -171,9 +169,7 @@ public final class ConditionalRequestClientImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The ifMatch parameter</td></tr>
+     * <tr><td>If-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
@@ -196,9 +192,7 @@ public final class ConditionalRequestClientImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 
@@ -221,9 +215,7 @@ public final class ConditionalRequestClientImpl {
      * <table border="1">
      * <caption>Header Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter</td></tr>
+     * <tr><td>If-None-Match</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addHeader}
      * 

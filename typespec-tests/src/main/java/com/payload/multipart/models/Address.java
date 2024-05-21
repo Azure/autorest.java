@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class Address implements JsonSerializable<Address> {
     /*
-     * A sequence of textual characters.
+     * The city property.
      */
     @Generated
     private final String city;
@@ -34,7 +34,7 @@ public final class Address implements JsonSerializable<Address> {
     }
 
     /**
-     * Get the city property: A sequence of textual characters.
+     * Get the city property: The city property.
      * 
      * @return the city value.
      */

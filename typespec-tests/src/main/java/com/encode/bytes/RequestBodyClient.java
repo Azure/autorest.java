@@ -44,9 +44,7 @@ public final class RequestBodyClient {
      * byte[]
      * }</pre>
      * 
-     * @param value Represent a byte array
-     * 
-     * The value parameter.
+     * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -112,9 +110,7 @@ public final class RequestBodyClient {
      * byte[]
      * }</pre>
      * 
-     * @param value Represent a byte array
-     * 
-     * The value parameter.
+     * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -136,9 +132,7 @@ public final class RequestBodyClient {
      * Base64Url
      * }</pre>
      * 
-     * @param value Represent a byte array
-     * 
-     * The value parameter.
+     * @param value Represent a byte array.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -155,9 +149,7 @@ public final class RequestBodyClient {
     /**
      * The defaultMethod operation.
      * 
-     * @param value Represent a byte array
-     * 
-     * The value parameter.
+     * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -214,9 +206,7 @@ public final class RequestBodyClient {
     /**
      * The base64 operation.
      * 
-     * @param value Represent a byte array
-     * 
-     * The value parameter.
+     * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -235,9 +225,7 @@ public final class RequestBodyClient {
     /**
      * The base64url operation.
      * 
-     * @param value Represent a byte array
-     * 
-     * The value parameter.
+     * @param value Represent a byte array.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

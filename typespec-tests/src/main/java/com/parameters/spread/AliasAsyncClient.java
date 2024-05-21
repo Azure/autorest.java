@@ -76,11 +76,7 @@ public final class AliasAsyncClient {
      * }</pre>
      * 
      * @param id A sequence of textual characters.
-     * 
-     * The id parameter.
      * @param xMsTestHeader A sequence of textual characters.
-     * 
-     * The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -112,11 +108,7 @@ public final class AliasAsyncClient {
      * }</pre>
      * 
      * @param id A sequence of textual characters.
-     * 
-     * The id parameter.
      * @param xMsTestHeader A sequence of textual characters.
-     * 
-     * The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -159,11 +151,7 @@ public final class AliasAsyncClient {
      * The spreadAsRequestParameter operation.
      * 
      * @param id A sequence of textual characters.
-     * 
-     * The id parameter.
      * @param xMsTestHeader A sequence of textual characters.
-     * 
-     * The xMsTestHeader parameter.
      * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

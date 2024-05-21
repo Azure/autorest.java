@@ -19,7 +19,7 @@ import java.util.Map;
 @Fluent
 public final class JobData implements JsonSerializable<JobData> {
     /*
-     * A sequence of textual characters.
+     * The configuration property.
      */
     @Generated
     private String configuration;
@@ -41,7 +41,7 @@ public final class JobData implements JsonSerializable<JobData> {
     }
 
     /**
-     * Get the configuration property: A sequence of textual characters.
+     * Get the configuration property: The configuration property.
      * 
      * @return the configuration value.
      */
@@ -51,7 +51,7 @@ public final class JobData implements JsonSerializable<JobData> {
     }
 
     /**
-     * Set the configuration property: A sequence of textual characters.
+     * Set the configuration property: The configuration property.
      * 
      * @param configuration the configuration value to set.
      * @return the JobData object itself.

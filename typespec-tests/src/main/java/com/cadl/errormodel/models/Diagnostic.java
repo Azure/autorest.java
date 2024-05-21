@@ -19,13 +19,13 @@ import java.io.IOException;
 @Immutable
 public final class Diagnostic implements JsonSerializable<Diagnostic> {
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private final String name;
 
     /*
-     * The error object.
+     * The error property.
      */
     @Generated
     private final ResponseError error;
@@ -43,7 +43,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -53,7 +53,7 @@ public final class Diagnostic implements JsonSerializable<Diagnostic> {
     }
 
     /**
-     * Get the error property: The error object.
+     * Get the error property: The error property.
      * 
      * @return the error value.
      */

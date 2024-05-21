@@ -112,9 +112,7 @@ public final class CollectionsModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param body Model with collection models properties
-     * 
-     * The body parameter.
+     * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -143,9 +141,7 @@ public final class CollectionsModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param body Model with collection models properties
-     * 
-     * The body parameter.
+     * @param body Model with collection models properties.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -200,9 +196,7 @@ public final class CollectionsModelAsyncClient {
     /**
      * Put a body with all properties present.
      * 
-     * @param body Model with collection models properties
-     * 
-     * The body parameter.
+     * @param body Model with collection models properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -225,9 +219,7 @@ public final class CollectionsModelAsyncClient {
     /**
      * Put a body with default properties.
      * 
-     * @param body Model with collection models properties
-     * 
-     * The body parameter.
+     * @param body Model with collection models properties.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -75,9 +75,7 @@ public final class SpreadRecordNonDiscriminatedUnion3Client {
      * }
      * }</pre>
      * 
-     * @param body The model spread Record&lt;WidgetData2[] | WidgetData1&gt;
-     * 
-     * The body parameter.
+     * @param body The model spread Record&lt;WidgetData2[] | WidgetData1&gt;.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -112,9 +110,7 @@ public final class SpreadRecordNonDiscriminatedUnion3Client {
     /**
      * Put operation.
      * 
-     * @param body The model spread Record&lt;WidgetData2[] | WidgetData1&gt;
-     * 
-     * The body parameter.
+     * @param body The model spread Record&lt;WidgetData2[] | WidgetData1&gt;.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

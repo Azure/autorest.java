@@ -673,8 +673,6 @@ public final class ParametersImpl {
      * The withAnd operation.
      * 
      * @param and A sequence of textual characters.
-     * 
-     * The and parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -692,8 +690,6 @@ public final class ParametersImpl {
      * The withAnd operation.
      * 
      * @param and A sequence of textual characters.
-     * 
-     * The and parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -711,8 +707,6 @@ public final class ParametersImpl {
      * The withAs operation.
      * 
      * @param as A sequence of textual characters.
-     * 
-     * The as parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -730,8 +724,6 @@ public final class ParametersImpl {
      * The withAs operation.
      * 
      * @param as A sequence of textual characters.
-     * 
-     * The as parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -749,8 +741,6 @@ public final class ParametersImpl {
      * The withAssert operation.
      * 
      * @param assertParameter A sequence of textual characters.
-     * 
-     * The assertParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -768,8 +758,6 @@ public final class ParametersImpl {
      * The withAssert operation.
      * 
      * @param assertParameter A sequence of textual characters.
-     * 
-     * The assertParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -787,8 +775,6 @@ public final class ParametersImpl {
      * The withAsync operation.
      * 
      * @param async A sequence of textual characters.
-     * 
-     * The async parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -806,8 +792,6 @@ public final class ParametersImpl {
      * The withAsync operation.
      * 
      * @param async A sequence of textual characters.
-     * 
-     * The async parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -825,8 +809,6 @@ public final class ParametersImpl {
      * The withAwait operation.
      * 
      * @param await A sequence of textual characters.
-     * 
-     * The await parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -844,8 +826,6 @@ public final class ParametersImpl {
      * The withAwait operation.
      * 
      * @param await A sequence of textual characters.
-     * 
-     * The await parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -863,8 +843,6 @@ public final class ParametersImpl {
      * The withBreak operation.
      * 
      * @param breakParameter A sequence of textual characters.
-     * 
-     * The breakParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -882,8 +860,6 @@ public final class ParametersImpl {
      * The withBreak operation.
      * 
      * @param breakParameter A sequence of textual characters.
-     * 
-     * The breakParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -901,8 +877,6 @@ public final class ParametersImpl {
      * The withClass operation.
      * 
      * @param classParameter A sequence of textual characters.
-     * 
-     * The classParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -920,8 +894,6 @@ public final class ParametersImpl {
      * The withClass operation.
      * 
      * @param classParameter A sequence of textual characters.
-     * 
-     * The classParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -939,8 +911,6 @@ public final class ParametersImpl {
      * The withConstructor operation.
      * 
      * @param constructor A sequence of textual characters.
-     * 
-     * The constructor parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -958,8 +928,6 @@ public final class ParametersImpl {
      * The withConstructor operation.
      * 
      * @param constructor A sequence of textual characters.
-     * 
-     * The constructor parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -977,8 +945,6 @@ public final class ParametersImpl {
      * The withContinue operation.
      * 
      * @param continueParameter A sequence of textual characters.
-     * 
-     * The continueParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -997,8 +963,6 @@ public final class ParametersImpl {
      * The withContinue operation.
      * 
      * @param continueParameter A sequence of textual characters.
-     * 
-     * The continueParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1016,8 +980,6 @@ public final class ParametersImpl {
      * The withDef operation.
      * 
      * @param def A sequence of textual characters.
-     * 
-     * The def parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1035,8 +997,6 @@ public final class ParametersImpl {
      * The withDef operation.
      * 
      * @param def A sequence of textual characters.
-     * 
-     * The def parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1054,8 +1014,6 @@ public final class ParametersImpl {
      * The withDel operation.
      * 
      * @param del A sequence of textual characters.
-     * 
-     * The del parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1073,8 +1031,6 @@ public final class ParametersImpl {
      * The withDel operation.
      * 
      * @param del A sequence of textual characters.
-     * 
-     * The del parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1092,8 +1048,6 @@ public final class ParametersImpl {
      * The withElif operation.
      * 
      * @param elif A sequence of textual characters.
-     * 
-     * The elif parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1111,8 +1065,6 @@ public final class ParametersImpl {
      * The withElif operation.
      * 
      * @param elif A sequence of textual characters.
-     * 
-     * The elif parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1130,8 +1082,6 @@ public final class ParametersImpl {
      * The withElse operation.
      * 
      * @param elseParameter A sequence of textual characters.
-     * 
-     * The elseParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1149,8 +1099,6 @@ public final class ParametersImpl {
      * The withElse operation.
      * 
      * @param elseParameter A sequence of textual characters.
-     * 
-     * The elseParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1168,8 +1116,6 @@ public final class ParametersImpl {
      * The withExcept operation.
      * 
      * @param except A sequence of textual characters.
-     * 
-     * The except parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1187,8 +1133,6 @@ public final class ParametersImpl {
      * The withExcept operation.
      * 
      * @param except A sequence of textual characters.
-     * 
-     * The except parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1206,8 +1150,6 @@ public final class ParametersImpl {
      * The withExec operation.
      * 
      * @param exec A sequence of textual characters.
-     * 
-     * The exec parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1225,8 +1167,6 @@ public final class ParametersImpl {
      * The withExec operation.
      * 
      * @param exec A sequence of textual characters.
-     * 
-     * The exec parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1244,8 +1184,6 @@ public final class ParametersImpl {
      * The withFinally operation.
      * 
      * @param finallyParameter A sequence of textual characters.
-     * 
-     * The finallyParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1263,8 +1201,6 @@ public final class ParametersImpl {
      * The withFinally operation.
      * 
      * @param finallyParameter A sequence of textual characters.
-     * 
-     * The finallyParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1282,8 +1218,6 @@ public final class ParametersImpl {
      * The withFor operation.
      * 
      * @param forParameter A sequence of textual characters.
-     * 
-     * The forParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1301,8 +1235,6 @@ public final class ParametersImpl {
      * The withFor operation.
      * 
      * @param forParameter A sequence of textual characters.
-     * 
-     * The forParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1320,8 +1252,6 @@ public final class ParametersImpl {
      * The withFrom operation.
      * 
      * @param from A sequence of textual characters.
-     * 
-     * The from parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1339,8 +1269,6 @@ public final class ParametersImpl {
      * The withFrom operation.
      * 
      * @param from A sequence of textual characters.
-     * 
-     * The from parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1358,8 +1286,6 @@ public final class ParametersImpl {
      * The withGlobal operation.
      * 
      * @param global A sequence of textual characters.
-     * 
-     * The global parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1377,8 +1303,6 @@ public final class ParametersImpl {
      * The withGlobal operation.
      * 
      * @param global A sequence of textual characters.
-     * 
-     * The global parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1396,8 +1320,6 @@ public final class ParametersImpl {
      * The withIf operation.
      * 
      * @param ifParameter A sequence of textual characters.
-     * 
-     * The ifParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1415,8 +1337,6 @@ public final class ParametersImpl {
      * The withIf operation.
      * 
      * @param ifParameter A sequence of textual characters.
-     * 
-     * The ifParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1434,8 +1354,6 @@ public final class ParametersImpl {
      * The withImport operation.
      * 
      * @param importParameter A sequence of textual characters.
-     * 
-     * The importParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1453,8 +1371,6 @@ public final class ParametersImpl {
      * The withImport operation.
      * 
      * @param importParameter A sequence of textual characters.
-     * 
-     * The importParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1472,8 +1388,6 @@ public final class ParametersImpl {
      * The withIn operation.
      * 
      * @param in A sequence of textual characters.
-     * 
-     * The in parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1491,8 +1405,6 @@ public final class ParametersImpl {
      * The withIn operation.
      * 
      * @param in A sequence of textual characters.
-     * 
-     * The in parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1510,8 +1422,6 @@ public final class ParametersImpl {
      * The withIs operation.
      * 
      * @param is A sequence of textual characters.
-     * 
-     * The is parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1529,8 +1439,6 @@ public final class ParametersImpl {
      * The withIs operation.
      * 
      * @param is A sequence of textual characters.
-     * 
-     * The is parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1548,8 +1456,6 @@ public final class ParametersImpl {
      * The withLambda operation.
      * 
      * @param lambda A sequence of textual characters.
-     * 
-     * The lambda parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1567,8 +1473,6 @@ public final class ParametersImpl {
      * The withLambda operation.
      * 
      * @param lambda A sequence of textual characters.
-     * 
-     * The lambda parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1586,8 +1490,6 @@ public final class ParametersImpl {
      * The withNot operation.
      * 
      * @param not A sequence of textual characters.
-     * 
-     * The not parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1605,8 +1507,6 @@ public final class ParametersImpl {
      * The withNot operation.
      * 
      * @param not A sequence of textual characters.
-     * 
-     * The not parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1624,8 +1524,6 @@ public final class ParametersImpl {
      * The withOr operation.
      * 
      * @param or A sequence of textual characters.
-     * 
-     * The or parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1643,8 +1541,6 @@ public final class ParametersImpl {
      * The withOr operation.
      * 
      * @param or A sequence of textual characters.
-     * 
-     * The or parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1662,8 +1558,6 @@ public final class ParametersImpl {
      * The withPass operation.
      * 
      * @param pass A sequence of textual characters.
-     * 
-     * The pass parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1681,8 +1575,6 @@ public final class ParametersImpl {
      * The withPass operation.
      * 
      * @param pass A sequence of textual characters.
-     * 
-     * The pass parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1700,8 +1592,6 @@ public final class ParametersImpl {
      * The withRaise operation.
      * 
      * @param raise A sequence of textual characters.
-     * 
-     * The raise parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1719,8 +1609,6 @@ public final class ParametersImpl {
      * The withRaise operation.
      * 
      * @param raise A sequence of textual characters.
-     * 
-     * The raise parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1738,8 +1626,6 @@ public final class ParametersImpl {
      * The withReturn operation.
      * 
      * @param returnParameter A sequence of textual characters.
-     * 
-     * The returnParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1757,8 +1643,6 @@ public final class ParametersImpl {
      * The withReturn operation.
      * 
      * @param returnParameter A sequence of textual characters.
-     * 
-     * The returnParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1776,8 +1660,6 @@ public final class ParametersImpl {
      * The withTry operation.
      * 
      * @param tryParameter A sequence of textual characters.
-     * 
-     * The tryParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1795,8 +1677,6 @@ public final class ParametersImpl {
      * The withTry operation.
      * 
      * @param tryParameter A sequence of textual characters.
-     * 
-     * The tryParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1814,8 +1694,6 @@ public final class ParametersImpl {
      * The withWhile operation.
      * 
      * @param whileParameter A sequence of textual characters.
-     * 
-     * The whileParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1833,8 +1711,6 @@ public final class ParametersImpl {
      * The withWhile operation.
      * 
      * @param whileParameter A sequence of textual characters.
-     * 
-     * The whileParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1852,8 +1728,6 @@ public final class ParametersImpl {
      * The withWith operation.
      * 
      * @param with A sequence of textual characters.
-     * 
-     * The with parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1871,8 +1745,6 @@ public final class ParametersImpl {
      * The withWith operation.
      * 
      * @param with A sequence of textual characters.
-     * 
-     * The with parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1890,8 +1762,6 @@ public final class ParametersImpl {
      * The withYield operation.
      * 
      * @param yield A sequence of textual characters.
-     * 
-     * The yield parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1909,8 +1779,6 @@ public final class ParametersImpl {
      * The withYield operation.
      * 
      * @param yield A sequence of textual characters.
-     * 
-     * The yield parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1928,8 +1796,6 @@ public final class ParametersImpl {
      * The withCancellationToken operation.
      * 
      * @param cancellationToken A sequence of textual characters.
-     * 
-     * The cancellationToken parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1949,8 +1815,6 @@ public final class ParametersImpl {
      * The withCancellationToken operation.
      * 
      * @param cancellationToken A sequence of textual characters.
-     * 
-     * The cancellationToken parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

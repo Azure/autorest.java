@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class BytesData extends Data {
     /*
-     * A sequence of textual characters.
+     * The @data.kind property.
      */
     @Generated
     private String type = "bytes";
@@ -40,7 +40,7 @@ public final class BytesData extends Data {
     }
 
     /**
-     * Get the type property: A sequence of textual characters.
+     * Get the type property: The &#064;data.kind property.
      * 
      * @return the type value.
      */

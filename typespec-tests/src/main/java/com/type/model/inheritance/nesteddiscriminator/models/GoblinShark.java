@@ -17,7 +17,7 @@ import java.io.IOException;
 @Immutable
 public final class GoblinShark extends Shark {
     /*
-     * A sequence of textual characters.
+     * The sharktype property.
      */
     @Generated
     private String sharktype = "goblin";
@@ -33,7 +33,7 @@ public final class GoblinShark extends Shark {
     }
 
     /**
-     * Get the sharktype property: A sequence of textual characters.
+     * Get the sharktype property: The sharktype property.
      * 
      * @return the sharktype value.
      */

@@ -27,56 +27,55 @@ import java.util.Objects;
 @Immutable
 public final class Builtin implements JsonSerializable<Builtin> {
     /*
-     * Boolean with `true` and `false` values.
+     * The boolean property.
      */
     @Generated
     private final boolean booleanProperty;
 
     /*
-     * A sequence of textual characters.
+     * The string property.
      */
     @Generated
     private final String string;
 
     /*
-     * Represent a byte array
+     * The bytes property.
      */
     @Generated
     private final byte[] bytes;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The int property.
      */
     @Generated
     private final int intProperty;
 
     /*
-     * An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )
+     * The safeint property.
      */
     @Generated
     private final long safeint;
 
     /*
-     * A decimal number with any length and precision. This represent any `decimal` value possible.
-     * It is commonly represented as `BigDecimal` in some languages.
+     * The decimal property.
      */
     @Generated
     private final BigDecimal decimal;
 
     /*
-     * A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`)
+     * The long property.
      */
     @Generated
     private final long longProperty;
 
     /*
-     * A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`)
+     * The float property.
      */
     @Generated
     private final double floatProperty;
 
     /*
-     * A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`)
+     * The double property.
      */
     @Generated
     private final double doubleProperty;
@@ -88,7 +87,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     private final Duration duration;
 
     /*
-     * A date on a calendar without a time zone, e.g. "April 10th"
+     * The date property.
      */
     @Generated
     private final LocalDate date;
@@ -112,7 +111,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     private final Map<String, byte[]> bytesDict;
 
     /*
-     * Represent a URL string as described by https://url.spec.whatwg.org/
+     * The url property.
      */
     @Generated
     private final String url;
@@ -175,7 +174,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the booleanProperty property: Boolean with `true` and `false` values.
+     * Get the booleanProperty property: The boolean property.
      * 
      * @return the booleanProperty value.
      */
@@ -185,7 +184,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the string property: A sequence of textual characters.
+     * Get the string property: The string property.
      * 
      * @return the string value.
      */
@@ -195,7 +194,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the bytes property: Represent a byte array.
+     * Get the bytes property: The bytes property.
      * 
      * @return the bytes value.
      */
@@ -205,7 +204,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the intProperty property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the intProperty property: The int property.
      * 
      * @return the intProperty value.
      */
@@ -215,8 +214,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the safeint property: An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to
-     * `9007199254740991 (2^53 − 1)` ).
+     * Get the safeint property: The safeint property.
      * 
      * @return the safeint value.
      */
@@ -226,9 +224,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the decimal property: A decimal number with any length and precision. This represent any `decimal` value
-     * possible.
-     * It is commonly represented as `BigDecimal` in some languages.
+     * Get the decimal property: The decimal property.
      * 
      * @return the decimal value.
      */
@@ -238,7 +234,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the longProperty property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
+     * Get the longProperty property: The long property.
      * 
      * @return the longProperty value.
      */
@@ -248,7 +244,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the floatProperty property: A 32 bit floating point number. (`±5.0 × 10^−324` to `±1.7 × 10^308`).
+     * Get the floatProperty property: The float property.
      * 
      * @return the floatProperty value.
      */
@@ -258,7 +254,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the doubleProperty property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
+     * Get the doubleProperty property: The double property.
      * 
      * @return the doubleProperty value.
      */
@@ -278,7 +274,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the date property: A date on a calendar without a time zone, e.g. "April 10th".
+     * Get the date property: The date property.
      * 
      * @return the date value.
      */
@@ -318,7 +314,7 @@ public final class Builtin implements JsonSerializable<Builtin> {
     }
 
     /**
-     * Get the url property: Represent a URL string as described by https://url.spec.whatwg.org/.
+     * Get the url property: The url property.
      * 
      * @return the url value.
      */

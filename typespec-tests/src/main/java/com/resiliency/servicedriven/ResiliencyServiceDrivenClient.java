@@ -58,9 +58,7 @@ public final class ResiliencyServiceDrivenClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The newParameter parameter</td></tr>
+     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -84,15 +82,11 @@ public final class ResiliencyServiceDrivenClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The newParameter parameter</td></tr>
+     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
      * @param parameter A sequence of textual characters.
-     * 
-     * The parameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -113,12 +107,8 @@ public final class ResiliencyServiceDrivenClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The parameter parameter</td></tr>
-     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The newParameter parameter</td></tr>
+     * <tr><td>parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <tr><td>new-parameter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * 
@@ -156,8 +146,6 @@ public final class ResiliencyServiceDrivenClient {
      * Test that grew up from accepting no parameters to an optional input parameter.
      * 
      * @param newParameter A sequence of textual characters.
-     * 
-     * The newParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -202,11 +190,7 @@ public final class ResiliencyServiceDrivenClient {
      * parameter.
      * 
      * @param parameter A sequence of textual characters.
-     * 
-     * The parameter parameter.
      * @param newParameter A sequence of textual characters.
-     * 
-     * The newParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -234,8 +218,6 @@ public final class ResiliencyServiceDrivenClient {
      * parameter.
      * 
      * @param parameter A sequence of textual characters.
-     * 
-     * The parameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -256,11 +238,7 @@ public final class ResiliencyServiceDrivenClient {
      * parameters.
      * 
      * @param parameter A sequence of textual characters.
-     * 
-     * The parameter parameter.
      * @param newParameter A sequence of textual characters.
-     * 
-     * The newParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -291,8 +269,6 @@ public final class ResiliencyServiceDrivenClient {
      * parameters.
      * 
      * @param parameter A sequence of textual characters.
-     * 
-     * The parameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

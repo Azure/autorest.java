@@ -50,9 +50,7 @@ public final class VersioningAsyncClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The projectFileVersion parameter</td></tr>
+     * <tr><td>projectFileVersion</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -73,8 +71,6 @@ public final class VersioningAsyncClient {
      * }</pre>
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -96,9 +92,7 @@ public final class VersioningAsyncClient {
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
      * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. Call
      * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>expand</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The expand parameter</td></tr>
+     * <tr><td>expand</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -147,8 +141,6 @@ public final class VersioningAsyncClient {
      * }</pre>
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param resource The resource parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -168,11 +160,7 @@ public final class VersioningAsyncClient {
      * Long-running resource action operation template.
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param projectFileVersion A sequence of textual characters.
-     * 
-     * The projectFileVersion parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -196,8 +184,6 @@ public final class VersioningAsyncClient {
      * Long-running resource action operation template.
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -219,8 +205,6 @@ public final class VersioningAsyncClient {
      * 
      * @param select The select parameter.
      * @param expand A sequence of textual characters.
-     * 
-     * The expand parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -293,8 +277,6 @@ public final class VersioningAsyncClient {
      * Long-running resource create or replace operation template.
      * 
      * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
      * @param resource The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

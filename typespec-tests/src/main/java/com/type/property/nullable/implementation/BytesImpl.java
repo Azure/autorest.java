@@ -244,9 +244,7 @@ public final class BytesImpl {
      * }</pre>
      * 
      * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     * looking for
-     * 
-     * The body parameter.
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -274,9 +272,7 @@ public final class BytesImpl {
      * }</pre>
      * 
      * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     * looking for
-     * 
-     * The body parameter.
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -303,9 +299,7 @@ public final class BytesImpl {
      * }</pre>
      * 
      * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     * looking for
-     * 
-     * The body parameter.
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -332,9 +326,7 @@ public final class BytesImpl {
      * }</pre>
      * 
      * @param body Template type for testing models with nullable property. Pass in the type of the property you are
-     * looking for
-     * 
-     * The body parameter.
+     * looking for.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

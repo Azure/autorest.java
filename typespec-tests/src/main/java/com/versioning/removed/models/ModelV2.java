@@ -19,7 +19,7 @@ import java.io.IOException;
 @Immutable
 public final class ModelV2 implements JsonSerializable<ModelV2> {
     /*
-     * A sequence of textual characters.
+     * The prop property.
      */
     @Generated
     private final String prop;
@@ -51,7 +51,7 @@ public final class ModelV2 implements JsonSerializable<ModelV2> {
     }
 
     /**
-     * Get the prop property: A sequence of textual characters.
+     * Get the prop property: The prop property.
      * 
      * @return the prop value.
      */

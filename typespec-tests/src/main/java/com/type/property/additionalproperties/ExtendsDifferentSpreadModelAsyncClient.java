@@ -84,9 +84,7 @@ public final class ExtendsDifferentSpreadModelAsyncClient {
      * }</pre>
      * 
      * @param body The model extends from a model that spread Record&lt;ModelForRecord&gt; with the different known
-     * property type
-     * 
-     * The body parameter.
+     * property type.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -123,9 +121,7 @@ public final class ExtendsDifferentSpreadModelAsyncClient {
      * Put operation.
      * 
      * @param body The model extends from a model that spread Record&lt;ModelForRecord&gt; with the different known
-     * property type
-     * 
-     * The body parameter.
+     * property type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

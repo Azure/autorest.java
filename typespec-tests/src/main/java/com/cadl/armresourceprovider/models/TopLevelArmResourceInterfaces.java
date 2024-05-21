@@ -16,11 +16,7 @@ public interface TopLevelArmResourceInterfaces {
      * Get a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -34,11 +30,7 @@ public interface TopLevelArmResourceInterfaces {
      * Get a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -50,11 +42,7 @@ public interface TopLevelArmResourceInterfaces {
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -65,11 +53,7 @@ public interface TopLevelArmResourceInterfaces {
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -81,8 +65,6 @@ public interface TopLevelArmResourceInterfaces {
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -94,8 +76,6 @@ public interface TopLevelArmResourceInterfaces {
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.

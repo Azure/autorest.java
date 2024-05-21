@@ -81,9 +81,7 @@ public final class SpreadModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param body The model spread Record&lt;ModelForRecord&gt; with the same known property type
-     * 
-     * The body parameter.
+     * @param body The model spread Record&lt;ModelForRecord&gt; with the same known property type.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -119,9 +117,7 @@ public final class SpreadModelAsyncClient {
     /**
      * Put operation.
      * 
-     * @param body The model spread Record&lt;ModelForRecord&gt; with the same known property type
-     * 
-     * The body parameter.
+     * @param body The model spread Record&lt;ModelForRecord&gt; with the same known property type.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

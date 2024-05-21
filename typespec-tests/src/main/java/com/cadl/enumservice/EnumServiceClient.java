@@ -107,7 +107,7 @@ public final class EnumServiceClient {
      * }
      * }</pre>
      * 
-     * @param color The color parameter. Allowed values: "Red", "Blue", "Green".
+     * @param color . Allowed values: "Red", "Blue", "Green".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -140,7 +140,7 @@ public final class EnumServiceClient {
      * }
      * }</pre>
      * 
-     * @param priority The priority parameter. Allowed values: 100, 0.
+     * @param priority . Allowed values: 100, 0.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -205,7 +205,7 @@ public final class EnumServiceClient {
      * }
      * }</pre>
      * 
-     * @param state The state parameter. Allowed values: "Running", "Completed", "Failed".
+     * @param state . Allowed values: "Running", "Completed", "Failed".
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

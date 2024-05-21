@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class InputRecord implements JsonSerializable<InputRecord> {
     /*
-     * A sequence of textual characters.
+     * The requiredProp property.
      */
     @Generated
     private final String requiredProp;
@@ -34,7 +34,7 @@ public final class InputRecord implements JsonSerializable<InputRecord> {
     }
 
     /**
-     * Get the requiredProp property: A sequence of textual characters.
+     * Get the requiredProp property: The requiredProp property.
      * 
      * @return the requiredProp value.
      */

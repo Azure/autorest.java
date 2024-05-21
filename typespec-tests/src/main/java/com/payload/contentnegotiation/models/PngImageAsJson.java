@@ -19,7 +19,7 @@ import java.io.IOException;
 @Immutable
 public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
     /*
-     * Represent a byte array
+     * The content property.
      */
     @Generated
     private final byte[] content;
@@ -35,7 +35,7 @@ public final class PngImageAsJson implements JsonSerializable<PngImageAsJson> {
     }
 
     /**
-     * Get the content property: Represent a byte array.
+     * Get the content property: The content property.
      * 
      * @return the content value.
      */

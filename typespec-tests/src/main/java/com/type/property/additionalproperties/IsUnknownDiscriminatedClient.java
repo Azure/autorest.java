@@ -78,8 +78,6 @@ public final class IsUnknownDiscriminatedClient {
      * }</pre>
      * 
      * @param body The model is Record&lt;unknown&gt; with a discriminator.
-     * 
-     * The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -115,8 +113,6 @@ public final class IsUnknownDiscriminatedClient {
      * Put operation.
      * 
      * @param body The model is Record&lt;unknown&gt; with a discriminator.
-     * 
-     * The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

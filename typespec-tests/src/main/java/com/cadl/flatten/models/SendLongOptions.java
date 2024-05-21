@@ -31,31 +31,31 @@ public final class SendLongOptions {
     private User user;
 
     /*
-     * A sequence of textual characters.
+     * The input property.
      */
     @Generated
     private final String input;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The dataInt property.
      */
     @Generated
     private final int dataInt;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The dataIntOptional property.
      */
     @Generated
     private Integer dataIntOptional;
 
     /*
-     * A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`)
+     * The dataLong property.
      */
     @Generated
     private Long dataLong;
 
     /*
-     * A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`)
+     * The data_float property.
      */
     @Generated
     private Double dataFloat;
@@ -79,7 +79,7 @@ public final class SendLongOptions {
     private final SendLongRequestStatus status;
 
     /*
-     * A sequence of textual characters.
+     * The _dummy property.
      */
     @Generated
     private String dummy;
@@ -157,7 +157,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the input property: A sequence of textual characters.
+     * Get the input property: The input property.
      * 
      * @return the input value.
      */
@@ -167,7 +167,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the dataInt property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the dataInt property: The dataInt property.
      * 
      * @return the dataInt value.
      */
@@ -177,7 +177,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the dataIntOptional property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the dataIntOptional property: The dataIntOptional property.
      * 
      * @return the dataIntOptional value.
      */
@@ -187,7 +187,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Set the dataIntOptional property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Set the dataIntOptional property: The dataIntOptional property.
      * 
      * @param dataIntOptional the dataIntOptional value to set.
      * @return the SendLongOptions object itself.
@@ -199,7 +199,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the dataLong property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
+     * Get the dataLong property: The dataLong property.
      * 
      * @return the dataLong value.
      */
@@ -209,7 +209,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Set the dataLong property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
+     * Set the dataLong property: The dataLong property.
      * 
      * @param dataLong the dataLong value to set.
      * @return the SendLongOptions object itself.
@@ -221,7 +221,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the dataFloat property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
+     * Get the dataFloat property: The data_float property.
      * 
      * @return the dataFloat value.
      */
@@ -231,7 +231,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Set the dataFloat property: A 32 bit floating point number. (`±1.5 x 10^−45` to `±3.4 x 10^38`).
+     * Set the dataFloat property: The data_float property.
      * 
      * @param dataFloat the dataFloat value to set.
      * @return the SendLongOptions object itself.
@@ -285,7 +285,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Get the dummy property: A sequence of textual characters.
+     * Get the dummy property: The _dummy property.
      * 
      * @return the dummy value.
      */
@@ -295,7 +295,7 @@ public final class SendLongOptions {
     }
 
     /**
-     * Set the dummy property: A sequence of textual characters.
+     * Set the dummy property: The _dummy property.
      * 
      * @param dummy the dummy value to set.
      * @return the SendLongOptions object itself.

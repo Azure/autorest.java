@@ -137,11 +137,7 @@ public interface ChildResource {
              * Specifies resourceGroupName, topLevelArmResourceName.
              * 
              * @param resourceGroupName A sequence of textual characters.
-             * 
-             * The resourceGroupName parameter.
              * @param topLevelArmResourceName A sequence of textual characters.
-             * 
-             * The topLevelArmResourceName parameter.
              * @return the next definition stage.
              */
             WithCreate withExistingTopLevelArmResource(String resourceGroupName, String topLevelArmResourceName);

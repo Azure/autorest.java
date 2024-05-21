@@ -93,21 +93,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -150,21 +140,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -208,21 +188,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -244,15 +214,9 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -275,21 +239,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -313,15 +267,9 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -342,21 +290,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -378,21 +316,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -411,15 +339,9 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -440,21 +362,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -474,15 +386,9 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -501,21 +407,11 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Create a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param ifMatch A sequence of textual characters.
-     * 
-     * The ifMatch parameter.
      * @param ifNoneMatch A sequence of textual characters.
-     * 
-     * The ifNoneMatch parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -533,11 +429,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -581,11 +473,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -629,11 +517,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -656,11 +540,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -685,11 +565,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -708,11 +584,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -733,11 +605,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -756,11 +624,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -780,11 +644,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -801,11 +661,7 @@ public final class CustomTemplateResourceInterfacesClientImpl implements CustomT
      * Update a CustomTemplateResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param customTemplateResourceName A sequence of textual characters.
-     * 
-     * The customTemplateResourceName parameter.
      * @param properties The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.

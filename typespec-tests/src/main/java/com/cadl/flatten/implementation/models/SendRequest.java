@@ -25,7 +25,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     private User user;
 
     /*
-     * A sequence of textual characters.
+     * The input property.
      */
     @Generated
     private final String input;
@@ -69,7 +69,7 @@ public final class SendRequest implements JsonSerializable<SendRequest> {
     }
 
     /**
-     * Get the input property: A sequence of textual characters.
+     * Get the input property: The input property.
      * 
      * @return the input value.
      */

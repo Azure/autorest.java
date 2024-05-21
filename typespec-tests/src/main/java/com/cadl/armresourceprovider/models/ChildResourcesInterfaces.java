@@ -16,14 +16,8 @@ public interface ChildResourcesInterfaces {
      * Get a ChildResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param childResourceName A sequence of textual characters.
-     * 
-     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -37,14 +31,8 @@ public interface ChildResourcesInterfaces {
      * Get a ChildResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param childResourceName A sequence of textual characters.
-     * 
-     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -56,14 +44,8 @@ public interface ChildResourcesInterfaces {
      * Delete a ChildResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param childResourceName A sequence of textual characters.
-     * 
-     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -74,14 +56,8 @@ public interface ChildResourcesInterfaces {
      * Delete a ChildResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param childResourceName A sequence of textual characters.
-     * 
-     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -93,11 +69,7 @@ public interface ChildResourcesInterfaces {
      * List ChildResource resources by TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -109,11 +81,7 @@ public interface ChildResourcesInterfaces {
      * List ChildResource resources by TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
@@ -127,14 +95,8 @@ public interface ChildResourcesInterfaces {
      * A long-running resource action.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param childResourceName A sequence of textual characters.
-     * 
-     * The childResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -145,14 +107,8 @@ public interface ChildResourcesInterfaces {
      * A long-running resource action.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param childResourceName A sequence of textual characters.
-     * 
-     * The childResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws com.azure.core.management.exception.ManagementException thrown if the request is rejected by server.

@@ -150,11 +150,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Get a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -190,11 +186,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Get a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -230,11 +222,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Get a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -251,11 +239,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Get a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -272,11 +256,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Get a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -291,15 +271,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -341,15 +315,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -391,15 +359,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -420,15 +382,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -450,15 +406,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -475,15 +425,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -502,15 +446,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -528,15 +466,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -555,15 +487,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -579,15 +505,9 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Create a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param resource Concrete tracked resource types can be created by aliasing this type using a specific property
      * type.
-     * 
-     * The resource parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -604,14 +524,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Update a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param properties The type used for update operations of the TopLevelArmResource.
-     * 
-     * The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -652,14 +566,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Update a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param properties The type used for update operations of the TopLevelArmResource.
-     * 
-     * The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -701,14 +609,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Update a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param properties The type used for update operations of the TopLevelArmResource.
-     * 
-     * The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -726,14 +628,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Update a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param properties The type used for update operations of the TopLevelArmResource.
-     * 
-     * The properties parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -751,14 +647,8 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Update a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param properties The type used for update operations of the TopLevelArmResource.
-     * 
-     * The properties parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -774,11 +664,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -814,11 +700,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -854,11 +736,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -876,11 +754,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -901,11 +775,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -920,11 +790,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -941,11 +807,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -961,11 +823,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -982,11 +840,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1000,11 +854,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * Delete a TopLevelArmResource.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param topLevelArmResourceName A sequence of textual characters.
-     * 
-     * The topLevelArmResourceName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1019,8 +869,6 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1054,8 +902,6 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1091,8 +937,6 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1108,8 +952,6 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1126,8 +968,6 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1142,8 +982,6 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
      * List TopLevelArmResource resources by resource group.
      * 
      * @param resourceGroupName A sequence of textual characters.
-     * 
-     * The resourceGroupName parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1268,9 +1106,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     /**
      * Get the next page of items.
      * 
-     * @param nextLink The URL to get the next list of items
-     * 
-     * The nextLink parameter.
+     * @param nextLink The URL to get the next list of items.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1298,9 +1134,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     /**
      * Get the next page of items.
      * 
-     * @param nextLink The URL to get the next list of items
-     * 
-     * The nextLink parameter.
+     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
@@ -1328,9 +1162,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     /**
      * Get the next page of items.
      * 
-     * @param nextLink The URL to get the next list of items
-     * 
-     * The nextLink parameter.
+     * @param nextLink The URL to get the next list of items.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1358,9 +1190,7 @@ public final class TopLevelArmResourceInterfacesClientImpl implements TopLevelAr
     /**
      * Get the next page of items.
      * 
-     * @param nextLink The URL to get the next list of items
-     * 
-     * The nextLink parameter.
+     * @param nextLink The URL to get the next list of items.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ManagementException thrown if the request is rejected by server.

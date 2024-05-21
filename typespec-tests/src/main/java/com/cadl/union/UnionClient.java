@@ -56,8 +56,6 @@ public final class UnionClient {
      * }</pre>
      * 
      * @param id A sequence of textual characters.
-     * 
-     * The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -78,9 +76,7 @@ public final class UnionClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The filter parameter</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -99,8 +95,6 @@ public final class UnionClient {
      * }</pre>
      * 
      * @param id A sequence of textual characters.
-     * 
-     * The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -174,8 +168,6 @@ public final class UnionClient {
      * The send operation.
      * 
      * @param id A sequence of textual characters.
-     * 
-     * The id parameter.
      * @param input The input parameter.
      * @param user The user parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -199,8 +191,6 @@ public final class UnionClient {
      * The send operation.
      * 
      * @param id A sequence of textual characters.
-     * 
-     * The id parameter.
      * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

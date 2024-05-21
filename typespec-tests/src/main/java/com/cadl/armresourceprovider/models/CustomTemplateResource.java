@@ -144,8 +144,6 @@ public interface CustomTemplateResource {
              * Specifies resourceGroupName.
              * 
              * @param resourceGroupName A sequence of textual characters.
-             * 
-             * The resourceGroupName parameter.
              * @return the next definition stage.
              */
             WithCreate withExistingResourceGroup(String resourceGroupName);
@@ -204,13 +202,9 @@ public interface CustomTemplateResource {
          */
         interface WithIfMatch {
             /**
-             * Specifies the ifMatch property: A sequence of textual characters.
-             * 
-             * The ifMatch parameter.
+             * Specifies the ifMatch property: A sequence of textual characters..
              * 
              * @param ifMatch A sequence of textual characters.
-             * 
-             * The ifMatch parameter.
              * @return the next definition stage.
              */
             WithCreate withIfMatch(String ifMatch);
@@ -221,13 +215,9 @@ public interface CustomTemplateResource {
          */
         interface WithIfNoneMatch {
             /**
-             * Specifies the ifNoneMatch property: A sequence of textual characters.
-             * 
-             * The ifNoneMatch parameter.
+             * Specifies the ifNoneMatch property: A sequence of textual characters..
              * 
              * @param ifNoneMatch A sequence of textual characters.
-             * 
-             * The ifNoneMatch parameter.
              * @return the next definition stage.
              */
             WithCreate withIfNoneMatch(String ifNoneMatch);

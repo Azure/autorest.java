@@ -20,7 +20,7 @@ import java.time.OffsetDateTime;
 @Immutable
 public final class JobResult implements JsonSerializable<JobResult> {
     /*
-     * Universally Unique Identifier
+     * The id property.
      */
     @Generated
     private String id;
@@ -50,7 +50,7 @@ public final class JobResult implements JsonSerializable<JobResult> {
     private OffsetDateTime lastUpdateDateTime;
 
     /*
-     * The error object.
+     * The error property.
      */
     @Generated
     private ResponseError error;
@@ -69,7 +69,7 @@ public final class JobResult implements JsonSerializable<JobResult> {
     }
 
     /**
-     * Get the id property: Universally Unique Identifier.
+     * Get the id property: The id property.
      * 
      * @return the id value.
      */
@@ -119,7 +119,7 @@ public final class JobResult implements JsonSerializable<JobResult> {
     }
 
     /**
-     * Get the error property: The error object.
+     * Get the error property: The error property.
      * 
      * @return the error value.
      */

@@ -14,19 +14,19 @@ import java.time.OffsetDateTime;
 @Fluent
 public final class TopLevelArmResourceUpdateProperties {
     /*
-     * A sequence of textual characters.
+     * The userName property.
      */
     @JsonProperty(value = "userName")
     private String userName;
 
     /*
-     * A sequence of textual characters.
+     * The userNames property.
      */
     @JsonProperty(value = "userNames")
     private String userNames;
 
     /*
-     * A sequence of textual characters.
+     * The accuserName property.
      */
     @JsonProperty(value = "accuserName")
     private String accuserName;
@@ -44,7 +44,7 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Get the userName property: A sequence of textual characters.
+     * Get the userName property: The userName property.
      * 
      * @return the userName value.
      */
@@ -53,7 +53,7 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Set the userName property: A sequence of textual characters.
+     * Set the userName property: The userName property.
      * 
      * @param userName the userName value to set.
      * @return the TopLevelArmResourceUpdateProperties object itself.
@@ -64,7 +64,7 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Get the userNames property: A sequence of textual characters.
+     * Get the userNames property: The userNames property.
      * 
      * @return the userNames value.
      */
@@ -73,7 +73,7 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Set the userNames property: A sequence of textual characters.
+     * Set the userNames property: The userNames property.
      * 
      * @param userNames the userNames value to set.
      * @return the TopLevelArmResourceUpdateProperties object itself.
@@ -84,7 +84,7 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Get the accuserName property: A sequence of textual characters.
+     * Get the accuserName property: The accuserName property.
      * 
      * @return the accuserName value.
      */
@@ -93,7 +93,7 @@ public final class TopLevelArmResourceUpdateProperties {
     }
 
     /**
-     * Set the accuserName property: A sequence of textual characters.
+     * Set the accuserName property: The accuserName property.
      * 
      * @param accuserName the accuserName value to set.
      * @return the TopLevelArmResourceUpdateProperties object itself.

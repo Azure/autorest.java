@@ -20,14 +20,12 @@ import java.util.Map;
 @Fluent
 public final class IsModelAdditionalProperties implements JsonSerializable<IsModelAdditionalProperties> {
     /*
-     * model for record
+     * The knownProp property.
      */
     @Generated
     private final ModelForRecord knownProp;
 
     /*
-     * The model is from Record<ModelForRecord> type.
-     * 
      * Additional properties
      */
     @Generated
@@ -44,7 +42,7 @@ public final class IsModelAdditionalProperties implements JsonSerializable<IsMod
     }
 
     /**
-     * Get the knownProp property: model for record.
+     * Get the knownProp property: The knownProp property.
      * 
      * @return the knownProp value.
      */
@@ -54,9 +52,7 @@ public final class IsModelAdditionalProperties implements JsonSerializable<IsMod
     }
 
     /**
-     * Get the additionalProperties property: The model is from Record&lt;ModelForRecord&gt; type.
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -66,9 +62,7 @@ public final class IsModelAdditionalProperties implements JsonSerializable<IsMod
     }
 
     /**
-     * Set the additionalProperties property: The model is from Record&lt;ModelForRecord&gt; type.
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsModelAdditionalProperties object itself.

@@ -151,9 +151,7 @@ public final class FloatOperationsImpl {
      * }
      * }</pre>
      * 
-     * @param body Model with a float property
-     * 
-     * The body parameter.
+     * @param body Model with a float property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -177,9 +175,7 @@ public final class FloatOperationsImpl {
      * }
      * }</pre>
      * 
-     * @param body Model with a float property
-     * 
-     * The body parameter.
+     * @param body Model with a float property.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
