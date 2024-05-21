@@ -1095,8 +1095,8 @@ export class CodeModelBuilder {
       }
 
       const nullable = isNullableType(param.param.type);
-      const parameter = new Parameter(this.getName(param.param), sdkType.details ?? "", schema, {
-        summary: sdkType.description,
+      const parameter = new Parameter(this.getName(param.param), this.getDoc(param.param), schema, {
+        summary: this.getSummary(param.param),
         implementation: ImplementationLocation.Method,
         required: !param.param.optional,
         nullable: nullable,
@@ -1340,8 +1340,8 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameter = new Parameter(this.getName(body), sdkType.details ?? "", schema, {
-      summary: sdkType.description,
+    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
+      summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
       protocol: {
