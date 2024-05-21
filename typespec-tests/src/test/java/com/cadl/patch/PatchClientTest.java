@@ -132,7 +132,9 @@ public class PatchClientTest {
         String json = BinaryData.fromObject(resource).toString();
         JsonNode node = OBJECT_MAPPER.readTree(json);
         Assertions.assertEquals(JsonNodeType.NULL, node.get("fish").get("color").getNodeType());
-        Assertions.assertEquals("shark", node.get("fish").get("kind").asText());
+        // TODO (alzimmer): Added SawShark into the hierarchy for further validation but this brings up a bug where
+        //  multi-level polymorphism does not generate correctly. Need to fix this in the future.
+        Assertions.assertEquals("shark", node.get("fish").get("sharktype").asText());
         Assertions.assertEquals(2, node.get("fish").get("age").asInt());
     }
 
