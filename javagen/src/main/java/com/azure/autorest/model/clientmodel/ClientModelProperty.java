@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -301,7 +301,7 @@ public class ClientModelProperty implements ClientModelPropertyAccess {
             imports.add(JsonIgnore.class.getName());
             imports.add(JsonAnySetter.class.getName());
             imports.add(JsonAnyGetter.class.getName());
-            imports.add(HashMap.class.getName());
+            imports.add(LinkedHashMap.class.getName());
         }
 
         if (settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.FIELD && needsFlatten) {

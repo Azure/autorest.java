@@ -5,15 +5,19 @@ package com.azure.autorest.template;
 
 import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.model.clientmodel.ClientModel;
+import com.azure.autorest.model.clientmodel.ClientModelProperty;
 import com.azure.autorest.model.javamodel.JavaClass;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaVisibility;
 import com.azure.autorest.util.ClientModelUtil;
 import com.azure.autorest.util.CodeNamer;
+import com.azure.core.util.CoreUtils;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientModel>, JavaFile>{
 
@@ -71,13 +75,25 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
         }
 
         for (ClientModel model : models) {
-            if (model.getParentModelName() != null && !model.getParentModelName().isEmpty()) {
-                // Only polymorphic parent models generate an accessor.
+            if (!model.getImplementationDetails().isInput()) {
+                // Model is only used as output and doesn't need to support json-merge-patch.
                 continue;
             }
 
-            if (!model.getImplementationDetails().isInput()) {
-                // Model is only used as output and doesn't need to support json-merge-patch.
+            if (model.isPolymorphic() && CoreUtils.isNullOrEmpty(model.getDerivedModels())) {
+                // Only polymorphic parent models generate an accessor.
+                // If it is the super most parent model, it will generate the prepareModelForJsonMergePatch method.
+                // Other parents need to generate setters for the properties that are used in json-merge-patch, used in
+                // deserialization to prevent these properties from always being included in serialization.
+                continue;
+            }
+
+            List<ClientModelProperty> setterProperties = model.getProperties().stream()
+                .filter(property -> !property.isConstant() && !property.isPolymorphicDiscriminator())
+                .collect(Collectors.toList());
+
+            if (!CoreUtils.isNullOrEmpty(model.getParentModelName()) && setterProperties.isEmpty()) {
+                // Model isn't the root parent and doesn't have any setter properties, no need to generate an accessor.
                 continue;
             }
 
@@ -85,20 +101,41 @@ public class JsonMergePatchHelperTemplate implements IJavaTemplate<List<ClientMo
             String camelModelName = CodeNamer.toCamelCase(modelName);
 
             // Accessor field declaration.
-            javaClass.privateMemberVariable(String.format("static %sAccessor %sAccessor", modelName, camelModelName));
+            javaClass.privateMemberVariable("static " + modelName + "Accessor " + camelModelName + "Accessor");
 
             // Accessor interface declaration.
-            javaClass.interfaceBlock(JavaVisibility.Public, String.format("%sAccessor", modelName),
-                interfaceBlock -> interfaceBlock.publicMethod(
-                    String.format("%1$s prepareModelForJsonMergePatch(%1$s %2$s, boolean jsonMergePatchEnabled)",
-                        modelName, camelModelName)));
+            javaClass.interfaceBlock(JavaVisibility.Public, modelName + "Accessor", interfaceBlock -> {
+                if (CoreUtils.isNullOrEmpty(model.getParentModelName())) {
+                    // Only the super most parent model generates the prepareModelForJsonMergePatch method.
+                    interfaceBlock.publicMethod(
+                        modelName + " prepareModelForJsonMergePatch(" + modelName + " " + camelModelName
+                            + ", boolean jsonMergePatchEnabled)");
+
+                    interfaceBlock.publicMethod("boolean isJsonMergePatch("  + modelName + " " + camelModelName + ")");
+                }
+
+                if (model.isPolymorphicParent()) {
+                    String modelNameParameter = model.getName().substring(0, 1).toLowerCase(Locale.ROOT)
+                        + model.getName().substring(1);
+                    for (ClientModelProperty property : model.getProperties()) {
+                        if (property.isConstant() || property.isPolymorphicDiscriminator()) {
+                            // Don't generate setters for constant or discriminator properties.
+                            continue;
+                        }
+
+                        interfaceBlock.publicMethod("void " + property.getSetterName() + "("
+                            + model.getName() + " " + modelNameParameter + ", "
+                            + property.getClientType() + " " + property.getName() + ")");
+                    }
+                }
+            });
 
             // Accessor field setter.
-            javaClass.publicStaticMethod(String.format("void set%1$sAccessor(%1$sAccessor accessor)", modelName),
+            javaClass.publicStaticMethod("void set" + modelName + "Accessor(" + modelName + "Accessor accessor)",
                 methodBlock -> methodBlock.line(camelModelName + "Accessor = accessor;"));
 
             // Accessor field getter.
-            javaClass.publicStaticMethod(String.format("%1$sAccessor get%1$sAccessor()", modelName),
+            javaClass.publicStaticMethod(modelName + "Accessor get" + modelName + "Accessor()",
                 methodBlock -> methodBlock.methodReturn(camelModelName + "Accessor"));
         }
     }

@@ -16,6 +16,8 @@ public class JsonMergePatchHelper {
 
     public interface ResourceAccessor {
         Resource prepareModelForJsonMergePatch(Resource resource, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(Resource resource);
     }
 
     public static void setResourceAccessor(ResourceAccessor accessor) {
@@ -30,6 +32,8 @@ public class JsonMergePatchHelper {
 
     public interface InnerModelAccessor {
         InnerModel prepareModelForJsonMergePatch(InnerModel innerModel, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(InnerModel innerModel);
     }
 
     public static void setInnerModelAccessor(InnerModelAccessor accessor) {
@@ -44,6 +48,16 @@ public class JsonMergePatchHelper {
 
     public interface FishAccessor {
         Fish prepareModelForJsonMergePatch(Fish fish, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(Fish fish);
+
+        void setId(Fish fish, String id);
+
+        void setName(Fish fish, String name);
+
+        void setAge(Fish fish, int age);
+
+        void setColor(Fish fish, String color);
     }
 
     public static void setFishAccessor(FishAccessor accessor) {

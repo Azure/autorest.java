@@ -16,6 +16,8 @@ public class JsonMergePatchHelper {
     public interface UpdatePatchRequestAccessor {
         UpdatePatchRequest prepareModelForJsonMergePatch(UpdatePatchRequest updatePatchRequest,
             boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(UpdatePatchRequest updatePatchRequest);
     }
 
     public static void setUpdatePatchRequestAccessor(UpdatePatchRequestAccessor accessor) {
@@ -30,6 +32,8 @@ public class JsonMergePatchHelper {
 
     public interface TodoItemPatchAccessor {
         TodoItemPatch prepareModelForJsonMergePatch(TodoItemPatch todoItemPatch, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(TodoItemPatch todoItemPatch);
     }
 
     public static void setTodoItemPatchAccessor(TodoItemPatchAccessor accessor) {

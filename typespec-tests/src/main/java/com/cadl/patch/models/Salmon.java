@@ -168,7 +168,7 @@ public final class Salmon extends Fish {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (isJsonMergePatch()) {
+        if (JsonMergePatchHelper.getFishAccessor().isJsonMergePatch(this)) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
@@ -246,47 +246,33 @@ public final class Salmon extends Fish {
     @Generated
     public static Salmon fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
-            int age = 0;
-            String color = null;
-            String kind = "salmon";
-            List<Fish> friends = null;
-            Map<String, Fish> hate = null;
-            Fish partner = null;
+            Salmon deserializedSalmon = new Salmon();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setId(deserializedSalmon, reader.getString());
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setName(deserializedSalmon, reader.getString());
                 } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
+                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedSalmon, reader.getInt());
                 } else if ("color".equals(fieldName)) {
-                    color = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedSalmon, reader.getString());
                 } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                    deserializedSalmon.kind = reader.getString();
                 } else if ("friends".equals(fieldName)) {
-                    friends = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    List<Fish> friends = reader.readArray(reader1 -> Fish.fromJson(reader1));
+                    deserializedSalmon.friends = friends;
                 } else if ("hate".equals(fieldName)) {
-                    hate = reader.readMap(reader1 -> Fish.fromJson(reader1));
+                    Map<String, Fish> hate = reader.readMap(reader1 -> Fish.fromJson(reader1));
+                    deserializedSalmon.hate = hate;
                 } else if ("partner".equals(fieldName)) {
-                    partner = Fish.fromJson(reader);
+                    deserializedSalmon.partner = Fish.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            Salmon deserializedSalmon = new Salmon();
-            deserializedSalmon.id = id;
-            deserializedSalmon.name = name;
-            deserializedSalmon.age = age;
-            deserializedSalmon.color = color;
-            deserializedSalmon.kind = kind;
-            deserializedSalmon.friends = friends;
-            deserializedSalmon.hate = hate;
-            deserializedSalmon.partner = partner;
 
             return deserializedSalmon;
         });

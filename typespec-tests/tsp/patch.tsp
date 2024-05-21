@@ -58,8 +58,15 @@ model Fish {
 }
 
 @doc("The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.")
+@discriminator("sharktype")
 model Shark extends Fish {
   kind: "shark";
+  sharktype: string;
+}
+
+@doc("The third level model SawShark in polymorphic multiple levels inheritance.")
+model SawShark extends Shark {
+  sharktype: "saw";
 }
 
 @doc("The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.")

@@ -82,14 +82,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private Fish fish;
 
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    boolean isJsonMergePatch() {
-        return this.jsonMergePatch;
-    }
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -97,14 +89,25 @@ public final class Resource implements JsonSerializable<Resource> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
     private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setResourceAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setResourceAccessor(new JsonMergePatchHelper.ResourceAccessor() {
+            @Override
+            public Resource prepareModelForJsonMergePatch(Resource model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(Resource model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 
@@ -326,7 +329,7 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (isJsonMergePatch()) {
+        if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
@@ -430,55 +433,37 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public static Resource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
-            String description = null;
-            Map<String, InnerModel> map = null;
-            Long longValue = null;
-            Integer intValue = null;
-            ResourceEnumValue enumValue = null;
-            InnerModel innerModelProperty = null;
-            List<InnerModel> array = null;
-            Fish fish = null;
+            Resource deserializedResource = new Resource();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    deserializedResource.id = reader.getString();
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedResource.name = reader.getString();
                 } else if ("description".equals(fieldName)) {
-                    description = reader.getString();
+                    deserializedResource.description = reader.getString();
                 } else if ("map".equals(fieldName)) {
-                    map = reader.readMap(reader1 -> InnerModel.fromJson(reader1));
+                    Map<String, InnerModel> map = reader.readMap(reader1 -> InnerModel.fromJson(reader1));
+                    deserializedResource.map = map;
                 } else if ("longValue".equals(fieldName)) {
-                    longValue = reader.getNullable(JsonReader::getLong);
+                    deserializedResource.longValue = reader.getNullable(JsonReader::getLong);
                 } else if ("intValue".equals(fieldName)) {
-                    intValue = reader.getNullable(JsonReader::getInt);
+                    deserializedResource.intValue = reader.getNullable(JsonReader::getInt);
                 } else if ("enumValue".equals(fieldName)) {
-                    enumValue = ResourceEnumValue.fromString(reader.getString());
+                    deserializedResource.enumValue = ResourceEnumValue.fromString(reader.getString());
                 } else if ("wireNameForInnerModelProperty".equals(fieldName)) {
-                    innerModelProperty = InnerModel.fromJson(reader);
+                    deserializedResource.innerModelProperty = InnerModel.fromJson(reader);
                 } else if ("array".equals(fieldName)) {
-                    array = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
+                    List<InnerModel> array = reader.readArray(reader1 -> InnerModel.fromJson(reader1));
+                    deserializedResource.array = array;
                 } else if ("fish".equals(fieldName)) {
-                    fish = Fish.fromJson(reader);
+                    deserializedResource.fish = Fish.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            Resource deserializedResource = new Resource();
-            deserializedResource.id = id;
-            deserializedResource.name = name;
-            deserializedResource.description = description;
-            deserializedResource.map = map;
-            deserializedResource.longValue = longValue;
-            deserializedResource.intValue = intValue;
-            deserializedResource.enumValue = enumValue;
-            deserializedResource.innerModelProperty = innerModelProperty;
-            deserializedResource.array = array;
-            deserializedResource.fish = fish;
 
             return deserializedResource;
         });

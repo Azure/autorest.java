@@ -33,14 +33,6 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     @Generated
     private byte[] nullableProperty;
 
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    boolean isJsonMergePatch() {
-        return this.jsonMergePatch;
-    }
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -48,14 +40,25 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
     private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setBytesPropertyAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setBytesPropertyAccessor(new JsonMergePatchHelper.BytesPropertyAccessor() {
+            @Override
+            public BytesProperty prepareModelForJsonMergePatch(BytesProperty model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(BytesProperty model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 
@@ -120,7 +123,7 @@ public final class BytesProperty implements JsonSerializable<BytesProperty> {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (isJsonMergePatch()) {
+        if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();

@@ -15,15 +15,15 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
+ * The third level model SawShark in polymorphic multiple levels inheritance.
  */
 @Fluent
-public class Shark extends Fish {
+public final class SawShark extends Shark {
     /*
      * The sharktype property.
      */
     @Generated
-    private String sharktype = "shark";
+    private String sharktype = "saw";
 
     /**
      * Stores updated model property, the value is property name, not serialized name.
@@ -32,11 +32,10 @@ public class Shark extends Fish {
     private final Set<String> updatedProperties = new HashSet<>();
 
     /**
-     * Creates an instance of Shark class.
+     * Creates an instance of SawShark class.
      */
     @Generated
-    public Shark() {
-        this.sharktype = "shark";
+    public SawShark() {
         this.updatedProperties.add("sharktype");
     }
 
@@ -46,6 +45,7 @@ public class Shark extends Fish {
      * @return the sharktype value.
      */
     @Generated
+    @Override
     public String getSharktype() {
         return this.sharktype;
     }
@@ -55,7 +55,7 @@ public class Shark extends Fish {
      */
     @Generated
     @Override
-    public Shark setAge(int age) {
+    public SawShark setAge(int age) {
         super.setAge(age);
         this.updatedProperties.add("age");
         return this;
@@ -66,7 +66,7 @@ public class Shark extends Fish {
      */
     @Generated
     @Override
-    public Shark setColor(String color) {
+    public SawShark setColor(String color) {
         super.setColor(color);
         this.updatedProperties.add("color");
         return this;
@@ -111,64 +111,38 @@ public class Shark extends Fish {
     }
 
     /**
-     * Reads an instance of Shark from the JsonReader.
+     * Reads an instance of SawShark from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of SawShark if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Shark.
+     * @throws IOException If an error occurs while reading the SawShark.
      */
     @Generated
-    public static Shark fromJson(JsonReader jsonReader) throws IOException {
+    public static SawShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String discriminatorValue = null;
-            try (JsonReader readerToUse = reader.bufferObject()) {
-                readerToUse.nextToken(); // Prepare for reading
-                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                    String fieldName = readerToUse.getFieldName();
-                    readerToUse.nextToken();
-                    if ("sharktype".equals(fieldName)) {
-                        discriminatorValue = readerToUse.getString();
-                        break;
-                    } else {
-                        readerToUse.skipChildren();
-                    }
-                }
-                // Use the discriminator value to determine which subtype should be deserialized.
-                if ("saw".equals(discriminatorValue)) {
-                    return SawShark.fromJson(readerToUse.reset());
-                } else {
-                    return fromJsonKnownDiscriminator(readerToUse.reset());
-                }
-            }
-        });
-    }
-
-    @Generated
-    static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            Shark deserializedShark = new Shark();
+            SawShark deserializedSawShark = new SawShark();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setId(deserializedShark, reader.getString());
+                    JsonMergePatchHelper.getFishAccessor().setId(deserializedSawShark, reader.getString());
                 } else if ("name".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setName(deserializedShark, reader.getString());
+                    JsonMergePatchHelper.getFishAccessor().setName(deserializedSawShark, reader.getString());
                 } else if ("age".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedShark, reader.getInt());
+                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedSawShark, reader.getInt());
                 } else if ("color".equals(fieldName)) {
-                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedShark, reader.getString());
+                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedSawShark, reader.getString());
                 } else if ("sharktype".equals(fieldName)) {
-                    deserializedShark.sharktype = reader.getString();
+                    deserializedSawShark.sharktype = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
 
-            return deserializedShark;
+            return deserializedSawShark;
         });
     }
 }

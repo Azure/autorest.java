@@ -38,14 +38,6 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
     @Generated
     private TodoItemPatchStatus status;
 
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    boolean isJsonMergePatch() {
-        return this.jsonMergePatch;
-    }
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -53,14 +45,25 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
     private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setTodoItemPatchAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setTodoItemPatchAccessor(new JsonMergePatchHelper.TodoItemPatchAccessor() {
+            @Override
+            public TodoItemPatch prepareModelForJsonMergePatch(TodoItemPatch model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(TodoItemPatch model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 
@@ -146,7 +149,7 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (isJsonMergePatch()) {
+        if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();

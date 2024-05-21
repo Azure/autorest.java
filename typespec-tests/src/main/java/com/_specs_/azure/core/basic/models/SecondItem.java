@@ -62,19 +62,17 @@ public final class SecondItem implements JsonSerializable<SecondItem> {
     @Generated
     public static SecondItem fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String name = null;
+            SecondItem deserializedSecondItem = new SecondItem();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedSecondItem.name = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            SecondItem deserializedSecondItem = new SecondItem();
-            deserializedSecondItem.name = name;
 
             return deserializedSecondItem;
         });

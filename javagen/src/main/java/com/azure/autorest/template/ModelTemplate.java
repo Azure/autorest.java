@@ -602,18 +602,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
                 classBlock.privateFinalMemberVariable(fieldSignature);
             } else {
-                if (model.isPolymorphicParent() && settings.isStreamStyleSerialization()
-                    && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.JSON_MERGE_PATCH)) {
-                    // Polymorphic parents in stream-style serialization used for json-merge-patch generate a
-                    // package-private field to support setting the value without needing to use a setter. This is done
-                    // as the setter performs a dual action of setting the property and determining whether the property
-                    // is serialized in the patch request.
-                    // This forces generated SDKs to include all models in the polymorphic hierarchy in the same
-                    // package.
-                    classBlock.variable(fieldSignature, JavaVisibility.PackagePrivate);
-                } else {
-                    classBlock.privateMemberVariable(fieldSignature);
-                }
+                classBlock.privateMemberVariable(fieldSignature);
             }
         }
     }
@@ -1269,35 +1258,71 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             return;
         }
 
-        // Only the root model needs to have the jsonMergePatch property and accessors.
-        boolean rootParent = model.getParentModelName() == null || model.getParentModelName().isEmpty();
-        if (rootParent) {
-            // properties
-            addGeneratedAnnotation(classBlock);
-            classBlock.privateMemberVariable("boolean jsonMergePatch");
-
-            addGeneratedAnnotation(classBlock);
-            classBlock.method(JavaVisibility.PackagePrivate, null, "boolean isJsonMergePatch()",
-                method -> method.line("return this.jsonMergePatch;"));
-        }
-
         classBlock.javadocComment(comment ->
             comment.description("Stores updated model property, the value is property name, not serialized name"));
         addGeneratedAnnotation(classBlock);
         classBlock.privateFinalMemberVariable("Set<String> updatedProperties = new HashSet<>()");
+
+        if (model.isPolymorphic() && CoreUtils.isNullOrEmpty(model.getDerivedModels())) {
+            // Only polymorphic parent models generate an accessor.
+            // If it is the super most parent model, it will generate the prepareModelForJsonMergePatch method.
+            // Other parents need to generate setters for the properties that are used in json-merge-patch, used in
+            // deserialization to prevent these properties from always being included in serialization.
+            return;
+        }
+
+        List<ClientModelProperty> setterProperties = !model.isPolymorphic() ? Collections.emptyList()
+            : model.getProperties().stream()
+                .filter(property -> !property.isConstant() && !property.isPolymorphicDiscriminator())
+                .collect(Collectors.toList());
+
+        boolean rootParent = CoreUtils.isNullOrEmpty(model.getParentModelName());
+        if (!rootParent && setterProperties.isEmpty()) {
+            // Model isn't the root parent and doesn't have any setter properties, no need to generate an accessor.
+            return;
+        }
+
+        if (rootParent) {
+            // Only the root model needs to have the jsonMergePatch property.
+            addGeneratedAnnotation(classBlock);
+            classBlock.privateMemberVariable("boolean jsonMergePatch");
+        }
 
         if (rootParent) {
             // setter
             addGeneratedAnnotation(classBlock);
             classBlock.privateMethod("void serializeAsJsonMergePatch(boolean jsonMergePatch)",
                 method -> method.line("this.jsonMergePatch = jsonMergePatch;"));
-
-            // static code block to access jsonMergePatch setter
-            classBlock.staticBlock(staticBlock -> staticBlock.text(String.format(
-                "JsonMergePatchHelper.set%sAccessor((model, jsonMergePatchEnabled) -> {\n"
-                    + "model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" + "return model;\n" + "});",
-                model.getName())));
         }
+
+        // static code block to access jsonMergePatch setter
+        classBlock.staticBlock(staticBlock -> {
+            String accessorName = model.getName() + "Accessor";
+            staticBlock.line("JsonMergePatchHelper.set" + accessorName + "(new JsonMergePatchHelper." + accessorName + "() {");
+            staticBlock.indent(() -> {
+                if (rootParent) {
+                    staticBlock.line("@Override");
+                    staticBlock.block("public " + model.getName() + " prepareModelForJsonMergePatch(" + model.getName()
+                        + " model, boolean jsonMergePatchEnabled)", setJsonMergePatch -> {
+                        staticBlock.line("model.serializeAsJsonMergePatch(jsonMergePatchEnabled);");
+                        staticBlock.line("return model;");
+                    });
+
+                    staticBlock.line("@Override");
+                    staticBlock.block("public boolean isJsonMergePatch(" + model.getName() + " model)",
+                        getJsonMergePatch -> getJsonMergePatch.line("return model.jsonMergePatch;"));
+                }
+
+                for (ClientModelProperty setter : setterProperties) {
+                    staticBlock.line("@Override");
+                    staticBlock.block("public void " + setter.getSetterName() + "(" + model.getName()
+                        + " model, " + setter.getWireType() + " " + setter.getName() + ")",
+                        setField -> setField.line("model." + setter.getName() + " = " + setter.getName() + ";"));
+                }
+            });
+
+            staticBlock.line("});");
+        });
     }
 
     private static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {

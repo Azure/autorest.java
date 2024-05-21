@@ -15,6 +15,8 @@ public class JsonMergePatchHelper {
 
     public interface UserAccessor {
         User prepareModelForJsonMergePatch(User user, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(User user);
     }
 
     public static void setUserAccessor(UserAccessor accessor) {
@@ -29,6 +31,8 @@ public class JsonMergePatchHelper {
 
     public interface UserOrderAccessor {
         UserOrder prepareModelForJsonMergePatch(UserOrder userOrder, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(UserOrder userOrder);
     }
 
     public static void setUserOrderAccessor(UserOrderAccessor accessor) {

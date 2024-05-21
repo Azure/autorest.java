@@ -15,6 +15,8 @@ public class JsonMergePatchHelper {
 
     public interface InnerModelAccessor {
         InnerModel prepareModelForJsonMergePatch(InnerModel innerModel, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(InnerModel innerModel);
     }
 
     public static void setInnerModelAccessor(InnerModelAccessor accessor) {
@@ -29,6 +31,8 @@ public class JsonMergePatchHelper {
 
     public interface ResourcePatchAccessor {
         ResourcePatch prepareModelForJsonMergePatch(ResourcePatch resourcePatch, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(ResourcePatch resourcePatch);
     }
 
     public static void setResourcePatchAccessor(ResourcePatchAccessor accessor) {

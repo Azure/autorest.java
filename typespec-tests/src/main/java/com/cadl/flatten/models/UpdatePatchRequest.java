@@ -26,14 +26,6 @@ public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchReq
     @Generated
     private TodoItemPatch patch;
 
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    boolean isJsonMergePatch() {
-        return this.jsonMergePatch;
-    }
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -41,14 +33,26 @@ public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchReq
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
     private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setUpdatePatchRequestAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setUpdatePatchRequestAccessor(new JsonMergePatchHelper.UpdatePatchRequestAccessor() {
+            @Override
+            public UpdatePatchRequest prepareModelForJsonMergePatch(UpdatePatchRequest model,
+                boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(UpdatePatchRequest model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 
@@ -89,7 +93,7 @@ public final class UpdatePatchRequest implements JsonSerializable<UpdatePatchReq
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (isJsonMergePatch()) {
+        if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();

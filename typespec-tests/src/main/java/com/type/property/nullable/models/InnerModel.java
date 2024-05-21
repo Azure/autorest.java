@@ -26,14 +26,6 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     @Generated
     private String property;
 
-    @Generated
-    private boolean jsonMergePatch;
-
-    @Generated
-    boolean isJsonMergePatch() {
-        return this.jsonMergePatch;
-    }
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -41,14 +33,25 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
+    private boolean jsonMergePatch;
+
+    @Generated
     private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setInnerModelAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setInnerModelAccessor(new JsonMergePatchHelper.InnerModelAccessor() {
+            @Override
+            public InnerModel prepareModelForJsonMergePatch(InnerModel model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(InnerModel model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 
@@ -89,7 +92,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (isJsonMergePatch()) {
+        if (jsonMergePatch) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();

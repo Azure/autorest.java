@@ -93,19 +93,17 @@ public final class Model implements JsonSerializable<Model> {
     @Generated
     public static Model fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            ModelOptionalLiteral optionalLiteral = null;
+            Model deserializedModel = new Model();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("optionalLiteral".equals(fieldName)) {
-                    optionalLiteral = ModelOptionalLiteral.fromString(reader.getString());
+                    deserializedModel.optionalLiteral = ModelOptionalLiteral.fromString(reader.getString());
                 } else {
                     reader.skipChildren();
                 }
             }
-            Model deserializedModel = new Model();
-            deserializedModel.optionalLiteral = optionalLiteral;
 
             return deserializedModel;
         });

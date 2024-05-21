@@ -20,6 +20,8 @@ public class JsonMergePatchHelper {
 
     public interface StringPropertyAccessor {
         StringProperty prepareModelForJsonMergePatch(StringProperty stringProperty, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(StringProperty stringProperty);
     }
 
     public static void setStringPropertyAccessor(StringPropertyAccessor accessor) {
@@ -34,6 +36,8 @@ public class JsonMergePatchHelper {
 
     public interface BytesPropertyAccessor {
         BytesProperty prepareModelForJsonMergePatch(BytesProperty bytesProperty, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(BytesProperty bytesProperty);
     }
 
     public static void setBytesPropertyAccessor(BytesPropertyAccessor accessor) {
@@ -49,6 +53,8 @@ public class JsonMergePatchHelper {
     public interface DatetimePropertyAccessor {
         DatetimeProperty prepareModelForJsonMergePatch(DatetimeProperty datetimeProperty,
             boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(DatetimeProperty datetimeProperty);
     }
 
     public static void setDatetimePropertyAccessor(DatetimePropertyAccessor accessor) {
@@ -64,6 +70,8 @@ public class JsonMergePatchHelper {
     public interface DurationPropertyAccessor {
         DurationProperty prepareModelForJsonMergePatch(DurationProperty durationProperty,
             boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(DurationProperty durationProperty);
     }
 
     public static void setDurationPropertyAccessor(DurationPropertyAccessor accessor) {
@@ -79,6 +87,8 @@ public class JsonMergePatchHelper {
     public interface CollectionsBytePropertyAccessor {
         CollectionsByteProperty prepareModelForJsonMergePatch(CollectionsByteProperty collectionsByteProperty,
             boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(CollectionsByteProperty collectionsByteProperty);
     }
 
     public static void setCollectionsBytePropertyAccessor(CollectionsBytePropertyAccessor accessor) {
@@ -94,6 +104,8 @@ public class JsonMergePatchHelper {
     public interface CollectionsModelPropertyAccessor {
         CollectionsModelProperty prepareModelForJsonMergePatch(CollectionsModelProperty collectionsModelProperty,
             boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(CollectionsModelProperty collectionsModelProperty);
     }
 
     public static void setCollectionsModelPropertyAccessor(CollectionsModelPropertyAccessor accessor) {
@@ -108,6 +120,8 @@ public class JsonMergePatchHelper {
 
     public interface InnerModelAccessor {
         InnerModel prepareModelForJsonMergePatch(InnerModel innerModel, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(InnerModel innerModel);
     }
 
     public static void setInnerModelAccessor(InnerModelAccessor accessor) {

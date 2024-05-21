@@ -14,6 +14,8 @@ public class JsonMergePatchHelper {
 
     public interface ResourceAccessor {
         Resource prepareModelForJsonMergePatch(Resource resource, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(Resource resource);
     }
 
     public static void setResourceAccessor(ResourceAccessor accessor) {
