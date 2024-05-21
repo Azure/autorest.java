@@ -182,9 +182,16 @@ public class EnumType implements IType {
     }
 
     @Override
-    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
-        String actualValueGetter = valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
-        return elementType.asNullable().jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter);
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter,
+        boolean jsonMergePatch) {
+        // When JSON merge patch is being used the valueGetter will already be null checked as JSON merge patch needs to
+        // explicitly handle null values.
+        String actualValueGetter = jsonMergePatch
+            ? valueGetter + "." + getToMethodName() + "()"
+            : valueGetter + " == null ? null : " + valueGetter + "." + getToMethodName() + "()";
+
+        return elementType.asNullable().jsonSerializationMethodCall(jsonWriterName, fieldName, actualValueGetter,
+            jsonMergePatch);
     }
 
     @Override

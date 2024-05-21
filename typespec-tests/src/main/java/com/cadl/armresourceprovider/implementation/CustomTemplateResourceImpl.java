@@ -10,6 +10,7 @@ import com.azure.core.util.Context;
 import com.cadl.armresourceprovider.fluent.models.CustomTemplateResourceInner;
 import com.cadl.armresourceprovider.models.CustomTemplateResource;
 import com.cadl.armresourceprovider.models.CustomTemplateResourcePatch;
+import com.cadl.armresourceprovider.models.Dog;
 import com.cadl.armresourceprovider.models.ManagedServiceIdentity;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import java.util.Collections;
@@ -56,6 +57,10 @@ public final class CustomTemplateResourceImpl
 
     public ProvisioningState provisioningState() {
         return this.innerModel().provisioningState();
+    }
+
+    public Dog dog() {
+        return this.innerModel().dog();
     }
 
     public Region region() {
@@ -168,6 +173,11 @@ public final class CustomTemplateResourceImpl
             this.updateProperties.withIdentity(identity);
             return this;
         }
+    }
+
+    public CustomTemplateResourceImpl withDog(Dog dog) {
+        this.innerModel().withDog(dog);
+        return this;
     }
 
     public CustomTemplateResourceImpl withIfMatch(String ifMatch) {

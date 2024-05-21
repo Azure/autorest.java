@@ -173,7 +173,7 @@ public final class TodoItemPatch implements JsonSerializable<TodoItemPatch> {
             if (this.status == null) {
                 jsonWriter.writeNullField("status");
             } else {
-                jsonWriter.writeStringField("status", this.status == null ? null : this.status.toString());
+                jsonWriter.writeStringField("status", this.status.toString());
             }
         }
         return jsonWriter.writeEndObject();
