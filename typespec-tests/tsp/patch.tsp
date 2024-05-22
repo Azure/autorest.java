@@ -62,7 +62,6 @@ model Fish {
 model Shark extends Fish {
   kind: "shark";
   sharktype: string;
-
   weight?: int32;
 }
 
