@@ -144,6 +144,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // XML namespace constants
             addXmlNamespaceConstants(model, classBlock);
 
+            addShadowProperties(model, classBlock, settings);
+
             // properties
             addProperties(model, classBlock, settings);
 
@@ -327,6 +329,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writeStreamStyleSerialization(classBlock, model, settings);
             }
         });
+    }
+
+    /**
+     * Add shadow properties for parent read-only properties that needs to be used in stream-style deserialization.
+     * @param model The client model.
+     * @param classBlock The Java class.
+     * @param settings AutoRest configuration settings.
+     */
+    protected void addShadowProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
+        // NO-OP for Jackson based serialization models
     }
 
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {

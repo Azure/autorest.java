@@ -228,6 +228,11 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
     }
 
+    @Override
+    protected void addShadowProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
+
+    }
+
     /**
      * write toJson() method.
      * <p>
