@@ -144,8 +144,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // XML namespace constants
             addXmlNamespaceConstants(model, classBlock);
 
-            addShadowProperties(model, classBlock, settings);
-
             // properties
             addProperties(model, classBlock, settings);
 
@@ -551,11 +549,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings AutoRest configuration settings.
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
-        for (ClientModelProperty parentDiscriminator : model.getParentPolymorphicDiscriminators()) {
-            addProperty(parentDiscriminator, model, classBlock, settings);
-        }
-
-        for (ClientModelProperty property : model.getProperties()) {
+        for (ClientModelProperty property : getFieldProperties(model, settings)) {
             addProperty(property, model, classBlock, settings);
         }
     }
@@ -628,6 +622,19 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         } else {
             classBlock.privateMemberVariable(fieldSignature);
         }
+    }
+
+    /**
+     * Get properties to generate as fields of the class.
+     * @param model the model to generate class of
+     * @param settings JavaSettings
+     * @return properties to generate as fields of the class
+     */
+    protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
+        return Stream.concat(
+            model.getParentPolymorphicDiscriminators().stream(),
+            model.getProperties().stream()
+        ).collect(Collectors.toList());
     }
 
     protected void addXmlWrapperClass(JavaClass classBlock, ClientModelProperty property, String wrapperClassName,

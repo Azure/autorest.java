@@ -42,6 +42,7 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.azure.autorest.util.ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME;
 import static com.azure.autorest.util.ClientModelUtil.includePropertyInConstructor;
@@ -228,9 +229,24 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
     }
 
+    /**
+     * For stream-style-serialization, we generate shadow properties for read-only properties that's not in constructor.
+     * @param model the model to generate class of
+     * @param settings JavaSettings
+     * @return properties to generate as fields of the class
+     */
     @Override
-    protected void addShadowProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
-
+    protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
+        return Stream.concat(
+                model.getProperties().stream(),
+                ClientModelUtil.getParentProperties(model)
+                        .stream()
+                        .filter(property -> !property.isPolymorphicDiscriminator()
+                                // must be read-only and not appear in constructor
+                                && property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs()
+                                // not required and in constructor
+                                && !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()))
+        ).collect(Collectors.toList());
     }
 
     /**
