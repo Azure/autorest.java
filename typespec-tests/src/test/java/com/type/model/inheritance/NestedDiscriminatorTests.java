@@ -30,7 +30,6 @@ class NestedDiscriminatorTests {
     }
 
     @Test
-    @Disabled("The item `kind` is missing in the generated json file by the method `toJson` of the class `Shark`.")
     void putModel() {
         Shark body = new GoblinShark(1);
         client.putModel(body);
@@ -41,14 +40,13 @@ class NestedDiscriminatorTests {
         Salmon salmon = (Salmon) client.getRecursiveModel();
         Assertions.assertEquals(2, salmon.getFriends().size());
         Assertions.assertEquals(2, salmon.getHate().size());
-        Assertions.assertEquals(Shark.class, salmon.getPartner().getClass());
+        Assertions.assertEquals(SawShark.class, salmon.getPartner().getClass());
         Assertions.assertEquals(1, salmon.getAge());
         Assertions.assertEquals(2, (salmon.getPartner()).getAge());
     }
 
 
     @Test
-    @Disabled("The item `kind` is missing in the generated json file by the method `toJson` of the class `Shark`. ")
     void putRecursiveModel() {
         Salmon salmon = new Salmon(1);
         salmon.setPartner(new SawShark(2));
