@@ -15,10 +15,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
+ * The third level model SawShark in polymorphic multiple levels inheritance.
  */
 @Fluent
-public class Shark extends Fish {
+public final class SawShark extends Shark {
     /*
      * The kind property.
      */
@@ -29,13 +29,7 @@ public class Shark extends Fish {
      * The sharktype property.
      */
     @Generated
-    private String sharktype = "shark";
-
-    /*
-     * The weight property.
-     */
-    @Generated
-    private Integer weight;
+    private String sharktype = "saw";
 
     @Generated
     private boolean jsonMergePatch;
@@ -52,17 +46,17 @@ public class Shark extends Fish {
     }
 
     static {
-        JsonMergePatchHelper.setSharkAccessor((model, jsonMergePatchEnabled) -> {
+        JsonMergePatchHelper.setSawSharkAccessor((model, jsonMergePatchEnabled) -> {
             model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
             return model;
         });
     }
 
     /**
-     * Creates an instance of Shark class.
+     * Creates an instance of SawShark class.
      */
     @Generated
-    public Shark() {
+    public SawShark() {
         this.updatedProperties.add("kind");
         this.updatedProperties.add("sharktype");
     }
@@ -73,29 +67,18 @@ public class Shark extends Fish {
      * @return the sharktype value.
      */
     @Generated
+    @Override
     public String getSharktype() {
         return this.sharktype;
     }
 
     /**
-     * Get the weight property: The weight property.
-     * 
-     * @return the weight value.
+     * {@inheritDoc}
      */
     @Generated
-    public Integer getWeight() {
-        return this.weight;
-    }
-
-    /**
-     * Set the weight property: The weight property.
-     * 
-     * @param weight the weight value to set.
-     * @return the Shark object itself.
-     */
-    @Generated
-    public Shark setWeight(Integer weight) {
-        this.weight = weight;
+    @Override
+    public SawShark setWeight(Integer weight) {
+        super.setWeight(weight);
         this.updatedProperties.add("weight");
         return this;
     }
@@ -105,7 +88,7 @@ public class Shark extends Fish {
      */
     @Generated
     @Override
-    public Shark setAge(int age) {
+    public SawShark setAge(int age) {
         super.setAge(age);
         this.updatedProperties.add("age");
         return this;
@@ -116,7 +99,7 @@ public class Shark extends Fish {
      */
     @Generated
     @Override
-    public Shark setColor(String color) {
+    public SawShark setColor(String color) {
         super.setColor(color);
         this.updatedProperties.add("color");
         return this;
@@ -135,8 +118,8 @@ public class Shark extends Fish {
             jsonWriter.writeStringField("kind", this.kind);
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
+            jsonWriter.writeNumberField("weight", getWeight());
             jsonWriter.writeStringField("sharktype", this.sharktype);
-            jsonWriter.writeNumberField("weight", this.weight);
             return jsonWriter.writeEndObject();
         }
     }
@@ -159,6 +142,13 @@ public class Shark extends Fish {
                 jsonWriter.writeStringField("color", getColor());
             }
         }
+        if (updatedProperties.contains("weight")) {
+            if (getWeight() == null) {
+                jsonWriter.writeNullField("weight");
+            } else {
+                jsonWriter.writeNumberField("weight", getWeight());
+            }
+        }
         if (updatedProperties.contains("sharktype")) {
             if (this.sharktype == null) {
                 jsonWriter.writeNullField("sharktype");
@@ -166,60 +156,27 @@ public class Shark extends Fish {
                 jsonWriter.writeStringField("sharktype", this.sharktype);
             }
         }
-        if (updatedProperties.contains("weight")) {
-            if (this.weight == null) {
-                jsonWriter.writeNullField("weight");
-            } else {
-                jsonWriter.writeNumberField("weight", this.weight);
-            }
-        }
         return jsonWriter.writeEndObject();
     }
 
     /**
-     * Reads an instance of Shark from the JsonReader.
+     * Reads an instance of SawShark from the JsonReader.
      * 
      * @param jsonReader The JsonReader being read.
-     * @return An instance of Shark if the JsonReader was pointing to an instance of it, or null if it was pointing to
-     * JSON null.
+     * @return An instance of SawShark if the JsonReader was pointing to an instance of it, or null if it was pointing
+     * to JSON null.
      * @throws IllegalStateException If the deserialized JSON object was missing any required properties.
-     * @throws IOException If an error occurs while reading the Shark.
+     * @throws IOException If an error occurs while reading the SawShark.
      */
     @Generated
-    public static Shark fromJson(JsonReader jsonReader) throws IOException {
-        return jsonReader.readObject(reader -> {
-            String discriminatorValue = null;
-            try (JsonReader readerToUse = reader.bufferObject()) {
-                readerToUse.nextToken(); // Prepare for reading
-                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
-                    String fieldName = readerToUse.getFieldName();
-                    readerToUse.nextToken();
-                    if ("sharktype".equals(fieldName)) {
-                        discriminatorValue = readerToUse.getString();
-                        break;
-                    } else {
-                        readerToUse.skipChildren();
-                    }
-                }
-                // Use the discriminator value to determine which subtype should be deserialized.
-                if ("saw".equals(discriminatorValue)) {
-                    return SawShark.fromJson(readerToUse.reset());
-                } else {
-                    return fromJsonKnownDiscriminator(readerToUse.reset());
-                }
-            }
-        });
-    }
-
-    @Generated
-    static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+    public static SawShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
             String id = null;
             String name = null;
             int age = 0;
             String color = null;
-            String sharktype = "shark";
             Integer weight = null;
+            String sharktype = "saw";
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
@@ -232,23 +189,23 @@ public class Shark extends Fish {
                     age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
                     color = reader.getString();
-                } else if ("sharktype".equals(fieldName)) {
-                    sharktype = reader.getString();
                 } else if ("weight".equals(fieldName)) {
                     weight = reader.getNullable(JsonReader::getInt);
+                } else if ("sharktype".equals(fieldName)) {
+                    sharktype = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            Shark deserializedShark = new Shark();
-            deserializedShark.setId(id);
-            deserializedShark.setName(name);
-            deserializedShark.setAge(age);
-            deserializedShark.setColor(color);
-            deserializedShark.sharktype = sharktype;
-            deserializedShark.weight = weight;
+            SawShark deserializedSawShark = new SawShark();
+            deserializedSawShark.setId(id);
+            deserializedSawShark.setName(name);
+            deserializedSawShark.setAge(age);
+            deserializedSawShark.setColor(color);
+            deserializedSawShark.setWeight(weight);
+            deserializedSawShark.sharktype = sharktype;
 
-            return deserializedShark;
+            return deserializedSawShark;
         });
     }
 }

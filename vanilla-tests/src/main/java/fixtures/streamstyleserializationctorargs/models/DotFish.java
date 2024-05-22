@@ -19,7 +19,7 @@ public class DotFish implements JsonSerializable<DotFish> {
     /*
      * The fish.type property.
      */
-    private String fishType;
+    private String fishType = "DotFish";
 
     /*
      * The species property.
@@ -30,7 +30,6 @@ public class DotFish implements JsonSerializable<DotFish> {
      * Creates an instance of DotFish class.
      */
     public DotFish() {
-        this.fishType = "DotFish";
     }
 
     /**

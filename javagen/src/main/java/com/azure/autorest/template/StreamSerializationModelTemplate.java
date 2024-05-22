@@ -212,7 +212,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
             writeFromXml(classBlock, model, propertiesManager, settings,
                 Templates.getModelTemplate()::addGeneratedAnnotation);
         } else {
-            if (ClientModelUtil.isJsonMergePatchModel(model)) {
+            if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
                 writeToJson(classBlock, propertiesManager, true, Templates.getModelTemplate()::addGeneratedAnnotation);
                 writeToJsonMergePatch(classBlock, propertiesManager,
                     Templates.getModelTemplate()::addGeneratedAnnotation);
@@ -277,6 +277,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         BiConsumer<ClientModelProperty, Boolean> serializeJsonProperty = (property, fromSuper) -> serializeJsonProperty(
             methodBlock, property, property.getSerializedName(), fromSuper, true, isJsonMergePatch);
 
+        propertiesManager.getModel().getParentPolymorphicDiscriminators()
+            .forEach(discriminator -> serializeJsonProperty.accept(discriminator, false));
         propertiesManager.forEachSuperRequiredProperty(property -> serializeJsonProperty.accept(property, true));
         propertiesManager.forEachSuperSetterProperty(property -> serializeJsonProperty.accept(property, true));
         propertiesManager.forEachRequiredProperty(property -> serializeJsonProperty.accept(property, false));
@@ -681,12 +683,36 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 // Add deserialization for all child types.
                 List<ClientModel> childTypes = getAllChildTypes(model, new ArrayList<>());
                 for (ClientModel childType : childTypes) {
+                    // Determine which serialization method to use based on whether the child type is also a polymorphic
+                    // parent and the child shares the same polymorphic discriminator as this model.
+                    // If the child and parent have different discriminator names then the child will need to be
+                    // deserialized checking the multi-level polymorphic discriminator.
+                    // Using the nested discriminator sample, there is
+                    // Fish : kind
+                    //   - Salmon : kind
+                    //   - Shark : sharktype
+                    //     - Sawshark : sharktype
+                    // So, if deserialization enters Fish and the "kind" is "Shark" then it needs to check the
+                    // "sharktype" to determine if it's a Sawshark or another subtype of Shark.
+                    boolean sameDiscimrinator = Objects.equals(childType.getPolymorphicDiscriminatorName(),
+                        model.getPolymorphicDiscriminatorName());
+
+                    if (!sameDiscimrinator && !Objects.equals(childType.getParentModelName(), model.getName())) {
+                        // Child model and parent model don't share the same discriminator and the child isn't a direct
+                        // child of the parent model, so skip this child model. This is done as the child model should
+                        // be deserialized by the subtype that defines the different polymorphic discriminator. Using
+                        // the sample above, Fish can't use "kind" to deserialize to a Shark subtype, it needs to use
+                        // "sharktype".
+                        continue;
+                    }
+
+                    String deserializationMethod = (isSuperTypeWithDiscriminator(childType) && sameDiscimrinator)
+                        ? ".fromJsonKnownDiscriminator(readerToUse.reset())"
+                        : ".fromJson(readerToUse.reset())";
+
                     ifBlock = ifOrElseIf(tryStatement, ifBlock,
                         "\"" + childType.getSerializedName() + "\".equals(discriminatorValue)",
-                        ifStatement -> ifStatement.methodReturn(
-                            childType.getName() + (isSuperTypeWithDiscriminator(childType)
-                                ? ".fromJsonKnownDiscriminator(readerToUse.reset())"
-                                : ".fromJson(readerToUse.reset())")));
+                        ifStatement -> ifStatement.methodReturn(childType.getName() + deserializationMethod));
                 }
 
                 if (ifBlock == null) {
@@ -1394,9 +1420,9 @@ hasConstructorArguments, settings));
         }
     }
 
-    private static boolean isSuperTypeWithDiscriminator(ClientModel model) {
-        return !CoreUtils.isNullOrEmpty(model.getPolymorphicDiscriminatorName())
-            && !CoreUtils.isNullOrEmpty(model.getDerivedModels());
+    private static boolean isSuperTypeWithDiscriminator(ClientModel child) {
+        return !CoreUtils.isNullOrEmpty(child.getPolymorphicDiscriminatorName())
+            && !CoreUtils.isNullOrEmpty(child.getDerivedModels());
     }
 
     /**

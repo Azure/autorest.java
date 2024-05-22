@@ -24,7 +24,7 @@ public class Fish implements JsonSerializable<Fish> {
      * The kind property.
      */
     @Generated
-    private String kind;
+    private String kind = "Fish";
 
     /*
      * The id property.
@@ -76,7 +76,6 @@ public class Fish implements JsonSerializable<Fish> {
      */
     @Generated
     public Fish() {
-        this.kind = "Fish";
         this.updatedProperties.add("kind");
     }
 

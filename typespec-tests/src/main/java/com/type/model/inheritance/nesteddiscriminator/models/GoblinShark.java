@@ -17,6 +17,12 @@ import java.io.IOException;
 @Immutable
 public final class GoblinShark extends Shark {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "shark";
+
+    /*
      * The sharktype property.
      */
     @Generated
@@ -50,6 +56,7 @@ public final class GoblinShark extends Shark {
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        jsonWriter.writeStringField("kind", this.kind);
         jsonWriter.writeIntField("age", getAge());
         jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();

@@ -8,6 +8,7 @@ import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.InnerModel;
 import com.cadl.patch.models.Resource;
 import com.cadl.patch.models.Salmon;
+import com.cadl.patch.models.SawShark;
 import com.cadl.patch.models.Shark;
 
 /**
@@ -21,6 +22,8 @@ public class JsonMergePatchHelper {
     private static FishAccessor fishAccessor;
 
     private static SharkAccessor sharkAccessor;
+
+    private static SawSharkAccessor sawSharkAccessor;
 
     private static SalmonAccessor salmonAccessor;
 
@@ -38,6 +41,10 @@ public class JsonMergePatchHelper {
 
     public interface SharkAccessor {
         Shark prepareModelForJsonMergePatch(Shark shark, boolean jsonMergePatchEnabled);
+    }
+
+    public interface SawSharkAccessor {
+        SawShark prepareModelForJsonMergePatch(SawShark sawShark, boolean jsonMergePatchEnabled);
     }
 
     public interface SalmonAccessor {
@@ -74,6 +81,14 @@ public class JsonMergePatchHelper {
 
     public static SharkAccessor getSharkAccessor() {
         return sharkAccessor;
+    }
+
+    public static void setSawSharkAccessor(SawSharkAccessor accessor) {
+        sawSharkAccessor = accessor;
+    }
+
+    public static SawSharkAccessor getSawSharkAccessor() {
+        return sawSharkAccessor;
     }
 
     public static void setSalmonAccessor(SalmonAccessor accessor) {

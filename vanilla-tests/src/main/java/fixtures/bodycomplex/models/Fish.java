@@ -20,7 +20,7 @@ public class Fish implements JsonSerializable<Fish> {
     /*
      * The fishtype property.
      */
-    private String fishtype;
+    private String fishtype = "Fish";
 
     /*
      * The species property.
@@ -43,7 +43,6 @@ public class Fish implements JsonSerializable<Fish> {
      * @param length the length value to set.
      */
     public Fish(float length) {
-        this.fishtype = "Fish";
         this.length = length;
     }
 

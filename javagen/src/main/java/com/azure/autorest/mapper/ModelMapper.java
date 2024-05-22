@@ -59,282 +59,317 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
         ClassType modelType = objectMapper.map(compositeType);
         String modelName = modelType.getName();
         ClientModel result = serviceModels.getModel(modelType.getName());
-        if (result == null && !ObjectMapper.isPlainObject(compositeType)) {
-            Set<ImplementationDetails.Usage> usages = SchemaUtil.mapSchemaContext(compositeType.getUsage());
-            if (isPredefinedModel(modelType)) {
-                // TODO (weidxu): a more consistent handling of external model for all data-plane
-                if (settings.isDataPlaneClient()) {
-                    usages = new HashSet<>(usages);
-                    usages.add(ImplementationDetails.Usage.EXTERNAL);
-                } else {
-                    // abort handling external model, if not DPG
-                    // vanilla and fluent currently does not have mechanism to handle model that not to be outputted.
-                    return result;
-                }
-            }
 
-            ClientModel.Builder builder = createModelBuilder()
-                .name(modelName)
-                .packageName(modelType.getPackage())
-                .type(modelType)
-                .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
-                .usedInXml(SchemaUtil.treatAsXml(compositeType))
-                .serializationFormats(compositeType.getSerializationFormats())
-                .implementationDetails(new ImplementationDetails.Builder()
-                    .usages(usages)
-                    .build());
-
-            boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
-            builder.polymorphic(isPolymorphic);
-
-            HashSet<String> modelImports = new HashSet<>();
-
-            String parentModelName = null;
-            boolean hasAdditionalProperties = false;
-            List<ObjectSchema> parentsNeedFlatten = Collections.emptyList();
-            if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
-                hasAdditionalProperties = compositeType.getParents().getImmediate().stream()
-                    .anyMatch(s -> s instanceof DictionarySchema);
-
-                ParentSchemaInfo parentSchemaInfo = getParentSchemaInfo(compositeType);
-                if (parentSchemaInfo.hasParentSchema()) {
-                    parentsNeedFlatten = parentSchemaInfo.getFlattenedParentSchemas();
-
-                    ClassType parentType = objectMapper.map(parentSchemaInfo.getParentSchema());
-                    parentModelName = parentType.getName();
-                    modelImports.add(parentType.getPackage() + "." + parentModelName);
-                }
-            }
-            builder.parentModelName(parentModelName);
-
-            List<Property> compositeTypeProperties = compositeType.getProperties()
-                .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
-            if (!parentsNeedFlatten.isEmpty()) {
-                // Take properties from base class of multiple inheritance as properties of this class.
-                for (ObjectSchema parent : parentsNeedFlatten) {
-                    compositeTypeProperties.addAll(parent.getProperties().stream()
-                        .filter(p -> !p.isIsDiscriminator())
-                        .collect(Collectors.toList()));
-                    if (parent.getParents() != null) {
-                        compositeTypeProperties.addAll(parent.getParents().getAll().stream()
-                            .filter(s -> s instanceof ObjectSchema)
-                            .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
-                            .filter(p -> !p.isIsDiscriminator())
-                            .collect(Collectors.toList()));
-                    }
-                }
-            }
-            for (Property autoRestProperty : compositeTypeProperties) {
-                IType propertyType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema());
-                if (!autoRestProperty.isRequired()) {
-                    propertyType = propertyType.asNullable();
-                }
-                propertyType.addImportsTo(modelImports, false);
-
-                IType propertyClientType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema()).getClientType();
-                propertyClientType.addImportsTo(modelImports, false);
-            }
-
-            boolean compositeTypeUsedWithXml = SchemaUtil.treatAsXml(compositeType);
-            if (!compositeTypeProperties.isEmpty()) {
-                if (compositeTypeUsedWithXml) {
-                    modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
-
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
-                        modelImports.add(ArrayList.class.getName());
-                    }
-
-                    if (compositeTypeProperties.stream().anyMatch(p -> {
-                        if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
-                            return false;
-                        }
-
-                        XmlSerializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
-                        return xmlSchema.isAttribute() || xmlSchema.getNamespace() != null;
-                    })) {
-                        modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
-                    }
-
-                    if (compositeTypeProperties.stream().anyMatch(p -> {
-                        if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
-                            return false;
-                        }
-
-                        return p.getSchema().getSerialization().getXml().isText();
-                    })) {
-                        modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText");
-                    }
-
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() == null
-                        || p.getSchema().getSerialization().getXml() == null || !p.getSchema().getSerialization()
-                        .getXml().isAttribute())) {
-                        modelImports.add(JsonProperty.class.getName());
-                    }
-
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
-                        && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isWrapped())) {
-                        modelImports.add(JsonCreator.class.getName());
-                    }
-
-                } else {
-                    modelImports.add(JsonProperty.class.getName());
-                }
-            }
-            if (hasAdditionalProperties) {
-                for (Property property : compositeTypeProperties) {
-                    if (property.getLanguage().getJava().getName().equals(PROPERTY_NAME_ADDITIONAL_PROPERTIES)) {
-                        property.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES + "Property");
-                    }
-                }
-            }
-
-            String summary = compositeType.getSummary();
-            String description = compositeType.getLanguage().getJava() == null ? null : compositeType.getLanguage().getJava().getDescription();
-            if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
-                builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
-            } else {
-                builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
-            }
-
-            String modelSerializedName = compositeType.getDiscriminatorValue();
-            if (modelSerializedName == null && compositeType.getLanguage().getDefault() != null) {
-                modelSerializedName = compositeType.getLanguage().getDefault().getName();
-            }
-            builder.serializedName(modelSerializedName);
-
-            List<ClientModel> derivedTypes = new ArrayList<>();
-            boolean hasChildren = compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null;
-            if (hasChildren) {
-                for (Schema childSchema : compositeType.getChildren().getImmediate()) {
-                    if (childSchema instanceof ObjectSchema) {
-                        ClientModel model = this.map((ObjectSchema) childSchema);
-                        derivedTypes.add(model);
-                    } else {
-                        throw new RuntimeException("Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
-                    }
-                }
-            }
-            builder.derivedModels(derivedTypes);
-
-            // Only configure XML information if XML is listed as one of the serialization formats in the ObjectSchema.
-            if (SchemaUtil.treatAsXml(compositeType)) {
-                boolean hasXmlFormat = compositeType.getSerialization() != null
-                    && compositeType.getSerialization().getXml() != null;
-                if (hasXmlFormat) {
-                    final XmlSerializationFormat xml = compositeType.getSerialization().getXml();
-                    String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
-                        ? compositeType.getLanguage().getDefault().getName()
-                        : xml.getName();
-                    builder.xmlName(xmlName);
-                    builder.xmlNamespace(xml.getNamespace());
-                } else {
-                    builder.xmlName(compositeType.getLanguage().getDefault().getName());
-                }
-            }
-
-            List<ClientModelProperty> properties = new ArrayList<>();
-
-            boolean needsFlatten = false;
-            if (settings.getModelerSettings().isFlattenModel()  // enabled by modelerfour
-                && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
-                needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
-            }
-
-            String polymorphicDiscriminator = null;
-            if (isPolymorphic) {
-                String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
-                // Only escape the discriminator if the model will be flattened.
-                polymorphicDiscriminator = needsFlatten
-                    ? discriminatorSerializedName.replace(".", "\\\\.")
-                    : discriminatorSerializedName;
-
-                final String finalPolymorphicDiscriminator = polymorphicDiscriminator;
-                ClientModelProperty discriminatorProperty = createDiscriminatorProperty(
-                    settings, hasChildren, compositeType,
-                    annotationArgs -> annotationArgs.replace(discriminatorSerializedName, finalPolymorphicDiscriminator),
-                    polymorphicDiscriminator);
-
-                if (discriminatorProperty != null) {
-                    properties.add(discriminatorProperty);
-
-                    if (!settings.isStreamStyleSerialization()) {
-                        modelImports.add(JsonTypeId.class.getName());
-                    }
-                }
-
-                builder.polymorphicDiscriminatorName(polymorphicDiscriminator)
-                    .polymorphicDiscriminator(discriminatorProperty);
-            }
-
-            builder.needsFlatten(needsFlatten);
-            builder.imports(new ArrayList<>(modelImports));
-
-            final boolean mutablePropertyAsOptional = usages.contains(ImplementationDetails.Usage.JSON_MERGE_PATCH) && settings.isStreamStyleSerialization();
-            List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
-            for (Property property : compositeTypeProperties) {
-                ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property, mutablePropertyAsOptional);
-                if (Objects.equals(polymorphicDiscriminator, modelProperty.getSerializedName())) {
-                    // Discriminator is defined both as the discriminator and a property in the model.
-                    // Make the discriminator property required if the property is required. But don't add the property
-                    // again as it would result in two properties for the same serialized name.
-                    properties.get(0).setRequired(modelProperty.isRequired());
-
-                    // If the model has children models, copy the requirement logic to the children models with the same
-                    // polymorphic discriminator.
-                    // Passing from the parent is performed instead of children checking the parent as children will
-                    // complete mapping before the parent. So, the parent is last to complete and the children models
-                    // will be fully defined. If the inverse was done, children checking the parent, the parent would
-                    // be null or an infinite loop would happen.
-                    if (!CoreUtils.isNullOrEmpty(derivedTypes)) {
-                        for (ClientModel derivedType : derivedTypes) {
-                            if (Objects.equals(derivedType.getPolymorphicDiscriminator().getSerializedName(), polymorphicDiscriminator)) {
-                                derivedType.getPolymorphicDiscriminator().setRequired(modelProperty.isRequired());
-                            }
-                        }
-                    }
-
-                    continue;
-                }
-
-                properties.add(modelProperty);
-
-                if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                    propertyReferences.addAll(collectPropertiesFromFlattenedModel(compositeType, property, modelProperty, propertyReferences));
-                }
-            }
-
-            if (hasAdditionalProperties) {
-                DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().stream()
-                    .filter(s -> s instanceof DictionarySchema)
-                    .findFirst()
-                    .orElseThrow(() -> new IllegalStateException(
-                        "Unable to find DictionarySchema for additional properties property."));
-                Property additionalProperties = new Property();
-                additionalProperties.setReadOnly(false);
-                additionalProperties.setSchema(schema);
-                additionalProperties.setSerializedName("");
-
-                additionalProperties.setLanguage(new Languages());
-                additionalProperties.getLanguage().setJava(new Language());
-                additionalProperties.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES);
-                String additionalPropertiesDescription = schema.getLanguage().getJava().getDescription();
-                if (CoreUtils.isNullOrEmpty(additionalPropertiesDescription)) {
-                    additionalPropertiesDescription = "Additional properties";
-                }
-                additionalProperties.getLanguage().getJava().setDescription(additionalPropertiesDescription);
-
-                properties.add(Mappers.getModelPropertyMapper().map(additionalProperties));
-            }
-
-            builder.properties(properties);
-            builder.propertyReferences(propertyReferences);
-            builder.crossLanguageDefinitionId(compositeType.getCrossLanguageDefinitionId());
-
-            result = builder.build();
-            serviceModels.addModel(result);
+        if (result != null || ObjectMapper.isPlainObject(compositeType)) {
+            return result;
         }
 
+        Set<ImplementationDetails.Usage> usages = SchemaUtil.mapSchemaContext(compositeType.getUsage());
+        if (isPredefinedModel(modelType)) {
+            // TODO (weidxu): a more consistent handling of external model for all data-plane
+            if (settings.isDataPlaneClient()) {
+                usages = new HashSet<>(usages);
+                usages.add(ImplementationDetails.Usage.EXTERNAL);
+            } else {
+                // abort handling external model, if not DPG
+                // vanilla and fluent currently does not have mechanism to handle model that not to be outputted.
+                return result;
+            }
+        }
+
+        ClientModel.Builder builder = createModelBuilder()
+            .name(modelName)
+            .packageName(modelType.getPackage())
+            .type(modelType)
+            .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
+            .usedInXml(SchemaUtil.treatAsXml(compositeType))
+            .serializationFormats(compositeType.getSerializationFormats())
+            .implementationDetails(new ImplementationDetails.Builder()
+                .usages(usages)
+                .build());
+
+        boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
+        builder.polymorphic(isPolymorphic);
+
+        HashSet<String> modelImports = new HashSet<>();
+
+        String parentModelName = null;
+        boolean hasAdditionalProperties = false;
+        List<ObjectSchema> parentsNeedFlatten = Collections.emptyList();
+        if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
+            hasAdditionalProperties = compositeType.getParents().getImmediate().stream()
+                .anyMatch(s -> s instanceof DictionarySchema);
+
+            ParentSchemaInfo parentSchemaInfo = getParentSchemaInfo(compositeType);
+            if (parentSchemaInfo.hasParentSchema()) {
+                parentsNeedFlatten = parentSchemaInfo.getFlattenedParentSchemas();
+
+                ClassType parentType = objectMapper.map(parentSchemaInfo.getParentSchema());
+                parentModelName = parentType.getName();
+                modelImports.add(parentType.getPackage() + "." + parentModelName);
+            }
+        }
+        builder.parentModelName(parentModelName);
+
+        List<Property> compositeTypeProperties = compositeType.getProperties()
+            .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
+        if (!parentsNeedFlatten.isEmpty()) {
+            // Take properties from base class of multiple inheritance as properties of this class.
+            for (ObjectSchema parent : parentsNeedFlatten) {
+                compositeTypeProperties.addAll(parent.getProperties().stream()
+                    .filter(p -> !p.isIsDiscriminator())
+                    .collect(Collectors.toList()));
+                if (parent.getParents() != null) {
+                    compositeTypeProperties.addAll(parent.getParents().getAll().stream()
+                        .filter(s -> s instanceof ObjectSchema)
+                        .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
+                        .filter(p -> !p.isIsDiscriminator())
+                        .collect(Collectors.toList()));
+                }
+            }
+        }
+        for (Property autoRestProperty : compositeTypeProperties) {
+            IType propertyType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema());
+            if (!autoRestProperty.isRequired()) {
+                propertyType = propertyType.asNullable();
+            }
+            propertyType.addImportsTo(modelImports, false);
+
+            IType propertyClientType = Mappers.getSchemaMapper().map(autoRestProperty.getSchema()).getClientType();
+            propertyClientType.addImportsTo(modelImports, false);
+        }
+
+        boolean compositeTypeUsedWithXml = SchemaUtil.treatAsXml(compositeType);
+        if (!compositeTypeProperties.isEmpty()) {
+            if (compositeTypeUsedWithXml) {
+                modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement");
+
+                if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema() instanceof ArraySchema)) {
+                    modelImports.add(ArrayList.class.getName());
+                }
+
+                if (compositeTypeProperties.stream().anyMatch(p -> {
+                    if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
+                        return false;
+                    }
+
+                    XmlSerializationFormat xmlSchema = p.getSchema().getSerialization().getXml();
+                    return xmlSchema.isAttribute() || xmlSchema.getNamespace() != null;
+                })) {
+                    modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty");
+                }
+
+                if (compositeTypeProperties.stream().anyMatch(p -> {
+                    if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
+                        return false;
+                    }
+
+                    return p.getSchema().getSerialization().getXml().isText();
+                })) {
+                    modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText");
+                }
+
+                if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() == null
+                    || p.getSchema().getSerialization().getXml() == null || !p.getSchema().getSerialization()
+                    .getXml().isAttribute())) {
+                    modelImports.add(JsonProperty.class.getName());
+                }
+
+                if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
+                    && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isWrapped())) {
+                    modelImports.add(JsonCreator.class.getName());
+                }
+
+            } else {
+                modelImports.add(JsonProperty.class.getName());
+            }
+        }
+        if (hasAdditionalProperties) {
+            for (Property property : compositeTypeProperties) {
+                if (property.getLanguage().getJava().getName().equals(PROPERTY_NAME_ADDITIONAL_PROPERTIES)) {
+                    property.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES + "Property");
+                }
+            }
+        }
+
+        String summary = compositeType.getSummary();
+        String description = compositeType.getLanguage().getJava() == null ? null : compositeType.getLanguage().getJava().getDescription();
+        if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
+            builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
+        } else {
+            builder.description(SchemaUtil.mergeSummaryWithDescription(summary, description));
+        }
+
+        String modelSerializedName = compositeType.getDiscriminatorValue();
+        if (modelSerializedName == null && compositeType.getLanguage().getDefault() != null) {
+            modelSerializedName = compositeType.getLanguage().getDefault().getName();
+        }
+        builder.serializedName(modelSerializedName);
+
+        List<ClientModel> derivedTypes = new ArrayList<>();
+        boolean hasChildren = compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null;
+        if (hasChildren) {
+            for (Schema childSchema : compositeType.getChildren().getImmediate()) {
+                if (childSchema instanceof ObjectSchema) {
+                    ClientModel model = this.map((ObjectSchema) childSchema);
+                    derivedTypes.add(model);
+                } else {
+                    throw new RuntimeException("Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
+                }
+            }
+        }
+        builder.derivedModels(derivedTypes);
+
+        // Only configure XML information if XML is listed as one of the serialization formats in the ObjectSchema.
+        if (SchemaUtil.treatAsXml(compositeType)) {
+            boolean hasXmlFormat = compositeType.getSerialization() != null
+                && compositeType.getSerialization().getXml() != null;
+            if (hasXmlFormat) {
+                final XmlSerializationFormat xml = compositeType.getSerialization().getXml();
+                String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
+                    ? compositeType.getLanguage().getDefault().getName()
+                    : xml.getName();
+                builder.xmlName(xmlName);
+                builder.xmlNamespace(xml.getNamespace());
+            } else {
+                builder.xmlName(compositeType.getLanguage().getDefault().getName());
+            }
+        }
+
+        List<ClientModelProperty> properties = new ArrayList<>();
+
+        boolean needsFlatten = false;
+        if (settings.getModelerSettings().isFlattenModel()  // enabled by modelerfour
+            && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.TYPE) {
+            needsFlatten = hasFlattenedProperty(compositeType, parentsNeedFlatten);
+        }
+
+        String polymorphicDiscriminator = null;
+        if (isPolymorphic) {
+            String discriminatorSerializedName = SchemaUtil.getDiscriminatorSerializedName(compositeType);
+            // Only escape the discriminator if the model will be flattened.
+            polymorphicDiscriminator = needsFlatten
+                ? discriminatorSerializedName.replace(".", "\\\\.")
+                : discriminatorSerializedName;
+
+            final String finalPolymorphicDiscriminator = polymorphicDiscriminator;
+            ClientModelProperty discriminatorProperty = createDiscriminatorProperty(
+                settings, hasChildren, compositeType,
+                annotationArgs -> annotationArgs.replace(discriminatorSerializedName, finalPolymorphicDiscriminator),
+                polymorphicDiscriminator);
+
+            if (discriminatorProperty != null) {
+                properties.add(discriminatorProperty);
+
+                if (!settings.isStreamStyleSerialization()) {
+                    modelImports.add(JsonTypeId.class.getName());
+                }
+            }
+
+            builder.polymorphicDiscriminatorName(polymorphicDiscriminator)
+                .polymorphicDiscriminator(discriminatorProperty);
+        }
+
+        builder.needsFlatten(needsFlatten);
+        builder.imports(new ArrayList<>(modelImports));
+
+        final boolean mutablePropertyAsOptional = usages.contains(ImplementationDetails.Usage.JSON_MERGE_PATCH) && settings.isStreamStyleSerialization();
+        List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
+        for (Property property : compositeTypeProperties) {
+            ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property, mutablePropertyAsOptional);
+            if (Objects.equals(polymorphicDiscriminator, modelProperty.getSerializedName())) {
+                // Discriminator is defined both as the discriminator and a property in the model.
+                // Make the discriminator property required if the property is required. But don't add the property
+                // again as it would result in two properties for the same serialized name.
+                properties.get(0).setRequired(modelProperty.isRequired());
+
+                // If the model has children models, copy the requirement logic to the children models with the same
+                // polymorphic discriminator.
+                // Passing from the parent is performed instead of children checking the parent as children will
+                // complete mapping before the parent. So, the parent is last to complete and the children models
+                // will be fully defined. If the inverse was done, children checking the parent, the parent would
+                // be null or an infinite loop would happen.
+                if (!CoreUtils.isNullOrEmpty(derivedTypes)) {
+                    for (ClientModel derivedType : derivedTypes) {
+                        if (Objects.equals(derivedType.getPolymorphicDiscriminator().getSerializedName(), polymorphicDiscriminator)) {
+                            derivedType.getPolymorphicDiscriminator().setRequired(modelProperty.isRequired());
+                        }
+                    }
+                }
+
+                continue;
+            }
+
+            properties.add(modelProperty);
+
+            if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+                propertyReferences.addAll(collectPropertiesFromFlattenedModel(compositeType, property, modelProperty, propertyReferences));
+            }
+        }
+
+        if (hasAdditionalProperties) {
+            DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().stream()
+                .filter(s -> s instanceof DictionarySchema)
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException(
+                    "Unable to find DictionarySchema for additional properties property."));
+            Property additionalProperties = new Property();
+            additionalProperties.setReadOnly(false);
+            additionalProperties.setSchema(schema);
+            additionalProperties.setSerializedName("");
+
+            additionalProperties.setLanguage(new Languages());
+            additionalProperties.getLanguage().setJava(new Language());
+            additionalProperties.getLanguage().getJava().setName(PROPERTY_NAME_ADDITIONAL_PROPERTIES);
+            String additionalPropertiesDescription = schema.getLanguage().getJava().getDescription();
+            if (CoreUtils.isNullOrEmpty(additionalPropertiesDescription)) {
+                additionalPropertiesDescription = "Additional properties";
+            }
+            additionalProperties.getLanguage().getJava().setDescription(additionalPropertiesDescription);
+
+            properties.add(Mappers.getModelPropertyMapper().map(additionalProperties));
+        }
+
+        builder.properties(properties);
+        builder.propertyReferences(propertyReferences);
+        builder.crossLanguageDefinitionId(compositeType.getCrossLanguageDefinitionId());
+
+        result = builder.build();
+
+        if (isPolymorphic && !CoreUtils.isNullOrEmpty(derivedTypes)) {
+            // Walk the polymorphic hierarchy finding places where the parent model and child model have different
+            // polymorphic discriminators. When this case is found add the parent polymorphic discriminator as a parent
+            // polymorphic discriminator to the child model. This is necessary to ensure that the child model generates
+            // the correct serialization in multi-level polymorphic structures.
+            for (ClientModel derivedType : derivedTypes) {
+                if (!Objects.equals(polymorphicDiscriminator, derivedType.getPolymorphicDiscriminatorName())) {
+                    ClientModelProperty parentDiscriminator = result.getPolymorphicDiscriminator().newBuilder()
+                        .defaultValue(derivedType.getPolymorphicDiscriminator().getDefaultValue())
+                        .build();
+
+                    passPolymorphicDiscriminatorToChildren(parentDiscriminator, derivedType);
+                }
+            }
+        }
+
+        serviceModels.addModel(result);
+
         return result;
+    }
+
+    private static void passPolymorphicDiscriminatorToChildren(ClientModelProperty parentDiscriminator,
+        ClientModel child) {
+        // Due to the execution order of ModelMapper, where children models complete mapping before the parent model,
+        // the parent polymorphic discriminator needs to be added at index 0. Reason, given an example where there are
+        // three models, where model #1 is the root parent with discriminator type, model #2 is a child of model #2 with
+        // discriminator kind, and model #3 is a child of model #3 with discriminator form. The order if this running
+        // will have model #2 add its discriminator to model #3 before model #1 runs adding its discriminator to #2 and
+        // #3. We want #3 to have the ordering of [type, kind], to represent the ordering of the parent models.
+        child.getParentPolymorphicDiscriminators().add(0, parentDiscriminator);
+
+        for (ClientModel derived : child.getDerivedModels()) {
+            passPolymorphicDiscriminatorToChildren(parentDiscriminator, derived);
+        }
     }
 
     private static class ParentSchemaInfo {
