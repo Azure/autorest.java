@@ -34,17 +34,20 @@ public final class Platform implements JsonSerializable<Platform> {
     private String osVersion;
 
     /*
-     * The optional os.features field specifies an array of strings, each listing a required OS feature (for example on Windows win32k
+     * The optional os.features field specifies an array of strings, each listing a required OS feature (for example on
+     * Windows win32k
      */
     private List<String> osFeatures;
 
     /*
-     * The optional variant field specifies a variant of the CPU, for example armv6l to specify a particular CPU variant of the ARM CPU.
+     * The optional variant field specifies a variant of the CPU, for example armv6l to specify a particular CPU variant
+     * of the ARM CPU.
      */
     private String variant;
 
     /*
-     * The optional features field specifies an array of strings, each listing a required CPU feature (for example sse4 or aes
+     * The optional features field specifies an array of strings, each listing a required CPU feature (for example sse4
+     * or aes
      */
     private List<String> features;
 

@@ -207,7 +207,8 @@ public final class FlattenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> uploadFileWithResponse(String name, BinaryData request, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadFile' is
+        // 'multipart/form-data'
         return this.serviceClient.uploadFileWithResponse(name, request, requestOptions);
     }
 
@@ -225,7 +226,8 @@ public final class FlattenClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> uploadTodoWithResponse(BinaryData request, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadTodo' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'uploadTodo' is
+        // 'multipart/form-data'
         return this.serviceClient.uploadTodoWithResponse(request, requestOptions);
     }
 

@@ -342,7 +342,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         if (isJsonMergePatch) {
             if (property.getClientType().isNullable()) {
                 methodBlock.ifBlock(String.format("updatedProperties.contains(\"%s\")", property.getName()), codeBlock -> {
-                    codeBlock.ifBlock(String.format("%s==null", getPropertyGetterStatement(property, fromSuperType)), ifBlock -> {
+                    codeBlock.ifBlock(String.format("%s == null", getPropertyGetterStatement(property, fromSuperType)), ifBlock -> {
                         ifBlock.line(String.format("jsonWriter.writeNullField(\"%s\");", property.getSerializedName()));
                     }).elseBlock(elseBlock -> {
                         serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, isJsonMergePatch);
@@ -380,7 +380,7 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         // Attempt to determine whether the wire type is simple serialization.
         // This is primitives, boxed primitives, a small set of string based models, and other ClientModels.
         String fieldSerializationMethod = wireType.jsonSerializationMethodCall("jsonWriter", serializedName,
-            propertyValueGetter);
+            propertyValueGetter, isJsonMergePatch);
         if (wireType == ClassType.BINARY_DATA) {
             // Special handling for BinaryData (instead of using "serializationMethodBase" and "serializationValueGetterModifier")
             // The reason is that some backend would fail the request on "null" value (e.g. OpenAI)
@@ -460,7 +460,8 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         String callingWriterName = depth == 0 ? "jsonWriter" : (depth == 1) ? "writer" : "writer" + (depth - 1);
         String lambdaWriterName = depth == 0 ? "writer" : "writer" + depth;
         String elementName = depth == 0 ? "element" : "element" + depth;
-        String valueSerializationMethod = elementType.jsonSerializationMethodCall(lambdaWriterName, null, elementName);
+        String valueSerializationMethod = elementType.jsonSerializationMethodCall(lambdaWriterName, null, elementName,
+            isJsonMergePatch);
         String serializeValue = depth == 0 ? propertyValueGetter
             : ((depth == 1) ? "element" : "element" + (depth - 1));
 

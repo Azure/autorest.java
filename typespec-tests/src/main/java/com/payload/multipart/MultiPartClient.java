@@ -60,7 +60,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> basicWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'basic' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'basic' is
+        // 'multipart/form-data'
         return this.serviceClient.basicWithResponse(body, requestOptions);
     }
 
@@ -78,7 +79,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> complexWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'complex' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'complex' is
+        // 'multipart/form-data'
         return this.serviceClient.complexWithResponse(body, requestOptions);
     }
 
@@ -96,7 +98,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> jsonPartWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonPart' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonPart' is
+        // 'multipart/form-data'
         return this.serviceClient.jsonPartWithResponse(body, requestOptions);
     }
 
@@ -114,7 +117,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> binaryArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'binaryArrayParts' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation
+        // 'binaryArrayParts' is 'multipart/form-data'
         return this.serviceClient.binaryArrayPartsWithResponse(body, requestOptions);
     }
 
@@ -132,7 +136,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> jsonArrayPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonArrayParts' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'jsonArrayParts'
+        // is 'multipart/form-data'
         return this.serviceClient.jsonArrayPartsWithResponse(body, requestOptions);
     }
 
@@ -150,7 +155,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> multiBinaryPartsWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'multiBinaryParts' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation
+        // 'multiBinaryParts' is 'multipart/form-data'
         return this.serviceClient.multiBinaryPartsWithResponse(body, requestOptions);
     }
 
@@ -168,7 +174,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> checkFileNameAndContentTypeWithResponse(BinaryData body, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'checkFileNameAndContentType' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation
+        // 'checkFileNameAndContentType' is 'multipart/form-data'
         return this.serviceClient.checkFileNameAndContentTypeWithResponse(body, requestOptions);
     }
 
@@ -186,7 +193,8 @@ public final class MultiPartClient {
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
     Response<Void> anonymousModelWithResponse(BinaryData request, RequestOptions requestOptions) {
-        // Protocol API requires serialization of parts with content-disposition and data, as operation 'anonymousModel' is 'multipart/form-data'
+        // Protocol API requires serialization of parts with content-disposition and data, as operation 'anonymousModel'
+        // is 'multipart/form-data'
         return this.serviceClient.anonymousModelWithResponse(request, requestOptions);
     }
 

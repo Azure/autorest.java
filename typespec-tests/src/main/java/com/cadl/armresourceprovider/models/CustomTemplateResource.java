@@ -71,6 +71,13 @@ public interface CustomTemplateResource {
     ProvisioningState provisioningState();
 
     /**
+     * Gets the dog property: The dog property.
+     * 
+     * @return the dog value.
+     */
+    Dog dog();
+
+    /**
      * Gets the region of the resource.
      * 
      * @return the region of the resource.
@@ -153,7 +160,7 @@ public interface CustomTemplateResource {
          * The stage of the CustomTemplateResource definition which contains all the minimum required properties for the
          * resource to be created, but also allows for any other optional properties to be specified.
          */
-        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithIdentity,
+        interface WithCreate extends DefinitionStages.WithTags, DefinitionStages.WithIdentity, DefinitionStages.WithDog,
             DefinitionStages.WithIfMatch, DefinitionStages.WithIfNoneMatch {
             /**
              * Executes the create request.
@@ -195,6 +202,19 @@ public interface CustomTemplateResource {
              * @return the next definition stage.
              */
             WithCreate withIdentity(ManagedServiceIdentity identity);
+        }
+
+        /**
+         * The stage of the CustomTemplateResource definition allowing to specify dog.
+         */
+        interface WithDog {
+            /**
+             * Specifies the dog property: The dog property..
+             * 
+             * @param dog The dog property.
+             * @return the next definition stage.
+             */
+            WithCreate withDog(Dog dog);
         }
 
         /**

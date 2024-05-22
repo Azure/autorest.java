@@ -380,7 +380,7 @@ public final class Resource implements JsonSerializable<Resource> {
             if (this.enumValue == null) {
                 jsonWriter.writeNullField("enumValue");
             } else {
-                jsonWriter.writeStringField("enumValue", this.enumValue == null ? null : this.enumValue.toString());
+                jsonWriter.writeStringField("enumValue", this.enumValue.toString());
             }
         }
         if (updatedProperties.contains("innerModelProperty")) {

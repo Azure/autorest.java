@@ -268,7 +268,8 @@ public class PrimitiveType implements IType {
     }
 
     @Override
-    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter) {
+    public String jsonSerializationMethodCall(String jsonWriterName, String fieldName, String valueGetter,
+        boolean jsonMergePatch) {
         if (wrapSerializationWithObjectsToString) {
             return fieldName == null
                 ? String.format("%s.%s(Objects.toString(%s, null))", jsonWriterName, serializationMethodBase, valueGetter)

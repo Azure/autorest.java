@@ -107,6 +107,30 @@ model CustomTemplateResource is TrackedResource<CustomTemplateResourceProperties
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 }
 
+@doc("extensible enum type for discriminator")
+union DogKind {
+  string,
+
+  @doc("Species golden")
+  Golden: "golden",
+}
+
+@doc("Test extensible enum type for discriminator")
+@discriminator("kind")
+model Dog {
+  @doc("discriminator property")
+  kind: DogKind;
+
+  @doc("Weight of the dog")
+  weight: int32;
+}
+
+@doc("Golden dog model")
+model Golden extends Dog {
+  @doc("discriminator property")
+  kind: DogKind.Golden;
+}
+
 @doc("Top Level Arm Resource Properties.")
 model CustomTemplateResourceProperties {
   @visibility("read")
@@ -117,6 +141,8 @@ model CustomTemplateResourceProperties {
   @removed(Versions.v2023_11_01)
   @added(Versions.v2023_12_01_preview)
   propertyRemovedInStable: string;
+
+  dog: Dog;
 }
 
 model CustomTemplateResourcePatch {
