@@ -6,7 +6,9 @@ package com.cadl.armresourceprovider.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.util.logging.ClientLogger;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.Map;
 
 /**
  * The properties of the managed service identities assigned to this resource.
@@ -35,7 +37,8 @@ public final class ManagedServiceIdentity {
      * The identities assigned to this resource by the user.
      */
     @JsonProperty(value = "userAssignedIdentities")
-    private UserAssignedIdentities userAssignedIdentities;
+    @JsonInclude(value = JsonInclude.Include.NON_NULL, content = JsonInclude.Include.ALWAYS)
+    private Map<String, UserAssignedIdentity> userAssignedIdentities;
 
     /**
      * Creates an instance of ManagedServiceIdentity class.
@@ -86,7 +89,7 @@ public final class ManagedServiceIdentity {
      * 
      * @return the userAssignedIdentities value.
      */
-    public UserAssignedIdentities userAssignedIdentities() {
+    public Map<String, UserAssignedIdentity> userAssignedIdentities() {
         return this.userAssignedIdentities;
     }
 
@@ -96,7 +99,7 @@ public final class ManagedServiceIdentity {
      * @param userAssignedIdentities the userAssignedIdentities value to set.
      * @return the ManagedServiceIdentity object itself.
      */
-    public ManagedServiceIdentity withUserAssignedIdentities(UserAssignedIdentities userAssignedIdentities) {
+    public ManagedServiceIdentity withUserAssignedIdentities(Map<String, UserAssignedIdentity> userAssignedIdentities) {
         this.userAssignedIdentities = userAssignedIdentities;
         return this;
     }
@@ -112,7 +115,11 @@ public final class ManagedServiceIdentity {
                 .log(new IllegalArgumentException("Missing required property type in model ManagedServiceIdentity"));
         }
         if (userAssignedIdentities() != null) {
-            userAssignedIdentities().validate();
+            userAssignedIdentities().values().forEach(e -> {
+                if (e != null) {
+                    e.validate();
+                }
+            });
         }
     }
 
