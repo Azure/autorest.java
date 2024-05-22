@@ -62,6 +62,8 @@ model Fish {
 model Shark extends Fish {
   kind: "shark";
   sharktype: string;
+
+  weight?: int32;
 }
 
 @doc("The third level model SawShark in polymorphic multiple levels inheritance.")

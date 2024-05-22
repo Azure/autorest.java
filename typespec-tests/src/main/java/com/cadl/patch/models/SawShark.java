@@ -55,6 +55,17 @@ public final class SawShark extends Shark {
      */
     @Generated
     @Override
+    public SawShark setWeight(Integer weight) {
+        super.setWeight(weight);
+        this.updatedProperties.add("weight");
+        return this;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Generated
+    @Override
     public SawShark setAge(int age) {
         super.setAge(age);
         this.updatedProperties.add("age");
@@ -84,6 +95,7 @@ public final class SawShark extends Shark {
             jsonWriter.writeStartObject();
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
+            jsonWriter.writeNumberField("weight", getWeight());
             jsonWriter.writeStringField("sharktype", this.sharktype);
             return jsonWriter.writeEndObject();
         }
@@ -98,6 +110,13 @@ public final class SawShark extends Shark {
                 jsonWriter.writeNullField("color");
             } else {
                 jsonWriter.writeStringField("color", getColor());
+            }
+        }
+        if (updatedProperties.contains("weight")) {
+            if (getWeight() == null) {
+                jsonWriter.writeNullField("weight");
+            } else {
+                jsonWriter.writeNumberField("weight", getWeight());
             }
         }
         if (updatedProperties.contains("sharktype")) {
@@ -135,6 +154,9 @@ public final class SawShark extends Shark {
                     JsonMergePatchHelper.getFishAccessor().setAge(deserializedSawShark, reader.getInt());
                 } else if ("color".equals(fieldName)) {
                     JsonMergePatchHelper.getFishAccessor().setColor(deserializedSawShark, reader.getString());
+                } else if ("weight".equals(fieldName)) {
+                    JsonMergePatchHelper.getSharkAccessor()
+                        .setWeight(deserializedSawShark, reader.getNullable(JsonReader::getInt));
                 } else if ("sharktype".equals(fieldName)) {
                     deserializedSawShark.sharktype = reader.getString();
                 } else {

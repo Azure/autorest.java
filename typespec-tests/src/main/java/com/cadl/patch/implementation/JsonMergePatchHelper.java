@@ -7,6 +7,7 @@ package com.cadl.patch.implementation;
 import com.cadl.patch.models.Fish;
 import com.cadl.patch.models.InnerModel;
 import com.cadl.patch.models.Resource;
+import com.cadl.patch.models.Shark;
 
 /**
  * This is the Helper class to enable json merge patch serialization for a model.
@@ -66,5 +67,19 @@ public class JsonMergePatchHelper {
 
     public static FishAccessor getFishAccessor() {
         return fishAccessor;
+    }
+
+    private static SharkAccessor sharkAccessor;
+
+    public interface SharkAccessor {
+        void setWeight(Shark shark, Integer weight);
+    }
+
+    public static void setSharkAccessor(SharkAccessor accessor) {
+        sharkAccessor = accessor;
+    }
+
+    public static SharkAccessor getSharkAccessor() {
+        return sharkAccessor;
     }
 }

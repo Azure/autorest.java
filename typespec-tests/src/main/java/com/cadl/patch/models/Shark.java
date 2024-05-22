@@ -25,11 +25,26 @@ public class Shark extends Fish {
     @Generated
     private String sharktype = "shark";
 
+    /*
+     * The weight property.
+     */
+    @Generated
+    private Integer weight;
+
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
+
+    static {
+        JsonMergePatchHelper.setSharkAccessor(new JsonMergePatchHelper.SharkAccessor() {
+            @Override
+            public void setWeight(Shark model, Integer weight) {
+                model.weight = weight;
+            }
+        });
+    }
 
     /**
      * Creates an instance of Shark class.
@@ -48,6 +63,29 @@ public class Shark extends Fish {
     @Generated
     public String getSharktype() {
         return this.sharktype;
+    }
+
+    /**
+     * Get the weight property: The weight property.
+     * 
+     * @return the weight value.
+     */
+    @Generated
+    public Integer getWeight() {
+        return this.weight;
+    }
+
+    /**
+     * Set the weight property: The weight property.
+     * 
+     * @param weight the weight value to set.
+     * @return the Shark object itself.
+     */
+    @Generated
+    public Shark setWeight(Integer weight) {
+        this.weight = weight;
+        this.updatedProperties.add("weight");
+        return this;
     }
 
     /**
@@ -85,6 +123,7 @@ public class Shark extends Fish {
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
             jsonWriter.writeStringField("sharktype", this.sharktype);
+            jsonWriter.writeNumberField("weight", this.weight);
             return jsonWriter.writeEndObject();
         }
     }
@@ -105,6 +144,13 @@ public class Shark extends Fish {
                 jsonWriter.writeNullField("sharktype");
             } else {
                 jsonWriter.writeStringField("sharktype", this.sharktype);
+            }
+        }
+        if (updatedProperties.contains("weight")) {
+            if (this.weight == null) {
+                jsonWriter.writeNullField("weight");
+            } else {
+                jsonWriter.writeNumberField("weight", this.weight);
             }
         }
         return jsonWriter.writeEndObject();
@@ -163,6 +209,8 @@ public class Shark extends Fish {
                     JsonMergePatchHelper.getFishAccessor().setColor(deserializedShark, reader.getString());
                 } else if ("sharktype".equals(fieldName)) {
                     deserializedShark.sharktype = reader.getString();
+                } else if ("weight".equals(fieldName)) {
+                    deserializedShark.weight = reader.getNullable(JsonReader::getInt);
                 } else {
                     reader.skipChildren();
                 }
