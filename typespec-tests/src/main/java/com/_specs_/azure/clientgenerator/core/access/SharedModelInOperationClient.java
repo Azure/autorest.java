@@ -46,9 +46,7 @@ public final class SharedModelInOperationClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
+     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -72,9 +70,7 @@ public final class SharedModelInOperationClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
+     * @param name The name parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -91,9 +87,7 @@ public final class SharedModelInOperationClient {
     /**
      * The publicMethod operation.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -113,9 +107,7 @@ public final class SharedModelInOperationClient {
     /**
      * The internal operation.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

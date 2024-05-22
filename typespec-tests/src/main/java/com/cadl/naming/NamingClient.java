@@ -44,7 +44,7 @@ public final class NamingClient {
      * 
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @param dataRequest summary of Request
-     * @param name A sequence of textual characters.
+     * @param name summary of name query parameter
      * @return summary of Response along with {@link Response}.
      * @throws ResourceModifiedException ResourceModifiedException thrown if the request is rejected by server on status
      * code 409.
@@ -88,15 +88,15 @@ public final class NamingClient {
      * 
      * description of POST op.
      * 
-     * @param name A sequence of textual characters.
+     * @param name summary of name query parameter
      * 
-     * The name parameter.
+     * description of name query parameter.
      * @param dataRequest summary of Request
      * 
      * description of Request.
-     * @param etag A sequence of textual characters.
+     * @param etag summary of etag header parameter
      * 
-     * The etag parameter.
+     * description of etag header parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -122,9 +122,9 @@ public final class NamingClient {
      * 
      * description of POST op.
      * 
-     * @param name A sequence of textual characters.
+     * @param name summary of name query parameter
      * 
-     * The name parameter.
+     * description of name query parameter.
      * @param dataRequest summary of Request
      * 
      * description of Request.

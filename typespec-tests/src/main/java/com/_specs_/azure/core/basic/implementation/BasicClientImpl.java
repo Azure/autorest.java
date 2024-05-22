@@ -439,12 +439,8 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
-     * @param resource Details about a user.
-     * 
-     * The resource parameter.
+     * @param id The user's id.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -499,12 +495,8 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
-     * @param resource Details about a user.
-     * 
-     * The resource parameter.
+     * @param id The user's id.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -558,12 +550,8 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
-     * @param resource Details about a user.
-     * 
-     * The resource parameter.
+     * @param id The user's id.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -617,12 +605,8 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
-     * @param resource Details about a user.
-     * 
-     * The resource parameter.
+     * @param id The user's id.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -659,9 +643,7 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
+     * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -697,9 +679,7 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
+     * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -721,24 +701,16 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>top</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The top parameter</td></tr>
-     * <tr><td>skip</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The skip parameter</td></tr>
-     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The maxPageSize parameter</td></tr>
-     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>The orderBy parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The filter parameter</td></tr>
-     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
+     * <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
+     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned
+     * results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the
+     * response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response.
+     * Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -783,24 +755,16 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>top</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The top parameter</td></tr>
-     * <tr><td>skip</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The skip parameter</td></tr>
-     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The maxPageSize parameter</td></tr>
-     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>The orderBy parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The filter parameter</td></tr>
-     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
+     * <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
+     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned
+     * results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the
+     * response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response.
+     * Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -864,24 +828,16 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>top</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The top parameter</td></tr>
-     * <tr><td>skip</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The skip parameter</td></tr>
-     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The maxPageSize parameter</td></tr>
-     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>The orderBy parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The filter parameter</td></tr>
-     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
+     * <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
+     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned
+     * results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the
+     * response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response.
+     * Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -925,24 +881,16 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>top</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The top parameter</td></tr>
-     * <tr><td>skip</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The skip parameter</td></tr>
-     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The maxPageSize parameter</td></tr>
-     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>The orderBy parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.
-     * 
-     * The filter parameter</td></tr>
-     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>The select parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
-     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>The expand parameter. Call
-     * {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>top</td><td>Integer</td><td>No</td><td>The number of result items to return.</td></tr>
+     * <tr><td>skip</td><td>Integer</td><td>No</td><td>The number of result items to skip.</td></tr>
+     * <tr><td>maxpagesize</td><td>Integer</td><td>No</td><td>The maximum number of result items per page.</td></tr>
+     * <tr><td>orderby</td><td>List&lt;String&gt;</td><td>No</td><td>Expressions that specify the order of returned
+     * results. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>Filter the result list using the given expression.</td></tr>
+     * <tr><td>select</td><td>List&lt;String&gt;</td><td>No</td><td>Select the specified fields to be included in the
+     * response. Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
+     * <tr><td>expand</td><td>List&lt;String&gt;</td><td>No</td><td>Expand the indicated resources into the response.
+     * Call {@link RequestOptions#addQueryParam} to add string to array.</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -1145,9 +1093,8 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>another</td><td>String</td><td>No</td><td>An extensible enum input parameter.
-     * 
-     * The another parameter. Allowed values: "First", "Second".</td></tr>
+     * <tr><td>another</td><td>String</td><td>No</td><td>Another query parameter. Allowed values: "First",
+     * "Second".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -1176,8 +1123,6 @@ public final class BasicClientImpl {
      * }</pre>
      * 
      * @param bodyInput The body of the input.
-     * 
-     * The bodyInput parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1202,9 +1147,8 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>another</td><td>String</td><td>No</td><td>An extensible enum input parameter.
-     * 
-     * The another parameter. Allowed values: "First", "Second".</td></tr>
+     * <tr><td>another</td><td>String</td><td>No</td><td>Another query parameter. Allowed values: "First",
+     * "Second".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -1233,8 +1177,6 @@ public final class BasicClientImpl {
      * }</pre>
      * 
      * @param bodyInput The body of the input.
-     * 
-     * The bodyInput parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1257,9 +1199,8 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>another</td><td>String</td><td>No</td><td>An extensible enum input parameter.
-     * 
-     * The another parameter. Allowed values: "First", "Second".</td></tr>
+     * <tr><td>another</td><td>String</td><td>No</td><td>Another query parameter. Allowed values: "First",
+     * "Second".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -1288,8 +1229,6 @@ public final class BasicClientImpl {
      * }</pre>
      * 
      * @param bodyInput The body of the input.
-     * 
-     * The bodyInput parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1313,9 +1252,8 @@ public final class BasicClientImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>another</td><td>String</td><td>No</td><td>An extensible enum input parameter.
-     * 
-     * The another parameter. Allowed values: "First", "Second".</td></tr>
+     * <tr><td>another</td><td>String</td><td>No</td><td>Another query parameter. Allowed values: "First",
+     * "Second".</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -1344,8 +1282,6 @@ public final class BasicClientImpl {
      * }</pre>
      * 
      * @param bodyInput The body of the input.
-     * 
-     * The bodyInput parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1508,9 +1444,7 @@ public final class BasicClientImpl {
      * 
      * Deletes a User.
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
+     * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1530,9 +1464,7 @@ public final class BasicClientImpl {
      * 
      * Deletes a User.
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
+     * @param id The user's id.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1567,12 +1499,8 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
-     * @param format A sequence of textual characters.
-     * 
-     * The format parameter.
+     * @param id The user's id.
+     * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1608,12 +1536,8 @@ public final class BasicClientImpl {
      * }
      * }</pre>
      * 
-     * @param id A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
-     * 
-     * The id parameter.
-     * @param format A sequence of textual characters.
-     * 
-     * The format parameter.
+     * @param id The user's id.
+     * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

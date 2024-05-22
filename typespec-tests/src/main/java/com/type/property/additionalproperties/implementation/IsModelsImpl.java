@@ -165,9 +165,7 @@ public final class IsModelsImpl {
      * }
      * }</pre>
      * 
-     * @param body The model is from Record&lt;ModelForRecord&gt; type.
-     * 
-     * The body parameter.
+     * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -196,9 +194,7 @@ public final class IsModelsImpl {
      * }
      * }</pre>
      * 
-     * @param body The model is from Record&lt;ModelForRecord&gt; type.
-     * 
-     * The body parameter.
+     * @param body body.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -60,12 +60,8 @@ public final class StandardAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param resource Details about a user.
-     * 
-     * The resource parameter.
+     * @param name The name of user.
+     * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -101,9 +97,7 @@ public final class StandardAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
+     * @param name The name of user.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -138,12 +132,8 @@ public final class StandardAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param format A sequence of textual characters.
-     * 
-     * The format parameter.
+     * @param name The name of user.
+     * @param format The format of the data.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -162,12 +152,8 @@ public final class StandardAsyncClient {
      * 
      * Creates or replaces a User.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param resource Details about a user.
-     * 
-     * The resource parameter.
+     * @param name The name of user.
+     * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -189,9 +175,7 @@ public final class StandardAsyncClient {
      * 
      * Deletes a User.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
+     * @param name The name of user.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -213,12 +197,8 @@ public final class StandardAsyncClient {
      * 
      * Exports a User.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param format A sequence of textual characters.
-     * 
-     * The format parameter.
+     * @param name The name of user.
+     * @param format The format of the data.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

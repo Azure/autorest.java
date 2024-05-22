@@ -37,9 +37,7 @@ public final class ParametersClient {
     /**
      * The withAnd operation.
      * 
-     * @param and A sequence of textual characters.
-     * 
-     * The and parameter.
+     * @param and The and parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,9 +54,7 @@ public final class ParametersClient {
     /**
      * The withAs operation.
      * 
-     * @param as A sequence of textual characters.
-     * 
-     * The as parameter.
+     * @param as The as parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -75,9 +71,7 @@ public final class ParametersClient {
     /**
      * The withAssert operation.
      * 
-     * @param assertParameter A sequence of textual characters.
-     * 
-     * The assertParameter parameter.
+     * @param assertParameter The assertParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -94,9 +88,7 @@ public final class ParametersClient {
     /**
      * The withAsync operation.
      * 
-     * @param async A sequence of textual characters.
-     * 
-     * The async parameter.
+     * @param async The async parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -113,9 +105,7 @@ public final class ParametersClient {
     /**
      * The withAwait operation.
      * 
-     * @param await A sequence of textual characters.
-     * 
-     * The await parameter.
+     * @param await The await parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -132,9 +122,7 @@ public final class ParametersClient {
     /**
      * The withBreak operation.
      * 
-     * @param breakParameter A sequence of textual characters.
-     * 
-     * The breakParameter parameter.
+     * @param breakParameter The breakParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -151,9 +139,7 @@ public final class ParametersClient {
     /**
      * The withClass operation.
      * 
-     * @param classParameter A sequence of textual characters.
-     * 
-     * The classParameter parameter.
+     * @param classParameter The classParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -170,9 +156,7 @@ public final class ParametersClient {
     /**
      * The withConstructor operation.
      * 
-     * @param constructor A sequence of textual characters.
-     * 
-     * The constructor parameter.
+     * @param constructor The constructor parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -189,9 +173,7 @@ public final class ParametersClient {
     /**
      * The withContinue operation.
      * 
-     * @param continueParameter A sequence of textual characters.
-     * 
-     * The continueParameter parameter.
+     * @param continueParameter The continueParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -208,9 +190,7 @@ public final class ParametersClient {
     /**
      * The withDef operation.
      * 
-     * @param def A sequence of textual characters.
-     * 
-     * The def parameter.
+     * @param def The def parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -227,9 +207,7 @@ public final class ParametersClient {
     /**
      * The withDel operation.
      * 
-     * @param del A sequence of textual characters.
-     * 
-     * The del parameter.
+     * @param del The del parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -246,9 +224,7 @@ public final class ParametersClient {
     /**
      * The withElif operation.
      * 
-     * @param elif A sequence of textual characters.
-     * 
-     * The elif parameter.
+     * @param elif The elif parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -265,9 +241,7 @@ public final class ParametersClient {
     /**
      * The withElse operation.
      * 
-     * @param elseParameter A sequence of textual characters.
-     * 
-     * The elseParameter parameter.
+     * @param elseParameter The elseParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -284,9 +258,7 @@ public final class ParametersClient {
     /**
      * The withExcept operation.
      * 
-     * @param except A sequence of textual characters.
-     * 
-     * The except parameter.
+     * @param except The except parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -303,9 +275,7 @@ public final class ParametersClient {
     /**
      * The withExec operation.
      * 
-     * @param exec A sequence of textual characters.
-     * 
-     * The exec parameter.
+     * @param exec The exec parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -322,9 +292,7 @@ public final class ParametersClient {
     /**
      * The withFinally operation.
      * 
-     * @param finallyParameter A sequence of textual characters.
-     * 
-     * The finallyParameter parameter.
+     * @param finallyParameter The finallyParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -341,9 +309,7 @@ public final class ParametersClient {
     /**
      * The withFor operation.
      * 
-     * @param forParameter A sequence of textual characters.
-     * 
-     * The forParameter parameter.
+     * @param forParameter The forParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -360,9 +326,7 @@ public final class ParametersClient {
     /**
      * The withFrom operation.
      * 
-     * @param from A sequence of textual characters.
-     * 
-     * The from parameter.
+     * @param from The from parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -379,9 +343,7 @@ public final class ParametersClient {
     /**
      * The withGlobal operation.
      * 
-     * @param global A sequence of textual characters.
-     * 
-     * The global parameter.
+     * @param global The global parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -398,9 +360,7 @@ public final class ParametersClient {
     /**
      * The withIf operation.
      * 
-     * @param ifParameter A sequence of textual characters.
-     * 
-     * The ifParameter parameter.
+     * @param ifParameter The ifParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -417,9 +377,7 @@ public final class ParametersClient {
     /**
      * The withImport operation.
      * 
-     * @param importParameter A sequence of textual characters.
-     * 
-     * The importParameter parameter.
+     * @param importParameter The importParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -436,9 +394,7 @@ public final class ParametersClient {
     /**
      * The withIn operation.
      * 
-     * @param in A sequence of textual characters.
-     * 
-     * The in parameter.
+     * @param in The in parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -455,9 +411,7 @@ public final class ParametersClient {
     /**
      * The withIs operation.
      * 
-     * @param is A sequence of textual characters.
-     * 
-     * The is parameter.
+     * @param is The is parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -474,9 +428,7 @@ public final class ParametersClient {
     /**
      * The withLambda operation.
      * 
-     * @param lambda A sequence of textual characters.
-     * 
-     * The lambda parameter.
+     * @param lambda The lambda parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -493,9 +445,7 @@ public final class ParametersClient {
     /**
      * The withNot operation.
      * 
-     * @param not A sequence of textual characters.
-     * 
-     * The not parameter.
+     * @param not The not parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -512,9 +462,7 @@ public final class ParametersClient {
     /**
      * The withOr operation.
      * 
-     * @param or A sequence of textual characters.
-     * 
-     * The or parameter.
+     * @param or The or parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -531,9 +479,7 @@ public final class ParametersClient {
     /**
      * The withPass operation.
      * 
-     * @param pass A sequence of textual characters.
-     * 
-     * The pass parameter.
+     * @param pass The pass parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -550,9 +496,7 @@ public final class ParametersClient {
     /**
      * The withRaise operation.
      * 
-     * @param raise A sequence of textual characters.
-     * 
-     * The raise parameter.
+     * @param raise The raise parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -569,9 +513,7 @@ public final class ParametersClient {
     /**
      * The withReturn operation.
      * 
-     * @param returnParameter A sequence of textual characters.
-     * 
-     * The returnParameter parameter.
+     * @param returnParameter The returnParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -588,9 +530,7 @@ public final class ParametersClient {
     /**
      * The withTry operation.
      * 
-     * @param tryParameter A sequence of textual characters.
-     * 
-     * The tryParameter parameter.
+     * @param tryParameter The tryParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -607,9 +547,7 @@ public final class ParametersClient {
     /**
      * The withWhile operation.
      * 
-     * @param whileParameter A sequence of textual characters.
-     * 
-     * The whileParameter parameter.
+     * @param whileParameter The whileParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -626,9 +564,7 @@ public final class ParametersClient {
     /**
      * The withWith operation.
      * 
-     * @param with A sequence of textual characters.
-     * 
-     * The with parameter.
+     * @param with The with parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -645,9 +581,7 @@ public final class ParametersClient {
     /**
      * The withYield operation.
      * 
-     * @param yield A sequence of textual characters.
-     * 
-     * The yield parameter.
+     * @param yield The yield parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -664,9 +598,7 @@ public final class ParametersClient {
     /**
      * The withCancellationToken operation.
      * 
-     * @param cancellationToken A sequence of textual characters.
-     * 
-     * The cancellationToken parameter.
+     * @param cancellationToken The cancellationToken parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -683,9 +615,7 @@ public final class ParametersClient {
     /**
      * The withAnd operation.
      * 
-     * @param and A sequence of textual characters.
-     * 
-     * The and parameter.
+     * @param and The and parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -704,9 +634,7 @@ public final class ParametersClient {
     /**
      * The withAs operation.
      * 
-     * @param as A sequence of textual characters.
-     * 
-     * The as parameter.
+     * @param as The as parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -725,9 +653,7 @@ public final class ParametersClient {
     /**
      * The withAssert operation.
      * 
-     * @param assertParameter A sequence of textual characters.
-     * 
-     * The assertParameter parameter.
+     * @param assertParameter The assertParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -746,9 +672,7 @@ public final class ParametersClient {
     /**
      * The withAsync operation.
      * 
-     * @param async A sequence of textual characters.
-     * 
-     * The async parameter.
+     * @param async The async parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -767,9 +691,7 @@ public final class ParametersClient {
     /**
      * The withAwait operation.
      * 
-     * @param await A sequence of textual characters.
-     * 
-     * The await parameter.
+     * @param await The await parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -788,9 +710,7 @@ public final class ParametersClient {
     /**
      * The withBreak operation.
      * 
-     * @param breakParameter A sequence of textual characters.
-     * 
-     * The breakParameter parameter.
+     * @param breakParameter The breakParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -809,9 +729,7 @@ public final class ParametersClient {
     /**
      * The withClass operation.
      * 
-     * @param classParameter A sequence of textual characters.
-     * 
-     * The classParameter parameter.
+     * @param classParameter The classParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -830,9 +748,7 @@ public final class ParametersClient {
     /**
      * The withConstructor operation.
      * 
-     * @param constructor A sequence of textual characters.
-     * 
-     * The constructor parameter.
+     * @param constructor The constructor parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -851,9 +767,7 @@ public final class ParametersClient {
     /**
      * The withContinue operation.
      * 
-     * @param continueParameter A sequence of textual characters.
-     * 
-     * The continueParameter parameter.
+     * @param continueParameter The continueParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -872,9 +786,7 @@ public final class ParametersClient {
     /**
      * The withDef operation.
      * 
-     * @param def A sequence of textual characters.
-     * 
-     * The def parameter.
+     * @param def The def parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -893,9 +805,7 @@ public final class ParametersClient {
     /**
      * The withDel operation.
      * 
-     * @param del A sequence of textual characters.
-     * 
-     * The del parameter.
+     * @param del The del parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -914,9 +824,7 @@ public final class ParametersClient {
     /**
      * The withElif operation.
      * 
-     * @param elif A sequence of textual characters.
-     * 
-     * The elif parameter.
+     * @param elif The elif parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -935,9 +843,7 @@ public final class ParametersClient {
     /**
      * The withElse operation.
      * 
-     * @param elseParameter A sequence of textual characters.
-     * 
-     * The elseParameter parameter.
+     * @param elseParameter The elseParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -956,9 +862,7 @@ public final class ParametersClient {
     /**
      * The withExcept operation.
      * 
-     * @param except A sequence of textual characters.
-     * 
-     * The except parameter.
+     * @param except The except parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -977,9 +881,7 @@ public final class ParametersClient {
     /**
      * The withExec operation.
      * 
-     * @param exec A sequence of textual characters.
-     * 
-     * The exec parameter.
+     * @param exec The exec parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -998,9 +900,7 @@ public final class ParametersClient {
     /**
      * The withFinally operation.
      * 
-     * @param finallyParameter A sequence of textual characters.
-     * 
-     * The finallyParameter parameter.
+     * @param finallyParameter The finallyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1019,9 +919,7 @@ public final class ParametersClient {
     /**
      * The withFor operation.
      * 
-     * @param forParameter A sequence of textual characters.
-     * 
-     * The forParameter parameter.
+     * @param forParameter The forParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1040,9 +938,7 @@ public final class ParametersClient {
     /**
      * The withFrom operation.
      * 
-     * @param from A sequence of textual characters.
-     * 
-     * The from parameter.
+     * @param from The from parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1061,9 +957,7 @@ public final class ParametersClient {
     /**
      * The withGlobal operation.
      * 
-     * @param global A sequence of textual characters.
-     * 
-     * The global parameter.
+     * @param global The global parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1082,9 +976,7 @@ public final class ParametersClient {
     /**
      * The withIf operation.
      * 
-     * @param ifParameter A sequence of textual characters.
-     * 
-     * The ifParameter parameter.
+     * @param ifParameter The ifParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1103,9 +995,7 @@ public final class ParametersClient {
     /**
      * The withImport operation.
      * 
-     * @param importParameter A sequence of textual characters.
-     * 
-     * The importParameter parameter.
+     * @param importParameter The importParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1124,9 +1014,7 @@ public final class ParametersClient {
     /**
      * The withIn operation.
      * 
-     * @param in A sequence of textual characters.
-     * 
-     * The in parameter.
+     * @param in The in parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1145,9 +1033,7 @@ public final class ParametersClient {
     /**
      * The withIs operation.
      * 
-     * @param is A sequence of textual characters.
-     * 
-     * The is parameter.
+     * @param is The is parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1166,9 +1052,7 @@ public final class ParametersClient {
     /**
      * The withLambda operation.
      * 
-     * @param lambda A sequence of textual characters.
-     * 
-     * The lambda parameter.
+     * @param lambda The lambda parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1187,9 +1071,7 @@ public final class ParametersClient {
     /**
      * The withNot operation.
      * 
-     * @param not A sequence of textual characters.
-     * 
-     * The not parameter.
+     * @param not The not parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1208,9 +1090,7 @@ public final class ParametersClient {
     /**
      * The withOr operation.
      * 
-     * @param or A sequence of textual characters.
-     * 
-     * The or parameter.
+     * @param or The or parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1229,9 +1109,7 @@ public final class ParametersClient {
     /**
      * The withPass operation.
      * 
-     * @param pass A sequence of textual characters.
-     * 
-     * The pass parameter.
+     * @param pass The pass parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1250,9 +1128,7 @@ public final class ParametersClient {
     /**
      * The withRaise operation.
      * 
-     * @param raise A sequence of textual characters.
-     * 
-     * The raise parameter.
+     * @param raise The raise parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1271,9 +1147,7 @@ public final class ParametersClient {
     /**
      * The withReturn operation.
      * 
-     * @param returnParameter A sequence of textual characters.
-     * 
-     * The returnParameter parameter.
+     * @param returnParameter The returnParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1292,9 +1166,7 @@ public final class ParametersClient {
     /**
      * The withTry operation.
      * 
-     * @param tryParameter A sequence of textual characters.
-     * 
-     * The tryParameter parameter.
+     * @param tryParameter The tryParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1313,9 +1185,7 @@ public final class ParametersClient {
     /**
      * The withWhile operation.
      * 
-     * @param whileParameter A sequence of textual characters.
-     * 
-     * The whileParameter parameter.
+     * @param whileParameter The whileParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1334,9 +1204,7 @@ public final class ParametersClient {
     /**
      * The withWith operation.
      * 
-     * @param with A sequence of textual characters.
-     * 
-     * The with parameter.
+     * @param with The with parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1355,9 +1223,7 @@ public final class ParametersClient {
     /**
      * The withYield operation.
      * 
-     * @param yield A sequence of textual characters.
-     * 
-     * The yield parameter.
+     * @param yield The yield parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1376,9 +1242,7 @@ public final class ParametersClient {
     /**
      * The withCancellationToken operation.
      * 
-     * @param cancellationToken A sequence of textual characters.
-     * 
-     * The cancellationToken parameter.
+     * @param cancellationToken The cancellationToken parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

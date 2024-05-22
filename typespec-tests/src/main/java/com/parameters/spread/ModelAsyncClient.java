@@ -50,8 +50,6 @@ public final class ModelAsyncClient {
      * }</pre>
      * 
      * @param bodyParameter This is a simple model.
-     * 
-     * The bodyParameter parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -76,9 +74,7 @@ public final class ModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param body This is a simple model.
-     * 
-     * The body parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -96,12 +92,8 @@ public final class ModelAsyncClient {
     /**
      * The spreadCompositeRequestWithoutBody operation.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param testHeader A sequence of textual characters.
-     * 
-     * The testHeader parameter.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -126,15 +118,9 @@ public final class ModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param testHeader A sequence of textual characters.
-     * 
-     * The testHeader parameter.
-     * @param body This is a simple model.
-     * 
-     * The body parameter.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
+     * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -159,15 +145,9 @@ public final class ModelAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param testHeader A sequence of textual characters.
-     * 
-     * The testHeader parameter.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param compositeRequestMix This is a model with non-body http request decorator.
-     * 
-     * The compositeRequestMix parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -187,8 +167,6 @@ public final class ModelAsyncClient {
      * The spreadAsRequestBody operation.
      * 
      * @param bodyParameter This is a simple model.
-     * 
-     * The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -209,9 +187,7 @@ public final class ModelAsyncClient {
     /**
      * The spreadCompositeRequestOnlyWithBody operation.
      * 
-     * @param body This is a simple model.
-     * 
-     * The body parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -232,12 +208,8 @@ public final class ModelAsyncClient {
     /**
      * The spreadCompositeRequestWithoutBody operation.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param testHeader A sequence of textual characters.
-     * 
-     * The testHeader parameter.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -258,15 +230,9 @@ public final class ModelAsyncClient {
     /**
      * The spreadCompositeRequest operation.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param testHeader A sequence of textual characters.
-     * 
-     * The testHeader parameter.
-     * @param body This is a simple model.
-     * 
-     * The body parameter.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
+     * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -287,15 +253,9 @@ public final class ModelAsyncClient {
     /**
      * The spreadCompositeRequestMix operation.
      * 
-     * @param name A sequence of textual characters.
-     * 
-     * The name parameter.
-     * @param testHeader A sequence of textual characters.
-     * 
-     * The testHeader parameter.
+     * @param name The name parameter.
+     * @param testHeader The testHeader parameter.
      * @param compositeRequestMix This is a model with non-body http request decorator.
-     * 
-     * The compositeRequestMix parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -301,9 +301,7 @@ public final class NamingClientImpl {
     /**
      * The parameter operation.
      * 
-     * @param clientName A sequence of textual characters.
-     * 
-     * The clientName parameter.
+     * @param clientName The clientName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -320,9 +318,7 @@ public final class NamingClientImpl {
     /**
      * The parameter operation.
      * 
-     * @param clientName A sequence of textual characters.
-     * 
-     * The clientName parameter.
+     * @param clientName The clientName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -489,9 +485,7 @@ public final class NamingClientImpl {
     /**
      * The request operation.
      * 
-     * @param clientName A sequence of textual characters.
-     * 
-     * The clientName parameter.
+     * @param clientName The clientName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -508,9 +502,7 @@ public final class NamingClientImpl {
     /**
      * The request operation.
      * 
-     * @param clientName A sequence of textual characters.
-     * 
-     * The clientName parameter.
+     * @param clientName The clientName parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
