@@ -104,17 +104,16 @@ public class MethodUtil {
                 description = parameter.getSchema().getLanguage().getDefault().getDescription();
             }
         }
-
+        // fallback to dummy description
+        if (description == null || description.isEmpty()) {
+            description = "The " + name + " parameter";
+        }
         // add allowed enum values
         if (isProtocolMethod && parameter.getProtocol().getHttp().getIn() != RequestParameterLocation.BODY) {
             description = MethodUtil.appendAllowedEnumValuesForEnumType(parameter, description);
         }
 
-        String javadocDescription = SchemaUtil.mergeSummaryWithDescription(summary, description);
-        if (CoreUtils.isNullOrEmpty(javadocDescription)) { // fallback to dummy description
-            javadocDescription = "The " + name + " parameter";
-        }
-        return javadocDescription;
+        return SchemaUtil.mergeSummaryWithDescription(summary, description);
     }
 
     /**
