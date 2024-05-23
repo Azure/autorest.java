@@ -22,7 +22,7 @@ public final class CustomTemplateResourceProperties {
     private ProvisioningState provisioningState;
 
     /*
-     * Test extensible enum type for discriminator
+     * The dog property.
      */
     @JsonProperty(value = "dog", required = true)
     private Dog dog;
@@ -43,7 +43,7 @@ public final class CustomTemplateResourceProperties {
     }
 
     /**
-     * Get the dog property: Test extensible enum type for discriminator.
+     * Get the dog property: The dog property.
      * 
      * @return the dog value.
      */
@@ -52,7 +52,7 @@ public final class CustomTemplateResourceProperties {
     }
 
     /**
-     * Set the dog property: Test extensible enum type for discriminator.
+     * Set the dog property: The dog property.
      * 
      * @param dog the dog value to set.
      * @return the CustomTemplateResourceProperties object itself.

@@ -20,7 +20,7 @@ import java.util.Objects;
 @Immutable
 public final class Base64urlBytesProperty implements JsonSerializable<Base64urlBytesProperty> {
     /*
-     * Represent a byte array
+     * The value property.
      */
     @Generated
     private final Base64Url value;
@@ -40,7 +40,7 @@ public final class Base64urlBytesProperty implements JsonSerializable<Base64urlB
     }
 
     /**
-     * Get the value property: Represent a byte array.
+     * Get the value property: The value property.
      * 
      * @return the value value.
      */

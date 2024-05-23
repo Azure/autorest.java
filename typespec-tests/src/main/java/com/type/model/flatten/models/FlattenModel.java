@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class FlattenModel implements JsonSerializable<FlattenModel> {
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private final String name;
 
     /*
-     * This is the child model to be flattened.
+     * The properties property.
      */
     @Generated
     private final ChildModel properties;
@@ -42,7 +42,7 @@ public final class FlattenModel implements JsonSerializable<FlattenModel> {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -52,7 +52,7 @@ public final class FlattenModel implements JsonSerializable<FlattenModel> {
     }
 
     /**
-     * Get the properties property: This is the child model to be flattened.
+     * Get the properties property: The properties property.
      * 
      * @return the properties value.
      */

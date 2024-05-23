@@ -32,25 +32,25 @@ public final class UploadTodoRequest {
     private final SendLongRequestStatus status;
 
     /*
-     * A sequence of textual characters.
+     * The _dummy property.
      */
     @Generated
     private String dummy;
 
     /*
-     * A sequence of textual characters.
+     * The prop1 property.
      */
     @Generated
     private String prop1;
 
     /*
-     * A sequence of textual characters.
+     * The prop2 property.
      */
     @Generated
     private String prop2;
 
     /*
-     * A sequence of textual characters.
+     * The prop3 property.
      */
     @Generated
     private String prop3;
@@ -110,7 +110,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Get the dummy property: A sequence of textual characters.
+     * Get the dummy property: The _dummy property.
      * 
      * @return the dummy value.
      */
@@ -120,7 +120,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Set the dummy property: A sequence of textual characters.
+     * Set the dummy property: The _dummy property.
      * 
      * @param dummy the dummy value to set.
      * @return the UploadTodoRequest object itself.
@@ -132,7 +132,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Get the prop1 property: A sequence of textual characters.
+     * Get the prop1 property: The prop1 property.
      * 
      * @return the prop1 value.
      */
@@ -142,7 +142,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Set the prop1 property: A sequence of textual characters.
+     * Set the prop1 property: The prop1 property.
      * 
      * @param prop1 the prop1 value to set.
      * @return the UploadTodoRequest object itself.
@@ -154,7 +154,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Get the prop2 property: A sequence of textual characters.
+     * Get the prop2 property: The prop2 property.
      * 
      * @return the prop2 value.
      */
@@ -164,7 +164,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Set the prop2 property: A sequence of textual characters.
+     * Set the prop2 property: The prop2 property.
      * 
      * @param prop2 the prop2 value to set.
      * @return the UploadTodoRequest object itself.
@@ -176,7 +176,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Get the prop3 property: A sequence of textual characters.
+     * Get the prop3 property: The prop3 property.
      * 
      * @return the prop3 value.
      */
@@ -186,7 +186,7 @@ public final class UploadTodoRequest {
     }
 
     /**
-     * Set the prop3 property: A sequence of textual characters.
+     * Set the prop3 property: The prop3 property.
      * 
      * @param prop3 the prop3 value to set.
      * @return the UploadTodoRequest object itself.

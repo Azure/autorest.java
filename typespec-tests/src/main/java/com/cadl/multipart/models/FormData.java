@@ -14,13 +14,13 @@ import java.util.List;
 @Fluent
 public final class FormData {
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private final String name;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The resolution property.
      */
     @Generated
     private final int resolution;
@@ -68,7 +68,7 @@ public final class FormData {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -78,7 +78,7 @@ public final class FormData {
     }
 
     /**
-     * Get the resolution property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the resolution property: The resolution property.
      * 
      * @return the resolution value.
      */

@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public class Bird implements JsonSerializable<Bird> {
     /*
-     * A sequence of textual characters.
+     * The kind property.
      */
     @Generated
     private String kind;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The wingspan property.
      */
     @Generated
     private final int wingspan;
@@ -41,7 +41,7 @@ public class Bird implements JsonSerializable<Bird> {
     }
 
     /**
-     * Get the kind property: A sequence of textual characters.
+     * Get the kind property: The kind property.
      * 
      * @return the kind value.
      */
@@ -51,7 +51,7 @@ public class Bird implements JsonSerializable<Bird> {
     }
 
     /**
-     * Get the wingspan property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the wingspan property: The wingspan property.
      * 
      * @return the wingspan value.
      */

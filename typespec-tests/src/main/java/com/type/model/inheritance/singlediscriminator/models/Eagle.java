@@ -20,7 +20,7 @@ import java.util.Map;
 @Fluent
 public final class Eagle extends Bird {
     /*
-     * A sequence of textual characters.
+     * The kind property.
      */
     @Generated
     private String kind = "eagle";
@@ -38,7 +38,7 @@ public final class Eagle extends Bird {
     private Map<String, Bird> hate;
 
     /*
-     * This is base model for polymorphic single level inheritance with a discriminator.
+     * The partner property.
      */
     @Generated
     private Bird partner;
@@ -54,7 +54,7 @@ public final class Eagle extends Bird {
     }
 
     /**
-     * Get the kind property: A sequence of textual characters.
+     * Get the kind property: The kind property.
      * 
      * @return the kind value.
      */
@@ -109,7 +109,7 @@ public final class Eagle extends Bird {
     }
 
     /**
-     * Get the partner property: This is base model for polymorphic single level inheritance with a discriminator.
+     * Get the partner property: The partner property.
      * 
      * @return the partner value.
      */
@@ -119,7 +119,7 @@ public final class Eagle extends Bird {
     }
 
     /**
-     * Set the partner property: This is base model for polymorphic single level inheritance with a discriminator.
+     * Set the partner property: The partner property.
      * 
      * @param partner the partner value to set.
      * @return the Eagle object itself.

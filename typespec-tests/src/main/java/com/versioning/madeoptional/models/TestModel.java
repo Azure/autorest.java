@@ -18,13 +18,13 @@ import java.io.IOException;
 @Fluent
 public final class TestModel implements JsonSerializable<TestModel> {
     /*
-     * A sequence of textual characters.
+     * The prop property.
      */
     @Generated
     private final String prop;
 
     /*
-     * A sequence of textual characters.
+     * The changedProp property.
      */
     @Generated
     private String changedProp;
@@ -40,7 +40,7 @@ public final class TestModel implements JsonSerializable<TestModel> {
     }
 
     /**
-     * Get the prop property: A sequence of textual characters.
+     * Get the prop property: The prop property.
      * 
      * @return the prop value.
      */
@@ -50,7 +50,7 @@ public final class TestModel implements JsonSerializable<TestModel> {
     }
 
     /**
-     * Get the changedProp property: A sequence of textual characters.
+     * Get the changedProp property: The changedProp property.
      * 
      * @return the changedProp value.
      */
@@ -60,7 +60,7 @@ public final class TestModel implements JsonSerializable<TestModel> {
     }
 
     /**
-     * Set the changedProp property: A sequence of textual characters.
+     * Set the changedProp property: The changedProp property.
      * 
      * @param changedProp the changedProp value to set.
      * @return the TestModel object itself.

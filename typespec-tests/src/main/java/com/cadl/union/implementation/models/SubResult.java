@@ -19,7 +19,7 @@ import java.io.IOException;
 @Fluent
 public final class SubResult extends Result {
     /*
-     * A sequence of textual characters.
+     * The text property.
      */
     @Generated
     private String text;
@@ -42,7 +42,7 @@ public final class SubResult extends Result {
     }
 
     /**
-     * Get the text property: A sequence of textual characters.
+     * Get the text property: The text property.
      * 
      * @return the text value.
      */
@@ -52,7 +52,7 @@ public final class SubResult extends Result {
     }
 
     /**
-     * Set the text property: A sequence of textual characters.
+     * Set the text property: The text property.
      * 
      * @param text the text value to set.
      * @return the SubResult object itself.

@@ -13,49 +13,49 @@ import com.azure.core.annotation.Immutable;
 @Immutable
 public final class SpreadWithMultipleParametersOptions {
     /*
-     * A sequence of textual characters.
+     * The id property.
      */
     @Generated
     private final String id;
 
     /*
-     * A sequence of textual characters.
+     * The x-ms-test-header property.
      */
     @Generated
     private final String xMsTestHeader;
 
     /*
-     * A sequence of textual characters.
+     * The prop1 property.
      */
     @Generated
     private final String prop1;
 
     /*
-     * A sequence of textual characters.
+     * The prop2 property.
      */
     @Generated
     private final String prop2;
 
     /*
-     * A sequence of textual characters.
+     * The prop3 property.
      */
     @Generated
     private final String prop3;
 
     /*
-     * A sequence of textual characters.
+     * The prop4 property.
      */
     @Generated
     private final String prop4;
 
     /*
-     * A sequence of textual characters.
+     * The prop5 property.
      */
     @Generated
     private final String prop5;
 
     /*
-     * A sequence of textual characters.
+     * The prop6 property.
      */
     @Generated
     private final String prop6;
@@ -86,7 +86,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the id property: A sequence of textual characters.
+     * Get the id property: The id property.
      * 
      * @return the id value.
      */
@@ -96,7 +96,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the xMsTestHeader property: A sequence of textual characters.
+     * Get the xMsTestHeader property: The x-ms-test-header property.
      * 
      * @return the xMsTestHeader value.
      */
@@ -106,7 +106,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the prop1 property: A sequence of textual characters.
+     * Get the prop1 property: The prop1 property.
      * 
      * @return the prop1 value.
      */
@@ -116,7 +116,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the prop2 property: A sequence of textual characters.
+     * Get the prop2 property: The prop2 property.
      * 
      * @return the prop2 value.
      */
@@ -126,7 +126,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the prop3 property: A sequence of textual characters.
+     * Get the prop3 property: The prop3 property.
      * 
      * @return the prop3 value.
      */
@@ -136,7 +136,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the prop4 property: A sequence of textual characters.
+     * Get the prop4 property: The prop4 property.
      * 
      * @return the prop4 value.
      */
@@ -146,7 +146,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the prop5 property: A sequence of textual characters.
+     * Get the prop5 property: The prop5 property.
      * 
      * @return the prop5 value.
      */
@@ -156,7 +156,7 @@ public final class SpreadWithMultipleParametersOptions {
     }
 
     /**
-     * Get the prop6 property: A sequence of textual characters.
+     * Get the prop6 property: The prop6 property.
      * 
      * @return the prop6 value.
      */

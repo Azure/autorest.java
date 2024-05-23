@@ -82,7 +82,7 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Get the userName property: A sequence of textual characters.
+     * Get the userName property: The userName property.
      * 
      * @return the userName value.
      */
@@ -91,7 +91,7 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Set the userName property: A sequence of textual characters.
+     * Set the userName property: The userName property.
      * 
      * @param userName the userName value to set.
      * @return the TopLevelArmResourceInner object itself.
@@ -105,7 +105,7 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Get the userNames property: A sequence of textual characters.
+     * Get the userNames property: The userNames property.
      * 
      * @return the userNames value.
      */
@@ -114,7 +114,7 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Set the userNames property: A sequence of textual characters.
+     * Set the userNames property: The userNames property.
      * 
      * @param userNames the userNames value to set.
      * @return the TopLevelArmResourceInner object itself.
@@ -128,7 +128,7 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Get the accuserName property: A sequence of textual characters.
+     * Get the accuserName property: The accuserName property.
      * 
      * @return the accuserName value.
      */
@@ -137,7 +137,7 @@ public final class TopLevelArmResourceInner extends Resource {
     }
 
     /**
-     * Set the accuserName property: A sequence of textual characters.
+     * Set the accuserName property: The accuserName property.
      * 
      * @param accuserName the accuserName value to set.
      * @return the TopLevelArmResourceInner object itself.

@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class AzureLocationModel implements JsonSerializable<AzureLocationModel> {
     /*
-     * Represents an Azure geography region where supported resource providers live.
+     * The location property.
      */
     @Generated
     private final String location;
@@ -34,7 +34,7 @@ public final class AzureLocationModel implements JsonSerializable<AzureLocationM
     }
 
     /**
-     * Get the location property: Represents an Azure geography region where supported resource providers live.
+     * Get the location property: The location property.
      * 
      * @return the location value.
      */

@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class NoDecoratorModelInPublic implements JsonSerializable<NoDecoratorModelInPublic> {
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private final String name;
@@ -34,7 +34,7 @@ public final class NoDecoratorModelInPublic implements JsonSerializable<NoDecora
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */

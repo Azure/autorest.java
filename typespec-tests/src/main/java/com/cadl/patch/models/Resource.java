@@ -23,19 +23,19 @@ import java.util.Set;
 @Fluent
 public final class Resource implements JsonSerializable<Resource> {
     /*
-     * A sequence of textual characters.
+     * The id property.
      */
     @Generated
     private String id;
 
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private String name;
 
     /*
-     * A sequence of textual characters.
+     * The description property.
      */
     @Generated
     private String description;
@@ -47,13 +47,13 @@ public final class Resource implements JsonSerializable<Resource> {
     private Map<String, InnerModel> map;
 
     /*
-     * A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`)
+     * The longValue property.
      */
     @Generated
     private Long longValue;
 
     /*
-     * A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`)
+     * The intValue property.
      */
     @Generated
     private Integer intValue;
@@ -77,7 +77,7 @@ public final class Resource implements JsonSerializable<Resource> {
     private List<InnerModel> array;
 
     /*
-     * This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * The fish property.
      */
     @Generated
     private Fish fish;
@@ -111,7 +111,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the id property: A sequence of textual characters.
+     * Get the id property: The id property.
      * 
      * @return the id value.
      */
@@ -121,7 +121,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -131,7 +131,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the description property: A sequence of textual characters.
+     * Get the description property: The description property.
      * 
      * @return the description value.
      */
@@ -141,7 +141,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the description property: A sequence of textual characters.
+     * Set the description property: The description property.
      * 
      * @param description the description value to set.
      * @return the Resource object itself.
@@ -178,7 +178,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the longValue property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
+     * Get the longValue property: The longValue property.
      * 
      * @return the longValue value.
      */
@@ -188,7 +188,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the longValue property: A 64-bit integer. (`-9,223,372,036,854,775,808` to `9,223,372,036,854,775,807`).
+     * Set the longValue property: The longValue property.
      * 
      * @param longValue the longValue value to set.
      * @return the Resource object itself.
@@ -201,7 +201,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Get the intValue property: The intValue property.
      * 
      * @return the intValue value.
      */
@@ -211,7 +211,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the intValue property: A 32-bit integer. (`-2,147,483,648` to `2,147,483,647`).
+     * Set the intValue property: The intValue property.
      * 
      * @param intValue the intValue value to set.
      * @return the Resource object itself.
@@ -293,7 +293,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Get the fish property: This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * Get the fish property: The fish property.
      * 
      * @return the fish value.
      */
@@ -303,7 +303,7 @@ public final class Resource implements JsonSerializable<Resource> {
     }
 
     /**
-     * Set the fish property: This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * Set the fish property: The fish property.
      * 
      * @param fish the fish value to set.
      * @return the Resource object itself.

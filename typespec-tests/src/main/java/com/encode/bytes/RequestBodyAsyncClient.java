@@ -68,7 +68,7 @@ public final class RequestBodyAsyncClient {
      * BinaryData
      * }</pre>
      * 
-     * @param value Represent a byte array.
+     * @param value The value parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -90,7 +90,7 @@ public final class RequestBodyAsyncClient {
      * BinaryData
      * }</pre>
      * 
-     * @param value Represent a byte array.
+     * @param value The value parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -171,7 +171,7 @@ public final class RequestBodyAsyncClient {
     /**
      * The octetStream operation.
      * 
-     * @param value Represent a byte array.
+     * @param value The value parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -191,7 +191,7 @@ public final class RequestBodyAsyncClient {
     /**
      * The customContentType operation.
      * 
-     * @param value Represent a byte array.
+     * @param value The value parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -24,7 +24,7 @@ public final class WidgetData0 implements JsonSerializable<WidgetData0> {
     private final String kind = "kind0";
 
     /*
-     * A sequence of textual characters.
+     * The fooProp property.
      */
     @Generated
     private final String fooProp;
@@ -50,7 +50,7 @@ public final class WidgetData0 implements JsonSerializable<WidgetData0> {
     }
 
     /**
-     * Get the fooProp property: A sequence of textual characters.
+     * Get the fooProp property: The fooProp property.
      * 
      * @return the fooProp value.
      */

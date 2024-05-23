@@ -71,7 +71,7 @@ public interface CustomTemplateResource {
     ProvisioningState provisioningState();
 
     /**
-     * Gets the dog property: Test extensible enum type for discriminator.
+     * Gets the dog property: The dog property.
      * 
      * @return the dog value.
      */
@@ -209,9 +209,9 @@ public interface CustomTemplateResource {
          */
         interface WithDog {
             /**
-             * Specifies the dog property: Test extensible enum type for discriminator.
+             * Specifies the dog property: The dog property..
              * 
-             * @param dog Test extensible enum type for discriminator.
+             * @param dog The dog property.
              * @return the next definition stage.
              */
             WithCreate withDog(Dog dog);

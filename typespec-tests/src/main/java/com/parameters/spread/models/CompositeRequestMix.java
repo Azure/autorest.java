@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class CompositeRequestMix implements JsonSerializable<CompositeRequestMix> {
     /*
-     * A sequence of textual characters.
+     * The prop property.
      */
     @Generated
     private final String prop;
@@ -34,7 +34,7 @@ public final class CompositeRequestMix implements JsonSerializable<CompositeRequ
     }
 
     /**
-     * Get the prop property: A sequence of textual characters.
+     * Get the prop property: The prop property.
      * 
      * @return the prop value.
      */

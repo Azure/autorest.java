@@ -38,7 +38,7 @@ public final class Salmon extends Fish {
     private Map<String, Fish> hate;
 
     /*
-     * This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * The partner property.
      */
     @Generated
     private Fish partner;
@@ -109,7 +109,7 @@ public final class Salmon extends Fish {
     }
 
     /**
-     * Get the partner property: This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * Get the partner property: The partner property.
      * 
      * @return the partner value.
      */
@@ -119,7 +119,7 @@ public final class Salmon extends Fish {
     }
 
     /**
-     * Set the partner property: This is base model for polymorphic multiple levels inheritance with a discriminator.
+     * Set the partner property: The partner property.
      * 
      * @param partner the partner value to set.
      * @return the Salmon object itself.

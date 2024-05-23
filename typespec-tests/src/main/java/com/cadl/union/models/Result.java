@@ -19,7 +19,7 @@ import java.io.IOException;
 @Fluent
 public class Result implements JsonSerializable<Result> {
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private final String name;
@@ -49,7 +49,7 @@ public class Result implements JsonSerializable<Result> {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */

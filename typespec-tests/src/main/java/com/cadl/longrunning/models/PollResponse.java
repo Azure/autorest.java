@@ -18,13 +18,13 @@ import java.io.IOException;
 @Immutable
 public final class PollResponse implements JsonSerializable<PollResponse> {
     /*
-     * A sequence of textual characters.
+     * The operationId property.
      */
     @Generated
     private final String operationId;
 
     /*
-     * Enum describing allowed operation states.
+     * The status property.
      */
     @Generated
     private final OperationState status;
@@ -42,7 +42,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
     }
 
     /**
-     * Get the operationId property: A sequence of textual characters.
+     * Get the operationId property: The operationId property.
      * 
      * @return the operationId value.
      */
@@ -52,7 +52,7 @@ public final class PollResponse implements JsonSerializable<PollResponse> {
     }
 
     /**
-     * Get the status property: Enum describing allowed operation states.
+     * Get the status property: The status property.
      * 
      * @return the status value.
      */

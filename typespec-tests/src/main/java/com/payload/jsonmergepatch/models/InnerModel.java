@@ -21,13 +21,13 @@ import java.util.Set;
 @Fluent
 public final class InnerModel implements JsonSerializable<InnerModel> {
     /*
-     * A sequence of textual characters.
+     * The name property.
      */
     @Generated
     private String name;
 
     /*
-     * A sequence of textual characters.
+     * The description property.
      */
     @Generated
     private String description;
@@ -61,7 +61,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     /**
-     * Get the name property: A sequence of textual characters.
+     * Get the name property: The name property.
      * 
      * @return the name value.
      */
@@ -71,7 +71,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     /**
-     * Set the name property: A sequence of textual characters.
+     * Set the name property: The name property.
      * 
      * @param name the name value to set.
      * @return the InnerModel object itself.
@@ -84,7 +84,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     /**
-     * Get the description property: A sequence of textual characters.
+     * Get the description property: The description property.
      * 
      * @return the description value.
      */
@@ -94,7 +94,7 @@ public final class InnerModel implements JsonSerializable<InnerModel> {
     }
 
     /**
-     * Set the description property: A sequence of textual characters.
+     * Set the description property: The description property.
      * 
      * @param description the description value to set.
      * @return the InnerModel object itself.

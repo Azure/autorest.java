@@ -22,7 +22,7 @@ public final class TopLevelArmResourceUpdate {
     private Map<String, String> tags;
 
     /*
-     * The updatable properties of the TopLevelArmResource.
+     * The properties property.
      */
     @JsonProperty(value = "properties")
     private TopLevelArmResourceUpdateProperties properties;
@@ -54,7 +54,7 @@ public final class TopLevelArmResourceUpdate {
     }
 
     /**
-     * Get the properties property: The updatable properties of the TopLevelArmResource.
+     * Get the properties property: The properties property.
      * 
      * @return the properties value.
      */
@@ -63,7 +63,7 @@ public final class TopLevelArmResourceUpdate {
     }
 
     /**
-     * Set the properties property: The updatable properties of the TopLevelArmResource.
+     * Set the properties property: The properties property.
      * 
      * @param properties the properties value to set.
      * @return the TopLevelArmResourceUpdate object itself.

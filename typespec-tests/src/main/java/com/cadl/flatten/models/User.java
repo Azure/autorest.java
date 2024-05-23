@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class User implements JsonSerializable<User> {
     /*
-     * A sequence of textual characters.
+     * The user property.
      */
     @Generated
     private final String user;
@@ -34,7 +34,7 @@ public final class User implements JsonSerializable<User> {
     }
 
     /**
-     * Get the user property: A sequence of textual characters.
+     * Get the user property: The user property.
      * 
      * @return the user value.
      */

@@ -18,7 +18,7 @@ import java.io.IOException;
 @Immutable
 public final class SameAsModel implements JsonSerializable<SameAsModel> {
     /*
-     * A sequence of textual characters.
+     * The SameAsModel property.
      */
     @Generated
     private final String sameAsModel;
@@ -34,7 +34,7 @@ public final class SameAsModel implements JsonSerializable<SameAsModel> {
     }
 
     /**
-     * Get the sameAsModel property: A sequence of textual characters.
+     * Get the sameAsModel property: The SameAsModel property.
      * 
      * @return the sameAsModel value.
      */
