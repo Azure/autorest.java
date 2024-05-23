@@ -26,8 +26,6 @@ public final class SpreadFloatRecord implements JsonSerializable<SpreadFloatReco
     private final double id;
 
     /*
-     * The model spread Record<float32> with the same known property type
-     * 
      * Additional properties
      */
     @Generated
@@ -54,9 +52,7 @@ public final class SpreadFloatRecord implements JsonSerializable<SpreadFloatReco
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;float32&gt; with the same known property type
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -66,9 +62,7 @@ public final class SpreadFloatRecord implements JsonSerializable<SpreadFloatReco
     }
 
     /**
-     * Set the additionalProperties property: The model spread Record&lt;float32&gt; with the same known property type
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the SpreadFloatRecord object itself.

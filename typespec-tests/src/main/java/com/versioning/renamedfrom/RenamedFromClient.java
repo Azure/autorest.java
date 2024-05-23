@@ -58,7 +58,7 @@ public final class RenamedFromClient {
      * }
      * }</pre>
      * 
-     * @param newQuery A sequence of textual characters.
+     * @param newQuery The newQuery parameter.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -76,7 +76,7 @@ public final class RenamedFromClient {
     /**
      * The newOp operation.
      * 
-     * @param newQuery A sequence of textual characters.
+     * @param newQuery The newQuery parameter.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

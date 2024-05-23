@@ -42,7 +42,7 @@ public final class MadeOptionalClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>param</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <tr><td>param</td><td>String</td><td>No</td><td>The param parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -81,7 +81,7 @@ public final class MadeOptionalClient {
      * The test operation.
      * 
      * @param body The body parameter.
-     * @param param A sequence of textual characters.
+     * @param param The param parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -2587,7 +2587,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter Array of PostContentSchemaItem.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2610,7 +2610,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter Array of PostContentSchemaItem.
+     * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2634,7 +2634,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter Array of PostContentSchemaItem.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2648,7 +2648,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter Array of PostContentSchemaItem.
+     * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2663,7 +2663,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter Array of PostContentSchemaItem.
+     * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2678,7 +2678,7 @@ public final class Explicits {
     /**
      * Test explicitly required array. Please put null and the client library should throw before the request is sent.
      * 
-     * @param bodyParameter Array of PostContentSchemaItem.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2691,7 +2691,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter Array of String.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2711,7 +2711,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter Array of String.
+     * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2732,7 +2732,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter Array of String.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -2759,7 +2759,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter Array of String.
+     * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2774,7 +2774,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter Array of String.
+     * @param bodyParameter The bodyParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -2789,7 +2789,7 @@ public final class Explicits {
     /**
      * Test explicitly optional array. Please put null.
      * 
-     * @param bodyParameter Array of String.
+     * @param bodyParameter The bodyParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3058,7 +3058,7 @@ public final class Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
      * throw before the request is sent.
      * 
-     * @param headerParameter Array of Post0ItemsItem.
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3086,7 +3086,7 @@ public final class Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
      * throw before the request is sent.
      * 
-     * @param headerParameter Array of Post0ItemsItem.
+     * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3115,7 +3115,7 @@ public final class Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
      * throw before the request is sent.
      * 
-     * @param headerParameter Array of Post0ItemsItem.
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3130,7 +3130,7 @@ public final class Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
      * throw before the request is sent.
      * 
-     * @param headerParameter Array of Post0ItemsItem.
+     * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3146,7 +3146,7 @@ public final class Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
      * throw before the request is sent.
      * 
-     * @param headerParameter Array of Post0ItemsItem.
+     * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3162,7 +3162,7 @@ public final class Explicits {
      * Test explicitly required array. Please put a header 'headerParameter' =&gt; null and the client library should
      * throw before the request is sent.
      * 
-     * @param headerParameter Array of Post0ItemsItem.
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3175,7 +3175,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter Array of String.
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3200,7 +3200,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter Array of String.
+     * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3226,7 +3226,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter Array of String.
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -3253,7 +3253,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter Array of String.
+     * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3268,7 +3268,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter Array of String.
+     * @param headerParameter The headerParameter parameter.
      * @param context The context to associate with this operation.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
@@ -3283,7 +3283,7 @@ public final class Explicits {
     /**
      * Test explicitly optional integer. Please put a header 'headerParameter' =&gt; null.
      * 
-     * @param headerParameter Array of String.
+     * @param headerParameter The headerParameter parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

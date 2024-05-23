@@ -389,7 +389,7 @@ public final class MultiPartAsyncClient {
     /**
      * Test content-type: multipart/form-data.
      * 
-     * @param profileImage The file details for the "profileImage" field.
+     * @param profileImage The profileImage parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

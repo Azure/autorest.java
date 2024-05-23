@@ -28,8 +28,6 @@ public final class SpreadRecordForNonDiscriminatedUnion3
     private final String name;
 
     /*
-     * The model spread Record<WidgetData2[] | WidgetData1>
-     * 
      * Additional properties
      */
     @Generated
@@ -56,9 +54,7 @@ public final class SpreadRecordForNonDiscriminatedUnion3
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;WidgetData2[] | WidgetData1&gt;
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -68,9 +64,7 @@ public final class SpreadRecordForNonDiscriminatedUnion3
     }
 
     /**
-     * Set the additionalProperties property: The model spread Record&lt;WidgetData2[] | WidgetData1&gt;
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the SpreadRecordForNonDiscriminatedUnion3 object itself.
