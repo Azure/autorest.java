@@ -26,8 +26,6 @@ public final class SpreadModelRecord implements JsonSerializable<SpreadModelReco
     private final ModelForRecord knownProp;
 
     /*
-     * The model spread Record<ModelForRecord> with the same known property type
-     * 
      * Additional properties
      */
     @Generated
@@ -54,10 +52,7 @@ public final class SpreadModelRecord implements JsonSerializable<SpreadModelReco
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;ModelForRecord&gt; with the same known property
-     * type
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -67,10 +62,7 @@ public final class SpreadModelRecord implements JsonSerializable<SpreadModelReco
     }
 
     /**
-     * Set the additionalProperties property: The model spread Record&lt;ModelForRecord&gt; with the same known property
-     * type
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the SpreadModelRecord object itself.

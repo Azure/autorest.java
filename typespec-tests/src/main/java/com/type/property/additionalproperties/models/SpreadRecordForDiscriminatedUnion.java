@@ -27,8 +27,6 @@ public final class SpreadRecordForDiscriminatedUnion implements JsonSerializable
     private final String name;
 
     /*
-     * The model spread Record<WidgetData>
-     * 
      * Additional properties
      */
     @Generated
@@ -55,9 +53,7 @@ public final class SpreadRecordForDiscriminatedUnion implements JsonSerializable
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;WidgetData&gt;
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -67,9 +63,7 @@ public final class SpreadRecordForDiscriminatedUnion implements JsonSerializable
     }
 
     /**
-     * Set the additionalProperties property: The model spread Record&lt;WidgetData&gt;
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the SpreadRecordForDiscriminatedUnion object itself.

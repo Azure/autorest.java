@@ -63,7 +63,7 @@ public final class ImplicitBodyClient {
     /**
      * The simple operation.
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

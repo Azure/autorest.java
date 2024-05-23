@@ -175,8 +175,8 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
-     * @param xMsTestHeader A sequence of textual characters.
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -203,8 +203,8 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
-     * @param xMsTestHeader A sequence of textual characters.
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -235,8 +235,8 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
-     * @param xMsTestHeader A sequence of textual characters.
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -268,8 +268,8 @@ public final class AliasImpl {
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
-     * @param xMsTestHeader A sequence of textual characters.
+     * @param id The id parameter.
+     * @param xMsTestHeader The xMsTestHeader parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.

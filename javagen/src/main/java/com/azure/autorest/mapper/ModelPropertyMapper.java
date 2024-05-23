@@ -61,9 +61,6 @@ public class ModelPropertyMapper implements IMapper<Property, ClientModelPropert
 
         String description;
         String summaryInProperty = property.getSummary();
-        if (summaryInProperty == null) {
-            summaryInProperty = property.getSchema() == null ? null : property.getSchema().getSummary();
-        }
         String descriptionInProperty = property.getLanguage().getJava() == null ? null : property.getLanguage().getJava().getDescription();
         if (CoreUtils.isNullOrEmpty(summaryInProperty) && CoreUtils.isNullOrEmpty(descriptionInProperty)) {
             description = String.format("The %s property.", property.getSerializedName());

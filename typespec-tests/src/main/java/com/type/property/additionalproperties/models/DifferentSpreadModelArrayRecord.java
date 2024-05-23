@@ -27,8 +27,6 @@ public class DifferentSpreadModelArrayRecord implements JsonSerializable<Differe
     private final String knownProp;
 
     /*
-     * The model spread Record<ModelForRecord[]> with the different known property type
-     * 
      * Additional properties
      */
     @Generated
@@ -55,10 +53,7 @@ public class DifferentSpreadModelArrayRecord implements JsonSerializable<Differe
     }
 
     /**
-     * Get the additionalProperties property: The model spread Record&lt;ModelForRecord[]&gt; with the different known
-     * property type
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -68,10 +63,7 @@ public class DifferentSpreadModelArrayRecord implements JsonSerializable<Differe
     }
 
     /**
-     * Set the additionalProperties property: The model spread Record&lt;ModelForRecord[]&gt; with the different known
-     * property type
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the DifferentSpreadModelArrayRecord object itself.

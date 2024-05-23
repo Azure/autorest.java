@@ -87,7 +87,7 @@ public final class EtagHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -137,7 +137,7 @@ public final class EtagHeadersAsyncClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -182,7 +182,7 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or replace operation template.
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestConditions Specifies HTTP options for conditional requests based on modification time.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -224,7 +224,7 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or replace operation template.
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -247,7 +247,7 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or update operation template.
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param matchConditions Specifies HTTP options for conditional requests.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
@@ -281,7 +281,7 @@ public final class EtagHeadersAsyncClient {
     /**
      * Create or update operation template.
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

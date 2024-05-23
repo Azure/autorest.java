@@ -26,8 +26,6 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     private final String name;
 
     /*
-     * The model is from Record<string> type.
-     * 
      * Additional properties
      */
     @Generated
@@ -54,9 +52,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     }
 
     /**
-     * Get the additionalProperties property: The model is from Record&lt;string&gt; type.
-     * 
-     * Additional properties.
+     * Get the additionalProperties property: Additional properties.
      * 
      * @return the additionalProperties value.
      */
@@ -66,9 +62,7 @@ public final class IsStringAdditionalProperties implements JsonSerializable<IsSt
     }
 
     /**
-     * Set the additionalProperties property: The model is from Record&lt;string&gt; type.
-     * 
-     * Additional properties.
+     * Set the additionalProperties property: Additional properties.
      * 
      * @param additionalProperties the additionalProperties value to set.
      * @return the IsStringAdditionalProperties object itself.
