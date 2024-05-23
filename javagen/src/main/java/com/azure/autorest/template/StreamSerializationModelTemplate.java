@@ -241,12 +241,16 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
                 model.getProperties().stream(),
                 ClientModelUtil.getParentProperties(model)
                         .stream()
-                        .filter(property -> !property.isPolymorphicDiscriminator()
-                                // must be read-only and not appear in constructor
-                                && property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs()
-                                // not required and in constructor
-                                && !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs()))
+                        .filter(property -> readOnlyNotInCtor(property, settings))
         ).collect(Collectors.toList());
+    }
+
+    private static boolean readOnlyNotInCtor(ClientModelProperty property, JavaSettings settings) {
+        return  // must be read-only and not appear in constructor
+            property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs()
+                // not required and in constructor
+                && !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs())
+                && !property.isPolymorphicDiscriminator();
     }
 
     /**
@@ -1458,7 +1462,9 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         boolean polymorphicJsonMergePatchScenario) {
         // If the property is defined in a super class use the setter as this will be able to set the value in the
         // super class.
-        if (fromSuper) {
+        if (fromSuper
+            // If the property is read-only from parent, it will be shadowed in child class.
+            && !readOnlyNotInCtor(property, JavaSettings.getInstance())) {
             if (polymorphicJsonMergePatchScenario) {
                 // Polymorphic JSON merge patch needs special handling as the setter methods are used to track whether
                 // the property is included in patch serialization. To prevent deserialization from requiring parent

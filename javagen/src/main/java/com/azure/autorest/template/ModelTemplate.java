@@ -329,16 +329,6 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         });
     }
 
-    /**
-     * Add shadow properties for parent read-only properties that needs to be used in stream-style deserialization.
-     * @param model The client model.
-     * @param classBlock The Java class.
-     * @param settings AutoRest configuration settings.
-     */
-    protected void addShadowProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
-        // NO-OP for Jackson based serialization models
-    }
-
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {
         // If there is client side validation and the model will generate a ClientLogger to log the validation
         // exceptions add an import of 'com.azure.core.util.logging.ClientLogger' and
