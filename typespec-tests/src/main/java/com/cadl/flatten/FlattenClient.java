@@ -63,7 +63,7 @@ public final class FlattenClient {
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param id The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -88,7 +88,7 @@ public final class FlattenClient {
      * }
      * }</pre>
      * 
-     * @param id A sequence of textual characters.
+     * @param id The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -109,7 +109,7 @@ public final class FlattenClient {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>filter</td><td>String</td><td>No</td><td>A sequence of textual characters.</td></tr>
+     * <tr><td>filter</td><td>String</td><td>No</td><td>The filter parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Request Body Schema</strong></p>
@@ -132,7 +132,7 @@ public final class FlattenClient {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -176,8 +176,7 @@ public final class FlattenClient {
      * }
      * }</pre>
      * 
-     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53
-     * − 1)` ).
+     * @param id The id parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -195,7 +194,7 @@ public final class FlattenClient {
     /**
      * The uploadFile operation.
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param request The request parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -234,8 +233,8 @@ public final class FlattenClient {
     /**
      * The send operation.
      * 
-     * @param id A sequence of textual characters.
-     * @param input A sequence of textual characters.
+     * @param id The id parameter.
+     * @param input The input parameter.
      * @param user The user parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -257,8 +256,8 @@ public final class FlattenClient {
     /**
      * The send operation.
      * 
-     * @param id A sequence of textual characters.
-     * @param input A sequence of textual characters.
+     * @param id The id parameter.
+     * @param input The input parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -279,8 +278,8 @@ public final class FlattenClient {
     /**
      * The sendProjectedName operation.
      * 
-     * @param id A sequence of textual characters.
-     * @param fileIdentifier A sequence of textual characters.
+     * @param id The id parameter.
+     * @param fileIdentifier The fileIdentifier parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -334,8 +333,7 @@ public final class FlattenClient {
     /**
      * The update operation.
      * 
-     * @param id An integer that can be serialized to JSON (`−9007199254740991 (−(2^53 − 1))` to `9007199254740991 (2^53
-     * − 1)` ).
+     * @param id The id parameter.
      * @param request The request parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -361,8 +359,8 @@ public final class FlattenClient {
     /**
      * The uploadFile operation.
      * 
-     * @param name A sequence of textual characters.
-     * @param fileData The file details for the "file_data" field.
+     * @param name The name parameter.
+     * @param fileData The fileData parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

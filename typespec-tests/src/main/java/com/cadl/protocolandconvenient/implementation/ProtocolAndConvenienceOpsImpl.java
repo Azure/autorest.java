@@ -532,7 +532,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -571,7 +571,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -610,7 +610,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -656,7 +656,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -702,7 +702,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -748,7 +748,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param name A sequence of textual characters.
+     * @param name The name parameter.
      * @param resource The resource instance.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -778,8 +778,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
-     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -816,8 +815,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
-     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -872,8 +870,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
-     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -908,8 +905,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * <table border="1">
      * <caption>Query Parameters</caption>
      * <tr><th>Name</th><th>Type</th><th>Required</th><th>Description</th></tr>
-     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>An integer that can be serialized to JSON (`−9007199254740991
-     * (−(2^53 − 1))` to `9007199254740991 (2^53 − 1)` )</td></tr>
+     * <tr><td>maxresults</td><td>Long</td><td>No</td><td>The maxPageSize parameter</td></tr>
      * </table>
      * You can add these to a request with {@link RequestOptions#addQueryParam}
      * <p><strong>Response Body Schema</strong></p>
@@ -970,9 +966,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param nextLink The URL to get the next list of items
-     * 
-     * The nextLink parameter.
+     * @param nextLink The URL to get the next list of items.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -1003,9 +997,7 @@ public final class ProtocolAndConvenienceOpsImpl {
      * }
      * }</pre>
      * 
-     * @param nextLink The URL to get the next list of items
-     * 
-     * The nextLink parameter.
+     * @param nextLink The URL to get the next list of items.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.

@@ -61,7 +61,7 @@ public final class AddedAsyncClient {
      * }
      * }</pre>
      * 
-     * @param headerV2 A sequence of textual characters.
+     * @param headerV2 The headerV2 parameter.
      * @param body The body parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
@@ -115,7 +115,7 @@ public final class AddedAsyncClient {
     /**
      * The v1 operation.
      * 
-     * @param headerV2 A sequence of textual characters.
+     * @param headerV2 The headerV2 parameter.
      * @param body The body parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws HttpResponseException thrown if the request is rejected by server.

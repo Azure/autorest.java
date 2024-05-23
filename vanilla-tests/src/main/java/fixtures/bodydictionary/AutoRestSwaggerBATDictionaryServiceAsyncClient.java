@@ -92,7 +92,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody The empty dictionary value {}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -107,7 +107,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {}.
      * 
-     * @param arrayBody The empty dictionary value {}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -254,7 +254,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      * 
-     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -269,7 +269,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {"0": true, "1": false, "2": false, "3": true }.
      * 
-     * @param arrayBody The dictionary value {"0": true, "1": false, "2": false, "3": true }.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -366,7 +366,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      * 
-     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -381,7 +381,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      * 
-     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -477,7 +477,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      * 
-     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -492,7 +492,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value empty {"0": 1, "1": -1, "2": 3, "3": 300}.
      * 
-     * @param arrayBody The dictionary value {"0": 1, "1": -1, "2": 3, "3": 300}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -588,7 +588,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * 
-     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -603,7 +603,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * 
-     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -699,7 +699,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * 
-     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -714,7 +714,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
      * 
-     * @param arrayBody The dictionary value {"0": 0, "1": -0.01, "2": 1.2e20}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -810,7 +810,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -825,7 +825,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
      * 
-     * @param arrayBody The dictionary value {"0": "foo1", "1": "foo2", "2": "foo3"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -922,7 +922,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * 
-     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -937,7 +937,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
      * 
-     * @param arrayBody The dictionary value {"0": "2000-12-01", "1": "1980-01-02", "2": "1492-10-12"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1038,8 +1038,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
      * 
-     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
-     * "1492-10-12T10:15:01-08:00"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1055,8 +1054,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Set dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
      * "1492-10-12T10:15:01-08:00"}.
      * 
-     * @param arrayBody The dictionary value {"0": "2000-12-01t00:00:01z", "1": "1980-01-02T00:11:35+01:00", "2":
-     * "1492-10-12T10:15:01-08:00"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1157,8 +1155,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2":
      * "Wed, 12 Oct 1492 10:15:01 GMT"}.
      * 
-     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
-     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1174,8 +1171,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Set dictionary value empty {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35 GMT", "2":
      * "Wed, 12 Oct 1492 10:15:01 GMT"}.
      * 
-     * @param arrayBody The dictionary value {"0": "Fri, 01 Dec 2000 00:00:01 GMT", "1": "Wed, 02 Jan 1980 00:11:35
-     * GMT", "2": "Wed, 12 Oct 1492 10:15:01 GMT"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1218,7 +1214,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * 
-     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1233,7 +1229,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Set dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
      * 
-     * @param arrayBody The dictionary value {"0": "P123DT22H14M12.011S", "1": "P5DT1H0M0S"}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1279,8 +1275,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
      * elementencoded in base 64.
      * 
-     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
-     * each elementencoded in base 64.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1296,8 +1291,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Put the dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with each
      * elementencoded in base 64.
      * 
-     * @param arrayBody The dictionary value {"0": hex(FF FF FF FA), "1": hex(01 02 03), "2": hex (25, 29, 43)} with
-     * each elementencoded in base 64.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1514,8 +1508,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
      * "4"}, "2": {"integer": 5, "string": "6"}}.
      * 
-     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
-     * "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1531,8 +1524,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Put an dictionary of complex type with values {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3, "string":
      * "4"}, "2": {"integer": 5, "string": "6"}}.
      * 
-     * @param arrayBody Dictionary of complex type with {"0": {"integer": 1, "string": "2"}, "1": {"integer": 3,
-     * "string": "4"}, "2": {"integer": 5, "string": "6"}}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1683,7 +1675,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * 
-     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1698,7 +1690,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
     /**
      * Put An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
      * 
-     * @param arrayBody An array of array of strings {"0": ["1", "2", "3"], "1": ["4", "5", "6"], "2": ["7", "8", "9"]}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1864,9 +1856,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
-     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
-     * "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
@@ -1884,9 +1874,7 @@ public final class AutoRestSwaggerBATDictionaryServiceAsyncClient {
      * Get an dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one", "2": "two", "3":
      * "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9": "nine"}}.
      * 
-     * @param arrayBody An dictionaries of dictionaries of type &lt;string, string&gt; with value {"0": {"1": "one",
-     * "2": "two", "3": "three"}, "1": {"4": "four", "5": "five", "6": "six"}, "2": {"7": "seven", "8": "eight", "9":
-     * "nine"}}.
+     * @param arrayBody The arrayBody parameter.
      * @throws IllegalArgumentException thrown if parameters fail the validation.
      * @throws ErrorException thrown if the request is rejected by server.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.

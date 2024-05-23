@@ -20,8 +20,6 @@ public final class ApplicationPackageReference {
     private String id;
 
     /*
-     * The version of the application to deploy. If omitted, the default version is deployed.
-     * 
      * If this is omitted, and no default version is specified for this application, the request fails with the error
      * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
      */
@@ -57,10 +55,9 @@ public final class ApplicationPackageReference {
     }
 
     /**
-     * Get the version property: The version of the application to deploy. If omitted, the default version is deployed.
-     * 
-     * If this is omitted, and no default version is specified for this application, the request fails with the error
-     * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
+     * Get the version property: If this is omitted, and no default version is specified for this application, the
+     * request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly,
+     * the HTTP status code is 409.
      * 
      * @return the version value.
      */
@@ -69,10 +66,9 @@ public final class ApplicationPackageReference {
     }
 
     /**
-     * Set the version property: The version of the application to deploy. If omitted, the default version is deployed.
-     * 
-     * If this is omitted, and no default version is specified for this application, the request fails with the error
-     * code InvalidApplicationPackageReferences. If you are calling the REST API directly, the HTTP status code is 409.
+     * Set the version property: If this is omitted, and no default version is specified for this application, the
+     * request fails with the error code InvalidApplicationPackageReferences. If you are calling the REST API directly,
+     * the HTTP status code is 409.
      * 
      * @param version the version value to set.
      * @return the ApplicationPackageReference object itself.
