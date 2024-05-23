@@ -172,7 +172,7 @@ public final class QueriesImpl {
     /**
      * The defaultMethod operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -189,7 +189,7 @@ public final class QueriesImpl {
     /**
      * The defaultMethod operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -206,7 +206,7 @@ public final class QueriesImpl {
     /**
      * The iso8601 operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -223,7 +223,7 @@ public final class QueriesImpl {
     /**
      * The iso8601 operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -240,7 +240,7 @@ public final class QueriesImpl {
     /**
      * The int32Seconds operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -258,7 +258,7 @@ public final class QueriesImpl {
     /**
      * The int32Seconds operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -276,7 +276,7 @@ public final class QueriesImpl {
     /**
      * The floatSeconds operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -294,7 +294,7 @@ public final class QueriesImpl {
     /**
      * The floatSeconds operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -312,7 +312,7 @@ public final class QueriesImpl {
     /**
      * The float64Seconds operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -330,7 +330,7 @@ public final class QueriesImpl {
     /**
      * The float64Seconds operation.
      * 
-     * @param input A duration/time period. e.g 5s, 10h.
+     * @param input The input parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
