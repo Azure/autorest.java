@@ -10,6 +10,7 @@ import com.azure.autorest.model.clientmodel.Annotation;
 import com.azure.autorest.model.clientmodel.AsyncSyncClient;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientBuilder;
+import com.azure.autorest.model.clientmodel.ClientBuilderTrait;
 import com.azure.autorest.model.clientmodel.ClientBuilderTraitMethod;
 import com.azure.autorest.model.clientmodel.PipelinePolicyDetails;
 import com.azure.autorest.model.clientmodel.PrimitiveType;
@@ -257,16 +258,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             addGeneratedAnnotation(classBlock);
             classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
             {
-                List<ServiceClientProperty> allProperties = new ArrayList<>();
-                if (!settings.isAzureOrFluent()) {
-                    allProperties.addAll(clientBuilder.getBuilderTraits()
-                            .stream()
-                            .flatMap(trait -> trait.getTraitMethods().stream())
-                            .map(ClientBuilderTraitMethod::getProperty)
-                            .filter(Objects::nonNull)
-                            .collect(Collectors.toList()));
-                }
-                allProperties.addAll(clientProperties);
+                List<ServiceClientProperty> allProperties = mergeClientPropertiesWithTraits(
+                    clientProperties,
+                    settings.isAzureOrFluent() ? null : clientBuilder.getBuilderTraits());
 
                 for (ServiceClientProperty serviceClientProperty : allProperties) {
                     if (serviceClientProperty.getDefaultValueExpression() != null
@@ -323,6 +317,9 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             });
 
             if (!settings.isAzureOrFluent()) {
+                List<ServiceClientProperty> allProperties = mergeClientPropertiesWithTraits(clientProperties, clientBuilder.getBuilderTraits());
+                addValidateBuilderMethod(classBlock, allProperties);
+
                 addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo(), serviceClient.getPipelinePolicyDetails());
             }
 
@@ -334,6 +331,22 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             }
             TemplateUtil.addClientLogger(classBlock, serviceClientBuilderName, javaFile.getContents());
         });
+    }
+
+    private static List<ServiceClientProperty> mergeClientPropertiesWithTraits(
+        List<ServiceClientProperty> clientProperties, List<ClientBuilderTrait> builderTraits) {
+
+        List<com.azure.autorest.model.clientmodel.ServiceClientProperty> allProperties = new ArrayList<>();
+        if (builderTraits != null) {
+            allProperties.addAll(builderTraits
+                    .stream()
+                    .flatMap(trait -> trait.getTraitMethods().stream())
+                    .map(ClientBuilderTraitMethod::getProperty)
+                    .filter(Objects::nonNull)
+                    .collect(Collectors.toList()));
+        }
+        allProperties.addAll(clientProperties);
+        return allProperties;
     }
 
     private void addBuildAsyncClientMethods(ClientBuilder clientBuilder, List<AsyncSyncClient> asyncClients, JavaClass classBlock, String buildMethodName) {
@@ -513,6 +526,19 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         addGeneratedAnnotation(classBlock);
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             TemplateHelper.createHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
+        });
+    }
+
+    private void addValidateBuilderMethod(JavaClass classBlock, List<ServiceClientProperty> properties) {
+        addGeneratedAnnotation(classBlock);
+        classBlock.privateMethod("void validateBuilder()", methodBlock -> {
+            methodBlock.line("// This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.");
+            methodBlock.line("// Developer can customize this method, to validate that the necessary conditions are met for the new client.");
+            for (ServiceClientProperty property : properties) {
+                if (property.isRequired()) {
+                    methodBlock.line("Objects.requireNonNull(" + property.getName() + ", \"'" + property.getName() + "' cannot be null.\");");
+                }
+            }
         });
     }
 
