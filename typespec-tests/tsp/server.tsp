@@ -19,7 +19,7 @@ using TypeSpec.Versioning;
     tld: string = "org",
 
     @doc("relative path segment, can be empty")
-    `relative-path`?: string;
+    `relative-path`?: string,
   }
 )
 namespace Cadl.Server {
