@@ -535,6 +535,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             methodBlock.line("// This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.");
             methodBlock.line("// Developer can customize this method, to validate that the necessary conditions are met for the new client.");
             for (ServiceClientProperty property : properties) {
+                // ServiceVersion is also provided with a defaultValueExpression
                 if (property.isRequired() && property.getDefaultValueExpression() == null) {
                     methodBlock.line("Objects.requireNonNull(" + property.getName() + ", \"'" + property.getName() + "' cannot be null.\");");
                 }
