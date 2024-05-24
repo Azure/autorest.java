@@ -246,7 +246,6 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
     private void validateBuilder() {
         // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

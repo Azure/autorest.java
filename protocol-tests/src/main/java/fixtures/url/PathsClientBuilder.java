@@ -284,7 +284,6 @@ public final class PathsClientBuilder implements HttpTrait<PathsClientBuilder>, 
         // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(globalStringPath, "'globalStringPath' cannot be null.");
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

@@ -302,7 +302,6 @@ public final class AutoRestRequiredOptionalTestServiceBuilder
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(requiredGlobalPath, "'requiredGlobalPath' cannot be null.");
         Objects.requireNonNull(requiredGlobalQuery, "'requiredGlobalQuery' cannot be null.");
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated
