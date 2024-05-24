@@ -13,14 +13,11 @@ import java.util.Collections;
 import java.util.List;
 
 public class QueriesTests {
-    private static QueriesAsyncClient asyncClient;
-
     private static QueriesClient client;
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new QueriesClientBuilder().buildAsyncClient();
-        client = new QueriesClientBuilder().buildClient();
+        client = new QueriesClientBuilder().globalStringPath("global").buildClient();
     }
 
     @Test

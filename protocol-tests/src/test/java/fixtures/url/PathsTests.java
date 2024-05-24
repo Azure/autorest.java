@@ -16,14 +16,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PathsTests {
-    private static PathsAsyncClient asyncClient;
-
     private static PathsClient client;
 
     @BeforeAll
     public static void setup() {
-        asyncClient = new PathsClientBuilder().buildAsyncClient();
-        client = new PathsClientBuilder().buildClient();
+        client = new PathsClientBuilder().globalStringPath("global").buildClient();
     }
 
     @Test
