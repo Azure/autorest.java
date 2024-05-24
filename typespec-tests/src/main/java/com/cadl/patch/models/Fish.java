@@ -24,7 +24,7 @@ public class Fish implements JsonSerializable<Fish> {
      * The kind property.
      */
     @Generated
-    private String kind;
+    private String kind = "Fish";
 
     /*
      * The id property.
@@ -104,7 +104,6 @@ public class Fish implements JsonSerializable<Fish> {
      */
     @Generated
     public Fish() {
-        this.kind = "Fish";
         this.updatedProperties.add("kind");
     }
 
@@ -276,9 +275,7 @@ public class Fish implements JsonSerializable<Fish> {
                 }
                 // Use the discriminator value to determine which subtype should be deserialized.
                 if ("shark".equals(discriminatorValue)) {
-                    return Shark.fromJsonKnownDiscriminator(readerToUse.reset());
-                } else if ("saw".equals(discriminatorValue)) {
-                    return SawShark.fromJson(readerToUse.reset());
+                    return Shark.fromJson(readerToUse.reset());
                 } else if ("salmon".equals(discriminatorValue)) {
                     return Salmon.fromJson(readerToUse.reset());
                 } else {

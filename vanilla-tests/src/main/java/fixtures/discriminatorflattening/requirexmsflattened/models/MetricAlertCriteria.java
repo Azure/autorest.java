@@ -21,7 +21,7 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
     /*
      * specifies the type of the alert criteria.
      */
-    private Odatatype odataType;
+    private Odatatype odataType = Odatatype.fromString("MetricAlertCriteria");
 
     /*
      * The rule criteria that defines the conditions of the alert rule.
@@ -32,7 +32,6 @@ public class MetricAlertCriteria implements JsonSerializable<MetricAlertCriteria
      * Creates an instance of MetricAlertCriteria class.
      */
     public MetricAlertCriteria() {
-        this.odataType = Odatatype.fromString("MetricAlertCriteria");
     }
 
     /**

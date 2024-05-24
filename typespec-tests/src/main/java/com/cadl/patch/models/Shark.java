@@ -20,6 +20,12 @@ import java.util.Set;
 @Fluent
 public class Shark extends Fish {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "shark";
+
+    /*
      * The sharktype property.
      */
     @Generated
@@ -51,7 +57,7 @@ public class Shark extends Fish {
      */
     @Generated
     public Shark() {
-        this.sharktype = "shark";
+        this.updatedProperties.add("kind");
         this.updatedProperties.add("sharktype");
     }
 
@@ -120,6 +126,7 @@ public class Shark extends Fish {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
+            jsonWriter.writeStringField("kind", this.kind);
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
             jsonWriter.writeStringField("sharktype", this.sharktype);
@@ -131,6 +138,13 @@ public class Shark extends Fish {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        if (updatedProperties.contains("kind")) {
+            if (this.kind == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", this.kind);
+            }
+        }
         jsonWriter.writeIntField("age", getAge());
         if (updatedProperties.contains("color")) {
             if (getColor() == null) {

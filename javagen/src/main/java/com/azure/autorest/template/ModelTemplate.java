@@ -148,7 +148,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             addProperties(model, classBlock, settings);
 
             // add jsonMergePatch related properties and accessors
-            if (ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()) {
+            if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
                 addJsonMergePatchRelatedPropertyAndAccessors(classBlock, model);
             }
 
@@ -178,7 +178,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 }
 
                 // getter method of discriminator property in subclass is handled differently
-                final boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
+                boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator()
+                    && !modelDefinesProperty(model, property);
                 if (polymorphicDiscriminatorInSubclass) {
                     classBlock.annotation("Override");
                 }
@@ -198,7 +199,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.method(methodVisibility, null,
                         model.getName() + " " + property.getSetterName() + "(" + propertyClientType + " " + property.getName() + ")",
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
-                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
+                            methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model, settings)));
                 } else {
                     // If stream-style serialization is being generated or the property is the polymorphic
                     // discriminator, some additional setters may need to be added to support read-only properties that
@@ -224,7 +225,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                                 + property.getName() + ")",
                             methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
                                 methodBlock, settings,
-                                ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()));
+                                ClientModelUtil.isJsonMergePatchModel(model, settings)));
                     }
                 }
 
@@ -256,14 +257,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                     addGeneratedAnnotation(classBlock);
                     classBlock.annotation("Override");
-
                     String methodSignature = model.getName() + " " + parentProperty.getSetterName() + "("
                         + parentProperty.getClientType() + " " + parentProperty.getName() + ")";
 
                     classBlock.publicMethod(methodSignature, methodBlock -> {
                         methodBlock.line(
                             "super." + parentProperty.getSetterName() + "(" + parentProperty.getName() + ");");
-                        if (ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()) {
+                        if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
                             methodBlock.line("this.updatedProperties.add(\"" + parentProperty.getName() + "\");");
                         }
                         methodBlock.methodReturn("this");
@@ -377,7 +377,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         model.addImportsTo(imports, settings);
 
         // add Json merge patch related imports
-        if (ClientModelUtil.isJsonMergePatchModel(model) && settings.isStreamStyleSerialization()) {
+        if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
             imports.add(settings.getPackage(settings.getImplementationSubpackage()) + "." + ClientModelUtil.JSON_MERGE_PATCH_HELPER_CLASS_NAME);
             imports.add(Set.class.getName());
             imports.add(HashSet.class.getName());
@@ -539,71 +539,82 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * @param settings AutoRest configuration settings.
      */
     private void addProperties(ClientModel model, JavaClass classBlock, JavaSettings settings) {
+        for (ClientModelProperty parentDiscriminator : model.getParentPolymorphicDiscriminators()) {
+            addProperty(parentDiscriminator, model, classBlock, settings);
+        }
+
         for (ClientModelProperty property : model.getProperties()) {
-//            if (property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property)) {
-//                // Only the super most parent model should have the polymorphic discriminator as a field.
-//                // The child models should use the parent's field. If the polymorphic property is required, it will be
-//                // initialized in the parent's constructor. Otherwise, it will be set using the package-private setter.
-//                continue;
-//            }
+            addProperty(property, model, classBlock, settings);
+        }
+    }
 
-            String propertyName = property.getName();
-            IType propertyType = property.getWireType();
+    private void addProperty(ClientModelProperty property, ClientModel model, JavaClass classBlock,
+        JavaSettings settings) {
+        String propertyName = property.getName();
+        IType propertyType = property.getWireType();
 
-            String fieldSignature;
-            if (model.isUsedInXml()) {
-                if (property.isXmlWrapper()) {
-                    if (!settings.isStreamStyleSerialization()) {
-                        String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
-                        classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
-                            innerClass -> addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
+        String defaultValue;
+        if (property.isPolymorphicDiscriminator()) {
+            defaultValue = (property.getDefaultValue() == null)
+                ? property.getClientType().defaultValueExpression(model.getSerializedName())
+                : property.getDefaultValue();
+        } else {
+            defaultValue = property.getDefaultValue();
+        }
 
-                        fieldSignature = xmlWrapperClassName + " " + propertyName;
-                    } else {
-                        fieldSignature = propertyType + " " + propertyName;
-                    }
-                } else if (propertyType instanceof ListType) {
-                    fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
+        String fieldSignature;
+        if (model.isUsedInXml()) {
+            if (property.isXmlWrapper()) {
+                if (!settings.isStreamStyleSerialization()) {
+                    String xmlWrapperClassName = getPropertyXmlWrapperClassName(property);
+                    classBlock.staticFinalClass(JavaVisibility.PackagePrivate, xmlWrapperClassName,
+                        innerClass -> addXmlWrapperClass(innerClass, property, xmlWrapperClassName, settings));
+
+                    fieldSignature = xmlWrapperClassName + " " + propertyName;
                 } else {
-                    // handle x-ms-client-default
-                    // Only set the property to a default value if the property isn't included in the constructor.
-                    // There can be cases with polymorphic discriminators where they have both a default value and are
-                    // required, in which case the default value will be set in the constructor.
-                    if (property.getDefaultValue() != null
-                        && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
-                        fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
-                    } else {
-                        fieldSignature = propertyType + " " + propertyName;
-                    }
+                    fieldSignature = propertyType + " " + propertyName;
                 }
+            } else if (propertyType instanceof ListType) {
+                fieldSignature = propertyType + " " + propertyName + " = new ArrayList<>()";
             } else {
-                if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
-                    // if the property of flattened model is required, initialize it
-                    fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
+                // handle x-ms-client-default
+                // Only set the property to a default value if the property isn't included in the constructor.
+                // There can be cases with polymorphic discriminators where they have both a default value and are
+                // required, in which case the default value will be set in the constructor.
+                if (defaultValue != null
+                    && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
+                    fieldSignature = propertyType + " " + propertyName + " = " + defaultValue;
                 } else {
-                    // handle x-ms-client-default
-                    // Only set the property to a default value if the property isn't included in the constructor.
-                    // There can be cases with polymorphic discriminators where they have both a default value and are
-                    // required, in which case the default value will be set in the constructor.
-                    if (property.getDefaultValue() != null
-                        && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
-                        fieldSignature = propertyType + " " + propertyName + " = " + property.getDefaultValue();
-                    } else {
-                        fieldSignature = propertyType + " " + propertyName;
-                    }
+                    fieldSignature = propertyType + " " + propertyName;
                 }
             }
-
-            classBlock.blockComment(comment -> comment.line(property.getDescription()));
-
-            addGeneratedAnnotation(classBlock);
-            addFieldAnnotations(model, property, classBlock, settings);
-
-            if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
-                classBlock.privateFinalMemberVariable(fieldSignature);
+        } else {
+            if (property.getClientFlatten() && property.isRequired() && property.getClientType() instanceof ClassType) {
+                // if the property of flattened model is required, initialize it
+                fieldSignature = propertyType + " " + propertyName + " = new " + propertyType + "()";
             } else {
-                classBlock.privateMemberVariable(fieldSignature);
+                // handle x-ms-client-default
+                // Only set the property to a default value if the property isn't included in the constructor.
+                // There can be cases with polymorphic discriminators where they have both a default value and are
+                // required, in which case the default value will be set in the constructor.
+                if (defaultValue != null
+                    && (!ClientModelUtil.includePropertyInConstructor(property, settings) || property.isConstant())) {
+                    fieldSignature = propertyType + " " + propertyName + " = " + defaultValue;
+                } else {
+                    fieldSignature = propertyType + " " + propertyName;
+                }
             }
+        }
+
+        classBlock.blockComment(comment -> comment.line(property.getDescription()));
+
+        addGeneratedAnnotation(classBlock);
+        addFieldAnnotations(model, property, classBlock, settings);
+
+        if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
+            classBlock.privateFinalMemberVariable(fieldSignature);
+        } else {
+            classBlock.privateMemberVariable(fieldSignature);
         }
     }
 
@@ -814,19 +825,13 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // If there is a polymorphic discriminator , add a line to initialize the discriminator.
             ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
             if (polymorphicProperty != null && !polymorphicProperty.isRequired()) {
-                String discriminatorValue = polymorphicProperty.getDefaultValue() != null
-                    ? polymorphicProperty.getDefaultValue()
-                    : polymorphicProperty.getClientType().defaultValueExpression(model.getSerializedName());
+                if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
+                    for (ClientModelProperty property : model.getParentPolymorphicDiscriminators()) {
+                        constructor.line("this.updatedProperties.add(\"" + property.getName() + "\");");
+                    }
 
-                if (modelDefinesProperty(model, polymorphicProperty)) {
-                    constructor.line("this." + polymorphicProperty.getName() + " = " + discriminatorValue + ";");
-                }
-                if (settings.isStreamStyleSerialization() && ClientModelUtil.isJsonMergePatchModel(model)) {
                     constructor.line("this.updatedProperties.add(\"" + polymorphicProperty.getName() + "\");");
                 }
-//                else {
-//                    constructor.line(polymorphicProperty.getSetterName() + "(" + discriminatorValue + ");");
-//                }
             }
 
             // constant properties should already be initialized in class variable definition

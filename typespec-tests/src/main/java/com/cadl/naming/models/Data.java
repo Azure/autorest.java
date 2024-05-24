@@ -22,14 +22,13 @@ public class Data implements JsonSerializable<Data> {
      * The @data.kind property.
      */
     @Generated
-    private String type;
+    private String type = "Data";
 
     /**
      * Creates an instance of Data class.
      */
     @Generated
     protected Data() {
-        this.type = "Data";
     }
 
     /**

@@ -20,6 +20,12 @@ import java.util.Set;
 @Fluent
 public final class SawShark extends Shark {
     /*
+     * The kind property.
+     */
+    @Generated
+    private String kind = "shark";
+
+    /*
      * The sharktype property.
      */
     @Generated
@@ -36,6 +42,7 @@ public final class SawShark extends Shark {
      */
     @Generated
     public SawShark() {
+        this.updatedProperties.add("kind");
         this.updatedProperties.add("sharktype");
     }
 
@@ -93,6 +100,7 @@ public final class SawShark extends Shark {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
+            jsonWriter.writeStringField("kind", this.kind);
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
             jsonWriter.writeNumberField("weight", getWeight());
@@ -104,6 +112,13 @@ public final class SawShark extends Shark {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
+        if (updatedProperties.contains("kind")) {
+            if (this.kind == null) {
+                jsonWriter.writeNullField("kind");
+            } else {
+                jsonWriter.writeStringField("kind", this.kind);
+            }
+        }
         jsonWriter.writeIntField("age", getAge());
         if (updatedProperties.contains("color")) {
             if (getColor() == null) {

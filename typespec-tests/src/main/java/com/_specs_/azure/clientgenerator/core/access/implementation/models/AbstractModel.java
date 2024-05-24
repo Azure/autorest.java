@@ -21,7 +21,7 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
      * The kind property.
      */
     @Generated
-    private String kind;
+    private String kind = "AbstractModel";
 
     /*
      * The name property.
@@ -36,7 +36,6 @@ public class AbstractModel implements JsonSerializable<AbstractModel> {
      */
     @Generated
     protected AbstractModel(String name) {
-        this.kind = "AbstractModel";
         this.name = name;
     }
 

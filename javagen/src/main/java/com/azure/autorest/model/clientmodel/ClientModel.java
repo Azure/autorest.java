@@ -48,6 +48,10 @@ public class ClientModel {
     private final boolean isPolymorphicParent;
 
     /**
+     * Get the properties used by parent models as polymorphic discriminators.
+     */
+    private final List<ClientModelProperty> parentPolymorphicDiscriminators;
+    /**
      * Get the property that determines which polymorphic model type to create.
      */
     private final ClientModelProperty polymorphicDiscriminator;
@@ -148,6 +152,7 @@ public class ClientModel {
      * @param implementationDetails The implementation details for the model.
      * @param usedInXml Whether the model is used in XML serialization.
      * @param crossLanguageDefinitionId The cross language definition id for the model.
+     *
      */
     protected ClientModel(String packageKeyword, String name, List<String> imports, String description,
         boolean isPolymorphic, ClientModelProperty polymorphicDiscriminator, String polymorphicDiscriminatorName,
@@ -163,6 +168,7 @@ public class ClientModel {
         this.description = description;
         this.isPolymorphic = isPolymorphic;
         this.isPolymorphicParent = isPolymorphic && !CoreUtils.isNullOrEmpty(derivedModels);
+        this.parentPolymorphicDiscriminators = new ArrayList<>();
         this.polymorphicDiscriminator = polymorphicDiscriminator;
         this.polymorphicDiscriminatorName = polymorphicDiscriminatorName;
         this.serializedName = serializedName;
@@ -251,6 +257,28 @@ public class ClientModel {
      */
     public final boolean isPolymorphicParent() {
         return isPolymorphicParent;
+    }
+
+    /**
+     * Gets the properties used by parent models as polymorphic discriminators.
+     * <p>
+     * The only time this will return a non-empty list is when this model is used in a multi-level polymorphic
+     * hierarchy. Or, as an example, if the root model uses a polymorphic discriminator of {@code kind} and this model
+     * uses a polymorphic discriminator of {@code type} this will have a single property where the serialized name is
+     * {@code kind} and the default value for it will be what to root model uses to determine that this is the model
+     * that should be deserialized. Continuing this example, the third level models, or those that are determined by the
+     * {@code type} value, will also have a single property where the serialized name is {@code kind} and the default
+     * value will be what the second level model uses to determine that this is the model that should be deserialized.
+     * This is because the {@code kind} property will always need to be present for these models. If there are even
+     * deeper levels of polymorphism, the same pattern will continue. So, if in the third level there is a model that
+     * introduces another polymorphic discriminator of {@code format} that model would have two properties in this list,
+     * one with {@code kind} with a default that determined the second level model and one with {@code type} with a
+     * default that determined the third level model. The fourth level model would then have both as well.
+     *
+     * @return The properties used by parent models as polymorphic discriminators.
+     */
+    public final List<ClientModelProperty> getParentPolymorphicDiscriminators() {
+        return parentPolymorphicDiscriminators;
     }
 
     /**
