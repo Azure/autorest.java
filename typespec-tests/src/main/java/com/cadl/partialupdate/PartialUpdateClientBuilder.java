@@ -223,6 +223,7 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
 
     @Generated
     private HttpPipeline createHttpPipeline() {
+        this.validateBuilder();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
@@ -279,4 +280,11 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
     }
 
     private static final ClientLogger LOGGER = new ClientLogger(PartialUpdateClientBuilder.class);
+
+    @Generated
+    private void validateBuilder() {
+        // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+    }
 }

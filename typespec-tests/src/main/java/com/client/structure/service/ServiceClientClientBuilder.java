@@ -254,7 +254,16 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
     }
 
     @Generated
+    private void validateBuilder() {
+        // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+        Objects.requireNonNull(client, "'client' cannot be null.");
+    }
+
+    @Generated
     private HttpPipeline createHttpPipeline() {
+        this.validateBuilder();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
