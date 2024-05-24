@@ -104,7 +104,6 @@ public class Fish implements JsonSerializable<Fish> {
      */
     @Generated
     public Fish() {
-        this.updatedProperties.add("kind");
     }
 
     /**
@@ -230,14 +229,10 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("kind")) {
-            if (this.kind == null) {
-                jsonWriter.writeNullField("kind");
-            } else {
-                jsonWriter.writeStringField("kind", this.kind);
-            }
+        jsonWriter.writeStringField("kind", this.kind);
+        if (updatedProperties.contains("age")) {
+            jsonWriter.writeIntField("age", this.age);
         }
-        jsonWriter.writeIntField("age", this.age);
         if (updatedProperties.contains("color")) {
             if (this.color == null) {
                 jsonWriter.writeNullField("color");

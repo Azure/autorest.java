@@ -822,17 +822,20 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 constructor.line("super(" + superProperties + ");");
             }
 
+            // If we're always adding the polymorphic discriminator to updated properties, may as well just make the
+            // serialization always add them. This will remove the need to track them, further reducing Set updating and
+            // querying, which can improve performance in high throughput scenarios.
             // If there is a polymorphic discriminator , add a line to initialize the discriminator.
-            ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
-            if (polymorphicProperty != null && !polymorphicProperty.isRequired()) {
-                if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
-                    for (ClientModelProperty property : model.getParentPolymorphicDiscriminators()) {
-                        constructor.line("this.updatedProperties.add(\"" + property.getName() + "\");");
-                    }
-
-                    constructor.line("this.updatedProperties.add(\"" + polymorphicProperty.getName() + "\");");
-                }
-            }
+//            ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
+//            if (polymorphicProperty != null && !polymorphicProperty.isRequired()) {
+//                if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
+//                    for (ClientModelProperty property : model.getParentPolymorphicDiscriminators()) {
+//                        constructor.line("this.updatedProperties.add(\"" + property.getName() + "\");");
+//                    }
+//
+//                    constructor.line("this.updatedProperties.add(\"" + polymorphicProperty.getName() + "\");");
+//                }
+//            }
 
             // constant properties should already be initialized in class variable definition
 //            // Then, add all constant properties.
