@@ -162,46 +162,32 @@ public final class JobResult implements JsonSerializable<JobResult> {
     @Generated
     public static JobResult fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            JobStatus status = null;
-            OffsetDateTime createdDateTime = null;
-            OffsetDateTime expirationDateTime = null;
-            OffsetDateTime lastUpdateDateTime = null;
-            ResponseError error = null;
-            JobResultResult result = null;
+            JobResult deserializedJobResult = new JobResult();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    deserializedJobResult.id = reader.getString();
                 } else if ("status".equals(fieldName)) {
-                    status = JobStatus.fromString(reader.getString());
+                    deserializedJobResult.status = JobStatus.fromString(reader.getString());
                 } else if ("createdDateTime".equals(fieldName)) {
-                    createdDateTime
+                    deserializedJobResult.createdDateTime
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("expirationDateTime".equals(fieldName)) {
-                    expirationDateTime
+                    deserializedJobResult.expirationDateTime
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("lastUpdateDateTime".equals(fieldName)) {
-                    lastUpdateDateTime
+                    deserializedJobResult.lastUpdateDateTime
                         = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
                 } else if ("error".equals(fieldName)) {
-                    error = ResponseError.fromJson(reader);
+                    deserializedJobResult.error = ResponseError.fromJson(reader);
                 } else if ("result".equals(fieldName)) {
-                    result = JobResultResult.fromJson(reader);
+                    deserializedJobResult.result = JobResultResult.fromJson(reader);
                 } else {
                     reader.skipChildren();
                 }
             }
-            JobResult deserializedJobResult = new JobResult();
-            deserializedJobResult.id = id;
-            deserializedJobResult.status = status;
-            deserializedJobResult.createdDateTime = createdDateTime;
-            deserializedJobResult.expirationDateTime = expirationDateTime;
-            deserializedJobResult.lastUpdateDateTime = lastUpdateDateTime;
-            deserializedJobResult.error = error;
-            deserializedJobResult.result = result;
 
             return deserializedJobResult;
         });

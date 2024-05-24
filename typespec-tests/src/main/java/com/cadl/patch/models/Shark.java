@@ -18,15 +18,18 @@ import java.util.Set;
  * The second level model in polymorphic multiple levels inheritance and it defines a new discriminator.
  */
 @Fluent
-public final class Shark extends Fish {
+public class Shark extends Fish {
     /*
-     * The kind property.
+     * The sharktype property.
      */
     @Generated
-    private String kind = "shark";
+    private String sharktype = "shark";
 
+    /*
+     * The weight property.
+     */
     @Generated
-    private boolean jsonMergePatch;
+    private Integer weight;
 
     /**
      * Stores updated model property, the value is property name, not serialized name.
@@ -34,15 +37,12 @@ public final class Shark extends Fish {
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
     static {
-        JsonMergePatchHelper.setSharkAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setSharkAccessor(new JsonMergePatchHelper.SharkAccessor() {
+            @Override
+            public void setWeight(Shark model, Integer weight) {
+                model.weight = weight;
+            }
         });
     }
 
@@ -51,18 +51,41 @@ public final class Shark extends Fish {
      */
     @Generated
     public Shark() {
-        this.updatedProperties.add("kind");
+        this.sharktype = "shark";
+        this.updatedProperties.add("sharktype");
     }
 
     /**
-     * Get the kind property: The kind property.
+     * Get the sharktype property: The sharktype property.
      * 
-     * @return the kind value.
+     * @return the sharktype value.
      */
     @Generated
-    @Override
-    public String getKind() {
-        return this.kind;
+    public String getSharktype() {
+        return this.sharktype;
+    }
+
+    /**
+     * Get the weight property: The weight property.
+     * 
+     * @return the weight value.
+     */
+    @Generated
+    public Integer getWeight() {
+        return this.weight;
+    }
+
+    /**
+     * Set the weight property: The weight property.
+     * 
+     * @param weight the weight value to set.
+     * @return the Shark object itself.
+     */
+    @Generated
+    public Shark setWeight(Integer weight) {
+        this.weight = weight;
+        this.updatedProperties.add("weight");
+        return this;
     }
 
     /**
@@ -93,13 +116,14 @@ public final class Shark extends Fish {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
+        if (JsonMergePatchHelper.getFishAccessor().isJsonMergePatch(this)) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
             jsonWriter.writeIntField("age", getAge());
             jsonWriter.writeStringField("color", getColor());
-            jsonWriter.writeStringField("kind", this.kind);
+            jsonWriter.writeStringField("sharktype", this.sharktype);
+            jsonWriter.writeNumberField("weight", this.weight);
             return jsonWriter.writeEndObject();
         }
     }
@@ -115,11 +139,18 @@ public final class Shark extends Fish {
                 jsonWriter.writeStringField("color", getColor());
             }
         }
-        if (updatedProperties.contains("kind")) {
-            if (this.kind == null) {
-                jsonWriter.writeNullField("kind");
+        if (updatedProperties.contains("sharktype")) {
+            if (this.sharktype == null) {
+                jsonWriter.writeNullField("sharktype");
             } else {
-                jsonWriter.writeStringField("kind", this.kind);
+                jsonWriter.writeStringField("sharktype", this.sharktype);
+            }
+        }
+        if (updatedProperties.contains("weight")) {
+            if (this.weight == null) {
+                jsonWriter.writeNullField("weight");
+            } else {
+                jsonWriter.writeNumberField("weight", this.weight);
             }
         }
         return jsonWriter.writeEndObject();
@@ -137,35 +168,53 @@ public final class Shark extends Fish {
     @Generated
     public static Shark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
-            int age = 0;
-            String color = null;
-            String kind = "shark";
+            String discriminatorValue = null;
+            try (JsonReader readerToUse = reader.bufferObject()) {
+                readerToUse.nextToken(); // Prepare for reading
+                while (readerToUse.nextToken() != JsonToken.END_OBJECT) {
+                    String fieldName = readerToUse.getFieldName();
+                    readerToUse.nextToken();
+                    if ("sharktype".equals(fieldName)) {
+                        discriminatorValue = readerToUse.getString();
+                        break;
+                    } else {
+                        readerToUse.skipChildren();
+                    }
+                }
+                // Use the discriminator value to determine which subtype should be deserialized.
+                if ("saw".equals(discriminatorValue)) {
+                    return SawShark.fromJson(readerToUse.reset());
+                } else {
+                    return fromJsonKnownDiscriminator(readerToUse.reset());
+                }
+            }
+        });
+    }
+
+    @Generated
+    static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
+        return jsonReader.readObject(reader -> {
+            Shark deserializedShark = new Shark();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setId(deserializedShark, reader.getString());
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setName(deserializedShark, reader.getString());
                 } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
+                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedShark, reader.getInt());
                 } else if ("color".equals(fieldName)) {
-                    color = reader.getString();
-                } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedShark, reader.getString());
+                } else if ("sharktype".equals(fieldName)) {
+                    deserializedShark.sharktype = reader.getString();
+                } else if ("weight".equals(fieldName)) {
+                    deserializedShark.weight = reader.getNullable(JsonReader::getInt);
                 } else {
                     reader.skipChildren();
                 }
             }
-            Shark deserializedShark = new Shark();
-            deserializedShark.setId(id);
-            deserializedShark.setName(name);
-            deserializedShark.setAge(age);
-            deserializedShark.setColor(color);
-            deserializedShark.kind = kind;
 
             return deserializedShark;
         });

@@ -784,11 +784,13 @@ abstract class ConvenienceMethodTemplateBase {
      * @return the name of the variable that holds the converted parameter
      */
     private static String writeParameterConversionExpressionWithJsonMergePatchEnabled(JavaBlock javaBlock, String convenientParameterTypeName, String convenientParameterName, String expression) {
-            String variableName = convenientParameterName + "InBinaryData";
-            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
-            javaBlock.line(String.format("BinaryData %1$s = BinaryData.fromBytes(%2$s.toBytes());", variableName, expression)); // BinaryData.fromObject() will not fire serialization, use toBytes() to fire serialization
-            javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
-            return variableName;
+        String variableName = convenientParameterName + "InBinaryData";
+        javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, true);", convenientParameterTypeName, convenientParameterName));
+        javaBlock.line("BinaryData " + variableName + " = " + expression + ";");
+        javaBlock.line("// BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.");
+        javaBlock.line(variableName + ".getLength();");
+        javaBlock.line(String.format("JsonMergePatchHelper.get%1$sAccessor().prepareModelForJsonMergePatch(%2$s, false);", convenientParameterTypeName, convenientParameterName));
+        return variableName;
     }
 
     protected static class MethodParameter {

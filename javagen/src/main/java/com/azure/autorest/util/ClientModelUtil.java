@@ -460,7 +460,7 @@ public class ClientModelUtil {
      */
     public static boolean isJsonMergePatchModel(ClientModel model) {
         return model.getImplementationDetails() != null && model.getImplementationDetails().getUsages() != null
-                && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.JSON_MERGE_PATCH);
+            && model.getImplementationDetails().getUsages().contains(ImplementationDetails.Usage.JSON_MERGE_PATCH);
     }
 
     /**

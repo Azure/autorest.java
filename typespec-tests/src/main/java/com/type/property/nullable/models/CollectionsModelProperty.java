@@ -33,9 +33,6 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
     @Generated
     private List<InnerModel> nullableProperty;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -43,15 +40,28 @@ public final class CollectionsModelProperty implements JsonSerializable<Collecti
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+    private boolean jsonMergePatch;
+
+    @Generated
+    private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setCollectionsModelPropertyAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
+        JsonMergePatchHelper
+            .setCollectionsModelPropertyAccessor(new JsonMergePatchHelper.CollectionsModelPropertyAccessor() {
+                @Override
+                public CollectionsModelProperty prepareModelForJsonMergePatch(CollectionsModelProperty model,
+                    boolean jsonMergePatchEnabled) {
+                    model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                    return model;
+                }
+
+                @Override
+                public boolean isJsonMergePatch(CollectionsModelProperty model) {
+                    return model.jsonMergePatch;
+                }
+            });
     }
 
     /**

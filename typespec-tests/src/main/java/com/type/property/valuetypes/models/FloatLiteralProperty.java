@@ -63,13 +63,15 @@ public final class FloatLiteralProperty implements JsonSerializable<FloatLiteral
     @Generated
     public static FloatLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            FloatLiteralProperty deserializedFloatLiteralProperty = new FloatLiteralProperty();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 reader.skipChildren();
             }
-            return new FloatLiteralProperty();
+
+            return deserializedFloatLiteralProperty;
         });
     }
 }
