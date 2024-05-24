@@ -43,8 +43,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
@@ -168,7 +168,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     ? JavaVisibility.Private
                     : JavaVisibility.Public;
 
-                generateGetterJavadoc(classBlock, model, property);
+                generateGetterJavadoc(classBlock, property);
                 addGeneratedAnnotation(classBlock);
                 if (property.isAdditionalProperties() && !settings.isStreamStyleSerialization()) {
                     classBlock.annotation("JsonAnyGetter");
@@ -235,15 +235,16 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     addGeneratedAnnotation(classBlock);
                     classBlock.annotation("JsonAnySetter");
                     MapType mapType = (MapType) property.getClientType();
-                    classBlock.packagePrivateMethod(String.format("void %s(String key, %s value)", property.getSetterName(), mapType.getValueType()), (methodBlock) -> {
+                    String methodSignature = "void " + property.getSetterName() + "(String key, "
+                        + mapType.getValueType() + " value)";
+                    classBlock.packagePrivateMethod(methodSignature, methodBlock -> {
                         // The additional properties are null by default, so if this is the first time the value is
                         // being added create the containing map.
-                        // TODO (alzimmer): Should we use LinkedHashMap to retain insertion order?
                         methodBlock.ifBlock(property.getName() + " == null",
-                            ifBlock -> ifBlock.line("%s = new HashMap<>();", property.getName()));
+                            ifBlock -> ifBlock.line(property.getName() + " = new LinkedHashMap<>();"));
 
-                        methodBlock.line("%s.put(%s, value);", property.getName(),
-                            model.getNeedsFlatten() ? "KEY_ESCAPER.matcher(key).replaceAll(\".\")" : "key");
+                        String key = model.getNeedsFlatten() ? "KEY_ESCAPER.matcher(key).replaceAll(\".\")" : "key";
+                        methodBlock.line(property.getName() + ".put(" + key + ", value);");
                     });
                 }
             }
@@ -256,19 +257,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     classBlock.javadocComment(JavaJavadocComment::inheritDoc);
                     addGeneratedAnnotation(classBlock);
                     classBlock.annotation("Override");
-                    classBlock.publicMethod(String.format("%s %s(%s %s)",
-                            model.getName(),
-                            parentProperty.getSetterName(),
-                            parentProperty.getClientType(),
-                            parentProperty.getName()),
-                        methodBlock -> {
-                            methodBlock.line(String.format("super.%1$s(%2$s);", parentProperty.getSetterName(),
-                                parentProperty.getName()));
-                            if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
-                                methodBlock.line(String.format("this.updatedProperties.add(\"%s\");", parentProperty.getName()));
-                            }
-                            methodBlock.methodReturn("this");
-                        });
+                    String methodSignature = model.getName() + " " + parentProperty.getSetterName() + "("
+                        + parentProperty.getClientType() + " " + parentProperty.getName() + ")";
+
+                    classBlock.publicMethod(methodSignature, methodBlock -> {
+                        methodBlock.line(
+                            "super." + parentProperty.getSetterName() + "(" + parentProperty.getName() + ");");
+                        if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
+                            methodBlock.line("this.updatedProperties.add(\"" + parentProperty.getName() + "\");");
+                        }
+                        methodBlock.methodReturn("this");
+                    });
                 }
             }
 
@@ -292,26 +291,26 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     final IType propertyClientTypeFinal = propertyClientType;
 
                     // getter
-                    generateGetterJavadoc(classBlock, model, property);
+                    generateGetterJavadoc(classBlock, property);
                     addGeneratedAnnotation(classBlock);
-                    classBlock.publicMethod(String.format("%1$s %2$s()", propertyClientType, propertyReference.getGetterName()), methodBlock -> {
+                    classBlock.publicMethod(propertyClientType + " " + propertyReference.getGetterName() + "()", methodBlock -> {
                         // use ternary operator to avoid directly return null
-                        String ifClause = String.format("this.%1$s() == null", targetProperty.getGetterName());
+                        String ifClause = "this." + targetProperty.getGetterName() + "() == null";
                         String nullClause = propertyClientTypeFinal.defaultValueExpression();
-                        String valueClause = String.format("this.%1$s().%2$s()", targetProperty.getGetterName(), property.getGetterName());
+                        String valueClause = "this." + targetProperty.getGetterName() + "()." + property.getGetterName() + "()";
 
-                        methodBlock.methodReturn(String.format("%1$s ? %2$s : %3$s", ifClause, nullClause, valueClause));
+                        methodBlock.methodReturn(ifClause + " ? " + nullClause + " : " + valueClause);
                     });
 
                     // setter
                     if (!propertyIsReadOnly) {
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
-                        classBlock.publicMethod(String.format("%1$s %2$s(%3$s %4$s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
-                            methodBlock.ifBlock(String.format("this.%1$s() == null", targetProperty.getGetterName()), ifBlock ->
-                                methodBlock.line(String.format("this.%1$s = new %2$s();", targetProperty.getName(), propertyReference.getTargetModelType())));
+                        classBlock.publicMethod(String.format("%s %s(%s %s)", model.getName(), propertyReference.getSetterName(), propertyClientType, property.getName()), methodBlock -> {
+                            methodBlock.ifBlock(String.format("this.%s() == null", targetProperty.getGetterName()), ifBlock ->
+                                methodBlock.line(String.format("this.%s = new %s();", targetProperty.getName(), propertyReference.getTargetModelType())));
 
-                            methodBlock.line(String.format("this.%1$s().%2$s(%3$s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
+                            methodBlock.line(String.format("this.%s().%s(%s);", targetProperty.getGetterName(), property.getSetterName(), property.getName()));
                             methodBlock.methodReturn("this");
                         });
                     }
@@ -351,7 +350,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
             // Also add any potential imports needed to convert the header to the strong type.
             // If the import isn't used it will be removed later on.
             imports.add(Base64.class.getName());
-            imports.add(HashMap.class.getName());
+            imports.add(LinkedHashMap.class.getName());
             imports.add(HttpHeader.class.getName());
             imports.add(UUID.class.getName());
             imports.add(URL.class.getName());
@@ -472,10 +471,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     protected void addClassLevelAnnotations(ClientModel model, JavaFile javaFile, JavaSettings settings) {
         if (model.isUsedInXml()) {
             if (!CoreUtils.isNullOrEmpty(model.getXmlNamespace())) {
-                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\", namespace = \"%2$s\")",
-                    model.getXmlName(), model.getXmlNamespace()));
+                javaFile.annotation("JacksonXmlRootElement(localName = \"" + model.getXmlName() + "\", "
+                    + "namespace = \"" + model.getXmlNamespace() + "\")");
             } else {
-                javaFile.annotation(String.format("JacksonXmlRootElement(localName = \"%1$s\")", model.getXmlName()));
+                javaFile.annotation("JacksonXmlRootElement(localName = \"" + model.getXmlName() + "\")");
             }
         }
 
@@ -962,16 +961,17 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
 
         if (sourceTypeName.equals(targetTypeName)) {
             if (treatAsXml && property.isXmlWrapper() && (property.getWireType() instanceof IterableType)) {
+                String thisGetName = "this." + property.getName();
                 if (settings.isStreamStyleSerialization()) {
-                    methodBlock.ifBlock("this." + property.getName() + " == null", ifBlock ->
-                        ifBlock.line("this." + property.getName() + " = new ArrayList<>();"));
+                    methodBlock.ifBlock(thisGetName + " == null", ifBlock ->
+                        ifBlock.line(thisGetName + " = new ArrayList<>();"));
                     methodBlock.methodReturn("this." + property.getName());
                 } else {
-                    methodBlock.ifBlock(String.format("this.%s == null", property.getName()), ifBlock ->
+                    methodBlock.ifBlock(thisGetName + " == null", ifBlock ->
                         ifBlock.line("this.%s = new %s(new ArrayList<%s>());", property.getName(),
                             getPropertyXmlWrapperClassName(property),
                             ((GenericType) property.getWireType()).getTypeArguments()[0]));
-                    methodBlock.methodReturn(String.format("this.%s.items", property.getName()));
+                    methodBlock.methodReturn(thisGetName + ".items");
                 }
             } else {
                 methodBlock.methodReturn(expression);
@@ -1029,7 +1029,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         }
 
         if (isJsonMergePatchModel) {
-            methodBlock.line(String.format("this.updatedProperties.add(\"%s\");", property.getName()));
+            methodBlock.line("this.updatedProperties.add(\"" + property.getName() + "\");");
         }
 
         methodBlock.methodReturn("this");
@@ -1059,21 +1059,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         JavaIfBlock nullCheck = methodBlock.ifBlock(String.format("%s() == null", getGetterName(model, property)), ifBlock -> {
                             final String errorMessage = String.format("\"Missing required property %s in model %s\"", property.getName(), model.getName());
                             if (settings.isUseClientLogger()) {
-                                ifBlock.line(String.format(
-                                    "throw LOGGER.atError().log(new IllegalArgumentException(%s));",
-                                    errorMessage));
+                                ifBlock.line(
+                                    "throw LOGGER.atError().log(new IllegalArgumentException(" + errorMessage + "));");
                             } else {
-                                ifBlock.line(String.format(
-                                    "throw new IllegalArgumentException(%s);",
-                                    errorMessage));
+                                ifBlock.line("throw new IllegalArgumentException(" + errorMessage + ");");
                             }
                         });
                         if (validation != null) {
                             nullCheck.elseBlock(elseBlock -> elseBlock.line(validation + ";"));
                         }
                     } else if (validation != null) {
-                        methodBlock.ifBlock(String.format("%s() != null", getGetterName(model, property)), ifBlock ->
-                            ifBlock.line(validation + ";"));
+                        methodBlock.ifBlock(getGetterName(model, property) + "() != null",
+                            ifBlock -> ifBlock.line(validation + ";"));
                     }
                 }
             });
@@ -1221,11 +1218,10 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
     }
 
     // Javadoc for getter method
-    private static void generateGetterJavadoc(JavaClass classBlock, ClientModel model,
-        ClientModelPropertyAccess property) {
+    private static void generateGetterJavadoc(JavaClass classBlock, ClientModelPropertyAccess property) {
         classBlock.javadocComment(comment -> {
-            comment.description(String.format("Get the %1$s property: %2$s", property.getName(), property.getDescription()));
-            comment.methodReturns(String.format("the %1$s value", property.getName()));
+            comment.description("Get the " + property.getName() + " property: " + property.getDescription());
+            comment.methodReturns("the " + property.getName() + " value");
         });
     }
 
@@ -1234,15 +1230,15 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         ClientModelPropertyAccess property) {
         classBlock.javadocComment((comment) -> {
             if (property.getDescription() == null || property.getDescription().contains(MISSING_SCHEMA)) {
-                comment.description(String.format("Set the %s property", property.getName()));
+                comment.description("Set the " + property.getName() + " property");
             } else {
-                comment.description(String.format("Set the %s property: %s", property.getName(), property.getDescription()));
+                comment.description("Set the " + property.getName() + " property: " + property.getDescription());
             }
             if (property.isRequiredForCreate() && !property.isRequired()) {
                 comment.line("<p>Required when create the resource.</p>");
             }
-            comment.param(property.getName(), String.format("the %s value to set", property.getName()));
-            comment.methodReturns(String.format("the %s object itself.", model.getName()));
+            comment.param(property.getName(), "the " + property.getName() + " value to set");
+            comment.methodReturns("the " + model.getName() + " object itself.");
         });
     }
 
@@ -1261,27 +1257,76 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
      * Add json-merge-patch related flag and accessors.
      */
     private void addJsonMergePatchRelatedPropertyAndAccessors(JavaClass classBlock, ClientModel model) {
-        // properties
-        addGeneratedAnnotation(classBlock);
-        classBlock.privateMemberVariable("boolean jsonMergePatch");
+        if (!model.getImplementationDetails().isInput()) {
+            // Model doesn't get used in serialization, no need to add json merge patch related properties and
+            // accessors.
+            return;
+        }
 
-        classBlock.javadocComment(comment -> {
-            comment.description("Stores updated model property, the value is property name, not serialized name");
-        });
+        classBlock.javadocComment(comment ->
+            comment.description("Stores updated model property, the value is property name, not serialized name"));
         addGeneratedAnnotation(classBlock);
         classBlock.privateFinalMemberVariable("Set<String> updatedProperties = new HashSet<>()");
 
-        // setter
-        addGeneratedAnnotation(classBlock);
-        classBlock.packagePrivateMethod("void serializeAsJsonMergePatch(boolean jsonMergePatch)", method -> {
-            method.line("this.jsonMergePatch = jsonMergePatch;");
-        });
+        if (model.isPolymorphic() && CoreUtils.isNullOrEmpty(model.getDerivedModels())) {
+            // Only polymorphic parent models generate an accessor.
+            // If it is the super most parent model, it will generate the prepareModelForJsonMergePatch method.
+            // Other parents need to generate setters for the properties that are used in json-merge-patch, used in
+            // deserialization to prevent these properties from always being included in serialization.
+            return;
+        }
+
+        List<ClientModelProperty> setterProperties = !model.isPolymorphic() ? Collections.emptyList()
+            : model.getProperties().stream()
+                .filter(property -> !property.isConstant() && !property.isPolymorphicDiscriminator())
+                .collect(Collectors.toList());
+
+        boolean rootParent = CoreUtils.isNullOrEmpty(model.getParentModelName());
+        if (!rootParent && setterProperties.isEmpty()) {
+            // Model isn't the root parent and doesn't have any setter properties, no need to generate an accessor.
+            return;
+        }
+
+        if (rootParent) {
+            // Only the root model needs to have the jsonMergePatch property.
+            addGeneratedAnnotation(classBlock);
+            classBlock.privateMemberVariable("boolean jsonMergePatch");
+        }
+
+        if (rootParent) {
+            // setter
+            addGeneratedAnnotation(classBlock);
+            classBlock.privateMethod("void serializeAsJsonMergePatch(boolean jsonMergePatch)",
+                method -> method.line("this.jsonMergePatch = jsonMergePatch;"));
+        }
 
         // static code block to access jsonMergePatch setter
         classBlock.staticBlock(staticBlock -> {
-            staticBlock.text(String.format("JsonMergePatchHelper.set%sAccessor((model, jsonMergePatchEnabled) -> {\n" +
-                    "model.serializeAsJsonMergePatch(jsonMergePatchEnabled);\n" +
-                    "return model;\n" + "});", model.getName()));
+            String accessorName = model.getName() + "Accessor";
+            staticBlock.line("JsonMergePatchHelper.set" + accessorName + "(new JsonMergePatchHelper." + accessorName + "() {");
+            staticBlock.indent(() -> {
+                if (rootParent) {
+                    staticBlock.line("@Override");
+                    staticBlock.block("public " + model.getName() + " prepareModelForJsonMergePatch(" + model.getName()
+                        + " model, boolean jsonMergePatchEnabled)", setJsonMergePatch -> {
+                        staticBlock.line("model.serializeAsJsonMergePatch(jsonMergePatchEnabled);");
+                        staticBlock.line("return model;");
+                    });
+
+                    staticBlock.line("@Override");
+                    staticBlock.block("public boolean isJsonMergePatch(" + model.getName() + " model)",
+                        getJsonMergePatch -> getJsonMergePatch.line("return model.jsonMergePatch;"));
+                }
+
+                for (ClientModelProperty setter : setterProperties) {
+                    staticBlock.line("@Override");
+                    staticBlock.block("public void " + setter.getSetterName() + "(" + model.getName()
+                        + " model, " + setter.getWireType() + " " + setter.getName() + ")",
+                        setField -> setField.line("model." + setter.getName() + " = " + setter.getName() + ";"));
+                }
+            });
+
+            staticBlock.line("});");
         });
     }
 

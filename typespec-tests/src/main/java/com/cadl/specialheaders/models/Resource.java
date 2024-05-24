@@ -44,9 +44,6 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     private String type;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -54,14 +51,25 @@ public final class Resource implements JsonSerializable<Resource> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+    private boolean jsonMergePatch;
+
+    @Generated
+    private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setResourceAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setResourceAccessor(new JsonMergePatchHelper.ResourceAccessor() {
+            @Override
+            public Resource prepareModelForJsonMergePatch(Resource model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(Resource model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 
@@ -187,31 +195,23 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public static Resource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
-            String description = null;
-            String type = null;
+            Resource deserializedResource = new Resource();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    deserializedResource.id = reader.getString();
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedResource.name = reader.getString();
                 } else if ("description".equals(fieldName)) {
-                    description = reader.getString();
+                    deserializedResource.description = reader.getString();
                 } else if ("type".equals(fieldName)) {
-                    type = reader.getString();
+                    deserializedResource.type = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            Resource deserializedResource = new Resource();
-            deserializedResource.id = id;
-            deserializedResource.name = name;
-            deserializedResource.description = description;
-            deserializedResource.type = type;
 
             return deserializedResource;
         });

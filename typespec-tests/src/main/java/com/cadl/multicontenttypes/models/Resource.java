@@ -78,23 +78,19 @@ public final class Resource implements JsonSerializable<Resource> {
     @Generated
     public static Resource fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
+            Resource deserializedResource = new Resource();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    deserializedResource.id = reader.getString();
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedResource.name = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            Resource deserializedResource = new Resource();
-            deserializedResource.id = id;
-            deserializedResource.name = name;
 
             return deserializedResource;
         });

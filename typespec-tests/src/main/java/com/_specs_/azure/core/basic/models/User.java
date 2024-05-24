@@ -45,9 +45,6 @@ public final class User implements JsonSerializable<User> {
     @Generated
     private String etag;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -55,14 +52,25 @@ public final class User implements JsonSerializable<User> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+    private boolean jsonMergePatch;
+
+    @Generated
+    private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setUserAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setUserAccessor(new JsonMergePatchHelper.UserAccessor() {
+            @Override
+            public User prepareModelForJsonMergePatch(User model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(User model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 
@@ -188,31 +196,24 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            int id = 0;
-            String etag = null;
-            String name = null;
-            List<UserOrder> orders = null;
+            User deserializedUser = new User();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getInt();
+                    deserializedUser.id = reader.getInt();
                 } else if ("etag".equals(fieldName)) {
-                    etag = reader.getString();
+                    deserializedUser.etag = reader.getString();
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedUser.name = reader.getString();
                 } else if ("orders".equals(fieldName)) {
-                    orders = reader.readArray(reader1 -> UserOrder.fromJson(reader1));
+                    List<UserOrder> orders = reader.readArray(reader1 -> UserOrder.fromJson(reader1));
+                    deserializedUser.orders = orders;
                 } else {
                     reader.skipChildren();
                 }
             }
-            User deserializedUser = new User();
-            deserializedUser.id = id;
-            deserializedUser.etag = etag;
-            deserializedUser.name = name;
-            deserializedUser.orders = orders;
 
             return deserializedUser;
         });

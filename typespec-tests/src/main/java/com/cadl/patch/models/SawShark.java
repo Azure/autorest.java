@@ -31,26 +31,11 @@ public final class SawShark extends Shark {
     @Generated
     private String sharktype = "saw";
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
-
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
-    static {
-        JsonMergePatchHelper.setSawSharkAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
-        });
-    }
 
     /**
      * Creates an instance of SawShark class.
@@ -111,7 +96,7 @@ public final class SawShark extends Shark {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
+        if (JsonMergePatchHelper.getFishAccessor().isJsonMergePatch(this)) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
@@ -171,39 +156,28 @@ public final class SawShark extends Shark {
     @Generated
     public static SawShark fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
-            int age = 0;
-            String color = null;
-            Integer weight = null;
-            String sharktype = "saw";
+            SawShark deserializedSawShark = new SawShark();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setId(deserializedSawShark, reader.getString());
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setName(deserializedSawShark, reader.getString());
                 } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
+                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedSawShark, reader.getInt());
                 } else if ("color".equals(fieldName)) {
-                    color = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedSawShark, reader.getString());
                 } else if ("weight".equals(fieldName)) {
-                    weight = reader.getNullable(JsonReader::getInt);
+                    JsonMergePatchHelper.getSharkAccessor()
+                        .setWeight(deserializedSawShark, reader.getNullable(JsonReader::getInt));
                 } else if ("sharktype".equals(fieldName)) {
-                    sharktype = reader.getString();
+                    deserializedSawShark.sharktype = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            SawShark deserializedSawShark = new SawShark();
-            deserializedSawShark.setId(id);
-            deserializedSawShark.setName(name);
-            deserializedSawShark.setAge(age);
-            deserializedSawShark.setColor(color);
-            deserializedSawShark.setWeight(weight);
-            deserializedSawShark.sharktype = sharktype;
 
             return deserializedSawShark;
         });

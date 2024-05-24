@@ -37,24 +37,18 @@ public class Shark extends Fish {
     @Generated
     private Integer weight;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
     @Generated
     private final Set<String> updatedProperties = new HashSet<>();
 
-    @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
-        this.jsonMergePatch = jsonMergePatch;
-    }
-
     static {
-        JsonMergePatchHelper.setSharkAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setSharkAccessor(new JsonMergePatchHelper.SharkAccessor() {
+            @Override
+            public void setWeight(Shark model, Integer weight) {
+                model.weight = weight;
+            }
         });
     }
 
@@ -128,7 +122,7 @@ public class Shark extends Fish {
     @Generated
     @Override
     public JsonWriter toJson(JsonWriter jsonWriter) throws IOException {
-        if (jsonMergePatch) {
+        if (JsonMergePatchHelper.getFishAccessor().isJsonMergePatch(this)) {
             return toJsonMergePatch(jsonWriter);
         } else {
             jsonWriter.writeStartObject();
@@ -214,39 +208,27 @@ public class Shark extends Fish {
     @Generated
     static Shark fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
-            int age = 0;
-            String color = null;
-            String sharktype = "shark";
-            Integer weight = null;
+            Shark deserializedShark = new Shark();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setId(deserializedShark, reader.getString());
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setName(deserializedShark, reader.getString());
                 } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
+                    JsonMergePatchHelper.getFishAccessor().setAge(deserializedShark, reader.getInt());
                 } else if ("color".equals(fieldName)) {
-                    color = reader.getString();
+                    JsonMergePatchHelper.getFishAccessor().setColor(deserializedShark, reader.getString());
                 } else if ("sharktype".equals(fieldName)) {
-                    sharktype = reader.getString();
+                    deserializedShark.sharktype = reader.getString();
                 } else if ("weight".equals(fieldName)) {
-                    weight = reader.getNullable(JsonReader::getInt);
+                    deserializedShark.weight = reader.getNullable(JsonReader::getInt);
                 } else {
                     reader.skipChildren();
                 }
             }
-            Shark deserializedShark = new Shark();
-            deserializedShark.setId(id);
-            deserializedShark.setName(name);
-            deserializedShark.setAge(age);
-            deserializedShark.setColor(color);
-            deserializedShark.sharktype = sharktype;
-            deserializedShark.weight = weight;
 
             return deserializedShark;
         });

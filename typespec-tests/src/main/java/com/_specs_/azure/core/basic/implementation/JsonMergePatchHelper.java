@@ -13,14 +13,10 @@ import com._specs_.azure.core.basic.models.UserOrder;
 public class JsonMergePatchHelper {
     private static UserAccessor userAccessor;
 
-    private static UserOrderAccessor userOrderAccessor;
-
     public interface UserAccessor {
         User prepareModelForJsonMergePatch(User user, boolean jsonMergePatchEnabled);
-    }
 
-    public interface UserOrderAccessor {
-        UserOrder prepareModelForJsonMergePatch(UserOrder userOrder, boolean jsonMergePatchEnabled);
+        boolean isJsonMergePatch(User user);
     }
 
     public static void setUserAccessor(UserAccessor accessor) {
@@ -29,6 +25,14 @@ public class JsonMergePatchHelper {
 
     public static UserAccessor getUserAccessor() {
         return userAccessor;
+    }
+
+    private static UserOrderAccessor userOrderAccessor;
+
+    public interface UserOrderAccessor {
+        UserOrder prepareModelForJsonMergePatch(UserOrder userOrder, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(UserOrder userOrder);
     }
 
     public static void setUserOrderAccessor(UserOrderAccessor accessor) {

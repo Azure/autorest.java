@@ -19,28 +19,34 @@ public class ClientModel {
      * The package that this model class belongs to.
      */
     private final String packageName;
+
     /**
      * Get the name of this model.
      */
     private final String name;
 
     private final String fullName;
+
     /**
      * Get the imports for this model.
      */
     private final List<String> imports;
+
     /**
      * Get the description of this model.
      */
     private final String description;
+
     /**
      * Get whether this model is part of a polymorphic hierarchy.
      */
     private final boolean isPolymorphic;
+
     /**
      * Get whether this model is a parent in a polymorphic hierarchy.
      */
     private final boolean isPolymorphicParent;
+
     /**
      * Get the properties used by parent models as polymorphic discriminators.
      */
@@ -49,26 +55,32 @@ public class ClientModel {
      * Get the property that determines which polymorphic model type to create.
      */
     private final ClientModelProperty polymorphicDiscriminator;
+
     /**
      * Get the name of the property that determines which polymorphic model type to create.
      */
     private final String polymorphicDiscriminatorName;
+
     /**
      * Get the name that is used for this model when it is serialized.
      */
     private final String serializedName;
+
     /**
      * Get whether this model needs serialization flattening.
      */
     private final boolean needsFlatten;
+
     /**
      * Get the parent model of this model.
      */
     private final String parentModelName;
+
     /**
      * Get the models that derive from this model.
      */
     private final List<ClientModel> derivedModels;
+
     /**
      * Get the name that will be used for this model's XML element representation.
      */

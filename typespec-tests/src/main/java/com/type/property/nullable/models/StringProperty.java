@@ -32,9 +32,6 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
     @Generated
     private String nullableProperty;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -42,14 +39,25 @@ public final class StringProperty implements JsonSerializable<StringProperty> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+    private boolean jsonMergePatch;
+
+    @Generated
+    private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setStringPropertyAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setStringPropertyAccessor(new JsonMergePatchHelper.StringPropertyAccessor() {
+            @Override
+            public StringProperty prepareModelForJsonMergePatch(StringProperty model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(StringProperty model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 

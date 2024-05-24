@@ -63,13 +63,15 @@ public final class StringLiteralProperty implements JsonSerializable<StringLiter
     @Generated
     public static StringLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            StringLiteralProperty deserializedStringLiteralProperty = new StringLiteralProperty();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 reader.skipChildren();
             }
-            return new StringLiteralProperty();
+
+            return deserializedStringLiteralProperty;
         });
     }
 }

@@ -63,13 +63,15 @@ public final class BooleanLiteralProperty implements JsonSerializable<BooleanLit
     @Generated
     public static BooleanLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            BooleanLiteralProperty deserializedBooleanLiteralProperty = new BooleanLiteralProperty();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 reader.skipChildren();
             }
-            return new BooleanLiteralProperty();
+
+            return deserializedBooleanLiteralProperty;
         });
     }
 }

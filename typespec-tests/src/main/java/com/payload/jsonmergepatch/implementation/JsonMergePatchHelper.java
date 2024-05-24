@@ -13,14 +13,10 @@ import com.payload.jsonmergepatch.models.ResourcePatch;
 public class JsonMergePatchHelper {
     private static InnerModelAccessor innerModelAccessor;
 
-    private static ResourcePatchAccessor resourcePatchAccessor;
-
     public interface InnerModelAccessor {
         InnerModel prepareModelForJsonMergePatch(InnerModel innerModel, boolean jsonMergePatchEnabled);
-    }
 
-    public interface ResourcePatchAccessor {
-        ResourcePatch prepareModelForJsonMergePatch(ResourcePatch resourcePatch, boolean jsonMergePatchEnabled);
+        boolean isJsonMergePatch(InnerModel innerModel);
     }
 
     public static void setInnerModelAccessor(InnerModelAccessor accessor) {
@@ -29,6 +25,14 @@ public class JsonMergePatchHelper {
 
     public static InnerModelAccessor getInnerModelAccessor() {
         return innerModelAccessor;
+    }
+
+    private static ResourcePatchAccessor resourcePatchAccessor;
+
+    public interface ResourcePatchAccessor {
+        ResourcePatch prepareModelForJsonMergePatch(ResourcePatch resourcePatch, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(ResourcePatch resourcePatch);
     }
 
     public static void setResourcePatchAccessor(ResourcePatchAccessor accessor) {

@@ -24,10 +24,8 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
     private final ClientModel targetModel;
     private final ClientModelProperty targetProperty;
 
-    private ClientModelPropertyReference(ClientModelProperty targetProperty,
-                                         ClientModel targetModel,
-                                         ClientModelPropertyAccess referenceProperty,
-                                         String name) {
+    private ClientModelPropertyReference(ClientModelProperty targetProperty, ClientModel targetModel,
+        ClientModelPropertyAccess referenceProperty, String name) {
         this.targetProperty = targetProperty;
         this.targetModel = targetModel;
         this.referenceProperty = referenceProperty;
@@ -46,16 +44,12 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
     }
 
     public static ClientModelPropertyReference ofFlattenProperty(ClientModelProperty targetProperty,
-                                                                 ClientModel targetModel,
-                                                                 ClientModelProperty property,
-                                                                 String name) {
+        ClientModel targetModel, ClientModelProperty property, String name) {
         return new ClientModelPropertyReference(targetProperty, targetModel, property, name);
     }
 
     public static ClientModelPropertyReference ofFlattenProperty(ClientModelProperty targetProperty,
-                                                                 ClientModel targetModel,
-                                                                 ClientModelPropertyReference referenceProperty,
-                                                                 String name) {
+        ClientModel targetModel, ClientModelPropertyReference referenceProperty, String name) {
         if (!referenceProperty.isFromFlattenedProperty()) {
             throw new IllegalArgumentException("Property is not from flattened model: " + referenceProperty.getName());
         }
@@ -88,7 +82,8 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
         } else if (referenceProperty instanceof ClientModelPropertyReference) {
             properties.addAll(((ClientModelPropertyReference) referenceProperty).getAllProperties());
         } else {
-            throw new IllegalStateException("Unknown subclass of ClientModelPropertyAccess: " + referenceProperty.getClass().getName());
+            throw new IllegalStateException(
+                "Unknown subclass of ClientModelPropertyAccess: " + referenceProperty.getClass().getName());
         }
         return properties;
     }
@@ -109,7 +104,8 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
 
     @Override
     public String getGetterName() {
-        return CodeNamer.getModelNamer().modelPropertyGetterName(this.referenceProperty.getClientType(), this.getName());
+        return CodeNamer.getModelNamer()
+            .modelPropertyGetterName(this.referenceProperty.getClientType(), this.getName());
     }
 
     @Override
@@ -149,7 +145,8 @@ public class ClientModelPropertyReference implements ClientModelPropertyAccess {
 
     @Override
     public boolean isRequiredForCreate() {
-        return (targetProperty == null || targetProperty.isRequiredForCreate()) && referenceProperty.isRequiredForCreate();
+        return (targetProperty == null || targetProperty.isRequiredForCreate())
+            && referenceProperty.isRequiredForCreate();
     }
 
     @Override
