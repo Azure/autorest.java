@@ -297,7 +297,7 @@ export class CodeModelBuilder {
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
             origin: "modelerfour:synthesized/host",
-            required: !it.optional,
+            required: true,
             protocol: {
               http: new HttpParameter(ParameterLocation.Uri),
             },
@@ -316,7 +316,6 @@ export class CodeModelBuilder {
       });
       return hostParameters;
     } else {
-      // use "endpoint"
       hostParameters.push(
         this.codeModel.addGlobalParameter(
           new Parameter("endpoint", "Server parameter", this.stringSchema, {
@@ -662,7 +661,7 @@ export class CodeModelBuilder {
   /**
    * `@armProviderNamespace` currently will add a default server if not defined globally:
    * https://github.com/Azure/typespec-azure/blob/8b8d7c05f168d9305a09691c4fedcb88f4a57652/packages/typespec-azure-resource-manager/src/namespace.ts#L121-L128
-   * TODO: if the synthesized server has the right hostParameter, we can use that instead
+   * TODO: if the synthesized server has the right hostParameter, we can use that insteadß
    *
    * @param server returned by getServers
    * @returns whether it's synthesized by `@armProviderNamespace`
@@ -1788,8 +1787,8 @@ export class CodeModelBuilder {
 
   private processStringSchemaFromSdkType(type: SdkBuiltInType, name: string): StringSchema {
     return this.codeModel.schemas.add(
-      new StringSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new StringSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
@@ -1797,8 +1796,8 @@ export class CodeModelBuilder {
   private processByteArraySchemaFromSdkType(type: SdkBuiltInType, name: string): ByteArraySchema {
     const base64Encoded: boolean = type.encode === "base64url";
     return this.codeModel.schemas.add(
-      new ByteArraySchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new ByteArraySchema(name, type.details ?? "", {
+        summary: type.description,
         format: base64Encoded ? "base64url" : "byte",
       }),
     );
@@ -1806,16 +1805,16 @@ export class CodeModelBuilder {
 
   private processIntegerSchemaFromSdkType(type: SdkBuiltInType, name: string, precision: number): NumberSchema {
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Integer, precision, {
-        summary: this.getSummary(type.__raw),
+      new NumberSchema(name, type.details ?? "", SchemaType.Integer, precision, {
+        summary: type.description,
       }),
     );
   }
 
   private processNumberSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Number, 64, {
-        summary: this.getSummary(type.__raw),
+      new NumberSchema(name, type.details ?? "", SchemaType.Number, 64, {
+        summary: type.description,
       }),
     );
   }
@@ -1823,16 +1822,16 @@ export class CodeModelBuilder {
   private processDecimalSchemaFromSdkType(type: SdkBuiltInType, name: string): NumberSchema {
     // "Infinity" maps to "BigDecimal" in Java
     return this.codeModel.schemas.add(
-      new NumberSchema(name, this.getDoc(type.__raw), SchemaType.Number, Infinity, {
-        summary: this.getSummary(type.__raw),
+      new NumberSchema(name, type.details ?? "", SchemaType.Number, Infinity, {
+        summary: type.description,
       }),
     );
   }
 
   private processBooleanSchemaFromSdkType(type: SdkBuiltInType, name: string): BooleanSchema {
     return this.codeModel.schemas.add(
-      new BooleanSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new BooleanSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
@@ -1840,14 +1839,14 @@ export class CodeModelBuilder {
   private processArraySchemaFromSdkType(type: SdkArrayType, name: string): ArraySchema {
     const elementSchema = this.processSchemaFromSdkType(type.valueType, name);
     return this.codeModel.schemas.add(
-      new ArraySchema(name, this.getDoc(type.__raw), elementSchema, {
-        summary: this.getSummary(type.__raw),
+      new ArraySchema(name, type.details ?? "", elementSchema, {
+        summary: type.description,
       }),
     );
   }
 
   private processDictionarySchemaFromSdkType(type: SdkDictionaryType, name: string): DictionarySchema {
-    const dictSchema = new DictionarySchema<any>(name, type.details ? type.details : "", null, {
+    const dictSchema = new DictionarySchema<any>(name, type.details ?? "", null, {
       summary: type.description,
     });
 
@@ -1879,8 +1878,8 @@ export class CodeModelBuilder {
 
     const schemaType = type.isFixed ? SealedChoiceSchema : ChoiceSchema;
 
-    const schema = new schemaType(type.name ? type.name : name, type.description ?? "", {
-      summary: this.getSummary(rawEnumType),
+    const schema = new schemaType(type.name ? type.name : name, type.details ?? "", {
+      summary: type.description,
       choiceType: valueType as any,
       choices: choices,
       language: {
@@ -1900,8 +1899,8 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new ConstantSchema(name, type.details ?? "", {
+        summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value),
       }),
@@ -1912,8 +1911,8 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.enumType, type.enumType.name);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new ConstantSchema(name, type.details ?? "", {
+        summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value ?? type.name),
       }),
@@ -1922,16 +1921,16 @@ export class CodeModelBuilder {
 
   private processUnixTimeSchemaFromSdkType(type: SdkDatetimeType, name: string): UnixTimeSchema {
     return this.codeModel.schemas.add(
-      new UnixTimeSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new UnixTimeSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
 
   private processDateTimeSchemaFromSdkType(type: SdkDatetimeType, name: string, rfc1123: boolean): DateTimeSchema {
     return this.codeModel.schemas.add(
-      new DateTimeSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new DateTimeSchema(name, type.details ?? "", {
+        summary: type.description,
         format: rfc1123 ? "date-time-rfc1123" : "date-time",
       }),
     );
@@ -1939,16 +1938,16 @@ export class CodeModelBuilder {
 
   private processDateSchemaFromSdkType(type: SdkBuiltInType, name: string): DateSchema {
     return this.codeModel.schemas.add(
-      new DateSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new DateSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
 
   private processTimeSchemaFromSdkType(type: SdkBuiltInType, name: string): TimeSchema {
     return this.codeModel.schemas.add(
-      new TimeSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new TimeSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
@@ -1959,8 +1958,8 @@ export class CodeModelBuilder {
     format: DurationSchema["format"] = "duration-rfc3339",
   ): DurationSchema {
     return this.codeModel.schemas.add(
-      new DurationSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new DurationSchema(name, type.details ?? "", {
+        summary: type.description,
         format: format,
       }),
     );
@@ -1968,8 +1967,8 @@ export class CodeModelBuilder {
 
   private processUrlSchemaFromSdkType(type: SdkBuiltInType, name: string): UriSchema {
     return this.codeModel.schemas.add(
-      new UriSchema(name, this.getDoc(type.__raw), {
-        summary: this.getSummary(type.__raw),
+      new UriSchema(name, type.details ?? "", {
+        summary: type.description,
       }),
     );
   }
@@ -1977,8 +1976,8 @@ export class CodeModelBuilder {
   private processObjectSchemaFromSdkType(type: SdkModelType, name: string): ObjectSchema {
     const rawModelType = type.__raw;
     const namespace = getNamespace(rawModelType);
-    const objectSchema = new ObjectScheme(name, this.getDoc(rawModelType), {
-      summary: this.getSummary(rawModelType),
+    const objectSchema = new ObjectScheme(name, type.details ?? "", {
+      summary: type.description,
       language: {
         default: {
           namespace: namespace,
@@ -2102,8 +2101,8 @@ export class CodeModelBuilder {
       schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
     }
 
-    return new Property(prop.name, this.getDoc(rawModelPropertyType), schema, {
-      summary: this.getSummary(rawModelPropertyType),
+    return new Property(prop.name, prop.details ?? "", schema, {
+      summary: prop.description,
       required: !prop.optional,
       nullable: nullable,
       readOnly: this.isReadOnly(prop),
@@ -2123,8 +2122,8 @@ export class CodeModelBuilder {
     this.logWarning(
       `Convert TypeSpec Union '${getUnionDescription(rawUnionType, this.typeNameOptions)}' to Class '${baseName}'`,
     );
-    const unionSchema = new OrSchema(baseName + "Base", this.getDoc(rawUnionType), {
-      summary: this.getSummary(rawUnionType),
+    const unionSchema = new OrSchema(baseName + "Base", type.details ?? "", {
+      summary: type.description,
     });
     unionSchema.anyOf = [];
     type.values.forEach((it) => {
@@ -2133,8 +2132,8 @@ export class CodeModelBuilder {
       const propertyName = "value";
 
       // these ObjectSchema is not added to codeModel.schemas
-      const objectSchema = new ObjectSchema(modelName, this.getDoc(rawUnionType), {
-        summary: this.getSummary(rawUnionType),
+      const objectSchema = new ObjectSchema(modelName, it.details ?? "", {
+        summary: it.description,
         language: {
           default: {
             namespace: namespace,
@@ -2147,8 +2146,8 @@ export class CodeModelBuilder {
 
       const variantSchema = this.processSchemaFromSdkType(it, variantName);
       objectSchema.addProperty(
-        new Property(propertyName, this.getDoc(rawUnionType), variantSchema, {
-          summary: this.getSummary(rawUnionType),
+        new Property(propertyName, type.details ?? "", variantSchema, {
+          summary: type.description,
           required: true,
           readOnly: false,
         }),
