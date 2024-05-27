@@ -2117,8 +2117,7 @@ export class CodeModelBuilder {
     this.logWarning(
       `Convert TypeSpec Union '${getUnionDescription(rawUnionType, this.typeNameOptions)}' to Class '${baseName}'`,
     );
-    // use TCGC's name
-    const unionSchema = new OrSchema(type.name ?? name, type.details ?? "", {
+    const unionSchema = new OrSchema(baseName + "Base", type.details ?? "", {
       summary: type.description,
     });
     unionSchema.anyOf = [];
