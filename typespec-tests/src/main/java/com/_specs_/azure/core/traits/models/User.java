@@ -79,23 +79,19 @@ public final class User implements JsonSerializable<User> {
     @Generated
     public static User fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            int id = 0;
-            String name = null;
+            User deserializedUser = new User();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getInt();
+                    deserializedUser.id = reader.getInt();
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedUser.name = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            User deserializedUser = new User();
-            deserializedUser.id = id;
-            deserializedUser.name = name;
 
             return deserializedUser;
         });

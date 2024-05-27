@@ -268,7 +268,9 @@ public final class JsonMergePatchAsyncClient {
         // Generated convenience method for updateResourceWithResponse
         RequestOptions requestOptions = new RequestOptions();
         JsonMergePatchHelper.getResourcePatchAccessor().prepareModelForJsonMergePatch(body, true);
-        BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
+        BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+        // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+        bodyInBinaryData.getLength();
         JsonMergePatchHelper.getResourcePatchAccessor().prepareModelForJsonMergePatch(body, false);
         return updateResourceWithResponse(bodyInBinaryData, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
@@ -293,7 +295,9 @@ public final class JsonMergePatchAsyncClient {
         RequestOptions requestOptions = new RequestOptions();
         if (body != null) {
             JsonMergePatchHelper.getResourcePatchAccessor().prepareModelForJsonMergePatch(body, true);
-            BinaryData bodyInBinaryData = BinaryData.fromBytes(BinaryData.fromObject(body).toBytes());
+            BinaryData bodyInBinaryData = BinaryData.fromObject(body);
+            // BinaryData.fromObject() will not fire serialization, use getLength() to fire serialization.
+            bodyInBinaryData.getLength();
             JsonMergePatchHelper.getResourcePatchAccessor().prepareModelForJsonMergePatch(body, false);
             requestOptions.setBody(bodyInBinaryData);
         }

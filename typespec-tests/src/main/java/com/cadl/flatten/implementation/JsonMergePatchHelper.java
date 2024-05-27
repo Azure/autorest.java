@@ -13,15 +13,11 @@ import com.cadl.flatten.models.UpdatePatchRequest;
 public class JsonMergePatchHelper {
     private static UpdatePatchRequestAccessor updatePatchRequestAccessor;
 
-    private static TodoItemPatchAccessor todoItemPatchAccessor;
-
     public interface UpdatePatchRequestAccessor {
         UpdatePatchRequest prepareModelForJsonMergePatch(UpdatePatchRequest updatePatchRequest,
             boolean jsonMergePatchEnabled);
-    }
 
-    public interface TodoItemPatchAccessor {
-        TodoItemPatch prepareModelForJsonMergePatch(TodoItemPatch todoItemPatch, boolean jsonMergePatchEnabled);
+        boolean isJsonMergePatch(UpdatePatchRequest updatePatchRequest);
     }
 
     public static void setUpdatePatchRequestAccessor(UpdatePatchRequestAccessor accessor) {
@@ -30,6 +26,14 @@ public class JsonMergePatchHelper {
 
     public static UpdatePatchRequestAccessor getUpdatePatchRequestAccessor() {
         return updatePatchRequestAccessor;
+    }
+
+    private static TodoItemPatchAccessor todoItemPatchAccessor;
+
+    public interface TodoItemPatchAccessor {
+        TodoItemPatch prepareModelForJsonMergePatch(TodoItemPatch todoItemPatch, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(TodoItemPatch todoItemPatch);
     }
 
     public static void setTodoItemPatchAccessor(TodoItemPatchAccessor accessor) {

@@ -95,6 +95,7 @@ public final class ClientModelPropertiesManager {
 
         Map<String, ClientModelPropertyWithMetadata> flattenedProperties = new LinkedHashMap<>();
         boolean hasRequiredProperties = false;
+        boolean hasConstructorArguments = false;
         superConstructorProperties = new LinkedHashMap<>();
         superRequiredProperties = new LinkedHashMap<>();
         superSetterProperties = new LinkedHashMap<>();
@@ -140,6 +141,7 @@ public final class ClientModelPropertiesManager {
                 superPropertyConsumer(property, superRequiredProperties, superConstructorProperties,
                     superReadOnlyProperties, superSetterProperties, settings);
                 hasRequiredProperties |= property.isRequired();
+                hasConstructorArguments |= ClientModelUtil.includePropertyInConstructor(property, settings);
             }
 
             if (property.getNeedsFlatten()) {
@@ -181,6 +183,7 @@ public final class ClientModelPropertiesManager {
                 if (!property.isConstant()) {
                     if (ClientModelUtil.includePropertyInConstructor(property, settings)) {
                         constructorProperties.put(property.getSerializedName(), property);
+                        hasConstructorArguments = true;
                     } else {
                         readOnlyProperties.put(property.getSerializedName(), property);
                     }
@@ -227,16 +230,11 @@ public final class ClientModelPropertiesManager {
             }
         }
 
-        boolean requiredConstructorProperties = hasRequiredProperties && settings.isRequiredFieldsAsConstructorArgs();
-        boolean readOnlyConstructorProperties = settings.isRequiredFieldsAsConstructorArgs()
-            && settings.isIncludeReadOnlyInConstructorArgs()
-            && (!CoreUtils.isNullOrEmpty(readOnlyProperties) || !CoreUtils.isNullOrEmpty(superReadOnlyProperties));
-
         this.hasRequiredProperties = hasRequiredProperties;
         this.requiredPropertiesCount = requiredProperties.size() + superRequiredProperties.size();
         this.setterPropertiesCount = setterProperties.size() + superSetterProperties.size();
         this.readOnlyPropertiesCount = readOnlyProperties.size() + superReadOnlyProperties.size();
-        this.hasConstructorArguments = requiredConstructorProperties || readOnlyConstructorProperties;
+        this.hasConstructorArguments = hasConstructorArguments;
         this.hasXmlElements = hasXmlElements;
         this.hasXmlTexts = hasXmlTexts;
         this.discriminatorProperty = discriminatorProperty;

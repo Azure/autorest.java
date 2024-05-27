@@ -73,18 +73,16 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
 
-            ClientModel.Builder builder = createModelBuilder()
-                .name(modelName)
+            ClientModel.Builder builder = createModelBuilder().name(modelName)
                 .packageName(modelType.getPackage())
                 .type(modelType)
                 .stronglyTypedHeader(compositeType.isStronglyTypedHeader())
                 .usedInXml(SchemaUtil.treatAsXml(compositeType))
                 .serializationFormats(compositeType.getSerializationFormats())
-                .implementationDetails(new ImplementationDetails.Builder()
-                    .usages(usages)
-                    .build());
+                .implementationDetails(new ImplementationDetails.Builder().usages(usages).build());
 
-            boolean isPolymorphic = compositeType.getDiscriminator() != null || compositeType.getDiscriminatorValue() != null;
+            boolean isPolymorphic = compositeType.getDiscriminator() != null
+                || compositeType.getDiscriminatorValue() != null;
             builder.polymorphic(isPolymorphic);
 
             HashSet<String> modelImports = new HashSet<>();
@@ -93,7 +91,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             boolean hasAdditionalProperties = false;
             List<ObjectSchema> parentsNeedFlatten = Collections.emptyList();
             if (compositeType.getParents() != null && compositeType.getParents().getImmediate() != null) {
-                hasAdditionalProperties = compositeType.getParents().getImmediate().stream()
+                hasAdditionalProperties = compositeType.getParents()
+                    .getImmediate()
+                    .stream()
                     .anyMatch(s -> s instanceof DictionarySchema);
 
                 ParentSchemaInfo parentSchemaInfo = getParentSchemaInfo(compositeType);
@@ -108,15 +108,20 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.parentModelName(parentModelName);
 
             List<Property> compositeTypeProperties = compositeType.getProperties()
-                .stream().filter(p -> !p.isIsDiscriminator()).collect(Collectors.toList());
+                .stream()
+                .filter(p -> !p.isIsDiscriminator())
+                .collect(Collectors.toList());
             if (!parentsNeedFlatten.isEmpty()) {
                 // Take properties from base class of multiple inheritance as properties of this class.
                 for (ObjectSchema parent : parentsNeedFlatten) {
-                    compositeTypeProperties.addAll(parent.getProperties().stream()
+                    compositeTypeProperties.addAll(parent.getProperties()
+                        .stream()
                         .filter(p -> !p.isIsDiscriminator())
                         .collect(Collectors.toList()));
                     if (parent.getParents() != null) {
-                        compositeTypeProperties.addAll(parent.getParents().getAll().stream()
+                        compositeTypeProperties.addAll(parent.getParents()
+                            .getAll()
+                            .stream()
                             .filter(s -> s instanceof ObjectSchema)
                             .flatMap(s -> ((ObjectSchema) s).getProperties().stream())
                             .filter(p -> !p.isIsDiscriminator())
@@ -145,7 +150,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     }
 
                     if (compositeTypeProperties.stream().anyMatch(p -> {
-                        if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
+                        if (p.getSchema().getSerialization() == null
+                            || p.getSchema().getSerialization().getXml() == null) {
                             return false;
                         }
 
@@ -156,7 +162,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     }
 
                     if (compositeTypeProperties.stream().anyMatch(p -> {
-                        if (p.getSchema().getSerialization() == null || p.getSchema().getSerialization().getXml() == null) {
+                        if (p.getSchema().getSerialization() == null
+                            || p.getSchema().getSerialization().getXml() == null) {
                             return false;
                         }
 
@@ -165,14 +172,21 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                         modelImports.add("com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText");
                     }
 
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() == null
-                        || p.getSchema().getSerialization().getXml() == null || !p.getSchema().getSerialization()
-                        .getXml().isAttribute())) {
+                    if (compositeTypeProperties.stream()
+                        .anyMatch(p -> p.getSchema().getSerialization() == null
+                            || p.getSchema().getSerialization().getXml() == null || !p.getSchema()
+                            .getSerialization()
+                            .getXml()
+                            .isAttribute())) {
                         modelImports.add(JsonProperty.class.getName());
                     }
 
-                    if (compositeTypeProperties.stream().anyMatch(p -> p.getSchema().getSerialization() != null
-                        && p.getSchema().getSerialization().getXml() != null && p.getSchema().getSerialization().getXml().isWrapped())) {
+                    if (compositeTypeProperties.stream()
+                        .anyMatch(p -> p.getSchema().getSerialization() != null
+                            && p.getSchema().getSerialization().getXml() != null && p.getSchema()
+                            .getSerialization()
+                            .getXml()
+                            .isWrapped())) {
                         modelImports.add(JsonCreator.class.getName());
                     }
 
@@ -189,7 +203,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             }
 
             String summary = compositeType.getSummary();
-            String description = compositeType.getLanguage().getJava() == null ? null : compositeType.getLanguage().getJava().getDescription();
+            String description = compositeType.getLanguage().getJava() == null
+                ? null
+                : compositeType.getLanguage().getJava().getDescription();
             if (CoreUtils.isNullOrEmpty(summary) && CoreUtils.isNullOrEmpty(description)) {
                 builder.description(String.format("The %s model.", compositeType.getLanguage().getJava().getName()));
             } else {
@@ -203,14 +219,16 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.serializedName(modelSerializedName);
 
             List<ClientModel> derivedTypes = new ArrayList<>();
-            boolean hasChildren = compositeType.getChildren() != null && compositeType.getChildren().getImmediate() != null;
+            boolean hasChildren = compositeType.getChildren() != null
+                && compositeType.getChildren().getImmediate() != null;
             if (hasChildren) {
                 for (Schema childSchema : compositeType.getChildren().getImmediate()) {
                     if (childSchema instanceof ObjectSchema) {
                         ClientModel model = this.map((ObjectSchema) childSchema);
                         derivedTypes.add(model);
                     } else {
-                        throw new RuntimeException("Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
+                        throw new RuntimeException(
+                            "Wait what? How? Child is not an object but a " + childSchema.getClass() + "?");
                     }
                 }
             }
@@ -222,9 +240,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     && compositeType.getSerialization().getXml() != null;
                 if (hasXmlFormat) {
                     final XmlSerializationFormat xml = compositeType.getSerialization().getXml();
-                    String xmlName = CoreUtils.isNullOrEmpty(xml.getName())
-                        ? compositeType.getLanguage().getDefault().getName()
-                        : xml.getName();
+                    String xmlName = CoreUtils.isNullOrEmpty(xml.getName()) ? compositeType.getLanguage()
+                        .getDefault()
+                        .getName() : xml.getName();
                     builder.xmlName(xmlName);
                     builder.xmlNamespace(xml.getNamespace());
                 } else {
@@ -249,10 +267,9 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     : discriminatorSerializedName;
 
                 final String finalPolymorphicDiscriminator = polymorphicDiscriminator;
-                ClientModelProperty discriminatorProperty = createDiscriminatorProperty(
-                    settings, hasChildren, compositeType,
-                    annotationArgs -> annotationArgs.replace(discriminatorSerializedName, finalPolymorphicDiscriminator),
-                    polymorphicDiscriminator);
+                ClientModelProperty discriminatorProperty = createDiscriminatorProperty(settings, hasChildren,
+                    compositeType, annotationArgs -> annotationArgs.replace(discriminatorSerializedName,
+                        finalPolymorphicDiscriminator), polymorphicDiscriminator);
 
                 if (discriminatorProperty != null) {
                     properties.add(discriminatorProperty);
@@ -269,10 +286,12 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.needsFlatten(needsFlatten);
             builder.imports(new ArrayList<>(modelImports));
 
-            final boolean mutablePropertyAsOptional = usages.contains(ImplementationDetails.Usage.JSON_MERGE_PATCH) && settings.isStreamStyleSerialization();
+            final boolean mutablePropertyAsOptional = usages.contains(ImplementationDetails.Usage.JSON_MERGE_PATCH)
+                && settings.isStreamStyleSerialization();
             List<ClientModelPropertyReference> propertyReferences = new ArrayList<>();
             for (Property property : compositeTypeProperties) {
-                ClientModelProperty modelProperty = Mappers.getModelPropertyMapper().map(property, mutablePropertyAsOptional);
+                ClientModelProperty modelProperty = Mappers.getModelPropertyMapper()
+                    .map(property, mutablePropertyAsOptional);
                 if (Objects.equals(polymorphicDiscriminator, modelProperty.getSerializedName())) {
                     // Discriminator is defined both as the discriminator and a property in the model.
                     // Make the discriminator property required if the property is required. But don't add the property
@@ -287,7 +306,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     // be null or an infinite loop would happen.
                     if (!CoreUtils.isNullOrEmpty(derivedTypes)) {
                         for (ClientModel derivedType : derivedTypes) {
-                            if (Objects.equals(derivedType.getPolymorphicDiscriminator().getSerializedName(), polymorphicDiscriminator)) {
+                            if (Objects.equals(derivedType.getPolymorphicDiscriminator().getSerializedName(),
+                                polymorphicDiscriminator)) {
                                 derivedType.getPolymorphicDiscriminator().setRequired(modelProperty.isRequired());
                             }
                         }
@@ -298,13 +318,18 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
 
                 properties.add(modelProperty);
 
-                if (modelProperty.getClientFlatten() && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
-                    propertyReferences.addAll(collectPropertiesFromFlattenedModel(compositeType, property, modelProperty, propertyReferences));
+                if (modelProperty.getClientFlatten()
+                    && settings.getClientFlattenAnnotationTarget() == JavaSettings.ClientFlattenAnnotationTarget.NONE) {
+                    propertyReferences.addAll(
+                        collectPropertiesFromFlattenedModel(compositeType, property, modelProperty,
+                            propertyReferences));
                 }
             }
 
             if (hasAdditionalProperties) {
-                DictionarySchema schema = (DictionarySchema) compositeType.getParents().getImmediate().stream()
+                DictionarySchema schema = (DictionarySchema) compositeType.getParents()
+                    .getImmediate()
+                    .stream()
                     .filter(s -> s instanceof DictionarySchema)
                     .findFirst()
                     .orElseThrow(() -> new IllegalStateException(
@@ -331,10 +356,43 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
             builder.crossLanguageDefinitionId(compositeType.getCrossLanguageDefinitionId());
 
             result = builder.build();
+
+            if (isPolymorphic && !CoreUtils.isNullOrEmpty(derivedTypes)) {
+                // Walk the polymorphic hierarchy finding places where the parent model and child model have different
+                // polymorphic discriminators. When this case is found add the parent polymorphic discriminator as a parent
+                // polymorphic discriminator to the child model. This is necessary to ensure that the child model generates
+                // the correct serialization in multi-level polymorphic structures.
+                for (ClientModel derivedType : derivedTypes) {
+                    if (!Objects.equals(polymorphicDiscriminator, derivedType.getPolymorphicDiscriminatorName())) {
+                        ClientModelProperty parentDiscriminator = result.getPolymorphicDiscriminator()
+                            .newBuilder()
+                            .defaultValue(derivedType.getPolymorphicDiscriminator().getDefaultValue())
+                            .build();
+
+                        passPolymorphicDiscriminatorToChildren(parentDiscriminator, derivedType);
+                    }
+                }
+            }
+
             serviceModels.addModel(result);
         }
 
         return result;
+    }
+
+    private static void passPolymorphicDiscriminatorToChildren(ClientModelProperty parentDiscriminator,
+        ClientModel child) {
+        // Due to the execution order of ModelMapper, where children models complete mapping before the parent model,
+        // the parent polymorphic discriminator needs to be added at index 0. Reason, given an example where there are
+        // three models, where model #1 is the root parent with discriminator type, model #2 is a child of model #2 with
+        // discriminator kind, and model #3 is a child of model #3 with discriminator form. The order if this running
+        // will have model #2 add its discriminator to model #3 before model #1 runs adding its discriminator to #2 and
+        // #3. We want #3 to have the ordering of [type, kind], to represent the ordering of the parent models.
+        child.getParentPolymorphicDiscriminators().add(0, parentDiscriminator);
+
+        for (ClientModel derived : child.getDerivedModels()) {
+            passPolymorphicDiscriminatorToChildren(parentDiscriminator, derived);
+        }
     }
 
     private static class ParentSchemaInfo {
