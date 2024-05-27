@@ -5,35 +5,35 @@
 package com.type.property.optional.models;
 
 /**
- * Defines values for StringLiteralPropertyProperty.
+ * Defines values for StringLiteralPropertyPropertyHello.
  */
-public enum StringLiteralPropertyProperty {
+public enum StringLiteralPropertyPropertyHello {
     /**
      * Enum value hello.
      */
     HELLO("hello");
 
     /**
-     * The actual serialized value for a StringLiteralPropertyProperty instance.
+     * The actual serialized value for a StringLiteralPropertyPropertyHello instance.
      */
     private final String value;
 
-    StringLiteralPropertyProperty(String value) {
+    StringLiteralPropertyPropertyHello(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a StringLiteralPropertyProperty instance.
+     * Parses a serialized value to a StringLiteralPropertyPropertyHello instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed StringLiteralPropertyProperty object, or null if unable to parse.
+     * @return the parsed StringLiteralPropertyPropertyHello object, or null if unable to parse.
      */
-    public static StringLiteralPropertyProperty fromString(String value) {
+    public static StringLiteralPropertyPropertyHello fromString(String value) {
         if (value == null) {
             return null;
         }
-        StringLiteralPropertyProperty[] items = StringLiteralPropertyProperty.values();
-        for (StringLiteralPropertyProperty item : items) {
+        StringLiteralPropertyPropertyHello[] items = StringLiteralPropertyPropertyHello.values();
+        for (StringLiteralPropertyPropertyHello item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
