@@ -1898,7 +1898,7 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, type.details ?? "", {
+      new ConstantSchema(type.name ?? name, type.details ?? "", {
         summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value),
