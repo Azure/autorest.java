@@ -34,6 +34,11 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceUpdateProperties",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.implementation.models.ChildResourceListResult",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
@@ -105,11 +110,6 @@
   "allDeclaredMethods" : true
 }, {
   "name" : "com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate",
-  "allDeclaredConstructors" : true,
-  "allDeclaredFields" : true,
-  "allDeclaredMethods" : true
-}, {
-  "name" : "com.cadl.armresourceprovider.models.TopLevelArmResourceUpdateProperties",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
