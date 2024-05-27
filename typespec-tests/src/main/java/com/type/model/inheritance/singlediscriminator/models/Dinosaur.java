@@ -21,7 +21,7 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      * The kind property.
      */
     @Generated
-    private String kind;
+    private String kind = "Dinosaur";
 
     /*
      * The size property.
@@ -36,7 +36,6 @@ public class Dinosaur implements JsonSerializable<Dinosaur> {
      */
     @Generated
     protected Dinosaur(int size) {
-        this.kind = "Dinosaur";
         this.size = size;
     }
 

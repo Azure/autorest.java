@@ -44,8 +44,7 @@ public class TypeSpecPlugin extends Javagen {
 
     public Client processClient(CodeModel codeModel) {
         // transform code model
-        codeModel = Preprocessor.convertOptionalConstantsToEnum(codeModel);
-        codeModel = new Transformer().transform(codeModel);
+        codeModel = new Transformer().transform(Preprocessor.convertOptionalConstantsToEnum(codeModel));
 
         // map to client model
         Client client = Mappers.getClientMapper().map(codeModel);
@@ -124,15 +123,15 @@ public class TypeSpecPlugin extends Javagen {
         // Union
         client.getUnionModels().stream()
                 .filter(ModelUtil::isGeneratingModel)
-                .forEach(model -> javaPackage.addUnionModel(model));
+                .forEach(javaPackage::addUnionModel);
     }
 
     @Override
     protected void writeHelperClasses(Client client, CodeModel codeModel, JavaPackage javaPackage, JavaSettings settings) {
         // JsonMergePatchHelper
         List<ClientModel> jsonMergePatchModels = client.getModels().stream()
-                .filter(ModelUtil::isGeneratingModel)
-                .filter(ClientModelUtil::isJsonMergePatchModel).collect(Collectors.toList());
+            .filter(model -> ModelUtil.isGeneratingModel(model) && ClientModelUtil.isJsonMergePatchModel(model, settings))
+            .collect(Collectors.toList());
         if (!jsonMergePatchModels.isEmpty()) {
             javaPackage.addJsonMergePatchHelper(jsonMergePatchModels);
         }

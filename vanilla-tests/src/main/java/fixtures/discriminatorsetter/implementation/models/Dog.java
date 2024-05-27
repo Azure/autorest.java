@@ -20,7 +20,7 @@ public class Dog implements JsonSerializable<Dog> {
     /*
      * discriminator property
      */
-    private DogKind kind;
+    private DogKind kind = DogKind.fromString("Dog");
 
     /*
      * Weight of the dog
@@ -31,7 +31,6 @@ public class Dog implements JsonSerializable<Dog> {
      * Creates an instance of Dog class.
      */
     public Dog() {
-        this.kind = DogKind.fromString("Dog");
     }
 
     /**

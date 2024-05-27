@@ -74,6 +74,22 @@ public class JavaClass implements JavaType {
     }
 
     /**
+     * Adds a variable with the given declaration and visibility.
+     * <p>
+     * This doesn't support modifiers. If you need to add modifiers, use
+     * {@link #variable(String, JavaVisibility, JavaModifier...)}. This will just be a non-final, non-static variable
+     * with the given visibility.
+     *
+     * @param variableDeclaration The variable declaration.
+     * @param visibility The visibility of the variable.
+     */
+    public final void variable(String variableDeclaration, JavaVisibility visibility) {
+        addExpectedNewLine();
+        contents.line(visibility + " " + variableDeclaration + ";");
+        addNewLine = true;
+    }
+
+    /**
      * Adds a variable with the given declaration, visibility, and modifiers.
      * <p>
      * Adding a private constant variable would be:

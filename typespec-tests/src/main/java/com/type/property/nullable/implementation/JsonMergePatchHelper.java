@@ -18,48 +18,10 @@ import com.type.property.nullable.models.StringProperty;
 public class JsonMergePatchHelper {
     private static StringPropertyAccessor stringPropertyAccessor;
 
-    private static BytesPropertyAccessor bytesPropertyAccessor;
-
-    private static DatetimePropertyAccessor datetimePropertyAccessor;
-
-    private static DurationPropertyAccessor durationPropertyAccessor;
-
-    private static CollectionsBytePropertyAccessor collectionsBytePropertyAccessor;
-
-    private static CollectionsModelPropertyAccessor collectionsModelPropertyAccessor;
-
-    private static InnerModelAccessor innerModelAccessor;
-
     public interface StringPropertyAccessor {
         StringProperty prepareModelForJsonMergePatch(StringProperty stringProperty, boolean jsonMergePatchEnabled);
-    }
 
-    public interface BytesPropertyAccessor {
-        BytesProperty prepareModelForJsonMergePatch(BytesProperty bytesProperty, boolean jsonMergePatchEnabled);
-    }
-
-    public interface DatetimePropertyAccessor {
-        DatetimeProperty prepareModelForJsonMergePatch(DatetimeProperty datetimeProperty,
-            boolean jsonMergePatchEnabled);
-    }
-
-    public interface DurationPropertyAccessor {
-        DurationProperty prepareModelForJsonMergePatch(DurationProperty durationProperty,
-            boolean jsonMergePatchEnabled);
-    }
-
-    public interface CollectionsBytePropertyAccessor {
-        CollectionsByteProperty prepareModelForJsonMergePatch(CollectionsByteProperty collectionsByteProperty,
-            boolean jsonMergePatchEnabled);
-    }
-
-    public interface CollectionsModelPropertyAccessor {
-        CollectionsModelProperty prepareModelForJsonMergePatch(CollectionsModelProperty collectionsModelProperty,
-            boolean jsonMergePatchEnabled);
-    }
-
-    public interface InnerModelAccessor {
-        InnerModel prepareModelForJsonMergePatch(InnerModel innerModel, boolean jsonMergePatchEnabled);
+        boolean isJsonMergePatch(StringProperty stringProperty);
     }
 
     public static void setStringPropertyAccessor(StringPropertyAccessor accessor) {
@@ -70,12 +32,29 @@ public class JsonMergePatchHelper {
         return stringPropertyAccessor;
     }
 
+    private static BytesPropertyAccessor bytesPropertyAccessor;
+
+    public interface BytesPropertyAccessor {
+        BytesProperty prepareModelForJsonMergePatch(BytesProperty bytesProperty, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(BytesProperty bytesProperty);
+    }
+
     public static void setBytesPropertyAccessor(BytesPropertyAccessor accessor) {
         bytesPropertyAccessor = accessor;
     }
 
     public static BytesPropertyAccessor getBytesPropertyAccessor() {
         return bytesPropertyAccessor;
+    }
+
+    private static DatetimePropertyAccessor datetimePropertyAccessor;
+
+    public interface DatetimePropertyAccessor {
+        DatetimeProperty prepareModelForJsonMergePatch(DatetimeProperty datetimeProperty,
+            boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(DatetimeProperty datetimeProperty);
     }
 
     public static void setDatetimePropertyAccessor(DatetimePropertyAccessor accessor) {
@@ -86,12 +65,30 @@ public class JsonMergePatchHelper {
         return datetimePropertyAccessor;
     }
 
+    private static DurationPropertyAccessor durationPropertyAccessor;
+
+    public interface DurationPropertyAccessor {
+        DurationProperty prepareModelForJsonMergePatch(DurationProperty durationProperty,
+            boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(DurationProperty durationProperty);
+    }
+
     public static void setDurationPropertyAccessor(DurationPropertyAccessor accessor) {
         durationPropertyAccessor = accessor;
     }
 
     public static DurationPropertyAccessor getDurationPropertyAccessor() {
         return durationPropertyAccessor;
+    }
+
+    private static CollectionsBytePropertyAccessor collectionsBytePropertyAccessor;
+
+    public interface CollectionsBytePropertyAccessor {
+        CollectionsByteProperty prepareModelForJsonMergePatch(CollectionsByteProperty collectionsByteProperty,
+            boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(CollectionsByteProperty collectionsByteProperty);
     }
 
     public static void setCollectionsBytePropertyAccessor(CollectionsBytePropertyAccessor accessor) {
@@ -102,12 +99,29 @@ public class JsonMergePatchHelper {
         return collectionsBytePropertyAccessor;
     }
 
+    private static CollectionsModelPropertyAccessor collectionsModelPropertyAccessor;
+
+    public interface CollectionsModelPropertyAccessor {
+        CollectionsModelProperty prepareModelForJsonMergePatch(CollectionsModelProperty collectionsModelProperty,
+            boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(CollectionsModelProperty collectionsModelProperty);
+    }
+
     public static void setCollectionsModelPropertyAccessor(CollectionsModelPropertyAccessor accessor) {
         collectionsModelPropertyAccessor = accessor;
     }
 
     public static CollectionsModelPropertyAccessor getCollectionsModelPropertyAccessor() {
         return collectionsModelPropertyAccessor;
+    }
+
+    private static InnerModelAccessor innerModelAccessor;
+
+    public interface InnerModelAccessor {
+        InnerModel prepareModelForJsonMergePatch(InnerModel innerModel, boolean jsonMergePatchEnabled);
+
+        boolean isJsonMergePatch(InnerModel innerModel);
     }
 
     public static void setInnerModelAccessor(InnerModelAccessor accessor) {

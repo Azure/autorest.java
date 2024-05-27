@@ -63,13 +63,15 @@ public final class IntLiteralProperty implements JsonSerializable<IntLiteralProp
     @Generated
     public static IntLiteralProperty fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
+            IntLiteralProperty deserializedIntLiteralProperty = new IntLiteralProperty();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 reader.skipChildren();
             }
-            return new IntLiteralProperty();
+
+            return deserializedIntLiteralProperty;
         });
     }
 }

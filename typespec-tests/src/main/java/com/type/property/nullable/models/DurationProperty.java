@@ -34,9 +34,6 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
     @Generated
     private Duration nullableProperty;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -44,14 +41,26 @@ public final class DurationProperty implements JsonSerializable<DurationProperty
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+    private boolean jsonMergePatch;
+
+    @Generated
+    private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setDurationPropertyAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setDurationPropertyAccessor(new JsonMergePatchHelper.DurationPropertyAccessor() {
+            @Override
+            public DurationProperty prepareModelForJsonMergePatch(DurationProperty model,
+                boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(DurationProperty model) {
+                return model.jsonMergePatch;
+            }
         });
     }
 

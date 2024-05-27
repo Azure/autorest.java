@@ -24,7 +24,7 @@ public class Fish implements JsonSerializable<Fish> {
      * The kind property.
      */
     @Generated
-    private String kind;
+    private String kind = "Fish";
 
     /*
      * The id property.
@@ -50,9 +50,6 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     private String color;
 
-    @Generated
-    private boolean jsonMergePatch;
-
     /**
      * Stores updated model property, the value is property name, not serialized name.
      */
@@ -60,14 +57,45 @@ public class Fish implements JsonSerializable<Fish> {
     private final Set<String> updatedProperties = new HashSet<>();
 
     @Generated
-    void serializeAsJsonMergePatch(boolean jsonMergePatch) {
+    private boolean jsonMergePatch;
+
+    @Generated
+    private void serializeAsJsonMergePatch(boolean jsonMergePatch) {
         this.jsonMergePatch = jsonMergePatch;
     }
 
     static {
-        JsonMergePatchHelper.setFishAccessor((model, jsonMergePatchEnabled) -> {
-            model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
-            return model;
+        JsonMergePatchHelper.setFishAccessor(new JsonMergePatchHelper.FishAccessor() {
+            @Override
+            public Fish prepareModelForJsonMergePatch(Fish model, boolean jsonMergePatchEnabled) {
+                model.serializeAsJsonMergePatch(jsonMergePatchEnabled);
+                return model;
+            }
+
+            @Override
+            public boolean isJsonMergePatch(Fish model) {
+                return model.jsonMergePatch;
+            }
+
+            @Override
+            public void setId(Fish model, String id) {
+                model.id = id;
+            }
+
+            @Override
+            public void setName(Fish model, String name) {
+                model.name = name;
+            }
+
+            @Override
+            public void setAge(Fish model, int age) {
+                model.age = age;
+            }
+
+            @Override
+            public void setColor(Fish model, String color) {
+                model.color = color;
+            }
         });
     }
 
@@ -76,7 +104,6 @@ public class Fish implements JsonSerializable<Fish> {
      */
     @Generated
     public Fish() {
-        this.kind = "Fish";
         this.updatedProperties.add("kind");
     }
 
@@ -261,35 +288,25 @@ public class Fish implements JsonSerializable<Fish> {
     @Generated
     static Fish fromJsonKnownDiscriminator(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            String id = null;
-            String name = null;
-            String kind = null;
-            int age = 0;
-            String color = null;
+            Fish deserializedFish = new Fish();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getString();
+                    deserializedFish.id = reader.getString();
                 } else if ("name".equals(fieldName)) {
-                    name = reader.getString();
+                    deserializedFish.name = reader.getString();
                 } else if ("kind".equals(fieldName)) {
-                    kind = reader.getString();
+                    deserializedFish.kind = reader.getString();
                 } else if ("age".equals(fieldName)) {
-                    age = reader.getInt();
+                    deserializedFish.age = reader.getInt();
                 } else if ("color".equals(fieldName)) {
-                    color = reader.getString();
+                    deserializedFish.color = reader.getString();
                 } else {
                     reader.skipChildren();
                 }
             }
-            Fish deserializedFish = new Fish();
-            deserializedFish.id = id;
-            deserializedFish.name = name;
-            deserializedFish.kind = kind;
-            deserializedFish.age = age;
-            deserializedFish.color = color;
 
             return deserializedFish;
         });

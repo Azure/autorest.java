@@ -62,19 +62,17 @@ public final class FirstItem implements JsonSerializable<FirstItem> {
     @Generated
     public static FirstItem fromJson(JsonReader jsonReader) throws IOException {
         return jsonReader.readObject(reader -> {
-            int id = 0;
+            FirstItem deserializedFirstItem = new FirstItem();
             while (reader.nextToken() != JsonToken.END_OBJECT) {
                 String fieldName = reader.getFieldName();
                 reader.nextToken();
 
                 if ("id".equals(fieldName)) {
-                    id = reader.getInt();
+                    deserializedFirstItem.id = reader.getInt();
                 } else {
                     reader.skipChildren();
                 }
             }
-            FirstItem deserializedFirstItem = new FirstItem();
-            deserializedFirstItem.id = id;
 
             return deserializedFirstItem;
         });

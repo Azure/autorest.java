@@ -24,7 +24,7 @@ public class IsUnknownAdditionalPropertiesDiscriminated
      * The discriminator
      */
     @Generated
-    private String kind;
+    private String kind = "IsUnknownAdditionalPropertiesDiscriminated";
 
     /*
      * The name property
@@ -45,7 +45,6 @@ public class IsUnknownAdditionalPropertiesDiscriminated
      */
     @Generated
     public IsUnknownAdditionalPropertiesDiscriminated(String name) {
-        this.kind = "IsUnknownAdditionalPropertiesDiscriminated";
         this.name = name;
     }
 
