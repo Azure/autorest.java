@@ -1878,7 +1878,7 @@ export class CodeModelBuilder {
 
     const schemaType = type.isFixed ? SealedChoiceSchema : ChoiceSchema;
 
-    const schema = new schemaType(type.name ? type.name : name, type.details ?? "", {
+    const schema = new schemaType(type.name ?? name, type.details ?? "", {
       summary: type.description,
       choiceType: valueType as any,
       choices: choices,
@@ -1911,7 +1911,7 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.enumType, type.enumType.name);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, type.details ?? "", {
+      new ConstantSchema(type.name ?? name, type.details ?? "", {
         summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value ?? type.name),
@@ -2079,10 +2079,7 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
-    const rawModelPropertyType = prop.__raw as ModelProperty | undefined;
-    // TODO: This case is related with literal.tsp, once TCGC supports giving a name, we can use TCGC generatedName
-    const schemaNameHint = pascalCase(getNamePrefixForProperty(rawModelPropertyType)) + pascalCase(prop.name);
-    let schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
+    let schema = this.processSchemaFromSdkType(prop.type, "");
     let nullable = prop.nullable;
 
     let extensions: Record<string, any> | undefined = undefined;
@@ -2116,13 +2113,13 @@ export class CodeModelBuilder {
       throw new Error(`Invalid type for union: '${type.kind}'.`);
     }
     const rawUnionType: Union = type.__raw as Union;
-    // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(rawUnionType);
     const baseName = type.name ?? pascalCase(name) + "Model";
     this.logWarning(
       `Convert TypeSpec Union '${getUnionDescription(rawUnionType, this.typeNameOptions)}' to Class '${baseName}'`,
     );
-    const unionSchema = new OrSchema(baseName + "Base", type.details ?? "", {
+    // use TCGC's name
+    const unionSchema = new OrSchema(type.name ?? name, type.details ?? "", {
       summary: type.description,
     });
     unionSchema.anyOf = [];
