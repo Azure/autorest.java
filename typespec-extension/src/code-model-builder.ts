@@ -157,7 +157,6 @@ import {
   getAccess,
   getDurationFormatFromSdkType,
   getNameForTemplate,
-  getNamePrefixForProperty,
   getUnionDescription,
   getUsage,
   hasScalarAsBase,
