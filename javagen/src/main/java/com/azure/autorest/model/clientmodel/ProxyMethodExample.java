@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,9 +22,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ProxyMethodExample {
 
@@ -35,6 +36,11 @@ public class ProxyMethodExample {
     private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
     private static final String SLASH = "/";
     private static final String QUOTED_SLASH = Pattern.quote(SLASH);
+
+    private static String tspDirectory = null;
+    public static void setTspDirectory(String tspDirectory) {
+        ProxyMethodExample.tspDirectory = tspDirectory;
+    }
 
     // https://azure.github.io/autorest/extensions/#x-ms-examples
     // https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/x-ms-examples.md
@@ -63,11 +69,7 @@ public class ProxyMethodExample {
         public Object getUnescapedQueryValue() {
             Object unescapedValue = objectValue;
             if (objectValue instanceof String) {
-                try {
-                    unescapedValue = URLDecoder.decode((String) objectValue, StandardCharsets.UTF_8.name());
-                } catch (UnsupportedEncodingException e) {
-                    // NOOP
-                }
+                unescapedValue = URLDecoder.decode((String) objectValue, StandardCharsets.UTF_8);
             }
             return unescapedValue;
         }
@@ -254,18 +256,51 @@ public class ProxyMethodExample {
 
                     case "file":
                     {
-                        String[] segments = url.getPath().split(QUOTED_SLASH);
-                        int resourceManagerOrDataPlaneSegmentIndex = -1;
-                        for (int i = 0; i < segments.length; ++i) {
-                            if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
-                                resourceManagerOrDataPlaneSegmentIndex = i;
-                                break;
+                        if (tspDirectory != null) {
+                            // TypeSpec
+                            /*
+                             * Example:
+                             * directory "specification/standbypool/StandbyPool.Management"
+                             * originalFileName "file:///C:/github/azure-sdk-for-java/sdk/standbypool/azure-resourcemanager-standbypool/TempTypeSpecFiles/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
+                             *
+                             * There is an overlap of "StandbyPool.Management", so that we can combine the 2 to Result:
+                             * specification/standbypool/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json
+                             */
+                            String[] directorySegments = tspDirectory.split(QUOTED_SLASH);
+                            String directoryLastSegment = directorySegments[directorySegments.length - 1];
+                            int sharedDirectorySegment = -1;
+                            String[] segments = url.getPath().split(QUOTED_SLASH);
+                            for (int i = segments.length - 1; i >= 0; --i) {
+                                if (Objects.equals(directoryLastSegment, segments[i])) {
+                                    sharedDirectorySegment = i;
+                                    break;
+                                }
                             }
-                        }
-                        if (resourceManagerOrDataPlaneSegmentIndex > 2) {
-                            originalFileName = Arrays.stream(segments)
-                                    .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
-                                    .collect(Collectors.joining(SLASH));
+                            if (sharedDirectorySegment >= 0) {
+                                originalFileName = Stream.concat(
+                                        Arrays.stream(directorySegments),
+                                        Arrays.stream(segments).skip(sharedDirectorySegment)
+                                        ).collect(Collectors.joining(SLASH));
+                            }
+                        } else {
+                            // Swagger
+                            /*
+                             * The examples should be under "specification/<service>/resource-manager"
+                             * or "specification/<service>/data-plane"
+                             */
+                            String[] segments = url.getPath().split(QUOTED_SLASH);
+                            int resourceManagerOrDataPlaneSegmentIndex = -1;
+                            for (int i = 0; i < segments.length; ++i) {
+                                if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
+                                    resourceManagerOrDataPlaneSegmentIndex = i;
+                                    break;
+                                }
+                            }
+                            if (resourceManagerOrDataPlaneSegmentIndex > 2) {
+                                originalFileName = Arrays.stream(segments)
+                                        .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
+                                        .collect(Collectors.joining(SLASH));
+                            }
                         }
                         break;
                     }
