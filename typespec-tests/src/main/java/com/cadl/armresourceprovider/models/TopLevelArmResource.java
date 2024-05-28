@@ -277,7 +277,8 @@ public interface TopLevelArmResource {
     /**
      * The template for TopLevelArmResource update.
      */
-    interface Update extends UpdateStages.WithTags, UpdateStages.WithProperties {
+    interface Update extends UpdateStages.WithTags, UpdateStages.WithUserName, UpdateStages.WithUserNames,
+        UpdateStages.WithAccuserName {
         /**
          * Executes the update request.
          * 
@@ -312,16 +313,42 @@ public interface TopLevelArmResource {
         }
 
         /**
-         * The stage of the TopLevelArmResource update allowing to specify properties.
+         * The stage of the TopLevelArmResource update allowing to specify userName.
          */
-        interface WithProperties {
+        interface WithUserName {
             /**
-             * Specifies the properties property: The properties property..
+             * Specifies the userName property: The userName property..
              * 
-             * @param properties The properties property.
+             * @param userName The userName property.
              * @return the next definition stage.
              */
-            Update withProperties(TopLevelArmResourceUpdateProperties properties);
+            Update withUserName(String userName);
+        }
+
+        /**
+         * The stage of the TopLevelArmResource update allowing to specify userNames.
+         */
+        interface WithUserNames {
+            /**
+             * Specifies the userNames property: The userNames property..
+             * 
+             * @param userNames The userNames property.
+             * @return the next definition stage.
+             */
+            Update withUserNames(String userNames);
+        }
+
+        /**
+         * The stage of the TopLevelArmResource update allowing to specify accuserName.
+         */
+        interface WithAccuserName {
+            /**
+             * Specifies the accuserName property: The accuserName property..
+             * 
+             * @param accuserName The accuserName property.
+             * @return the next definition stage.
+             */
+            Update withAccuserName(String accuserName);
         }
     }
 
