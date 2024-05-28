@@ -73,6 +73,13 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                 }
             }
 
+            if (usages.contains(ImplementationDetails.Usage.JSON_MERGE_PATCH)
+                && !usages.contains(ImplementationDetails.Usage.INPUT)) {
+                // Remove the usage of JSON merge patch if the model isn't used as INPUT to the service. JSON merge
+                // patch logic is only used for INPUT.
+                usages.remove(ImplementationDetails.Usage.JSON_MERGE_PATCH);
+            }
+
             ClientModel.Builder builder = createModelBuilder().name(modelName)
                 .packageName(modelType.getPackage())
                 .type(modelType)
