@@ -256,51 +256,11 @@ public class ProxyMethodExample {
 
                     case "file":
                     {
-                        if (tspDirectory != null) {
-                            // TypeSpec
-                            /*
-                             * Example:
-                             * directory "specification/standbypool/StandbyPool.Management"
-                             * originalFileName "file:///C:/github/azure-sdk-for-java/sdk/standbypool/azure-resourcemanager-standbypool/TempTypeSpecFiles/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
-                             *
-                             * There is an overlap of "StandbyPool.Management", so that we can combine the 2 to Result:
-                             * specification/standbypool/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json
-                             */
-                            String[] directorySegments = tspDirectory.split(QUOTED_SLASH);
-                            String directoryLastSegment = directorySegments[directorySegments.length - 1];
-                            int sharedDirectorySegment = -1;
-                            String[] segments = url.getPath().split(QUOTED_SLASH);
-                            for (int i = segments.length - 1; i >= 0; --i) {
-                                if (Objects.equals(directoryLastSegment, segments[i])) {
-                                    sharedDirectorySegment = i;
-                                    break;
-                                }
-                            }
-                            if (sharedDirectorySegment >= 0) {
-                                originalFileName = Stream.concat(
-                                        Arrays.stream(directorySegments),
-                                        Arrays.stream(segments).skip(sharedDirectorySegment)
-                                        ).collect(Collectors.joining(SLASH));
-                            }
-                        } else {
-                            // Swagger
-                            /*
-                             * The examples should be under "specification/<service>/resource-manager"
-                             * or "specification/<service>/data-plane"
-                             */
-                            String[] segments = url.getPath().split(QUOTED_SLASH);
-                            int resourceManagerOrDataPlaneSegmentIndex = -1;
-                            for (int i = 0; i < segments.length; ++i) {
-                                if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
-                                    resourceManagerOrDataPlaneSegmentIndex = i;
-                                    break;
-                                }
-                            }
-                            if (resourceManagerOrDataPlaneSegmentIndex > 2) {
-                                originalFileName = Arrays.stream(segments)
-                                        .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
-                                        .collect(Collectors.joining(SLASH));
-                            }
+                        String relativeFileName = tspDirectory != null
+                                ? getRelativeOriginalFileNameForTsp(url)
+                                : getRelativeOriginalFileNameForSwagger(url);
+                        if (relativeFileName != null) {
+                            originalFileName = relativeFileName;
                         }
                         break;
                     }
@@ -335,6 +295,59 @@ public class ProxyMethodExample {
 
     private ProxyMethodExample(String originalFile) {
         this.originalFile = originalFile;
+    }
+
+    static String getRelativeOriginalFileNameForTsp(URL url) {
+        // TypeSpec
+        /*
+         * Example:
+         * directory "specification/standbypool/StandbyPool.Management"
+         * originalFileName "file:///C:/github/azure-sdk-for-java/sdk/standbypool/azure-resourcemanager-standbypool/TempTypeSpecFiles/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
+         *
+         * There is an overlap of "StandbyPool.Management", so that we can combine the 2 to Result:
+         * "specification/standbypool/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
+         */
+        String originalFileName = null;
+        String[] directorySegments = tspDirectory.split(QUOTED_SLASH);
+        String directoryLastSegment = directorySegments[directorySegments.length - 1];
+        int sharedDirectorySegment = -1;
+        String[] segments = url.getPath().split(QUOTED_SLASH);
+        for (int i = segments.length - 1; i >= 0; --i) {
+            if (Objects.equals(directoryLastSegment, segments[i])) {
+                sharedDirectorySegment = i;
+                break;
+            }
+        }
+        if (sharedDirectorySegment >= 0) {
+            originalFileName = Stream.concat(
+                    Arrays.stream(directorySegments),
+                    Arrays.stream(segments).skip(sharedDirectorySegment + 1)
+            ).collect(Collectors.joining(SLASH));
+        }
+        return originalFileName;
+    }
+
+    static String getRelativeOriginalFileNameForSwagger(URL url) {
+        // Swagger
+        /*
+         * The examples should be under "specification/<service>/resource-manager"
+         * or "specification/<service>/data-plane"
+         */
+        String originalFileName = null;
+        String[] segments = url.getPath().split(QUOTED_SLASH);
+        int resourceManagerOrDataPlaneSegmentIndex = -1;
+        for (int i = 0; i < segments.length; ++i) {
+            if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
+                resourceManagerOrDataPlaneSegmentIndex = i;
+                break;
+            }
+        }
+        if (resourceManagerOrDataPlaneSegmentIndex > 2) {
+            originalFileName = Arrays.stream(segments)
+                    .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
+                    .collect(Collectors.joining(SLASH));
+        }
+        return originalFileName;
     }
 
     @Override
