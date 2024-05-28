@@ -5,6 +5,7 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -403,8 +404,8 @@ public final class OciAnnotations implements JsonSerializable<OciAnnotations> {
                 reader.nextToken();
 
                 if ("org.opencontainers.image.created".equals(fieldName)) {
-                    deserializedOciAnnotations.createdOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedOciAnnotations.createdOn = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("org.opencontainers.image.authors".equals(fieldName)) {
                     deserializedOciAnnotations.authors = reader.getString();
                 } else if ("org.opencontainers.image.url".equals(fieldName)) {
