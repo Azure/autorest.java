@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -111,11 +112,11 @@ public final class DatetimeWrapper implements JsonSerializable<DatetimeWrapper> 
                 reader.nextToken();
 
                 if ("field".equals(fieldName)) {
-                    deserializedDatetimeWrapper.field
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedDatetimeWrapper.field = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("now".equals(fieldName)) {
-                    deserializedDatetimeWrapper.now
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedDatetimeWrapper.now = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

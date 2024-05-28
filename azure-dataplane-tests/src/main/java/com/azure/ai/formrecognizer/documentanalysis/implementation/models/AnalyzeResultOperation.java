@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -187,11 +188,11 @@ public final class AnalyzeResultOperation implements JsonSerializable<AnalyzeRes
                     deserializedAnalyzeResultOperation.status
                         = AnalyzeResultOperationStatus.fromString(reader.getString());
                 } else if ("createdDateTime".equals(fieldName)) {
-                    deserializedAnalyzeResultOperation.createdDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedAnalyzeResultOperation.createdDateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("lastUpdatedDateTime".equals(fieldName)) {
-                    deserializedAnalyzeResultOperation.lastUpdatedDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedAnalyzeResultOperation.lastUpdatedDateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("error".equals(fieldName)) {
                     deserializedAnalyzeResultOperation.error = Error.fromJson(reader);
                 } else if ("analyzeResult".equals(fieldName)) {

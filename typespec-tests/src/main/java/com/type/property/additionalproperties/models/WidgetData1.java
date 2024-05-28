@@ -6,6 +6,7 @@ package com.type.property.additionalproperties.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -123,9 +124,11 @@ public final class WidgetData1 implements JsonSerializable<WidgetData1> {
                 reader.nextToken();
 
                 if ("start".equals(fieldName)) {
-                    start = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    start = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("end".equals(fieldName)) {
-                    end = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    end = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -184,8 +185,8 @@ public final class DocumentModelSummary implements JsonSerializable<DocumentMode
                 if ("modelId".equals(fieldName)) {
                     deserializedDocumentModelSummary.modelId = reader.getString();
                 } else if ("createdDateTime".equals(fieldName)) {
-                    deserializedDocumentModelSummary.createdDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedDocumentModelSummary.createdDateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("description".equals(fieldName)) {
                     deserializedDocumentModelSummary.description = reader.getString();
                 } else if ("apiVersion".equals(fieldName)) {

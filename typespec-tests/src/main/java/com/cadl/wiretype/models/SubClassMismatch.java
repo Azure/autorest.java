@@ -6,6 +6,7 @@ package com.cadl.wiretype.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
@@ -87,7 +88,8 @@ public final class SubClassMismatch extends SuperClass {
                 reader.nextToken();
 
                 if ("dateTime".equals(fieldName)) {
-                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    dateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("dateTimeRfc7231".equals(fieldName)) {
                     DateTimeRfc1123 dateTimeRfc7231Holder
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));

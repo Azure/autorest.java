@@ -6,6 +6,7 @@ package com.cadl.wiretype.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -75,7 +76,8 @@ public class SuperClass implements JsonSerializable<SuperClass> {
                 reader.nextToken();
 
                 if ("dateTime".equals(fieldName)) {
-                    dateTime = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    dateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }
