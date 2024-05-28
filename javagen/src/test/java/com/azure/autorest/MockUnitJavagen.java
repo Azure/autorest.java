@@ -5,7 +5,6 @@ package com.azure.autorest;
 
 import com.azure.autorest.extension.base.jsonrpc.Connection;
 import com.azure.autorest.extension.base.model.Message;
-import org.junit.Assert;
 
 import java.io.IOException;
 import java.io.InputStream;
