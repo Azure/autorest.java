@@ -24,6 +24,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ProxyMethodExample {
@@ -32,6 +33,8 @@ public class ProxyMethodExample {
 
     private static final ObjectMapper PRETTY_PRINTER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
+    private static final String SLASH = "/";
+    private static final String QUOTED_SLASH = Pattern.quote(SLASH);
 
     // https://azure.github.io/autorest/extensions/#x-ms-examples
     // https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/x-ms-examples.md
@@ -238,20 +241,20 @@ public class ProxyMethodExample {
                     case "http":
                     case "https":
                     {
-                        String[] segments = url.getPath().split("/");
+                        String[] segments = url.getPath().split(QUOTED_SLASH);
                         if (segments.length > 3) {
                             // first 3 should be owner, name, branch
                             originalFileName = Arrays.stream(segments)
                                     .filter(s -> !s.isEmpty())
                                     .skip(3)
-                                    .collect(Collectors.joining("/"));
+                                    .collect(Collectors.joining(SLASH));
                         }
                         break;
                     }
 
                     case "file":
                     {
-                        String[] segments = url.getPath().split("/");
+                        String[] segments = url.getPath().split(QUOTED_SLASH);
                         int resourceManagerOrDataPlaneSegmentIndex = -1;
                         for (int i = 0; i < segments.length; ++i) {
                             if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
@@ -262,7 +265,7 @@ public class ProxyMethodExample {
                         if (resourceManagerOrDataPlaneSegmentIndex > 2) {
                             originalFileName = Arrays.stream(segments)
                                     .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
-                                    .collect(Collectors.joining("/"));
+                                    .collect(Collectors.joining(SLASH));
                         }
                         break;
                     }
