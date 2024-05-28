@@ -6,8 +6,8 @@ package com.azure.autorest.util;
 import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientEnumValue;
 import com.azure.autorest.model.clientmodel.EnumType;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -24,8 +24,8 @@ public class ModelTestCaseUtilTests {
                 .build();
 
         Object jsonObject = ModelTestCaseUtil.jsonFromType(0, type);
-        Assert.assertTrue(jsonObject instanceof String);
-        Assert.assertTrue(Objects.equals("200", jsonObject) || Objects.equals("404", jsonObject));
+        Assertions.assertTrue(jsonObject instanceof String);
+        Assertions.assertTrue(Objects.equals("200", jsonObject) || Objects.equals("404", jsonObject));
 
         type = new EnumType.Builder()
                 .elementType(ClassType.INTEGER)
@@ -35,7 +35,7 @@ public class ModelTestCaseUtilTests {
                 .build();
 
         jsonObject = ModelTestCaseUtil.jsonFromType(0, type);
-        Assert.assertTrue(jsonObject instanceof Integer);
-        Assert.assertTrue(Objects.equals(200, jsonObject) || Objects.equals(404, jsonObject));
+        Assertions.assertTrue(jsonObject instanceof Integer);
+        Assertions.assertTrue(Objects.equals(200, jsonObject) || Objects.equals(404, jsonObject));
     }
 }

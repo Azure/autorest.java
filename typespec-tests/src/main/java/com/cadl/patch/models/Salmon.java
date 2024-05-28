@@ -57,7 +57,6 @@ public final class Salmon extends Fish {
      */
     @Generated
     public Salmon() {
-        this.updatedProperties.add("kind");
     }
 
     /**
@@ -185,7 +184,9 @@ public final class Salmon extends Fish {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        jsonWriter.writeIntField("age", getAge());
+        if (updatedProperties.contains("age")) {
+            jsonWriter.writeIntField("age", getAge());
+        }
         if (updatedProperties.contains("color")) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
@@ -193,13 +194,7 @@ public final class Salmon extends Fish {
                 jsonWriter.writeStringField("color", getColor());
             }
         }
-        if (updatedProperties.contains("kind")) {
-            if (this.kind == null) {
-                jsonWriter.writeNullField("kind");
-            } else {
-                jsonWriter.writeStringField("kind", this.kind);
-            }
-        }
+        jsonWriter.writeStringField("kind", this.kind);
         if (updatedProperties.contains("friends")) {
             if (this.friends == null) {
                 jsonWriter.writeNullField("friends");

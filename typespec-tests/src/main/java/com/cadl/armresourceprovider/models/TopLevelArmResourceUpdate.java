@@ -5,6 +5,7 @@
 package com.cadl.armresourceprovider.models;
 
 import com.azure.core.annotation.Fluent;
+import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceUpdateProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Map;
@@ -25,7 +26,7 @@ public final class TopLevelArmResourceUpdate {
      * The properties property.
      */
     @JsonProperty(value = "properties")
-    private TopLevelArmResourceUpdateProperties properties;
+    private TopLevelArmResourceUpdateProperties innerProperties;
 
     /**
      * Creates an instance of TopLevelArmResourceUpdate class.
@@ -54,22 +55,80 @@ public final class TopLevelArmResourceUpdate {
     }
 
     /**
-     * Get the properties property: The properties property.
+     * Get the innerProperties property: The properties property.
      * 
-     * @return the properties value.
+     * @return the innerProperties value.
      */
-    public TopLevelArmResourceUpdateProperties properties() {
-        return this.properties;
+    private TopLevelArmResourceUpdateProperties innerProperties() {
+        return this.innerProperties;
     }
 
     /**
-     * Set the properties property: The properties property.
+     * Get the userName property: The userName property.
      * 
-     * @param properties the properties value to set.
+     * @return the userName value.
+     */
+    public String userName() {
+        return this.innerProperties() == null ? null : this.innerProperties().userName();
+    }
+
+    /**
+     * Set the userName property: The userName property.
+     * 
+     * @param userName the userName value to set.
      * @return the TopLevelArmResourceUpdate object itself.
      */
-    public TopLevelArmResourceUpdate withProperties(TopLevelArmResourceUpdateProperties properties) {
-        this.properties = properties;
+    public TopLevelArmResourceUpdate withUserName(String userName) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new TopLevelArmResourceUpdateProperties();
+        }
+        this.innerProperties().withUserName(userName);
+        return this;
+    }
+
+    /**
+     * Get the userNames property: The userNames property.
+     * 
+     * @return the userNames value.
+     */
+    public String userNames() {
+        return this.innerProperties() == null ? null : this.innerProperties().userNames();
+    }
+
+    /**
+     * Set the userNames property: The userNames property.
+     * 
+     * @param userNames the userNames value to set.
+     * @return the TopLevelArmResourceUpdate object itself.
+     */
+    public TopLevelArmResourceUpdate withUserNames(String userNames) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new TopLevelArmResourceUpdateProperties();
+        }
+        this.innerProperties().withUserNames(userNames);
+        return this;
+    }
+
+    /**
+     * Get the accuserName property: The accuserName property.
+     * 
+     * @return the accuserName value.
+     */
+    public String accuserName() {
+        return this.innerProperties() == null ? null : this.innerProperties().accuserName();
+    }
+
+    /**
+     * Set the accuserName property: The accuserName property.
+     * 
+     * @param accuserName the accuserName value to set.
+     * @return the TopLevelArmResourceUpdate object itself.
+     */
+    public TopLevelArmResourceUpdate withAccuserName(String accuserName) {
+        if (this.innerProperties() == null) {
+            this.innerProperties = new TopLevelArmResourceUpdateProperties();
+        }
+        this.innerProperties().withAccuserName(accuserName);
         return this;
     }
 
@@ -79,8 +138,8 @@ public final class TopLevelArmResourceUpdate {
      * @throws IllegalArgumentException thrown if the instance is not valid.
      */
     public void validate() {
-        if (properties() != null) {
-            properties().validate();
+        if (innerProperties() != null) {
+            innerProperties().validate();
         }
     }
 }
