@@ -8,8 +8,8 @@ import com.azure.autorest.model.projectmodel.Project;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestProxyAssertsTemplateTests {
 
@@ -32,9 +32,9 @@ public class TestProxyAssertsTemplateTests {
         String output = new TestProxyAssetsTemplate().write(project);
 
         JsonNode jsonNode = new ObjectMapper().readTree(output);
-        Assert.assertEquals("Azure/azure-sdk-assets", jsonNode.get("AssetsRepo").asText());
-        Assert.assertEquals("java", jsonNode.get("AssetsRepoPrefixPath").asText());
-        Assert.assertEquals("java/openai/azure-ai-openai", jsonNode.get("TagPrefix").asText());
-        Assert.assertNotNull(jsonNode.get("Tag").asText());
+        Assertions.assertEquals("Azure/azure-sdk-assets", jsonNode.get("AssetsRepo").asText());
+        Assertions.assertEquals("java", jsonNode.get("AssetsRepoPrefixPath").asText());
+        Assertions.assertEquals("java/openai/azure-ai-openai", jsonNode.get("TagPrefix").asText());
+        Assertions.assertNotNull(jsonNode.get("Tag").asText());
     }
 }

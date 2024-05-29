@@ -57,8 +57,6 @@ public class Shark extends Fish {
      */
     @Generated
     public Shark() {
-        this.updatedProperties.add("kind");
-        this.updatedProperties.add("sharktype");
     }
 
     /**
@@ -138,14 +136,10 @@ public class Shark extends Fish {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("kind")) {
-            if (this.kind == null) {
-                jsonWriter.writeNullField("kind");
-            } else {
-                jsonWriter.writeStringField("kind", this.kind);
-            }
+        jsonWriter.writeStringField("kind", this.kind);
+        if (updatedProperties.contains("age")) {
+            jsonWriter.writeIntField("age", getAge());
         }
-        jsonWriter.writeIntField("age", getAge());
         if (updatedProperties.contains("color")) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
@@ -153,13 +147,7 @@ public class Shark extends Fish {
                 jsonWriter.writeStringField("color", getColor());
             }
         }
-        if (updatedProperties.contains("sharktype")) {
-            if (this.sharktype == null) {
-                jsonWriter.writeNullField("sharktype");
-            } else {
-                jsonWriter.writeStringField("sharktype", this.sharktype);
-            }
-        }
+        jsonWriter.writeStringField("sharktype", this.sharktype);
         if (updatedProperties.contains("weight")) {
             if (this.weight == null) {
                 jsonWriter.writeNullField("weight");

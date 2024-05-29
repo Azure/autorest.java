@@ -8,9 +8,9 @@ import com.azure.autorest.model.clientmodel.ClassType;
 import com.azure.autorest.model.clientmodel.ClientMethodParameter;
 import com.azure.autorest.model.clientmodel.MethodParameter;
 import com.azure.autorest.model.clientmodel.Versioning;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 
 public class ClientMethodMapperTests {
 
-    @BeforeClass
+    @BeforeAll
     public static void ensurePlugin() {
         MockUnitJavagen javagen = new MockUnitJavagen();
     }
@@ -64,16 +64,16 @@ public class ClientMethodMapperTests {
                 .build());
 
         List<List<ClientMethodParameter>> signatures = ClientMethodMapper.findOverloadedSignatures(parameters);
-        Assert.assertEquals(4, signatures.size());
+        Assertions.assertEquals(4, signatures.size());
         // API for required-only would be signature of "param0"
         // API for no added (aka "v0")
-        Assert.assertEquals(Arrays.asList("param0", "param1"), signatures.get(0).stream().map(MethodParameter::getName).collect(Collectors.toList()));
+        Assertions.assertEquals(Arrays.asList("param0", "param1"), signatures.get(0).stream().map(MethodParameter::getName).collect(Collectors.toList()));
         // API for v1
-        Assert.assertEquals(Arrays.asList("param0", "param1", "param2"), signatures.get(1).stream().map(MethodParameter::getName).collect(Collectors.toList()));
+        Assertions.assertEquals(Arrays.asList("param0", "param1", "param2"), signatures.get(1).stream().map(MethodParameter::getName).collect(Collectors.toList()));
         // API for v2
-        Assert.assertEquals(Arrays.asList("param0", "param1", "param2", "param3"), signatures.get(2).stream().map(MethodParameter::getName).collect(Collectors.toList()));
+        Assertions.assertEquals(Arrays.asList("param0", "param1", "param2", "param3"), signatures.get(2).stream().map(MethodParameter::getName).collect(Collectors.toList()));
         // API for v3
-        Assert.assertEquals(Arrays.asList("param0", "param1", "param2", "param3", "param4"), signatures.get(3).stream().map(MethodParameter::getName).collect(Collectors.toList()));
+        Assertions.assertEquals(Arrays.asList("param0", "param1", "param2", "param3", "param4"), signatures.get(3).stream().map(MethodParameter::getName).collect(Collectors.toList()));
         // API for v4 be same as v3
         // API for v5 would be same as full parameters
     }

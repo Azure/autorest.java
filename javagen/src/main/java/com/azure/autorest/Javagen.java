@@ -257,7 +257,7 @@ public class Javagen extends NewPlugin {
 
         writeClientModels(client, javaPackage, settings);
 
-        writeHelperClasses(client, javaPackage, settings);
+        writeHelperClasses(client, codeModel, javaPackage, settings);
 
         // Unit tests on client model
         if (settings.isGenerateTests() && !settings.isDataPlaneClient()) {
@@ -340,7 +340,7 @@ public class Javagen extends NewPlugin {
         }
     }
 
-    protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
+    protected void writeHelperClasses(Client client, CodeModel codeModel, JavaPackage javaPackage, JavaSettings settings) {
     }
 
     private void clear() {

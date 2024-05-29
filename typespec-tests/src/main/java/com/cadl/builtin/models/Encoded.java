@@ -303,8 +303,8 @@ public final class Encoded implements JsonSerializable<Encoded> {
                 } else if ("timeInSecondsFraction".equals(fieldName)) {
                     deserializedEncoded.timeInSecondsFraction = reader.getNullable(JsonReader::getDouble);
                 } else if ("dateTime".equals(fieldName)) {
-                    deserializedEncoded.dateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedEncoded.dateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("dateTimeRfc7231".equals(fieldName)) {
                     deserializedEncoded.dateTimeRfc7231
                         = reader.getNullable(nonNullReader -> new DateTimeRfc1123(nonNullReader.getString()));

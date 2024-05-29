@@ -3,33 +3,33 @@
 
 package com.azure.autorest.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class CodeNamerTests {
 
     @Test
     public void testEnumMemberName() {
-        Assert.assertEquals("NINE_NINE_ONE", CodeNamer.getEnumMemberName("991"));
+        Assertions.assertEquals("NINE_NINE_ONE", CodeNamer.getEnumMemberName("991"));
 
-        Assert.assertEquals("TCP", CodeNamer.getEnumMemberName("tcp"));
+        Assertions.assertEquals("TCP", CodeNamer.getEnumMemberName("tcp"));
 
-        Assert.assertEquals("WSDL_LINK", CodeNamer.getEnumMemberName("wsdl-link"));
+        Assertions.assertEquals("WSDL_LINK", CodeNamer.getEnumMemberName("wsdl-link"));
 
-        Assert.assertEquals("CONTENT_TYPE", CodeNamer.getEnumMemberName("content_type"));
+        Assertions.assertEquals("CONTENT_TYPE", CodeNamer.getEnumMemberName("content_type"));
 
-        Assert.assertEquals("MICROSOFT_APP_CONFIGURATION_CONFIGURATION_STORES", CodeNamer.getEnumMemberName("Microsoft.AppConfiguration/configurationStores"));
+        Assertions.assertEquals("MICROSOFT_APP_CONFIGURATION_CONFIGURATION_STORES", CodeNamer.getEnumMemberName("Microsoft.AppConfiguration/configurationStores"));
 
-        Assert.assertEquals("ASTERISK", CodeNamer.getEnumMemberName("*"));
+        Assertions.assertEquals("ASTERISK", CodeNamer.getEnumMemberName("*"));
 
-        Assert.assertEquals("ALL", CodeNamer.getEnumMemberName("$all"));
+        Assertions.assertEquals("ALL", CodeNamer.getEnumMemberName("$all"));
 
-        Assert.assertEquals("ALL", CodeNamer.getEnumMemberName("all*"));
+        Assertions.assertEquals("ALL", CodeNamer.getEnumMemberName("all*"));
 
-        Assert.assertEquals("SYSTEM_ASSIGNED_USER_ASSIGNED", CodeNamer.getEnumMemberName("SystemAssigned, UserAssigned"));
+        Assertions.assertEquals("SYSTEM_ASSIGNED_USER_ASSIGNED", CodeNamer.getEnumMemberName("SystemAssigned, UserAssigned"));
 
-        Assert.assertEquals("ONE_ZEROMINUTELY", CodeNamer.getEnumMemberName("_10minutely"));
+        Assertions.assertEquals("ONE_ZEROMINUTELY", CodeNamer.getEnumMemberName("_10minutely"));
 
-        Assert.assertEquals("_", CodeNamer.getEnumMemberName("_"));
+        Assertions.assertEquals("_", CodeNamer.getEnumMemberName("_"));
     }
 }

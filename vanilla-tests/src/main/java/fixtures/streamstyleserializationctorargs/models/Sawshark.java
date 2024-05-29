@@ -152,7 +152,8 @@ public final class Sawshark extends Shark {
                     length = reader.getFloat();
                     lengthFound = true;
                 } else if ("birthday".equals(fieldName)) {
-                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    birthday = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                     birthdayFound = true;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();

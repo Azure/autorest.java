@@ -6,6 +6,7 @@ package com.encode.datetime.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -75,7 +76,8 @@ public final class Rfc3339DatetimeProperty implements JsonSerializable<Rfc3339Da
                 reader.nextToken();
 
                 if ("value".equals(fieldName)) {
-                    value = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    value = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

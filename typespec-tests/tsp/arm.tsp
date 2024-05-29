@@ -84,6 +84,8 @@ model TopLevelArmResourceProperties {
   userName: string; // this should be renamed to username
   userNames: string; // this isn't a whole word match, shouldn't be renamed to usernames
   accuserName: string; // this isn't a whole word match, shouldn't be renamed to accusername
+
+  @visibility("create", "read")
   startTimeStamp: utcDateTime; // this should be renamed to startTimestamp
 
   @visibility("read")
@@ -236,3 +238,4 @@ op ArmResourceUpdateSync<
 ): ResponseWithHeader<TResource> | ErrorResponse;
 
 @@flattenProperty(TrackedResource.properties);
+@@flattenProperty(Azure.ResourceManager.Foundations.ResourceUpdateModel.properties);

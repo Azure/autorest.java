@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -221,8 +222,8 @@ public final class CopyAuthorization implements JsonSerializable<CopyAuthorizati
                 } else if ("accessToken".equals(fieldName)) {
                     deserializedCopyAuthorization.accessToken = reader.getString();
                 } else if ("expirationDateTime".equals(fieldName)) {
-                    deserializedCopyAuthorization.expirationDateTime
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedCopyAuthorization.expirationDateTime = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

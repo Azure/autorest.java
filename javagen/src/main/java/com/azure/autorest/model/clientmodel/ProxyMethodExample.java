@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.slf4j.Logger;
 
-import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -23,8 +22,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class ProxyMethodExample {
 
@@ -32,6 +34,13 @@ public class ProxyMethodExample {
 
     private static final ObjectMapper PRETTY_PRINTER = new ObjectMapper().enable(SerializationFeature.INDENT_OUTPUT);
     private static final ObjectMapper NORMAL_PRINTER = new ObjectMapper();
+    private static final String SLASH = "/";
+    private static final String QUOTED_SLASH = Pattern.quote(SLASH);
+
+    private static String tspDirectory = null;
+    public static void setTspDirectory(String tspDirectory) {
+        ProxyMethodExample.tspDirectory = tspDirectory;
+    }
 
     // https://azure.github.io/autorest/extensions/#x-ms-examples
     // https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/x-ms-examples.md
@@ -60,11 +69,7 @@ public class ProxyMethodExample {
         public Object getUnescapedQueryValue() {
             Object unescapedValue = objectValue;
             if (objectValue instanceof String) {
-                try {
-                    unescapedValue = URLDecoder.decode((String) objectValue, StandardCharsets.UTF_8.name());
-                } catch (UnsupportedEncodingException e) {
-                    // NOOP
-                }
+                unescapedValue = URLDecoder.decode((String) objectValue, StandardCharsets.UTF_8);
             }
             return unescapedValue;
         }
@@ -238,31 +243,24 @@ public class ProxyMethodExample {
                     case "http":
                     case "https":
                     {
-                        String[] segments = url.getPath().split("/");
+                        String[] segments = url.getPath().split(QUOTED_SLASH);
                         if (segments.length > 3) {
                             // first 3 should be owner, name, branch
                             originalFileName = Arrays.stream(segments)
                                     .filter(s -> !s.isEmpty())
                                     .skip(3)
-                                    .collect(Collectors.joining("/"));
+                                    .collect(Collectors.joining(SLASH));
                         }
                         break;
                     }
 
                     case "file":
                     {
-                        String[] segments = url.getPath().split("/");
-                        int resourceManagerOrDataPlaneSegmentIndex = -1;
-                        for (int i = 0; i < segments.length; ++i) {
-                            if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
-                                resourceManagerOrDataPlaneSegmentIndex = i;
-                                break;
-                            }
-                        }
-                        if (resourceManagerOrDataPlaneSegmentIndex > 2) {
-                            originalFileName = Arrays.stream(segments)
-                                    .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
-                                    .collect(Collectors.joining("/"));
+                        String relativeFileName = tspDirectory != null
+                                ? getRelativeOriginalFileNameForTsp(url)
+                                : getRelativeOriginalFileNameForSwagger(url);
+                        if (relativeFileName != null) {
+                            originalFileName = relativeFileName;
                         }
                         break;
                     }
@@ -297,6 +295,59 @@ public class ProxyMethodExample {
 
     private ProxyMethodExample(String originalFile) {
         this.originalFile = originalFile;
+    }
+
+    static String getRelativeOriginalFileNameForTsp(URL url) {
+        // TypeSpec
+        /*
+         * Example:
+         * directory "specification/standbypool/StandbyPool.Management"
+         * originalFileName "file:///C:/github/azure-sdk-for-java/sdk/standbypool/azure-resourcemanager-standbypool/TempTypeSpecFiles/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
+         *
+         * There is an overlap of "StandbyPool.Management", so that we can combine the 2 to Result:
+         * "specification/standbypool/StandbyPool.Management/examples/2023-12-01-preview/StandbyVirtualMachinePools_Update.json"
+         */
+        String originalFileName = null;
+        String[] directorySegments = tspDirectory.split(QUOTED_SLASH);
+        String directoryLastSegment = directorySegments[directorySegments.length - 1];
+        int sharedDirectorySegment = -1;
+        String[] segments = url.getPath().split(QUOTED_SLASH);
+        for (int i = segments.length - 1; i >= 0; --i) {
+            if (Objects.equals(directoryLastSegment, segments[i])) {
+                sharedDirectorySegment = i;
+                break;
+            }
+        }
+        if (sharedDirectorySegment >= 0) {
+            originalFileName = Stream.concat(
+                    Arrays.stream(directorySegments),
+                    Arrays.stream(segments).skip(sharedDirectorySegment + 1)
+            ).collect(Collectors.joining(SLASH));
+        }
+        return originalFileName;
+    }
+
+    static String getRelativeOriginalFileNameForSwagger(URL url) {
+        // Swagger
+        /*
+         * The examples should be under "specification/<service>/resource-manager"
+         * or "specification/<service>/data-plane"
+         */
+        String originalFileName = null;
+        String[] segments = url.getPath().split(QUOTED_SLASH);
+        int resourceManagerOrDataPlaneSegmentIndex = -1;
+        for (int i = 0; i < segments.length; ++i) {
+            if ("resource-manager".equals(segments[i]) || "data-plane".equals(segments[i])) {
+                resourceManagerOrDataPlaneSegmentIndex = i;
+                break;
+            }
+        }
+        if (resourceManagerOrDataPlaneSegmentIndex > 2) {
+            originalFileName = Arrays.stream(segments)
+                    .skip(resourceManagerOrDataPlaneSegmentIndex - 2)
+                    .collect(Collectors.joining(SLASH));
+        }
+        return originalFileName;
     }
 
     @Override

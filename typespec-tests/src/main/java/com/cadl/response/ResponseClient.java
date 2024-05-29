@@ -398,7 +398,7 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails1, OperationDetails1> beginLroInvalidPollResponse(Resource request) {
+    public SyncPoller<OperationDetails1, Resource> beginLroInvalidPollResponse(Resource request) {
         // Generated convenience method for beginLroInvalidPollResponseWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLroInvalidPollResponseWithModel(BinaryData.fromObject(request), requestOptions);
@@ -418,7 +418,7 @@ public final class ResponseClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
-    public SyncPoller<OperationDetails2, OperationDetails2> beginLroInvalidResult(Resource request) {
+    public SyncPoller<OperationDetails2, Resource> beginLroInvalidResult(Resource request) {
         // Generated convenience method for beginLroInvalidResultWithModel
         RequestOptions requestOptions = new RequestOptions();
         return serviceClient.beginLroInvalidResultWithModel(BinaryData.fromObject(request), requestOptions);

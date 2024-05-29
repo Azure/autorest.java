@@ -6,6 +6,7 @@ package fixtures.requiredfieldsascotrargstransformation.models;
 
 import com.azure.core.annotation.Immutable;
 import com.azure.core.util.Base64Url;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.DateTimeRfc1123;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
@@ -259,8 +260,8 @@ public class TransformationAsRequiredFields implements JsonSerializable<Transfor
                         = OffsetDateTime.ofInstant(Instant.ofEpochSecond(reader.getLong()), ZoneOffset.UTC);
                     unixTimeLongRequiredFound = true;
                 } else if ("unixTimeDateTimeRequired".equals(fieldName)) {
-                    unixTimeDateTimeRequired
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    unixTimeDateTimeRequired = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                     unixTimeDateTimeRequiredFound = true;
                 } else if ("rfc1123NonRequired".equals(fieldName)) {
                     rfc1123NonRequired
