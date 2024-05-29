@@ -214,8 +214,8 @@ public final class ErrorModelClientBuilder implements HttpTrait<ErrorModelClient
      */
     @Generated
     private ErrorModelClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ErrorModelClientImpl client
             = new ErrorModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

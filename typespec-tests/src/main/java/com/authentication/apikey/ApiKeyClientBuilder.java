@@ -216,8 +216,8 @@ public final class ApiKeyClientBuilder implements HttpTrait<ApiKeyClientBuilder>
      */
     @Generated
     private ApiKeyClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ApiKeyClientImpl client = new ApiKeyClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

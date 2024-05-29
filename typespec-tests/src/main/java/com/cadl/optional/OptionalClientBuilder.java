@@ -214,8 +214,8 @@ public final class OptionalClientBuilder implements HttpTrait<OptionalClientBuil
      */
     @Generated
     private OptionalClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         OptionalClientImpl client
             = new OptionalClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

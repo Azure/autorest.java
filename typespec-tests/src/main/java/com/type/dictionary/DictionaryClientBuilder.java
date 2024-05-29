@@ -220,8 +220,8 @@ public final class DictionaryClientBuilder
      */
     @Generated
     private DictionaryClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         DictionaryClientImpl client
             = new DictionaryClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

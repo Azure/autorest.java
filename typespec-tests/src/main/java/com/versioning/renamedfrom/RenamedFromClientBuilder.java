@@ -255,10 +255,10 @@ public final class RenamedFromClientBuilder implements HttpTrait<RenamedFromClie
      */
     @Generated
     private RenamedFromClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         RenamedFromServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : RenamedFromServiceVersion.getLatest();
-        this.validateClient();
         RenamedFromClientImpl client = new RenamedFromClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.version, localServiceVersion);
         return client;

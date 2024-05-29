@@ -266,12 +266,12 @@ public final class MicrosoftAzureTestUrlBuilder
      */
     @Generated
     public MicrosoftAzureTestUrl buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         String localApiVersion = (apiVersion != null) ? apiVersion : "2014-04-01-preview";
         SerializerAdapter localSerializerAdapter
             = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        this.validateClient();
         MicrosoftAzureTestUrl client = new MicrosoftAzureTestUrl(localPipeline, localSerializerAdapter,
             this.subscriptionId, localHost, localApiVersion);
         return client;
@@ -282,8 +282,6 @@ public final class MicrosoftAzureTestUrlBuilder
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(subscriptionId, "'subscriptionId' cannot be null.");
-        Objects.requireNonNull(host, "'host' cannot be null.");
-        Objects.requireNonNull(apiVersion, "'apiVersion' cannot be null.");
     }
 
     @Generated

@@ -198,8 +198,8 @@ public final class ConditionalRequestClientBuilder
      */
     @Generated
     private ConditionalRequestClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ConditionalRequestClientImpl client
             = new ConditionalRequestClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

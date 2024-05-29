@@ -203,8 +203,8 @@ public final class ContentNegotiationClientBuilder
      */
     @Generated
     private ContentNegotiationClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ContentNegotiationClientImpl client
             = new ContentNegotiationClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

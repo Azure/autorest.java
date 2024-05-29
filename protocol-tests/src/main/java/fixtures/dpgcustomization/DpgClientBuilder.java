@@ -233,11 +233,11 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
      */
     @Generated
     private DpgClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         DpgServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : DpgServiceVersion.getLatest();
-        this.validateClient();
         DpgClientImpl client = new DpgClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             localHost, localServiceVersion);
         return client;
@@ -247,7 +247,6 @@ public final class DpgClientBuilder implements HttpTrait<DpgClientBuilder>, Conf
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

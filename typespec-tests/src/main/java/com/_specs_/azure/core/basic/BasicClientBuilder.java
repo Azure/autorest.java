@@ -220,10 +220,10 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
      */
     @Generated
     private BasicClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         BasicServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : BasicServiceVersion.getLatest();
-        this.validateClient();
         BasicClientImpl client
             = new BasicClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
         return client;

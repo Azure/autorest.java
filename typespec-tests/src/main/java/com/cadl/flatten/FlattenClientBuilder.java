@@ -232,10 +232,10 @@ public final class FlattenClientBuilder implements HttpTrait<FlattenClientBuilde
      */
     @Generated
     private FlattenClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         FlattenServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : FlattenServiceVersion.getLatest();
-        this.validateClient();
         FlattenClientImpl client = new FlattenClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, localServiceVersion);
         return client;

@@ -233,10 +233,10 @@ public final class ProtocolAndConvenientClientBuilder implements HttpTrait<Proto
      */
     @Generated
     private ProtocolAndConvenientClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ProtocolAndConvenientServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ProtocolAndConvenientServiceVersion.getLatest();
-        this.validateClient();
         ProtocolAndConvenientClientImpl client = new ProtocolAndConvenientClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

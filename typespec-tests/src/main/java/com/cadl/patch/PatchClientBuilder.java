@@ -214,8 +214,8 @@ public final class PatchClientBuilder implements HttpTrait<PatchClientBuilder>, 
      */
     @Generated
     private PatchClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         PatchClientImpl client
             = new PatchClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

@@ -207,8 +207,8 @@ public final class AccessClientBuilder
      */
     @Generated
     private AccessClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         AccessClientImpl client = new AccessClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

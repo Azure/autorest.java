@@ -198,8 +198,8 @@ public final class XmsClientRequestIdClientBuilder
      */
     @Generated
     private XmsClientRequestIdClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         XmsClientRequestIdClientImpl client
             = new XmsClientRequestIdClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

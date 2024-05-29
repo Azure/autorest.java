@@ -196,8 +196,8 @@ public final class FixedClientBuilder implements HttpTrait<FixedClientBuilder>, 
      */
     @Generated
     private FixedClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         FixedClientImpl client = new FixedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

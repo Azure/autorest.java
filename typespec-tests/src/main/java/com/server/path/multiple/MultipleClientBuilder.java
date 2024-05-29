@@ -232,10 +232,10 @@ public final class MultipleClientBuilder implements HttpTrait<MultipleClientBuil
      */
     @Generated
     private MultipleClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         MultipleServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : MultipleServiceVersion.getLatest();
-        this.validateClient();
         MultipleClientImpl client = new MultipleClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

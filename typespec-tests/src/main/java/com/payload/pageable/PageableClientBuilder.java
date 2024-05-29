@@ -197,8 +197,8 @@ public final class PageableClientBuilder
      */
     @Generated
     private PageableClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         PageableClientImpl client
             = new PageableClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

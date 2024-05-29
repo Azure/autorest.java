@@ -197,8 +197,8 @@ public final class JsonMergePatchClientBuilder
      */
     @Generated
     private JsonMergePatchClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         JsonMergePatchClientImpl client
             = new JsonMergePatchClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

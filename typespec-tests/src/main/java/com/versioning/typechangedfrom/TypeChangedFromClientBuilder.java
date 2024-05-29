@@ -251,10 +251,10 @@ public final class TypeChangedFromClientBuilder implements HttpTrait<TypeChanged
      */
     @Generated
     private TypeChangedFromClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         TypeChangedFromServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : TypeChangedFromServiceVersion.getLatest();
-        this.validateClient();
         TypeChangedFromClientImpl client = new TypeChangedFromClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.version, localServiceVersion);
         return client;

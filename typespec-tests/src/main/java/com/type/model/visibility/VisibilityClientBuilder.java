@@ -197,8 +197,8 @@ public final class VisibilityClientBuilder
      */
     @Generated
     private VisibilityClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         VisibilityClientImpl client
             = new VisibilityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

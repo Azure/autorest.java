@@ -216,10 +216,10 @@ public final class ScalarClientBuilder
      */
     @Generated
     private ScalarClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ScalarServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ScalarServiceVersion.getLatest();
-        this.validateClient();
         ScalarClientImpl client
             = new ScalarClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
         return client;

@@ -232,10 +232,10 @@ public final class LongRunningClientBuilder implements HttpTrait<LongRunningClie
      */
     @Generated
     private LongRunningClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         LongRunningServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : LongRunningServiceVersion.getLatest();
-        this.validateClient();
         LongRunningClientImpl client = new LongRunningClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

@@ -250,10 +250,10 @@ public final class MadeOptionalClientBuilder implements HttpTrait<MadeOptionalCl
      */
     @Generated
     private MadeOptionalClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         MadeOptionalServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : MadeOptionalServiceVersion.getLatest();
-        this.validateClient();
         MadeOptionalClientImpl client = new MadeOptionalClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.version, localServiceVersion);
         return client;

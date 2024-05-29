@@ -250,10 +250,10 @@ public final class RemovedClientBuilder implements HttpTrait<RemovedClientBuilde
      */
     @Generated
     private RemovedClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         RemovedServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : RemovedServiceVersion.getLatest();
-        this.validateClient();
         RemovedClientImpl client = new RemovedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, this.version, localServiceVersion);
         return client;

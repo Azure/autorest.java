@@ -217,8 +217,8 @@ public final class ArrayClientBuilder implements HttpTrait<ArrayClientBuilder>, 
      */
     @Generated
     private ArrayClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ArrayClientImpl client = new ArrayClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

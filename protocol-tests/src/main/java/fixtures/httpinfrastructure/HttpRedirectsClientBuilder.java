@@ -234,11 +234,11 @@ public final class HttpRedirectsClientBuilder
      */
     @Generated
     private AutoRestHttpInfrastructureTestServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestHttpInfrastructureTestServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : AutoRestHttpInfrastructureTestServiceVersion.getLatest();
-        this.validateClient();
         AutoRestHttpInfrastructureTestServiceClientImpl client = new AutoRestHttpInfrastructureTestServiceClientImpl(
             localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
@@ -248,7 +248,6 @@ public final class HttpRedirectsClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

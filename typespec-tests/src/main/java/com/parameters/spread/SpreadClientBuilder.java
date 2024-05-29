@@ -198,8 +198,8 @@ public final class SpreadClientBuilder
      */
     @Generated
     private SpreadClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SpreadClientImpl client = new SpreadClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

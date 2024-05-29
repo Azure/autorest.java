@@ -233,10 +233,10 @@ public final class ParmaterizedEndpointClientBuilder implements HttpTrait<Parmat
      */
     @Generated
     private ParmaterizedEndpointClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ParmaterizedEndpointServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ParmaterizedEndpointServiceVersion.getLatest();
-        this.validateClient();
         ParmaterizedEndpointClientImpl client = new ParmaterizedEndpointClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

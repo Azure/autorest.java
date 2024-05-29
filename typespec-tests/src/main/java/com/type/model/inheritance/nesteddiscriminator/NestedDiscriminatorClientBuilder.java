@@ -198,8 +198,8 @@ public final class NestedDiscriminatorClientBuilder
      */
     @Generated
     private NestedDiscriminatorClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NestedDiscriminatorClientImpl client
             = new NestedDiscriminatorClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

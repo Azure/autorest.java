@@ -199,8 +199,8 @@ public final class CollectionFormatClientBuilder
      */
     @Generated
     private CollectionFormatClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         CollectionFormatClientImpl client
             = new CollectionFormatClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

@@ -257,8 +257,8 @@ public final class ValueTypesClientBuilder
      */
     @Generated
     private ValueTypesClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ValueTypesClientImpl client
             = new ValueTypesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

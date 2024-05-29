@@ -214,8 +214,8 @@ public final class SpecialCharsClientBuilder implements HttpTrait<SpecialCharsCl
      */
     @Generated
     private SpecialCharsClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SpecialCharsClientImpl client
             = new SpecialCharsClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

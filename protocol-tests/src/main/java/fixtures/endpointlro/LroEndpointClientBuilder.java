@@ -250,10 +250,10 @@ public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClie
      */
     @Generated
     private LroEndpointClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         LroEndpointServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : LroEndpointServiceVersion.getLatest();
-        this.validateClient();
         LroEndpointClientImpl client = new LroEndpointClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.projectName, localServiceVersion);
         return client;

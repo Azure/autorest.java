@@ -232,11 +232,11 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
      */
     @Generated
     private AutoRestComplexTestServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestComplexTestServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : AutoRestComplexTestServiceVersion.getLatest();
-        this.validateClient();
         AutoRestComplexTestServiceClientImpl client = new AutoRestComplexTestServiceClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
@@ -246,7 +246,6 @@ public final class BasicClientBuilder implements HttpTrait<BasicClientBuilder>, 
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

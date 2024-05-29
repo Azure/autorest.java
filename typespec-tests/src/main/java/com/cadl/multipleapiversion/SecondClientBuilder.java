@@ -232,10 +232,10 @@ public final class SecondClientBuilder implements HttpTrait<SecondClientBuilder>
      */
     @Generated
     private SecondClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SecondServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : SecondServiceVersion.getLatest();
-        this.validateClient();
         SecondClientImpl client = new SecondClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, localServiceVersion);
         return client;

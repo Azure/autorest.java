@@ -214,8 +214,8 @@ public final class WireTypeClientBuilder implements HttpTrait<WireTypeClientBuil
      */
     @Generated
     private WireTypeClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         WireTypeClientImpl client
             = new WireTypeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

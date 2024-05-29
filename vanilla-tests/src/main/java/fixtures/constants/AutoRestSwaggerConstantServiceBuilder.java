@@ -287,12 +287,12 @@ public final class AutoRestSwaggerConstantServiceBuilder implements HttpTrait<Au
      */
     @Generated
     public AutoRestSwaggerConstantService buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localPathConstant = (pathConstant != null) ? pathConstant : "path";
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter
             = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        this.validateClient();
         AutoRestSwaggerConstantService client = new AutoRestSwaggerConstantService(localPipeline,
             localSerializerAdapter, this.headerConstant, this.queryConstant, localPathConstant, localHost);
         return client;
@@ -302,10 +302,6 @@ public final class AutoRestSwaggerConstantServiceBuilder implements HttpTrait<Au
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(headerConstant, "'headerConstant' cannot be null.");
-        Objects.requireNonNull(queryConstant, "'queryConstant' cannot be null.");
-        Objects.requireNonNull(pathConstant, "'pathConstant' cannot be null.");
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

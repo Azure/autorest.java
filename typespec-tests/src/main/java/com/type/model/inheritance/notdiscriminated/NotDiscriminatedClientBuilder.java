@@ -198,8 +198,8 @@ public final class NotDiscriminatedClientBuilder
      */
     @Generated
     private NotDiscriminatedClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NotDiscriminatedClientImpl client
             = new NotDiscriminatedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

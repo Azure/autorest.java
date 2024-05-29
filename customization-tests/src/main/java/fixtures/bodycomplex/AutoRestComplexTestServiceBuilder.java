@@ -268,12 +268,12 @@ public final class AutoRestComplexTestServiceBuilder
      */
     @Generated
     private AutoRestComplexTestServiceImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         String localApiVersion = (apiVersion != null) ? apiVersion : "2016-02-29";
         SerializerAdapter localSerializerAdapter
             = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        this.validateClient();
         AutoRestComplexTestServiceImpl client
             = new AutoRestComplexTestServiceImpl(localPipeline, localSerializerAdapter, localHost, localApiVersion);
         return client;
@@ -283,8 +283,6 @@ public final class AutoRestComplexTestServiceBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
-        Objects.requireNonNull(apiVersion, "'apiVersion' cannot be null.");
     }
 
     @Generated

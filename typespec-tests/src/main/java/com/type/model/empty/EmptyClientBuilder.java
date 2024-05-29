@@ -196,8 +196,8 @@ public final class EmptyClientBuilder implements HttpTrait<EmptyClientBuilder>, 
      */
     @Generated
     private EmptyClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         EmptyClientImpl client = new EmptyClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

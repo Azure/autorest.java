@@ -214,8 +214,8 @@ public final class EnumServiceClientBuilder implements HttpTrait<EnumServiceClie
      */
     @Generated
     private EnumServiceClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         EnumServiceClientImpl client
             = new EnumServiceClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

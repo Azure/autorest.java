@@ -294,11 +294,11 @@ public final class ConstantAndClientParameterServiceClientBuilder
      */
     @Generated
     private ConstantAndClientParameterServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         ConstantAndClientParameterServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ConstantAndClientParameterServiceVersion.getLatest();
-        this.validateClient();
         ConstantAndClientParameterServiceClientImpl client = new ConstantAndClientParameterServiceClientImpl(
             localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.queryRequiredClientParam,
             this.queryRequiredDefaultValueClientParam, this.queryNonRequiredClientParam, localHost,
@@ -311,9 +311,6 @@ public final class ConstantAndClientParameterServiceClientBuilder
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(queryRequiredClientParam, "'queryRequiredClientParam' cannot be null.");
-        Objects.requireNonNull(queryRequiredDefaultValueClientParam,
-            "'queryRequiredDefaultValueClientParam' cannot be null.");
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

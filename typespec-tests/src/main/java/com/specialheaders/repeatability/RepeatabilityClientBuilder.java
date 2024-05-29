@@ -198,8 +198,8 @@ public final class RepeatabilityClientBuilder
      */
     @Generated
     private RepeatabilityClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         RepeatabilityClientImpl client
             = new RepeatabilityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

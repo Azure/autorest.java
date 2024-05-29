@@ -214,8 +214,8 @@ public final class NamingClientBuilder implements HttpTrait<NamingClientBuilder>
      */
     @Generated
     private NamingClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NamingClientImpl client
             = new NamingClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

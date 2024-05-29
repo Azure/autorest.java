@@ -214,8 +214,8 @@ public final class SingleClientBuilder implements HttpTrait<SingleClientBuilder>
      */
     @Generated
     private SingleClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SingleClientImpl client
             = new SingleClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

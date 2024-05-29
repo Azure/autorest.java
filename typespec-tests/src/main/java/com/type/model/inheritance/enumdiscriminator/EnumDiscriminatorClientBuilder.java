@@ -198,8 +198,8 @@ public final class EnumDiscriminatorClientBuilder
      */
     @Generated
     private EnumDiscriminatorClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         EnumDiscriminatorClientImpl client
             = new EnumDiscriminatorClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

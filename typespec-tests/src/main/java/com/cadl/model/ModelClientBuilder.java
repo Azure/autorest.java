@@ -214,8 +214,8 @@ public final class ModelClientBuilder implements HttpTrait<ModelClientBuilder>, 
      */
     @Generated
     private ModelClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ModelClientImpl client
             = new ModelClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

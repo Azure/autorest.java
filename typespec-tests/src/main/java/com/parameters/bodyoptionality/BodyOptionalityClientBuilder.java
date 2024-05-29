@@ -203,8 +203,8 @@ public final class BodyOptionalityClientBuilder
      */
     @Generated
     private BodyOptionalityClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         BodyOptionalityClientImpl client
             = new BodyOptionalityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

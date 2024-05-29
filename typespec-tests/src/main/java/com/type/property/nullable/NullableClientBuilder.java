@@ -210,8 +210,8 @@ public final class NullableClientBuilder
      */
     @Generated
     private NullableClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NullableClientImpl client
             = new NullableClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

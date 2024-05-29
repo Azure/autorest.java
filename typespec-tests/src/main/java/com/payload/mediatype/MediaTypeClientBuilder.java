@@ -197,8 +197,8 @@ public final class MediaTypeClientBuilder
      */
     @Generated
     private MediaTypeClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         MediaTypeClientImpl client
             = new MediaTypeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

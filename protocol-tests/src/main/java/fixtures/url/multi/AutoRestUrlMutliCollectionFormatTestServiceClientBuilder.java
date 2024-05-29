@@ -238,12 +238,12 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
      */
     @Generated
     private AutoRestUrlMutliCollectionFormatTestServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestUrlMutliCollectionFormatTestServiceVersion localServiceVersion = (serviceVersion != null)
             ? serviceVersion
             : AutoRestUrlMutliCollectionFormatTestServiceVersion.getLatest();
-        this.validateClient();
         AutoRestUrlMutliCollectionFormatTestServiceClientImpl client
             = new AutoRestUrlMutliCollectionFormatTestServiceClientImpl(localPipeline,
                 JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
@@ -254,7 +254,6 @@ public final class AutoRestUrlMutliCollectionFormatTestServiceClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

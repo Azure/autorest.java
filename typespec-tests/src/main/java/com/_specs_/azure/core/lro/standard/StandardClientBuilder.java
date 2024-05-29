@@ -216,10 +216,10 @@ public final class StandardClientBuilder
      */
     @Generated
     private StandardClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         StandardServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : StandardServiceVersion.getLatest();
-        this.validateClient();
         StandardClientImpl client = new StandardClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
         return client;

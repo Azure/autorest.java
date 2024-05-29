@@ -198,8 +198,8 @@ public final class RecursiveClientBuilder
      */
     @Generated
     private RecursiveClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         RecursiveClientImpl client
             = new RecursiveClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

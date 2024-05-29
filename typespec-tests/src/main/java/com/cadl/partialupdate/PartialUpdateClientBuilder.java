@@ -214,8 +214,8 @@ public final class PartialUpdateClientBuilder implements HttpTrait<PartialUpdate
      */
     @Generated
     private PartialUpdateClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         PartialUpdateClientImpl client = new PartialUpdateClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

@@ -217,8 +217,8 @@ public final class CustomClientBuilder implements HttpTrait<CustomClientBuilder>
      */
     @Generated
     private CustomClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         CustomClientImpl client = new CustomClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

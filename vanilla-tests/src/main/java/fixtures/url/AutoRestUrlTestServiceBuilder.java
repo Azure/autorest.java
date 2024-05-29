@@ -266,11 +266,11 @@ public final class AutoRestUrlTestServiceBuilder
      */
     @Generated
     public AutoRestUrlTestService buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         SerializerAdapter localSerializerAdapter
             = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        this.validateClient();
         AutoRestUrlTestService client = new AutoRestUrlTestService(localPipeline, localSerializerAdapter,
             this.globalStringPath, this.globalStringQuery, localHost);
         return client;
@@ -281,7 +281,6 @@ public final class AutoRestUrlTestServiceBuilder
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(globalStringPath, "'globalStringPath' cannot be null.");
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

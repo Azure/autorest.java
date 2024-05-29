@@ -214,8 +214,8 @@ public final class LiteralServiceClientBuilder implements HttpTrait<LiteralServi
      */
     @Generated
     private LiteralServiceClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         LiteralServiceClientImpl client = new LiteralServiceClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

@@ -221,8 +221,8 @@ public final class MultiContentTypesClientBuilder implements HttpTrait<MultiCont
      */
     @Generated
     private MultiContentTypesClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         MultiContentTypesClientImpl client = new MultiContentTypesClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

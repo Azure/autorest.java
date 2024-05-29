@@ -204,8 +204,8 @@ public final class DurationClientBuilder
      */
     @Generated
     private DurationClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         DurationClientImpl client
             = new DurationClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

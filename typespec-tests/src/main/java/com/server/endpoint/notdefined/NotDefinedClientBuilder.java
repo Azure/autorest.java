@@ -215,8 +215,8 @@ public final class NotDefinedClientBuilder implements HttpTrait<NotDefinedClient
      */
     @Generated
     private NotDefinedClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NotDefinedClientImpl client
             = new NotDefinedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

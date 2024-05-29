@@ -197,8 +197,8 @@ public final class JsonClientBuilder implements HttpTrait<JsonClientBuilder>, Co
      */
     @Generated
     private JsonClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         JsonClientImpl client = new JsonClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

@@ -251,10 +251,10 @@ public final class ReturnTypeChangedFromClientBuilder implements HttpTrait<Retur
      */
     @Generated
     private ReturnTypeChangedFromClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ReturnTypeChangedFromServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ReturnTypeChangedFromServiceVersion.getLatest();
-        this.validateClient();
         ReturnTypeChangedFromClientImpl client = new ReturnTypeChangedFromClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.version, localServiceVersion);
         return client;

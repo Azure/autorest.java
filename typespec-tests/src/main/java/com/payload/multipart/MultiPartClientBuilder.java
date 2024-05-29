@@ -197,8 +197,8 @@ public final class MultiPartClientBuilder
      */
     @Generated
     private MultiPartClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         MultiPartClientImpl client
             = new MultiPartClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

@@ -207,8 +207,8 @@ public final class BytesClientBuilder implements HttpTrait<BytesClientBuilder>, 
      */
     @Generated
     private BytesClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         BytesClientImpl client = new BytesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

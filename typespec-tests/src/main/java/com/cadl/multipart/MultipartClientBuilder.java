@@ -214,8 +214,8 @@ public final class MultipartClientBuilder implements HttpTrait<MultipartClientBu
      */
     @Generated
     private MultipartClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         MultipartClientImpl client
             = new MultipartClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

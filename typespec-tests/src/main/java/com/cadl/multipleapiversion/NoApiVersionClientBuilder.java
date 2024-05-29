@@ -232,10 +232,10 @@ public final class NoApiVersionClientBuilder implements HttpTrait<NoApiVersionCl
      */
     @Generated
     private NoApiVersionClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NoApiVersionServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : NoApiVersionServiceVersion.getLatest();
-        this.validateClient();
         NoApiVersionClientImpl client = new NoApiVersionClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

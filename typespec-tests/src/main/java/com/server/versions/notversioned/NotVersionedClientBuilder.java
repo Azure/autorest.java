@@ -215,8 +215,8 @@ public final class NotVersionedClientBuilder implements HttpTrait<NotVersionedCl
      */
     @Generated
     private NotVersionedClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         NotVersionedClientImpl client
             = new NotVersionedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

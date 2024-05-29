@@ -219,8 +219,8 @@ public final class OAuth2ClientBuilder implements HttpTrait<OAuth2ClientBuilder>
      */
     @Generated
     private OAuth2ClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         OAuth2ClientImpl client = new OAuth2ClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

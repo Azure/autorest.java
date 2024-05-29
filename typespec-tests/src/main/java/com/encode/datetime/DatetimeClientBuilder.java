@@ -206,8 +206,8 @@ public final class DatetimeClientBuilder
      */
     @Generated
     private DatetimeClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         DatetimeClientImpl client
             = new DatetimeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

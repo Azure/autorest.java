@@ -232,10 +232,10 @@ public final class ResponseClientBuilder implements HttpTrait<ResponseClientBuil
      */
     @Generated
     private ResponseClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ResponseServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ResponseServiceVersion.getLatest();
-        this.validateClient();
         ResponseClientImpl client = new ResponseClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

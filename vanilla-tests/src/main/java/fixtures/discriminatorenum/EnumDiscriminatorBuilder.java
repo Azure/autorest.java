@@ -230,11 +230,11 @@ public final class EnumDiscriminatorBuilder
      */
     @Generated
     public EnumDiscriminator buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "";
         SerializerAdapter localSerializerAdapter
             = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        this.validateClient();
         EnumDiscriminator client = new EnumDiscriminator(localPipeline, localSerializerAdapter, localHost);
         return client;
     }
@@ -243,7 +243,6 @@ public final class EnumDiscriminatorBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

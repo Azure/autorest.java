@@ -232,10 +232,10 @@ public final class ContosoClientBuilder implements HttpTrait<ContosoClientBuilde
      */
     @Generated
     private ContosoClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ContosoServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ContosoServiceVersion.getLatest();
-        this.validateClient();
         ContosoClientImpl client = new ContosoClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, localServiceVersion);
         return client;

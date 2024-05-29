@@ -221,8 +221,8 @@ public final class VisibilityClientBuilder implements HttpTrait<VisibilityClient
      */
     @Generated
     private VisibilityClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         VisibilityClientImpl client
             = new VisibilityClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

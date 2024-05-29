@@ -256,10 +256,10 @@ public final class ResiliencyServiceDrivenClientBuilder implements HttpTrait<Res
      */
     @Generated
     private ResiliencyServiceDrivenClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ServiceDrivenServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ServiceDrivenServiceVersion.getLatest();
-        this.validateClient();
         ResiliencyServiceDrivenClientImpl client
             = new ResiliencyServiceDrivenClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
                 this.endpoint, this.serviceDeploymentVersion, localServiceVersion);

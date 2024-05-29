@@ -246,8 +246,8 @@ public final class ServiceClientClientBuilder implements HttpTrait<ServiceClient
      */
     @Generated
     private ServiceClientClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ServiceClientClientImpl client = new ServiceClientClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;

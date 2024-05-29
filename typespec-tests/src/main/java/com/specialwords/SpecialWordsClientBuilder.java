@@ -206,8 +206,8 @@ public final class SpecialWordsClientBuilder
      */
     @Generated
     private SpecialWordsClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SpecialWordsClientImpl client
             = new SpecialWordsClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

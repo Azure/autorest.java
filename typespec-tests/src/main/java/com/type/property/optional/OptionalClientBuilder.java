@@ -226,8 +226,8 @@ public final class OptionalClientBuilder
      */
     @Generated
     private OptionalClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         OptionalClientImpl client
             = new OptionalClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

@@ -214,8 +214,8 @@ public final class BuiltinClientBuilder implements HttpTrait<BuiltinClientBuilde
      */
     @Generated
     private BuiltinClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         BuiltinClientImpl client
             = new BuiltinClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;

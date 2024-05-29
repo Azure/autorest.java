@@ -215,10 +215,10 @@ public final class RpcClientBuilder implements HttpTrait<RpcClientBuilder>, Conf
      */
     @Generated
     private RpcClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         RpcServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : RpcServiceVersion.getLatest();
-        this.validateClient();
         RpcClientImpl client
             = new RpcClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localServiceVersion);
         return client;

@@ -197,8 +197,8 @@ public final class ExtensibleClientBuilder
      */
     @Generated
     private ExtensibleClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ExtensibleClientImpl client
             = new ExtensibleClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

@@ -198,8 +198,8 @@ public final class SingleDiscriminatorClientBuilder
      */
     @Generated
     private SingleDiscriminatorClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         SingleDiscriminatorClientImpl client
             = new SingleDiscriminatorClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

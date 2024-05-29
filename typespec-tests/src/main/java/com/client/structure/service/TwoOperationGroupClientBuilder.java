@@ -234,8 +234,8 @@ public final class TwoOperationGroupClientBuilder implements HttpTrait<TwoOperat
      */
     @Generated
     private TwoOperationGroupClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         TwoOperationGroupClientImpl client = new TwoOperationGroupClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;

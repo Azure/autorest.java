@@ -217,8 +217,8 @@ public final class UnionClientBuilder implements HttpTrait<UnionClientBuilder>, 
      */
     @Generated
     private UnionClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         UnionClientImpl client = new UnionClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

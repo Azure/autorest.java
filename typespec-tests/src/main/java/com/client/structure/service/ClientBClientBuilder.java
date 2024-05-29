@@ -233,8 +233,8 @@ public final class ClientBClientBuilder implements HttpTrait<ClientBClientBuilde
      */
     @Generated
     private ClientBClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ClientBClientImpl client = new ClientBClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, this.client);
         return client;

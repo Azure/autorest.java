@@ -232,10 +232,10 @@ public final class VersioningClientBuilder implements HttpTrait<VersioningClient
      */
     @Generated
     private VersioningClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         VersioningServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : VersioningServiceVersion.getLatest();
-        this.validateClient();
         VersioningClientImpl client = new VersioningClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

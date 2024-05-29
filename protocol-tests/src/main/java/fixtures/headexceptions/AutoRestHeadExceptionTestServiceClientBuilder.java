@@ -238,11 +238,11 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder
      */
     @Generated
     private AutoRestHeadExceptionTestServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestHeadExceptionTestServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : AutoRestHeadExceptionTestServiceVersion.getLatest();
-        this.validateClient();
         AutoRestHeadExceptionTestServiceClientImpl client = new AutoRestHeadExceptionTestServiceClientImpl(
             localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
@@ -252,7 +252,6 @@ public final class AutoRestHeadExceptionTestServiceClientBuilder
     private void validateClient() {
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
-        Objects.requireNonNull(host, "'host' cannot be null.");
     }
 
     @Generated

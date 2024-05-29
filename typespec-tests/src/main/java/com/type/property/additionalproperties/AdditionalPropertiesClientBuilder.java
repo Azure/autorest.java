@@ -263,8 +263,8 @@ public final class AdditionalPropertiesClientBuilder
      */
     @Generated
     private AdditionalPropertiesClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         AdditionalPropertiesClientImpl client
             = new AdditionalPropertiesClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;

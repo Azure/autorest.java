@@ -253,10 +253,10 @@ public final class MiscellaneousClientBuilder
      */
     @Generated
     private FormRecognizerClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         FormRecognizerServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : FormRecognizerServiceVersion.getLatest();
-        this.validateClient();
         FormRecognizerClientImpl client = new FormRecognizerClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;

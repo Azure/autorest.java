@@ -196,8 +196,8 @@ public final class UsageClientBuilder implements HttpTrait<UsageClientBuilder>, 
      */
     @Generated
     private UsageClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         UsageClientImpl client = new UsageClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }

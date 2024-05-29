@@ -266,12 +266,12 @@ public final class AutoRestValidationTestBuilder
      */
     @Generated
     public AutoRestValidationTest buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         String localApiVersion = (apiVersion != null) ? apiVersion : "1.0.0";
         SerializerAdapter localSerializerAdapter
             = (serializerAdapter != null) ? serializerAdapter : JacksonAdapter.createDefaultSerializerAdapter();
-        this.validateClient();
         AutoRestValidationTest client = new AutoRestValidationTest(localPipeline, localSerializerAdapter,
             this.subscriptionId, localHost, localApiVersion);
         return client;
@@ -282,8 +282,6 @@ public final class AutoRestValidationTestBuilder
         // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(subscriptionId, "'subscriptionId' cannot be null.");
-        Objects.requireNonNull(host, "'host' cannot be null.");
-        Objects.requireNonNull(apiVersion, "'apiVersion' cannot be null.");
     }
 
     @Generated

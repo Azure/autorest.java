@@ -214,8 +214,8 @@ public final class InternalClientBuilder implements HttpTrait<InternalClientBuil
      */
     @Generated
     private InternalClientImpl buildInnerClient() {
-        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         this.validateClient();
+        HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         InternalClientImpl client
             = new InternalClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
