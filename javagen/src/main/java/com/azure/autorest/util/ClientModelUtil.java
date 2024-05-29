@@ -8,6 +8,7 @@ import com.azure.autorest.extension.base.model.codemodel.Client;
 import com.azure.autorest.extension.base.model.codemodel.CodeModel;
 import com.azure.autorest.extension.base.model.codemodel.ConstantSchema;
 import com.azure.autorest.extension.base.model.codemodel.KnownMediaType;
+import com.azure.autorest.extension.base.model.codemodel.Operation;
 import com.azure.autorest.extension.base.model.codemodel.OperationGroup;
 import com.azure.autorest.extension.base.model.codemodel.Parameter;
 import com.azure.autorest.extension.base.plugin.JavaSettings;
@@ -57,6 +58,10 @@ public class ClientModelUtil {
     private static final Pattern SPLIT_FLATTEN_PROPERTY_PATTERN = Pattern.compile("((?<!\\\\))\\.");
 
     public static final String JSON_MERGE_PATCH_HELPER_CLASS_NAME = "JsonMergePatchHelper";
+
+    public static final String OPERATION_LOCATION_POLLING_STRATEGY = "OperationLocationPollingStrategy";
+    public static final String SYNC_OPERATION_LOCATION_POLLING_STRATEGY = "SyncOperationLocationPollingStrategy";
+    public static final String POLLING_UTILS = "PollingUtils";
 
     private ClientModelUtil() {
     }
@@ -724,6 +729,27 @@ public class ClientModelUtil {
         }
 
         return externalPackageNames;
+    }
+
+    public static boolean requireOperationLocationPollingStrategy(CodeModel codeModel) {
+        if (!CoreUtils.isNullOrEmpty(codeModel.getClients())) {
+            for (Client client : codeModel.getClients()) {
+                if (!CoreUtils.isNullOrEmpty(client.getOperationGroups())) {
+                    for (OperationGroup og : client.getOperationGroups()) {
+                        if (!CoreUtils.isNullOrEmpty(og.getOperations())) {
+                            for (Operation operation : og.getOperations()) {
+                                if (operation.getLroMetadata() != null && operation.getLroMetadata().getPollingStrategy() != null) {
+                                    if (OPERATION_LOCATION_POLLING_STRATEGY.equals(operation.getLroMetadata().getPollingStrategy().getLanguage().getJava().getName())) {
+                                        return true;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public static boolean isMultipartModel(ClientModel model) {

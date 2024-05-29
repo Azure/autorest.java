@@ -13,7 +13,6 @@ import com.azure.autorest.model.clientmodel.Client;
 import com.azure.autorest.model.clientmodel.ConvenienceMethod;
 import com.azure.autorest.model.clientmodel.ClientModel;
 import com.azure.autorest.model.javamodel.JavaPackage;
-import com.azure.autorest.partialupdate.util.PartialUpdateHandler;
 import com.azure.autorest.preprocessor.Preprocessor;
 import com.azure.autorest.preprocessor.tranformer.Transformer;
 import com.azure.autorest.util.ClientModelUtil;
@@ -28,8 +27,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.OutputStream;
 import java.lang.reflect.Type;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -130,7 +127,7 @@ public class TypeSpecPlugin extends Javagen {
     }
 
     @Override
-    protected void writeHelperClasses(Client client, JavaPackage javaPackage, JavaSettings settings) {
+    protected void writeHelperClasses(Client client, CodeModel codeModel, JavaPackage javaPackage, JavaSettings settings) {
         // JsonMergePatchHelper
         List<ClientModel> jsonMergePatchModels = client.getModels().stream()
             .filter(model -> ModelUtil.isGeneratingModel(model) && ClientModelUtil.isJsonMergePatchModel(model, settings))
@@ -152,28 +149,22 @@ public class TypeSpecPlugin extends Javagen {
                         ClientModelUtil.MULTI_PART_FORM_DATA_HELPER_CLASS_NAME);
             }
         }
+
+        // OperationLocationPollingStrategy
+        if (ClientModelUtil.requireOperationLocationPollingStrategy(codeModel)) {
+            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()),
+                    ClientModelUtil.OPERATION_LOCATION_POLLING_STRATEGY);
+            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()),
+                    ClientModelUtil.SYNC_OPERATION_LOCATION_POLLING_STRATEGY);
+            javaPackage.addJavaFromResources(settings.getPackage(settings.getImplementationSubpackage()),
+                    ClientModelUtil.POLLING_UTILS);
+        }
     }
 
     @Override
     public void writeFile(String fileName, String content, List<Object> sourceMap) {
         File outputFile = FileUtil.writeToFile(emitterOptions.getOutputDir(), fileName, content);
         LOGGER.info("Write file: {}", outputFile.getAbsolutePath());
-    }
-
-    public String handlePartialUpdate(String filePath, String generatedContent) {
-        if (filePath.endsWith(".java")) { // only handle for .java file
-            // check if existingFile exists, if not, no need to handle partial update
-            Path absoluteFilePath = Paths.get(emitterOptions.getOutputDir(), filePath);
-            if (Files.exists(absoluteFilePath)) {
-                try {
-                    String existingFileContent = Files.readString(absoluteFilePath);
-                    return PartialUpdateHandler.handlePartialUpdateForFile(generatedContent, existingFileContent);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-        return generatedContent;
     }
 
     private static final Map<String, Object> SETTINGS_MAP = new HashMap<>();
