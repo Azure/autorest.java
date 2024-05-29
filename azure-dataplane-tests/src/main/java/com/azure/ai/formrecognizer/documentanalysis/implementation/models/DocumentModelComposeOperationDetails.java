@@ -5,6 +5,7 @@
 package com.azure.ai.formrecognizer.documentanalysis.implementation.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -192,11 +193,11 @@ public final class DocumentModelComposeOperationDetails extends OperationDetails
                     deserializedDocumentModelComposeOperationDetails
                         .setStatus(OperationStatus.fromString(reader.getString()));
                 } else if ("createdDateTime".equals(fieldName)) {
-                    deserializedDocumentModelComposeOperationDetails.setCreatedDateTime(
-                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
+                    deserializedDocumentModelComposeOperationDetails.setCreatedDateTime(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
                 } else if ("lastUpdatedDateTime".equals(fieldName)) {
-                    deserializedDocumentModelComposeOperationDetails.setLastUpdatedDateTime(
-                        reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString())));
+                    deserializedDocumentModelComposeOperationDetails.setLastUpdatedDateTime(reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString())));
                 } else if ("resourceLocation".equals(fieldName)) {
                     deserializedDocumentModelComposeOperationDetails.setResourceLocation(reader.getString());
                 } else if ("percentCompleted".equals(fieldName)) {

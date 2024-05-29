@@ -269,10 +269,10 @@ public class ClassType implements IType {
         .defaultValueExpressionConverter(defaultValueExpression -> "OffsetDateTime.parse(\"" + defaultValueExpression + "\")")
         .jsonToken("JsonToken.STRING")
         .serializationValueGetterModifier(valueGetter -> valueGetter + " == null ? null : DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(" + valueGetter + ")")
-        .jsonDeserializationMethod("getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()))")
+        .jsonDeserializationMethod("getNullable(nonNullReader -> " + CORE_UTILS.getName() + ".parseBestOffsetDateTime(nonNullReader.getString()))")
         .serializationMethodBase("writeString")
-        .xmlElementDeserializationMethod("getNullableElement(dateString -> OffsetDateTime.parse(dateString))")
-        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, dateString -> OffsetDateTime.parse(dateString))")
+        .xmlElementDeserializationMethod("getNullableElement(dateString -> " + CORE_UTILS.getName() + ".parseBestOffsetDateTime(dateString))")
+        .xmlAttributeDeserializationTemplate("%s.getNullableAttribute(%s, %s, dateString -> " + CORE_UTILS.getName() + ".parseBestOffsetDateTime(dateString))")
         .build();
 
     public static final ClassType DURATION = new Builder(false).knownClass(Duration.class)

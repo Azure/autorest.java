@@ -5,6 +5,7 @@
 package com.azure.containers.containerregistry.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -247,11 +248,11 @@ public class ContainerRepositoryProperties implements JsonSerializable<Container
                 } else if ("imageName".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.name = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
-                    deserializedContainerRepositoryProperties.createdOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedContainerRepositoryProperties.createdOn = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("lastUpdateTime".equals(fieldName)) {
-                    deserializedContainerRepositoryProperties.lastUpdatedOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedContainerRepositoryProperties.lastUpdatedOn = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("manifestCount".equals(fieldName)) {
                     deserializedContainerRepositoryProperties.manifestCount = reader.getInt();
                 } else if ("tagCount".equals(fieldName)) {

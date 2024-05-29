@@ -27,6 +27,7 @@ import { EmitterOptions } from "./emitter.js";
 import { getNamespace, logWarning, pascalCase } from "./utils.js";
 import { modelIs, unionReferredByType } from "./type-utils.js";
 import { SdkContext, getDefaultApiVersion } from "@azure-tools/typespec-client-generator-core";
+import { pathToFileURL } from "url";
 
 export const SPECIAL_HEADER_NAMES = new Set([
   "repeatability-request-id",
@@ -120,7 +121,8 @@ export async function loadExamples(
     const exampleFiles = await program.host.readDir(exampleDir);
     for (const fileName of exampleFiles) {
       try {
-        const exampleFile = await program.host.readFile(resolvePath(exampleDir, fileName));
+        const exampleFilePath = resolvePath(exampleDir, fileName);
+        const exampleFile = await program.host.readFile(exampleFilePath);
         const example = JSON.parse(exampleFile.text);
         if (!example.operationId) {
           logWarning(program, `Example file '${fileName}' is missing operationId.`);
@@ -128,6 +130,7 @@ export async function loadExamples(
         }
 
         if (!operationIdExamplesMap.has(example.operationId)) {
+          example["x-ms-original-file"] = pathToFileURL(exampleFilePath).toString();
           operationIdExamplesMap.set(example.operationId, example);
         }
       } catch (err) {

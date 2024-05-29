@@ -11,6 +11,7 @@ import com.azure.autorest.extension.base.plugin.JavaSettings;
 import com.azure.autorest.fluent.TypeSpecFluentPlugin;
 import com.azure.autorest.fluent.model.javamodel.FluentJavaPackage;
 import com.azure.autorest.model.clientmodel.Client;
+import com.azure.autorest.model.clientmodel.ProxyMethodExample;
 import com.azure.autorest.model.javamodel.JavaFile;
 import com.azure.autorest.model.javamodel.JavaPackage;
 import com.azure.autorest.postprocessor.Postprocessor;
@@ -18,6 +19,7 @@ import com.azure.autorest.util.ClientModelUtil;
 import com.azure.core.util.Configuration;
 import com.azure.core.util.CoreUtils;
 import com.azure.typespec.model.EmitterOptions;
+import com.azure.typespec.util.TspLocationUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -54,6 +56,10 @@ public class Main {
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES);
     }
 
+    private static final String TSP_LOCATION_FILENAME = "tsp-location.yaml";
+
+    private static Yaml yaml = null;
+
     // java -jar target/azure-typespec-extension-jar-with-dependencies.jar
     public static void main(String[] args) throws IOException {
         // parameters
@@ -85,6 +91,21 @@ public class Main {
 
                     // if there is already pom and source, do not overwrite them (includes README.md, CHANGELOG.md etc.)
                     sdkIntegration = !filenames.containsAll(Arrays.asList("pom.xml", "src"));
+                }
+            }
+
+            // load tsp-location.yaml
+            try (Stream<Path> filestream = Files.list(outputDirPath)) {
+                Set<String> filenames = filestream
+                        .map(p -> p.getFileName().toString())
+                        .map(name -> name.toLowerCase(Locale.ROOT))
+                        .collect(Collectors.toSet());
+                if (filenames.contains(TSP_LOCATION_FILENAME)) {
+                    String directory = TspLocationUtil.getDirectory(getYaml(),
+                            outputDirPath.resolve(TSP_LOCATION_FILENAME));
+                    if (!CoreUtils.isNullOrEmpty(directory)) {
+                        ProxyMethodExample.setTspDirectory(directory);
+                    }
                 }
             }
         }
@@ -219,17 +240,22 @@ public class Main {
 
     private static CodeModel loadCodeModel(String filename) throws IOException {
         String file = Files.readString(Paths.get(filename));
+        return getYaml().loadAs(file, CodeModel.class);
+    }
 
-        Representer representer = new Representer(new DumperOptions());
-        representer.setPropertyUtils(new AnnotatedPropertyUtils());
-        representer.getPropertyUtils().setSkipMissingProperties(true);
-        LoaderOptions loaderOptions = new LoaderOptions();
-        loaderOptions.setCodePointLimit(50 * 1024 * 1024);
-        loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
-        loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
-        loaderOptions.setTagInspector(new TrustedTagInspector());
-        Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
-        Yaml yamlMapper = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
-        return yamlMapper.loadAs(file, CodeModel.class);
+    private static Yaml getYaml() {
+        if (yaml == null) {
+            Representer representer = new Representer(new DumperOptions());
+            representer.setPropertyUtils(new AnnotatedPropertyUtils());
+            representer.getPropertyUtils().setSkipMissingProperties(true);
+            LoaderOptions loaderOptions = new LoaderOptions();
+            loaderOptions.setCodePointLimit(50 * 1024 * 1024);
+            loaderOptions.setMaxAliasesForCollections(Integer.MAX_VALUE);
+            loaderOptions.setNestingDepthLimit(Integer.MAX_VALUE);
+            loaderOptions.setTagInspector(new TrustedTagInspector());
+            Constructor constructor = new CodeModelCustomConstructor(loaderOptions);
+            yaml = new Yaml(constructor, representer, new DumperOptions(), loaderOptions);
+        }
+        return yaml;
     }
 }

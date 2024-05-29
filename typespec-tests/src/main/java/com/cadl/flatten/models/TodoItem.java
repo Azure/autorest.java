@@ -6,6 +6,7 @@ package com.cadl.flatten.models;
 
 import com.azure.core.annotation.Generated;
 import com.azure.core.annotation.Immutable;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -203,13 +204,16 @@ public final class TodoItem implements JsonSerializable<TodoItem> {
                 } else if ("status".equals(fieldName)) {
                     status = SendLongRequestStatus.fromString(reader.getString());
                 } else if ("createdAt".equals(fieldName)) {
-                    createdAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    createdAt = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("updatedAt".equals(fieldName)) {
-                    updatedAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    updatedAt = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("description".equals(fieldName)) {
                     description = reader.getString();
                 } else if ("completedAt".equals(fieldName)) {
-                    completedAt = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    completedAt = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("_dummy".equals(fieldName)) {
                     dummy = reader.getString();
                 } else {

@@ -2108,6 +2108,11 @@ export class CodeModelBuilder {
       extensions = extensions ?? {};
       extensions["x-ms-client-flatten"] = true;
     }
+    const mutability = this.getMutability(prop);
+    if (mutability) {
+      extensions = extensions ?? {};
+      extensions["x-ms-mutability"] = mutability;
+    }
 
     if (prop.kind === "property" && prop.isMultipartFileInput) {
       schema = this.processMultipartFormDataFilePropertySchemaFromSdkType(prop, this.namespace);
@@ -2342,6 +2347,29 @@ export class CodeModelBuilder {
       return !target.visibility.includes(Visibility.Read);
     } else {
       return false;
+    }
+  }
+
+  private getMutability(target: SdkModelPropertyType): string[] | undefined {
+    if (target.kind === "property" && target.visibility) {
+      const mutability: string[] = [];
+      if (target.visibility.includes(Visibility.Create)) {
+        mutability.push("create");
+      }
+      if (target.visibility.includes(Visibility.Update)) {
+        mutability.push("update");
+      }
+      if (target.visibility.includes(Visibility.Read)) {
+        mutability.push("read");
+      }
+      if (mutability.length === 3) {
+        // if all 3 (supported) mutability values are present, there is no need to set the x-ms-mutability
+        return undefined;
+      } else {
+        return mutability;
+      }
+    } else {
+      return undefined;
     }
   }
 

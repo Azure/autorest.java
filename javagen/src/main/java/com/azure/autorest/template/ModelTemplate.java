@@ -201,26 +201,26 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                         methodBlock -> addSetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
                             methodBlock, settings, ClientModelUtil.isJsonMergePatchModel(model, settings)));
                 } else {
-                    // If stream-style serialization is being generated or the property is the polymorphic
-                    // discriminator, some additional setters may need to be added to support read-only properties that
-                    // aren't included in the constructor.
+                    // If stream-style serialization is being generated, some additional setters may need to be added to
+                    // support read-only properties that aren't included in the constructor.
                     // Jackson handles this by reflectively setting the value in the parent model, but stream-style
                     // serialization doesn't perform reflective cracking like Jackson Databind does, so it needs a way
                     // to access the readonly property (aka one without a public setter method).
                     //
                     // The package-private setter is added when the property isn't included in the constructor and is
-                    // defined by this model.
+                    // defined by this model, except for JSON merge patch models as those use the access helper pattern
+                    // to enable subtypes to set the property.
                     boolean streamStyle = settings.isStreamStyleSerialization();
                     boolean hasDerivedTypes = !CoreUtils.isNullOrEmpty(model.getDerivedModels());
                     boolean notIncludedInConstructor = !ClientModelUtil.includePropertyInConstructor(property,
                         settings);
                     boolean definedByModel = modelDefinesProperty(model, property);
+                    boolean modelIsJsonMergePatch = ClientModelUtil.isJsonMergePatchModel(model, settings);
                     if (hasDerivedTypes && notIncludedInConstructor && definedByModel
-                        && streamStyle && !property.isPolymorphicDiscriminator()) {
-                        methodVisibility = JavaVisibility.PackagePrivate;
+                        && streamStyle && !property.isPolymorphicDiscriminator() && !modelIsJsonMergePatch) {
                         generateSetterJavadoc(classBlock, model, property);
                         addGeneratedAnnotation(classBlock);
-                        classBlock.method(methodVisibility, null,
+                        classBlock.method(JavaVisibility.PackagePrivate, null,
                             model.getName() + " " + property.getSetterName() + "(" + propertyWireType + " "
                                 + property.getName() + ")",
                             methodBlock -> addSetterMethod(propertyWireType, propertyWireType, property, treatAsXml,
@@ -822,17 +822,20 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 constructor.line("super(" + superProperties + ");");
             }
 
+            // If we're always adding the polymorphic discriminator to updated properties, may as well just make the
+            // serialization always add them. This will remove the need to track them, further reducing Set updating and
+            // querying, which can improve performance in high throughput scenarios.
             // If there is a polymorphic discriminator , add a line to initialize the discriminator.
-            ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
-            if (polymorphicProperty != null && !polymorphicProperty.isRequired()) {
-                if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
-                    for (ClientModelProperty property : model.getParentPolymorphicDiscriminators()) {
-                        constructor.line("this.updatedProperties.add(\"" + property.getName() + "\");");
-                    }
-
-                    constructor.line("this.updatedProperties.add(\"" + polymorphicProperty.getName() + "\");");
-                }
-            }
+//            ClientModelProperty polymorphicProperty = model.getPolymorphicDiscriminator();
+//            if (polymorphicProperty != null && !polymorphicProperty.isRequired()) {
+//                if (ClientModelUtil.isJsonMergePatchModel(model, settings)) {
+//                    for (ClientModelProperty property : model.getParentPolymorphicDiscriminators()) {
+//                        constructor.line("this.updatedProperties.add(\"" + property.getName() + "\");");
+//                    }
+//
+//                    constructor.line("this.updatedProperties.add(\"" + polymorphicProperty.getName() + "\");");
+//                }
+//            }
 
             // constant properties should already be initialized in class variable definition
 //            // Then, add all constant properties.

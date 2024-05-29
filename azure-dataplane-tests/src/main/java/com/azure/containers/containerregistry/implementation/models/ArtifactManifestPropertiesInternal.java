@@ -8,6 +8,7 @@ import com.azure.containers.containerregistry.models.ArtifactArchitecture;
 import com.azure.containers.containerregistry.models.ArtifactManifestPlatform;
 import com.azure.containers.containerregistry.models.ArtifactOperatingSystem;
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -461,11 +462,11 @@ public class ArtifactManifestPropertiesInternal implements JsonSerializable<Arti
                             deserializedArtifactManifestPropertiesInternal.sizeInBytes
                                 = reader.getNullable(JsonReader::getLong);
                         } else if ("createdTime".equals(fieldName)) {
-                            deserializedArtifactManifestPropertiesInternal.createdOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                            deserializedArtifactManifestPropertiesInternal.createdOn = reader.getNullable(
+                                nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                         } else if ("lastUpdateTime".equals(fieldName)) {
-                            deserializedArtifactManifestPropertiesInternal.lastUpdatedOn
-                                = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                            deserializedArtifactManifestPropertiesInternal.lastUpdatedOn = reader.getNullable(
+                                nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                         } else if ("architecture".equals(fieldName)) {
                             deserializedArtifactManifestPropertiesInternal.architecture
                                 = ArtifactArchitecture.fromString(reader.getString());
