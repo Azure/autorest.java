@@ -256,6 +256,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             });
             addGeneratedAnnotation(classBlock);
             classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function -> {
+                if (!settings.isAzureOrFluent()) {
+                    function.line("this.validateClient();");
+                }
+
                 List<ServiceClientProperty> allProperties = mergeClientPropertiesWithTraits(
                     clientProperties,
                     settings.isAzureOrFluent() ? null : clientBuilder.getBuilderTraits());
@@ -269,12 +273,7 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                                 serviceClientProperty.getName(),
                                 serviceClientProperty.getName(),
                                 serviceClientProperty.getDefaultValueExpression()));
-
                     }
-                }
-
-                if (!settings.isAzureOrFluent()) {
-                    function.line("this.validateClient();");
                 }
 
                 // additional service client properties in constructor arguments
@@ -546,7 +545,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             methodBlock.line("// This method is invoked from 'buildInnerClient'/'buildClient' method.");
             methodBlock.line("// Developer can customize this method, to validate that the necessary conditions are met for the new client.");
             for (ServiceClientProperty property : properties) {
-                if (property.isRequired()) {
+                // property have a default value would have a "local<PropertyName>" for the initialization of client
+                if (property.isRequired() && property.getDefaultValueExpression() == null) {
                     methodBlock.line("Objects.requireNonNull(" + property.getName() + ", \"'" + property.getName() + "' cannot be null.\");");
                 }
             }
