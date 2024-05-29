@@ -250,14 +250,12 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             JavaVisibility visibility = settings.isGenerateSyncAsyncClients() ? JavaVisibility.Private : JavaVisibility.Public;
 
             // build method
-            classBlock.javadocComment(comment ->
-            {
+            classBlock.javadocComment(comment -> {
                 comment.description(String.format("Builds an instance of %1$s with the provided parameters", buildReturnType));
                 comment.methodReturns(String.format("an instance of %1$s", buildReturnType));
             });
             addGeneratedAnnotation(classBlock);
-            classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function ->
-            {
+            classBlock.method(visibility, null, String.format("%1$s %2$s()", buildReturnType, buildMethodName), function -> {
                 List<ServiceClientProperty> allProperties = mergeClientPropertiesWithTraits(
                     clientProperties,
                     settings.isAzureOrFluent() ? null : clientBuilder.getBuilderTraits());
@@ -273,6 +271,10 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
                                 serviceClientProperty.getDefaultValueExpression()));
 
                     }
+                }
+
+                if (!settings.isAzureOrFluent()) {
+                    function.line("this.validateClient();");
                 }
 
                 // additional service client properties in constructor arguments
@@ -318,7 +320,8 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
 
             if (!settings.isAzureOrFluent()) {
                 List<ServiceClientProperty> allProperties = mergeClientPropertiesWithTraits(clientProperties, clientBuilder.getBuilderTraits());
-                addValidateBuilderMethod(classBlock, allProperties);
+                addValidateClientMethod(classBlock, allProperties);
+                addValidatePipelineMethod(classBlock);
 
                 addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo(), serviceClient.getPipelinePolicyDetails());
             }
@@ -529,14 +532,21 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         });
     }
 
-    private void addValidateBuilderMethod(JavaClass classBlock, List<ServiceClientProperty> properties) {
+    private void addValidatePipelineMethod(JavaClass classBlock) {
         addGeneratedAnnotation(classBlock);
-        classBlock.privateMethod("void validateBuilder()", methodBlock -> {
-            methodBlock.line("// This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.");
+        classBlock.privateMethod("void validatePipeline()", methodBlock -> {
+            methodBlock.line("// This method is invoked from 'createHttpPipeline' method.");
+            methodBlock.line("// Developer can customize this method, to validate that the necessary conditions are met for the new HTTP pipeline.");
+        });
+    }
+
+    private void addValidateClientMethod(JavaClass classBlock, List<ServiceClientProperty> properties) {
+        addGeneratedAnnotation(classBlock);
+        classBlock.privateMethod("void validateClient()", methodBlock -> {
+            methodBlock.line("// This method is invoked from 'buildInnerClient'/'buildClient' method.");
             methodBlock.line("// Developer can customize this method, to validate that the necessary conditions are met for the new client.");
             for (ServiceClientProperty property : properties) {
-                // ServiceVersion is also provided with a defaultValueExpression
-                if (property.isRequired() && property.getDefaultValueExpression() == null) {
+                if (property.isRequired()) {
                     methodBlock.line("Objects.requireNonNull(" + property.getName() + ", \"'" + property.getName() + "' cannot be null.\");");
                 }
             }
