@@ -624,7 +624,7 @@ public final class ProtocolAndConvenienceOpsImpl {
         RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com.cadl.protocolandconvenient.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -670,7 +670,7 @@ public final class ProtocolAndConvenienceOpsImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com.cadl.protocolandconvenient.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -716,7 +716,7 @@ public final class ProtocolAndConvenienceOpsImpl {
         BinaryData resource, RequestOptions requestOptions) {
         return PollerFlux.create(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponseAsync(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.OperationLocationPollingStrategy<>(
+            new com.cadl.protocolandconvenient.implementation.OperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null
@@ -762,7 +762,7 @@ public final class ProtocolAndConvenienceOpsImpl {
         RequestOptions requestOptions) {
         return SyncPoller.createPoller(Duration.ofSeconds(1),
             () -> this.createOrReplaceWithResponse(name, resource, requestOptions),
-            new com.azure.core.experimental.util.polling.SyncOperationLocationPollingStrategy<>(
+            new com.cadl.protocolandconvenient.implementation.SyncOperationLocationPollingStrategy<>(
                 new PollingStrategyOptions(this.client.getHttpPipeline())
                     .setEndpoint("{endpoint}".replace("{endpoint}", this.client.getEndpoint()))
                     .setContext(requestOptions != null && requestOptions.getContext() != null

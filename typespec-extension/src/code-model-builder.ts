@@ -880,34 +880,30 @@ export class CodeModelBuilder {
       let pollingSchema = undefined;
       let finalSchema = undefined;
 
+      let pollingStrategy: Metadata | undefined = undefined;
+      let finalResultPropertySerializedName: string | undefined = undefined;
+
       const verb = httpOperation.verb;
       const useNewPollStrategy = isLroNewPollingStrategy(httpOperation, lroMetadata);
-
-      let pollingStrategy: Metadata | undefined = undefined;
       if (useNewPollStrategy) {
-        // use new experimental OperationLocationPollingStrategy
+        // use OperationLocationPollingStrategy
         pollingStrategy = new Metadata({
           language: {
             java: {
               name: "OperationLocationPollingStrategy",
-              namespace: "com.azure.core.experimental.util.polling",
+              namespace: getJavaNamespace(this.namespace) + ".implementation",
             },
           },
         });
       }
 
       // pollingSchema
-      if (useNewPollStrategy) {
-        // com.azure.core.experimental.models.PollResult
+      if (modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")) {
         pollingSchema = this.pollResultSchema;
       } else {
-        if (modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")) {
-          pollingSchema = this.pollResultSchema;
-        } else {
-          const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
-          const sdkType = getClientType(this.sdkContext, pollType);
-          pollingSchema = this.processSchemaFromSdkType(sdkType, "pollResult");
-        }
+        const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
+        const sdkType = getClientType(this.sdkContext, pollType);
+        pollingSchema = this.processSchemaFromSdkType(sdkType, "pollResult");
       }
 
       // finalSchema
@@ -922,6 +918,16 @@ export class CodeModelBuilder {
         const finalType = this.findResponseBody(finalResult);
         const sdkType = getClientType(this.sdkContext, finalType);
         finalSchema = this.processSchemaFromSdkType(sdkType, "finalResult");
+
+        if (
+          useNewPollStrategy &&
+          lroMetadata.finalStep &&
+          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+          lroMetadata.finalStep.target
+        ) {
+          // final result is the value in lroMetadata.finalStep.target
+          finalResultPropertySerializedName = this.getSerializedName(lroMetadata.finalStep.target);
+        }
       }
 
       // track usage
@@ -942,7 +948,13 @@ export class CodeModelBuilder {
         }
       }
 
-      op.lroMetadata = new LongRunningMetadata(true, pollingSchema, finalSchema, pollingStrategy);
+      op.lroMetadata = new LongRunningMetadata(
+        true,
+        pollingSchema,
+        finalSchema,
+        pollingStrategy,
+        finalResultPropertySerializedName,
+      );
       return op.lroMetadata;
     }
 

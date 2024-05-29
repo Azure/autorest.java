@@ -6,8 +6,8 @@ package com.azure.autorest.mapper;
 import com.azure.autorest.MockUnitJavagen;
 import com.azure.autorest.model.clientmodel.Pom;
 import com.azure.autorest.model.projectmodel.Project;
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -29,12 +29,12 @@ public class PomMapperTests {
         MockUnitJavagen javagen = new MockUnitJavagen();
         Project mockProject = new MockProject();
         Pom pom = new PomMapper().map(mockProject);
-        Assert.assertEquals("com.azure", pom.getGroupId());
-        Assert.assertEquals("azure-mock", pom.getArtifactId());
-        Assert.assertEquals("Mock", pom.getServiceName());
+        Assertions.assertEquals("com.azure", pom.getGroupId());
+        Assertions.assertEquals("azure-mock", pom.getArtifactId());
+        Assertions.assertEquals("Mock", pom.getServiceName());
         List<String> dependencies = pom.getDependencyIdentifiers();
-        Assert.assertTrue(dependencies.stream().anyMatch(d -> d.startsWith("com.azure:azure-core:")));
-        Assert.assertTrue(dependencies.stream().anyMatch(d -> d.startsWith("com.azure:azure-core-test:")));
-        Assert.assertTrue(dependencies.stream().noneMatch(d -> d.startsWith("com.azure:azure-core-test:15.0")));    // it should have higher version
+        Assertions.assertTrue(dependencies.stream().anyMatch(d -> d.startsWith("com.azure:azure-core:")));
+        Assertions.assertTrue(dependencies.stream().anyMatch(d -> d.startsWith("com.azure:azure-core-test:")));
+        Assertions.assertTrue(dependencies.stream().noneMatch(d -> d.startsWith("com.azure:azure-core-test:15.0")));    // it should have higher version
     }
 }

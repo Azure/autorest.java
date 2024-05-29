@@ -3,8 +3,8 @@
 
 package com.azure.autorest.util;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class ClassNameUtilTests {
 
@@ -16,7 +16,7 @@ public class ClassNameUtilTests {
                 "src/samples/java",
                 "com.azure.resourcemanager.deviceprovisioningservices.generated",
                 "IotDpsResourceCheckProvisioningServiceNameAvailabilitySamples");
-        Assert.assertEquals("IotDpsResourceCheckProvisioningServiceNameAvailabilit", name);
+        Assertions.assertEquals("IotDpsResourceCheckProvisioningServiceNameAvailabilit", name);
 
         // do nothing as too little remaining length for class name
         name = ClassNameUtil.truncateClassName(
@@ -24,7 +24,7 @@ public class ClassNameUtilTests {
                 "src/samples/java",
                 "com.azure.resourcemanager.deviceprovisioningservicespadpadpadpadpadpad.generated",
                 "IotDpsResourceCheckProvisioningServiceNameAvailabilitySamples");
-        Assert.assertEquals("IotDpsResourceCheckProvisioningServiceNameAvailabilitySamples", name);
+        Assertions.assertEquals("IotDpsResourceCheckProvisioningServiceNameAvailabilitySamples", name);
 
         // no change
         name = ClassNameUtil.truncateClassName(
@@ -32,6 +32,6 @@ public class ClassNameUtilTests {
                 "src/samples/java",
                 "com.azure.resourcemanager.datafactory.generated",
                 "DataFlowDebugSessionAddDataFlowSamples");
-        Assert.assertEquals("DataFlowDebugSessionAddDataFlowSamples", name);
+        Assertions.assertEquals("DataFlowDebugSessionAddDataFlowSamples", name);
     }
 }

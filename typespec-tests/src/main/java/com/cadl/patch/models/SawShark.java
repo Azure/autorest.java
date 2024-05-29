@@ -42,8 +42,6 @@ public final class SawShark extends Shark {
      */
     @Generated
     public SawShark() {
-        this.updatedProperties.add("kind");
-        this.updatedProperties.add("sharktype");
     }
 
     /**
@@ -112,14 +110,10 @@ public final class SawShark extends Shark {
     @Generated
     private JsonWriter toJsonMergePatch(JsonWriter jsonWriter) throws IOException {
         jsonWriter.writeStartObject();
-        if (updatedProperties.contains("kind")) {
-            if (this.kind == null) {
-                jsonWriter.writeNullField("kind");
-            } else {
-                jsonWriter.writeStringField("kind", this.kind);
-            }
+        jsonWriter.writeStringField("kind", this.kind);
+        if (updatedProperties.contains("age")) {
+            jsonWriter.writeIntField("age", getAge());
         }
-        jsonWriter.writeIntField("age", getAge());
         if (updatedProperties.contains("color")) {
             if (getColor() == null) {
                 jsonWriter.writeNullField("color");
@@ -134,13 +128,7 @@ public final class SawShark extends Shark {
                 jsonWriter.writeNumberField("weight", getWeight());
             }
         }
-        if (updatedProperties.contains("sharktype")) {
-            if (this.sharktype == null) {
-                jsonWriter.writeNullField("sharktype");
-            } else {
-                jsonWriter.writeStringField("sharktype", this.sharktype);
-            }
-        }
+        jsonWriter.writeStringField("sharktype", this.sharktype);
         return jsonWriter.writeEndObject();
     }
 

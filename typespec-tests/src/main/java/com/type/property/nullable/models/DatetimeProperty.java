@@ -6,6 +6,7 @@ package com.type.property.nullable.models;
 
 import com.azure.core.annotation.Fluent;
 import com.azure.core.annotation.Generated;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -180,8 +181,8 @@ public final class DatetimeProperty implements JsonSerializable<DatetimeProperty
                 if ("requiredProperty".equals(fieldName)) {
                     deserializedDatetimeProperty.requiredProperty = reader.getString();
                 } else if ("nullableProperty".equals(fieldName)) {
-                    deserializedDatetimeProperty.nullableProperty
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedDatetimeProperty.nullableProperty = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else {
                     reader.skipChildren();
                 }

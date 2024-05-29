@@ -160,7 +160,7 @@ public final class Banana implements XmlSerializable<Banana> {
                     deserializedBanana.flavor = reader.getStringElement();
                 } else if ("expiration".equals(elementName.getLocalPart())) {
                     deserializedBanana.expiration
-                        = reader.getNullableElement(dateString -> OffsetDateTime.parse(dateString));
+                        = reader.getNullableElement(dateString -> CoreUtils.parseBestOffsetDateTime(dateString));
                 } else {
                     reader.skipElement();
                 }
