@@ -109,19 +109,31 @@ model CustomTemplateResource is TrackedResource<CustomTemplateResourceProperties
   @doc("Managed identity.")
   identity?: Azure.ResourceManager.Foundations.ManagedServiceIdentity;
 
-  kind: DogKind;
+  kind: FishKind;
 }
 
-model CustomTemplateResourceGolden extends CustomTemplateResource {
-  kind: DogKind.Golden;
+@discriminator("sharkType")
+model CustomTemplateResourceShark extends CustomTemplateResource {
+  kind: FishKind.Shark;
+}
+
+model CustomTemplateResourceSawShark extends CustomTemplateResourceShark {
+  sharkType: SharkType.SawShark;
 }
 
 @doc("extensible enum type for discriminator")
-union DogKind {
+union FishKind {
   string,
 
   @doc("Species golden")
-  Golden: "golden",
+  Shark: "shark",
+}
+
+@doc("extensible enum type for discriminator")
+union SharkType {
+  string,
+
+  SawShark: "sawshark"
 }
 
 @doc("Top Level Arm Resource Properties.")

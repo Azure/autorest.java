@@ -234,23 +234,37 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
      * @param model the model to generate class of
      * @param settings JavaSettings
      * @return properties to generate as fields of the class
+     * @see com.azure.autorest.mapper.ModelMapper#passPolymorphicDiscriminatorToChildren
      */
     @Override
     protected List<ClientModelProperty> getFieldProperties(ClientModel model, JavaSettings settings) {
         return Stream.concat(
-                model.getProperties().stream(),
+                super.getFieldProperties(model, settings).stream(),
                 ClientModelUtil.getParentProperties(model)
                         .stream()
-                        .filter(property -> readOnlyNotInCtor(property, settings))
+                        .filter(property -> readOnlyNotInCtor(property, settings)
+                                // parent discriminators are already passed to children, see @see in method javadoc
+                                && !property.isPolymorphicDiscriminator())
         ).collect(Collectors.toList());
+    }
+
+    /**
+     * In stream-style-serialization, parent's read-only properties are shadowed in child classes.
+     * @param model the client model
+     * @param property the property to generate getter
+     * @param settings {@link JavaSettings} instance
+     * @return whether the property's getter overrides parent getter
+     */
+    @Override
+    protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+        return (property.isPolymorphicDiscriminator() || readOnlyNotInCtor(property, settings)) && !modelDefinesProperty(model, property);
     }
 
     private static boolean readOnlyNotInCtor(ClientModelProperty property, JavaSettings settings) {
         return  // must be read-only and not appear in constructor
-            property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs()
-                // not required and in constructor
-                && !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs())
-                && !property.isPolymorphicDiscriminator();
+                property.isReadOnly() && !settings.isIncludeReadOnlyInConstructorArgs()
+                        // not required and in constructor
+                        && !(property.isRequired() && settings.isRequiredFieldsAsConstructorArgs());
     }
 
     /**

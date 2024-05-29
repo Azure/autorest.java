@@ -158,7 +158,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 : JavaVisibility.Public;
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
-            for (ClientModelProperty property : model.getProperties()) {
+            for (ClientModelProperty property : getFieldProperties(model, settings)) {
                 final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 
                 IType propertyWireType = property.getWireType();
@@ -177,10 +177,8 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                     TemplateUtil.addJsonGetter(classBlock, settings, property.getSerializedName());
                 }
 
-                // getter method of discriminator property in subclass is handled differently
-                boolean polymorphicDiscriminatorInSubclass = property.isPolymorphicDiscriminator()
-                    && !modelDefinesProperty(model, property);
-                if (polymorphicDiscriminatorInSubclass) {
+                boolean overridesParentGetter = isOverrideParentGetter(model, property, settings);
+                if (overridesParentGetter) {
                     classBlock.annotation("Override");
                 }
                 classBlock.method(methodVisibility, null,
@@ -327,6 +325,18 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 writeStreamStyleSerialization(classBlock, model, settings);
             }
         });
+    }
+
+    /**
+     * Whether the property's getter overrides parent getter.
+     * @param model the client model
+     * @param property the property to generate getter method
+     * @param settings {@link JavaSettings} instance
+     * @return whether the property's getter overrides parent getter
+     */
+    protected boolean isOverrideParentGetter(ClientModel model, ClientModelProperty property, JavaSettings settings) {
+        // getter method of discriminator property in subclass is handled differently
+        return property.isPolymorphicDiscriminator() && !modelDefinesProperty(model, property);
     }
 
     private void addImports(Set<String> imports, ClientModel model, JavaSettings settings) {
@@ -1342,7 +1352,7 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
         });
     }
 
-    private static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
+    static boolean modelDefinesProperty(ClientModel model, ClientModelProperty property) {
         return ClientModelUtil.getParentProperties(model).stream().noneMatch(parentProperty ->
             Objects.equals(property.getSerializedName(), parentProperty.getSerializedName()));
     }
