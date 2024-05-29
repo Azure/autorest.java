@@ -95,7 +95,6 @@ import {
   getOverloadedOperation,
   getProjectedName,
   getSummary,
-  getTypeName,
   getVisibility,
   ignoreDiagnostics,
   isArrayModelType,
@@ -156,7 +155,6 @@ import {
   ProcessingCache,
   getAccess,
   getDurationFormatFromSdkType,
-  getNameForTemplate,
   getUnionDescription,
   getUsage,
   hasScalarAsBase,
@@ -1337,7 +1335,8 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
+    const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
+    const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
@@ -1585,10 +1584,10 @@ export class CodeModelBuilder {
               }
               if (match) {
                 schema = candidateResponseSchema;
+                const sdkType = getClientType(this.sdkContext, bodyType);
+                const modelName = sdkType.kind === "model" ? sdkType.name : undefined;
                 this.trace(
-                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
-                    candidateResponseSchema.language.default.name
-                  }'`,
+                  `Replace TypeSpec model '${modelName}' with '${candidateResponseSchema.language.default.name}'`,
                 );
               }
             }
@@ -2243,13 +2242,9 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation | undefined,
+    target: Union | UnionVariant | Enum | EnumMember | ModelProperty | Operation,
     nameHint: string | undefined = undefined,
   ): string {
-    if (!target) {
-      return nameHint || "";
-    }
-
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
     if (emitterClientName && typeof emitterClientName === "string") {
@@ -2271,24 +2266,6 @@ export class CodeModelBuilder {
       return friendlyName;
     }
 
-    // if no projectedName and friendlyName found, return the name of the target (including special handling for template)
-    if (
-      target.kind === "Model" &&
-      target.templateMapper &&
-      target.templateMapper.args &&
-      target.templateMapper.args.length > 0
-    ) {
-      const tspName = getTypeName(target, this.typeNameOptions);
-      const newName = getNameForTemplate(target);
-      this.logWarning(`Rename TypeSpec Model '${tspName}' to '${newName}'`);
-      return newName;
-    }
-
-    if (!target.name && nameHint) {
-      const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
-      return newName;
-    }
     if (typeof target.name === "symbol") {
       return "";
     }
