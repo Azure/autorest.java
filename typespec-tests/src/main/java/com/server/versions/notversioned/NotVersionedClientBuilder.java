@@ -216,21 +216,29 @@ public final class NotVersionedClientBuilder implements HttpTrait<NotVersionedCl
     @Generated
     private NotVersionedClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        this.validateClient();
         NotVersionedClientImpl client
             = new NotVersionedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint);
         return client;
     }
 
     @Generated
-    private void validateBuilder() {
-        // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated
+    private void validatePipeline() {
+        // This method is invoked from 'createHttpPipeline' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new HTTP
+        // pipeline.
+    }
+
+    @Generated
     private HttpPipeline createHttpPipeline() {
-        this.validateBuilder();
+        this.validatePipeline();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;

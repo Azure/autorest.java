@@ -298,6 +298,7 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestSwaggerConstantServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : AutoRestSwaggerConstantServiceVersion.getLatest();
+        this.validateClient();
         AutoRestSwaggerConstantServiceClientImpl client = new AutoRestSwaggerConstantServiceClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.headerConstant, this.queryConstant, localPathConstant,
             localHost, localServiceVersion);
@@ -305,14 +306,25 @@ public final class AutoRestSwaggerConstantServiceClientBuilder
     }
 
     @Generated
-    private void validateBuilder() {
-        // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(headerConstant, "'headerConstant' cannot be null.");
+        Objects.requireNonNull(queryConstant, "'queryConstant' cannot be null.");
+        Objects.requireNonNull(pathConstant, "'pathConstant' cannot be null.");
+        Objects.requireNonNull(host, "'host' cannot be null.");
+    }
+
+    @Generated
+    private void validatePipeline() {
+        // This method is invoked from 'createHttpPipeline' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new HTTP
+        // pipeline.
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        this.validateBuilder();
+        this.validatePipeline();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;

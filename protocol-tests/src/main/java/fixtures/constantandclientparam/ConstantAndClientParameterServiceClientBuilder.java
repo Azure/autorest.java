@@ -298,6 +298,7 @@ public final class ConstantAndClientParameterServiceClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         ConstantAndClientParameterServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ConstantAndClientParameterServiceVersion.getLatest();
+        this.validateClient();
         ConstantAndClientParameterServiceClientImpl client = new ConstantAndClientParameterServiceClientImpl(
             localPipeline, JacksonAdapter.createDefaultSerializerAdapter(), this.queryRequiredClientParam,
             this.queryRequiredDefaultValueClientParam, this.queryNonRequiredClientParam, localHost,
@@ -306,15 +307,25 @@ public final class ConstantAndClientParameterServiceClientBuilder
     }
 
     @Generated
-    private void validateBuilder() {
-        // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
         Objects.requireNonNull(queryRequiredClientParam, "'queryRequiredClientParam' cannot be null.");
+        Objects.requireNonNull(queryRequiredDefaultValueClientParam,
+            "'queryRequiredDefaultValueClientParam' cannot be null.");
+        Objects.requireNonNull(host, "'host' cannot be null.");
+    }
+
+    @Generated
+    private void validatePipeline() {
+        // This method is invoked from 'createHttpPipeline' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new HTTP
+        // pipeline.
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        this.validateBuilder();
+        this.validatePipeline();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;

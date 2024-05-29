@@ -207,20 +207,28 @@ public final class DatetimeClientBuilder
     @Generated
     private DatetimeClientImpl buildInnerClient() {
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
+        this.validateClient();
         DatetimeClientImpl client
             = new DatetimeClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
     }
 
     @Generated
-    private void validateBuilder() {
-        // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated
+    private void validatePipeline() {
+        // This method is invoked from 'createHttpPipeline' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new HTTP
+        // pipeline.
+    }
+
+    @Generated
     private HttpPipeline createHttpPipeline() {
-        this.validateBuilder();
+        this.validatePipeline();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;

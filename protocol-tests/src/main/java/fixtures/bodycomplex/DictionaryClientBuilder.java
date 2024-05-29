@@ -237,20 +237,29 @@ public final class DictionaryClientBuilder
         String localHost = (host != null) ? host : "http://localhost:3000";
         AutoRestComplexTestServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : AutoRestComplexTestServiceVersion.getLatest();
+        this.validateClient();
         AutoRestComplexTestServiceClientImpl client = new AutoRestComplexTestServiceClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), localHost, localServiceVersion);
         return client;
     }
 
     @Generated
-    private void validateBuilder() {
-        // This method is invoked from 'createHttpPipeline' when preparing the HTTP pipeline for the new client.
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
         // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(host, "'host' cannot be null.");
+    }
+
+    @Generated
+    private void validatePipeline() {
+        // This method is invoked from 'createHttpPipeline' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new HTTP
+        // pipeline.
     }
 
     @Generated
     private HttpPipeline createHttpPipeline() {
-        this.validateBuilder();
+        this.validatePipeline();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
