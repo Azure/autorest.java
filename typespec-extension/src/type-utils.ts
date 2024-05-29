@@ -82,24 +82,6 @@ export function isModelReferredInTemplate(template: TemplatedTypeBase, target: M
   );
 }
 
-export function getNameForTemplate(target: Type): string {
-  switch (target.kind) {
-    case "Model": {
-      let name = target.name;
-      if (target.templateMapper && target.templateMapper.args) {
-        name = name + target.templateMapper.args.map((it) => ("kind" in it ? getNameForTemplate(it) : "")).join("");
-      }
-      return name;
-    }
-
-    case "String":
-      return target.value;
-
-    default:
-      return "";
-  }
-}
-
 export function isNullableType(type: Type): boolean {
   if (type.kind === "Union") {
     const nullVariants = Array.from(type.variants.values()).filter((it) => isNullType(it.type));
