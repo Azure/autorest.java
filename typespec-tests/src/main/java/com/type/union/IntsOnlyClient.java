@@ -71,7 +71,7 @@ public final class IntsOnlyClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest6 The sendRequest6 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,8 +81,8 @@ public final class IntsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest6, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest6, requestOptions);
     }
 
     /**
@@ -119,8 +119,8 @@ public final class IntsOnlyClient {
     public void send(GetResponseProp3 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest3 requestObj = new SendRequest3(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest3 sendRequest6Obj = new SendRequest3(prop);
+        BinaryData sendRequest6 = BinaryData.fromObject(sendRequest6Obj);
+        sendWithResponse(sendRequest6, requestOptions).getValue();
     }
 }

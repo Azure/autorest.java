@@ -73,7 +73,7 @@ public final class FloatsOnlyAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest5 The sendRequest5 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,8 +83,8 @@ public final class FloatsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData sendRequest5, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(sendRequest5, requestOptions);
     }
 
     /**
@@ -123,8 +123,8 @@ public final class FloatsOnlyAsyncClient {
     public Mono<Void> send(GetResponseProp1 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest4 requestObj = new SendRequest4(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SendRequest4 sendRequest5Obj = new SendRequest4(prop);
+        BinaryData sendRequest5 = BinaryData.fromObject(sendRequest5Obj);
+        return sendWithResponse(sendRequest5, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

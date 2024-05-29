@@ -65,7 +65,7 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<BinaryData>> read(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData readRequest, RequestOptions requestOptions, Context context);
 
         @Post("/specialchars")
         @ExpectedResponses({ 200 })
@@ -74,7 +74,7 @@ public final class BuiltinOpsImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<BinaryData> readSync(@HostParam("endpoint") String endpoint, @HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData readRequest, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -99,7 +99,7 @@ public final class BuiltinOpsImpl {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param readRequest The readRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -108,10 +108,10 @@ public final class BuiltinOpsImpl {
      * @return the response body along with {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponseAsync(BinaryData request, RequestOptions requestOptions) {
+    public Mono<Response<BinaryData>> readWithResponseAsync(BinaryData readRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil
-            .withContext(context -> service.read(this.client.getEndpoint(), accept, request, requestOptions, context));
+        return FluxUtil.withContext(
+            context -> service.read(this.client.getEndpoint(), accept, readRequest, requestOptions, context));
     }
 
     /**
@@ -136,7 +136,7 @@ public final class BuiltinOpsImpl {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param readRequest The readRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -145,8 +145,8 @@ public final class BuiltinOpsImpl {
      * @return the response body along with {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<BinaryData> readWithResponse(BinaryData request, RequestOptions requestOptions) {
+    public Response<BinaryData> readWithResponse(BinaryData readRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.readSync(this.client.getEndpoint(), accept, request, requestOptions, Context.NONE);
+        return service.readSync(this.client.getEndpoint(), accept, readRequest, requestOptions, Context.NONE);
     }
 }

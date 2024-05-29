@@ -89,7 +89,7 @@ public final class MixedTypesAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest The sendRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -99,8 +99,8 @@ public final class MixedTypesAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData sendRequest, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(sendRequest, requestOptions);
     }
 
     /**
@@ -139,8 +139,8 @@ public final class MixedTypesAsyncClient {
     public Mono<Void> send(MixedTypesCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest9 requestObj = new SendRequest9(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SendRequest9 sendRequestObj = new SendRequest9(prop);
+        BinaryData sendRequest = BinaryData.fromObject(sendRequestObj);
+        return sendWithResponse(sendRequest, requestOptions).flatMap(FluxUtil::toMono);
     }
 }
