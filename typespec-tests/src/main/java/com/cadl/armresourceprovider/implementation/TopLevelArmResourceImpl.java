@@ -11,7 +11,6 @@ import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
 import com.cadl.armresourceprovider.models.ProvisioningState;
 import com.cadl.armresourceprovider.models.TopLevelArmResource;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdate;
-import com.cadl.armresourceprovider.models.TopLevelArmResourceUpdateProperties;
 import java.time.OffsetDateTime;
 import java.util.Collections;
 import java.util.List;
@@ -199,27 +198,37 @@ public final class TopLevelArmResourceImpl
     }
 
     public TopLevelArmResourceImpl withUserName(String userName) {
-        this.innerModel().withUserName(userName);
-        return this;
+        if (isInCreateMode()) {
+            this.innerModel().withUserName(userName);
+            return this;
+        } else {
+            this.updateProperties.withUserName(userName);
+            return this;
+        }
     }
 
     public TopLevelArmResourceImpl withUserNames(String userNames) {
-        this.innerModel().withUserNames(userNames);
-        return this;
+        if (isInCreateMode()) {
+            this.innerModel().withUserNames(userNames);
+            return this;
+        } else {
+            this.updateProperties.withUserNames(userNames);
+            return this;
+        }
     }
 
     public TopLevelArmResourceImpl withAccuserName(String accuserName) {
-        this.innerModel().withAccuserName(accuserName);
-        return this;
+        if (isInCreateMode()) {
+            this.innerModel().withAccuserName(accuserName);
+            return this;
+        } else {
+            this.updateProperties.withAccuserName(accuserName);
+            return this;
+        }
     }
 
     public TopLevelArmResourceImpl withStartTimeStamp(OffsetDateTime startTimeStamp) {
         this.innerModel().withStartTimeStamp(startTimeStamp);
-        return this;
-    }
-
-    public TopLevelArmResourceImpl withProperties(TopLevelArmResourceUpdateProperties properties) {
-        this.updateProperties.withProperties(properties);
         return this;
     }
 

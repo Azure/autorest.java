@@ -8,9 +8,11 @@ import com._specs_.azure.core.lro.standard.models.User;
 import com.azure.core.http.policy.HttpLogDetailLevel;
 import com.azure.core.http.policy.HttpLogOptions;
 import com.azure.core.util.BinaryData;
+import com.azure.core.util.polling.AsyncPollResponse;
 import com.azure.core.util.polling.LongRunningOperationStatus;
 import com.azure.core.util.polling.PollOperationDetails;
 import com.azure.core.util.polling.PollResponse;
+import com.azure.core.util.polling.PollerFlux;
 import com.azure.core.util.polling.SyncPoller;
 
 import org.junit.jupiter.api.Assertions;
@@ -18,9 +20,13 @@ import org.junit.jupiter.api.Test;
 
 public class LroCoreTests {
 
-    private StandardClient client = new StandardClientBuilder()
+    private final StandardClient client = new StandardClientBuilder()
             .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
             .buildClient();
+
+    private final StandardAsyncClient asyncClient = new StandardClientBuilder()
+            .httpLogOptions(new HttpLogOptions().setLogLevel(HttpLogDetailLevel.BODY_AND_HEADERS))
+            .buildAsyncClient();
 
     @Test
     public void testPut() {
@@ -31,6 +37,18 @@ public class LroCoreTests {
         Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
 
         User user = poller.getFinalResult();
+        Assertions.assertEquals("madge", user.getName());
+    }
+
+    @Test
+    public void testPutAsync() {
+        PollerFlux<PollOperationDetails, User> poller = asyncClient.beginCreateOrReplace(
+                "madge", new User("contributor"));
+
+        AsyncPollResponse<PollOperationDetails, User> response = poller.blockLast();
+        Assertions.assertEquals(LongRunningOperationStatus.SUCCESSFULLY_COMPLETED, response.getStatus());
+
+        User user = response.getFinalResult().block();
         Assertions.assertEquals("madge", user.getName());
     }
 

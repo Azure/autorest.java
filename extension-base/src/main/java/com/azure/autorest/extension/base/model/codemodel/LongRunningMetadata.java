@@ -10,6 +10,7 @@ public class LongRunningMetadata {
     private ObjectSchema pollResultType;
     private ObjectSchema finalResultType;
     private Metadata pollingStrategy;
+    private String finalResultPropertySerializedName;
 
     /**
      * Creates a new instance of the LongRunningMetadata class.
@@ -69,5 +70,23 @@ public class LongRunningMetadata {
      */
     public void setPollingStrategy(Metadata pollingStrategy) {
         this.pollingStrategy = pollingStrategy;
+    }
+
+    /**
+     * Gets the serialized name for the property of final result.
+     *
+     * @return the serialized name for the property of final result.
+     */
+    public String getFinalResultPropertySerializedName() {
+        return finalResultPropertySerializedName;
+    }
+
+    /**
+     * Sets the serialized name for the property of final result.
+     *
+     * @param finalResultPropertySerializedName the serialized name for the property of final result.
+     */
+    public void setFinalResultPropertySerializedName(String finalResultPropertySerializedName) {
+        this.finalResultPropertySerializedName = finalResultPropertySerializedName;
     }
 }

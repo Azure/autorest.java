@@ -353,16 +353,21 @@ public class StreamSerializationModelTemplate extends ModelTemplate {
         }
 
         if (isJsonMergePatch) {
-            if (property.getClientType().isNullable()) {
-                methodBlock.ifBlock("updatedProperties.contains(\"" + property.getName() + "\")", codeBlock ->
-                    codeBlock.ifBlock(getPropertyGetterStatement(property, fromSuperType) + " == null",
-                            ifBlock -> ifBlock.line("jsonWriter.writeNullField(\"" + property.getSerializedName() + "\");"))
-                        .elseBlock(elseBlock -> serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, isJsonMergePatch)));
+            if (!property.isPolymorphicDiscriminator()) {
+                methodBlock.ifBlock("updatedProperties.contains(\"" + property.getName() + "\")", codeBlock -> {
+                    if (property.getClientType().isNullable()) {
+                        codeBlock.ifBlock(getPropertyGetterStatement(property, fromSuperType) + " == null",
+                                ifBlock -> ifBlock.line("jsonWriter.writeNullField(\"" + property.getSerializedName() + "\");"))
+                            .elseBlock(elseBlock -> serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, true));
+                    } else {
+                        serializeJsonProperty(codeBlock, property, serializedName, fromSuperType, true, false);
+                    }
+                });
             } else {
-                serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, isJsonMergePatch);
+                serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, true);
             }
         } else {
-            serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, isJsonMergePatch);
+            serializeJsonProperty(methodBlock, property, serializedName, fromSuperType, false);
         }
     }
 

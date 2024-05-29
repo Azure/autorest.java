@@ -101,9 +101,8 @@ public final class TemplateHelper {
         function.line("policies.add(new AddHeadersFromContextPolicy());");
 
         // clientOptions header
-        function.line("HttpHeaders headers = new HttpHeaders();");
-        function.line(String.format("%s.getHeaders().forEach(header -> headers.set(HttpHeaderName.fromString(header.getName()), header.getValue()));", localClientOptionsName));
-        function.ifBlock("headers.getSize() > 0", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
+        function.line("HttpHeaders headers = CoreUtils.createHttpHeadersFromClientOptions(" + localClientOptionsName + ");");
+        function.ifBlock("headers != null", block -> block.line("policies.add(new AddHeadersPolicy(headers));"));
 
         function.line("this.pipelinePolicies.stream()" +
                 ".filter(p -> p.getPipelinePosition() == HttpPipelinePosition.PER_CALL)" +

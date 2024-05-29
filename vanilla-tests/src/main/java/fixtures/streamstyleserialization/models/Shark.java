@@ -5,6 +5,7 @@
 package fixtures.streamstyleserialization.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.core.util.logging.ClientLogger;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
@@ -202,8 +203,8 @@ public class Shark extends Fish {
                     List<Fish> siblings = reader.readArray(reader1 -> Fish.fromJson(reader1));
                     deserializedShark.setSiblings(siblings);
                 } else if ("birthday".equals(fieldName)) {
-                    deserializedShark.birthday
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedShark.birthday = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("fishtype".equals(fieldName)) {
                     deserializedShark.fishtype = reader.getString();
                 } else if ("age".equals(fieldName)) {

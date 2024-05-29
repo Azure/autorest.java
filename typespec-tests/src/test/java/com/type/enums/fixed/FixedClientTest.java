@@ -3,13 +3,21 @@
 
 package com.type.enums.fixed;
 
+import com.azure.core.exception.HttpResponseException;
+import com.azure.core.http.policy.FixedDelayOptions;
+import com.azure.core.http.policy.RetryOptions;
+import com.azure.core.util.BinaryData;
 import com.type.enums.fixed.models.DaysOfWeekEnum;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.Duration;
+
 class FixedClientTest {
 
-    FixedClient client = new FixedClientBuilder().buildClient();
+    FixedClient client = new FixedClientBuilder()
+        .retryOptions(new RetryOptions(new FixedDelayOptions(0, Duration.ZERO)))
+        .buildClient();
 
     @Test
     void getKnownValue() {
@@ -23,9 +31,12 @@ class FixedClientTest {
     }
 
 
-    // Not a valid test for Java, as compiler will fail at "DaysOfWeekEnum.Weekend"
-//    @Test
-//    void putUnknownValue() {
-//        client.putUnknownValue(DaysOfWeekEnum.Weekend);
-//    }
+    @Test
+    void putUnknownValue() {
+        // Not a valid test for Java, as compiler will fail at "DaysOfWeekEnum.WEEKEND"
+        // client.putUnknownValue(DaysOfWeekEnum.WEEKEND);
+
+        Assertions.assertThrowsExactly(HttpResponseException.class,
+            () -> client.putUnknownValueWithResponse(BinaryData.fromObject("Weekend"), null));
+    }
 }

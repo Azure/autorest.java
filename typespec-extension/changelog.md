@@ -1,5 +1,20 @@
 # Release History
 
+## 0.16.2 (2024-05-30)
+
+Compatible with compiler 0.56.
+
+- Generate `OperationLocationPollingStrategy` for long-running operation.
+The generated lib would no longer need to depend on the `azure-core-experimental` lib.
+
+## 0.16.1 (2024-05-29)
+
+Compatible with compiler 0.56.
+
+- Improvement on json-merge-patch model classes.
+- Improvement on stream-style-serialization on polymorphic classes.
+- Improvement on management-plane sample generation from TypeSpec.
+
 ## 0.16.0 (2024-05-17)
 
 Compatible with compiler 0.56.
