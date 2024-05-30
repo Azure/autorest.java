@@ -268,15 +268,7 @@ public final class LroEndpointClientBuilder implements HttpTrait<LroEndpointClie
     }
 
     @Generated
-    private void validatePipeline() {
-        // This method is invoked from 'createHttpPipeline' method.
-        // Developer can customize this method, to validate that the necessary conditions are met for the new HTTP
-        // pipeline.
-    }
-
-    @Generated
     private HttpPipeline createHttpPipeline() {
-        this.validatePipeline();
         Configuration buildConfiguration
             = (configuration == null) ? Configuration.getGlobalConfiguration() : configuration;
         HttpLogOptions localHttpLogOptions = this.httpLogOptions == null ? new HttpLogOptions() : this.httpLogOptions;
