@@ -158,6 +158,20 @@ public class ModelTemplate implements IJavaTemplate<ClientModel, JavaFile> {
                 : JavaVisibility.Public;
             addModelConstructor(model, modelConstructorVisibility, settings, classBlock);
 
+            // Getters for parent discriminator properties
+            for (ClientModelProperty property : model.getParentPolymorphicDiscriminators()) {
+                IType propertyWireType = property.getWireType();
+                IType propertyClientType = propertyWireType.getClientType();
+
+                generateGetterJavadoc(classBlock, property);
+                addGeneratedAnnotation(classBlock);
+                classBlock.annotation("Override");
+                classBlock.method(JavaVisibility.Public, null,
+                    propertyClientType + " " + getGetterName(model, property) + "()",
+                    methodBlock -> addGetterMethod(propertyWireType, propertyClientType, property, treatAsXml,
+                        methodBlock, settings));
+            }
+
             for (ClientModelProperty property : model.getProperties()) {
                 final boolean propertyIsReadOnly = immutableOutputModel || property.isReadOnly();
 

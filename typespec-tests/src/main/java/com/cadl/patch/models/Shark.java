@@ -60,6 +60,17 @@ public class Shark extends Fish {
     }
 
     /**
+     * Get the kind property: The kind property.
+     * 
+     * @return the kind value.
+     */
+    @Generated
+    @Override
+    public String getKind() {
+        return this.kind;
+    }
+
+    /**
      * Get the sharktype property: The sharktype property.
      * 
      * @return the sharktype value.

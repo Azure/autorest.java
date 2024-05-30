@@ -3,9 +3,9 @@ import "@azure-tools/cadl-ranch-expect";
 
 using TypeSpec.Http;
 
-@doc("Illustrates multiple level inheritance with multiple discriminators.")
-@scenarioService("/type/model/inheritance/nested-discriminator")
-namespace Type.Model.Inheritance.NestedDiscriminator;
+@doc("Illustrates multiple level inheritance with multiple enum discriminators.")
+@scenarioService("/type/model/inheritance/enum-nested-discriminator")
+namespace Type.Model.Inheritance.EnumNestedDiscriminator;
 
 @doc("extensible enum type for discriminator")
 union FishKind {
@@ -42,7 +42,7 @@ union SharkKind {
 @discriminator("sharktype")
 model Shark extends Fish {
   kind: FishKind.Shark;
-  sharktype: SharKind;
+  sharktype: SharkKind;
 }
 
 @doc("The second level model in polymorphic multiple levels inheritance which contains references to other polymorphic instances.")
