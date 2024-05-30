@@ -64,7 +64,7 @@ public final class ImplicitBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Mono<Response<Void>> simple(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData simpleRequest, RequestOptions requestOptions, Context context);
 
         @Put("/parameters/basic/implicit-body/simple")
         @ExpectedResponses({ 204 })
@@ -73,7 +73,7 @@ public final class ImplicitBodiesImpl {
         @UnexpectedResponseExceptionType(value = ResourceModifiedException.class, code = { 409 })
         @UnexpectedResponseExceptionType(HttpResponseException.class)
         Response<Void> simpleSync(@HeaderParam("accept") String accept,
-            @BodyParam("application/json") BinaryData request, RequestOptions requestOptions, Context context);
+            @BodyParam("application/json") BinaryData simpleRequest, RequestOptions requestOptions, Context context);
     }
 
     /**
@@ -86,7 +86,7 @@ public final class ImplicitBodiesImpl {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param simpleRequest The simpleRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -95,9 +95,9 @@ public final class ImplicitBodiesImpl {
      * @return the {@link Response} on successful completion of {@link Mono}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> simpleWithResponseAsync(BinaryData request, RequestOptions requestOptions) {
+    public Mono<Response<Void>> simpleWithResponseAsync(BinaryData simpleRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return FluxUtil.withContext(context -> service.simple(accept, request, requestOptions, context));
+        return FluxUtil.withContext(context -> service.simple(accept, simpleRequest, requestOptions, context));
     }
 
     /**
@@ -110,7 +110,7 @@ public final class ImplicitBodiesImpl {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param simpleRequest The simpleRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -119,8 +119,8 @@ public final class ImplicitBodiesImpl {
      * @return the {@link Response}.
      */
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> simpleWithResponse(BinaryData request, RequestOptions requestOptions) {
+    public Response<Void> simpleWithResponse(BinaryData simpleRequest, RequestOptions requestOptions) {
         final String accept = "application/json";
-        return service.simpleSync(accept, request, requestOptions, Context.NONE);
+        return service.simpleSync(accept, simpleRequest, requestOptions, Context.NONE);
     }
 }

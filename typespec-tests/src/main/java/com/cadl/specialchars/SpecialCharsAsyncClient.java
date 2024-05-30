@@ -61,7 +61,7 @@ public final class SpecialCharsAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param readRequest The readRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -71,8 +71,8 @@ public final class SpecialCharsAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<BinaryData>> readWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.readWithResponseAsync(request, requestOptions);
+    public Mono<Response<BinaryData>> readWithResponse(BinaryData readRequest, RequestOptions requestOptions) {
+        return this.serviceClient.readWithResponseAsync(readRequest, requestOptions);
     }
 
     /**
@@ -92,9 +92,9 @@ public final class SpecialCharsAsyncClient {
     public Mono<Resource> read(String id) {
         // Generated convenience method for readWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        ReadRequest requestObj = new ReadRequest(id);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return readWithResponse(request, requestOptions).flatMap(FluxUtil::toMono)
+        ReadRequest readRequestObj = new ReadRequest(id);
+        BinaryData readRequest = BinaryData.fromObject(readRequestObj);
+        return readWithResponse(readRequest, requestOptions).flatMap(FluxUtil::toMono)
             .map(protocolMethodData -> protocolMethodData.toObject(Resource.class));
     }
 }

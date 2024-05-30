@@ -5,32 +5,32 @@
 package com.type.property.optional.models;
 
 /**
- * Defines values for FloatLiteralPropertyProperty.
+ * Defines values for FloatLiteralPropertyProperty125.
  */
-public enum FloatLiteralPropertyProperty {
+public enum FloatLiteralPropertyProperty125 {
     /**
      * Enum value 1.25.
      */
     ONE_TWO_FIVE(1.25);
 
     /**
-     * The actual serialized value for a FloatLiteralPropertyProperty instance.
+     * The actual serialized value for a FloatLiteralPropertyProperty125 instance.
      */
     private final double value;
 
-    FloatLiteralPropertyProperty(double value) {
+    FloatLiteralPropertyProperty125(double value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a FloatLiteralPropertyProperty instance.
+     * Parses a serialized value to a FloatLiteralPropertyProperty125 instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed FloatLiteralPropertyProperty object, or null if unable to parse.
+     * @return the parsed FloatLiteralPropertyProperty125 object, or null if unable to parse.
      */
-    public static FloatLiteralPropertyProperty fromDouble(double value) {
-        FloatLiteralPropertyProperty[] items = FloatLiteralPropertyProperty.values();
-        for (FloatLiteralPropertyProperty item : items) {
+    public static FloatLiteralPropertyProperty125 fromDouble(double value) {
+        FloatLiteralPropertyProperty125[] items = FloatLiteralPropertyProperty125.values();
+        for (FloatLiteralPropertyProperty125 item : items) {
             if (Double.doubleToLongBits(item.toDouble()) == Double.doubleToLongBits(value)) {
                 return item;
             }

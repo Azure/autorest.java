@@ -77,7 +77,7 @@ public final class EnumsOnlyClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest3 The sendRequest3 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -87,8 +87,8 @@ public final class EnumsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest3, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest3, requestOptions);
     }
 
     /**
@@ -125,8 +125,8 @@ public final class EnumsOnlyClient {
     public void send(EnumsOnlyCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest6 requestObj = new SendRequest6(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest6 sendRequest3Obj = new SendRequest6(prop);
+        BinaryData sendRequest3 = BinaryData.fromObject(sendRequest3Obj);
+        sendWithResponse(sendRequest3, requestOptions).getValue();
     }
 }

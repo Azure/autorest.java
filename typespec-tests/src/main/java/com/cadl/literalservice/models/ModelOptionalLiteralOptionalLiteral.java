@@ -5,35 +5,35 @@
 package com.cadl.literalservice.models;
 
 /**
- * Defines values for ModelOptionalLiteral.
+ * Defines values for ModelOptionalLiteralOptionalLiteral.
  */
-public enum ModelOptionalLiteral {
+public enum ModelOptionalLiteralOptionalLiteral {
     /**
      * Enum value optionalLiteral.
      */
     OPTIONAL_LITERAL("optionalLiteral");
 
     /**
-     * The actual serialized value for a ModelOptionalLiteral instance.
+     * The actual serialized value for a ModelOptionalLiteralOptionalLiteral instance.
      */
     private final String value;
 
-    ModelOptionalLiteral(String value) {
+    ModelOptionalLiteralOptionalLiteral(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a ModelOptionalLiteral instance.
+     * Parses a serialized value to a ModelOptionalLiteralOptionalLiteral instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed ModelOptionalLiteral object, or null if unable to parse.
+     * @return the parsed ModelOptionalLiteralOptionalLiteral object, or null if unable to parse.
      */
-    public static ModelOptionalLiteral fromString(String value) {
+    public static ModelOptionalLiteralOptionalLiteral fromString(String value) {
         if (value == null) {
             return null;
         }
-        ModelOptionalLiteral[] items = ModelOptionalLiteral.values();
-        for (ModelOptionalLiteral item : items) {
+        ModelOptionalLiteralOptionalLiteral[] items = ModelOptionalLiteralOptionalLiteral.values();
+        for (ModelOptionalLiteralOptionalLiteral item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
