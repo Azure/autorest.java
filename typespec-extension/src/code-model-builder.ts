@@ -95,7 +95,6 @@ import {
   getOverloadedOperation,
   getProjectedName,
   getSummary,
-  getTypeName,
   getVisibility,
   ignoreDiagnostics,
   isArrayModelType,
@@ -156,8 +155,6 @@ import {
   ProcessingCache,
   getAccess,
   getDurationFormatFromSdkType,
-  getNameForTemplate,
-  getNamePrefixForProperty,
   getUnionDescription,
   getUsage,
   hasScalarAsBase,
@@ -879,34 +876,30 @@ export class CodeModelBuilder {
       let pollingSchema = undefined;
       let finalSchema = undefined;
 
+      let pollingStrategy: Metadata | undefined = undefined;
+      let finalResultPropertySerializedName: string | undefined = undefined;
+
       const verb = httpOperation.verb;
       const useNewPollStrategy = isLroNewPollingStrategy(httpOperation, lroMetadata);
-
-      let pollingStrategy: Metadata | undefined = undefined;
       if (useNewPollStrategy) {
-        // use new experimental OperationLocationPollingStrategy
+        // use OperationLocationPollingStrategy
         pollingStrategy = new Metadata({
           language: {
             java: {
               name: "OperationLocationPollingStrategy",
-              namespace: "com.azure.core.experimental.util.polling",
+              namespace: getJavaNamespace(this.namespace) + ".implementation",
             },
           },
         });
       }
 
       // pollingSchema
-      if (useNewPollStrategy) {
-        // com.azure.core.experimental.models.PollResult
+      if (modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")) {
         pollingSchema = this.pollResultSchema;
       } else {
-        if (modelIs(lroMetadata.pollingInfo.responseModel, "OperationStatus", "Azure.Core.Foundations")) {
-          pollingSchema = this.pollResultSchema;
-        } else {
-          const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
-          const sdkType = getClientType(this.sdkContext, pollType);
-          pollingSchema = this.processSchemaFromSdkType(sdkType, "pollResult");
-        }
+        const pollType = this.findResponseBody(lroMetadata.pollingInfo.responseModel);
+        const sdkType = getClientType(this.sdkContext, pollType);
+        pollingSchema = this.processSchemaFromSdkType(sdkType, "pollResult");
       }
 
       // finalSchema
@@ -921,6 +914,16 @@ export class CodeModelBuilder {
         const finalType = this.findResponseBody(finalResult);
         const sdkType = getClientType(this.sdkContext, finalType);
         finalSchema = this.processSchemaFromSdkType(sdkType, "finalResult");
+
+        if (
+          useNewPollStrategy &&
+          lroMetadata.finalStep &&
+          lroMetadata.finalStep.kind === "pollingSuccessProperty" &&
+          lroMetadata.finalStep.target
+        ) {
+          // final result is the value in lroMetadata.finalStep.target
+          finalResultPropertySerializedName = this.getSerializedName(lroMetadata.finalStep.target);
+        }
       }
 
       // track usage
@@ -941,7 +944,13 @@ export class CodeModelBuilder {
         }
       }
 
-      op.lroMetadata = new LongRunningMetadata(true, pollingSchema, finalSchema, pollingStrategy);
+      op.lroMetadata = new LongRunningMetadata(
+        true,
+        pollingSchema,
+        finalSchema,
+        pollingStrategy,
+        finalResultPropertySerializedName,
+      );
       return op.lroMetadata;
     }
 
@@ -1338,7 +1347,8 @@ export class CodeModelBuilder {
     }
 
     const isAnonymousModel = sdkType.kind === "model" && sdkType.isGeneratedName === true;
-    const parameter = new Parameter(this.getName(body), this.getDoc(body), schema, {
+    const parameterName = body.kind === "Model" ? (sdkType.kind === "model" ? sdkType.name : "") : this.getName(body);
+    const parameter = new Parameter(parameterName, this.getDoc(body), schema, {
       summary: this.getSummary(body),
       implementation: ImplementationLocation.Method,
       required: body.kind === "Model" || !body.optional,
@@ -1586,10 +1596,10 @@ export class CodeModelBuilder {
               }
               if (match) {
                 schema = candidateResponseSchema;
+                const sdkType = getClientType(this.sdkContext, bodyType);
+                const modelName = sdkType.kind === "model" ? sdkType.name : undefined;
                 this.trace(
-                  `Replace TypeSpec model '${this.getName(bodyType)}' with '${
-                    candidateResponseSchema.language.default.name
-                  }'`,
+                  `Replace TypeSpec model '${modelName}' with '${candidateResponseSchema.language.default.name}'`,
                 );
               }
             }
@@ -1878,7 +1888,7 @@ export class CodeModelBuilder {
 
     const schemaType = type.isFixed ? SealedChoiceSchema : ChoiceSchema;
 
-    const schema = new schemaType(type.name ? type.name : name, type.details ?? "", {
+    const schema = new schemaType(type.name ?? name, type.details ?? "", {
       summary: type.description,
       choiceType: valueType as any,
       choices: choices,
@@ -1899,7 +1909,7 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.valueType, type.valueType.kind);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, type.details ?? "", {
+      new ConstantSchema(type.name ?? name, type.details ?? "", {
         summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value),
@@ -1911,7 +1921,7 @@ export class CodeModelBuilder {
     const valueType = this.processSchemaFromSdkType(type.enumType, type.enumType.name);
 
     return this.codeModel.schemas.add(
-      new ConstantSchema(name, type.details ?? "", {
+      new ConstantSchema(type.name ?? name, type.details ?? "", {
         summary: type.description,
         valueType: valueType,
         value: new ConstantValue(type.value ?? type.name),
@@ -2079,10 +2089,7 @@ export class CodeModelBuilder {
   }
 
   private processModelPropertyFromSdkType(prop: SdkModelPropertyType): Property {
-    const rawModelPropertyType = prop.__raw as ModelProperty | undefined;
-    // TODO: This case is related with literal.tsp, once TCGC supports giving a name, we can use TCGC generatedName
-    const schemaNameHint = pascalCase(getNamePrefixForProperty(rawModelPropertyType)) + pascalCase(prop.name);
-    let schema = this.processSchemaFromSdkType(prop.type, schemaNameHint);
+    let schema = this.processSchemaFromSdkType(prop.type, "");
     let nullable = prop.nullable;
 
     let extensions: Record<string, any> | undefined = undefined;
@@ -2121,7 +2128,6 @@ export class CodeModelBuilder {
       throw new Error(`Invalid type for union: '${type.kind}'.`);
     }
     const rawUnionType: Union = type.__raw as Union;
-    // TODO: name from typespec-client-generator-core
     const namespace = getNamespace(rawUnionType);
     const baseName = type.name ?? pascalCase(name) + "Model";
     this.logWarning(
@@ -2253,13 +2259,9 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Model | Union | UnionVariant | Enum | EnumMember | ModelProperty | Scalar | Operation | undefined,
+    target: Union | UnionVariant | Enum | EnumMember | ModelProperty | Operation,
     nameHint: string | undefined = undefined,
   ): string {
-    if (!target) {
-      return nameHint || "";
-    }
-
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
     if (emitterClientName && typeof emitterClientName === "string") {
@@ -2281,24 +2283,6 @@ export class CodeModelBuilder {
       return friendlyName;
     }
 
-    // if no projectedName and friendlyName found, return the name of the target (including special handling for template)
-    if (
-      target.kind === "Model" &&
-      target.templateMapper &&
-      target.templateMapper.args &&
-      target.templateMapper.args.length > 0
-    ) {
-      const tspName = getTypeName(target, this.typeNameOptions);
-      const newName = getNameForTemplate(target);
-      this.logWarning(`Rename TypeSpec Model '${tspName}' to '${newName}'`);
-      return newName;
-    }
-
-    if (!target.name && nameHint) {
-      const newName = nameHint;
-      this.logWarning(`Rename anonymous TypeSpec ${target.kind} to '${newName}'`);
-      return newName;
-    }
     if (typeof target.name === "symbol") {
       return "";
     }

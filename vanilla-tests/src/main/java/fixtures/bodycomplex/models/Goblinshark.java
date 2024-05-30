@@ -5,6 +5,7 @@
 package fixtures.bodycomplex.models;
 
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonToken;
 import com.azure.json.JsonWriter;
@@ -178,7 +179,8 @@ public final class Goblinshark extends Shark {
                     length = reader.getFloat();
                     lengthFound = true;
                 } else if ("birthday".equals(fieldName)) {
-                    birthday = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    birthday = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                     birthdayFound = true;
                 } else if ("species".equals(fieldName)) {
                     species = reader.getString();

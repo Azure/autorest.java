@@ -166,10 +166,10 @@ public final class AccessPolicy implements XmlSerializable<AccessPolicy> {
 
                 if ("Start".equals(elementName.getLocalPart())) {
                     deserializedAccessPolicy.start
-                        = reader.getNullableElement(dateString -> OffsetDateTime.parse(dateString));
+                        = reader.getNullableElement(dateString -> CoreUtils.parseBestOffsetDateTime(dateString));
                 } else if ("Expiry".equals(elementName.getLocalPart())) {
                     deserializedAccessPolicy.expiry
-                        = reader.getNullableElement(dateString -> OffsetDateTime.parse(dateString));
+                        = reader.getNullableElement(dateString -> CoreUtils.parseBestOffsetDateTime(dateString));
                 } else if ("Permission".equals(elementName.getLocalPart())) {
                     deserializedAccessPolicy.permission = reader.getStringElement();
                 } else {

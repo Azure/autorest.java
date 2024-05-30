@@ -17,7 +17,7 @@ import com.azure.core.http.rest.Response;
 import com.azure.core.util.BinaryData;
 import com.cadl.literalservice.implementation.LiteralOpsImpl;
 import com.cadl.literalservice.models.Model;
-import com.cadl.literalservice.models.OptionalLiteralParam;
+import com.cadl.literalservice.models.PutRequestOptionalLiteralParam;
 
 /**
  * Initializes a new instance of the synchronous LiteralServiceClient type.
@@ -94,7 +94,7 @@ public final class LiteralServiceClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Model put(Model model, OptionalLiteralParam optionalLiteralParam) {
+    public Model put(Model model, PutRequestOptionalLiteralParam optionalLiteralParam) {
         // Generated convenience method for putWithResponse
         RequestOptions requestOptions = new RequestOptions();
         if (optionalLiteralParam != null) {

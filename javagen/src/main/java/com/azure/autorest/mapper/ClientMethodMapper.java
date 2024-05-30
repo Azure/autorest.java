@@ -58,6 +58,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -1654,8 +1655,8 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
             ObjectMapper objectMapper = Mappers.getObjectMapper();
             IType intermediateType = objectMapper.map(metadata.getPollResultType());
             IType finalType = metadata.getFinalResultType() == null
-                    ? PrimitiveType.VOID
-                    : objectMapper.map(metadata.getFinalResultType());
+                ? PrimitiveType.VOID
+                : objectMapper.map(metadata.getFinalResultType());
 
             // PollingDetails would override LongRunningMetadata
             if (pollingDetails.getIntermediateType() != null) {
@@ -1665,19 +1666,33 @@ public class ClientMethodMapper implements IMapper<Operation, List<ClientMethod>
                 finalType = createTypeFromModelName(pollingDetails.getFinalType(), JavaSettings.getInstance());
             }
 
+            // PollingStrategy
+            JavaSettings settings = JavaSettings.getInstance();
+            final String packageName = settings.getPackage(settings.getImplementationSubpackage());
             String pollingStrategy = metadata.getPollingStrategy() == null
-                    ? pollingDetails.getStrategy()
-                    : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, metadata.getPollingStrategy().getLanguage().getJava().getNamespace() + "." + metadata.getPollingStrategy().getLanguage().getJava().getName());
+                ? pollingDetails.getStrategy()
+                : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, packageName + "." + metadata.getPollingStrategy().getLanguage().getJava().getName());
             String syncPollingStrategy = metadata.getPollingStrategy() == null
-                    ? pollingDetails.getSyncStrategy()
-                    : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, metadata.getPollingStrategy().getLanguage().getJava().getNamespace() + ".Sync" + metadata.getPollingStrategy().getLanguage().getJava().getName());
+                ? pollingDetails.getSyncStrategy()
+                : String.format(JavaSettings.PollingDetails.DEFAULT_POLLING_STRATEGY_FORMAT, packageName + ".Sync" + metadata.getPollingStrategy().getLanguage().getJava().getName());
+            if (metadata.getPollingStrategy() != null && metadata.getFinalResultPropertySerializedName() != null) {
+                // add "<property-name>" argument to polling strategy constructor
+                Function<String, String> addPropertyNameToArguments = (strategy) -> {
+                    strategy = strategy.substring(0, strategy.length() - 1) + ", ";
+                    strategy += ClassType.STRING.defaultValueExpression(metadata.getFinalResultPropertySerializedName());
+                    strategy += ")";
+                    return strategy;
+                };
+                pollingStrategy = addPropertyNameToArguments.apply(pollingStrategy);
+                syncPollingStrategy = addPropertyNameToArguments.apply(syncPollingStrategy);
+            }
 
             methodPollingDetails = new MethodPollingDetails(
-                    pollingStrategy,
-                    syncPollingStrategy,
-                    intermediateType,
-                    finalType,
-                    pollingDetails.getPollIntervalInSeconds());
+                pollingStrategy,
+                syncPollingStrategy,
+                intermediateType,
+                finalType,
+                pollingDetails.getPollIntervalInSeconds());
         }
         return methodPollingDetails;
     }

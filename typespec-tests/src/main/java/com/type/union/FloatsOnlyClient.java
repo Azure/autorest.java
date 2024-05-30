@@ -71,7 +71,7 @@ public final class FloatsOnlyClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest5 The sendRequest5 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,8 +81,8 @@ public final class FloatsOnlyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest5, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest5, requestOptions);
     }
 
     /**
@@ -119,8 +119,8 @@ public final class FloatsOnlyClient {
     public void send(GetResponseProp1 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest4 requestObj = new SendRequest4(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest4 sendRequest5Obj = new SendRequest4(prop);
+        BinaryData sendRequest5 = BinaryData.fromObject(sendRequest5Obj);
+        sendWithResponse(sendRequest5, requestOptions).getValue();
     }
 }

@@ -8,6 +8,7 @@ import com.azure.containers.containerregistry.models.ArtifactArchitecture;
 import com.azure.containers.containerregistry.models.ArtifactManifestPlatform;
 import com.azure.containers.containerregistry.models.ArtifactOperatingSystem;
 import com.azure.core.annotation.Fluent;
+import com.azure.core.util.CoreUtils;
 import com.azure.json.JsonReader;
 import com.azure.json.JsonSerializable;
 import com.azure.json.JsonToken;
@@ -377,11 +378,11 @@ public class ManifestAttributesBase implements JsonSerializable<ManifestAttribut
                 if ("digest".equals(fieldName)) {
                     deserializedManifestAttributesBase.digest = reader.getString();
                 } else if ("createdTime".equals(fieldName)) {
-                    deserializedManifestAttributesBase.createdOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedManifestAttributesBase.createdOn = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("lastUpdateTime".equals(fieldName)) {
-                    deserializedManifestAttributesBase.lastUpdatedOn
-                        = reader.getNullable(nonNullReader -> OffsetDateTime.parse(nonNullReader.getString()));
+                    deserializedManifestAttributesBase.lastUpdatedOn = reader
+                        .getNullable(nonNullReader -> CoreUtils.parseBestOffsetDateTime(nonNullReader.getString()));
                 } else if ("imageSize".equals(fieldName)) {
                     deserializedManifestAttributesBase.sizeInBytes = reader.getNullable(JsonReader::getLong);
                 } else if ("architecture".equals(fieldName)) {
