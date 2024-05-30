@@ -48,6 +48,8 @@ import com.azure.mgmtlitetest.storage.models.Sku;
 import com.azure.mgmtlitetest.storage.models.SkuName;
 import com.azure.mgmtlitetest.storage.models.StorageAccount;
 import com.azure.mgmtlitetest.storage.models.StorageAccounts;
+import com.azure.mgmtlitetest.streamstyleserialization.fluent.models.CommunityGalleryInner;
+import com.azure.mgmtlitetest.streamstyleserialization.models.PirCommunityGalleryResource;
 import com.azure.mgmttest.appservice.models.DefaultErrorResponseError;
 import com.azure.mgmttest.authorization.models.GraphErrorException;
 import com.azure.mgmttest.networkwatcher.models.PacketCapture;
@@ -479,5 +481,30 @@ public class RuntimeTests {
         if (!found) {
             Assertions.fail("Method should exist: " + clazz.getName() + " " + methodName + "(" + parametersSignature + ")");
         }
+    }
+
+    public void testStreamStyleSerialization() throws IOException {
+        SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
+        Map<String, Object> pirCommunityGalleryResourceMap = new HashMap<>() {{
+            this.put("name", "myName");
+            this.put("location", "myLocation");
+            this.put("type", "myType");
+        }};
+        String pirCommunityGalleryResourceJson = serializerAdapter.serialize(pirCommunityGalleryResourceMap, SerializerEncoding.JSON);
+
+        PirCommunityGalleryResource pirCommunityGalleryResource = serializerAdapter.deserialize(pirCommunityGalleryResourceJson, PirCommunityGalleryResource.class, SerializerEncoding.JSON);
+        Assertions.assertEquals("myName", pirCommunityGalleryResource.name());
+
+        Map<String, Object> communityGalleryResourceMap = new HashMap<>() {{
+            this.put("name", "myName");
+            this.put("location", "myLocation");
+            this.put("type", "myType");
+            this.put("disclaimer", "myDisclaimer");
+        }};
+
+        String galleryJson = serializerAdapter.serialize(communityGalleryResourceMap, SerializerEncoding.JSON);
+        CommunityGalleryInner galleryInner = serializerAdapter.deserialize(galleryJson, CommunityGalleryInner.class, SerializerEncoding.JSON);
+        Assertions.assertEquals("myName", galleryInner.name());
+        Assertions.assertEquals("myDisclaimer", galleryInner.disclaimer());
     }
 }

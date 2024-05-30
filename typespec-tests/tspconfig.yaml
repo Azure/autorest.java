@@ -8,7 +8,6 @@ options:
     generate-tests: true
     examples-directory: "{project-root}/tsp/examples"
     flavor: "Azure"
-    stream-style-serialization: true
     dev-options:
       generate-code-model: true
       loglevel: info

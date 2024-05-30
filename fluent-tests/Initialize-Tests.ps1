@@ -135,6 +135,9 @@ $job = @(
     # schema clean-up
     "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/schema-cleanup.json --java.namespace=com.azure.mgmtlitetest.schemacleanup"
 
+    # stream-style-serialization
+    "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false --input-file=./swagger/stream-style-serialization.json --java.namespace=com.azure.mgmtlitetest.streamstyleserialization --stream-style-serialization=true"
+
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/network/resource-manager/readme.md --tag=package-2020-06 --java.namespace=com.azure.mgmtlitetest.network"
     # "--version=$AUTOREST_CORE_VERSION $FLUENTLITE_ARGUMENTS --regenerate-pom=false https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/specification/compute/resource-manager/readme.md --tag=package-2020-06-30 --java.namespace=com.azure.mgmtlitetest.compute"
 ) | ForEach-Object -Parallel $generateScript -ThrottleLimit $Parallelization -AsJob

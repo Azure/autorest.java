@@ -57,6 +57,8 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.group-etag-headers=false"""
     # also test generating from specific api-version
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
+  } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
+    $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
