@@ -483,6 +483,7 @@ public class RuntimeTests {
         }
     }
 
+    @Test
     public void testStreamStyleSerialization() throws IOException {
         SerializerAdapter serializerAdapter = SerializerFactory.createDefaultManagementSerializerAdapter();
         Map<String, Object> pirCommunityGalleryResourceMap = new HashMap<>() {{

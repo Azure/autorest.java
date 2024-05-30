@@ -59,6 +59,8 @@ $generateScript = {
     $tspOptions += " --option ""@azure-tools/typespec-java.api-version=2023-11-01"""
   } elseif ($tspFile -match "arm-stream-style-serialization.tsp") {
     $tspOptions += " --option ""@azure-tools/typespec-java.stream-style-serialization=true"""
+    # for mgmt, do not generate tests due to random mock values
+    $tspOptions += " --option ""@azure-tools/typespec-java.generate-tests=false"""
   }
 
   # Test customization for one of the TypeSpec definitions - naming.tsp
