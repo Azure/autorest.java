@@ -46,7 +46,7 @@ public final class ImplicitBodyClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param simpleRequest The simpleRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -56,8 +56,8 @@ public final class ImplicitBodyClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> simpleWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.simpleWithResponse(request, requestOptions);
+    public Response<Void> simpleWithResponse(BinaryData simpleRequest, RequestOptions requestOptions) {
+        return this.serviceClient.simpleWithResponse(simpleRequest, requestOptions);
     }
 
     /**
@@ -76,8 +76,8 @@ public final class ImplicitBodyClient {
     public void simple(String name) {
         // Generated convenience method for simpleWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SimpleRequest requestObj = new SimpleRequest(name);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        simpleWithResponse(request, requestOptions).getValue();
+        SimpleRequest simpleRequestObj = new SimpleRequest(name);
+        BinaryData simpleRequest = BinaryData.fromObject(simpleRequestObj);
+        simpleWithResponse(simpleRequest, requestOptions).getValue();
     }
 }

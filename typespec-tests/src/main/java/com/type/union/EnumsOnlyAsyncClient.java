@@ -79,7 +79,7 @@ public final class EnumsOnlyAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest3 The sendRequest3 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -89,8 +89,8 @@ public final class EnumsOnlyAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData sendRequest3, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(sendRequest3, requestOptions);
     }
 
     /**
@@ -129,8 +129,8 @@ public final class EnumsOnlyAsyncClient {
     public Mono<Void> send(EnumsOnlyCases prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest6 requestObj = new SendRequest6(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SendRequest6 sendRequest3Obj = new SendRequest6(prop);
+        BinaryData sendRequest3 = BinaryData.fromObject(sendRequest3Obj);
+        return sendWithResponse(sendRequest3, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

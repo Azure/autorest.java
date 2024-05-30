@@ -51,7 +51,7 @@ public final class AliasAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param spreadAsRequestBodyRequest The spreadAsRequestBodyRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -61,8 +61,9 @@ public final class AliasAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.spreadAsRequestBodyWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> spreadAsRequestBodyWithResponse(BinaryData spreadAsRequestBodyRequest,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadAsRequestBodyWithResponseAsync(spreadAsRequestBodyRequest, requestOptions);
     }
 
     /**
@@ -142,9 +143,9 @@ public final class AliasAsyncClient {
     public Mono<Void> spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadAsRequestBodyRequest requestObj = new SpreadAsRequestBodyRequest(name);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return spreadAsRequestBodyWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SpreadAsRequestBodyRequest spreadAsRequestBodyRequestObj = new SpreadAsRequestBodyRequest(name);
+        BinaryData spreadAsRequestBodyRequest = BinaryData.fromObject(spreadAsRequestBodyRequestObj);
+        return spreadAsRequestBodyWithResponse(spreadAsRequestBodyRequest, requestOptions).flatMap(FluxUtil::toMono);
     }
 
     /**

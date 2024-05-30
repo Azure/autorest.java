@@ -73,7 +73,7 @@ public final class StringExtensibleAsyncClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest8 The sendRequest8 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -83,8 +83,8 @@ public final class StringExtensibleAsyncClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Mono<Response<Void>> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponseAsync(request, requestOptions);
+    public Mono<Response<Void>> sendWithResponse(BinaryData sendRequest8, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponseAsync(sendRequest8, requestOptions);
     }
 
     /**
@@ -123,8 +123,8 @@ public final class StringExtensibleAsyncClient {
     public Mono<Void> send(GetResponseProp4 prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest1 requestObj = new SendRequest1(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        return sendWithResponse(request, requestOptions).flatMap(FluxUtil::toMono);
+        SendRequest1 sendRequest8Obj = new SendRequest1(prop);
+        BinaryData sendRequest8 = BinaryData.fromObject(sendRequest8Obj);
+        return sendWithResponse(sendRequest8, requestOptions).flatMap(FluxUtil::toMono);
     }
 }

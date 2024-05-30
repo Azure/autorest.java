@@ -49,7 +49,7 @@ public final class AliasClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param spreadAsRequestBodyRequest The spreadAsRequestBodyRequest parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -59,8 +59,9 @@ public final class AliasClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> spreadAsRequestBodyWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.spreadAsRequestBodyWithResponse(request, requestOptions);
+    public Response<Void> spreadAsRequestBodyWithResponse(BinaryData spreadAsRequestBodyRequest,
+        RequestOptions requestOptions) {
+        return this.serviceClient.spreadAsRequestBodyWithResponse(spreadAsRequestBodyRequest, requestOptions);
     }
 
     /**
@@ -138,9 +139,9 @@ public final class AliasClient {
     public void spreadAsRequestBody(String name) {
         // Generated convenience method for spreadAsRequestBodyWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SpreadAsRequestBodyRequest requestObj = new SpreadAsRequestBodyRequest(name);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        spreadAsRequestBodyWithResponse(request, requestOptions).getValue();
+        SpreadAsRequestBodyRequest spreadAsRequestBodyRequestObj = new SpreadAsRequestBodyRequest(name);
+        BinaryData spreadAsRequestBodyRequest = BinaryData.fromObject(spreadAsRequestBodyRequestObj);
+        spreadAsRequestBodyWithResponse(spreadAsRequestBodyRequest, requestOptions).getValue();
     }
 
     /**

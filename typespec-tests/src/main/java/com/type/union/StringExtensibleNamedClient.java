@@ -71,7 +71,7 @@ public final class StringExtensibleNamedClient {
      * }
      * }</pre>
      * 
-     * @param request The request parameter.
+     * @param sendRequest7 The sendRequest7 parameter.
      * @param requestOptions The options to configure the HTTP request before HTTP client sends it.
      * @throws HttpResponseException thrown if the request is rejected by server.
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
@@ -81,8 +81,8 @@ public final class StringExtensibleNamedClient {
      */
     @Generated
     @ServiceMethod(returns = ReturnType.SINGLE)
-    public Response<Void> sendWithResponse(BinaryData request, RequestOptions requestOptions) {
-        return this.serviceClient.sendWithResponse(request, requestOptions);
+    public Response<Void> sendWithResponse(BinaryData sendRequest7, RequestOptions requestOptions) {
+        return this.serviceClient.sendWithResponse(sendRequest7, requestOptions);
     }
 
     /**
@@ -119,8 +119,8 @@ public final class StringExtensibleNamedClient {
     public void send(StringExtensibleNamedUnion prop) {
         // Generated convenience method for sendWithResponse
         RequestOptions requestOptions = new RequestOptions();
-        SendRequest2 requestObj = new SendRequest2(prop);
-        BinaryData request = BinaryData.fromObject(requestObj);
-        sendWithResponse(request, requestOptions).getValue();
+        SendRequest2 sendRequest7Obj = new SendRequest2(prop);
+        BinaryData sendRequest7 = BinaryData.fromObject(sendRequest7Obj);
+        sendWithResponse(sendRequest7, requestOptions).getValue();
     }
 }

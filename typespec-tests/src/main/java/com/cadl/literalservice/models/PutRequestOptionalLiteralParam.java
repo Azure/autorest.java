@@ -5,35 +5,35 @@
 package com.cadl.literalservice.models;
 
 /**
- * Defines values for OptionalLiteralParam.
+ * Defines values for PutRequestOptionalLiteralParam.
  */
-public enum OptionalLiteralParam {
+public enum PutRequestOptionalLiteralParam {
     /**
      * Enum value optionalLiteralParam.
      */
     OPTIONAL_LITERAL_PARAM("optionalLiteralParam");
 
     /**
-     * The actual serialized value for a OptionalLiteralParam instance.
+     * The actual serialized value for a PutRequestOptionalLiteralParam instance.
      */
     private final String value;
 
-    OptionalLiteralParam(String value) {
+    PutRequestOptionalLiteralParam(String value) {
         this.value = value;
     }
 
     /**
-     * Parses a serialized value to a OptionalLiteralParam instance.
+     * Parses a serialized value to a PutRequestOptionalLiteralParam instance.
      * 
      * @param value the serialized value to parse.
-     * @return the parsed OptionalLiteralParam object, or null if unable to parse.
+     * @return the parsed PutRequestOptionalLiteralParam object, or null if unable to parse.
      */
-    public static OptionalLiteralParam fromString(String value) {
+    public static PutRequestOptionalLiteralParam fromString(String value) {
         if (value == null) {
             return null;
         }
-        OptionalLiteralParam[] items = OptionalLiteralParam.values();
-        for (OptionalLiteralParam item : items) {
+        PutRequestOptionalLiteralParam[] items = PutRequestOptionalLiteralParam.values();
+        for (PutRequestOptionalLiteralParam item : items) {
             if (item.toString().equalsIgnoreCase(value)) {
                 return item;
             }
