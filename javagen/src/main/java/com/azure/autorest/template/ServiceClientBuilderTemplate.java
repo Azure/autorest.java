@@ -320,7 +320,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
             if (!settings.isAzureOrFluent()) {
                 List<ServiceClientProperty> allProperties = mergeClientPropertiesWithTraits(clientProperties, clientBuilder.getBuilderTraits());
                 addValidateClientMethod(classBlock, allProperties);
-                addValidatePipelineMethod(classBlock);
 
                 addCreateHttpPipelineMethod(settings, classBlock, serviceClient.getDefaultCredentialScopes(), serviceClient.getSecurityInfo(), serviceClient.getPipelinePolicyDetails());
             }
@@ -528,14 +527,6 @@ public class ServiceClientBuilderTemplate implements IJavaTemplate<ClientBuilder
         addGeneratedAnnotation(classBlock);
         classBlock.privateMethod("HttpPipeline createHttpPipeline()", function -> {
             TemplateHelper.createHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
-        });
-    }
-
-    private void addValidatePipelineMethod(JavaClass classBlock) {
-        addGeneratedAnnotation(classBlock);
-        classBlock.privateMethod("void validatePipeline()", methodBlock -> {
-            methodBlock.line("// This method is invoked from 'createHttpPipeline' method.");
-            methodBlock.line("// Developer can customize this method, to validate that the necessary conditions are met for the new HTTP pipeline.");
         });
     }
 

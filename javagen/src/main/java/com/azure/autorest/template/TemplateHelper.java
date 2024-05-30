@@ -41,7 +41,6 @@ public final class TemplateHelper {
     }
 
     public static void createHttpPipelineMethod(JavaSettings settings, String defaultCredentialScopes, SecurityInfo securityInfo, PipelinePolicyDetails pipelinePolicyDetails, JavaBlock function) {
-        function.line("this.validatePipeline();");
         if (!settings.isBranded()) {
             createGenericHttpPipelineMethod(settings, defaultCredentialScopes, securityInfo, pipelinePolicyDetails, function);
         } else {
