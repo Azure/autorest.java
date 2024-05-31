@@ -294,6 +294,7 @@ public final class ConstantAndClientParameterServiceClientBuilder
      */
     @Generated
     private ConstantAndClientParameterServiceClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "http://localhost:3000";
         ConstantAndClientParameterServiceVersion localServiceVersion
@@ -303,6 +304,13 @@ public final class ConstantAndClientParameterServiceClientBuilder
             this.queryRequiredDefaultValueClientParam, this.queryNonRequiredClientParam, localHost,
             localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(queryRequiredClientParam, "'queryRequiredClientParam' cannot be null.");
     }
 
     @Generated

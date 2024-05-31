@@ -12,9 +12,9 @@ import org.junit.jupiter.api.Test;
 
 public class AddedClientTests {
     private final AddedClient addedClient = new AddedClientBuilder()
-            .endpoint("http://localhost:3000").buildClient();
+            .endpoint("http://localhost:3000").version("v2").buildClient();
     private final InterfaceV2Client interfaceV2Client = new AddedClientBuilder()
-            .endpoint("http://localhost:3000").buildInterfaceV2Client();
+            .endpoint("http://localhost:3000").version("v2").buildInterfaceV2Client();
 
     @Test
     public void testAddedClient() {

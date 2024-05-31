@@ -238,10 +238,19 @@ public final class RenamedOperationClientBuilder implements HttpTrait<RenamedOpe
      */
     @Generated
     private RenamedOperationClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         RenamedOperationClientImpl client = new RenamedOperationClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, this.client);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+        Objects.requireNonNull(client, "'client' cannot be null.");
     }
 
     @Generated

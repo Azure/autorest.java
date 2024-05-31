@@ -197,10 +197,17 @@ public final class JsonMergePatchClientBuilder
      */
     @Generated
     private JsonMergePatchClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         JsonMergePatchClientImpl client
             = new JsonMergePatchClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated

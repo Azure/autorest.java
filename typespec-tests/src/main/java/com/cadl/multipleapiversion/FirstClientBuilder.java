@@ -232,12 +232,20 @@ public final class FirstClientBuilder implements HttpTrait<FirstClientBuilder>, 
      */
     @Generated
     private FirstClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         FirstServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : FirstServiceVersion.getLatest();
         FirstClientImpl client = new FirstClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

@@ -249,6 +249,7 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
      */
     @Generated
     public AutoRestParameterizedCustomHostTestClient buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localDnsSuffix = (dnsSuffix != null) ? dnsSuffix : "host";
         SerializerAdapter localSerializerAdapter
@@ -256,6 +257,13 @@ public final class AutoRestParameterizedCustomHostTestClientBuilder
         AutoRestParameterizedCustomHostTestClient client = new AutoRestParameterizedCustomHostTestClient(localPipeline,
             localSerializerAdapter, this.subscriptionId, localDnsSuffix);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(subscriptionId, "'subscriptionId' cannot be null.");
     }
 
     @Generated
