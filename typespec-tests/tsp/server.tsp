@@ -9,14 +9,17 @@ using TypeSpec.Versioning;
   title: "HttpbinServer",
 })
 @server(
-  "https://{domain}.{tld}",
+  "https://{domain}.{tld}{relative-path}",
   "Httpbin endpoint",
   {
     @doc("second-level domain, use httpbin")
-    domain?: string = "httpbin",
+    domain: string = "httpbin",
 
     @doc("top-level domain, use org")
-    tld?: string = "org",
+    tld: string = "org",
+
+    @doc("relative path segment, can be empty")
+    `relative-path`?: string,
   }
 )
 namespace Cadl.Server {

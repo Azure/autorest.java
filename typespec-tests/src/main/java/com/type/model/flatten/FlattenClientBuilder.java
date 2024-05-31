@@ -197,10 +197,17 @@ public final class FlattenClientBuilder
      */
     @Generated
     private FlattenClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         FlattenClientImpl client
             = new FlattenClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter());
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated

@@ -232,12 +232,20 @@ public final class ResponseClientBuilder implements HttpTrait<ResponseClientBuil
      */
     @Generated
     private ResponseClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         ResponseServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : ResponseServiceVersion.getLatest();
         ResponseClientImpl client = new ResponseClientImpl(localPipeline,
             JacksonAdapter.createDefaultSerializerAdapter(), this.endpoint, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
     }
 
     @Generated

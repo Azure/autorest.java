@@ -255,12 +255,21 @@ public final class AddedClientBuilder implements HttpTrait<AddedClientBuilder>, 
      */
     @Generated
     private AddedClientImpl buildInnerClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         AddedServiceVersion localServiceVersion
             = (serviceVersion != null) ? serviceVersion : AddedServiceVersion.getLatest();
         AddedClientImpl client = new AddedClientImpl(localPipeline, JacksonAdapter.createDefaultSerializerAdapter(),
             this.endpoint, this.version, localServiceVersion);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
+        Objects.requireNonNull(endpoint, "'endpoint' cannot be null.");
+        Objects.requireNonNull(version, "'version' cannot be null.");
     }
 
     @Generated

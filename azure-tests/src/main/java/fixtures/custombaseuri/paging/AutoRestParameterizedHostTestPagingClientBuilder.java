@@ -231,6 +231,7 @@ public final class AutoRestParameterizedHostTestPagingClientBuilder
      */
     @Generated
     public AutoRestParameterizedHostTestPagingClient buildClient() {
+        this.validateClient();
         HttpPipeline localPipeline = (pipeline != null) ? pipeline : createHttpPipeline();
         String localHost = (host != null) ? host : "host";
         SerializerAdapter localSerializerAdapter
@@ -238,6 +239,12 @@ public final class AutoRestParameterizedHostTestPagingClientBuilder
         AutoRestParameterizedHostTestPagingClient client
             = new AutoRestParameterizedHostTestPagingClient(localPipeline, localSerializerAdapter, localHost);
         return client;
+    }
+
+    @Generated
+    private void validateClient() {
+        // This method is invoked from 'buildInnerClient'/'buildClient' method.
+        // Developer can customize this method, to validate that the necessary conditions are met for the new client.
     }
 
     @Generated

@@ -294,7 +294,7 @@ export class CodeModelBuilder {
           parameter = new Parameter(it.name, this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
             origin: "modelerfour:synthesized/host",
-            required: true,
+            required: !it.optional,
             protocol: {
               http: new HttpParameter(ParameterLocation.Uri),
             },
@@ -313,6 +313,7 @@ export class CodeModelBuilder {
       });
       return hostParameters;
     } else {
+      // use "endpoint"
       hostParameters.push(
         this.codeModel.addGlobalParameter(
           new Parameter("endpoint", "Server parameter", this.stringSchema, {
@@ -658,7 +659,7 @@ export class CodeModelBuilder {
   /**
    * `@armProviderNamespace` currently will add a default server if not defined globally:
    * https://github.com/Azure/typespec-azure/blob/8b8d7c05f168d9305a09691c4fedcb88f4a57652/packages/typespec-azure-resource-manager/src/namespace.ts#L121-L128
-   * TODO: if the synthesized server has the right hostParameter, we can use that insteadß
+   * TODO: if the synthesized server has the right hostParameter, we can use that instead
    *
    * @param server returned by getServers
    * @returns whether it's synthesized by `@armProviderNamespace`

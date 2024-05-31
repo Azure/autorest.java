@@ -10,9 +10,9 @@ import org.junit.jupiter.api.Test;
 
 public class RenamedFromClientTests {
     private final RenamedFromClient renamedFromClient = new RenamedFromClientBuilder()
-            .endpoint("http://localhost:3000").buildClient();
+            .endpoint("http://localhost:3000").version("v2").buildClient();
     private final NewInterfaceClient newInterfaceClient = new RenamedFromClientBuilder()
-            .endpoint("http://localhost:3000").buildNewInterfaceClient();
+            .endpoint("http://localhost:3000").version("v2").buildNewInterfaceClient();
 
     @Test
     public void testNewOp() {
