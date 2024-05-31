@@ -373,7 +373,8 @@ public class ModelMapper implements IMapper<ObjectSchema, ClientModel> {
                     if (!Objects.equals(polymorphicDiscriminator, derivedType.getPolymorphicDiscriminatorName())) {
                         ClientModelProperty parentDiscriminator = result.getPolymorphicDiscriminator()
                             .newBuilder()
-                            .defaultValue(derivedType.getPolymorphicDiscriminator().getDefaultValue())
+                            .defaultValue(result.getPolymorphicDiscriminator().getClientType()
+                                .defaultValueExpression(derivedType.getSerializedName()))
                             .build();
 
                         passPolymorphicDiscriminatorToChildren(parentDiscriminator, derivedType);
