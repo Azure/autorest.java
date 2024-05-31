@@ -872,7 +872,7 @@ export class CodeModelBuilder {
     const operation = httpOperation.operation;
 
     // ARM uses the response of activation request as poll/final result.
-    // Therefore these schema would not be public.
+    // Therefore these schema will not be public.
     const trackConvenienceApi: boolean = Boolean(op.convenienceApi) && !this.isArm();
 
     const lroMetadata = getLroMetadata(this.program, operation);
