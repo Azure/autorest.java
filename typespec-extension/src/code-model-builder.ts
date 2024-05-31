@@ -873,7 +873,7 @@ export class CodeModelBuilder {
 
     // ARM uses the response of activation request as poll/final result.
     // Therefore these schema would not be public.
-    const trackConvenienceApi: boolean = Boolean(op.convenienceApi) ?? !this.isArm();
+    const trackConvenienceApi: boolean = Boolean(op.convenienceApi) && !this.isArm();
 
     const lroMetadata = getLroMetadata(this.program, operation);
     // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
@@ -1544,7 +1544,7 @@ export class CodeModelBuilder {
 
     let responseBody: HttpOperationBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
-    let trackConvenienceApi: boolean = Boolean(op.convenienceApi) ?? false;
+    let trackConvenienceApi: boolean = Boolean(op.convenienceApi);
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       responseBody = resp.responses[0].body;
     }
