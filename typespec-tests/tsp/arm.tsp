@@ -174,6 +174,10 @@ model ResponseWithHeader<T> {
   ...Body<T>;
 }
 
+model Result {
+  reason?: string;
+}
+
 // #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "built-in conditional request includes time based conditional headers"
 alias IfMatchParameters<T extends Azure.ResourceManager.Foundations.Resource> = {
   @header("If-Match")
@@ -197,7 +201,14 @@ interface ChildResourcesInterface
 
 @armResourceOperations
 interface TopLevelArmResourceInterface
-  extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {}
+  extends TrackedResourceOperations<TopLevelArmResource, TopLevelArmResourceProperties> {
+  action is ArmResourceActionAsync<
+    TopLevelArmResource,
+    void,
+    Result,
+    Azure.ResourceManager.Foundations.BaseParameters<TopLevelArmResource>
+  >;
+}
 
 @armResourceOperations
 interface CustomTemplateResourceInterface

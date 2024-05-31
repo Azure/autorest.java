@@ -870,6 +870,9 @@ export class CodeModelBuilder {
   private processLroMetadata(op: CodeModelOperation, httpOperation: HttpOperation): LongRunningMetadata {
     const operation = httpOperation.operation;
 
+    // ARM uses the response as poll/final result
+    const trackConvenienceApi: boolean = Boolean(op.convenienceApi) ?? !this.isArm();
+
     const lroMetadata = getLroMetadata(this.program, operation);
     // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
     if (lroMetadata && lroMetadata.pollingInfo && lroMetadata.statusMonitorStep) {
@@ -929,7 +932,7 @@ export class CodeModelBuilder {
       // track usage
       if (pollingSchema) {
         this.trackSchemaUsage(pollingSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
+        if (trackConvenienceApi) {
           this.trackSchemaUsage(pollingSchema, {
             usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
           });
@@ -937,7 +940,7 @@ export class CodeModelBuilder {
       }
       if (finalSchema) {
         this.trackSchemaUsage(finalSchema, { usage: [SchemaContext.Output] });
-        if (op.convenienceApi) {
+        if (trackConvenienceApi) {
           this.trackSchemaUsage(finalSchema, {
             usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public],
           });
@@ -1569,53 +1572,16 @@ export class CodeModelBuilder {
       } else {
         // schema (usually JSON)
         let schema: Schema | undefined = undefined;
-        const verb = op.requests?.[0].protocol?.http?.method;
-        if (
-          // LRO, candidateResponseSchema is Model/ObjectSchema
-          candidateResponseSchema &&
-          candidateResponseSchema instanceof ObjectSchema &&
-          // bodyType is templated Model
-          bodyType.kind === "Model" &&
-          bodyType.templateMapper &&
-          bodyType.templateMapper.args &&
-          bodyType.templateMapper.args.length > 0
-        ) {
-          if (verb === "post") {
-            // for LRO ResourceAction, the standard does not require a final type, hence it can be the same as intermediate type
-            // https://github.com/microsoft/api-guidelines/blob/vNext/azure/ConsiderationsForServiceDesign.md#long-running-action-operations
-
-            // check if we can use candidateResponseSchema as response schema (instead of the templated Model), for LRO ResourceAction
-            if (candidateResponseSchema.properties?.length === bodyType.properties.size) {
-              let match = true;
-              for (const prop of Array.from(bodyType.properties.values())) {
-                const name = this.getName(prop);
-                if (!candidateResponseSchema.properties?.find((it) => it.language.default.name === name)) {
-                  match = false;
-                  break;
-                }
-              }
-              if (match) {
-                schema = candidateResponseSchema;
-                const sdkType = getClientType(this.sdkContext, bodyType);
-                const modelName = sdkType.kind === "model" ? sdkType.name : undefined;
-                this.trace(
-                  `Replace TypeSpec model '${modelName}' with '${candidateResponseSchema.language.default.name}'`,
-                );
-              }
-            }
-          } else if (verb === "delete") {
-            // for LRO ResourceDelete, final type will be replaced to "Void" in convenience API, hence do not generate the class
+        if (candidateResponseSchema) {
+          // The operation is LRO
+          if (trackConvenienceApi && !this.isArm()) {
+            // DPG uses the LroMetadata as poll/final result, not the response of activation request
             trackConvenienceApi = false;
           }
         }
         if (!schema) {
-          if (verb === "post" && op.lroMetadata && op.lroMetadata.pollResultType) {
-            // for standard LRO action, return type is the pollResultType
-            schema = op.lroMetadata.pollResultType;
-          } else {
-            const sdkType = getClientType(this.sdkContext, bodyType);
-            schema = this.processSchemaFromSdkType(sdkType, op.language.default.name + "Response");
-          }
+          const sdkType = getClientType(this.sdkContext, bodyType);
+          schema = this.processSchemaFromSdkType(sdkType, op.language.default.name + "Response");
         }
         response = new SchemaResponse(schema, {
           protocol: {
