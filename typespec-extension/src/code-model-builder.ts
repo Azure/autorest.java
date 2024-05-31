@@ -871,7 +871,8 @@ export class CodeModelBuilder {
   private processLroMetadata(op: CodeModelOperation, httpOperation: HttpOperation): LongRunningMetadata {
     const operation = httpOperation.operation;
 
-    // ARM uses the response as poll/final result
+    // ARM uses the response of activation request as poll/final result.
+    // Therefore these schema would not be public.
     const trackConvenienceApi: boolean = Boolean(op.convenienceApi) ?? !this.isArm();
 
     const lroMetadata = getLroMetadata(this.program, operation);
@@ -1543,7 +1544,7 @@ export class CodeModelBuilder {
 
     let responseBody: HttpOperationBody | undefined = undefined;
     let bodyType: Type | undefined = undefined;
-    let trackConvenienceApi = op.convenienceApi ?? false;
+    let trackConvenienceApi: boolean = Boolean(op.convenienceApi) ?? false;
     if (resp.responses && resp.responses.length > 0 && resp.responses[0].body) {
       responseBody = resp.responses[0].body;
     }
@@ -1577,6 +1578,7 @@ export class CodeModelBuilder {
           // The operation is LRO
           if (trackConvenienceApi && !this.isArm()) {
             // DPG uses the LroMetadata as poll/final result, not the response of activation request
+            // Therefore this schema will not be public.
             trackConvenienceApi = false;
           }
         }
