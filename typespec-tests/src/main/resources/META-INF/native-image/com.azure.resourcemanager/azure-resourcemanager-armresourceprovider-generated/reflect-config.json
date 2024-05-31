@@ -24,6 +24,11 @@
   "allDeclaredFields" : true,
   "allDeclaredMethods" : true
 }, {
+  "name" : "com.cadl.armresourceprovider.fluent.models.ResultInner",
+  "allDeclaredConstructors" : true,
+  "allDeclaredFields" : true,
+  "allDeclaredMethods" : true
+}, {
   "name" : "com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner",
   "allDeclaredConstructors" : true,
   "allDeclaredFields" : true,
