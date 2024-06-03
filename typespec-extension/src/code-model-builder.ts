@@ -55,6 +55,7 @@ import {
   SdkEnumValueType,
   SdkModelPropertyType,
   SdkModelType,
+  SdkPackage,
   SdkType,
   SdkUnionType,
   createSdkContext,
@@ -63,6 +64,8 @@ import {
   getClientType,
   getCrossLanguageDefinitionId,
   getDefaultApiVersion,
+  getSdkModelPropertyType,
+  getSdkModelPropertyTypeBase,
   getWireName,
   isApiVersion,
   isInternal,
@@ -516,7 +519,98 @@ export class CodeModelBuilder {
     }
   }
 
+  // private processClientsFromSdkType() {
+  //     // preprocess group-etag-headers
+  //     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
+
+  //     const sdkPackage = this.sdkContext.experimental_sdkPackage;
+  //     for (const client of sdkPackage.clients) {
+  //       const codeModelClient = new CodeModelClient(client.name, client.details ?? "", {
+  //         summary: client.description,
+  
+  //         // at present, use global security definition
+  //         security: this.codeModel.security,
+  //       });
+  //       // codeModelClient.crossLanguageDefinitionId = client.crossLanguageDefinitionId;
+  //     }
+
+      // versioning
+      // const versioning = getVersion(this.program, client.service);
+      // if (versioning && versioning.getVersions()) {
+      //   // @versioned in versioning
+      //   if (!this.sdkContext.apiVersion || ["all", "latest"].includes(this.sdkContext.apiVersion)) {
+      //     this.apiVersion = getDefaultApiVersion(this.sdkContext, client.service);
+      //   } else {
+      //     this.apiVersion = versioning.getVersions().find((it: Version) => it.value === this.sdkContext.apiVersion);
+      //     if (!this.apiVersion) {
+      //       throw new Error("Unrecognized api-version: " + this.sdkContext.apiVersion);
+      //     }
+      //   }
+
+      //   codeModelClient.apiVersions = [];
+      //   for (const version of this.getFilteredApiVersions(this.apiVersion, versioning.getVersions())) {
+      //     const apiVersion = new ApiVersion();
+      //     apiVersion.version = version.value;
+      //     codeModelClient.apiVersions.push(apiVersion);
+      //   }
+      // }
+
+      // server
+  //     let baseUri = "{endpoint}";
+  //     const servers = getServers(this.program, client.service);
+  //     if (servers && servers.length === 1 && !this.isArmSynthesizedServer(servers[0])) {
+  //       baseUri = servers[0].url;
+  //     }
+  //     const hostParameters = this.processHost(servers?.length === 1 ? servers[0] : undefined);
+  //     codeModelClient.addGlobalParameters(hostParameters);
+  //     const clientContext = new ClientContext(
+  //       baseUri,
+  //       hostParameters,
+  //       codeModelClient.globalParameters!,
+  //       codeModelClient.apiVersions,
+  //     );
+  //     clientContext.preProcessOperations(this.sdkContext, client);
+
+  //     const operationGroups = listOperationGroups(this.sdkContext, client, true);
+
+  //     const operationWithoutGroup = listOperationsInOperationGroup(this.sdkContext, client);
+  //     let codeModelGroup = new OperationGroup("");
+  //     for (const operation of operationWithoutGroup) {
+  //       if (!this.needToSkipProcessingOperation(operation, clientContext)) {
+  //         codeModelGroup.addOperation(this.processOperation("", operation, clientContext));
+  //       }
+  //     }
+  //     if (codeModelGroup.operations?.length > 0) {
+  //       codeModelClient.operationGroups.push(codeModelGroup);
+  //     }
+
+  //     for (const operationGroup of operationGroups) {
+  //       const operations = listOperationsInOperationGroup(this.sdkContext, operationGroup);
+  //       // operation group with no operation is skipped
+  //       if (operations.length > 0) {
+  //         const groupPath = operationGroup.groupPath.split(".");
+  //         let operationGroupName: string;
+  //         if (groupPath.length > 1) {
+  //           // groupPath should be in format of "OpenAIClient.Chat.Completions"
+  //           operationGroupName = groupPath.slice(1).join("");
+  //         } else {
+  //           // protection
+  //           operationGroupName = operationGroup.type.name;
+  //         }
+  //         codeModelGroup = new OperationGroup(operationGroupName);
+  //         for (const operation of operations) {
+  //           if (!this.needToSkipProcessingOperation(operation, clientContext)) {
+  //             codeModelGroup.addOperation(this.processOperation(operationGroupName, operation, clientContext));
+  //           }
+  //         }
+  //         codeModelClient.operationGroups.push(codeModelGroup);
+  //       }
+  //     }
+      
+  // }
+
   private processClients(): SdkClient[] {
+    const sdkPackage = this.sdkContext.experimental_sdkPackage;
     const clients = listClients(this.sdkContext);
     // preprocess group-etag-headers
     this.options["group-etag-headers"] = this.options["group-etag-headers"] ?? true;
@@ -789,7 +883,10 @@ export class CodeModelBuilder {
     // host
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
-    op.parameters.parameters.map((it) => this.processParameter(codeModelOperation, it, clientContext));
+    op.parameters.parameters.map((it) => {
+      const sdkParamType = ignoreDiagnostics(getSdkModelPropertyType(this.sdkContext, it.param, operation));
+      this.processParameterFromSdkType(codeModelOperation, sdkParamType, it, clientContext);
+  });
     // "accept" header
     this.addAcceptHeaderParameter(codeModelOperation, op.responses);
     // body
@@ -987,6 +1084,160 @@ export class CodeModelBuilder {
   }
 
   private _armApiVersionParameter?: Parameter;
+
+  private processParameterFromSdkType(op: CodeModelOperation, param: SdkModelPropertyType, raw: HttpOperationParameter, clientContext: ClientContext) {
+    if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
+      // pre-condition for "isApiVersion": the client supports ApiVersions
+      if (this.isArm()) {
+        // Currently we assume ARM tsp only have one client and one api-version.
+        // TODO: How will service define mixed api-versions(like those in Compute RP)?
+        const apiVersion = this.apiVersion?.value;
+        if (!this._armApiVersionParameter) {
+          this._armApiVersionParameter = this.createApiVersionParameter(
+            "api-version",
+            param.kind === "query" ? ParameterLocation.Query : ParameterLocation.Path,
+            apiVersion,
+          );
+          clientContext.addGlobalParameter(this._armApiVersionParameter);
+        }
+        op.addParameter(this._armApiVersionParameter);
+      } else {
+        const parameter = param.kind === "query" ? this.apiVersionParameter : this.apiVersionParameterInPath;
+        op.addParameter(parameter);
+        clientContext.addGlobalParameter(parameter);
+      }
+    } 
+    // else if (this.isSubscriptionId(raw)) {
+    //   const parameter = this.subscriptionIdParameter(raw);
+    //   op.addParameter(parameter);
+    //   clientContext.addGlobalParameter(parameter);
+    // } 
+    else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
+      // special headers
+      op.specialHeaders = op.specialHeaders ?? [];
+      if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.name)) {
+        op.specialHeaders.push(param.name);
+      }
+    } else {
+      // schema
+      let schema;
+      const sdkType = param.type;
+      if (
+        param.kind === "header" && (sdkType.kind === "utcDateTime" || sdkType.kind === "offsetDateTime")) {
+        // utcDateTime in header maps to rfc7231
+        schema = this.processDateTimeSchemaFromSdkType(sdkType, param.name, true);
+      } else {
+        schema = this.processSchemaFromSdkType(sdkType, param.name);
+      }
+
+      // skip-url-encoding
+      let extensions: { [id: string]: any } | undefined = undefined;
+      if (
+        (param.kind === "query" || param.kind === "path") &&
+        isSdkBuiltInKind(sdkType.kind) && // TODO: question: Scalar -> builtin kinds, is it fine?
+        schema instanceof UriSchema
+      ) {
+        extensions = { "x-ms-skip-url-encoding": true };
+      }
+
+      if (this.supportsAdvancedVersioning()) {
+        // versioning
+        const addedOn = getAddedOnVersions(this.program, raw.param);
+        if (addedOn) {
+          extensions = extensions ?? {};
+          extensions["x-ms-versioning-added"] = clientContext.getAddedVersions(addedOn);
+        }
+      }
+
+      // format if array
+      let style = undefined;
+      let explode = undefined;
+      if (sdkType.kind === "array" && sdkType.valueType.kind === "model") {
+        if (param.kind === "query") {
+          const format = param.collectionFormat;
+          switch (format) {
+            case "csv":
+              style = SerializationStyle.Simple;
+              break;
+
+            case "ssv":
+              style = SerializationStyle.SpaceDelimited;
+              break;
+
+            case "tsv":
+              style = SerializationStyle.TabDelimited;
+              break;
+
+            case "pipes":
+              style = SerializationStyle.PipeDelimited;
+              break;
+
+            case "multi":
+              style = SerializationStyle.Form;
+              explode = true;
+              break;
+
+            default:
+              if (format) {
+                this.logWarning(`Unrecognized query parameter format: '${format}'.`);
+              }
+              break;
+          }
+        } else if (param.kind === "header") {
+          const format = param.collectionFormat;
+          switch (format) {
+            case "csv":
+              style = SerializationStyle.Simple;
+              break;
+
+            default:
+              if (format) {
+                this.logWarning(`Unrecognized header parameter format: '${format}'.`);
+              }
+              break;
+          }
+        }
+      }
+
+      const nullable = param.nullable;
+      const parameter = new Parameter(param.name, param.description ?? "", schema, {
+        summary: param.details,
+        implementation: ImplementationLocation.Method,
+        required: !param.optional,
+        nullable: nullable,
+        protocol: {
+          http: new HttpParameter(raw.type, {
+            style: style,
+            explode: explode,
+          }),
+        },
+        language: {
+          default: {
+            serializedName: param.name,
+          },
+        },
+        extensions: extensions,
+      });
+      op.addParameter(parameter);
+
+      this.trackSchemaUsage(schema, { usage: [SchemaContext.Input] });
+
+      if (op.convenienceApi) {
+        this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
+      }
+
+      if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
+        let mediaTypes = ["application/json"];
+        if (schema instanceof ConstantSchema) {
+          mediaTypes = [schema.value.value.toString()];
+        } else if (schema instanceof SealedChoiceSchema) {
+          mediaTypes = schema.choices.map((it) => it.value.toString());
+        }
+        op.requests![0].protocol.http!.mediaTypes = mediaTypes;
+      }
+    }
+
+  }
 
   private processParameter(op: CodeModelOperation, param: HttpOperationParameter, clientContext: ClientContext) {
     if (clientContext.apiVersions && isApiVersion(this.sdkContext, param)) {
@@ -2625,4 +2876,12 @@ export class CodeModelBuilder {
   private isArm(): boolean {
     return Boolean(this.codeModel.arm);
   }
+
+  // private getLocationFromSdkParameter(param: SdkModelPropertyType): string {
+  //   if (Object.values(ParameterLocation).includes(param.kind)) {
+  //     return param.kind;
+  //   } else {
+  //     return "none";
+  //   }
+  // }
 }
