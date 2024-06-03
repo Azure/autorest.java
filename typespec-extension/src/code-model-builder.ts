@@ -828,8 +828,7 @@ export class CodeModelBuilder {
     const lroMetadata = this.processLroMetadata(codeModelOperation, op);
 
     // responses
-    const candidateResponseSchema = lroMetadata.pollResultType; // candidate: response body type of pollingOperation
-    op.responses.map((it) => this.processResponse(codeModelOperation, it, candidateResponseSchema));
+    op.responses.map((it) => this.processResponse(codeModelOperation, it, lroMetadata.longRunning));
 
     // check for paged
     this.processRouteForPaged(codeModelOperation, op.responses);
@@ -871,9 +870,7 @@ export class CodeModelBuilder {
   private processLroMetadata(op: CodeModelOperation, httpOperation: HttpOperation): LongRunningMetadata {
     const operation = httpOperation.operation;
 
-    // ARM uses the response of activation request as poll/final result.
-    // Therefore these schema will not be public.
-    const trackConvenienceApi: boolean = Boolean(op.convenienceApi) && !this.isArm();
+    const trackConvenienceApi: boolean = Boolean(op.convenienceApi);
 
     const lroMetadata = getLroMetadata(this.program, operation);
     // needs lroMetadata.statusMonitorStep, as getLroMetadata would return for @pollingOperation operation
@@ -1510,11 +1507,7 @@ export class CodeModelBuilder {
     return this.getEffectiveSchemaType(bodyType);
   }
 
-  private processResponse(
-    op: CodeModelOperation,
-    resp: HttpOperationResponse,
-    candidateResponseSchema: Schema | undefined = undefined,
-  ) {
+  private processResponse(op: CodeModelOperation, resp: HttpOperationResponse, longRunning: boolean) {
     // TODO: what to do if more than 1 response?
     // It happens when the response type is Union, on one status code.
     let response: Response;
@@ -1574,13 +1567,9 @@ export class CodeModelBuilder {
       } else {
         // schema (usually JSON)
         let schema: Schema | undefined = undefined;
-        if (candidateResponseSchema) {
-          // The operation is LRO
-          if (trackConvenienceApi && !this.isArm()) {
-            // DPG uses the LroMetadata as poll/final result, not the response of activation request
-            // Therefore this schema will not be public.
-            trackConvenienceApi = false;
-          }
+        if (longRunning) {
+          // LRO uses the LroMetadata for poll/final result, not the response of activation request
+          trackConvenienceApi = false;
         }
         if (!schema) {
           const sdkType = getClientType(this.sdkContext, bodyType);
