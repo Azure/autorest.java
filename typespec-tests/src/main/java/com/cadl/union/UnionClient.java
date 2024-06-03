@@ -139,7 +139,7 @@ public final class UnionClient {
      * <pre>{@code
      * {
      *     id: String (Required)
-     *     status: String (Required)
+     *     status: String(NotStarted/Running/Succeeded/Failed/Canceled) (Required)
      *     error (Optional): {
      *         code: String (Required)
      *         message: String (Required)
@@ -147,6 +147,11 @@ public final class UnionClient {
      *         details (Optional): [
      *             (recursive schema, see above)
      *         ]
+     *     }
+     *     result (Optional): {
+     *         name: String (Required)
+     *         result (Optional): (recursive schema, see result above)
+     *         data: BinaryData (Required)
      *     }
      * }
      * }</pre>
@@ -156,7 +161,7 @@ public final class UnionClient {
      * @throws ClientAuthenticationException thrown if the request is rejected by server on status code 401.
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
-     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)
@@ -286,7 +291,7 @@ public final class UnionClient {
      * @throws ResourceNotFoundException thrown if the request is rejected by server on status code 404.
      * @throws ResourceModifiedException thrown if the request is rejected by server on status code 409.
      * @throws RuntimeException all other wrapped checked exceptions if the request fails to be sent.
-     * @return the {@link SyncPoller} for polling of status details for long running operations.
+     * @return the {@link SyncPoller} for polling of provides status details for long running operations.
      */
     @Generated
     @ServiceMethod(returns = ReturnType.LONG_RUNNING_OPERATION)

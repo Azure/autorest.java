@@ -10,7 +10,9 @@ import com.azure.core.http.rest.SimpleResponse;
 import com.azure.core.util.Context;
 import com.azure.core.util.logging.ClientLogger;
 import com.cadl.armresourceprovider.fluent.TopLevelArmResourceInterfacesClient;
+import com.cadl.armresourceprovider.fluent.models.ResultInner;
 import com.cadl.armresourceprovider.fluent.models.TopLevelArmResourceInner;
+import com.cadl.armresourceprovider.models.Result;
 import com.cadl.armresourceprovider.models.TopLevelArmResource;
 import com.cadl.armresourceprovider.models.TopLevelArmResourceInterfaces;
 
@@ -76,6 +78,24 @@ public final class TopLevelArmResourceInterfacesImpl implements TopLevelArmResou
     public PagedIterable<TopLevelArmResource> list(Context context) {
         PagedIterable<TopLevelArmResourceInner> inner = this.serviceClient().list(context);
         return ResourceManagerUtils.mapPage(inner, inner1 -> new TopLevelArmResourceImpl(inner1, this.manager()));
+    }
+
+    public Result action(String resourceGroupName, String topLevelArmResourceName) {
+        ResultInner inner = this.serviceClient().action(resourceGroupName, topLevelArmResourceName);
+        if (inner != null) {
+            return new ResultImpl(inner, this.manager());
+        } else {
+            return null;
+        }
+    }
+
+    public Result action(String resourceGroupName, String topLevelArmResourceName, Context context) {
+        ResultInner inner = this.serviceClient().action(resourceGroupName, topLevelArmResourceName, context);
+        if (inner != null) {
+            return new ResultImpl(inner, this.manager());
+        } else {
+            return null;
+        }
     }
 
     public TopLevelArmResource getById(String id) {
