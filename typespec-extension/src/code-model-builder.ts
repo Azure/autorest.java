@@ -288,7 +288,7 @@ export class CodeModelBuilder {
           this.trackSchemaUsage(schema, {
             usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
           });
-          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+          parameter = new Parameter(this.getName(it), this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
             origin: "modelerfour:synthesized/host",
             required: !it.optional,
