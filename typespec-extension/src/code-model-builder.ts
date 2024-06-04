@@ -884,7 +884,7 @@ export class CodeModelBuilder {
     clientContext.hostParameters.forEach((it) => codeModelOperation.addParameter(it));
     // parameters
     op.parameters.parameters.map((it) => {
-      const sdkParamType = ignoreDiagnostics(getSdkModelPropertyType(this.sdkContext, it.param, operation));
+      const sdkParamType: SdkModelPropertyType = ignoreDiagnostics(getSdkModelPropertyType(this.sdkContext, it.param, operation));
       this.processParameterFromSdkType(codeModelOperation, sdkParamType, it, clientContext);
   });
     // "accept" header
@@ -1107,28 +1107,22 @@ export class CodeModelBuilder {
         clientContext.addGlobalParameter(parameter);
       }
     } 
-    // else if (this.isSubscriptionId(raw)) {
-    //   const parameter = this.subscriptionIdParameter(raw);
-    //   op.addParameter(parameter);
-    //   clientContext.addGlobalParameter(parameter);
-    // } 
-    else if (SPECIAL_HEADER_NAMES.has(param.name.toLowerCase())) {
+    else if (this.isSubscriptionId(raw)) { // TODO: remove this
+      const parameter = this.subscriptionIdParameter(raw);
+      op.addParameter(parameter);
+      clientContext.addGlobalParameter(parameter);
+    } 
+    else if (param.kind === "header" && SPECIAL_HEADER_NAMES.has(param.serializedName.toLowerCase())) {
       // special headers
       op.specialHeaders = op.specialHeaders ?? [];
-      if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.name)) {
-        op.specialHeaders.push(param.name);
+      if (!stringArrayContainsIgnoreCase(op.specialHeaders, param.serializedName)) {
+        op.specialHeaders.push(param.serializedName);
       }
     } else {
       // schema
       let schema;
       const sdkType = param.type;
-      if (
-        param.kind === "header" && (sdkType.kind === "utcDateTime" || sdkType.kind === "offsetDateTime")) {
-        // utcDateTime in header maps to rfc7231
-        schema = this.processDateTimeSchemaFromSdkType(sdkType, param.name, true);
-      } else {
-        schema = this.processSchemaFromSdkType(sdkType, param.name);
-      }
+      schema = this.processSchemaFromSdkType(sdkType, param.name);
 
       // skip-url-encoding
       let extensions: { [id: string]: any } | undefined = undefined;
@@ -1200,8 +1194,8 @@ export class CodeModelBuilder {
       }
 
       const nullable = param.nullable;
-      const parameter = new Parameter(param.name, param.description ?? "", schema, {
-        summary: param.details,
+      const parameter = new Parameter(param.name, param.details ?? "", schema, {
+        summary: param.description,
         implementation: ImplementationLocation.Method,
         required: !param.optional,
         nullable: nullable,
@@ -1213,7 +1207,7 @@ export class CodeModelBuilder {
         },
         language: {
           default: {
-            serializedName: param.name,
+            serializedName: (param.kind === "header" || param.kind === "query" || param.kind === "path" || param.kind === "property") ? param.serializedName : param.name,
           },
         },
         extensions: extensions,
@@ -1226,7 +1220,7 @@ export class CodeModelBuilder {
         this.trackSchemaUsage(schema, { usage: [op.internalApi ? SchemaContext.Internal : SchemaContext.Public] });
       }
 
-      if (param.name.toLowerCase() === CONTENT_TYPE_KEY) {
+      if (param.kind === "header" && param.serializedName.toLowerCase() === CONTENT_TYPE_KEY) {
         let mediaTypes = ["application/json"];
         if (schema instanceof ConstantSchema) {
           mediaTypes = [schema.value.value.toString()];
