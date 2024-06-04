@@ -2213,10 +2213,7 @@ export class CodeModelBuilder {
     return target ? getSummary(this.program, target) : undefined;
   }
 
-  private getName(
-    target: ModelProperty | Operation,
-    nameHint: string | undefined = undefined,
-  ): string {
+  private getName(target: ModelProperty | Operation, nameHint: string | undefined = undefined): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
     if (emitterClientName && typeof emitterClientName === "string") {
