@@ -76,8 +76,6 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
-  Enum,
-  EnumMember,
   Model,
   ModelProperty,
   Operation,
@@ -86,7 +84,6 @@ import {
   Type,
   TypeNameOptions,
   Union,
-  UnionVariant,
   getDoc,
   getEffectiveModelType,
   getEncode,
@@ -2217,7 +2214,7 @@ export class CodeModelBuilder {
   }
 
   private getName(
-    target: Union | UnionVariant | Enum | EnumMember | ModelProperty | Operation,
+    target: ModelProperty | Operation,
     nameHint: string | undefined = undefined,
   ): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
