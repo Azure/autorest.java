@@ -76,8 +76,6 @@ import {
 } from "@azure-tools/typespec-client-generator-core";
 import {
   EmitContext,
-  Enum,
-  EnumMember,
   Model,
   ModelProperty,
   Operation,
@@ -86,7 +84,6 @@ import {
   Type,
   TypeNameOptions,
   Union,
-  UnionVariant,
   getDoc,
   getEffectiveModelType,
   getEncode,
@@ -291,7 +288,7 @@ export class CodeModelBuilder {
           this.trackSchemaUsage(schema, {
             usage: [SchemaContext.Input, SchemaContext.Output /*SchemaContext.Public*/],
           });
-          parameter = new Parameter(it.name, this.getDoc(it), schema, {
+          parameter = new Parameter(this.getName(it), this.getDoc(it), schema, {
             implementation: ImplementationLocation.Client,
             origin: "modelerfour:synthesized/host",
             required: !it.optional,
@@ -2216,10 +2213,7 @@ export class CodeModelBuilder {
     return target ? getSummary(this.program, target) : undefined;
   }
 
-  private getName(
-    target: Union | UnionVariant | Enum | EnumMember | ModelProperty | Operation,
-    nameHint: string | undefined = undefined,
-  ): string {
+  private getName(target: ModelProperty | Operation, nameHint: string | undefined = undefined): string {
     // TODO: once getLibraryName API in typespec-client-generator-core can get projected name from language and client, as well as can handle template case, use getLibraryName API
     const emitterClientName = getClientNameOverride(this.sdkContext, target);
     if (emitterClientName && typeof emitterClientName === "string") {
